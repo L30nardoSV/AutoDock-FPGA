@@ -1,0 +1,17 @@
+This explains how experiments are performed.
+
+----------------------------------
+PDBs_exp
+Initial "Experiments"
+Folder contains the results of running "ofdock" againts many protein-ligand complexes.
+It is ONLY used to verify the functional correctness of the design as other processes might
+have been run at the same time "ofdock" was running.
+
+IMPORTANT:
+THIS IS EMPTY FOR THE AMD VERSION AS VERIFICATION WAS ALREADY DONE IN EREDMITHRIM USING OFDOCK_INTEL.
+----------------------------------
+
+PDBs_val
+"Validation"
+Real measurements of performance and power.
+No other processes were running besides "ofdock" and "power_gov"

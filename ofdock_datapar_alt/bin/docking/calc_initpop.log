@@ -1,0 +1,1 @@
+Compiler Command: aoc -march=emulator -v --board a10gx device/calc_initpop.cl -o bin/docking.aocx
