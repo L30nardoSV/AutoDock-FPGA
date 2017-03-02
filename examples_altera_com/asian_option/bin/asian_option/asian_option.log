@@ -1,0 +1,9 @@
+Compiler Command: aoc -march=emulator -v device/asian_option.cl -o bin/asian_option.aocx
+Scalarizer can't handle insertelement with non-constant index:  %vecins = insertelement <16 x i32> %28, i32 %26, i32 %27, !dbg !249
+Scalarizer can't handle insertelement with non-constant index:  %vecins31 = insertelement <16 x i32> %32, i32 %30, i32 %31, !dbg !251
+Scalarizer can't handle insertelement with non-constant index:  %vecins35 = insertelement <16 x i32> %36, i32 %34, i32 %35, !dbg !252
+Scalarizer can't handle insertelement with non-constant index:  %vecins39 = insertelement <16 x i32> %40, i32 %38, i32 %39, !dbg !253
+Scalarizer can't handle insertelement with non-constant index:  %vecins = insertelement <16 x float> %98, float %96, i32 %97, !dbg !298
+Scalarizer can't handle insertelement with non-constant index:  %vecins146 = insertelement <16 x float> %102, float %100, i32 %101, !dbg !300
+Scalarizer can't handle insertelement with non-constant index:  %vecins150 = insertelement <16 x float> %106, float %104, i32 %105, !dbg !301
+Scalarizer can't handle insertelement with non-constant index:  %vecins154 = insertelement <16 x float> %110, float %108, i32 %109, !dbg !302

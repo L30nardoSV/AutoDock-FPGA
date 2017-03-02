@@ -1,0 +1,86 @@
+/*
+ * (C) 2013. Evopro Innovation Kft.
+ *
+ * performdocking.c
+ *
+ *  Created on: 2009.05.25.
+ *      Author: pechan.imre
+ */
+
+#include "performdocking.h"
+
+int docking_with_cpu(const Gridinfo* mygrid, const double* floatgrids, Dockpars* mypars, const Liganddata* myligand_init,
+					  const int* argc, char** argv, double* cpu_exectime_sum, Ligandresult* result_ligands)
+//The function performs the docking algorithm with the CPU.
+{
+	double start_algorithm, stop_algorithm;
+	int run_cnt;
+	int i, j;
+
+	Liganddata myligand;
+	double movvec_to_origo [3];
+
+	double init_population [CPU_MAX_POP_SIZE][40];
+	double final_population [CPU_MAX_POP_SIZE][40];
+
+	*cpu_exectime_sum = 0;
+
+	int debug = 0;
+
+	printf("Starting dockings...\n");
+	fflush(stdout);
+
+	for (run_cnt = 0; run_cnt < mypars->num_of_runs; run_cnt++)
+	{
+
+		myligand = *myligand_init;
+
+		//Capturing seeds and initial population
+		get_seeds_and_initpop(mypars, init_population, &myligand, mygrid);	
+
+		//Capturing reference orientation of the ligand
+		get_ref_orientation(&myligand, mypars);	
+
+		//x, y and z in grid spacing instead of A
+		for (i=0; i<CPU_MAX_POP_SIZE; i++)
+			for (j=0; j<3; j++)
+				init_population [i][j] = init_population [i][j]/mygrid->spacing;	
+
+		//Moving, rotating and scaling the ligand
+		get_movvec_to_origo(&myligand, movvec_to_origo);
+		move_ligand(&myligand, movvec_to_origo);
+		scale_ligand(&myligand, (double) 1.0/mygrid->spacing);
+
+		//Unit and moving vectors of the ligand's rotatable bonds 
+		//must be re-calculated due to the new orientation and scaling
+		get_moving_and_unit_vectors(&myligand);
+
+		//Executing docking algorithm
+
+		memcpy(final_population, init_population, sizeof(double)*CPU_MAX_POP_SIZE*40);
+
+		start_algorithm = timer_gets();
+		printf("Run %d started...     \n", run_cnt+1);
+		fflush(stdout);
+
+		//genetic_steady_state(final_population, &myligand, mygrid, floatgrids, mypars, 1, debug);
+		genetic_generational(final_population, &myligand, mygrid, floatgrids, mypars, 1, debug);
+
+		stop_algorithm = timer_gets();
+
+		printf("finished, CPU run time: %.3fs\n", stop_algorithm - start_algorithm);
+		fflush(stdout);
+
+		*cpu_exectime_sum += (stop_algorithm - start_algorithm);
+
+		//Acquiring and processing result
+		arrange_result(final_population, (int) mypars->pop_size + 1);
+
+		make_resfiles(final_population, &myligand, myligand_init, mypars, mygrid, floatgrids,
+					  argc, argv, debug, run_cnt, &(result_ligands [run_cnt]));
+
+	}
+
+	return 0;
+}
+
