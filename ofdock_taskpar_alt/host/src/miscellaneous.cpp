@@ -7,38 +7,29 @@
  *      Author: pechan.imre
  */
 
+#include "miscellaneous.h"
 
-#include "miscallenous.h"
-
-/*
 int float2fracint(double toconv, int frac)
-*/
-int float2fracint(float toconv, 		  
-		  int frac)
 //The function converts a float value to a fixed pont fractional number in (32-frac).frac format,
 //and returns it as an integer.
 {
 	if (toconv >= 0)
-		return (int) floor(toconv*pow(2, frac));
+		return (int) floor(toconv*pow(2.0, frac));
 	else
-		return (int) ceil(toconv*pow(2, frac));
+		return (int) ceil(toconv*pow(2.0, frac));
 }
 
-/*
 long long float2fraclint(double toconv, int frac)
-*/
-int float2fraclint(float toconv, 		   
-		   int frac)
 //The function converts a float value to a fixed pont fractional number in (32-frac).frac format,
 //and returns it as a long integer.
 {
 	if (toconv >= 0)
-		return (long long) floor(toconv*pow(2, frac));
+		return (long long) floor(toconv*pow(2.0, frac));
 	else
-		return (long long) ceil(toconv*pow(2, frac));
+		return (long long) ceil(toconv*pow(2.0, frac));
 }
 
-double timer_gets(void)
+/*double timer_gets(void)
 //The function returns the current time in seconds.
 {
   struct timeval ts;
@@ -47,7 +38,7 @@ double timer_gets(void)
   gettimeofday(&ts, (struct timezone*)0);
   timesec = ((double) ts.tv_sec*1000000000.0 + (double) ts.tv_usec*1000.0)/1000000000.0;
   return timesec;
-}
+}*/
 
 double myrand(void)
 //The functon returns a random double number between 0 and 1
@@ -61,20 +52,12 @@ double myrand(void)
 		first_call++;
 	}
 
-	
-	//printf("GFGFGFGG\n");
-
 	do
-#if defined (REPRO)
-		temprand = ((double) 1)/((double) RAND_MAX);
-#else
 		temprand = ((double) rand())/((double) RAND_MAX);
-#endif	
 	while ((temprand == 0.0) || (temprand == 1.0));
 
 	return temprand;
 }
-
 
 unsigned int myrand_int(unsigned int limit)
 //The function returns a random integer which is lower than the given limit.
@@ -82,30 +65,19 @@ unsigned int myrand_int(unsigned int limit)
 	return (unsigned int) floor(limit*myrand());
 }
 
-/*
 double distance(const double point1 [], const double point2 [])
-*/
-float distance(const float point1 [], 	       
-	       const float point2 [])
-//Returns the distance between point1 and point2 (the arrays have to store the x, y and z coordinates of the
+//Returns the distance between point1 and point2.
+//The arrays have to store the x, y and z coordinates of the
 //point, respectively.
 {
 	double sub1, sub2, sub3;
-
 	sub1 = point1 [0] - point2 [0];
 	sub2 = point1 [1] - point2 [1];
 	sub3 = point1 [2] - point2 [2];
-
 	return sqrt(sub1*sub1 + sub2*sub2 + sub3*sub3);
 }
 
-/*
 void vec_point2line(const double point [], const double line_pointA [], const double line_pointB [], double vec [])
-*/
-void vec_point2line(const float point [], 		    
-		    const float line_pointA [], 		    
-		    const float line_pointB [], 		    
-		    float vec [])
 //The function calculates the vector which moves a point given by the first parameter to its perpendicular projection
 //on a line given by to of its points (line_pointA and line_pointB parameters). The result vector is the vec parameter.
 {
@@ -114,39 +86,37 @@ void vec_point2line(const float point [],
 	double posvec_of_line_length2, temp;
 	int i;
 
+	//vector parallel to line
 	for (i=0; i<3; i++)
-		posvec_of_line [i] = line_pointB [i] - line_pointA [i];		//vector parallel to line
+		posvec_of_line[i] = line_pointB[i] - line_pointA[i];
 
-	posvec_of_line_length2 = pow(posvec_of_line [0], 2) + pow(posvec_of_line [1], 2) + pow(posvec_of_line [2], 2);	//length^2 of posvec_of_line
+	//length^2 of posvec_of_line
+	posvec_of_line_length2 = pow(posvec_of_line[0], 2) +
+				 pow(posvec_of_line[1], 2) +
+				 pow(posvec_of_line[2], 2);
 
 	temp = 0;
 	for (i=0; i<3; i++)
 		temp += posvec_of_line [i] * (point [i] - line_pointA [i]);
 	temp = temp/posvec_of_line_length2;
 
+	//perpendicular projection of point to the line
 	for (i=0; i<3; i++)
-		proj_of_point [i] = temp * posvec_of_line [i] + line_pointA [i];	//perpendicular projection of point to the line
+		proj_of_point [i] = temp * posvec_of_line [i] + line_pointA [i];
 
 	for (i=0; i<3; i++)
 		vec [i] = proj_of_point [i] - point [i];
 }
 
-/*
 void rotate(double point [], const double movvec [], const double normvec [], const double* angle, int debug)
-*/
-void rotate(float point [], 	    
-	    const float movvec [], 	    
-	    const float normvec [], 	    
-	    const float* angle, 	    
-	    int debug)
-//The function rotates the point given by the first parameter around an axis which is parallel to vector normvec and which
-//can be moved to the origo with vector movvec. The direction of rotation with angle is considered relative to normvec
+//The function rotates the point given by the first parameter around an axis
+//which is parallel to vector normvec and which
+//can be moved to the origo with vector movvec.
+//The direction of rotation with angle is considered relative to normvec
 //according to right hand rule. If debug is 1, debug messages will be printed to the screen.
 {
-
 	Quaternion quatrot_left, quatrot_right, quatrot_temp;
 	double anglediv2, cos_anglediv2, sin_anglediv2;
-
 
 	//the point must be moved according to moving vector
 	point [0] = point [0] - movvec [0];
@@ -155,8 +125,10 @@ void rotate(float point [],
 
 	if (debug == 1)
 	{
-		printf("Moving vector coordinates (x,y,z): %lf, %lf, %lf\n", movvec [0], movvec [1], movvec [2]);
-		printf("Unit vector coordinates (x,y,z): %lf, %lf, %lf\n", normvec [0], normvec [1], normvec [2]);
+		printf("Moving vector coordinates (x,y,z): %lf, %lf, %lf\n",
+						  movvec [0], movvec [1], movvec [2]);
+		printf("Unit vector coordinates (x,y,z): %lf, %lf, %lf\n",
+						  normvec [0], normvec [1], normvec [2]);
 	}
 
 	//Related equations:
@@ -172,68 +144,84 @@ void rotate(float point [],
 	//											k*(a1d2+a2d1+b1c2-b2c1)
 	//
 
-	anglediv2 = (*angle)/2/180*M_PI; 
-
-/*
-	// TESTEO
-	printf("angle = %f, M_PI = %f, anglediv2 = %f\n", *angle, M_PI, anglediv2);
-*/
-
+	anglediv2 = (*angle)/2/180*PI;
 	cos_anglediv2 = cos(anglediv2);
 	sin_anglediv2 = sin(anglediv2);
 
-	quatrot_left.q = cos_anglediv2;				//rotation quaternion
+	//rotation quaternion
+	quatrot_left.q = cos_anglediv2;
 	quatrot_left.x = sin_anglediv2*normvec [0];
 	quatrot_left.y = sin_anglediv2*normvec [1];
 	quatrot_left.z = sin_anglediv2*normvec [2];
 
-
-	quatrot_right.q = quatrot_left.q;					//inverse of rotation quaternion
+	//inverse of rotation quaternion
+	quatrot_right.q = quatrot_left.q;
 	quatrot_right.x = -1*quatrot_left.x;
 	quatrot_right.y = -1*quatrot_left.y;
 	quatrot_right.z = -1*quatrot_left.z;
 
 	if (debug == 1)
 	{
-		printf("q (w,x,y,z): %lf, %lf, %lf, %lf\n", quatrot_left.q, quatrot_left.x, quatrot_left.y, quatrot_left.z);
-		printf("q^-1 (w,x,y,z): %lf, %lf, %lf, %lf\n", quatrot_right.q, quatrot_right.x, quatrot_right.y, quatrot_right.z);
-		printf("v (w,x,y,z): %lf, %lf, %lf, %lf\n", 0.0, point [0], point [1], point [2]);
+		printf("q (w,x,y,z): %lf, %lf, %lf, %lf\n",
+			quatrot_left.q, quatrot_left.x, quatrot_left.y, quatrot_left.z);
+		printf("q^-1 (w,x,y,z): %lf, %lf, %lf, %lf\n",
+			quatrot_right.q, quatrot_right.x, quatrot_right.y, quatrot_right.z);
+		printf("v (w,x,y,z): %lf, %lf, %lf, %lf\n",
+			0.0, point [0], point [1], point [2]);
 	}
 
 	//Quaternion multiplications
-	//Since the q field of v is 0 as well as the result's q element, simplifications can be made...
-
-	quatrot_temp.q = 0 - quatrot_left.x*point [0] - quatrot_left.y*point [1] - quatrot_left.z*point [2];
-	quatrot_temp.x = quatrot_left.q*point [0] + 0 + quatrot_left.y*point [2] - quatrot_left.z*point [1];
-	quatrot_temp.y = quatrot_left.q*point [1] - quatrot_left.x*point [2] + 0 + quatrot_left.z*point [0];
-	quatrot_temp.z = quatrot_left.q*point [2] + quatrot_left.x*point [1] - quatrot_left.y*point [0] + 0;
+	//Since the q field of v is 0 as well as the result's q element,
+	//simplifications can be made...
+	quatrot_temp.q = 0 -
+			 quatrot_left.x*point [0] -
+			 quatrot_left.y*point [1] -
+			 quatrot_left.z*point [2];
+	quatrot_temp.x = quatrot_left.q*point [0] +
+			 0 +
+			 quatrot_left.y*point [2] -
+			 quatrot_left.z*point [1];
+	quatrot_temp.y = quatrot_left.q*point [1] -
+			 quatrot_left.x*point [2] +
+			 0 +
+			 quatrot_left.z*point [0];
+	quatrot_temp.z = quatrot_left.q*point [2] +
+			 quatrot_left.x*point [1] -
+			 quatrot_left.y*point [0] +
+			0;
 
 	if (debug == 1)
-		printf("q*v (w,x,y,z): %lf, %lf, %lf, %lf\n", quatrot_temp.q, quatrot_temp.x, quatrot_temp.y, quatrot_temp.z);
+		printf("q*v (w,x,y,z): %lf, %lf, %lf, %lf\n",
+		        quatrot_temp.q, quatrot_temp.x, quatrot_temp.y, quatrot_temp.z);
 
-	point [0] = quatrot_temp.q*quatrot_right.x + quatrot_temp.x*quatrot_right.q + quatrot_temp.y*quatrot_right.z - quatrot_temp.z*quatrot_right.y;
-	point [1] = quatrot_temp.q*quatrot_right.y - quatrot_temp.x*quatrot_right.z + quatrot_temp.y*quatrot_right.q + quatrot_temp.z*quatrot_right.x;
-	point [2] = quatrot_temp.q*quatrot_right.z + quatrot_temp.x*quatrot_right.y - quatrot_temp.y*quatrot_right.x + quatrot_temp.z*quatrot_right.q;
+	point [0] = quatrot_temp.q*quatrot_right.x +
+		    quatrot_temp.x*quatrot_right.q +
+		    quatrot_temp.y*quatrot_right.z -
+		    quatrot_temp.z*quatrot_right.y;
+	point [1] = quatrot_temp.q*quatrot_right.y -
+		    quatrot_temp.x*quatrot_right.z +
+		    quatrot_temp.y*quatrot_right.q +
+		    quatrot_temp.z*quatrot_right.x;
+	point [2] = quatrot_temp.q*quatrot_right.z +
+		    quatrot_temp.x*quatrot_right.y -
+		    quatrot_temp.y*quatrot_right.x +
+		    quatrot_temp.z*quatrot_right.q;
 
 	if (debug == 1)
-		printf("q*v*q^-1 (w,x,y,z): %lf, %lf, %lf, %lf\n", 0.0, point [0], point [1], point [2]);
+		printf("q*v*q^-1 (w,x,y,z): %lf, %lf, %lf, %lf\n",
+			0.0, point [0], point [1], point [2]);
 
 	//Moving the point back
-
 	point [0] = point [0] + movvec [0];
 	point [1] = point [1] + movvec [1];
 	point [2] = point [2] + movvec [2];
 
 	if (debug == 1)
-		printf("rotated point (x,y,z): %lf, %lf, %lf\n\n", point [0], point [1], point [2]);
-
+		printf("rotated point (x,y,z): %lf, %lf, %lf\n\n",
+			point [0], point [1], point [2]);
 }
 
-/*
 double angle_of_vectors(const double vector1 [], const double vector2 [])
-*/
-float angle_of_vectors(const float vector1 [], 		       
-		       const float vector2 [])
 //The function's inputs are two position vectors (whose starting point is the origo).
 //The function returns the angle between them.
 {
@@ -252,21 +240,13 @@ float angle_of_vectors(const float vector1 [],
 
 	temp = scalmul/(len_vec1*len_vec2);
 
-	if (temp > 1)
-		temp = 1;
-	if (temp < -1)
-		temp = -1;
+	if (temp > 1)  temp =  1;
+	if (temp < -1) temp = -1;
 
-	return (acos(temp)*180/M_PI);
-
+	return (acos(temp)*180/PI);
 }
 
-/*
 void vec_crossprod(const double vector1 [], const double vector2 [], double crossprodvec [])
-*/
-void vec_crossprod(const float vector1 [], 		   
-		   const float vector2 [], 		   
-		   float crossprodvec [])
 //The function calculates the cross product of position vectors vector1 and vector2, and returns
 //it in the third parameter.
 {
@@ -275,17 +255,10 @@ void vec_crossprod(const float vector1 [],
 	crossprodvec [2] = vector1 [0]*vector2 [1] - vector1 [1]*vector2 [0];
 }
 
-/*
 void get_trilininterpol_weights(double weights [][2][2], const double* dx, const double* dy, const double* dz)
-*/
-void get_trilininterpol_weights(float weights [][2][2], 				
-				const float* dx, 				
-				const float* dy, 				
-				const float* dz)
 //The function calculates the weights for trilinear interpolation based on the location of the point inside
 //the cube which is given by the second, third and fourth parameters.
 {
-
 	weights [0][0][0] = (1-(*dx))*(1-(*dy))*(1-(*dz));
 	weights [1][0][0] = (*dx)*(1-(*dy))*(1-(*dz));
 	weights [0][1][0] = (1-(*dx))*(*dy)*(1-(*dz));
@@ -294,11 +267,46 @@ void get_trilininterpol_weights(float weights [][2][2],
 	weights [1][0][1] = (*dx)*(1-(*dy))*(*dz);
 	weights [0][1][1] = (1-(*dx))*(*dy)*(*dz);
 	weights [1][1][1] = (*dx)*(*dy)*(*dz);
-
 }
 
+void get_trilininterpol_weights_f(float weights [][2][2], const float* dx, const float* dy, const float* dz)
+//The function calculates the weights for trilinear interpolation based on the location of the point inside
+//the cube which is given by the second, third and fourth parameters.
+{
+	weights [0][0][0] = (1-(*dx))*(1-(*dy))*(1-(*dz));
+	weights [1][0][0] = (*dx)*(1-(*dy))*(1-(*dz));
+	weights [0][1][0] = (1-(*dx))*(*dy)*(1-(*dz));
+	weights [1][1][0] = (*dx)*(*dy)*(1-(*dz));
+	weights [0][0][1] = (1-(*dx))*(1-(*dy))*(*dz);
+	weights [1][0][1] = (*dx)*(1-(*dy))*(*dz);
+	weights [0][1][1] = (1-(*dx))*(*dy)*(*dz);
+	weights [1][1][1] = (*dx)*(*dy)*(*dz);
+}
+
+void print_binary_string(unsigned long long to_print)
+//The function prints out the value of to_print parameter to the standart io as a binary number.
+{
+	unsigned long long temp;
+	int i;
+
+	temp = 1;
+	temp = (temp << 63);
+
+	for (i=0; i<64; i++)
+	{
+		if ((temp & to_print) != 0)
+			printf("1");
+		else
+			printf("0");
+	temp = (temp >> 1);
+	}
+}
+
+//L30nardoSV
+// This was disabled for Windows
 int stricmp(const char* str1, const char* str2)
-//The function compares the two input strings and returns 0 if they are identical (case-UNsensitive)
+//The function compares the two input strings and
+//returns 0 if they are identical (case-UNsensitive)
 //and 1 if not.
 {
 	const char* c1_poi;
@@ -331,3 +339,21 @@ int stricmp(const char* str1, const char* str2)
 	return isdifferent;
 }
 
+
+
+unsigned int genseed(unsigned int init)
+//The function generates random numbers with a linear congruential generator,
+//using Visual C++ generator constants.
+//The generator can be initialized with the init parameter.
+//If the parameter is 0, a new random value will be
+//returned (and init won't be used).
+{
+	static unsigned int state = 0;
+
+	if (init != 0)
+		state = init;
+	else
+		state = (RAND_A_GS*state+RAND_C_GS);
+
+	return state;
+}

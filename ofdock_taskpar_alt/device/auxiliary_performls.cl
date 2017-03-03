@@ -170,6 +170,8 @@ void perform_LS(
 		//Krnl_Conform
 		uint pipe_cnt;
 
+//ENABLE BACK!!!!!
+/*
 		for (pipe_cnt=0; pipe_cnt<myligand_num_of_atoms*5; pipe_cnt++)
 		{
 			write_channel_altera(chan_GA2Conf_ligandatom_idxyzq, loc_LS_templigand_atom_idxyzq[pipe_cnt]);
@@ -179,7 +181,7 @@ void perform_LS(
 		{
 			write_channel_altera(chan_GA2Conf_genotype, entity_possible_new_genotype[pipe_cnt]);
 		}
-
+*/
 		//Krnl_InterE
 		entity_possible_new_genotype[39] = read_channel_altera(chan_Intere2GA_intere);
 		
@@ -288,6 +290,9 @@ void perform_LS(
 
 			//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 			// Krnl_Conform
+
+// ENABLE THEM BACK!!!!
+/*
 			for (pipe_cnt=0; pipe_cnt<myligand_num_of_atoms*5; pipe_cnt++)
 			{
 				write_channel_altera(chan_GA2Conf_ligandatom_idxyzq, loc_LS_templigand_atom_idxyzq[pipe_cnt]);
@@ -297,6 +302,7 @@ void perform_LS(
 			{
 				write_channel_altera(chan_GA2Conf_genotype, entity_possible_new_genotype[pipe_cnt]);
 			}
+*/
 
 			//Krnl_InterE
 			entity_possible_new_genotype[39] = read_channel_altera(chan_Intere2GA_intere);
@@ -375,7 +381,10 @@ void perform_LS(
 		{
 			//this limitation is necessary in the FPGA due to the number representation
 			if ((rho*base_dang_mul_sqrt3 < 90) && (rho*base_dmov_mul_sqrt3 < 64)) 
-				rho = EXPANSION_FACTOR*rho;
+			{
+				//rho = EXPANSION_FACTOR*rho;
+				rho = LS_EXP_FACTOR*rho;
+			}
 
 			cons_fail = 0;
 			cons_succ = 0;
@@ -388,7 +397,9 @@ void perform_LS(
 		else
 			if (cons_fail >= max_cons_fail)
 			{
-				rho = CONTRACTION_FACTOR*rho;
+				//rho = CONTRACTION_FACTOR*rho;
+				rho = LS_CONT_FACTOR*rho;
+					
 				cons_fail = 0;
 				cons_succ = 0;
 

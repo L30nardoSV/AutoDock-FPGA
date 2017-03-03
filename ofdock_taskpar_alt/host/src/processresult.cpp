@@ -9,13 +9,8 @@
 
 #include "processresult.h"
 
-/*
-void arrange_result(double final_population [][40], const int pop_size)
-*/
 
-void arrange_result(float final_population [][40], 		    
-		    const int pop_size)
-
+void arrange_result(float* final_population, float* energies, const int pop_size)
 //The function arranges the rows of the input array (first array index is considered to be the row
 //index) according to the sum of [] [38] and [][39] elements, which can be used for arranging the
 //genotypes of the final population according to the sum of energy values. Genotypes with lower
@@ -23,25 +18,23 @@ void arrange_result(float final_population [][40],
 //the population, the arrangement will be performed only on the first pop_size part of final_population.
 {
 	int i,j;
-/*
-	double temp_genotype [40];
-*/
-	float temp_genotype [40];
+	float temp_genotype[GENOTYPE_LENGTH_IN_GLOBMEM];
+	float temp_energy;
 
 	for (j=0; j<pop_size-1; j++)
 		for (i=pop_size-2; i>=j; i--)		//arrange according to sum of inter- and intramolecular energies
-			if (final_population [i][38] + final_population [i][39] > final_population [i+1][38] + final_population [i+1][39])
+			if (energies[i] > energies[i+1])
 			{
-/*
-				memcpy(temp_genotype, final_population [i], 40*sizeof(double));
-				memcpy(final_population [i], final_population [i+1], 40*sizeof(double));
-				memcpy(final_population [i+1], temp_genotype, 40*sizeof(double));
-*/
-				memcpy(temp_genotype, final_population [i], 40*sizeof(float));
-				memcpy(final_population [i], final_population [i+1], 40*sizeof(float));
-				memcpy(final_population [i+1], temp_genotype, 40*sizeof(float));
+				memcpy(temp_genotype, final_population+i*GENOTYPE_LENGTH_IN_GLOBMEM, GENOTYPE_LENGTH_IN_GLOBMEM*sizeof(float));
+				memcpy(final_population+i*GENOTYPE_LENGTH_IN_GLOBMEM, final_population+(i+1)*GENOTYPE_LENGTH_IN_GLOBMEM, GENOTYPE_LENGTH_IN_GLOBMEM*sizeof(float));
+				memcpy(final_population+(i+1)*GENOTYPE_LENGTH_IN_GLOBMEM, temp_genotype, GENOTYPE_LENGTH_IN_GLOBMEM*sizeof(float));
+
+				temp_energy = energies[i];
+				energies[i] = energies[i+1];
+				energies[i+1] = temp_energy;
 			}
 }
+
 
 void write_basic_info(FILE* fp, const Liganddata* ligand_ref, const Dockpars* mypars, const Gridinfo* mygrid, const int* argc, char** argv)
 //The function writes basic information (such as docking parameters) to the file whose file pointer is the first parameter of the function.
@@ -50,8 +43,9 @@ void write_basic_info(FILE* fp, const Liganddata* ligand_ref, const Dockpars* my
 	char temp_filename [128];
 	int i;
 
+
 	fprintf(fp, "***********************************\n");
-	fprintf(fp, "**       FDOCK REPORT FILE       **\n");
+	fprintf(fp, "**   OFDOCK(GDOCK) REPORT FILE   **\n");
 	fprintf(fp, "***********************************\n\n\n");
 
 	//Writing out docking parameters
@@ -64,21 +58,20 @@ void write_basic_info(FILE* fp, const Liganddata* ligand_ref, const Dockpars* my
 
 	fprintf(fp, "Number of energy evaluations:              %ld\n", mypars->num_of_energy_evals);
 	fprintf(fp, "Number of generations:                     %ld\n", mypars->num_of_generations);
-	fprintf(fp, "Size of population:                        %ld\n", mypars->pop_size+1);
-	fprintf(fp, "Rate of crossover:                         %lf%%\n", (double) mypars->crossover_rate/255*100);
-	fprintf(fp, "Tournament selection probability limit:    %lf%%\n", (double) mypars->tournament_rate/255*100);
-	fprintf(fp, "Rate of mutation:                          %lf%%\n", (double) mypars->mutation_rate/255*100);
-	fprintf(fp, "Maximal allowed delta movement:            +/- %lfA\n", (double) mypars->dmov_mask/pow(2, 10)*mygrid->spacing);
-	fprintf(fp, "Maximal allowed delta angle:               +/- %lf°\n\n", (double) mypars->dang_mask/pow(2, 8)*180/512);
+	fprintf(fp, "Size of population:                        %ld\n", mypars->pop_size);
+	fprintf(fp, "Rate of crossover:                         %lf%%\n", (double) mypars->crossover_rate);
+	fprintf(fp, "Tournament selection probability limit:    %lf%%\n", (double) mypars->tournament_rate);
+	fprintf(fp, "Rate of mutation:                          %lf%%\n", (double) mypars->mutation_rate);
+	fprintf(fp, "Maximal allowed delta movement:            +/- %lfA\n", (double) mypars->abs_max_dmov*mygrid->spacing);
+	fprintf(fp, "Maximal allowed delta angle:               +/- %lf°\n\n", (double) mypars->abs_max_dang);
 
-	fprintf(fp, "Rate of local search:                      %lf%% ", 100*mypars->lsearch_rate);
-	fprintf(fp, "\n");
+	fprintf(fp, "Rate of local search:                      %lf%%\n", mypars->lsearch_rate);
 
 	fprintf(fp, "Maximal number of local search iterations: %ld\n", mypars->max_num_of_iters);
-	fprintf(fp, "Rho lower bound:                           %lf\n", (double) mypars->rho_lower_bound/pow(2, 10));
-	fprintf(fp, "Spread of local search delta movement:     %lfA\n", (double) mypars->base_dmov_mul_sqrt3*mygrid->spacing/sqrt(3)/pow(2, 10));
-	fprintf(fp, "Spread of local search delta angle:        %lf°\n", (double) mypars->base_dang_mul_sqrt3*180/512/sqrt(3)/pow(2, 8));
-	fprintf(fp, "Limit of consecutive successes/failures:   %ld\n\n", mypars->cons_limit+1);
+	fprintf(fp, "Rho lower bound:                           %lf\n", (double) mypars->rho_lower_bound);
+	fprintf(fp, "Spread of local search delta movement:     %lfA\n", (double) mypars->base_dmov_mul_sqrt3*mygrid->spacing/sqrt(3.0));
+	fprintf(fp, "Spread of local search delta angle:        %lf°\n", (double) mypars->base_dang_mul_sqrt3/sqrt(3.0));
+	fprintf(fp, "Limit of consecutive successes/failures:   %ld\n\n", mypars->cons_limit);
 
 	fprintf(fp, "Unbound model:                             ");
 	if (mypars->unbound_model == 0)
@@ -90,12 +83,6 @@ void write_basic_info(FILE* fp, const Liganddata* ligand_ref, const Dockpars* my
 			fprintf(fp, "COMPACT\n");
 
 	fprintf(fp, "Number of pdb files to be generated:       %d\n", mypars->gen_pdbs);
-
-	fprintf(fp, "Random number generator seeds:             ");
-	if (mypars->seed_gen_or_loadfile == 0)
-		fprintf(fp, "GENERATE\n");
-	else
-		fprintf(fp, "LOAD FROM FILE (seeds.txt)\n");
 
 	fprintf(fp, "Initial population:                        ");
 	if (mypars->initpop_gen_or_loadfile == 0)
@@ -115,10 +102,8 @@ void write_basic_info(FILE* fp, const Liganddata* ligand_ref, const Dockpars* my
 	fprintf(fp, "===================================\n\n");
 
 	fprintf(fp, "Receptor name:                             %s\n", mygrid->receptor_name);
-	fprintf(fp, "Number of grid points (x, y, z):           %d, %d, %d\n", mygrid->size_xyz [0],
-			mygrid->size_xyz [1], mygrid->size_xyz [2]);
-	fprintf(fp, "Grid size (x, y, z):                       %lf, %lf, %lfA\n", mygrid->size_xyz_angstr [0],
-			mygrid->size_xyz_angstr [1], mygrid->size_xyz_angstr [2]);
+	fprintf(fp, "Number of grid points (x, y, z):           %d, %d, %d\n", mygrid->size_xyz [0], mygrid->size_xyz [1], mygrid->size_xyz [2]);
+	fprintf(fp, "Grid size (x, y, z):                       %lf, %lf, %lfA\n", mygrid->size_xyz_angstr [0], mygrid->size_xyz_angstr [1], mygrid->size_xyz_angstr [2]);
 	fprintf(fp, "Grid spacing:                              %lfA\n", mygrid->spacing);
 	fprintf(fp, "\n\n");
 
@@ -136,6 +121,10 @@ void write_basic_info(FILE* fp, const Liganddata* ligand_ref, const Dockpars* my
 	fprintf(fp, "Number of rotatable bonds:                 %d\n", ligand_ref->num_of_rotbonds);
 	fprintf(fp, "Number of atom types:                      %d\n", ligand_ref->num_of_atypes);
 
+	fprintf(fp, "Number of intraE contributors:             %d\n", ligand_ref->num_of_intraE_contributors);
+	fprintf(fp, "Number of required rotations:              %d\n", ligand_ref->num_of_rotations_required);
+	fprintf(fp, "Number of rotation cycles:                 %d\n", ligand_ref->num_of_rotcyc);
+
 	fprintf(fp, "\n\n");
 
 }
@@ -149,7 +138,7 @@ void write_basic_info_dlg(FILE* fp, const Liganddata* ligand_ref, const Dockpars
 
 
 	fprintf(fp, "**********************************************************\n");
-	fprintf(fp, "**       FDOCK  AUTODOCKTOOLS-COMPATIBLE DLG FILE       **\n");
+	fprintf(fp, "**       GDOCK  AUTODOCKTOOLS-COMPATIBLE DLG FILE       **\n");
 	fprintf(fp, "**********************************************************\n\n\n");
 
 	//Writing out docking parameters
@@ -160,26 +149,27 @@ void write_basic_info_dlg(FILE* fp, const Liganddata* ligand_ref, const Dockpars
 	fprintf(fp, "Ligand file:                               %s\n", mypars->ligandfile);
 	fprintf(fp, "Grid fld file:                             %s\n\n", mypars->fldfile);
 
-	fprintf(fp, "Number of runs:                            %d\n", mypars->num_of_runs),
+	//fprintf(fp, "Number of runs:                            %d\n", mypars->num_of_runs),
+	fprintf(fp, "Number of runs:                            %lu\n", mypars->num_of_runs),
+
 	fprintf(fp, "Number of energy evaluations:              %ld\n", mypars->num_of_energy_evals);
 	fprintf(fp, "Number of generations:                     %ld\n", mypars->num_of_generations);
-	fprintf(fp, "Size of population:                        %ld\n", mypars->pop_size+1);
-	fprintf(fp, "Rate of crossover:                         %lf%%\n", (double) mypars->crossover_rate/255*100);
-	fprintf(fp, "Tournament selection probability limit:    %lf%%\n", (double) mypars->tournament_rate/255*100);
-	fprintf(fp, "Rate of mutation:                          %lf%%\n", (double) mypars->mutation_rate/255*100);
-	fprintf(fp, "Maximal allowed delta movement:            +/- %lfA\n", (double) mypars->dmov_mask/pow(2, 10)*mygrid->spacing);
-	fprintf(fp, "Maximal allowed delta angle:               +/- %lf°\n\n", (double) mypars->dang_mask/pow(2, 8)*180/512);
+	fprintf(fp, "Size of population:                        %ld\n", mypars->pop_size);
+	fprintf(fp, "Rate of crossover:                         %lf%%\n", (double) mypars->crossover_rate);
+	fprintf(fp, "Tournament selection probability limit:    %lf%%\n", (double) mypars->tournament_rate);
+	fprintf(fp, "Rate of mutation:                          %lf%%\n", (double) mypars->mutation_rate);
+	fprintf(fp, "Maximal allowed delta movement:            +/- %lfA\n", (double) mypars->abs_max_dmov*mygrid->spacing);
+	fprintf(fp, "Maximal allowed delta angle:               +/- %lf°\n\n", (double) mypars->abs_max_dang);
 
-	fprintf(fp, "Rate of local search:                      %lf%% ", 100*mypars->lsearch_rate);
-	fprintf(fp, "\n");
+	fprintf(fp, "Rate of local search:                      %lf%%\n", mypars->lsearch_rate);
 
 	fprintf(fp, "Maximal number of local search iterations: %ld\n", mypars->max_num_of_iters);
-	fprintf(fp, "Rho lower bound:                           %lf\n", (double) mypars->rho_lower_bound/pow(2, 10));
-	fprintf(fp, "Spread of local search delta movement:     %lfA\n", (double) mypars->base_dmov_mul_sqrt3*mygrid->spacing/sqrt(3)/pow(2, 10));
-	fprintf(fp, "Spread of local search delta angle:        %lf°\n", (double) mypars->base_dang_mul_sqrt3*180/512/sqrt(3)/pow(2, 8));
-	fprintf(fp, "Limit of consecutive successes/failures:   %ld\n\n", mypars->cons_limit+1);
+	fprintf(fp, "Rho lower bound:                           %lf\n", (double) mypars->rho_lower_bound);
+	fprintf(fp, "Spread of local search delta movement:     %lfA\n", (double) mypars->base_dmov_mul_sqrt3*mygrid->spacing/sqrt(3.0));
+	fprintf(fp, "Spread of local search delta angle:        %lf°\n", (double) mypars->base_dang_mul_sqrt3/sqrt(3.0));
+	fprintf(fp, "Limit of consecutive successes/failures:   %ld\n\n", mypars->cons_limit);
 
-	fprintf(fp, "Handle symmetry during clustering:         ");
+		fprintf(fp, "Handle symmetry during clustering:         ");
 	if (mypars->handle_symmetry != 0)
 		fprintf(fp, "YES\n");
 	else
@@ -223,30 +213,17 @@ void write_basic_info_dlg(FILE* fp, const Liganddata* ligand_ref, const Dockpars
 	fprintf(fp, "    DUMMY DATA (only for ADT-compatibility)\n");
 	fprintf(fp, "    ________________________\n\n\n");
 	fprintf(fp, "DPF> outlev 1\n");
-	fprintf(fp, "DPF> ga_run %d\n", mypars->num_of_runs);
+
+	//fprintf(fp, "DPF> ga_run %d\n", mypars->num_of_runs);
+	fprintf(fp, "DPF> ga_run %lu\n", mypars->num_of_runs);
+
 	fprintf(fp, "DPF> fld %s.maps.fld\n", mygrid->receptor_name);
 	fprintf(fp, "DPF> move %s\n\n\n", mypars->ligandfile);
 }
 
-/*
-void make_resfiles(double final_population [][40], const Liganddata* ligand_ref,
-				   const Liganddata* ligand_from_pdb, const Dockpars* mypars, const Gridinfo* mygrid, const double* grids,
-				   const int* argc, char** argv, int debug, int run_cnt, Ligandresult* best_result)
-*/
-
-void make_resfiles(float final_population [][40], 		   
-		   const Liganddata* ligand_ref, 		   
-		   const Liganddata* ligand_from_pdb, 		   
-		   const Dockpars* mypars, 		   
-		   const Gridinfo* mygrid, 		   
-		   const float* grids, 		   
-		   const int* argc, 		   
-		   char** argv, 		   
-		   int debug, 		   
-		   int run_cnt, 		   
-		   Ligandresult* best_result)
-
-
+void make_resfiles(float* final_population, float* energies, const Liganddata* ligand_ref,
+				   const Liganddata* ligand_from_pdb, const Dockpars* mypars, int evals_performed, int generations_used, const Gridinfo* mygrid, const float* grids,
+				   float* cpu_ref_ori_angles, const int* argc, char** argv, int debug, int run_cnt, Ligandresult* best_result)
 //The function writes out final_population generated by get_result
 //as well as different parameters about the docking, the receptor and the ligand to a file called fdock_report.txt in a
 //readable and understandable format. The ligand_from_pdb parametere must be the Liganddata which includes the original
@@ -256,19 +233,19 @@ void make_resfiles(float final_population [][40],
 //be moved and rotated according to the genotype values). The function returns some information about the best result wich
 //was found with the best_result parameter.
 {
-	FILE* fp = NULL;
+	FILE* fp;
 	int i,j;
-	double entity_rmsds [CPU_MAX_POP_SIZE];
+	double entity_rmsds [MAX_POPSIZE];
 	Liganddata temp_docked;
 	char temp_filename [128];
 	char* name_ext_start;
-	double accurate_interE [CPU_MAX_POP_SIZE];
-	double accurate_intraE [CPU_MAX_POP_SIZE];
-	double accurate_intraE_without_desolv [CPU_MAX_POP_SIZE];
+	float accurate_interE [MAX_POPSIZE];
+	float accurate_intraE [MAX_POPSIZE];
+	float temp_genotype[GENOTYPE_LENGTH_IN_GLOBMEM];
 
-	static double best_energy_of_all = 1000000000000;
+	static float best_energy_of_all = 1000000000000;
 
-	int pop_size = mypars->pop_size + 1;
+	int pop_size = mypars->pop_size;
 
 
 	sprintf(temp_filename, "final_population_run%d.txt", run_cnt+1);
@@ -283,8 +260,10 @@ void make_resfiles(float final_population [][40],
 
 		fprintf(fp, "           COUNTER STATES           \n");
 		fprintf(fp, "===================================\n\n");
-		fprintf(fp, "Number of energy evaluations performed:    %ld\n", mypars->evals_performed);
-		fprintf(fp, "Number of generations used:                %ld\n", mypars->generations_used);
+		//fprintf(fp, "Number of energy evaluations performed:    %ld\n", evals_performed);
+		fprintf(fp, "Number of energy evaluations performed:    %u\n", evals_performed);
+		//fprintf(fp, "Number of generations used:                %ld\n", generations_used);
+		fprintf(fp, "Number of generations used:                %u\n", generations_used);
 		fprintf(fp, "\n\n");
 
 	}
@@ -301,23 +280,22 @@ void make_resfiles(float final_population [][40],
 		//if (i==127)
 		//	change_conform(&temp_docked, final_population [i], 1);				//calculating the conformation of current entity
 		//else
-			change_conform(&temp_docked, final_population [i], debug);
+			change_conform_f(&temp_docked, final_population+i*GENOTYPE_LENGTH_IN_GLOBMEM, cpu_ref_ori_angles, debug);
 
 		//if (i==78)
 		//	accurate_interE [i] = calc_interE(mygrid, &temp_docked, grids, 0.00, 1);
 		//else
-			accurate_interE [i] = calc_interE(mygrid, &temp_docked, grids, 0.00, debug);	//calculating the intermolecular energy
+			accurate_interE[i] = calc_interE_f(mygrid, &temp_docked, grids, 0.00, debug);	//calculating the intermolecular energy
 
 		if (i == 0)		//additional calculations for ADT-compatible result file, only in case of best conformation
-			calc_interE_peratom(mygrid, &temp_docked, grids, 0.00, &(best_result->interE_elec), best_result->peratom_vdw, best_result->peratom_elec, debug);
+			calc_interE_peratom_f(mygrid, &temp_docked, grids, 0.00, &(best_result->interE_elec), best_result->peratom_vdw, best_result->peratom_elec, debug);
 
 		scale_ligand(&temp_docked, mygrid->spacing);
 		//if (i==127)
 		//	accurate_intraE [i] = calc_intraE(&temp_docked, 8, 0, mypars->coeffs.scaled_AD4_coeff_elec, mypars->coeffs.AD4_coeff_desolv, 1);				//calculating the intramolecular energy
 		//else
-			accurate_intraE [i] = calc_intraE(&temp_docked, 8, 0, mypars->coeffs.scaled_AD4_coeff_elec, mypars->coeffs.AD4_coeff_desolv, mypars->qasp, debug);
+			accurate_intraE[i] = calc_intraE_f(&temp_docked, 8, 0, mypars->coeffs.scaled_AD4_coeff_elec, mypars->coeffs.AD4_coeff_desolv, mypars->qasp, debug);
 
-		accurate_intraE_without_desolv [i] = calc_intraE(&temp_docked, 8, 1, mypars->coeffs.scaled_AD4_coeff_elec, mypars->coeffs.AD4_coeff_desolv, mypars->qasp, debug);	//calculating the intramolecular energy without desolvation term
 
 		move_ligand(&temp_docked, mygrid->origo_real_xyz);				//moving it according to grid location
 		entity_rmsds [i] = calc_rmsd(ligand_from_pdb, &temp_docked, mypars->handle_symmetry);	//calculating rmds compared to original pdb file
@@ -358,34 +336,25 @@ void make_resfiles(float final_population [][40],
 		fprintf(fp, " Entity |      dx [A]      |      dy [A]      |      dz [A]      |     phi [°]      |    theta [°]     | alpha_genrot [°] |");
 		for (i=0; i<ligand_from_pdb->num_of_rotbonds; i++)
 			fprintf(fp, " alpha_rotb%2d [°] |", i);
-		fprintf(fp, " intramolecular energy in FPGA / in CPU without desolvation term /  in CPU with desolvation term [kcal/mol] |       intermolecular energy in FPGA / in CPU [kcal/mol]       | RMSD [A] | \n");
+		fprintf(fp, " intramolecular energy | intermolecular energy | total energy calculated by CPU / calculated by GPU / difference | RMSD [A] | \n");
 
 		fprintf(fp, "--------+------------------+------------------+------------------+------------------+------------------+------------------+");
 		for (i=0; i<ligand_from_pdb->num_of_rotbonds; i++)
 			fprintf(fp, "------------------+");
-		fprintf(fp, "------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------|----------+ \n");
+		fprintf(fp, "-----------------------+-----------------------+------------------------------------------------------------------------+----------+ \n");
 
 		for (i=0; i<pop_size; i++)
 		{
 			fprintf(fp, "  %3d   |", i+1);
 
 			for (j=0; j<3; j++)
-				fprintf(fp, "    %10.3lf    |", final_population [i][j]*(mygrid->spacing));
+				fprintf(fp, "    %10.3f    |", final_population [i*GENOTYPE_LENGTH_IN_GLOBMEM+j]*(mygrid->spacing));
 			for (j=3; j<6+ligand_from_pdb->num_of_rotbonds; j++)
-				fprintf(fp, "    %10.3lf    |", final_population [i][j]);
+				fprintf(fp, "    %10.3f    |", final_population [i*GENOTYPE_LENGTH_IN_GLOBMEM+j]);
 
-			if (ceil(final_population [i][38]) == HIGHEST_ENERGY)
-				if (ceil(final_population [i][39]) == HIGHEST_ENERGY)
-					fprintf(fp, "                atom out of grid  / %26.3lf / %26.3lf                 |", accurate_intraE_without_desolv [i], accurate_intraE [i]);
-				else
-					fprintf(fp, "           atom pair distance too low  / %26.3lf / %26.3lf            |", accurate_intraE_without_desolv [i], accurate_intraE [i]);
-			else
-				fprintf(fp, "            %26.3lf / %26.3lf / %26.3lf            |", final_population [i][38], accurate_intraE_without_desolv [i], accurate_intraE [i]);	//ezt majd vissza...
-
-			if (ceil(final_population [i][39]) == HIGHEST_ENERGY)
-				fprintf(fp, "         atom out of grid / %26.3lf         |", accurate_interE [i]);
-			else
-				fprintf(fp, "    %26.3lf / %26.3lf    |", final_population [i][39], accurate_interE [i]);
+			fprintf(fp, " %21.3f |", accurate_intraE [i]);
+			fprintf(fp, " %21.3f |", accurate_interE [i]);
+			fprintf(fp, "  %21.3f / %21.3f / %21.3f |", accurate_intraE[i] + accurate_interE[i], energies[i], energies[i] - (accurate_intraE[i] + accurate_interE[i]));
 
 			fprintf(fp, " %8.3lf | \n", entity_rmsds [i]);
 		}
@@ -393,150 +362,152 @@ void make_resfiles(float final_population [][40],
 		fclose(fp);
 
 	}
+}
+
+void cluster_analysis(Ligandresult myresults [], int num_of_runs, char* report_file_name, const Liganddata* ligand_ref,
+					  const Dockpars* mypars, const Gridinfo* mygrid, const int* argc, char** argv, const double docking_avg_runtime,
+					  const double program_runtime)
+//The function performs ranked cluster analisys similar to that of AutoDock and creates a file with report_file_name name, the result
+//will be written to it.
+{
+	int i,j;
+	Ligandresult temp_ligres;
+	int num_of_clusters;
+	int current_clust_center;
+	double temp_rmsd;
+	double cluster_tolerance = 2;
+	int result_clustered;
+	int subrank;
+	FILE* fp;
+	int cluster_sizes [1000];
+	double sum_energy [1000];
+	double best_energy [1000];
+
+	const double AD4_coeff_tors = mypars->coeffs.AD4_coeff_tors;
+	double torsional_energy;
+
+	//first of all, let's calculate the constant torsional free energy term
+	torsional_energy = AD4_coeff_tors * ligand_ref->num_of_rotbonds;
+
+	//arranging results according to energy, myresults [0] will be the best one (with lowest energy)
+	for (j=0; j<num_of_runs-1; j++)
+		for (i=num_of_runs-2; i>=j; i--)		//arrange according to sum of inter- and intramolecular energies
+			if ((myresults [i]).interE /*+ (myresults [i]).intraE*/ > (myresults [i+1]).interE /*+ (myresults [i+1]).intraE*/)	//mimics the behaviour of AD4 unbound_same_as_bound
+			//if ((myresults [i]).interE + (myresults [i]).intraE > (myresults [i+1]).interE + (myresults [i+1]).intraE)
+			{
+				temp_ligres = myresults [i];
+				myresults [i] = myresults [i+1];
+				myresults [i+1] = temp_ligres;
+			}
+
+	for (i=0; i<num_of_runs; i++)
+	{
+		(myresults [i]).clus_id = 0;	//indicates that it hasn't been put into cluster yet
+	}
+
+	//the best result is the center of the first cluster
+	(myresults [0]).clus_id = 1;
+	(myresults [0]).rmsd_from_cluscent = 0;
+	num_of_clusters = 1;
+
+	for (i=1; i<num_of_runs; i++)	//for each result
+	{
+		current_clust_center = 0;
+		result_clustered = 0;
+
+		for (j=0; j<i; j++)		//results with lower id-s are clustered, look for cluster centers
+		{
+			if ((myresults [j]).clus_id > current_clust_center)		//it is the center of a new cluster
+			{
+				current_clust_center = (myresults [j]).clus_id;
+				temp_rmsd = calc_rmsd(&((myresults [j]).reslig_realcoord), &((myresults [i]).reslig_realcoord), mypars->handle_symmetry);	//comparing current result with cluster center
+				if (temp_rmsd <= cluster_tolerance)		//in this case we put result i to cluster with center j
+				{
+					(myresults [i]).clus_id = current_clust_center;
+					(myresults [i]).rmsd_from_cluscent = temp_rmsd;
+					result_clustered = 1;
+					break;
+				}
+			}
+		}
+
+		if (result_clustered != 1)		//if no suitable cluster was found, this is the center of a new one
+		{
+			num_of_clusters++;
+			(myresults [i]).clus_id = num_of_clusters;		//new cluster id
+			(myresults [i]).rmsd_from_cluscent = 0;
+		}
+
+	}
+
+	for (i=1; i<=num_of_clusters; i++)	//printing cluster info to file
+	{
+		subrank = 0;
+		cluster_sizes [i-1] = 0;
+		sum_energy [i-1] = 0;
+		for (j=0; j<num_of_runs; j++)
+			if (myresults [j].clus_id == i)
+			{
+				subrank++;
+				(cluster_sizes [i-1])++;
+				sum_energy [i-1] += (myresults [j]).interE + /*(myresults [j]).intraE +*/ torsional_energy;		//intraE can be commented when unbound_same_as_bound
+				(myresults [j]).clus_subrank = subrank;
+				if (subrank == 1)
+					best_energy [i-1] = (myresults [j]).interE + /*(myresults [j]).intraE +*/ torsional_energy;		//intraE can be commented when unbound_same_as_bound
+			}
+	}
+
+	fp = fopen(report_file_name, "w");
+
+	write_basic_info(fp, ligand_ref, mypars, mygrid, argc, argv);	//Write basic information about docking and molecule parameters to file
+
+	fprintf(fp, "           RUN TIME INFO           \n");
+	fprintf(fp, "===================================\n\n");
+
+	fprintf(fp, "Average GPU run time for 1 run:           %lfs\n", docking_avg_runtime);
+	fprintf(fp, "Total GPU docking run time:               %fs\n", docking_avg_runtime*mypars->num_of_runs);
+
+	fprintf(fp, "Program run time:                          %lfs\n", program_runtime);
+	fprintf(fp, "\n\n");
+
+	fprintf(fp, "       CLUSTERING HISTOGRAM        \n");
+	fprintf(fp, "===================================\n\n");
+	fprintf(fp, " Cluster rank | Num in cluster |   Best energy   |   Mean energy   |    5    10   15   20   25   30   35\n");
+	fprintf(fp, "--------------+----------------+-----------------+-----------------+----+----+----+----+----+----+----+\n");
+
+	for (i=1; i<=num_of_clusters; i++)
+	{
+		fprintf(fp, "      %3d     |       %3d      | %15.3lf | %15.3lf |", i, cluster_sizes [i-1], best_energy [i-1], sum_energy [i-1]/cluster_sizes [i-1]);
+
+		for (j=0; j<cluster_sizes [i-1]; j++)
+			fprintf(fp, "#");
+
+		fprintf(fp, "\n");
+	}
+	fprintf(fp, "\n\n");
+
+	fprintf(fp, "              CLUSTERS             \n");
+	fprintf(fp, "===================================\n\n");
+	fprintf(fp, " Rank | Subrank | Run | Intermolecular E | Intramolecular E | Torsional energy |   Total energy   | Cluster RMSD | Reference RMSD |\n");
+	fprintf(fp, "------+---------+-----+------------------+------------------+------------------+------------------+--------------+----------------+\n");
+
+	for (i=1; i<=num_of_clusters; i++)	//printing cluster info to file
+	{
+		for (j=0; j<num_of_runs; j++)
+			if (myresults [j].clus_id == i)
+			{
+				fprintf(fp, "  %3d |   %3d   | %3d |  %15.3lf |  %15.3lf |  %15.3lf |  %15.3lf |     %4.2lf     |      %4.2lf      |\n", (myresults [j]).clus_id, (myresults [j]).clus_subrank, (myresults [j]).run_number,
+						(myresults [j]).interE, (myresults [j]).intraE, torsional_energy, (myresults [j]).interE + /*(myresults [j]).intraE +*/ torsional_energy, (myresults [j]).rmsd_from_cluscent, (myresults [j]).rmsd_from_ref); 	//intraE can be commented when unbound_same_as_bound
+			}
+	}
+
+	fclose(fp);
 
 }
 
-//void cluster_analysis(Ligandresult myresults [], int num_of_runs, char* report_file_name, const Liganddata* ligand_ref,
-//					  const Dockpars* mypars, const Gridinfo* mygrid, const int* argc, char** argv, const double docking_avg_runtime,
-//					  const double program_runtime)
-////The function performs ranked cluster analisys similar to that of AutoDock and creates a file with report_file_name name, the result
-////will be written to it.
-//{
-//	int i,j;
-//	Ligandresult temp_ligres;
-//	int num_of_clusters;
-//	int current_clust_center;
-//	double temp_rmsd;
-//	int result_clustered;
-//	int subrank;
-//	FILE* fp;
-//	int cluster_sizes [1000];
-//	double sum_energy [1000];
-//	double best_energy [1000];
-//
-//	const double AD4_coeff_tors = mypars->coeffs.AD4_coeff_tors;
-//	double cluster_tolerance = mypars->rmsd_tolerance;
-//	double torsional_energy;
-//
-//	//first of all, let's calculate the constant torsional free energy term
-//	torsional_energy = AD4_coeff_tors * ligand_ref->num_of_rotbonds;
-//
-//	//arranging results according to energy, myresults [0] will be the best one (with lowest energy)
-//	for (j=0; j<num_of_runs-1; j++)
-//		for (i=num_of_runs-2; i>=j; i--)		//arrange according to sum of inter- and intramolecular energies
-//			if ((myresults [i]).interE /*+ (myresults [i]).intraE*/ > (myresults [i+1]).interE /*+ (myresults [i+1]).intraE*/)	//mimics the behaviour of AD4 unbound_same_as_bound
-//			//if ((myresults [i]).interE + (myresults [i]).intraE > (myresults [i+1]).interE + (myresults [i+1]).intraE)
-//			{
-//				temp_ligres = myresults [i];
-//				myresults [i] = myresults [i+1];
-//				myresults [i+1] = temp_ligres;
-//			}
-//
-//	for (i=0; i<num_of_runs; i++)
-//	{
-//		(myresults [i]).clus_id = 0;	//indicates that it hasn't been put into cluster yet
-//	}
-//
-//	//the best result is the center of the first cluster
-//	(myresults [0]).clus_id = 1;
-//	(myresults [0]).rmsd_from_cluscent = 0;
-//	num_of_clusters = 1;
-//
-//	for (i=1; i<num_of_runs; i++)	//for each result
-//	{
-//		current_clust_center = 0;
-//		result_clustered = 0;
-//
-//		for (j=0; j<i; j++)		//results with lower id-s are clustered, look for cluster centers
-//		{
-//			if ((myresults [j]).clus_id > current_clust_center)		//it is the center of a new cluster
-//			{
-//				current_clust_center = (myresults [j]).clus_id;
-//				temp_rmsd = calc_rmsd(&((myresults [j]).reslig_realcoord), &((myresults [i]).reslig_realcoord), mypars->handle_symmetry);	//comparing current result with cluster center
-//				if (temp_rmsd <= cluster_tolerance)		//in this case we put result i to cluster with center j
-//				{
-//					(myresults [i]).clus_id = current_clust_center;
-//					(myresults [i]).rmsd_from_cluscent = temp_rmsd;
-//					result_clustered = 1;
-//					break;
-//				}
-//			}
-//		}
-//
-//		if (result_clustered != 1)		//if no suitable cluster was found, this is the center of a new one
-//		{
-//			num_of_clusters++;
-//			(myresults [i]).clus_id = num_of_clusters;		//new cluster id
-//			(myresults [i]).rmsd_from_cluscent = 0;
-//		}
-//
-//	}
-//
-//	for (i=1; i<=num_of_clusters; i++)	//printing cluster info to file
-//	{
-//		subrank = 0;
-//		cluster_sizes [i-1] = 0;
-//		sum_energy [i-1] = 0;
-//		for (j=0; j<num_of_runs; j++)
-//			if (myresults [j].clus_id == i)
-//			{
-//				subrank++;
-//				(cluster_sizes [i-1])++;
-//				sum_energy [i-1] += (myresults [j]).interE + /*(myresults [j]).intraE +*/ torsional_energy;		//intraE can be commented when unbound_same_as_bound
-//				(myresults [j]).clus_subrank = subrank;
-//				if (subrank == 1)
-//					best_energy [i-1] = (myresults [j]).interE + /*(myresults [j]).intraE +*/ torsional_energy;		//intraE can be commented when unbound_same_as_bound
-//			}
-//	}
-//
-//	fp = fopen(report_file_name, "w");
-//
-//	write_basic_info(fp, ligand_ref, mypars, mygrid, argc, argv);	//Write basic information about docking and molecule parameters to file
-//
-//	fprintf(fp, "           RUN TIME INFO           \n");
-//	fprintf(fp, "===================================\n\n");
-//
-//	fprintf(fp, "Average CPU run time for 1 run:            %lfs\n", docking_avg_runtime);
-//	fprintf(fp, "Program run time:                          %lfs\n", program_runtime);
-//	fprintf(fp, "\n\n");
-//
-//	fprintf(fp, "       CLUSTERING HISTOGRAM        \n");
-//	fprintf(fp, "===================================\n\n");
-//	fprintf(fp, " Cluster rank | Num in cluster |   Best energy   |   Mean energy   |    5    10   15   20   25   30   35\n");
-//	fprintf(fp, "--------------+----------------+-----------------+-----------------+----+----+----+----+----+----+----+\n");
-//
-//	for (i=1; i<=num_of_clusters; i++)
-//	{
-//		fprintf(fp, "      %3d     |       %3d      | %15.3lf | %15.3lf |", i, cluster_sizes [i-1], best_energy [i-1], sum_energy [i-1]/cluster_sizes [i-1]);
-//
-//		for (j=0; j<cluster_sizes [i-1]; j++)
-//			fprintf(fp, "#");
-//
-//		fprintf(fp, "\n");
-//	}
-//	fprintf(fp, "\n\n");
-//
-//	fprintf(fp, "              CLUSTERS             \n");
-//	fprintf(fp, "===================================\n\n");
-//	fprintf(fp, " Rank | Subrank | Run | Intermolecular E | Intramolecular E | Torsional energy |   Total energy   | Cluster RMSD | Reference RMSD |\n");
-//	fprintf(fp, "------+---------+-----+------------------+------------------+------------------+------------------+--------------+----------------+\n");
-//
-//	for (i=1; i<=num_of_clusters; i++)	//printing cluster info to file
-//	{
-//		for (j=0; j<num_of_runs; j++)
-//			if (myresults [j].clus_id == i)
-//			{
-//				fprintf(fp, "  %3d |   %3d   | %3d |  %15.3lf |  %15.3lf |  %15.3lf |  %15.3lf |     %4.2lf     |      %4.2lf      |\n", (myresults [j]).clus_id, (myresults [j]).clus_subrank, (myresults [j]).run_number,
-//						(myresults [j]).interE, (myresults [j]).intraE, torsional_energy, (myresults [j]).interE + /*(myresults [j]).intraE +*/ torsional_energy, (myresults [j]).rmsd_from_cluscent, (myresults [j]).rmsd_from_ref); 	//intraE can be commented when unbound_same_as_bound
-//			}
-//	}
-//
-//	fclose(fp);
-//
-//}
-
 void clusanal_gendlg(Ligandresult myresults [], int num_of_runs, const Liganddata* ligand_ref,
-					 const Dockpars* mypars, const Gridinfo* mygrid, const int* argc, char** argv)
+					 const Dockpars* mypars, const Gridinfo* mygrid, const int* argc, char** argv, const double docking_avg_runtime,
+					 const double program_runtime)
 //The function performs ranked cluster analisys similar to that of AutoDock and creates a file with report_file_name name, the result
 //will be written to it.
 {
@@ -600,8 +571,10 @@ void clusanal_gendlg(Ligandresult myresults [], int num_of_runs, const Liganddat
 	{
 		fprintf(fp, "    FINAL DOCKED STATE:\n    ________________________\n\n\n");
 
-		fprintf(fp, "Run:   %d / %d\n", i+1, mypars->num_of_runs);
-		fprintf(fp, "Time taken for this run:   %.3lfs\n\n", myresults[i].runtime);
+		//fprintf(fp, "Run:   %d / %d\n", i+1, mypars->num_of_runs);
+		fprintf(fp, "Run:   %d / %lu\n", i+1, mypars->num_of_runs);
+
+		fprintf(fp, "Time taken for this run:   %.3lfs\n\n", docking_avg_runtime);
 
 		fprintf(fp, "DOCKED: MODEL        %d\n", i+1);
 		fprintf(fp, "DOCKED: USER    Run = %d\n", i+1);
@@ -852,5 +825,4 @@ void clusanal_gendlg(Ligandresult myresults [], int num_of_runs, const Liganddat
 
 	fclose(fp_xml);
 }
-
 

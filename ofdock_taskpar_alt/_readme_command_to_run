@@ -13,7 +13,11 @@ aoc -march=emulator -Werror -v --board a10gx device/Krnl_GA.cl -o bin/docking.ao
 # Run ofdock (under ./bin)
 # Emulation: this will execute 1 run
 env CL_CONTEXT_EMULATOR_DEVICE_ALTERA=1 ./host -ffile ../input_data/1hvr_vegl.maps.fld -lfile ../input_data/1hvrl.pdbqt
+env CL_CONTEXT_EMULATOR_DEVICE_ALTERA=1 ./host -ffile ../input_data/3ptb/derived/3ptb_protein.maps.fld -lfile ../input_data/3ptb/derived/3ptb_ligand.pdbqt
+
+
+
 
 # FPGA: this will execute 1 run
-./host -ffile ../input_data/1hvr_vegl.maps.fld -lfile ./input_data/1hvrl.pdbqt -nrun 1
+./host -ffile ../input_data/1hvr_vegl.maps.fld -lfile ../input_data/1hvrl.pdbqt -nrun 1
 

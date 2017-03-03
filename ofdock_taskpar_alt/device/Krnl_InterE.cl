@@ -10,10 +10,22 @@
 // Originally from: processligand.c
 // --------------------------------------------------------------------------
 __kernel __attribute__ ((reqd_work_group_size(1,1,1)))
+/*
 void Krnl_InterE(__global const float*           restrict GlobFgrids,
 		 __global const Ligandconstant*  restrict LigConst,
 		 __global const Gridconstant*    restrict GridConst)
+*/
+void Krnl_InterE(
+             __global const float*           restrict GlobFgrids,
+	     __global       float*           restrict GlobPopulationCurrent,
+	     __global       float*           restrict GlobEnergyCurrent,
+	     __global       float*           restrict GlobPopulationNext,
+	     __global       float*           restrict GlobEnergyNext,
+             __global const float*           restrict GlobPRNG,
+	     __global const kernelconstant* restrict KerConst,
+	     __global const Dockparameters* restrict DockConst)
 {
+
 #ifdef EMULATOR
 	printf("Krnl InterE!!\n");
 	printf("GridConst->size_x = %u\n", GridConst->size_x);	
@@ -28,6 +40,7 @@ void Krnl_InterE(__global const float*           restrict GlobFgrids,
 	// --------------------------------------------------------------
 	// Wait for ligand data
 	// --------------------------------------------------------------
+/*
 	__local float myligand_atom_idxyzq[MAX_NUM_OF_ATOMS*5];
 
 	uint init_cnt;
@@ -36,7 +49,20 @@ void Krnl_InterE(__global const float*           restrict GlobFgrids,
 	{
 		myligand_atom_idxyzq[init_cnt] = read_channel_altera(chan_Conf2Intere_ligandatom_idxyzq);
 	}
+*/
+
+	__local float loc_coords_x[MAX_NUM_OF_ATOMS];
+	__local float loc_coords_y[MAX_NUM_OF_ATOMS];
+	__local float loc_coords_z[MAX_NUM_OF_ATOMS];
+
+	for (uint pipe_cnt=0; pipe_cnt<DockConst->num_of_atoms; pipe_cnt++) {
+		loc_coords_x[pipe_cnt] = read_channel_altera(chan_Conf2Intere_x);
+		loc_coords_y[pipe_cnt] = read_channel_altera(chan_Conf2Intere_y);
+		loc_coords_z[pipe_cnt] = read_channel_altera(chan_Conf2Intere_z);
+	}
 	// --------------------------------------------------------------
+
+
 
 	int atom_cnt;
 	uint atom_cnt_times_5;
@@ -47,39 +73,51 @@ void Krnl_InterE(__global const float*           restrict GlobFgrids,
 
 	int typeid;
 
-
-
-
 	float interE = 0.0f;
 	float interE_OUTGRID = 0.0f;
 	float interE_INGRID  = 0.0f;
 
 	// L30nardoSV	
 	unsigned int mul_tmp;
+	unsigned char g1 = DockConst->gridsize_x; 	
+	unsigned int  g2 = DockConst->gridsize_x * DockConst->gridsize_y;         
+	unsigned int  g3 = DockConst->gridsize_x * DockConst->gridsize_y * DockConst->gridsize_z;
+
         unsigned int ylow_times_g1, yhigh_times_g1;
         unsigned int zlow_times_g2, zhigh_times_g2;
         
 	unsigned int cube_000, cube_100, cube_010, cube_110;
         unsigned int cube_001, cube_101, cube_011, cube_111;
 
+
+
 	// for each atom
 	// **********************************************
 	// ADD VENDOR SPECIFIC PRAGMA	
 	// **********************************************
 	LOOP_INTERE_1:
-	for (atom_cnt=LigConst->num_of_atoms-1; atom_cnt>=0; atom_cnt--)		
+	for (atom_cnt=DockConst->num_of_atoms-1; atom_cnt>=0; atom_cnt--)		
 	{
+/*
 		atom_cnt_times_5 = atom_cnt*5;
 		typeid = convert_int(myligand_atom_idxyzq [atom_cnt_times_5]);
 		x = myligand_atom_idxyzq [atom_cnt_times_5+1];
 		y = myligand_atom_idxyzq [atom_cnt_times_5+2];
 		z = myligand_atom_idxyzq [atom_cnt_times_5+3];
 		q = myligand_atom_idxyzq [atom_cnt_times_5+4];
+*/
+
+		typeid = KerConst->atom_types_const[atom_cnt];
+		x = loc_coords_x[atom_cnt];
+		y = loc_coords_y[atom_cnt];
+		z = loc_coords_z[atom_cnt];
+		q = KerConst->atom_charges_const[atom_cnt];
+
 
 		// if the atom is outside of the grid
-		if ((x < 0.0f) || (x >= GridConst->size_x-1) || 
-		    (y < 0.0f) || (y >= GridConst->size_y-1) ||
-		    (z < 0.0f) || (z >= GridConst->size_z-1))	
+		if ((x < 0.0f) || (x >= DockConst->gridsize_x-1) || 
+		    (y < 0.0f) || (y >= DockConst->gridsize_y-1) ||
+		    (z < 0.0f) || (z >= DockConst->gridsize_z-1))	
 		{
 			interE_OUTGRID += 16777216.0f; //penalty is 2^24 for each atom outside the grid
 		} 
@@ -120,8 +158,8 @@ void Krnl_InterE(__global const float*           restrict GlobFgrids,
 			#endif
 
 			// L30nardoSV
-			ylow_times_g1  = y_low*GridConst->g1;	yhigh_times_g1 = y_high*GridConst->g1;
-        	        zlow_times_g2  = z_low*GridConst->g2;	zhigh_times_g2 = z_high*GridConst->g2;
+			ylow_times_g1  = y_low*g1;	yhigh_times_g1 = y_high*g1;
+        	        zlow_times_g2  = z_low*g2;	zhigh_times_g2 = z_high*g2;
         	        cube_000 = x_low  + ylow_times_g1  + zlow_times_g2;
         	        cube_100 = x_high + ylow_times_g1  + zlow_times_g2;
         	        cube_010 = x_low  + yhigh_times_g1 + zlow_times_g2;
@@ -130,11 +168,9 @@ void Krnl_InterE(__global const float*           restrict GlobFgrids,
         	        cube_101 = x_high + ylow_times_g1  + zhigh_times_g2;
         	        cube_011 = x_low  + yhigh_times_g1 + zhigh_times_g2;
         	        cube_111 = x_high + yhigh_times_g1 + zhigh_times_g2;
-        	        mul_tmp = typeid*GridConst->g3;
+        	        mul_tmp = typeid*g3;
 
 			//energy contribution of the current grid type
-			cube [0][0][0] = *(GlobFgrids);
-/*
 	                cube [0][0][0] = *(GlobFgrids + cube_000 + mul_tmp);
         	        cube [1][0][0] = *(GlobFgrids + cube_100 + mul_tmp);
         	        cube [0][1][0] = *(GlobFgrids + cube_010 + mul_tmp);
@@ -143,7 +179,6 @@ void Krnl_InterE(__global const float*           restrict GlobFgrids,
         	        cube [1][0][1] = *(GlobFgrids + cube_101 + mul_tmp);
         	        cube [0][1][1] = *(GlobFgrids + cube_011 + mul_tmp);
         	        cube [1][1][1] = *(GlobFgrids + cube_111 + mul_tmp);
-*/
 		
 			#if defined (DEBUG_KERNEL_INTER_E)
 			printf("Interpolation of van der Waals map:\n");
@@ -157,16 +192,17 @@ void Krnl_InterE(__global const float*           restrict GlobFgrids,
 			printf("cube(1,1,1) = %f\n", cube [1][1][1]);
 			#endif
 
-			interE_INGRID += trilin_interpol(cube, weights);
+			//interE_INGRID += trilin_interpol(cube, weights);
+			interE_INGRID += TRILININTERPOL(cube, weights);
 
 			#if defined (DEBUG_KERNEL_INTER_E)
-			printf("interpolated value = %f\n\n", trilin_interpol(cube, weights));
+			//printf("interpolated value = %f\n\n", trilin_interpol(cube, weights));
+			printf("interpolated value = %f\n\n", TRILININTERPOL(cube, weights));
 			#endif
 
 			//energy contribution of the electrostatic grid
-			typeid = GridConst->num_of_atypes;
-			mul_tmp = typeid*GridConst->g3;
-/*
+			typeid = DockConst->num_of_atypes;
+			mul_tmp = typeid*g3;
         	        cube [0][0][0] = *(GlobFgrids + cube_000 + mul_tmp);
         	        cube [1][0][0] = *(GlobFgrids + cube_100 + mul_tmp);
         	        cube [0][1][0] = *(GlobFgrids + cube_010 + mul_tmp);
@@ -175,7 +211,6 @@ void Krnl_InterE(__global const float*           restrict GlobFgrids,
         	        cube [1][0][1] = *(GlobFgrids + cube_101 + mul_tmp);
         	        cube [0][1][1] = *(GlobFgrids + cube_011 + mul_tmp);
         	        cube [1][1][1] = *(GlobFgrids + cube_111 + mul_tmp);
-*/
 
 			#if defined (DEBUG_KERNEL_INTER_E)
 			printf("Interpolation of electrostatic map:\n");
@@ -189,16 +224,17 @@ void Krnl_InterE(__global const float*           restrict GlobFgrids,
 			printf("cube(1,1,1) = %f\n", cube [1][1][1]);
 			#endif
 
-			interE_INGRID += q * trilin_interpol(cube, weights);
+			//interE_INGRID += q * trilin_interpol(cube, weights);
+			interE_INGRID += q * TRILININTERPOL(cube, weights);
 
 			#if defined (DEBUG_KERNEL_INTER_E)
-			printf("interpoated value = %f, multiplied by q = %f\n\n", trilin_interpol(cube, weights), q*trilin_interpol(cube, weights));
+			//printf("interpoated value = %f, multiplied by q = %f\n\n", trilin_interpol(cube, weights), q*trilin_interpol(cube, weights));
+			printf("interpoated value = %f, multiplied by q = %f\n\n", TRILININTERPOL(cube, weights), q*TRILININTERPOL(cube, weights));
 			#endif
 
 			//energy contribution of the desolvation grid
-			typeid = GridConst->num_of_atypes+1;
-			mul_tmp = typeid*GridConst->g3;
-/*
+			typeid = DockConst->num_of_atypes+1;
+			mul_tmp = typeid*g3;
         	        cube [0][0][0] = *(GlobFgrids + cube_000 + mul_tmp);
         	        cube [1][0][0] = *(GlobFgrids + cube_100 + mul_tmp);
         	        cube [0][1][0] = *(GlobFgrids + cube_010 + mul_tmp);
@@ -207,7 +243,7 @@ void Krnl_InterE(__global const float*           restrict GlobFgrids,
         	        cube [1][0][1] = *(GlobFgrids + cube_101 + mul_tmp);
         	        cube [0][1][1] = *(GlobFgrids + cube_011 + mul_tmp);
         	        cube [1][1][1] = *(GlobFgrids + cube_111 + mul_tmp);
-*/
+
 			#if defined (DEBUG_KERNEL_INTER_E)
 			printf("Interpolation of desolvation map:\n");
 			printf("cube(0,0,0) = %f\n", cube [0][0][0]);
@@ -220,24 +256,29 @@ void Krnl_InterE(__global const float*           restrict GlobFgrids,
 			printf("cube(1,1,1) = %f\n", cube [1][1][1]);
 			#endif
 
-			interE_INGRID += fabs(q) * trilin_interpol(cube, weights);
+			//interE_INGRID += fabs(q) * trilin_interpol(cube, weights);
+			interE_INGRID += fabs(q) * TRILININTERPOL(cube, weights);
 
 			#if defined (DEBUG_KERNEL_KERNEL_INTER_E)
-			printf("interploated value = %f, multiplied by abs(q) = %f\n\n", trilin_interpol(cube, weights), fabs(q) * trilin_interpol(cube, weights));
+			//printf("interploated value = %f, multiplied by abs(q) = %f\n\n", trilin_interpol(cube, weights), fabs(q) * trilin_interpol(cube, weights));
+			printf("interploated value = %f, multiplied by abs(q) = %f\n\n", TRILININTERPOL(cube, weights), fabs(q) * trilin_interpol(cube, weights));
 			printf("Current value of intermolecular energy = %f\n\n\n", interE_INGRID);
 			#endif
 		}
+
 	} // End of LOOP_INTERE_1:	
 
 	interE = interE_OUTGRID + interE_INGRID;
 	
-/*
-	// --------------------------------------------------------------
-	// Send intermolecular energy to GA
-	// --------------------------------------------------------------
-	write_channel_altera(chan_Intere2GA_intere, interE);
-	// --------------------------------------------------------------
-*/
+
+
+
+	//// --------------------------------------------------------------
+	//// Send intermolecular energy to GA
+	//// --------------------------------------------------------------
+	//write_channel_altera(chan_Intere2GA_intere, interE);
+	//// --------------------------------------------------------------
+
 
 }
 // --------------------------------------------------------------------------

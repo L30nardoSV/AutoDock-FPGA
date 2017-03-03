@@ -6,33 +6,55 @@
 // Originally from: processligand.c
 // --------------------------------------------------------------------------
 __kernel __attribute__ ((reqd_work_group_size(1,1,1)))
+/*
 void Krnl_Conform(__global const int*             restrict GlobLigand_rotbonds,
-		  __global const int*             restrict GlobLigand_atom_rotbonds,
+		  __global const char*             restrict GlobLigand_atom_rotbonds,
 		  __global const float*           restrict GlobLigand_rotbonds_moving_vectors,
 		  __global const float*           restrict GlobLigand_rotbonds_unit_vectors,
 		  __global const Ligandconstant*  restrict LigConst)
+*/
+void Krnl_Conform(
+             __global const float*           restrict GlobFgrids,
+	     __global       float*           restrict GlobPopulationCurrent,
+	     __global       float*           restrict GlobEnergyCurrent,
+	     __global       float*           restrict GlobPopulationNext,
+	     __global       float*           restrict GlobEnergyNext,
+             __global const float*           restrict GlobPRNG,
+	     __global const kernelconstant* restrict KerConst,
+	     __global const Dockparameters* restrict DockConst)
 {
+
 #ifdef EMULATOR
 	printf("Krnl Conform!!\n");
 #endif
 	// --------------------------------------------------------------
 	// Wait for ligand data and genotypes
 	// --------------------------------------------------------------
+/*
 	__local float myligand_atom_idxyzq[MAX_NUM_OF_ATOMS*5];
-	__local float genotype[40];
+*/
 
-	uint init_cnt;
+	__local float loc_coords_x[MAX_NUM_OF_ATOMS];
+	__local float loc_coords_y[MAX_NUM_OF_ATOMS];
+	__local float loc_coords_z[MAX_NUM_OF_ATOMS];
+	__local float genotype[ACTUAL_GENOTYPE_LENGTH];
 
-	for (init_cnt=0; init_cnt<LigConst->num_of_atoms*5; init_cnt++)
-	{
-		myligand_atom_idxyzq[init_cnt] = read_channel_altera(chan_GA2Conf_ligandatom_idxyzq);
+	for (uint pipe_cnt=0; pipe_cnt<DockConst->num_of_atoms; pipe_cnt++) {
+		loc_coords_x[pipe_cnt] = read_channel_altera(chan_GA2Conf_x);
+		loc_coords_y[pipe_cnt] = read_channel_altera(chan_GA2Conf_y);
+		loc_coords_z[pipe_cnt] = read_channel_altera(chan_GA2Conf_z);
 	}
 
-	for (init_cnt=0; init_cnt<40; init_cnt++)
-	{
-		genotype[init_cnt] = read_channel_altera(chan_GA2Conf_genotype);
+
+	for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {
+		genotype[pipe_cnt] = read_channel_altera(chan_GA2Conf_genotype);
 	}
 	// --------------------------------------------------------------
+
+
+
+
+
 
 	const float genrot_movvec [3] = {0.0f,0.0f,0.0f};
 	float genrot_unitvec  [3];
@@ -54,68 +76,166 @@ void Krnl_Conform(__global const int*             restrict GlobLigand_rotbonds,
 	genrot_unitvec [2] = cos(theta);
 	#endif
 	
+// NOT SURE IF THIS MUST BE KEPT WITH THE 
+// SINGLE FOR-LOOP/DATA PARALLEL IMPLEMENTATION
+/*
 	//moving ligand to origo
-	get_movvec_to_origo(LigConst->num_of_atoms, myligand_atom_idxyzq, movvec_to_origo);
-	move_ligand        (LigConst->num_of_atoms, myligand_atom_idxyzq, movvec_to_origo);
+	get_movvec_to_origo(DockConst->num_of_atoms, loc_coords_x, loc_coords_y, loc_coords_z, movvec_to_origo);
+	move_ligand        (DockConst->num_of_atoms, loc_coords_x, loc_coords_y, loc_coords_z, movvec_to_origo);
+*/
+	int rotation_list_element;
+	float atom_to_rotate[3];
+	float rotation_angle;
+	float genrotangle;
+	float sin_angle;
+	float rotation_unitvec[3], rotation_movingvec[3];
+	float quatrot_left_x, quatrot_left_y, quatrot_left_z, quatrot_left_q;
+	float quatrot_temp_x, quatrot_temp_y, quatrot_temp_z, quatrot_temp_q;
 
-	//for each atom of the ligand
+	genrotangle = genotype[5]*DEG_TO_RAD;
+
 	// **********************************************
 	// ADD VENDOR SPECIFIC PRAGMA
 	// **********************************************
 	LOOP_CHANGE_CONFORM_1:
-	for (atom_id=0; atom_id<LigConst->num_of_atoms; atom_id++)						
+	for (uint rotation_counter = 0; rotation_counter < DockConst->rotbondlist_length; rotation_counter++)
 	{
-		#if defined (DEBUG_KERNEL_CHANGE_CONFORM)
-		printf("\n\n\nROTATING atom %d ", atom_id);
-		#endif
+		rotation_list_element = KerConst->rotlist_const[rotation_counter];
 
-		//if the ligand has rotatable bonds
-		if (LigConst->num_of_rotbonds != 0)
+		if ((rotation_list_element & RLIST_DUMMY_MASK) == 0)	//if not dummy rotation
 		{
-			//for each rotatable bond
-			// **********************************************
-			// ADD VENDOR SPECIFIC PRAGMA
-			// **********************************************	
-			LOOP_CHANGE_CONFORM_2:
-			for (rotbond_id=0; rotbond_id<LigConst->num_of_rotbonds; rotbond_id++)
+			atom_id = rotation_list_element & RLIST_ATOMID_MASK;
+
+			//capturing atom coordinates
+			if ((rotation_list_element & RLIST_FIRSTROT_MASK) != 0)	//if first rotation of this atom
 			{
-				//if the atom has to be rotated around this bond
-				if (GlobLigand_atom_rotbonds [atom_id*32 + rotbond_id] != 0)
-				{
-					#if defined (DEBUG_KERNEL_CHANGE_CONFORM)
-					printf("around rotatable bond %d\n", rotbond_id);
-					#endif
+				atom_to_rotate[0] = KerConst->ref_coords_x_const[atom_id];
+				atom_to_rotate[1] = KerConst->ref_coords_y_const[atom_id];
+				atom_to_rotate[2] = KerConst->ref_coords_z_const[atom_id];
+			}
+			else
+			{
+				atom_to_rotate[0] = loc_coords_x[atom_id];
+				atom_to_rotate[1] = loc_coords_y[atom_id];
+				atom_to_rotate[2] = loc_coords_z[atom_id];
+			}
 
-					//rotating
-					rotate_custom(&myligand_atom_idxyzq [atom_id*5+1], 
-						      GlobLigand_rotbonds_moving_vectors [rotbond_id*3],
-						      GlobLigand_rotbonds_moving_vectors [rotbond_id*3+1],
-						      GlobLigand_rotbonds_moving_vectors [rotbond_id*3+2],
-						      GlobLigand_rotbonds_unit_vectors   [rotbond_id*3],
-						      GlobLigand_rotbonds_unit_vectors   [rotbond_id*3+1],
-						      GlobLigand_rotbonds_unit_vectors   [rotbond_id*3+2],
-						      genotype [6+rotbond_id]);
+			//capturing rotation vectors and angle
+			if ((rotation_list_element & RLIST_GENROT_MASK) != 0)	//if general rotation
+			{
+				rotation_unitvec[0] = genrot_unitvec[0];
+				rotation_unitvec[1] = genrot_unitvec[1];
+				rotation_unitvec[2] = genrot_unitvec[2];
 
-				} // End of if (GlobLigand_atom_rotbonds [atom_id*32 + rotbond_id] != 0)
-			} // End of for-loop (rotbond_id)	
-		} // End of if (myligand_num_of_rotbonds != 0)
+				rotation_angle = genrotangle;
 
-		#if defined (DEBUG_KERNEL_CHANGE_CONFORM)
-		printf("according to general rotation\n");
-		#endif
+				rotation_movingvec[0] = genotype[0];
+				rotation_movingvec[1] = genotype[1];
+				rotation_movingvec[2] = genotype[2];
+			}
+			else	//if rotating around rotatable bond
+			{
+				rotbond_id = (rotation_list_element & RLIST_RBONDID_MASK) >> RLIST_RBONDID_SHIFT;
+	
+				rotation_unitvec[0] = KerConst->rotbonds_unit_vectors_const[3*rotbond_id];
+				rotation_unitvec[1] = KerConst->rotbonds_unit_vectors_const[3*rotbond_id+1];
+				rotation_unitvec[2] = KerConst->rotbonds_unit_vectors_const[3*rotbond_id+2];
+				rotation_angle = genotype[6+rotbond_id]*DEG_TO_RAD;
 
-		//general rotation
-		rotate_custom(&myligand_atom_idxyzq [atom_id*5+1], 
-		              genrot_movvec[0],
-			      genrot_movvec[1],
-			      genrot_movvec[2],
-		              genrot_unitvec[0],
-			      genrot_unitvec[1],
-			      genrot_unitvec[2],
-		              genotype [5]);
+				rotation_movingvec[0] = KerConst->rotbonds_moving_vectors_const[3*rotbond_id];
+				rotation_movingvec[1] = KerConst->rotbonds_moving_vectors_const[3*rotbond_id+1];
+				rotation_movingvec[2] = KerConst->rotbonds_moving_vectors_const[3*rotbond_id+2];
 
-	} // End of for-loop (atom_id)
+				//in addition performing the first movement 
+				//which is needed only if rotating around rotatable bond
+				atom_to_rotate[0] -= rotation_movingvec[0];
+				atom_to_rotate[1] -= rotation_movingvec[1];
+				atom_to_rotate[2] -= rotation_movingvec[2];
+			}
 
+			//performing rotation
+			rotation_angle = rotation_angle/2;
+			quatrot_left_q = cos(rotation_angle);
+			sin_angle = sin(rotation_angle);
+
+			quatrot_left_x = sin_angle*rotation_unitvec[0];
+			quatrot_left_y = sin_angle*rotation_unitvec[1];
+			quatrot_left_z = sin_angle*rotation_unitvec[2];
+
+			if ((rotation_list_element & RLIST_GENROT_MASK) != 0)	//if general rotation, 
+										//two rotations should be performed 
+										//(multiplying the quaternions)
+			{
+				//calculating quatrot_left*ref_orientation_quats_const, 
+				//which means that reference orientation rotation is the first
+				quatrot_temp_q = quatrot_left_q;
+				quatrot_temp_x = quatrot_left_x;
+				quatrot_temp_y = quatrot_left_y;
+				quatrot_temp_z = quatrot_left_z;
+
+				// L30nardoSV: taking the first one
+				quatrot_left_q = quatrot_temp_q*KerConst->ref_orientation_quats_const[0]-
+						 quatrot_temp_x*KerConst->ref_orientation_quats_const[1]-
+						 quatrot_temp_y*KerConst->ref_orientation_quats_const[2]-
+						 quatrot_temp_z*KerConst->ref_orientation_quats_const[3];
+				quatrot_left_x = quatrot_temp_q*KerConst->ref_orientation_quats_const[1]+
+						 KerConst->ref_orientation_quats_const[0]*quatrot_temp_x+
+						 quatrot_temp_y*KerConst->ref_orientation_quats_const[3]-
+						 KerConst->ref_orientation_quats_const[2]*quatrot_temp_z;
+				quatrot_left_y = quatrot_temp_q*KerConst->ref_orientation_quats_const[2]+
+						 KerConst->ref_orientation_quats_const[0]*quatrot_temp_y+
+						 KerConst->ref_orientation_quats_const[1]*quatrot_temp_z-
+						 quatrot_temp_x*KerConst->ref_orientation_quats_const[3];
+				quatrot_left_z = quatrot_temp_q*KerConst->ref_orientation_quats_const[3]+
+						 KerConst->ref_orientation_quats_const[0]*quatrot_temp_z+
+						 quatrot_temp_x*KerConst->ref_orientation_quats_const[2]-
+						 KerConst->ref_orientation_quats_const[1]*quatrot_temp_y;
+
+			}
+
+			quatrot_temp_q = 0 -
+					 quatrot_left_x*atom_to_rotate [0] -
+					 quatrot_left_y*atom_to_rotate [1] -
+					 quatrot_left_z*atom_to_rotate [2];
+			quatrot_temp_x = quatrot_left_q*atom_to_rotate [0] +
+					 quatrot_left_y*atom_to_rotate [2] -
+					 quatrot_left_z*atom_to_rotate [1];
+			quatrot_temp_y = quatrot_left_q*atom_to_rotate [1] -
+					 quatrot_left_x*atom_to_rotate [2] +
+					 quatrot_left_z*atom_to_rotate [0];
+			quatrot_temp_z = quatrot_left_q*atom_to_rotate [2] +
+					 quatrot_left_x*atom_to_rotate [1] -
+					 quatrot_left_y*atom_to_rotate [0];
+
+			atom_to_rotate [0] = 0 -
+					     quatrot_temp_q*quatrot_left_x +
+					     quatrot_temp_x*quatrot_left_q -
+					     quatrot_temp_y*quatrot_left_z +
+					     quatrot_temp_z*quatrot_left_y;
+			atom_to_rotate [1] = 0 -
+					     quatrot_temp_q*quatrot_left_y +
+					     quatrot_temp_x*quatrot_left_z +
+					     quatrot_temp_y*quatrot_left_q -
+					     quatrot_temp_z*quatrot_left_x;
+			atom_to_rotate [2] = 0 -
+					     quatrot_temp_q*quatrot_left_z -
+					     quatrot_temp_x*quatrot_left_y +
+					     quatrot_temp_y*quatrot_left_x +
+					     quatrot_temp_z*quatrot_left_q;
+
+			//performing final movement and storing values
+			loc_coords_x[atom_id] = atom_to_rotate [0] + rotation_movingvec[0];
+			loc_coords_y[atom_id] = atom_to_rotate [1] + rotation_movingvec[1];
+			loc_coords_z[atom_id] = atom_to_rotate [2] + rotation_movingvec[2];
+
+		} // End if-statement not dummy rotation
+	} // End rotation_counter for-loop
+
+
+
+// NOT SURE IF THIS MUST BE KEPT WITH THE 
+// SINGLE FOR-LOOP/DATA PARALLEL IMPLEMENTATION
+/*
 	float genotype_copy [3];
 	genotype_copy [0] = genotype [0];
 	genotype_copy [1] = genotype [1];
@@ -132,15 +252,23 @@ void Krnl_Conform(__global const int*             restrict GlobLigand_rotbonds,
 	}
 	#endif
 
+*/
+
+
 	// --------------------------------------------------------------
 	// Send ligand data to InterE and IntraE Kernels
 	// --------------------------------------------------------------
-	for (init_cnt=0; init_cnt<LigConst->num_of_atoms*5; init_cnt++)
-	{
-		write_channel_altera(chan_Conf2Intere_ligandatom_idxyzq, myligand_atom_idxyzq[init_cnt]);
-		write_channel_altera(chan_Conf2Intrae_ligandatom_idxyzq, myligand_atom_idxyzq[init_cnt]);
+	for (uint pipe_cnt=0; pipe_cnt<DockConst->num_of_atoms; pipe_cnt++) {
+		write_channel_altera(chan_Conf2Intere_x, loc_coords_x[pipe_cnt]);
+		write_channel_altera(chan_Conf2Intere_y, loc_coords_y[pipe_cnt]);
+		write_channel_altera(chan_Conf2Intere_z, loc_coords_z[pipe_cnt]);
+
+		write_channel_altera(chan_Conf2Intrae_x, loc_coords_x[pipe_cnt]);
+		write_channel_altera(chan_Conf2Intrae_y, loc_coords_y[pipe_cnt]);
+		write_channel_altera(chan_Conf2Intrae_z, loc_coords_z[pipe_cnt]);
 	}
 	// --------------------------------------------------------------
+
 
 }
 // --------------------------------------------------------------------------

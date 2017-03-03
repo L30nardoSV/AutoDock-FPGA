@@ -1,25 +1,34 @@
+/*
+typedef struct
+{
+	float q; 
+	float x; 
+	float y; 
+	float z;
+} KernelQuaternion;
+*/
 // --------------------------------------------------------------------------
 // The function returns the moving vector in the second parameter 
 // which moves the ligand (that is, its geometrical center point) 
 // given by the first parameter to the origo).
 // Originally from: processligand.c
 // --------------------------------------------------------------------------
-void get_movvec_to_origo(        const uint   myligand_num_of_atoms,
-			 __local const float* myligand_atom_idxyzq,
+void get_movvec_to_origo(        const char   myligand_num_of_atoms,
+			 __local const float* myligand_coords_x,
+			 __local const float* myligand_coords_y,
+			 __local const float* myligand_coords_z,
 				       float* movvec)
 {
 	float tmp_x = 0.0f, tmp_y = 0.0f, tmp_z = 0.0f; 
-	uint i, i_times_5;
 
 	// **********************************************
 	// ADD VENDOR SPECIFIC PRAGMA
 	// **********************************************
 	LOOP_GET_MOVVEC_TO_ORIGO:
-	for (i=0; i<myligand_num_of_atoms; i++) {
-		i_times_5 = i*5;
-		tmp_x += myligand_atom_idxyzq [i_times_5+1];
-		tmp_y += myligand_atom_idxyzq [i_times_5+2];
-		tmp_z += myligand_atom_idxyzq [i_times_5+3];
+	for (uint i=0; i<myligand_num_of_atoms; i++) {
+		tmp_x += myligand_coords_x [i];
+		tmp_y += myligand_coords_y [i];
+		tmp_z += myligand_coords_z [i];
 	}
 
 	// **********************************************
@@ -41,24 +50,26 @@ void get_movvec_to_origo(        const uint   myligand_num_of_atoms,
 // according to the vector given by the second one.
 // Originally from: processligand.c
 // --------------------------------------------------------------------------
-void move_ligand(        const uint   myligand_num_of_atoms,
-	 	 __local       float* myligand_atom_idxyzq, 
+void move_ligand(        const char   myligand_num_of_atoms,
+	 	 //__local       float* myligand_atom_idxyzq, 
+		 __local       float* myligand_coords_x,
+		 __local       float* myligand_coords_y,
+		 __local       float* myligand_coords_z,
 			 const float* movvec)
 {
-	uint i, i_times_5;
-
 	// **********************************************
 	// ADD VENDOR SPECIFIC PRAGMA
 	// **********************************************
 	LOOP_MOVE_LIGAND:
-	for (i=0; i<myligand_num_of_atoms; i++) {
-		i_times_5 = i*5;
-		myligand_atom_idxyzq [i_times_5+1] += movvec [0];
-		myligand_atom_idxyzq [i_times_5+2] += movvec [1];
-		myligand_atom_idxyzq [i_times_5+3] += movvec [2];
+	for (uint i=0; i<myligand_num_of_atoms; i++) {
+		myligand_coords_x [i] += movvec [0];
+		myligand_coords_y [i] += movvec [1];
+		myligand_coords_z [i] += movvec [2];
 	}
 }
 
+
+/*
 // --------------------------------------------------------------------------
 // The function rotates the point given by the first parameter 
 // around an axis which is parallel to vector normvec and 
@@ -163,3 +174,4 @@ void rotate_custom(__local float* point,
 	printf("rotated point (x,y,z): %f, %f, %f\n\n", point [0], point [1], point [2]);
 	#endif
 }
+*/

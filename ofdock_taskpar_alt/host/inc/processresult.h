@@ -20,72 +20,75 @@
 
 #define PRINT1000(file, x) fprintf(file,  ((fabs((x)) >= 0.0) && ((fabs(x)) <= 1000.)) ? "%+7.2f" : "%+11.2e" , (x));
 
-/*
 typedef struct
 {
 	Liganddata reslig_realcoord;
-	double interE;
-	double interE_elec;
-	double intraE;
-	double peratom_vdw [256];
-	double peratom_elec [256];
-	double rmsd_from_ref;
-	double rmsd_from_cluscent;
-	int clus_id;
-	int clus_subrank;
-	int run_number;
-	double runtime;
-
-} Ligandresult;
-*/
-
-typedef struct { 	
-	Liganddata reslig_realcoord; 	
-	float interE; 	
-	float interE_elec; 	
-	float intraE; 	
-	float peratom_vdw [256]; 	
-	float peratom_elec [256]; 	
-	float rmsd_from_ref; 	
-	float rmsd_from_cluscent; 	
-	int clus_id; 	
-	int clus_subrank; 	
-	int run_number; 	
-	float runtime; 
+	float 	   interE;
+	float 	   interE_elec;
+	float      intraE;
+	float      peratom_vdw  [MAX_NUM_OF_ATOMS];
+	float      peratom_elec [MAX_NUM_OF_ATOMS];
+	float      rmsd_from_ref;
+	float      rmsd_from_cluscent;
+	int        clus_id;
+	int        clus_subrank;
+	int        run_number;
 } Ligandresult;
 
-/*
-void arrange_result(double [][40], const int);
-*/
-void arrange_result(float [][40], 		    
-		    const int);
 
+void arrange_result(    float*    final_population,
+		        float*    energies,
+		    const int 	  pop_size);
 
-void write_basic_info(FILE*, const Liganddata*, const Dockpars*, const Gridinfo*, const int*, char**);
+void write_basic_info(            FILE* fp,
+		      const Liganddata* ligand_ref,
+		      const Dockpars*   mypars,
+		      const Gridinfo*   mygrid,
+		      const int*        argc,
+		           char**       argv);
 
-void write_basic_info_dlg(FILE*, const Liganddata*, const Dockpars*, const Gridinfo*, const int*, char**);
+void write_basic_info_dlg(	      FILE* fp,
+			  const Liganddata* ligand_ref,
+			  const Dockpars*   mypars,
+			  const Gridinfo*   mygrid,
+			  const int*        argc,
+			  	char**      argv);
 
-/*
-void make_resfiles(double [][40], const Liganddata*, const Liganddata*,
-				   const Dockpars*, const Gridinfo*, const double*, const int*, char**, int, int, Ligandresult*);
-*/
+void make_resfiles(	      float* final_population,
+		   	      float* energies,
+		   const Liganddata* ligand_ref,
+                   const Liganddata* ligand_from_pdb,
+		   const Dockpars*   mypars,
+		   		int  evals_performed,
+                   		int  generations_used,
+                   const Gridinfo*   mygrid,
+                   const float*      grids,
+                   	      float* cpu_ref_ori_angles,
+                   const int* 	     argc,
+		   	      char** argv,
+		   		int  debug,
+		   		int  run_cnt,
+		   Ligandresult* best_result);
 
-void make_resfiles(float [][40], 		   
-		   const Liganddata*, 		   
-		   const Liganddata*, 		   
-		   const Dockpars*, 		   
-		   const Gridinfo*, 		   
-		   const float*, 		   
-		   const int*, 		   
-		   char**, 		   
-		   int, 		   
-		   int, 		   
-		   Ligandresult*);
+void cluster_analysis(     Ligandresult myresults [],
+		                    int num_of_runs,
+		                  char* report_file_name,
+		      const Liganddata* ligand_ref,
+		      const Dockpars* mypars,
+		      const Gridinfo* mygrid,
+		      const int*      argc,
+		            char**    argv,
+		      const double    docking_avg_runtime,
+		      const double    program_runtime);
 
-
-//void cluster_analysis(Ligandresult [], int, char*, const Liganddata*, const Dockpars*, const Gridinfo*, const int*,
-//					  char**, const double, const double);
-
-void clusanal_gendlg(Ligandresult [], int, const Liganddata*, const Dockpars*, const Gridinfo*, const int*, char**);
+void clusanal_gendlg(Ligandresult myresults [],
+		                  int  num_of_runs,
+		     const Liganddata* ligand_ref,
+		     const Dockpars*   mypars,
+                     const Gridinfo*   mygrid,
+		     const int*        argc,
+                               char**  argv,
+                     const double docking_avg_runtime,
+		     const double program_runtime);
 
 #endif /* PROCESSRESULT_H_ */

@@ -1,5 +1,5 @@
 **********************************************************
-**       FDOCK  AUTODOCKTOOLS-COMPATIBLE DLG FILE       **
+**       GDOCK  AUTODOCKTOOLS-COMPATIBLE DLG FILE       **
 **********************************************************
 
 
@@ -16,21 +16,21 @@ Number of generations:                     27000
 Size of population:                        150
 Rate of crossover:                         80.000000%
 Tournament selection probability limit:    60.000000%
-Rate of mutation:                          1.960784%
-Maximal allowed delta movement:            +/- 5.999634A
-Maximal allowed delta angle:               +/- 89.998627°
+Rate of mutation:                          2.000000%
+Maximal allowed delta movement:            +/- 6.000000A
+Maximal allowed delta angle:               +/- 90.000000°
 
-Rate of local search:                      6.000000% 
+Rate of local search:                      6.000000%
 Maximal number of local search iterations: 300
-Rho lower bound:                           0.009766
-Spread of local search delta movement:     1.999935A
-Spread of local search delta angle:        74.999946°
+Rho lower bound:                           0.010000
+Spread of local search delta movement:     2.000000A
+Spread of local search delta angle:        74.999999°
 Limit of consecutive successes/failures:   4
 
 Handle symmetry during clustering:         NO
 RMSD tolerance:                            2.000000A
 
-Program call in command line was:          ./host -ffile ../input_data/3ptb/derived/3ptb_protein.maps.fld -lfile ../input_data/3ptb/derived/3ptb_ligand.pdbqt -nrun 1 
+Program call in command line was:          ./host -ffile ../input_data/3ptb/derived/3ptb_protein.maps.fld -lfile ../input_data/3ptb/derived/3ptb_ligand.pdbqt 
 
 
     GRID PARAMETERS
@@ -98,19 +98,19 @@ INPUT-LIGAND-PDBQT: TORSDOF 2
 
 
 Run:   1 / 1
-Time taken for this run:   0.000s
+Time taken for this run:   0.020s
 
 DOCKED: MODEL        1
 DOCKED: USER    Run = 1
 DOCKED: USER
-DOCKED: USER    Estimated Free Energy of Binding    =       -nan kcal/mol  [=(1)+(2)+(3)-(4)]
+DOCKED: USER    Estimated Free Energy of Binding    =  +1.68e+08 kcal/mol  [=(1)+(2)+(3)-(4)]
 DOCKED: USER
-DOCKED: USER    (1) Final Intermolecular Energy     =       -nan kcal/mol
-DOCKED: USER        vdW + Hbond + desolv Energy     =       -nan kcal/mol
-DOCKED: USER        Electrostatic Energy            =       -nan kcal/mol
-DOCKED: USER    (2) Final Total Internal Energy     =  +0.00 kcal/mol
+DOCKED: USER    (1) Final Intermolecular Energy     =  +1.68e+08 kcal/mol
+DOCKED: USER        vdW + Hbond + desolv Energy     =  +1.68e+08 kcal/mol
+DOCKED: USER        Electrostatic Energy            =  -0.00 kcal/mol
+DOCKED: USER    (2) Final Total Internal Energy     =  +0.12 kcal/mol
 DOCKED: USER    (3) Torsional Free Energy           =  +0.60 kcal/mol
-DOCKED: USER    (4) Unbound System's Energy         =  +0.00 kcal/mol
+DOCKED: USER    (4) Unbound System's Energy         =  +0.12 kcal/mol
 DOCKED: USER
 DOCKED: USER
 DOCKED: REMARK  2 active torsions:
@@ -120,22 +120,22 @@ DOCKED: REMARK    2  A    between atoms: C_7  and  N1_8
 DOCKED: USER                              x       y       z     vdW  Elec       q    Type
 DOCKED: USER                           _______ _______ _______ _____ _____    ______ ____
 DOCKED: ROOT
-DOCKED: HETATM    1  C1  BEN A   1        -nan    -nan     inf+100000.00+100000.00    +0.000 A 
-DOCKED: HETATM    2  C2  BEN A   1        -nan    -nan     inf+100000.00+100000.00    -321864398408282664299659264.000 A 
-DOCKED: HETATM    3  C3  BEN A   1        -nan    -nan     inf+100000.00+100000.00    -518969491456.000 A 
-DOCKED: HETATM    4  C4  BEN A   1        -nan    -nan     inf+100000.00+100000.00    +0.000 A 
-DOCKED: HETATM    5  C5  BEN A   1        -nan    -nan     inf+100000.00+100000.00    -518969491456.000 A 
-DOCKED: HETATM    6  C6  BEN A   1        -nan    -nan     inf+100000.00+100000.00    -321864398408282664299659264.000 A 
+DOCKED: HETATM    1  C1  BEN A   1      -2.248  11.304  13.641+100000.00+100000.00    +0.007 A 
+DOCKED: HETATM    2  C2  BEN A   1      -2.811  10.826  12.488+100000.00+100000.00    +0.015 A 
+DOCKED: HETATM    3  C3  BEN A   1      -2.596   9.495  12.106+100000.00+100000.00    +0.001 A 
+DOCKED: HETATM    4  C4  BEN A   1      -1.811   8.647  12.903+100000.00+100000.00    +0.000 A 
+DOCKED: HETATM    5  C5  BEN A   1      -1.251   9.147  14.081+100000.00+100000.00    +0.001 A 
+DOCKED: HETATM    6  C6  BEN A   1      -1.478  10.474  14.437+100000.00+100000.00    +0.015 A 
 DOCKED: ENDROOT
 DOCKED: BRANCH   1   7
-DOCKED: HETATM    7  C   BEN A   1        -nan    -nan     inf+100000.00+100000.00    +0.000 C 
-DOCKED: HETATM    8  N2  BEN A   1        -nan    -nan    -nan  -nan  -nan    +0.000 N 
-DOCKED: HETATM    9  H22 BEN A   1        -nan    -nan    -nan  -nan  -nan    +119422827978414792822210217115648.000 HD
-DOCKED: HETATM   10  H21 BEN A   1        -nan    -nan    -nan  -nan  -nan    +119422827978414792822210217115648.000 HD
+DOCKED: HETATM    7  C   BEN A   1      -2.454  12.628  14.014+11.08 -0.26    +0.102 C 
+DOCKED: HETATM    8  N2  BEN A   1      -1.449  13.340  14.495 -0.69 +0.36    -0.385 N 
+DOCKED: HETATM    9  H22 BEN A   1      -0.513  12.938  14.458+100000.00+100000.00    +0.157 HD
+DOCKED: HETATM   10  H21 BEN A   1      -1.599  14.311  14.769 -0.03 -0.10    +0.157 HD
 DOCKED: BRANCH   7  11
-DOCKED: HETATM   11  N1  BEN A   1        -nan    -nan    -nan  -nan  -nan    +0.000 N 
-DOCKED: HETATM   12  H12 BEN A   1        -nan    -nan    -nan  -nan  -nan    +119422827978414792822210217115648.000 HD
-DOCKED: HETATM   13  H11 BEN A   1        -nan    -nan    -nan  -nan  -nan    +119422827978414792822210217115648.000 HD
+DOCKED: HETATM   11  N1  BEN A   1      -3.666  13.149  14.061+100000.00+100000.00    -0.385 N 
+DOCKED: HETATM   12  H12 BEN A   1      -3.784  14.119  13.770+100000.00+100000.00    +0.157 HD
+DOCKED: HETATM   13  H11 BEN A   1      -4.442  12.651  14.496+100000.00+100000.00    +0.157 HD
 DOCKED: ENDBRANCH   7  11
 DOCKED: ENDBRANCH   1   7
 DOCKED: TORSDOF 2
@@ -154,7 +154,7 @@ Clus | Lowest    | Run | Mean      | Num | Histogram
 -ter | Binding   |     | Binding   | in  |
 Rank | Energy    |     | Energy    | Clus|    5    10   15   20   25   30   35
 _____|___________|_____|___________|_____|____:____|____:____|____:____|____:___
-   1 |      -nan |   1 |      -nan |   1 |#
+   1 | +1.68e+08 |   1 | +1.68e+08 |   1 |#
 _____|___________|_____|___________|_____|______________________________________
 
 
@@ -167,4 +167,4 @@ _____________________________________________________________________
 Rank | Sub- | Run  | Binding   | Cluster | Reference       | Grep
      | Rank |      | Energy    | RMSD    | RMSD            | Pattern
 _____|______|______|___________|_________|_________________|___________
-   1      1      1        -nan      0.00       nan           RANKING
+   1      1      1   +1.68e+08      0.00      4.98           RANKING

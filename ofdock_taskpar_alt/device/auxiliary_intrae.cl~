@@ -30,13 +30,15 @@ float distance_custom(__local const float* point1,
 	sub3 = point1 [2] - point2 [2];
 
 	float temp_sqroot;
-	temp_sqroot = sub1*sub1 + sub2*sub2 + sub3*sub3;	//printf("native: %f ... ", native_sqrt(temp_sqroot));
+	temp_sqroot = sub1*sub1 + sub2*sub2 + sub3*sub3;	
+	//printf("native: %f ... ", native_sqrt(temp_sqroot));
 	#if defined (NATIVE_PRECISION)
-	temp_sqroot = sqrt_custom(temp_sqroot);			//printf("approx: %f\n", temp_sqroot);
+	temp_sqroot = sqrt_custom(temp_sqroot);			
+	//printf("approx: %f\n", temp_sqroot);
 	#else
 	temp_sqroot = sqrt(temp_sqroot);	
 	#endif
-	return temp_sqroot;					//return native_sqrt(sub1*sub1 + sub2*sub2 + sub3*sub3);
+	return temp_sqroot;					
 }
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------

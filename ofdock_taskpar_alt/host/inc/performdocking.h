@@ -3,49 +3,52 @@
  *
  * performdocking.h
  *
- *  Created on: 2009.05.25.
+ *  Created on: 2010.05.26.
  *      Author: pechan.imre
  */
 
-#ifndef EXECDOCK_H_
-#define EXECDOCK_H_
+#ifndef PERFORMDOCKING_H_
+#define PERFORMDOCKING_H_
 
 #include <stdio.h>
-#include <string.h>
+#include <stdlib.h>
+#include <time.h>
+//#include <math.h>
 
-#include "defines.h"
-#include "getparameters.h"
-#include "processligand.h"
 #include "processgrid.h"
-#include "miscallenous.h"
+#include "miscellaneous.h"
+#include "processligand.h"
+#include "getparameters.h"
+#include "calcenergy.h"	
 #include "processresult.h"
-#include "searchoptimum.h"
 
-#include <CL/opencl.h> 
-//#include "commonMacros.h" 
-//#include "listAttributes.h" 
-//#include "Platforms.h" 
-//#include "Devices.h" 
-//#include "Contexts.h" 
-//#include "CommandQueues.h" 
-//#include "Programs.h" 
-#include "Kernels.h" 
-//#include "ImportBinary.h" 
-//#include "ImportSource.h" 
+#include <CL/opencl.h>
+//#include "commonMacros.h"
+//#include "listAttributes.h"
+//#include "Platforms.h"
+//#include "Devices.h"
+//#include "Contexts.h"
+//#include "CommandQueues.h"
+//#include "Programs.h"
+#include "Kernels.h"
+//#include "ImportBinary.h"
+//#include "ImportSource.h"
 #include "BufferObjects.h"
 
-/*
-int docking_with_cpu(const Gridinfo* mygrid, const double* floatgrids, Dockpars* mypars, const Liganddata* myligand_init,
-					 const int* argc, char** argv, double* fpga_exectime_sum, Ligandresult* result_ligands);
-*/
+#define ELAPSEDSECS(stop,start) ((float) stop-start)/((float) CLOCKS_PER_SEC)
 
-int docking_with_cpu(const Gridinfo* mygrid, 		     
-		     const float* floatgrids, 		     
-		     Dockpars* mypars, 		     
-		     const Liganddata* myligand_init, 		     
-		     const int* argc, 		     
-		     char** argv, 		     
-		     double* fpga_exectime_sum, 		     
-		     Ligandresult* result_ligands);
+int docking_with_gpu(const Gridinfo* 	mygrid,
+         	     /*const*/ float* 	cpu_floatgrids,
+		           Dockpars*	mypars,
+		     const Liganddata* 	myligand_init,
+		     const int* 	argc,
+		     char**		argv,
+		           clock_t 	clock_start_program);
 
-#endif /* EXECDOCK_H_ */
+double check_progress(int* evals_of_runs,
+		      int generation_cnt,
+		      int max_num_of_evals,
+		      int max_num_of_gens,
+		      int num_of_runs);
+
+#endif /* PERFORMDOCKING_H_ */

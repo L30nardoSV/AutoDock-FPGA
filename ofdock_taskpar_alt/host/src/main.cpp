@@ -1,110 +1,108 @@
-/*
- * (C) 2013. Evopro Innovation Kft.
- *
- * main.c
- *
- *  Created on: 2008.09.04.
- *      Author: pechan.imre
- */
-
-#include <stdio.h>
-#include <stdlib.h>
-
+//#include <stdio.h>
+//#include <stdlib.h>
+#include <time.h>
 
 #include "processgrid.h"
-#include "miscallenous.h"
-#include "processresult.h"
+//include "processresult.h"
 #include "processligand.h"
 #include "getparameters.h"
 #include "performdocking.h"
 
-int main(int argc, char* argv [])
+
+// ------------------------
+// Correct time measurement
+// Moved to performdocking.cpp to skip measuring build time
+#include <sys/time.h>
+// ------------------------
+
+
+int main(int argc, char* argv[])
 {
+
+	//=======================================================================
+	// Docking Algorithm
+	//=======================================================================
 
 	Gridinfo mygrid;
 	Liganddata myligand_init;
 	Dockpars mypars;
-	
-/*
-	double* floatgrids;
-*/
+
 	float* floatgrids;
 
-	double start_program, stop_program;
-	double dock_exectime_sum;
-	Ligandresult* result_ligands;
-	//char report_file_name [30];
+	clock_t clock_start_program, clock_stop_program;
 
 
-	start_program = timer_gets();
+	clock_start_program = clock();
 
-	//Capturing names of grid parameter file and ligand pdbqt file
+	// ------------------------
+	// Correct time measurement
+	// Moved to performdocking.cpp to skip measuring build time
+	double num_sec, num_usec, elapsed_sec;
+	timeval time_start,time_end;
+	gettimeofday(&time_start,NULL);
+	// ------------------------
 
-	if (get_filenames_and_ADcoeffs(&argc, argv, &mypars) != 0)		//Filling the filename and coeffs fields of mypars according to command line arguments
+	//------------------------------------------------------------
+	// Capturing names of grid parameter file and ligand pdbqt file
+	//------------------------------------------------------------
+
+	// Filling the filename and coeffs fields of mypars according to command line arguments
+	if (get_filenames_and_ADcoeffs(&argc, argv, &mypars) != 0)
 		return 1;
 
-	//Processing receptor and ligand files
+	//------------------------------------------------------------
+	// Processing receptor and ligand files
+	//------------------------------------------------------------
 
-	if (get_gridinfo(mypars.fldfile, &mygrid) != 0)		//Filling mygrid according to the gpf file
+	// Filling mygrid according to the gpf file
+	if (get_gridinfo(mypars.fldfile, &mygrid) != 0)
 		return 1;
 
-	if (init_liganddata(mypars.ligandfile, &myligand_init, &mygrid) != 0)		//Filling the atom types filed of myligand according to the grid types
+	// Filling the atom types filed of myligand according to the grid types
+	if (init_liganddata(mypars.ligandfile, &myligand_init, &mygrid) != 0)
 		return 1;
 
-	if (get_liganddata(mypars.ligandfile, &myligand_init, mypars.coeffs.AD4_coeff_vdW, mypars.coeffs.AD4_coeff_hb) != 0)	//Filling myligand according to the pdbqt file
+	// Filling myligand according to the pdbqt file
+	if (get_liganddata(mypars.ligandfile, &myligand_init, mypars.coeffs.AD4_coeff_vdW, mypars.coeffs.AD4_coeff_hb) != 0)
 		return 1;
 
-	if (get_gridvalues(&mygrid, &floatgrids) != 0)		//Reading the grid files and storing values in the memory region pointed by floatgrids
+	//Reading the grid files and storing values in the memory region pointed by floatgrids
+	if (get_gridvalues_f(&mygrid, &floatgrids) != 0)
 		return 1;
 
+	//------------------------------------------------------------
+	// Capturing algorithm parameters (command line args)
+	//------------------------------------------------------------
+	get_commandpars(&argc, argv, &(mygrid.spacing), &mypars);
 
-	//Capturing algorithm parameters
-
-	get_recligpars(&myligand_init, &mygrid, &mypars);		//Capturing required parameters of the ligand and the grid
-
-	get_commandpars(&argc, argv, &(mygrid.spacing), &mypars);		//capturing command line arguments
-
-	//Allocating memory for results
-
-	result_ligands = (Ligandresult*) malloc(sizeof(Ligandresult)*(mypars.num_of_runs));
-	if (result_ligands == NULL)
-	{
-		printf("Error: not enough memory!\n");
-		return 1;
-	}
-
-	//Calculating the energies of reference ligand if required
+	//------------------------------------------------------------
+	// Calculating energies of reference ligand if required
+	//------------------------------------------------------------
 	if (mypars.reflig_en_reqired == 1)
-		print_ref_lig_energies(myligand_init, mygrid, floatgrids, mypars.coeffs.scaled_AD4_coeff_elec, mypars.coeffs.AD4_coeff_desolv, mypars.qasp);
+		print_ref_lig_energies_f(myligand_init, mygrid, floatgrids, mypars.coeffs.scaled_AD4_coeff_elec, mypars.coeffs.AD4_coeff_desolv, mypars.qasp);
 
-	//Perform docking
+	//------------------------------------------------------------
+	// Starting Docking
+	//------------------------------------------------------------
+	if (docking_with_gpu(&mygrid, floatgrids, &mypars, &myligand_init, &argc, argv, clock_start_program) != 0)
+		return 1;
 
-	docking_with_cpu(&mygrid, floatgrids, &mypars, &myligand_init, &argc, argv, &dock_exectime_sum, result_ligands);
-
-	//Perform ranked cluster analysis
-
-	/*if (mypars.use_cpu == 1)
-		strcpy(report_file_name, "clusters_cpu.txt");
-	else
-		strcpy(report_file_name, "clusters_fpga.txt");*/
-
-	//cluster_analysis(result_ligands, mypars.num_of_runs, report_file_name, &myligand_init, &mypars,
-	//				 &mygrid, &argc, argv, dock_exectime_sum/mypars.num_of_runs, stop_program_before_clustering-start_program);
-
-	clusanal_gendlg(result_ligands, mypars.num_of_runs, &myligand_init, &mypars,
-					&mygrid, &argc, argv);
+	free(floatgrids);
 
 /*
-	free(floatgrids);
-	free(result_ligands);
+	clock_stop_program = clock();
+	printf("Program run time: %.3f sec\n", ELAPSEDSECS(clock_stop_program, clock_start_program));
 */
-	//Stopping program
 
-	stop_program = timer_gets();
-
-	printf("\n\nAverage run time of one run: %.3f sec\n", dock_exectime_sum/mypars.num_of_runs);
-	printf("Program run time: %.3f sec\n", (stop_program-start_program));
+	// ------------------------
+	// Correct time measurement
+	// Moved to performdocking.cpp to skip measuring build time
+	gettimeofday(&time_end,NULL);
+	num_sec     = time_end.tv_sec  - time_start.tv_sec;
+	num_usec    = time_end.tv_usec - time_start.tv_usec;
+	elapsed_sec = num_sec + (num_usec/1000000);
+	printf("Program run time %.3f sec (CORRECTED, used for EVALUATION)\n",elapsed_sec);
+	//// ------------------------
 
 	return 0;
 }
-
