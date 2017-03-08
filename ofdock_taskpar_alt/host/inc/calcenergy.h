@@ -47,6 +47,10 @@ typedef struct
 	int*   		evals_of_new_entities;
 	unsigned int* 	prng_states;
 */
+	// L30nardoSV added
+	unsigned int num_of_energy_evals;
+	unsigned int num_of_generations;
+
 	int    		pop_size;
 	int    		num_of_genes;
 	float  		tournament_rate;

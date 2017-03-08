@@ -23,7 +23,7 @@
 #elif defined (N128WI) 	
 	#define NUM_OF_THREADS_PER_BLOCK 128 // ofdock_amd_128wi 
 #else 	
-	#define NUM_OF_THREADS_PER_BLOCK 32  // ofdock_amd_32wi 
+	#define NUM_OF_THREADS_PER_BLOCK 1  // ofdock_amd_32wi 
 #endif
 
 // -----------------------------------------------------------------------------

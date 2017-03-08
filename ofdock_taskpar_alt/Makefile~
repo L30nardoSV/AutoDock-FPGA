@@ -160,9 +160,9 @@ else
 endif
 
 ifeq ($(ENABLE_K5),YES)
-	K5 =-DENABLE_KERNEL5
+	K4 =-DENABLE_KERNEL5
 else
-	K5 =
+	K4 =
 endif
 
 

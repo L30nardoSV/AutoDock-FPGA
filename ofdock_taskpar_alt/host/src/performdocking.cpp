@@ -60,6 +60,12 @@ static cl_kernel kernel4  = NULL;
 static const char *name_k4 = "Krnl_IntraE";
 #endif
 
+#ifdef ENABLE_KERNEL5
+static cl_command_queue command_queue5 = NULL;
+static cl_kernel kernel5  = NULL;
+static const char *name_k5 = "Krnl_Manager";
+#endif
+
 static cl_program program = NULL;
 
 // Function prototypes
@@ -246,6 +252,10 @@ filled with clock() */
 	dockpars.rotbondlist_length = ((int) NUM_OF_THREADS_PER_BLOCK*(myligand_reference.num_of_rotcyc));
 	dockpars.coeff_elec    = ((float) mypars->coeffs.scaled_AD4_coeff_elec);
 	dockpars.coeff_desolv  = ((float) mypars->coeffs.AD4_coeff_desolv);
+	// L30nardoSV added
+	dockpars.num_of_energy_evals = (unsigned int) mypars->num_of_energy_evals;
+	dockpars.num_of_generations  = (unsigned int) mypars->num_of_generations;
+
 	dockpars.pop_size      = mypars->pop_size;
 	dockpars.num_of_genes  = myligand_reference.num_of_rotbonds + 6;
 	dockpars.tournament_rate = mypars->tournament_rate;
@@ -307,17 +317,6 @@ filled with clock() */
         setKernelArg(kernel2,7, sizeof(cl_mem),                          	&mem_DockparametersConst);
 #endif // End of ENABLE_KERNEL2
 
-#ifdef ENABLE_KERNEL4
-        setKernelArg(kernel4,0, sizeof(mem_dockpars_fgrids),                    &mem_dockpars_fgrids);
-        setKernelArg(kernel4,1, sizeof(mem_dockpars_conformations_current),     &mem_dockpars_conformations_current);
-        setKernelArg(kernel4,2, sizeof(mem_dockpars_energies_current),          &mem_dockpars_energies_current);
-        setKernelArg(kernel4,3, sizeof(mem_dockpars_conformations_next),        &mem_dockpars_conformations_next);
-        setKernelArg(kernel4,4, sizeof(mem_dockpars_energies_next),             &mem_dockpars_energies_next);
-        setKernelArg(kernel4,5, sizeof(mem_dockpars_prng_states),               &mem_dockpars_prng_states);
-	setKernelArg(kernel4,6, sizeof(cl_mem),                          	&mem_KerConst);
-        setKernelArg(kernel4,7, sizeof(cl_mem),                          	&mem_DockparametersConst);
-#endif // End of ENABLE_KERNEL4
-
 #ifdef ENABLE_KERNEL3
         setKernelArg(kernel3,0, sizeof(mem_dockpars_fgrids),                    &mem_dockpars_fgrids);
         setKernelArg(kernel3,1, sizeof(mem_dockpars_conformations_current),     &mem_dockpars_conformations_current);
@@ -329,7 +328,27 @@ filled with clock() */
         setKernelArg(kernel3,7, sizeof(cl_mem),                          	&mem_DockparametersConst);
 #endif // End of ENABLE_KERNEL3
 
+#ifdef ENABLE_KERNEL4
+        setKernelArg(kernel4,0, sizeof(mem_dockpars_fgrids),                    &mem_dockpars_fgrids);
+        setKernelArg(kernel4,1, sizeof(mem_dockpars_conformations_current),     &mem_dockpars_conformations_current);
+        setKernelArg(kernel4,2, sizeof(mem_dockpars_energies_current),          &mem_dockpars_energies_current);
+        setKernelArg(kernel4,3, sizeof(mem_dockpars_conformations_next),        &mem_dockpars_conformations_next);
+        setKernelArg(kernel4,4, sizeof(mem_dockpars_energies_next),             &mem_dockpars_energies_next);
+        setKernelArg(kernel4,5, sizeof(mem_dockpars_prng_states),               &mem_dockpars_prng_states);
+	setKernelArg(kernel4,6, sizeof(cl_mem),                          	&mem_KerConst);
+        setKernelArg(kernel4,7, sizeof(cl_mem),                          	&mem_DockparametersConst);
+#endif // End of ENABLE_KERNEL4
 
+#ifdef ENABLE_KERNEL5
+        setKernelArg(kernel5,0, sizeof(mem_dockpars_fgrids),                    &mem_dockpars_fgrids);
+        setKernelArg(kernel5,1, sizeof(mem_dockpars_conformations_current),     &mem_dockpars_conformations_current);
+        setKernelArg(kernel5,2, sizeof(mem_dockpars_energies_current),          &mem_dockpars_energies_current);
+        setKernelArg(kernel5,3, sizeof(mem_dockpars_conformations_next),        &mem_dockpars_conformations_next);
+        setKernelArg(kernel5,4, sizeof(mem_dockpars_energies_next),             &mem_dockpars_energies_next);
+        setKernelArg(kernel5,5, sizeof(mem_dockpars_prng_states),               &mem_dockpars_prng_states);
+	setKernelArg(kernel5,6, sizeof(cl_mem),                          	&mem_KerConst);
+        setKernelArg(kernel5,7, sizeof(cl_mem),                          	&mem_DockparametersConst);
+#endif // End of ENABLE_KERNEL3
 
 
 
@@ -353,13 +372,17 @@ filled with clock() */
 	runKernelTask(command_queue2,kernel2,NULL,NULL);
 #endif // ENABLE_KERNEL2
 
+#ifdef ENABLE_KERNEL3
+	runKernelTask(command_queue3,kernel3,NULL,NULL);
+#endif // ENABLE_KERNEL3
+
 #ifdef ENABLE_KERNEL4
 	runKernelTask(command_queue4,kernel4,NULL,NULL);
 #endif // ENABLE_KERNEL4
 
-#ifdef ENABLE_KERNEL3
-	runKernelTask(command_queue3,kernel3,NULL,NULL);
-#endif // ENABLE_KERNEL3
+#ifdef ENABLE_KERNEL5
+	runKernelTask(command_queue5,kernel5,NULL,NULL);
+#endif // ENABLE_KERNEL5
 
 
 		generation_cnt++;
@@ -372,12 +395,16 @@ filled with clock() */
 	clFinish(command_queue2); 
 #endif
 
+#ifdef ENABLE_KERNEL3 		
+	clFinish(command_queue3); 
+#endif
+
 #ifdef ENABLE_KERNEL4 		
 	clFinish(command_queue4); 
 #endif
 
-#ifdef ENABLE_KERNEL3 		
-	clFinish(command_queue3); 
+#ifdef ENABLE_KERNEL5
+	clFinish(command_queue5); 
 #endif
 
 
@@ -557,6 +584,13 @@ bool init() {
   checkError(status, "Failed to create kernel");
 #endif
 
+#ifdef ENABLE_KERNEL3
+  command_queue3 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  checkError(status, "Failed to create command queue3");
+  kernel3 = clCreateKernel(program, name_k3, &status);
+  checkError(status, "Failed to create kernel");
+#endif
+
 #ifdef ENABLE_KERNEL4
   command_queue4 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
   checkError(status, "Failed to create command queue4");
@@ -564,10 +598,10 @@ bool init() {
   checkError(status, "Failed to create kernel");
 #endif
 
-#ifdef ENABLE_KERNEL3
-  command_queue3 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
-  checkError(status, "Failed to create command queue3");
-  kernel3 = clCreateKernel(program, name_k3, &status);
+#ifdef ENABLE_KERNEL5
+  command_queue5 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  checkError(status, "Failed to create command queue5");
+  kernel5 = clCreateKernel(program, name_k5, &status);
   checkError(status, "Failed to create kernel");
 #endif
 
@@ -594,6 +628,11 @@ void cleanup() {
 #ifdef ENABLE_KERNEL4
   if(kernel4) {clReleaseKernel(kernel4);}
   if(command_queue4) {clReleaseCommandQueue(command_queue4);}
+#endif
+
+#ifdef ENABLE_KERNEL5
+  if(kernel5) {clReleaseKernel(kernel5);}
+  if(command_queue5) {clReleaseCommandQueue(command_queue5);}
 #endif
 
   if(program) {clReleaseProgram(program);}

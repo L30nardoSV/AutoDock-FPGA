@@ -9,86 +9,57 @@
 // if it remains outside, a very high value will be added to the current energy as a penalty. 
 // Originally from: processligand.c
 // --------------------------------------------------------------------------
-__kernel __attribute__ ((reqd_work_group_size(1,1,1)))
-/*
-void Krnl_InterE(__global const float*           restrict GlobFgrids,
-		 __global const Ligandconstant*  restrict LigConst,
-		 __global const Gridconstant*    restrict GridConst)
-*/
+__kernel
 void Krnl_InterE(
              __global const float*           restrict GlobFgrids,
 	     __global       float*           restrict GlobPopulationCurrent,
 	     __global       float*           restrict GlobEnergyCurrent,
 	     __global       float*           restrict GlobPopulationNext,
 	     __global       float*           restrict GlobEnergyNext,
-             __global const float*           restrict GlobPRNG,
-	     __global const kernelconstant* restrict KerConst,
-	     __global const Dockparameters* restrict DockConst)
+             __global       unsigned int*    restrict GlobPRNG,
+	     __global const kernelconstant*  restrict KerConst,
+	     __global const Dockparameters*  restrict DockConst)
 {
-
-#ifdef EMULATOR
-	printf("Krnl InterE!!\n");
-	printf("GridConst->size_x = %u\n", GridConst->size_x);	
-	printf("GridConst->size_y = %u\n", GridConst->size_y);
-	printf("GridConst->size_z = %u\n", GridConst->size_z);
-	printf("GridConst->g1 = %u\n", GridConst->g1);
-	printf("GridConst->g2 = %u\n", GridConst->g2);
-	printf("GridConst->g3 = %u\n", GridConst->g3);
-	printf("GridConst->spacing  = %f\n", GridConst->spacing);
-	printf("GridConst->num_of_atypes = %u\n", GridConst->num_of_atypes);
-#endif
-	// --------------------------------------------------------------
-	// Wait for ligand data
-	// --------------------------------------------------------------
-/*
-	__local float myligand_atom_idxyzq[MAX_NUM_OF_ATOMS*5];
-
-	uint init_cnt;
-
-	for(init_cnt=0; init_cnt<LigConst->num_of_atoms*5; init_cnt++)
-	{
-		myligand_atom_idxyzq[init_cnt] = read_channel_altera(chan_Conf2Intere_ligandatom_idxyzq);
-	}
-*/
 
 	__local float loc_coords_x[MAX_NUM_OF_ATOMS];
 	__local float loc_coords_y[MAX_NUM_OF_ATOMS];
 	__local float loc_coords_z[MAX_NUM_OF_ATOMS];
 
-	for (uint pipe_cnt=0; pipe_cnt<DockConst->num_of_atoms; pipe_cnt++) {
-		loc_coords_x[pipe_cnt] = read_channel_altera(chan_Conf2Intere_x);
-		loc_coords_y[pipe_cnt] = read_channel_altera(chan_Conf2Intere_y);
-		loc_coords_z[pipe_cnt] = read_channel_altera(chan_Conf2Intere_z);
-	}
-	// --------------------------------------------------------------
-
-
-
-	int atom_cnt;
-	uint atom_cnt_times_5;
+	float interE;
+	char atom1_id, atom1_typeid;
 	float x, y, z, dx, dy, dz, q;
 	float cube [2][2][2];
 	float weights [2][2][2];
 	int x_low, x_high, y_low, y_high, z_low, z_high;
 
-	int typeid;
-
-	float interE = 0.0f;
-	float interE_OUTGRID = 0.0f;
-	float interE_INGRID  = 0.0f;
-
 	// L30nardoSV	
-	unsigned int mul_tmp;
+	unsigned int  mul_tmp;
 	unsigned char g1 = DockConst->gridsize_x; 	
 	unsigned int  g2 = DockConst->gridsize_x * DockConst->gridsize_y;         
 	unsigned int  g3 = DockConst->gridsize_x * DockConst->gridsize_y * DockConst->gridsize_z;
+        unsigned int  ylow_times_g1, yhigh_times_g1;
+        unsigned int  zlow_times_g2, zhigh_times_g2;
+	unsigned int  cube_000, cube_100, cube_010, cube_110;
+        unsigned int  cube_001, cube_101, cube_011, cube_111;
 
-        unsigned int ylow_times_g1, yhigh_times_g1;
-        unsigned int zlow_times_g2, zhigh_times_g2;
-        
-	unsigned int cube_000, cube_100, cube_010, cube_110;
-        unsigned int cube_001, cube_101, cube_011, cube_111;
+while(1) {
+	//printf("BEFORE In INTER CHANNEL\n");
+	// --------------------------------------------------------------
+	// Wait for ligand atomic coordinates in channel
+	// --------------------------------------------------------------
 
+	for (uint pipe_cnt=0; pipe_cnt<DockConst->num_of_atoms; pipe_cnt++) {
+		loc_coords_x[pipe_cnt] = read_channel_altera(chan_Conf2Intere_x);
+		mem_fence(CLK_CHANNEL_MEM_FENCE);
+		loc_coords_y[pipe_cnt] = read_channel_altera(chan_Conf2Intere_y);
+		mem_fence(CLK_CHANNEL_MEM_FENCE);
+		loc_coords_z[pipe_cnt] = read_channel_altera(chan_Conf2Intere_z);
+	}
+	// --------------------------------------------------------------
+	//printf("AFTER In INTER CHANNEL\n");
+
+
+	interE = 0.0f;
 
 
 	// for each atom
@@ -96,30 +67,21 @@ void Krnl_InterE(
 	// ADD VENDOR SPECIFIC PRAGMA	
 	// **********************************************
 	LOOP_INTERE_1:
-	for (atom_cnt=DockConst->num_of_atoms-1; atom_cnt>=0; atom_cnt--)		
+	for (atom1_id=0; atom1_id<DockConst->num_of_atoms; atom1_id++)		
 	{
-/*
-		atom_cnt_times_5 = atom_cnt*5;
-		typeid = convert_int(myligand_atom_idxyzq [atom_cnt_times_5]);
-		x = myligand_atom_idxyzq [atom_cnt_times_5+1];
-		y = myligand_atom_idxyzq [atom_cnt_times_5+2];
-		z = myligand_atom_idxyzq [atom_cnt_times_5+3];
-		q = myligand_atom_idxyzq [atom_cnt_times_5+4];
-*/
-
-		typeid = KerConst->atom_types_const[atom_cnt];
-		x = loc_coords_x[atom_cnt];
-		y = loc_coords_y[atom_cnt];
-		z = loc_coords_z[atom_cnt];
-		q = KerConst->atom_charges_const[atom_cnt];
-
+		atom1_typeid = KerConst->atom_types_const[atom1_id];
+		x = loc_coords_x[atom1_id];
+		y = loc_coords_y[atom1_id];
+		z = loc_coords_z[atom1_id];
+		q = KerConst->atom_charges_const[atom1_id];
 
 		// if the atom is outside of the grid
 		if ((x < 0.0f) || (x >= DockConst->gridsize_x-1) || 
 		    (y < 0.0f) || (y >= DockConst->gridsize_y-1) ||
 		    (z < 0.0f) || (z >= DockConst->gridsize_z-1))	
 		{
-			interE_OUTGRID += 16777216.0f; //penalty is 2^24 for each atom outside the grid
+			//penalty is 2^24 for each atom outside the grid
+			interE += 16777216.0f; 
 		} 
 		else 
 		{
@@ -143,7 +105,7 @@ void Krnl_InterE(
 			weights [1][1][1] = dx*dy*dz;
 
 			#if defined (DEBUG_KERNEL_INTER_E)
-			printf("\n\nPartial results for atom with id %i:\n", atom_cnt);
+			printf("\n\nPartial results for atom with id %i:\n", atom1_id);
 			printf("x_low = %d, x_high = %d, x_frac = %f\n", x_low, x_high, dx);
 			printf("y_low = %d, y_high = %d, y_frac = %f\n", y_low, y_high, dy);
 			printf("z_low = %d, z_high = %d, z_frac = %f\n\n", z_low, z_high, dz);
@@ -168,7 +130,7 @@ void Krnl_InterE(
         	        cube_101 = x_high + ylow_times_g1  + zhigh_times_g2;
         	        cube_011 = x_low  + yhigh_times_g1 + zhigh_times_g2;
         	        cube_111 = x_high + yhigh_times_g1 + zhigh_times_g2;
-        	        mul_tmp = typeid*g3;
+        	        mul_tmp = atom1_typeid*g3;
 
 			//energy contribution of the current grid type
 	                cube [0][0][0] = *(GlobFgrids + cube_000 + mul_tmp);
@@ -192,17 +154,15 @@ void Krnl_InterE(
 			printf("cube(1,1,1) = %f\n", cube [1][1][1]);
 			#endif
 
-			//interE_INGRID += trilin_interpol(cube, weights);
-			interE_INGRID += TRILININTERPOL(cube, weights);
+			interE += TRILININTERPOL(cube, weights);
 
 			#if defined (DEBUG_KERNEL_INTER_E)
-			//printf("interpolated value = %f\n\n", trilin_interpol(cube, weights));
 			printf("interpolated value = %f\n\n", TRILININTERPOL(cube, weights));
 			#endif
 
 			//energy contribution of the electrostatic grid
-			typeid = DockConst->num_of_atypes;
-			mul_tmp = typeid*g3;
+			atom1_typeid = DockConst->num_of_atypes;
+			mul_tmp = atom1_typeid*g3;
         	        cube [0][0][0] = *(GlobFgrids + cube_000 + mul_tmp);
         	        cube [1][0][0] = *(GlobFgrids + cube_100 + mul_tmp);
         	        cube [0][1][0] = *(GlobFgrids + cube_010 + mul_tmp);
@@ -224,17 +184,15 @@ void Krnl_InterE(
 			printf("cube(1,1,1) = %f\n", cube [1][1][1]);
 			#endif
 
-			//interE_INGRID += q * trilin_interpol(cube, weights);
-			interE_INGRID += q * TRILININTERPOL(cube, weights);
+			interE += q * TRILININTERPOL(cube, weights);
 
 			#if defined (DEBUG_KERNEL_INTER_E)
-			//printf("interpoated value = %f, multiplied by q = %f\n\n", trilin_interpol(cube, weights), q*trilin_interpol(cube, weights));
 			printf("interpoated value = %f, multiplied by q = %f\n\n", TRILININTERPOL(cube, weights), q*TRILININTERPOL(cube, weights));
 			#endif
 
 			//energy contribution of the desolvation grid
-			typeid = DockConst->num_of_atypes+1;
-			mul_tmp = typeid*g3;
+			atom1_typeid = DockConst->num_of_atypes+1;
+			mul_tmp = atom1_typeid*g3;
         	        cube [0][0][0] = *(GlobFgrids + cube_000 + mul_tmp);
         	        cube [1][0][0] = *(GlobFgrids + cube_100 + mul_tmp);
         	        cube [0][1][0] = *(GlobFgrids + cube_010 + mul_tmp);
@@ -256,30 +214,22 @@ void Krnl_InterE(
 			printf("cube(1,1,1) = %f\n", cube [1][1][1]);
 			#endif
 
-			//interE_INGRID += fabs(q) * trilin_interpol(cube, weights);
-			interE_INGRID += fabs(q) * TRILININTERPOL(cube, weights);
+			interE += fabs(q) * TRILININTERPOL(cube, weights);
 
 			#if defined (DEBUG_KERNEL_KERNEL_INTER_E)
-			//printf("interploated value = %f, multiplied by abs(q) = %f\n\n", trilin_interpol(cube, weights), fabs(q) * trilin_interpol(cube, weights));
 			printf("interploated value = %f, multiplied by abs(q) = %f\n\n", TRILININTERPOL(cube, weights), fabs(q) * trilin_interpol(cube, weights));
-			printf("Current value of intermolecular energy = %f\n\n\n", interE_INGRID);
+			printf("Current value of intermolecular energy = %f\n\n\n", interE);
 			#endif
 		}
-
 	} // End of LOOP_INTERE_1:	
 
-	interE = interE_OUTGRID + interE_INGRID;
-	
-
-
-
-	//// --------------------------------------------------------------
-	//// Send intermolecular energy to GA
-	//// --------------------------------------------------------------
-	//write_channel_altera(chan_Intere2GA_intere, interE);
-	//// --------------------------------------------------------------
-
-
+	// --------------------------------------------------------------
+	// Send intermolecular energy to chanel
+	// --------------------------------------------------------------
+	write_channel_altera(chan_Intere2Manager_intere, interE);
+	// --------------------------------------------------------------
+ 	
+	} // End of while(1)
 }
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------

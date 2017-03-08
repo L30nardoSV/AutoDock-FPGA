@@ -103,14 +103,14 @@ Time taken for this run:   0.020s
 DOCKED: MODEL        1
 DOCKED: USER    Run = 1
 DOCKED: USER
-DOCKED: USER    Estimated Free Energy of Binding    =  +1.68e+08 kcal/mol  [=(1)+(2)+(3)-(4)]
+DOCKED: USER    Estimated Free Energy of Binding    =  +1.34e+08 kcal/mol  [=(1)+(2)+(3)-(4)]
 DOCKED: USER
-DOCKED: USER    (1) Final Intermolecular Energy     =  +1.68e+08 kcal/mol
-DOCKED: USER        vdW + Hbond + desolv Energy     =  +1.68e+08 kcal/mol
-DOCKED: USER        Electrostatic Energy            =  -0.00 kcal/mol
-DOCKED: USER    (2) Final Total Internal Energy     =  +0.12 kcal/mol
+DOCKED: USER    (1) Final Intermolecular Energy     =  +1.34e+08 kcal/mol
+DOCKED: USER        vdW + Hbond + desolv Energy     =  +1.34e+08 kcal/mol
+DOCKED: USER        Electrostatic Energy            =  -0.02 kcal/mol
+DOCKED: USER    (2) Final Total Internal Energy     =  +0.14 kcal/mol
 DOCKED: USER    (3) Torsional Free Energy           =  +0.60 kcal/mol
-DOCKED: USER    (4) Unbound System's Energy         =  +0.12 kcal/mol
+DOCKED: USER    (4) Unbound System's Energy         =  +0.14 kcal/mol
 DOCKED: USER
 DOCKED: USER
 DOCKED: REMARK  2 active torsions:
@@ -120,22 +120,22 @@ DOCKED: REMARK    2  A    between atoms: C_7  and  N1_8
 DOCKED: USER                              x       y       z     vdW  Elec       q    Type
 DOCKED: USER                           _______ _______ _______ _____ _____    ______ ____
 DOCKED: ROOT
-DOCKED: HETATM    1  C1  BEN A   1      -2.248  11.304  13.641+100000.00+100000.00    +0.007 A 
-DOCKED: HETATM    2  C2  BEN A   1      -2.811  10.826  12.488+100000.00+100000.00    +0.015 A 
-DOCKED: HETATM    3  C3  BEN A   1      -2.596   9.495  12.106+100000.00+100000.00    +0.001 A 
-DOCKED: HETATM    4  C4  BEN A   1      -1.811   8.647  12.903+100000.00+100000.00    +0.000 A 
-DOCKED: HETATM    5  C5  BEN A   1      -1.251   9.147  14.081+100000.00+100000.00    +0.001 A 
-DOCKED: HETATM    6  C6  BEN A   1      -1.478  10.474  14.437+100000.00+100000.00    +0.015 A 
+DOCKED: HETATM    1  C1  BEN A   1      -2.125  13.806  18.895 +0.22 -0.00    +0.007 A 
+DOCKED: HETATM    2  C2  BEN A   1      -2.352  12.517  19.297+100000.00+100000.00    +0.015 A 
+DOCKED: HETATM    3  C3  BEN A   1      -3.037  12.270  20.494+100000.00+100000.00    +0.001 A 
+DOCKED: HETATM    4  C4  BEN A   1      -3.499  13.338  21.279+100000.00+100000.00    +0.000 A 
+DOCKED: HETATM    5  C5  BEN A   1      -3.268  14.648  20.851+100000.00+100000.00    +0.001 A 
+DOCKED: HETATM    6  C6  BEN A   1      -2.582  14.866  19.659+100000.00+100000.00    +0.015 A 
 DOCKED: ENDROOT
 DOCKED: BRANCH   1   7
-DOCKED: HETATM    7  C   BEN A   1      -2.454  12.628  14.014+11.08 -0.26    +0.102 C 
-DOCKED: HETATM    8  N2  BEN A   1      -1.449  13.340  14.495 -0.69 +0.36    -0.385 N 
-DOCKED: HETATM    9  H22 BEN A   1      -0.513  12.938  14.458+100000.00+100000.00    +0.157 HD
-DOCKED: HETATM   10  H21 BEN A   1      -1.599  14.311  14.769 -0.03 -0.10    +0.157 HD
+DOCKED: HETATM    7  C   BEN A   1      -1.436  14.051  17.712 -0.67 -0.03    +0.102 C 
+DOCKED: HETATM    8  N2  BEN A   1      -0.327  13.381  17.445+100000.00+100000.00    -0.385 N 
+DOCKED: HETATM    9  H22 BEN A   1      -0.074  12.605  18.056+100000.00+100000.00    +0.157 HD
+DOCKED: HETATM   10  H21 BEN A   1       0.179  13.560  16.578+100000.00+100000.00    +0.157 HD
 DOCKED: BRANCH   7  11
-DOCKED: HETATM   11  N1  BEN A   1      -3.666  13.149  14.061+100000.00+100000.00    -0.385 N 
-DOCKED: HETATM   12  H12 BEN A   1      -3.784  14.119  13.770+100000.00+100000.00    +0.157 HD
-DOCKED: HETATM   13  H11 BEN A   1      -4.442  12.651  14.496+100000.00+100000.00    +0.157 HD
+DOCKED: HETATM   11  N1  BEN A   1      -1.763  15.055  16.919 -0.56 +0.12    -0.385 N 
+DOCKED: HETATM   12  H12 BEN A   1      -2.608  15.582  17.135 -0.02 -0.05    +0.157 HD
+DOCKED: HETATM   13  H11 BEN A   1      -1.268  15.224  16.044 -0.02 -0.05    +0.157 HD
 DOCKED: ENDBRANCH   7  11
 DOCKED: ENDBRANCH   1   7
 DOCKED: TORSDOF 2
@@ -154,7 +154,7 @@ Clus | Lowest    | Run | Mean      | Num | Histogram
 -ter | Binding   |     | Binding   | in  |
 Rank | Energy    |     | Energy    | Clus|    5    10   15   20   25   30   35
 _____|___________|_____|___________|_____|____:____|____:____|____:____|____:___
-   1 | +1.68e+08 |   1 | +1.68e+08 |   1 |#
+   1 | +1.34e+08 |   1 | +1.34e+08 |   1 |#
 _____|___________|_____|___________|_____|______________________________________
 
 
@@ -167,4 +167,4 @@ _____________________________________________________________________
 Rank | Sub- | Run  | Binding   | Cluster | Reference       | Grep
      | Rank |      | Energy    | RMSD    | RMSD            | Pattern
 _____|______|______|___________|_________|_________________|___________
-   1      1      1   +1.68e+08      0.00      4.98           RANKING
+   1      1      1   +1.34e+08      0.00      3.23           RANKING
