@@ -63,7 +63,7 @@ static const char *name_k4 = "Krnl_IntraE";
 #ifdef ENABLE_KERNEL5
 static cl_command_queue command_queue5 = NULL;
 static cl_kernel kernel5  = NULL;
-static const char *name_k5 = "Krnl_Manager";
+static const char *name_k5 = "Krnl_Store";
 #endif
 
 static cl_program program = NULL;
@@ -92,7 +92,6 @@ float* cpu_final_populations;
 float* cpu_energies;
 Ligandresult* cpu_result_ligands;
 unsigned int* cpu_prng_seeds;
-int*   cpu_evals_of_runs;
 float* cpu_ref_ori_angles;
 
 //// --------------------------------
@@ -128,6 +127,9 @@ cl_mem mem_dockpars_energies_current;
 cl_mem mem_dockpars_conformations_next;
 cl_mem mem_dockpars_energies_next;
 cl_mem mem_dockpars_prng_states;
+
+cl_mem mem_evals_performed;
+cl_mem mem_generations_performed;
 
 //// --------------------------------
 //// Docking
@@ -171,41 +173,25 @@ filled with clock() */
 	size_t size_populations;
 	size_t size_energies;
 	size_t size_prng_seeds;
-	size_t size_evals_of_runs;
-
-	int threadsPerBlock;
-	int blocksPerGridForEachEntity;
-	int blocksPerGridForEachRun;
-	int blocksPerGridForEachLSEntity;
-
-	unsigned long run_cnt;	/* int run_cnt; */
-	int generation_cnt;
-	int i;
-	double progress;
-
 
 	clock_t clock_start_docking;
 	clock_t	clock_stop_docking;
 	clock_t clock_stop_program_before_clustering;
 
-	//setting number of blocks and threads
-	threadsPerBlock = NUM_OF_THREADS_PER_BLOCK;
-	blocksPerGridForEachEntity = mypars->pop_size * mypars->num_of_runs;
-	blocksPerGridForEachRun = mypars->num_of_runs;
-
 	//allocating CPU memory for initial populations
-	size_populations = mypars->num_of_runs * mypars->pop_size * GENOTYPE_LENGTH_IN_GLOBMEM*sizeof(float);
+	//size_populations = mypars->pop_size * GENOTYPE_LENGTH_IN_GLOBMEM * sizeof(float);
+	size_populations = mypars->pop_size * ACTUAL_GENOTYPE_LENGTH * sizeof(float);
         cpu_init_populations = (float*) alignedMalloc(size_populations);
 	memset(cpu_init_populations, 0, size_populations);
 
 	//allocating CPU memory for results
-	size_energies = mypars->pop_size * mypars->num_of_runs * sizeof(float);
-	cpu_energies = (float*) alignedMalloc(size_energies);
-	cpu_result_ligands = (Ligandresult*) alignedMalloc(sizeof(Ligandresult)*(mypars->num_of_runs));	
+	size_energies = mypars->pop_size * sizeof(float);
+	cpu_energies = (float*) alignedMalloc(size_energies);		
+	cpu_result_ligands = (Ligandresult*) alignedMalloc(sizeof(Ligandresult));	
 	cpu_final_populations = (float*) alignedMalloc(size_populations);
 
 	//allocating memory in CPU for reference orientation angles
-	cpu_ref_ori_angles = (float*) alignedMalloc(mypars->num_of_runs*3*sizeof(float));
+	cpu_ref_ori_angles = (float*) alignedMalloc(3*sizeof(float));
 
 	//generating initial populations and random orientation angles of reference ligand
 	//(ligand will be moved to origo and scaled as well)
@@ -214,22 +200,17 @@ filled with clock() */
 
 	//allocating memory in CPU for pseudorandom number generator seeds and
 	//generating them (seed for each thread during GA)
-	size_prng_seeds = blocksPerGridForEachEntity * threadsPerBlock * sizeof(unsigned int);
+
+	size_prng_seeds = sizeof(unsigned int);
 	cpu_prng_seeds = (unsigned int*) alignedMalloc(size_prng_seeds);
 
 	genseed(time(NULL));	//initializing seed generator
 
-	for (i=0; i<blocksPerGridForEachEntity*threadsPerBlock; i++)
 #if defined (REPRO)
-		cpu_prng_seeds[i] = 1u;
+	cpu_prng_seeds[0] = 1u;
 #else
-		cpu_prng_seeds[i] = genseed(0u);
+	cpu_prng_seeds[0] = genseed(0u);	
 #endif
-
-	//allocating memory in CPU for evaluation counters
-	size_evals_of_runs = mypars->num_of_runs*sizeof(int);
-	cpu_evals_of_runs = (int*) alignedMalloc(size_evals_of_runs);
-	memset(cpu_evals_of_runs, 0, size_evals_of_runs);
 
 	//preparing the constant data fields for the GPU
 	// ----------------------------------------------------------------------
@@ -271,7 +252,7 @@ filled with clock() */
 	dockpars.cons_limit        = (unsigned int) mypars->cons_limit;
 	dockpars.max_num_of_iters  = (unsigned int) mypars->max_num_of_iters;
 	dockpars.qasp = mypars->qasp;
-	blocksPerGridForEachLSEntity = dockpars.num_of_lsentities*mypars->num_of_runs;
+
 
 
  	//allocating GPU memory for populations, floatgrids,
@@ -286,12 +267,17 @@ filled with clock() */
 	mallocBufferObject(context,CL_MEM_READ_WRITE,size_populations, &mem_dockpars_conformations_next);
 	mallocBufferObject(context,CL_MEM_READ_WRITE,size_energies,    &mem_dockpars_energies_next);
 	mallocBufferObject(context,CL_MEM_READ_WRITE,size_prng_seeds,  &mem_dockpars_prng_states);
+	mallocBufferObject(context,CL_MEM_READ_WRITE,sizeof(unsigned int),  &mem_evals_performed);
+	mallocBufferObject(context,CL_MEM_READ_WRITE,sizeof(unsigned int),  &mem_generations_performed);
 
 	memcopyBufferObjectToDevice(command_queue1,mem_DockparametersConst, 		&dockpars,            sizeof(dockpars));
 	memcopyBufferObjectToDevice(command_queue1,mem_KerConst, 	   		&KerConst,            sizeof(KerConst));
-	memcopyBufferObjectToDevice(command_queue1,mem_dockpars_fgrids, 			cpu_floatgrids,       size_floatgrids);
+	memcopyBufferObjectToDevice(command_queue1,mem_dockpars_fgrids, 		cpu_floatgrids,       size_floatgrids);
  	memcopyBufferObjectToDevice(command_queue1,mem_dockpars_conformations_current, 	cpu_init_populations, size_populations);
 	memcopyBufferObjectToDevice(command_queue1,mem_dockpars_prng_states,     	cpu_prng_seeds,       size_prng_seeds);
+
+	
+
 
 	clock_start_docking = clock();
 
@@ -304,6 +290,8 @@ filled with clock() */
         setKernelArg(kernel1,5, sizeof(mem_dockpars_prng_states),               &mem_dockpars_prng_states);
 	setKernelArg(kernel1,6, sizeof(cl_mem),                          	&mem_KerConst);
         setKernelArg(kernel1,7, sizeof(cl_mem),                          	&mem_DockparametersConst);
+	setKernelArg(kernel1,8, sizeof(mem_evals_performed),                    &mem_evals_performed);
+        setKernelArg(kernel1,9, sizeof(mem_generations_performed),              &mem_generations_performed);
 #endif // End of ENABLE_KERNEL1
 
 #ifdef ENABLE_KERNEL2
@@ -353,62 +341,113 @@ filled with clock() */
 
 
 
-	generation_cnt = 1;
+
+	//unsigned long run_cnt;	/* int run_cnt; */
 
 
-
-
-	for (run_cnt = 0; run_cnt < mypars->num_of_runs; run_cnt++)
+	for (unsigned int run_cnt = 0; run_cnt < mypars->num_of_runs; run_cnt++)
 	{
 
-		printf("Run %d started...     \n", run_cnt+1); 		
-		fflush(stdout);
+		printf("Run %u started...     \n", run_cnt+1); fflush(stdout);
+		
 
 #ifdef ENABLE_KERNEL1
-	runKernelTask(command_queue1,kernel1,NULL,NULL);
+		runKernelTask(command_queue1,kernel1,NULL,NULL);
 #endif // ENABLE_KERNEL1
 
 #ifdef ENABLE_KERNEL2
-	runKernelTask(command_queue2,kernel2,NULL,NULL);
+		runKernelTask(command_queue2,kernel2,NULL,NULL);
 #endif // ENABLE_KERNEL2
 
 #ifdef ENABLE_KERNEL3
-	runKernelTask(command_queue3,kernel3,NULL,NULL);
+		runKernelTask(command_queue3,kernel3,NULL,NULL);
 #endif // ENABLE_KERNEL3
 
 #ifdef ENABLE_KERNEL4
-	runKernelTask(command_queue4,kernel4,NULL,NULL);
+		runKernelTask(command_queue4,kernel4,NULL,NULL);
 #endif // ENABLE_KERNEL4
 
 #ifdef ENABLE_KERNEL5
-	runKernelTask(command_queue5,kernel5,NULL,NULL);
+		runKernelTask(command_queue5,kernel5,NULL,NULL);
 #endif // ENABLE_KERNEL5
 
 
-		generation_cnt++;
-
 #ifdef ENABLE_KERNEL1 		
-	clFinish(command_queue1); 
+		clFinish(command_queue1); 
 #endif
 
 #ifdef ENABLE_KERNEL2	
-	clFinish(command_queue2); 
+		clFinish(command_queue2); 
 #endif
 
 #ifdef ENABLE_KERNEL3 		
-	clFinish(command_queue3); 
+		clFinish(command_queue3); 
 #endif
 
 #ifdef ENABLE_KERNEL4 		
-	clFinish(command_queue4); 
+		clFinish(command_queue4); 
 #endif
 
 #ifdef ENABLE_KERNEL5
-	clFinish(command_queue5); 
+		clFinish(command_queue5); 
 #endif
 
 
-	} // End of while-loop
+
+		clock_stop_docking = clock();
+
+
+
+		printf("\n\n"); fflush(stdout);
+
+
+		//processing results
+
+
+		memcopyBufferObjectFromDevice(command_queue1,&mypars->num_of_energy_evals,mem_evals_performed,sizeof(unsigned int));
+		memcopyBufferObjectFromDevice(command_queue1,&mypars->num_of_generations,mem_generations_performed,sizeof(unsigned int));
+
+		memcopyBufferObjectFromDevice(command_queue1,cpu_final_populations,mem_dockpars_conformations_current,size_populations);
+
+		memcopyBufferObjectFromDevice(command_queue1,cpu_energies,mem_dockpars_energies_current,size_energies);
+
+
+/*
+		arrange_result(cpu_final_populations+run_cnt*mypars->pop_size*GENOTYPE_LENGTH_IN_GLOBMEM, 
+			       cpu_energies+run_cnt*mypars->pop_size, mypars->pop_size);
+*/
+
+		arrange_result(cpu_final_populations, cpu_energies, mypars->pop_size);
+
+
+/*
+		make_resfiles(cpu_final_populations+run_cnt*mypars->pop_size*GENOTYPE_LENGTH_IN_GLOBMEM, 
+			      cpu_energies+run_cnt*mypars->pop_size, &myligand_reference,
+			      myligand_init, mypars, cpu_evals_of_runs[run_cnt], generation_cnt, mygrid, cpu_floatgrids, 				      cpu_ref_ori_angles+3*run_cnt, argc, argv, 0,
+			      run_cnt, &(cpu_result_ligands [run_cnt]));
+*/
+
+		make_resfiles(cpu_final_populations, 
+			      cpu_energies, 
+			      &myligand_reference,
+			      myligand_init, 
+			      mypars, 
+			      mypars->num_of_energy_evals, 
+			      mypars->num_of_generations, 
+			      mygrid, 
+			      cpu_floatgrids,
+			      cpu_ref_ori_angles, 
+			      argc, 
+			      argv, 
+			      0,
+			      run_cnt, 
+			      cpu_result_ligands);
+
+
+
+
+
+	} // End of for (run_cnt = 0; run_cnt < mypars->num_of_runs; run_cnt++)
 
 
 
@@ -419,46 +458,11 @@ filled with clock() */
 
 
 
+	
 
 
 
-
-
-	clock_stop_docking = clock();
-
-
-
-	printf("\n\n");
-
-	// ===============================================================================
-	// L30nardoSV modified
-	// http://www.cc.gatech.edu/~vetter/keeneland/tutorial-2012-02-20/08-opencl.pdf
-	// ===============================================================================
-
-	//processing results
-
-
-
-
-
-
-	//cudaMemcpy(cpu_final_populations, dockpars.conformations_current, size_populations, cudaMemcpyDeviceToHost);
-	memcopyBufferObjectFromDevice(command_queue1,cpu_final_populations,mem_dockpars_conformations_current,size_populations);
-
-	//cudaMemcpy(cpu_energies, dockpars.energies_current, size_energies, cudaMemcpyDeviceToHost);
-	memcopyBufferObjectFromDevice(command_queue1,cpu_energies,mem_dockpars_energies_current,size_energies);
-
-
-
-
-
-
-
-
-
-
-
-
+/*
 #if defined (DOCK_DEBUG)
 	for (int cnt_pop=0;cnt_pop<size_populations/sizeof(float);cnt_pop++)
 		printf("total_num_pop: %u, cpu_final_populations[%u]: %f\n",(unsigned int)(size_populations/sizeof(float)),cnt_pop,cpu_final_populations[cnt_pop]);
@@ -466,29 +470,29 @@ filled with clock() */
 	for (int cnt_pop=0;cnt_pop<size_energies/sizeof(float);cnt_pop++)
 		printf("total_num_energies: %u, cpu_energies[%u]: %f\n",    (unsigned int)(size_energies/sizeof(float)),cnt_pop,cpu_energies[cnt_pop]);
 #endif
+*/
 
-	// ===============================================================================
 
 
-	for (run_cnt=0; run_cnt < mypars->num_of_runs; run_cnt++)
-	{
-		arrange_result(cpu_final_populations+run_cnt*mypars->pop_size*GENOTYPE_LENGTH_IN_GLOBMEM, cpu_energies+run_cnt*mypars->pop_size, mypars->pop_size);
 
-		make_resfiles(cpu_final_populations+run_cnt*mypars->pop_size*GENOTYPE_LENGTH_IN_GLOBMEM, cpu_energies+run_cnt*mypars->pop_size, &myligand_reference,
-					  myligand_init, mypars, cpu_evals_of_runs[run_cnt], generation_cnt, mygrid, cpu_floatgrids, cpu_ref_ori_angles+3*run_cnt, argc, argv, /*1*/0,
-					  run_cnt, &(cpu_result_ligands [run_cnt]));
 
-	}
+
+
+
+
+
+
 
 	clock_stop_program_before_clustering = clock();
+
+
 	clusanal_gendlg(cpu_result_ligands, mypars->num_of_runs, myligand_init, mypars,
 					 mygrid, argc, argv, ELAPSEDSECS(clock_stop_docking, clock_start_docking)/mypars->num_of_runs,
 					 ELAPSEDSECS(clock_stop_program_before_clustering, clock_start_program));
 
-        // ------------------------
-        // Correct time measurement
-	//printf("Average run time of one run: %.3f sec\n", ELAPSEDSECS(clock_stop_docking, clock_start_docking)/mypars->num_of_runs);
-	// ------------------------
+
+
+
 
 	clock_stop_docking = clock();
 
@@ -584,17 +588,17 @@ bool init() {
   checkError(status, "Failed to create kernel");
 #endif
 
-#ifdef ENABLE_KERNEL4
-  command_queue4 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
-  checkError(status, "Failed to create command queue4");
-  kernel4 = clCreateKernel(program, name_k4, &status);
-  checkError(status, "Failed to create kernel");
-#endif
-
 #ifdef ENABLE_KERNEL3
   command_queue3 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
   checkError(status, "Failed to create command queue3");
   kernel3 = clCreateKernel(program, name_k3, &status);
+  checkError(status, "Failed to create kernel");
+#endif
+
+#ifdef ENABLE_KERNEL4
+  command_queue4 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  checkError(status, "Failed to create command queue4");
+  kernel4 = clCreateKernel(program, name_k4, &status);
   checkError(status, "Failed to create kernel");
 #endif
 
@@ -644,7 +648,6 @@ void cleanup() {
   if(cpu_energies)         {alignedFree(cpu_energies);}
   if(cpu_result_ligands)   {alignedFree(cpu_result_ligands);}
   if(cpu_prng_seeds)       {alignedFree(cpu_prng_seeds);}
-  if(cpu_evals_of_runs)    {alignedFree(cpu_evals_of_runs);}
   if(cpu_ref_ori_angles)   {alignedFree(cpu_ref_ori_angles);}
 
   if(mem_DockparametersConst)		{clReleaseMemObject(mem_DockparametersConst);}
@@ -655,6 +658,8 @@ void cleanup() {
   if(mem_dockpars_conformations_next)   {clReleaseMemObject(mem_dockpars_conformations_next);}
   if(mem_dockpars_energies_next)        {clReleaseMemObject(mem_dockpars_energies_next);}
   if(mem_dockpars_prng_states)          {clReleaseMemObject(mem_dockpars_prng_states);}
+  if(mem_evals_performed)		{clReleaseMemObject(mem_evals_performed);}
+  if(mem_generations_performed)		{clReleaseMemObject(mem_generations_performed);}
 }
 
 // Helper functions to display parameters returned by OpenCL queries

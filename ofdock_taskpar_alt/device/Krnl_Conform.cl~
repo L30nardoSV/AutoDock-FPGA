@@ -20,6 +20,10 @@ void Krnl_Conform(
 	__local float loc_coords_z[MAX_NUM_OF_ATOMS];
 	__local float genotype[ACTUAL_GENOTYPE_LENGTH];
 
+	char active = 1;
+	char mode   = 0;
+	uint cnt    = 0;    
+
 	float phi, theta, genrotangle;
 	float genrot_unitvec [3];
 
@@ -33,7 +37,7 @@ void Krnl_Conform(
 	float quatrot_left_x, quatrot_left_y, quatrot_left_z, quatrot_left_q;
 	float quatrot_temp_x, quatrot_temp_y, quatrot_temp_z, quatrot_temp_q;
 
-while(1) {
+while(active) {
 
 	//printf("BEFORE In CONFORM CHANNEL\n");
 	// --------------------------------------------------------------
@@ -43,6 +47,12 @@ while(1) {
 	for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {
 		genotype[pipe_cnt] = read_channel_altera(chan_GA2Conf_genotype);
 	}
+
+	active = read_channel_altera(chan_GA2Conf_active);
+	if (active == 0) {printf("	%-20s: %s\n", "Krnl_Conform", "disabled");}
+	
+	mode   = read_channel_altera(chan_GA2Conf_mode);
+	cnt    = read_channel_altera(chan_GA2Conf_cnt);
 	// --------------------------------------------------------------
 	//printf("AFTER In CONFORM CHANNEL\n");
 
@@ -224,17 +234,21 @@ while(1) {
 	for (uint pipe_cnt=0; pipe_cnt<DockConst->num_of_atoms; pipe_cnt++) {
 		write_channel_altera(chan_Conf2Intere_x, loc_coords_x[pipe_cnt]);
 		write_channel_altera(chan_Conf2Intrae_x, loc_coords_x[pipe_cnt]);
-		mem_fence(CLK_CHANNEL_MEM_FENCE);
+		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);
 		write_channel_altera(chan_Conf2Intere_y, loc_coords_y[pipe_cnt]);
 		write_channel_altera(chan_Conf2Intrae_y, loc_coords_y[pipe_cnt]);
-		mem_fence(CLK_CHANNEL_MEM_FENCE);
+		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);
 		write_channel_altera(chan_Conf2Intere_z, loc_coords_z[pipe_cnt]);
 		write_channel_altera(chan_Conf2Intrae_z, loc_coords_z[pipe_cnt]);
-		//mem_fence(CLK_CHANNEL_MEM_FENCE);
-
-
-
-
+		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);
+		write_channel_altera(chan_Conf2Intere_active, active);
+		write_channel_altera(chan_Conf2Intrae_active, active);
+		mem_fence(CLK_CHANNEL_MEM_FENCE);
+		write_channel_altera(chan_Conf2Intere_mode,   mode);
+		write_channel_altera(chan_Conf2Intrae_mode,   mode);
+		mem_fence(CLK_CHANNEL_MEM_FENCE);
+		write_channel_altera(chan_Conf2Intere_cnt,    cnt);
+		write_channel_altera(chan_Conf2Intrae_cnt,    cnt);
 	}
 	// --------------------------------------------------------------
 	//printf("AFTER Out CONFORM CHANNEL\n");

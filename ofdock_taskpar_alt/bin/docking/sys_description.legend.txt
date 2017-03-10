@@ -47,6 +47,14 @@
     - internal # representing its type
     - internal # representing its category
     - its size
+   For each kernel argument:
+    - internal # representing its type
+    - internal # representing its category
+    - its size
+   For each kernel argument:
+    - internal # representing its type
+    - internal # representing its category
+    - its size
    - Number of printf calls
    - Number of local memory systems.
    - X-dim of required work-group size

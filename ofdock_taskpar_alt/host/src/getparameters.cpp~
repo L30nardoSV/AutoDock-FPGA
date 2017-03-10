@@ -706,6 +706,8 @@ void gen_initpop_and_reflig(Dockpars*       mypars,
 	ref_ori_angles[1] = (float) (myrand()*180.0);	//theta
 	ref_ori_angles[2] = (float) (myrand()*360.0);	//angle
 #endif
+	}
+
 
 	get_movvec_to_origo(myligand, movvec_to_origo);
 	move_ligand(myligand, movvec_to_origo);

@@ -8,33 +8,43 @@
 // If the debug parameter is 1, debug messages will be printed to the standard output.
 // Originally from: searchoptimum.c
 // --------------------------------------------------------------------------
-void perform_LS(__global       float*           restrict GlobEnergyCurrent,
-	     	__global       float*           restrict GlobEnergyNext,
+void perform_LS(__global       float*           restrict GlobPopulationCurrent,
+		__global       float*           restrict GlobEnergyCurrent,
 		__global       uint*            restrict GlobPRNG,
 		__global const kernelconstant*  restrict KerConst,
 		__global const Dockparameters*  restrict DockConst,
+			       uint 			 entity_for_ls,
 		__local        float*                    offspring_genotype,
 	        __local        float*                    entity_possible_new_genotype,
 			       uint*                     evals_performed)
 {
+	float rho = 1.0f;
 
-	char mode = 0;
+
+	char active = 0;
+	char mode   = 0;
+	char ack    = 0;
+	float candidate_energy;
+	float offspring_energy;
 
 
 	uint i;
-	float genotype_deviate [40];		//38 would be enough...
-	float genotype_bias [40];
+	//float offspring_genotype[ACTUAL_GENOTYPE_LENGTH];
+	//float entity_possible_new_genotype [ACTUAL_GENOTYPE_LENGTH];
+	float genotype_deviate  [ACTUAL_GENOTYPE_LENGTH];		//38 would be enough...
+	float genotype_bias     [ACTUAL_GENOTYPE_LENGTH];
 
 	// **********************************************
 	// ADD VENDOR SPECIFIC PRAGMA
 	// **********************************************
 	LOOP_PERFORM_LS_1:
-	for (i=0; i<40; i++) 
+	for (i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) 
 	{
+		offspring_genotype [i] = GlobPopulationCurrent[entity_for_ls*ACTUAL_GENOTYPE_LENGTH + i];
 		genotype_bias [i] = 0.0f;
 	}
 
-	float rho = 1.0f;
+	offspring_energy = GlobEnergyCurrent[entity_for_ls];
 
 	//consecutive successes and failures
 	uint cons_succ = 0;
@@ -76,7 +86,7 @@ void perform_LS(__global       float*           restrict GlobEnergyCurrent,
 		// **********************************************
 		LOOP_PERFORM_LS_2:
 		//for (i=3; i<myligand_num_of_rotbonds+6; i++)
-		for (i=3; i<DockConst->rotbondlist_length+6; i++)
+		for (i=3; i<DockConst->num_of_genes; i++)
 		{
 			//rho is the deviation of the uniform distribution
 			genotype_deviate [i] = rho*DockConst->base_dang_mul_sqrt3*(2*myrand(GlobPRNG)-1);
@@ -113,7 +123,7 @@ void perform_LS(__global       float*           restrict GlobEnergyCurrent,
 		// **********************************************
 		LOOP_PERFORM_LS_3:
 		//for (i=5; i<myligand_num_of_rotbonds+6; i++)
-		for (i=5; i<DockConst->rotbondlist_length+6; i++)
+		for (i=5; i<DockConst->num_of_genes; i++)
 		{
 			entity_possible_new_genotype [i] = offspring_genotype [i] + genotype_deviate [i] + genotype_bias [i];  
 			map_angle(&(entity_possible_new_genotype [i]), 360.0f);
@@ -129,17 +139,34 @@ void perform_LS(__global       float*           restrict GlobEnergyCurrent,
 			write_channel_altera(chan_GA2Conf_genotype, entity_possible_new_genotype[pipe_cnt]);
 		//	printf("%u ", pipe_cnt);
 		}
-
+		active = 1;
 		mode = 3;
-		write_channel_altera(chan_GA2Manager_mode, mode);
-		write_channel_altera(chan_GA2Manager_cnt,  iteration_cnt);
+		write_channel_altera(chan_GA2Conf_active, active);
+		write_channel_altera(chan_GA2Conf_mode,   mode);
+		write_channel_altera(chan_GA2Conf_cnt,    iteration_cnt);
 		// --------------------------------------------------------------
 		//printf("\n... AFTER LS CHANNEL 1, %u\n",iteration_cnt);
 
 
 
-		// REQUIRES FENCES TO SYNC 
-		mem_fence(CLK_GLOBAL_MEM_FENCE);
+
+		mem_fence(CLK_CHANNEL_MEM_FENCE);
+		ack = read_channel_altera(chan_Store2GA_ack);
+		mem_fence(CLK_CHANNEL_MEM_FENCE);
+		candidate_energy = read_channel_altera(chan_Store2GA_LSenergy);
+		//printf("LS (1) ack: %u, iteration_cnt: %u ...", ack, iteration_cnt);
+
+
+
+
+
+
+
+
+
+
+
+
 
 		#if defined (DEBUG_PERFORM_LS)
 		printf("\n\n\n%u. iteration\n", iteration_cnt);
@@ -161,13 +188,13 @@ void perform_LS(__global       float*           restrict GlobEnergyCurrent,
 
 
 		//if the new entity is better better
-		if (GlobEnergyNext [iteration_cnt] < GlobEnergyCurrent [iteration_cnt])
+		if (candidate_energy < offspring_energy)
 		{
 			// **********************************************
 			// ADD VENDOR SPECIFIC PRAGMA
 			// **********************************************
 			LOOP_PERFORM_LS_4:
-			for (i=0; i<40; i++) {
+			for (i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {
 				//updating offspring_genotype
 				offspring_genotype [i] = entity_possible_new_genotype [i];
 
@@ -175,6 +202,7 @@ void perform_LS(__global       float*           restrict GlobEnergyCurrent,
 				genotype_bias [i] = 0.6f*genotype_bias [i] + 0.4f*genotype_deviate [i];
 			}
 
+			offspring_energy = candidate_energy;
 			cons_succ++;
 			cons_fail = 0;
 
@@ -211,7 +239,7 @@ void perform_LS(__global       float*           restrict GlobEnergyCurrent,
 			// ADD VENDOR SPECIFIC PRAGMA
 			// **********************************************
 			LOOP_PERFORM_LS_5:
-			for (i=5; i<DockConst->rotbondlist_length+6; i++)
+			for (i=5; i<DockConst->num_of_genes; i++)
 			{
 				entity_possible_new_genotype [i] = offspring_genotype [i] - genotype_deviate [i] - genotype_bias [i];
 				map_angle(&(entity_possible_new_genotype [i]), 360.0f);
@@ -228,12 +256,35 @@ void perform_LS(__global       float*           restrict GlobEnergyCurrent,
 				write_channel_altera(chan_GA2Conf_genotype, entity_possible_new_genotype[pipe_cnt]);
 			//	printf("%u ", pipe_cnt);
 			}
-
+		
+			active = 1;
 			mode = 3;
-			write_channel_altera(chan_GA2Manager_mode, mode);
-			write_channel_altera(chan_GA2Manager_cnt,  iteration_cnt);
+			write_channel_altera(chan_GA2Conf_active, active);
+			write_channel_altera(chan_GA2Conf_mode,   mode);
+			write_channel_altera(chan_GA2Conf_cnt,    iteration_cnt);
 			// --------------------------------------------------------------
 			//printf("\n... AFTER LS CHANNEL 2, %u\n",iteration_cnt);
+
+
+
+			mem_fence(CLK_CHANNEL_MEM_FENCE);
+			ack = read_channel_altera(chan_Store2GA_ack);
+			mem_fence(CLK_CHANNEL_MEM_FENCE);
+			candidate_energy = read_channel_altera(chan_Store2GA_LSenergy);
+			//printf("LS (2) ack: %u, iteration_cnt: %u\n", ack, iteration_cnt);
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 			(*evals_performed)++;
@@ -248,13 +299,13 @@ void perform_LS(__global       float*           restrict GlobEnergyCurrent,
 			#endif
 
 			//if the new entity is better
-			if (GlobEnergyNext [iteration_cnt] < GlobEnergyCurrent [iteration_cnt])
+			if (candidate_energy < offspring_energy)
 			{
 				// **********************************************
 				// ADD VENDOR SPECIFIC PRAGMA
 				// **********************************************
 				LOOP_PERFORM_LS_6:
-				for (i=0; i<40; i++) {
+				for (i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {
 					//updating offspring_genotype
 					offspring_genotype [i] = entity_possible_new_genotype [i];
 
@@ -262,6 +313,7 @@ void perform_LS(__global       float*           restrict GlobEnergyCurrent,
 					genotype_bias [i] = 0.6f*genotype_bias [i] - 0.4f*genotype_deviate [i];
 				}
 
+				offspring_energy = candidate_energy;
 				cons_succ++;
 				cons_fail = 0;
 
@@ -275,7 +327,7 @@ void perform_LS(__global       float*           restrict GlobEnergyCurrent,
 				// ADD VENDOR SPECIFIC PRAGMA
 				// **********************************************
 				LOOP_PERFORM_LS_7:
-				for (i=0; i<40; i++) {
+				for (i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {
 					//updating (halving) genotype_bias
 					genotype_bias [i] = 0.5f*genotype_bias [i];
 				}
@@ -335,6 +387,18 @@ void perform_LS(__global       float*           restrict GlobEnergyCurrent,
 
 
 	} //End of LOOP_WHILE_PERFORM_LS_1
+
+
+	// **********************************************
+	// ADD VENDOR SPECIFIC PRAGMA
+	// **********************************************
+	LOOP_PERFORM_LS_8:
+	for (i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) 
+	{
+		GlobPopulationCurrent[entity_for_ls*ACTUAL_GENOTYPE_LENGTH + i] = offspring_genotype [i];
+	}
+
+	GlobEnergyCurrent[entity_for_ls] = offspring_energy;
 
 
 }

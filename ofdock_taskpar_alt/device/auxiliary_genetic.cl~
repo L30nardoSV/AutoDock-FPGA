@@ -52,7 +52,7 @@ uint find_best(__global const float* restrict GlobEnergyCurrent,
 	// ADD VENDOR SPECIFIC PRAGMA
 	// *********************************************
 	LOOP_FIND_BEST_2:
-	for (i=1; i<pop_size; i++) {
+	for (i=1; i<pop_size+1; i++) {
 
 		#if defined (DEBUG_FIND_BEST)
 		printf("iteration: %u, energy_iteration_entity: %f, best_entity: %u, energy_best_entity: %f ...", 

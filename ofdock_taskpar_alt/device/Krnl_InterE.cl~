@@ -25,15 +25,16 @@ void Krnl_InterE(
 	__local float loc_coords_y[MAX_NUM_OF_ATOMS];
 	__local float loc_coords_z[MAX_NUM_OF_ATOMS];
 
+	char active = 1;
+	char mode   = 0;
+	uint cnt    = 0;   
+
 	float interE;
 	char atom1_id, atom1_typeid;
 	float x, y, z, dx, dy, dz, q;
 	float cube [2][2][2];
 	float weights [2][2][2];
 	int x_low, x_high, y_low, y_high, z_low, z_high;
-
-
-
 
 	// L30nardoSV	
 	unsigned int  mul_tmp;
@@ -45,7 +46,7 @@ void Krnl_InterE(
 	unsigned int  cube_000, cube_100, cube_010, cube_110;
         unsigned int  cube_001, cube_101, cube_011, cube_111;
 
-while(1) {
+while(active) {
 	//printf("BEFORE In INTER CHANNEL\n");
 	// --------------------------------------------------------------
 	// Wait for ligand atomic coordinates in channel
@@ -53,14 +54,21 @@ while(1) {
 
 	for (uint pipe_cnt=0; pipe_cnt<DockConst->num_of_atoms; pipe_cnt++) {
 		loc_coords_x[pipe_cnt] = read_channel_altera(chan_Conf2Intere_x);
-		mem_fence(CLK_CHANNEL_MEM_FENCE);
+		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);
 		loc_coords_y[pipe_cnt] = read_channel_altera(chan_Conf2Intere_y);
-		mem_fence(CLK_CHANNEL_MEM_FENCE);
+		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);
 		loc_coords_z[pipe_cnt] = read_channel_altera(chan_Conf2Intere_z);
+		mem_fence(CLK_CHANNEL_MEM_FENCE) | CLK_LOCAL_MEM_FENCE;
+		active = read_channel_altera(chan_Conf2Intere_active);
+		mem_fence(CLK_CHANNEL_MEM_FENCE);
+		mode   = read_channel_altera(chan_Conf2Intere_mode);
+		mem_fence(CLK_CHANNEL_MEM_FENCE);
+		cnt    = read_channel_altera(chan_Conf2Intere_cnt);
 	}
 	// --------------------------------------------------------------
 	//printf("AFTER In INTER CHANNEL\n");
 
+	if (active == 0) {printf("	%-20s: %s\n", "Krnl_InterE", "disabled");}
 
 	interE = 0.0f;
 
@@ -229,7 +237,13 @@ while(1) {
 	// --------------------------------------------------------------
 	// Send intermolecular energy to chanel
 	// --------------------------------------------------------------
-	write_channel_altera(chan_Intere2Manager_intere, interE);
+	write_channel_altera(chan_Intere2Store_intere, interE);
+	mem_fence(CLK_CHANNEL_MEM_FENCE);
+	write_channel_altera(chan_Intere2Store_active, active);
+	mem_fence(CLK_CHANNEL_MEM_FENCE);
+	write_channel_altera(chan_Intere2Store_mode,   mode);
+	mem_fence(CLK_CHANNEL_MEM_FENCE);
+	write_channel_altera(chan_Intere2Store_cnt,    cnt);
 	// --------------------------------------------------------------
  	
 	} // End of while(1)

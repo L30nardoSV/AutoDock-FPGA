@@ -378,7 +378,7 @@ void make_resfiles(float* final_population,
 /*
 				fprintf(fp, "    %10.3f    |", final_population [i*GENOTYPE_LENGTH_IN_GLOBMEM+j]);
 */
-				fprintf(fp, "    %10.3f    |", final_population [i*ACTUAL_GENOTYPE_LENGTH+j]);
+				fprintf(fp, "    %10.3f    |", final_population [i*GENOTYPE_LENGTH_IN_GLOBMEM+j]);
 
 			fprintf(fp, " %21.3f |", accurate_intraE [i]);
 			fprintf(fp, " %21.3f |", accurate_interE [i]);

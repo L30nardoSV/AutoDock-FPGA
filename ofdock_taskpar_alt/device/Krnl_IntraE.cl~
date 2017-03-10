@@ -17,6 +17,10 @@ void Krnl_IntraE(
 	__local float loc_coords_y[MAX_NUM_OF_ATOMS];
 	__local float loc_coords_z[MAX_NUM_OF_ATOMS];
 
+	char active = 1;
+	char mode   = 0;
+	uint cnt    = 0;   
+
 	int contributor_counter;
 	char atom1_id, atom2_id, atom1_typeid, atom2_typeid;
 	float subx, suby, subz, distance_leo;
@@ -27,9 +31,7 @@ void Krnl_IntraE(
 	float distance_pow_2, distance_pow_4, distance_pow_6, distance_pow_10, distance_pow_12;
 	float intraE;
 
-printf("INTRA \n");
-
-while(1) {
+while(active) {
 	//printf("BEFORE In INTRA CHANNEL\n");
 	// --------------------------------------------------------------
 	// Wait for ligand atomic coordinates in channel
@@ -37,13 +39,21 @@ while(1) {
 
 	for (uint pipe_cnt=0; pipe_cnt<DockConst->num_of_atoms; pipe_cnt++) {
 		loc_coords_x[pipe_cnt] = read_channel_altera(chan_Conf2Intrae_x);
-		mem_fence(CLK_CHANNEL_MEM_FENCE);
+		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);
 		loc_coords_y[pipe_cnt] = read_channel_altera(chan_Conf2Intrae_y);
-		mem_fence(CLK_CHANNEL_MEM_FENCE);
+		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);
 		loc_coords_z[pipe_cnt] = read_channel_altera(chan_Conf2Intrae_z);
+		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);
+		active = read_channel_altera(chan_Conf2Intrae_active);
+		mem_fence(CLK_CHANNEL_MEM_FENCE);
+		mode   = read_channel_altera(chan_Conf2Intrae_mode);
+		mem_fence(CLK_CHANNEL_MEM_FENCE);
+		cnt    = read_channel_altera(chan_Conf2Intrae_cnt);
 	}
 	// --------------------------------------------------------------
 	//printf("AFTER In INTRA CHANNEL\n");
+
+	if (active == 0) {printf("	%-20s: %s\n", "Krnl_IntraE", "disabled");}
 
 	intraE = 0.0f;
 
@@ -99,10 +109,10 @@ while(1) {
 			intraE+= DockConst->coeff_elec*KerConst->atom_charges_const[atom1_id]*KerConst->atom_charges_const[atom2_id]/(distance_leo*(-8.5525f + 86.9525f/(1.0f + 7.7839f*exp(-0.3154f*distance_leo))));
 
 			//calculating desolvation term
-			intraE+= ((KerConst->dspars_S_const[atom1_typeid] + 
-				 DockConst->qasp*fabs(KerConst->atom_charges_const[atom1_id]))*KerConst->dspars_V_const[atom2_typeid] + 
-				 (KerConst->dspars_S_const[atom2_typeid] + 							   
-				 DockConst->qasp*fabs(KerConst->atom_charges_const[atom2_id]))*KerConst->dspars_V_const[atom1_typeid]) * DockConst->coeff_desolv*exp(-distance_leo*distance_leo/25.92f);
+			intraE+= (
+				 (KerConst->dspars_S_const[atom1_typeid] + DockConst->qasp*fabs(KerConst->atom_charges_const[atom1_id]))*KerConst->dspars_V_const[atom2_typeid] + 
+				 (KerConst->dspars_S_const[atom2_typeid] +  DockConst->qasp*fabs(KerConst->atom_charges_const[atom2_id]))*KerConst->dspars_V_const[atom1_typeid]) * 
+				 DockConst->coeff_desolv*exp(-distance_leo*distance_leo/25.92f);
 	
 		} // End of if: if ((dist < dcutoff) && (dist < 20.48))	
 
@@ -111,7 +121,13 @@ while(1) {
 	// --------------------------------------------------------------
 	// Send intramolecular energy to channel
 	// --------------------------------------------------------------
-	write_channel_altera(chan_Intrae2Manager_intrae, intraE);
+	write_channel_altera(chan_Intrae2Store_intrae, intraE);
+	mem_fence(CLK_CHANNEL_MEM_FENCE);
+	write_channel_altera(chan_Intrae2Store_active, active);
+	mem_fence(CLK_CHANNEL_MEM_FENCE);
+	write_channel_altera(chan_Intrae2Store_mode,   mode);
+	mem_fence(CLK_CHANNEL_MEM_FENCE);
+	write_channel_altera(chan_Intrae2Store_cnt,    cnt);
 	// --------------------------------------------------------------
 
 	} // End of while(1)

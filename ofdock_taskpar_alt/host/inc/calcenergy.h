@@ -93,7 +93,8 @@ typedef struct
        float ref_coords_z_const[MAX_NUM_OF_ATOMS];
        float rotbonds_moving_vectors_const[3*MAX_NUM_OF_ROTBONDS];
        float rotbonds_unit_vectors_const  [3*MAX_NUM_OF_ROTBONDS];
-       float ref_orientation_quats_const  [4*MAX_NUM_OF_RUNS];
+       //float ref_orientation_quats_const  [4*MAX_NUM_OF_RUNS];
+       float ref_orientation_quats_const  [4];
 } kernelconstant;
 
 int prepare_const_fields_for_gpu(Liganddata* 	 myligand_reference,

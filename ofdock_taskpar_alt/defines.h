@@ -13,6 +13,7 @@
 // -----------------------------------------------------------------------------
 // DIFFERENT WORK GROUP SIZES
 // -----------------------------------------------------------------------------
+/*
 //NUM_WORKITEMS=-DN32WI 
 #if defined (N32WI) 	
 	#define NUM_OF_THREADS_PER_BLOCK 32  // ofdock_amd_32wi 
@@ -25,7 +26,9 @@
 #else 	
 	#define NUM_OF_THREADS_PER_BLOCK 1  // ofdock_amd_32wi 
 #endif
+*/
 
+#define NUM_OF_THREADS_PER_BLOCK 1
 // -----------------------------------------------------------------------------
 // DOCKING CONSTANTS
 // -----------------------------------------------------------------------------
@@ -36,8 +39,6 @@
 #define RLIST_GENROT_MASK    0x00020000
 #define RLIST_DUMMY_MASK     0x00040000
 #define DEG_TO_RAD 	     0.0174533f
-// L30nardo SV added to new_taskpar branch
-#define DEG_TO_RAD_DIV_2     0.008727f
 
 //#define COEFF_VDW 0.1662f
 //#define COEFF_HB 0.1209f
@@ -104,6 +105,7 @@
 #define MAPPED_COPY	// if disabled, then mem copy inside main computation loop
 			// doesn't use DMA engine
 			// improvement: 77 (disabled) to 76 (enabled) sec 
+//#define REPRO
 // -----------------------------------------------------------------------------
 
 #endif /* DEFINES_H_ */

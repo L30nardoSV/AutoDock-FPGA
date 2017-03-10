@@ -6,18 +6,38 @@
 // MAX_NUM_OF_ATOMS=90
 // ACTUAL_GENOTYPE_LENGTH (MAX_NUM_OF_ROTBONDS+6) =38
 channel float chan_GA2Conf_genotype __attribute__((depth(38)));
-channel char  chan_GA2Manager_mode;	// mode 1 or I: init calculation energy, 2 or G: genetic generation, 3 or P: local search
-channel uint  chan_GA2Manager_cnt;	// population count
+//channel char  chan_GA2Manager_mode;	// mode 1 or I: init calculation energy, 2 or G: genetic generation, 3 or P: local search
+//channel uint  chan_GA2Manager_cnt;	// population count
+channel char  chan_GA2Conf_active;	// active 1: receiving Kernel is active, 0 receiving Kernel is disabled
+channel char  chan_GA2Conf_mode;	// mode 1 or I: init calculation energy, 2 or G: genetic generation, 3 or P: local search
+channel uint  chan_GA2Conf_cnt;		// population count
 
 channel float chan_Conf2Intere_x __attribute__((depth(90)));
 channel float chan_Conf2Intere_y __attribute__((depth(90)));
 channel float chan_Conf2Intere_z __attribute__((depth(90)));
+channel char  chan_Conf2Intere_active;	
+channel char  chan_Conf2Intere_mode;	
+channel uint  chan_Conf2Intere_cnt;	
+
 channel float chan_Conf2Intrae_x __attribute__((depth(90)));
 channel float chan_Conf2Intrae_y __attribute__((depth(90)));
 channel float chan_Conf2Intrae_z __attribute__((depth(90)));
+channel char  chan_Conf2Intrae_active;	
+channel char  chan_Conf2Intrae_mode;	
+channel uint  chan_Conf2Intrae_cnt;
 
-channel float chan_Intere2Manager_intere;
-channel float chan_Intrae2Manager_intrae;
+channel float chan_Intere2Store_intere;
+channel char  chan_Intere2Store_active;	
+channel char  chan_Intere2Store_mode;	
+channel uint  chan_Intere2Store_cnt;
+
+channel float chan_Intrae2Store_intrae;
+channel char  chan_Intrae2Store_active;	
+channel char  chan_Intrae2Store_mode;	
+channel uint  chan_Intrae2Store_cnt;
+
+channel char  chan_Store2GA_ack;
+channel float chan_Store2GA_LSenergy;
 
 #include "../defines.h"
 
@@ -83,7 +103,8 @@ typedef struct
        float ref_coords_z_const[MAX_NUM_OF_ATOMS];
        float rotbonds_moving_vectors_const[3*MAX_NUM_OF_ROTBONDS];
        float rotbonds_unit_vectors_const  [3*MAX_NUM_OF_ROTBONDS];
-       float ref_orientation_quats_const  [4*MAX_NUM_OF_RUNS];
+       //float ref_orientation_quats_const  [4*MAX_NUM_OF_RUNS];
+       float ref_orientation_quats_const  [4];
 } kernelconstant;
 
 
@@ -108,8 +129,9 @@ void Krnl_GA(__global const float*           restrict GlobFgrids,
 	     __global       float*           restrict GlobEnergyNext,
              __global       unsigned int*    restrict GlobPRNG,
 	     __global const kernelconstant*  restrict KerConst,
-	     __global const Dockparameters*  restrict DockConst)
-
+	     __global const Dockparameters*  restrict DockConst,
+	     __global       unsigned int*    restrict GlobEvals_performed,
+	     __global       unsigned int*    restrict GlobGenerations_performed)
 {
 	//Print algorithm parameters
 
@@ -150,7 +172,9 @@ void Krnl_GA(__global const float*           restrict GlobFgrids,
 	uint pop_cnt;
 	uint new_pop_cnt;
 
-	char mode = 0;
+	char active = 0;
+	char mode   = 0;
+	char ack    = 0;
 
 	LOOP_GEN_GENERATIONAL_1:
 	for (pop_cnt = 0; pop_cnt < DockConst->pop_size; pop_cnt++)
@@ -161,10 +185,11 @@ void Krnl_GA(__global const float*           restrict GlobFgrids,
 		for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {
 			write_channel_altera(chan_GA2Conf_genotype, GlobPopulationCurrent[pop_cnt*ACTUAL_GENOTYPE_LENGTH+ pipe_cnt]);
 		}
-
-		mode = 1;
-		write_channel_altera(chan_GA2Manager_mode, mode);
-		write_channel_altera(chan_GA2Manager_cnt,  pop_cnt);
+		active = 1;
+		mode   = 1;
+		write_channel_altera(chan_GA2Conf_active, active);
+		write_channel_altera(chan_GA2Conf_mode,   mode);
+		write_channel_altera(chan_GA2Conf_cnt,    pop_cnt);
 		// --------------------------------------------------------------
 		
 		#if defined (DEBUG_LEO)
@@ -174,17 +199,6 @@ void Krnl_GA(__global const float*           restrict GlobFgrids,
 	
 	eval_cnt = pop_cnt++;
 	
-
-
-
-
-
-
-
-
-
-
-
 	#if defined (DEBUG_LEO)
 	printf("eval_cnt (INC): %u\n", eval_cnt);
 	#endif
@@ -196,8 +210,40 @@ void Krnl_GA(__global const float*           restrict GlobFgrids,
 
 
 
-	// Syncronize global memory
-	mem_fence(CLK_GLOBAL_MEM_FENCE);
+
+
+
+
+
+
+
+
+
+
+	// --------------------------------------------------------------
+	// Send DUMMY genotypes to channel to signal INI stop
+	// --------------------------------------------------------------
+	for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {
+		write_channel_altera(chan_GA2Conf_genotype, 0);
+	}
+	active = 1;
+	mode   = 0;
+	write_channel_altera(chan_GA2Conf_active, active);
+	write_channel_altera(chan_GA2Conf_mode,   mode);
+	write_channel_altera(chan_GA2Conf_cnt,    0);
+
+	ack = read_channel_altera(chan_Store2GA_ack);
+	printf("INI ack: %u\n", ack);
+	// --------------------------------------------------------------
+		
+
+
+
+
+
+
+
+
 
 
 
@@ -219,6 +265,7 @@ void Krnl_GA(__global const float*           restrict GlobFgrids,
 	uint num_of_evals_for_ls  = 0;
 	__local float local_entity_ls	 [ACTUAL_GENOTYPE_LENGTH];
 	__local float entity_possible_new_genotype [ACTUAL_GENOTYPE_LENGTH];
+	float local_entity_energy;
 
 
 
@@ -232,9 +279,6 @@ void Krnl_GA(__global const float*           restrict GlobFgrids,
 	// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 	while ((eval_cnt < DockConst->num_of_energy_evals) && (generation_cnt < DockConst->num_of_generations))
 	{
-		printf("eval_cnt: %u\n", eval_cnt);
-
-
 		//Creating a new population
 
 		//Identifying best entity
@@ -258,9 +302,12 @@ void Krnl_GA(__global const float*           restrict GlobFgrids,
 		#endif
 
 		//elitism - copying the best entity to new population
-		GlobPopulationNext[0] = GlobPopulationCurrent[best_entity_id];
+		for (uint i=0; i<ACTUAL_GENOTYPE_LENGTH; i++)
+		{
+			GlobPopulationNext[i] = GlobPopulationCurrent[best_entity_id*ACTUAL_GENOTYPE_LENGTH+i];
+		}
 
-
+		GlobEnergyNext[best_entity_id] = GlobEnergyCurrent[best_entity_id];
 		//new population consists of one member currently
 		new_pop_cnt = 1;
 
@@ -315,12 +362,13 @@ void Krnl_GA(__global const float*           restrict GlobFgrids,
 
 			for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {
 				write_channel_altera(chan_GA2Conf_genotype, offspring_genotype[pipe_cnt]);
-				//printf("%u\n", pipe_cnt);
 			}
 
+			active = 1;
 			mode = 2;
-			write_channel_altera(chan_GA2Manager_mode, mode);
-			write_channel_altera(chan_GA2Manager_cnt,  new_pop_cnt);
+			write_channel_altera(chan_GA2Conf_active, active);
+			write_channel_altera(chan_GA2Conf_mode,   mode);
+			write_channel_altera(chan_GA2Conf_cnt,    new_pop_cnt);
 
 			// --------------------------------------------------------------
 			//printf("AFTER GA CHANNEL, %u\n",new_pop_cnt);
@@ -329,10 +377,13 @@ void Krnl_GA(__global const float*           restrict GlobFgrids,
 			// **********************************************
 			// ADD VENDOR SPECIFIC PRAGMA
 			// **********************************************
+			/*
 			LOOP_GEN_GENERATIONAL_3:
 			for (uint gene_cnt = 0; gene_cnt < ACTUAL_GENOTYPE_LENGTH; gene_cnt++) {
-				GlobPopulationCurrent[new_pop_cnt*ACTUAL_GENOTYPE_LENGTH + gene_cnt] = offspring_genotype[gene_cnt];
+				GlobPopulationNext[new_pop_cnt*ACTUAL_GENOTYPE_LENGTH + gene_cnt] = offspring_genotype[gene_cnt];
 			}
+			*/
+			async_work_group_copy(GlobPopulationNext+new_pop_cnt*ACTUAL_GENOTYPE_LENGTH, offspring_genotype, ACTUAL_GENOTYPE_LENGTH, 0);
 	
 			#if defined (DEBUG_LEO)
 			printf("eval_cnt (INC): %u, new_pop_cnt (INC): %u\n", eval_cnt, new_pop_cnt);
@@ -346,15 +397,81 @@ void Krnl_GA(__global const float*           restrict GlobFgrids,
 
 
 
-		// Syncronize global memory
-		mem_fence(CLK_GLOBAL_MEM_FENCE);
 
 
+		
 
 
-		//#if defined (DEBUG_LEO)
+		#if defined (DEBUG_LEO)
 		printf("End of loop of new_pop_cnt, new_pop_cnt = %u\n", new_pop_cnt);
-		//#endif
+		#endif
+
+
+
+
+
+
+
+		// --------------------------------------------------------------
+		// Send DUMMY genotypes to channel to signal GG stop
+		// --------------------------------------------------------------
+		for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {
+			write_channel_altera(chan_GA2Conf_genotype, 0);
+		}
+		active = 1;
+		mode   = 0;
+		write_channel_altera(chan_GA2Conf_active, active);
+		write_channel_altera(chan_GA2Conf_mode,   mode);
+		write_channel_altera(chan_GA2Conf_cnt,    0);
+
+		ack = read_channel_altera(chan_Store2GA_ack);
+		printf("GG ack: %u\n", ack);
+		// --------------------------------------------------------------
+		
+
+
+
+
+		// Updating old population with new one
+		// **********************************************
+		// ADD VENDOR SPECIFIC PRAGMA
+		// **********************************************
+		for (uint i=0;i<DockConst->pop_size*ACTUAL_GENOTYPE_LENGTH; i++)
+		{
+			GlobPopulationCurrent[i] = GlobPopulationNext[i];
+		}
+
+		// Updating old energy with new one
+		// **********************************************
+		// ADD VENDOR SPECIFIC PRAGMA
+		// **********************************************
+		for (uint i=0;i<DockConst->pop_size; i++)
+		{
+			GlobEnergyCurrent[i] = GlobEnergyNext[i];
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 		evals_for_ls_in_this_cycle = 0;
@@ -398,18 +515,20 @@ void Krnl_GA(__global const float*           restrict GlobFgrids,
 
 			//printf("BEFORE LS, %u\n",ls_ent_cnt);
 			//performing local search
-			async_work_group_copy(local_entity_ls, GlobPopulationCurrent+entity_for_ls*ACTUAL_GENOTYPE_LENGTH, ACTUAL_GENOTYPE_LENGTH, 0);
+			//async_work_group_copy(local_entity_ls, GlobPopulationCurrent+entity_for_ls*ACTUAL_GENOTYPE_LENGTH, ACTUAL_GENOTYPE_LENGTH, 0);
+			//local_entity_energy = GlobEnergyCurrent[entity_for_ls];
 
-			perform_LS(GlobEnergyCurrent,
-				   GlobEnergyNext,
+			perform_LS(GlobPopulationCurrent,
+				   GlobEnergyCurrent,
 				   GlobPRNG,
 				   KerConst,
 				   DockConst,
+				   entity_for_ls,
 				   local_entity_ls,
 				   entity_possible_new_genotype,
 				   &LS_eval);
 
-			async_work_group_copy(GlobPopulationCurrent+entity_for_ls*ACTUAL_GENOTYPE_LENGTH, local_entity_ls, ACTUAL_GENOTYPE_LENGTH, 0);
+			//async_work_group_copy(GlobPopulationCurrent+entity_for_ls*ACTUAL_GENOTYPE_LENGTH, local_entity_ls, ACTUAL_GENOTYPE_LENGTH, 0);
 
 			//printf("AFTER LS, %u\n",ls_ent_cnt);
 
@@ -440,7 +559,7 @@ void Krnl_GA(__global const float*           restrict GlobFgrids,
 		generation_cnt++;
 
 		//#if defined (DEBUG_LEO)
-		printf("generation_cnt (INC): %u\n", generation_cnt);
+		printf("eval_cnt: %u, generation_cnt: %u\n", eval_cnt, generation_cnt);
 		//#endif
 
 
@@ -453,16 +572,26 @@ void Krnl_GA(__global const float*           restrict GlobFgrids,
 	// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
+	printf("	%-20s: %s\n", "Krnl_GA", "has finished execution!");
+
+	
+	active = 0;
+	mode = 4;
+
+	// --------------------------------------------------------------
+	// Send DUMMY genotypes to channel
+	// --------------------------------------------------------------
+	for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {
+		write_channel_altera(chan_GA2Conf_genotype, 0);
+	}
+	write_channel_altera(chan_GA2Conf_active, active);
+	write_channel_altera(chan_GA2Conf_mode,   mode);
+	write_channel_altera(chan_GA2Conf_cnt,    0);
+	// --------------------------------------------------------------
 
 
-
-
-
-
-	#if defined (DEBUG_LEO)
-	printf("eval_cnt: %u\n",  GlobCounter[0]);
-	printf("generations_cnt: %u\n",  GlobCounter[1]);
-	#endif
+	GlobEvals_performed[0]       =  eval_cnt;
+	GlobGenerations_performed[0] =  generation_cnt;
 
 	#if defined (DEBUG_KERNEL1)
 	printf("Energy evaluations for LS: %u out of %u\n", num_of_evals_for_ls, eval_cnt);
@@ -477,5 +606,5 @@ void Krnl_GA(__global const float*           restrict GlobFgrids,
 #include "Krnl_Conform.cl"
 #include "Krnl_InterE.cl"
 #include "Krnl_IntraE.cl"
-#include "Krnl_Manager.cl"
+#include "Krnl_Store.cl"
 
