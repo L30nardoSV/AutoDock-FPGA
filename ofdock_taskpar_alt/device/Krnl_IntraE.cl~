@@ -110,8 +110,8 @@ while(active) {
 
 			//calculating desolvation term
 			intraE+= (
-				 (KerConst->dspars_S_const[atom1_typeid] + DockConst->qasp*fabs(KerConst->atom_charges_const[atom1_id]))*KerConst->dspars_V_const[atom2_typeid] + 
-				 (KerConst->dspars_S_const[atom2_typeid] +  DockConst->qasp*fabs(KerConst->atom_charges_const[atom2_id]))*KerConst->dspars_V_const[atom1_typeid]) * 
+				  ( KerConst->dspars_S_const[atom1_typeid] + DockConst->qasp*fabs(KerConst->atom_charges_const[atom1_id]) ) * KerConst->dspars_V_const[atom2_typeid] + 
+				  ( KerConst->dspars_S_const[atom2_typeid] + DockConst->qasp*fabs(KerConst->atom_charges_const[atom2_id]) ) * KerConst->dspars_V_const[atom1_typeid]) * 
 				 DockConst->coeff_desolv*exp(-distance_leo*distance_leo/25.92f);
 	
 		} // End of if: if ((dist < dcutoff) && (dist < 20.48))	

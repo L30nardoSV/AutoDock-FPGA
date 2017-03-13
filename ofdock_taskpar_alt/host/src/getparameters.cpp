@@ -666,7 +666,7 @@ void gen_initpop_and_reflig(Dockpars*       mypars,
 			init_populations [entity_id*ACTUAL_GENOTYPE_LENGTH+gene_id] = init_populations [entity_id*ACTUAL_GENOTYPE_LENGTH+gene_id]/mygrid->spacing;
 
 	//changing initial orientation of reference ligand
-	/*for (i=0; i<38; i++)
+	for (uint i=0; i<38; i++)
 		switch (i)
 		{
 		case 3: init_orientation [i] = mypars->ref_ori_angles [0];
@@ -677,8 +677,9 @@ void gen_initpop_and_reflig(Dockpars*       mypars,
 				break;
 		default: init_orientation [i] = 0;
 		}
-
-	change_conform_f(myligand, init_orientation, 0);*/
+	
+	//change_conform_f(myligand, init_orientation, 0);
+	change_conform_f(myligand, init_orientation, ref_ori_angles, 0);
 
 	//initial orientation will be calculated during docking,
 	//only the required angles are generated here,

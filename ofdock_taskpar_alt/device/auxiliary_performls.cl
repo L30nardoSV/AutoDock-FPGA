@@ -137,7 +137,6 @@ void perform_LS(__global       float*           restrict GlobPopulationCurrent,
 		// --------------------------------------------------------------
 		for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {
 			write_channel_altera(chan_GA2Conf_genotype, entity_possible_new_genotype[pipe_cnt]);
-		//	printf("%u ", pipe_cnt);
 		}
 		active = 1;
 		mode = 3;
@@ -254,7 +253,6 @@ void perform_LS(__global       float*           restrict GlobPopulationCurrent,
 			// --------------------------------------------------------------
 			for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {
 				write_channel_altera(chan_GA2Conf_genotype, entity_possible_new_genotype[pipe_cnt]);
-			//	printf("%u ", pipe_cnt);
 			}
 		
 			active = 1;

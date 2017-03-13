@@ -1,0 +1,870 @@
+var spvData = '
+{
+  "functions":
+  [
+    {
+      "type":"container"
+      , "id2":1
+      , "name":"Krnl_GA"
+      , "file":""
+      , "line":"0"
+      , "order":0
+      , "children":[
+        {
+          "type":"container"
+          , "id2":2
+          , "name":""
+          , "file":""
+          , "line":"0"
+          , "order":0
+          , "children":[
+            {
+              "type":"bb"
+              , "id2":3
+              , "name":"Basic Block 0"
+              , "file":""
+              , "line":"0"
+              , "order":0
+            }
+            ,
+            {
+              "type":"bb"
+              , "id2":4
+              , "name":"Basic Block 1"
+              , "file":""
+              , "line":"0"
+              , "order":1
+            }
+            ,
+            {
+              "type":"bb"
+              , "id2":5
+              , "name":"Basic Block 2"
+              , "file":""
+              , "line":"0"
+              , "order":2
+            }
+          ]
+        }
+      ]
+    }
+    ,
+    {
+      "type":"container"
+      , "id2":28
+      , "name":"Krnl_Conform"
+      , "file":""
+      , "line":"0"
+      , "order":0
+      , "children":[
+        {
+          "type":"container"
+          , "id2":29
+          , "name":""
+          , "file":""
+          , "line":"0"
+          , "order":0
+          , "children":[
+            {
+              "type":"bb"
+              , "id2":30
+              , "name":"Basic Block 0"
+              , "file":""
+              , "line":"0"
+              , "order":0
+            }
+            ,
+            {
+              "type":"bb"
+              , "id2":32
+              , "name":"Basic Block 2"
+              , "file":""
+              , "line":"0"
+              , "order":1
+            }
+            ,
+            {
+              "type":"bb"
+              , "id2":33
+              , "name":"Basic Block 3"
+              , "file":""
+              , "line":"0"
+              , "order":2
+              , "children":[
+                {
+                  "type":"inst"
+                  , "id2":76
+                  , "name":"Store"
+                  , "file":"2"
+                  , "line":"48"
+                  , "order":11
+                  , "details":
+                  {
+                    "Width":"32 bits"
+                    , "Type":"Pipelined"
+                    , "Stall-free":"Yes"
+                  }
+                }
+              ]
+            }
+            ,
+            {
+              "type":"bb"
+              , "id2":34
+              , "name":"Basic Block 4"
+              , "file":""
+              , "line":"0"
+              , "order":3
+              , "children":[
+                {
+                  "type":"inst"
+                  , "id2":77
+                  , "name":"Load"
+                  , "file":"2"
+                  , "line":"59"
+                  , "order":2
+                  , "details":
+                  {
+                    "Width":"32 bits"
+                    , "Type":"Pipelined"
+                    , "Stall-free":"Yes"
+                  }
+                }
+                ,
+                {
+                  "type":"inst"
+                  , "id2":78
+                  , "name":"Load"
+                  , "file":"2"
+                  , "line":"60"
+                  , "order":2
+                  , "details":
+                  {
+                    "Width":"64 bits"
+                    , "Type":"Pipelined"
+                    , "Stall-free":"Yes"
+                  }
+                }
+                ,
+                {
+                  "type":"inst"
+                  , "id2":79
+                  , "name":"Load"
+                  , "file":"2"
+                  , "line":"112"
+                  , "order":2
+                  , "details":
+                  {
+                    "Width":"32 bits"
+                    , "Type":"Pipelined"
+                    , "Stall-free":"Yes"
+                  }
+                }
+                ,
+                {
+                  "type":"inst"
+                  , "id2":80
+                  , "name":"Load"
+                  , "file":"2"
+                  , "line":"110"
+                  , "order":47
+                  , "details":
+                  {
+                    "Width":"64 bits"
+                    , "Type":"Pipelined"
+                    , "Stall-free":"Yes"
+                  }
+                }
+              ]
+            }
+            ,
+            {
+              "type":"bb"
+              , "id2":35
+              , "name":"Basic Block 5"
+              , "file":""
+              , "line":"0"
+              , "order":4
+              , "children":[
+                {
+                  "type":"inst"
+                  , "id2":81
+                  , "name":"Load"
+                  , "file":"2"
+                  , "line":"121"
+                  , "order":9
+                  , "details":
+                  {
+                    "Width":"32 bits"
+                    , "Type":"Pipelined"
+                    , "Stall-free":"Yes"
+                  }
+                }
+                ,
+                {
+                  "type":"inst"
+                  , "id2":41
+                  , "name":"'acl.pop_i1' Function Call"
+                  , "file":"2"
+                  , "line":"206"
+                  , "order":235
+                }
+                ,
+                {
+                  "type":"inst"
+                  , "id2":43
+                  , "name":"'acl.pop_i1' Function Call"
+                  , "file":"2"
+                  , "line":"205"
+                  , "order":235
+                }
+                ,
+                {
+                  "type":"inst"
+                  , "id2":82
+                  , "name":"Load"
+                  , "file":"2"
+                  , "line":"96"
+                  , "order":235
+                  , "details":
+                  {
+                    "Width":"32 bits"
+                    , "Type":"Pipelined"
+                    , "Stall-free":"Yes"
+                  }
+                }
+                ,
+                {
+                  "type":"inst"
+                  , "id2":83
+                  , "name":"Load"
+                  , "file":"2"
+                  , "line":"97"
+                  , "order":235
+                  , "details":
+                  {
+                    "Width":"32 bits"
+                    , "Type":"Pipelined"
+                    , "Stall-free":"Yes"
+                  }
+                }
+                ,
+                {
+                  "type":"inst"
+                  , "id2":39
+                  , "name":"'acl.pop_i1' Function Call"
+                  , "file":"2"
+                  , "line":"207"
+                  , "order":236
+                }
+                ,
+                {
+                  "type":"inst"
+                  , "id2":84
+                  , "name":"Load"
+                  , "file":"2"
+                  , "line":"98"
+                  , "order":236
+                  , "details":
+                  {
+                    "Width":"32 bits"
+                    , "Type":"Pipelined"
+                    , "Stall-free":"Yes"
+                  }
+                }
+                ,
+                {
+                  "type":"inst"
+                  , "id2":85
+                  , "name":"Store"
+                  , "file":"2"
+                  , "line":"206"
+                  , "order":275
+                  , "details":
+                  {
+                    "Width":"32 bits"
+                    , "Type":"Pipelined"
+                    , "Stall-free":"Yes"
+                  }
+                }
+                ,
+                {
+                  "type":"inst"
+                  , "id2":86
+                  , "name":"Store"
+                  , "file":"2"
+                  , "line":"207"
+                  , "order":275
+                  , "details":
+                  {
+                    "Width":"32 bits"
+                    , "Type":"Pipelined"
+                    , "Stall-free":"Yes"
+                  }
+                }
+                ,
+                {
+                  "type":"inst"
+                  , "id2":38
+                  , "name":"'acl.push_i1' Function Call"
+                  , "file":"2"
+                  , "line":"207"
+                  , "order":277
+                }
+                ,
+                {
+                  "type":"inst"
+                  , "id2":40
+                  , "name":"'acl.push_i1' Function Call"
+                  , "file":"2"
+                  , "line":"206"
+                  , "order":277
+                }
+                ,
+                {
+                  "type":"inst"
+                  , "id2":87
+                  , "name":"Store"
+                  , "file":"2"
+                  , "line":"205"
+                  , "order":278
+                  , "details":
+                  {
+                    "Width":"32 bits"
+                    , "Type":"Pipelined"
+                    , "Stall-free":"Yes"
+                  }
+                }
+                ,
+                {
+                  "type":"inst"
+                  , "id2":42
+                  , "name":"'acl.push_i1' Function Call"
+                  , "file":"2"
+                  , "line":"205"
+                  , "order":280
+                }
+              ]
+            }
+            ,
+            {
+              "type":"bb"
+              , "id2":36
+              , "name":"Basic Block 6"
+              , "file":""
+              , "line":"0"
+              , "order":5
+              , "children":[
+                {
+                  "type":"inst"
+                  , "id2":88
+                  , "name":"Load"
+                  , "file":"2"
+                  , "line":"235"
+                  , "order":3
+                  , "details":
+                  {
+                    "Width":"32 bits"
+                    , "Type":"Pipelined"
+                    , "Stall-free":"Yes"
+                  }
+                }
+                ,
+                {
+                  "type":"inst"
+                  , "id2":89
+                  , "name":"Load"
+                  , "file":"2"
+                  , "line":"238"
+                  , "order":16
+                  , "details":
+                  {
+                    "Width":"32 bits"
+                    , "Type":"Pipelined"
+                    , "Stall-free":"Yes"
+                  }
+                }
+                ,
+                {
+                  "type":"inst"
+                  , "id2":90
+                  , "name":"Load"
+                  , "file":"2"
+                  , "line":"241"
+                  , "order":29
+                  , "details":
+                  {
+                    "Width":"32 bits"
+                    , "Type":"Pipelined"
+                    , "Stall-free":"Yes"
+                  }
+                }
+              ]
+            }
+            ,
+            {
+              "type":"bb"
+              , "id2":31
+              , "name":"Basic Block 1"
+              , "file":""
+              , "line":"0"
+              , "order":6
+            }
+            ,
+            {
+              "type":"bb"
+              , "id2":37
+              , "name":"Basic Block 7"
+              , "file":""
+              , "line":"0"
+              , "order":7
+            }
+          ]
+        }
+      ]
+    }
+    ,
+    {
+      "type":"container"
+      , "id2":173
+      , "name":"Krnl_InterE"
+      , "file":""
+      , "line":"0"
+      , "order":0
+      , "children":[
+        {
+          "type":"container"
+          , "id2":174
+          , "name":""
+          , "file":""
+          , "line":"0"
+          , "order":0
+          , "children":[
+            {
+              "type":"bb"
+              , "id2":175
+              , "name":"Basic Block 0"
+              , "file":""
+              , "line":"0"
+              , "order":0
+            }
+            ,
+            {
+              "type":"bb"
+              , "id2":176
+              , "name":"Basic Block 1"
+              , "file":""
+              , "line":"0"
+              , "order":1
+            }
+            ,
+            {
+              "type":"bb"
+              , "id2":177
+              , "name":"Basic Block 2"
+              , "file":""
+              , "line":"0"
+              , "order":2
+              , "children":[
+                {
+                  "type":"inst"
+                  , "id2":200
+                  , "name":"Store"
+                  , "file":"3"
+                  , "line":"62"
+                  , "order":11
+                  , "details":
+                  {
+                    "Width":"32 bits"
+                    , "Type":"Pipelined"
+                    , "Stall-free":"Yes"
+                  }
+                }
+                ,
+                {
+                  "type":"inst"
+                  , "id2":201
+                  , "name":"Store"
+                  , "file":"3"
+                  , "line":"64"
+                  , "order":14
+                  , "details":
+                  {
+                    "Width":"32 bits"
+                    , "Type":"Pipelined"
+                    , "Stall-free":"Yes"
+                  }
+                }
+                ,
+                {
+                  "type":"inst"
+                  , "id2":202
+                  , "name":"Store"
+                  , "file":"3"
+                  , "line":"66"
+                  , "order":17
+                  , "details":
+                  {
+                    "Width":"32 bits"
+                    , "Type":"Pipelined"
+                    , "Stall-free":"Yes"
+                  }
+                }
+              ]
+            }
+            ,
+            {
+              "type":"bb"
+              , "id2":178
+              , "name":"Basic Block 3"
+              , "file":""
+              , "line":"0"
+              , "order":3
+            }
+            ,
+            {
+              "type":"bb"
+              , "id2":179
+              , "name":"Basic Block 4"
+              , "file":""
+              , "line":"0"
+              , "order":4
+              , "children":[
+                {
+                  "type":"inst"
+                  , "id2":203
+                  , "name":"Load"
+                  , "file":"3"
+                  , "line":"91"
+                  , "order":19
+                  , "details":
+                  {
+                    "Width":"32 bits"
+                    , "Type":"Pipelined"
+                    , "Stall-free":"Yes"
+                  }
+                }
+                ,
+                {
+                  "type":"inst"
+                  , "id2":204
+                  , "name":"Load"
+                  , "file":"3"
+                  , "line":"90"
+                  , "order":20
+                  , "details":
+                  {
+                    "Width":"32 bits"
+                    , "Type":"Pipelined"
+                    , "Stall-free":"Yes"
+                  }
+                }
+                ,
+                {
+                  "type":"inst"
+                  , "id2":205
+                  , "name":"Load"
+                  , "file":"3"
+                  , "line":"92"
+                  , "order":20
+                  , "details":
+                  {
+                    "Width":"32 bits"
+                    , "Type":"Pipelined"
+                    , "Stall-free":"Yes"
+                  }
+                }
+              ]
+            }
+            ,
+            {
+              "type":"bb"
+              , "id2":181
+              , "name":"Basic Block 6"
+              , "file":""
+              , "line":"0"
+              , "order":5
+            }
+            ,
+            {
+              "type":"bb"
+              , "id2":180
+              , "name":"Basic Block 5"
+              , "file":""
+              , "line":"0"
+              , "order":6
+            }
+          ]
+        }
+      ]
+    }
+    ,
+    {
+      "type":"container"
+      , "id2":277
+      , "name":"Krnl_IntraE"
+      , "file":""
+      , "line":"0"
+      , "order":0
+      , "children":[
+        {
+          "type":"container"
+          , "id2":278
+          , "name":""
+          , "file":""
+          , "line":"0"
+          , "order":0
+          , "children":[
+            {
+              "type":"bb"
+              , "id2":279
+              , "name":"Basic Block 0"
+              , "file":""
+              , "line":"0"
+              , "order":0
+            }
+            ,
+            {
+              "type":"bb"
+              , "id2":280
+              , "name":"Basic Block 1"
+              , "file":""
+              , "line":"0"
+              , "order":1
+            }
+            ,
+            {
+              "type":"bb"
+              , "id2":281
+              , "name":"Basic Block 2"
+              , "file":""
+              , "line":"0"
+              , "order":2
+              , "children":[
+                {
+                  "type":"inst"
+                  , "id2":307
+                  , "name":"Store"
+                  , "file":"4"
+                  , "line":"41"
+                  , "order":11
+                  , "details":
+                  {
+                    "Width":"32 bits"
+                    , "Type":"Pipelined"
+                    , "Stall-free":"Yes"
+                  }
+                }
+                ,
+                {
+                  "type":"inst"
+                  , "id2":308
+                  , "name":"Store"
+                  , "file":"4"
+                  , "line":"43"
+                  , "order":14
+                  , "details":
+                  {
+                    "Width":"32 bits"
+                    , "Type":"Pipelined"
+                    , "Stall-free":"Yes"
+                  }
+                }
+                ,
+                {
+                  "type":"inst"
+                  , "id2":309
+                  , "name":"Store"
+                  , "file":"4"
+                  , "line":"45"
+                  , "order":17
+                  , "details":
+                  {
+                    "Width":"32 bits"
+                    , "Type":"Pipelined"
+                    , "Stall-free":"Yes"
+                  }
+                }
+              ]
+            }
+            ,
+            {
+              "type":"bb"
+              , "id2":282
+              , "name":"Basic Block 3"
+              , "file":""
+              , "line":"0"
+              , "order":3
+            }
+            ,
+            {
+              "type":"bb"
+              , "id2":283
+              , "name":"Basic Block 4"
+              , "file":""
+              , "line":"0"
+              , "order":4
+              , "children":[
+                {
+                  "type":"inst"
+                  , "id2":310
+                  , "name":"Load"
+                  , "file":"4"
+                  , "line":"70"
+                  , "order":180
+                  , "details":
+                  {
+                    "Width":"32 bits"
+                    , "Type":"Pipelined"
+                    , "Stall-free":"Yes"
+                  }
+                }
+                ,
+                {
+                  "type":"inst"
+                  , "id2":311
+                  , "name":"Load"
+                  , "file":"4"
+                  , "line":"71"
+                  , "order":180
+                  , "details":
+                  {
+                    "Width":"32 bits"
+                    , "Type":"Pipelined"
+                    , "Stall-free":"Yes"
+                  }
+                }
+                ,
+                {
+                  "type":"inst"
+                  , "id2":312
+                  , "name":"Load"
+                  , "file":"4"
+                  , "line":"70"
+                  , "order":180
+                  , "details":
+                  {
+                    "Width":"32 bits"
+                    , "Type":"Pipelined"
+                    , "Stall-free":"Yes"
+                  }
+                }
+                ,
+                {
+                  "type":"inst"
+                  , "id2":313
+                  , "name":"Load"
+                  , "file":"4"
+                  , "line":"71"
+                  , "order":180
+                  , "details":
+                  {
+                    "Width":"32 bits"
+                    , "Type":"Pipelined"
+                    , "Stall-free":"Yes"
+                  }
+                }
+                ,
+                {
+                  "type":"inst"
+                  , "id2":314
+                  , "name":"Load"
+                  , "file":"4"
+                  , "line":"72"
+                  , "order":187
+                  , "details":
+                  {
+                    "Width":"32 bits"
+                    , "Type":"Pipelined"
+                    , "Stall-free":"Yes"
+                  }
+                }
+                ,
+                {
+                  "type":"inst"
+                  , "id2":315
+                  , "name":"Load"
+                  , "file":"4"
+                  , "line":"72"
+                  , "order":187
+                  , "details":
+                  {
+                    "Width":"32 bits"
+                    , "Type":"Pipelined"
+                    , "Stall-free":"Yes"
+                  }
+                }
+              ]
+            }
+            ,
+            {
+              "type":"bb"
+              , "id2":284
+              , "name":"Basic Block 5"
+              , "file":""
+              , "line":"0"
+              , "order":5
+            }
+            ,
+            {
+              "type":"bb"
+              , "id2":285
+              , "name":"Basic Block 6"
+              , "file":""
+              , "line":"0"
+              , "order":6
+            }
+          ]
+        }
+      ]
+    }
+    ,
+    {
+      "type":"container"
+      , "id2":380
+      , "name":"Krnl_Store"
+      , "file":""
+      , "line":"0"
+      , "order":0
+      , "children":[
+        {
+          "type":"container"
+          , "id2":381
+          , "name":""
+          , "file":""
+          , "line":"0"
+          , "order":0
+          , "children":[
+            {
+              "type":"bb"
+              , "id2":382
+              , "name":"Basic Block 0"
+              , "file":""
+              , "line":"0"
+              , "order":0
+            }
+            ,
+            {
+              "type":"bb"
+              , "id2":383
+              , "name":"Basic Block 1"
+              , "file":""
+              , "line":"0"
+              , "order":1
+            }
+            ,
+            {
+              "type":"bb"
+              , "id2":384
+              , "name":"Basic Block 2"
+              , "file":""
+              , "line":"0"
+              , "order":2
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+';

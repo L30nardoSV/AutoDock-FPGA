@@ -1,0 +1,2 @@
+Compiler Command: aoc -v --board a10gx device/Krnl_GA.cl -o bin/docking_a10gx.aocx
+Compiler Error: Multiple writes to channel chan_GA2Conf_genotype

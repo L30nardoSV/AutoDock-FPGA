@@ -29,8 +29,8 @@ void perform_LS(__global       float*           restrict GlobPopulationCurrent,
 
 
 	uint i;
-	float offspring_genotype[ACTUAL_GENOTYPE_LENGTH];
-	float entity_possible_new_genotype [ACTUAL_GENOTYPE_LENGTH];
+	//float offspring_genotype[ACTUAL_GENOTYPE_LENGTH];
+	//float entity_possible_new_genotype [ACTUAL_GENOTYPE_LENGTH];
 	float genotype_deviate  [ACTUAL_GENOTYPE_LENGTH];		//38 would be enough...
 	float genotype_bias     [ACTUAL_GENOTYPE_LENGTH];
 
@@ -137,7 +137,7 @@ void perform_LS(__global       float*           restrict GlobPopulationCurrent,
 		// --------------------------------------------------------------
 		for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {
 			write_channel_altera(chan_GA2Conf_genotype, entity_possible_new_genotype[pipe_cnt]);
-		//	printf("%u ", pipe_cnt);
+			mem_fence(CLK_CHANNEL_MEM_FENCE);
 		}
 		active = 1;
 		mode = 3;
@@ -254,7 +254,7 @@ void perform_LS(__global       float*           restrict GlobPopulationCurrent,
 			// --------------------------------------------------------------
 			for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {
 				write_channel_altera(chan_GA2Conf_genotype, entity_possible_new_genotype[pipe_cnt]);
-			//	printf("%u ", pipe_cnt);
+				mem_fence(CLK_CHANNEL_MEM_FENCE);
 			}
 		
 			active = 1;

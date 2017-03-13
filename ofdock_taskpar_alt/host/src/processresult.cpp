@@ -309,8 +309,16 @@ void make_resfiles(float* final_population,
 		//else
 			accurate_interE[i] = calc_interE_f(mygrid, &temp_docked, grids, 0.00, debug);	//calculating the intermolecular energy
 
+
+
+
+
 		if (i == 0)		//additional calculations for ADT-compatible result file, only in case of best conformation
 			calc_interE_peratom_f(mygrid, &temp_docked, grids, 0.00, &(best_result->interE_elec), best_result->peratom_vdw, best_result->peratom_elec, debug);
+
+
+
+
 
 		scale_ligand(&temp_docked, mygrid->spacing);
 		//if (i==127)

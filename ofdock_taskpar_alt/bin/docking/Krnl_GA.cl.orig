@@ -122,7 +122,7 @@ typedef struct
 // Originally from: searchoptimum.c
 // --------------------------------------------------------------------------
 __kernel
-void Krnl_GA(__global const float*           restrict GlobFgrids,
+void Krnl_GA(//__global const float*           restrict GlobFgrids,
 	     __global       float*           restrict GlobPopulationCurrent,
 	     __global       float*           restrict GlobEnergyCurrent,
 	     __global       float*           restrict GlobPopulationNext,
@@ -166,6 +166,12 @@ void Krnl_GA(__global const float*           restrict GlobFgrids,
 	printf("qasp: %f\n",     DockConst->qasp);
 	#endif
 
+
+
+
+
+
+
 	//Calculating energies of initial population
 	uint eval_cnt = 0;
 	uint generation_cnt = 1;
@@ -175,6 +181,23 @@ void Krnl_GA(__global const float*           restrict GlobFgrids,
 	char active = 0;
 	char mode   = 0;
 	char ack    = 0;
+
+
+
+
+
+
+
+
+///*
+
+
+
+
+
+
+
+
 
 	LOOP_GEN_GENERATIONAL_1:
 	for (pop_cnt = 0; pop_cnt < DockConst->pop_size; pop_cnt++)
@@ -233,10 +256,9 @@ void Krnl_GA(__global const float*           restrict GlobFgrids,
 	write_channel_altera(chan_GA2Conf_cnt,    0);
 
 	ack = read_channel_altera(chan_Store2GA_ack);
-	printf("INI ack: %u\n", ack);
+	//printf("INI ack: %u\n", ack);
 	// --------------------------------------------------------------
 		
-
 
 
 
@@ -378,12 +400,12 @@ void Krnl_GA(__global const float*           restrict GlobFgrids,
 			// **********************************************
 			// ADD VENDOR SPECIFIC PRAGMA
 			// **********************************************
-			/*
-			LOOP_GEN_GENERATIONAL_3:
-			for (uint gene_cnt = 0; gene_cnt < ACTUAL_GENOTYPE_LENGTH; gene_cnt++) {
-				GlobPopulationNext[new_pop_cnt*ACTUAL_GENOTYPE_LENGTH + gene_cnt] = offspring_genotype[gene_cnt];
-			}
-			*/
+			
+			//LOOP_GEN_GENERATIONAL_3:
+			//for (uint gene_cnt = 0; gene_cnt < ACTUAL_GENOTYPE_LENGTH; gene_cnt++) {
+			//	GlobPopulationNext[new_pop_cnt*ACTUAL_GENOTYPE_LENGTH + gene_cnt] = offspring_genotype[gene_cnt];
+			//}
+			
 			async_work_group_copy(GlobPopulationNext+new_pop_cnt*ACTUAL_GENOTYPE_LENGTH, offspring_genotype, ACTUAL_GENOTYPE_LENGTH, 0);
 	
 			#if defined (DEBUG_LEO)
@@ -426,7 +448,7 @@ void Krnl_GA(__global const float*           restrict GlobFgrids,
 		write_channel_altera(chan_GA2Conf_cnt,    0);
 
 		ack = read_channel_altera(chan_Store2GA_ack);
-		printf("GG ack: %u\n", ack);
+		//printf("GG ack: %u\n", ack);
 		// --------------------------------------------------------------
 		
 
@@ -571,6 +593,23 @@ void Krnl_GA(__global const float*           restrict GlobFgrids,
 
 	// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 	// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+//*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 	printf("	%-20s: %s\n", "Krnl_GA", "has finished execution!");

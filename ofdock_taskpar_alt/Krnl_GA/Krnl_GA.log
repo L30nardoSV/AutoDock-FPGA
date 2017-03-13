@@ -1,0 +1,193 @@
+Compiler Command: aoc -v -c ./device/Krnl_GA.cl --report
+Warning: Kernel 'Krnl_GA' has unused argument 'GlobPopulationCurrent'
+Warning: Kernel 'Krnl_GA' has unused argument 'GlobEnergyCurrent'
+Warning: Kernel 'Krnl_GA' has unused argument 'GlobPopulationNext'
+Warning: Kernel 'Krnl_GA' has unused argument 'GlobEnergyNext'
+Warning: Kernel 'Krnl_GA' has unused argument 'GlobPRNG'
+Warning: Kernel 'Krnl_GA' has unused argument 'KerConst'
+Warning: Kernel 'Krnl_GA' has unused argument 'DockConst'
+Warning: Kernel 'Krnl_Store' has unused argument 'GlobEnergyCurrent'
+Warning: Kernel 'Krnl_Store' has unused argument 'GlobEnergyNext'
+=========================================================================================================
+                                   *** Optimization Report ***                                        
+
+Kernels that do not use any work-item built-in functions, such as get_global_id(), are compiled for single
+work-item execution (a task). Otherwise, a kernel is compiled as an ND-Range.
+
+For tasks, the compiler will attempt to pipeline every loop in the kernel to allow multiple iterations of
+the loop to execute concurrently. If some loops are not pipelined, or not pipelined well, you may not get
+good performance.
+
+For ND-Range kernels, the loops are not pipelined. Instead, they are built to accept multiple work-items
+simultaneously. Kernel throughput is usually reduced by the largest total number of iterations of nested
+loops. A large number of threads is usually required to efficiently utilize ND-Range kernels.
+
+=========================================================================================================
+Kernel: Krnl_GA                                                                                          
+=========================================================================================================
+The kernel is compiled for single work-item execution.
+
+The kernel has a required work-group size of (1, 1, 1).
+
+Loop Report:
+
+ + Loop "Block1" (file Krnl_GA.cl line 624)
+   Pipelined well. Successive iterations are launched every cycle.
+   
+   
+=========================================================================================================
+Kernel: Krnl_Conform                                                                                     
+=========================================================================================================
+The kernel is compiled for single work-item execution.
+
+The kernel has a required work-group size of (1, 1, 1).
+
+Loop Report:
+
+ + Loop "Block5" (file Krnl_Conform.cl line 40)
+ | NOT pipelined due to: 
+ |   Loop exit condition unresolvable at iteration initiation.
+ |   Simplify loop exit condition to fix this problem.
+ |   See "Unable to Resolve Loop Exit Condition at Iteration Initiation" section of the Best Practices Guide for more information.
+ |   Not pipelining this loop will most likely lead to poor performance.
+ | 
+ | 
+ |-+ Loop "Block6" (file Krnl_Conform.cl line 47)
+ |   Pipelined well. Successive iterations are launched every cycle.
+ |   
+ |   
+ |-+ Loop "Block8" (file Krnl_Conform.cl line 79)
+ |   Pipelined with successive iterations launched every 45 cycles due to: 
+ |        
+ |       Memory dependency on Load Operation from: (file Krnl_Conform.cl line 96)
+ |         Load Operation (file Krnl_Conform.cl line 79, line 234)
+ |       Largest Critical Path Contributors:
+ |           16%: Load Operation  (file Krnl_Conform.cl line 96)
+ |           11%: Hardened Floating-Point Multiply-Add Operation  (file Krnl_Conform.cl line 188)
+ |           11%: Hardened Floating-Point Multiply-Add Operation  (file Krnl_Conform.cl line 188)
+ |            8%: Hardened Floating-Point Sub Operation  (file Krnl_Conform.cl line 129)
+ |            8%: Hardened Floating-Point Multiply Operation  (file Krnl_Conform.cl line 174)
+ |            8%: Hardened Floating-Point Sub Operation  (file Krnl_Conform.cl line 174)
+ |            8%: Hardened Floating-Point Sub Operation  (file Krnl_Conform.cl line 174)
+ |            8%: Hardened Floating-Point Multiply Operation  (file Krnl_Conform.cl line 188)
+ |            8%: Hardened Floating-Point Sub Operation  (file Krnl_Conform.cl line 188)
+ |        
+ |       Memory dependency on Load Operation from: (file Krnl_Conform.cl line 96)
+ |         Store Operation (file Krnl_Conform.cl line 205)
+ |       Largest Critical Path Contributors:
+ |           16%: Load Operation  (file Krnl_Conform.cl line 96)
+ |           11%: Hardened Floating-Point Multiply-Add Operation  (file Krnl_Conform.cl line 188)
+ |           11%: Hardened Floating-Point Multiply-Add Operation  (file Krnl_Conform.cl line 188)
+ |            8%: Hardened Floating-Point Sub Operation  (file Krnl_Conform.cl line 129)
+ |            8%: Hardened Floating-Point Multiply Operation  (file Krnl_Conform.cl line 174)
+ |            8%: Hardened Floating-Point Sub Operation  (file Krnl_Conform.cl line 174)
+ |            8%: Hardened Floating-Point Sub Operation  (file Krnl_Conform.cl line 174)
+ |            8%: Hardened Floating-Point Multiply Operation  (file Krnl_Conform.cl line 188)
+ |            8%: Hardened Floating-Point Sub Operation  (file Krnl_Conform.cl line 188)
+ |    
+ |   Additional memory dependencies:
+ |        
+ |       Memory dependency on Load Operation from: (file Krnl_Conform.cl line 97)
+ |         Load Operation (file Krnl_Conform.cl line 79, line 234)
+ |         Store Operation (file Krnl_Conform.cl line 206)
+ |        
+ |       Memory dependency on Load Operation from: (file Krnl_Conform.cl line 98)
+ |         Load Operation (file Krnl_Conform.cl line 79, line 234)
+ |         Store Operation (file Krnl_Conform.cl line 207)
+ |   
+ |   
+ |-+ Loop "Block9" (file Krnl_Conform.cl line 234)
+     Pipelined well. Successive iterations are launched every cycle.
+     
+     
+=========================================================================================================
+Kernel: Krnl_InterE                                                                                      
+=========================================================================================================
+The kernel is compiled for single work-item execution.
+
+The kernel has a required work-group size of (1, 1, 1).
+
+Loop Report:
+
+ + Loop "Block12" (file Krnl_InterE.cl line 55)
+ | NOT pipelined due to: 
+ |   Loop exit condition unresolvable at iteration initiation.
+ |   Simplify loop exit condition to fix this problem.
+ |   See "Unable to Resolve Loop Exit Condition at Iteration Initiation" section of the Best Practices Guide for more information.
+ |   Not pipelining this loop will most likely lead to poor performance.
+ | 
+ | 
+ |-+ Loop "Block13" (file Krnl_InterE.cl line 61)
+ |   Pipelined well. Successive iterations are launched every cycle.
+ |   
+ |   
+ |-+ Loop "Block15" (file Krnl_InterE.cl line 87)
+     Pipelined with successive iterations launched every 13 cycles due to: 
+          
+         Data dependency on variable interE  (file Krnl_InterE.cl line 38)
+         Largest Critical Path Contributors:
+             40%: Hardened Floating-Point Multiply-Add Operation  (file Krnl_InterE.cl line 204)
+             30%: Hardened Floating-Point Add Operation  (file Krnl_InterE.cl line 174)
+             30%: Hardened Floating-Point Add Operation  (file Krnl_InterE.cl line 234)
+     
+     
+=========================================================================================================
+Kernel: Krnl_IntraE                                                                                      
+=========================================================================================================
+The kernel is compiled for single work-item execution.
+
+The kernel has a required work-group size of (1, 1, 1).
+
+Loop Report:
+
+ + Loop "Block19" (file Krnl_IntraE.cl line 34)
+ | NOT pipelined due to: 
+ |   Loop exit condition unresolvable at iteration initiation.
+ |   Simplify loop exit condition to fix this problem.
+ |   See "Unable to Resolve Loop Exit Condition at Iteration Initiation" section of the Best Practices Guide for more information.
+ |   Not pipelining this loop will most likely lead to poor performance.
+ | 
+ | 
+ |-+ Loop "Block20" (file Krnl_IntraE.cl line 40)
+ |   Pipelined well. Successive iterations are launched every cycle.
+ |   
+ |   
+ |-+ Loop "Block22" (file Krnl_IntraE.cl line 65)
+     Pipelined with successive iterations launched every 17 cycles due to: 
+          
+         Data dependency on variable intraE  (file Krnl_IntraE.cl line 32)
+         Largest Critical Path Contributors:
+             30%: Hardened Floating-Point Multiply-Add Operation  (file Krnl_IntraE.cl line 115)
+             23%: Hardened Floating-Point Add Operation  (file Krnl_IntraE.cl line 101)
+             23%: Hardened Floating-Point Sub Operation  (file Krnl_IntraE.cl line 104, line 106)
+             23%: Hardened Floating-Point Add Operation  (file Krnl_IntraE.cl line 109)
+     
+     
+=========================================================================================================
+Kernel: Krnl_Store                                                                                       
+=========================================================================================================
+The kernel is compiled for single work-item execution.
+
+The kernel has a required work-group size of (1, 1, 1).
+
+Loop Report:
+
+ + Loop "Block26" (file Krnl_Store.cl line 30)
+   Pipelined well. Successive iterations are launched every cycle.
+   
+   
+=========================================================================================================
+
++--------------------------------------------------------------------+
+; Estimated Resource Usage Summary                                   ;
++----------------------------------------+---------------------------+
+; Resource                               + Usage                     ;
++----------------------------------------+---------------------------+
+; Logic utilization                      ;   56%                     ;
+; ALUTs                                  ;   31%                     ;
+; Dedicated logic registers              ;   27%                     ;
+; Memory blocks                          ;  105%                     ;
+; DSP blocks                             ;   15%                     ;
++----------------------------------------+---------------------------;
+System name: Krnl_GA
+

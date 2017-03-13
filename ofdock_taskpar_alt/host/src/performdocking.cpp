@@ -270,72 +270,79 @@ filled with clock() */
 	mallocBufferObject(context,CL_MEM_READ_WRITE,sizeof(unsigned int),  &mem_evals_performed);
 	mallocBufferObject(context,CL_MEM_READ_WRITE,sizeof(unsigned int),  &mem_generations_performed);
 
+/*
+	memcopyBufferObjectToDevice(command_queue1,mem_DockparametersConst, 		&dockpars,            sizeof(dockpars));
+	//memcopyBufferObjectToDevice(command_queue1,mem_KerConst, 	   		&KerConst,            sizeof(KerConst));
+	memcopyBufferObjectToDevice(command_queue1,mem_dockpars_fgrids, 		cpu_floatgrids,       size_floatgrids);
+ 	//memcopyBufferObjectToDevice(command_queue1,mem_dockpars_conformations_current, 	cpu_init_populations, size_populations);
+	//memcopyBufferObjectToDevice(command_queue1,mem_dockpars_prng_states,     	cpu_prng_seeds,       size_prng_seeds);
+*/
+
+/*
 	memcopyBufferObjectToDevice(command_queue1,mem_DockparametersConst, 		&dockpars,            sizeof(dockpars));
 	memcopyBufferObjectToDevice(command_queue1,mem_KerConst, 	   		&KerConst,            sizeof(KerConst));
 	memcopyBufferObjectToDevice(command_queue1,mem_dockpars_fgrids, 		cpu_floatgrids,       size_floatgrids);
  	memcopyBufferObjectToDevice(command_queue1,mem_dockpars_conformations_current, 	cpu_init_populations, size_populations);
 	memcopyBufferObjectToDevice(command_queue1,mem_dockpars_prng_states,     	cpu_prng_seeds,       size_prng_seeds);
-
-	
-
+*/
 
 	clock_start_docking = clock();
 
 #ifdef ENABLE_KERNEL1
-        setKernelArg(kernel1,0, sizeof(mem_dockpars_fgrids),                    &mem_dockpars_fgrids);
-        setKernelArg(kernel1,1, sizeof(mem_dockpars_conformations_current),     &mem_dockpars_conformations_current);
-        setKernelArg(kernel1,2, sizeof(mem_dockpars_energies_current),          &mem_dockpars_energies_current);
-        setKernelArg(kernel1,3, sizeof(mem_dockpars_conformations_next),        &mem_dockpars_conformations_next);
-        setKernelArg(kernel1,4, sizeof(mem_dockpars_energies_next),             &mem_dockpars_energies_next);
-        setKernelArg(kernel1,5, sizeof(mem_dockpars_prng_states),               &mem_dockpars_prng_states);
-	setKernelArg(kernel1,6, sizeof(cl_mem),                          	&mem_KerConst);
-        setKernelArg(kernel1,7, sizeof(cl_mem),                          	&mem_DockparametersConst);
-	setKernelArg(kernel1,8, sizeof(mem_evals_performed),                    &mem_evals_performed);
-        setKernelArg(kernel1,9, sizeof(mem_generations_performed),              &mem_generations_performed);
+        //setKernelArg(kernel1,0, sizeof(mem_dockpars_fgrids),                    &mem_dockpars_fgrids);
+        setKernelArg(kernel1,0, sizeof(mem_dockpars_conformations_current),     &mem_dockpars_conformations_current);
+        setKernelArg(kernel1,1, sizeof(mem_dockpars_energies_current),          &mem_dockpars_energies_current);
+        setKernelArg(kernel1,2, sizeof(mem_dockpars_conformations_next),        &mem_dockpars_conformations_next);
+        setKernelArg(kernel1,3, sizeof(mem_dockpars_energies_next),             &mem_dockpars_energies_next);
+        setKernelArg(kernel1,4, sizeof(mem_dockpars_prng_states),               &mem_dockpars_prng_states);
+	setKernelArg(kernel1,5, sizeof(cl_mem),                          	&mem_KerConst);
+        setKernelArg(kernel1,6, sizeof(cl_mem),                          	&mem_DockparametersConst);
+	setKernelArg(kernel1,7, sizeof(mem_evals_performed),                    &mem_evals_performed);
+        setKernelArg(kernel1,8, sizeof(mem_generations_performed),              &mem_generations_performed);
 #endif // End of ENABLE_KERNEL1
 
 #ifdef ENABLE_KERNEL2
-        setKernelArg(kernel2,0, sizeof(mem_dockpars_fgrids),                    &mem_dockpars_fgrids);
-        setKernelArg(kernel2,1, sizeof(mem_dockpars_conformations_current),     &mem_dockpars_conformations_current);
-        setKernelArg(kernel2,2, sizeof(mem_dockpars_energies_current),          &mem_dockpars_energies_current);
-        setKernelArg(kernel2,3, sizeof(mem_dockpars_conformations_next),        &mem_dockpars_conformations_next);
-        setKernelArg(kernel2,4, sizeof(mem_dockpars_energies_next),             &mem_dockpars_energies_next);
-        setKernelArg(kernel2,5, sizeof(mem_dockpars_prng_states),               &mem_dockpars_prng_states);
-	setKernelArg(kernel2,6, sizeof(cl_mem),                          	&mem_KerConst);
-        setKernelArg(kernel2,7, sizeof(cl_mem),                          	&mem_DockparametersConst);
+        //setKernelArg(kernel2,0, sizeof(mem_dockpars_fgrids),                    &mem_dockpars_fgrids);
+        //setKernelArg(kernel2,1, sizeof(mem_dockpars_conformations_current),     &mem_dockpars_conformations_current);
+        //setKernelArg(kernel2,2, sizeof(mem_dockpars_energies_current),          &mem_dockpars_energies_current);
+        //setKernelArg(kernel2,3, sizeof(mem_dockpars_conformations_next),        &mem_dockpars_conformations_next);
+        //setKernelArg(kernel2,4, sizeof(mem_dockpars_energies_next),             &mem_dockpars_energies_next);
+        //setKernelArg(kernel2,5, sizeof(mem_dockpars_prng_states),               &mem_dockpars_prng_states);
+	setKernelArg(kernel2,0, sizeof(cl_mem),                          	&mem_KerConst);
+        setKernelArg(kernel2,1, sizeof(cl_mem),                          	&mem_DockparametersConst);
 #endif // End of ENABLE_KERNEL2
 
 #ifdef ENABLE_KERNEL3
         setKernelArg(kernel3,0, sizeof(mem_dockpars_fgrids),                    &mem_dockpars_fgrids);
-        setKernelArg(kernel3,1, sizeof(mem_dockpars_conformations_current),     &mem_dockpars_conformations_current);
-        setKernelArg(kernel3,2, sizeof(mem_dockpars_energies_current),          &mem_dockpars_energies_current);
-        setKernelArg(kernel3,3, sizeof(mem_dockpars_conformations_next),        &mem_dockpars_conformations_next);
-        setKernelArg(kernel3,4, sizeof(mem_dockpars_energies_next),             &mem_dockpars_energies_next);
-        setKernelArg(kernel3,5, sizeof(mem_dockpars_prng_states),               &mem_dockpars_prng_states);
-	setKernelArg(kernel3,6, sizeof(cl_mem),                          	&mem_KerConst);
-        setKernelArg(kernel3,7, sizeof(cl_mem),                          	&mem_DockparametersConst);
+        //setKernelArg(kernel3,1, sizeof(mem_dockpars_conformations_current),     &mem_dockpars_conformations_current);
+        //setKernelArg(kernel3,2, sizeof(mem_dockpars_energies_current),          &mem_dockpars_energies_current);
+        //setKernelArg(kernel3,3, sizeof(mem_dockpars_conformations_next),        &mem_dockpars_conformations_next);
+        //setKernelArg(kernel3,4, sizeof(mem_dockpars_energies_next),             &mem_dockpars_energies_next);
+        //setKernelArg(kernel3,5, sizeof(mem_dockpars_prng_states),               &mem_dockpars_prng_states);
+	setKernelArg(kernel3,1, sizeof(cl_mem),                          	&mem_KerConst);
+        setKernelArg(kernel3,2, sizeof(cl_mem),                          	&mem_DockparametersConst);
 #endif // End of ENABLE_KERNEL3
 
 #ifdef ENABLE_KERNEL4
-        setKernelArg(kernel4,0, sizeof(mem_dockpars_fgrids),                    &mem_dockpars_fgrids);
-        setKernelArg(kernel4,1, sizeof(mem_dockpars_conformations_current),     &mem_dockpars_conformations_current);
-        setKernelArg(kernel4,2, sizeof(mem_dockpars_energies_current),          &mem_dockpars_energies_current);
-        setKernelArg(kernel4,3, sizeof(mem_dockpars_conformations_next),        &mem_dockpars_conformations_next);
-        setKernelArg(kernel4,4, sizeof(mem_dockpars_energies_next),             &mem_dockpars_energies_next);
-        setKernelArg(kernel4,5, sizeof(mem_dockpars_prng_states),               &mem_dockpars_prng_states);
-	setKernelArg(kernel4,6, sizeof(cl_mem),                          	&mem_KerConst);
-        setKernelArg(kernel4,7, sizeof(cl_mem),                          	&mem_DockparametersConst);
+        //setKernelArg(kernel4,0, sizeof(mem_dockpars_fgrids),                    &mem_dockpars_fgrids);
+        //setKernelArg(kernel4,1, sizeof(mem_dockpars_conformations_current),     &mem_dockpars_conformations_current);
+        //setKernelArg(kernel4,2, sizeof(mem_dockpars_energies_current),          &mem_dockpars_energies_current);
+        //setKernelArg(kernel4,3, sizeof(mem_dockpars_conformations_next),        &mem_dockpars_conformations_next);
+        //setKernelArg(kernel4,4, sizeof(mem_dockpars_energies_next),             &mem_dockpars_energies_next);
+        //setKernelArg(kernel4,5, sizeof(mem_dockpars_prng_states),               &mem_dockpars_prng_states);
+	setKernelArg(kernel4,0, sizeof(cl_mem),                          	&mem_KerConst);
+        setKernelArg(kernel4,1, sizeof(cl_mem),                          	&mem_DockparametersConst);
 #endif // End of ENABLE_KERNEL4
 
 #ifdef ENABLE_KERNEL5
-        setKernelArg(kernel5,0, sizeof(mem_dockpars_fgrids),                    &mem_dockpars_fgrids);
-        setKernelArg(kernel5,1, sizeof(mem_dockpars_conformations_current),     &mem_dockpars_conformations_current);
-        setKernelArg(kernel5,2, sizeof(mem_dockpars_energies_current),          &mem_dockpars_energies_current);
-        setKernelArg(kernel5,3, sizeof(mem_dockpars_conformations_next),        &mem_dockpars_conformations_next);
-        setKernelArg(kernel5,4, sizeof(mem_dockpars_energies_next),             &mem_dockpars_energies_next);
-        setKernelArg(kernel5,5, sizeof(mem_dockpars_prng_states),               &mem_dockpars_prng_states);
-	setKernelArg(kernel5,6, sizeof(cl_mem),                          	&mem_KerConst);
-        setKernelArg(kernel5,7, sizeof(cl_mem),                          	&mem_DockparametersConst);
+        //setKernelArg(kernel5,0, sizeof(mem_dockpars_fgrids),                    &mem_dockpars_fgrids);
+        //setKernelArg(kernel5,1, sizeof(mem_dockpars_conformations_current),     &mem_dockpars_conformations_current);
+        setKernelArg(kernel5,0, sizeof(mem_dockpars_energies_current),          &mem_dockpars_energies_current);
+        //setKernelArg(kernel5,3, sizeof(mem_dockpars_conformations_next),        &mem_dockpars_conformations_next);
+        setKernelArg(kernel5,1, sizeof(mem_dockpars_energies_next),             &mem_dockpars_energies_next);
+        //setKernelArg(kernel5,5, sizeof(mem_dockpars_prng_states),               &mem_dockpars_prng_states);
+	//setKernelArg(kernel5,6, sizeof(cl_mem),                          	&mem_KerConst);
+        //setKernelArg(kernel5,7, sizeof(cl_mem),                          	&mem_DockparametersConst);
 #endif // End of ENABLE_KERNEL3
 
 
@@ -349,6 +356,30 @@ filled with clock() */
 	{
 
 		printf("Run %u started...     \n", run_cnt+1); fflush(stdout);
+
+
+
+	myligand_reference = *myligand_init;
+	gen_initpop_and_reflig(mypars, cpu_init_populations, cpu_ref_ori_angles, &myligand_reference, mygrid);
+
+
+	if (prepare_const_fields_for_gpu(&myligand_reference, mypars, cpu_ref_ori_angles, &KerConst) == 1)
+		return 1;
+
+/*
+#if defined (REPRO)
+	cpu_prng_seeds[0] = 1u;
+#else
+	cpu_prng_seeds[0] = genseed(0u);	
+#endif
+*/
+	memcopyBufferObjectToDevice(command_queue1,mem_DockparametersConst, 		&dockpars,            sizeof(dockpars));
+	memcopyBufferObjectToDevice(command_queue1,mem_KerConst, 	   		&KerConst,            sizeof(KerConst));
+	memcopyBufferObjectToDevice(command_queue1,mem_dockpars_fgrids, 		cpu_floatgrids,       size_floatgrids);
+ 	memcopyBufferObjectToDevice(command_queue1,mem_dockpars_conformations_current, 	cpu_init_populations, size_populations);
+	memcopyBufferObjectToDevice(command_queue1,mem_dockpars_prng_states,     	cpu_prng_seeds,       size_prng_seeds);
+
+
 		
 
 #ifdef ENABLE_KERNEL1
@@ -406,9 +437,7 @@ filled with clock() */
 
 		memcopyBufferObjectFromDevice(command_queue1,&mypars->num_of_energy_evals,mem_evals_performed,sizeof(unsigned int));
 		memcopyBufferObjectFromDevice(command_queue1,&mypars->num_of_generations,mem_generations_performed,sizeof(unsigned int));
-
 		memcopyBufferObjectFromDevice(command_queue1,cpu_final_populations,mem_dockpars_conformations_current,size_populations);
-
 		memcopyBufferObjectFromDevice(command_queue1,cpu_energies,mem_dockpars_energies_current,size_energies);
 
 

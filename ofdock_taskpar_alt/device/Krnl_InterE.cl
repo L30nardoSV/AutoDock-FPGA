@@ -12,11 +12,11 @@
 __kernel
 void Krnl_InterE(
              __global const float*           restrict GlobFgrids,
-	     __global       float*           restrict GlobPopulationCurrent,
-	     __global       float*           restrict GlobEnergyCurrent,
-	     __global       float*           restrict GlobPopulationNext,
-	     __global       float*           restrict GlobEnergyNext,
-             __global       unsigned int*    restrict GlobPRNG,
+	     //__global       float*           restrict GlobPopulationCurrent,
+	     //__global       float*           restrict GlobEnergyCurrent,
+	     //__global       float*           restrict GlobPopulationNext,
+	     //__global       float*           restrict GlobEnergyNext,
+             //__global       unsigned int*    restrict GlobPRNG,
 	     __global const kernelconstant*  restrict KerConst,
 	     __global const Dockparameters*  restrict DockConst)
 {
@@ -24,6 +24,11 @@ void Krnl_InterE(
 	__local float loc_coords_x[MAX_NUM_OF_ATOMS];
 	__local float loc_coords_y[MAX_NUM_OF_ATOMS];
 	__local float loc_coords_z[MAX_NUM_OF_ATOMS];
+
+	//float loc_coords_x[MAX_NUM_OF_ATOMS];
+	//float loc_coords_y[MAX_NUM_OF_ATOMS];
+	//float loc_coords_z[MAX_NUM_OF_ATOMS];
+
 
 	char active = 1;
 	char mode   = 0;

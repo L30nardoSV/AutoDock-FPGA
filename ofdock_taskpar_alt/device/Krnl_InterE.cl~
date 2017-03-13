@@ -12,18 +12,24 @@
 __kernel
 void Krnl_InterE(
              __global const float*           restrict GlobFgrids,
-	     __global       float*           restrict GlobPopulationCurrent,
-	     __global       float*           restrict GlobEnergyCurrent,
-	     __global       float*           restrict GlobPopulationNext,
-	     __global       float*           restrict GlobEnergyNext,
-             __global       unsigned int*    restrict GlobPRNG,
+	     //__global       float*           restrict GlobPopulationCurrent,
+	     //__global       float*           restrict GlobEnergyCurrent,
+	     //__global       float*           restrict GlobPopulationNext,
+	     //__global       float*           restrict GlobEnergyNext,
+             //__global       unsigned int*    restrict GlobPRNG,
 	     __global const kernelconstant*  restrict KerConst,
 	     __global const Dockparameters*  restrict DockConst)
 {
 
-	__local float loc_coords_x[MAX_NUM_OF_ATOMS];
-	__local float loc_coords_y[MAX_NUM_OF_ATOMS];
-	__local float loc_coords_z[MAX_NUM_OF_ATOMS];
+	//__local float loc_coords_x[MAX_NUM_OF_ATOMS];
+	//__local float loc_coords_y[MAX_NUM_OF_ATOMS];
+	//__local float loc_coords_z[MAX_NUM_OF_ATOMS];
+
+
+	float loc_coords_x[MAX_NUM_OF_ATOMS];
+	float loc_coords_y[MAX_NUM_OF_ATOMS];
+	float loc_coords_z[MAX_NUM_OF_ATOMS];
+
 
 	char active = 1;
 	char mode   = 0;
@@ -58,7 +64,7 @@ while(active) {
 		loc_coords_y[pipe_cnt] = read_channel_altera(chan_Conf2Intere_y);
 		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);
 		loc_coords_z[pipe_cnt] = read_channel_altera(chan_Conf2Intere_z);
-		mem_fence(CLK_CHANNEL_MEM_FENCE) | CLK_LOCAL_MEM_FENCE;
+		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);
 		active = read_channel_altera(chan_Conf2Intere_active);
 		mem_fence(CLK_CHANNEL_MEM_FENCE);
 		mode   = read_channel_altera(chan_Conf2Intere_mode);

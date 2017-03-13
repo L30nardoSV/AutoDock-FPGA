@@ -309,8 +309,16 @@ void make_resfiles(float* final_population,
 		//else
 			accurate_interE[i] = calc_interE_f(mygrid, &temp_docked, grids, 0.00, debug);	//calculating the intermolecular energy
 
+
+
+
+/*
 		if (i == 0)		//additional calculations for ADT-compatible result file, only in case of best conformation
 			calc_interE_peratom_f(mygrid, &temp_docked, grids, 0.00, &(best_result->interE_elec), best_result->peratom_vdw, best_result->peratom_elec, debug);
+*/
+
+
+
 
 		scale_ligand(&temp_docked, mygrid->spacing);
 		//if (i==127)
@@ -378,7 +386,7 @@ void make_resfiles(float* final_population,
 /*
 				fprintf(fp, "    %10.3f    |", final_population [i*GENOTYPE_LENGTH_IN_GLOBMEM+j]);
 */
-				fprintf(fp, "    %10.3f    |", final_population [i*GENOTYPE_LENGTH_IN_GLOBMEM+j]);
+				fprintf(fp, "    %10.3f    |", final_population [i*ACTUAL_GENOTYPE_LENGTH+j]);
 
 			fprintf(fp, " %21.3f |", accurate_intraE [i]);
 			fprintf(fp, " %21.3f |", accurate_interE [i]);

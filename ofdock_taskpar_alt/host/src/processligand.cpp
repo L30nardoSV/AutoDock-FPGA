@@ -1158,6 +1158,7 @@ void change_conform_f(Liganddata* myligand,
 		if (debug == 1)
 			printf("according to general rotation\n");
 
+
 		rotate(&(myligand->atom_idxyzq[atom_id][1]),
 		       genrot_movvec,
 		       refori_unitvec,

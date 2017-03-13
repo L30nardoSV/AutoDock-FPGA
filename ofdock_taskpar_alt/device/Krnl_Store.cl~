@@ -1,13 +1,15 @@
 __kernel
 void Krnl_Store(
-             __global const float*           restrict GlobFgrids,
-	     __global       float*           restrict GlobPopulationCurrent,
+             //__global const float*           restrict GlobFgrids,
+	     //__global       float*           restrict GlobPopulationCurrent,
 	     __global       float*           restrict GlobEnergyCurrent,
-	     __global       float*           restrict GlobPopulationNext,
-	     __global       float*           restrict GlobEnergyNext,
-             __global       unsigned int*    restrict GlobPRNG,
-	     __global const kernelconstant*  restrict KerConst,
-	     __global const Dockparameters*  restrict DockConst)
+	     //__global       float*           restrict GlobPopulationNext,
+	     __global       float*           restrict GlobEnergyNext
+		//,
+             //__global       unsigned int*    restrict GlobPRNG,
+	     //__global const kernelconstant*  restrict KerConst,
+	     //__global const Dockparameters*  restrict DockConst
+	     )
 {
 	// --------------------------------------------------------------
 	// Wait for enegies
@@ -53,6 +55,7 @@ while(active) {
 	if (active == 0) {printf("	%-20s: %s\n", "Krnl_Store", "disabled");}
 
 	switch (mode) {
+/*
 		case 0:	write_channel_altera(chan_Store2GA_ack, 1);	// Signal INI, GG or LS finished 
 		break;
 		case 1:	GlobEnergyCurrent[cnt] = InterE + IntraE;	// INI: Init energy calculation of pop
@@ -64,6 +67,9 @@ while(active) {
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 			write_channel_altera(chan_Store2GA_LSenergy, LSenergy);
 		break;
+*/
+
+
 		case 4:							// Krnl_GA has finished execution!
 		break;
 	}

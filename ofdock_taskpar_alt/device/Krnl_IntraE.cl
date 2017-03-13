@@ -3,12 +3,12 @@
 // --------------------------------------------------------------------------
 __kernel
 void Krnl_IntraE(
-             __global const float*           restrict GlobFgrids,
-	     __global       float*           restrict GlobPopulationCurrent,
-	     __global       float*           restrict GlobEnergyCurrent,
-	     __global       float*           restrict GlobPopulationNext,
-	     __global       float*           restrict GlobEnergyNext,
-             __global       unsigned int*    restrict GlobPRNG,
+             //__global const float*           restrict GlobFgrids,
+	     //__global       float*           restrict GlobPopulationCurrent,
+	     //__global       float*           restrict GlobEnergyCurrent,
+	     //__global       float*           restrict GlobPopulationNext,
+	     //__global       float*           restrict GlobEnergyNext,
+             //__global       unsigned int*    restrict GlobPRNG,
 	     __global const kernelconstant*  restrict KerConst,
 	     __global const Dockparameters*  restrict DockConst)
 {

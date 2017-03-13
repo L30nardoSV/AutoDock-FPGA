@@ -5,7 +5,7 @@
 // --------------------------------------------------------------------------
 __kernel
 void Krnl_Conform(
-             __global const float*           restrict GlobFgrids,
+             //__global const float*           restrict GlobFgrids,
 	     __global       float*           restrict GlobPopulationCurrent,
 	     __global       float*           restrict GlobEnergyCurrent,
 	     __global       float*           restrict GlobPopulationNext,
@@ -151,7 +151,7 @@ while(active) {
 				quatrot_temp_y = quatrot_left_y;
 				quatrot_temp_z = quatrot_left_z;
 
-				// L30nardoSV: taking the first one
+				// L30nardoSV: taking the first element of ref_orientation_quats_const member
 				quatrot_left_q = quatrot_temp_q*KerConst->ref_orientation_quats_const[0]-
 						 quatrot_temp_x*KerConst->ref_orientation_quats_const[1]-
 						 quatrot_temp_y*KerConst->ref_orientation_quats_const[2]-
