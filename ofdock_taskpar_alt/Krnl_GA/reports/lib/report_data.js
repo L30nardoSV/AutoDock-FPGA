@@ -2058,7 +2058,7 @@ var loopsJSON={
         [
           {
             "filename":"Krnl_IntraE.cl"
-            , "line":38
+            , "line":40
             , "level":0
           }
         ]
@@ -2085,7 +2085,7 @@ var loopsJSON={
         [
           {
             "filename":"Krnl_IntraE.cl"
-            , "line":44
+            , "line":46
             , "level":1
           }
         ]
@@ -2094,114 +2094,16 @@ var loopsJSON={
     , {
       "name":"Block117"
       , "data":
-      ["Yes", "17", "II"]
+      ["Yes", "1", "n/a"]
       , "debug":
       [
         [
           {
             "filename":"Krnl_IntraE.cl"
-            , "line":69
+            , "line":75
             , "level":1
           }
         ]
-      ]
-      , "details":
-      [
-        "Data dependency"
-      ]
-      , "resources":
-      [
-        {
-          "name":"II bottleneck due to data dependency on variable(s):"
-          , "subinfos":
-          [
-            {
-              "info":
-              {
-                "name":"intraE"
-                , "debug":
-                [
-                  [
-                    {
-                      "filename":"Krnl_IntraE.cl"
-                      , "line":36
-                    }
-                  ]
-                ]
-              }
-            }
-          ]
-        }
-        , {
-          "name":"Largest critical path contributor(s):"
-          , "subinfos":
-          [
-            {
-              "info":
-              {
-                "name":"30%: Hardened Floating-Point Multiply-Add Operation"
-                , "debug":
-                [
-                  [
-                    {
-                      "filename":"Krnl_IntraE.cl"
-                      , "line":119
-                    }
-                  ]
-                ]
-              }
-            }
-            , {
-              "info":
-              {
-                "name":"23%: Hardened Floating-Point Add Operation"
-                , "debug":
-                [
-                  [
-                    {
-                      "filename":"Krnl_IntraE.cl"
-                      , "line":105
-                    }
-                  ]
-                ]
-              }
-            }
-            , {
-              "info":
-              {
-                "name":"23%: Hardened Floating-Point Sub Operation"
-                , "debug":
-                [
-                  [
-                    {
-                      "filename":"Krnl_IntraE.cl"
-                      , "line":108
-                    }
-                    , {
-                      "filename":"Krnl_IntraE.cl"
-                      , "line":110
-                    }
-                  ]
-                ]
-              }
-            }
-            , {
-              "info":
-              {
-                "name":"23%: Hardened Floating-Point Add Operation"
-                , "debug":
-                [
-                  [
-                    {
-                      "filename":"Krnl_IntraE.cl"
-                      , "line":113
-                    }
-                  ]
-                ]
-              }
-            }
-          ]
-        }
       ]
     }
     , {
@@ -6399,7 +6301,7 @@ var loopsJSON={
               , "details":
               {
                 "Width":"8 bits"
-                , "Depth":"2133"
+                , "Depth":"2128"
                 , "Stall-free":"No"
                 , "Start-Cycle":"2"
                 , "Latency":"1"
@@ -6458,7 +6360,7 @@ var loopsJSON={
               , "details":
               {
                 "Width":"32 bits"
-                , "Depth":"2136"
+                , "Depth":"2131"
                 , "Stall-free":"No"
                 , "Start-Cycle":"2"
                 , "Latency":"1"
@@ -8465,7 +8367,7 @@ var loopsJSON={
               , "details":
               {
                 "Width":"32 bits"
-                , "Depth":"388"
+                , "Depth":"393"
                 , "Stall-free":"No"
                 , "Start-Cycle":"1"
                 , "Latency":"1"
@@ -8480,7 +8382,7 @@ var loopsJSON={
               , "details":
               {
                 "Width":"8 bits"
-                , "Depth":"387"
+                , "Depth":"392"
                 , "Stall-free":"No"
                 , "Start-Cycle":"2"
                 , "Latency":"1"
@@ -8495,7 +8397,7 @@ var loopsJSON={
               , "details":
               {
                 "Width":"8 bits"
-                , "Depth":"386"
+                , "Depth":"391"
                 , "Stall-free":"No"
                 , "Start-Cycle":"3"
                 , "Latency":"1"
@@ -8510,7 +8412,7 @@ var loopsJSON={
               , "details":
               {
                 "Width":"32 bits"
-                , "Depth":"386"
+                , "Depth":"391"
                 , "Stall-free":"No"
                 , "Start-Cycle":"4"
                 , "Latency":"1"
@@ -8580,7 +8482,7 @@ var loopsJSON={
               , "id":494
               , "name":"Load"
               , "file":"4"
-              , "line":"44"
+              , "line":"46"
               , "details":
               {
                 "Width":"256 bits"
@@ -8596,7 +8498,7 @@ var loopsJSON={
               , "id":495
               , "name":"Load"
               , "file":"4"
-              , "line":"116"
+              , "line":"142"
               , "details":
               {
                 "Width":"32 bits"
@@ -8673,7 +8575,7 @@ var loopsJSON={
               , "id":498
               , "name":"Channel Read"
               , "file":"4"
-              , "line":"45"
+              , "line":"47"
               , "details":
               {
                 "Width":"32 bits"
@@ -8688,7 +8590,7 @@ var loopsJSON={
               , "id":499
               , "name":"Store"
               , "file":"4"
-              , "line":"45"
+              , "line":"47"
               , "details":
               {
                 "Width":"32 bits"
@@ -8703,7 +8605,7 @@ var loopsJSON={
               , "id":500
               , "name":"Channel Read"
               , "file":"4"
-              , "line":"47"
+              , "line":"49"
               , "details":
               {
                 "Width":"32 bits"
@@ -8718,7 +8620,7 @@ var loopsJSON={
               , "id":501
               , "name":"Store"
               , "file":"4"
-              , "line":"47"
+              , "line":"49"
               , "details":
               {
                 "Width":"32 bits"
@@ -8733,7 +8635,7 @@ var loopsJSON={
               , "id":502
               , "name":"Channel Read"
               , "file":"4"
-              , "line":"49"
+              , "line":"51"
               , "details":
               {
                 "Width":"32 bits"
@@ -8748,7 +8650,7 @@ var loopsJSON={
               , "id":503
               , "name":"Store"
               , "file":"4"
-              , "line":"49"
+              , "line":"51"
               , "details":
               {
                 "Width":"32 bits"
@@ -8763,7 +8665,7 @@ var loopsJSON={
               , "id":504
               , "name":"Channel Read"
               , "file":"4"
-              , "line":"51"
+              , "line":"53"
               , "details":
               {
                 "Width":"8 bits"
@@ -8778,7 +8680,7 @@ var loopsJSON={
               , "id":505
               , "name":"Channel Read"
               , "file":"4"
-              , "line":"53"
+              , "line":"55"
               , "details":
               {
                 "Width":"8 bits"
@@ -8793,7 +8695,7 @@ var loopsJSON={
               , "id":506
               , "name":"Channel Read"
               , "file":"4"
-              , "line":"55"
+              , "line":"57"
               , "details":
               {
                 "Width":"32 bits"
@@ -8808,7 +8710,7 @@ var loopsJSON={
               , "id":507
               , "name":"loop end"
               , "file":"4"
-              , "line":"44"
+              , "line":"46"
               , "details":
               {
                 "Start-Cycle":"22"
@@ -8848,7 +8750,7 @@ var loopsJSON={
               , "id":509
               , "name":"Store"
               , "file":"4"
-              , "line":"60"
+              , "line":"62"
               , "details":
               {
                 "Width":"256 bits"
@@ -8896,8 +8798,8 @@ var loopsJSON={
           , "name":"Block117"
           , "file":""
           , "line":"0"
-          , "II":17
-          , "LoopInfo":"Loop is pipelined with II of 17. See Optimization Report for more information."
+          , "II":1
+          , "LoopInfo":""
           , "hasFmaxBottlenecks":"No"
           , "hasSubloops":"No"
           , "isPipelined":"Yes"
@@ -8907,13 +8809,13 @@ var loopsJSON={
               , "id":512
               , "name":"Load"
               , "file":"4"
-              , "line":"71"
+              , "line":"77"
               , "details":
               {
                 "Width":"16 bits"
                 , "Type":"Burst-non-aligned"
                 , "Stall-free":"No"
-                , "Start-Cycle":"18"
+                , "Start-Cycle":"3"
                 , "Latency":"160"
               }
             }
@@ -8922,13 +8824,13 @@ var loopsJSON={
               , "id":513
               , "name":"Load"
               , "file":"4"
-              , "line":"74"
+              , "line":"80"
               , "details":
               {
                 "Width":"32 bits"
                 , "Type":"Pipelined"
                 , "Stall-free":"Yes"
-                , "Start-Cycle":"180"
+                , "Start-Cycle":"165"
                 , "Latency":"5"
                 , "Additional Info":" Part of a stall-free cluster."
               }
@@ -8938,13 +8840,13 @@ var loopsJSON={
               , "id":514
               , "name":"Load"
               , "file":"4"
-              , "line":"74"
+              , "line":"80"
               , "details":
               {
                 "Width":"32 bits"
                 , "Type":"Pipelined"
                 , "Stall-free":"Yes"
-                , "Start-Cycle":"180"
+                , "Start-Cycle":"165"
                 , "Latency":"5"
                 , "Additional Info":" Part of a stall-free cluster."
               }
@@ -8954,13 +8856,13 @@ var loopsJSON={
               , "id":515
               , "name":"Load"
               , "file":"4"
-              , "line":"75"
+              , "line":"81"
               , "details":
               {
                 "Width":"32 bits"
                 , "Type":"Pipelined"
                 , "Stall-free":"Yes"
-                , "Start-Cycle":"180"
+                , "Start-Cycle":"165"
                 , "Latency":"5"
                 , "Additional Info":" Part of a stall-free cluster."
               }
@@ -8970,13 +8872,13 @@ var loopsJSON={
               , "id":516
               , "name":"Load"
               , "file":"4"
-              , "line":"75"
+              , "line":"81"
               , "details":
               {
                 "Width":"32 bits"
                 , "Type":"Pipelined"
                 , "Stall-free":"Yes"
-                , "Start-Cycle":"180"
+                , "Start-Cycle":"165"
                 , "Latency":"5"
                 , "Additional Info":" Part of a stall-free cluster."
               }
@@ -8986,13 +8888,13 @@ var loopsJSON={
               , "id":517
               , "name":"Load"
               , "file":"4"
-              , "line":"76"
+              , "line":"82"
               , "details":
               {
                 "Width":"32 bits"
                 , "Type":"Pipelined"
                 , "Stall-free":"Yes"
-                , "Start-Cycle":"187"
+                , "Start-Cycle":"172"
                 , "Latency":"5"
                 , "Additional Info":" Part of a stall-free cluster."
               }
@@ -9002,13 +8904,13 @@ var loopsJSON={
               , "id":518
               , "name":"Load"
               , "file":"4"
-              , "line":"76"
+              , "line":"82"
               , "details":
               {
                 "Width":"32 bits"
                 , "Type":"Pipelined"
                 , "Stall-free":"Yes"
-                , "Start-Cycle":"187"
+                , "Start-Cycle":"172"
                 , "Latency":"5"
                 , "Additional Info":" Part of a stall-free cluster."
               }
@@ -9018,13 +8920,13 @@ var loopsJSON={
               , "id":519
               , "name":"Load"
               , "file":"4"
-              , "line":"101"
+              , "line":"107"
               , "details":
               {
                 "Width":"8 bits"
                 , "Type":"Burst-coalesced"
                 , "Stall-free":"No"
-                , "Start-Cycle":"284"
+                , "Start-Cycle":"269"
                 , "Latency":"160"
               }
             }
@@ -9033,13 +8935,13 @@ var loopsJSON={
               , "id":520
               , "name":"Load"
               , "file":"4"
-              , "line":"107"
+              , "line":"116"
               , "details":
               {
                 "Width":"8 bits"
                 , "Type":"Burst-coalesced"
                 , "Stall-free":"No"
-                , "Start-Cycle":"449"
+                , "Start-Cycle":"434"
                 , "Latency":"160"
               }
             }
@@ -9048,13 +8950,13 @@ var loopsJSON={
               , "id":521
               , "name":"Load"
               , "file":"4"
-              , "line":"102"
+              , "line":"108"
               , "details":
               {
                 "Width":"8 bits"
                 , "Type":"Burst-coalesced"
                 , "Stall-free":"No"
-                , "Start-Cycle":"284"
+                , "Start-Cycle":"269"
                 , "Latency":"160"
               }
             }
@@ -9063,13 +8965,13 @@ var loopsJSON={
               , "id":522
               , "name":"Load"
               , "file":"4"
-              , "line":"113"
+              , "line":"133"
               , "details":
               {
                 "Width":"32 bits"
                 , "Type":"Burst-coalesced"
                 , "Stall-free":"No"
-                , "Start-Cycle":"284"
+                , "Start-Cycle":"269"
                 , "Latency":"160"
               }
             }
@@ -9078,13 +8980,13 @@ var loopsJSON={
               , "id":523
               , "name":"Load"
               , "file":"4"
-              , "line":"113"
+              , "line":"133"
               , "details":
               {
                 "Width":"32 bits"
                 , "Type":"Burst-coalesced"
                 , "Stall-free":"No"
-                , "Start-Cycle":"284"
+                , "Start-Cycle":"269"
                 , "Latency":"160"
               }
             }
@@ -9093,13 +8995,13 @@ var loopsJSON={
               , "id":524
               , "name":"Load"
               , "file":"4"
-              , "line":"105"
+              , "line":"114"
               , "details":
               {
                 "Width":"32 bits"
                 , "Type":"Burst-coalesced"
                 , "Stall-free":"No"
-                , "Start-Cycle":"449"
+                , "Start-Cycle":"434"
                 , "Latency":"160"
               }
             }
@@ -9108,13 +9010,13 @@ var loopsJSON={
               , "id":525
               , "name":"Load"
               , "file":"4"
-              , "line":"108"
+              , "line":"120"
               , "details":
               {
                 "Width":"32 bits"
                 , "Type":"Burst-coalesced"
                 , "Stall-free":"No"
-                , "Start-Cycle":"449"
+                , "Start-Cycle":"434"
                 , "Latency":"160"
               }
             }
@@ -9123,13 +9025,13 @@ var loopsJSON={
               , "id":526
               , "name":"Load"
               , "file":"4"
-              , "line":"116"
+              , "line":"142"
               , "details":
               {
                 "Width":"32 bits"
                 , "Type":"Burst-coalesced"
                 , "Stall-free":"No"
-                , "Start-Cycle":"449"
+                , "Start-Cycle":"434"
                 , "Latency":"160"
               }
             }
@@ -9138,13 +9040,13 @@ var loopsJSON={
               , "id":527
               , "name":"Load"
               , "file":"4"
-              , "line":"118"
+              , "line":"144"
               , "details":
               {
                 "Width":"32 bits"
                 , "Type":"Burst-coalesced"
                 , "Stall-free":"No"
-                , "Start-Cycle":"449"
+                , "Start-Cycle":"434"
                 , "Latency":"160"
               }
             }
@@ -9153,13 +9055,13 @@ var loopsJSON={
               , "id":528
               , "name":"Load"
               , "file":"4"
-              , "line":"117"
+              , "line":"143"
               , "details":
               {
                 "Width":"32 bits"
                 , "Type":"Burst-coalesced"
                 , "Stall-free":"No"
-                , "Start-Cycle":"449"
+                , "Start-Cycle":"434"
                 , "Latency":"160"
               }
             }
@@ -9168,13 +9070,13 @@ var loopsJSON={
               , "id":529
               , "name":"Load"
               , "file":"4"
-              , "line":"117"
+              , "line":"143"
               , "details":
               {
                 "Width":"32 bits"
                 , "Type":"Burst-coalesced"
                 , "Stall-free":"No"
-                , "Start-Cycle":"449"
+                , "Start-Cycle":"434"
                 , "Latency":"160"
               }
             }
@@ -9183,10 +9085,10 @@ var loopsJSON={
               , "id":530
               , "name":"loop end"
               , "file":"4"
-              , "line":"69"
+              , "line":"75"
               , "details":
               {
-                "Start-Cycle":"662"
+                "Start-Cycle":"652"
                 , "Latency":"1"
                 , "Additional Info":"Exit from a basic block. Control flow branches at this node to one or more merge nodes. There is no control branching between merge and branch node for the same basic block."
               }
@@ -9208,7 +9110,7 @@ var loopsJSON={
           ]
           , "details":
           {
-            "Latency":"663"
+            "Latency":"653"
           }
         }
         , {
@@ -9228,7 +9130,7 @@ var loopsJSON={
               , "id":532
               , "name":"Channel Write"
               , "file":"4"
-              , "line":"128"
+              , "line":"157"
               , "details":
               {
                 "Width":"32 bits"
@@ -9243,7 +9145,7 @@ var loopsJSON={
               , "id":534
               , "name":"Channel Write"
               , "file":"4"
-              , "line":"130"
+              , "line":"159"
               , "details":
               {
                 "Width":"8 bits"
@@ -9258,7 +9160,7 @@ var loopsJSON={
               , "id":536
               , "name":"Channel Write"
               , "file":"4"
-              , "line":"132"
+              , "line":"161"
               , "details":
               {
                 "Width":"8 bits"
@@ -9273,7 +9175,7 @@ var loopsJSON={
               , "id":538
               , "name":"Channel Write"
               , "file":"4"
-              , "line":"134"
+              , "line":"163"
               , "details":
               {
                 "Width":"32 bits"
@@ -9288,7 +9190,7 @@ var loopsJSON={
               , "id":540
               , "name":"end"
               , "file":"4"
-              , "line":"38"
+              , "line":"40"
               , "details":
               {
                 "Start-Cycle":"5"
@@ -9433,7 +9335,7 @@ var loopsJSON={
               , "details":
               {
                 "Width":"32 bits"
-                , "Depth":"388"
+                , "Depth":"393"
                 , "Stall-free":"No"
                 , "Start-Cycle":"2"
                 , "Latency":"0"
@@ -9463,7 +9365,7 @@ var loopsJSON={
               , "details":
               {
                 "Width":"8 bits"
-                , "Depth":"387"
+                , "Depth":"392"
                 , "Stall-free":"No"
                 , "Start-Cycle":"2"
                 , "Latency":"0"
@@ -9493,7 +9395,7 @@ var loopsJSON={
               , "details":
               {
                 "Width":"8 bits"
-                , "Depth":"386"
+                , "Depth":"391"
                 , "Stall-free":"No"
                 , "Start-Cycle":"2"
                 , "Latency":"1"
@@ -9523,7 +9425,7 @@ var loopsJSON={
               , "details":
               {
                 "Width":"32 bits"
-                , "Depth":"386"
+                , "Depth":"391"
                 , "Stall-free":"No"
                 , "Start-Cycle":"3"
                 , "Latency":"1"
@@ -9583,7 +9485,7 @@ var loopsJSON={
               , "details":
               {
                 "Width":"8 bits"
-                , "Depth":"2133"
+                , "Depth":"2128"
                 , "Stall-free":"No"
                 , "Start-Cycle":"14"
                 , "Latency":"1"
@@ -9628,7 +9530,7 @@ var loopsJSON={
               , "details":
               {
                 "Width":"32 bits"
-                , "Depth":"2136"
+                , "Depth":"2131"
                 , "Stall-free":"No"
                 , "Start-Cycle":"15"
                 , "Latency":"1"
@@ -9924,7 +9826,7 @@ var loopsJSON={
       , "details":
       {
         "Width":"8 bits"
-        , "Depth":"387"
+        , "Depth":"392"
       }
     }
     , {
@@ -9936,7 +9838,7 @@ var loopsJSON={
       , "details":
       {
         "Width":"32 bits"
-        , "Depth":"386"
+        , "Depth":"391"
       }
     }
     , {
@@ -9948,7 +9850,7 @@ var loopsJSON={
       , "details":
       {
         "Width":"32 bits"
-        , "Depth":"388"
+        , "Depth":"393"
       }
     }
     , {
@@ -9960,7 +9862,7 @@ var loopsJSON={
       , "details":
       {
         "Width":"8 bits"
-        , "Depth":"386"
+        , "Depth":"391"
       }
     }
     , {
@@ -10020,7 +9922,7 @@ var loopsJSON={
       , "details":
       {
         "Width":"32 bits"
-        , "Depth":"2136"
+        , "Depth":"2131"
       }
     }
     , {
@@ -10032,7 +9934,7 @@ var loopsJSON={
       , "details":
       {
         "Width":"8 bits"
-        , "Depth":"2133"
+        , "Depth":"2128"
       }
     }
   ]
@@ -11395,153 +11297,13 @@ var loopsJSON={
     }
     ,
     {
-      "from":251
-      , "to":248
+      "from":296
+      , "to":292
     }
     ,
     {
-      "from":124
-      , "to":112
-    }
-    ,
-    {
-      "from":184
-      , "to":179
-    }
-    ,
-    {
-      "from":288
-      , "to":285
-    }
-    ,
-    {
-      "from":240
-      , "to":242
-    }
-    ,
-    {
-      "from":164
-      , "to":161
-    }
-    ,
-    {
-      "from":254
-      , "to":252
-    }
-    ,
-    {
-      "from":248
-      , "to":249
-    }
-    ,
-    {
-      "from":224
-      , "to":225
-    }
-    ,
-    {
-      "from":239
-      , "to":233
-    }
-    ,
-    {
-      "from":291
-      , "to":289
-    }
-    ,
-    {
-      "from":184
-      , "to":180
-    }
-    ,
-    {
-      "from":274
-      , "to":275
-    }
-    ,
-    {
-      "from":270
-      , "to":266
-    }
-    ,
-    {
-      "from":244
-      , "to":240
-    }
-    ,
-    {
-      "from":180
-      , "to":182
-    }
-    ,
-    {
-      "from":124
-      , "to":113
-    }
-    ,
-    {
-      "from":211
-      , "to":209
-    }
-    ,
-    {
-      "from":239
-      , "to":235
-    }
-    ,
-    {
-      "from":261
-      , "to":255
-    }
-    ,
-    {
-      "from":270
-      , "to":267
-    }
-    ,
-    {
-      "from":105
-      , "to":106
-    }
-    ,
-    {
-      "from":239
-      , "to":234
-    }
-    ,
-    {
-      "from":179
-      , "to":181
-    }
-    ,
-    {
-      "from":160
-      , "to":158
-    }
-    ,
-    {
-      "from":169
-      , "to":166
-    }
-    ,
-    {
-      "from":261
-      , "to":256
-    }
-    ,
-    {
-      "from":266
-      , "to":268
-    }
-    ,
-    {
-      "from":244
-      , "to":241
-    }
-    ,
-    {
-      "from":133
-      , "to":134
+      "from":191
+      , "to":187
     }
     ,
     {
@@ -11550,53 +11312,63 @@ var loopsJSON={
     }
     ,
     {
-      "from":285
-      , "to":286
+      "from":133
+      , "to":134
     }
     ,
     {
-      "from":170
-      , "to":172
+      "from":247
+      , "to":245
     }
     ,
     {
-      "from":171
-      , "to":172
+      "from":292
+      , "to":293
     }
     ,
     {
-      "from":273
-      , "to":271
+      "from":262
+      , "to":263
     }
     ,
     {
-      "from":304
-      , "to":301
+      "from":169
+      , "to":165
     }
     ,
     {
-      "from":178
-      , "to":175
+      "from":300
+      , "to":297
     }
     ,
     {
-      "from":119
-      , "to":121
+      "from":111
+      , "to":109
     }
     ,
     {
-      "from":204
-      , "to":202
+      "from":191
+      , "to":186
     }
     ,
     {
-      "from":161
-      , "to":162
+      "from":108
+      , "to":105
     }
     ,
     {
-      "from":219
-      , "to":216
+      "from":157
+      , "to":154
+    }
+    ,
+    {
+      "from":228
+      , "to":229
+    }
+    ,
+    {
+      "from":104
+      , "to":102
     }
     ,
     {
@@ -11605,28 +11377,128 @@ var loopsJSON={
     }
     ,
     {
-      "from":223
-      , "to":220
+      "from":191
+      , "to":185
     }
     ,
     {
-      "from":261
-      , "to":257
+      "from":186
+      , "to":189
     }
     ,
     {
-      "from":154
-      , "to":155
+      "from":153
+      , "to":150
     }
     ,
     {
-      "from":284
-      , "to":281
+      "from":291
+      , "to":289
     }
     ,
     {
-      "from":145
-      , "to":141
+      "from":175
+      , "to":176
+    }
+    ,
+    {
+      "from":119
+      , "to":121
+    }
+    ,
+    {
+      "from":125
+      , "to":126
+    }
+    ,
+    {
+      "from":153
+      , "to":149
+    }
+    ,
+    {
+      "from":174
+      , "to":171
+    }
+    ,
+    {
+      "from":204
+      , "to":202
+    }
+    ,
+    {
+      "from":244
+      , "to":240
+    }
+    ,
+    {
+      "from":195
+      , "to":196
+    }
+    ,
+    {
+      "from":248
+      , "to":249
+    }
+    ,
+    {
+      "from":273
+      , "to":271
+    }
+    ,
+    {
+      "from":265
+      , "to":262
+    }
+    ,
+    {
+      "from":205
+      , "to":206
+    }
+    ,
+    {
+      "from":169
+      , "to":166
+    }
+    ,
+    {
+      "from":240
+      , "to":242
+    }
+    ,
+    {
+      "from":184
+      , "to":179
+    }
+    ,
+    {
+      "from":124
+      , "to":118
+    }
+    ,
+    {
+      "from":115
+      , "to":119
+    }
+    ,
+    {
+      "from":105
+      , "to":106
+    }
+    ,
+    {
+      "from":136
+      , "to":133
+    }
+    ,
+    {
+      "from":132
+      , "to":130
+    }
+    ,
+    {
+      "from":244
+      , "to":241
     }
     ,
     {
@@ -11635,8 +11507,38 @@ var loopsJSON={
     }
     ,
     {
+      "from":141
+      , "to":143
+    }
+    ,
+    {
+      "from":142
+      , "to":143
+    }
+    ,
+    {
+      "from":261
+      , "to":258
+    }
+    ,
+    {
+      "from":112
+      , "to":117
+    }
+    ,
+    {
       "from":145
       , "to":142
+    }
+    ,
+    {
+      "from":239
+      , "to":232
+    }
+    ,
+    {
+      "from":154
+      , "to":155
     }
     ,
     {
@@ -11660,38 +11562,18 @@ var loopsJSON={
     }
     ,
     {
-      "from":239
-      , "to":232
+      "from":284
+      , "to":281
+    }
+    ,
+    {
+      "from":145
+      , "to":141
     }
     ,
     {
       "from":261
-      , "to":258
-    }
-    ,
-    {
-      "from":227
-      , "to":224
-    }
-    ,
-    {
-      "from":141
-      , "to":143
-    }
-    ,
-    {
-      "from":142
-      , "to":143
-    }
-    ,
-    {
-      "from":115
-      , "to":119
-    }
-    ,
-    {
-      "from":132
-      , "to":130
+      , "to":257
     }
     ,
     {
@@ -11700,153 +11582,28 @@ var loopsJSON={
     }
     ,
     {
-      "from":216
-      , "to":217
+      "from":161
+      , "to":162
     }
     ,
     {
-      "from":198
-      , "to":195
+      "from":160
+      , "to":158
     }
     ,
     {
-      "from":205
-      , "to":206
+      "from":261
+      , "to":256
     }
     ,
     {
-      "from":124
-      , "to":118
+      "from":239
+      , "to":236
     }
     ,
     {
-      "from":128
-      , "to":125
-    }
-    ,
-    {
-      "from":153
-      , "to":149
-    }
-    ,
-    {
-      "from":191
-      , "to":185
-    }
-    ,
-    {
-      "from":280
-      , "to":278
-    }
-    ,
-    {
-      "from":265
-      , "to":262
-    }
-    ,
-    {
-      "from":195
-      , "to":196
-    }
-    ,
-    {
-      "from":104
-      , "to":102
-    }
-    ,
-    {
-      "from":112
-      , "to":117
-    }
-    ,
-    {
-      "from":153
-      , "to":150
-    }
-    ,
-    {
-      "from":157
-      , "to":154
-    }
-    ,
-    {
-      "from":231
-      , "to":228
-    }
-    ,
-    {
-      "from":149
-      , "to":151
-    }
-    ,
-    {
-      "from":150
-      , "to":151
-    }
-    ,
-    {
-      "from":194
-      , "to":192
-    }
-    ,
-    {
-      "from":247
-      , "to":245
-    }
-    ,
-    {
-      "from":262
-      , "to":263
-    }
-    ,
-    {
-      "from":220
-      , "to":221
-    }
-    ,
-    {
-      "from":208
-      , "to":205
-    }
-    ,
-    {
-      "from":191
-      , "to":186
-    }
-    ,
-    {
-      "from":165
-      , "to":167
-    }
-    ,
-    {
-      "from":166
-      , "to":167
-    }
-    ,
-    {
-      "from":136
-      , "to":133
-    }
-    ,
-    {
-      "from":212
-      , "to":213
-    }
-    ,
-    {
-      "from":201
-      , "to":199
-    }
-    ,
-    {
-      "from":191
-      , "to":187
-    }
-    ,
-    {
-      "from":296
-      , "to":292
+      "from":285
+      , "to":286
     }
     ,
     {
@@ -11855,8 +11612,118 @@ var loopsJSON={
     }
     ,
     {
+      "from":170
+      , "to":172
+    }
+    ,
+    {
+      "from":171
+      , "to":172
+    }
+    ,
+    {
+      "from":208
+      , "to":205
+    }
+    ,
+    {
+      "from":179
+      , "to":181
+    }
+    ,
+    {
+      "from":266
+      , "to":268
+    }
+    ,
+    {
+      "from":270
+      , "to":267
+    }
+    ,
+    {
+      "from":270
+      , "to":266
+    }
+    ,
+    {
+      "from":219
+      , "to":216
+    }
+    ,
+    {
+      "from":254
+      , "to":252
+    }
+    ,
+    {
+      "from":124
+      , "to":115
+    }
+    ,
+    {
+      "from":164
+      , "to":161
+    }
+    ,
+    {
+      "from":140
+      , "to":137
+    }
+    ,
+    {
+      "from":261
+      , "to":255
+    }
+    ,
+    {
+      "from":211
+      , "to":209
+    }
+    ,
+    {
+      "from":227
+      , "to":224
+    }
+    ,
+    {
+      "from":178
+      , "to":175
+    }
+    ,
+    {
+      "from":304
+      , "to":301
+    }
+    ,
+    {
+      "from":288
+      , "to":285
+    }
+    ,
+    {
       "from":277
       , "to":274
+    }
+    ,
+    {
+      "from":201
+      , "to":199
+    }
+    ,
+    {
+      "from":184
+      , "to":180
+    }
+    ,
+    {
+      "from":223
+      , "to":220
+    }
+    ,
+    {
+      "from":274
+      , "to":275
     }
     ,
     {
@@ -11880,83 +11747,18 @@ var loopsJSON={
     }
     ,
     {
-      "from":175
-      , "to":176
-    }
-    ,
-    {
       "from":239
-      , "to":236
+      , "to":233
     }
     ,
     {
-      "from":174
-      , "to":171
+      "from":128
+      , "to":125
     }
     ,
     {
-      "from":125
-      , "to":126
-    }
-    ,
-    {
-      "from":186
-      , "to":189
-    }
-    ,
-    {
-      "from":174
-      , "to":170
-    }
-    ,
-    {
-      "from":104
-      , "to":101
-    }
-    ,
-    {
-      "from":228
-      , "to":229
-    }
-    ,
-    {
-      "from":300
-      , "to":297
-    }
-    ,
-    {
-      "from":185
-      , "to":188
-    }
-    ,
-    {
-      "from":124
-      , "to":115
-    }
-    ,
-    {
-      "from":140
-      , "to":137
-    }
-    ,
-    {
-      "from":292
-      , "to":293
-    }
-    ,
-    {
-      "from":108
-      , "to":105
-    }
-    ,
-    {
-      "from":169
-      , "to":165
-    }
-    ,
-    {
-      "from":111
-      , "to":109
+      "from":251
+      , "to":248
     }
     ,
     {
@@ -11965,223 +11767,498 @@ var loopsJSON={
     }
     ,
     {
-      "from":131
-      , "to":132
+      "from":216
+      , "to":217
     }
     ,
     {
-      "from":127
-      , "to":132
+      "from":124
+      , "to":112
     }
     ,
     {
-      "from":38
-      , "to":38
+      "from":220
+      , "to":221
     }
     ,
     {
-      "from":37
-      , "to":38
+      "from":198
+      , "to":195
+    }
+    ,
+    {
+      "from":165
+      , "to":167
+    }
+    ,
+    {
+      "from":166
+      , "to":167
     }
     ,
     {
       "from":212
-      , "to":214
+      , "to":213
     }
     ,
     {
-      "from":213
-      , "to":214
+      "from":239
+      , "to":234
     }
     ,
     {
-      "from":146
-      , "to":147
+      "from":104
+      , "to":101
     }
     ,
     {
-      "from":303
-      , "to":100
+      "from":174
+      , "to":170
     }
     ,
     {
-      "from":207
-      , "to":208
+      "from":180
+      , "to":182
     }
     ,
     {
-      "from":203
-      , "to":208
+      "from":280
+      , "to":278
     }
     ,
     {
-      "from":176
-      , "to":177
+      "from":185
+      , "to":188
     }
     ,
     {
-      "from":218
-      , "to":219
+      "from":194
+      , "to":192
     }
     ,
     {
-      "from":52
-      , "to":219
+      "from":239
+      , "to":235
     }
     ,
     {
-      "from":177
-      , "to":178
+      "from":149
+      , "to":151
     }
     ,
     {
-      "from":159
-      , "to":178
+      "from":150
+      , "to":151
     }
     ,
     {
-      "from":286
-      , "to":287
+      "from":124
+      , "to":113
     }
     ,
     {
-      "from":67
-      , "to":247
+      "from":231
+      , "to":228
     }
     ,
     {
-      "from":301
-      , "to":303
+      "from":224
+      , "to":225
     }
     ,
     {
-      "from":195
-      , "to":197
+      "from":167
+      , "to":168
     }
     ,
     {
-      "from":196
-      , "to":197
+      "from":299
+      , "to":6
     }
     ,
     {
-      "from":155
-      , "to":156
+      "from":5
+      , "to":6
     }
     ,
     {
-      "from":25
-      , "to":25
+      "from":84
+      , "to":84
     }
     ,
     {
-      "from":147
-      , "to":25
+      "from":82
+      , "to":84
     }
     ,
     {
-      "from":21
-      , "to":21
+      "from":47
+      , "to":201
     }
     ,
     {
-      "from":139
-      , "to":21
+      "from":129
+      , "to":131
     }
     ,
     {
-      "from":15
-      , "to":52
+      "from":130
+      , "to":131
     }
     ,
     {
-      "from":45
-      , "to":46
-    }
-    ,
-    {
-      "from":90
-      , "to":94
-    }
-    ,
-    {
-      "from":241
-      , "to":243
-    }
-    ,
-    {
-      "from":240
-      , "to":243
-    }
-    ,
-    {
-      "from":242
-      , "to":243
-    }
-    ,
-    {
-      "from":199
-      , "to":200
-    }
-    ,
-    {
-      "from":86
-      , "to":86
-    }
-    ,
-    {
-      "from":276
-      , "to":86
-    }
-    ,
-    {
-      "from":245
-      , "to":246
-    }
-    ,
-    {
-      "from":36
-      , "to":36
-    }
-    ,
-    {
-      "from":183
-      , "to":36
-    }
-    ,
-    {
-      "from":290
-      , "to":291
+      "from":287
+      , "to":288
     }
     ,
     {
       "from":94
-      , "to":291
+      , "to":288
+    }
+    ,
+    {
+      "from":271
+      , "to":272
+    }
+    ,
+    {
+      "from":131
+      , "to":18
+    }
+    ,
+    {
+      "from":159
+      , "to":31
+    }
+    ,
+    {
+      "from":279
+      , "to":277
+    }
+    ,
+    {
+      "from":272
+      , "to":277
+    }
+    ,
+    {
+      "from":214
+      , "to":227
+    }
+    ,
+    {
+      "from":289
+      , "to":290
+    }
+    ,
+    {
+      "from":217
+      , "to":218
+    }
+    ,
+    {
+      "from":210
+      , "to":211
+    }
+    ,
+    {
+      "from":139
+      , "to":211
+    }
+    ,
+    {
+      "from":59
+      , "to":59
+    }
+    ,
+    {
+      "from":226
+      , "to":59
+    }
+    ,
+    {
+      "from":70
+      , "to":70
+    }
+    ,
+    {
+      "from":250
+      , "to":70
+    }
+    ,
+    {
+      "from":72
+      , "to":72
+    }
+    ,
+    {
+      "from":71
+      , "to":72
+    }
+    ,
+    {
+      "from":80
+      , "to":270
+    }
+    ,
+    {
+      "from":23
+      , "to":23
+    }
+    ,
+    {
+      "from":144
+      , "to":23
+    }
+    ,
+    {
+      "from":229
+      , "to":230
+    }
+    ,
+    {
+      "from":295
+      , "to":296
+    }
+    ,
+    {
+      "from":123
+      , "to":296
+    }
+    ,
+    {
+      "from":264
+      , "to":265
+    }
+    ,
+    {
+      "from":74
+      , "to":265
+    }
+    ,
+    {
+      "from":6
+      , "to":7
+    }
+    ,
+    {
+      "from":163
+      , "to":160
+    }
+    ,
+    {
+      "from":218
+      , "to":55
+    }
+    ,
+    {
+      "from":162
+      , "to":163
+    }
+    ,
+    {
+      "from":297
+      , "to":299
+    }
+    ,
+    {
+      "from":65
+      , "to":66
+    }
+    ,
+    {
+      "from":177
+      , "to":184
+    }
+    ,
+    {
+      "from":173
+      , "to":184
+    }
+    ,
+    {
+      "from":168
+      , "to":184
     }
     ,
     {
       "from":64
-      , "to":64
+      , "to":244
     }
     ,
     {
-      "from":62
-      , "to":64
+      "from":168
+      , "to":169
     }
     ,
     {
-      "from":135
-      , "to":136
+      "from":31
+      , "to":169
     }
     ,
     {
-      "from":18
-      , "to":136
+      "from":72
+      , "to":254
     }
     ,
     {
-      "from":86
-      , "to":87
+      "from":295
+      , "to":300
+    }
+    ,
+    {
+      "from":253
+      , "to":251
+    }
+    ,
+    {
+      "from":246
+      , "to":251
+    }
+    ,
+    {
+      "from":274
+      , "to":276
+    }
+    ,
+    {
+      "from":275
+      , "to":276
+    }
+    ,
+    {
+      "from":81
+      , "to":82
+    }
+    ,
+    {
+      "from":107
+      , "to":108
+    }
+    ,
+    {
+      "from":7
+      , "to":108
+    }
+    ,
+    {
+      "from":15
+      , "to":140
+    }
+    ,
+    {
+      "from":158
+      , "to":159
+    }
+    ,
+    {
+      "from":209
+      , "to":210
+    }
+    ,
+    {
+      "from":248
+      , "to":250
+    }
+    ,
+    {
+      "from":249
+      , "to":250
+    }
+    ,
+    {
+      "from":84
+      , "to":273
+    }
+    ,
+    {
+      "from":59
+      , "to":239
+    }
+    ,
+    {
+      "from":74
+      , "to":261
+    }
+    ,
+    {
+      "from":127
+      , "to":128
+    }
+    ,
+    {
+      "from":10
+      , "to":128
+    }
+    ,
+    {
+      "from":134
+      , "to":135
+    }
+    ,
+    {
+      "from":278
+      , "to":279
+    }
+    ,
+    {
+      "from":42
+      , "to":42
+    }
+    ,
+    {
+      "from":41
+      , "to":42
+    }
+    ,
+    {
+      "from":237
+      , "to":238
+    }
+    ,
+    {
+      "from":233
+      , "to":238
+    }
+    ,
+    {
+      "from":234
+      , "to":238
+    }
+    ,
+    {
+      "from":235
+      , "to":238
+    }
+    ,
+    {
+      "from":236
+      , "to":238
+    }
+    ,
+    {
+      "from":232
+      , "to":238
+    }
+    ,
+    {
+      "from":61
+      , "to":62
+    }
+    ,
+    {
+      "from":149
+      , "to":152
+    }
+    ,
+    {
+      "from":150
+      , "to":152
+    }
+    ,
+    {
+      "from":151
+      , "to":152
     }
     ,
     {
@@ -12255,6 +12332,261 @@ var loopsJSON={
     }
     ,
     {
+      "from":202
+      , "to":203
+    }
+    ,
+    {
+      "from":299
+      , "to":304
+    }
+    ,
+    {
+      "from":141
+      , "to":144
+    }
+    ,
+    {
+      "from":142
+      , "to":144
+    }
+    ,
+    {
+      "from":143
+      , "to":144
+    }
+    ,
+    {
+      "from":21
+      , "to":21
+    }
+    ,
+    {
+      "from":139
+      , "to":21
+    }
+    ,
+    {
+      "from":45
+      , "to":46
+    }
+    ,
+    {
+      "from":301
+      , "to":303
+    }
+    ,
+    {
+      "from":45
+      , "to":45
+    }
+    ,
+    {
+      "from":197
+      , "to":45
+    }
+    ,
+    {
+      "from":106
+      , "to":107
+    }
+    ,
+    {
+      "from":61
+      , "to":61
+    }
+    ,
+    {
+      "from":238
+      , "to":61
+    }
+    ,
+    {
+      "from":283
+      , "to":284
+    }
+    ,
+    {
+      "from":91
+      , "to":284
+    }
+    ,
+    {
+      "from":110
+      , "to":111
+    }
+    ,
+    {
+      "from":7
+      , "to":111
+    }
+    ,
+    {
+      "from":42
+      , "to":194
+    }
+    ,
+    {
+      "from":221
+      , "to":222
+    }
+    ,
+    {
+      "from":25
+      , "to":153
+    }
+    ,
+    {
+      "from":137
+      , "to":139
+    }
+    ,
+    {
+      "from":138
+      , "to":139
+    }
+    ,
+    {
+      "from":156
+      , "to":157
+    }
+    ,
+    {
+      "from":152
+      , "to":157
+    }
+    ,
+    {
+      "from":163
+      , "to":164
+    }
+    ,
+    {
+      "from":28
+      , "to":164
+    }
+    ,
+    {
+      "from":290
+      , "to":11
+    }
+    ,
+    {
+      "from":230
+      , "to":231
+    }
+    ,
+    {
+      "from":214
+      , "to":231
+    }
+    ,
+    {
+      "from":173
+      , "to":174
+    }
+    ,
+    {
+      "from":31
+      , "to":174
+    }
+    ,
+    {
+      "from":77
+      , "to":77
+    }
+    ,
+    {
+      "from":260
+      , "to":77
+    }
+    ,
+    {
+      "from":77
+      , "to":78
+    }
+    ,
+    {
+      "from":25
+      , "to":25
+    }
+    ,
+    {
+      "from":147
+      , "to":25
+    }
+    ,
+    {
+      "from":38
+      , "to":38
+    }
+    ,
+    {
+      "from":37
+      , "to":38
+    }
+    ,
+    {
+      "from":131
+      , "to":132
+    }
+    ,
+    {
+      "from":127
+      , "to":132
+    }
+    ,
+    {
+      "from":212
+      , "to":214
+    }
+    ,
+    {
+      "from":213
+      , "to":214
+    }
+    ,
+    {
+      "from":81
+      , "to":81
+    }
+    ,
+    {
+      "from":269
+      , "to":81
+    }
+    ,
+    {
+      "from":135
+      , "to":13
+    }
+    ,
+    {
+      "from":146
+      , "to":147
+    }
+    ,
+    {
+      "from":286
+      , "to":287
+    }
+    ,
+    {
+      "from":177
+      , "to":178
+    }
+    ,
+    {
+      "from":159
+      , "to":178
+    }
+    ,
+    {
+      "from":303
+      , "to":100
+    }
+    ,
+    {
       "from":101
       , "to":103
     }
@@ -12265,13 +12597,48 @@ var loopsJSON={
     }
     ,
     {
-      "from":65
-      , "to":65
+      "from":135
+      , "to":136
     }
     ,
     {
-      "from":243
-      , "to":65
+      "from":18
+      , "to":136
+    }
+    ,
+    {
+      "from":126
+      , "to":127
+    }
+    ,
+    {
+      "from":207
+      , "to":208
+    }
+    ,
+    {
+      "from":203
+      , "to":208
+    }
+    ,
+    {
+      "from":290
+      , "to":291
+    }
+    ,
+    {
+      "from":94
+      , "to":291
+    }
+    ,
+    {
+      "from":15
+      , "to":52
+    }
+    ,
+    {
+      "from":156
+      , "to":28
     }
     ,
     {
@@ -12285,8 +12652,53 @@ var loopsJSON={
     }
     ,
     {
-      "from":6
-      , "to":10
+      "from":199
+      , "to":200
+    }
+    ,
+    {
+      "from":23
+      , "to":148
+    }
+    ,
+    {
+      "from":241
+      , "to":243
+    }
+    ,
+    {
+      "from":240
+      , "to":243
+    }
+    ,
+    {
+      "from":242
+      , "to":243
+    }
+    ,
+    {
+      "from":86
+      , "to":86
+    }
+    ,
+    {
+      "from":276
+      , "to":86
+    }
+    ,
+    {
+      "from":195
+      , "to":197
+    }
+    ,
+    {
+      "from":196
+      , "to":197
+    }
+    ,
+    {
+      "from":176
+      , "to":177
     }
     ,
     {
@@ -12300,13 +12712,53 @@ var loopsJSON={
     }
     ,
     {
-      "from":88
-      , "to":280
+      "from":90
+      , "to":94
     }
     ,
     {
-      "from":10
-      , "to":15
+      "from":64
+      , "to":64
+    }
+    ,
+    {
+      "from":62
+      , "to":64
+    }
+    ,
+    {
+      "from":86
+      , "to":87
+    }
+    ,
+    {
+      "from":90
+      , "to":91
+    }
+    ,
+    {
+      "from":103
+      , "to":4
+    }
+    ,
+    {
+      "from":36
+      , "to":37
+    }
+    ,
+    {
+      "from":293
+      , "to":295
+    }
+    ,
+    {
+      "from":65
+      , "to":65
+    }
+    ,
+    {
+      "from":243
+      , "to":65
     }
     ,
     {
@@ -12320,28 +12772,48 @@ var loopsJSON={
     }
     ,
     {
-      "from":90
-      , "to":91
+      "from":155
+      , "to":156
     }
     ,
     {
-      "from":65
-      , "to":66
+      "from":245
+      , "to":246
     }
     ,
     {
-      "from":64
-      , "to":244
+      "from":36
+      , "to":36
     }
     ,
     {
-      "from":248
-      , "to":250
+      "from":183
+      , "to":36
     }
     ,
     {
-      "from":249
-      , "to":250
+      "from":303
+      , "to":5
+    }
+    ,
+    {
+      "from":4
+      , "to":5
+    }
+    ,
+    {
+      "from":263
+      , "to":264
+    }
+    ,
+    {
+      "from":88
+      , "to":280
+    }
+    ,
+    {
+      "from":226
+      , "to":74
     }
     ,
     {
@@ -12370,583 +12842,13 @@ var loopsJSON={
     }
     ,
     {
-      "from":72
-      , "to":254
-    }
-    ,
-    {
-      "from":134
-      , "to":135
-    }
-    ,
-    {
-      "from":237
-      , "to":238
-    }
-    ,
-    {
-      "from":233
-      , "to":238
-    }
-    ,
-    {
-      "from":234
-      , "to":238
-    }
-    ,
-    {
-      "from":235
-      , "to":238
-    }
-    ,
-    {
-      "from":236
-      , "to":238
-    }
-    ,
-    {
-      "from":232
-      , "to":238
-    }
-    ,
-    {
-      "from":263
-      , "to":264
-    }
-    ,
-    {
-      "from":36
-      , "to":37
-    }
-    ,
-    {
-      "from":81
-      , "to":82
-    }
-    ,
-    {
-      "from":59
-      , "to":239
-    }
-    ,
-    {
-      "from":299
-      , "to":304
-    }
-    ,
-    {
-      "from":103
-      , "to":4
-    }
-    ,
-    {
-      "from":177
-      , "to":184
-    }
-    ,
-    {
-      "from":173
-      , "to":184
-    }
-    ,
-    {
-      "from":168
-      , "to":184
-    }
-    ,
-    {
-      "from":127
-      , "to":128
-    }
-    ,
-    {
-      "from":10
-      , "to":128
-    }
-    ,
-    {
-      "from":141
-      , "to":144
-    }
-    ,
-    {
-      "from":142
-      , "to":144
-    }
-    ,
-    {
-      "from":143
-      , "to":144
-    }
-    ,
-    {
-      "from":264
-      , "to":265
-    }
-    ,
-    {
-      "from":74
-      , "to":265
-    }
-    ,
-    {
-      "from":137
-      , "to":139
-    }
-    ,
-    {
-      "from":138
-      , "to":139
-    }
-    ,
-    {
-      "from":110
-      , "to":111
-    }
-    ,
-    {
-      "from":7
-      , "to":111
-    }
-    ,
-    {
-      "from":107
-      , "to":108
-    }
-    ,
-    {
-      "from":7
-      , "to":108
-    }
-    ,
-    {
-      "from":209
-      , "to":210
-    }
-    ,
-    {
-      "from":61
-      , "to":62
-    }
-    ,
-    {
-      "from":253
-      , "to":251
-    }
-    ,
-    {
-      "from":246
-      , "to":251
-    }
-    ,
-    {
-      "from":303
-      , "to":5
-    }
-    ,
-    {
-      "from":4
-      , "to":5
-    }
-    ,
-    {
-      "from":25
-      , "to":153
-    }
-    ,
-    {
-      "from":42
-      , "to":42
-    }
-    ,
-    {
-      "from":41
-      , "to":42
-    }
-    ,
-    {
-      "from":23
-      , "to":148
-    }
-    ,
-    {
-      "from":202
-      , "to":203
-    }
-    ,
-    {
-      "from":77
-      , "to":78
-    }
-    ,
-    {
-      "from":283
-      , "to":284
-    }
-    ,
-    {
-      "from":91
-      , "to":284
-    }
-    ,
-    {
-      "from":290
-      , "to":11
-    }
-    ,
-    {
-      "from":106
-      , "to":107
-    }
-    ,
-    {
-      "from":156
-      , "to":157
-    }
-    ,
-    {
-      "from":152
-      , "to":157
-    }
-    ,
-    {
-      "from":126
-      , "to":127
-    }
-    ,
-    {
-      "from":163
-      , "to":164
-    }
-    ,
-    {
-      "from":28
-      , "to":164
-    }
-    ,
-    {
-      "from":45
-      , "to":45
-    }
-    ,
-    {
-      "from":197
-      , "to":45
-    }
-    ,
-    {
-      "from":156
-      , "to":28
-    }
-    ,
-    {
-      "from":74
-      , "to":261
-    }
-    ,
-    {
-      "from":77
-      , "to":77
-    }
-    ,
-    {
-      "from":260
-      , "to":77
-    }
-    ,
-    {
-      "from":274
-      , "to":276
-    }
-    ,
-    {
-      "from":275
-      , "to":276
-    }
-    ,
-    {
-      "from":61
-      , "to":61
-    }
-    ,
-    {
-      "from":238
-      , "to":61
-    }
-    ,
-    {
-      "from":149
-      , "to":152
-    }
-    ,
-    {
-      "from":150
-      , "to":152
-    }
-    ,
-    {
-      "from":151
-      , "to":152
-    }
-    ,
-    {
-      "from":230
-      , "to":231
-    }
-    ,
-    {
-      "from":214
-      , "to":231
-    }
-    ,
-    {
-      "from":135
-      , "to":13
-    }
-    ,
-    {
-      "from":15
-      , "to":140
-    }
-    ,
-    {
-      "from":168
-      , "to":169
-    }
-    ,
-    {
-      "from":31
-      , "to":169
-    }
-    ,
-    {
-      "from":295
-      , "to":300
-    }
-    ,
-    {
-      "from":173
-      , "to":174
-    }
-    ,
-    {
-      "from":31
-      , "to":174
-    }
-    ,
-    {
-      "from":299
-      , "to":6
-    }
-    ,
-    {
-      "from":5
-      , "to":6
-    }
-    ,
-    {
-      "from":214
-      , "to":227
-    }
-    ,
-    {
-      "from":159
-      , "to":31
-    }
-    ,
-    {
-      "from":271
-      , "to":272
-    }
-    ,
-    {
-      "from":6
-      , "to":7
-    }
-    ,
-    {
-      "from":221
-      , "to":222
-    }
-    ,
-    {
-      "from":42
-      , "to":194
-    }
-    ,
-    {
-      "from":279
-      , "to":277
-    }
-    ,
-    {
-      "from":272
-      , "to":277
-    }
-    ,
-    {
-      "from":167
-      , "to":168
-    }
-    ,
-    {
-      "from":158
-      , "to":159
-    }
-    ,
-    {
-      "from":129
-      , "to":131
-    }
-    ,
-    {
-      "from":130
-      , "to":131
-    }
-    ,
-    {
-      "from":162
-      , "to":163
-    }
-    ,
-    {
-      "from":72
-      , "to":72
-    }
-    ,
-    {
-      "from":71
-      , "to":72
-    }
-    ,
-    {
-      "from":131
-      , "to":18
-    }
-    ,
-    {
-      "from":80
-      , "to":270
-    }
-    ,
-    {
-      "from":217
-      , "to":218
-    }
-    ,
-    {
-      "from":278
-      , "to":279
-    }
-    ,
-    {
-      "from":289
-      , "to":290
-    }
-    ,
-    {
-      "from":297
-      , "to":299
-    }
-    ,
-    {
-      "from":287
-      , "to":288
-    }
-    ,
-    {
-      "from":94
-      , "to":288
-    }
-    ,
-    {
-      "from":210
-      , "to":211
-    }
-    ,
-    {
-      "from":139
-      , "to":211
-    }
-    ,
-    {
-      "from":218
-      , "to":55
-    }
-    ,
-    {
-      "from":21
-      , "to":145
-    }
-    ,
-    {
-      "from":47
-      , "to":201
-    }
-    ,
-    {
-      "from":23
-      , "to":23
-    }
-    ,
-    {
-      "from":144
-      , "to":23
-    }
-    ,
-    {
-      "from":84
-      , "to":273
-    }
-    ,
-    {
-      "from":295
-      , "to":296
-    }
-    ,
-    {
-      "from":123
-      , "to":296
-    }
-    ,
-    {
-      "from":226
-      , "to":74
-    }
-    ,
-    {
-      "from":107
-      , "to":12
-    }
-    ,
-    {
       "from":260
       , "to":90
     }
     ,
     {
-      "from":38
-      , "to":191
-    }
-    ,
-    {
-      "from":81
-      , "to":81
-    }
-    ,
-    {
-      "from":269
-      , "to":81
-    }
-    ,
-    {
-      "from":192
-      , "to":193
-    }
-    ,
-    {
-      "from":40
-      , "to":41
+      "from":6
+      , "to":10
     }
     ,
     {
@@ -12955,33 +12857,28 @@ var loopsJSON={
     }
     ,
     {
-      "from":40
-      , "to":40
+      "from":10
+      , "to":15
     }
     ,
     {
-      "from":190
-      , "to":40
-    }
-    ,
-    {
-      "from":47
-      , "to":47
-    }
-    ,
-    {
-      "from":46
-      , "to":47
-    }
-    ,
-    {
-      "from":229
-      , "to":230
+      "from":21
+      , "to":145
     }
     ,
     {
       "from":200
       , "to":204
+    }
+    ,
+    {
+      "from":107
+      , "to":12
+    }
+    ,
+    {
+      "from":192
+      , "to":193
     }
     ,
     {
@@ -13000,63 +12897,28 @@ var loopsJSON={
     }
     ,
     {
-      "from":293
-      , "to":295
+      "from":252
+      , "to":253
     }
     ,
     {
-      "from":206
-      , "to":207
+      "from":38
+      , "to":191
     }
     ,
     {
-      "from":109
-      , "to":110
+      "from":40
+      , "to":41
     }
     ,
     {
-      "from":163
-      , "to":160
+      "from":47
+      , "to":47
     }
     ,
     {
-      "from":88
-      , "to":88
-    }
-    ,
-    {
-      "from":87
-      , "to":88
-    }
-    ,
-    {
-      "from":59
-      , "to":59
-    }
-    ,
-    {
-      "from":226
-      , "to":59
-    }
-    ,
-    {
-      "from":222
-      , "to":223
-    }
-    ,
-    {
-      "from":55
-      , "to":223
-    }
-    ,
-    {
-      "from":70
-      , "to":70
-    }
-    ,
-    {
-      "from":250
-      , "to":70
+      "from":46
+      , "to":47
     }
     ,
     {
@@ -13067,61 +12929,6 @@ var loopsJSON={
     {
       "from":193
       , "to":198
-    }
-    ,
-    {
-      "from":172
-      , "to":173
-    }
-    ,
-    {
-      "from":252
-      , "to":253
-    }
-    ,
-    {
-      "from":182
-      , "to":183
-    }
-    ,
-    {
-      "from":180
-      , "to":183
-    }
-    ,
-    {
-      "from":181
-      , "to":183
-    }
-    ,
-    {
-      "from":93
-      , "to":93
-    }
-    ,
-    {
-      "from":91
-      , "to":93
-    }
-    ,
-    {
-      "from":84
-      , "to":84
-    }
-    ,
-    {
-      "from":82
-      , "to":84
-    }
-    ,
-    {
-      "from":52
-      , "to":215
-    }
-    ,
-    {
-      "from":70
-      , "to":71
     }
     ,
     {
@@ -13142,6 +12949,66 @@ var loopsJSON={
     {
       "from":188
       , "to":190
+    }
+    ,
+    {
+      "from":88
+      , "to":88
+    }
+    ,
+    {
+      "from":87
+      , "to":88
+    }
+    ,
+    {
+      "from":182
+      , "to":183
+    }
+    ,
+    {
+      "from":180
+      , "to":183
+    }
+    ,
+    {
+      "from":181
+      , "to":183
+    }
+    ,
+    {
+      "from":206
+      , "to":207
+    }
+    ,
+    {
+      "from":109
+      , "to":110
+    }
+    ,
+    {
+      "from":222
+      , "to":223
+    }
+    ,
+    {
+      "from":55
+      , "to":223
+    }
+    ,
+    {
+      "from":70
+      , "to":71
+    }
+    ,
+    {
+      "from":40
+      , "to":40
+    }
+    ,
+    {
+      "from":190
+      , "to":40
     }
     ,
     {
@@ -13175,38 +13042,38 @@ var loopsJSON={
     }
     ,
     {
-      "from":134
-      , "to":338
+      "from":52
+      , "to":215
     }
     ,
     {
-      "from":138
-      , "to":338
+      "from":93
+      , "to":93
     }
     ,
     {
-      "from":213
-      , "to":338
+      "from":91
+      , "to":93
     }
     ,
     {
-      "from":338
-      , "to":112
+      "from":218
+      , "to":219
     }
     ,
     {
-      "from":179
-      , "to":338
+      "from":52
+      , "to":219
     }
     ,
     {
-      "from":217
-      , "to":338
+      "from":67
+      , "to":247
     }
     ,
     {
-      "from":286
-      , "to":338
+      "from":172
+      , "to":173
     }
     ,
     {
@@ -13215,7 +13082,37 @@ var loopsJSON={
     }
     ,
     {
-      "from":118
+      "from":338
+      , "to":125
+    }
+    ,
+    {
+      "from":158
+      , "to":338
+    }
+    ,
+    {
+      "from":338
+      , "to":212
+    }
+    ,
+    {
+      "from":217
+      , "to":338
+    }
+    ,
+    {
+      "from":179
+      , "to":338
+    }
+    ,
+    {
+      "from":134
+      , "to":338
+    }
+    ,
+    {
+      "from":286
       , "to":338
     }
     ,
@@ -13226,52 +13123,57 @@ var loopsJSON={
     ,
     {
       "from":338
-      , "to":125
+      , "to":112
     }
     ,
     {
-      "from":338
-      , "to":161
+      "from":118
+      , "to":338
     }
     ,
     {
-      "from":202
+      "from":221
+      , "to":338
+    }
+    ,
+    {
+      "from":181
       , "to":338
     }
     ,
     {
       "from":338
-      , "to":149
+      , "to":133
     }
     ,
     {
-      "from":185
+      "from":213
       , "to":338
+    }
+    ,
+    {
+      "from":338
+      , "to":105
+    }
+    ,
+    {
+      "from":143
+      , "to":338
+    }
+    ,
+    {
+      "from":338
+      , "to":101
+    }
+    ,
+    {
+      "from":338
+      , "to":154
     }
     ,
     {
       "from":338
       , "to":216
-    }
-    ,
-    {
-      "from":225
-      , "to":338
-    }
-    ,
-    {
-      "from":146
-      , "to":338
-    }
-    ,
-    {
-      "from":338
-      , "to":220
-    }
-    ,
-    {
-      "from":338
-      , "to":141
     }
     ,
     {
@@ -13286,47 +13188,7 @@ var loopsJSON={
     ,
     {
       "from":338
-      , "to":150
-    }
-    ,
-    {
-      "from":338
-      , "to":154
-    }
-    ,
-    {
-      "from":338
-      , "to":228
-    }
-    ,
-    {
-      "from":113
-      , "to":338
-    }
-    ,
-    {
-      "from":338
       , "to":142
-    }
-    ,
-    {
-      "from":338
-      , "to":101
-    }
-    ,
-    {
-      "from":151
-      , "to":338
-    }
-    ,
-    {
-      "from":232
-      , "to":338
-    }
-    ,
-    {
-      "from":338
-      , "to":224
     }
     ,
     {
@@ -13335,12 +13197,7 @@ var loopsJSON={
     }
     ,
     {
-      "from":143
-      , "to":338
-    }
-    ,
-    {
-      "from":158
+      "from":146
       , "to":338
     }
     ,
@@ -13350,28 +13207,73 @@ var loopsJSON={
     }
     ,
     {
-      "from":181
+      "from":232
       , "to":338
     }
     ,
     {
       "from":338
-      , "to":105
+      , "to":161
     }
     ,
     {
       "from":338
-      , "to":212
+      , "to":150
     }
     ,
     {
-      "from":221
+      "from":151
+      , "to":338
+    }
+    ,
+    {
+      "from":185
       , "to":338
     }
     ,
     {
       "from":338
-      , "to":133
+      , "to":224
+    }
+    ,
+    {
+      "from":338
+      , "to":149
+    }
+    ,
+    {
+      "from":113
+      , "to":338
+    }
+    ,
+    {
+      "from":202
+      , "to":338
+    }
+    ,
+    {
+      "from":338
+      , "to":228
+    }
+    ,
+    {
+      "from":338
+      , "to":141
+    }
+    ,
+    {
+      "from":338
+      , "to":220
+    }
+    ,
+    {
+      "from":138
+      , "to":338
+    }
+    ,
+    {
+      "from":225
+      , "to":338
     }
     ,
     {
@@ -13541,277 +13443,12 @@ var loopsJSON={
     ,
     {
       "from":366
-      , "to":374
-    }
-    ,
-    {
-      "from":369
-      , "to":374
-    }
-    ,
-    {
-      "from":368
-      , "to":374
-    }
-    ,
-    {
-      "from":367
-      , "to":374
-    }
-    ,
-    {
-      "from":370
-      , "to":374
-    }
-    ,
-    {
-      "from":371
-      , "to":374
-    }
-    ,
-    {
-      "from":358
-      , "to":359
-    }
-    ,
-    {
-      "from":382
-      , "to":366
-    }
-    ,
-    {
-      "from":366
-      , "to":376
-    }
-    ,
-    {
-      "from":369
-      , "to":376
-    }
-    ,
-    {
-      "from":368
-      , "to":376
-    }
-    ,
-    {
-      "from":367
-      , "to":376
-    }
-    ,
-    {
-      "from":370
-      , "to":376
-    }
-    ,
-    {
-      "from":371
-      , "to":376
-    }
-    ,
-    {
-      "from":366
-      , "to":377
-    }
-    ,
-    {
-      "from":369
-      , "to":377
-    }
-    ,
-    {
-      "from":368
-      , "to":377
-    }
-    ,
-    {
-      "from":367
-      , "to":377
-    }
-    ,
-    {
-      "from":370
-      , "to":377
-    }
-    ,
-    {
-      "from":371
-      , "to":377
-    }
-    ,
-    {
-      "from":366
-      , "to":378
-    }
-    ,
-    {
-      "from":369
-      , "to":378
-    }
-    ,
-    {
-      "from":368
-      , "to":378
-    }
-    ,
-    {
-      "from":367
-      , "to":378
-    }
-    ,
-    {
-      "from":370
-      , "to":378
-    }
-    ,
-    {
-      "from":371
-      , "to":378
-    }
-    ,
-    {
-      "from":374
-      , "to":378
-    }
-    ,
-    {
-      "from":377
-      , "to":378
-    }
-    ,
-    {
-      "from":375
-      , "to":378
-    }
-    ,
-    {
-      "from":376
-      , "to":378
-    }
-    ,
-    {
-      "from":373
-      , "to":378
-    }
-    ,
-    {
-      "from":383
-      , "to":388
-    }
-    ,
-    {
-      "from":384
-      , "to":388
-    }
-    ,
-    {
-      "from":386
-      , "to":388
-    }
-    ,
-    {
-      "from":366
-      , "to":370
-    }
-    ,
-    {
-      "from":398
-      , "to":404
-    }
-    ,
-    {
-      "from":400
-      , "to":404
-    }
-    ,
-    {
-      "from":383
-      , "to":404
-    }
-    ,
-    {
-      "from":366
       , "to":369
     }
     ,
     {
-      "from":394
-      , "to":400
-    }
-    ,
-    {
-      "from":396
-      , "to":400
-    }
-    ,
-    {
-      "from":383
-      , "to":400
-    }
-    ,
-    {
-      "from":366
-      , "to":375
-    }
-    ,
-    {
-      "from":369
-      , "to":375
-    }
-    ,
-    {
-      "from":368
-      , "to":375
-    }
-    ,
-    {
-      "from":367
-      , "to":375
-    }
-    ,
-    {
-      "from":370
-      , "to":375
-    }
-    ,
-    {
-      "from":371
-      , "to":375
-    }
-    ,
-    {
-      "from":394
-      , "to":398
-    }
-    ,
-    {
-      "from":396
-      , "to":398
-    }
-    ,
-    {
-      "from":383
-      , "to":398
-    }
-    ,
-    {
-      "from":402
-      , "to":408
-    }
-    ,
-    {
-      "from":404
-      , "to":408
-    }
-    ,
-    {
-      "from":383
-      , "to":408
-    }
-    ,
-    {
-      "from":366
-      , "to":367
+      "from":361
+      , "to":358
     }
     ,
     {
@@ -13835,11 +13472,6 @@ var loopsJSON={
     }
     ,
     {
-      "from":352
-      , "to":355
-    }
-    ,
-    {
       "from":366
       , "to":379
     }
@@ -13895,23 +13527,8 @@ var loopsJSON={
     }
     ,
     {
-      "from":388
-      , "to":389
-    }
-    ,
-    {
-      "from":383
-      , "to":389
-    }
-    ,
-    {
-      "from":384
-      , "to":389
-    }
-    ,
-    {
-      "from":386
-      , "to":389
+      "from":411
+      , "to":383
     }
     ,
     {
@@ -13935,18 +13552,153 @@ var loopsJSON={
     }
     ,
     {
-      "from":351
-      , "to":349
+      "from":366
+      , "to":378
     }
     ,
     {
-      "from":411
-      , "to":383
+      "from":369
+      , "to":378
+    }
+    ,
+    {
+      "from":368
+      , "to":378
+    }
+    ,
+    {
+      "from":367
+      , "to":378
+    }
+    ,
+    {
+      "from":370
+      , "to":378
+    }
+    ,
+    {
+      "from":371
+      , "to":378
+    }
+    ,
+    {
+      "from":374
+      , "to":378
+    }
+    ,
+    {
+      "from":377
+      , "to":378
+    }
+    ,
+    {
+      "from":375
+      , "to":378
+    }
+    ,
+    {
+      "from":376
+      , "to":378
+    }
+    ,
+    {
+      "from":373
+      , "to":378
+    }
+    ,
+    {
+      "from":402
+      , "to":408
+    }
+    ,
+    {
+      "from":404
+      , "to":408
     }
     ,
     {
       "from":383
-      , "to":384
+      , "to":408
+    }
+    ,
+    {
+      "from":353
+      , "to":354
+    }
+    ,
+    {
+      "from":366
+      , "to":373
+    }
+    ,
+    {
+      "from":369
+      , "to":373
+    }
+    ,
+    {
+      "from":368
+      , "to":373
+    }
+    ,
+    {
+      "from":367
+      , "to":373
+    }
+    ,
+    {
+      "from":370
+      , "to":373
+    }
+    ,
+    {
+      "from":371
+      , "to":373
+    }
+    ,
+    {
+      "from":398
+      , "to":404
+    }
+    ,
+    {
+      "from":400
+      , "to":404
+    }
+    ,
+    {
+      "from":383
+      , "to":404
+    }
+    ,
+    {
+      "from":366
+      , "to":376
+    }
+    ,
+    {
+      "from":369
+      , "to":376
+    }
+    ,
+    {
+      "from":368
+      , "to":376
+    }
+    ,
+    {
+      "from":367
+      , "to":376
+    }
+    ,
+    {
+      "from":370
+      , "to":376
+    }
+    ,
+    {
+      "from":371
+      , "to":376
     }
     ,
     {
@@ -13955,18 +13707,118 @@ var loopsJSON={
     }
     ,
     {
+      "from":394
+      , "to":400
+    }
+    ,
+    {
+      "from":396
+      , "to":400
+    }
+    ,
+    {
+      "from":383
+      , "to":400
+    }
+    ,
+    {
+      "from":366
+      , "to":371
+    }
+    ,
+    {
+      "from":366
+      , "to":374
+    }
+    ,
+    {
+      "from":369
+      , "to":374
+    }
+    ,
+    {
+      "from":368
+      , "to":374
+    }
+    ,
+    {
+      "from":367
+      , "to":374
+    }
+    ,
+    {
+      "from":370
+      , "to":374
+    }
+    ,
+    {
+      "from":371
+      , "to":374
+    }
+    ,
+    {
+      "from":393
+      , "to":396
+    }
+    ,
+    {
+      "from":389
+      , "to":396
+    }
+    ,
+    {
+      "from":391
+      , "to":396
+    }
+    ,
+    {
+      "from":383
+      , "to":396
+    }
+    ,
+    {
+      "from":382
+      , "to":366
+    }
+    ,
+    {
       "from":366
       , "to":368
     }
     ,
     {
-      "from":365
-      , "to":363
+      "from":366
+      , "to":377
+    }
+    ,
+    {
+      "from":369
+      , "to":377
+    }
+    ,
+    {
+      "from":368
+      , "to":377
+    }
+    ,
+    {
+      "from":367
+      , "to":377
+    }
+    ,
+    {
+      "from":370
+      , "to":377
+    }
+    ,
+    {
+      "from":371
+      , "to":377
     }
     ,
     {
       "from":351
-      , "to":348
+      , "to":349
     }
     ,
     {
@@ -13987,36 +13839,6 @@ var loopsJSON={
     {
       "from":386
       , "to":391
-    }
-    ,
-    {
-      "from":398
-      , "to":402
-    }
-    ,
-    {
-      "from":400
-      , "to":402
-    }
-    ,
-    {
-      "from":383
-      , "to":402
-    }
-    ,
-    {
-      "from":353
-      , "to":354
-    }
-    ,
-    {
-      "from":357
-      , "to":352
-    }
-    ,
-    {
-      "from":352
-      , "to":353
     }
     ,
     {
@@ -14047,6 +13869,26 @@ var loopsJSON={
     {
       "from":371
       , "to":372
+    }
+    ,
+    {
+      "from":402
+      , "to":406
+    }
+    ,
+    {
+      "from":404
+      , "to":406
+    }
+    ,
+    {
+      "from":383
+      , "to":406
+    }
+    ,
+    {
+      "from":366
+      , "to":367
     }
     ,
     {
@@ -14105,213 +13947,138 @@ var loopsJSON={
     }
     ,
     {
-      "from":402
-      , "to":406
-    }
-    ,
-    {
-      "from":404
-      , "to":406
-    }
-    ,
-    {
-      "from":383
-      , "to":406
+      "from":365
+      , "to":363
     }
     ,
     {
       "from":366
-      , "to":373
+      , "to":370
     }
     ,
     {
-      "from":369
-      , "to":373
+      "from":351
+      , "to":348
     }
     ,
     {
-      "from":368
-      , "to":373
+      "from":398
+      , "to":402
     }
     ,
     {
-      "from":367
-      , "to":373
-    }
-    ,
-    {
-      "from":370
-      , "to":373
-    }
-    ,
-    {
-      "from":371
-      , "to":373
-    }
-    ,
-    {
-      "from":361
-      , "to":358
-    }
-    ,
-    {
-      "from":393
-      , "to":396
-    }
-    ,
-    {
-      "from":389
-      , "to":396
-    }
-    ,
-    {
-      "from":391
-      , "to":396
+      "from":400
+      , "to":402
     }
     ,
     {
       "from":383
-      , "to":396
+      , "to":402
     }
     ,
     {
-      "from":366
-      , "to":371
-    }
-    ,
-    {
-      "from":360
-      , "to":361
-    }
-    ,
-    {
-      "from":356
-      , "to":361
-    }
-    ,
-    {
-      "from":381
-      , "to":382
-    }
-    ,
-    {
-      "from":364
-      , "to":382
-    }
-    ,
-    {
-      "from":341
-      , "to":357
-    }
-    ,
-    {
-      "from":350
-      , "to":357
-    }
-    ,
-    {
-      "from":363
-      , "to":364
-    }
-    ,
-    {
-      "from":362
-      , "to":364
-    }
-    ,
-    {
-      "from":383
-      , "to":410
-    }
-    ,
-    {
-      "from":388
-      , "to":410
-    }
-    ,
-    {
-      "from":384
-      , "to":410
-    }
-    ,
-    {
-      "from":386
-      , "to":410
-    }
-    ,
-    {
-      "from":408
-      , "to":410
-    }
-    ,
-    {
-      "from":406
-      , "to":410
-    }
-    ,
-    {
-      "from":393
-      , "to":410
-    }
-    ,
-    {
-      "from":389
-      , "to":410
-    }
-    ,
-    {
-      "from":391
-      , "to":410
-    }
-    ,
-    {
-      "from":410
-      , "to":411
-    }
-    ,
-    {
-      "from":381
-      , "to":411
-    }
-    ,
-    {
-      "from":354
-      , "to":356
+      "from":357
+      , "to":352
     }
     ,
     {
       "from":352
-      , "to":356
+      , "to":353
     }
     ,
     {
-      "from":355
-      , "to":356
+      "from":388
+      , "to":389
     }
     ,
     {
-      "from":353
-      , "to":356
+      "from":383
+      , "to":389
     }
     ,
     {
-      "from":410
-      , "to":341
+      "from":384
+      , "to":389
     }
     ,
     {
-      "from":359
-      , "to":360
+      "from":386
+      , "to":389
     }
     ,
     {
-      "from":348
-      , "to":350
+      "from":358
+      , "to":359
     }
     ,
     {
-      "from":349
-      , "to":350
+      "from":383
+      , "to":384
+    }
+    ,
+    {
+      "from":366
+      , "to":375
+    }
+    ,
+    {
+      "from":369
+      , "to":375
+    }
+    ,
+    {
+      "from":368
+      , "to":375
+    }
+    ,
+    {
+      "from":367
+      , "to":375
+    }
+    ,
+    {
+      "from":370
+      , "to":375
+    }
+    ,
+    {
+      "from":371
+      , "to":375
+    }
+    ,
+    {
+      "from":352
+      , "to":355
+    }
+    ,
+    {
+      "from":383
+      , "to":388
+    }
+    ,
+    {
+      "from":384
+      , "to":388
+    }
+    ,
+    {
+      "from":386
+      , "to":388
+    }
+    ,
+    {
+      "from":394
+      , "to":398
+    }
+    ,
+    {
+      "from":396
+      , "to":398
+    }
+    ,
+    {
+      "from":383
+      , "to":398
     }
     ,
     {
@@ -14360,8 +14127,143 @@ var loopsJSON={
     }
     ,
     {
+      "from":383
+      , "to":410
+    }
+    ,
+    {
+      "from":388
+      , "to":410
+    }
+    ,
+    {
+      "from":384
+      , "to":410
+    }
+    ,
+    {
+      "from":386
+      , "to":410
+    }
+    ,
+    {
+      "from":408
+      , "to":410
+    }
+    ,
+    {
+      "from":406
+      , "to":410
+    }
+    ,
+    {
+      "from":393
+      , "to":410
+    }
+    ,
+    {
+      "from":389
+      , "to":410
+    }
+    ,
+    {
+      "from":391
+      , "to":410
+    }
+    ,
+    {
+      "from":360
+      , "to":361
+    }
+    ,
+    {
+      "from":356
+      , "to":361
+    }
+    ,
+    {
+      "from":341
+      , "to":357
+    }
+    ,
+    {
+      "from":350
+      , "to":357
+    }
+    ,
+    {
+      "from":359
+      , "to":360
+    }
+    ,
+    {
       "from":341
       , "to":347
+    }
+    ,
+    {
+      "from":381
+      , "to":382
+    }
+    ,
+    {
+      "from":364
+      , "to":382
+    }
+    ,
+    {
+      "from":354
+      , "to":356
+    }
+    ,
+    {
+      "from":352
+      , "to":356
+    }
+    ,
+    {
+      "from":355
+      , "to":356
+    }
+    ,
+    {
+      "from":353
+      , "to":356
+    }
+    ,
+    {
+      "from":363
+      , "to":364
+    }
+    ,
+    {
+      "from":362
+      , "to":364
+    }
+    ,
+    {
+      "from":410
+      , "to":411
+    }
+    ,
+    {
+      "from":381
+      , "to":411
+    }
+    ,
+    {
+      "from":348
+      , "to":350
+    }
+    ,
+    {
+      "from":349
+      , "to":350
+    }
+    ,
+    {
+      "from":410
+      , "to":341
     }
     ,
     {
@@ -14371,32 +14273,17 @@ var loopsJSON={
     ,
     {
       "from":338
-      , "to":366
-    }
-    ,
-    {
-      "from":338
-      , "to":370
-    }
-    ,
-    {
-      "from":338
       , "to":369
     }
     ,
     {
       "from":338
-      , "to":367
-    }
-    ,
-    {
-      "from":355
-      , "to":338
+      , "to":371
     }
     ,
     {
       "from":338
-      , "to":349
+      , "to":366
     }
     ,
     {
@@ -14406,12 +14293,27 @@ var loopsJSON={
     ,
     {
       "from":338
-      , "to":348
+      , "to":349
     }
     ,
     {
       "from":338
-      , "to":371
+      , "to":367
+    }
+    ,
+    {
+      "from":338
+      , "to":370
+    }
+    ,
+    {
+      "from":338
+      , "to":348
+    }
+    ,
+    {
+      "from":355
+      , "to":338
     }
     ,
     {
@@ -14466,17 +14368,17 @@ var loopsJSON={
     ,
     {
       "from":446
+      , "to":465
+    }
+    ,
+    {
+      "from":446
+      , "to":458
+    }
+    ,
+    {
+      "from":446
       , "to":449
-    }
-    ,
-    {
-      "from":446
-      , "to":471
-    }
-    ,
-    {
-      "from":446
-      , "to":455
     }
     ,
     {
@@ -14486,12 +14388,32 @@ var loopsJSON={
     ,
     {
       "from":446
-      , "to":458
+      , "to":455
+    }
+    ,
+    {
+      "from":473
+      , "to":447
+    }
+    ,
+    {
+      "from":446
+      , "to":461
     }
     ,
     {
       "from":445
       , "to":443
+    }
+    ,
+    {
+      "from":446
+      , "to":464
+    }
+    ,
+    {
+      "from":474
+      , "to":476
     }
     ,
     {
@@ -14506,52 +14428,32 @@ var loopsJSON={
     ,
     {
       "from":446
-      , "to":456
+      , "to":448
     }
     ,
     {
       "from":446
-      , "to":453
-    }
-    ,
-    {
-      "from":474
-      , "to":476
-    }
-    ,
-    {
-      "from":476
-      , "to":478
+      , "to":470
     }
     ,
     {
       "from":446
-      , "to":450
+      , "to":467
+    }
+    ,
+    {
+      "from":435
+      , "to":436
     }
     ,
     {
       "from":446
-      , "to":459
+      , "to":466
     }
     ,
     {
       "from":446
-      , "to":468
-    }
-    ,
-    {
-      "from":439
-      , "to":440
-    }
-    ,
-    {
-      "from":446
-      , "to":462
-    }
-    ,
-    {
-      "from":446
-      , "to":460
+      , "to":463
     }
     ,
     {
@@ -14561,22 +14463,52 @@ var loopsJSON={
     ,
     {
       "from":446
+      , "to":469
+    }
+    ,
+    {
+      "from":478
+      , "to":480
+    }
+    ,
+    {
+      "from":446
       , "to":457
     }
     ,
     {
-      "from":446
-      , "to":465
+      "from":434
+      , "to":432
+    }
+    ,
+    {
+      "from":442
+      , "to":435
     }
     ,
     {
       "from":446
-      , "to":463
+      , "to":460
     }
     ,
     {
       "from":446
-      , "to":466
+      , "to":454
+    }
+    ,
+    {
+      "from":446
+      , "to":451
+    }
+    ,
+    {
+      "from":446
+      , "to":459
+    }
+    ,
+    {
+      "from":476
+      , "to":478
     }
     ,
     {
@@ -14590,68 +14522,98 @@ var loopsJSON={
     }
     ,
     {
-      "from":442
-      , "to":435
+      "from":446
+      , "to":468
     }
     ,
     {
       "from":446
-      , "to":454
+      , "to":453
     }
     ,
     {
       "from":446
-      , "to":448
+      , "to":450
     }
     ,
     {
       "from":446
-      , "to":470
-    }
-    ,
-    {
-      "from":478
-      , "to":480
+      , "to":471
     }
     ,
     {
       "from":446
-      , "to":451
+      , "to":456
+    }
+    ,
+    {
+      "from":439
+      , "to":440
     }
     ,
     {
       "from":446
-      , "to":464
+      , "to":462
     }
     ,
     {
-      "from":446
-      , "to":467
+      "from":482
+      , "to":426
     }
     ,
     {
-      "from":473
-      , "to":447
+      "from":433
+      , "to":426
     }
     ,
     {
-      "from":434
-      , "to":432
+      "from":443
+      , "to":444
+    }
+    ,
+    {
+      "from":472
+      , "to":483
+    }
+    ,
+    {
+      "from":440
+      , "to":441
     }
     ,
     {
       "from":435
-      , "to":436
+      , "to":441
     }
     ,
     {
-      "from":446
-      , "to":469
+      "from":436
+      , "to":441
     }
     ,
     {
-      "from":446
-      , "to":461
+      "from":437
+      , "to":441
+    }
+    ,
+    {
+      "from":438
+      , "to":441
+    }
+    ,
+    {
+      "from":439
+      , "to":441
+    }
+    ,
+    {
+      "from":482
+      , "to":431
+    }
+    ,
+    {
+      "from":480
+      , "to":482
     }
     ,
     {
@@ -14667,31 +14629,6 @@ var loopsJSON={
     {
       "from":432
       , "to":433
-    }
-    ,
-    {
-      "from":480
-      , "to":482
-    }
-    ,
-    {
-      "from":482
-      , "to":426
-    }
-    ,
-    {
-      "from":433
-      , "to":426
-    }
-    ,
-    {
-      "from":441
-      , "to":445
-    }
-    ,
-    {
-      "from":443
-      , "to":444
     }
     ,
     {
@@ -14825,43 +14762,8 @@ var loopsJSON={
     }
     ,
     {
-      "from":482
-      , "to":431
-    }
-    ,
-    {
-      "from":472
-      , "to":483
-    }
-    ,
-    {
-      "from":440
-      , "to":441
-    }
-    ,
-    {
-      "from":435
-      , "to":441
-    }
-    ,
-    {
-      "from":436
-      , "to":441
-    }
-    ,
-    {
-      "from":437
-      , "to":441
-    }
-    ,
-    {
-      "from":438
-      , "to":441
-    }
-    ,
-    {
-      "from":439
-      , "to":441
+      "from":441
+      , "to":445
     }
     ,
     {
@@ -14876,17 +14778,12 @@ var loopsJSON={
     ,
     {
       "from":338
+      , "to":458
+    }
+    ,
+    {
+      "from":338
       , "to":449
-    }
-    ,
-    {
-      "from":338
-      , "to":471
-    }
-    ,
-    {
-      "from":338
-      , "to":455
     }
     ,
     {
@@ -14896,7 +14793,17 @@ var loopsJSON={
     ,
     {
       "from":338
-      , "to":458
+      , "to":455
+    }
+    ,
+    {
+      "from":338
+      , "to":447
+    }
+    ,
+    {
+      "from":338
+      , "to":461
     }
     ,
     {
@@ -14906,72 +14813,7 @@ var loopsJSON={
     ,
     {
       "from":338
-      , "to":456
-    }
-    ,
-    {
-      "from":338
-      , "to":453
-    }
-    ,
-    {
-      "from":338
-      , "to":450
-    }
-    ,
-    {
-      "from":338
-      , "to":459
-    }
-    ,
-    {
-      "from":338
-      , "to":468
-    }
-    ,
-    {
-      "from":338
-      , "to":465
-    }
-    ,
-    {
-      "from":338
-      , "to":462
-    }
-    ,
-    {
-      "from":338
-      , "to":460
-    }
-    ,
-    {
-      "from":338
-      , "to":446
-    }
-    ,
-    {
-      "from":338
-      , "to":457
-    }
-    ,
-    {
-      "from":338
-      , "to":463
-    }
-    ,
-    {
-      "from":338
-      , "to":466
-    }
-    ,
-    {
-      "from":338
-      , "to":451
-    }
-    ,
-    {
-      "from":338
-      , "to":454
+      , "to":464
     }
     ,
     {
@@ -14986,17 +14828,32 @@ var loopsJSON={
     ,
     {
       "from":338
-      , "to":464
-    }
-    ,
-    {
-      "from":338
       , "to":467
     }
     ,
     {
       "from":338
-      , "to":447
+      , "to":466
+    }
+    ,
+    {
+      "from":338
+      , "to":463
+    }
+    ,
+    {
+      "from":338
+      , "to":446
+    }
+    ,
+    {
+      "from":338
+      , "to":469
+    }
+    ,
+    {
+      "from":338
+      , "to":457
     }
     ,
     {
@@ -15006,12 +14863,57 @@ var loopsJSON={
     ,
     {
       "from":338
-      , "to":461
+      , "to":460
     }
     ,
     {
       "from":338
-      , "to":469
+      , "to":454
+    }
+    ,
+    {
+      "from":338
+      , "to":451
+    }
+    ,
+    {
+      "from":338
+      , "to":459
+    }
+    ,
+    {
+      "from":338
+      , "to":468
+    }
+    ,
+    {
+      "from":338
+      , "to":453
+    }
+    ,
+    {
+      "from":338
+      , "to":450
+    }
+    ,
+    {
+      "from":338
+      , "to":471
+    }
+    ,
+    {
+      "from":338
+      , "to":456
+    }
+    ,
+    {
+      "from":338
+      , "to":465
+    }
+    ,
+    {
+      "from":338
+      , "to":462
     }
     ,
     {
@@ -15111,6 +15013,131 @@ var loopsJSON={
     ,
     {
       "from":513
+      , "to":522
+    }
+    ,
+    {
+      "from":514
+      , "to":522
+    }
+    ,
+    {
+      "from":515
+      , "to":522
+    }
+    ,
+    {
+      "from":516
+      , "to":522
+    }
+    ,
+    {
+      "from":517
+      , "to":522
+    }
+    ,
+    {
+      "from":518
+      , "to":522
+    }
+    ,
+    {
+      "from":512
+      , "to":522
+    }
+    ,
+    {
+      "from":536
+      , "to":538
+    }
+    ,
+    {
+      "from":513
+      , "to":527
+    }
+    ,
+    {
+      "from":514
+      , "to":527
+    }
+    ,
+    {
+      "from":515
+      , "to":527
+    }
+    ,
+    {
+      "from":516
+      , "to":527
+    }
+    ,
+    {
+      "from":517
+      , "to":527
+    }
+    ,
+    {
+      "from":518
+      , "to":527
+    }
+    ,
+    {
+      "from":512
+      , "to":527
+    }
+    ,
+    {
+      "from":519
+      , "to":527
+    }
+    ,
+    {
+      "from":498
+      , "to":499
+    }
+    ,
+    {
+      "from":513
+      , "to":521
+    }
+    ,
+    {
+      "from":514
+      , "to":521
+    }
+    ,
+    {
+      "from":515
+      , "to":521
+    }
+    ,
+    {
+      "from":516
+      , "to":521
+    }
+    ,
+    {
+      "from":517
+      , "to":521
+    }
+    ,
+    {
+      "from":518
+      , "to":521
+    }
+    ,
+    {
+      "from":512
+      , "to":521
+    }
+    ,
+    {
+      "from":512
+      , "to":517
+    }
+    ,
+    {
+      "from":513
       , "to":528
     }
     ,
@@ -15147,6 +15174,46 @@ var loopsJSON={
     {
       "from":521
       , "to":528
+    }
+    ,
+    {
+      "from":497
+      , "to":495
+    }
+    ,
+    {
+      "from":534
+      , "to":536
+    }
+    ,
+    {
+      "from":501
+      , "to":502
+    }
+    ,
+    {
+      "from":503
+      , "to":504
+    }
+    ,
+    {
+      "from":508
+      , "to":498
+    }
+    ,
+    {
+      "from":505
+      , "to":506
+    }
+    ,
+    {
+      "from":512
+      , "to":514
+    }
+    ,
+    {
+      "from":512
+      , "to":515
     }
     ,
     {
@@ -15171,337 +15238,42 @@ var loopsJSON={
     ,
     {
       "from":513
-      , "to":519
+      , "to":529
     }
     ,
     {
       "from":514
-      , "to":519
+      , "to":529
     }
     ,
     {
       "from":515
-      , "to":519
+      , "to":529
     }
     ,
     {
       "from":516
-      , "to":519
+      , "to":529
     }
     ,
     {
       "from":517
-      , "to":519
+      , "to":529
     }
     ,
     {
       "from":518
-      , "to":519
+      , "to":529
     }
     ,
     {
       "from":512
-      , "to":519
-    }
-    ,
-    {
-      "from":512
-      , "to":513
-    }
-    ,
-    {
-      "from":513
-      , "to":522
-    }
-    ,
-    {
-      "from":514
-      , "to":522
-    }
-    ,
-    {
-      "from":515
-      , "to":522
-    }
-    ,
-    {
-      "from":516
-      , "to":522
-    }
-    ,
-    {
-      "from":517
-      , "to":522
-    }
-    ,
-    {
-      "from":518
-      , "to":522
-    }
-    ,
-    {
-      "from":512
-      , "to":522
-    }
-    ,
-    {
-      "from":497
-      , "to":495
-    }
-    ,
-    {
-      "from":532
-      , "to":534
-    }
-    ,
-    {
-      "from":512
-      , "to":517
-    }
-    ,
-    {
-      "from":513
-      , "to":520
-    }
-    ,
-    {
-      "from":514
-      , "to":520
-    }
-    ,
-    {
-      "from":515
-      , "to":520
-    }
-    ,
-    {
-      "from":516
-      , "to":520
-    }
-    ,
-    {
-      "from":517
-      , "to":520
-    }
-    ,
-    {
-      "from":518
-      , "to":520
-    }
-    ,
-    {
-      "from":512
-      , "to":520
-    }
-    ,
-    {
-      "from":500
-      , "to":501
-    }
-    ,
-    {
-      "from":511
-      , "to":509
-    }
-    ,
-    {
-      "from":498
-      , "to":499
-    }
-    ,
-    {
-      "from":513
-      , "to":527
-    }
-    ,
-    {
-      "from":514
-      , "to":527
-    }
-    ,
-    {
-      "from":515
-      , "to":527
-    }
-    ,
-    {
-      "from":516
-      , "to":527
-    }
-    ,
-    {
-      "from":517
-      , "to":527
-    }
-    ,
-    {
-      "from":518
-      , "to":527
-    }
-    ,
-    {
-      "from":512
-      , "to":527
-    }
-    ,
-    {
-      "from":519
-      , "to":527
-    }
-    ,
-    {
-      "from":536
-      , "to":538
-    }
-    ,
-    {
-      "from":531
-      , "to":512
-    }
-    ,
-    {
-      "from":534
-      , "to":536
-    }
-    ,
-    {
-      "from":512
-      , "to":516
-    }
-    ,
-    {
-      "from":497
-      , "to":494
-    }
-    ,
-    {
-      "from":502
-      , "to":503
-    }
-    ,
-    {
-      "from":513
-      , "to":523
-    }
-    ,
-    {
-      "from":514
-      , "to":523
-    }
-    ,
-    {
-      "from":515
-      , "to":523
-    }
-    ,
-    {
-      "from":516
-      , "to":523
-    }
-    ,
-    {
-      "from":517
-      , "to":523
-    }
-    ,
-    {
-      "from":518
-      , "to":523
-    }
-    ,
-    {
-      "from":512
-      , "to":523
-    }
-    ,
-    {
-      "from":513
-      , "to":521
-    }
-    ,
-    {
-      "from":514
-      , "to":521
-    }
-    ,
-    {
-      "from":515
-      , "to":521
-    }
-    ,
-    {
-      "from":516
-      , "to":521
-    }
-    ,
-    {
-      "from":517
-      , "to":521
-    }
-    ,
-    {
-      "from":518
-      , "to":521
-    }
-    ,
-    {
-      "from":512
-      , "to":521
-    }
-    ,
-    {
-      "from":519
-      , "to":525
+      , "to":529
     }
     ,
     {
       "from":521
-      , "to":525
-    }
-    ,
-    {
-      "from":513
-      , "to":525
-    }
-    ,
-    {
-      "from":514
-      , "to":525
-    }
-    ,
-    {
-      "from":515
-      , "to":525
-    }
-    ,
-    {
-      "from":516
-      , "to":525
-    }
-    ,
-    {
-      "from":517
-      , "to":525
-    }
-    ,
-    {
-      "from":518
-      , "to":525
-    }
-    ,
-    {
-      "from":512
-      , "to":525
-    }
-    ,
-    {
-      "from":512
-      , "to":515
-    }
-    ,
-    {
-      "from":499
-      , "to":500
+      , "to":529
     }
     ,
     {
@@ -15511,87 +15283,37 @@ var loopsJSON={
     ,
     {
       "from":513
-      , "to":529
+      , "to":523
     }
     ,
     {
       "from":514
-      , "to":529
+      , "to":523
     }
     ,
     {
       "from":515
-      , "to":529
+      , "to":523
     }
     ,
     {
       "from":516
-      , "to":529
+      , "to":523
     }
     ,
     {
       "from":517
-      , "to":529
+      , "to":523
     }
     ,
     {
       "from":518
-      , "to":529
+      , "to":523
     }
     ,
     {
       "from":512
-      , "to":529
-    }
-    ,
-    {
-      "from":521
-      , "to":529
-    }
-    ,
-    {
-      "from":513
-      , "to":526
-    }
-    ,
-    {
-      "from":514
-      , "to":526
-    }
-    ,
-    {
-      "from":515
-      , "to":526
-    }
-    ,
-    {
-      "from":516
-      , "to":526
-    }
-    ,
-    {
-      "from":517
-      , "to":526
-    }
-    ,
-    {
-      "from":518
-      , "to":526
-    }
-    ,
-    {
-      "from":512
-      , "to":526
-    }
-    ,
-    {
-      "from":519
-      , "to":526
-    }
-    ,
-    {
-      "from":501
-      , "to":502
+      , "to":523
     }
     ,
     {
@@ -15640,13 +15362,113 @@ var loopsJSON={
     }
     ,
     {
-      "from":505
-      , "to":506
+      "from":499
+      , "to":500
     }
     ,
     {
-      "from":508
-      , "to":498
+      "from":513
+      , "to":520
+    }
+    ,
+    {
+      "from":514
+      , "to":520
+    }
+    ,
+    {
+      "from":515
+      , "to":520
+    }
+    ,
+    {
+      "from":516
+      , "to":520
+    }
+    ,
+    {
+      "from":517
+      , "to":520
+    }
+    ,
+    {
+      "from":518
+      , "to":520
+    }
+    ,
+    {
+      "from":512
+      , "to":520
+    }
+    ,
+    {
+      "from":511
+      , "to":509
+    }
+    ,
+    {
+      "from":513
+      , "to":526
+    }
+    ,
+    {
+      "from":514
+      , "to":526
+    }
+    ,
+    {
+      "from":515
+      , "to":526
+    }
+    ,
+    {
+      "from":516
+      , "to":526
+    }
+    ,
+    {
+      "from":517
+      , "to":526
+    }
+    ,
+    {
+      "from":518
+      , "to":526
+    }
+    ,
+    {
+      "from":512
+      , "to":526
+    }
+    ,
+    {
+      "from":519
+      , "to":526
+    }
+    ,
+    {
+      "from":532
+      , "to":534
+    }
+    ,
+    {
+      "from":497
+      , "to":494
+    }
+    ,
+    {
+      "from":531
+      , "to":512
+    }
+    ,
+    {
+      "from":500
+      , "to":501
+    }
+    ,
+    {
+      "from":512
+      , "to":513
     }
     ,
     {
@@ -15655,18 +15477,93 @@ var loopsJSON={
     }
     ,
     {
-      "from":503
-      , "to":504
+      "from":519
+      , "to":525
+    }
+    ,
+    {
+      "from":521
+      , "to":525
+    }
+    ,
+    {
+      "from":513
+      , "to":525
+    }
+    ,
+    {
+      "from":514
+      , "to":525
+    }
+    ,
+    {
+      "from":515
+      , "to":525
+    }
+    ,
+    {
+      "from":516
+      , "to":525
+    }
+    ,
+    {
+      "from":517
+      , "to":525
+    }
+    ,
+    {
+      "from":518
+      , "to":525
     }
     ,
     {
       "from":512
-      , "to":514
+      , "to":525
     }
     ,
     {
-      "from":509
-      , "to":510
+      "from":502
+      , "to":503
+    }
+    ,
+    {
+      "from":512
+      , "to":516
+    }
+    ,
+    {
+      "from":513
+      , "to":519
+    }
+    ,
+    {
+      "from":514
+      , "to":519
+    }
+    ,
+    {
+      "from":515
+      , "to":519
+    }
+    ,
+    {
+      "from":516
+      , "to":519
+    }
+    ,
+    {
+      "from":517
+      , "to":519
+    }
+    ,
+    {
+      "from":518
+      , "to":519
+    }
+    ,
+    {
+      "from":512
+      , "to":519
     }
     ,
     {
@@ -15680,18 +15577,68 @@ var loopsJSON={
     }
     ,
     {
+      "from":530
+      , "to":531
+    }
+    ,
+    {
+      "from":510
+      , "to":531
+    }
+    ,
+    {
+      "from":540
+      , "to":493
+    }
+    ,
+    {
+      "from":507
+      , "to":508
+    }
+    ,
+    {
+      "from":488
+      , "to":508
+    }
+    ,
+    {
+      "from":509
+      , "to":510
+    }
+    ,
+    {
+      "from":506
+      , "to":507
+    }
+    ,
+    {
+      "from":504
+      , "to":507
+    }
+    ,
+    {
+      "from":505
+      , "to":507
+    }
+    ,
+    {
       "from":507
       , "to":511
     }
     ,
     {
-      "from":522
-      , "to":530
+      "from":530
+      , "to":541
     }
     ,
     {
-      "from":523
-      , "to":530
+      "from":494
+      , "to":496
+    }
+    ,
+    {
+      "from":495
+      , "to":496
     }
     ,
     {
@@ -15726,6 +15673,16 @@ var loopsJSON={
     ,
     {
       "from":512
+      , "to":530
+    }
+    ,
+    {
+      "from":522
+      , "to":530
+    }
+    ,
+    {
+      "from":523
       , "to":530
     }
     ,
@@ -15765,98 +15722,8 @@ var loopsJSON={
     }
     ,
     {
-      "from":540
-      , "to":493
-    }
-    ,
-    {
-      "from":506
-      , "to":507
-    }
-    ,
-    {
-      "from":504
-      , "to":507
-    }
-    ,
-    {
-      "from":505
-      , "to":507
-    }
-    ,
-    {
-      "from":530
-      , "to":531
-    }
-    ,
-    {
-      "from":510
-      , "to":531
-    }
-    ,
-    {
-      "from":494
-      , "to":496
-    }
-    ,
-    {
-      "from":495
-      , "to":496
-    }
-    ,
-    {
       "from":538
       , "to":540
-    }
-    ,
-    {
-      "from":507
-      , "to":508
-    }
-    ,
-    {
-      "from":488
-      , "to":508
-    }
-    ,
-    {
-      "from":530
-      , "to":541
-    }
-    ,
-    {
-      "from":338
-      , "to":528
-    }
-    ,
-    {
-      "from":338
-      , "to":519
-    }
-    ,
-    {
-      "from":338
-      , "to":522
-    }
-    ,
-    {
-      "from":338
-      , "to":495
-    }
-    ,
-    {
-      "from":338
-      , "to":520
-    }
-    ,
-    {
-      "from":338
-      , "to":512
-    }
-    ,
-    {
-      "from":509
-      , "to":338
     }
     ,
     {
@@ -15866,22 +15733,17 @@ var loopsJSON={
     ,
     {
       "from":338
-      , "to":494
-    }
-    ,
-    {
-      "from":338
-      , "to":523
-    }
-    ,
-    {
-      "from":338
       , "to":521
     }
     ,
     {
       "from":338
-      , "to":525
+      , "to":528
+    }
+    ,
+    {
+      "from":338
+      , "to":495
     }
     ,
     {
@@ -15891,12 +15753,52 @@ var loopsJSON={
     ,
     {
       "from":338
-      , "to":526
+      , "to":523
     }
     ,
     {
       "from":338
       , "to":524
+    }
+    ,
+    {
+      "from":338
+      , "to":520
+    }
+    ,
+    {
+      "from":338
+      , "to":526
+    }
+    ,
+    {
+      "from":509
+      , "to":338
+    }
+    ,
+    {
+      "from":338
+      , "to":494
+    }
+    ,
+    {
+      "from":338
+      , "to":512
+    }
+    ,
+    {
+      "from":338
+      , "to":525
+    }
+    ,
+    {
+      "from":338
+      , "to":522
+    }
+    ,
+    {
+      "from":338
+      , "to":519
     }
     ,
     {
@@ -15950,6 +15852,126 @@ var loopsJSON={
     }
     ,
     {
+      "from":555
+      , "to":557
+    }
+    ,
+    {
+      "from":556
+      , "to":557
+    }
+    ,
+    {
+      "from":560
+      , "to":561
+    }
+    ,
+    {
+      "from":559
+      , "to":561
+    }
+    ,
+    {
+      "from":560
+      , "to":565
+    }
+    ,
+    {
+      "from":559
+      , "to":565
+    }
+    ,
+    {
+      "from":561
+      , "to":565
+    }
+    ,
+    {
+      "from":562
+      , "to":565
+    }
+    ,
+    {
+      "from":555
+      , "to":565
+    }
+    ,
+    {
+      "from":556
+      , "to":565
+    }
+    ,
+    {
+      "from":557
+      , "to":563
+    }
+    ,
+    {
+      "from":558
+      , "to":563
+    }
+    ,
+    {
+      "from":557
+      , "to":569
+    }
+    ,
+    {
+      "from":558
+      , "to":569
+    }
+    ,
+    {
+      "from":571
+      , "to":556
+    }
+    ,
+    {
+      "from":557
+      , "to":559
+    }
+    ,
+    {
+      "from":558
+      , "to":559
+    }
+    ,
+    {
+      "from":571
+      , "to":555
+    }
+    ,
+    {
+      "from":560
+      , "to":567
+    }
+    ,
+    {
+      "from":559
+      , "to":567
+    }
+    ,
+    {
+      "from":561
+      , "to":567
+    }
+    ,
+    {
+      "from":562
+      , "to":567
+    }
+    ,
+    {
+      "from":555
+      , "to":567
+    }
+    ,
+    {
+      "from":556
+      , "to":567
+    }
+    ,
+    {
       "from":565
       , "to":568
     }
@@ -15985,16 +16007,6 @@ var loopsJSON={
     }
     ,
     {
-      "from":555
-      , "to":558
-    }
-    ,
-    {
-      "from":556
-      , "to":558
-    }
-    ,
-    {
       "from":560
       , "to":564
     }
@@ -16022,166 +16034,6 @@ var loopsJSON={
     {
       "from":556
       , "to":564
-    }
-    ,
-    {
-      "from":571
-      , "to":556
-    }
-    ,
-    {
-      "from":560
-      , "to":561
-    }
-    ,
-    {
-      "from":559
-      , "to":561
-    }
-    ,
-    {
-      "from":557
-      , "to":559
-    }
-    ,
-    {
-      "from":558
-      , "to":559
-    }
-    ,
-    {
-      "from":560
-      , "to":565
-    }
-    ,
-    {
-      "from":559
-      , "to":565
-    }
-    ,
-    {
-      "from":561
-      , "to":565
-    }
-    ,
-    {
-      "from":562
-      , "to":565
-    }
-    ,
-    {
-      "from":555
-      , "to":565
-    }
-    ,
-    {
-      "from":556
-      , "to":565
-    }
-    ,
-    {
-      "from":555
-      , "to":557
-    }
-    ,
-    {
-      "from":556
-      , "to":557
-    }
-    ,
-    {
-      "from":557
-      , "to":563
-    }
-    ,
-    {
-      "from":558
-      , "to":563
-    }
-    ,
-    {
-      "from":560
-      , "to":567
-    }
-    ,
-    {
-      "from":559
-      , "to":567
-    }
-    ,
-    {
-      "from":561
-      , "to":567
-    }
-    ,
-    {
-      "from":562
-      , "to":567
-    }
-    ,
-    {
-      "from":555
-      , "to":567
-    }
-    ,
-    {
-      "from":556
-      , "to":567
-    }
-    ,
-    {
-      "from":560
-      , "to":566
-    }
-    ,
-    {
-      "from":559
-      , "to":566
-    }
-    ,
-    {
-      "from":561
-      , "to":566
-    }
-    ,
-    {
-      "from":562
-      , "to":566
-    }
-    ,
-    {
-      "from":555
-      , "to":566
-    }
-    ,
-    {
-      "from":556
-      , "to":566
-    }
-    ,
-    {
-      "from":571
-      , "to":555
-    }
-    ,
-    {
-      "from":557
-      , "to":560
-    }
-    ,
-    {
-      "from":558
-      , "to":560
-    }
-    ,
-    {
-      "from":557
-      , "to":569
-    }
-    ,
-    {
-      "from":558
-      , "to":569
     }
     ,
     {
@@ -16195,13 +16047,53 @@ var loopsJSON={
     }
     ,
     {
-      "from":570
-      , "to":571
+      "from":560
+      , "to":566
     }
     ,
     {
-      "from":552
-      , "to":571
+      "from":559
+      , "to":566
+    }
+    ,
+    {
+      "from":561
+      , "to":566
+    }
+    ,
+    {
+      "from":562
+      , "to":566
+    }
+    ,
+    {
+      "from":555
+      , "to":566
+    }
+    ,
+    {
+      "from":556
+      , "to":566
+    }
+    ,
+    {
+      "from":557
+      , "to":560
+    }
+    ,
+    {
+      "from":558
+      , "to":560
+    }
+    ,
+    {
+      "from":555
+      , "to":558
+    }
+    ,
+    {
+      "from":556
+      , "to":558
     }
     ,
     {
@@ -16250,12 +16142,22 @@ var loopsJSON={
     }
     ,
     {
-      "from":564
-      , "to":338
+      "from":570
+      , "to":571
+    }
+    ,
+    {
+      "from":552
+      , "to":571
     }
     ,
     {
       "from":563
+      , "to":338
+    }
+    ,
+    {
+      "from":569
       , "to":338
     }
     ,
@@ -16265,12 +16167,12 @@ var loopsJSON={
     }
     ,
     {
-      "from":566
+      "from":564
       , "to":338
     }
     ,
     {
-      "from":569
+      "from":566
       , "to":338
     }
   ]
@@ -16289,9 +16191,9 @@ var loopsJSON={
   "columns":["ALUTs", "FFs", "RAMs", "DSPs"]
   , "debug_enabled":1
   , "total_percent":
-  [258.316, 113.252, 148.143, 159.622, 26.9433]
+  [258.191, 113.17, 148.093, 159.118, 26.9433]
   , "total":
-  [892607, 2335213, 3799, 409]
+  [891961, 2334419, 3787, 409]
   , "name":"Kernel System"
   , "max_resources":
   [788160, 1576320, 2380, 1518]
@@ -17840,7 +17742,7 @@ var loopsJSON={
             {
               "name":"State"
               , "data":
-              [4695.56, 8687.71, 40.5667, 0]
+              [4695.56, 8687.72, 40.5667, 0]
               , "details":
               [
                 "Resources for live values and control logic. To reduce this area:\n- reduce size of local variables\n- reduce scope of local variables, localizing them as much as possible\n- reduce number of nested loops"
@@ -18275,7 +18177,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_Conform.cl:162"
                     , "data":
-                    [157.333, 303.268, 0.571429, 0]
+                    [157.333, 303.267, 0.571429, 0]
                     , "debug":
                     [
                       [
@@ -18293,7 +18195,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_Conform.cl:166"
                     , "data":
-                    [153.133, 305.368, 0.0714286, 0]
+                    [153.133, 305.367, 0.0714286, 0]
                     , "debug":
                     [
                       [
@@ -20869,7 +20771,7 @@ var loopsJSON={
                   {
                     "name":"No Source Line"
                     , "data":
-                    [325.691, 3093.74, 8, 0]
+                    [325.69, 3093.74, 8, 0]
                   }
                   , "count":0
                 }
@@ -22649,7 +22551,7 @@ var loopsJSON={
             {
               "name":"State"
               , "data":
-              [76578.6, 188386, 10, 0]
+              [76578.7, 188386, 10, 0]
               , "details":
               [
                 "Resources for live values and control logic. To reduce this area:\n- reduce size of local variables\n- reduce scope of local variables, localizing them as much as possible\n- reduce number of nested loops"
@@ -22724,7 +22626,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_GA.cl:248"
                     , "data":
-                    [456, 916.919, 0, 0]
+                    [456, 916.92, 0, 0]
                     , "debug":
                     [
                       [
@@ -23228,7 +23130,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_GA.cl:497"
                     , "data":
-                    [456, 916.919, 0, 0]
+                    [456, 916.92, 0, 0]
                     , "debug":
                     [
                       [
@@ -23390,7 +23292,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_GA.cl:552"
                     , "data":
-                    [456, 916.919, 0, 0]
+                    [456, 916.92, 0, 0]
                     , "debug":
                     [
                       [
@@ -23462,7 +23364,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_GA.cl:564"
                     , "data":
-                    [456, 916.919, 0, 0]
+                    [456, 916.92, 0, 0]
                     , "debug":
                     [
                       [
@@ -35273,7 +35175,7 @@ var loopsJSON={
                   {
                     "name":"No Source Line"
                     , "data":
-                    [1994, 3085, 43, 0]
+                    [1994, 3085.01, 43, 0]
                   }
                   , "count":0
                 }
@@ -35479,7 +35381,7 @@ var loopsJSON={
             {
               "name":"State"
               , "data":
-              [6258.67, 19459.5, 13.3613, 0]
+              [6258.67, 19460, 13.3613, 0]
               , "details":
               [
                 "Resources for live values and control logic. To reduce this area:\n- reduce size of local variables\n- reduce scope of local variables, localizing them as much as possible\n- reduce number of nested loops"
@@ -37832,7 +37734,7 @@ var loopsJSON={
             {
               "name":"State"
               , "data":
-              [4315.6, 13824.5, 9.39999, 0]
+              [4315.6, 13824.5, 9.4, 0]
               , "details":
               [
                 "Resources for live values and control logic. To reduce this area:\n- reduce size of local variables\n- reduce scope of local variables, localizing them as much as possible\n- reduce number of nested loops"
@@ -37925,7 +37827,7 @@ var loopsJSON={
                   {
                     "name":"No Source Line"
                     , "data":
-                    [418.067, 7725.07, 8.2, 0]
+                    [418.067, 7725.06, 8.2, 0]
                   }
                   , "count":0
                 }
@@ -38190,7 +38092,7 @@ var loopsJSON={
             {
               "name":"State"
               , "data":
-              [7993.98, 24237.4, 6, 0]
+              [7993.98, 24237.5, 6, 0]
               , "details":
               [
                 "Resources for live values and control logic. To reduce this area:\n- reduce size of local variables\n- reduce scope of local variables, localizing them as much as possible\n- reduce number of nested loops"
@@ -38265,7 +38167,7 @@ var loopsJSON={
                   {
                     "name":"No Source Line"
                     , "data":
-                    [3153.91, 10801.8, 1.33333, 0]
+                    [3153.92, 10801.8, 1.33333, 0]
                   }
                   , "count":0
                 }
@@ -40206,7 +40108,7 @@ var loopsJSON={
                   {
                     "name":"No Source Line"
                     , "data":
-                    [3104, 6207.99, 0, 0]
+                    [3104.01, 6208.01, 0, 0]
                   }
                   , "count":0
                 }
@@ -42644,7 +42546,7 @@ var loopsJSON={
             {
               "name":"State"
               , "data":
-              [4899, 19052, 44, 0]
+              [4898.99, 19052, 44, 0]
               , "details":
               [
                 "Resources for live values and control logic. To reduce this area:\n- reduce size of local variables\n- reduce scope of local variables, localizing them as much as possible\n- reduce number of nested loops"
@@ -43745,7 +43647,7 @@ var loopsJSON={
                   {
                     "name":"No Source Line"
                     , "data":
-                    [1391.46, 6040.22, 9, 0]
+                    [1391.46, 6040.2, 9, 0]
                   }
                   , "count":0
                 }
@@ -45991,6 +45893,24 @@ var loopsJSON={
           ]
         }
         , {
+          "name":"Coalesced Private Variables: \n - 'partialE1' (Krnl_IntraE.cl:38)\n - 'partialE2' (Krnl_IntraE.cl:38)"
+          , "data":
+          [8, 133, 0, 0]
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                , "line":38
+              }
+            ]
+          ]
+          , "details":
+          [
+            "Implemented using registers of the following size:\n- 2 registers of width 32 and depth 1"
+          ]
+        }
+        , {
           "name":"Krnl_IntraE.cl:16 (loc_coords_x)"
           , "data":
           [33, 256, 2, 0]
@@ -46045,43 +45965,61 @@ var loopsJSON={
           ]
         }
         , {
-          "name":"Private Variable: \n - 'contributor_counter' (Krnl_IntraE.cl:69)"
+          "name":"Private Variable: \n - 'contributor_counter' (Krnl_IntraE.cl:75)"
           , "data":
-          [40, 34, 1, 0]
+          [8, 69, 0, 0]
           , "debug":
           [
             [
               {
                 "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                , "line":69
+                , "line":75
               }
             ]
           ]
           , "details":
           [
-            "Implemented using registers of the following size:\n- 1 register of width 32 and depth 17 (depth was increased by a factor of 17 due to a loop initiation interval of 17.)\nReducing the scope of the variable may reduce its depth (e.g. moving declaration inside a loop or using it as soon as possible)."
+            "Implemented using registers of the following size:\n- 1 register of width 32 and depth 1"
           ]
         }
         , {
-          "name":"Private Variable: \n - 'intraE' (Krnl_IntraE.cl:36)"
+          "name":"Private Variable: \n - 'partialE3' (Krnl_IntraE.cl:38)"
           , "data":
-          [72, 130, 1, 0]
+          [8, 69, 0, 0]
           , "debug":
           [
             [
               {
                 "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                , "line":36
+                , "line":38
               }
             ]
           ]
           , "details":
           [
-            "Implemented using registers of the following size:\n- 1 register of width 32 and depth 17 (depth was increased by a factor of 17 due to a loop initiation interval of 17.)\nReducing the scope of the variable may reduce its depth (e.g. moving declaration inside a loop or using it as soon as possible)."
+            "Implemented using registers of the following size:\n- 1 register of width 32 and depth 1"
           ]
         }
         , {
-          "name":"Private Variable: \n - 'pipe_cnt' (Krnl_IntraE.cl:44)"
+          "name":"Private Variable: \n - 'partialE4' (Krnl_IntraE.cl:38)"
+          , "data":
+          [8, 69, 0, 0]
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                , "line":38
+              }
+            ]
+          ]
+          , "details":
+          [
+            "Implemented using registers of the following size:\n- 1 register of width 32 and depth 1"
+          ]
+        }
+        , {
+          "name":"Private Variable: \n - 'pipe_cnt' (Krnl_IntraE.cl:46)"
           , "data":
           [24, 101, 0, 0]
           , "debug":
@@ -46089,7 +46027,7 @@ var loopsJSON={
             [
               {
                 "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                , "line":44
+                , "line":46
               }
             ]
           ]
@@ -46127,7 +46065,7 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:105"
+                    "name":"Krnl_IntraE.cl:114"
                     , "data":
                     [42.6667, 42.6667, 0, 0]
                     , "debug":
@@ -46135,7 +46073,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":105
+                          , "line":114
                         }
                       ]
                     ]
@@ -46145,7 +46083,7 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:113"
+                    "name":"Krnl_IntraE.cl:133"
                     , "data":
                     [42.6667, 42.6667, 0, 0]
                     , "debug":
@@ -46153,7 +46091,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":113
+                          , "line":133
                         }
                       ]
                     ]
@@ -46163,7 +46101,7 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:116"
+                    "name":"Krnl_IntraE.cl:142"
                     , "data":
                     [62, 62, 0, 0]
                     , "debug":
@@ -46171,7 +46109,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":116
+                          , "line":142
                         }
                       ]
                     ]
@@ -46181,7 +46119,7 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:118"
+                    "name":"Krnl_IntraE.cl:144"
                     , "data":
                     [42.6667, 42.6667, 0, 0]
                     , "debug":
@@ -46189,7 +46127,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":118
+                          , "line":144
                         }
                       ]
                     ]
@@ -46199,7 +46137,7 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:44"
+                    "name":"Krnl_IntraE.cl:46"
                     , "data":
                     [50.6667, 50.6667, 0, 0]
                     , "debug":
@@ -46207,7 +46145,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":44
+                          , "line":46
                         }
                       ]
                     ]
@@ -46217,7 +46155,7 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:69"
+                    "name":"Krnl_IntraE.cl:75"
                     , "data":
                     [58.6667, 58.6667, 0, 0]
                     , "debug":
@@ -46225,7 +46163,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":69
+                          , "line":75
                         }
                       ]
                     ]
@@ -46235,7 +46173,7 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:77"
+                    "name":"Krnl_IntraE.cl:83"
                     , "data":
                     [42.6667, 42.6667, 0, 0]
                     , "debug":
@@ -46243,7 +46181,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":77
+                          , "line":83
                         }
                       ]
                     ]
@@ -46265,7 +46203,7 @@ var loopsJSON={
           , "computation":
           [
             {
-              "name":"Krnl_IntraE.cl:44"
+              "name":"Krnl_IntraE.cl:46"
               , "data":
               [0.333333, 43, 0, 0]
               , "debug":
@@ -46273,7 +46211,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":44
+                    , "line":46
                   }
                 ]
               ]
@@ -46295,7 +46233,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:69"
+              "name":"Krnl_IntraE.cl:75"
               , "data":
               [0.333333, 43, 0, 0]
               , "debug":
@@ -46303,7 +46241,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":69
+                    , "line":75
                   }
                 ]
               ]
@@ -46325,7 +46263,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:77"
+              "name":"Krnl_IntraE.cl:83"
               , "data":
               [0.333333, 43, 0, 0]
               , "debug":
@@ -46333,7 +46271,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":77
+                    , "line":83
                   }
                 ]
               ]
@@ -46355,7 +46293,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:105"
+              "name":"Krnl_IntraE.cl:114"
               , "data":
               [0.333333, 43, 0, 0]
               , "debug":
@@ -46363,7 +46301,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":105
+                    , "line":114
                   }
                 ]
               ]
@@ -46385,7 +46323,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:113"
+              "name":"Krnl_IntraE.cl:133"
               , "data":
               [0.333333, 43, 0, 0]
               , "debug":
@@ -46393,7 +46331,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":113
+                    , "line":133
                   }
                 ]
               ]
@@ -46415,7 +46353,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:116"
+              "name":"Krnl_IntraE.cl:142"
               , "data":
               [16, 48, 0, 0]
               , "debug":
@@ -46423,7 +46361,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":116
+                    , "line":142
                   }
                 ]
               ]
@@ -46445,7 +46383,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:118"
+              "name":"Krnl_IntraE.cl:144"
               , "data":
               [0.333333, 43, 0, 0]
               , "debug":
@@ -46453,7 +46391,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":118
+                    , "line":144
                   }
                 ]
               ]
@@ -46556,24 +46494,6 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:51"
-                    , "data":
-                    [0, 4, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":51
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
                     "name":"Krnl_IntraE.cl:53"
                     , "data":
                     [0, 4, 0, 0]
@@ -46594,13 +46514,31 @@ var loopsJSON={
                   {
                     "name":"Krnl_IntraE.cl:55"
                     , "data":
-                    [0, 16, 0, 0]
+                    [0, 4, 0, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
                           , "line":55
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_IntraE.cl:57"
+                    , "data":
+                    [0, 16, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                          , "line":57
                         }
                       ]
                     ]
@@ -46640,7 +46578,7 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:44"
+                    "name":"Krnl_IntraE.cl:46"
                     , "data":
                     [26, 107.333, 0, 0]
                     , "debug":
@@ -46648,25 +46586,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":44
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_IntraE.cl:45"
-                    , "data":
-                    [32.4583, 30.7778, 0.222222, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":45
+                          , "line":46
                         }
                       ]
                     ]
@@ -46678,7 +46598,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_IntraE.cl:47"
                     , "data":
-                    [43.4405, 118.183, 0.222222, 0]
+                    [32.4583, 30.7778, 0.222222, 0]
                     , "debug":
                     [
                       [
@@ -46696,7 +46616,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_IntraE.cl:49"
                     , "data":
-                    [62.1905, 290.116, 0.222222, 0]
+                    [43.4405, 118.183, 0.222222, 0]
                     , "debug":
                     [
                       [
@@ -46714,7 +46634,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_IntraE.cl:51"
                     , "data":
-                    [15.3036, 21.3079, 0.111111, 0]
+                    [62.1905, 290.116, 0.222222, 0]
                     , "debug":
                     [
                       [
@@ -46730,27 +46650,9 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:52"
-                    , "data":
-                    [106, 82, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":52
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
                     "name":"Krnl_IntraE.cl:53"
                     , "data":
-                    [19.8036, 25.3079, 0.111111, 0]
+                    [15.3036, 21.3079, 0.111111, 0]
                     , "debug":
                     [
                       [
@@ -46766,7 +46668,43 @@ var loopsJSON={
                 , {
                   "info":
                   {
+                    "name":"Krnl_IntraE.cl:54"
+                    , "data":
+                    [106, 82, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                          , "line":54
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
                     "name":"Krnl_IntraE.cl:55"
+                    , "data":
+                    [19.8036, 25.3079, 0.111111, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                          , "line":55
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_IntraE.cl:57"
                     , "data":
                     [27.8036, 56.3079, 0.111111, 0]
                     , "debug":
@@ -46774,7 +46712,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":55
+                          , "line":57
                         }
                       ]
                     ]
@@ -46805,7 +46743,7 @@ var loopsJSON={
                 {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:44"
+                    "name":"Krnl_IntraE.cl:46"
                     , "data":
                     [7, 6, 0, 0]
                     , "debug":
@@ -46813,7 +46751,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":44
+                          , "line":46
                         }
                       ]
                     ]
@@ -46844,7 +46782,7 @@ var loopsJSON={
           , "computation":
           [
             {
-              "name":"Krnl_IntraE.cl:44"
+              "name":"Krnl_IntraE.cl:46"
               , "data":
               [16, 0, 0, 0]
               , "debug":
@@ -46852,7 +46790,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":44
+                    , "line":46
                   }
                 ]
               ]
@@ -46864,36 +46802,6 @@ var loopsJSON={
                     "name":"Integer Compare"
                     , "data":
                     [16, 0, 0, 0]
-                  }
-                  , "count":1
-                }
-              ]
-            }
-            , {
-              "name":"Krnl_IntraE.cl:45"
-              , "data":
-              [34, 24, 0, 0]
-              , "debug":
-              [
-                [
-                  {
-                    "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":45
-                  }
-                ]
-              ]
-              , "subinfos":
-              [
-                {
-                  "info":
-                  {
-                    "name":"Store"
-                    , "data":
-                    [34, 24, 0, 0]
-                    , "details":
-                    [
-                      "Stall-free write to memory declared on Krnl_IntraE.cl:16."
-                    ]
                   }
                   , "count":1
                 }
@@ -46922,7 +46830,7 @@ var loopsJSON={
                     [34, 24, 0, 0]
                     , "details":
                     [
-                      "Stall-free write to memory declared on Krnl_IntraE.cl:17."
+                      "Stall-free write to memory declared on Krnl_IntraE.cl:16."
                     ]
                   }
                   , "count":1
@@ -46939,6 +46847,36 @@ var loopsJSON={
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
                     , "line":49
+                  }
+                ]
+              ]
+              , "subinfos":
+              [
+                {
+                  "info":
+                  {
+                    "name":"Store"
+                    , "data":
+                    [34, 24, 0, 0]
+                    , "details":
+                    [
+                      "Stall-free write to memory declared on Krnl_IntraE.cl:17."
+                    ]
+                  }
+                  , "count":1
+                }
+              ]
+            }
+            , {
+              "name":"Krnl_IntraE.cl:51"
+              , "data":
+              [34, 24, 0, 0]
+              , "debug":
+              [
+                [
+                  {
+                    "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                    , "line":51
                   }
                 ]
               ]
@@ -47041,24 +46979,6 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:51"
-                    , "data":
-                    [0, 4, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":51
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
                     "name":"Krnl_IntraE.cl:53"
                     , "data":
                     [0, 4, 0, 0]
@@ -47079,7 +46999,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_IntraE.cl:55"
                     , "data":
-                    [0, 16, 0, 0]
+                    [0, 4, 0, 0]
                     , "debug":
                     [
                       [
@@ -47095,7 +47015,25 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:60"
+                    "name":"Krnl_IntraE.cl:57"
+                    , "data":
+                    [0, 16, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                          , "line":57
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_IntraE.cl:62"
                     , "data":
                     [54, 337, 0, 0]
                     , "debug":
@@ -47103,7 +47041,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":60
+                          , "line":62
                         }
                       ]
                     ]
@@ -47125,7 +47063,7 @@ var loopsJSON={
           , "computation":
           [
             {
-              "name":"Krnl_IntraE.cl:60"
+              "name":"Krnl_IntraE.cl:62"
               , "data":
               [1535, 3793, 16, 0]
               , "debug":
@@ -47133,7 +47071,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":60
+                    , "line":62
                   }
                 ]
               ]
@@ -47163,7 +47101,7 @@ var loopsJSON={
             {
               "name":"State"
               , "data":
-              [2945, 7615, 38, 0]
+              [2765, 7349, 34, 0]
               , "details":
               [
                 "Resources for live values and control logic. To reduce this area:\n- reduce size of local variables\n- reduce scope of local variables, localizing them as much as possible\n- reduce number of nested loops"
@@ -47182,15 +47120,15 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:101"
+                    "name":"Krnl_IntraE.cl:100"
                     , "data":
-                    [80.0909, 328.591, 1, 0]
+                    [64, 128, 0, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":101
+                          , "line":100
                         }
                       ]
                     ]
@@ -47202,7 +47140,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_IntraE.cl:102"
                     , "data":
-                    [80.0909, 328.591, 1, 0]
+                    [8, 16, 0, 0]
                     , "debug":
                     [
                       [
@@ -47220,7 +47158,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_IntraE.cl:105"
                     , "data":
-                    [74.9481, 122.948, 1.14286, 0]
+                    [26.3048, 45.6095, 0.333333, 0]
                     , "debug":
                     [
                       [
@@ -47238,7 +47176,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_IntraE.cl:107"
                     , "data":
-                    [20.9481, 35.9481, 0.142857, 0]
+                    [80.0909, 328.591, 1, 0]
                     , "debug":
                     [
                       [
@@ -47256,7 +47194,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_IntraE.cl:108"
                     , "data":
-                    [82.9481, 138.948, 1.14286, 0]
+                    [80.0909, 328.591, 1, 0]
                     , "debug":
                     [
                       [
@@ -47272,33 +47210,15 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:110"
+                    "name":"Krnl_IntraE.cl:114"
                     , "data":
-                    [32, 64, 0, 0]
+                    [55.1481, 77.6481, 1.44286, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":110
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_IntraE.cl:113"
-                    , "data":
-                    [429.62, 1162.56, 3.16667, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":113
+                          , "line":114
                         }
                       ]
                     ]
@@ -47310,7 +47230,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_IntraE.cl:116"
                     , "data":
-                    [82.9481, 122.948, 0.142857, 0]
+                    [20.9481, 35.9481, 0.142857, 0]
                     , "debug":
                     [
                       [
@@ -47326,7 +47246,79 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:117"
+                    "name":"Krnl_IntraE.cl:120"
+                    , "data":
+                    [34.4814, 42.9814, 0.77619, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                          , "line":120
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_IntraE.cl:127"
+                    , "data":
+                    [29.5333, 39.0333, 0.633333, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                          , "line":127
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_IntraE.cl:133"
+                    , "data":
+                    [395.87, 1100.18, 3.04167, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                          , "line":133
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_IntraE.cl:142"
+                    , "data":
+                    [82.9481, 122.948, 0.142857, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                          , "line":142
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_IntraE.cl:143"
                     , "data":
                     [181.896, 252.896, 0.285714, 0]
                     , "debug":
@@ -47334,7 +47326,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":117
+                          , "line":143
                         }
                       ]
                     ]
@@ -47344,7 +47336,7 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:118"
+                    "name":"Krnl_IntraE.cl:144"
                     , "data":
                     [272.948, 456.948, 1.14286, 0]
                     , "debug":
@@ -47352,7 +47344,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":118
+                          , "line":144
                         }
                       ]
                     ]
@@ -47362,15 +47354,15 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:119"
+                    "name":"Krnl_IntraE.cl:145"
                     , "data":
-                    [183.105, 336.21, 2.33333, 0]
+                    [76.3548, 143.335, 0.708333, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":119
+                          , "line":145
                         }
                       ]
                     ]
@@ -47380,15 +47372,15 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:62"
+                    "name":"Krnl_IntraE.cl:150"
                     , "data":
-                    [48, 73, 2, 0]
+                    [128, 288, 0, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":62
+                          , "line":150
                         }
                       ]
                     ]
@@ -47398,15 +47390,15 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:69"
+                    "name":"Krnl_IntraE.cl:65"
                     , "data":
-                    [165.533, 901.033, 8.25, 0]
+                    [4.2, 2.7, 0.3, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":69
+                          , "line":65
                         }
                       ]
                     ]
@@ -47416,15 +47408,15 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:71"
+                    "name":"Krnl_IntraE.cl:66"
                     , "data":
-                    [38.3333, 56.1667, 0.5, 0]
+                    [6.53333, 3.53333, 0.133333, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":71
+                          , "line":66
                         }
                       ]
                     ]
@@ -47434,15 +47426,15 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:72"
+                    "name":"Krnl_IntraE.cl:67"
                     , "data":
-                    [17, 13.5, 0.5, 0]
+                    [28.25, 40.625, 0.875, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":72
+                          , "line":67
                         }
                       ]
                     ]
@@ -47452,15 +47444,15 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:74"
+                    "name":"Krnl_IntraE.cl:68"
                     , "data":
-                    [32, 64, 0, 0]
+                    [5.25, 8.125, 0.375, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":74
+                          , "line":68
                         }
                       ]
                     ]
@@ -47472,7 +47464,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_IntraE.cl:75"
                     , "data":
-                    [32, 64, 0, 0]
+                    [113.533, 808.2, 7.58333, 0]
                     , "debug":
                     [
                       [
@@ -47488,27 +47480,9 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:76"
-                    , "data":
-                    [96, 192, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":76
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
                     "name":"Krnl_IntraE.cl:77"
                     , "data":
-                    [80, 160, 0, 0]
+                    [21, 36.5, 0, 0]
                     , "debug":
                     [
                       [
@@ -47524,7 +47498,97 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:79"
+                    "name":"Krnl_IntraE.cl:78"
+                    , "data":
+                    [5, 4.5, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                          , "line":78
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_IntraE.cl:80"
+                    , "data":
+                    [32, 64, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                          , "line":80
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_IntraE.cl:81"
+                    , "data":
+                    [32, 64, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                          , "line":81
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_IntraE.cl:82"
+                    , "data":
+                    [96, 192, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                          , "line":82
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_IntraE.cl:83"
+                    , "data":
+                    [80, 160, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                          , "line":83
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_IntraE.cl:85"
                     , "data":
                     [48, 96, 0, 0]
                     , "debug":
@@ -47532,7 +47596,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":79
+                          , "line":85
                         }
                       ]
                     ]
@@ -47542,7 +47606,7 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:92"
+                    "name":"Krnl_IntraE.cl:98"
                     , "data":
                     [16, 32, 0, 0]
                     , "debug":
@@ -47550,61 +47614,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":92
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_IntraE.cl:93"
-                    , "data":
-                    [8, 16, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":93
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_IntraE.cl:94"
-                    , "data":
-                    [64, 128, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":94
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_IntraE.cl:96"
-                    , "data":
-                    [8, 16, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":96
+                          , "line":98
                         }
                       ]
                     ]
@@ -47616,7 +47626,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_IntraE.cl:99"
                     , "data":
-                    [26.3048, 45.6095, 0.333333, 0]
+                    [8, 16, 0, 0]
                     , "debug":
                     [
                       [
@@ -47634,7 +47644,7 @@ var loopsJSON={
                   {
                     "name":"No Source Line"
                     , "data":
-                    [711.286, 2214.1, 14.9167, 0]
+                    [699.619, 2221.1, 14.0833, 0]
                   }
                   , "count":0
                 }
@@ -47643,7 +47653,7 @@ var loopsJSON={
             , {
               "name":"Feedback"
               , "data":
-              [65, 53, 2, 0]
+              [15, 75, 0, 0]
               , "details":
               [
                 "Resources for loop-carried dependencies. To reduce this area:\n- reduce number and size of loop-carried variables"
@@ -47653,15 +47663,15 @@ var loopsJSON={
                 {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:69"
+                    "name":"Krnl_IntraE.cl:75"
                     , "data":
-                    [25, 19, 1, 0]
+                    [7, 6, 0, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":69
+                          , "line":75
                         }
                       ]
                     ]
@@ -47673,7 +47683,7 @@ var loopsJSON={
                   {
                     "name":"No Source Line"
                     , "data":
-                    [40, 34, 1, 0]
+                    [8, 69, 0, 0]
                   }
                   , "count":0
                 }
@@ -47682,7 +47692,7 @@ var loopsJSON={
             , {
               "name":"Cluster logic"
               , "data":
-              [1956, 4388, 19, 0]
+              [1619, 3661, 15, 0]
               , "details":
               [
                 "Logic required to efficiently support sets of operations that do not stall. This area cannot be affected directly."
@@ -47718,7 +47728,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:69"
+              "name":"Krnl_IntraE.cl:75"
               , "data":
               [26, 0, 0, 0]
               , "debug":
@@ -47726,7 +47736,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":69
+                    , "line":75
                   }
                 ]
               ]
@@ -47753,7 +47763,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:71"
+              "name":"Krnl_IntraE.cl:77"
               , "data":
               [1722, 1715.5, 21.5, 0]
               , "debug":
@@ -47761,7 +47771,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":71
+                    , "line":77
                   }
                 ]
               ]
@@ -47792,7 +47802,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:72"
+              "name":"Krnl_IntraE.cl:78"
               , "data":
               [1717, 1715.5, 21.5, 0]
               , "debug":
@@ -47800,7 +47810,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":72
+                    , "line":78
                   }
                 ]
               ]
@@ -47822,7 +47832,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:74"
+              "name":"Krnl_IntraE.cl:80"
               , "data":
               [18, 16, 0, 1]
               , "debug":
@@ -47830,7 +47840,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":74
+                    , "line":80
                   }
                 ]
               ]
@@ -47861,7 +47871,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:75"
+              "name":"Krnl_IntraE.cl:81"
               , "data":
               [18, 16, 0, 1]
               , "debug":
@@ -47869,7 +47879,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":75
+                    , "line":81
                   }
                 ]
               ]
@@ -47900,7 +47910,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:76"
+              "name":"Krnl_IntraE.cl:82"
               , "data":
               [18, 16, 0, 1]
               , "debug":
@@ -47908,7 +47918,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":76
+                    , "line":82
                   }
                 ]
               ]
@@ -47939,7 +47949,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:77"
+              "name":"Krnl_IntraE.cl:83"
               , "data":
               [129, 346, 3, 6]
               , "debug":
@@ -47947,7 +47957,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":77
+                    , "line":83
                   }
                 ]
               ]
@@ -47992,7 +48002,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:79"
+              "name":"Krnl_IntraE.cl:85"
               , "data":
               [63, 28, 0, 0]
               , "debug":
@@ -48000,7 +48010,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":79
+                    , "line":85
                   }
                 ]
               ]
@@ -48018,7 +48028,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:92"
+              "name":"Krnl_IntraE.cl:98"
               , "data":
               [0, 0, 0, 1]
               , "debug":
@@ -48026,85 +48036,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":92
-                  }
-                ]
-              ]
-              , "subinfos":
-              [
-                {
-                  "info":
-                  {
-                    "name":"Hardened Floating-Point Multiply"
-                    , "data":
-                    [0, 0, 0, 1]
-                  }
-                  , "count":1
-                }
-              ]
-            }
-            , {
-              "name":"Krnl_IntraE.cl:93"
-              , "data":
-              [0, 0, 0, 1]
-              , "debug":
-              [
-                [
-                  {
-                    "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":93
-                  }
-                ]
-              ]
-              , "subinfos":
-              [
-                {
-                  "info":
-                  {
-                    "name":"Hardened Floating-Point Multiply"
-                    , "data":
-                    [0, 0, 0, 1]
-                  }
-                  , "count":1
-                }
-              ]
-            }
-            , {
-              "name":"Krnl_IntraE.cl:94"
-              , "data":
-              [0, 0, 0, 1]
-              , "debug":
-              [
-                [
-                  {
-                    "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":94
-                  }
-                ]
-              ]
-              , "subinfos":
-              [
-                {
-                  "info":
-                  {
-                    "name":"Hardened Floating-Point Multiply"
-                    , "data":
-                    [0, 0, 0, 1]
-                  }
-                  , "count":1
-                }
-              ]
-            }
-            , {
-              "name":"Krnl_IntraE.cl:96"
-              , "data":
-              [0, 0, 0, 1]
-              , "debug":
-              [
-                [
-                  {
-                    "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":96
+                    , "line":98
                   }
                 ]
               ]
@@ -48124,7 +48056,7 @@ var loopsJSON={
             , {
               "name":"Krnl_IntraE.cl:99"
               , "data":
-              [126, 56, 0, 0]
+              [0, 0, 0, 1]
               , "debug":
               [
                 [
@@ -48139,24 +48071,24 @@ var loopsJSON={
                 {
                   "info":
                   {
-                    "name":"Floating Point Compare"
+                    "name":"Hardened Floating-Point Multiply"
                     , "data":
-                    [126, 56, 0, 0]
+                    [0, 0, 0, 1]
                   }
-                  , "count":2
+                  , "count":1
                 }
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:101"
+              "name":"Krnl_IntraE.cl:100"
               , "data":
-              [3165, 4266, 43, 0]
+              [0, 0, 0, 1]
               , "debug":
               [
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":101
+                    , "line":100
                   }
                 ]
               ]
@@ -48165,13 +48097,9 @@ var loopsJSON={
                 {
                   "info":
                   {
-                    "name":"Load"
+                    "name":"Hardened Floating-Point Multiply"
                     , "data":
-                    [3165, 4266, 43, 0]
-                    , "details":
-                    [
-                      "Load with a private 512 kilobit cache. Cache is not shared with any other load. It is flushed on kernel start. Use Dynamic Profiler to verify cache effectiveness. Other kernels should not be updating the data in global memory while this kernel is using it. Cache is created when memory access pattern is data-dependent or appears to be repetitive. Simplify access pattern or mark pointer as 'volatile' to disable generation of this cache."
-                    ]
+                    [0, 0, 0, 1]
                   }
                   , "count":1
                 }
@@ -48180,7 +48108,7 @@ var loopsJSON={
             , {
               "name":"Krnl_IntraE.cl:102"
               , "data":
-              [3165, 4266, 43, 0]
+              [0, 0, 0, 1]
               , "debug":
               [
                 [
@@ -48195,13 +48123,9 @@ var loopsJSON={
                 {
                   "info":
                   {
-                    "name":"Load"
+                    "name":"Hardened Floating-Point Multiply"
                     , "data":
-                    [3165, 4266, 43, 0]
-                    , "details":
-                    [
-                      "Load with a private 512 kilobit cache. Cache is not shared with any other load. It is flushed on kernel start. Use Dynamic Profiler to verify cache effectiveness. Other kernels should not be updating the data in global memory while this kernel is using it. Cache is created when memory access pattern is data-dependent or appears to be repetitive. Simplify access pattern or mark pointer as 'volatile' to disable generation of this cache."
-                    ]
+                    [0, 0, 0, 1]
                   }
                   , "count":1
                 }
@@ -48210,7 +48134,7 @@ var loopsJSON={
             , {
               "name":"Krnl_IntraE.cl:105"
               , "data":
-              [3222, 4707, 48, 8]
+              [126, 56, 0, 0]
               , "debug":
               [
                 [
@@ -48225,51 +48149,11 @@ var loopsJSON={
                 {
                   "info":
                   {
-                    "name":"Add"
+                    "name":"Floating Point Compare"
                     , "data":
-                    [16, 0, 0, 0]
+                    [126, 56, 0, 0]
                   }
-                  , "count":1
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Floating Point Divide"
-                    , "data":
-                    [185, 409, 5, 5]
-                  }
-                  , "count":1
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Hardened Floating-Point Add"
-                    , "data":
-                    [0, 0, 0, 1]
-                  }
-                  , "count":1
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Load"
-                    , "data":
-                    [3021, 4266, 43, 0]
-                    , "details":
-                    [
-                      "Load with a private 512 kilobit cache. Cache is not shared with any other load. It is flushed on kernel start. Use Dynamic Profiler to verify cache effectiveness. Other kernels should not be updating the data in global memory while this kernel is using it. Cache is created when memory access pattern is data-dependent or appears to be repetitive. Simplify access pattern or mark pointer as 'volatile' to disable generation of this cache."
-                    ]
-                  }
-                  , "count":1
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Mul"
-                    , "data":
-                    [0, 32, 0, 2]
-                  }
-                  , "count":1
+                  , "count":2
                 }
               ]
             }
@@ -48306,7 +48190,7 @@ var loopsJSON={
             , {
               "name":"Krnl_IntraE.cl:108"
               , "data":
-              [3206, 4675, 48, 5.5]
+              [3165, 4266, 43, 0]
               , "debug":
               [
                 [
@@ -48321,6 +48205,45 @@ var loopsJSON={
                 {
                   "info":
                   {
+                    "name":"Load"
+                    , "data":
+                    [3165, 4266, 43, 0]
+                    , "details":
+                    [
+                      "Load with a private 512 kilobit cache. Cache is not shared with any other load. It is flushed on kernel start. Use Dynamic Profiler to verify cache effectiveness. Other kernels should not be updating the data in global memory while this kernel is using it. Cache is created when memory access pattern is data-dependent or appears to be repetitive. Simplify access pattern or mark pointer as 'volatile' to disable generation of this cache."
+                    ]
+                  }
+                  , "count":1
+                }
+              ]
+            }
+            , {
+              "name":"Krnl_IntraE.cl:114"
+              , "data":
+              [3222, 4707, 48, 7]
+              , "debug":
+              [
+                [
+                  {
+                    "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                    , "line":114
+                  }
+                ]
+              ]
+              , "subinfos":
+              [
+                {
+                  "info":
+                  {
+                    "name":"Add"
+                    , "data":
+                    [16, 0, 0, 0]
+                  }
+                  , "count":1
+                }
+                , {
+                  "info":
+                  {
                     "name":"Floating Point Divide"
                     , "data":
                     [185, 409, 5, 5]
@@ -48330,9 +48253,78 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Hardened Floating-Point Sub"
+                    "name":"Load"
                     , "data":
-                    [0, 0, 0, 0.5]
+                    [3021, 4266, 43, 0]
+                    , "details":
+                    [
+                      "Load with a private 512 kilobit cache. Cache is not shared with any other load. It is flushed on kernel start. Use Dynamic Profiler to verify cache effectiveness. Other kernels should not be updating the data in global memory while this kernel is using it. Cache is created when memory access pattern is data-dependent or appears to be repetitive. Simplify access pattern or mark pointer as 'volatile' to disable generation of this cache."
+                    ]
+                  }
+                  , "count":1
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Mul"
+                    , "data":
+                    [0, 32, 0, 2]
+                  }
+                  , "count":1
+                }
+              ]
+            }
+            , {
+              "name":"Krnl_IntraE.cl:116"
+              , "data":
+              [3165, 4266, 43, 0]
+              , "debug":
+              [
+                [
+                  {
+                    "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                    , "line":116
+                  }
+                ]
+              ]
+              , "subinfos":
+              [
+                {
+                  "info":
+                  {
+                    "name":"Load"
+                    , "data":
+                    [3165, 4266, 43, 0]
+                    , "details":
+                    [
+                      "Load with a private 512 kilobit cache. Cache is not shared with any other load. It is flushed on kernel start. Use Dynamic Profiler to verify cache effectiveness. Other kernels should not be updating the data in global memory while this kernel is using it. Cache is created when memory access pattern is data-dependent or appears to be repetitive. Simplify access pattern or mark pointer as 'volatile' to disable generation of this cache."
+                    ]
+                  }
+                  , "count":1
+                }
+              ]
+            }
+            , {
+              "name":"Krnl_IntraE.cl:120"
+              , "data":
+              [3113.5, 4470.5, 45.5, 2.5]
+              , "debug":
+              [
+                [
+                  {
+                    "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                    , "line":120
+                  }
+                ]
+              ]
+              , "subinfos":
+              [
+                {
+                  "info":
+                  {
+                    "name":"Floating Point Divide"
+                    , "data":
+                    [92.5, 204.5, 2.5, 2.5]
                   }
                   , "count":1
                 }
@@ -48352,15 +48344,15 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:110"
+              "name":"Krnl_IntraE.cl:127"
               , "data":
-              [0, 0, 0, 0.5]
+              [92.5, 204.5, 2.5, 2.5]
               , "debug":
               [
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":110
+                    , "line":127
                   }
                 ]
               ]
@@ -48369,24 +48361,24 @@ var loopsJSON={
                 {
                   "info":
                   {
-                    "name":"Hardened Floating-Point Sub"
+                    "name":"Floating Point Divide"
                     , "data":
-                    [0, 0, 0, 0.5]
+                    [92.5, 204.5, 2.5, 2.5]
                   }
                   , "count":1
                 }
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:113"
+              "name":"Krnl_IntraE.cl:133"
               , "data":
-              [6688, 9561, 99, 24]
+              [6688, 9561, 99, 23]
               , "debug":
               [
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":113
+                    , "line":133
                   }
                 ]
               ]
@@ -48415,9 +48407,9 @@ var loopsJSON={
                   {
                     "name":"Hardened Floating-Point Add"
                     , "data":
-                    [0, 0, 0, 3]
+                    [0, 0, 0, 2]
                   }
-                  , "count":3
+                  , "count":2
                 }
                 , {
                   "info":
@@ -48444,7 +48436,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:116"
+              "name":"Krnl_IntraE.cl:142"
               , "data":
               [3021, 4266, 43, 0]
               , "debug":
@@ -48452,7 +48444,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":116
+                    , "line":142
                   }
                 ]
               ]
@@ -48474,7 +48466,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:117"
+              "name":"Krnl_IntraE.cl:143"
               , "data":
               [6042, 8532, 86, 1]
               , "debug":
@@ -48482,7 +48474,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":117
+                    , "line":143
                   }
                 ]
               ]
@@ -48513,7 +48505,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:118"
+              "name":"Krnl_IntraE.cl:144"
               , "data":
               [3021, 4266, 43, 4]
               , "debug":
@@ -48521,7 +48513,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":118
+                    , "line":144
                   }
                 ]
               ]
@@ -48570,7 +48562,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:119"
+              "name":"Krnl_IntraE.cl:145"
               , "data":
               [461, 620, 8, 13]
               , "debug":
@@ -48578,7 +48570,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":119
+                    , "line":145
                   }
                 ]
               ]
@@ -48607,18 +48599,35 @@ var loopsJSON={
                   {
                     "name":"Hardened Floating-Point Multiply"
                     , "data":
-                    [0, 0, 0, 1]
+                    [0, 0, 0, 2]
                   }
-                  , "count":1
+                  , "count":2
                 }
-                , {
+              ]
+            }
+            , {
+              "name":"Krnl_IntraE.cl:150"
+              , "data":
+              [0, 0, 0, 3]
+              , "debug":
+              [
+                [
+                  {
+                    "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                    , "line":150
+                  }
+                ]
+              ]
+              , "subinfos":
+              [
+                {
                   "info":
                   {
-                    "name":"Hardened Floating-Point Multiply-Add"
+                    "name":"Hardened Floating-Point Add"
                     , "data":
-                    [0, 0, 0, 1]
+                    [0, 0, 0, 3]
                   }
-                  , "count":1
+                  , "count":3
                 }
               ]
             }
@@ -48650,7 +48659,7 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:38"
+                    "name":"Krnl_IntraE.cl:40"
                     , "data":
                     [12, 197, 0, 0]
                     , "debug":
@@ -48658,7 +48667,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":38
+                          , "line":40
                         }
                       ]
                     ]
@@ -48668,7 +48677,7 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:60"
+                    "name":"Krnl_IntraE.cl:62"
                     , "data":
                     [12, 11, 0, 0]
                     , "debug":
@@ -48676,7 +48685,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":60
+                          , "line":62
                         }
                       ]
                     ]
@@ -48765,7 +48774,7 @@ var loopsJSON={
           ]
         }
         , {
-          "name":"Coalesced Private Variables: \n - 'write_to_channel_ack' (Krnl_Store.cl:27)\n - 'write_to_channel_energy' (Krnl_Store.cl:28)"
+          "name":"Coalesced Private Variables: \n - 'write_to_channel_energy' (Krnl_Store.cl:28)\n - 'write_to_channel_ack' (Krnl_Store.cl:27)"
           , "data":
           [8, 37, 0, 0]
           , "debug":
@@ -48864,7 +48873,7 @@ var loopsJSON={
             {
               "name":"State"
               , "data":
-              [710.834, 2321.33, 3, 0]
+              [710.833, 2321.33, 3, 0]
               , "details":
               [
                 "Resources for live values and control logic. To reduce this area:\n- reduce size of local variables\n- reduce scope of local variables, localizing them as much as possible\n- reduce number of nested loops"
@@ -50185,4 +50194,4 @@ var loopsJSON={
     }
   ]
 }
-;var fileJSON=[{"index":0, "path":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_GA.cl", "name":"Krnl_GA.cl", "content":"// Enable the channels extension\012#pragma OPENCL EXTENSION cl_altera_channels : enable\012\012//IC: initial calculation of energy of populations\012//GG: genetic generation \012//LS: local search\012//OFF: everything is done, disable other kernels\012/*\012enum STATES {S_IC 		= 0,		 \012	     S_IC_WAIT_END	= 1,\012	     S_GG		= 2,\012	     S_GG_WAIT_END	= 3,\012             S_LS		= 4, 	\012	     S_LS_WAIT_END	= 5,\012	     S_OFF		= 6,\012	     S_WAIT_END_OFF	= 7\012	    };*/\012#define STATE_IC 	   0\012#define STATE_IC_WAIT_END  1\012#define STATE_GG_FIND_BEST 2\012#define STATE_GG 	   3\012#define STATE_GG_WAIT_END  4\012#define STATE_UPDATE_POP   5\012#define STATE_LS           6\012#define STATE_LS_WAIT_END  7\012#define STATE_CHECK_TERMINATION 8\012#define STATE_END 	   9\012#define STATE_WAIT_END 	   10\012#define STATE_OFF 	   11\012\012\012#define LS_STATE_DIR_FIRST	12\012#define LS_STATE_WAIT_FIRST	13\012#define LS_STATE_ENERGY_FIRST	14\012#define LS_STATE_DIR_SECOND	15\012#define LS_STATE_WAIT_SECOND	16\012#define LS_STATE_ENERGY_SECOND	17\012#define LS_STATE_CHECK_RHO	18\012#define LS_STATE_CHECK_TERMINATION 19\012\012\012// Define kernel file-scope channel variable\012// Buffered channels \012// MAX_NUM_OF_ATOMS=90\012// ACTUAL_GENOTYPE_LENGTH (MAX_NUM_OF_ROTBONDS+6) =38\012\012channel float chan_GA2Conf_genotype __attribute__((depth(38)));\012channel char  chan_GA2Conf_active;	// active 1: receiving Kernel is active, 0 receiving Kernel is disabled\012channel char  chan_GA2Conf_mode;	// mode 1 or I: init calculation energy, 2 or G: genetic generation, 3 or P: local search\012channel uint  chan_GA2Conf_cnt;		// population count\012\012\012channel float chan_Conf2Intere_x __attribute__((depth(90)));\012channel float chan_Conf2Intere_y __attribute__((depth(90)));\012channel float chan_Conf2Intere_z __attribute__((depth(90)));\012/*\012channel float chan_Conf2Intere_x __attribute__((depth(45)));\012channel float chan_Conf2Intere_y __attribute__((depth(45)));\012channel float chan_Conf2Intere_z __attribute__((depth(45)));\012*/\012channel char  chan_Conf2Intere_active;	\012channel char  chan_Conf2Intere_mode;	\012channel uint  chan_Conf2Intere_cnt;	\012\012\012channel float chan_Conf2Intrae_x __attribute__((depth(90)));\012channel float chan_Conf2Intrae_y __attribute__((depth(90)));\012channel float chan_Conf2Intrae_z __attribute__((depth(90)));\012/*\012channel float chan_Conf2Intrae_x __attribute__((depth(45)));\012channel float chan_Conf2Intrae_y __attribute__((depth(45)));\012channel float chan_Conf2Intrae_z __attribute__((depth(45)));\012*/\012channel char  chan_Conf2Intrae_active;	\012channel char  chan_Conf2Intrae_mode;	\012channel uint  chan_Conf2Intrae_cnt;\012\012channel float chan_Intere2Store_intere;\012channel char  chan_Intere2Store_active;	\012channel char  chan_Intere2Store_mode;	\012channel uint  chan_Intere2Store_cnt;\012\012channel float chan_Intrae2Store_intrae;\012channel char  chan_Intrae2Store_active;	\012channel char  chan_Intrae2Store_mode;	\012channel uint  chan_Intrae2Store_cnt;\012\012channel char  chan_Store2GA_ack;\012channel float chan_Store2GA_LSenergy;\012\012#include \"../defines.h\"\012\012// Next structures were copied from calcenergy.h\012typedef struct\012{\012	char  	 	num_of_atoms;\012	char   		num_of_atypes;\012	int    		num_of_intraE_contributors;\012	char   		gridsize_x;\012	char   		gridsize_y;\012	char   		gridsize_z;\012	float  		grid_spacing;\012/*\012	float* 		fgrids;\012*/\012	int    		rotbondlist_length;\012	float  		coeff_elec;\012	float  		coeff_desolv;\012/*\012	float* 		conformations_current;\012	float* 		energies_current;\012	float* 		conformations_next;\012	float* 		energies_next;\012	int*   		evals_of_new_entities;\012	unsigned int* 	prng_states;\012*/\012\012	// L30nardoSV added\012	unsigned int num_of_energy_evals;\012	unsigned int num_of_generations;\012\012	int    		pop_size;\012	int    		num_of_genes;\012	float  		tournament_rate;\012	float  		crossover_rate;\012	float  		mutation_rate;\012	float  		abs_max_dmov;\012	float  		abs_max_dang;\012	float  		lsearch_rate;\012	unsigned int 	num_of_lsentities;\012	float  		rho_lower_bound;\012	float  		base_dmov_mul_sqrt3;\012	float  		base_dang_mul_sqrt3;\012	unsigned int 	cons_limit;\012	unsigned int 	max_num_of_iters;\012	float  		qasp;\012} Dockparameters;\012\012// Constant struct\012typedef struct\012{\012       float atom_charges_const[MAX_NUM_OF_ATOMS];\012       char  atom_types_const  [MAX_NUM_OF_ATOMS];\012       char  intraE_contributors_const[3*MAX_INTRAE_CONTRIBUTORS];\012       float VWpars_AC_const   [MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES];\012       float VWpars_BD_const   [MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES];\012       float dspars_S_const    [MAX_NUM_OF_ATYPES];\012       float dspars_V_const    [MAX_NUM_OF_ATYPES];\012       int   rotlist_const     [MAX_NUM_OF_ROTATIONS];\012       float ref_coords_x_const[MAX_NUM_OF_ATOMS];\012       float ref_coords_y_const[MAX_NUM_OF_ATOMS];\012       float ref_coords_z_const[MAX_NUM_OF_ATOMS];\012       float rotbonds_moving_vectors_const[3*MAX_NUM_OF_ROTBONDS];\012       float rotbonds_unit_vectors_const  [3*MAX_NUM_OF_ROTBONDS];\012       //float ref_orientation_quats_const  [4*MAX_NUM_OF_RUNS];\012       float ref_orientation_quats_const  [4];\012} kernelconstant;\012\012#include \"auxiliary_genetic.cl\"\012//#include \"auxiliary_performls.cl\"\012\012\012// --------------------------------------------------------------------------\012// The function performs a generational genetic algorithm based search \012// on the search space.\012// The first parameter is the population which must be filled with initial values \012// before calling this function. \012// The other parameters are variables which describe the grids, \012// the docking parameters and the ligand to be docked. \012// Originally from: searchoptimum.c\012// --------------------------------------------------------------------------\012__kernel __attribute__ ((reqd_work_group_size(1,1,1)))\012void Krnl_GA(//__global const float*           restrict GlobFgrids,\012	     __global       float*           restrict GlobPopulationCurrent,\012	     __global       float*           restrict GlobEnergyCurrent,\012	     __global       float*           restrict GlobPopulationNext,\012	     __global       float*           restrict GlobEnergyNext,\012             __global       unsigned int*    restrict GlobPRNG,\012	     __global const kernelconstant*  restrict KerConst,\012	     __global const Dockparameters*  restrict DockConst,\012	     __global       unsigned int*    restrict GlobEvals_performed,\012	     __global       unsigned int*    restrict GlobGenerations_performed)\012{\012	//Print algorithm parameters\012\012	#if defined (DEBUG_KERNEL1)\012	printf(\"\\nParameters of the genetic algorihtm:\\n\");\012	printf(\"\\nLigand num_of_atoms: %u\\n\",  DockConst->num_of_atoms);\012	printf(\"Ligand num_of_atypes:  %u\\n\",  DockConst->num_of_atypes);\012	printf(\"Ligand num_of_intraE_contributors: %u\\n\",  DockConst->num_of_atypes);\012	printf(\"Grid size_x: %u\\n\", 		DockConst->gridsize_x);\012	printf(\"Grid size_y: %u\\n\",   		DockConst->gridsize_y);\012	printf(\"Grid size_z: %u\\n\",   		DockConst->gridsize_z);\012	printf(\"Grid spacing: %f\\n\",  		DockConst->grid_spacing);\012	printf(\"Ligand rotbondlist_length: %u\\n\",  DockConst->rotbondlist_length);\012	printf(\"Ligand coeff_elec: %f\\n\",  	DockConst->coeff_elec);\012	printf(\"Ligand coeff_desolv: %f\\n\",  	DockConst->coeff_desolv);\012	printf(\"\\nnum_of_energy_evals: %u\\n\",   DockConst->num_of_energy_evals);\012	printf(\"num_of_generations: %u\\n\",   	DockConst->num_of_generations);\012	printf(\"Population size: %u\\n\",         DockConst->pop_size);\012	printf(\"Number of genes: %u\\n\",         DockConst->num_of_genes);\012	printf(\"Tournament rate: %f\\n\",  	DockConst->tournament_rate);\012	printf(\"Crossover rate: %f\\n\",  	DockConst->crossover_rate);\012	printf(\"Mutation rate: %f\\n\",  		DockConst->mutation_rate);\012	printf(\"Maximal delta movement during mutation: +/-%fA\\n\", DockConst->abs_max_dmov);\012	printf(\"maximal delta angle during mutation: +/-%f°\\n\",    DockConst->abs_max_dang);\012	printf(\"LS rate: %f\\n\",  		DockConst->lsearch_rate);\012	printf(\"LS num_of_lsentities: %u\\n\",    DockConst->num_of_lsentities);\012	printf(\"LS rho_lower_bound: %f\\n\",      DockConst->rho_lower_bound);	 //Rho lower bound\012	printf(\"LS base_dmov_mul_sqrt3: %f\\n\",  DockConst->base_dmov_mul_sqrt3); //Maximal delta movement during ls\012	printf(\"LS base_dang_mul_sqrt3: %f\\n\",  DockConst->base_dang_mul_sqrt3); //Maximal delta angle during ls\012	printf(\"LS cons_limit: %u\\n\",           DockConst->cons_limit);\012	printf(\"LS max_num_of_iters: %u\\n\",     DockConst->max_num_of_iters);\012	printf(\"qasp: %f\\n\",     DockConst->qasp);\012	#endif\012\012	//STATES docking_state = S_IC;\012	\012	// \012	__local float genotype [ACTUAL_GENOTYPE_LENGTH];\012	\012	// Find_best\012	uint best_entity_id;\012	__local float loc_energies[MAX_POPSIZE];\012\012	// Binary tournament\012	uint parent1, parent2;\012	__local float local_entity_1     [ACTUAL_GENOTYPE_LENGTH];\012	__local float local_entity_2     [ACTUAL_GENOTYPE_LENGTH];	\012	__local float offspring_genotype [ACTUAL_GENOTYPE_LENGTH];\012\012	// local search\012	uint entity_for_ls;\012	uint LS_eval;\012	uint evals_for_ls_in_this_cycle;\012	uint num_of_evals_for_ls  = 0;\012	//__local float local_entity_ls	 [ACTUAL_GENOTYPE_LENGTH];\012	//__local float entity_possible_new_genotype [ACTUAL_GENOTYPE_LENGTH];\012	float local_entity_energy;\012\012	// --------------------------------------------\012	// moved from auxiliary_performls.cl\012	float rho;\012	float candidate_energy;\012	float offspring_energy;\012\012	float genotype_deviate  [ACTUAL_GENOTYPE_LENGTH];		//38 would be enough...\012	float genotype_bias     [ACTUAL_GENOTYPE_LENGTH];\012\012	uint cons_succ = 0;\012	uint cons_fail = 0;	\012	uint iteration_cnt = 0;\012	\012\012	// --------------------------------------------\012\012	uint ls_ent_cnt=0;\012\012\012	//Calculating energies of initial population\012	uint eval_cnt = 0;\012	uint generation_cnt = 1;\012\012	bool active = true;\012	char active_work_kernels = 1;\012	//char mode   = 1;\012	char mode   = STATE_IC;\012	char ack    = 0;\012\012	bool write_to_channel_genotype = false;\012	bool read_from_channel_ack     = false;\012	bool read_from_channel_energy  = false;\012\012\012\012\012\012\012\012\012///*\012	\012\012	// State machine\012	uint pop_cnt = 0;	\012	bool first_step = true;\012\012\012	while (active) {\012\012\012	switch (mode) {\012		// ---------------------------------------------------------------------------------------------------------\012		case STATE_IC :			// IC: Init energy calculation of pop\012			if (pop_cnt < DockConst->pop_size-1) {\012				mode = STATE_IC;\012				write_to_channel_genotype = true;\012				read_from_channel_ack     = false;\012				read_from_channel_energy  = false;\012\012				if (first_step == true) {\012					first_step = false;\012				}\012				else {\012					pop_cnt++;\012				}\012					\012				for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {\012					genotype[pipe_cnt] = GlobPopulationCurrent[pop_cnt*ACTUAL_GENOTYPE_LENGTH+ pipe_cnt];\012				}	\012			}\012			else {\012				mode = STATE_IC_WAIT_END;\012				write_to_channel_genotype  = true;\012				read_from_channel_ack      = false;\012				read_from_channel_energy   = false;\012\012				for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {\012					genotype[pipe_cnt] = 0;\012				}	\012			}					\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case STATE_IC_WAIT_END :	// Signal IC finished \012			mode = STATE_GG_FIND_BEST;\012			write_to_channel_genotype = false;\012			read_from_channel_ack = true;\012			eval_cnt = DockConst->pop_size;	\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case STATE_GG_FIND_BEST:\012			mode = STATE_GG;\012			write_to_channel_genotype = false;\012			read_from_channel_ack = false ;\012\012			pop_cnt = 0;\012\012			//Identifying best entity\012			best_entity_id = find_best(GlobEnergyCurrent, loc_energies, DockConst->pop_size); \012			\012			//elitism - copying the best entity to new population\012			for (uint i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {\012				GlobPopulationNext[i] = GlobPopulationCurrent[best_entity_id*ACTUAL_GENOTYPE_LENGTH+i];\012			}\012			GlobEnergyNext[best_entity_id] = GlobEnergyCurrent[best_entity_id];\012\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case STATE_GG :			// GG: Genetic Generation\012			pop_cnt++;\012\012			if (pop_cnt < DockConst->pop_size) {\012				mode = STATE_GG;\012				write_to_channel_genotype = true;\012				read_from_channel_ack = false;\012\012				//selecting two individuals randomly\012				binary_tournament_selection(GlobEnergyCurrent, GlobPRNG, &parent1, &parent2,\012						            DockConst->pop_size, DockConst->tournament_rate);\012\012				async_work_group_copy(local_entity_1, GlobPopulationCurrent+parent1*ACTUAL_GENOTYPE_LENGTH, ACTUAL_GENOTYPE_LENGTH, 0);\012				async_work_group_copy(local_entity_2, GlobPopulationCurrent+parent2*ACTUAL_GENOTYPE_LENGTH, ACTUAL_GENOTYPE_LENGTH, 0);\012\012				// first two args are population [parent1], population [parent2]\012				gen_new_genotype(GlobPRNG, local_entity_1, local_entity_2,\012					         DockConst->mutation_rate, DockConst->abs_max_dmov, DockConst->abs_max_dang,\012					         DockConst->crossover_rate, ACTUAL_GENOTYPE_LENGTH, genotype);\012\012				async_work_group_copy(GlobPopulationNext+pop_cnt*ACTUAL_GENOTYPE_LENGTH, genotype, ACTUAL_GENOTYPE_LENGTH, 0);\012\012				//pop_cnt++;\012			}\012			else {\012				mode = STATE_GG_WAIT_END;\012				write_to_channel_genotype = true;\012				read_from_channel_ack = false;\012\012				for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {\012					genotype[pipe_cnt] = 0;\012				}	\012			}			\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case STATE_GG_WAIT_END :	// Signal GG finished 		\012			mode = STATE_UPDATE_POP;\012			write_to_channel_genotype = false;\012			read_from_channel_ack = true;\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case STATE_UPDATE_POP :\012			mode = STATE_LS;\012			write_to_channel_genotype = false;\012			read_from_channel_ack = false;\012\012			pop_cnt = 0;\012			eval_cnt += DockConst->pop_size;\012			evals_for_ls_in_this_cycle = 0;\012			//ls_ent_cnt=0;\012\012			// Updating old population with new one\012			for (uint i=0;i<DockConst->pop_size*ACTUAL_GENOTYPE_LENGTH; i++) {\012				GlobPopulationCurrent[i] = GlobPopulationNext[i];\012			}\012\012			// Updating old energy with new one\012			for (uint i=0;i<DockConst->pop_size; i++) {\012				GlobEnergyCurrent[i] = GlobEnergyNext[i];\012			}					\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case STATE_LS :			// LS: Local Search\012\012			//choosing an entity randomly,\012			//and without checking if it has already been subjected to LS in this cycle\012			entity_for_ls = myrand_uint(GlobPRNG, DockConst->pop_size);\012\012			for (uint i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {\012				offspring_genotype [i] = GlobPopulationCurrent[entity_for_ls*ACTUAL_GENOTYPE_LENGTH + i];\012				genotype_bias [i] = 0.0f;\012			}\012			offspring_energy = GlobEnergyCurrent[entity_for_ls];\012\012			mode = LS_STATE_DIR_FIRST;\012			write_to_channel_genotype = false;\012			read_from_channel_ack = false;\012\012			rho = 1.0f;\012			LS_eval = 0;\012			iteration_cnt = 0;\012\012\012/*\012			for (uint ls_ent_cnt=0; ls_ent_cnt<DockConst->num_of_lsentities; ls_ent_cnt++)	\012			{\012\012				perform_LS(GlobPopulationCurrent,\012				           GlobEnergyCurrent,\012				           GlobPRNG,\012				           KerConst,\012				           DockConst,\012				           entity_for_ls,\012				           local_entity_ls,\012				           entity_possible_new_genotype,\012				           &LS_eval);\012\012				eval_cnt += LS_eval;\012				evals_for_ls_in_this_cycle += LS_eval;\012				num_of_evals_for_ls += LS_eval;\012			}\012\012			generation_cnt++;\012			mode = STATE_LS_WAIT_END;\012*/\012\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case LS_STATE_DIR_FIRST:\012			//rho is the deviation of the uniform distribution\012			genotype_deviate [0] = rho*DockConst->base_dmov_mul_sqrt3*(2*myrand(GlobPRNG)-1);\012			genotype_deviate [1] = rho*DockConst->base_dmov_mul_sqrt3*(2*myrand(GlobPRNG)-1);\012			genotype_deviate [2] = rho*DockConst->base_dmov_mul_sqrt3*(2*myrand(GlobPRNG)-1);\012			for (uint i=3; i<DockConst->num_of_genes; i++) {\012				genotype_deviate [i] = rho*DockConst->base_dang_mul_sqrt3*(2*myrand(GlobPRNG)-1);\012			}\012\012			genotype [0] = offspring_genotype [0] + genotype_deviate [0] + genotype_bias [0];\012			genotype [1] = offspring_genotype [1] + genotype_deviate [1] + genotype_bias [1];\012			genotype [2] = offspring_genotype [2] + genotype_deviate [2] + genotype_bias [2];\012			genotype [3] = offspring_genotype [3] + genotype_deviate [3] + genotype_bias [3];\012			map_angle(&(genotype [3]), 360.0f);\012			genotype [4] = offspring_genotype [4] + genotype_deviate [4] + genotype_bias [4];\012			map_angle(&(genotype [4]), 180.0f);\012			for (uint i=5; i<DockConst->num_of_genes; i++) {\012				genotype [i] = offspring_genotype [i] + genotype_deviate [i] + genotype_bias [i];  \012				map_angle(&(genotype [i]), 360.0f);\012			}\012			\012			mode = LS_STATE_WAIT_FIRST;\012			write_to_channel_genotype = true;\012			read_from_channel_energy = false;\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case LS_STATE_WAIT_FIRST:\012			mode = LS_STATE_ENERGY_FIRST;\012			write_to_channel_genotype = false;\012			read_from_channel_energy = true;\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case LS_STATE_ENERGY_FIRST:\012			//if the new entity is better better\012			if (candidate_energy < offspring_energy) {\012\012				for (uint i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {\012					//updating offspring_genotype\012					offspring_genotype [i] = genotype [i];\012					//updating genotype_bias\012					genotype_bias [i] = 0.6f*genotype_bias [i] + 0.4f*genotype_deviate [i];\012				}\012\012				offspring_energy = candidate_energy;\012				cons_succ++;\012				cons_fail = 0;\012	\012				mode = LS_STATE_CHECK_RHO;\012				write_to_channel_genotype = false;\012				read_from_channel_energy = false;\012\012			}\012\012			//if worser, check the opposite direction\012			else {\012				mode = LS_STATE_DIR_SECOND;\012				write_to_channel_genotype = false;\012				read_from_channel_energy = false;\012			}\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case LS_STATE_DIR_SECOND:\012			genotype [0] = offspring_genotype [0] - genotype_deviate [0] - genotype_bias [0];				 \012			genotype [1] = offspring_genotype [1] - genotype_deviate [1] - genotype_bias [1];\012			genotype [2] = offspring_genotype [2] - genotype_deviate [2] - genotype_bias [2];\012			genotype [3] = offspring_genotype [3] - genotype_deviate [3] - genotype_bias [3];\012			map_angle(&(genotype [3]), 360.0f);\012			genotype [4] = offspring_genotype [4] - genotype_deviate [4] - genotype_bias [4];\012			map_angle(&(genotype [4]), 180.0f);\012			for (uint i=5; i<DockConst->num_of_genes; i++) {\012				genotype [i] = offspring_genotype [i] - genotype_deviate [i] - genotype_bias [i];\012				map_angle(&(genotype [i]), 360.0f);\012			}\012\012			mode = LS_STATE_WAIT_SECOND;\012			write_to_channel_genotype = true;\012			read_from_channel_energy = false;\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case LS_STATE_WAIT_SECOND:\012			mode = LS_STATE_ENERGY_SECOND;\012			write_to_channel_genotype = false;\012			read_from_channel_energy = true;\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case LS_STATE_ENERGY_SECOND:\012			LS_eval++;\012\012			//if the new entity is better\012			if (candidate_energy < offspring_energy) {\012				for (uint i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {\012					//updating offspring_genotype\012					offspring_genotype [i] = genotype [i];\012\012					//updating genotype_bias\012					genotype_bias [i] = 0.6f*genotype_bias [i] - 0.4f*genotype_deviate [i];\012				}\012\012				offspring_energy = candidate_energy;\012				cons_succ++;\012				cons_fail = 0;\012\012			}\012			//failure in both of the directions :-(\012			else {\012				//updating (halving) genotype_bias\012				for (uint i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {\012					genotype_bias [i] = 0.5f*genotype_bias [i];\012				}\012\012				cons_fail++;\012				cons_succ = 0;\012			}\012\012			mode = LS_STATE_CHECK_RHO;\012			write_to_channel_genotype = false;\012			read_from_channel_energy = false;\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case LS_STATE_CHECK_RHO:\012			//Changing deviation (rho), if needed\012			if (cons_succ >= DockConst->cons_limit) {\012			//this limitation is necessary in the FPGA due to the number representation\012				if ((rho*DockConst->base_dang_mul_sqrt3 < 90) && (rho*DockConst->base_dmov_mul_sqrt3 < 64)) {\012					rho = LS_EXP_FACTOR*rho;\012				}\012\012				cons_fail = 0;\012				cons_succ = 0;\012\012				}\012			else {\012				if (cons_fail >= DockConst->cons_limit) {\012					rho = LS_CONT_FACTOR*rho;\012					cons_fail = 0;\012					cons_succ = 0;\012				}\012			}\012\012			iteration_cnt++;\012			//printf(\"performLS: iteration_cnt (INC): %u, rho: %f, max: %f\\n\", iteration_cnt, rho, DockConst->rho_lower_bound);\012\012			mode = LS_STATE_CHECK_TERMINATION;\012			write_to_channel_genotype = false;\012			read_from_channel_energy = false;\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case LS_STATE_CHECK_TERMINATION:\012			if ((iteration_cnt < DockConst->max_num_of_iters) && (rho > DockConst->rho_lower_bound)) {\012				mode = LS_STATE_DIR_FIRST;\012				write_to_channel_genotype = false;\012				read_from_channel_energy = false;\012			}\012			else {\012				mode = STATE_LS_WAIT_END;\012				write_to_channel_genotype = false;\012				read_from_channel_energy = false;\012\012				for (uint i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {\012					GlobPopulationCurrent[entity_for_ls*ACTUAL_GENOTYPE_LENGTH + i] = offspring_genotype [i];\012				}\012				GlobEnergyCurrent[entity_for_ls] = offspring_energy;\012			}\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case STATE_LS_WAIT_END :	// Signal LS finished 		\012			eval_cnt += LS_eval;\012			evals_for_ls_in_this_cycle += LS_eval;\012			num_of_evals_for_ls += LS_eval;\012\012			ls_ent_cnt++;\012\012			if (ls_ent_cnt<DockConst->num_of_lsentities) {\012				//mode = LS_STATE_DIR_FIRST;\012				mode = STATE_LS;\012				write_to_channel_genotype = false;\012				read_from_channel_ack = false;\012			}\012			else {\012				mode = STATE_CHECK_TERMINATION;\012				write_to_channel_genotype = false;\012				read_from_channel_ack = false;\012\012				generation_cnt++;\012			}				\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case STATE_CHECK_TERMINATION :	// Signal LS finished 		\012			if((eval_cnt < DockConst->num_of_energy_evals) && (generation_cnt < DockConst->num_of_generations)) {\012				mode = STATE_GG_FIND_BEST;\012				pop_cnt = 0; \012				write_to_channel_genotype = false;\012				read_from_channel_ack = false;\012			}\012			else {\012				mode = STATE_END;\012				write_to_channel_genotype = false;\012				read_from_channel_ack = false;	\012			}\012			printf(\"eval_cnt: %u, generation_cnt: %u\\n\", eval_cnt, generation_cnt);	\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case STATE_END :		// Krnl_GA has finished execution!	\012			active_work_kernels = 0;\012			mode = STATE_WAIT_END;\012			write_to_channel_genotype = true;\012			read_from_channel_ack = false;\012\012			for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {\012				genotype[pipe_cnt] = 0;\012			}\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case STATE_WAIT_END :		\012			mode = STATE_OFF;\012			write_to_channel_genotype = false;\012			read_from_channel_ack = true;\012				\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case STATE_OFF :	\012			active = false;\012			GlobEvals_performed[0]       =  eval_cnt;\012			GlobGenerations_performed[0] =  generation_cnt;	\012\012			write_to_channel_genotype = false;\012			read_from_channel_ack = false;\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012	} // End of switch\012\012\012	if (write_to_channel_genotype == true) {\012		write_channel_altera(chan_GA2Conf_active, active_work_kernels);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		write_channel_altera(chan_GA2Conf_mode,   mode);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		write_channel_altera(chan_GA2Conf_cnt,    pop_cnt);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012\012		for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {\012			write_channel_altera(chan_GA2Conf_genotype, genotype[pipe_cnt]);\012		}\012	}\012\012	if (read_from_channel_ack == true) { \012		ack = read_channel_altera(chan_Store2GA_ack);	\012	}\012\012	if (read_from_channel_energy == true) {\012		candidate_energy = read_channel_altera(chan_Store2GA_LSenergy);\012	}\012\012	} // End of while\012\012\012\012\012\012\012\012//*/\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012/*\012\012	//active = 1;\012	//mode   = 1;\012\012	LOOP_GEN_GENERATIONAL_1:\012	for (uint pop_cnt = 0; pop_cnt < DockConst->pop_size; pop_cnt++)\012	{	\012		// --------------------------------------------------------------\012		// Send genotypes to channel\012		// --------------------------------------------------------------\012		write_channel_altera(chan_GA2Conf_active, active);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		write_channel_altera(chan_GA2Conf_mode,   mode);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		write_channel_altera(chan_GA2Conf_cnt,    pop_cnt);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012\012		for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {\012			//write_channel_altera(chan_GA2Conf_genotype, GlobPopulationCurrent[pop_cnt*ACTUAL_GENOTYPE_LENGTH+ pipe_cnt]);\012			write_channel_altera(chan_GA2Conf_IC_genotype, GlobPopulationCurrent[pop_cnt*ACTUAL_GENOTYPE_LENGTH+ pipe_cnt]);\012		}\012\012\012\012\012		// --------------------------------------------------------------\012		\012		#if defined (DEBUG_LEO)\012		printf(\"pop_cnt (INC): %u\\n\", pop_cnt);\012		#endif\012	} // End of LOOP_GEN_GENERATIONAL_1\012	\012	eval_cnt = DockConst->pop_size;\012	\012	#if defined (DEBUG_LEO)\012	printf(\"eval_cnt (INC): %u\\n\", eval_cnt);\012	#endif\012\012\012\012\012\012\012\012\012	// --------------------------------------------------------------\012	// Send DUMMY genotypes to channel to signal INI stop\012	// --------------------------------------------------------------\012	active = 1;\012	mode   = STATE_IC_WAIT_END;\012\012	write_channel_altera(chan_GA2Conf_active, active);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	write_channel_altera(chan_GA2Conf_mode,   mode);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	write_channel_altera(chan_GA2Conf_cnt,    0);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012\012	for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {\012		//write_channel_altera(chan_GA2Conf_genotype, 0);\012		write_channel_altera(chan_GA2Conf_IC_WAIT_genotype, 0);\012	}\012\012\012	//ack = read_channel_altera(chan_Store2GA_ack);\012	ack = read_channel_altera(chan_Store2GA_IC_ack);\012	//printf(\"INI ack: %u\\n\", ack);\012	// --------------------------------------------------------------\012		\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012	// **********************************************\012	// ADD VENDOR SPECIFIC PRAGMA\012	// **********************************************\012	float avg_energy;\012	\012	LOOP_WHILE_GEN_GENERATIONAL_1:\012	// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\012	// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\012	while ((eval_cnt < DockConst->num_of_energy_evals) && (generation_cnt < DockConst->num_of_generations))\012	{\012		//Creating a new population\012\012		//Identifying best entity\012		best_entity_id = find_best(GlobEnergyCurrent, loc_energies, DockConst->pop_size); \012\012		#if defined (DEBUG_KERNEL1)\012		avg_energy = 0.0f;\012		printf(\"\\n\\n\\nFinal state of the %u. generation:\\n\", generation_cnt);\012		printf(\"----------------------------\\n\\n\");\012		for (i=0; i<DockConst->pop_size; i++)\012		{\012			avg_energy += GlobEnergyCurrent [i];\012			printf(\"Entity %3u: \", i);\012			for (j=0; j<ACTUAL_GENOTYPE_LENGTH; j++) {\012				printf(\"%8.3f \", GlobPopulationCurrent [i*ACTUAL_GENOTYPE_LENGTH +j]);\012			}\012			printf(\"   energy sum: %10.3f\\n\", GlobEnergyCurrent [i*40 + 38]);\012		}\012		printf(\"\\nAverage energy: %f\\nBest energy sum: %f)\\n\\n\", avg_energy/DockConst->pop_size, \012		      GlobEnergyCurrent[best_entity_id]);\012		#endif\012\012		//elitism - copying the best entity to new population\012		for (uint i=0; i<ACTUAL_GENOTYPE_LENGTH; i++)\012		{\012			GlobPopulationNext[i] = GlobPopulationCurrent[best_entity_id*ACTUAL_GENOTYPE_LENGTH+i];\012		}\012		GlobEnergyNext[best_entity_id] = GlobEnergyCurrent[best_entity_id];\012\012\012		//new population consists of one member currently\012		// But not needed to be specified as the following loop does it\012		//new_pop_cnt = 1;\012\012\012\012\012\012\012\012		// -----------------------------------------------------------------------\012		active = 1;\012		mode = 2;\012\012		// **********************************************\012		// ADD VENDOR SPECIFIC PRAGMA\012		// **********************************************\012		LOOP_GEN_GENERATIONAL_2:\012		for (uint new_pop_cnt = 1; new_pop_cnt < DockConst->pop_size; new_pop_cnt++)\012		{\012			//printf(\"BEFORE BINARY TOURNAMENT, %u\\n\",new_pop_cnt);\012			//selecting two individuals randomly\012			binary_tournament_selection(GlobEnergyCurrent,\012						    GlobPRNG,\012						    &parent1,\012						    &parent2,\012						    DockConst->pop_size,\012						    DockConst->tournament_rate);\012			//printf(\"AFTER BINARY TOURNAMENT, %u\\n\",new_pop_cnt);\012\012\012			//mating parents	\012			async_work_group_copy(local_entity_1, GlobPopulationCurrent+parent1*ACTUAL_GENOTYPE_LENGTH, ACTUAL_GENOTYPE_LENGTH, 0);\012			async_work_group_copy(local_entity_2, GlobPopulationCurrent+parent2*ACTUAL_GENOTYPE_LENGTH, ACTUAL_GENOTYPE_LENGTH, 0);\012\012\012			//printf(\"BEFORE GEN NEW GENOTYPE, %u\\n\",new_pop_cnt);\012			// first two args are population [parent1], population [parent2]\012			gen_new_genotype(GlobPRNG,\012                                         local_entity_1, \012					 local_entity_2,\012					 DockConst->mutation_rate,\012					 DockConst->abs_max_dmov,\012					 DockConst->abs_max_dang,\012					 DockConst->crossover_rate,\012					 ACTUAL_GENOTYPE_LENGTH,\012					 offspring_genotype);\012\012			//printf(\"AFTER GEN NEW GENOTYPE, %u\\n\",new_pop_cnt);\012\012\012			//printf(\"BEFORE GA CHANNEL, %u\\n\",new_pop_cnt);\012			// --------------------------------------------------------------\012			// Send genotypes to channel\012			// --------------------------------------------------------------\012\012			for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {\012				write_channel_altera(chan_GA2Conf_genotype, offspring_genotype[pipe_cnt]);\012			}\012\012			write_channel_altera(chan_GA2Conf_active, active);\012			write_channel_altera(chan_GA2Conf_mode,   mode);\012			write_channel_altera(chan_GA2Conf_cnt,    new_pop_cnt);\012\012			// --------------------------------------------------------------\012			//printf(\"AFTER GA CHANNEL, %u\\n\",new_pop_cnt);\012\012			//copying offspring to population\012			// **********************************************\012			// ADD VENDOR SPECIFIC PRAGMA\012			// **********************************************\012			\012			//LOOP_GEN_GENERATIONAL_3:\012			//for (uint gene_cnt = 0; gene_cnt < ACTUAL_GENOTYPE_LENGTH; gene_cnt++) {\012			//	GlobPopulationNext[new_pop_cnt*ACTUAL_GENOTYPE_LENGTH + gene_cnt] = offspring_genotype[gene_cnt];\012			//}\012			\012			async_work_group_copy(GlobPopulationNext+new_pop_cnt*ACTUAL_GENOTYPE_LENGTH, offspring_genotype, ACTUAL_GENOTYPE_LENGTH, 0);\012	\012			#if defined (DEBUG_LEO)\012			printf(\"eval_cnt (INC): %u, new_pop_cnt (INC): %u\\n\", eval_cnt, new_pop_cnt);\012			#endif\012			\012\012\012		\012		} // End of LOOP_GEN_GENERATIONAL_2\012		// -----------------------------------------------------------------------\012\012\012\012\012\012		\012\012\012		#if defined (DEBUG_LEO)\012		printf(\"End of loop of new_pop_cnt, new_pop_cnt = %u\\n\", DockConst->pop_size);\012		#endif\012\012\012\012\012\012\012\012		// --------------------------------------------------------------\012		// Send DUMMY genotypes to channel to signal GG stop\012		// --------------------------------------------------------------\012		active = 1;\012		mode   = 0;\012		for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {\012			write_channel_altera(chan_GA2Conf_genotype, 0);\012		}\012\012		write_channel_altera(chan_GA2Conf_active, active);\012		write_channel_altera(chan_GA2Conf_mode,   mode);\012		write_channel_altera(chan_GA2Conf_cnt,    0);\012\012		ack = read_channel_altera(chan_Store2GA_ack);\012		//printf(\"GG ack: %u\\n\", ack);\012		// --------------------------------------------------------------\012		\012\012\012\012\012		// Updating old population with new one\012		// **********************************************\012		// ADD VENDOR SPECIFIC PRAGMA\012		// **********************************************\012		for (uint i=0;i<DockConst->pop_size*ACTUAL_GENOTYPE_LENGTH; i++)\012		{\012			GlobPopulationCurrent[i] = GlobPopulationNext[i];\012		}\012\012		// Updating old energy with new one\012		// **********************************************\012		// ADD VENDOR SPECIFIC PRAGMA\012		// **********************************************\012		for (uint i=0;i<DockConst->pop_size; i++)\012		{\012			GlobEnergyCurrent[i] = GlobEnergyNext[i];\012		}\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012		evals_for_ls_in_this_cycle = 0;\012\012		#if defined (DEBUG_LEO)\012		printf(\"num_of_entity_for_ls: %u \\n\", DockConst->num_of_lsentities);\012		#endif\012\012\012\012\012\012\012\012\012\012		// -----------------------------------------------------------------------\012		// **********************************************\012		// ADD VENDOR SPECIFIC PRAGMA\012		// **********************************************\012		LOOP_GEN_GENERATIONAL_4:\012		//subjecting num_of_entity_for_ls pieces of offsprings to LS\012		for (uint ls_ent_cnt=0; ls_ent_cnt<DockConst->num_of_lsentities; ls_ent_cnt++)	\012		{\012			//choosing an entity randomly,\012			//and without checking if it has already been subjected to LS in this cycle\012			entity_for_ls = myrand_uint(GlobPRNG, DockConst->pop_size);\012\012			#if defined (DEBUG_LEO)\012			printf(\"entity_for_ls: %u\\n\", entity_for_ls);\012			#endif\012\012\012			#if defined (DEBUG_KERNEL1)\012			printf(\"Entity %u before local search: \", entity_for_ls);\012			for (j=0; j<DockConst->rotbondlist_length+6; j++) {\012				printf(\"%f \", GlobPopulationCurrent [entity_for_ls*ACTUAL_GENOTYPE_LENGTH + j]);\012			}\012			printf(\"   energies: %f \\n\", GlobEnergyCurrent [entity_for_ls]);\012			#endif\012\012			//printf(\"BEFORE LS, %u\\n\",ls_ent_cnt);\012			//performing local search\012			//async_work_group_copy(local_entity_ls, GlobPopulationCurrent+entity_for_ls*ACTUAL_GENOTYPE_LENGTH, ACTUAL_GENOTYPE_LENGTH, 0);\012			//local_entity_energy = GlobEnergyCurrent[entity_for_ls];\012\012			perform_LS(GlobPopulationCurrent,\012				   GlobEnergyCurrent,\012				   GlobPRNG,\012				   KerConst,\012				   DockConst,\012				   entity_for_ls,\012				   local_entity_ls,\012				   entity_possible_new_genotype,\012				   &LS_eval);\012\012			//async_work_group_copy(GlobPopulationCurrent+entity_for_ls*ACTUAL_GENOTYPE_LENGTH, local_entity_ls, ACTUAL_GENOTYPE_LENGTH, 0);\012\012			//printf(\"AFTER LS, %u\\n\",ls_ent_cnt);\012\012\012			eval_cnt += LS_eval;\012			evals_for_ls_in_this_cycle += LS_eval;\012\012\012			#if defined (DEBUG_KERNEL1)\012			printf(\"Entity %u after local search (%u evaluations): \", entity_for_ls, LS_eval);\012			for (j=0; j<myligand_num_of_rotbonds+6; j++) {printf(\"%f \", GlobPopulation [entity_for_ls*40 + j]);}\012			printf(\"   energies: %f %f\\n\",\012				   GlobPopulation [entity_for_ls*40 + 38],\012				   GlobPopulation [entity_for_ls*40 + 39]);\012			#endif\012\012			num_of_evals_for_ls += LS_eval;\012\012			#if defined (DEBUG_LEO)\012			printf(\"eval_cnt (INC): %u, evals_for_ls_in_this_cycle(INC): % u\\n\", eval_cnt, evals_for_ls_in_this_cycle);\012			#endif\012\012\012		} // End of LOOP_GEN_GENERATIONAL_4\012\012		// -----------------------------------------------------------------------\012\012		generation_cnt++;\012\012		//#if defined (DEBUG_LEO)\012		printf(\"eval_cnt: %u, generation_cnt: %u\\n\", eval_cnt, generation_cnt);\012		//#endif\012\012\012\012\012	} // End of while ((eval_cnt < mypars->num_of_energy_evals) && (generation_cnt < mypars->num_of_generations))\012\012\012	// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\012	// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\012*/\012\012\012\012\012\012\012\012\012\012\012\012\012\012/*\012\012\012\012\012	printf(\"	%-20s: %s\\n\", \"Krnl_GA\", \"has finished execution!\");\012\012	\012	active = 0;\012	mode = 4;\012\012	// --------------------------------------------------------------\012	// Send DUMMY genotypes to channel\012	// --------------------------------------------------------------\012	for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {\012		write_channel_altera(chan_GA2Conf_genotype, 0);\012	}\012	write_channel_altera(chan_GA2Conf_active, active);\012	write_channel_altera(chan_GA2Conf_mode,   mode);\012	write_channel_altera(chan_GA2Conf_cnt,    0);\012	// --------------------------------------------------------------\012\012\012	GlobEvals_performed[0]       =  eval_cnt;\012	GlobGenerations_performed[0] =  generation_cnt;\012\012	#if defined (DEBUG_KERNEL1)\012	printf(\"Energy evaluations for LS: %u out of %u\\n\", num_of_evals_for_ls, eval_cnt);\012	printf(\"Number of generations: %u\\n\", generation_cnt);\012	#endif\012\012\012\012\012*/\012\012\012\012}\012\012// --------------------------------------------------------------------------\012// --------------------------------------------------------------------------\012\012\012#include \"Krnl_Conform.cl\"\012#include \"Krnl_InterE.cl\"\012#include \"Krnl_IntraE.cl\"\012#include \"Krnl_Store.cl\"\012\012"}, {"index":1, "path":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_Conform.cl", "name":"Krnl_Conform.cl", "content":"// --------------------------------------------------------------------------\012// The function changes the conformation of myligand according to \012// the genotype given by the second parameter.\012// Originally from: processligand.c\012// --------------------------------------------------------------------------\012__kernel __attribute__ ((reqd_work_group_size(1,1,1)))\012void Krnl_Conform(\012             //__global const float*           restrict GlobFgrids,\012	     //__global       float*           restrict GlobPopulationCurrent,\012	     //__global       float*           restrict GlobEnergyCurrent,\012	     //__global       float*           restrict GlobPopulationNext,\012	     //__global       float*           restrict GlobEnergyNext,\012             //__global       unsigned int*    restrict GlobPRNG,\012	     __global const kernelconstant*  restrict KerConst,\012	     __global const Dockparameters*  restrict DockConst)\012{\012\012	__local float loc_coords_x[MAX_NUM_OF_ATOMS];\012	__local float loc_coords_y[MAX_NUM_OF_ATOMS];\012	__local float loc_coords_z[MAX_NUM_OF_ATOMS];\012	__local float genotype[ACTUAL_GENOTYPE_LENGTH];\012/*\012	float __attribute__((register)) loc_coords_x[MAX_NUM_OF_ATOMS];\012	float __attribute__((register)) loc_coords_y[MAX_NUM_OF_ATOMS];\012	float __attribute__((register)) loc_coords_z[MAX_NUM_OF_ATOMS];\012	float __attribute__((register)) genotype[ACTUAL_GENOTYPE_LENGTH];\012*/\012\012\012	char active = 1;\012	char mode   = 0;\012	uint cnt    = 0;    \012\012	float phi, theta, genrotangle;\012	float genrot_unitvec [3];\012\012	int rotation_list_element;\012	uint atom_id, rotbond_id;\012	float atom_to_rotate[3];\012	float rotation_unitvec[3];\012	float rotation_movingvec[3];\012	float rotation_angle;\012	float sin_angle;\012	float quatrot_left_x, quatrot_left_y, quatrot_left_z, quatrot_left_q;\012	float quatrot_temp_x, quatrot_temp_y, quatrot_temp_z, quatrot_temp_q;\012\012while(active) {\012\012	//printf(\"BEFORE In CONFORM CHANNEL\\n\");\012	// --------------------------------------------------------------\012	// Wait for genotypes in channel\012	// --------------------------------------------------------------\012	active = read_channel_altera(chan_GA2Conf_active); if (active == 0) {printf(\"	%-20s: %s\\n\", \"Krnl_Conform\", \"disabled\");}\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	mode   = read_channel_altera(chan_GA2Conf_mode);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	cnt    = read_channel_altera(chan_GA2Conf_cnt);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012\012	for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {\012		genotype[pipe_cnt] = read_channel_altera(chan_GA2Conf_genotype);\012	}	\012	// --------------------------------------------------------------\012	//printf(\"AFTER In CONFORM CHANNEL\\n\");\012\012	phi         = genotype [3]*DEG_TO_RAD;\012	theta       = genotype [4]*DEG_TO_RAD;\012	genrotangle = genotype [5]*DEG_TO_RAD;\012\012	#if defined (NATIVE_PRECISION)\012	genrot_unitvec [0] = native_sin(theta)*native_cos(phi);\012	genrot_unitvec [1] = native_sin(theta)*native_sin(phi);\012	genrot_unitvec [2] = native_cos(theta);\012	#else\012	genrot_unitvec [0] = sin(theta)*cos(phi);\012	genrot_unitvec [1] = sin(theta)*sin(phi);\012	genrot_unitvec [2] = cos(theta);\012	#endif\012	\012	\012\012	// **********************************************\012	// ADD VENDOR SPECIFIC PRAGMA\012	// **********************************************\012	LOOP_CHANGE_CONFORM_1:\012	for (uint rotation_counter = 0; rotation_counter < DockConst->rotbondlist_length; rotation_counter++)\012	{\012		rotation_list_element = KerConst->rotlist_const[rotation_counter];\012\012		if ((rotation_list_element & RLIST_DUMMY_MASK) == 0)	//if not dummy rotation\012		{\012			atom_id = rotation_list_element & RLIST_ATOMID_MASK;\012\012			//capturing atom coordinates\012			if ((rotation_list_element & RLIST_FIRSTROT_MASK) != 0)	//if first rotation of this atom\012			{\012				atom_to_rotate[0] = KerConst->ref_coords_x_const[atom_id];\012				atom_to_rotate[1] = KerConst->ref_coords_y_const[atom_id];\012				atom_to_rotate[2] = KerConst->ref_coords_z_const[atom_id];\012			}\012			else\012			{\012				atom_to_rotate[0] = loc_coords_x[atom_id];\012				atom_to_rotate[1] = loc_coords_y[atom_id];\012				atom_to_rotate[2] = loc_coords_z[atom_id];\012			}\012\012			//capturing rotation vectors and angle\012			if ((rotation_list_element & RLIST_GENROT_MASK) != 0)	//if general rotation\012			{\012				rotation_unitvec[0] = genrot_unitvec[0];\012				rotation_unitvec[1] = genrot_unitvec[1];\012				rotation_unitvec[2] = genrot_unitvec[2];\012\012				rotation_angle = genrotangle;\012\012				rotation_movingvec[0] = genotype[0];\012				rotation_movingvec[1] = genotype[1];\012				rotation_movingvec[2] = genotype[2];\012			}\012			else	//if rotating around rotatable bond\012			{\012				rotbond_id = (rotation_list_element & RLIST_RBONDID_MASK) >> RLIST_RBONDID_SHIFT;\012	\012				rotation_unitvec[0] = KerConst->rotbonds_unit_vectors_const[3*rotbond_id];\012				rotation_unitvec[1] = KerConst->rotbonds_unit_vectors_const[3*rotbond_id+1];\012				rotation_unitvec[2] = KerConst->rotbonds_unit_vectors_const[3*rotbond_id+2];\012				rotation_angle = genotype[6+rotbond_id]*DEG_TO_RAD;\012\012				rotation_movingvec[0] = KerConst->rotbonds_moving_vectors_const[3*rotbond_id];\012				rotation_movingvec[1] = KerConst->rotbonds_moving_vectors_const[3*rotbond_id+1];\012				rotation_movingvec[2] = KerConst->rotbonds_moving_vectors_const[3*rotbond_id+2];\012\012				//in addition performing the first movement \012				//which is needed only if rotating around rotatable bond\012				atom_to_rotate[0] -= rotation_movingvec[0];\012				atom_to_rotate[1] -= rotation_movingvec[1];\012				atom_to_rotate[2] -= rotation_movingvec[2];\012			}\012\012			//performing rotation\012			rotation_angle = rotation_angle/2;\012			quatrot_left_q = cos(rotation_angle);\012			sin_angle = sin(rotation_angle);\012\012			quatrot_left_x = sin_angle*rotation_unitvec[0];\012			quatrot_left_y = sin_angle*rotation_unitvec[1];\012			quatrot_left_z = sin_angle*rotation_unitvec[2];\012\012			if ((rotation_list_element & RLIST_GENROT_MASK) != 0)	//if general rotation, \012										//two rotations should be performed \012										//(multiplying the quaternions)\012			{\012				//calculating quatrot_left*ref_orientation_quats_const, \012				//which means that reference orientation rotation is the first\012				quatrot_temp_q = quatrot_left_q;\012				quatrot_temp_x = quatrot_left_x;\012				quatrot_temp_y = quatrot_left_y;\012				quatrot_temp_z = quatrot_left_z;\012\012				// L30nardoSV: taking the first element of ref_orientation_quats_const member\012				quatrot_left_q = quatrot_temp_q*KerConst->ref_orientation_quats_const[0]-\012						 quatrot_temp_x*KerConst->ref_orientation_quats_const[1]-\012						 quatrot_temp_y*KerConst->ref_orientation_quats_const[2]-\012						 quatrot_temp_z*KerConst->ref_orientation_quats_const[3];\012				quatrot_left_x = quatrot_temp_q*KerConst->ref_orientation_quats_const[1]+\012						 KerConst->ref_orientation_quats_const[0]*quatrot_temp_x+\012						 quatrot_temp_y*KerConst->ref_orientation_quats_const[3]-\012						 KerConst->ref_orientation_quats_const[2]*quatrot_temp_z;\012				quatrot_left_y = quatrot_temp_q*KerConst->ref_orientation_quats_const[2]+\012						 KerConst->ref_orientation_quats_const[0]*quatrot_temp_y+\012						 KerConst->ref_orientation_quats_const[1]*quatrot_temp_z-\012						 quatrot_temp_x*KerConst->ref_orientation_quats_const[3];\012				quatrot_left_z = quatrot_temp_q*KerConst->ref_orientation_quats_const[3]+\012						 KerConst->ref_orientation_quats_const[0]*quatrot_temp_z+\012						 quatrot_temp_x*KerConst->ref_orientation_quats_const[2]-\012						 KerConst->ref_orientation_quats_const[1]*quatrot_temp_y;\012\012			}\012\012			quatrot_temp_q = 0 -\012					 quatrot_left_x*atom_to_rotate [0] -\012					 quatrot_left_y*atom_to_rotate [1] -\012					 quatrot_left_z*atom_to_rotate [2];\012			quatrot_temp_x = quatrot_left_q*atom_to_rotate [0] +\012					 quatrot_left_y*atom_to_rotate [2] -\012					 quatrot_left_z*atom_to_rotate [1];\012			quatrot_temp_y = quatrot_left_q*atom_to_rotate [1] -\012					 quatrot_left_x*atom_to_rotate [2] +\012					 quatrot_left_z*atom_to_rotate [0];\012			quatrot_temp_z = quatrot_left_q*atom_to_rotate [2] +\012					 quatrot_left_x*atom_to_rotate [1] -\012					 quatrot_left_y*atom_to_rotate [0];\012\012			atom_to_rotate [0] = 0 -\012					     quatrot_temp_q*quatrot_left_x +\012					     quatrot_temp_x*quatrot_left_q -\012					     quatrot_temp_y*quatrot_left_z +\012					     quatrot_temp_z*quatrot_left_y;\012			atom_to_rotate [1] = 0 -\012					     quatrot_temp_q*quatrot_left_y +\012					     quatrot_temp_x*quatrot_left_z +\012					     quatrot_temp_y*quatrot_left_q -\012					     quatrot_temp_z*quatrot_left_x;\012			atom_to_rotate [2] = 0 -\012					     quatrot_temp_q*quatrot_left_z -\012					     quatrot_temp_x*quatrot_left_y +\012					     quatrot_temp_y*quatrot_left_x +\012					     quatrot_temp_z*quatrot_left_q;\012\012			//performing final movement and storing values\012			loc_coords_x[atom_id] = atom_to_rotate [0] + rotation_movingvec[0];\012			loc_coords_y[atom_id] = atom_to_rotate [1] + rotation_movingvec[1];\012			loc_coords_z[atom_id] = atom_to_rotate [2] + rotation_movingvec[2];\012\012		} // End if-statement not dummy rotation\012	} // End rotation_counter for-loop\012\012	//printf(\"BEFORE Out CONFORM CHANNEL\\n\");\012	// --------------------------------------------------------------\012	// Send ligand atomic coordinates to channel \012	// --------------------------------------------------------------\012/*\012	for (uint pipe_cnt=0; pipe_cnt<DockConst->num_of_atoms; pipe_cnt++) {\012		write_channel_altera(chan_Conf2Intere_x, loc_coords_x[pipe_cnt]);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		write_channel_altera(chan_Conf2Intere_y, loc_coords_y[pipe_cnt]);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		write_channel_altera(chan_Conf2Intere_z, loc_coords_z[pipe_cnt]);\012		//mem_fence(CLK_CHANNEL_MEM_FENCE);\012\012		write_channel_altera(chan_Conf2Intrae_x, loc_coords_x[pipe_cnt]);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		write_channel_altera(chan_Conf2Intrae_y, loc_coords_y[pipe_cnt]);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		write_channel_altera(chan_Conf2Intrae_z, loc_coords_z[pipe_cnt]);\012	}\012*/\012\012\012	for (uint pipe_cnt=0; pipe_cnt<DockConst->num_of_atoms; pipe_cnt++) {\012		write_channel_altera(chan_Conf2Intere_x, loc_coords_x[pipe_cnt]);\012		write_channel_altera(chan_Conf2Intrae_x, loc_coords_x[pipe_cnt]);\012		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);\012		write_channel_altera(chan_Conf2Intere_y, loc_coords_y[pipe_cnt]);\012		write_channel_altera(chan_Conf2Intrae_y, loc_coords_y[pipe_cnt]);\012		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);\012		write_channel_altera(chan_Conf2Intere_z, loc_coords_z[pipe_cnt]);\012		write_channel_altera(chan_Conf2Intrae_z, loc_coords_z[pipe_cnt]);\012		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);\012		write_channel_altera(chan_Conf2Intere_active, active);\012		write_channel_altera(chan_Conf2Intrae_active, active);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		write_channel_altera(chan_Conf2Intere_mode,   mode);\012		write_channel_altera(chan_Conf2Intrae_mode,   mode);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		write_channel_altera(chan_Conf2Intere_cnt,    cnt);\012		write_channel_altera(chan_Conf2Intrae_cnt,    cnt);\012	}\012	// --------------------------------------------------------------\012	//printf(\"AFTER Out CONFORM CHANNEL\\n\");\012\012} // End of while(1)\012\012}\012// --------------------------------------------------------------------------\012// --------------------------------------------------------------------------\012"}, {"index":2, "path":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl", "name":"Krnl_InterE.cl", "content":"// --------------------------------------------------------------------------\012// The function calculates the intermolecular energy of a ligand given by \012// myligand parameter, and a receptor represented as a grid. \012// The grid point values must be stored at the location which starts at GlobFgrids, \012// the memory content can be generated with get_gridvalues function.\012// The mygrid parameter must be the corresponding grid informtaion. \012// If an atom is outside the grid, the coordinates will be changed with \012// the value of outofgrid_tolerance, \012// if it remains outside, a very high value will be added to the current energy as a penalty. \012// Originally from: processligand.c\012// --------------------------------------------------------------------------\012__kernel __attribute__ ((reqd_work_group_size(1,1,1)))\012void Krnl_InterE(\012             __global const float*           restrict GlobFgrids,\012	     //__global       float*           restrict GlobPopulationCurrent,\012	     //__global       float*           restrict GlobEnergyCurrent,\012	     //__global       float*           restrict GlobPopulationNext,\012	     //__global       float*           restrict GlobEnergyNext,\012             //__global       unsigned int*    restrict GlobPRNG,\012	     __global const kernelconstant*  restrict KerConst,\012	     __global const Dockparameters*  restrict DockConst)\012{\012/*\012	__local float loc_coords_x[MAX_NUM_OF_ATOMS];\012	__local float loc_coords_y[MAX_NUM_OF_ATOMS];\012	__local float loc_coords_z[MAX_NUM_OF_ATOMS];\012*/\012\012	float __attribute__((register)) loc_coords_x[MAX_NUM_OF_ATOMS];\012	float __attribute__((register)) loc_coords_y[MAX_NUM_OF_ATOMS];\012	float __attribute__((register)) loc_coords_z[MAX_NUM_OF_ATOMS];\012\012\012	char active = 1;\012	char mode   = 0;\012	uint cnt    = 0;   \012\012	float interE;\012	float partialE1, partialE2, partialE3;\012\012\012	char atom1_id, atom1_typeid;\012	float x, y, z, dx, dy, dz, q;\012	float cube [2][2][2];\012	float weights [2][2][2];\012	int x_low, x_high, y_low, y_high, z_low, z_high;\012\012	// L30nardoSV	\012	unsigned int  mul_tmp;\012	unsigned char g1 = DockConst->gridsize_x; 	\012	unsigned int  g2 = DockConst->gridsize_x * DockConst->gridsize_y;         \012	unsigned int  g3 = DockConst->gridsize_x * DockConst->gridsize_y * DockConst->gridsize_z;\012        unsigned int  ylow_times_g1, yhigh_times_g1;\012        unsigned int  zlow_times_g2, zhigh_times_g2;\012	unsigned int  cube_000, cube_100, cube_010, cube_110;\012        unsigned int  cube_001, cube_101, cube_011, cube_111;\012\012while(active) {\012	//printf(\"BEFORE In INTER CHANNEL\\n\");\012	// --------------------------------------------------------------\012	// Wait for ligand atomic coordinates in channel\012	// --------------------------------------------------------------\012\012	for (uint pipe_cnt=0; pipe_cnt<DockConst->num_of_atoms; pipe_cnt++) {\012		loc_coords_x[pipe_cnt] = read_channel_altera(chan_Conf2Intere_x);\012		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);\012		loc_coords_y[pipe_cnt] = read_channel_altera(chan_Conf2Intere_y);\012		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);\012		loc_coords_z[pipe_cnt] = read_channel_altera(chan_Conf2Intere_z);\012		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);\012		active = read_channel_altera(chan_Conf2Intere_active);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		mode   = read_channel_altera(chan_Conf2Intere_mode);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		cnt    = read_channel_altera(chan_Conf2Intere_cnt);\012	}\012	// --------------------------------------------------------------\012	//printf(\"AFTER In INTER CHANNEL\\n\");\012\012	if (active == 0) {printf(\"	%-20s: %s\\n\", \"Krnl_InterE\", \"disabled\");}\012\012	interE = 0.0f;\012	partialE1 = 0.0f;\012	partialE2 = 0.0f;\012	partialE3 = 0.0f;\012\012	// for each atom\012	// **********************************************\012	// ADD VENDOR SPECIFIC PRAGMA	\012	// **********************************************\012	LOOP_INTERE_1:\012	for (atom1_id=0; atom1_id<DockConst->num_of_atoms; atom1_id++)		\012	{\012		atom1_typeid = KerConst->atom_types_const[atom1_id];\012		x = loc_coords_x[atom1_id];\012		y = loc_coords_y[atom1_id];\012		z = loc_coords_z[atom1_id];\012		q = KerConst->atom_charges_const[atom1_id];\012\012		// if the atom is outside of the grid\012		if ((x < 0.0f) || (x >= DockConst->gridsize_x-1) || \012		    (y < 0.0f) || (y >= DockConst->gridsize_y-1) ||\012		    (z < 0.0f) || (z >= DockConst->gridsize_z-1))	\012		{\012			//penalty is 2^24 for each atom outside the grid\012			/*\012			interE += 16777216.0f; \012			*/\012			partialE1 = 16777216.0f; \012			partialE2 = 0.0f;\012			partialE3 = 0.0f;\012		} \012		else \012		{\012			x_low  = convert_int(floor(x));\012			y_low  = convert_int(floor(y));\012			z_low  = convert_int(floor(z));\012			x_high = convert_int(ceil(x));	 \012			y_high = convert_int(ceil(y));\012			z_high = convert_int(ceil(z));\012			dx = x - x_low; dy = y - y_low; dz = z - z_low;\012\012			// Calculates the weights for trilinear interpolation\012			// based on the location of the point inside\012			weights [0][0][0] = (1-dx)*(1-dy)*(1-dz);\012			weights [1][0][0] = dx*(1-dy)*(1-dz);\012			weights [0][1][0] = (1-dx)*dy*(1-dz);\012			weights [1][1][0] = dx*dy*(1-dz);\012			weights [0][0][1] = (1-dx)*(1-dy)*dz;\012			weights [1][0][1] = dx*(1-dy)*dz;\012			weights [0][1][1] = (1-dx)*dy*dz;\012			weights [1][1][1] = dx*dy*dz;\012\012			#if defined (DEBUG_KERNEL_INTER_E)\012			printf(\"\\n\\nPartial results for atom with id %i:\\n\", atom1_id);\012			printf(\"x_low = %d, x_high = %d, x_frac = %f\\n\", x_low, x_high, dx);\012			printf(\"y_low = %d, y_high = %d, y_frac = %f\\n\", y_low, y_high, dy);\012			printf(\"z_low = %d, z_high = %d, z_frac = %f\\n\\n\", z_low, z_high, dz);\012			printf(\"coeff(0,0,0) = %f\\n\", weights [0][0][0]);\012			printf(\"coeff(1,0,0) = %f\\n\", weights [1][0][0]);\012			printf(\"coeff(0,1,0) = %f\\n\", weights [0][1][0]);\012			printf(\"coeff(1,1,0) = %f\\n\", weights [1][1][0]);\012			printf(\"coeff(0,0,1) = %f\\n\", weights [0][0][1]);\012			printf(\"coeff(1,0,1) = %f\\n\", weights [1][0][1]);\012			printf(\"coeff(0,1,1) = %f\\n\", weights [0][1][1]);\012			printf(\"coeff(1,1,1) = %f\\n\", weights [1][1][1]);\012			#endif\012\012			// L30nardoSV\012			ylow_times_g1  = y_low*g1;	yhigh_times_g1 = y_high*g1;\012        	        zlow_times_g2  = z_low*g2;	zhigh_times_g2 = z_high*g2;\012        	        cube_000 = x_low  + ylow_times_g1  + zlow_times_g2;\012        	        cube_100 = x_high + ylow_times_g1  + zlow_times_g2;\012        	        cube_010 = x_low  + yhigh_times_g1 + zlow_times_g2;\012        	        cube_110 = x_high + yhigh_times_g1 + zlow_times_g2;\012        	        cube_001 = x_low  + ylow_times_g1  + zhigh_times_g2;\012        	        cube_101 = x_high + ylow_times_g1  + zhigh_times_g2;\012        	        cube_011 = x_low  + yhigh_times_g1 + zhigh_times_g2;\012        	        cube_111 = x_high + yhigh_times_g1 + zhigh_times_g2;\012        	        mul_tmp = atom1_typeid*g3;\012\012			//energy contribution of the current grid type\012	                cube [0][0][0] = *(GlobFgrids + cube_000 + mul_tmp);\012        	        cube [1][0][0] = *(GlobFgrids + cube_100 + mul_tmp);\012        	        cube [0][1][0] = *(GlobFgrids + cube_010 + mul_tmp);\012        	        cube [1][1][0] = *(GlobFgrids + cube_110 + mul_tmp);\012        	        cube [0][0][1] = *(GlobFgrids + cube_001 + mul_tmp);\012        	        cube [1][0][1] = *(GlobFgrids + cube_101 + mul_tmp);\012        	        cube [0][1][1] = *(GlobFgrids + cube_011 + mul_tmp);\012        	        cube [1][1][1] = *(GlobFgrids + cube_111 + mul_tmp);\012		\012			#if defined (DEBUG_KERNEL_INTER_E)\012			printf(\"Interpolation of van der Waals map:\\n\");\012			printf(\"cube(0,0,0) = %f\\n\", cube [0][0][0]);\012			printf(\"cube(1,0,0) = %f\\n\", cube [1][0][0]);\012			printf(\"cube(0,1,0) = %f\\n\", cube [0][1][0]);\012			printf(\"cube(1,1,0) = %f\\n\", cube [1][1][0]);\012			printf(\"cube(0,0,1) = %f\\n\", cube [0][0][1]);\012			printf(\"cube(1,0,1) = %f\\n\", cube [1][0][1]);\012			printf(\"cube(0,1,1) = %f\\n\", cube [0][1][1]);\012			printf(\"cube(1,1,1) = %f\\n\", cube [1][1][1]);\012			#endif\012\012			/*\012			interE += TRILININTERPOL(cube, weights);\012			*/\012			partialE1 = TRILININTERPOL(cube, weights);\012\012			#if defined (DEBUG_KERNEL_INTER_E)\012			printf(\"interpolated value = %f\\n\\n\", TRILININTERPOL(cube, weights));\012			#endif\012\012			//energy contribution of the electrostatic grid\012			atom1_typeid = DockConst->num_of_atypes;\012			mul_tmp = atom1_typeid*g3;\012        	        cube [0][0][0] = *(GlobFgrids + cube_000 + mul_tmp);\012        	        cube [1][0][0] = *(GlobFgrids + cube_100 + mul_tmp);\012        	        cube [0][1][0] = *(GlobFgrids + cube_010 + mul_tmp);\012        	        cube [1][1][0] = *(GlobFgrids + cube_110 + mul_tmp);\012        	        cube [0][0][1] = *(GlobFgrids + cube_001 + mul_tmp);\012        	        cube [1][0][1] = *(GlobFgrids + cube_101 + mul_tmp);\012        	        cube [0][1][1] = *(GlobFgrids + cube_011 + mul_tmp);\012        	        cube [1][1][1] = *(GlobFgrids + cube_111 + mul_tmp);\012\012			#if defined (DEBUG_KERNEL_INTER_E)\012			printf(\"Interpolation of electrostatic map:\\n\");\012			printf(\"cube(0,0,0) = %f\\n\", cube [0][0][0]);\012			printf(\"cube(1,0,0) = %f\\n\", cube [1][0][0]);\012			printf(\"cube(0,1,0) = %f\\n\", cube [0][1][0]);\012			printf(\"cube(1,1,0) = %f\\n\", cube [1][1][0]);\012			printf(\"cube(0,0,1) = %f\\n\", cube [0][0][1]);\012			printf(\"cube(1,0,1) = %f\\n\", cube [1][0][1]);\012			printf(\"cube(0,1,1) = %f\\n\", cube [0][1][1]);\012			printf(\"cube(1,1,1) = %f\\n\", cube [1][1][1]);\012			#endif\012\012			/*\012			interE += q * TRILININTERPOL(cube, weights);\012			*/\012			partialE2 = q * TRILININTERPOL(cube, weights);\012		\012			#if defined (DEBUG_KERNEL_INTER_E)\012			printf(\"interpoated value = %f, multiplied by q = %f\\n\\n\", TRILININTERPOL(cube, weights), q*TRILININTERPOL(cube, weights));\012			#endif\012\012			//energy contribution of the desolvation grid\012			atom1_typeid = DockConst->num_of_atypes+1;\012			mul_tmp = atom1_typeid*g3;\012        	        cube [0][0][0] = *(GlobFgrids + cube_000 + mul_tmp);\012        	        cube [1][0][0] = *(GlobFgrids + cube_100 + mul_tmp);\012        	        cube [0][1][0] = *(GlobFgrids + cube_010 + mul_tmp);\012        	        cube [1][1][0] = *(GlobFgrids + cube_110 + mul_tmp);\012        	        cube [0][0][1] = *(GlobFgrids + cube_001 + mul_tmp);\012        	        cube [1][0][1] = *(GlobFgrids + cube_101 + mul_tmp);\012        	        cube [0][1][1] = *(GlobFgrids + cube_011 + mul_tmp);\012        	        cube [1][1][1] = *(GlobFgrids + cube_111 + mul_tmp);\012\012			#if defined (DEBUG_KERNEL_INTER_E)\012			printf(\"Interpolation of desolvation map:\\n\");\012			printf(\"cube(0,0,0) = %f\\n\", cube [0][0][0]);\012			printf(\"cube(1,0,0) = %f\\n\", cube [1][0][0]);\012			printf(\"cube(0,1,0) = %f\\n\", cube [0][1][0]);\012			printf(\"cube(1,1,0) = %f\\n\", cube [1][1][0]);\012			printf(\"cube(0,0,1) = %f\\n\", cube [0][0][1]);\012			printf(\"cube(1,0,1) = %f\\n\", cube [1][0][1]);\012			printf(\"cube(0,1,1) = %f\\n\", cube [0][1][1]);\012			printf(\"cube(1,1,1) = %f\\n\", cube [1][1][1]);\012			#endif\012\012			/*\012			interE += fabs(q) * TRILININTERPOL(cube, weights);\012			*/\012			partialE3 = fabs(q) * TRILININTERPOL(cube, weights);\012\012			#if defined (DEBUG_KERNEL_KERNEL_INTER_E)\012			printf(\"interploated value = %f, multiplied by abs(q) = %f\\n\\n\", TRILININTERPOL(cube, weights), fabs(q) * trilin_interpol(cube, weights));\012			printf(\"Current value of intermolecular energy = %f\\n\\n\\n\", interE);\012			#endif\012		}\012\012\012		interE += partialE1 + partialE2 + partialE3;\012	} // End of LOOP_INTERE_1:	\012\012	// --------------------------------------------------------------\012	// Send intermolecular energy to chanel\012	// --------------------------------------------------------------\012	write_channel_altera(chan_Intere2Store_intere, interE);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	write_channel_altera(chan_Intere2Store_active, active);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	write_channel_altera(chan_Intere2Store_mode,   mode);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	write_channel_altera(chan_Intere2Store_cnt,    cnt);\012	// --------------------------------------------------------------\012 	\012	} // End of while(1)\012}\012// --------------------------------------------------------------------------\012// --------------------------------------------------------------------------\012"}, {"index":3, "path":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl", "name":"Krnl_IntraE.cl", "content":"// --------------------------------------------------------------------------\012// Originally from: processligand.c\012// --------------------------------------------------------------------------\012__kernel __attribute__ ((reqd_work_group_size(1,1,1)))\012void Krnl_IntraE(\012             //__global const float*           restrict GlobFgrids,\012	     //__global       float*           restrict GlobPopulationCurrent,\012	     //__global       float*           restrict GlobEnergyCurrent,\012	     //__global       float*           restrict GlobPopulationNext,\012	     //__global       float*           restrict GlobEnergyNext,\012             //__global       unsigned int*    restrict GlobPRNG,\012	     __global const kernelconstant*  restrict KerConst,\012	     __global const Dockparameters*  restrict DockConst)\012{\012\012	__local float loc_coords_x[MAX_NUM_OF_ATOMS];\012	__local float loc_coords_y[MAX_NUM_OF_ATOMS];\012	__local float loc_coords_z[MAX_NUM_OF_ATOMS];\012/*\012	float __attribute__((register)) loc_coords_x[MAX_NUM_OF_ATOMS];\012	float __attribute__((register)) loc_coords_y[MAX_NUM_OF_ATOMS];\012	float __attribute__((register)) loc_coords_z[MAX_NUM_OF_ATOMS];\012*/\012	char active = 1;\012	char mode   = 0;\012	uint cnt    = 0;   \012\012	int contributor_counter;\012	char atom1_id, atom2_id, atom1_typeid, atom2_typeid;\012	float subx, suby, subz, distance_leo;\012\012 	// Altera doesn't support power function 	\012	// so this is implemented with multiplications 	\012	// Full precision is used 	\012	float distance_pow_2, distance_pow_4, distance_pow_6, distance_pow_10, distance_pow_12;\012	float intraE;\012\012while(active) {\012	//printf(\"BEFORE In INTRA CHANNEL\\n\");\012	// --------------------------------------------------------------\012	// Wait for ligand atomic coordinates in channel\012	// --------------------------------------------------------------\012\012	for (uint pipe_cnt=0; pipe_cnt<DockConst->num_of_atoms; pipe_cnt++) {\012		loc_coords_x[pipe_cnt] = read_channel_altera(chan_Conf2Intrae_x);\012		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);\012		loc_coords_y[pipe_cnt] = read_channel_altera(chan_Conf2Intrae_y);\012		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);\012		loc_coords_z[pipe_cnt] = read_channel_altera(chan_Conf2Intrae_z);\012		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);\012		active = read_channel_altera(chan_Conf2Intrae_active);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		mode   = read_channel_altera(chan_Conf2Intrae_mode);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		cnt    = read_channel_altera(chan_Conf2Intrae_cnt);\012	}\012	// --------------------------------------------------------------\012	//printf(\"AFTER In INTRA CHANNEL\\n\");\012\012	if (active == 0) {printf(\"	%-20s: %s\\n\", \"Krnl_IntraE\", \"disabled\");}\012\012	intraE = 0.0f;\012\012	//for each intramolecular atom contributor pair\012	// **********************************************\012	// ADD VENDOR SPECIFIC PRAGMA\012	// **********************************************\012	LOOP_INTRAE_1:\012	for (uint contributor_counter=0; contributor_counter<DockConst->num_of_intraE_contributors; contributor_counter++)\012	{	\012		atom1_id = KerConst->intraE_contributors_const[3*contributor_counter]; \012		atom2_id = KerConst->intraE_contributors_const[3*contributor_counter+1];\012\012		subx = loc_coords_x[atom1_id] - loc_coords_x[atom2_id];\012		suby = loc_coords_y[atom1_id] - loc_coords_y[atom2_id];\012		subz = loc_coords_z[atom1_id] - loc_coords_z[atom2_id];\012		distance_leo = sqrt(subx*subx + suby*suby + subz*subz)*DockConst->grid_spacing;\012\012		if (distance_leo < 1.0f) {\012			#if defined (DEBUG_KERNEL_INTRA_E)\012			printf(\"\\n\\nToo low distance (%f) between atoms %u and %u\\n\", distance_leo, atom1_id, atom2_id);\012			#endif\012			//return HIGHEST_ENERGY;	//returning maximal value\012			distance_leo = 1.0f;\012		}\012\012		#if defined (DEBUG_KERNEL_INTRA_E)\012		printf(\"\\n\\nCalculating energy contribution of atoms %u and %u\\n\", atom1_id+1, atom2_id+1);\012		printf(\"Distance: %f\\n\", distance_leo);\012		#endif\012\012		distance_pow_2  = distance_leo*distance_leo; 		\012		distance_pow_4  = distance_pow_2*distance_pow_2; 		\012		distance_pow_6  = distance_pow_2*distance_pow_4; 		\012		distance_pow_10 = distance_pow_4*distance_pow_6; 		\012		distance_pow_12 = distance_pow_6*distance_pow_6;\012		\012		//but only if the distance is less than distance cutoff value and 20.48A (because of the tables)\012		if ((distance_leo < 8.0f) && (distance_leo < 20.48f)) \012		{\012			atom1_typeid = KerConst->atom_types_const [atom1_id];\012			atom2_typeid = KerConst->atom_types_const [atom2_id];\012\012			//calculating van der Waals / hydrogen bond term\012			intraE += KerConst->VWpars_AC_const[atom1_typeid * DockConst->num_of_atypes+atom2_typeid]/distance_pow_12;\012\012			if (KerConst->intraE_contributors_const[3*contributor_counter+2] == 1)	//H-bond\012				intraE-= KerConst->VWpars_BD_const[atom1_typeid*DockConst->num_of_atypes+atom2_typeid]/distance_pow_10;	\012			else	//van der Waals\012				intraE-= KerConst->VWpars_BD_const[atom1_typeid*DockConst->num_of_atypes+atom2_typeid]/distance_pow_6;\012\012			//calculating electrostatic term\012			intraE+= DockConst->coeff_elec*KerConst->atom_charges_const[atom1_id]*KerConst->atom_charges_const[atom2_id]/(distance_leo*(-8.5525f + 86.9525f/(1.0f + 7.7839f*exp(-0.3154f*distance_leo))));\012\012			//calculating desolvation term\012			intraE+= (\012				  ( KerConst->dspars_S_const[atom1_typeid] + DockConst->qasp*fabs(KerConst->atom_charges_const[atom1_id]) ) * KerConst->dspars_V_const[atom2_typeid] + \012				  ( KerConst->dspars_S_const[atom2_typeid] + DockConst->qasp*fabs(KerConst->atom_charges_const[atom2_id]) ) * KerConst->dspars_V_const[atom1_typeid]) * \012				 DockConst->coeff_desolv*exp(-distance_leo*distance_leo/25.92f);\012	\012		} // End of if: if ((dist < dcutoff) && (dist < 20.48))	\012\012	} // End of LOOP_INTRAE_1\012\012	// --------------------------------------------------------------\012	// Send intramolecular energy to channel\012	// --------------------------------------------------------------\012	write_channel_altera(chan_Intrae2Store_intrae, intraE);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	write_channel_altera(chan_Intrae2Store_active, active);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	write_channel_altera(chan_Intrae2Store_mode,   mode);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	write_channel_altera(chan_Intrae2Store_cnt,    cnt);\012	// --------------------------------------------------------------\012\012	} // End of while(1)\012}\012// --------------------------------------------------------------------------\012// --------------------------------------------------------------------------\012"}, {"index":4, "path":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_Store.cl", "name":"Krnl_Store.cl", "content":"__kernel __attribute__ ((reqd_work_group_size(1,1,1)))\012void Krnl_Store(\012             //__global const float*           restrict GlobFgrids,\012	     //__global       float*           restrict GlobPopulationCurrent,\012	     __global       float*           restrict GlobEnergyCurrent,\012	     //__global       float*           restrict GlobPopulationNext,\012	     __global       float*           restrict GlobEnergyNext\012		//,\012             //__global       unsigned int*    restrict GlobPRNG,\012	     //__global const kernelconstant*  restrict KerConst,\012	     //__global const Dockparameters*  restrict DockConst\012	     )\012{\012	// --------------------------------------------------------------\012	// Wait for enegies\012	// --------------------------------------------------------------\012	float InterE;\012	float IntraE;\012\012	char active = 1;\012	char mode   = 0;\012	uint cnt    = 0;  \012\012 	char active1, active2;\012	char mode1, mode2;\012	uint cnt1, cnt2;\012	bool write_to_channel_ack = false;\012	bool write_to_channel_energy = false;\012\012\012	float LSenergy;\012\012while(active) {\012\012	InterE = read_channel_altera(chan_Intere2Store_intere);\012	IntraE = read_channel_altera(chan_Intrae2Store_intrae);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	active1 = read_channel_altera(chan_Intere2Store_active);\012	active2 = read_channel_altera(chan_Intrae2Store_active);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	mode1 = read_channel_altera(chan_Intere2Store_mode);\012	mode2 = read_channel_altera(chan_Intrae2Store_mode);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	cnt1  = read_channel_altera(chan_Intere2Store_cnt);\012	cnt2  = read_channel_altera(chan_Intrae2Store_cnt);\012\012	// --------------------------------------------------------------\012	\012	if (active1 != active2) {printf(\"Store error: active are not equal!\\n\");}\012	else 			{active = active1;}\012\012	if (mode1 != mode2)     {printf(\"Store error: mode are not equal!\\n\");}\012	else 			{mode = mode1;}\012\012	if (cnt1  != cnt2)      {printf(\"Store error: mode are not equal!\\n\");}\012	else 			{cnt = cnt1;}\012\012	if (active == 0) {printf(\"	%-20s: %s\\n\", \"Krnl_Store\", \"disabled\");}\012\012/*\012	switch (mode) {\012//\012		case 0:	write_channel_altera(chan_Store2GA_ack, 1);	// Signal INI, GG or LS finished \012		break;\012		case 1:	GlobEnergyCurrent[cnt] = InterE + IntraE;	// INI: Init energy calculation of pop\012		break;\012		case 2:	GlobEnergyNext[cnt] = InterE + IntraE;		// GG: Genetic Generation\012		break;\012		case 3:	LSenergy = InterE + IntraE;		// LS: Local Search\012			write_channel_altera(chan_Store2GA_ack, 1);\012			mem_fence(CLK_CHANNEL_MEM_FENCE);\012			write_channel_altera(chan_Store2GA_LSenergy, LSenergy);\012		break;\012//\012\012\012		case 4:							// Krnl_GA has finished execution!\012		break;\012	}\012*/\012\012\012\012\012	switch (mode) {\012		case STATE_IC :\012			write_to_channel_ack = false;\012			write_to_channel_energy = false;	\012			GlobEnergyCurrent[cnt] = InterE + IntraE;\012		break;\012\012		case STATE_IC_WAIT_END :\012			write_to_channel_ack = true;\012			write_to_channel_energy = false;	\012		break;\012\012		case STATE_GG :\012			write_to_channel_ack = false;	\012			write_to_channel_energy = false;	\012			GlobEnergyNext[cnt] = InterE + IntraE;\012		break;\012\012		case STATE_GG_WAIT_END :	\012			write_to_channel_ack = true;	\012			write_to_channel_energy = false;\012		break;\012\012		case STATE_LS :	\012			write_to_channel_ack = false;\012			write_to_channel_energy = false;	\012		break;\012\012		case LS_STATE_DIR_FIRST:\012	\012		break;\012\012		case LS_STATE_WAIT_FIRST:\012			LSenergy = InterE + IntraE;\012			write_to_channel_ack = false;\012			write_to_channel_energy = true;	\012		break;\012\012		case LS_STATE_ENERGY_FIRST:\012			write_to_channel_ack = false;\012			write_to_channel_energy = false;	\012		break;\012\012		\012		case LS_STATE_DIR_SECOND:\012\012		break;\012\012		case LS_STATE_WAIT_SECOND:\012			LSenergy = InterE + IntraE;\012			write_to_channel_ack = false;\012			write_to_channel_energy = true;	\012		break;\012\012		case LS_STATE_CHECK_RHO:\012			write_to_channel_ack = false;\012			write_to_channel_energy = false;	\012		break;\012\012		case LS_STATE_CHECK_TERMINATION:\012			write_to_channel_ack = false;\012			write_to_channel_energy = false;	\012		break;\012\012\012		case STATE_LS_WAIT_END :	\012			write_to_channel_ack = false;\012			write_to_channel_energy = false;	\012		break;\012\012		case STATE_END :							\012			write_to_channel_ack = false;	\012			write_to_channel_energy = false;		\012		break;\012\012		case STATE_WAIT_END :	\012			write_to_channel_ack = true;	\012			write_to_channel_energy = false;					\012		break;\012\012		case STATE_OFF :							\012			write_to_channel_ack = false;\012			write_to_channel_energy = false;\012		break;\012	}\012\012\012	if (write_to_channel_ack == true) {	\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		write_channel_altera(chan_Store2GA_ack, 1);	// Signal IC finished \012	}\012\012	if (write_to_channel_energy == true) {\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		write_channel_altera(chan_Store2GA_LSenergy, LSenergy);\012	}\012\012} // End of while(1)\012\012}\012// --------------------------------------------------------------------------\012// --------------------------------------------------------------------------\012"}, {"index":5, "path":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/auxiliary_genetic.cl", "name":"auxiliary_genetic.cl", "content":"// --------------------------------------------------------------------------\012// The function maps the first parameter into the interval 0..ang_max\012// by adding/subtracting n*ang_max to/from it.\012// Originally from: searchoptimum.c\012// --------------------------------------------------------------------------\012void map_angle(__local float* angle, const float ang_max)\012{\012	float x = (*angle);\012\012	// **********************************************\012	// ADD VENDOR SPECIFIC PRAGMA\012	// **********************************************\012	LOOP_WHILE_MAP_ANGLE_1:\012	while (x < 0.0f) {\012		x += ang_max;\012	}\012\012	// **********************************************\012	// ADD VENDOR SPECIFIC PRAGMA\012	// **********************************************\012	LOOP_WHILE_MAP_ANGLE_2:\012	while (x > ang_max) {\012		x -= ang_max;\012	}\012\012	(*angle) = x;\012}\012\012// --------------------------------------------------------------------------\012// The function finds the best entity based on the energy value \012// i.e. sum of the 38th and 39th element\012// and returns its ID in the best_entity parameter. \012// The pop_size parameter must be equal to the population size.\012// Originally from: searchoptimum.c\012// --------------------------------------------------------------------------\012uint find_best(__global const float* restrict GlobEnergyCurrent, \012	       __local        float* restrict loc_energies,\012		        const uint pop_size)\012{\012	uint i;\012	uint best_entity = 0;\012\012	// **********************************************\012	// ADD VENDOR SPECIFIC PRAGMA\012	// **********************************************\012	LOOP_FIND_BEST_1:\012	for (i=0; i<pop_size; i++) {\012		loc_energies[i] = GlobEnergyCurrent[i];\012	}\012\012	// **********************************************\012	// ADD VENDOR SPECIFIC PRAGMA\012	// *********************************************\012	LOOP_FIND_BEST_2:\012	for (i=1; i<pop_size; i++) {\012\012		#if defined (DEBUG_FIND_BEST)\012		printf(\"iteration: %u, energy_iteration_entity: %f, best_entity: %u, energy_best_entity: %f ...\", \012			i, loc_energies[i], best_entity, loc_energies[best_entity]);\012		#endif\012		\012		if (loc_energies[best_entity] > loc_energies[i])    \012		{\012			best_entity = i;\012			\012			#if defined (DEBUG_FIND_BEST)\012			printf(\"RES: best_entity: %u, energy_best_entity: %f\\n\",\012			       best_entity, \012			       loc_energies[best_entity]);\012			#endif\012	\012		}\012		#if defined (DEBUG_FIND_BEST)\012		printf(\"\\n\");\012		#endif\012	}\012\012	return best_entity;\012}\012\012// --------------------------------------------------------------------------\012// --------------------------------------------------------------------------\012uint myrand_basic (__global uint* restrict GlobPRNG)\012{\012	uint temprand_uint;\012\012#if defined (REPRO)\012	temprand_uint = 1;\012#else\012	temprand_uint = GlobPRNG[0];\012	temprand_uint = (RAND_A*temprand_uint + RAND_C);\012#endif\012	GlobPRNG[0] = temprand_uint;\012\012	return temprand_uint;\012}\012\012// --------------------------------------------------------------------------\012// --------------------------------------------------------------------------\012float myrand(__global uint* restrict GlobPRNG)\012{\012	uint   temprand_uint;\012	float temprand_float;\012\012	temprand_uint = myrand_basic(GlobPRNG);\012	temprand_float = convert_float(native_divide(temprand_uint,MAX_UINT))*0.999999f;\012	return temprand_float;\012}\012\012// --------------------------------------------------------------------------\012// --------------------------------------------------------------------------\012uint myrand_uint(__global uint* restrict GlobPRNG,\012		 const uint limit)\012{\012	uint   temprand_uint;\012	temprand_uint = myrand_basic(GlobPRNG);\012	// no native_divide() used here as values are integers\012	temprand_uint = (temprand_uint/MAX_UINT)*limit;\012	return temprand_uint;\012	\012}\012\012// --------------------------------------------------------------------------\012// The function performs binary tournament selection. \012// The first parameter must containt the population data. \012// rand_level is the probability with which the new entity should be selected as parent. \012// The two selected parents are returned in the parent1 and parent2 parameters.\012// Originally from: searchoptimum.c\012// --------------------------------------------------------------------------\012void binary_tournament_selection(__global const float* restrict GlobEnergyCurrent,\012				 __global       uint*  restrict GlobPRNG,\012				                uint*           parent1, \012				                uint*           parent2,\012					  const uint            pop_size,  \012				          const float           rand_level)\012{\012	uint parent_candidates [2];\012\012	//generating two different parent candidates\012	parent_candidates [0] = myrand_uint(GlobPRNG, pop_size);\012\012	LOOP_DOWHILE_BIN_TOURNAMENT_SEL_1:\012	do\012	{\012#if defined (REPRO)\012		parent_candidates [1] = myrand_uint(GlobPRNG, pop_size) + 1;\012#else\012		parent_candidates [1] = myrand_uint(GlobPRNG, pop_size);\012#endif	\012	}\012	while (parent_candidates [0] == parent_candidates [1]);\012\012	//the better will be the first parent with rand_level prability \012	//and the second with 1-rand_level probability\012	if (GlobEnergyCurrent[parent_candidates[0]] < GlobEnergyCurrent[parent_candidates[1]])\012	{\012		if (myrand(GlobPRNG) < 100*rand_level) {*parent1 = parent_candidates [0];}\012		else			               {*parent1 = parent_candidates [1];}\012	}\012	else\012	{\012		if (myrand(GlobPRNG) < 100*rand_level) {*parent1 = parent_candidates [1];}\012		else			               {*parent1 = parent_candidates [0];}	\012	}\012\012\012	#if defined (DEBUG_TOURNAMENT_SELECTION)\012	printf(\"Selecting first parent: %u (candidates were %u (E=%f) and %u (E=%f))\\n\", *parent1, \012		parent_candidates [0], GlobEnergyCurrent [parent_candidates [0]],\012		parent_candidates [1], GlobEnergyCurrent [parent_candidates [1]]);\012	#endif\012\012	//generating two different parent candidates (which differ from parent1 as well)\012	LOOP_DOWHILE_BIN_TOURNAMENT_SEL_2:\012	do\012#if defined (REPRO)\012		parent_candidates [0] = myrand_uint(GlobPRNG, pop_size) + 2;\012#else\012		parent_candidates [0] = myrand_uint(GlobPRNG, pop_size);\012#endif\012	while (parent_candidates [0] == *parent1);\012\012	LOOP_DOWHILE_BIN_TOURNAMENT_SEL_3:\012	do\012#if defined (REPRO)\012		parent_candidates [1] = myrand_uint(GlobPRNG, pop_size) + 3;\012#else\012		parent_candidates [1] = myrand_uint(GlobPRNG, pop_size);\012#endif\012	while ((parent_candidates [1] == parent_candidates [0]) || (parent_candidates [1] == *parent1));\012\012	//the better will be the second parent\012	if (GlobEnergyCurrent[parent_candidates[0]] < GlobEnergyCurrent[parent_candidates[1]])\012	{\012		if (myrand(GlobPRNG) < 100*rand_level) {*parent2 = parent_candidates [0];}\012		else		          	       {*parent2 = parent_candidates [1];}\012	}\012	else\012	{\012		if (myrand(GlobPRNG) < 100*rand_level) {*parent2 = parent_candidates [1];}\012		else			               {*parent2 = parent_candidates [0];}	\012	}\012\012	#if defined (DEBUG_TOURNAMENT_SELECTION)\012	printf(\"Selecting second parent: %u (candidates were %u (E=%f) and %u (E=%f))\\n\", *parent2,\012	       parent_candidates [0], GlobEnergyCurrent [parent_candidates [0]] ,\012	       parent_candidates [1], GlobEnergyCurrent [(arent_candidates [1]]);\012	#endif\012}\012\012// --------------------------------------------------------------------------\012// The function performs crossover and mutation and \012// generates two offsprings from two parents whose genotypes are the functions parameters. \012// Mutation rate is the probability of mutating a gene in %, \012// abs_max_dmov and abs_max_dang are the maximal delta values of a translation \012// or an orientation/rotatable bond gene during mutation.\012// Originally from: searchoptimum.c\012// --------------------------------------------------------------------------\012void gen_new_genotype(__global      uint*  restrict GlobPRNG,\012		      __local const float*          parent1_genotype,\012		      __local const float*          parent2_genotype, \012		              const float           mutation_rate,\012			      const float           abs_max_dmov,\012			      const float           abs_max_dang,\012			      const float           crossover_rate,\012			      const uint            num_of_genes,\012		      __local       float*          offspring_genotype)\012{\012	uint covr_point_low, covr_point_high;\012	uint temp1, temp2;\012	uint i;\012\012	//choosing crossover points randomly\012	temp1 = myrand_uint(GlobPRNG, num_of_genes-1);\012	temp2 = myrand_uint(GlobPRNG, num_of_genes-1);\012\012\012	//if (temp1 < temp2) {covr_point_low = temp1;\012	//		    covr_point_high = temp2;}\012	//else {		    covr_point_low = temp2;\012	//		    covr_point_high = temp1;}\012\012\012	bool twopoint_cross_yes = false;\012	if (temp1 == temp2)\012	{	\012		covr_point_low = temp1;\012	}\012	else\012	{\012		twopoint_cross_yes = true;\012		if (temp1 < temp2) {\012			covr_point_low = temp1;\012			covr_point_high = temp2;\012		}\012		else {		    \012			covr_point_low = temp2;\012			covr_point_high = temp1;\012		}\012	}\012\012	#if defined (DEBUG_GEN_NEW_GENOTYPE)\012	printf(\"Crossover points: low: %u, high: %u\\n\", covr_point_low, covr_point_high);\012	printf(\"Parent1: \");\012	for (i=0; i<num_of_genes; i++) {printf(\"%f \", parent1_genotype [i]);} printf(\"\\n\");\012\012	printf(\"Parent2: \");\012	for (i=0; i<num_of_genes; i++) {printf(\"%f \", parent2_genotype [i]);} printf(\"\\n\");\012	#endif\012\012	//performing crossover\012	if (crossover_rate > 100.0f*myrand(GlobPRNG))\012	{\012		//two-point crossover\012		//if (covr_point_low != covr_point_high)\012		if (twopoint_cross_yes == true)\012		{\012			// **********************************************\012			// ADD VENDOR SPECIFIC PRAGMA\012			// **********************************************\012			LOOP_GEN_NEW_GENOTYPE_1:\012			for (i=0; i<num_of_genes; i++)\012			{\012				if ((i<=covr_point_low) || (i>covr_point_high)) \012				{\012					offspring_genotype [i] = parent1_genotype[i];\012				}\012				else {\012					offspring_genotype [i] = parent2_genotype[i];\012				}\012			}\012		}\012		//one-point crossover\012		else {\012			// **********************************************\012			// ADD VENDOR SPECIFIC PRAGMA\012			// **********************************************\012			LOOP_GEN_NEW_GENOTYPE_2:\012			for (i=0; i<num_of_genes; i++)\012			{\012				if (i <= covr_point_low)\012				{\012					offspring_genotype [i] = parent1_genotype[i];\012				}\012				else {\012					offspring_genotype [i] = parent2_genotype[i];\012				}\012			}\012		}\012\012		#if defined (DEBUG_GEN_NEW_GENOTYPE)\012		printf(\"Offspring1 after crossover: \");\012		for (i=0; i<num_of_genes; i++) {printf(\"%f \", offspring_genotype [i]);} printf(\"\\n\");\012		#endif\012\012	}\012	else	//if no crossover, the offsprings are the parents\012	{\012		// **********************************************\012		// ADD VENDOR SPECIFIC PRAGMA\012		// **********************************************\012		LOOP_GEN_NEW_GENOTYPE_3:\012		for (i=0; i<num_of_genes; i++)\012		{\012			offspring_genotype [i] = parent1_genotype[i];\012		}\012\012		#if defined (DEBUG_GEN_NEW_GENOTYPE)\012		printf(\"No crossover, offsprings' genotypes equals to those of the parents\\n\");\012		#endif\012	}\012\012	//performing mutation\012\012	////mutating first offspring\012	//// THIS LOOP IS NOT PIPELINED AS IT CONTAINS ANOTHER LOOP\012	////__attribute__ ((xcl_pipeline_loop))\012	//LOOP_GEN_NEW_GENOTYPE_4:\012	\012//	for (i=0; i<num_of_genes; i++)\012//	{\012//		if (mutation_rate > 100.0f*myrand(GlobPRNG))\012//		{\012//			if (i < 3)\012//			{\012//				offspring_genotype [i] = offspring1genotype [i] + 2.0f*abs_max_dmov*myrand(GlobPRNG)-abs_max_dmov;\012//			}\012//			else\012//			{\012//				offspring_genotype [i] = (offspring_genotype [i] + 2.0f*abs_max_dang*myrand(GlobPRNG)-abs_max_dang);\012//\012//				if (i == 4) {map_angle(&(offspring_genotype [i]), 180.0f);}	//mapping angle to 0..180\012//				else        {map_angle(&(offspring_genotype [i]), 360.0f);}	//mapping angle to 0..360\012//\012//			}\012//		}\012//	}\012\012	// **********************************************\012	// ADD VENDOR SPECIFIC PRAGMA\012	// **********************************************\012	LOOP_GEN_NEW_GENOTYPE_4:\012	for (i=0; i<3; i++)\012	{\012		if (mutation_rate > 100*myrand(GlobPRNG))\012		{\012			offspring_genotype [i] = offspring_genotype [i] + 2*abs_max_dmov*myrand(GlobPRNG)-abs_max_dmov;\012		}\012	}\012\012	if (mutation_rate > 100*myrand(GlobPRNG))\012	{\012		offspring_genotype [3] = offspring_genotype [3] + 2*abs_max_dmov*myrand(GlobPRNG)-abs_max_dmov;\012		map_angle(&(offspring_genotype [3]), 360.0f);\012	}\012		\012	if (mutation_rate > 100*myrand(GlobPRNG))\012	{\012		offspring_genotype [4] = offspring_genotype [4] + 2*abs_max_dang*myrand(GlobPRNG)-abs_max_dang;\012		map_angle(&(offspring_genotype [4]), 180.0f);\012	}\012\012	// **********************************************\012	// ADD VENDOR SPECIFIC PRAGMA\012	// **********************************************\012	LOOP_GEN_NEW_GENOTYPE_5:\012	for (i=5; i<num_of_genes; i++)\012	{\012		if (mutation_rate > 100*myrand(GlobPRNG))\012		{\012			offspring_genotype [i] = offspring_genotype [i] + 2*abs_max_dang*myrand(GlobPRNG)-abs_max_dang;\012			map_angle(&(offspring_genotype [i]), 360.0f);	//mapping angle to 0..360\012		}\012	}\012\012	#if defined (DEBUG_GEN_NEW_GENOTYPE)\012	printf(\"Offspring1 after mutation: \");\012	for (i=0; i<num_of_genes; i++) {printf(\"%f \", offspring_genotype [i]);} printf(\"\\n\");\012	#endif\012\012}\012"}];
+;var fileJSON=[{"index":0, "path":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_GA.cl", "name":"Krnl_GA.cl", "content":"// Enable the channels extension\012#pragma OPENCL EXTENSION cl_altera_channels : enable\012\012//IC: initial calculation of energy of populations\012//GG: genetic generation \012//LS: local search\012//OFF: everything is done, disable other kernels\012/*\012enum STATES {S_IC 		= 0,		 \012	     S_IC_WAIT_END	= 1,\012	     S_GG		= 2,\012	     S_GG_WAIT_END	= 3,\012             S_LS		= 4, 	\012	     S_LS_WAIT_END	= 5,\012	     S_OFF		= 6,\012	     S_WAIT_END_OFF	= 7\012	    };*/\012#define STATE_IC 	   0\012#define STATE_IC_WAIT_END  1\012#define STATE_GG_FIND_BEST 2\012#define STATE_GG 	   3\012#define STATE_GG_WAIT_END  4\012#define STATE_UPDATE_POP   5\012#define STATE_LS           6\012#define STATE_LS_WAIT_END  7\012#define STATE_CHECK_TERMINATION 8\012#define STATE_END 	   9\012#define STATE_WAIT_END 	   10\012#define STATE_OFF 	   11\012\012\012#define LS_STATE_DIR_FIRST	12\012#define LS_STATE_WAIT_FIRST	13\012#define LS_STATE_ENERGY_FIRST	14\012#define LS_STATE_DIR_SECOND	15\012#define LS_STATE_WAIT_SECOND	16\012#define LS_STATE_ENERGY_SECOND	17\012#define LS_STATE_CHECK_RHO	18\012#define LS_STATE_CHECK_TERMINATION 19\012\012\012// Define kernel file-scope channel variable\012// Buffered channels \012// MAX_NUM_OF_ATOMS=90\012// ACTUAL_GENOTYPE_LENGTH (MAX_NUM_OF_ROTBONDS+6) =38\012\012channel float chan_GA2Conf_genotype __attribute__((depth(38)));\012channel char  chan_GA2Conf_active;	// active 1: receiving Kernel is active, 0 receiving Kernel is disabled\012channel char  chan_GA2Conf_mode;	// mode 1 or I: init calculation energy, 2 or G: genetic generation, 3 or P: local search\012channel uint  chan_GA2Conf_cnt;		// population count\012\012\012channel float chan_Conf2Intere_x __attribute__((depth(90)));\012channel float chan_Conf2Intere_y __attribute__((depth(90)));\012channel float chan_Conf2Intere_z __attribute__((depth(90)));\012/*\012channel float chan_Conf2Intere_x __attribute__((depth(45)));\012channel float chan_Conf2Intere_y __attribute__((depth(45)));\012channel float chan_Conf2Intere_z __attribute__((depth(45)));\012*/\012channel char  chan_Conf2Intere_active;	\012channel char  chan_Conf2Intere_mode;	\012channel uint  chan_Conf2Intere_cnt;	\012\012\012channel float chan_Conf2Intrae_x __attribute__((depth(90)));\012channel float chan_Conf2Intrae_y __attribute__((depth(90)));\012channel float chan_Conf2Intrae_z __attribute__((depth(90)));\012/*\012channel float chan_Conf2Intrae_x __attribute__((depth(45)));\012channel float chan_Conf2Intrae_y __attribute__((depth(45)));\012channel float chan_Conf2Intrae_z __attribute__((depth(45)));\012*/\012channel char  chan_Conf2Intrae_active;	\012channel char  chan_Conf2Intrae_mode;	\012channel uint  chan_Conf2Intrae_cnt;\012\012channel float chan_Intere2Store_intere;\012channel char  chan_Intere2Store_active;	\012channel char  chan_Intere2Store_mode;	\012channel uint  chan_Intere2Store_cnt;\012\012channel float chan_Intrae2Store_intrae;\012channel char  chan_Intrae2Store_active;	\012channel char  chan_Intrae2Store_mode;	\012channel uint  chan_Intrae2Store_cnt;\012\012channel char  chan_Store2GA_ack;\012channel float chan_Store2GA_LSenergy;\012\012#include \"../defines.h\"\012\012// Next structures were copied from calcenergy.h\012typedef struct\012{\012	char  	 	num_of_atoms;\012	char   		num_of_atypes;\012	int    		num_of_intraE_contributors;\012	char   		gridsize_x;\012	char   		gridsize_y;\012	char   		gridsize_z;\012	float  		grid_spacing;\012/*\012	float* 		fgrids;\012*/\012	int    		rotbondlist_length;\012	float  		coeff_elec;\012	float  		coeff_desolv;\012/*\012	float* 		conformations_current;\012	float* 		energies_current;\012	float* 		conformations_next;\012	float* 		energies_next;\012	int*   		evals_of_new_entities;\012	unsigned int* 	prng_states;\012*/\012\012	// L30nardoSV added\012	unsigned int num_of_energy_evals;\012	unsigned int num_of_generations;\012\012	int    		pop_size;\012	int    		num_of_genes;\012	float  		tournament_rate;\012	float  		crossover_rate;\012	float  		mutation_rate;\012	float  		abs_max_dmov;\012	float  		abs_max_dang;\012	float  		lsearch_rate;\012	unsigned int 	num_of_lsentities;\012	float  		rho_lower_bound;\012	float  		base_dmov_mul_sqrt3;\012	float  		base_dang_mul_sqrt3;\012	unsigned int 	cons_limit;\012	unsigned int 	max_num_of_iters;\012	float  		qasp;\012} Dockparameters;\012\012// Constant struct\012typedef struct\012{\012       float atom_charges_const[MAX_NUM_OF_ATOMS];\012       char  atom_types_const  [MAX_NUM_OF_ATOMS];\012       char  intraE_contributors_const[3*MAX_INTRAE_CONTRIBUTORS];\012       float VWpars_AC_const   [MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES];\012       float VWpars_BD_const   [MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES];\012       float dspars_S_const    [MAX_NUM_OF_ATYPES];\012       float dspars_V_const    [MAX_NUM_OF_ATYPES];\012       int   rotlist_const     [MAX_NUM_OF_ROTATIONS];\012       float ref_coords_x_const[MAX_NUM_OF_ATOMS];\012       float ref_coords_y_const[MAX_NUM_OF_ATOMS];\012       float ref_coords_z_const[MAX_NUM_OF_ATOMS];\012       float rotbonds_moving_vectors_const[3*MAX_NUM_OF_ROTBONDS];\012       float rotbonds_unit_vectors_const  [3*MAX_NUM_OF_ROTBONDS];\012       //float ref_orientation_quats_const  [4*MAX_NUM_OF_RUNS];\012       float ref_orientation_quats_const  [4];\012} kernelconstant;\012\012#include \"auxiliary_genetic.cl\"\012//#include \"auxiliary_performls.cl\"\012\012\012// --------------------------------------------------------------------------\012// The function performs a generational genetic algorithm based search \012// on the search space.\012// The first parameter is the population which must be filled with initial values \012// before calling this function. \012// The other parameters are variables which describe the grids, \012// the docking parameters and the ligand to be docked. \012// Originally from: searchoptimum.c\012// --------------------------------------------------------------------------\012__kernel __attribute__ ((reqd_work_group_size(1,1,1)))\012void Krnl_GA(//__global const float*           restrict GlobFgrids,\012	     __global       float*           restrict GlobPopulationCurrent,\012	     __global       float*           restrict GlobEnergyCurrent,\012	     __global       float*           restrict GlobPopulationNext,\012	     __global       float*           restrict GlobEnergyNext,\012             __global       unsigned int*    restrict GlobPRNG,\012	     __global const kernelconstant*  restrict KerConst,\012	     __global const Dockparameters*  restrict DockConst,\012	     __global       unsigned int*    restrict GlobEvals_performed,\012	     __global       unsigned int*    restrict GlobGenerations_performed)\012{\012	//Print algorithm parameters\012\012	#if defined (DEBUG_KERNEL1)\012	printf(\"\\nParameters of the genetic algorihtm:\\n\");\012	printf(\"\\nLigand num_of_atoms: %u\\n\",  DockConst->num_of_atoms);\012	printf(\"Ligand num_of_atypes:  %u\\n\",  DockConst->num_of_atypes);\012	printf(\"Ligand num_of_intraE_contributors: %u\\n\",  DockConst->num_of_atypes);\012	printf(\"Grid size_x: %u\\n\", 		DockConst->gridsize_x);\012	printf(\"Grid size_y: %u\\n\",   		DockConst->gridsize_y);\012	printf(\"Grid size_z: %u\\n\",   		DockConst->gridsize_z);\012	printf(\"Grid spacing: %f\\n\",  		DockConst->grid_spacing);\012	printf(\"Ligand rotbondlist_length: %u\\n\",  DockConst->rotbondlist_length);\012	printf(\"Ligand coeff_elec: %f\\n\",  	DockConst->coeff_elec);\012	printf(\"Ligand coeff_desolv: %f\\n\",  	DockConst->coeff_desolv);\012	printf(\"\\nnum_of_energy_evals: %u\\n\",   DockConst->num_of_energy_evals);\012	printf(\"num_of_generations: %u\\n\",   	DockConst->num_of_generations);\012	printf(\"Population size: %u\\n\",         DockConst->pop_size);\012	printf(\"Number of genes: %u\\n\",         DockConst->num_of_genes);\012	printf(\"Tournament rate: %f\\n\",  	DockConst->tournament_rate);\012	printf(\"Crossover rate: %f\\n\",  	DockConst->crossover_rate);\012	printf(\"Mutation rate: %f\\n\",  		DockConst->mutation_rate);\012	printf(\"Maximal delta movement during mutation: +/-%fA\\n\", DockConst->abs_max_dmov);\012	printf(\"maximal delta angle during mutation: +/-%f°\\n\",    DockConst->abs_max_dang);\012	printf(\"LS rate: %f\\n\",  		DockConst->lsearch_rate);\012	printf(\"LS num_of_lsentities: %u\\n\",    DockConst->num_of_lsentities);\012	printf(\"LS rho_lower_bound: %f\\n\",      DockConst->rho_lower_bound);	 //Rho lower bound\012	printf(\"LS base_dmov_mul_sqrt3: %f\\n\",  DockConst->base_dmov_mul_sqrt3); //Maximal delta movement during ls\012	printf(\"LS base_dang_mul_sqrt3: %f\\n\",  DockConst->base_dang_mul_sqrt3); //Maximal delta angle during ls\012	printf(\"LS cons_limit: %u\\n\",           DockConst->cons_limit);\012	printf(\"LS max_num_of_iters: %u\\n\",     DockConst->max_num_of_iters);\012	printf(\"qasp: %f\\n\",     DockConst->qasp);\012	#endif\012\012	//STATES docking_state = S_IC;\012	\012	// \012	__local float genotype [ACTUAL_GENOTYPE_LENGTH];\012	\012	// Find_best\012	uint best_entity_id;\012	__local float loc_energies[MAX_POPSIZE];\012\012	// Binary tournament\012	uint parent1, parent2;\012	__local float local_entity_1     [ACTUAL_GENOTYPE_LENGTH];\012	__local float local_entity_2     [ACTUAL_GENOTYPE_LENGTH];	\012	__local float offspring_genotype [ACTUAL_GENOTYPE_LENGTH];\012\012	// local search\012	uint entity_for_ls;\012	uint LS_eval;\012	uint evals_for_ls_in_this_cycle;\012	uint num_of_evals_for_ls  = 0;\012	//__local float local_entity_ls	 [ACTUAL_GENOTYPE_LENGTH];\012	//__local float entity_possible_new_genotype [ACTUAL_GENOTYPE_LENGTH];\012	float local_entity_energy;\012\012	// --------------------------------------------\012	// moved from auxiliary_performls.cl\012	float rho;\012	float candidate_energy;\012	float offspring_energy;\012\012	float genotype_deviate  [ACTUAL_GENOTYPE_LENGTH];		//38 would be enough...\012	float genotype_bias     [ACTUAL_GENOTYPE_LENGTH];\012\012	uint cons_succ = 0;\012	uint cons_fail = 0;	\012	uint iteration_cnt = 0;\012	\012\012	// --------------------------------------------\012\012	uint ls_ent_cnt=0;\012\012\012	//Calculating energies of initial population\012	uint eval_cnt = 0;\012	uint generation_cnt = 1;\012\012	bool active = true;\012	char active_work_kernels = 1;\012	//char mode   = 1;\012	char mode   = STATE_IC;\012	char ack    = 0;\012\012	bool write_to_channel_genotype = false;\012	bool read_from_channel_ack     = false;\012	bool read_from_channel_energy  = false;\012\012\012\012\012\012\012\012\012///*\012	\012\012	// State machine\012	uint pop_cnt = 0;	\012	bool first_step = true;\012\012\012	while (active) {\012\012\012	switch (mode) {\012		// ---------------------------------------------------------------------------------------------------------\012		case STATE_IC :			// IC: Init energy calculation of pop\012			if (pop_cnt < DockConst->pop_size-1) {\012				mode = STATE_IC;\012				write_to_channel_genotype = true;\012				read_from_channel_ack     = false;\012				read_from_channel_energy  = false;\012\012				if (first_step == true) {\012					first_step = false;\012				}\012				else {\012					pop_cnt++;\012				}\012					\012				for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {\012					genotype[pipe_cnt] = GlobPopulationCurrent[pop_cnt*ACTUAL_GENOTYPE_LENGTH+ pipe_cnt];\012				}	\012			}\012			else {\012				mode = STATE_IC_WAIT_END;\012				write_to_channel_genotype  = true;\012				read_from_channel_ack      = false;\012				read_from_channel_energy   = false;\012\012				for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {\012					genotype[pipe_cnt] = 0;\012				}	\012			}					\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case STATE_IC_WAIT_END :	// Signal IC finished \012			mode = STATE_GG_FIND_BEST;\012			write_to_channel_genotype = false;\012			read_from_channel_ack = true;\012			eval_cnt = DockConst->pop_size;	\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case STATE_GG_FIND_BEST:\012			mode = STATE_GG;\012			write_to_channel_genotype = false;\012			read_from_channel_ack = false ;\012\012			pop_cnt = 0;\012\012			//Identifying best entity\012			best_entity_id = find_best(GlobEnergyCurrent, loc_energies, DockConst->pop_size); \012			\012			//elitism - copying the best entity to new population\012			for (uint i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {\012				GlobPopulationNext[i] = GlobPopulationCurrent[best_entity_id*ACTUAL_GENOTYPE_LENGTH+i];\012			}\012			GlobEnergyNext[best_entity_id] = GlobEnergyCurrent[best_entity_id];\012\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case STATE_GG :			// GG: Genetic Generation\012			pop_cnt++;\012\012			if (pop_cnt < DockConst->pop_size) {\012				mode = STATE_GG;\012				write_to_channel_genotype = true;\012				read_from_channel_ack = false;\012\012				//selecting two individuals randomly\012				binary_tournament_selection(GlobEnergyCurrent, GlobPRNG, &parent1, &parent2,\012						            DockConst->pop_size, DockConst->tournament_rate);\012\012				async_work_group_copy(local_entity_1, GlobPopulationCurrent+parent1*ACTUAL_GENOTYPE_LENGTH, ACTUAL_GENOTYPE_LENGTH, 0);\012				async_work_group_copy(local_entity_2, GlobPopulationCurrent+parent2*ACTUAL_GENOTYPE_LENGTH, ACTUAL_GENOTYPE_LENGTH, 0);\012\012				// first two args are population [parent1], population [parent2]\012				gen_new_genotype(GlobPRNG, local_entity_1, local_entity_2,\012					         DockConst->mutation_rate, DockConst->abs_max_dmov, DockConst->abs_max_dang,\012					         DockConst->crossover_rate, ACTUAL_GENOTYPE_LENGTH, genotype);\012\012				async_work_group_copy(GlobPopulationNext+pop_cnt*ACTUAL_GENOTYPE_LENGTH, genotype, ACTUAL_GENOTYPE_LENGTH, 0);\012\012				//pop_cnt++;\012			}\012			else {\012				mode = STATE_GG_WAIT_END;\012				write_to_channel_genotype = true;\012				read_from_channel_ack = false;\012\012				for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {\012					genotype[pipe_cnt] = 0;\012				}	\012			}			\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case STATE_GG_WAIT_END :	// Signal GG finished 		\012			mode = STATE_UPDATE_POP;\012			write_to_channel_genotype = false;\012			read_from_channel_ack = true;\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case STATE_UPDATE_POP :\012			mode = STATE_LS;\012			write_to_channel_genotype = false;\012			read_from_channel_ack = false;\012\012			pop_cnt = 0;\012			eval_cnt += DockConst->pop_size;\012			evals_for_ls_in_this_cycle = 0;\012			//ls_ent_cnt=0;\012\012			// Updating old population with new one\012			for (uint i=0;i<DockConst->pop_size*ACTUAL_GENOTYPE_LENGTH; i++) {\012				GlobPopulationCurrent[i] = GlobPopulationNext[i];\012			}\012\012			// Updating old energy with new one\012			for (uint i=0;i<DockConst->pop_size; i++) {\012				GlobEnergyCurrent[i] = GlobEnergyNext[i];\012			}					\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case STATE_LS :			// LS: Local Search\012\012			//choosing an entity randomly,\012			//and without checking if it has already been subjected to LS in this cycle\012			entity_for_ls = myrand_uint(GlobPRNG, DockConst->pop_size);\012\012			for (uint i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {\012				offspring_genotype [i] = GlobPopulationCurrent[entity_for_ls*ACTUAL_GENOTYPE_LENGTH + i];\012				genotype_bias [i] = 0.0f;\012			}\012			offspring_energy = GlobEnergyCurrent[entity_for_ls];\012\012			mode = LS_STATE_DIR_FIRST;\012			write_to_channel_genotype = false;\012			read_from_channel_ack = false;\012\012			rho = 1.0f;\012			LS_eval = 0;\012			iteration_cnt = 0;\012\012\012/*\012			for (uint ls_ent_cnt=0; ls_ent_cnt<DockConst->num_of_lsentities; ls_ent_cnt++)	\012			{\012\012				perform_LS(GlobPopulationCurrent,\012				           GlobEnergyCurrent,\012				           GlobPRNG,\012				           KerConst,\012				           DockConst,\012				           entity_for_ls,\012				           local_entity_ls,\012				           entity_possible_new_genotype,\012				           &LS_eval);\012\012				eval_cnt += LS_eval;\012				evals_for_ls_in_this_cycle += LS_eval;\012				num_of_evals_for_ls += LS_eval;\012			}\012\012			generation_cnt++;\012			mode = STATE_LS_WAIT_END;\012*/\012\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case LS_STATE_DIR_FIRST:\012			//rho is the deviation of the uniform distribution\012			genotype_deviate [0] = rho*DockConst->base_dmov_mul_sqrt3*(2*myrand(GlobPRNG)-1);\012			genotype_deviate [1] = rho*DockConst->base_dmov_mul_sqrt3*(2*myrand(GlobPRNG)-1);\012			genotype_deviate [2] = rho*DockConst->base_dmov_mul_sqrt3*(2*myrand(GlobPRNG)-1);\012			for (uint i=3; i<DockConst->num_of_genes; i++) {\012				genotype_deviate [i] = rho*DockConst->base_dang_mul_sqrt3*(2*myrand(GlobPRNG)-1);\012			}\012\012			genotype [0] = offspring_genotype [0] + genotype_deviate [0] + genotype_bias [0];\012			genotype [1] = offspring_genotype [1] + genotype_deviate [1] + genotype_bias [1];\012			genotype [2] = offspring_genotype [2] + genotype_deviate [2] + genotype_bias [2];\012			genotype [3] = offspring_genotype [3] + genotype_deviate [3] + genotype_bias [3];\012			map_angle(&(genotype [3]), 360.0f);\012			genotype [4] = offspring_genotype [4] + genotype_deviate [4] + genotype_bias [4];\012			map_angle(&(genotype [4]), 180.0f);\012			for (uint i=5; i<DockConst->num_of_genes; i++) {\012				genotype [i] = offspring_genotype [i] + genotype_deviate [i] + genotype_bias [i];  \012				map_angle(&(genotype [i]), 360.0f);\012			}\012			\012			mode = LS_STATE_WAIT_FIRST;\012			write_to_channel_genotype = true;\012			read_from_channel_energy = false;\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case LS_STATE_WAIT_FIRST:\012			mode = LS_STATE_ENERGY_FIRST;\012			write_to_channel_genotype = false;\012			read_from_channel_energy = true;\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case LS_STATE_ENERGY_FIRST:\012			//if the new entity is better better\012			if (candidate_energy < offspring_energy) {\012\012				for (uint i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {\012					//updating offspring_genotype\012					offspring_genotype [i] = genotype [i];\012					//updating genotype_bias\012					genotype_bias [i] = 0.6f*genotype_bias [i] + 0.4f*genotype_deviate [i];\012				}\012\012				offspring_energy = candidate_energy;\012				cons_succ++;\012				cons_fail = 0;\012	\012				mode = LS_STATE_CHECK_RHO;\012				write_to_channel_genotype = false;\012				read_from_channel_energy = false;\012\012			}\012\012			//if worser, check the opposite direction\012			else {\012				mode = LS_STATE_DIR_SECOND;\012				write_to_channel_genotype = false;\012				read_from_channel_energy = false;\012			}\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case LS_STATE_DIR_SECOND:\012			genotype [0] = offspring_genotype [0] - genotype_deviate [0] - genotype_bias [0];				 \012			genotype [1] = offspring_genotype [1] - genotype_deviate [1] - genotype_bias [1];\012			genotype [2] = offspring_genotype [2] - genotype_deviate [2] - genotype_bias [2];\012			genotype [3] = offspring_genotype [3] - genotype_deviate [3] - genotype_bias [3];\012			map_angle(&(genotype [3]), 360.0f);\012			genotype [4] = offspring_genotype [4] - genotype_deviate [4] - genotype_bias [4];\012			map_angle(&(genotype [4]), 180.0f);\012			for (uint i=5; i<DockConst->num_of_genes; i++) {\012				genotype [i] = offspring_genotype [i] - genotype_deviate [i] - genotype_bias [i];\012				map_angle(&(genotype [i]), 360.0f);\012			}\012\012			mode = LS_STATE_WAIT_SECOND;\012			write_to_channel_genotype = true;\012			read_from_channel_energy = false;\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case LS_STATE_WAIT_SECOND:\012			mode = LS_STATE_ENERGY_SECOND;\012			write_to_channel_genotype = false;\012			read_from_channel_energy = true;\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case LS_STATE_ENERGY_SECOND:\012			LS_eval++;\012\012			//if the new entity is better\012			if (candidate_energy < offspring_energy) {\012				for (uint i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {\012					//updating offspring_genotype\012					offspring_genotype [i] = genotype [i];\012\012					//updating genotype_bias\012					genotype_bias [i] = 0.6f*genotype_bias [i] - 0.4f*genotype_deviate [i];\012				}\012\012				offspring_energy = candidate_energy;\012				cons_succ++;\012				cons_fail = 0;\012\012			}\012			//failure in both of the directions :-(\012			else {\012				//updating (halving) genotype_bias\012				for (uint i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {\012					genotype_bias [i] = 0.5f*genotype_bias [i];\012				}\012\012				cons_fail++;\012				cons_succ = 0;\012			}\012\012			mode = LS_STATE_CHECK_RHO;\012			write_to_channel_genotype = false;\012			read_from_channel_energy = false;\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case LS_STATE_CHECK_RHO:\012			//Changing deviation (rho), if needed\012			if (cons_succ >= DockConst->cons_limit) {\012			//this limitation is necessary in the FPGA due to the number representation\012				if ((rho*DockConst->base_dang_mul_sqrt3 < 90) && (rho*DockConst->base_dmov_mul_sqrt3 < 64)) {\012					rho = LS_EXP_FACTOR*rho;\012				}\012\012				cons_fail = 0;\012				cons_succ = 0;\012\012				}\012			else {\012				if (cons_fail >= DockConst->cons_limit) {\012					rho = LS_CONT_FACTOR*rho;\012					cons_fail = 0;\012					cons_succ = 0;\012				}\012			}\012\012			iteration_cnt++;\012			//printf(\"performLS: iteration_cnt (INC): %u, rho: %f, max: %f\\n\", iteration_cnt, rho, DockConst->rho_lower_bound);\012\012			mode = LS_STATE_CHECK_TERMINATION;\012			write_to_channel_genotype = false;\012			read_from_channel_energy = false;\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case LS_STATE_CHECK_TERMINATION:\012			if ((iteration_cnt < DockConst->max_num_of_iters) && (rho > DockConst->rho_lower_bound)) {\012				mode = LS_STATE_DIR_FIRST;\012				write_to_channel_genotype = false;\012				read_from_channel_energy = false;\012			}\012			else {\012				mode = STATE_LS_WAIT_END;\012				write_to_channel_genotype = false;\012				read_from_channel_energy = false;\012\012				for (uint i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {\012					GlobPopulationCurrent[entity_for_ls*ACTUAL_GENOTYPE_LENGTH + i] = offspring_genotype [i];\012				}\012				GlobEnergyCurrent[entity_for_ls] = offspring_energy;\012			}\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case STATE_LS_WAIT_END :	// Signal LS finished 		\012			eval_cnt += LS_eval;\012			evals_for_ls_in_this_cycle += LS_eval;\012			num_of_evals_for_ls += LS_eval;\012\012			ls_ent_cnt++;\012\012			if (ls_ent_cnt<DockConst->num_of_lsentities) {\012				//mode = LS_STATE_DIR_FIRST;\012				mode = STATE_LS;\012				write_to_channel_genotype = false;\012				read_from_channel_ack = false;\012			}\012			else {\012				mode = STATE_CHECK_TERMINATION;\012				write_to_channel_genotype = false;\012				read_from_channel_ack = false;\012\012				generation_cnt++;\012			}				\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case STATE_CHECK_TERMINATION :	// Signal LS finished 		\012			if((eval_cnt < DockConst->num_of_energy_evals) && (generation_cnt < DockConst->num_of_generations)) {\012				mode = STATE_GG_FIND_BEST;\012				pop_cnt = 0; \012				write_to_channel_genotype = false;\012				read_from_channel_ack = false;\012			}\012			else {\012				mode = STATE_END;\012				write_to_channel_genotype = false;\012				read_from_channel_ack = false;	\012			}\012			printf(\"eval_cnt: %u, generation_cnt: %u\\n\", eval_cnt, generation_cnt);	\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case STATE_END :		// Krnl_GA has finished execution!	\012			active_work_kernels = 0;\012			mode = STATE_WAIT_END;\012			write_to_channel_genotype = true;\012			read_from_channel_ack = false;\012\012			for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {\012				genotype[pipe_cnt] = 0;\012			}\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case STATE_WAIT_END :		\012			mode = STATE_OFF;\012			write_to_channel_genotype = false;\012			read_from_channel_ack = true;\012				\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case STATE_OFF :	\012			active = false;\012			GlobEvals_performed[0]       =  eval_cnt;\012			GlobGenerations_performed[0] =  generation_cnt;	\012\012			write_to_channel_genotype = false;\012			read_from_channel_ack = false;\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012	} // End of switch\012\012\012	if (write_to_channel_genotype == true) {\012		write_channel_altera(chan_GA2Conf_active, active_work_kernels);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		write_channel_altera(chan_GA2Conf_mode,   mode);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		write_channel_altera(chan_GA2Conf_cnt,    pop_cnt);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012\012		for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {\012			write_channel_altera(chan_GA2Conf_genotype, genotype[pipe_cnt]);\012		}\012	}\012\012	if (read_from_channel_ack == true) { \012		ack = read_channel_altera(chan_Store2GA_ack);	\012	}\012\012	if (read_from_channel_energy == true) {\012		candidate_energy = read_channel_altera(chan_Store2GA_LSenergy);\012	}\012\012	} // End of while\012\012\012\012\012\012\012\012//*/\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012/*\012\012	//active = 1;\012	//mode   = 1;\012\012	LOOP_GEN_GENERATIONAL_1:\012	for (uint pop_cnt = 0; pop_cnt < DockConst->pop_size; pop_cnt++)\012	{	\012		// --------------------------------------------------------------\012		// Send genotypes to channel\012		// --------------------------------------------------------------\012		write_channel_altera(chan_GA2Conf_active, active);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		write_channel_altera(chan_GA2Conf_mode,   mode);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		write_channel_altera(chan_GA2Conf_cnt,    pop_cnt);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012\012		for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {\012			//write_channel_altera(chan_GA2Conf_genotype, GlobPopulationCurrent[pop_cnt*ACTUAL_GENOTYPE_LENGTH+ pipe_cnt]);\012			write_channel_altera(chan_GA2Conf_IC_genotype, GlobPopulationCurrent[pop_cnt*ACTUAL_GENOTYPE_LENGTH+ pipe_cnt]);\012		}\012\012\012\012\012		// --------------------------------------------------------------\012		\012		#if defined (DEBUG_LEO)\012		printf(\"pop_cnt (INC): %u\\n\", pop_cnt);\012		#endif\012	} // End of LOOP_GEN_GENERATIONAL_1\012	\012	eval_cnt = DockConst->pop_size;\012	\012	#if defined (DEBUG_LEO)\012	printf(\"eval_cnt (INC): %u\\n\", eval_cnt);\012	#endif\012\012\012\012\012\012\012\012\012	// --------------------------------------------------------------\012	// Send DUMMY genotypes to channel to signal INI stop\012	// --------------------------------------------------------------\012	active = 1;\012	mode   = STATE_IC_WAIT_END;\012\012	write_channel_altera(chan_GA2Conf_active, active);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	write_channel_altera(chan_GA2Conf_mode,   mode);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	write_channel_altera(chan_GA2Conf_cnt,    0);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012\012	for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {\012		//write_channel_altera(chan_GA2Conf_genotype, 0);\012		write_channel_altera(chan_GA2Conf_IC_WAIT_genotype, 0);\012	}\012\012\012	//ack = read_channel_altera(chan_Store2GA_ack);\012	ack = read_channel_altera(chan_Store2GA_IC_ack);\012	//printf(\"INI ack: %u\\n\", ack);\012	// --------------------------------------------------------------\012		\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012	// **********************************************\012	// ADD VENDOR SPECIFIC PRAGMA\012	// **********************************************\012	float avg_energy;\012	\012	LOOP_WHILE_GEN_GENERATIONAL_1:\012	// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\012	// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\012	while ((eval_cnt < DockConst->num_of_energy_evals) && (generation_cnt < DockConst->num_of_generations))\012	{\012		//Creating a new population\012\012		//Identifying best entity\012		best_entity_id = find_best(GlobEnergyCurrent, loc_energies, DockConst->pop_size); \012\012		#if defined (DEBUG_KERNEL1)\012		avg_energy = 0.0f;\012		printf(\"\\n\\n\\nFinal state of the %u. generation:\\n\", generation_cnt);\012		printf(\"----------------------------\\n\\n\");\012		for (i=0; i<DockConst->pop_size; i++)\012		{\012			avg_energy += GlobEnergyCurrent [i];\012			printf(\"Entity %3u: \", i);\012			for (j=0; j<ACTUAL_GENOTYPE_LENGTH; j++) {\012				printf(\"%8.3f \", GlobPopulationCurrent [i*ACTUAL_GENOTYPE_LENGTH +j]);\012			}\012			printf(\"   energy sum: %10.3f\\n\", GlobEnergyCurrent [i*40 + 38]);\012		}\012		printf(\"\\nAverage energy: %f\\nBest energy sum: %f)\\n\\n\", avg_energy/DockConst->pop_size, \012		      GlobEnergyCurrent[best_entity_id]);\012		#endif\012\012		//elitism - copying the best entity to new population\012		for (uint i=0; i<ACTUAL_GENOTYPE_LENGTH; i++)\012		{\012			GlobPopulationNext[i] = GlobPopulationCurrent[best_entity_id*ACTUAL_GENOTYPE_LENGTH+i];\012		}\012		GlobEnergyNext[best_entity_id] = GlobEnergyCurrent[best_entity_id];\012\012\012		//new population consists of one member currently\012		// But not needed to be specified as the following loop does it\012		//new_pop_cnt = 1;\012\012\012\012\012\012\012\012		// -----------------------------------------------------------------------\012		active = 1;\012		mode = 2;\012\012		// **********************************************\012		// ADD VENDOR SPECIFIC PRAGMA\012		// **********************************************\012		LOOP_GEN_GENERATIONAL_2:\012		for (uint new_pop_cnt = 1; new_pop_cnt < DockConst->pop_size; new_pop_cnt++)\012		{\012			//printf(\"BEFORE BINARY TOURNAMENT, %u\\n\",new_pop_cnt);\012			//selecting two individuals randomly\012			binary_tournament_selection(GlobEnergyCurrent,\012						    GlobPRNG,\012						    &parent1,\012						    &parent2,\012						    DockConst->pop_size,\012						    DockConst->tournament_rate);\012			//printf(\"AFTER BINARY TOURNAMENT, %u\\n\",new_pop_cnt);\012\012\012			//mating parents	\012			async_work_group_copy(local_entity_1, GlobPopulationCurrent+parent1*ACTUAL_GENOTYPE_LENGTH, ACTUAL_GENOTYPE_LENGTH, 0);\012			async_work_group_copy(local_entity_2, GlobPopulationCurrent+parent2*ACTUAL_GENOTYPE_LENGTH, ACTUAL_GENOTYPE_LENGTH, 0);\012\012\012			//printf(\"BEFORE GEN NEW GENOTYPE, %u\\n\",new_pop_cnt);\012			// first two args are population [parent1], population [parent2]\012			gen_new_genotype(GlobPRNG,\012                                         local_entity_1, \012					 local_entity_2,\012					 DockConst->mutation_rate,\012					 DockConst->abs_max_dmov,\012					 DockConst->abs_max_dang,\012					 DockConst->crossover_rate,\012					 ACTUAL_GENOTYPE_LENGTH,\012					 offspring_genotype);\012\012			//printf(\"AFTER GEN NEW GENOTYPE, %u\\n\",new_pop_cnt);\012\012\012			//printf(\"BEFORE GA CHANNEL, %u\\n\",new_pop_cnt);\012			// --------------------------------------------------------------\012			// Send genotypes to channel\012			// --------------------------------------------------------------\012\012			for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {\012				write_channel_altera(chan_GA2Conf_genotype, offspring_genotype[pipe_cnt]);\012			}\012\012			write_channel_altera(chan_GA2Conf_active, active);\012			write_channel_altera(chan_GA2Conf_mode,   mode);\012			write_channel_altera(chan_GA2Conf_cnt,    new_pop_cnt);\012\012			// --------------------------------------------------------------\012			//printf(\"AFTER GA CHANNEL, %u\\n\",new_pop_cnt);\012\012			//copying offspring to population\012			// **********************************************\012			// ADD VENDOR SPECIFIC PRAGMA\012			// **********************************************\012			\012			//LOOP_GEN_GENERATIONAL_3:\012			//for (uint gene_cnt = 0; gene_cnt < ACTUAL_GENOTYPE_LENGTH; gene_cnt++) {\012			//	GlobPopulationNext[new_pop_cnt*ACTUAL_GENOTYPE_LENGTH + gene_cnt] = offspring_genotype[gene_cnt];\012			//}\012			\012			async_work_group_copy(GlobPopulationNext+new_pop_cnt*ACTUAL_GENOTYPE_LENGTH, offspring_genotype, ACTUAL_GENOTYPE_LENGTH, 0);\012	\012			#if defined (DEBUG_LEO)\012			printf(\"eval_cnt (INC): %u, new_pop_cnt (INC): %u\\n\", eval_cnt, new_pop_cnt);\012			#endif\012			\012\012\012		\012		} // End of LOOP_GEN_GENERATIONAL_2\012		// -----------------------------------------------------------------------\012\012\012\012\012\012		\012\012\012		#if defined (DEBUG_LEO)\012		printf(\"End of loop of new_pop_cnt, new_pop_cnt = %u\\n\", DockConst->pop_size);\012		#endif\012\012\012\012\012\012\012\012		// --------------------------------------------------------------\012		// Send DUMMY genotypes to channel to signal GG stop\012		// --------------------------------------------------------------\012		active = 1;\012		mode   = 0;\012		for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {\012			write_channel_altera(chan_GA2Conf_genotype, 0);\012		}\012\012		write_channel_altera(chan_GA2Conf_active, active);\012		write_channel_altera(chan_GA2Conf_mode,   mode);\012		write_channel_altera(chan_GA2Conf_cnt,    0);\012\012		ack = read_channel_altera(chan_Store2GA_ack);\012		//printf(\"GG ack: %u\\n\", ack);\012		// --------------------------------------------------------------\012		\012\012\012\012\012		// Updating old population with new one\012		// **********************************************\012		// ADD VENDOR SPECIFIC PRAGMA\012		// **********************************************\012		for (uint i=0;i<DockConst->pop_size*ACTUAL_GENOTYPE_LENGTH; i++)\012		{\012			GlobPopulationCurrent[i] = GlobPopulationNext[i];\012		}\012\012		// Updating old energy with new one\012		// **********************************************\012		// ADD VENDOR SPECIFIC PRAGMA\012		// **********************************************\012		for (uint i=0;i<DockConst->pop_size; i++)\012		{\012			GlobEnergyCurrent[i] = GlobEnergyNext[i];\012		}\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012		evals_for_ls_in_this_cycle = 0;\012\012		#if defined (DEBUG_LEO)\012		printf(\"num_of_entity_for_ls: %u \\n\", DockConst->num_of_lsentities);\012		#endif\012\012\012\012\012\012\012\012\012\012		// -----------------------------------------------------------------------\012		// **********************************************\012		// ADD VENDOR SPECIFIC PRAGMA\012		// **********************************************\012		LOOP_GEN_GENERATIONAL_4:\012		//subjecting num_of_entity_for_ls pieces of offsprings to LS\012		for (uint ls_ent_cnt=0; ls_ent_cnt<DockConst->num_of_lsentities; ls_ent_cnt++)	\012		{\012			//choosing an entity randomly,\012			//and without checking if it has already been subjected to LS in this cycle\012			entity_for_ls = myrand_uint(GlobPRNG, DockConst->pop_size);\012\012			#if defined (DEBUG_LEO)\012			printf(\"entity_for_ls: %u\\n\", entity_for_ls);\012			#endif\012\012\012			#if defined (DEBUG_KERNEL1)\012			printf(\"Entity %u before local search: \", entity_for_ls);\012			for (j=0; j<DockConst->rotbondlist_length+6; j++) {\012				printf(\"%f \", GlobPopulationCurrent [entity_for_ls*ACTUAL_GENOTYPE_LENGTH + j]);\012			}\012			printf(\"   energies: %f \\n\", GlobEnergyCurrent [entity_for_ls]);\012			#endif\012\012			//printf(\"BEFORE LS, %u\\n\",ls_ent_cnt);\012			//performing local search\012			//async_work_group_copy(local_entity_ls, GlobPopulationCurrent+entity_for_ls*ACTUAL_GENOTYPE_LENGTH, ACTUAL_GENOTYPE_LENGTH, 0);\012			//local_entity_energy = GlobEnergyCurrent[entity_for_ls];\012\012			perform_LS(GlobPopulationCurrent,\012				   GlobEnergyCurrent,\012				   GlobPRNG,\012				   KerConst,\012				   DockConst,\012				   entity_for_ls,\012				   local_entity_ls,\012				   entity_possible_new_genotype,\012				   &LS_eval);\012\012			//async_work_group_copy(GlobPopulationCurrent+entity_for_ls*ACTUAL_GENOTYPE_LENGTH, local_entity_ls, ACTUAL_GENOTYPE_LENGTH, 0);\012\012			//printf(\"AFTER LS, %u\\n\",ls_ent_cnt);\012\012\012			eval_cnt += LS_eval;\012			evals_for_ls_in_this_cycle += LS_eval;\012\012\012			#if defined (DEBUG_KERNEL1)\012			printf(\"Entity %u after local search (%u evaluations): \", entity_for_ls, LS_eval);\012			for (j=0; j<myligand_num_of_rotbonds+6; j++) {printf(\"%f \", GlobPopulation [entity_for_ls*40 + j]);}\012			printf(\"   energies: %f %f\\n\",\012				   GlobPopulation [entity_for_ls*40 + 38],\012				   GlobPopulation [entity_for_ls*40 + 39]);\012			#endif\012\012			num_of_evals_for_ls += LS_eval;\012\012			#if defined (DEBUG_LEO)\012			printf(\"eval_cnt (INC): %u, evals_for_ls_in_this_cycle(INC): % u\\n\", eval_cnt, evals_for_ls_in_this_cycle);\012			#endif\012\012\012		} // End of LOOP_GEN_GENERATIONAL_4\012\012		// -----------------------------------------------------------------------\012\012		generation_cnt++;\012\012		//#if defined (DEBUG_LEO)\012		printf(\"eval_cnt: %u, generation_cnt: %u\\n\", eval_cnt, generation_cnt);\012		//#endif\012\012\012\012\012	} // End of while ((eval_cnt < mypars->num_of_energy_evals) && (generation_cnt < mypars->num_of_generations))\012\012\012	// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\012	// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\012*/\012\012\012\012\012\012\012\012\012\012\012\012\012\012/*\012\012\012\012\012	printf(\"	%-20s: %s\\n\", \"Krnl_GA\", \"has finished execution!\");\012\012	\012	active = 0;\012	mode = 4;\012\012	// --------------------------------------------------------------\012	// Send DUMMY genotypes to channel\012	// --------------------------------------------------------------\012	for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {\012		write_channel_altera(chan_GA2Conf_genotype, 0);\012	}\012	write_channel_altera(chan_GA2Conf_active, active);\012	write_channel_altera(chan_GA2Conf_mode,   mode);\012	write_channel_altera(chan_GA2Conf_cnt,    0);\012	// --------------------------------------------------------------\012\012\012	GlobEvals_performed[0]       =  eval_cnt;\012	GlobGenerations_performed[0] =  generation_cnt;\012\012	#if defined (DEBUG_KERNEL1)\012	printf(\"Energy evaluations for LS: %u out of %u\\n\", num_of_evals_for_ls, eval_cnt);\012	printf(\"Number of generations: %u\\n\", generation_cnt);\012	#endif\012\012\012\012\012*/\012\012\012\012}\012\012// --------------------------------------------------------------------------\012// --------------------------------------------------------------------------\012\012\012#include \"Krnl_Conform.cl\"\012#include \"Krnl_InterE.cl\"\012#include \"Krnl_IntraE.cl\"\012#include \"Krnl_Store.cl\"\012\012"}, {"index":1, "path":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_Conform.cl", "name":"Krnl_Conform.cl", "content":"// --------------------------------------------------------------------------\012// The function changes the conformation of myligand according to \012// the genotype given by the second parameter.\012// Originally from: processligand.c\012// --------------------------------------------------------------------------\012__kernel __attribute__ ((reqd_work_group_size(1,1,1)))\012void Krnl_Conform(\012             //__global const float*           restrict GlobFgrids,\012	     //__global       float*           restrict GlobPopulationCurrent,\012	     //__global       float*           restrict GlobEnergyCurrent,\012	     //__global       float*           restrict GlobPopulationNext,\012	     //__global       float*           restrict GlobEnergyNext,\012             //__global       unsigned int*    restrict GlobPRNG,\012	     __global const kernelconstant*  restrict KerConst,\012	     __global const Dockparameters*  restrict DockConst)\012{\012\012	__local float loc_coords_x[MAX_NUM_OF_ATOMS];\012	__local float loc_coords_y[MAX_NUM_OF_ATOMS];\012	__local float loc_coords_z[MAX_NUM_OF_ATOMS];\012	__local float genotype[ACTUAL_GENOTYPE_LENGTH];\012/*\012	float __attribute__((register)) loc_coords_x[MAX_NUM_OF_ATOMS];\012	float __attribute__((register)) loc_coords_y[MAX_NUM_OF_ATOMS];\012	float __attribute__((register)) loc_coords_z[MAX_NUM_OF_ATOMS];\012	float __attribute__((register)) genotype[ACTUAL_GENOTYPE_LENGTH];\012*/\012\012\012	char active = 1;\012	char mode   = 0;\012	uint cnt    = 0;    \012\012	float phi, theta, genrotangle;\012	float genrot_unitvec [3];\012\012	int rotation_list_element;\012	uint atom_id, rotbond_id;\012	float atom_to_rotate[3];\012	float rotation_unitvec[3];\012	float rotation_movingvec[3];\012	float rotation_angle;\012	float sin_angle;\012	float quatrot_left_x, quatrot_left_y, quatrot_left_z, quatrot_left_q;\012	float quatrot_temp_x, quatrot_temp_y, quatrot_temp_z, quatrot_temp_q;\012\012while(active) {\012\012	//printf(\"BEFORE In CONFORM CHANNEL\\n\");\012	// --------------------------------------------------------------\012	// Wait for genotypes in channel\012	// --------------------------------------------------------------\012	active = read_channel_altera(chan_GA2Conf_active); if (active == 0) {printf(\"	%-20s: %s\\n\", \"Krnl_Conform\", \"disabled\");}\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	mode   = read_channel_altera(chan_GA2Conf_mode);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	cnt    = read_channel_altera(chan_GA2Conf_cnt);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012\012	for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {\012		genotype[pipe_cnt] = read_channel_altera(chan_GA2Conf_genotype);\012	}	\012	// --------------------------------------------------------------\012	//printf(\"AFTER In CONFORM CHANNEL\\n\");\012\012	phi         = genotype [3]*DEG_TO_RAD;\012	theta       = genotype [4]*DEG_TO_RAD;\012	genrotangle = genotype [5]*DEG_TO_RAD;\012\012	#if defined (NATIVE_PRECISION)\012	genrot_unitvec [0] = native_sin(theta)*native_cos(phi);\012	genrot_unitvec [1] = native_sin(theta)*native_sin(phi);\012	genrot_unitvec [2] = native_cos(theta);\012	#else\012	genrot_unitvec [0] = sin(theta)*cos(phi);\012	genrot_unitvec [1] = sin(theta)*sin(phi);\012	genrot_unitvec [2] = cos(theta);\012	#endif\012	\012	\012\012	// **********************************************\012	// ADD VENDOR SPECIFIC PRAGMA\012	// **********************************************\012	LOOP_CHANGE_CONFORM_1:\012	for (uint rotation_counter = 0; rotation_counter < DockConst->rotbondlist_length; rotation_counter++)\012	{\012		rotation_list_element = KerConst->rotlist_const[rotation_counter];\012\012		if ((rotation_list_element & RLIST_DUMMY_MASK) == 0)	//if not dummy rotation\012		{\012			atom_id = rotation_list_element & RLIST_ATOMID_MASK;\012\012			//capturing atom coordinates\012			if ((rotation_list_element & RLIST_FIRSTROT_MASK) != 0)	//if first rotation of this atom\012			{\012				atom_to_rotate[0] = KerConst->ref_coords_x_const[atom_id];\012				atom_to_rotate[1] = KerConst->ref_coords_y_const[atom_id];\012				atom_to_rotate[2] = KerConst->ref_coords_z_const[atom_id];\012			}\012			else\012			{\012				atom_to_rotate[0] = loc_coords_x[atom_id];\012				atom_to_rotate[1] = loc_coords_y[atom_id];\012				atom_to_rotate[2] = loc_coords_z[atom_id];\012			}\012\012			//capturing rotation vectors and angle\012			if ((rotation_list_element & RLIST_GENROT_MASK) != 0)	//if general rotation\012			{\012				rotation_unitvec[0] = genrot_unitvec[0];\012				rotation_unitvec[1] = genrot_unitvec[1];\012				rotation_unitvec[2] = genrot_unitvec[2];\012\012				rotation_angle = genrotangle;\012\012				rotation_movingvec[0] = genotype[0];\012				rotation_movingvec[1] = genotype[1];\012				rotation_movingvec[2] = genotype[2];\012			}\012			else	//if rotating around rotatable bond\012			{\012				rotbond_id = (rotation_list_element & RLIST_RBONDID_MASK) >> RLIST_RBONDID_SHIFT;\012	\012				rotation_unitvec[0] = KerConst->rotbonds_unit_vectors_const[3*rotbond_id];\012				rotation_unitvec[1] = KerConst->rotbonds_unit_vectors_const[3*rotbond_id+1];\012				rotation_unitvec[2] = KerConst->rotbonds_unit_vectors_const[3*rotbond_id+2];\012				rotation_angle = genotype[6+rotbond_id]*DEG_TO_RAD;\012\012				rotation_movingvec[0] = KerConst->rotbonds_moving_vectors_const[3*rotbond_id];\012				rotation_movingvec[1] = KerConst->rotbonds_moving_vectors_const[3*rotbond_id+1];\012				rotation_movingvec[2] = KerConst->rotbonds_moving_vectors_const[3*rotbond_id+2];\012\012				//in addition performing the first movement \012				//which is needed only if rotating around rotatable bond\012				atom_to_rotate[0] -= rotation_movingvec[0];\012				atom_to_rotate[1] -= rotation_movingvec[1];\012				atom_to_rotate[2] -= rotation_movingvec[2];\012			}\012\012			//performing rotation\012			rotation_angle = rotation_angle/2;\012			quatrot_left_q = cos(rotation_angle);\012			sin_angle = sin(rotation_angle);\012\012			quatrot_left_x = sin_angle*rotation_unitvec[0];\012			quatrot_left_y = sin_angle*rotation_unitvec[1];\012			quatrot_left_z = sin_angle*rotation_unitvec[2];\012\012			if ((rotation_list_element & RLIST_GENROT_MASK) != 0)	//if general rotation, \012										//two rotations should be performed \012										//(multiplying the quaternions)\012			{\012				//calculating quatrot_left*ref_orientation_quats_const, \012				//which means that reference orientation rotation is the first\012				quatrot_temp_q = quatrot_left_q;\012				quatrot_temp_x = quatrot_left_x;\012				quatrot_temp_y = quatrot_left_y;\012				quatrot_temp_z = quatrot_left_z;\012\012				// L30nardoSV: taking the first element of ref_orientation_quats_const member\012				quatrot_left_q = quatrot_temp_q*KerConst->ref_orientation_quats_const[0]-\012						 quatrot_temp_x*KerConst->ref_orientation_quats_const[1]-\012						 quatrot_temp_y*KerConst->ref_orientation_quats_const[2]-\012						 quatrot_temp_z*KerConst->ref_orientation_quats_const[3];\012				quatrot_left_x = quatrot_temp_q*KerConst->ref_orientation_quats_const[1]+\012						 KerConst->ref_orientation_quats_const[0]*quatrot_temp_x+\012						 quatrot_temp_y*KerConst->ref_orientation_quats_const[3]-\012						 KerConst->ref_orientation_quats_const[2]*quatrot_temp_z;\012				quatrot_left_y = quatrot_temp_q*KerConst->ref_orientation_quats_const[2]+\012						 KerConst->ref_orientation_quats_const[0]*quatrot_temp_y+\012						 KerConst->ref_orientation_quats_const[1]*quatrot_temp_z-\012						 quatrot_temp_x*KerConst->ref_orientation_quats_const[3];\012				quatrot_left_z = quatrot_temp_q*KerConst->ref_orientation_quats_const[3]+\012						 KerConst->ref_orientation_quats_const[0]*quatrot_temp_z+\012						 quatrot_temp_x*KerConst->ref_orientation_quats_const[2]-\012						 KerConst->ref_orientation_quats_const[1]*quatrot_temp_y;\012\012			}\012\012			quatrot_temp_q = 0 -\012					 quatrot_left_x*atom_to_rotate [0] -\012					 quatrot_left_y*atom_to_rotate [1] -\012					 quatrot_left_z*atom_to_rotate [2];\012			quatrot_temp_x = quatrot_left_q*atom_to_rotate [0] +\012					 quatrot_left_y*atom_to_rotate [2] -\012					 quatrot_left_z*atom_to_rotate [1];\012			quatrot_temp_y = quatrot_left_q*atom_to_rotate [1] -\012					 quatrot_left_x*atom_to_rotate [2] +\012					 quatrot_left_z*atom_to_rotate [0];\012			quatrot_temp_z = quatrot_left_q*atom_to_rotate [2] +\012					 quatrot_left_x*atom_to_rotate [1] -\012					 quatrot_left_y*atom_to_rotate [0];\012\012			atom_to_rotate [0] = 0 -\012					     quatrot_temp_q*quatrot_left_x +\012					     quatrot_temp_x*quatrot_left_q -\012					     quatrot_temp_y*quatrot_left_z +\012					     quatrot_temp_z*quatrot_left_y;\012			atom_to_rotate [1] = 0 -\012					     quatrot_temp_q*quatrot_left_y +\012					     quatrot_temp_x*quatrot_left_z +\012					     quatrot_temp_y*quatrot_left_q -\012					     quatrot_temp_z*quatrot_left_x;\012			atom_to_rotate [2] = 0 -\012					     quatrot_temp_q*quatrot_left_z -\012					     quatrot_temp_x*quatrot_left_y +\012					     quatrot_temp_y*quatrot_left_x +\012					     quatrot_temp_z*quatrot_left_q;\012\012			//performing final movement and storing values\012			loc_coords_x[atom_id] = atom_to_rotate [0] + rotation_movingvec[0];\012			loc_coords_y[atom_id] = atom_to_rotate [1] + rotation_movingvec[1];\012			loc_coords_z[atom_id] = atom_to_rotate [2] + rotation_movingvec[2];\012\012		} // End if-statement not dummy rotation\012	} // End rotation_counter for-loop\012\012	//printf(\"BEFORE Out CONFORM CHANNEL\\n\");\012	// --------------------------------------------------------------\012	// Send ligand atomic coordinates to channel \012	// --------------------------------------------------------------\012/*\012	for (uint pipe_cnt=0; pipe_cnt<DockConst->num_of_atoms; pipe_cnt++) {\012		write_channel_altera(chan_Conf2Intere_x, loc_coords_x[pipe_cnt]);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		write_channel_altera(chan_Conf2Intere_y, loc_coords_y[pipe_cnt]);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		write_channel_altera(chan_Conf2Intere_z, loc_coords_z[pipe_cnt]);\012		//mem_fence(CLK_CHANNEL_MEM_FENCE);\012\012		write_channel_altera(chan_Conf2Intrae_x, loc_coords_x[pipe_cnt]);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		write_channel_altera(chan_Conf2Intrae_y, loc_coords_y[pipe_cnt]);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		write_channel_altera(chan_Conf2Intrae_z, loc_coords_z[pipe_cnt]);\012	}\012*/\012\012\012	for (uint pipe_cnt=0; pipe_cnt<DockConst->num_of_atoms; pipe_cnt++) {\012		write_channel_altera(chan_Conf2Intere_x, loc_coords_x[pipe_cnt]);\012		write_channel_altera(chan_Conf2Intrae_x, loc_coords_x[pipe_cnt]);\012		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);\012		write_channel_altera(chan_Conf2Intere_y, loc_coords_y[pipe_cnt]);\012		write_channel_altera(chan_Conf2Intrae_y, loc_coords_y[pipe_cnt]);\012		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);\012		write_channel_altera(chan_Conf2Intere_z, loc_coords_z[pipe_cnt]);\012		write_channel_altera(chan_Conf2Intrae_z, loc_coords_z[pipe_cnt]);\012		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);\012		write_channel_altera(chan_Conf2Intere_active, active);\012		write_channel_altera(chan_Conf2Intrae_active, active);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		write_channel_altera(chan_Conf2Intere_mode,   mode);\012		write_channel_altera(chan_Conf2Intrae_mode,   mode);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		write_channel_altera(chan_Conf2Intere_cnt,    cnt);\012		write_channel_altera(chan_Conf2Intrae_cnt,    cnt);\012	}\012	// --------------------------------------------------------------\012	//printf(\"AFTER Out CONFORM CHANNEL\\n\");\012\012} // End of while(1)\012\012}\012// --------------------------------------------------------------------------\012// --------------------------------------------------------------------------\012"}, {"index":2, "path":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl", "name":"Krnl_InterE.cl", "content":"// --------------------------------------------------------------------------\012// The function calculates the intermolecular energy of a ligand given by \012// myligand parameter, and a receptor represented as a grid. \012// The grid point values must be stored at the location which starts at GlobFgrids, \012// the memory content can be generated with get_gridvalues function.\012// The mygrid parameter must be the corresponding grid informtaion. \012// If an atom is outside the grid, the coordinates will be changed with \012// the value of outofgrid_tolerance, \012// if it remains outside, a very high value will be added to the current energy as a penalty. \012// Originally from: processligand.c\012// --------------------------------------------------------------------------\012__kernel __attribute__ ((reqd_work_group_size(1,1,1)))\012void Krnl_InterE(\012             __global const float*           restrict GlobFgrids,\012	     //__global       float*           restrict GlobPopulationCurrent,\012	     //__global       float*           restrict GlobEnergyCurrent,\012	     //__global       float*           restrict GlobPopulationNext,\012	     //__global       float*           restrict GlobEnergyNext,\012             //__global       unsigned int*    restrict GlobPRNG,\012	     __global const kernelconstant*  restrict KerConst,\012	     __global const Dockparameters*  restrict DockConst)\012{\012/*\012	__local float loc_coords_x[MAX_NUM_OF_ATOMS];\012	__local float loc_coords_y[MAX_NUM_OF_ATOMS];\012	__local float loc_coords_z[MAX_NUM_OF_ATOMS];\012*/\012\012	float __attribute__((register)) loc_coords_x[MAX_NUM_OF_ATOMS];\012	float __attribute__((register)) loc_coords_y[MAX_NUM_OF_ATOMS];\012	float __attribute__((register)) loc_coords_z[MAX_NUM_OF_ATOMS];\012\012\012	char active = 1;\012	char mode   = 0;\012	uint cnt    = 0;   \012\012	float interE;\012	float partialE1, partialE2, partialE3;\012\012\012	char atom1_id, atom1_typeid;\012	float x, y, z, dx, dy, dz, q;\012	float cube [2][2][2];\012	float weights [2][2][2];\012	int x_low, x_high, y_low, y_high, z_low, z_high;\012\012	// L30nardoSV	\012	unsigned int  mul_tmp;\012	unsigned char g1 = DockConst->gridsize_x; 	\012	unsigned int  g2 = DockConst->gridsize_x * DockConst->gridsize_y;         \012	unsigned int  g3 = DockConst->gridsize_x * DockConst->gridsize_y * DockConst->gridsize_z;\012        unsigned int  ylow_times_g1, yhigh_times_g1;\012        unsigned int  zlow_times_g2, zhigh_times_g2;\012	unsigned int  cube_000, cube_100, cube_010, cube_110;\012        unsigned int  cube_001, cube_101, cube_011, cube_111;\012\012while(active) {\012	//printf(\"BEFORE In INTER CHANNEL\\n\");\012	// --------------------------------------------------------------\012	// Wait for ligand atomic coordinates in channel\012	// --------------------------------------------------------------\012\012	for (uint pipe_cnt=0; pipe_cnt<DockConst->num_of_atoms; pipe_cnt++) {\012		loc_coords_x[pipe_cnt] = read_channel_altera(chan_Conf2Intere_x);\012		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);\012		loc_coords_y[pipe_cnt] = read_channel_altera(chan_Conf2Intere_y);\012		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);\012		loc_coords_z[pipe_cnt] = read_channel_altera(chan_Conf2Intere_z);\012		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);\012		active = read_channel_altera(chan_Conf2Intere_active);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		mode   = read_channel_altera(chan_Conf2Intere_mode);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		cnt    = read_channel_altera(chan_Conf2Intere_cnt);\012	}\012	// --------------------------------------------------------------\012	//printf(\"AFTER In INTER CHANNEL\\n\");\012\012	if (active == 0) {printf(\"	%-20s: %s\\n\", \"Krnl_InterE\", \"disabled\");}\012\012	interE = 0.0f;\012	partialE1 = 0.0f;\012	partialE2 = 0.0f;\012	partialE3 = 0.0f;\012\012	// for each atom\012	// **********************************************\012	// ADD VENDOR SPECIFIC PRAGMA	\012	// **********************************************\012	LOOP_INTERE_1:\012	for (atom1_id=0; atom1_id<DockConst->num_of_atoms; atom1_id++)		\012	{\012		atom1_typeid = KerConst->atom_types_const[atom1_id];\012		x = loc_coords_x[atom1_id];\012		y = loc_coords_y[atom1_id];\012		z = loc_coords_z[atom1_id];\012		q = KerConst->atom_charges_const[atom1_id];\012\012		// if the atom is outside of the grid\012		if ((x < 0.0f) || (x >= DockConst->gridsize_x-1) || \012		    (y < 0.0f) || (y >= DockConst->gridsize_y-1) ||\012		    (z < 0.0f) || (z >= DockConst->gridsize_z-1))	\012		{\012			//penalty is 2^24 for each atom outside the grid\012			/*\012			interE += 16777216.0f; \012			*/\012			partialE1 = 16777216.0f; \012			partialE2 = 0.0f;\012			partialE3 = 0.0f;\012		} \012		else \012		{\012			x_low  = convert_int(floor(x));\012			y_low  = convert_int(floor(y));\012			z_low  = convert_int(floor(z));\012			x_high = convert_int(ceil(x));	 \012			y_high = convert_int(ceil(y));\012			z_high = convert_int(ceil(z));\012			dx = x - x_low; dy = y - y_low; dz = z - z_low;\012\012			// Calculates the weights for trilinear interpolation\012			// based on the location of the point inside\012			weights [0][0][0] = (1-dx)*(1-dy)*(1-dz);\012			weights [1][0][0] = dx*(1-dy)*(1-dz);\012			weights [0][1][0] = (1-dx)*dy*(1-dz);\012			weights [1][1][0] = dx*dy*(1-dz);\012			weights [0][0][1] = (1-dx)*(1-dy)*dz;\012			weights [1][0][1] = dx*(1-dy)*dz;\012			weights [0][1][1] = (1-dx)*dy*dz;\012			weights [1][1][1] = dx*dy*dz;\012\012			#if defined (DEBUG_KERNEL_INTER_E)\012			printf(\"\\n\\nPartial results for atom with id %i:\\n\", atom1_id);\012			printf(\"x_low = %d, x_high = %d, x_frac = %f\\n\", x_low, x_high, dx);\012			printf(\"y_low = %d, y_high = %d, y_frac = %f\\n\", y_low, y_high, dy);\012			printf(\"z_low = %d, z_high = %d, z_frac = %f\\n\\n\", z_low, z_high, dz);\012			printf(\"coeff(0,0,0) = %f\\n\", weights [0][0][0]);\012			printf(\"coeff(1,0,0) = %f\\n\", weights [1][0][0]);\012			printf(\"coeff(0,1,0) = %f\\n\", weights [0][1][0]);\012			printf(\"coeff(1,1,0) = %f\\n\", weights [1][1][0]);\012			printf(\"coeff(0,0,1) = %f\\n\", weights [0][0][1]);\012			printf(\"coeff(1,0,1) = %f\\n\", weights [1][0][1]);\012			printf(\"coeff(0,1,1) = %f\\n\", weights [0][1][1]);\012			printf(\"coeff(1,1,1) = %f\\n\", weights [1][1][1]);\012			#endif\012\012			// L30nardoSV\012			ylow_times_g1  = y_low*g1;	yhigh_times_g1 = y_high*g1;\012        	        zlow_times_g2  = z_low*g2;	zhigh_times_g2 = z_high*g2;\012        	        cube_000 = x_low  + ylow_times_g1  + zlow_times_g2;\012        	        cube_100 = x_high + ylow_times_g1  + zlow_times_g2;\012        	        cube_010 = x_low  + yhigh_times_g1 + zlow_times_g2;\012        	        cube_110 = x_high + yhigh_times_g1 + zlow_times_g2;\012        	        cube_001 = x_low  + ylow_times_g1  + zhigh_times_g2;\012        	        cube_101 = x_high + ylow_times_g1  + zhigh_times_g2;\012        	        cube_011 = x_low  + yhigh_times_g1 + zhigh_times_g2;\012        	        cube_111 = x_high + yhigh_times_g1 + zhigh_times_g2;\012        	        mul_tmp = atom1_typeid*g3;\012\012			//energy contribution of the current grid type\012	                cube [0][0][0] = *(GlobFgrids + cube_000 + mul_tmp);\012        	        cube [1][0][0] = *(GlobFgrids + cube_100 + mul_tmp);\012        	        cube [0][1][0] = *(GlobFgrids + cube_010 + mul_tmp);\012        	        cube [1][1][0] = *(GlobFgrids + cube_110 + mul_tmp);\012        	        cube [0][0][1] = *(GlobFgrids + cube_001 + mul_tmp);\012        	        cube [1][0][1] = *(GlobFgrids + cube_101 + mul_tmp);\012        	        cube [0][1][1] = *(GlobFgrids + cube_011 + mul_tmp);\012        	        cube [1][1][1] = *(GlobFgrids + cube_111 + mul_tmp);\012		\012			#if defined (DEBUG_KERNEL_INTER_E)\012			printf(\"Interpolation of van der Waals map:\\n\");\012			printf(\"cube(0,0,0) = %f\\n\", cube [0][0][0]);\012			printf(\"cube(1,0,0) = %f\\n\", cube [1][0][0]);\012			printf(\"cube(0,1,0) = %f\\n\", cube [0][1][0]);\012			printf(\"cube(1,1,0) = %f\\n\", cube [1][1][0]);\012			printf(\"cube(0,0,1) = %f\\n\", cube [0][0][1]);\012			printf(\"cube(1,0,1) = %f\\n\", cube [1][0][1]);\012			printf(\"cube(0,1,1) = %f\\n\", cube [0][1][1]);\012			printf(\"cube(1,1,1) = %f\\n\", cube [1][1][1]);\012			#endif\012\012			/*\012			interE += TRILININTERPOL(cube, weights);\012			*/\012			partialE1 = TRILININTERPOL(cube, weights);\012\012			#if defined (DEBUG_KERNEL_INTER_E)\012			printf(\"interpolated value = %f\\n\\n\", TRILININTERPOL(cube, weights));\012			#endif\012\012			//energy contribution of the electrostatic grid\012			atom1_typeid = DockConst->num_of_atypes;\012			mul_tmp = atom1_typeid*g3;\012        	        cube [0][0][0] = *(GlobFgrids + cube_000 + mul_tmp);\012        	        cube [1][0][0] = *(GlobFgrids + cube_100 + mul_tmp);\012        	        cube [0][1][0] = *(GlobFgrids + cube_010 + mul_tmp);\012        	        cube [1][1][0] = *(GlobFgrids + cube_110 + mul_tmp);\012        	        cube [0][0][1] = *(GlobFgrids + cube_001 + mul_tmp);\012        	        cube [1][0][1] = *(GlobFgrids + cube_101 + mul_tmp);\012        	        cube [0][1][1] = *(GlobFgrids + cube_011 + mul_tmp);\012        	        cube [1][1][1] = *(GlobFgrids + cube_111 + mul_tmp);\012\012			#if defined (DEBUG_KERNEL_INTER_E)\012			printf(\"Interpolation of electrostatic map:\\n\");\012			printf(\"cube(0,0,0) = %f\\n\", cube [0][0][0]);\012			printf(\"cube(1,0,0) = %f\\n\", cube [1][0][0]);\012			printf(\"cube(0,1,0) = %f\\n\", cube [0][1][0]);\012			printf(\"cube(1,1,0) = %f\\n\", cube [1][1][0]);\012			printf(\"cube(0,0,1) = %f\\n\", cube [0][0][1]);\012			printf(\"cube(1,0,1) = %f\\n\", cube [1][0][1]);\012			printf(\"cube(0,1,1) = %f\\n\", cube [0][1][1]);\012			printf(\"cube(1,1,1) = %f\\n\", cube [1][1][1]);\012			#endif\012\012			/*\012			interE += q * TRILININTERPOL(cube, weights);\012			*/\012			partialE2 = q * TRILININTERPOL(cube, weights);\012		\012			#if defined (DEBUG_KERNEL_INTER_E)\012			printf(\"interpoated value = %f, multiplied by q = %f\\n\\n\", TRILININTERPOL(cube, weights), q*TRILININTERPOL(cube, weights));\012			#endif\012\012			//energy contribution of the desolvation grid\012			atom1_typeid = DockConst->num_of_atypes+1;\012			mul_tmp = atom1_typeid*g3;\012        	        cube [0][0][0] = *(GlobFgrids + cube_000 + mul_tmp);\012        	        cube [1][0][0] = *(GlobFgrids + cube_100 + mul_tmp);\012        	        cube [0][1][0] = *(GlobFgrids + cube_010 + mul_tmp);\012        	        cube [1][1][0] = *(GlobFgrids + cube_110 + mul_tmp);\012        	        cube [0][0][1] = *(GlobFgrids + cube_001 + mul_tmp);\012        	        cube [1][0][1] = *(GlobFgrids + cube_101 + mul_tmp);\012        	        cube [0][1][1] = *(GlobFgrids + cube_011 + mul_tmp);\012        	        cube [1][1][1] = *(GlobFgrids + cube_111 + mul_tmp);\012\012			#if defined (DEBUG_KERNEL_INTER_E)\012			printf(\"Interpolation of desolvation map:\\n\");\012			printf(\"cube(0,0,0) = %f\\n\", cube [0][0][0]);\012			printf(\"cube(1,0,0) = %f\\n\", cube [1][0][0]);\012			printf(\"cube(0,1,0) = %f\\n\", cube [0][1][0]);\012			printf(\"cube(1,1,0) = %f\\n\", cube [1][1][0]);\012			printf(\"cube(0,0,1) = %f\\n\", cube [0][0][1]);\012			printf(\"cube(1,0,1) = %f\\n\", cube [1][0][1]);\012			printf(\"cube(0,1,1) = %f\\n\", cube [0][1][1]);\012			printf(\"cube(1,1,1) = %f\\n\", cube [1][1][1]);\012			#endif\012\012			/*\012			interE += fabs(q) * TRILININTERPOL(cube, weights);\012			*/\012			partialE3 = fabs(q) * TRILININTERPOL(cube, weights);\012\012			#if defined (DEBUG_KERNEL_KERNEL_INTER_E)\012			printf(\"interploated value = %f, multiplied by abs(q) = %f\\n\\n\", TRILININTERPOL(cube, weights), fabs(q) * trilin_interpol(cube, weights));\012			printf(\"Current value of intermolecular energy = %f\\n\\n\\n\", interE);\012			#endif\012		}\012\012\012		interE += partialE1 + partialE2 + partialE3;\012	} // End of LOOP_INTERE_1:	\012\012	// --------------------------------------------------------------\012	// Send intermolecular energy to chanel\012	// --------------------------------------------------------------\012	write_channel_altera(chan_Intere2Store_intere, interE);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	write_channel_altera(chan_Intere2Store_active, active);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	write_channel_altera(chan_Intere2Store_mode,   mode);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	write_channel_altera(chan_Intere2Store_cnt,    cnt);\012	// --------------------------------------------------------------\012 	\012	} // End of while(1)\012}\012// --------------------------------------------------------------------------\012// --------------------------------------------------------------------------\012"}, {"index":3, "path":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl", "name":"Krnl_IntraE.cl", "content":"// --------------------------------------------------------------------------\012// Originally from: processligand.c\012// --------------------------------------------------------------------------\012__kernel __attribute__ ((reqd_work_group_size(1,1,1)))\012void Krnl_IntraE(\012             //__global const float*           restrict GlobFgrids,\012	     //__global       float*           restrict GlobPopulationCurrent,\012	     //__global       float*           restrict GlobEnergyCurrent,\012	     //__global       float*           restrict GlobPopulationNext,\012	     //__global       float*           restrict GlobEnergyNext,\012             //__global       unsigned int*    restrict GlobPRNG,\012	     __global const kernelconstant*  restrict KerConst,\012	     __global const Dockparameters*  restrict DockConst)\012{\012\012	__local float loc_coords_x[MAX_NUM_OF_ATOMS];\012	__local float loc_coords_y[MAX_NUM_OF_ATOMS];\012	__local float loc_coords_z[MAX_NUM_OF_ATOMS];\012/*\012	float __attribute__((register)) loc_coords_x[MAX_NUM_OF_ATOMS];\012	float __attribute__((register)) loc_coords_y[MAX_NUM_OF_ATOMS];\012	float __attribute__((register)) loc_coords_z[MAX_NUM_OF_ATOMS];\012*/\012	char active = 1;\012	char mode   = 0;\012	uint cnt    = 0;   \012\012	int contributor_counter;\012	char atom1_id, atom2_id, atom1_typeid, atom2_typeid;\012	float subx, suby, subz, distance_leo;\012\012 	// Altera doesn't support power function 	\012	// so this is implemented with multiplications 	\012	// Full precision is used 	\012	float distance_pow_2, distance_pow_4, distance_pow_6, distance_pow_10, distance_pow_12;\012	float intraE;\012\012	float partialE1, partialE2, partialE3, partialE4;\012\012while(active) {\012	//printf(\"BEFORE In INTRA CHANNEL\\n\");\012	// --------------------------------------------------------------\012	// Wait for ligand atomic coordinates in channel\012	// --------------------------------------------------------------\012\012	for (uint pipe_cnt=0; pipe_cnt<DockConst->num_of_atoms; pipe_cnt++) {\012		loc_coords_x[pipe_cnt] = read_channel_altera(chan_Conf2Intrae_x);\012		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);\012		loc_coords_y[pipe_cnt] = read_channel_altera(chan_Conf2Intrae_y);\012		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);\012		loc_coords_z[pipe_cnt] = read_channel_altera(chan_Conf2Intrae_z);\012		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);\012		active = read_channel_altera(chan_Conf2Intrae_active);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		mode   = read_channel_altera(chan_Conf2Intrae_mode);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		cnt    = read_channel_altera(chan_Conf2Intrae_cnt);\012	}\012	// --------------------------------------------------------------\012	//printf(\"AFTER In INTRA CHANNEL\\n\");\012\012	if (active == 0) {printf(\"	%-20s: %s\\n\", \"Krnl_IntraE\", \"disabled\");}\012\012	intraE = 0.0f;\012	partialE1 = 0.0f;\012	partialE2 = 0.0f;\012	partialE3 = 0.0f;\012	partialE4 = 0.0f;\012\012	//for each intramolecular atom contributor pair\012	// **********************************************\012	// ADD VENDOR SPECIFIC PRAGMA\012	// **********************************************\012	LOOP_INTRAE_1:\012	for (uint contributor_counter=0; contributor_counter<DockConst->num_of_intraE_contributors; contributor_counter++)\012	{	\012		atom1_id = KerConst->intraE_contributors_const[3*contributor_counter]; \012		atom2_id = KerConst->intraE_contributors_const[3*contributor_counter+1];\012\012		subx = loc_coords_x[atom1_id] - loc_coords_x[atom2_id];\012		suby = loc_coords_y[atom1_id] - loc_coords_y[atom2_id];\012		subz = loc_coords_z[atom1_id] - loc_coords_z[atom2_id];\012		distance_leo = sqrt(subx*subx + suby*suby + subz*subz)*DockConst->grid_spacing;\012\012		if (distance_leo < 1.0f) {\012			#if defined (DEBUG_KERNEL_INTRA_E)\012			printf(\"\\n\\nToo low distance (%f) between atoms %u and %u\\n\", distance_leo, atom1_id, atom2_id);\012			#endif\012			//return HIGHEST_ENERGY;	//returning maximal value\012			distance_leo = 1.0f;\012		}\012\012		#if defined (DEBUG_KERNEL_INTRA_E)\012		printf(\"\\n\\nCalculating energy contribution of atoms %u and %u\\n\", atom1_id+1, atom2_id+1);\012		printf(\"Distance: %f\\n\", distance_leo);\012		#endif\012\012		distance_pow_2  = distance_leo*distance_leo; 		\012		distance_pow_4  = distance_pow_2*distance_pow_2; 		\012		distance_pow_6  = distance_pow_2*distance_pow_4; 		\012		distance_pow_10 = distance_pow_4*distance_pow_6; 		\012		distance_pow_12 = distance_pow_6*distance_pow_6;\012		\012		//but only if the distance is less than distance cutoff value and 20.48A (because of the tables)\012		if ((distance_leo < 8.0f) && (distance_leo < 20.48f)) \012		{\012			atom1_typeid = KerConst->atom_types_const [atom1_id];\012			atom2_typeid = KerConst->atom_types_const [atom2_id];\012\012			//calculating van der Waals / hydrogen bond term\012			/*\012			intraE += KerConst->VWpars_AC_const[atom1_typeid * DockConst->num_of_atypes+atom2_typeid]/distance_pow_12;\012			*/\012			partialE1 = KerConst->VWpars_AC_const[atom1_typeid * DockConst->num_of_atypes+atom2_typeid]/distance_pow_12;\012\012			if (KerConst->intraE_contributors_const[3*contributor_counter+2] == 1)	//H-bond\012				/*\012				intraE-= KerConst->VWpars_BD_const[atom1_typeid*DockConst->num_of_atypes+atom2_typeid]/distance_pow_10;	\012				*/\012				partialE2 = KerConst->VWpars_BD_const[atom1_typeid*DockConst->num_of_atypes+atom2_typeid]/distance_pow_10;	\012\012\012			else	//van der Waals\012				/*\012				intraE-= KerConst->VWpars_BD_const[atom1_typeid*DockConst->num_of_atypes+atom2_typeid]/distance_pow_6;\012				*/\012				partialE2 = KerConst->VWpars_BD_const[atom1_typeid*DockConst->num_of_atypes+atom2_typeid]/distance_pow_6;\012\012			//calculating electrostatic term\012			/*\012			intraE+= DockConst->coeff_elec*KerConst->atom_charges_const[atom1_id]*KerConst->atom_charges_const[atom2_id]/(distance_leo*(-8.5525f + 86.9525f/(1.0f + 7.7839f*exp(-0.3154f*distance_leo))));\012			*/\012			partialE3 = DockConst->coeff_elec*KerConst->atom_charges_const[atom1_id]*KerConst->atom_charges_const[atom2_id]/(distance_leo*(-8.5525f + 86.9525f/(1.0f + 7.7839f*exp(-0.3154f*distance_leo))));\012\012			//calculating desolvation term\012			/*\012			intraE+= (\012				  ( KerConst->dspars_S_const[atom1_typeid] + DockConst->qasp*fabs(KerConst->atom_charges_const[atom1_id]) ) * KerConst->dspars_V_const[atom2_typeid] + \012				  ( KerConst->dspars_S_const[atom2_typeid] + DockConst->qasp*fabs(KerConst->atom_charges_const[atom2_id]) ) * KerConst->dspars_V_const[atom1_typeid]) * \012				 DockConst->coeff_desolv*exp(-distance_leo*distance_leo/25.92f);\012			*/\012			partialE4 = (\012				  ( KerConst->dspars_S_const[atom1_typeid] + DockConst->qasp*fabs(KerConst->atom_charges_const[atom1_id]) ) * KerConst->dspars_V_const[atom2_typeid] + \012				  ( KerConst->dspars_S_const[atom2_typeid] + DockConst->qasp*fabs(KerConst->atom_charges_const[atom2_id]) ) * KerConst->dspars_V_const[atom1_typeid]) * \012				 DockConst->coeff_desolv*exp(-distance_leo*distance_leo/25.92f);\012			\012	\012		} // End of if: if ((dist < dcutoff) && (dist < 20.48))	\012\012		intraE += partialE1 + partialE2 + partialE3 + partialE4;\012\012	} // End of LOOP_INTRAE_1\012\012	// --------------------------------------------------------------\012	// Send intramolecular energy to channel\012	// --------------------------------------------------------------\012	write_channel_altera(chan_Intrae2Store_intrae, intraE);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	write_channel_altera(chan_Intrae2Store_active, active);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	write_channel_altera(chan_Intrae2Store_mode,   mode);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	write_channel_altera(chan_Intrae2Store_cnt,    cnt);\012	// --------------------------------------------------------------\012\012	} // End of while(1)\012}\012// --------------------------------------------------------------------------\012// --------------------------------------------------------------------------\012"}, {"index":4, "path":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_Store.cl", "name":"Krnl_Store.cl", "content":"__kernel __attribute__ ((reqd_work_group_size(1,1,1)))\012void Krnl_Store(\012             //__global const float*           restrict GlobFgrids,\012	     //__global       float*           restrict GlobPopulationCurrent,\012	     __global       float*           restrict GlobEnergyCurrent,\012	     //__global       float*           restrict GlobPopulationNext,\012	     __global       float*           restrict GlobEnergyNext\012		//,\012             //__global       unsigned int*    restrict GlobPRNG,\012	     //__global const kernelconstant*  restrict KerConst,\012	     //__global const Dockparameters*  restrict DockConst\012	     )\012{\012	// --------------------------------------------------------------\012	// Wait for enegies\012	// --------------------------------------------------------------\012	float InterE;\012	float IntraE;\012\012	char active = 1;\012	char mode   = 0;\012	uint cnt    = 0;  \012\012 	char active1, active2;\012	char mode1, mode2;\012	uint cnt1, cnt2;\012	bool write_to_channel_ack = false;\012	bool write_to_channel_energy = false;\012\012\012	float LSenergy;\012\012while(active) {\012\012	InterE = read_channel_altera(chan_Intere2Store_intere);\012	IntraE = read_channel_altera(chan_Intrae2Store_intrae);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	active1 = read_channel_altera(chan_Intere2Store_active);\012	active2 = read_channel_altera(chan_Intrae2Store_active);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	mode1 = read_channel_altera(chan_Intere2Store_mode);\012	mode2 = read_channel_altera(chan_Intrae2Store_mode);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	cnt1  = read_channel_altera(chan_Intere2Store_cnt);\012	cnt2  = read_channel_altera(chan_Intrae2Store_cnt);\012\012	// --------------------------------------------------------------\012	\012	if (active1 != active2) {printf(\"Store error: active are not equal!\\n\");}\012	else 			{active = active1;}\012\012	if (mode1 != mode2)     {printf(\"Store error: mode are not equal!\\n\");}\012	else 			{mode = mode1;}\012\012	if (cnt1  != cnt2)      {printf(\"Store error: mode are not equal!\\n\");}\012	else 			{cnt = cnt1;}\012\012	if (active == 0) {printf(\"	%-20s: %s\\n\", \"Krnl_Store\", \"disabled\");}\012\012/*\012	switch (mode) {\012//\012		case 0:	write_channel_altera(chan_Store2GA_ack, 1);	// Signal INI, GG or LS finished \012		break;\012		case 1:	GlobEnergyCurrent[cnt] = InterE + IntraE;	// INI: Init energy calculation of pop\012		break;\012		case 2:	GlobEnergyNext[cnt] = InterE + IntraE;		// GG: Genetic Generation\012		break;\012		case 3:	LSenergy = InterE + IntraE;		// LS: Local Search\012			write_channel_altera(chan_Store2GA_ack, 1);\012			mem_fence(CLK_CHANNEL_MEM_FENCE);\012			write_channel_altera(chan_Store2GA_LSenergy, LSenergy);\012		break;\012//\012\012\012		case 4:							// Krnl_GA has finished execution!\012		break;\012	}\012*/\012\012\012\012\012	switch (mode) {\012		case STATE_IC :\012			write_to_channel_ack = false;\012			write_to_channel_energy = false;	\012			GlobEnergyCurrent[cnt] = InterE + IntraE;\012		break;\012\012		case STATE_IC_WAIT_END :\012			write_to_channel_ack = true;\012			write_to_channel_energy = false;	\012		break;\012\012		case STATE_GG :\012			write_to_channel_ack = false;	\012			write_to_channel_energy = false;	\012			GlobEnergyNext[cnt] = InterE + IntraE;\012		break;\012\012		case STATE_GG_WAIT_END :	\012			write_to_channel_ack = true;	\012			write_to_channel_energy = false;\012		break;\012\012		case STATE_LS :	\012			write_to_channel_ack = false;\012			write_to_channel_energy = false;	\012		break;\012\012		case LS_STATE_DIR_FIRST:\012	\012		break;\012\012		case LS_STATE_WAIT_FIRST:\012			LSenergy = InterE + IntraE;\012			write_to_channel_ack = false;\012			write_to_channel_energy = true;	\012		break;\012\012		case LS_STATE_ENERGY_FIRST:\012			write_to_channel_ack = false;\012			write_to_channel_energy = false;	\012		break;\012\012		\012		case LS_STATE_DIR_SECOND:\012\012		break;\012\012		case LS_STATE_WAIT_SECOND:\012			LSenergy = InterE + IntraE;\012			write_to_channel_ack = false;\012			write_to_channel_energy = true;	\012		break;\012\012		case LS_STATE_CHECK_RHO:\012			write_to_channel_ack = false;\012			write_to_channel_energy = false;	\012		break;\012\012		case LS_STATE_CHECK_TERMINATION:\012			write_to_channel_ack = false;\012			write_to_channel_energy = false;	\012		break;\012\012\012		case STATE_LS_WAIT_END :	\012			write_to_channel_ack = false;\012			write_to_channel_energy = false;	\012		break;\012\012		case STATE_END :							\012			write_to_channel_ack = false;	\012			write_to_channel_energy = false;		\012		break;\012\012		case STATE_WAIT_END :	\012			write_to_channel_ack = true;	\012			write_to_channel_energy = false;					\012		break;\012\012		case STATE_OFF :							\012			write_to_channel_ack = false;\012			write_to_channel_energy = false;\012		break;\012	}\012\012\012	if (write_to_channel_ack == true) {	\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		write_channel_altera(chan_Store2GA_ack, 1);	// Signal IC finished \012	}\012\012	if (write_to_channel_energy == true) {\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		write_channel_altera(chan_Store2GA_LSenergy, LSenergy);\012	}\012\012} // End of while(1)\012\012}\012// --------------------------------------------------------------------------\012// --------------------------------------------------------------------------\012"}, {"index":5, "path":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/auxiliary_genetic.cl", "name":"auxiliary_genetic.cl", "content":"// --------------------------------------------------------------------------\012// The function maps the first parameter into the interval 0..ang_max\012// by adding/subtracting n*ang_max to/from it.\012// Originally from: searchoptimum.c\012// --------------------------------------------------------------------------\012void map_angle(__local float* angle, const float ang_max)\012{\012	float x = (*angle);\012\012	// **********************************************\012	// ADD VENDOR SPECIFIC PRAGMA\012	// **********************************************\012	LOOP_WHILE_MAP_ANGLE_1:\012	while (x < 0.0f) {\012		x += ang_max;\012	}\012\012	// **********************************************\012	// ADD VENDOR SPECIFIC PRAGMA\012	// **********************************************\012	LOOP_WHILE_MAP_ANGLE_2:\012	while (x > ang_max) {\012		x -= ang_max;\012	}\012\012	(*angle) = x;\012}\012\012// --------------------------------------------------------------------------\012// The function finds the best entity based on the energy value \012// i.e. sum of the 38th and 39th element\012// and returns its ID in the best_entity parameter. \012// The pop_size parameter must be equal to the population size.\012// Originally from: searchoptimum.c\012// --------------------------------------------------------------------------\012uint find_best(__global const float* restrict GlobEnergyCurrent, \012	       __local        float* restrict loc_energies,\012		        const uint pop_size)\012{\012	uint i;\012	uint best_entity = 0;\012\012	// **********************************************\012	// ADD VENDOR SPECIFIC PRAGMA\012	// **********************************************\012	LOOP_FIND_BEST_1:\012	for (i=0; i<pop_size; i++) {\012		loc_energies[i] = GlobEnergyCurrent[i];\012	}\012\012	// **********************************************\012	// ADD VENDOR SPECIFIC PRAGMA\012	// *********************************************\012	LOOP_FIND_BEST_2:\012	for (i=1; i<pop_size; i++) {\012\012		#if defined (DEBUG_FIND_BEST)\012		printf(\"iteration: %u, energy_iteration_entity: %f, best_entity: %u, energy_best_entity: %f ...\", \012			i, loc_energies[i], best_entity, loc_energies[best_entity]);\012		#endif\012		\012		if (loc_energies[best_entity] > loc_energies[i])    \012		{\012			best_entity = i;\012			\012			#if defined (DEBUG_FIND_BEST)\012			printf(\"RES: best_entity: %u, energy_best_entity: %f\\n\",\012			       best_entity, \012			       loc_energies[best_entity]);\012			#endif\012	\012		}\012		#if defined (DEBUG_FIND_BEST)\012		printf(\"\\n\");\012		#endif\012	}\012\012	return best_entity;\012}\012\012// --------------------------------------------------------------------------\012// --------------------------------------------------------------------------\012uint myrand_basic (__global uint* restrict GlobPRNG)\012{\012	uint temprand_uint;\012\012#if defined (REPRO)\012	temprand_uint = 1;\012#else\012	temprand_uint = GlobPRNG[0];\012	temprand_uint = (RAND_A*temprand_uint + RAND_C);\012#endif\012	GlobPRNG[0] = temprand_uint;\012\012	return temprand_uint;\012}\012\012// --------------------------------------------------------------------------\012// --------------------------------------------------------------------------\012float myrand(__global uint* restrict GlobPRNG)\012{\012	uint   temprand_uint;\012	float temprand_float;\012\012	temprand_uint = myrand_basic(GlobPRNG);\012	temprand_float = convert_float(native_divide(temprand_uint,MAX_UINT))*0.999999f;\012	return temprand_float;\012}\012\012// --------------------------------------------------------------------------\012// --------------------------------------------------------------------------\012uint myrand_uint(__global uint* restrict GlobPRNG,\012		 const uint limit)\012{\012	uint   temprand_uint;\012	temprand_uint = myrand_basic(GlobPRNG);\012	// no native_divide() used here as values are integers\012	temprand_uint = (temprand_uint/MAX_UINT)*limit;\012	return temprand_uint;\012	\012}\012\012// --------------------------------------------------------------------------\012// The function performs binary tournament selection. \012// The first parameter must containt the population data. \012// rand_level is the probability with which the new entity should be selected as parent. \012// The two selected parents are returned in the parent1 and parent2 parameters.\012// Originally from: searchoptimum.c\012// --------------------------------------------------------------------------\012void binary_tournament_selection(__global const float* restrict GlobEnergyCurrent,\012				 __global       uint*  restrict GlobPRNG,\012				                uint*           parent1, \012				                uint*           parent2,\012					  const uint            pop_size,  \012				          const float           rand_level)\012{\012	uint parent_candidates [2];\012\012	//generating two different parent candidates\012	parent_candidates [0] = myrand_uint(GlobPRNG, pop_size);\012\012	LOOP_DOWHILE_BIN_TOURNAMENT_SEL_1:\012	do\012	{\012#if defined (REPRO)\012		parent_candidates [1] = myrand_uint(GlobPRNG, pop_size) + 1;\012#else\012		parent_candidates [1] = myrand_uint(GlobPRNG, pop_size);\012#endif	\012	}\012	while (parent_candidates [0] == parent_candidates [1]);\012\012	//the better will be the first parent with rand_level prability \012	//and the second with 1-rand_level probability\012	if (GlobEnergyCurrent[parent_candidates[0]] < GlobEnergyCurrent[parent_candidates[1]])\012	{\012		if (myrand(GlobPRNG) < 100*rand_level) {*parent1 = parent_candidates [0];}\012		else			               {*parent1 = parent_candidates [1];}\012	}\012	else\012	{\012		if (myrand(GlobPRNG) < 100*rand_level) {*parent1 = parent_candidates [1];}\012		else			               {*parent1 = parent_candidates [0];}	\012	}\012\012\012	#if defined (DEBUG_TOURNAMENT_SELECTION)\012	printf(\"Selecting first parent: %u (candidates were %u (E=%f) and %u (E=%f))\\n\", *parent1, \012		parent_candidates [0], GlobEnergyCurrent [parent_candidates [0]],\012		parent_candidates [1], GlobEnergyCurrent [parent_candidates [1]]);\012	#endif\012\012	//generating two different parent candidates (which differ from parent1 as well)\012	LOOP_DOWHILE_BIN_TOURNAMENT_SEL_2:\012	do\012#if defined (REPRO)\012		parent_candidates [0] = myrand_uint(GlobPRNG, pop_size) + 2;\012#else\012		parent_candidates [0] = myrand_uint(GlobPRNG, pop_size);\012#endif\012	while (parent_candidates [0] == *parent1);\012\012	LOOP_DOWHILE_BIN_TOURNAMENT_SEL_3:\012	do\012#if defined (REPRO)\012		parent_candidates [1] = myrand_uint(GlobPRNG, pop_size) + 3;\012#else\012		parent_candidates [1] = myrand_uint(GlobPRNG, pop_size);\012#endif\012	while ((parent_candidates [1] == parent_candidates [0]) || (parent_candidates [1] == *parent1));\012\012	//the better will be the second parent\012	if (GlobEnergyCurrent[parent_candidates[0]] < GlobEnergyCurrent[parent_candidates[1]])\012	{\012		if (myrand(GlobPRNG) < 100*rand_level) {*parent2 = parent_candidates [0];}\012		else		          	       {*parent2 = parent_candidates [1];}\012	}\012	else\012	{\012		if (myrand(GlobPRNG) < 100*rand_level) {*parent2 = parent_candidates [1];}\012		else			               {*parent2 = parent_candidates [0];}	\012	}\012\012	#if defined (DEBUG_TOURNAMENT_SELECTION)\012	printf(\"Selecting second parent: %u (candidates were %u (E=%f) and %u (E=%f))\\n\", *parent2,\012	       parent_candidates [0], GlobEnergyCurrent [parent_candidates [0]] ,\012	       parent_candidates [1], GlobEnergyCurrent [(arent_candidates [1]]);\012	#endif\012}\012\012// --------------------------------------------------------------------------\012// The function performs crossover and mutation and \012// generates two offsprings from two parents whose genotypes are the functions parameters. \012// Mutation rate is the probability of mutating a gene in %, \012// abs_max_dmov and abs_max_dang are the maximal delta values of a translation \012// or an orientation/rotatable bond gene during mutation.\012// Originally from: searchoptimum.c\012// --------------------------------------------------------------------------\012void gen_new_genotype(__global      uint*  restrict GlobPRNG,\012		      __local const float*          parent1_genotype,\012		      __local const float*          parent2_genotype, \012		              const float           mutation_rate,\012			      const float           abs_max_dmov,\012			      const float           abs_max_dang,\012			      const float           crossover_rate,\012			      const uint            num_of_genes,\012		      __local       float*          offspring_genotype)\012{\012	uint covr_point_low, covr_point_high;\012	uint temp1, temp2;\012	uint i;\012\012	//choosing crossover points randomly\012	temp1 = myrand_uint(GlobPRNG, num_of_genes-1);\012	temp2 = myrand_uint(GlobPRNG, num_of_genes-1);\012\012\012	//if (temp1 < temp2) {covr_point_low = temp1;\012	//		    covr_point_high = temp2;}\012	//else {		    covr_point_low = temp2;\012	//		    covr_point_high = temp1;}\012\012\012	bool twopoint_cross_yes = false;\012	if (temp1 == temp2)\012	{	\012		covr_point_low = temp1;\012	}\012	else\012	{\012		twopoint_cross_yes = true;\012		if (temp1 < temp2) {\012			covr_point_low = temp1;\012			covr_point_high = temp2;\012		}\012		else {		    \012			covr_point_low = temp2;\012			covr_point_high = temp1;\012		}\012	}\012\012	#if defined (DEBUG_GEN_NEW_GENOTYPE)\012	printf(\"Crossover points: low: %u, high: %u\\n\", covr_point_low, covr_point_high);\012	printf(\"Parent1: \");\012	for (i=0; i<num_of_genes; i++) {printf(\"%f \", parent1_genotype [i]);} printf(\"\\n\");\012\012	printf(\"Parent2: \");\012	for (i=0; i<num_of_genes; i++) {printf(\"%f \", parent2_genotype [i]);} printf(\"\\n\");\012	#endif\012\012	//performing crossover\012	if (crossover_rate > 100.0f*myrand(GlobPRNG))\012	{\012		//two-point crossover\012		//if (covr_point_low != covr_point_high)\012		if (twopoint_cross_yes == true)\012		{\012			// **********************************************\012			// ADD VENDOR SPECIFIC PRAGMA\012			// **********************************************\012			LOOP_GEN_NEW_GENOTYPE_1:\012			for (i=0; i<num_of_genes; i++)\012			{\012				if ((i<=covr_point_low) || (i>covr_point_high)) \012				{\012					offspring_genotype [i] = parent1_genotype[i];\012				}\012				else {\012					offspring_genotype [i] = parent2_genotype[i];\012				}\012			}\012		}\012		//one-point crossover\012		else {\012			// **********************************************\012			// ADD VENDOR SPECIFIC PRAGMA\012			// **********************************************\012			LOOP_GEN_NEW_GENOTYPE_2:\012			for (i=0; i<num_of_genes; i++)\012			{\012				if (i <= covr_point_low)\012				{\012					offspring_genotype [i] = parent1_genotype[i];\012				}\012				else {\012					offspring_genotype [i] = parent2_genotype[i];\012				}\012			}\012		}\012\012		#if defined (DEBUG_GEN_NEW_GENOTYPE)\012		printf(\"Offspring1 after crossover: \");\012		for (i=0; i<num_of_genes; i++) {printf(\"%f \", offspring_genotype [i]);} printf(\"\\n\");\012		#endif\012\012	}\012	else	//if no crossover, the offsprings are the parents\012	{\012		// **********************************************\012		// ADD VENDOR SPECIFIC PRAGMA\012		// **********************************************\012		LOOP_GEN_NEW_GENOTYPE_3:\012		for (i=0; i<num_of_genes; i++)\012		{\012			offspring_genotype [i] = parent1_genotype[i];\012		}\012\012		#if defined (DEBUG_GEN_NEW_GENOTYPE)\012		printf(\"No crossover, offsprings' genotypes equals to those of the parents\\n\");\012		#endif\012	}\012\012	//performing mutation\012\012	////mutating first offspring\012	//// THIS LOOP IS NOT PIPELINED AS IT CONTAINS ANOTHER LOOP\012	////__attribute__ ((xcl_pipeline_loop))\012	//LOOP_GEN_NEW_GENOTYPE_4:\012	\012//	for (i=0; i<num_of_genes; i++)\012//	{\012//		if (mutation_rate > 100.0f*myrand(GlobPRNG))\012//		{\012//			if (i < 3)\012//			{\012//				offspring_genotype [i] = offspring1genotype [i] + 2.0f*abs_max_dmov*myrand(GlobPRNG)-abs_max_dmov;\012//			}\012//			else\012//			{\012//				offspring_genotype [i] = (offspring_genotype [i] + 2.0f*abs_max_dang*myrand(GlobPRNG)-abs_max_dang);\012//\012//				if (i == 4) {map_angle(&(offspring_genotype [i]), 180.0f);}	//mapping angle to 0..180\012//				else        {map_angle(&(offspring_genotype [i]), 360.0f);}	//mapping angle to 0..360\012//\012//			}\012//		}\012//	}\012\012	// **********************************************\012	// ADD VENDOR SPECIFIC PRAGMA\012	// **********************************************\012	LOOP_GEN_NEW_GENOTYPE_4:\012	for (i=0; i<3; i++)\012	{\012		if (mutation_rate > 100*myrand(GlobPRNG))\012		{\012			offspring_genotype [i] = offspring_genotype [i] + 2*abs_max_dmov*myrand(GlobPRNG)-abs_max_dmov;\012		}\012	}\012\012	if (mutation_rate > 100*myrand(GlobPRNG))\012	{\012		offspring_genotype [3] = offspring_genotype [3] + 2*abs_max_dmov*myrand(GlobPRNG)-abs_max_dmov;\012		map_angle(&(offspring_genotype [3]), 360.0f);\012	}\012		\012	if (mutation_rate > 100*myrand(GlobPRNG))\012	{\012		offspring_genotype [4] = offspring_genotype [4] + 2*abs_max_dang*myrand(GlobPRNG)-abs_max_dang;\012		map_angle(&(offspring_genotype [4]), 180.0f);\012	}\012\012	// **********************************************\012	// ADD VENDOR SPECIFIC PRAGMA\012	// **********************************************\012	LOOP_GEN_NEW_GENOTYPE_5:\012	for (i=5; i<num_of_genes; i++)\012	{\012		if (mutation_rate > 100*myrand(GlobPRNG))\012		{\012			offspring_genotype [i] = offspring_genotype [i] + 2*abs_max_dang*myrand(GlobPRNG)-abs_max_dang;\012			map_angle(&(offspring_genotype [i]), 360.0f);	//mapping angle to 0..360\012		}\012	}\012\012	#if defined (DEBUG_GEN_NEW_GENOTYPE)\012	printf(\"Offspring1 after mutation: \");\012	for (i=0; i<num_of_genes; i++) {printf(\"%f \", offspring_genotype [i]);} printf(\"\\n\");\012	#endif\012\012}\012"}];

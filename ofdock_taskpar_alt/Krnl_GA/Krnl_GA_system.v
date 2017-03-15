@@ -3605,7 +3605,7 @@ module Krnl_GA_system
    // INST channel_id_chan_Store2GA_ack_fifo of acl_channel_fifo
    acl_channel_fifo
    #(
-      .FIFO_DEPTH(2133),
+      .FIFO_DEPTH(2128),
       .DATA_W(8),
       .ADJUST_FOR_LATENCY(1),
       .INTENDED_DEVICE_FAMILY("Arria 10")
@@ -3636,7 +3636,7 @@ module Krnl_GA_system
    // INST channel_id_chan_Store2GA_LSenergy_fifo of acl_channel_fifo
    acl_channel_fifo
    #(
-      .FIFO_DEPTH(2136),
+      .FIFO_DEPTH(2131),
       .DATA_W(32),
       .ADJUST_FOR_LATENCY(1),
       .INTENDED_DEVICE_FAMILY("Arria 10")
@@ -3667,7 +3667,7 @@ module Krnl_GA_system
    // INST channel_id_chan_Intere2Store_active_fifo of acl_channel_fifo
    acl_channel_fifo
    #(
-      .FIFO_DEPTH(387),
+      .FIFO_DEPTH(392),
       .DATA_W(8),
       .ADJUST_FOR_LATENCY(1),
       .INTENDED_DEVICE_FAMILY("Arria 10")
@@ -3698,7 +3698,7 @@ module Krnl_GA_system
    // INST channel_id_chan_Intere2Store_cnt_fifo of acl_channel_fifo
    acl_channel_fifo
    #(
-      .FIFO_DEPTH(386),
+      .FIFO_DEPTH(391),
       .DATA_W(32),
       .ADJUST_FOR_LATENCY(1),
       .INTENDED_DEVICE_FAMILY("Arria 10")
@@ -3729,7 +3729,7 @@ module Krnl_GA_system
    // INST channel_id_chan_Intere2Store_intere_fifo of acl_channel_fifo
    acl_channel_fifo
    #(
-      .FIFO_DEPTH(388),
+      .FIFO_DEPTH(393),
       .DATA_W(32),
       .ADJUST_FOR_LATENCY(1),
       .INTENDED_DEVICE_FAMILY("Arria 10")
@@ -3760,7 +3760,7 @@ module Krnl_GA_system
    // INST channel_id_chan_Intere2Store_mode_fifo of acl_channel_fifo
    acl_channel_fifo
    #(
-      .FIFO_DEPTH(386),
+      .FIFO_DEPTH(391),
       .DATA_W(8),
       .ADJUST_FOR_LATENCY(1),
       .INTENDED_DEVICE_FAMILY("Arria 10")

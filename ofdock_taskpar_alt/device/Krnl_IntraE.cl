@@ -35,6 +35,8 @@ void Krnl_IntraE(
 	float distance_pow_2, distance_pow_4, distance_pow_6, distance_pow_10, distance_pow_12;
 	float intraE;
 
+	float partialE1, partialE2, partialE3, partialE4;
+
 while(active) {
 	//printf("BEFORE In INTRA CHANNEL\n");
 	// --------------------------------------------------------------
@@ -60,6 +62,10 @@ while(active) {
 	if (active == 0) {printf("	%-20s: %s\n", "Krnl_IntraE", "disabled");}
 
 	intraE = 0.0f;
+	partialE1 = 0.0f;
+	partialE2 = 0.0f;
+	partialE3 = 0.0f;
+	partialE4 = 0.0f;
 
 	//for each intramolecular atom contributor pair
 	// **********************************************
@@ -102,23 +108,46 @@ while(active) {
 			atom2_typeid = KerConst->atom_types_const [atom2_id];
 
 			//calculating van der Waals / hydrogen bond term
+			/*
 			intraE += KerConst->VWpars_AC_const[atom1_typeid * DockConst->num_of_atypes+atom2_typeid]/distance_pow_12;
+			*/
+			partialE1 = KerConst->VWpars_AC_const[atom1_typeid * DockConst->num_of_atypes+atom2_typeid]/distance_pow_12;
 
 			if (KerConst->intraE_contributors_const[3*contributor_counter+2] == 1)	//H-bond
+				/*
 				intraE-= KerConst->VWpars_BD_const[atom1_typeid*DockConst->num_of_atypes+atom2_typeid]/distance_pow_10;	
+				*/
+				partialE2 = KerConst->VWpars_BD_const[atom1_typeid*DockConst->num_of_atypes+atom2_typeid]/distance_pow_10;	
+
+
 			else	//van der Waals
+				/*
 				intraE-= KerConst->VWpars_BD_const[atom1_typeid*DockConst->num_of_atypes+atom2_typeid]/distance_pow_6;
+				*/
+				partialE2 = KerConst->VWpars_BD_const[atom1_typeid*DockConst->num_of_atypes+atom2_typeid]/distance_pow_6;
 
 			//calculating electrostatic term
+			/*
 			intraE+= DockConst->coeff_elec*KerConst->atom_charges_const[atom1_id]*KerConst->atom_charges_const[atom2_id]/(distance_leo*(-8.5525f + 86.9525f/(1.0f + 7.7839f*exp(-0.3154f*distance_leo))));
+			*/
+			partialE3 = DockConst->coeff_elec*KerConst->atom_charges_const[atom1_id]*KerConst->atom_charges_const[atom2_id]/(distance_leo*(-8.5525f + 86.9525f/(1.0f + 7.7839f*exp(-0.3154f*distance_leo))));
 
 			//calculating desolvation term
+			/*
 			intraE+= (
 				  ( KerConst->dspars_S_const[atom1_typeid] + DockConst->qasp*fabs(KerConst->atom_charges_const[atom1_id]) ) * KerConst->dspars_V_const[atom2_typeid] + 
 				  ( KerConst->dspars_S_const[atom2_typeid] + DockConst->qasp*fabs(KerConst->atom_charges_const[atom2_id]) ) * KerConst->dspars_V_const[atom1_typeid]) * 
 				 DockConst->coeff_desolv*exp(-distance_leo*distance_leo/25.92f);
+			*/
+			partialE4 = (
+				  ( KerConst->dspars_S_const[atom1_typeid] + DockConst->qasp*fabs(KerConst->atom_charges_const[atom1_id]) ) * KerConst->dspars_V_const[atom2_typeid] + 
+				  ( KerConst->dspars_S_const[atom2_typeid] + DockConst->qasp*fabs(KerConst->atom_charges_const[atom2_id]) ) * KerConst->dspars_V_const[atom1_typeid]) * 
+				 DockConst->coeff_desolv*exp(-distance_leo*distance_leo/25.92f);
+			
 	
 		} // End of if: if ((dist < dcutoff) && (dist < 20.48))	
+
+		intraE += partialE1 + partialE2 + partialE3 + partialE4;
 
 	} // End of LOOP_INTRAE_1
 

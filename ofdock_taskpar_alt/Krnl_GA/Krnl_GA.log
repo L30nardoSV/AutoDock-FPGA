@@ -348,7 +348,7 @@ The kernel has a required work-group size of (1, 1, 1).
 
 Loop Report:
 
- + Loop "Block114" (file Krnl_IntraE.cl line 38)
+ + Loop "Block114" (file Krnl_IntraE.cl line 40)
  | NOT pipelined due to: 
  |   Loop exit condition unresolvable at iteration initiation.
  |   Simplify loop exit condition to fix this problem.
@@ -356,19 +356,12 @@ Loop Report:
  |   Not pipelining this loop will most likely lead to poor performance.
  | 
  | 
- |-+ Loop "Block115" (file Krnl_IntraE.cl line 44)
+ |-+ Loop "Block115" (file Krnl_IntraE.cl line 46)
  |   Pipelined well. Successive iterations are launched every cycle.
  |   
  |   
- |-+ Loop "Block117" (file Krnl_IntraE.cl line 69)
-     Pipelined with successive iterations launched every 17 cycles due to: 
-          
-         Data dependency on variable intraE  (file Krnl_IntraE.cl line 36)
-         Largest Critical Path Contributors:
-             30%: Hardened Floating-Point Multiply-Add Operation  (file Krnl_IntraE.cl line 119)
-             23%: Hardened Floating-Point Add Operation  (file Krnl_IntraE.cl line 105)
-             23%: Hardened Floating-Point Sub Operation  (file Krnl_IntraE.cl line 108, line 110)
-             23%: Hardened Floating-Point Add Operation  (file Krnl_IntraE.cl line 113)
+ |-+ Loop "Block117" (file Krnl_IntraE.cl line 75)
+     Pipelined well. Successive iterations are launched every cycle.
      
      
 =========================================================================================================
@@ -394,7 +387,7 @@ Loop Report:
 ; Logic utilization                      ;  258%                     ;
 ; ALUTs                                  ;  113%                     ;
 ; Dedicated logic registers              ;  148%                     ;
-; Memory blocks                          ;  160%                     ;
+; Memory blocks                          ;  159%                     ;
 ; DSP blocks                             ;   27%                     ;
 +----------------------------------------+---------------------------;
 System name: Krnl_GA
