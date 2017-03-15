@@ -260,6 +260,7 @@ add_fileset_file acl_fp_sitofp.v SYSTEM_VERILOG PATH $::env(ALTERAOCLSDKROOT)/ip
 add_fileset_file acl_fp_floor.v SYSTEM_VERILOG PATH $::env(ALTERAOCLSDKROOT)/ip/acl_fp_floor.v TOP_LEVEL_FILE
 add_fileset_file acl_fp_ceil.v SYSTEM_VERILOG PATH $::env(ALTERAOCLSDKROOT)/ip/acl_fp_ceil.v TOP_LEVEL_FILE
 add_fileset_file acl_fp_convert_with_rounding.v SYSTEM_VERILOG PATH $::env(ALTERAOCLSDKROOT)/ip/acl_fp_convert_with_rounding.v TOP_LEVEL_FILE
+add_fileset_file acl_fp_accum_a10.v SYSTEM_VERILOG PATH $::env(ALTERAOCLSDKROOT)/ip/acl_fp_accum_a10.v TOP_LEVEL_FILE
 add_fileset_file acl_fp_sqrt_s5.v SYSTEM_VERILOG PATH $::env(ALTERAOCLSDKROOT)/ip/acl_fp_sqrt_s5.v TOP_LEVEL_FILE
 add_fileset_file fp_sqrt_s5.vhd VHDL PATH $::env(ALTERAOCLSDKROOT)/ip/fp_sqrt_s5.vhd TOP_LEVEL_FILE
 add_fileset_file fp_sqrt_s5_memoryC0_uid59_sqrtTableGenerator_lutmem.hex HEX PATH $::env(ALTERAOCLSDKROOT)/ip/fp_sqrt_s5_memoryC0_uid59_sqrtTableGenerator_lutmem.hex TOP_LEVEL_FILE
@@ -383,6 +384,7 @@ add_fileset_file acl_fp_sitofp.v SYSTEM_VERILOG PATH $::env(ALTERAOCLSDKROOT)/ip
 add_fileset_file acl_fp_floor.v SYSTEM_VERILOG PATH $::env(ALTERAOCLSDKROOT)/ip/acl_fp_floor.v TOP_LEVEL_FILE
 add_fileset_file acl_fp_ceil.v SYSTEM_VERILOG PATH $::env(ALTERAOCLSDKROOT)/ip/acl_fp_ceil.v TOP_LEVEL_FILE
 add_fileset_file acl_fp_convert_with_rounding.v SYSTEM_VERILOG PATH $::env(ALTERAOCLSDKROOT)/ip/acl_fp_convert_with_rounding.v TOP_LEVEL_FILE
+add_fileset_file acl_fp_accum_a10.v SYSTEM_VERILOG PATH $::env(ALTERAOCLSDKROOT)/ip/acl_fp_accum_a10.v TOP_LEVEL_FILE
 add_fileset_file acl_fp_sqrt_s5.v SYSTEM_VERILOG PATH $::env(ALTERAOCLSDKROOT)/ip/acl_fp_sqrt_s5.v TOP_LEVEL_FILE
 add_fileset_file fp_sqrt_s5.vhd VHDL PATH $::env(ALTERAOCLSDKROOT)/ip/fp_sqrt_s5.vhd TOP_LEVEL_FILE
 add_fileset_file fp_sqrt_s5_memoryC0_uid59_sqrtTableGenerator_lutmem.hex HEX PATH $::env(ALTERAOCLSDKROOT)/ip/fp_sqrt_s5_memoryC0_uid59_sqrtTableGenerator_lutmem.hex TOP_LEVEL_FILE

@@ -17,24 +17,26 @@ enum STATES {S_IC 		= 0,
 	    };*/
 #define STATE_IC 	   0
 #define STATE_IC_WAIT_END  1
-#define STATE_GG 	   2
-#define STATE_GG_WAIT_END  3
-#define STATE_LS           4
-#define STATE_LS_WAIT_END  5
-#define STATE_CHECK_TERMINATION 6
-#define STATE_END 	   7
-#define STATE_WAIT_END 	   8
-#define STATE_OFF 	   9
+#define STATE_GG_FIND_BEST 2
+#define STATE_GG 	   3
+#define STATE_GG_WAIT_END  4
+#define STATE_UPDATE_POP   5
+#define STATE_LS           6
+#define STATE_LS_WAIT_END  7
+#define STATE_CHECK_TERMINATION 8
+#define STATE_END 	   9
+#define STATE_WAIT_END 	   10
+#define STATE_OFF 	   11
 
 
-#define LS_STATE_DIR_FIRST	10
-#define LS_STATE_WAIT_FIRST	11
-#define LS_STATE_ENERGY_FIRST	12
-#define LS_STATE_DIR_SECOND	13
-#define LS_STATE_WAIT_SECOND	14
-#define LS_STATE_ENERGY_SECOND	15
-#define LS_STATE_CHECK_RHO	16
-#define LS_STATE_CHECK_TERMINATION 17
+#define LS_STATE_DIR_FIRST	12
+#define LS_STATE_WAIT_FIRST	13
+#define LS_STATE_ENERGY_FIRST	14
+#define LS_STATE_DIR_SECOND	15
+#define LS_STATE_WAIT_SECOND	16
+#define LS_STATE_ENERGY_SECOND	17
+#define LS_STATE_CHECK_RHO	18
+#define LS_STATE_CHECK_TERMINATION 19
 
 
 // Define kernel file-scope channel variable
@@ -281,6 +283,8 @@ void Krnl_GA(//__global const float*           restrict GlobFgrids,
 
 	// State machine
 	uint pop_cnt = 0;	
+	bool first_step = true;
+
 
 	while (active) {
 
@@ -288,16 +292,22 @@ void Krnl_GA(//__global const float*           restrict GlobFgrids,
 	switch (mode) {
 		// ---------------------------------------------------------------------------------------------------------
 		case STATE_IC :			// IC: Init energy calculation of pop
-			if (pop_cnt < DockConst->pop_size) {
+			if (pop_cnt < DockConst->pop_size-1) {
 				mode = STATE_IC;
 				write_to_channel_genotype = true;
 				read_from_channel_ack     = false;
 				read_from_channel_energy  = false;
 
+				if (first_step == true) {
+					first_step = false;
+				}
+				else {
+					pop_cnt++;
+				}
+					
 				for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {
 					genotype[pipe_cnt] = GlobPopulationCurrent[pop_cnt*ACTUAL_GENOTYPE_LENGTH+ pipe_cnt];
 				}	
-				pop_cnt++;
 			}
 			else {
 				mode = STATE_IC_WAIT_END;
@@ -312,14 +322,19 @@ void Krnl_GA(//__global const float*           restrict GlobFgrids,
 		break;
 		// ---------------------------------------------------------------------------------------------------------
 		case STATE_IC_WAIT_END :	// Signal IC finished 
-			mode = STATE_GG;
+			mode = STATE_GG_FIND_BEST;
 			write_to_channel_genotype = false;
 			read_from_channel_ack = true;
-			pop_cnt = 0;
 			eval_cnt = DockConst->pop_size;	
 		break;
 		// ---------------------------------------------------------------------------------------------------------
-		case STATE_GG :			// GG: Genetic Generation
+		case STATE_GG_FIND_BEST:
+			mode = STATE_GG;
+			write_to_channel_genotype = false;
+			read_from_channel_ack = false ;
+
+			pop_cnt = 0;
+
 			//Identifying best entity
 			best_entity_id = find_best(GlobEnergyCurrent, loc_energies, DockConst->pop_size); 
 			
@@ -328,6 +343,11 @@ void Krnl_GA(//__global const float*           restrict GlobFgrids,
 				GlobPopulationNext[i] = GlobPopulationCurrent[best_entity_id*ACTUAL_GENOTYPE_LENGTH+i];
 			}
 			GlobEnergyNext[best_entity_id] = GlobEnergyCurrent[best_entity_id];
+
+		break;
+		// ---------------------------------------------------------------------------------------------------------
+		case STATE_GG :			// GG: Genetic Generation
+			pop_cnt++;
 
 			if (pop_cnt < DockConst->pop_size) {
 				mode = STATE_GG;
@@ -348,7 +368,7 @@ void Krnl_GA(//__global const float*           restrict GlobFgrids,
 
 				async_work_group_copy(GlobPopulationNext+pop_cnt*ACTUAL_GENOTYPE_LENGTH, genotype, ACTUAL_GENOTYPE_LENGTH, 0);
 
-				pop_cnt++;
+				//pop_cnt++;
 			}
 			else {
 				mode = STATE_GG_WAIT_END;
@@ -362,9 +382,15 @@ void Krnl_GA(//__global const float*           restrict GlobFgrids,
 		break;
 		// ---------------------------------------------------------------------------------------------------------
 		case STATE_GG_WAIT_END :	// Signal GG finished 		
-			mode = STATE_LS;
+			mode = STATE_UPDATE_POP;
 			write_to_channel_genotype = false;
 			read_from_channel_ack = true;
+		break;
+		// ---------------------------------------------------------------------------------------------------------
+		case STATE_UPDATE_POP :
+			mode = STATE_LS;
+			write_to_channel_genotype = false;
+			read_from_channel_ack = false;
 
 			pop_cnt = 0;
 			eval_cnt += DockConst->pop_size;
@@ -601,7 +627,8 @@ void Krnl_GA(//__global const float*           restrict GlobFgrids,
 			ls_ent_cnt++;
 
 			if (ls_ent_cnt<DockConst->num_of_lsentities) {
-				mode = LS_STATE_DIR_FIRST;
+				//mode = LS_STATE_DIR_FIRST;
+				mode = STATE_LS;
 				write_to_channel_genotype = false;
 				read_from_channel_ack = false;
 			}
@@ -616,7 +643,8 @@ void Krnl_GA(//__global const float*           restrict GlobFgrids,
 		// ---------------------------------------------------------------------------------------------------------
 		case STATE_CHECK_TERMINATION :	// Signal LS finished 		
 			if((eval_cnt < DockConst->num_of_energy_evals) && (generation_cnt < DockConst->num_of_generations)) {
-				mode = STATE_GG;
+				mode = STATE_GG_FIND_BEST;
+				pop_cnt = 0; 
 				write_to_channel_genotype = false;
 				read_from_channel_ack = false;
 			}

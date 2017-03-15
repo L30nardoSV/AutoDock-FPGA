@@ -100,18 +100,6 @@
 		<II>0</II>
 	</loop>
 	<loop>
-		<line> (file Krnl_GA</line>
-		<II>0</II>
-	</loop>
-	<loop>
-		<line> (file auxiliary_genetic</line>
-		<II>0</II>
-	</loop>
-	<loop>
-		<line> (file Krnl_GA</line>
-		<II>0</II>
-	</loop>
-	<loop>
 		<line> (file auxiliary_genetic</line>
 		<II>0</II>
 	</loop>
@@ -124,6 +112,10 @@
 		<II>0</II>
 	</loop>
 	<loop>
+		<line> (file auxiliary_genetic</line>
+		<II>0</II>
+	</loop>
+	<loop>
 		<line> (file Krnl_GA</line>
 		<II>0</II>
 	</loop>
@@ -145,6 +137,14 @@
 	</loop>
 	<loop>
 		<line> (file auxiliary_genetic</line>
+		<II>0</II>
+	</loop>
+	<loop>
+		<line> (file Krnl_GA</line>
+		<II>0</II>
+	</loop>
+	<loop>
+		<line> (file Krnl_GA</line>
 		<II>0</II>
 	</loop>
 	<loop>
@@ -217,7 +217,7 @@
 	</loop>
 	<loop>
 		<line> (file Krnl_InterE</line>
-		<II>13</II>
+		<II>1</II>
 	</loop>
 	<loop>
 		<line> (file Krnl_IntraE</line>

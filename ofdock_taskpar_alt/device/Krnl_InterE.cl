@@ -36,6 +36,9 @@ void Krnl_InterE(
 	uint cnt    = 0;   
 
 	float interE;
+	float partialE1, partialE2, partialE3;
+
+
 	char atom1_id, atom1_typeid;
 	float x, y, z, dx, dy, dz, q;
 	float cube [2][2][2];
@@ -77,7 +80,9 @@ while(active) {
 	if (active == 0) {printf("	%-20s: %s\n", "Krnl_InterE", "disabled");}
 
 	interE = 0.0f;
-
+	partialE1 = 0.0f;
+	partialE2 = 0.0f;
+	partialE3 = 0.0f;
 
 	// for each atom
 	// **********************************************
@@ -98,7 +103,12 @@ while(active) {
 		    (z < 0.0f) || (z >= DockConst->gridsize_z-1))	
 		{
 			//penalty is 2^24 for each atom outside the grid
+			/*
 			interE += 16777216.0f; 
+			*/
+			partialE1 = 16777216.0f; 
+			partialE2 = 0.0f;
+			partialE3 = 0.0f;
 		} 
 		else 
 		{
@@ -171,7 +181,10 @@ while(active) {
 			printf("cube(1,1,1) = %f\n", cube [1][1][1]);
 			#endif
 
+			/*
 			interE += TRILININTERPOL(cube, weights);
+			*/
+			partialE1 = TRILININTERPOL(cube, weights);
 
 			#if defined (DEBUG_KERNEL_INTER_E)
 			printf("interpolated value = %f\n\n", TRILININTERPOL(cube, weights));
@@ -201,8 +214,11 @@ while(active) {
 			printf("cube(1,1,1) = %f\n", cube [1][1][1]);
 			#endif
 
+			/*
 			interE += q * TRILININTERPOL(cube, weights);
-
+			*/
+			partialE2 = q * TRILININTERPOL(cube, weights);
+		
 			#if defined (DEBUG_KERNEL_INTER_E)
 			printf("interpoated value = %f, multiplied by q = %f\n\n", TRILININTERPOL(cube, weights), q*TRILININTERPOL(cube, weights));
 			#endif
@@ -231,13 +247,19 @@ while(active) {
 			printf("cube(1,1,1) = %f\n", cube [1][1][1]);
 			#endif
 
+			/*
 			interE += fabs(q) * TRILININTERPOL(cube, weights);
+			*/
+			partialE3 = fabs(q) * TRILININTERPOL(cube, weights);
 
 			#if defined (DEBUG_KERNEL_KERNEL_INTER_E)
 			printf("interploated value = %f, multiplied by abs(q) = %f\n\n", TRILININTERPOL(cube, weights), fabs(q) * trilin_interpol(cube, weights));
 			printf("Current value of intermolecular energy = %f\n\n\n", interE);
 			#endif
 		}
+
+
+		interE += partialE1 + partialE2 + partialE3;
 	} // End of LOOP_INTERE_1:	
 
 	// --------------------------------------------------------------

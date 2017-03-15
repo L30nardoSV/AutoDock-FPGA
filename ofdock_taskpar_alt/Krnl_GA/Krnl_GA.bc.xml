@@ -365,16 +365,16 @@
 				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/acl_merge_node_priority_encoder_workgroup.v" />
 				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/acl_fp_mul_a10.v" />
 				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/acl_fp_cmp.v" />
+				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/acl_enable_sink.v" />
+				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/acl_printf_buffer_address_generator.v" />
+				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/st_top.v" />
 				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/acl_full_detector.v" />
 				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/acl_stall_free_sink.v" />
 				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/acl_fp_fptoui.v" />
 				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/acl_fp_sub_a10.v" />
 				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/acl_fp_multadd_a10.v" />
-				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/acl_enable_sink.v" />
 				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/acl_fp_dot2_a10.v" />
 				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/acl_fp_mdot2_a10.v" />
-				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/st_top.v" />
-				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/acl_printf_buffer_address_generator.v" />
 				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/acl_embedded_workgroup_issuer.v" />
 				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/acl_embedded_workgroup_issuer_complex.v" />
 				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/acl_embedded_workgroup_issuer_fifo.v" />
@@ -394,53 +394,51 @@
 			<DATA>
 				<INTERFACE port="local_bb0_ld_memcoalesce_DockConst_load_06_inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="read" criticality="0" buffer_location="" group_id="0" />
 				<INTERFACE port="local_bb0_ld_memcoalesce_DockConst_load_0_inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="read" criticality="0" buffer_location="" group_id="0" />
-				<INTERFACE port="local_bb12_ld__inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="read" criticality="208933" buffer_location="" group_id="0" />
-				<INTERFACE port="local_bb12_st__inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="write" criticality="208933" buffer_location="" group_id="0" />
-				<INTERFACE port="local_bb13_ld__inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="read" criticality="5498" buffer_location="" group_id="0" />
-				<INTERFACE port="local_bb13_ld__u132_inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="read" criticality="5498" buffer_location="" group_id="0" />
-				<INTERFACE port="local_bb13_st__inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="write" criticality="5498" buffer_location="" group_id="0" />
-				<INTERFACE port="local_bb13_st_c0_exe1577_inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="write" criticality="5498" buffer_location="" group_id="0" />
-				<INTERFACE port="local_bb15_ld__inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="read" criticality="2749" buffer_location="" group_id="0" />
-				<INTERFACE port="local_bb15_ld__u153_inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="read" criticality="2749" buffer_location="" group_id="0" />
-				<INTERFACE port="local_bb15_st_c0_exe1598_inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="write" criticality="2749" buffer_location="" group_id="0" />
-				<INTERFACE port="local_bb17_st_c0_exe1609_inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="write" criticality="2749" buffer_location="" group_id="0" />
-				<INTERFACE port="local_bb19_ld__inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="read" criticality="2749" buffer_location="" group_id="0" />
-				<INTERFACE port="local_bb19_ld__u200_inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="read" criticality="2749" buffer_location="" group_id="0" />
-				<INTERFACE port="local_bb19_st_c0_exe1640_inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="write" criticality="2749" buffer_location="" group_id="0" />
-				<INTERFACE port="local_bb20_ld__inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="read" criticality="2814976" buffer_location="" group_id="0" />
-				<INTERFACE port="local_bb22_st_c0_exe4_inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="write" criticality="2749" buffer_location="" group_id="0" />
-				<INTERFACE port="local_bb23_ld__inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="read" criticality="2814976" buffer_location="" group_id="0" />
-				<INTERFACE port="local_bb28_st_c0_exe5707_inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="write" criticality="2739" buffer_location="" group_id="0" />
-				<INTERFACE port="local_bb28_st_c0_exe9_inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="write" criticality="2739" buffer_location="" group_id="0" />
-				<INTERFACE port="local_bb32_st_c0_exe1757_inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="write" criticality="2739" buffer_location="" group_id="0" />
-				<INTERFACE port="local_bb32_st_c0_exe4760_inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="write" criticality="2739" buffer_location="" group_id="0" />
-				<INTERFACE port="local_bb42_st_came_from_for_body115_i_select_inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="write" criticality="2656" buffer_location="" group_id="0" />
-				<INTERFACE port="local_bb43_st__inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="write" criticality="2719744" buffer_location="" group_id="0" />
-				<INTERFACE port="local_bb45_ld__inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="read" criticality="17628" buffer_location="" group_id="0" />
-				<INTERFACE port="local_bb45_st_c0_exe1879_inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="write" criticality="17628" buffer_location="" group_id="0" />
-				<INTERFACE port="local_bb46_ld__inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="read" criticality="4512768" buffer_location="" group_id="0" />
-				<INTERFACE port="local_bb46_st__inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="write" criticality="4512768" buffer_location="" group_id="0" />
-				<INTERFACE port="local_bb48_ld__inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="read" criticality="4512768" buffer_location="" group_id="0" />
-				<INTERFACE port="local_bb48_st__inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="write" criticality="4512768" buffer_location="" group_id="0" />
-				<INTERFACE port="local_bb49_ld__inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="read" criticality="14102" buffer_location="" group_id="0" />
-				<INTERFACE port="local_bb49_st_c0_exe3894_inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="write" criticality="14102" buffer_location="" group_id="0" />
-				<INTERFACE port="local_bb50_ld__inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="read" criticality="133688" buffer_location="" group_id="0" />
-				<INTERFACE port="local_bb52_st_c0_exe1919_inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="write" criticality="2820" buffer_location="" group_id="0" />
-				<INTERFACE port="local_bb5_ld__inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="read" criticality="522315" buffer_location="" group_id="0" />
-				<INTERFACE port="local_bb87_st__inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="write" criticality="1847296" buffer_location="" group_id="0" />
-				<INTERFACE port="local_bb92_ld__inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="read" criticality="54902" buffer_location="" group_id="0" />
-				<INTERFACE port="local_bb92_st_eval_cnt_0_inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="write" criticality="54902" buffer_location="" group_id="0" />
-				<INTERFACE port="local_bb92_st_generation_cnt_0_inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="write" criticality="54902" buffer_location="" group_id="0" />
-				<INTERFACE port="local_bb92_st_offspring_energy_0_inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="write" criticality="54902" buffer_location="" group_id="0" />
-				<INTERFACE port="local_bb92_st_printf_data2_inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="write" criticality="54902" buffer_location="" group_id="0" />
-				<INTERFACE port="local_bb9_ld__inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="read" criticality="5641216" buffer_location="" group_id="0" />
-				<INTERFACE port="local_bb89__chan_GA2Conf_genotype_inst0" cosim_name="" type="master" width="32" burstwidth="5" pipelined="true" addr_space="__channel" aspace_id="4" optype="write" criticality="56219648" buffer_location="" group_id="0" depth="257" chan_id="chan_GA2Conf_genotype" is_fifo="1" init="" adjust_for_latency="1" almost_full_value="-1" />
-				<INTERFACE port="local_bb90__chan_Store2GA_ack_inst0" cosim_name="" type="master" width="8" burstwidth="5" pipelined="true" addr_space="__channel" aspace_id="4" optype="read" criticality="54902" buffer_location="" group_id="0" depth="2639" chan_id="chan_Store2GA_ack" is_fifo="1" init="" adjust_for_latency="1" almost_full_value="-1" />
-				<INTERFACE port="local_bb92__chan_GA2Conf_active_inst0" cosim_name="" type="master" width="8" burstwidth="5" pipelined="true" addr_space="__channel" aspace_id="4" optype="write" criticality="54902" buffer_location="" group_id="0" depth="0" chan_id="chan_GA2Conf_active" is_fifo="1" init="" adjust_for_latency="1" almost_full_value="-1" />
-				<INTERFACE port="local_bb92__chan_GA2Conf_cnt_inst0" cosim_name="" type="master" width="32" burstwidth="5" pipelined="true" addr_space="__channel" aspace_id="4" optype="write" criticality="54902" buffer_location="" group_id="0" depth="160" chan_id="chan_GA2Conf_cnt" is_fifo="1" init="" adjust_for_latency="1" almost_full_value="-1" />
-				<INTERFACE port="local_bb92__chan_GA2Conf_mode_inst0" cosim_name="" type="master" width="8" burstwidth="5" pipelined="true" addr_space="__channel" aspace_id="4" optype="write" criticality="54902" buffer_location="" group_id="0" depth="160" chan_id="chan_GA2Conf_mode" is_fifo="1" init="" adjust_for_latency="1" almost_full_value="-1" />
-				<INTERFACE port="local_bb93__chan_Store2GA_LSenergy_inst0" cosim_name="" type="master" width="32" burstwidth="5" pipelined="true" addr_space="__channel" aspace_id="4" optype="read" criticality="53" buffer_location="" group_id="0" depth="2642" chan_id="chan_Store2GA_LSenergy" is_fifo="1" init="" adjust_for_latency="1" almost_full_value="-1" />
-				<INTERFACE port="local_bb25_st_c0_exe2665_inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="write" criticality="41680" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb11_ld__6749_inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="read" criticality="45253" buffer_location="" group_id="0" />
+				<INTERFACE port="local_bb11_st__6747_inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="write" criticality="45253" buffer_location="" group_id="0" />
+				<INTERFACE port="local_bb11_st_eval_cnt_0_inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="write" criticality="45253" buffer_location="" group_id="0" />
+				<INTERFACE port="local_bb11_st_generation_cnt_0_inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="write" criticality="45253" buffer_location="" group_id="0" />
+				<INTERFACE port="local_bb11_st_printf_data2_inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="write" criticality="45253" buffer_location="" group_id="0" />
+				<INTERFACE port="local_bb13_ld__inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="read" criticality="4657152" buffer_location="" group_id="0" />
+				<INTERFACE port="local_bb16_ld__inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="read" criticality="172487" buffer_location="" group_id="0" />
+				<INTERFACE port="local_bb16_st__inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="write" criticality="172487" buffer_location="" group_id="0" />
+				<INTERFACE port="local_bb17_ld__inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="read" criticality="9096" buffer_location="" group_id="0" />
+				<INTERFACE port="local_bb17_st_c0_exe1587_inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="write" criticality="9096" buffer_location="" group_id="0" />
+				<INTERFACE port="local_bb19_ld__inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="read" criticality="4548" buffer_location="" group_id="0" />
+				<INTERFACE port="local_bb19_ld__u222_inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="read" criticality="4548" buffer_location="" group_id="0" />
+				<INTERFACE port="local_bb19_st_c0_exe1615_inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="write" criticality="4548" buffer_location="" group_id="0" />
+				<INTERFACE port="local_bb21_st_c0_exe1626_inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="write" criticality="4548" buffer_location="" group_id="0" />
+				<INTERFACE port="local_bb23_ld__inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="read" criticality="4548" buffer_location="" group_id="0" />
+				<INTERFACE port="local_bb23_ld__u273_inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="read" criticality="4548" buffer_location="" group_id="0" />
+				<INTERFACE port="local_bb23_st_c0_exe1657_inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="write" criticality="4548" buffer_location="" group_id="0" />
+				<INTERFACE port="local_bb24_ld__inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="read" criticality="4657152" buffer_location="" group_id="0" />
+				<INTERFACE port="local_bb26_st_c0_exe4671_inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="write" criticality="4548" buffer_location="" group_id="0" />
+				<INTERFACE port="local_bb27_ld__inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="read" criticality="4657152" buffer_location="" group_id="0" />
+				<INTERFACE port="local_bb32_st_c0_exe5734_inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="write" criticality="4537" buffer_location="" group_id="0" />
+				<INTERFACE port="local_bb32_st_c0_exe9738_inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="write" criticality="4537" buffer_location="" group_id="0" />
+				<INTERFACE port="local_bb36_st_c0_exe1806_inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="write" criticality="4537" buffer_location="" group_id="0" />
+				<INTERFACE port="local_bb36_st_c0_exe4809_inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="write" criticality="4537" buffer_location="" group_id="0" />
+				<INTERFACE port="local_bb46_st_came_from_for_body115_i_select_inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="write" criticality="4399" buffer_location="" group_id="0" />
+				<INTERFACE port="local_bb47_st__inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="write" criticality="4504576" buffer_location="" group_id="0" />
+				<INTERFACE port="local_bb50_ld__inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="read" criticality="7276" buffer_location="" group_id="0" />
+				<INTERFACE port="local_bb50_st_c0_exe1928_inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="write" criticality="7276" buffer_location="" group_id="0" />
+				<INTERFACE port="local_bb51_ld__inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="read" criticality="1862656" buffer_location="" group_id="0" />
+				<INTERFACE port="local_bb51_st__inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="write" criticality="1862656" buffer_location="" group_id="0" />
+				<INTERFACE port="local_bb53_ld__inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="read" criticality="1862656" buffer_location="" group_id="0" />
+				<INTERFACE port="local_bb53_st__inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="write" criticality="1862656" buffer_location="" group_id="0" />
+				<INTERFACE port="local_bb54_ld__inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="read" criticality="5820" buffer_location="" group_id="0" />
+				<INTERFACE port="local_bb54_st_c0_exe3943_inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="write" criticality="5820" buffer_location="" group_id="0" />
+				<INTERFACE port="local_bb55_ld__inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="read" criticality="55182" buffer_location="" group_id="0" />
+				<INTERFACE port="local_bb57_st_c0_exe11077_inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="write" criticality="1164" buffer_location="" group_id="0" />
+				<INTERFACE port="local_bb5_ld__inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="read" criticality="431217" buffer_location="" group_id="0" />
+				<INTERFACE port="local_bb92_st__inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="write" criticality="761856" buffer_location="" group_id="0" />
+				<INTERFACE port="local_bb11__chan_GA2Conf_active_inst0" cosim_name="" type="master" width="8" burstwidth="5" pipelined="true" addr_space="__channel" aspace_id="4" optype="write" criticality="45253" buffer_location="" group_id="0" depth="0" chan_id="chan_GA2Conf_active" is_fifo="1" init="" adjust_for_latency="1" almost_full_value="-1" />
+				<INTERFACE port="local_bb11__chan_GA2Conf_cnt_inst0" cosim_name="" type="master" width="32" burstwidth="5" pipelined="true" addr_space="__channel" aspace_id="4" optype="write" criticality="45253" buffer_location="" group_id="0" depth="160" chan_id="chan_GA2Conf_cnt" is_fifo="1" init="" adjust_for_latency="1" almost_full_value="-1" />
+				<INTERFACE port="local_bb11__chan_GA2Conf_mode_inst0" cosim_name="" type="master" width="8" burstwidth="5" pipelined="true" addr_space="__channel" aspace_id="4" optype="write" criticality="45253" buffer_location="" group_id="0" depth="160" chan_id="chan_GA2Conf_mode" is_fifo="1" init="" adjust_for_latency="1" almost_full_value="-1" />
+				<INTERFACE port="local_bb94__chan_GA2Conf_genotype_inst0" cosim_name="" type="master" width="32" burstwidth="5" pipelined="true" addr_space="__channel" aspace_id="4" optype="write" criticality="46339072" buffer_location="" group_id="0" depth="257" chan_id="chan_GA2Conf_genotype" is_fifo="1" init="" adjust_for_latency="1" almost_full_value="-1" />
+				<INTERFACE port="local_bb95__chan_Store2GA_ack_inst0" cosim_name="" type="master" width="8" burstwidth="5" pipelined="true" addr_space="__channel" aspace_id="4" optype="read" criticality="45253" buffer_location="" group_id="0" depth="2133" chan_id="chan_Store2GA_ack" is_fifo="1" init="" adjust_for_latency="1" almost_full_value="-1" />
+				<INTERFACE port="local_bb96__chan_Store2GA_LSenergy_inst0" cosim_name="" type="master" width="32" burstwidth="5" pipelined="true" addr_space="__channel" aspace_id="4" optype="read" criticality="44" buffer_location="" group_id="0" depth="2136" chan_id="chan_Store2GA_LSenergy" is_fifo="1" init="" adjust_for_latency="1" almost_full_value="-1" />
+				<INTERFACE port="local_bb29_st_c0_exe2686_inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="write" criticality="68987" buffer_location="" group_id="0" >
 						<CONNECTION port="0" bank="0" />
 						<CONNECTION port="0" bank="1" />
 						<CONNECTION port="0" bank="2" />
@@ -452,7 +450,7 @@
 						<CONNECTION port="0" bank="8" />
 						<CONNECTION port="0" bank="9" />
 				</INTERFACE>
-				<INTERFACE port="local_bb26_st_c0_exe2677_inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="write" criticality="41680" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb30_st_c0_exe2698_inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="write" criticality="68987" buffer_location="" group_id="0" >
 						<CONNECTION port="1" bank="0" />
 						<CONNECTION port="1" bank="1" />
 						<CONNECTION port="1" bank="2" />
@@ -464,7 +462,7 @@
 						<CONNECTION port="1" bank="8" />
 						<CONNECTION port="1" bank="9" />
 				</INTERFACE>
-				<INTERFACE port="local_bb27_st_c0_exe1686_inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="write" criticality="20821" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb31_st_c0_exe1707_inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="write" criticality="34474" buffer_location="" group_id="0" >
 						<CONNECTION port="0" bank="0" />
 						<CONNECTION port="0" bank="1" />
 						<CONNECTION port="0" bank="2" />
@@ -476,25 +474,25 @@
 						<CONNECTION port="0" bank="8" />
 						<CONNECTION port="0" bank="9" />
 				</INTERFACE>
-				<INTERFACE port="local_bb28_ld_memcoalesce_null_load_0_inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="read" criticality="2739" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb32_ld_memcoalesce_null_load_0_inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="read" criticality="4537" buffer_location="" group_id="0" >
 						<CONNECTION port="1" bank="0" />
 				</INTERFACE>
-				<INTERFACE port="local_bb28_st_c1_exe2_inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="write" criticality="2739" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb32_st_c1_exe2_inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="write" criticality="4537" buffer_location="" group_id="0" >
 						<CONNECTION port="0" bank="0" />
 				</INTERFACE>
-				<INTERFACE port="local_bb32_ld__inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="read" criticality="2739" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb36_ld__inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="read" criticality="4537" buffer_location="" group_id="0" >
 						<CONNECTION port="1" bank="1" />
 				</INTERFACE>
-				<INTERFACE port="local_bb32_st_c1_exe1772_inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="write" criticality="2739" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb36_st_c1_exe1821_inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="write" criticality="4537" buffer_location="" group_id="0" >
 						<CONNECTION port="0" bank="1" />
 				</INTERFACE>
-				<INTERFACE port="local_bb32_st_select6422_inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="write" criticality="2739" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb36_st_select6801_inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="write" criticality="4537" buffer_location="" group_id="0" >
 						<CONNECTION port="1" bank="0" />
 				</INTERFACE>
-				<INTERFACE port="local_bb36_st_select6411_inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="write" criticality="2739" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb40_st_select6776_inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="write" criticality="4537" buffer_location="" group_id="0" >
 						<CONNECTION port="1" bank="1" />
 				</INTERFACE>
-				<INTERFACE port="local_bb37_ld__inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="read" criticality="87648" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb41_ld__inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="read" criticality="145184" buffer_location="" group_id="0" >
 						<CONNECTION port="0" bank="1" />
 						<CONNECTION port="1" bank="2" />
 						<CONNECTION port="1" bank="3" />
@@ -505,7 +503,7 @@
 						<CONNECTION port="1" bank="8" />
 						<CONNECTION port="1" bank="9" />
 				</INTERFACE>
-				<INTERFACE port="local_bb37_st_c1_exe1834_inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="write" criticality="87648" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb41_st_c1_exe1883_inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="write" criticality="145184" buffer_location="" group_id="0" >
 						<CONNECTION port="1" bank="1" />
 						<CONNECTION port="0" bank="2" />
 						<CONNECTION port="0" bank="3" />
@@ -516,7 +514,7 @@
 						<CONNECTION port="0" bank="8" />
 						<CONNECTION port="0" bank="9" />
 				</INTERFACE>
-				<INTERFACE port="local_bb41_st_select6400_inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="write" criticality="87648" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb45_st_select6765_inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="write" criticality="145184" buffer_location="" group_id="0" >
 						<CONNECTION port="0" bank="1" />
 						<CONNECTION port="1" bank="2" />
 						<CONNECTION port="1" bank="3" />
@@ -527,7 +525,7 @@
 						<CONNECTION port="1" bank="8" />
 						<CONNECTION port="1" bank="9" />
 				</INTERFACE>
-				<INTERFACE port="local_bb43_ld__inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="read" criticality="2719744" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb47_ld__inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="read" criticality="4504576" buffer_location="" group_id="0" >
 						<CONNECTION port="0" bank="0" />
 						<CONNECTION port="1" bank="1" />
 						<CONNECTION port="0" bank="2" />
@@ -539,7 +537,7 @@
 						<CONNECTION port="0" bank="8" />
 						<CONNECTION port="0" bank="9" />
 				</INTERFACE>
-				<INTERFACE port="local_bb44_st__inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="write" criticality="104258" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb48_st__inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="write" criticality="172487" buffer_location="" group_id="0" >
 						<CONNECTION port="1" bank="0" />
 						<CONNECTION port="0" bank="1" />
 						<CONNECTION port="1" bank="2" />
@@ -551,16 +549,10 @@
 						<CONNECTION port="1" bank="8" />
 						<CONNECTION port="1" bank="9" />
 				</INTERFACE>
-				<INTERFACE port="local_bb52_st_c0_exe6976_inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="write" criticality="2820" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb57_st_c0_exe61165_inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="write" criticality="1164" buffer_location="" group_id="0" >
 						<CONNECTION port="0" bank="0" />
 				</INTERFACE>
-				<INTERFACE port="local_bb55_st_c0_exe11012_inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="write" criticality="2820" buffer_location="" group_id="0" >
-						<CONNECTION port="1" bank="1" />
-				</INTERFACE>
-				<INTERFACE port="local_bb55_st_select6508_inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="write" criticality="2820" buffer_location="" group_id="0" >
-						<CONNECTION port="1" bank="0" />
-				</INTERFACE>
-				<INTERFACE port="local_bb5_st__inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="write" criticality="522315" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb5_st__inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="write" criticality="431217" buffer_location="" group_id="0" >
 						<CONNECTION port="0" bank="0" />
 						<CONNECTION port="0" bank="1" />
 						<CONNECTION port="0" bank="2" />
@@ -572,10 +564,16 @@
 						<CONNECTION port="0" bank="8" />
 						<CONNECTION port="0" bank="9" />
 				</INTERFACE>
-				<INTERFACE port="local_bb60_st_select6494_inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="write" criticality="2820" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb60_st_c0_exe11201_inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="write" criticality="1164" buffer_location="" group_id="0" >
+						<CONNECTION port="1" bank="1" />
+				</INTERFACE>
+				<INTERFACE port="local_bb60_st_select6867_inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="write" criticality="1164" buffer_location="" group_id="0" >
+						<CONNECTION port="1" bank="0" />
+				</INTERFACE>
+				<INTERFACE port="local_bb65_st_select6811_inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="write" criticality="1164" buffer_location="" group_id="0" >
 						<CONNECTION port="0" bank="1" />
 				</INTERFACE>
-				<INTERFACE port="local_bb61_st_c0_exe11150_inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="write" criticality="2887680" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb66_st_c0_exe11407_inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="write" criticality="1191936" buffer_location="" group_id="0" >
 						<CONNECTION port="0" bank="0" />
 						<CONNECTION port="1" bank="1" />
 						<CONNECTION port="0" bank="2" />
@@ -593,7 +591,19 @@
 						<CONNECTION port="0" bank="14" />
 						<CONNECTION port="0" bank="15" />
 				</INTERFACE>
-				<INTERFACE port="local_bb65_st_select6434_inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="write" criticality="2887680" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb6_st__inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="write" criticality="431217" buffer_location="" group_id="0" >
+						<CONNECTION port="1" bank="0" />
+						<CONNECTION port="1" bank="1" />
+						<CONNECTION port="1" bank="2" />
+						<CONNECTION port="1" bank="3" />
+						<CONNECTION port="1" bank="4" />
+						<CONNECTION port="1" bank="5" />
+						<CONNECTION port="1" bank="6" />
+						<CONNECTION port="1" bank="7" />
+						<CONNECTION port="1" bank="8" />
+						<CONNECTION port="1" bank="9" />
+				</INTERFACE>
+				<INTERFACE port="local_bb70_st_select6781_inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="write" criticality="1191936" buffer_location="" group_id="0" >
 						<CONNECTION port="1" bank="0" />
 						<CONNECTION port="0" bank="1" />
 						<CONNECTION port="1" bank="2" />
@@ -611,10 +621,10 @@
 						<CONNECTION port="1" bank="14" />
 						<CONNECTION port="1" bank="15" />
 				</INTERFACE>
-				<INTERFACE port="local_bb67_st_c0_exe21216_inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="write" criticality="9024" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb72_st_c0_exe21473_inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="write" criticality="3724" buffer_location="" group_id="0" >
 						<CONNECTION port="0" bank="0" />
 				</INTERFACE>
-				<INTERFACE port="local_bb68_ld__inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="read" criticality="2310144" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb73_ld__inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="read" criticality="953344" buffer_location="" group_id="0" >
 						<CONNECTION port="1" bank="0" />
 						<CONNECTION port="1" bank="1" />
 						<CONNECTION port="0" bank="2" />
@@ -626,28 +636,16 @@
 						<CONNECTION port="0" bank="8" />
 						<CONNECTION port="0" bank="9" />
 				</INTERFACE>
-				<INTERFACE port="local_bb6_st__inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="write" criticality="522315" buffer_location="" group_id="0" >
-						<CONNECTION port="1" bank="0" />
-						<CONNECTION port="1" bank="1" />
-						<CONNECTION port="1" bank="2" />
-						<CONNECTION port="1" bank="3" />
-						<CONNECTION port="1" bank="4" />
-						<CONNECTION port="1" bank="5" />
-						<CONNECTION port="1" bank="6" />
-						<CONNECTION port="1" bank="7" />
-						<CONNECTION port="1" bank="8" />
-						<CONNECTION port="1" bank="9" />
-				</INTERFACE>
-				<INTERFACE port="local_bb71_st_c0_exe11484_inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="write" criticality="1804" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb76_st_c0_exe11741_inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="write" criticality="744" buffer_location="" group_id="0" >
 						<CONNECTION port="0" bank="1" />
 				</INTERFACE>
-				<INTERFACE port="local_bb71_st_select6519_inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="write" criticality="1804" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb76_st_select6878_inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="write" criticality="744" buffer_location="" group_id="0" >
 						<CONNECTION port="0" bank="0" />
 				</INTERFACE>
-				<INTERFACE port="local_bb75_st_select6499_inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="write" criticality="1804" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb80_st_select6818_inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="write" criticality="744" buffer_location="" group_id="0" >
 						<CONNECTION port="1" bank="1" />
 				</INTERFACE>
-				<INTERFACE port="local_bb77_st_c0_exe11690_inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="write" criticality="1847296" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb82_st_c0_exe11947_inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="write" criticality="761856" buffer_location="" group_id="0" >
 						<CONNECTION port="1" bank="0" />
 						<CONNECTION port="0" bank="1" />
 						<CONNECTION port="1" bank="2" />
@@ -665,7 +663,7 @@
 						<CONNECTION port="0" bank="14" />
 						<CONNECTION port="0" bank="15" />
 				</INTERFACE>
-				<INTERFACE port="local_bb81_st_select6439_inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="write" criticality="1847296" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb86_st_select6788_inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="write" criticality="761856" buffer_location="" group_id="0" >
 						<CONNECTION port="0" bank="0" />
 						<CONNECTION port="1" bank="1" />
 						<CONNECTION port="0" bank="2" />
@@ -683,7 +681,7 @@
 						<CONNECTION port="1" bank="14" />
 						<CONNECTION port="1" bank="15" />
 				</INTERFACE>
-				<INTERFACE port="local_bb84_ld__inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="read" criticality="68418" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb89_ld__inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="read" criticality="28216" buffer_location="" group_id="0" >
 						<CONNECTION port="1" bank="0" />
 						<CONNECTION port="0" bank="1" />
 						<CONNECTION port="1" bank="2" />
@@ -695,7 +693,7 @@
 						<CONNECTION port="1" bank="8" />
 						<CONNECTION port="1" bank="9" />
 				</INTERFACE>
-				<INTERFACE port="local_bb88_st__inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="write" criticality="1847296" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb93_st__inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="write" criticality="761856" buffer_location="" group_id="0" >
 						<CONNECTION port="0" bank="0" />
 						<CONNECTION port="1" bank="1" />
 						<CONNECTION port="0" bank="2" />
@@ -713,7 +711,7 @@
 						<CONNECTION port="0" bank="14" />
 						<CONNECTION port="0" bank="15" />
 				</INTERFACE>
-				<INTERFACE port="local_bb89_ld__inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="read" criticality="56219648" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb94_ld__inst0" cosim_name="" type="master" width="128" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="5" optype="read" criticality="46339072" buffer_location="" group_id="0" >
 						<CONNECTION port="1" bank="0" />
 						<CONNECTION port="0" bank="1" />
 						<CONNECTION port="1" bank="2" />
@@ -725,94 +723,94 @@
 						<CONNECTION port="1" bank="8" />
 						<CONNECTION port="1" bank="9" />
 				</INTERFACE>
-				<INTERFACE port="local_bb10_ld__inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="6" optype="read" criticality="5641216" buffer_location="" group_id="0" >
-						<CONNECTION port="1" bank="-1" />
-				</INTERFACE>
-				<INTERFACE port="local_bb10_ld__u102_inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="6" optype="read" criticality="5641216" buffer_location="" group_id="0" >
-						<CONNECTION port="2" bank="-1" />
-				</INTERFACE>
-				<INTERFACE port="local_bb9_st__inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="6" optype="write" criticality="5641216" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb13_st__inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="6" optype="write" criticality="4657152" buffer_location="" group_id="0" >
 						<CONNECTION port="0" bank="-1" />
 				</INTERFACE>
-				<INTERFACE port="local_bb20_st__inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="7" optype="write" criticality="2814976" buffer_location="" group_id="0" >
-						<CONNECTION port="0" bank="-1" />
-				</INTERFACE>
-				<INTERFACE port="local_bb25_ld__u286_inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="7" optype="read" criticality="41680" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb14_ld__inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="6" optype="read" criticality="4657152" buffer_location="" group_id="0" >
 						<CONNECTION port="1" bank="-1" />
 				</INTERFACE>
-				<INTERFACE port="local_bb26_ld__inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="7" optype="read" criticality="41680" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb14_ld__u169_inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="6" optype="read" criticality="4657152" buffer_location="" group_id="0" >
 						<CONNECTION port="2" bank="-1" />
 				</INTERFACE>
-				<INTERFACE port="local_bb27_ld__inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="7" optype="read" criticality="20821" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb24_st__inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="7" optype="write" criticality="4657152" buffer_location="" group_id="0" >
+						<CONNECTION port="0" bank="-1" />
+				</INTERFACE>
+				<INTERFACE port="local_bb29_ld__u365_inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="7" optype="read" criticality="68987" buffer_location="" group_id="0" >
+						<CONNECTION port="1" bank="-1" />
+				</INTERFACE>
+				<INTERFACE port="local_bb30_ld__inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="7" optype="read" criticality="68987" buffer_location="" group_id="0" >
+						<CONNECTION port="2" bank="-1" />
+				</INTERFACE>
+				<INTERFACE port="local_bb31_ld__inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="7" optype="read" criticality="34474" buffer_location="" group_id="0" >
 						<CONNECTION port="3" bank="-1" />
 				</INTERFACE>
-				<INTERFACE port="local_bb23_st__inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="8" optype="write" criticality="2814976" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb27_st__inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="8" optype="write" criticality="4657152" buffer_location="" group_id="0" >
 						<CONNECTION port="0" bank="-1" />
 				</INTERFACE>
-				<INTERFACE port="local_bb25_ld__inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="8" optype="read" criticality="41680" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb29_ld__inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="8" optype="read" criticality="68987" buffer_location="" group_id="0" >
 						<CONNECTION port="1" bank="-1" />
 				</INTERFACE>
-				<INTERFACE port="local_bb26_ld__u296_inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="8" optype="read" criticality="41680" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb30_ld__u376_inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="8" optype="read" criticality="68987" buffer_location="" group_id="0" >
 						<CONNECTION port="2" bank="-1" />
 				</INTERFACE>
-				<INTERFACE port="local_bb50_st__inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="9" optype="write" criticality="133688" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb55_st__inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="9" optype="write" criticality="55182" buffer_location="" group_id="0" >
 						<CONNECTION port="0" bank="-1" />
 				</INTERFACE>
-				<INTERFACE port="local_bb52_ld__inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="9" optype="read" criticality="2820" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb57_ld__inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="9" optype="read" criticality="1164" buffer_location="" group_id="0" >
 						<CONNECTION port="1" bank="3" />
 				</INTERFACE>
-				<INTERFACE port="local_bb52_ld__u777_inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="9" optype="read" criticality="2820" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb57_ld__u907_inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="9" optype="read" criticality="1164" buffer_location="" group_id="0" >
 						<CONNECTION port="1" bank="2" />
 				</INTERFACE>
-				<INTERFACE port="local_bb52_ld__u778_inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="9" optype="read" criticality="2820" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb57_ld__u908_inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="9" optype="read" criticality="1164" buffer_location="" group_id="0" >
 						<CONNECTION port="1" bank="1" />
 				</INTERFACE>
-				<INTERFACE port="local_bb52_ld__u779_inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="9" optype="read" criticality="2820" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb57_ld__u909_inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="9" optype="read" criticality="1164" buffer_location="" group_id="0" >
 						<CONNECTION port="1" bank="0" />
 				</INTERFACE>
-				<INTERFACE port="local_bb55_ld__inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="9" optype="read" criticality="2820" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb60_ld__inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="9" optype="read" criticality="1164" buffer_location="" group_id="0" >
 						<CONNECTION port="2" bank="0" />
 				</INTERFACE>
-				<INTERFACE port="local_bb61_ld__inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="9" optype="read" criticality="2887680" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb66_ld__inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="9" optype="read" criticality="1191936" buffer_location="" group_id="0" >
 						<CONNECTION port="3" bank="0" />
 						<CONNECTION port="2" bank="1" />
 						<CONNECTION port="2" bank="2" />
 						<CONNECTION port="2" bank="3" />
 				</INTERFACE>
-				<INTERFACE port="local_bb67_ld__inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="9" optype="read" criticality="9024" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb72_ld__inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="9" optype="read" criticality="3724" buffer_location="" group_id="0" >
 						<CONNECTION port="3" bank="3" />
 				</INTERFACE>
-				<INTERFACE port="local_bb67_ld__u970_inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="9" optype="read" criticality="9024" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb72_ld__u1132_inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="9" optype="read" criticality="3724" buffer_location="" group_id="0" >
 						<CONNECTION port="3" bank="2" />
 				</INTERFACE>
-				<INTERFACE port="local_bb67_ld__u971_inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="9" optype="read" criticality="9024" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb72_ld__u1133_inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="9" optype="read" criticality="3724" buffer_location="" group_id="0" >
 						<CONNECTION port="3" bank="1" />
 				</INTERFACE>
-				<INTERFACE port="local_bb67_ld__u972_inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="9" optype="read" criticality="9024" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb72_ld__u1134_inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="9" optype="read" criticality="3724" buffer_location="" group_id="0" >
 						<CONNECTION port="0" bank="0" />
 				</INTERFACE>
-				<INTERFACE port="local_bb68_st__inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="9" optype="write" criticality="2310144" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb73_st__inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="9" optype="write" criticality="953344" buffer_location="" group_id="0" >
 						<CONNECTION port="1" bank="0" />
 						<CONNECTION port="0" bank="1" />
 						<CONNECTION port="0" bank="2" />
 						<CONNECTION port="0" bank="3" />
 				</INTERFACE>
-				<INTERFACE port="local_bb71_ld__inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="9" optype="read" criticality="1804" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb76_ld__inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="9" optype="read" criticality="744" buffer_location="" group_id="0" >
 						<CONNECTION port="2" bank="0" />
 				</INTERFACE>
-				<INTERFACE port="local_bb77_ld__inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="9" optype="read" criticality="1847296" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb82_ld__inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="9" optype="read" criticality="761856" buffer_location="" group_id="0" >
 						<CONNECTION port="3" bank="0" />
 						<CONNECTION port="1" bank="1" />
 						<CONNECTION port="1" bank="2" />
 						<CONNECTION port="1" bank="3" />
 				</INTERFACE>
-				<INTERFACE port="local_bb84_st__inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="9" optype="write" criticality="68418" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb89_st__inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="9" optype="write" criticality="28216" buffer_location="" group_id="0" >
 						<CONNECTION port="0" bank="0" />
 						<CONNECTION port="2" bank="1" />
 						<CONNECTION port="2" bank="2" />
 						<CONNECTION port="2" bank="3" />
 				</INTERFACE>
-				<INTERFACE port="local_bb87_ld__inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="9" optype="read" criticality="1847296" buffer_location="" group_id="0" >
+				<INTERFACE port="local_bb92_ld__inst0" cosim_name="" type="master" width="32" burstwidth="1" pipelined="true" addr_space="__local" aspace_id="9" optype="read" criticality="761856" buffer_location="" group_id="0" >
 						<CONNECTION port="1" bank="0" />
 						<CONNECTION port="3" bank="1" />
 						<CONNECTION port="3" bank="2" />
@@ -852,7 +850,7 @@
 				<FORMAT_STRING id="11" string="disabled" />
 			</PRINTF_FORMAT_STRINGS>
 			<PRINTF_INTERFACES>
-				<INTERFACE port="local_bb92_printf_addr_acl_printf_p1i8_32_inst0" />
+				<INTERFACE port="local_bb11_printf_addr_acl_printf_p1i8_32_inst0" />
 			</PRINTF_INTERFACES>
 		</KERNEL>
 	</KERNEL_BUNDLE>
@@ -912,7 +910,7 @@
 				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/acl_fp_mul_a10.v" />
 				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/acl_fp_dot2_a10.v" />
 				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/acl_fp_add_a10.v" />
-				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/acl_fp_multadd_a10.v" />
+				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/acl_fp_accum_a10.v" />
 				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/acl_loop_limiter.v" />
 				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/acl_work_group_limiter.v" />
 				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/acl_kernel_finish_detector.v" />
@@ -958,10 +956,10 @@
 				<INTERFACE port="local_bb2__chan_Conf2Intere_x_inst0" cosim_name="" type="master" width="32" burstwidth="5" pipelined="true" addr_space="__channel" aspace_id="4" optype="read" criticality="1073741824" buffer_location="" group_id="0" depth="109" chan_id="chan_Conf2Intere_x" is_fifo="1" init="" adjust_for_latency="1" almost_full_value="-1" />
 				<INTERFACE port="local_bb2__chan_Conf2Intere_y_inst0" cosim_name="" type="master" width="32" burstwidth="5" pipelined="true" addr_space="__channel" aspace_id="4" optype="read" criticality="1073741824" buffer_location="" group_id="0" depth="97" chan_id="chan_Conf2Intere_y" is_fifo="1" init="" adjust_for_latency="1" almost_full_value="-1" />
 				<INTERFACE port="local_bb2__chan_Conf2Intere_z_inst0" cosim_name="" type="master" width="32" burstwidth="5" pipelined="true" addr_space="__channel" aspace_id="4" optype="read" criticality="1073741824" buffer_location="" group_id="0" depth="90" chan_id="chan_Conf2Intere_z" is_fifo="1" init="" adjust_for_latency="1" almost_full_value="-1" />
-				<INTERFACE port="local_bb5__chan_Intere2Store_active_inst0" cosim_name="" type="master" width="8" burstwidth="5" pipelined="true" addr_space="__channel" aspace_id="4" optype="write" criticality="1048576" buffer_location="" group_id="0" depth="382" chan_id="chan_Intere2Store_active" is_fifo="1" init="" adjust_for_latency="0" almost_full_value="-1" />
-				<INTERFACE port="local_bb5__chan_Intere2Store_cnt_inst0" cosim_name="" type="master" width="32" burstwidth="5" pipelined="true" addr_space="__channel" aspace_id="4" optype="write" criticality="1048576" buffer_location="" group_id="0" depth="381" chan_id="chan_Intere2Store_cnt" is_fifo="1" init="" adjust_for_latency="0" almost_full_value="-1" />
-				<INTERFACE port="local_bb5__chan_Intere2Store_intere_inst0" cosim_name="" type="master" width="32" burstwidth="5" pipelined="true" addr_space="__channel" aspace_id="4" optype="write" criticality="1048576" buffer_location="" group_id="0" depth="383" chan_id="chan_Intere2Store_intere" is_fifo="1" init="" adjust_for_latency="0" almost_full_value="-1" />
-				<INTERFACE port="local_bb5__chan_Intere2Store_mode_inst0" cosim_name="" type="master" width="8" burstwidth="5" pipelined="true" addr_space="__channel" aspace_id="4" optype="write" criticality="1048576" buffer_location="" group_id="0" depth="381" chan_id="chan_Intere2Store_mode" is_fifo="1" init="" adjust_for_latency="0" almost_full_value="-1" />
+				<INTERFACE port="local_bb5__chan_Intere2Store_active_inst0" cosim_name="" type="master" width="8" burstwidth="5" pipelined="true" addr_space="__channel" aspace_id="4" optype="write" criticality="1048576" buffer_location="" group_id="0" depth="387" chan_id="chan_Intere2Store_active" is_fifo="1" init="" adjust_for_latency="0" almost_full_value="-1" />
+				<INTERFACE port="local_bb5__chan_Intere2Store_cnt_inst0" cosim_name="" type="master" width="32" burstwidth="5" pipelined="true" addr_space="__channel" aspace_id="4" optype="write" criticality="1048576" buffer_location="" group_id="0" depth="386" chan_id="chan_Intere2Store_cnt" is_fifo="1" init="" adjust_for_latency="0" almost_full_value="-1" />
+				<INTERFACE port="local_bb5__chan_Intere2Store_intere_inst0" cosim_name="" type="master" width="32" burstwidth="5" pipelined="true" addr_space="__channel" aspace_id="4" optype="write" criticality="1048576" buffer_location="" group_id="0" depth="388" chan_id="chan_Intere2Store_intere" is_fifo="1" init="" adjust_for_latency="0" almost_full_value="-1" />
+				<INTERFACE port="local_bb5__chan_Intere2Store_mode_inst0" cosim_name="" type="master" width="8" burstwidth="5" pipelined="true" addr_space="__channel" aspace_id="4" optype="write" criticality="1048576" buffer_location="" group_id="0" depth="386" chan_id="chan_Intere2Store_mode" is_fifo="1" init="" adjust_for_latency="0" almost_full_value="-1" />
 			</DATA>
 			<KERNEL_ARGS>
 				<ARGUMENT name="GlobFgrids" cosim_name="" opencl_access_type="ACL_ARG_ADDR_GLOBAL" opencl_type_category="ACL_ARG_MEM_OBJ" size="8" type_qualifier="CR" access_qualifier="ARG_ACCESS_NONE" type_name="float*" >
@@ -1232,16 +1230,16 @@
 				<INTERFACE port="local_bb1_st__u31_inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="write" criticality="1048576" buffer_location="" group_id="0" />
 				<INTERFACE port="local_bb1_st__u5_inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="write" criticality="1048576" buffer_location="" group_id="0" />
 				<INTERFACE port="local_bb1_st_c1_exe4_inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="write" criticality="1048576" buffer_location="" group_id="0" />
-				<INTERFACE port="local_bb1__chan_Intere2Store_active_inst0" cosim_name="" type="master" width="8" burstwidth="5" pipelined="true" addr_space="__channel" aspace_id="4" optype="read" criticality="1048576" buffer_location="" group_id="0" depth="382" chan_id="chan_Intere2Store_active" is_fifo="1" init="" adjust_for_latency="1" almost_full_value="-1" />
-				<INTERFACE port="local_bb1__chan_Intere2Store_cnt_inst0" cosim_name="" type="master" width="32" burstwidth="5" pipelined="true" addr_space="__channel" aspace_id="4" optype="read" criticality="1048576" buffer_location="" group_id="0" depth="381" chan_id="chan_Intere2Store_cnt" is_fifo="1" init="" adjust_for_latency="1" almost_full_value="-1" />
-				<INTERFACE port="local_bb1__chan_Intere2Store_intere_inst0" cosim_name="" type="master" width="32" burstwidth="5" pipelined="true" addr_space="__channel" aspace_id="4" optype="read" criticality="1048576" buffer_location="" group_id="0" depth="383" chan_id="chan_Intere2Store_intere" is_fifo="1" init="" adjust_for_latency="1" almost_full_value="-1" />
-				<INTERFACE port="local_bb1__chan_Intere2Store_mode_inst0" cosim_name="" type="master" width="8" burstwidth="5" pipelined="true" addr_space="__channel" aspace_id="4" optype="read" criticality="1048576" buffer_location="" group_id="0" depth="381" chan_id="chan_Intere2Store_mode" is_fifo="1" init="" adjust_for_latency="1" almost_full_value="-1" />
+				<INTERFACE port="local_bb1__chan_Intere2Store_active_inst0" cosim_name="" type="master" width="8" burstwidth="5" pipelined="true" addr_space="__channel" aspace_id="4" optype="read" criticality="1048576" buffer_location="" group_id="0" depth="387" chan_id="chan_Intere2Store_active" is_fifo="1" init="" adjust_for_latency="1" almost_full_value="-1" />
+				<INTERFACE port="local_bb1__chan_Intere2Store_cnt_inst0" cosim_name="" type="master" width="32" burstwidth="5" pipelined="true" addr_space="__channel" aspace_id="4" optype="read" criticality="1048576" buffer_location="" group_id="0" depth="386" chan_id="chan_Intere2Store_cnt" is_fifo="1" init="" adjust_for_latency="1" almost_full_value="-1" />
+				<INTERFACE port="local_bb1__chan_Intere2Store_intere_inst0" cosim_name="" type="master" width="32" burstwidth="5" pipelined="true" addr_space="__channel" aspace_id="4" optype="read" criticality="1048576" buffer_location="" group_id="0" depth="388" chan_id="chan_Intere2Store_intere" is_fifo="1" init="" adjust_for_latency="1" almost_full_value="-1" />
+				<INTERFACE port="local_bb1__chan_Intere2Store_mode_inst0" cosim_name="" type="master" width="8" burstwidth="5" pipelined="true" addr_space="__channel" aspace_id="4" optype="read" criticality="1048576" buffer_location="" group_id="0" depth="386" chan_id="chan_Intere2Store_mode" is_fifo="1" init="" adjust_for_latency="1" almost_full_value="-1" />
 				<INTERFACE port="local_bb1__chan_Intrae2Store_active_inst0" cosim_name="" type="master" width="8" burstwidth="5" pipelined="true" addr_space="__channel" aspace_id="4" optype="read" criticality="1048576" buffer_location="" group_id="0" depth="0" chan_id="chan_Intrae2Store_active" is_fifo="1" init="" adjust_for_latency="1" almost_full_value="-1" />
 				<INTERFACE port="local_bb1__chan_Intrae2Store_cnt_inst0" cosim_name="" type="master" width="32" burstwidth="5" pipelined="true" addr_space="__channel" aspace_id="4" optype="read" criticality="1048576" buffer_location="" group_id="0" depth="0" chan_id="chan_Intrae2Store_cnt" is_fifo="1" init="" adjust_for_latency="1" almost_full_value="-1" />
 				<INTERFACE port="local_bb1__chan_Intrae2Store_intrae_inst0" cosim_name="" type="master" width="32" burstwidth="5" pipelined="true" addr_space="__channel" aspace_id="4" optype="read" criticality="1048576" buffer_location="" group_id="0" depth="1" chan_id="chan_Intrae2Store_intrae" is_fifo="1" init="" adjust_for_latency="1" almost_full_value="-1" />
 				<INTERFACE port="local_bb1__chan_Intrae2Store_mode_inst0" cosim_name="" type="master" width="8" burstwidth="5" pipelined="true" addr_space="__channel" aspace_id="4" optype="read" criticality="1048576" buffer_location="" group_id="0" depth="0" chan_id="chan_Intrae2Store_mode" is_fifo="1" init="" adjust_for_latency="1" almost_full_value="-1" />
-				<INTERFACE port="local_bb1__chan_Store2GA_LSenergy_inst0" cosim_name="" type="master" width="32" burstwidth="5" pipelined="true" addr_space="__channel" aspace_id="4" optype="write" criticality="1048576" buffer_location="" group_id="0" depth="2642" chan_id="chan_Store2GA_LSenergy" is_fifo="1" init="" adjust_for_latency="1" almost_full_value="-1" />
-				<INTERFACE port="local_bb1__chan_Store2GA_ack_inst0" cosim_name="" type="master" width="8" burstwidth="5" pipelined="true" addr_space="__channel" aspace_id="4" optype="write" criticality="1048576" buffer_location="" group_id="0" depth="2639" chan_id="chan_Store2GA_ack" is_fifo="1" init="" adjust_for_latency="1" almost_full_value="-1" />
+				<INTERFACE port="local_bb1__chan_Store2GA_LSenergy_inst0" cosim_name="" type="master" width="32" burstwidth="5" pipelined="true" addr_space="__channel" aspace_id="4" optype="write" criticality="1048576" buffer_location="" group_id="0" depth="2136" chan_id="chan_Store2GA_LSenergy" is_fifo="1" init="" adjust_for_latency="1" almost_full_value="-1" />
+				<INTERFACE port="local_bb1__chan_Store2GA_ack_inst0" cosim_name="" type="master" width="8" burstwidth="5" pipelined="true" addr_space="__channel" aspace_id="4" optype="write" criticality="1048576" buffer_location="" group_id="0" depth="2133" chan_id="chan_Store2GA_ack" is_fifo="1" init="" adjust_for_latency="1" almost_full_value="-1" />
 			</DATA>
 			<KERNEL_ARGS>
 				<ARGUMENT name="GlobEnergyCurrent" cosim_name="" opencl_access_type="ACL_ARG_ADDR_GLOBAL" opencl_type_category="ACL_ARG_MEM_OBJ" size="8" type_qualifier="R" access_qualifier="ARG_ACCESS_NONE" type_name="float*" >
