@@ -2,7 +2,7 @@ Vectorization: 1
 Max_vectorization: 16
 Copies: 1
 Max_copies: 256
-Throughput: 0.127441
+Throughput: 0.12358
 Copyfactor: 1
 Sharing: 1
 Max_sharing: 1

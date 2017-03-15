@@ -3,7 +3,7 @@
 // the genotype given by the second parameter.
 // Originally from: processligand.c
 // --------------------------------------------------------------------------
-__kernel
+__kernel __attribute__ ((reqd_work_group_size(1,1,1)))
 void Krnl_Conform(
              //__global const float*           restrict GlobFgrids,
 	     //__global       float*           restrict GlobPopulationCurrent,
@@ -19,6 +19,13 @@ void Krnl_Conform(
 	__local float loc_coords_y[MAX_NUM_OF_ATOMS];
 	__local float loc_coords_z[MAX_NUM_OF_ATOMS];
 	__local float genotype[ACTUAL_GENOTYPE_LENGTH];
+/*
+	float __attribute__((register)) loc_coords_x[MAX_NUM_OF_ATOMS];
+	float __attribute__((register)) loc_coords_y[MAX_NUM_OF_ATOMS];
+	float __attribute__((register)) loc_coords_z[MAX_NUM_OF_ATOMS];
+	float __attribute__((register)) genotype[ACTUAL_GENOTYPE_LENGTH];
+*/
+
 
 	char active = 1;
 	char mode   = 0;
@@ -43,16 +50,16 @@ while(active) {
 	// --------------------------------------------------------------
 	// Wait for genotypes in channel
 	// --------------------------------------------------------------
+	active = read_channel_altera(chan_GA2Conf_active); if (active == 0) {printf("	%-20s: %s\n", "Krnl_Conform", "disabled");}
+	mem_fence(CLK_CHANNEL_MEM_FENCE);
+	mode   = read_channel_altera(chan_GA2Conf_mode);
+	mem_fence(CLK_CHANNEL_MEM_FENCE);
+	cnt    = read_channel_altera(chan_GA2Conf_cnt);
+	mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 	for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {
 		genotype[pipe_cnt] = read_channel_altera(chan_GA2Conf_genotype);
-	}
-
-	active = read_channel_altera(chan_GA2Conf_active);
-	if (active == 0) {printf("	%-20s: %s\n", "Krnl_Conform", "disabled");}
-	
-	mode   = read_channel_altera(chan_GA2Conf_mode);
-	cnt    = read_channel_altera(chan_GA2Conf_cnt);
+	}	
 	// --------------------------------------------------------------
 	//printf("AFTER In CONFORM CHANNEL\n");
 

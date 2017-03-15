@@ -1,13 +1,37 @@
 Compiler Command: aoc -v -c ./device/Krnl_GA.cl --report
-Warning: Kernel 'Krnl_GA' has unused argument 'GlobPopulationCurrent'
-Warning: Kernel 'Krnl_GA' has unused argument 'GlobEnergyCurrent'
-Warning: Kernel 'Krnl_GA' has unused argument 'GlobPopulationNext'
-Warning: Kernel 'Krnl_GA' has unused argument 'GlobEnergyNext'
-Warning: Kernel 'Krnl_GA' has unused argument 'GlobPRNG'
+Compiler Warning: Auto-unrolled loop at /home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt//home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/auxiliary_genetic.cl:363
+/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/auxiliary_genetic.cl:179: Compiler Warning: Channel ordering required barrier insertion in do.body26.i of Krnl_GA, but kernel may hang as a result
+/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/auxiliary_genetic.cl:188: Compiler Warning: Channel ordering required barrier insertion in do.body33.i of Krnl_GA, but kernel may hang as a result
+/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_GA.cl:341: Compiler Warning: Channel ordering required barrier insertion in for.body.i130 of Krnl_GA, but kernel may hang as a result
+/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_GA.cl:285: Compiler Warning: Channel ordering required barrier insertion in _ZL21async_work_group_copyPU10AS16776961fPKU10AS16776960fmPU10AS16776961c.exit._ZL21async_work_group_copyPU10AS16776961fPKU10AS16776960fmPU10AS16776961c.exit158_crit_edge of Krnl_GA, but kernel may hang as a result
+/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_GA.cl:342: Compiler Warning: Channel ordering required barrier insertion in for.body.i153 of Krnl_GA, but kernel may hang as a result
+/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/auxiliary_genetic.cl:22: Compiler Warning: Channel ordering required barrier insertion in while.body3.i50.i of Krnl_GA, but kernel may hang as a result
+/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/auxiliary_genetic.cl:14: Compiler Warning: Channel ordering required barrier insertion in while.body.i18.i of Krnl_GA, but kernel may hang as a result
+/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/auxiliary_genetic.cl:22: Compiler Warning: Channel ordering required barrier insertion in while.body3.i24.i of Krnl_GA, but kernel may hang as a result
+/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/auxiliary_genetic.cl:14: Compiler Warning: Channel ordering required barrier insertion in while.body.i.i of Krnl_GA, but kernel may hang as a result
+/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/auxiliary_genetic.cl:22: Compiler Warning: Channel ordering required barrier insertion in while.body3.i.i of Krnl_GA, but kernel may hang as a result
+/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/auxiliary_genetic.cl:387: Compiler Warning: Channel ordering required barrier insertion in map_angle.exit.i.loopexit.loopexit of Krnl_GA, but kernel may hang as a result
+/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/auxiliary_genetic.cl:22: Compiler Warning: Channel ordering required barrier insertion in while.body3.i60 of Krnl_GA, but kernel may hang as a result
+/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/auxiliary_genetic.cl:14: Compiler Warning: Channel ordering required barrier insertion in while.body.i42 of Krnl_GA, but kernel may hang as a result
+/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/auxiliary_genetic.cl:22: Compiler Warning: Channel ordering required barrier insertion in while.body3.i48 of Krnl_GA, but kernel may hang as a result
+/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/auxiliary_genetic.cl:14: Compiler Warning: Channel ordering required barrier insertion in while.body.i30 of Krnl_GA, but kernel may hang as a result
+/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/auxiliary_genetic.cl:22: Compiler Warning: Channel ordering required barrier insertion in while.body3.i36 of Krnl_GA, but kernel may hang as a result
+/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_GA.cl:447: Compiler Warning: Channel ordering required barrier insertion in map_angle.exit37.loopexit of Krnl_GA, but kernel may hang as a result
+/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/auxiliary_genetic.cl:22: Compiler Warning: Channel ordering required barrier insertion in while.body3.i24 of Krnl_GA, but kernel may hang as a result
+/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/auxiliary_genetic.cl:14: Compiler Warning: Channel ordering required barrier insertion in while.body.i6 of Krnl_GA, but kernel may hang as a result
+/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/auxiliary_genetic.cl:22: Compiler Warning: Channel ordering required barrier insertion in while.body3.i12 of Krnl_GA, but kernel may hang as a result
+/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/auxiliary_genetic.cl:14: Compiler Warning: Channel ordering required barrier insertion in while.body.i of Krnl_GA, but kernel may hang as a result
+/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/auxiliary_genetic.cl:22: Compiler Warning: Channel ordering required barrier insertion in while.body3.i of Krnl_GA, but kernel may hang as a result
+/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_GA.cl:500: Compiler Warning: Channel ordering required barrier insertion in map_angle.exit.loopexit of Krnl_GA, but kernel may hang as a result
+/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_GA.cl:285: Compiler Warning: Channel ordering required barrier insertion in if.end408.loopexit.loopexit of Krnl_GA, but kernel may hang as a result
+/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_GA.cl:285: Compiler Warning: Channel ordering required barrier insertion in for.body.i97.UnifiedLatchBlock.switch of Krnl_GA, but kernel may hang as a result
+/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_GA.cl:680: Compiler Warning: Channel ordering required barrier insertion in while.cond.UnifiedLatchBlock.switch of Krnl_GA, but kernel may hang as a result
+Compiler Warning: Enforcing channel ordering in kernel Krnl_GA limits number of concurrent workgroups to 1
+Compiler Warning: Kernels  Krnl_Conform, Krnl_GA, Krnl_InterE, Krnl_IntraE and Krnl_Store may form a cycle due to connectivity of channels  chan_Conf2Intere_active, chan_Conf2Intere_cnt, chan_Conf2Intere_mode, chan_Conf2Intere_x, chan_Conf2Intere_y, chan_Conf2Intere_z, chan_Conf2Intrae_active, chan_Conf2Intrae_cnt, chan_Conf2Intrae_mode, chan_Conf2Intrae_x, chan_Conf2Intrae_y, chan_Conf2Intrae_z, chan_GA2Conf_active, chan_GA2Conf_cnt, chan_GA2Conf_genotype, chan_GA2Conf_mode, chan_Intere2Store_active, chan_Intere2Store_cnt, chan_Intere2Store_intere, chan_Intere2Store_mode, chan_Intrae2Store_active, chan_Intrae2Store_cnt, chan_Intrae2Store_intrae, chan_Intrae2Store_mode, chan_Store2GA_LSenergy and chan_Store2GA_ack. Use mem_fence if you require source code-based ordering of channel operations. Channel depths cannot be optimized
+/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_GA.cl:680: Compiler Warning: Enforcing channel order on Block2 may cause kernel Krnl_GA to hang due to thread dependent loop exits within the loop nest
+/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_GA.cl:285: Compiler Warning: Enforcing channel order on Block3 may cause kernel Krnl_GA to hang due to thread dependent loop exits within the loop nest
+/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_GA.cl:669: Compiler Warning: Enforcing channel order on Block89 may cause kernel Krnl_GA to hang due to thread dependent loop exits within the loop nest
 Warning: Kernel 'Krnl_GA' has unused argument 'KerConst'
-Warning: Kernel 'Krnl_GA' has unused argument 'DockConst'
-Warning: Kernel 'Krnl_Store' has unused argument 'GlobEnergyCurrent'
-Warning: Kernel 'Krnl_Store' has unused argument 'GlobEnergyNext'
 =========================================================================================================
                                    *** Optimization Report ***                                        
 
@@ -25,16 +49,156 @@ loops. A large number of threads is usually required to efficiently utilize ND-R
 =========================================================================================================
 Kernel: Krnl_GA                                                                                          
 =========================================================================================================
-The kernel is compiled for single work-item execution.
+The kernel is compiled as an ND-Range.
 
 The kernel has a required work-group size of (1, 1, 1).
 
 Loop Report:
 
- + Loop "Block1" (file Krnl_GA.cl line 624)
-   Pipelined well. Successive iterations are launched every cycle.
-   
-   
+ + Loop "Block2" (file Krnl_GA.cl line 680)
+ | 
+ | 
+ |-+ Loop "Block3" (file Krnl_GA.cl line 285, line 678)
+   | 
+   | 
+   |-+ Loop "Block73" (file auxiliary_genetic.cl line 14)
+   |   
+   |   
+   |-+ Loop "Block69" (file auxiliary_genetic.cl line 14)
+   |   
+   |   
+   |-+ Loop "Block57" (file auxiliary_genetic.cl line 14)
+   |   
+   |   
+   |-+ Loop "Block53" (file auxiliary_genetic.cl line 14)
+   |   
+   |   
+   |-+ Loop "Block33" (file auxiliary_genetic.cl line 14)
+   |   
+   |   
+   |-+ Loop "Block29" (file auxiliary_genetic.cl line 14)
+   |   
+   |   
+   |-+ Loop "Block76" (file auxiliary_genetic.cl line 22)
+   |   
+   |   
+   |-+ Loop "Block72" (file auxiliary_genetic.cl line 22)
+   |   
+   |   
+   |-+ Loop "Block59" (file auxiliary_genetic.cl line 22)
+   |   
+   |   
+   |-+ Loop "Block56" (file auxiliary_genetic.cl line 22)
+   |   
+   |   
+   |-+ Loop "Block35" (file auxiliary_genetic.cl line 22)
+   |   
+   |   
+   |-+ Loop "Block31" (file auxiliary_genetic.cl line 22)
+   |   
+   |   
+   |-+ Loop "Block9" (file auxiliary_genetic.cl line 47)
+   |   
+   |   
+   |-+ Loop "Block10" (file auxiliary_genetic.cl line 55)
+   |   
+   |   
+   |-+ Loop "Block14" (file auxiliary_genetic.cl line 150)
+   |   
+   |   
+   |-+ Loop "Block16" (file auxiliary_genetic.cl line 179)
+   |   
+   |   
+   |-+ Loop "Block18" (file auxiliary_genetic.cl line 188)
+   |   
+   |   
+   |-+ Loop "Block25" (file auxiliary_genetic.cl line 282)
+   |   
+   |   
+   |-+ Loop "Block5" (file Krnl_GA.cl line 297)
+   |   
+   |   
+   |-+ Loop "Block26" (file auxiliary_genetic.cl line 299)
+   |   
+   |   
+   |-+ Loop "Block6" (file Krnl_GA.cl line 308)
+   |   
+   |   
+   |-+ Loop "Block27" (file auxiliary_genetic.cl line 323)
+   |   
+   |   
+   |-+ Loop "Block12" (file Krnl_GA.cl line 327)
+   |   
+   |   
+   |-+ Loop "Block20" (file Krnl_GA.cl line 341)
+   |   
+   |   
+   |-+ Loop "Block23" (file Krnl_GA.cl line 342)
+   |   
+   |   
+   |-+ Loop "Block43" (file Krnl_GA.cl line 349)
+   |   
+   |   
+   |-+ Loop "Block44" (file Krnl_GA.cl line 358)
+   |   
+   |   
+   |-+ Loop "Block46" (file Krnl_GA.cl line 375)
+   |   
+   |   
+   |-+ Loop "Block48" (file Krnl_GA.cl line 380)
+   |   
+   |   
+   |-+ Loop "Block37" (file auxiliary_genetic.cl line 387)
+   | | 
+   | | 
+   | |-+ Loop "Block38" (file auxiliary_genetic.cl line 14)
+   | |   
+   | |   
+   | |-+ Loop "Block40" (file auxiliary_genetic.cl line 22)
+   |     
+   |     
+   |-+ Loop "Block50" (file Krnl_GA.cl line 391)
+   |   
+   |   
+   |-+ Loop "Block51" (file Krnl_GA.cl line 436)
+   |   
+   |   
+   |-+ Loop "Block61" (file Krnl_GA.cl line 447)
+   | | 
+   | | 
+   | |-+ Loop "Block62" (file auxiliary_genetic.cl line 14)
+   | |   
+   | |   
+   | |-+ Loop "Block64" (file auxiliary_genetic.cl line 22)
+   |     
+   |     
+   |-+ Loop "Block68" (file Krnl_GA.cl line 467)
+   |   
+   |   
+   |-+ Loop "Block77" (file Krnl_GA.cl line 500)
+   | | 
+   | | 
+   | |-+ Loop "Block78" (file auxiliary_genetic.cl line 14)
+   | |   
+   | |   
+   | |-+ Loop "Block80" (file auxiliary_genetic.cl line 22)
+   |     
+   |     
+   |-+ Loop "Block84" (file Krnl_GA.cl line 521)
+   |   
+   |   
+   |-+ Loop "Block85" (file Krnl_GA.cl line 537)
+   |   
+   |   
+   |-+ Loop "Block87" (file Krnl_GA.cl line 589)
+   |   
+   |   
+   |-+ Loop "Block88" (file Krnl_GA.cl line 637)
+   |   
+   |   
+   |-+ Loop "Block89" (file Krnl_GA.cl line 669)
+       
+       
 =========================================================================================================
 Kernel: Krnl_Conform                                                                                     
 =========================================================================================================
@@ -44,59 +208,109 @@ The kernel has a required work-group size of (1, 1, 1).
 
 Loop Report:
 
- + Loop "Block5" (file Krnl_Conform.cl line 40)
- | NOT pipelined due to: 
- |   Loop exit condition unresolvable at iteration initiation.
- |   Simplify loop exit condition to fix this problem.
- |   See "Unable to Resolve Loop Exit Condition at Iteration Initiation" section of the Best Practices Guide for more information.
- |   Not pipelining this loop will most likely lead to poor performance.
+ + Loop "Block97" (file Krnl_Conform.cl line 47)
+ | Pipelined with successive iterations launched every cycle.
+ |  
+ | The compiler has limited the maximum number of simultaneous iterations of this loop to 16
+ | to provide a good trade-off between area and throughput due to local memory accesses which are
+ | iteration independent. If you want more fine grained control, please use the
+ | #pragma max_concurrency <N> on the loop. A higher value may provide higher throughput
+ | while a lower value will provide area benefits.
+ |  
+ | Iterations executed serially across the regions listed below.
+ | Only a single loop iteration will execute inside the listed regions.
+ | This will cause performance degradation unless the regions are pipelined well
+ | (can process an iteration every cycle).
+ |      
+ |     Loop "Block100" (file Krnl_Conform.cl line 86)
+ |     Loop "Block101" (file Krnl_Conform.cl line 241)
+ |     due to:
+ |     Memory dependency on Load Operation from: (file Krnl_Conform.cl line 103)
+ |       Channel Read Operation (file Krnl_Conform.cl line 53)
+ |       Load Operation (file Krnl_Conform.cl line 86, line 241)
+ |       Store Operation (file Krnl_Conform.cl line 212)
+ |      
+ |     Loop "Block100" (file Krnl_Conform.cl line 86)
+ |     Loop "Block101" (file Krnl_Conform.cl line 241)
+ |     due to:
+ |     Memory dependency on Load Operation from: (file Krnl_Conform.cl line 104)
+ |       Channel Read Operation (file Krnl_Conform.cl line 53)
+ |       Store Operation (file Krnl_Conform.cl line 213)
+ |      
+ |     Loop "Block100" (file Krnl_Conform.cl line 86)
+ |     Loop "Block101" (file Krnl_Conform.cl line 241)
+ |     due to:
+ |     Memory dependency on Load Operation from: (file Krnl_Conform.cl line 105)
+ |       Channel Read Operation (file Krnl_Conform.cl line 53)
+ |       Store Operation (file Krnl_Conform.cl line 214)
+ |      
+ |     Loop "Block100" (file Krnl_Conform.cl line 86)
+ |     Loop "Block101" (file Krnl_Conform.cl line 241)
+ |     due to:
+ |     Memory dependency on Store Operation from: (file Krnl_Conform.cl line 212)
+ |       Channel Read Operation (file Krnl_Conform.cl line 53)
+ |       Load Operation (file Krnl_Conform.cl line 242)
+ |      
+ |     Loop "Block100" (file Krnl_Conform.cl line 86)
+ |     Loop "Block101" (file Krnl_Conform.cl line 241)
+ |     due to:
+ |     Memory dependency on Store Operation from: (file Krnl_Conform.cl line 213)
+ |       Channel Read Operation (file Krnl_Conform.cl line 53)
+ |       Load Operation (file Krnl_Conform.cl line 245)
+ |      
+ |     Loop "Block100" (file Krnl_Conform.cl line 86)
+ |     Loop "Block101" (file Krnl_Conform.cl line 241)
+ |     due to:
+ |     Memory dependency on Store Operation from: (file Krnl_Conform.cl line 214)
+ |       Channel Read Operation (file Krnl_Conform.cl line 53)
+ |       Load Operation (file Krnl_Conform.cl line 248)
  | 
  | 
- |-+ Loop "Block6" (file Krnl_Conform.cl line 47)
+ |-+ Loop "Block98" (file Krnl_Conform.cl line 60)
  |   Pipelined well. Successive iterations are launched every cycle.
  |   
  |   
- |-+ Loop "Block8" (file Krnl_Conform.cl line 79)
+ |-+ Loop "Block100" (file Krnl_Conform.cl line 86)
  |   Pipelined with successive iterations launched every 45 cycles due to: 
  |        
- |       Memory dependency on Load Operation from: (file Krnl_Conform.cl line 96)
- |         Load Operation (file Krnl_Conform.cl line 79, line 234)
+ |       Memory dependency on Load Operation from: (file Krnl_Conform.cl line 103)
+ |         Load Operation (file Krnl_Conform.cl line 86, line 241)
  |       Largest Critical Path Contributors:
- |           16%: Load Operation  (file Krnl_Conform.cl line 96)
- |           11%: Hardened Floating-Point Multiply-Add Operation  (file Krnl_Conform.cl line 188)
- |           11%: Hardened Floating-Point Multiply-Add Operation  (file Krnl_Conform.cl line 188)
- |            8%: Hardened Floating-Point Sub Operation  (file Krnl_Conform.cl line 129)
- |            8%: Hardened Floating-Point Multiply Operation  (file Krnl_Conform.cl line 174)
- |            8%: Hardened Floating-Point Sub Operation  (file Krnl_Conform.cl line 174)
- |            8%: Hardened Floating-Point Sub Operation  (file Krnl_Conform.cl line 174)
- |            8%: Hardened Floating-Point Multiply Operation  (file Krnl_Conform.cl line 188)
- |            8%: Hardened Floating-Point Sub Operation  (file Krnl_Conform.cl line 188)
+ |           16%: Load Operation  (file Krnl_Conform.cl line 103)
+ |           11%: Hardened Floating-Point Multiply-Add Operation  (file Krnl_Conform.cl line 195)
+ |           11%: Hardened Floating-Point Multiply-Add Operation  (file Krnl_Conform.cl line 195)
+ |            8%: Hardened Floating-Point Sub Operation  (file Krnl_Conform.cl line 136)
+ |            8%: Hardened Floating-Point Multiply Operation  (file Krnl_Conform.cl line 181)
+ |            8%: Hardened Floating-Point Sub Operation  (file Krnl_Conform.cl line 181)
+ |            8%: Hardened Floating-Point Sub Operation  (file Krnl_Conform.cl line 181)
+ |            8%: Hardened Floating-Point Multiply Operation  (file Krnl_Conform.cl line 195)
+ |            8%: Hardened Floating-Point Sub Operation  (file Krnl_Conform.cl line 195)
  |        
- |       Memory dependency on Load Operation from: (file Krnl_Conform.cl line 96)
- |         Store Operation (file Krnl_Conform.cl line 205)
+ |       Memory dependency on Load Operation from: (file Krnl_Conform.cl line 103)
+ |         Store Operation (file Krnl_Conform.cl line 212)
  |       Largest Critical Path Contributors:
- |           16%: Load Operation  (file Krnl_Conform.cl line 96)
- |           11%: Hardened Floating-Point Multiply-Add Operation  (file Krnl_Conform.cl line 188)
- |           11%: Hardened Floating-Point Multiply-Add Operation  (file Krnl_Conform.cl line 188)
- |            8%: Hardened Floating-Point Sub Operation  (file Krnl_Conform.cl line 129)
- |            8%: Hardened Floating-Point Multiply Operation  (file Krnl_Conform.cl line 174)
- |            8%: Hardened Floating-Point Sub Operation  (file Krnl_Conform.cl line 174)
- |            8%: Hardened Floating-Point Sub Operation  (file Krnl_Conform.cl line 174)
- |            8%: Hardened Floating-Point Multiply Operation  (file Krnl_Conform.cl line 188)
- |            8%: Hardened Floating-Point Sub Operation  (file Krnl_Conform.cl line 188)
+ |           16%: Load Operation  (file Krnl_Conform.cl line 103)
+ |           11%: Hardened Floating-Point Multiply-Add Operation  (file Krnl_Conform.cl line 195)
+ |           11%: Hardened Floating-Point Multiply-Add Operation  (file Krnl_Conform.cl line 195)
+ |            8%: Hardened Floating-Point Sub Operation  (file Krnl_Conform.cl line 136)
+ |            8%: Hardened Floating-Point Multiply Operation  (file Krnl_Conform.cl line 181)
+ |            8%: Hardened Floating-Point Sub Operation  (file Krnl_Conform.cl line 181)
+ |            8%: Hardened Floating-Point Sub Operation  (file Krnl_Conform.cl line 181)
+ |            8%: Hardened Floating-Point Multiply Operation  (file Krnl_Conform.cl line 195)
+ |            8%: Hardened Floating-Point Sub Operation  (file Krnl_Conform.cl line 195)
  |    
  |   Additional memory dependencies:
  |        
- |       Memory dependency on Load Operation from: (file Krnl_Conform.cl line 97)
- |         Load Operation (file Krnl_Conform.cl line 79, line 234)
- |         Store Operation (file Krnl_Conform.cl line 206)
+ |       Memory dependency on Load Operation from: (file Krnl_Conform.cl line 104)
+ |         Load Operation (file Krnl_Conform.cl line 86, line 241)
+ |         Store Operation (file Krnl_Conform.cl line 213)
  |        
- |       Memory dependency on Load Operation from: (file Krnl_Conform.cl line 98)
- |         Load Operation (file Krnl_Conform.cl line 79, line 234)
- |         Store Operation (file Krnl_Conform.cl line 207)
+ |       Memory dependency on Load Operation from: (file Krnl_Conform.cl line 105)
+ |         Load Operation (file Krnl_Conform.cl line 86, line 241)
+ |         Store Operation (file Krnl_Conform.cl line 214)
  |   
  |   
- |-+ Loop "Block9" (file Krnl_Conform.cl line 234)
+ |-+ Loop "Block101" (file Krnl_Conform.cl line 241)
      Pipelined well. Successive iterations are launched every cycle.
      
      
@@ -109,7 +323,7 @@ The kernel has a required work-group size of (1, 1, 1).
 
 Loop Report:
 
- + Loop "Block12" (file Krnl_InterE.cl line 55)
+ + Loop "Block104" (file Krnl_InterE.cl line 55)
  | NOT pipelined due to: 
  |   Loop exit condition unresolvable at iteration initiation.
  |   Simplify loop exit condition to fix this problem.
@@ -117,11 +331,11 @@ Loop Report:
  |   Not pipelining this loop will most likely lead to poor performance.
  | 
  | 
- |-+ Loop "Block13" (file Krnl_InterE.cl line 61)
+ |-+ Loop "Block105" (file Krnl_InterE.cl line 61)
  |   Pipelined well. Successive iterations are launched every cycle.
  |   
  |   
- |-+ Loop "Block15" (file Krnl_InterE.cl line 87)
+ |-+ Loop "Block107" (file Krnl_InterE.cl line 87)
      Pipelined with successive iterations launched every 13 cycles due to: 
           
          Data dependency on variable interE  (file Krnl_InterE.cl line 38)
@@ -140,7 +354,7 @@ The kernel has a required work-group size of (1, 1, 1).
 
 Loop Report:
 
- + Loop "Block19" (file Krnl_IntraE.cl line 34)
+ + Loop "Block111" (file Krnl_IntraE.cl line 38)
  | NOT pipelined due to: 
  |   Loop exit condition unresolvable at iteration initiation.
  |   Simplify loop exit condition to fix this problem.
@@ -148,19 +362,19 @@ Loop Report:
  |   Not pipelining this loop will most likely lead to poor performance.
  | 
  | 
- |-+ Loop "Block20" (file Krnl_IntraE.cl line 40)
+ |-+ Loop "Block112" (file Krnl_IntraE.cl line 44)
  |   Pipelined well. Successive iterations are launched every cycle.
  |   
  |   
- |-+ Loop "Block22" (file Krnl_IntraE.cl line 65)
+ |-+ Loop "Block114" (file Krnl_IntraE.cl line 69)
      Pipelined with successive iterations launched every 17 cycles due to: 
           
-         Data dependency on variable intraE  (file Krnl_IntraE.cl line 32)
+         Data dependency on variable intraE  (file Krnl_IntraE.cl line 36)
          Largest Critical Path Contributors:
-             30%: Hardened Floating-Point Multiply-Add Operation  (file Krnl_IntraE.cl line 115)
-             23%: Hardened Floating-Point Add Operation  (file Krnl_IntraE.cl line 101)
-             23%: Hardened Floating-Point Sub Operation  (file Krnl_IntraE.cl line 104, line 106)
-             23%: Hardened Floating-Point Add Operation  (file Krnl_IntraE.cl line 109)
+             30%: Hardened Floating-Point Multiply-Add Operation  (file Krnl_IntraE.cl line 119)
+             23%: Hardened Floating-Point Add Operation  (file Krnl_IntraE.cl line 105)
+             23%: Hardened Floating-Point Sub Operation  (file Krnl_IntraE.cl line 108, line 110)
+             23%: Hardened Floating-Point Add Operation  (file Krnl_IntraE.cl line 113)
      
      
 =========================================================================================================
@@ -172,7 +386,7 @@ The kernel has a required work-group size of (1, 1, 1).
 
 Loop Report:
 
- + Loop "Block26" (file Krnl_Store.cl line 30)
+ + Loop "Block118" (file Krnl_Store.cl line 33)
    Pipelined well. Successive iterations are launched every cycle.
    
    
@@ -183,11 +397,11 @@ Loop Report:
 +----------------------------------------+---------------------------+
 ; Resource                               + Usage                     ;
 +----------------------------------------+---------------------------+
-; Logic utilization                      ;   56%                     ;
-; ALUTs                                  ;   31%                     ;
-; Dedicated logic registers              ;   27%                     ;
-; Memory blocks                          ;  105%                     ;
-; DSP blocks                             ;   15%                     ;
+; Logic utilization                      ;  257%                     ;
+; ALUTs                                  ;  113%                     ;
+; Dedicated logic registers              ;  147%                     ;
+; Memory blocks                          ;  161%                     ;
+; DSP blocks                             ;   27%                     ;
 +----------------------------------------+---------------------------;
 System name: Krnl_GA
 

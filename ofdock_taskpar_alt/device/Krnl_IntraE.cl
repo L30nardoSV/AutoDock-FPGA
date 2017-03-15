@@ -1,7 +1,7 @@
 // --------------------------------------------------------------------------
 // Originally from: processligand.c
 // --------------------------------------------------------------------------
-__kernel
+__kernel __attribute__ ((reqd_work_group_size(1,1,1)))
 void Krnl_IntraE(
              //__global const float*           restrict GlobFgrids,
 	     //__global       float*           restrict GlobPopulationCurrent,
@@ -16,7 +16,11 @@ void Krnl_IntraE(
 	__local float loc_coords_x[MAX_NUM_OF_ATOMS];
 	__local float loc_coords_y[MAX_NUM_OF_ATOMS];
 	__local float loc_coords_z[MAX_NUM_OF_ATOMS];
-
+/*
+	float __attribute__((register)) loc_coords_x[MAX_NUM_OF_ATOMS];
+	float __attribute__((register)) loc_coords_y[MAX_NUM_OF_ATOMS];
+	float __attribute__((register)) loc_coords_z[MAX_NUM_OF_ATOMS];
+*/
 	char active = 1;
 	char mode   = 0;
 	uint cnt    = 0;   

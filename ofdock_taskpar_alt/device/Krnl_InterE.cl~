@@ -20,15 +20,15 @@ void Krnl_InterE(
 	     __global const kernelconstant*  restrict KerConst,
 	     __global const Dockparameters*  restrict DockConst)
 {
+/*
+	__local float loc_coords_x[MAX_NUM_OF_ATOMS];
+	__local float loc_coords_y[MAX_NUM_OF_ATOMS];
+	__local float loc_coords_z[MAX_NUM_OF_ATOMS];
+*/
 
-	//__local float loc_coords_x[MAX_NUM_OF_ATOMS];
-	//__local float loc_coords_y[MAX_NUM_OF_ATOMS];
-	//__local float loc_coords_z[MAX_NUM_OF_ATOMS];
-
-
-	float loc_coords_x[MAX_NUM_OF_ATOMS];
-	float loc_coords_y[MAX_NUM_OF_ATOMS];
-	float loc_coords_z[MAX_NUM_OF_ATOMS];
+	float __attribute__((register)) loc_coords_x[MAX_NUM_OF_ATOMS];
+	float __attribute__((register)) loc_coords_y[MAX_NUM_OF_ATOMS];
+	float __attribute__((register)) loc_coords_z[MAX_NUM_OF_ATOMS];
 
 
 	char active = 1;

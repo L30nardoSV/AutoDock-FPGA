@@ -1,4 +1,4 @@
-__kernel
+__kernel __attribute__ ((reqd_work_group_size(1,1,1)))
 void Krnl_Store(
              //__global const float*           restrict GlobFgrids,
 	     //__global       float*           restrict GlobPopulationCurrent,
@@ -24,6 +24,9 @@ void Krnl_Store(
  	char active1, active2;
 	char mode1, mode2;
 	uint cnt1, cnt2;
+	bool write_to_channel_ack = false;
+	bool write_to_channel_energy = false;
+
 
 	float LSenergy;
 
@@ -54,8 +57,9 @@ while(active) {
 
 	if (active == 0) {printf("	%-20s: %s\n", "Krnl_Store", "disabled");}
 
+/*
 	switch (mode) {
-///*
+//
 		case 0:	write_channel_altera(chan_Store2GA_ack, 1);	// Signal INI, GG or LS finished 
 		break;
 		case 1:	GlobEnergyCurrent[cnt] = InterE + IntraE;	// INI: Init energy calculation of pop
@@ -67,11 +71,112 @@ while(active) {
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 			write_channel_altera(chan_Store2GA_LSenergy, LSenergy);
 		break;
-//*/
+//
 
 
 		case 4:							// Krnl_GA has finished execution!
 		break;
+	}
+*/
+
+
+
+
+	switch (mode) {
+		case STATE_IC :
+			write_to_channel_ack = false;
+			write_to_channel_energy = false;	
+			GlobEnergyCurrent[cnt] = InterE + IntraE;
+		break;
+
+		case STATE_IC_WAIT_END :
+			write_to_channel_ack = true;
+			write_to_channel_energy = false;	
+		break;
+
+		case STATE_GG :
+			write_to_channel_ack = false;	
+			write_to_channel_energy = false;	
+			GlobEnergyNext[cnt] = InterE + IntraE;
+		break;
+
+		case STATE_GG_WAIT_END :	
+			write_to_channel_ack = true;	
+			write_to_channel_energy = false;
+		break;
+
+		case STATE_LS :	
+			write_to_channel_ack = false;
+			write_to_channel_energy = false;	
+		break;
+
+		case LS_STATE_DIR_FIRST:
+	
+		break;
+
+		case LS_STATE_WAIT_FIRST:
+			LSenergy = InterE + IntraE;
+			write_to_channel_ack = false;
+			write_to_channel_energy = true;	
+		break;
+
+		case LS_STATE_ENERGY_FIRST:
+			write_to_channel_ack = false;
+			write_to_channel_energy = false;	
+		break;
+
+		
+		case LS_STATE_DIR_SECOND:
+
+		break;
+
+		case LS_STATE_WAIT_SECOND:
+			LSenergy = InterE + IntraE;
+			write_to_channel_ack = false;
+			write_to_channel_energy = true;	
+		break;
+
+		case LS_STATE_CHECK_RHO:
+			write_to_channel_ack = false;
+			write_to_channel_energy = false;	
+		break;
+
+		case LS_STATE_CHECK_TERMINATION:
+			write_to_channel_ack = false;
+			write_to_channel_energy = false;	
+		break;
+
+
+		case STATE_LS_WAIT_END :	
+			write_to_channel_ack = false;
+			write_to_channel_energy = false;	
+		break;
+
+		case STATE_END :							
+			write_to_channel_ack = false;	
+			write_to_channel_energy = false;		
+		break;
+
+		case STATE_WAIT_END :	
+			write_to_channel_ack = true;	
+			write_to_channel_energy = false;					
+		break;
+
+		case STATE_OFF :							
+			write_to_channel_ack = false;
+			write_to_channel_energy = false;
+		break;
+	}
+
+
+	if (write_to_channel_ack == true) {	
+		mem_fence(CLK_CHANNEL_MEM_FENCE);
+		write_channel_altera(chan_Store2GA_ack, 1);	// Signal IC finished 
+	}
+
+	if (write_to_channel_energy == true) {
+		mem_fence(CLK_CHANNEL_MEM_FENCE);
+		write_channel_altera(chan_Store2GA_LSenergy, LSenergy);
 	}
 
 } // End of while(1)

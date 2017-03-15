@@ -9,7 +9,7 @@
 // if it remains outside, a very high value will be added to the current energy as a penalty. 
 // Originally from: processligand.c
 // --------------------------------------------------------------------------
-__kernel
+__kernel __attribute__ ((reqd_work_group_size(1,1,1)))
 void Krnl_InterE(
              __global const float*           restrict GlobFgrids,
 	     //__global       float*           restrict GlobPopulationCurrent,
@@ -20,14 +20,15 @@ void Krnl_InterE(
 	     __global const kernelconstant*  restrict KerConst,
 	     __global const Dockparameters*  restrict DockConst)
 {
-
+/*
 	__local float loc_coords_x[MAX_NUM_OF_ATOMS];
 	__local float loc_coords_y[MAX_NUM_OF_ATOMS];
 	__local float loc_coords_z[MAX_NUM_OF_ATOMS];
+*/
 
-	//float loc_coords_x[MAX_NUM_OF_ATOMS];
-	//float loc_coords_y[MAX_NUM_OF_ATOMS];
-	//float loc_coords_z[MAX_NUM_OF_ATOMS];
+	float __attribute__((register)) loc_coords_x[MAX_NUM_OF_ATOMS];
+	float __attribute__((register)) loc_coords_y[MAX_NUM_OF_ATOMS];
+	float __attribute__((register)) loc_coords_z[MAX_NUM_OF_ATOMS];
 
 
 	char active = 1;
