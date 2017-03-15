@@ -389,51 +389,6 @@ module Krnl_GA_system
    logic [7:0] avs_channel_id_chan_Conf2Intere_mode_read_data;
    logic avs_channel_id_chan_Conf2Intere_mode_write_almostfull;
    logic avm_channel_id_chan_Conf2Intere_mode_write_almostfull;
-   logic [31:0] avs_channel_id_chan_Conf2Intere_x_fifosize;
-   logic avm_channel_id_chan_Conf2Intere_x_write_valid;
-   logic avm_channel_id_chan_Conf2Intere_x_write_ready;
-   logic [31:0] avm_channel_id_chan_Conf2Intere_x_write_data;
-   logic avm_channel_id_chan_Conf2Intere_x_read_valid;
-   logic avm_channel_id_chan_Conf2Intere_x_read_ready;
-   logic [31:0] avm_channel_id_chan_Conf2Intere_x_read_data;
-   logic avs_channel_id_chan_Conf2Intere_x_write_valid;
-   logic avs_channel_id_chan_Conf2Intere_x_write_ready;
-   logic [31:0] avs_channel_id_chan_Conf2Intere_x_write_data;
-   logic avs_channel_id_chan_Conf2Intere_x_read_valid;
-   logic avs_channel_id_chan_Conf2Intere_x_read_ready;
-   logic [31:0] avs_channel_id_chan_Conf2Intere_x_read_data;
-   logic avs_channel_id_chan_Conf2Intere_x_write_almostfull;
-   logic avm_channel_id_chan_Conf2Intere_x_write_almostfull;
-   logic [31:0] avs_channel_id_chan_Conf2Intere_y_fifosize;
-   logic avm_channel_id_chan_Conf2Intere_y_write_valid;
-   logic avm_channel_id_chan_Conf2Intere_y_write_ready;
-   logic [31:0] avm_channel_id_chan_Conf2Intere_y_write_data;
-   logic avm_channel_id_chan_Conf2Intere_y_read_valid;
-   logic avm_channel_id_chan_Conf2Intere_y_read_ready;
-   logic [31:0] avm_channel_id_chan_Conf2Intere_y_read_data;
-   logic avs_channel_id_chan_Conf2Intere_y_write_valid;
-   logic avs_channel_id_chan_Conf2Intere_y_write_ready;
-   logic [31:0] avs_channel_id_chan_Conf2Intere_y_write_data;
-   logic avs_channel_id_chan_Conf2Intere_y_read_valid;
-   logic avs_channel_id_chan_Conf2Intere_y_read_ready;
-   logic [31:0] avs_channel_id_chan_Conf2Intere_y_read_data;
-   logic avs_channel_id_chan_Conf2Intere_y_write_almostfull;
-   logic avm_channel_id_chan_Conf2Intere_y_write_almostfull;
-   logic [31:0] avs_channel_id_chan_Conf2Intere_z_fifosize;
-   logic avm_channel_id_chan_Conf2Intere_z_write_valid;
-   logic avm_channel_id_chan_Conf2Intere_z_write_ready;
-   logic [31:0] avm_channel_id_chan_Conf2Intere_z_write_data;
-   logic avm_channel_id_chan_Conf2Intere_z_read_valid;
-   logic avm_channel_id_chan_Conf2Intere_z_read_ready;
-   logic [31:0] avm_channel_id_chan_Conf2Intere_z_read_data;
-   logic avs_channel_id_chan_Conf2Intere_z_write_valid;
-   logic avs_channel_id_chan_Conf2Intere_z_write_ready;
-   logic [31:0] avs_channel_id_chan_Conf2Intere_z_write_data;
-   logic avs_channel_id_chan_Conf2Intere_z_read_valid;
-   logic avs_channel_id_chan_Conf2Intere_z_read_ready;
-   logic [31:0] avs_channel_id_chan_Conf2Intere_z_read_data;
-   logic avs_channel_id_chan_Conf2Intere_z_write_almostfull;
-   logic avm_channel_id_chan_Conf2Intere_z_write_almostfull;
    logic [31:0] avs_channel_id_chan_Conf2Intrae_active_fifosize;
    logic avm_channel_id_chan_Conf2Intrae_active_write_valid;
    logic avm_channel_id_chan_Conf2Intrae_active_write_ready;
@@ -479,6 +434,51 @@ module Krnl_GA_system
    logic [7:0] avs_channel_id_chan_Conf2Intrae_mode_read_data;
    logic avs_channel_id_chan_Conf2Intrae_mode_write_almostfull;
    logic avm_channel_id_chan_Conf2Intrae_mode_write_almostfull;
+   logic [31:0] avs_channel_id_chan_Conf2Intere_x_fifosize;
+   logic avm_channel_id_chan_Conf2Intere_x_write_valid;
+   logic avm_channel_id_chan_Conf2Intere_x_write_ready;
+   logic [31:0] avm_channel_id_chan_Conf2Intere_x_write_data;
+   logic avm_channel_id_chan_Conf2Intere_x_read_valid;
+   logic avm_channel_id_chan_Conf2Intere_x_read_ready;
+   logic [31:0] avm_channel_id_chan_Conf2Intere_x_read_data;
+   logic avs_channel_id_chan_Conf2Intere_x_write_valid;
+   logic avs_channel_id_chan_Conf2Intere_x_write_ready;
+   logic [31:0] avs_channel_id_chan_Conf2Intere_x_write_data;
+   logic avs_channel_id_chan_Conf2Intere_x_read_valid;
+   logic avs_channel_id_chan_Conf2Intere_x_read_ready;
+   logic [31:0] avs_channel_id_chan_Conf2Intere_x_read_data;
+   logic avs_channel_id_chan_Conf2Intere_x_write_almostfull;
+   logic avm_channel_id_chan_Conf2Intere_x_write_almostfull;
+   logic [31:0] avs_channel_id_chan_Conf2Intere_y_fifosize;
+   logic avm_channel_id_chan_Conf2Intere_y_write_valid;
+   logic avm_channel_id_chan_Conf2Intere_y_write_ready;
+   logic [31:0] avm_channel_id_chan_Conf2Intere_y_write_data;
+   logic avm_channel_id_chan_Conf2Intere_y_read_valid;
+   logic avm_channel_id_chan_Conf2Intere_y_read_ready;
+   logic [31:0] avm_channel_id_chan_Conf2Intere_y_read_data;
+   logic avs_channel_id_chan_Conf2Intere_y_write_valid;
+   logic avs_channel_id_chan_Conf2Intere_y_write_ready;
+   logic [31:0] avs_channel_id_chan_Conf2Intere_y_write_data;
+   logic avs_channel_id_chan_Conf2Intere_y_read_valid;
+   logic avs_channel_id_chan_Conf2Intere_y_read_ready;
+   logic [31:0] avs_channel_id_chan_Conf2Intere_y_read_data;
+   logic avs_channel_id_chan_Conf2Intere_y_write_almostfull;
+   logic avm_channel_id_chan_Conf2Intere_y_write_almostfull;
+   logic [31:0] avs_channel_id_chan_Conf2Intere_z_fifosize;
+   logic avm_channel_id_chan_Conf2Intere_z_write_valid;
+   logic avm_channel_id_chan_Conf2Intere_z_write_ready;
+   logic [31:0] avm_channel_id_chan_Conf2Intere_z_write_data;
+   logic avm_channel_id_chan_Conf2Intere_z_read_valid;
+   logic avm_channel_id_chan_Conf2Intere_z_read_ready;
+   logic [31:0] avm_channel_id_chan_Conf2Intere_z_read_data;
+   logic avs_channel_id_chan_Conf2Intere_z_write_valid;
+   logic avs_channel_id_chan_Conf2Intere_z_write_ready;
+   logic [31:0] avs_channel_id_chan_Conf2Intere_z_write_data;
+   logic avs_channel_id_chan_Conf2Intere_z_read_valid;
+   logic avs_channel_id_chan_Conf2Intere_z_read_ready;
+   logic [31:0] avs_channel_id_chan_Conf2Intere_z_read_data;
+   logic avs_channel_id_chan_Conf2Intere_z_write_almostfull;
+   logic avm_channel_id_chan_Conf2Intere_z_write_almostfull;
    logic [31:0] avs_channel_id_chan_Conf2Intrae_x_fifosize;
    logic avm_channel_id_chan_Conf2Intrae_x_write_valid;
    logic avm_channel_id_chan_Conf2Intrae_x_write_ready;
@@ -1061,21 +1061,6 @@ module Krnl_GA_system
       .avm_channel_id_chan_Conf2Intere_mode_write_ready(avm_channel_id_chan_Conf2Intere_mode_write_ready),
       .avm_channel_id_chan_Conf2Intere_mode_write_data(avm_channel_id_chan_Conf2Intere_mode_write_data),
       .avm_channel_id_chan_Conf2Intere_mode_write_almostfull(avm_channel_id_chan_Conf2Intere_mode_write_almostfull),
-      // AVST avm_channel_id_chan_Conf2Intere_x_write
-      .avm_channel_id_chan_Conf2Intere_x_write_valid(avm_channel_id_chan_Conf2Intere_x_write_valid),
-      .avm_channel_id_chan_Conf2Intere_x_write_ready(avm_channel_id_chan_Conf2Intere_x_write_ready),
-      .avm_channel_id_chan_Conf2Intere_x_write_data(avm_channel_id_chan_Conf2Intere_x_write_data),
-      .avm_channel_id_chan_Conf2Intere_x_write_almostfull(avm_channel_id_chan_Conf2Intere_x_write_almostfull),
-      // AVST avm_channel_id_chan_Conf2Intere_y_write
-      .avm_channel_id_chan_Conf2Intere_y_write_valid(avm_channel_id_chan_Conf2Intere_y_write_valid),
-      .avm_channel_id_chan_Conf2Intere_y_write_ready(avm_channel_id_chan_Conf2Intere_y_write_ready),
-      .avm_channel_id_chan_Conf2Intere_y_write_data(avm_channel_id_chan_Conf2Intere_y_write_data),
-      .avm_channel_id_chan_Conf2Intere_y_write_almostfull(avm_channel_id_chan_Conf2Intere_y_write_almostfull),
-      // AVST avm_channel_id_chan_Conf2Intere_z_write
-      .avm_channel_id_chan_Conf2Intere_z_write_valid(avm_channel_id_chan_Conf2Intere_z_write_valid),
-      .avm_channel_id_chan_Conf2Intere_z_write_ready(avm_channel_id_chan_Conf2Intere_z_write_ready),
-      .avm_channel_id_chan_Conf2Intere_z_write_data(avm_channel_id_chan_Conf2Intere_z_write_data),
-      .avm_channel_id_chan_Conf2Intere_z_write_almostfull(avm_channel_id_chan_Conf2Intere_z_write_almostfull),
       // AVST avm_channel_id_chan_Conf2Intrae_active_write
       .avm_channel_id_chan_Conf2Intrae_active_write_valid(avm_channel_id_chan_Conf2Intrae_active_write_valid),
       .avm_channel_id_chan_Conf2Intrae_active_write_ready(avm_channel_id_chan_Conf2Intrae_active_write_ready),
@@ -1091,6 +1076,21 @@ module Krnl_GA_system
       .avm_channel_id_chan_Conf2Intrae_mode_write_ready(avm_channel_id_chan_Conf2Intrae_mode_write_ready),
       .avm_channel_id_chan_Conf2Intrae_mode_write_data(avm_channel_id_chan_Conf2Intrae_mode_write_data),
       .avm_channel_id_chan_Conf2Intrae_mode_write_almostfull(avm_channel_id_chan_Conf2Intrae_mode_write_almostfull),
+      // AVST avm_channel_id_chan_Conf2Intere_x_write
+      .avm_channel_id_chan_Conf2Intere_x_write_valid(avm_channel_id_chan_Conf2Intere_x_write_valid),
+      .avm_channel_id_chan_Conf2Intere_x_write_ready(avm_channel_id_chan_Conf2Intere_x_write_ready),
+      .avm_channel_id_chan_Conf2Intere_x_write_data(avm_channel_id_chan_Conf2Intere_x_write_data),
+      .avm_channel_id_chan_Conf2Intere_x_write_almostfull(avm_channel_id_chan_Conf2Intere_x_write_almostfull),
+      // AVST avm_channel_id_chan_Conf2Intere_y_write
+      .avm_channel_id_chan_Conf2Intere_y_write_valid(avm_channel_id_chan_Conf2Intere_y_write_valid),
+      .avm_channel_id_chan_Conf2Intere_y_write_ready(avm_channel_id_chan_Conf2Intere_y_write_ready),
+      .avm_channel_id_chan_Conf2Intere_y_write_data(avm_channel_id_chan_Conf2Intere_y_write_data),
+      .avm_channel_id_chan_Conf2Intere_y_write_almostfull(avm_channel_id_chan_Conf2Intere_y_write_almostfull),
+      // AVST avm_channel_id_chan_Conf2Intere_z_write
+      .avm_channel_id_chan_Conf2Intere_z_write_valid(avm_channel_id_chan_Conf2Intere_z_write_valid),
+      .avm_channel_id_chan_Conf2Intere_z_write_ready(avm_channel_id_chan_Conf2Intere_z_write_ready),
+      .avm_channel_id_chan_Conf2Intere_z_write_data(avm_channel_id_chan_Conf2Intere_z_write_data),
+      .avm_channel_id_chan_Conf2Intere_z_write_almostfull(avm_channel_id_chan_Conf2Intere_z_write_almostfull),
       // AVST avm_channel_id_chan_Conf2Intrae_x_write
       .avm_channel_id_chan_Conf2Intrae_x_write_valid(avm_channel_id_chan_Conf2Intrae_x_write_valid),
       .avm_channel_id_chan_Conf2Intrae_x_write_ready(avm_channel_id_chan_Conf2Intrae_x_write_ready),
@@ -1984,306 +1984,306 @@ module Krnl_GA_system
       .avm_local_bb4_ld__inst0_readdata(avm_kernel_rd_readdata[27]),
       .avm_local_bb4_ld__inst0_readdatavalid(avm_kernel_rd_readdatavalid[27]),
       .avm_local_bb4_ld__inst0_writeack(avm_kernel_rd_writeack[27]),
-      // AVM avm_local_bb4_ld__u100_inst0
-      .avm_local_bb4_ld__u100_inst0_enable(avm_kernel_rd_enable[28]),
-      .avm_local_bb4_ld__u100_inst0_read(avm_kernel_rd_read[28]),
-      .avm_local_bb4_ld__u100_inst0_write(avm_kernel_rd_write[28]),
-      .avm_local_bb4_ld__u100_inst0_burstcount(avm_kernel_rd_burstcount[28]),
-      .avm_local_bb4_ld__u100_inst0_address(avm_kernel_rd_address[28]),
-      .avm_local_bb4_ld__u100_inst0_writedata(avm_kernel_rd_writedata[28]),
-      .avm_local_bb4_ld__u100_inst0_byteenable(avm_kernel_rd_byteenable[28]),
-      .avm_local_bb4_ld__u100_inst0_waitrequest(avm_kernel_rd_waitrequest[28]),
-      .avm_local_bb4_ld__u100_inst0_readdata(avm_kernel_rd_readdata[28]),
-      .avm_local_bb4_ld__u100_inst0_readdatavalid(avm_kernel_rd_readdatavalid[28]),
-      .avm_local_bb4_ld__u100_inst0_writeack(avm_kernel_rd_writeack[28]),
-      // AVM avm_local_bb4_ld__u101_inst0
-      .avm_local_bb4_ld__u101_inst0_enable(avm_kernel_rd_enable[29]),
-      .avm_local_bb4_ld__u101_inst0_read(avm_kernel_rd_read[29]),
-      .avm_local_bb4_ld__u101_inst0_write(avm_kernel_rd_write[29]),
-      .avm_local_bb4_ld__u101_inst0_burstcount(avm_kernel_rd_burstcount[29]),
-      .avm_local_bb4_ld__u101_inst0_address(avm_kernel_rd_address[29]),
-      .avm_local_bb4_ld__u101_inst0_writedata(avm_kernel_rd_writedata[29]),
-      .avm_local_bb4_ld__u101_inst0_byteenable(avm_kernel_rd_byteenable[29]),
-      .avm_local_bb4_ld__u101_inst0_waitrequest(avm_kernel_rd_waitrequest[29]),
-      .avm_local_bb4_ld__u101_inst0_readdata(avm_kernel_rd_readdata[29]),
-      .avm_local_bb4_ld__u101_inst0_readdatavalid(avm_kernel_rd_readdatavalid[29]),
-      .avm_local_bb4_ld__u101_inst0_writeack(avm_kernel_rd_writeack[29]),
-      // AVM avm_local_bb4_ld__u102_inst0
-      .avm_local_bb4_ld__u102_inst0_enable(avm_kernel_rd_enable[30]),
-      .avm_local_bb4_ld__u102_inst0_read(avm_kernel_rd_read[30]),
-      .avm_local_bb4_ld__u102_inst0_write(avm_kernel_rd_write[30]),
-      .avm_local_bb4_ld__u102_inst0_burstcount(avm_kernel_rd_burstcount[30]),
-      .avm_local_bb4_ld__u102_inst0_address(avm_kernel_rd_address[30]),
-      .avm_local_bb4_ld__u102_inst0_writedata(avm_kernel_rd_writedata[30]),
-      .avm_local_bb4_ld__u102_inst0_byteenable(avm_kernel_rd_byteenable[30]),
-      .avm_local_bb4_ld__u102_inst0_waitrequest(avm_kernel_rd_waitrequest[30]),
-      .avm_local_bb4_ld__u102_inst0_readdata(avm_kernel_rd_readdata[30]),
-      .avm_local_bb4_ld__u102_inst0_readdatavalid(avm_kernel_rd_readdatavalid[30]),
-      .avm_local_bb4_ld__u102_inst0_writeack(avm_kernel_rd_writeack[30]),
-      // AVM avm_local_bb4_ld__u103_inst0
-      .avm_local_bb4_ld__u103_inst0_enable(avm_kernel_rd_enable[31]),
-      .avm_local_bb4_ld__u103_inst0_read(avm_kernel_rd_read[31]),
-      .avm_local_bb4_ld__u103_inst0_write(avm_kernel_rd_write[31]),
-      .avm_local_bb4_ld__u103_inst0_burstcount(avm_kernel_rd_burstcount[31]),
-      .avm_local_bb4_ld__u103_inst0_address(avm_kernel_rd_address[31]),
-      .avm_local_bb4_ld__u103_inst0_writedata(avm_kernel_rd_writedata[31]),
-      .avm_local_bb4_ld__u103_inst0_byteenable(avm_kernel_rd_byteenable[31]),
-      .avm_local_bb4_ld__u103_inst0_waitrequest(avm_kernel_rd_waitrequest[31]),
-      .avm_local_bb4_ld__u103_inst0_readdata(avm_kernel_rd_readdata[31]),
-      .avm_local_bb4_ld__u103_inst0_readdatavalid(avm_kernel_rd_readdatavalid[31]),
-      .avm_local_bb4_ld__u103_inst0_writeack(avm_kernel_rd_writeack[31]),
       // AVM avm_local_bb4_ld__u104_inst0
-      .avm_local_bb4_ld__u104_inst0_enable(avm_kernel_rd_enable[32]),
-      .avm_local_bb4_ld__u104_inst0_read(avm_kernel_rd_read[32]),
-      .avm_local_bb4_ld__u104_inst0_write(avm_kernel_rd_write[32]),
-      .avm_local_bb4_ld__u104_inst0_burstcount(avm_kernel_rd_burstcount[32]),
-      .avm_local_bb4_ld__u104_inst0_address(avm_kernel_rd_address[32]),
-      .avm_local_bb4_ld__u104_inst0_writedata(avm_kernel_rd_writedata[32]),
-      .avm_local_bb4_ld__u104_inst0_byteenable(avm_kernel_rd_byteenable[32]),
-      .avm_local_bb4_ld__u104_inst0_waitrequest(avm_kernel_rd_waitrequest[32]),
-      .avm_local_bb4_ld__u104_inst0_readdata(avm_kernel_rd_readdata[32]),
-      .avm_local_bb4_ld__u104_inst0_readdatavalid(avm_kernel_rd_readdatavalid[32]),
-      .avm_local_bb4_ld__u104_inst0_writeack(avm_kernel_rd_writeack[32]),
+      .avm_local_bb4_ld__u104_inst0_enable(avm_kernel_rd_enable[28]),
+      .avm_local_bb4_ld__u104_inst0_read(avm_kernel_rd_read[28]),
+      .avm_local_bb4_ld__u104_inst0_write(avm_kernel_rd_write[28]),
+      .avm_local_bb4_ld__u104_inst0_burstcount(avm_kernel_rd_burstcount[28]),
+      .avm_local_bb4_ld__u104_inst0_address(avm_kernel_rd_address[28]),
+      .avm_local_bb4_ld__u104_inst0_writedata(avm_kernel_rd_writedata[28]),
+      .avm_local_bb4_ld__u104_inst0_byteenable(avm_kernel_rd_byteenable[28]),
+      .avm_local_bb4_ld__u104_inst0_waitrequest(avm_kernel_rd_waitrequest[28]),
+      .avm_local_bb4_ld__u104_inst0_readdata(avm_kernel_rd_readdata[28]),
+      .avm_local_bb4_ld__u104_inst0_readdatavalid(avm_kernel_rd_readdatavalid[28]),
+      .avm_local_bb4_ld__u104_inst0_writeack(avm_kernel_rd_writeack[28]),
       // AVM avm_local_bb4_ld__u105_inst0
-      .avm_local_bb4_ld__u105_inst0_enable(avm_kernel_rd_enable[33]),
-      .avm_local_bb4_ld__u105_inst0_read(avm_kernel_rd_read[33]),
-      .avm_local_bb4_ld__u105_inst0_write(avm_kernel_rd_write[33]),
-      .avm_local_bb4_ld__u105_inst0_burstcount(avm_kernel_rd_burstcount[33]),
-      .avm_local_bb4_ld__u105_inst0_address(avm_kernel_rd_address[33]),
-      .avm_local_bb4_ld__u105_inst0_writedata(avm_kernel_rd_writedata[33]),
-      .avm_local_bb4_ld__u105_inst0_byteenable(avm_kernel_rd_byteenable[33]),
-      .avm_local_bb4_ld__u105_inst0_waitrequest(avm_kernel_rd_waitrequest[33]),
-      .avm_local_bb4_ld__u105_inst0_readdata(avm_kernel_rd_readdata[33]),
-      .avm_local_bb4_ld__u105_inst0_readdatavalid(avm_kernel_rd_readdatavalid[33]),
-      .avm_local_bb4_ld__u105_inst0_writeack(avm_kernel_rd_writeack[33]),
+      .avm_local_bb4_ld__u105_inst0_enable(avm_kernel_rd_enable[29]),
+      .avm_local_bb4_ld__u105_inst0_read(avm_kernel_rd_read[29]),
+      .avm_local_bb4_ld__u105_inst0_write(avm_kernel_rd_write[29]),
+      .avm_local_bb4_ld__u105_inst0_burstcount(avm_kernel_rd_burstcount[29]),
+      .avm_local_bb4_ld__u105_inst0_address(avm_kernel_rd_address[29]),
+      .avm_local_bb4_ld__u105_inst0_writedata(avm_kernel_rd_writedata[29]),
+      .avm_local_bb4_ld__u105_inst0_byteenable(avm_kernel_rd_byteenable[29]),
+      .avm_local_bb4_ld__u105_inst0_waitrequest(avm_kernel_rd_waitrequest[29]),
+      .avm_local_bb4_ld__u105_inst0_readdata(avm_kernel_rd_readdata[29]),
+      .avm_local_bb4_ld__u105_inst0_readdatavalid(avm_kernel_rd_readdatavalid[29]),
+      .avm_local_bb4_ld__u105_inst0_writeack(avm_kernel_rd_writeack[29]),
       // AVM avm_local_bb4_ld__u106_inst0
-      .avm_local_bb4_ld__u106_inst0_enable(avm_kernel_rd_enable[34]),
-      .avm_local_bb4_ld__u106_inst0_read(avm_kernel_rd_read[34]),
-      .avm_local_bb4_ld__u106_inst0_write(avm_kernel_rd_write[34]),
-      .avm_local_bb4_ld__u106_inst0_burstcount(avm_kernel_rd_burstcount[34]),
-      .avm_local_bb4_ld__u106_inst0_address(avm_kernel_rd_address[34]),
-      .avm_local_bb4_ld__u106_inst0_writedata(avm_kernel_rd_writedata[34]),
-      .avm_local_bb4_ld__u106_inst0_byteenable(avm_kernel_rd_byteenable[34]),
-      .avm_local_bb4_ld__u106_inst0_waitrequest(avm_kernel_rd_waitrequest[34]),
-      .avm_local_bb4_ld__u106_inst0_readdata(avm_kernel_rd_readdata[34]),
-      .avm_local_bb4_ld__u106_inst0_readdatavalid(avm_kernel_rd_readdatavalid[34]),
-      .avm_local_bb4_ld__u106_inst0_writeack(avm_kernel_rd_writeack[34]),
+      .avm_local_bb4_ld__u106_inst0_enable(avm_kernel_rd_enable[30]),
+      .avm_local_bb4_ld__u106_inst0_read(avm_kernel_rd_read[30]),
+      .avm_local_bb4_ld__u106_inst0_write(avm_kernel_rd_write[30]),
+      .avm_local_bb4_ld__u106_inst0_burstcount(avm_kernel_rd_burstcount[30]),
+      .avm_local_bb4_ld__u106_inst0_address(avm_kernel_rd_address[30]),
+      .avm_local_bb4_ld__u106_inst0_writedata(avm_kernel_rd_writedata[30]),
+      .avm_local_bb4_ld__u106_inst0_byteenable(avm_kernel_rd_byteenable[30]),
+      .avm_local_bb4_ld__u106_inst0_waitrequest(avm_kernel_rd_waitrequest[30]),
+      .avm_local_bb4_ld__u106_inst0_readdata(avm_kernel_rd_readdata[30]),
+      .avm_local_bb4_ld__u106_inst0_readdatavalid(avm_kernel_rd_readdatavalid[30]),
+      .avm_local_bb4_ld__u106_inst0_writeack(avm_kernel_rd_writeack[30]),
       // AVM avm_local_bb4_ld__u107_inst0
-      .avm_local_bb4_ld__u107_inst0_enable(avm_kernel_rd_enable[35]),
-      .avm_local_bb4_ld__u107_inst0_read(avm_kernel_rd_read[35]),
-      .avm_local_bb4_ld__u107_inst0_write(avm_kernel_rd_write[35]),
-      .avm_local_bb4_ld__u107_inst0_burstcount(avm_kernel_rd_burstcount[35]),
-      .avm_local_bb4_ld__u107_inst0_address(avm_kernel_rd_address[35]),
-      .avm_local_bb4_ld__u107_inst0_writedata(avm_kernel_rd_writedata[35]),
-      .avm_local_bb4_ld__u107_inst0_byteenable(avm_kernel_rd_byteenable[35]),
-      .avm_local_bb4_ld__u107_inst0_waitrequest(avm_kernel_rd_waitrequest[35]),
-      .avm_local_bb4_ld__u107_inst0_readdata(avm_kernel_rd_readdata[35]),
-      .avm_local_bb4_ld__u107_inst0_readdatavalid(avm_kernel_rd_readdatavalid[35]),
-      .avm_local_bb4_ld__u107_inst0_writeack(avm_kernel_rd_writeack[35]),
+      .avm_local_bb4_ld__u107_inst0_enable(avm_kernel_rd_enable[31]),
+      .avm_local_bb4_ld__u107_inst0_read(avm_kernel_rd_read[31]),
+      .avm_local_bb4_ld__u107_inst0_write(avm_kernel_rd_write[31]),
+      .avm_local_bb4_ld__u107_inst0_burstcount(avm_kernel_rd_burstcount[31]),
+      .avm_local_bb4_ld__u107_inst0_address(avm_kernel_rd_address[31]),
+      .avm_local_bb4_ld__u107_inst0_writedata(avm_kernel_rd_writedata[31]),
+      .avm_local_bb4_ld__u107_inst0_byteenable(avm_kernel_rd_byteenable[31]),
+      .avm_local_bb4_ld__u107_inst0_waitrequest(avm_kernel_rd_waitrequest[31]),
+      .avm_local_bb4_ld__u107_inst0_readdata(avm_kernel_rd_readdata[31]),
+      .avm_local_bb4_ld__u107_inst0_readdatavalid(avm_kernel_rd_readdatavalid[31]),
+      .avm_local_bb4_ld__u107_inst0_writeack(avm_kernel_rd_writeack[31]),
       // AVM avm_local_bb4_ld__u108_inst0
-      .avm_local_bb4_ld__u108_inst0_enable(avm_kernel_rd_enable[36]),
-      .avm_local_bb4_ld__u108_inst0_read(avm_kernel_rd_read[36]),
-      .avm_local_bb4_ld__u108_inst0_write(avm_kernel_rd_write[36]),
-      .avm_local_bb4_ld__u108_inst0_burstcount(avm_kernel_rd_burstcount[36]),
-      .avm_local_bb4_ld__u108_inst0_address(avm_kernel_rd_address[36]),
-      .avm_local_bb4_ld__u108_inst0_writedata(avm_kernel_rd_writedata[36]),
-      .avm_local_bb4_ld__u108_inst0_byteenable(avm_kernel_rd_byteenable[36]),
-      .avm_local_bb4_ld__u108_inst0_waitrequest(avm_kernel_rd_waitrequest[36]),
-      .avm_local_bb4_ld__u108_inst0_readdata(avm_kernel_rd_readdata[36]),
-      .avm_local_bb4_ld__u108_inst0_readdatavalid(avm_kernel_rd_readdatavalid[36]),
-      .avm_local_bb4_ld__u108_inst0_writeack(avm_kernel_rd_writeack[36]),
+      .avm_local_bb4_ld__u108_inst0_enable(avm_kernel_rd_enable[32]),
+      .avm_local_bb4_ld__u108_inst0_read(avm_kernel_rd_read[32]),
+      .avm_local_bb4_ld__u108_inst0_write(avm_kernel_rd_write[32]),
+      .avm_local_bb4_ld__u108_inst0_burstcount(avm_kernel_rd_burstcount[32]),
+      .avm_local_bb4_ld__u108_inst0_address(avm_kernel_rd_address[32]),
+      .avm_local_bb4_ld__u108_inst0_writedata(avm_kernel_rd_writedata[32]),
+      .avm_local_bb4_ld__u108_inst0_byteenable(avm_kernel_rd_byteenable[32]),
+      .avm_local_bb4_ld__u108_inst0_waitrequest(avm_kernel_rd_waitrequest[32]),
+      .avm_local_bb4_ld__u108_inst0_readdata(avm_kernel_rd_readdata[32]),
+      .avm_local_bb4_ld__u108_inst0_readdatavalid(avm_kernel_rd_readdatavalid[32]),
+      .avm_local_bb4_ld__u108_inst0_writeack(avm_kernel_rd_writeack[32]),
       // AVM avm_local_bb4_ld__u109_inst0
-      .avm_local_bb4_ld__u109_inst0_enable(avm_kernel_rd_enable[37]),
-      .avm_local_bb4_ld__u109_inst0_read(avm_kernel_rd_read[37]),
-      .avm_local_bb4_ld__u109_inst0_write(avm_kernel_rd_write[37]),
-      .avm_local_bb4_ld__u109_inst0_burstcount(avm_kernel_rd_burstcount[37]),
-      .avm_local_bb4_ld__u109_inst0_address(avm_kernel_rd_address[37]),
-      .avm_local_bb4_ld__u109_inst0_writedata(avm_kernel_rd_writedata[37]),
-      .avm_local_bb4_ld__u109_inst0_byteenable(avm_kernel_rd_byteenable[37]),
-      .avm_local_bb4_ld__u109_inst0_waitrequest(avm_kernel_rd_waitrequest[37]),
-      .avm_local_bb4_ld__u109_inst0_readdata(avm_kernel_rd_readdata[37]),
-      .avm_local_bb4_ld__u109_inst0_readdatavalid(avm_kernel_rd_readdatavalid[37]),
-      .avm_local_bb4_ld__u109_inst0_writeack(avm_kernel_rd_writeack[37]),
+      .avm_local_bb4_ld__u109_inst0_enable(avm_kernel_rd_enable[33]),
+      .avm_local_bb4_ld__u109_inst0_read(avm_kernel_rd_read[33]),
+      .avm_local_bb4_ld__u109_inst0_write(avm_kernel_rd_write[33]),
+      .avm_local_bb4_ld__u109_inst0_burstcount(avm_kernel_rd_burstcount[33]),
+      .avm_local_bb4_ld__u109_inst0_address(avm_kernel_rd_address[33]),
+      .avm_local_bb4_ld__u109_inst0_writedata(avm_kernel_rd_writedata[33]),
+      .avm_local_bb4_ld__u109_inst0_byteenable(avm_kernel_rd_byteenable[33]),
+      .avm_local_bb4_ld__u109_inst0_waitrequest(avm_kernel_rd_waitrequest[33]),
+      .avm_local_bb4_ld__u109_inst0_readdata(avm_kernel_rd_readdata[33]),
+      .avm_local_bb4_ld__u109_inst0_readdatavalid(avm_kernel_rd_readdatavalid[33]),
+      .avm_local_bb4_ld__u109_inst0_writeack(avm_kernel_rd_writeack[33]),
       // AVM avm_local_bb4_ld__u110_inst0
-      .avm_local_bb4_ld__u110_inst0_enable(avm_kernel_rd_enable[38]),
-      .avm_local_bb4_ld__u110_inst0_read(avm_kernel_rd_read[38]),
-      .avm_local_bb4_ld__u110_inst0_write(avm_kernel_rd_write[38]),
-      .avm_local_bb4_ld__u110_inst0_burstcount(avm_kernel_rd_burstcount[38]),
-      .avm_local_bb4_ld__u110_inst0_address(avm_kernel_rd_address[38]),
-      .avm_local_bb4_ld__u110_inst0_writedata(avm_kernel_rd_writedata[38]),
-      .avm_local_bb4_ld__u110_inst0_byteenable(avm_kernel_rd_byteenable[38]),
-      .avm_local_bb4_ld__u110_inst0_waitrequest(avm_kernel_rd_waitrequest[38]),
-      .avm_local_bb4_ld__u110_inst0_readdata(avm_kernel_rd_readdata[38]),
-      .avm_local_bb4_ld__u110_inst0_readdatavalid(avm_kernel_rd_readdatavalid[38]),
-      .avm_local_bb4_ld__u110_inst0_writeack(avm_kernel_rd_writeack[38]),
+      .avm_local_bb4_ld__u110_inst0_enable(avm_kernel_rd_enable[34]),
+      .avm_local_bb4_ld__u110_inst0_read(avm_kernel_rd_read[34]),
+      .avm_local_bb4_ld__u110_inst0_write(avm_kernel_rd_write[34]),
+      .avm_local_bb4_ld__u110_inst0_burstcount(avm_kernel_rd_burstcount[34]),
+      .avm_local_bb4_ld__u110_inst0_address(avm_kernel_rd_address[34]),
+      .avm_local_bb4_ld__u110_inst0_writedata(avm_kernel_rd_writedata[34]),
+      .avm_local_bb4_ld__u110_inst0_byteenable(avm_kernel_rd_byteenable[34]),
+      .avm_local_bb4_ld__u110_inst0_waitrequest(avm_kernel_rd_waitrequest[34]),
+      .avm_local_bb4_ld__u110_inst0_readdata(avm_kernel_rd_readdata[34]),
+      .avm_local_bb4_ld__u110_inst0_readdatavalid(avm_kernel_rd_readdatavalid[34]),
+      .avm_local_bb4_ld__u110_inst0_writeack(avm_kernel_rd_writeack[34]),
       // AVM avm_local_bb4_ld__u111_inst0
-      .avm_local_bb4_ld__u111_inst0_enable(avm_kernel_rd_enable[39]),
-      .avm_local_bb4_ld__u111_inst0_read(avm_kernel_rd_read[39]),
-      .avm_local_bb4_ld__u111_inst0_write(avm_kernel_rd_write[39]),
-      .avm_local_bb4_ld__u111_inst0_burstcount(avm_kernel_rd_burstcount[39]),
-      .avm_local_bb4_ld__u111_inst0_address(avm_kernel_rd_address[39]),
-      .avm_local_bb4_ld__u111_inst0_writedata(avm_kernel_rd_writedata[39]),
-      .avm_local_bb4_ld__u111_inst0_byteenable(avm_kernel_rd_byteenable[39]),
-      .avm_local_bb4_ld__u111_inst0_waitrequest(avm_kernel_rd_waitrequest[39]),
-      .avm_local_bb4_ld__u111_inst0_readdata(avm_kernel_rd_readdata[39]),
-      .avm_local_bb4_ld__u111_inst0_readdatavalid(avm_kernel_rd_readdatavalid[39]),
-      .avm_local_bb4_ld__u111_inst0_writeack(avm_kernel_rd_writeack[39]),
+      .avm_local_bb4_ld__u111_inst0_enable(avm_kernel_rd_enable[35]),
+      .avm_local_bb4_ld__u111_inst0_read(avm_kernel_rd_read[35]),
+      .avm_local_bb4_ld__u111_inst0_write(avm_kernel_rd_write[35]),
+      .avm_local_bb4_ld__u111_inst0_burstcount(avm_kernel_rd_burstcount[35]),
+      .avm_local_bb4_ld__u111_inst0_address(avm_kernel_rd_address[35]),
+      .avm_local_bb4_ld__u111_inst0_writedata(avm_kernel_rd_writedata[35]),
+      .avm_local_bb4_ld__u111_inst0_byteenable(avm_kernel_rd_byteenable[35]),
+      .avm_local_bb4_ld__u111_inst0_waitrequest(avm_kernel_rd_waitrequest[35]),
+      .avm_local_bb4_ld__u111_inst0_readdata(avm_kernel_rd_readdata[35]),
+      .avm_local_bb4_ld__u111_inst0_readdatavalid(avm_kernel_rd_readdatavalid[35]),
+      .avm_local_bb4_ld__u111_inst0_writeack(avm_kernel_rd_writeack[35]),
       // AVM avm_local_bb4_ld__u112_inst0
-      .avm_local_bb4_ld__u112_inst0_enable(avm_kernel_rd_enable[40]),
-      .avm_local_bb4_ld__u112_inst0_read(avm_kernel_rd_read[40]),
-      .avm_local_bb4_ld__u112_inst0_write(avm_kernel_rd_write[40]),
-      .avm_local_bb4_ld__u112_inst0_burstcount(avm_kernel_rd_burstcount[40]),
-      .avm_local_bb4_ld__u112_inst0_address(avm_kernel_rd_address[40]),
-      .avm_local_bb4_ld__u112_inst0_writedata(avm_kernel_rd_writedata[40]),
-      .avm_local_bb4_ld__u112_inst0_byteenable(avm_kernel_rd_byteenable[40]),
-      .avm_local_bb4_ld__u112_inst0_waitrequest(avm_kernel_rd_waitrequest[40]),
-      .avm_local_bb4_ld__u112_inst0_readdata(avm_kernel_rd_readdata[40]),
-      .avm_local_bb4_ld__u112_inst0_readdatavalid(avm_kernel_rd_readdatavalid[40]),
-      .avm_local_bb4_ld__u112_inst0_writeack(avm_kernel_rd_writeack[40]),
+      .avm_local_bb4_ld__u112_inst0_enable(avm_kernel_rd_enable[36]),
+      .avm_local_bb4_ld__u112_inst0_read(avm_kernel_rd_read[36]),
+      .avm_local_bb4_ld__u112_inst0_write(avm_kernel_rd_write[36]),
+      .avm_local_bb4_ld__u112_inst0_burstcount(avm_kernel_rd_burstcount[36]),
+      .avm_local_bb4_ld__u112_inst0_address(avm_kernel_rd_address[36]),
+      .avm_local_bb4_ld__u112_inst0_writedata(avm_kernel_rd_writedata[36]),
+      .avm_local_bb4_ld__u112_inst0_byteenable(avm_kernel_rd_byteenable[36]),
+      .avm_local_bb4_ld__u112_inst0_waitrequest(avm_kernel_rd_waitrequest[36]),
+      .avm_local_bb4_ld__u112_inst0_readdata(avm_kernel_rd_readdata[36]),
+      .avm_local_bb4_ld__u112_inst0_readdatavalid(avm_kernel_rd_readdatavalid[36]),
+      .avm_local_bb4_ld__u112_inst0_writeack(avm_kernel_rd_writeack[36]),
       // AVM avm_local_bb4_ld__u113_inst0
-      .avm_local_bb4_ld__u113_inst0_enable(avm_kernel_rd_enable[41]),
-      .avm_local_bb4_ld__u113_inst0_read(avm_kernel_rd_read[41]),
-      .avm_local_bb4_ld__u113_inst0_write(avm_kernel_rd_write[41]),
-      .avm_local_bb4_ld__u113_inst0_burstcount(avm_kernel_rd_burstcount[41]),
-      .avm_local_bb4_ld__u113_inst0_address(avm_kernel_rd_address[41]),
-      .avm_local_bb4_ld__u113_inst0_writedata(avm_kernel_rd_writedata[41]),
-      .avm_local_bb4_ld__u113_inst0_byteenable(avm_kernel_rd_byteenable[41]),
-      .avm_local_bb4_ld__u113_inst0_waitrequest(avm_kernel_rd_waitrequest[41]),
-      .avm_local_bb4_ld__u113_inst0_readdata(avm_kernel_rd_readdata[41]),
-      .avm_local_bb4_ld__u113_inst0_readdatavalid(avm_kernel_rd_readdatavalid[41]),
-      .avm_local_bb4_ld__u113_inst0_writeack(avm_kernel_rd_writeack[41]),
+      .avm_local_bb4_ld__u113_inst0_enable(avm_kernel_rd_enable[37]),
+      .avm_local_bb4_ld__u113_inst0_read(avm_kernel_rd_read[37]),
+      .avm_local_bb4_ld__u113_inst0_write(avm_kernel_rd_write[37]),
+      .avm_local_bb4_ld__u113_inst0_burstcount(avm_kernel_rd_burstcount[37]),
+      .avm_local_bb4_ld__u113_inst0_address(avm_kernel_rd_address[37]),
+      .avm_local_bb4_ld__u113_inst0_writedata(avm_kernel_rd_writedata[37]),
+      .avm_local_bb4_ld__u113_inst0_byteenable(avm_kernel_rd_byteenable[37]),
+      .avm_local_bb4_ld__u113_inst0_waitrequest(avm_kernel_rd_waitrequest[37]),
+      .avm_local_bb4_ld__u113_inst0_readdata(avm_kernel_rd_readdata[37]),
+      .avm_local_bb4_ld__u113_inst0_readdatavalid(avm_kernel_rd_readdatavalid[37]),
+      .avm_local_bb4_ld__u113_inst0_writeack(avm_kernel_rd_writeack[37]),
       // AVM avm_local_bb4_ld__u114_inst0
-      .avm_local_bb4_ld__u114_inst0_enable(avm_kernel_rd_enable[42]),
-      .avm_local_bb4_ld__u114_inst0_read(avm_kernel_rd_read[42]),
-      .avm_local_bb4_ld__u114_inst0_write(avm_kernel_rd_write[42]),
-      .avm_local_bb4_ld__u114_inst0_burstcount(avm_kernel_rd_burstcount[42]),
-      .avm_local_bb4_ld__u114_inst0_address(avm_kernel_rd_address[42]),
-      .avm_local_bb4_ld__u114_inst0_writedata(avm_kernel_rd_writedata[42]),
-      .avm_local_bb4_ld__u114_inst0_byteenable(avm_kernel_rd_byteenable[42]),
-      .avm_local_bb4_ld__u114_inst0_waitrequest(avm_kernel_rd_waitrequest[42]),
-      .avm_local_bb4_ld__u114_inst0_readdata(avm_kernel_rd_readdata[42]),
-      .avm_local_bb4_ld__u114_inst0_readdatavalid(avm_kernel_rd_readdatavalid[42]),
-      .avm_local_bb4_ld__u114_inst0_writeack(avm_kernel_rd_writeack[42]),
+      .avm_local_bb4_ld__u114_inst0_enable(avm_kernel_rd_enable[38]),
+      .avm_local_bb4_ld__u114_inst0_read(avm_kernel_rd_read[38]),
+      .avm_local_bb4_ld__u114_inst0_write(avm_kernel_rd_write[38]),
+      .avm_local_bb4_ld__u114_inst0_burstcount(avm_kernel_rd_burstcount[38]),
+      .avm_local_bb4_ld__u114_inst0_address(avm_kernel_rd_address[38]),
+      .avm_local_bb4_ld__u114_inst0_writedata(avm_kernel_rd_writedata[38]),
+      .avm_local_bb4_ld__u114_inst0_byteenable(avm_kernel_rd_byteenable[38]),
+      .avm_local_bb4_ld__u114_inst0_waitrequest(avm_kernel_rd_waitrequest[38]),
+      .avm_local_bb4_ld__u114_inst0_readdata(avm_kernel_rd_readdata[38]),
+      .avm_local_bb4_ld__u114_inst0_readdatavalid(avm_kernel_rd_readdatavalid[38]),
+      .avm_local_bb4_ld__u114_inst0_writeack(avm_kernel_rd_writeack[38]),
       // AVM avm_local_bb4_ld__u115_inst0
-      .avm_local_bb4_ld__u115_inst0_enable(avm_kernel_rd_enable[43]),
-      .avm_local_bb4_ld__u115_inst0_read(avm_kernel_rd_read[43]),
-      .avm_local_bb4_ld__u115_inst0_write(avm_kernel_rd_write[43]),
-      .avm_local_bb4_ld__u115_inst0_burstcount(avm_kernel_rd_burstcount[43]),
-      .avm_local_bb4_ld__u115_inst0_address(avm_kernel_rd_address[43]),
-      .avm_local_bb4_ld__u115_inst0_writedata(avm_kernel_rd_writedata[43]),
-      .avm_local_bb4_ld__u115_inst0_byteenable(avm_kernel_rd_byteenable[43]),
-      .avm_local_bb4_ld__u115_inst0_waitrequest(avm_kernel_rd_waitrequest[43]),
-      .avm_local_bb4_ld__u115_inst0_readdata(avm_kernel_rd_readdata[43]),
-      .avm_local_bb4_ld__u115_inst0_readdatavalid(avm_kernel_rd_readdatavalid[43]),
-      .avm_local_bb4_ld__u115_inst0_writeack(avm_kernel_rd_writeack[43]),
+      .avm_local_bb4_ld__u115_inst0_enable(avm_kernel_rd_enable[39]),
+      .avm_local_bb4_ld__u115_inst0_read(avm_kernel_rd_read[39]),
+      .avm_local_bb4_ld__u115_inst0_write(avm_kernel_rd_write[39]),
+      .avm_local_bb4_ld__u115_inst0_burstcount(avm_kernel_rd_burstcount[39]),
+      .avm_local_bb4_ld__u115_inst0_address(avm_kernel_rd_address[39]),
+      .avm_local_bb4_ld__u115_inst0_writedata(avm_kernel_rd_writedata[39]),
+      .avm_local_bb4_ld__u115_inst0_byteenable(avm_kernel_rd_byteenable[39]),
+      .avm_local_bb4_ld__u115_inst0_waitrequest(avm_kernel_rd_waitrequest[39]),
+      .avm_local_bb4_ld__u115_inst0_readdata(avm_kernel_rd_readdata[39]),
+      .avm_local_bb4_ld__u115_inst0_readdatavalid(avm_kernel_rd_readdatavalid[39]),
+      .avm_local_bb4_ld__u115_inst0_writeack(avm_kernel_rd_writeack[39]),
       // AVM avm_local_bb4_ld__u116_inst0
-      .avm_local_bb4_ld__u116_inst0_enable(avm_kernel_rd_enable[44]),
-      .avm_local_bb4_ld__u116_inst0_read(avm_kernel_rd_read[44]),
-      .avm_local_bb4_ld__u116_inst0_write(avm_kernel_rd_write[44]),
-      .avm_local_bb4_ld__u116_inst0_burstcount(avm_kernel_rd_burstcount[44]),
-      .avm_local_bb4_ld__u116_inst0_address(avm_kernel_rd_address[44]),
-      .avm_local_bb4_ld__u116_inst0_writedata(avm_kernel_rd_writedata[44]),
-      .avm_local_bb4_ld__u116_inst0_byteenable(avm_kernel_rd_byteenable[44]),
-      .avm_local_bb4_ld__u116_inst0_waitrequest(avm_kernel_rd_waitrequest[44]),
-      .avm_local_bb4_ld__u116_inst0_readdata(avm_kernel_rd_readdata[44]),
-      .avm_local_bb4_ld__u116_inst0_readdatavalid(avm_kernel_rd_readdatavalid[44]),
-      .avm_local_bb4_ld__u116_inst0_writeack(avm_kernel_rd_writeack[44]),
+      .avm_local_bb4_ld__u116_inst0_enable(avm_kernel_rd_enable[40]),
+      .avm_local_bb4_ld__u116_inst0_read(avm_kernel_rd_read[40]),
+      .avm_local_bb4_ld__u116_inst0_write(avm_kernel_rd_write[40]),
+      .avm_local_bb4_ld__u116_inst0_burstcount(avm_kernel_rd_burstcount[40]),
+      .avm_local_bb4_ld__u116_inst0_address(avm_kernel_rd_address[40]),
+      .avm_local_bb4_ld__u116_inst0_writedata(avm_kernel_rd_writedata[40]),
+      .avm_local_bb4_ld__u116_inst0_byteenable(avm_kernel_rd_byteenable[40]),
+      .avm_local_bb4_ld__u116_inst0_waitrequest(avm_kernel_rd_waitrequest[40]),
+      .avm_local_bb4_ld__u116_inst0_readdata(avm_kernel_rd_readdata[40]),
+      .avm_local_bb4_ld__u116_inst0_readdatavalid(avm_kernel_rd_readdatavalid[40]),
+      .avm_local_bb4_ld__u116_inst0_writeack(avm_kernel_rd_writeack[40]),
       // AVM avm_local_bb4_ld__u117_inst0
-      .avm_local_bb4_ld__u117_inst0_enable(avm_kernel_rd_enable[45]),
-      .avm_local_bb4_ld__u117_inst0_read(avm_kernel_rd_read[45]),
-      .avm_local_bb4_ld__u117_inst0_write(avm_kernel_rd_write[45]),
-      .avm_local_bb4_ld__u117_inst0_burstcount(avm_kernel_rd_burstcount[45]),
-      .avm_local_bb4_ld__u117_inst0_address(avm_kernel_rd_address[45]),
-      .avm_local_bb4_ld__u117_inst0_writedata(avm_kernel_rd_writedata[45]),
-      .avm_local_bb4_ld__u117_inst0_byteenable(avm_kernel_rd_byteenable[45]),
-      .avm_local_bb4_ld__u117_inst0_waitrequest(avm_kernel_rd_waitrequest[45]),
-      .avm_local_bb4_ld__u117_inst0_readdata(avm_kernel_rd_readdata[45]),
-      .avm_local_bb4_ld__u117_inst0_readdatavalid(avm_kernel_rd_readdatavalid[45]),
-      .avm_local_bb4_ld__u117_inst0_writeack(avm_kernel_rd_writeack[45]),
+      .avm_local_bb4_ld__u117_inst0_enable(avm_kernel_rd_enable[41]),
+      .avm_local_bb4_ld__u117_inst0_read(avm_kernel_rd_read[41]),
+      .avm_local_bb4_ld__u117_inst0_write(avm_kernel_rd_write[41]),
+      .avm_local_bb4_ld__u117_inst0_burstcount(avm_kernel_rd_burstcount[41]),
+      .avm_local_bb4_ld__u117_inst0_address(avm_kernel_rd_address[41]),
+      .avm_local_bb4_ld__u117_inst0_writedata(avm_kernel_rd_writedata[41]),
+      .avm_local_bb4_ld__u117_inst0_byteenable(avm_kernel_rd_byteenable[41]),
+      .avm_local_bb4_ld__u117_inst0_waitrequest(avm_kernel_rd_waitrequest[41]),
+      .avm_local_bb4_ld__u117_inst0_readdata(avm_kernel_rd_readdata[41]),
+      .avm_local_bb4_ld__u117_inst0_readdatavalid(avm_kernel_rd_readdatavalid[41]),
+      .avm_local_bb4_ld__u117_inst0_writeack(avm_kernel_rd_writeack[41]),
       // AVM avm_local_bb4_ld__u118_inst0
-      .avm_local_bb4_ld__u118_inst0_enable(avm_kernel_rd_enable[46]),
-      .avm_local_bb4_ld__u118_inst0_read(avm_kernel_rd_read[46]),
-      .avm_local_bb4_ld__u118_inst0_write(avm_kernel_rd_write[46]),
-      .avm_local_bb4_ld__u118_inst0_burstcount(avm_kernel_rd_burstcount[46]),
-      .avm_local_bb4_ld__u118_inst0_address(avm_kernel_rd_address[46]),
-      .avm_local_bb4_ld__u118_inst0_writedata(avm_kernel_rd_writedata[46]),
-      .avm_local_bb4_ld__u118_inst0_byteenable(avm_kernel_rd_byteenable[46]),
-      .avm_local_bb4_ld__u118_inst0_waitrequest(avm_kernel_rd_waitrequest[46]),
-      .avm_local_bb4_ld__u118_inst0_readdata(avm_kernel_rd_readdata[46]),
-      .avm_local_bb4_ld__u118_inst0_readdatavalid(avm_kernel_rd_readdatavalid[46]),
-      .avm_local_bb4_ld__u118_inst0_writeack(avm_kernel_rd_writeack[46]),
+      .avm_local_bb4_ld__u118_inst0_enable(avm_kernel_rd_enable[42]),
+      .avm_local_bb4_ld__u118_inst0_read(avm_kernel_rd_read[42]),
+      .avm_local_bb4_ld__u118_inst0_write(avm_kernel_rd_write[42]),
+      .avm_local_bb4_ld__u118_inst0_burstcount(avm_kernel_rd_burstcount[42]),
+      .avm_local_bb4_ld__u118_inst0_address(avm_kernel_rd_address[42]),
+      .avm_local_bb4_ld__u118_inst0_writedata(avm_kernel_rd_writedata[42]),
+      .avm_local_bb4_ld__u118_inst0_byteenable(avm_kernel_rd_byteenable[42]),
+      .avm_local_bb4_ld__u118_inst0_waitrequest(avm_kernel_rd_waitrequest[42]),
+      .avm_local_bb4_ld__u118_inst0_readdata(avm_kernel_rd_readdata[42]),
+      .avm_local_bb4_ld__u118_inst0_readdatavalid(avm_kernel_rd_readdatavalid[42]),
+      .avm_local_bb4_ld__u118_inst0_writeack(avm_kernel_rd_writeack[42]),
       // AVM avm_local_bb4_ld__u119_inst0
-      .avm_local_bb4_ld__u119_inst0_enable(avm_kernel_rd_enable[47]),
-      .avm_local_bb4_ld__u119_inst0_read(avm_kernel_rd_read[47]),
-      .avm_local_bb4_ld__u119_inst0_write(avm_kernel_rd_write[47]),
-      .avm_local_bb4_ld__u119_inst0_burstcount(avm_kernel_rd_burstcount[47]),
-      .avm_local_bb4_ld__u119_inst0_address(avm_kernel_rd_address[47]),
-      .avm_local_bb4_ld__u119_inst0_writedata(avm_kernel_rd_writedata[47]),
-      .avm_local_bb4_ld__u119_inst0_byteenable(avm_kernel_rd_byteenable[47]),
-      .avm_local_bb4_ld__u119_inst0_waitrequest(avm_kernel_rd_waitrequest[47]),
-      .avm_local_bb4_ld__u119_inst0_readdata(avm_kernel_rd_readdata[47]),
-      .avm_local_bb4_ld__u119_inst0_readdatavalid(avm_kernel_rd_readdatavalid[47]),
-      .avm_local_bb4_ld__u119_inst0_writeack(avm_kernel_rd_writeack[47]),
+      .avm_local_bb4_ld__u119_inst0_enable(avm_kernel_rd_enable[43]),
+      .avm_local_bb4_ld__u119_inst0_read(avm_kernel_rd_read[43]),
+      .avm_local_bb4_ld__u119_inst0_write(avm_kernel_rd_write[43]),
+      .avm_local_bb4_ld__u119_inst0_burstcount(avm_kernel_rd_burstcount[43]),
+      .avm_local_bb4_ld__u119_inst0_address(avm_kernel_rd_address[43]),
+      .avm_local_bb4_ld__u119_inst0_writedata(avm_kernel_rd_writedata[43]),
+      .avm_local_bb4_ld__u119_inst0_byteenable(avm_kernel_rd_byteenable[43]),
+      .avm_local_bb4_ld__u119_inst0_waitrequest(avm_kernel_rd_waitrequest[43]),
+      .avm_local_bb4_ld__u119_inst0_readdata(avm_kernel_rd_readdata[43]),
+      .avm_local_bb4_ld__u119_inst0_readdatavalid(avm_kernel_rd_readdatavalid[43]),
+      .avm_local_bb4_ld__u119_inst0_writeack(avm_kernel_rd_writeack[43]),
       // AVM avm_local_bb4_ld__u120_inst0
-      .avm_local_bb4_ld__u120_inst0_enable(avm_kernel_rd_enable[48]),
-      .avm_local_bb4_ld__u120_inst0_read(avm_kernel_rd_read[48]),
-      .avm_local_bb4_ld__u120_inst0_write(avm_kernel_rd_write[48]),
-      .avm_local_bb4_ld__u120_inst0_burstcount(avm_kernel_rd_burstcount[48]),
-      .avm_local_bb4_ld__u120_inst0_address(avm_kernel_rd_address[48]),
-      .avm_local_bb4_ld__u120_inst0_writedata(avm_kernel_rd_writedata[48]),
-      .avm_local_bb4_ld__u120_inst0_byteenable(avm_kernel_rd_byteenable[48]),
-      .avm_local_bb4_ld__u120_inst0_waitrequest(avm_kernel_rd_waitrequest[48]),
-      .avm_local_bb4_ld__u120_inst0_readdata(avm_kernel_rd_readdata[48]),
-      .avm_local_bb4_ld__u120_inst0_readdatavalid(avm_kernel_rd_readdatavalid[48]),
-      .avm_local_bb4_ld__u120_inst0_writeack(avm_kernel_rd_writeack[48]),
+      .avm_local_bb4_ld__u120_inst0_enable(avm_kernel_rd_enable[44]),
+      .avm_local_bb4_ld__u120_inst0_read(avm_kernel_rd_read[44]),
+      .avm_local_bb4_ld__u120_inst0_write(avm_kernel_rd_write[44]),
+      .avm_local_bb4_ld__u120_inst0_burstcount(avm_kernel_rd_burstcount[44]),
+      .avm_local_bb4_ld__u120_inst0_address(avm_kernel_rd_address[44]),
+      .avm_local_bb4_ld__u120_inst0_writedata(avm_kernel_rd_writedata[44]),
+      .avm_local_bb4_ld__u120_inst0_byteenable(avm_kernel_rd_byteenable[44]),
+      .avm_local_bb4_ld__u120_inst0_waitrequest(avm_kernel_rd_waitrequest[44]),
+      .avm_local_bb4_ld__u120_inst0_readdata(avm_kernel_rd_readdata[44]),
+      .avm_local_bb4_ld__u120_inst0_readdatavalid(avm_kernel_rd_readdatavalid[44]),
+      .avm_local_bb4_ld__u120_inst0_writeack(avm_kernel_rd_writeack[44]),
       // AVM avm_local_bb4_ld__u121_inst0
-      .avm_local_bb4_ld__u121_inst0_enable(avm_kernel_rd_enable[49]),
-      .avm_local_bb4_ld__u121_inst0_read(avm_kernel_rd_read[49]),
-      .avm_local_bb4_ld__u121_inst0_write(avm_kernel_rd_write[49]),
-      .avm_local_bb4_ld__u121_inst0_burstcount(avm_kernel_rd_burstcount[49]),
-      .avm_local_bb4_ld__u121_inst0_address(avm_kernel_rd_address[49]),
-      .avm_local_bb4_ld__u121_inst0_writedata(avm_kernel_rd_writedata[49]),
-      .avm_local_bb4_ld__u121_inst0_byteenable(avm_kernel_rd_byteenable[49]),
-      .avm_local_bb4_ld__u121_inst0_waitrequest(avm_kernel_rd_waitrequest[49]),
-      .avm_local_bb4_ld__u121_inst0_readdata(avm_kernel_rd_readdata[49]),
-      .avm_local_bb4_ld__u121_inst0_readdatavalid(avm_kernel_rd_readdatavalid[49]),
-      .avm_local_bb4_ld__u121_inst0_writeack(avm_kernel_rd_writeack[49]),
+      .avm_local_bb4_ld__u121_inst0_enable(avm_kernel_rd_enable[45]),
+      .avm_local_bb4_ld__u121_inst0_read(avm_kernel_rd_read[45]),
+      .avm_local_bb4_ld__u121_inst0_write(avm_kernel_rd_write[45]),
+      .avm_local_bb4_ld__u121_inst0_burstcount(avm_kernel_rd_burstcount[45]),
+      .avm_local_bb4_ld__u121_inst0_address(avm_kernel_rd_address[45]),
+      .avm_local_bb4_ld__u121_inst0_writedata(avm_kernel_rd_writedata[45]),
+      .avm_local_bb4_ld__u121_inst0_byteenable(avm_kernel_rd_byteenable[45]),
+      .avm_local_bb4_ld__u121_inst0_waitrequest(avm_kernel_rd_waitrequest[45]),
+      .avm_local_bb4_ld__u121_inst0_readdata(avm_kernel_rd_readdata[45]),
+      .avm_local_bb4_ld__u121_inst0_readdatavalid(avm_kernel_rd_readdatavalid[45]),
+      .avm_local_bb4_ld__u121_inst0_writeack(avm_kernel_rd_writeack[45]),
       // AVM avm_local_bb4_ld__u122_inst0
-      .avm_local_bb4_ld__u122_inst0_enable(avm_kernel_rd_enable[50]),
-      .avm_local_bb4_ld__u122_inst0_read(avm_kernel_rd_read[50]),
-      .avm_local_bb4_ld__u122_inst0_write(avm_kernel_rd_write[50]),
-      .avm_local_bb4_ld__u122_inst0_burstcount(avm_kernel_rd_burstcount[50]),
-      .avm_local_bb4_ld__u122_inst0_address(avm_kernel_rd_address[50]),
-      .avm_local_bb4_ld__u122_inst0_writedata(avm_kernel_rd_writedata[50]),
-      .avm_local_bb4_ld__u122_inst0_byteenable(avm_kernel_rd_byteenable[50]),
-      .avm_local_bb4_ld__u122_inst0_waitrequest(avm_kernel_rd_waitrequest[50]),
-      .avm_local_bb4_ld__u122_inst0_readdata(avm_kernel_rd_readdata[50]),
-      .avm_local_bb4_ld__u122_inst0_readdatavalid(avm_kernel_rd_readdatavalid[50]),
-      .avm_local_bb4_ld__u122_inst0_writeack(avm_kernel_rd_writeack[50]),
+      .avm_local_bb4_ld__u122_inst0_enable(avm_kernel_rd_enable[46]),
+      .avm_local_bb4_ld__u122_inst0_read(avm_kernel_rd_read[46]),
+      .avm_local_bb4_ld__u122_inst0_write(avm_kernel_rd_write[46]),
+      .avm_local_bb4_ld__u122_inst0_burstcount(avm_kernel_rd_burstcount[46]),
+      .avm_local_bb4_ld__u122_inst0_address(avm_kernel_rd_address[46]),
+      .avm_local_bb4_ld__u122_inst0_writedata(avm_kernel_rd_writedata[46]),
+      .avm_local_bb4_ld__u122_inst0_byteenable(avm_kernel_rd_byteenable[46]),
+      .avm_local_bb4_ld__u122_inst0_waitrequest(avm_kernel_rd_waitrequest[46]),
+      .avm_local_bb4_ld__u122_inst0_readdata(avm_kernel_rd_readdata[46]),
+      .avm_local_bb4_ld__u122_inst0_readdatavalid(avm_kernel_rd_readdatavalid[46]),
+      .avm_local_bb4_ld__u122_inst0_writeack(avm_kernel_rd_writeack[46]),
       // AVM avm_local_bb4_ld__u123_inst0
-      .avm_local_bb4_ld__u123_inst0_enable(avm_kernel_rd_enable[51]),
-      .avm_local_bb4_ld__u123_inst0_read(avm_kernel_rd_read[51]),
-      .avm_local_bb4_ld__u123_inst0_write(avm_kernel_rd_write[51]),
-      .avm_local_bb4_ld__u123_inst0_burstcount(avm_kernel_rd_burstcount[51]),
-      .avm_local_bb4_ld__u123_inst0_address(avm_kernel_rd_address[51]),
-      .avm_local_bb4_ld__u123_inst0_writedata(avm_kernel_rd_writedata[51]),
-      .avm_local_bb4_ld__u123_inst0_byteenable(avm_kernel_rd_byteenable[51]),
-      .avm_local_bb4_ld__u123_inst0_waitrequest(avm_kernel_rd_waitrequest[51]),
-      .avm_local_bb4_ld__u123_inst0_readdata(avm_kernel_rd_readdata[51]),
-      .avm_local_bb4_ld__u123_inst0_readdatavalid(avm_kernel_rd_readdatavalid[51]),
-      .avm_local_bb4_ld__u123_inst0_writeack(avm_kernel_rd_writeack[51]),
-      // AVM avm_local_bb4_ld__u95_inst0
-      .avm_local_bb4_ld__u95_inst0_enable(avm_kernel_rd_enable[52]),
-      .avm_local_bb4_ld__u95_inst0_read(avm_kernel_rd_read[52]),
-      .avm_local_bb4_ld__u95_inst0_write(avm_kernel_rd_write[52]),
-      .avm_local_bb4_ld__u95_inst0_burstcount(avm_kernel_rd_burstcount[52]),
-      .avm_local_bb4_ld__u95_inst0_address(avm_kernel_rd_address[52]),
-      .avm_local_bb4_ld__u95_inst0_writedata(avm_kernel_rd_writedata[52]),
-      .avm_local_bb4_ld__u95_inst0_byteenable(avm_kernel_rd_byteenable[52]),
-      .avm_local_bb4_ld__u95_inst0_waitrequest(avm_kernel_rd_waitrequest[52]),
-      .avm_local_bb4_ld__u95_inst0_readdata(avm_kernel_rd_readdata[52]),
-      .avm_local_bb4_ld__u95_inst0_readdatavalid(avm_kernel_rd_readdatavalid[52]),
-      .avm_local_bb4_ld__u95_inst0_writeack(avm_kernel_rd_writeack[52]),
+      .avm_local_bb4_ld__u123_inst0_enable(avm_kernel_rd_enable[47]),
+      .avm_local_bb4_ld__u123_inst0_read(avm_kernel_rd_read[47]),
+      .avm_local_bb4_ld__u123_inst0_write(avm_kernel_rd_write[47]),
+      .avm_local_bb4_ld__u123_inst0_burstcount(avm_kernel_rd_burstcount[47]),
+      .avm_local_bb4_ld__u123_inst0_address(avm_kernel_rd_address[47]),
+      .avm_local_bb4_ld__u123_inst0_writedata(avm_kernel_rd_writedata[47]),
+      .avm_local_bb4_ld__u123_inst0_byteenable(avm_kernel_rd_byteenable[47]),
+      .avm_local_bb4_ld__u123_inst0_waitrequest(avm_kernel_rd_waitrequest[47]),
+      .avm_local_bb4_ld__u123_inst0_readdata(avm_kernel_rd_readdata[47]),
+      .avm_local_bb4_ld__u123_inst0_readdatavalid(avm_kernel_rd_readdatavalid[47]),
+      .avm_local_bb4_ld__u123_inst0_writeack(avm_kernel_rd_writeack[47]),
+      // AVM avm_local_bb4_ld__u124_inst0
+      .avm_local_bb4_ld__u124_inst0_enable(avm_kernel_rd_enable[48]),
+      .avm_local_bb4_ld__u124_inst0_read(avm_kernel_rd_read[48]),
+      .avm_local_bb4_ld__u124_inst0_write(avm_kernel_rd_write[48]),
+      .avm_local_bb4_ld__u124_inst0_burstcount(avm_kernel_rd_burstcount[48]),
+      .avm_local_bb4_ld__u124_inst0_address(avm_kernel_rd_address[48]),
+      .avm_local_bb4_ld__u124_inst0_writedata(avm_kernel_rd_writedata[48]),
+      .avm_local_bb4_ld__u124_inst0_byteenable(avm_kernel_rd_byteenable[48]),
+      .avm_local_bb4_ld__u124_inst0_waitrequest(avm_kernel_rd_waitrequest[48]),
+      .avm_local_bb4_ld__u124_inst0_readdata(avm_kernel_rd_readdata[48]),
+      .avm_local_bb4_ld__u124_inst0_readdatavalid(avm_kernel_rd_readdatavalid[48]),
+      .avm_local_bb4_ld__u124_inst0_writeack(avm_kernel_rd_writeack[48]),
+      // AVM avm_local_bb4_ld__u125_inst0
+      .avm_local_bb4_ld__u125_inst0_enable(avm_kernel_rd_enable[49]),
+      .avm_local_bb4_ld__u125_inst0_read(avm_kernel_rd_read[49]),
+      .avm_local_bb4_ld__u125_inst0_write(avm_kernel_rd_write[49]),
+      .avm_local_bb4_ld__u125_inst0_burstcount(avm_kernel_rd_burstcount[49]),
+      .avm_local_bb4_ld__u125_inst0_address(avm_kernel_rd_address[49]),
+      .avm_local_bb4_ld__u125_inst0_writedata(avm_kernel_rd_writedata[49]),
+      .avm_local_bb4_ld__u125_inst0_byteenable(avm_kernel_rd_byteenable[49]),
+      .avm_local_bb4_ld__u125_inst0_waitrequest(avm_kernel_rd_waitrequest[49]),
+      .avm_local_bb4_ld__u125_inst0_readdata(avm_kernel_rd_readdata[49]),
+      .avm_local_bb4_ld__u125_inst0_readdatavalid(avm_kernel_rd_readdatavalid[49]),
+      .avm_local_bb4_ld__u125_inst0_writeack(avm_kernel_rd_writeack[49]),
+      // AVM avm_local_bb4_ld__u126_inst0
+      .avm_local_bb4_ld__u126_inst0_enable(avm_kernel_rd_enable[50]),
+      .avm_local_bb4_ld__u126_inst0_read(avm_kernel_rd_read[50]),
+      .avm_local_bb4_ld__u126_inst0_write(avm_kernel_rd_write[50]),
+      .avm_local_bb4_ld__u126_inst0_burstcount(avm_kernel_rd_burstcount[50]),
+      .avm_local_bb4_ld__u126_inst0_address(avm_kernel_rd_address[50]),
+      .avm_local_bb4_ld__u126_inst0_writedata(avm_kernel_rd_writedata[50]),
+      .avm_local_bb4_ld__u126_inst0_byteenable(avm_kernel_rd_byteenable[50]),
+      .avm_local_bb4_ld__u126_inst0_waitrequest(avm_kernel_rd_waitrequest[50]),
+      .avm_local_bb4_ld__u126_inst0_readdata(avm_kernel_rd_readdata[50]),
+      .avm_local_bb4_ld__u126_inst0_readdatavalid(avm_kernel_rd_readdatavalid[50]),
+      .avm_local_bb4_ld__u126_inst0_writeack(avm_kernel_rd_writeack[50]),
+      // AVM avm_local_bb4_ld__u127_inst0
+      .avm_local_bb4_ld__u127_inst0_enable(avm_kernel_rd_enable[51]),
+      .avm_local_bb4_ld__u127_inst0_read(avm_kernel_rd_read[51]),
+      .avm_local_bb4_ld__u127_inst0_write(avm_kernel_rd_write[51]),
+      .avm_local_bb4_ld__u127_inst0_burstcount(avm_kernel_rd_burstcount[51]),
+      .avm_local_bb4_ld__u127_inst0_address(avm_kernel_rd_address[51]),
+      .avm_local_bb4_ld__u127_inst0_writedata(avm_kernel_rd_writedata[51]),
+      .avm_local_bb4_ld__u127_inst0_byteenable(avm_kernel_rd_byteenable[51]),
+      .avm_local_bb4_ld__u127_inst0_waitrequest(avm_kernel_rd_waitrequest[51]),
+      .avm_local_bb4_ld__u127_inst0_readdata(avm_kernel_rd_readdata[51]),
+      .avm_local_bb4_ld__u127_inst0_readdatavalid(avm_kernel_rd_readdatavalid[51]),
+      .avm_local_bb4_ld__u127_inst0_writeack(avm_kernel_rd_writeack[51]),
+      // AVM avm_local_bb4_ld__u99_inst0
+      .avm_local_bb4_ld__u99_inst0_enable(avm_kernel_rd_enable[52]),
+      .avm_local_bb4_ld__u99_inst0_read(avm_kernel_rd_read[52]),
+      .avm_local_bb4_ld__u99_inst0_write(avm_kernel_rd_write[52]),
+      .avm_local_bb4_ld__u99_inst0_burstcount(avm_kernel_rd_burstcount[52]),
+      .avm_local_bb4_ld__u99_inst0_address(avm_kernel_rd_address[52]),
+      .avm_local_bb4_ld__u99_inst0_writedata(avm_kernel_rd_writedata[52]),
+      .avm_local_bb4_ld__u99_inst0_byteenable(avm_kernel_rd_byteenable[52]),
+      .avm_local_bb4_ld__u99_inst0_waitrequest(avm_kernel_rd_waitrequest[52]),
+      .avm_local_bb4_ld__u99_inst0_readdata(avm_kernel_rd_readdata[52]),
+      .avm_local_bb4_ld__u99_inst0_readdatavalid(avm_kernel_rd_readdatavalid[52]),
+      .avm_local_bb4_ld__u99_inst0_writeack(avm_kernel_rd_writeack[52]),
       // AVST avm_channel_id_chan_Conf2Intere_active_read
       .avm_channel_id_chan_Conf2Intere_active_read_valid(avm_channel_id_chan_Conf2Intere_active_read_valid),
       .avm_channel_id_chan_Conf2Intere_active_read_ready(avm_channel_id_chan_Conf2Intere_active_read_ready),
@@ -2531,138 +2531,138 @@ module Krnl_GA_system
       .avm_local_bb3_st__inst0_readdata(avm_kernel_wr_readdata[24]),
       .avm_local_bb3_st__inst0_readdatavalid(avm_kernel_wr_readdatavalid[24]),
       .avm_local_bb3_st__inst0_writeack(avm_kernel_wr_writeack[24]),
-      // AVM avm_local_bb4_ld__u18_inst0
-      .avm_local_bb4_ld__u18_inst0_enable(avm_kernel_rd_enable[55]),
-      .avm_local_bb4_ld__u18_inst0_read(avm_kernel_rd_read[55]),
-      .avm_local_bb4_ld__u18_inst0_write(avm_kernel_rd_write[55]),
-      .avm_local_bb4_ld__u18_inst0_burstcount(avm_kernel_rd_burstcount[55]),
-      .avm_local_bb4_ld__u18_inst0_address(avm_kernel_rd_address[55]),
-      .avm_local_bb4_ld__u18_inst0_writedata(avm_kernel_rd_writedata[55]),
-      .avm_local_bb4_ld__u18_inst0_byteenable(avm_kernel_rd_byteenable[55]),
-      .avm_local_bb4_ld__u18_inst0_waitrequest(avm_kernel_rd_waitrequest[55]),
-      .avm_local_bb4_ld__u18_inst0_readdata(avm_kernel_rd_readdata[55]),
-      .avm_local_bb4_ld__u18_inst0_readdatavalid(avm_kernel_rd_readdatavalid[55]),
-      .avm_local_bb4_ld__u18_inst0_writeack(avm_kernel_rd_writeack[55]),
-      // AVM avm_local_bb4_ld__u19_inst0
-      .avm_local_bb4_ld__u19_inst0_enable(avm_kernel_rd_enable[56]),
-      .avm_local_bb4_ld__u19_inst0_read(avm_kernel_rd_read[56]),
-      .avm_local_bb4_ld__u19_inst0_write(avm_kernel_rd_write[56]),
-      .avm_local_bb4_ld__u19_inst0_burstcount(avm_kernel_rd_burstcount[56]),
-      .avm_local_bb4_ld__u19_inst0_address(avm_kernel_rd_address[56]),
-      .avm_local_bb4_ld__u19_inst0_writedata(avm_kernel_rd_writedata[56]),
-      .avm_local_bb4_ld__u19_inst0_byteenable(avm_kernel_rd_byteenable[56]),
-      .avm_local_bb4_ld__u19_inst0_waitrequest(avm_kernel_rd_waitrequest[56]),
-      .avm_local_bb4_ld__u19_inst0_readdata(avm_kernel_rd_readdata[56]),
-      .avm_local_bb4_ld__u19_inst0_readdatavalid(avm_kernel_rd_readdatavalid[56]),
-      .avm_local_bb4_ld__u19_inst0_writeack(avm_kernel_rd_writeack[56]),
-      // AVM avm_local_bb4_ld__u20_inst0
-      .avm_local_bb4_ld__u20_inst0_enable(avm_kernel_rd_enable[57]),
-      .avm_local_bb4_ld__u20_inst0_read(avm_kernel_rd_read[57]),
-      .avm_local_bb4_ld__u20_inst0_write(avm_kernel_rd_write[57]),
-      .avm_local_bb4_ld__u20_inst0_burstcount(avm_kernel_rd_burstcount[57]),
-      .avm_local_bb4_ld__u20_inst0_address(avm_kernel_rd_address[57]),
-      .avm_local_bb4_ld__u20_inst0_writedata(avm_kernel_rd_writedata[57]),
-      .avm_local_bb4_ld__u20_inst0_byteenable(avm_kernel_rd_byteenable[57]),
-      .avm_local_bb4_ld__u20_inst0_waitrequest(avm_kernel_rd_waitrequest[57]),
-      .avm_local_bb4_ld__u20_inst0_readdata(avm_kernel_rd_readdata[57]),
-      .avm_local_bb4_ld__u20_inst0_readdatavalid(avm_kernel_rd_readdatavalid[57]),
-      .avm_local_bb4_ld__u20_inst0_writeack(avm_kernel_rd_writeack[57]),
-      // AVM avm_local_bb4_ld__u21_inst0
-      .avm_local_bb4_ld__u21_inst0_enable(avm_kernel_rd_enable[58]),
-      .avm_local_bb4_ld__u21_inst0_read(avm_kernel_rd_read[58]),
-      .avm_local_bb4_ld__u21_inst0_write(avm_kernel_rd_write[58]),
-      .avm_local_bb4_ld__u21_inst0_burstcount(avm_kernel_rd_burstcount[58]),
-      .avm_local_bb4_ld__u21_inst0_address(avm_kernel_rd_address[58]),
-      .avm_local_bb4_ld__u21_inst0_writedata(avm_kernel_rd_writedata[58]),
-      .avm_local_bb4_ld__u21_inst0_byteenable(avm_kernel_rd_byteenable[58]),
-      .avm_local_bb4_ld__u21_inst0_waitrequest(avm_kernel_rd_waitrequest[58]),
-      .avm_local_bb4_ld__u21_inst0_readdata(avm_kernel_rd_readdata[58]),
-      .avm_local_bb4_ld__u21_inst0_readdatavalid(avm_kernel_rd_readdatavalid[58]),
-      .avm_local_bb4_ld__u21_inst0_writeack(avm_kernel_rd_writeack[58]),
       // AVM avm_local_bb4_ld__u22_inst0
-      .avm_local_bb4_ld__u22_inst0_enable(avm_kernel_rd_enable[59]),
-      .avm_local_bb4_ld__u22_inst0_read(avm_kernel_rd_read[59]),
-      .avm_local_bb4_ld__u22_inst0_write(avm_kernel_rd_write[59]),
-      .avm_local_bb4_ld__u22_inst0_burstcount(avm_kernel_rd_burstcount[59]),
-      .avm_local_bb4_ld__u22_inst0_address(avm_kernel_rd_address[59]),
-      .avm_local_bb4_ld__u22_inst0_writedata(avm_kernel_rd_writedata[59]),
-      .avm_local_bb4_ld__u22_inst0_byteenable(avm_kernel_rd_byteenable[59]),
-      .avm_local_bb4_ld__u22_inst0_waitrequest(avm_kernel_rd_waitrequest[59]),
-      .avm_local_bb4_ld__u22_inst0_readdata(avm_kernel_rd_readdata[59]),
-      .avm_local_bb4_ld__u22_inst0_readdatavalid(avm_kernel_rd_readdatavalid[59]),
-      .avm_local_bb4_ld__u22_inst0_writeack(avm_kernel_rd_writeack[59]),
+      .avm_local_bb4_ld__u22_inst0_enable(avm_kernel_rd_enable[55]),
+      .avm_local_bb4_ld__u22_inst0_read(avm_kernel_rd_read[55]),
+      .avm_local_bb4_ld__u22_inst0_write(avm_kernel_rd_write[55]),
+      .avm_local_bb4_ld__u22_inst0_burstcount(avm_kernel_rd_burstcount[55]),
+      .avm_local_bb4_ld__u22_inst0_address(avm_kernel_rd_address[55]),
+      .avm_local_bb4_ld__u22_inst0_writedata(avm_kernel_rd_writedata[55]),
+      .avm_local_bb4_ld__u22_inst0_byteenable(avm_kernel_rd_byteenable[55]),
+      .avm_local_bb4_ld__u22_inst0_waitrequest(avm_kernel_rd_waitrequest[55]),
+      .avm_local_bb4_ld__u22_inst0_readdata(avm_kernel_rd_readdata[55]),
+      .avm_local_bb4_ld__u22_inst0_readdatavalid(avm_kernel_rd_readdatavalid[55]),
+      .avm_local_bb4_ld__u22_inst0_writeack(avm_kernel_rd_writeack[55]),
       // AVM avm_local_bb4_ld__u23_inst0
-      .avm_local_bb4_ld__u23_inst0_enable(avm_kernel_rd_enable[60]),
-      .avm_local_bb4_ld__u23_inst0_read(avm_kernel_rd_read[60]),
-      .avm_local_bb4_ld__u23_inst0_write(avm_kernel_rd_write[60]),
-      .avm_local_bb4_ld__u23_inst0_burstcount(avm_kernel_rd_burstcount[60]),
-      .avm_local_bb4_ld__u23_inst0_address(avm_kernel_rd_address[60]),
-      .avm_local_bb4_ld__u23_inst0_writedata(avm_kernel_rd_writedata[60]),
-      .avm_local_bb4_ld__u23_inst0_byteenable(avm_kernel_rd_byteenable[60]),
-      .avm_local_bb4_ld__u23_inst0_waitrequest(avm_kernel_rd_waitrequest[60]),
-      .avm_local_bb4_ld__u23_inst0_readdata(avm_kernel_rd_readdata[60]),
-      .avm_local_bb4_ld__u23_inst0_readdatavalid(avm_kernel_rd_readdatavalid[60]),
-      .avm_local_bb4_ld__u23_inst0_writeack(avm_kernel_rd_writeack[60]),
+      .avm_local_bb4_ld__u23_inst0_enable(avm_kernel_rd_enable[56]),
+      .avm_local_bb4_ld__u23_inst0_read(avm_kernel_rd_read[56]),
+      .avm_local_bb4_ld__u23_inst0_write(avm_kernel_rd_write[56]),
+      .avm_local_bb4_ld__u23_inst0_burstcount(avm_kernel_rd_burstcount[56]),
+      .avm_local_bb4_ld__u23_inst0_address(avm_kernel_rd_address[56]),
+      .avm_local_bb4_ld__u23_inst0_writedata(avm_kernel_rd_writedata[56]),
+      .avm_local_bb4_ld__u23_inst0_byteenable(avm_kernel_rd_byteenable[56]),
+      .avm_local_bb4_ld__u23_inst0_waitrequest(avm_kernel_rd_waitrequest[56]),
+      .avm_local_bb4_ld__u23_inst0_readdata(avm_kernel_rd_readdata[56]),
+      .avm_local_bb4_ld__u23_inst0_readdatavalid(avm_kernel_rd_readdatavalid[56]),
+      .avm_local_bb4_ld__u23_inst0_writeack(avm_kernel_rd_writeack[56]),
       // AVM avm_local_bb4_ld__u24_inst0
-      .avm_local_bb4_ld__u24_inst0_enable(avm_kernel_rd_enable[61]),
-      .avm_local_bb4_ld__u24_inst0_read(avm_kernel_rd_read[61]),
-      .avm_local_bb4_ld__u24_inst0_write(avm_kernel_rd_write[61]),
-      .avm_local_bb4_ld__u24_inst0_burstcount(avm_kernel_rd_burstcount[61]),
-      .avm_local_bb4_ld__u24_inst0_address(avm_kernel_rd_address[61]),
-      .avm_local_bb4_ld__u24_inst0_writedata(avm_kernel_rd_writedata[61]),
-      .avm_local_bb4_ld__u24_inst0_byteenable(avm_kernel_rd_byteenable[61]),
-      .avm_local_bb4_ld__u24_inst0_waitrequest(avm_kernel_rd_waitrequest[61]),
-      .avm_local_bb4_ld__u24_inst0_readdata(avm_kernel_rd_readdata[61]),
-      .avm_local_bb4_ld__u24_inst0_readdatavalid(avm_kernel_rd_readdatavalid[61]),
-      .avm_local_bb4_ld__u24_inst0_writeack(avm_kernel_rd_writeack[61]),
+      .avm_local_bb4_ld__u24_inst0_enable(avm_kernel_rd_enable[57]),
+      .avm_local_bb4_ld__u24_inst0_read(avm_kernel_rd_read[57]),
+      .avm_local_bb4_ld__u24_inst0_write(avm_kernel_rd_write[57]),
+      .avm_local_bb4_ld__u24_inst0_burstcount(avm_kernel_rd_burstcount[57]),
+      .avm_local_bb4_ld__u24_inst0_address(avm_kernel_rd_address[57]),
+      .avm_local_bb4_ld__u24_inst0_writedata(avm_kernel_rd_writedata[57]),
+      .avm_local_bb4_ld__u24_inst0_byteenable(avm_kernel_rd_byteenable[57]),
+      .avm_local_bb4_ld__u24_inst0_waitrequest(avm_kernel_rd_waitrequest[57]),
+      .avm_local_bb4_ld__u24_inst0_readdata(avm_kernel_rd_readdata[57]),
+      .avm_local_bb4_ld__u24_inst0_readdatavalid(avm_kernel_rd_readdatavalid[57]),
+      .avm_local_bb4_ld__u24_inst0_writeack(avm_kernel_rd_writeack[57]),
       // AVM avm_local_bb4_ld__u25_inst0
-      .avm_local_bb4_ld__u25_inst0_enable(avm_kernel_rd_enable[62]),
-      .avm_local_bb4_ld__u25_inst0_read(avm_kernel_rd_read[62]),
-      .avm_local_bb4_ld__u25_inst0_write(avm_kernel_rd_write[62]),
-      .avm_local_bb4_ld__u25_inst0_burstcount(avm_kernel_rd_burstcount[62]),
-      .avm_local_bb4_ld__u25_inst0_address(avm_kernel_rd_address[62]),
-      .avm_local_bb4_ld__u25_inst0_writedata(avm_kernel_rd_writedata[62]),
-      .avm_local_bb4_ld__u25_inst0_byteenable(avm_kernel_rd_byteenable[62]),
-      .avm_local_bb4_ld__u25_inst0_waitrequest(avm_kernel_rd_waitrequest[62]),
-      .avm_local_bb4_ld__u25_inst0_readdata(avm_kernel_rd_readdata[62]),
-      .avm_local_bb4_ld__u25_inst0_readdatavalid(avm_kernel_rd_readdatavalid[62]),
-      .avm_local_bb4_ld__u25_inst0_writeack(avm_kernel_rd_writeack[62]),
+      .avm_local_bb4_ld__u25_inst0_enable(avm_kernel_rd_enable[58]),
+      .avm_local_bb4_ld__u25_inst0_read(avm_kernel_rd_read[58]),
+      .avm_local_bb4_ld__u25_inst0_write(avm_kernel_rd_write[58]),
+      .avm_local_bb4_ld__u25_inst0_burstcount(avm_kernel_rd_burstcount[58]),
+      .avm_local_bb4_ld__u25_inst0_address(avm_kernel_rd_address[58]),
+      .avm_local_bb4_ld__u25_inst0_writedata(avm_kernel_rd_writedata[58]),
+      .avm_local_bb4_ld__u25_inst0_byteenable(avm_kernel_rd_byteenable[58]),
+      .avm_local_bb4_ld__u25_inst0_waitrequest(avm_kernel_rd_waitrequest[58]),
+      .avm_local_bb4_ld__u25_inst0_readdata(avm_kernel_rd_readdata[58]),
+      .avm_local_bb4_ld__u25_inst0_readdatavalid(avm_kernel_rd_readdatavalid[58]),
+      .avm_local_bb4_ld__u25_inst0_writeack(avm_kernel_rd_writeack[58]),
       // AVM avm_local_bb4_ld__u26_inst0
-      .avm_local_bb4_ld__u26_inst0_enable(avm_kernel_rd_enable[63]),
-      .avm_local_bb4_ld__u26_inst0_read(avm_kernel_rd_read[63]),
-      .avm_local_bb4_ld__u26_inst0_write(avm_kernel_rd_write[63]),
-      .avm_local_bb4_ld__u26_inst0_burstcount(avm_kernel_rd_burstcount[63]),
-      .avm_local_bb4_ld__u26_inst0_address(avm_kernel_rd_address[63]),
-      .avm_local_bb4_ld__u26_inst0_writedata(avm_kernel_rd_writedata[63]),
-      .avm_local_bb4_ld__u26_inst0_byteenable(avm_kernel_rd_byteenable[63]),
-      .avm_local_bb4_ld__u26_inst0_waitrequest(avm_kernel_rd_waitrequest[63]),
-      .avm_local_bb4_ld__u26_inst0_readdata(avm_kernel_rd_readdata[63]),
-      .avm_local_bb4_ld__u26_inst0_readdatavalid(avm_kernel_rd_readdatavalid[63]),
-      .avm_local_bb4_ld__u26_inst0_writeack(avm_kernel_rd_writeack[63]),
+      .avm_local_bb4_ld__u26_inst0_enable(avm_kernel_rd_enable[59]),
+      .avm_local_bb4_ld__u26_inst0_read(avm_kernel_rd_read[59]),
+      .avm_local_bb4_ld__u26_inst0_write(avm_kernel_rd_write[59]),
+      .avm_local_bb4_ld__u26_inst0_burstcount(avm_kernel_rd_burstcount[59]),
+      .avm_local_bb4_ld__u26_inst0_address(avm_kernel_rd_address[59]),
+      .avm_local_bb4_ld__u26_inst0_writedata(avm_kernel_rd_writedata[59]),
+      .avm_local_bb4_ld__u26_inst0_byteenable(avm_kernel_rd_byteenable[59]),
+      .avm_local_bb4_ld__u26_inst0_waitrequest(avm_kernel_rd_waitrequest[59]),
+      .avm_local_bb4_ld__u26_inst0_readdata(avm_kernel_rd_readdata[59]),
+      .avm_local_bb4_ld__u26_inst0_readdatavalid(avm_kernel_rd_readdatavalid[59]),
+      .avm_local_bb4_ld__u26_inst0_writeack(avm_kernel_rd_writeack[59]),
       // AVM avm_local_bb4_ld__u27_inst0
-      .avm_local_bb4_ld__u27_inst0_enable(avm_kernel_rd_enable[64]),
-      .avm_local_bb4_ld__u27_inst0_read(avm_kernel_rd_read[64]),
-      .avm_local_bb4_ld__u27_inst0_write(avm_kernel_rd_write[64]),
-      .avm_local_bb4_ld__u27_inst0_burstcount(avm_kernel_rd_burstcount[64]),
-      .avm_local_bb4_ld__u27_inst0_address(avm_kernel_rd_address[64]),
-      .avm_local_bb4_ld__u27_inst0_writedata(avm_kernel_rd_writedata[64]),
-      .avm_local_bb4_ld__u27_inst0_byteenable(avm_kernel_rd_byteenable[64]),
-      .avm_local_bb4_ld__u27_inst0_waitrequest(avm_kernel_rd_waitrequest[64]),
-      .avm_local_bb4_ld__u27_inst0_readdata(avm_kernel_rd_readdata[64]),
-      .avm_local_bb4_ld__u27_inst0_readdatavalid(avm_kernel_rd_readdatavalid[64]),
-      .avm_local_bb4_ld__u27_inst0_writeack(avm_kernel_rd_writeack[64]),
+      .avm_local_bb4_ld__u27_inst0_enable(avm_kernel_rd_enable[60]),
+      .avm_local_bb4_ld__u27_inst0_read(avm_kernel_rd_read[60]),
+      .avm_local_bb4_ld__u27_inst0_write(avm_kernel_rd_write[60]),
+      .avm_local_bb4_ld__u27_inst0_burstcount(avm_kernel_rd_burstcount[60]),
+      .avm_local_bb4_ld__u27_inst0_address(avm_kernel_rd_address[60]),
+      .avm_local_bb4_ld__u27_inst0_writedata(avm_kernel_rd_writedata[60]),
+      .avm_local_bb4_ld__u27_inst0_byteenable(avm_kernel_rd_byteenable[60]),
+      .avm_local_bb4_ld__u27_inst0_waitrequest(avm_kernel_rd_waitrequest[60]),
+      .avm_local_bb4_ld__u27_inst0_readdata(avm_kernel_rd_readdata[60]),
+      .avm_local_bb4_ld__u27_inst0_readdatavalid(avm_kernel_rd_readdatavalid[60]),
+      .avm_local_bb4_ld__u27_inst0_writeack(avm_kernel_rd_writeack[60]),
       // AVM avm_local_bb4_ld__u28_inst0
-      .avm_local_bb4_ld__u28_inst0_enable(avm_kernel_rd_enable[65]),
-      .avm_local_bb4_ld__u28_inst0_read(avm_kernel_rd_read[65]),
-      .avm_local_bb4_ld__u28_inst0_write(avm_kernel_rd_write[65]),
-      .avm_local_bb4_ld__u28_inst0_burstcount(avm_kernel_rd_burstcount[65]),
-      .avm_local_bb4_ld__u28_inst0_address(avm_kernel_rd_address[65]),
-      .avm_local_bb4_ld__u28_inst0_writedata(avm_kernel_rd_writedata[65]),
-      .avm_local_bb4_ld__u28_inst0_byteenable(avm_kernel_rd_byteenable[65]),
-      .avm_local_bb4_ld__u28_inst0_waitrequest(avm_kernel_rd_waitrequest[65]),
-      .avm_local_bb4_ld__u28_inst0_readdata(avm_kernel_rd_readdata[65]),
-      .avm_local_bb4_ld__u28_inst0_readdatavalid(avm_kernel_rd_readdatavalid[65]),
-      .avm_local_bb4_ld__u28_inst0_writeack(avm_kernel_rd_writeack[65]),
+      .avm_local_bb4_ld__u28_inst0_enable(avm_kernel_rd_enable[61]),
+      .avm_local_bb4_ld__u28_inst0_read(avm_kernel_rd_read[61]),
+      .avm_local_bb4_ld__u28_inst0_write(avm_kernel_rd_write[61]),
+      .avm_local_bb4_ld__u28_inst0_burstcount(avm_kernel_rd_burstcount[61]),
+      .avm_local_bb4_ld__u28_inst0_address(avm_kernel_rd_address[61]),
+      .avm_local_bb4_ld__u28_inst0_writedata(avm_kernel_rd_writedata[61]),
+      .avm_local_bb4_ld__u28_inst0_byteenable(avm_kernel_rd_byteenable[61]),
+      .avm_local_bb4_ld__u28_inst0_waitrequest(avm_kernel_rd_waitrequest[61]),
+      .avm_local_bb4_ld__u28_inst0_readdata(avm_kernel_rd_readdata[61]),
+      .avm_local_bb4_ld__u28_inst0_readdatavalid(avm_kernel_rd_readdatavalid[61]),
+      .avm_local_bb4_ld__u28_inst0_writeack(avm_kernel_rd_writeack[61]),
+      // AVM avm_local_bb4_ld__u29_inst0
+      .avm_local_bb4_ld__u29_inst0_enable(avm_kernel_rd_enable[62]),
+      .avm_local_bb4_ld__u29_inst0_read(avm_kernel_rd_read[62]),
+      .avm_local_bb4_ld__u29_inst0_write(avm_kernel_rd_write[62]),
+      .avm_local_bb4_ld__u29_inst0_burstcount(avm_kernel_rd_burstcount[62]),
+      .avm_local_bb4_ld__u29_inst0_address(avm_kernel_rd_address[62]),
+      .avm_local_bb4_ld__u29_inst0_writedata(avm_kernel_rd_writedata[62]),
+      .avm_local_bb4_ld__u29_inst0_byteenable(avm_kernel_rd_byteenable[62]),
+      .avm_local_bb4_ld__u29_inst0_waitrequest(avm_kernel_rd_waitrequest[62]),
+      .avm_local_bb4_ld__u29_inst0_readdata(avm_kernel_rd_readdata[62]),
+      .avm_local_bb4_ld__u29_inst0_readdatavalid(avm_kernel_rd_readdatavalid[62]),
+      .avm_local_bb4_ld__u29_inst0_writeack(avm_kernel_rd_writeack[62]),
+      // AVM avm_local_bb4_ld__u30_inst0
+      .avm_local_bb4_ld__u30_inst0_enable(avm_kernel_rd_enable[63]),
+      .avm_local_bb4_ld__u30_inst0_read(avm_kernel_rd_read[63]),
+      .avm_local_bb4_ld__u30_inst0_write(avm_kernel_rd_write[63]),
+      .avm_local_bb4_ld__u30_inst0_burstcount(avm_kernel_rd_burstcount[63]),
+      .avm_local_bb4_ld__u30_inst0_address(avm_kernel_rd_address[63]),
+      .avm_local_bb4_ld__u30_inst0_writedata(avm_kernel_rd_writedata[63]),
+      .avm_local_bb4_ld__u30_inst0_byteenable(avm_kernel_rd_byteenable[63]),
+      .avm_local_bb4_ld__u30_inst0_waitrequest(avm_kernel_rd_waitrequest[63]),
+      .avm_local_bb4_ld__u30_inst0_readdata(avm_kernel_rd_readdata[63]),
+      .avm_local_bb4_ld__u30_inst0_readdatavalid(avm_kernel_rd_readdatavalid[63]),
+      .avm_local_bb4_ld__u30_inst0_writeack(avm_kernel_rd_writeack[63]),
+      // AVM avm_local_bb4_ld__u31_inst0
+      .avm_local_bb4_ld__u31_inst0_enable(avm_kernel_rd_enable[64]),
+      .avm_local_bb4_ld__u31_inst0_read(avm_kernel_rd_read[64]),
+      .avm_local_bb4_ld__u31_inst0_write(avm_kernel_rd_write[64]),
+      .avm_local_bb4_ld__u31_inst0_burstcount(avm_kernel_rd_burstcount[64]),
+      .avm_local_bb4_ld__u31_inst0_address(avm_kernel_rd_address[64]),
+      .avm_local_bb4_ld__u31_inst0_writedata(avm_kernel_rd_writedata[64]),
+      .avm_local_bb4_ld__u31_inst0_byteenable(avm_kernel_rd_byteenable[64]),
+      .avm_local_bb4_ld__u31_inst0_waitrequest(avm_kernel_rd_waitrequest[64]),
+      .avm_local_bb4_ld__u31_inst0_readdata(avm_kernel_rd_readdata[64]),
+      .avm_local_bb4_ld__u31_inst0_readdatavalid(avm_kernel_rd_readdatavalid[64]),
+      .avm_local_bb4_ld__u31_inst0_writeack(avm_kernel_rd_writeack[64]),
+      // AVM avm_local_bb4_ld__u32_inst0
+      .avm_local_bb4_ld__u32_inst0_enable(avm_kernel_rd_enable[65]),
+      .avm_local_bb4_ld__u32_inst0_read(avm_kernel_rd_read[65]),
+      .avm_local_bb4_ld__u32_inst0_write(avm_kernel_rd_write[65]),
+      .avm_local_bb4_ld__u32_inst0_burstcount(avm_kernel_rd_burstcount[65]),
+      .avm_local_bb4_ld__u32_inst0_address(avm_kernel_rd_address[65]),
+      .avm_local_bb4_ld__u32_inst0_writedata(avm_kernel_rd_writedata[65]),
+      .avm_local_bb4_ld__u32_inst0_byteenable(avm_kernel_rd_byteenable[65]),
+      .avm_local_bb4_ld__u32_inst0_waitrequest(avm_kernel_rd_waitrequest[65]),
+      .avm_local_bb4_ld__u32_inst0_readdata(avm_kernel_rd_readdata[65]),
+      .avm_local_bb4_ld__u32_inst0_readdatavalid(avm_kernel_rd_readdatavalid[65]),
+      .avm_local_bb4_ld__u32_inst0_writeack(avm_kernel_rd_writeack[65]),
       // AVM avm_local_bb4_ld_memcoalesce_KerConst_load_0_inst0
       .avm_local_bb4_ld_memcoalesce_KerConst_load_0_inst0_enable(avm_kernel_rd_enable[66]),
       .avm_local_bb4_ld_memcoalesce_KerConst_load_0_inst0_read(avm_kernel_rd_read[66]),
@@ -3233,9 +3233,9 @@ module Krnl_GA_system
    // INST channel_id_chan_Conf2Intere_active_fifo of acl_channel_fifo
    acl_channel_fifo
    #(
-      .FIFO_DEPTH(0),
+      .FIFO_DEPTH(31),
       .DATA_W(8),
-      .ADJUST_FOR_LATENCY(1),
+      .ADJUST_FOR_LATENCY(0),
       .INTENDED_DEVICE_FAMILY("Arria 10")
    )
    channel_id_chan_Conf2Intere_active_fifo
@@ -3264,9 +3264,9 @@ module Krnl_GA_system
    // INST channel_id_chan_Conf2Intere_cnt_fifo of acl_channel_fifo
    acl_channel_fifo
    #(
-      .FIFO_DEPTH(0),
+      .FIFO_DEPTH(30),
       .DATA_W(32),
-      .ADJUST_FOR_LATENCY(1),
+      .ADJUST_FOR_LATENCY(0),
       .INTENDED_DEVICE_FAMILY("Arria 10")
    )
    channel_id_chan_Conf2Intere_cnt_fifo
@@ -3295,9 +3295,9 @@ module Krnl_GA_system
    // INST channel_id_chan_Conf2Intere_mode_fifo of acl_channel_fifo
    acl_channel_fifo
    #(
-      .FIFO_DEPTH(0),
+      .FIFO_DEPTH(30),
       .DATA_W(8),
-      .ADJUST_FOR_LATENCY(1),
+      .ADJUST_FOR_LATENCY(0),
       .INTENDED_DEVICE_FAMILY("Arria 10")
    )
    channel_id_chan_Conf2Intere_mode_fifo
@@ -3317,6 +3317,99 @@ module Krnl_GA_system
    );
 
    assign avm_channel_id_chan_Conf2Intere_mode_write_almostfull = avs_channel_id_chan_Conf2Intere_mode_write_almostfull;
+   assign avs_channel_id_chan_Conf2Intrae_active_write_valid = avm_channel_id_chan_Conf2Intrae_active_write_valid;
+   assign avm_channel_id_chan_Conf2Intrae_active_write_ready = avs_channel_id_chan_Conf2Intrae_active_write_ready;
+   assign avs_channel_id_chan_Conf2Intrae_active_write_data = avm_channel_id_chan_Conf2Intrae_active_write_data;
+   assign avm_channel_id_chan_Conf2Intrae_active_read_valid = avs_channel_id_chan_Conf2Intrae_active_read_valid;
+   assign avs_channel_id_chan_Conf2Intrae_active_read_ready = avm_channel_id_chan_Conf2Intrae_active_read_ready;
+   assign avm_channel_id_chan_Conf2Intrae_active_read_data = avs_channel_id_chan_Conf2Intrae_active_read_data;
+   // INST channel_id_chan_Conf2Intrae_active_fifo of acl_channel_fifo
+   acl_channel_fifo
+   #(
+      .FIFO_DEPTH(24),
+      .DATA_W(8),
+      .ADJUST_FOR_LATENCY(0),
+      .INTENDED_DEVICE_FAMILY("Arria 10")
+   )
+   channel_id_chan_Conf2Intrae_active_fifo
+   (
+      .clock(clock),
+      .resetn(resetn),
+      // AVST avst_in
+      .avst_in_valid(avs_channel_id_chan_Conf2Intrae_active_write_valid),
+      .avst_in_ready(avs_channel_id_chan_Conf2Intrae_active_write_ready),
+      .avst_in_data(avs_channel_id_chan_Conf2Intrae_active_write_data),
+      // AVST avst_out
+      .avst_out_valid(avs_channel_id_chan_Conf2Intrae_active_read_valid),
+      .avst_out_ready(avs_channel_id_chan_Conf2Intrae_active_read_ready),
+      .avst_out_data(avs_channel_id_chan_Conf2Intrae_active_read_data),
+      .profile_fifosize(avs_channel_id_chan_Conf2Intrae_active_fifosize),
+      .almost_full(avs_channel_id_chan_Conf2Intrae_active_write_almostfull)
+   );
+
+   assign avm_channel_id_chan_Conf2Intrae_active_write_almostfull = avs_channel_id_chan_Conf2Intrae_active_write_almostfull;
+   assign avs_channel_id_chan_Conf2Intrae_cnt_write_valid = avm_channel_id_chan_Conf2Intrae_cnt_write_valid;
+   assign avm_channel_id_chan_Conf2Intrae_cnt_write_ready = avs_channel_id_chan_Conf2Intrae_cnt_write_ready;
+   assign avs_channel_id_chan_Conf2Intrae_cnt_write_data = avm_channel_id_chan_Conf2Intrae_cnt_write_data;
+   assign avm_channel_id_chan_Conf2Intrae_cnt_read_valid = avs_channel_id_chan_Conf2Intrae_cnt_read_valid;
+   assign avs_channel_id_chan_Conf2Intrae_cnt_read_ready = avm_channel_id_chan_Conf2Intrae_cnt_read_ready;
+   assign avm_channel_id_chan_Conf2Intrae_cnt_read_data = avs_channel_id_chan_Conf2Intrae_cnt_read_data;
+   // INST channel_id_chan_Conf2Intrae_cnt_fifo of acl_channel_fifo
+   acl_channel_fifo
+   #(
+      .FIFO_DEPTH(23),
+      .DATA_W(32),
+      .ADJUST_FOR_LATENCY(0),
+      .INTENDED_DEVICE_FAMILY("Arria 10")
+   )
+   channel_id_chan_Conf2Intrae_cnt_fifo
+   (
+      .clock(clock),
+      .resetn(resetn),
+      // AVST avst_in
+      .avst_in_valid(avs_channel_id_chan_Conf2Intrae_cnt_write_valid),
+      .avst_in_ready(avs_channel_id_chan_Conf2Intrae_cnt_write_ready),
+      .avst_in_data(avs_channel_id_chan_Conf2Intrae_cnt_write_data),
+      // AVST avst_out
+      .avst_out_valid(avs_channel_id_chan_Conf2Intrae_cnt_read_valid),
+      .avst_out_ready(avs_channel_id_chan_Conf2Intrae_cnt_read_ready),
+      .avst_out_data(avs_channel_id_chan_Conf2Intrae_cnt_read_data),
+      .profile_fifosize(avs_channel_id_chan_Conf2Intrae_cnt_fifosize),
+      .almost_full(avs_channel_id_chan_Conf2Intrae_cnt_write_almostfull)
+   );
+
+   assign avm_channel_id_chan_Conf2Intrae_cnt_write_almostfull = avs_channel_id_chan_Conf2Intrae_cnt_write_almostfull;
+   assign avs_channel_id_chan_Conf2Intrae_mode_write_valid = avm_channel_id_chan_Conf2Intrae_mode_write_valid;
+   assign avm_channel_id_chan_Conf2Intrae_mode_write_ready = avs_channel_id_chan_Conf2Intrae_mode_write_ready;
+   assign avs_channel_id_chan_Conf2Intrae_mode_write_data = avm_channel_id_chan_Conf2Intrae_mode_write_data;
+   assign avm_channel_id_chan_Conf2Intrae_mode_read_valid = avs_channel_id_chan_Conf2Intrae_mode_read_valid;
+   assign avs_channel_id_chan_Conf2Intrae_mode_read_ready = avm_channel_id_chan_Conf2Intrae_mode_read_ready;
+   assign avm_channel_id_chan_Conf2Intrae_mode_read_data = avs_channel_id_chan_Conf2Intrae_mode_read_data;
+   // INST channel_id_chan_Conf2Intrae_mode_fifo of acl_channel_fifo
+   acl_channel_fifo
+   #(
+      .FIFO_DEPTH(23),
+      .DATA_W(8),
+      .ADJUST_FOR_LATENCY(0),
+      .INTENDED_DEVICE_FAMILY("Arria 10")
+   )
+   channel_id_chan_Conf2Intrae_mode_fifo
+   (
+      .clock(clock),
+      .resetn(resetn),
+      // AVST avst_in
+      .avst_in_valid(avs_channel_id_chan_Conf2Intrae_mode_write_valid),
+      .avst_in_ready(avs_channel_id_chan_Conf2Intrae_mode_write_ready),
+      .avst_in_data(avs_channel_id_chan_Conf2Intrae_mode_write_data),
+      // AVST avst_out
+      .avst_out_valid(avs_channel_id_chan_Conf2Intrae_mode_read_valid),
+      .avst_out_ready(avs_channel_id_chan_Conf2Intrae_mode_read_ready),
+      .avst_out_data(avs_channel_id_chan_Conf2Intrae_mode_read_data),
+      .profile_fifosize(avs_channel_id_chan_Conf2Intrae_mode_fifosize),
+      .almost_full(avs_channel_id_chan_Conf2Intrae_mode_write_almostfull)
+   );
+
+   assign avm_channel_id_chan_Conf2Intrae_mode_write_almostfull = avs_channel_id_chan_Conf2Intrae_mode_write_almostfull;
    assign avs_channel_id_chan_Conf2Intere_x_write_valid = avm_channel_id_chan_Conf2Intere_x_write_valid;
    assign avm_channel_id_chan_Conf2Intere_x_write_ready = avs_channel_id_chan_Conf2Intere_x_write_ready;
    assign avs_channel_id_chan_Conf2Intere_x_write_data = avm_channel_id_chan_Conf2Intere_x_write_data;
@@ -3326,7 +3419,7 @@ module Krnl_GA_system
    // INST channel_id_chan_Conf2Intere_x_fifo of acl_channel_fifo
    acl_channel_fifo
    #(
-      .FIFO_DEPTH(109),
+      .FIFO_DEPTH(114),
       .DATA_W(32),
       .ADJUST_FOR_LATENCY(1),
       .INTENDED_DEVICE_FAMILY("Arria 10")
@@ -3357,7 +3450,7 @@ module Krnl_GA_system
    // INST channel_id_chan_Conf2Intere_y_fifo of acl_channel_fifo
    acl_channel_fifo
    #(
-      .FIFO_DEPTH(97),
+      .FIFO_DEPTH(102),
       .DATA_W(32),
       .ADJUST_FOR_LATENCY(1),
       .INTENDED_DEVICE_FAMILY("Arria 10")
@@ -3410,99 +3503,6 @@ module Krnl_GA_system
    );
 
    assign avm_channel_id_chan_Conf2Intere_z_write_almostfull = avs_channel_id_chan_Conf2Intere_z_write_almostfull;
-   assign avs_channel_id_chan_Conf2Intrae_active_write_valid = avm_channel_id_chan_Conf2Intrae_active_write_valid;
-   assign avm_channel_id_chan_Conf2Intrae_active_write_ready = avs_channel_id_chan_Conf2Intrae_active_write_ready;
-   assign avs_channel_id_chan_Conf2Intrae_active_write_data = avm_channel_id_chan_Conf2Intrae_active_write_data;
-   assign avm_channel_id_chan_Conf2Intrae_active_read_valid = avs_channel_id_chan_Conf2Intrae_active_read_valid;
-   assign avs_channel_id_chan_Conf2Intrae_active_read_ready = avm_channel_id_chan_Conf2Intrae_active_read_ready;
-   assign avm_channel_id_chan_Conf2Intrae_active_read_data = avs_channel_id_chan_Conf2Intrae_active_read_data;
-   // INST channel_id_chan_Conf2Intrae_active_fifo of acl_channel_fifo
-   acl_channel_fifo
-   #(
-      .FIFO_DEPTH(1),
-      .DATA_W(8),
-      .ADJUST_FOR_LATENCY(1),
-      .INTENDED_DEVICE_FAMILY("Arria 10")
-   )
-   channel_id_chan_Conf2Intrae_active_fifo
-   (
-      .clock(clock),
-      .resetn(resetn),
-      // AVST avst_in
-      .avst_in_valid(avs_channel_id_chan_Conf2Intrae_active_write_valid),
-      .avst_in_ready(avs_channel_id_chan_Conf2Intrae_active_write_ready),
-      .avst_in_data(avs_channel_id_chan_Conf2Intrae_active_write_data),
-      // AVST avst_out
-      .avst_out_valid(avs_channel_id_chan_Conf2Intrae_active_read_valid),
-      .avst_out_ready(avs_channel_id_chan_Conf2Intrae_active_read_ready),
-      .avst_out_data(avs_channel_id_chan_Conf2Intrae_active_read_data),
-      .profile_fifosize(avs_channel_id_chan_Conf2Intrae_active_fifosize),
-      .almost_full(avs_channel_id_chan_Conf2Intrae_active_write_almostfull)
-   );
-
-   assign avm_channel_id_chan_Conf2Intrae_active_write_almostfull = avs_channel_id_chan_Conf2Intrae_active_write_almostfull;
-   assign avs_channel_id_chan_Conf2Intrae_cnt_write_valid = avm_channel_id_chan_Conf2Intrae_cnt_write_valid;
-   assign avm_channel_id_chan_Conf2Intrae_cnt_write_ready = avs_channel_id_chan_Conf2Intrae_cnt_write_ready;
-   assign avs_channel_id_chan_Conf2Intrae_cnt_write_data = avm_channel_id_chan_Conf2Intrae_cnt_write_data;
-   assign avm_channel_id_chan_Conf2Intrae_cnt_read_valid = avs_channel_id_chan_Conf2Intrae_cnt_read_valid;
-   assign avs_channel_id_chan_Conf2Intrae_cnt_read_ready = avm_channel_id_chan_Conf2Intrae_cnt_read_ready;
-   assign avm_channel_id_chan_Conf2Intrae_cnt_read_data = avs_channel_id_chan_Conf2Intrae_cnt_read_data;
-   // INST channel_id_chan_Conf2Intrae_cnt_fifo of acl_channel_fifo
-   acl_channel_fifo
-   #(
-      .FIFO_DEPTH(1),
-      .DATA_W(32),
-      .ADJUST_FOR_LATENCY(1),
-      .INTENDED_DEVICE_FAMILY("Arria 10")
-   )
-   channel_id_chan_Conf2Intrae_cnt_fifo
-   (
-      .clock(clock),
-      .resetn(resetn),
-      // AVST avst_in
-      .avst_in_valid(avs_channel_id_chan_Conf2Intrae_cnt_write_valid),
-      .avst_in_ready(avs_channel_id_chan_Conf2Intrae_cnt_write_ready),
-      .avst_in_data(avs_channel_id_chan_Conf2Intrae_cnt_write_data),
-      // AVST avst_out
-      .avst_out_valid(avs_channel_id_chan_Conf2Intrae_cnt_read_valid),
-      .avst_out_ready(avs_channel_id_chan_Conf2Intrae_cnt_read_ready),
-      .avst_out_data(avs_channel_id_chan_Conf2Intrae_cnt_read_data),
-      .profile_fifosize(avs_channel_id_chan_Conf2Intrae_cnt_fifosize),
-      .almost_full(avs_channel_id_chan_Conf2Intrae_cnt_write_almostfull)
-   );
-
-   assign avm_channel_id_chan_Conf2Intrae_cnt_write_almostfull = avs_channel_id_chan_Conf2Intrae_cnt_write_almostfull;
-   assign avs_channel_id_chan_Conf2Intrae_mode_write_valid = avm_channel_id_chan_Conf2Intrae_mode_write_valid;
-   assign avm_channel_id_chan_Conf2Intrae_mode_write_ready = avs_channel_id_chan_Conf2Intrae_mode_write_ready;
-   assign avs_channel_id_chan_Conf2Intrae_mode_write_data = avm_channel_id_chan_Conf2Intrae_mode_write_data;
-   assign avm_channel_id_chan_Conf2Intrae_mode_read_valid = avs_channel_id_chan_Conf2Intrae_mode_read_valid;
-   assign avs_channel_id_chan_Conf2Intrae_mode_read_ready = avm_channel_id_chan_Conf2Intrae_mode_read_ready;
-   assign avm_channel_id_chan_Conf2Intrae_mode_read_data = avs_channel_id_chan_Conf2Intrae_mode_read_data;
-   // INST channel_id_chan_Conf2Intrae_mode_fifo of acl_channel_fifo
-   acl_channel_fifo
-   #(
-      .FIFO_DEPTH(1),
-      .DATA_W(8),
-      .ADJUST_FOR_LATENCY(1),
-      .INTENDED_DEVICE_FAMILY("Arria 10")
-   )
-   channel_id_chan_Conf2Intrae_mode_fifo
-   (
-      .clock(clock),
-      .resetn(resetn),
-      // AVST avst_in
-      .avst_in_valid(avs_channel_id_chan_Conf2Intrae_mode_write_valid),
-      .avst_in_ready(avs_channel_id_chan_Conf2Intrae_mode_write_ready),
-      .avst_in_data(avs_channel_id_chan_Conf2Intrae_mode_write_data),
-      // AVST avst_out
-      .avst_out_valid(avs_channel_id_chan_Conf2Intrae_mode_read_valid),
-      .avst_out_ready(avs_channel_id_chan_Conf2Intrae_mode_read_ready),
-      .avst_out_data(avs_channel_id_chan_Conf2Intrae_mode_read_data),
-      .profile_fifosize(avs_channel_id_chan_Conf2Intrae_mode_fifosize),
-      .almost_full(avs_channel_id_chan_Conf2Intrae_mode_write_almostfull)
-   );
-
-   assign avm_channel_id_chan_Conf2Intrae_mode_write_almostfull = avs_channel_id_chan_Conf2Intrae_mode_write_almostfull;
    assign avs_channel_id_chan_Conf2Intrae_x_write_valid = avm_channel_id_chan_Conf2Intrae_x_write_valid;
    assign avm_channel_id_chan_Conf2Intrae_x_write_ready = avs_channel_id_chan_Conf2Intrae_x_write_ready;
    assign avs_channel_id_chan_Conf2Intrae_x_write_data = avm_channel_id_chan_Conf2Intrae_x_write_data;
@@ -3605,7 +3605,7 @@ module Krnl_GA_system
    // INST channel_id_chan_Store2GA_ack_fifo of acl_channel_fifo
    acl_channel_fifo
    #(
-      .FIFO_DEPTH(2128),
+      .FIFO_DEPTH(2118),
       .DATA_W(8),
       .ADJUST_FOR_LATENCY(1),
       .INTENDED_DEVICE_FAMILY("Arria 10")
@@ -3636,7 +3636,7 @@ module Krnl_GA_system
    // INST channel_id_chan_Store2GA_LSenergy_fifo of acl_channel_fifo
    acl_channel_fifo
    #(
-      .FIFO_DEPTH(2131),
+      .FIFO_DEPTH(2121),
       .DATA_W(32),
       .ADJUST_FOR_LATENCY(1),
       .INTENDED_DEVICE_FAMILY("Arria 10")
@@ -4721,21 +4721,6 @@ module Krnl_Conform_top_wrapper_0
    input logic avm_channel_id_chan_Conf2Intere_mode_write_ready,
    output logic [7:0] avm_channel_id_chan_Conf2Intere_mode_write_data,
    input logic avm_channel_id_chan_Conf2Intere_mode_write_almostfull,
-   // AVST avm_channel_id_chan_Conf2Intere_x_write
-   output logic avm_channel_id_chan_Conf2Intere_x_write_valid,
-   input logic avm_channel_id_chan_Conf2Intere_x_write_ready,
-   output logic [31:0] avm_channel_id_chan_Conf2Intere_x_write_data,
-   input logic avm_channel_id_chan_Conf2Intere_x_write_almostfull,
-   // AVST avm_channel_id_chan_Conf2Intere_y_write
-   output logic avm_channel_id_chan_Conf2Intere_y_write_valid,
-   input logic avm_channel_id_chan_Conf2Intere_y_write_ready,
-   output logic [31:0] avm_channel_id_chan_Conf2Intere_y_write_data,
-   input logic avm_channel_id_chan_Conf2Intere_y_write_almostfull,
-   // AVST avm_channel_id_chan_Conf2Intere_z_write
-   output logic avm_channel_id_chan_Conf2Intere_z_write_valid,
-   input logic avm_channel_id_chan_Conf2Intere_z_write_ready,
-   output logic [31:0] avm_channel_id_chan_Conf2Intere_z_write_data,
-   input logic avm_channel_id_chan_Conf2Intere_z_write_almostfull,
    // AVST avm_channel_id_chan_Conf2Intrae_active_write
    output logic avm_channel_id_chan_Conf2Intrae_active_write_valid,
    input logic avm_channel_id_chan_Conf2Intrae_active_write_ready,
@@ -4751,6 +4736,21 @@ module Krnl_Conform_top_wrapper_0
    input logic avm_channel_id_chan_Conf2Intrae_mode_write_ready,
    output logic [7:0] avm_channel_id_chan_Conf2Intrae_mode_write_data,
    input logic avm_channel_id_chan_Conf2Intrae_mode_write_almostfull,
+   // AVST avm_channel_id_chan_Conf2Intere_x_write
+   output logic avm_channel_id_chan_Conf2Intere_x_write_valid,
+   input logic avm_channel_id_chan_Conf2Intere_x_write_ready,
+   output logic [31:0] avm_channel_id_chan_Conf2Intere_x_write_data,
+   input logic avm_channel_id_chan_Conf2Intere_x_write_almostfull,
+   // AVST avm_channel_id_chan_Conf2Intere_y_write
+   output logic avm_channel_id_chan_Conf2Intere_y_write_valid,
+   input logic avm_channel_id_chan_Conf2Intere_y_write_ready,
+   output logic [31:0] avm_channel_id_chan_Conf2Intere_y_write_data,
+   input logic avm_channel_id_chan_Conf2Intere_y_write_almostfull,
+   // AVST avm_channel_id_chan_Conf2Intere_z_write
+   output logic avm_channel_id_chan_Conf2Intere_z_write_valid,
+   input logic avm_channel_id_chan_Conf2Intere_z_write_ready,
+   output logic [31:0] avm_channel_id_chan_Conf2Intere_z_write_data,
+   input logic avm_channel_id_chan_Conf2Intere_z_write_almostfull,
    // AVST avm_channel_id_chan_Conf2Intrae_x_write
    output logic avm_channel_id_chan_Conf2Intrae_x_write_valid,
    input logic avm_channel_id_chan_Conf2Intrae_x_write_ready,
@@ -5047,18 +5047,18 @@ module Krnl_Conform_top_wrapper_0
       .avm_local_bb5_ld_memcoalesce_null_load_05_inst0_readdata(local_avm_aspace11_readdata[0][5]),
       .avm_local_bb5_ld_memcoalesce_null_load_05_inst0_readdatavalid(local_avm_aspace11_readdatavalid[0][5]),
       .avm_local_bb5_ld_memcoalesce_null_load_05_inst0_writeack(local_avm_aspace11_writeack[0][5]),
-      // AVM avm_local_bb5_ld__u29_inst0
-      .avm_local_bb5_ld__u29_inst0_enable(local_avm_aspace12_enable[0][0]),
-      .avm_local_bb5_ld__u29_inst0_read(local_avm_aspace12_read[0][0]),
-      .avm_local_bb5_ld__u29_inst0_write(local_avm_aspace12_write[0][0]),
-      .avm_local_bb5_ld__u29_inst0_burstcount(local_avm_aspace12_burstcount[0][0]),
-      .avm_local_bb5_ld__u29_inst0_address(local_avm_aspace12_address[0][0]),
-      .avm_local_bb5_ld__u29_inst0_writedata(local_avm_aspace12_writedata[0][0]),
-      .avm_local_bb5_ld__u29_inst0_byteenable(local_avm_aspace12_byteenable[0][0]),
-      .avm_local_bb5_ld__u29_inst0_waitrequest(local_avm_aspace12_waitrequest[0][0]),
-      .avm_local_bb5_ld__u29_inst0_readdata(local_avm_aspace12_readdata[0][0]),
-      .avm_local_bb5_ld__u29_inst0_readdatavalid(local_avm_aspace12_readdatavalid[0][0]),
-      .avm_local_bb5_ld__u29_inst0_writeack(local_avm_aspace12_writeack[0][0]),
+      // AVM avm_local_bb5_ld__u28_inst0
+      .avm_local_bb5_ld__u28_inst0_enable(local_avm_aspace12_enable[0][0]),
+      .avm_local_bb5_ld__u28_inst0_read(local_avm_aspace12_read[0][0]),
+      .avm_local_bb5_ld__u28_inst0_write(local_avm_aspace12_write[0][0]),
+      .avm_local_bb5_ld__u28_inst0_burstcount(local_avm_aspace12_burstcount[0][0]),
+      .avm_local_bb5_ld__u28_inst0_address(local_avm_aspace12_address[0][0]),
+      .avm_local_bb5_ld__u28_inst0_writedata(local_avm_aspace12_writedata[0][0]),
+      .avm_local_bb5_ld__u28_inst0_byteenable(local_avm_aspace12_byteenable[0][0]),
+      .avm_local_bb5_ld__u28_inst0_waitrequest(local_avm_aspace12_waitrequest[0][0]),
+      .avm_local_bb5_ld__u28_inst0_readdata(local_avm_aspace12_readdata[0][0]),
+      .avm_local_bb5_ld__u28_inst0_readdatavalid(local_avm_aspace12_readdatavalid[0][0]),
+      .avm_local_bb5_ld__u28_inst0_writeack(local_avm_aspace12_writeack[0][0]),
       // AVM avm_local_bb5_st_add242_hfp_inst0
       .avm_local_bb5_st_add242_hfp_inst0_enable(local_avm_aspace12_enable[0][1]),
       .avm_local_bb5_st_add242_hfp_inst0_read(local_avm_aspace12_read[0][1]),
@@ -5071,30 +5071,30 @@ module Krnl_Conform_top_wrapper_0
       .avm_local_bb5_st_add242_hfp_inst0_readdata(local_avm_aspace12_readdata[0][1]),
       .avm_local_bb5_st_add242_hfp_inst0_readdatavalid(local_avm_aspace12_readdatavalid[0][1]),
       .avm_local_bb5_st_add242_hfp_inst0_writeack(local_avm_aspace12_writeack[0][1]),
-      // AVM avm_local_bb6_ld__inst0
-      .avm_local_bb6_ld__inst0_enable(local_avm_aspace12_enable[0][2]),
-      .avm_local_bb6_ld__inst0_read(local_avm_aspace12_read[0][2]),
-      .avm_local_bb6_ld__inst0_write(local_avm_aspace12_write[0][2]),
-      .avm_local_bb6_ld__inst0_burstcount(local_avm_aspace12_burstcount[0][2]),
-      .avm_local_bb6_ld__inst0_address(local_avm_aspace12_address[0][2]),
-      .avm_local_bb6_ld__inst0_writedata(local_avm_aspace12_writedata[0][2]),
-      .avm_local_bb6_ld__inst0_byteenable(local_avm_aspace12_byteenable[0][2]),
-      .avm_local_bb6_ld__inst0_waitrequest(local_avm_aspace12_waitrequest[0][2]),
-      .avm_local_bb6_ld__inst0_readdata(local_avm_aspace12_readdata[0][2]),
-      .avm_local_bb6_ld__inst0_readdatavalid(local_avm_aspace12_readdatavalid[0][2]),
-      .avm_local_bb6_ld__inst0_writeack(local_avm_aspace12_writeack[0][2]),
-      // AVM avm_local_bb5_ld__u30_inst0
-      .avm_local_bb5_ld__u30_inst0_enable(local_avm_aspace13_enable[0][0]),
-      .avm_local_bb5_ld__u30_inst0_read(local_avm_aspace13_read[0][0]),
-      .avm_local_bb5_ld__u30_inst0_write(local_avm_aspace13_write[0][0]),
-      .avm_local_bb5_ld__u30_inst0_burstcount(local_avm_aspace13_burstcount[0][0]),
-      .avm_local_bb5_ld__u30_inst0_address(local_avm_aspace13_address[0][0]),
-      .avm_local_bb5_ld__u30_inst0_writedata(local_avm_aspace13_writedata[0][0]),
-      .avm_local_bb5_ld__u30_inst0_byteenable(local_avm_aspace13_byteenable[0][0]),
-      .avm_local_bb5_ld__u30_inst0_waitrequest(local_avm_aspace13_waitrequest[0][0]),
-      .avm_local_bb5_ld__u30_inst0_readdata(local_avm_aspace13_readdata[0][0]),
-      .avm_local_bb5_ld__u30_inst0_readdatavalid(local_avm_aspace13_readdatavalid[0][0]),
-      .avm_local_bb5_ld__u30_inst0_writeack(local_avm_aspace13_writeack[0][0]),
+      // AVM avm_local_bb7_ld__inst0
+      .avm_local_bb7_ld__inst0_enable(local_avm_aspace12_enable[0][2]),
+      .avm_local_bb7_ld__inst0_read(local_avm_aspace12_read[0][2]),
+      .avm_local_bb7_ld__inst0_write(local_avm_aspace12_write[0][2]),
+      .avm_local_bb7_ld__inst0_burstcount(local_avm_aspace12_burstcount[0][2]),
+      .avm_local_bb7_ld__inst0_address(local_avm_aspace12_address[0][2]),
+      .avm_local_bb7_ld__inst0_writedata(local_avm_aspace12_writedata[0][2]),
+      .avm_local_bb7_ld__inst0_byteenable(local_avm_aspace12_byteenable[0][2]),
+      .avm_local_bb7_ld__inst0_waitrequest(local_avm_aspace12_waitrequest[0][2]),
+      .avm_local_bb7_ld__inst0_readdata(local_avm_aspace12_readdata[0][2]),
+      .avm_local_bb7_ld__inst0_readdatavalid(local_avm_aspace12_readdatavalid[0][2]),
+      .avm_local_bb7_ld__inst0_writeack(local_avm_aspace12_writeack[0][2]),
+      // AVM avm_local_bb5_ld__u29_inst0
+      .avm_local_bb5_ld__u29_inst0_enable(local_avm_aspace13_enable[0][0]),
+      .avm_local_bb5_ld__u29_inst0_read(local_avm_aspace13_read[0][0]),
+      .avm_local_bb5_ld__u29_inst0_write(local_avm_aspace13_write[0][0]),
+      .avm_local_bb5_ld__u29_inst0_burstcount(local_avm_aspace13_burstcount[0][0]),
+      .avm_local_bb5_ld__u29_inst0_address(local_avm_aspace13_address[0][0]),
+      .avm_local_bb5_ld__u29_inst0_writedata(local_avm_aspace13_writedata[0][0]),
+      .avm_local_bb5_ld__u29_inst0_byteenable(local_avm_aspace13_byteenable[0][0]),
+      .avm_local_bb5_ld__u29_inst0_waitrequest(local_avm_aspace13_waitrequest[0][0]),
+      .avm_local_bb5_ld__u29_inst0_readdata(local_avm_aspace13_readdata[0][0]),
+      .avm_local_bb5_ld__u29_inst0_readdatavalid(local_avm_aspace13_readdatavalid[0][0]),
+      .avm_local_bb5_ld__u29_inst0_writeack(local_avm_aspace13_writeack[0][0]),
       // AVM avm_local_bb5_st_add247_hfp_inst0
       .avm_local_bb5_st_add247_hfp_inst0_enable(local_avm_aspace13_enable[0][1]),
       .avm_local_bb5_st_add247_hfp_inst0_read(local_avm_aspace13_read[0][1]),
@@ -5107,30 +5107,30 @@ module Krnl_Conform_top_wrapper_0
       .avm_local_bb5_st_add247_hfp_inst0_readdata(local_avm_aspace13_readdata[0][1]),
       .avm_local_bb5_st_add247_hfp_inst0_readdatavalid(local_avm_aspace13_readdatavalid[0][1]),
       .avm_local_bb5_st_add247_hfp_inst0_writeack(local_avm_aspace13_writeack[0][1]),
-      // AVM avm_local_bb6_ld__u35_inst0
-      .avm_local_bb6_ld__u35_inst0_enable(local_avm_aspace13_enable[0][2]),
-      .avm_local_bb6_ld__u35_inst0_read(local_avm_aspace13_read[0][2]),
-      .avm_local_bb6_ld__u35_inst0_write(local_avm_aspace13_write[0][2]),
-      .avm_local_bb6_ld__u35_inst0_burstcount(local_avm_aspace13_burstcount[0][2]),
-      .avm_local_bb6_ld__u35_inst0_address(local_avm_aspace13_address[0][2]),
-      .avm_local_bb6_ld__u35_inst0_writedata(local_avm_aspace13_writedata[0][2]),
-      .avm_local_bb6_ld__u35_inst0_byteenable(local_avm_aspace13_byteenable[0][2]),
-      .avm_local_bb6_ld__u35_inst0_waitrequest(local_avm_aspace13_waitrequest[0][2]),
-      .avm_local_bb6_ld__u35_inst0_readdata(local_avm_aspace13_readdata[0][2]),
-      .avm_local_bb6_ld__u35_inst0_readdatavalid(local_avm_aspace13_readdatavalid[0][2]),
-      .avm_local_bb6_ld__u35_inst0_writeack(local_avm_aspace13_writeack[0][2]),
-      // AVM avm_local_bb5_ld__u28_inst0
-      .avm_local_bb5_ld__u28_inst0_enable(local_avm_aspace14_enable[0][0]),
-      .avm_local_bb5_ld__u28_inst0_read(local_avm_aspace14_read[0][0]),
-      .avm_local_bb5_ld__u28_inst0_write(local_avm_aspace14_write[0][0]),
-      .avm_local_bb5_ld__u28_inst0_burstcount(local_avm_aspace14_burstcount[0][0]),
-      .avm_local_bb5_ld__u28_inst0_address(local_avm_aspace14_address[0][0]),
-      .avm_local_bb5_ld__u28_inst0_writedata(local_avm_aspace14_writedata[0][0]),
-      .avm_local_bb5_ld__u28_inst0_byteenable(local_avm_aspace14_byteenable[0][0]),
-      .avm_local_bb5_ld__u28_inst0_waitrequest(local_avm_aspace14_waitrequest[0][0]),
-      .avm_local_bb5_ld__u28_inst0_readdata(local_avm_aspace14_readdata[0][0]),
-      .avm_local_bb5_ld__u28_inst0_readdatavalid(local_avm_aspace14_readdatavalid[0][0]),
-      .avm_local_bb5_ld__u28_inst0_writeack(local_avm_aspace14_writeack[0][0]),
+      // AVM avm_local_bb7_ld__u35_inst0
+      .avm_local_bb7_ld__u35_inst0_enable(local_avm_aspace13_enable[0][2]),
+      .avm_local_bb7_ld__u35_inst0_read(local_avm_aspace13_read[0][2]),
+      .avm_local_bb7_ld__u35_inst0_write(local_avm_aspace13_write[0][2]),
+      .avm_local_bb7_ld__u35_inst0_burstcount(local_avm_aspace13_burstcount[0][2]),
+      .avm_local_bb7_ld__u35_inst0_address(local_avm_aspace13_address[0][2]),
+      .avm_local_bb7_ld__u35_inst0_writedata(local_avm_aspace13_writedata[0][2]),
+      .avm_local_bb7_ld__u35_inst0_byteenable(local_avm_aspace13_byteenable[0][2]),
+      .avm_local_bb7_ld__u35_inst0_waitrequest(local_avm_aspace13_waitrequest[0][2]),
+      .avm_local_bb7_ld__u35_inst0_readdata(local_avm_aspace13_readdata[0][2]),
+      .avm_local_bb7_ld__u35_inst0_readdatavalid(local_avm_aspace13_readdatavalid[0][2]),
+      .avm_local_bb7_ld__u35_inst0_writeack(local_avm_aspace13_writeack[0][2]),
+      // AVM avm_local_bb5_ld__u30_inst0
+      .avm_local_bb5_ld__u30_inst0_enable(local_avm_aspace14_enable[0][0]),
+      .avm_local_bb5_ld__u30_inst0_read(local_avm_aspace14_read[0][0]),
+      .avm_local_bb5_ld__u30_inst0_write(local_avm_aspace14_write[0][0]),
+      .avm_local_bb5_ld__u30_inst0_burstcount(local_avm_aspace14_burstcount[0][0]),
+      .avm_local_bb5_ld__u30_inst0_address(local_avm_aspace14_address[0][0]),
+      .avm_local_bb5_ld__u30_inst0_writedata(local_avm_aspace14_writedata[0][0]),
+      .avm_local_bb5_ld__u30_inst0_byteenable(local_avm_aspace14_byteenable[0][0]),
+      .avm_local_bb5_ld__u30_inst0_waitrequest(local_avm_aspace14_waitrequest[0][0]),
+      .avm_local_bb5_ld__u30_inst0_readdata(local_avm_aspace14_readdata[0][0]),
+      .avm_local_bb5_ld__u30_inst0_readdatavalid(local_avm_aspace14_readdatavalid[0][0]),
+      .avm_local_bb5_ld__u30_inst0_writeack(local_avm_aspace14_writeack[0][0]),
       // AVM avm_local_bb5_st_add252_hfp_inst0
       .avm_local_bb5_st_add252_hfp_inst0_enable(local_avm_aspace14_enable[0][1]),
       .avm_local_bb5_st_add252_hfp_inst0_read(local_avm_aspace14_read[0][1]),
@@ -5143,18 +5143,18 @@ module Krnl_Conform_top_wrapper_0
       .avm_local_bb5_st_add252_hfp_inst0_readdata(local_avm_aspace14_readdata[0][1]),
       .avm_local_bb5_st_add252_hfp_inst0_readdatavalid(local_avm_aspace14_readdatavalid[0][1]),
       .avm_local_bb5_st_add252_hfp_inst0_writeack(local_avm_aspace14_writeack[0][1]),
-      // AVM avm_local_bb6_ld__u37_inst0
-      .avm_local_bb6_ld__u37_inst0_enable(local_avm_aspace14_enable[0][2]),
-      .avm_local_bb6_ld__u37_inst0_read(local_avm_aspace14_read[0][2]),
-      .avm_local_bb6_ld__u37_inst0_write(local_avm_aspace14_write[0][2]),
-      .avm_local_bb6_ld__u37_inst0_burstcount(local_avm_aspace14_burstcount[0][2]),
-      .avm_local_bb6_ld__u37_inst0_address(local_avm_aspace14_address[0][2]),
-      .avm_local_bb6_ld__u37_inst0_writedata(local_avm_aspace14_writedata[0][2]),
-      .avm_local_bb6_ld__u37_inst0_byteenable(local_avm_aspace14_byteenable[0][2]),
-      .avm_local_bb6_ld__u37_inst0_waitrequest(local_avm_aspace14_waitrequest[0][2]),
-      .avm_local_bb6_ld__u37_inst0_readdata(local_avm_aspace14_readdata[0][2]),
-      .avm_local_bb6_ld__u37_inst0_readdatavalid(local_avm_aspace14_readdatavalid[0][2]),
-      .avm_local_bb6_ld__u37_inst0_writeack(local_avm_aspace14_writeack[0][2]),
+      // AVM avm_local_bb7_ld__u37_inst0
+      .avm_local_bb7_ld__u37_inst0_enable(local_avm_aspace14_enable[0][2]),
+      .avm_local_bb7_ld__u37_inst0_read(local_avm_aspace14_read[0][2]),
+      .avm_local_bb7_ld__u37_inst0_write(local_avm_aspace14_write[0][2]),
+      .avm_local_bb7_ld__u37_inst0_burstcount(local_avm_aspace14_burstcount[0][2]),
+      .avm_local_bb7_ld__u37_inst0_address(local_avm_aspace14_address[0][2]),
+      .avm_local_bb7_ld__u37_inst0_writedata(local_avm_aspace14_writedata[0][2]),
+      .avm_local_bb7_ld__u37_inst0_byteenable(local_avm_aspace14_byteenable[0][2]),
+      .avm_local_bb7_ld__u37_inst0_waitrequest(local_avm_aspace14_waitrequest[0][2]),
+      .avm_local_bb7_ld__u37_inst0_readdata(local_avm_aspace14_readdata[0][2]),
+      .avm_local_bb7_ld__u37_inst0_readdatavalid(local_avm_aspace14_readdatavalid[0][2]),
+      .avm_local_bb7_ld__u37_inst0_writeack(local_avm_aspace14_writeack[0][2]),
       // AVST avst_local_bb2__chan_GA2Conf_active_inst0
       .avst_local_bb2__chan_GA2Conf_active_inst0_valid(avm_channel_id_chan_GA2Conf_active_read_valid),
       .avst_local_bb2__chan_GA2Conf_active_inst0_ready(avm_channel_id_chan_GA2Conf_active_read_ready),
@@ -5186,21 +5186,6 @@ module Krnl_Conform_top_wrapper_0
       .avst_local_bb6__chan_Conf2Intere_mode_inst0_ready(avm_channel_id_chan_Conf2Intere_mode_write_ready),
       .avst_local_bb6__chan_Conf2Intere_mode_inst0_data(avm_channel_id_chan_Conf2Intere_mode_write_data),
       .avst_local_bb6__chan_Conf2Intere_mode_inst0_almostfull(avm_channel_id_chan_Conf2Intere_mode_write_almostfull),
-      // AVST avst_local_bb6__chan_Conf2Intere_x_inst0
-      .avst_local_bb6__chan_Conf2Intere_x_inst0_valid(avm_channel_id_chan_Conf2Intere_x_write_valid),
-      .avst_local_bb6__chan_Conf2Intere_x_inst0_ready(avm_channel_id_chan_Conf2Intere_x_write_ready),
-      .avst_local_bb6__chan_Conf2Intere_x_inst0_data(avm_channel_id_chan_Conf2Intere_x_write_data),
-      .avst_local_bb6__chan_Conf2Intere_x_inst0_almostfull(avm_channel_id_chan_Conf2Intere_x_write_almostfull),
-      // AVST avst_local_bb6__chan_Conf2Intere_y_inst0
-      .avst_local_bb6__chan_Conf2Intere_y_inst0_valid(avm_channel_id_chan_Conf2Intere_y_write_valid),
-      .avst_local_bb6__chan_Conf2Intere_y_inst0_ready(avm_channel_id_chan_Conf2Intere_y_write_ready),
-      .avst_local_bb6__chan_Conf2Intere_y_inst0_data(avm_channel_id_chan_Conf2Intere_y_write_data),
-      .avst_local_bb6__chan_Conf2Intere_y_inst0_almostfull(avm_channel_id_chan_Conf2Intere_y_write_almostfull),
-      // AVST avst_local_bb6__chan_Conf2Intere_z_inst0
-      .avst_local_bb6__chan_Conf2Intere_z_inst0_valid(avm_channel_id_chan_Conf2Intere_z_write_valid),
-      .avst_local_bb6__chan_Conf2Intere_z_inst0_ready(avm_channel_id_chan_Conf2Intere_z_write_ready),
-      .avst_local_bb6__chan_Conf2Intere_z_inst0_data(avm_channel_id_chan_Conf2Intere_z_write_data),
-      .avst_local_bb6__chan_Conf2Intere_z_inst0_almostfull(avm_channel_id_chan_Conf2Intere_z_write_almostfull),
       // AVST avst_local_bb6__chan_Conf2Intrae_active_inst0
       .avst_local_bb6__chan_Conf2Intrae_active_inst0_valid(avm_channel_id_chan_Conf2Intrae_active_write_valid),
       .avst_local_bb6__chan_Conf2Intrae_active_inst0_ready(avm_channel_id_chan_Conf2Intrae_active_write_ready),
@@ -5216,21 +5201,36 @@ module Krnl_Conform_top_wrapper_0
       .avst_local_bb6__chan_Conf2Intrae_mode_inst0_ready(avm_channel_id_chan_Conf2Intrae_mode_write_ready),
       .avst_local_bb6__chan_Conf2Intrae_mode_inst0_data(avm_channel_id_chan_Conf2Intrae_mode_write_data),
       .avst_local_bb6__chan_Conf2Intrae_mode_inst0_almostfull(avm_channel_id_chan_Conf2Intrae_mode_write_almostfull),
-      // AVST avst_local_bb6__chan_Conf2Intrae_x_inst0
-      .avst_local_bb6__chan_Conf2Intrae_x_inst0_valid(avm_channel_id_chan_Conf2Intrae_x_write_valid),
-      .avst_local_bb6__chan_Conf2Intrae_x_inst0_ready(avm_channel_id_chan_Conf2Intrae_x_write_ready),
-      .avst_local_bb6__chan_Conf2Intrae_x_inst0_data(avm_channel_id_chan_Conf2Intrae_x_write_data),
-      .avst_local_bb6__chan_Conf2Intrae_x_inst0_almostfull(avm_channel_id_chan_Conf2Intrae_x_write_almostfull),
-      // AVST avst_local_bb6__chan_Conf2Intrae_y_inst0
-      .avst_local_bb6__chan_Conf2Intrae_y_inst0_valid(avm_channel_id_chan_Conf2Intrae_y_write_valid),
-      .avst_local_bb6__chan_Conf2Intrae_y_inst0_ready(avm_channel_id_chan_Conf2Intrae_y_write_ready),
-      .avst_local_bb6__chan_Conf2Intrae_y_inst0_data(avm_channel_id_chan_Conf2Intrae_y_write_data),
-      .avst_local_bb6__chan_Conf2Intrae_y_inst0_almostfull(avm_channel_id_chan_Conf2Intrae_y_write_almostfull),
-      // AVST avst_local_bb6__chan_Conf2Intrae_z_inst0
-      .avst_local_bb6__chan_Conf2Intrae_z_inst0_valid(avm_channel_id_chan_Conf2Intrae_z_write_valid),
-      .avst_local_bb6__chan_Conf2Intrae_z_inst0_ready(avm_channel_id_chan_Conf2Intrae_z_write_ready),
-      .avst_local_bb6__chan_Conf2Intrae_z_inst0_data(avm_channel_id_chan_Conf2Intrae_z_write_data),
-      .avst_local_bb6__chan_Conf2Intrae_z_inst0_almostfull(avm_channel_id_chan_Conf2Intrae_z_write_almostfull),
+      // AVST avst_local_bb7__chan_Conf2Intere_x_inst0
+      .avst_local_bb7__chan_Conf2Intere_x_inst0_valid(avm_channel_id_chan_Conf2Intere_x_write_valid),
+      .avst_local_bb7__chan_Conf2Intere_x_inst0_ready(avm_channel_id_chan_Conf2Intere_x_write_ready),
+      .avst_local_bb7__chan_Conf2Intere_x_inst0_data(avm_channel_id_chan_Conf2Intere_x_write_data),
+      .avst_local_bb7__chan_Conf2Intere_x_inst0_almostfull(avm_channel_id_chan_Conf2Intere_x_write_almostfull),
+      // AVST avst_local_bb7__chan_Conf2Intere_y_inst0
+      .avst_local_bb7__chan_Conf2Intere_y_inst0_valid(avm_channel_id_chan_Conf2Intere_y_write_valid),
+      .avst_local_bb7__chan_Conf2Intere_y_inst0_ready(avm_channel_id_chan_Conf2Intere_y_write_ready),
+      .avst_local_bb7__chan_Conf2Intere_y_inst0_data(avm_channel_id_chan_Conf2Intere_y_write_data),
+      .avst_local_bb7__chan_Conf2Intere_y_inst0_almostfull(avm_channel_id_chan_Conf2Intere_y_write_almostfull),
+      // AVST avst_local_bb7__chan_Conf2Intere_z_inst0
+      .avst_local_bb7__chan_Conf2Intere_z_inst0_valid(avm_channel_id_chan_Conf2Intere_z_write_valid),
+      .avst_local_bb7__chan_Conf2Intere_z_inst0_ready(avm_channel_id_chan_Conf2Intere_z_write_ready),
+      .avst_local_bb7__chan_Conf2Intere_z_inst0_data(avm_channel_id_chan_Conf2Intere_z_write_data),
+      .avst_local_bb7__chan_Conf2Intere_z_inst0_almostfull(avm_channel_id_chan_Conf2Intere_z_write_almostfull),
+      // AVST avst_local_bb7__chan_Conf2Intrae_x_inst0
+      .avst_local_bb7__chan_Conf2Intrae_x_inst0_valid(avm_channel_id_chan_Conf2Intrae_x_write_valid),
+      .avst_local_bb7__chan_Conf2Intrae_x_inst0_ready(avm_channel_id_chan_Conf2Intrae_x_write_ready),
+      .avst_local_bb7__chan_Conf2Intrae_x_inst0_data(avm_channel_id_chan_Conf2Intrae_x_write_data),
+      .avst_local_bb7__chan_Conf2Intrae_x_inst0_almostfull(avm_channel_id_chan_Conf2Intrae_x_write_almostfull),
+      // AVST avst_local_bb7__chan_Conf2Intrae_y_inst0
+      .avst_local_bb7__chan_Conf2Intrae_y_inst0_valid(avm_channel_id_chan_Conf2Intrae_y_write_valid),
+      .avst_local_bb7__chan_Conf2Intrae_y_inst0_ready(avm_channel_id_chan_Conf2Intrae_y_write_ready),
+      .avst_local_bb7__chan_Conf2Intrae_y_inst0_data(avm_channel_id_chan_Conf2Intrae_y_write_data),
+      .avst_local_bb7__chan_Conf2Intrae_y_inst0_almostfull(avm_channel_id_chan_Conf2Intrae_y_write_almostfull),
+      // AVST avst_local_bb7__chan_Conf2Intrae_z_inst0
+      .avst_local_bb7__chan_Conf2Intrae_z_inst0_valid(avm_channel_id_chan_Conf2Intrae_z_write_valid),
+      .avst_local_bb7__chan_Conf2Intrae_z_inst0_ready(avm_channel_id_chan_Conf2Intrae_z_write_ready),
+      .avst_local_bb7__chan_Conf2Intrae_z_inst0_data(avm_channel_id_chan_Conf2Intrae_z_write_data),
+      .avst_local_bb7__chan_Conf2Intrae_z_inst0_almostfull(avm_channel_id_chan_Conf2Intrae_z_write_almostfull),
       // AVM p_avm_local_bb2_printf_addr_acl_printf_p1i8_32_inst0
       .p_avm_local_bb2_printf_addr_acl_printf_p1i8_32_inst0_enable(p_avm_local_bb2_printf_addr_acl_printf_p1i8_32_inst0_enable),
       .p_avm_local_bb2_printf_addr_acl_printf_p1i8_32_inst0_read(p_avm_local_bb2_printf_addr_acl_printf_p1i8_32_inst0_read),
@@ -24052,54 +24052,6 @@ module Krnl_InterE_top_wrapper_0
    input logic [511:0] avm_local_bb4_ld__inst0_readdata,
    input logic avm_local_bb4_ld__inst0_readdatavalid,
    input logic avm_local_bb4_ld__inst0_writeack,
-   // AVM avm_local_bb4_ld__u100_inst0
-   output logic avm_local_bb4_ld__u100_inst0_enable,
-   output logic avm_local_bb4_ld__u100_inst0_read,
-   output logic avm_local_bb4_ld__u100_inst0_write,
-   output logic [4:0] avm_local_bb4_ld__u100_inst0_burstcount,
-   output logic [30:0] avm_local_bb4_ld__u100_inst0_address,
-   output logic [511:0] avm_local_bb4_ld__u100_inst0_writedata,
-   output logic [63:0] avm_local_bb4_ld__u100_inst0_byteenable,
-   input logic avm_local_bb4_ld__u100_inst0_waitrequest,
-   input logic [511:0] avm_local_bb4_ld__u100_inst0_readdata,
-   input logic avm_local_bb4_ld__u100_inst0_readdatavalid,
-   input logic avm_local_bb4_ld__u100_inst0_writeack,
-   // AVM avm_local_bb4_ld__u101_inst0
-   output logic avm_local_bb4_ld__u101_inst0_enable,
-   output logic avm_local_bb4_ld__u101_inst0_read,
-   output logic avm_local_bb4_ld__u101_inst0_write,
-   output logic [4:0] avm_local_bb4_ld__u101_inst0_burstcount,
-   output logic [30:0] avm_local_bb4_ld__u101_inst0_address,
-   output logic [511:0] avm_local_bb4_ld__u101_inst0_writedata,
-   output logic [63:0] avm_local_bb4_ld__u101_inst0_byteenable,
-   input logic avm_local_bb4_ld__u101_inst0_waitrequest,
-   input logic [511:0] avm_local_bb4_ld__u101_inst0_readdata,
-   input logic avm_local_bb4_ld__u101_inst0_readdatavalid,
-   input logic avm_local_bb4_ld__u101_inst0_writeack,
-   // AVM avm_local_bb4_ld__u102_inst0
-   output logic avm_local_bb4_ld__u102_inst0_enable,
-   output logic avm_local_bb4_ld__u102_inst0_read,
-   output logic avm_local_bb4_ld__u102_inst0_write,
-   output logic [4:0] avm_local_bb4_ld__u102_inst0_burstcount,
-   output logic [30:0] avm_local_bb4_ld__u102_inst0_address,
-   output logic [511:0] avm_local_bb4_ld__u102_inst0_writedata,
-   output logic [63:0] avm_local_bb4_ld__u102_inst0_byteenable,
-   input logic avm_local_bb4_ld__u102_inst0_waitrequest,
-   input logic [511:0] avm_local_bb4_ld__u102_inst0_readdata,
-   input logic avm_local_bb4_ld__u102_inst0_readdatavalid,
-   input logic avm_local_bb4_ld__u102_inst0_writeack,
-   // AVM avm_local_bb4_ld__u103_inst0
-   output logic avm_local_bb4_ld__u103_inst0_enable,
-   output logic avm_local_bb4_ld__u103_inst0_read,
-   output logic avm_local_bb4_ld__u103_inst0_write,
-   output logic [4:0] avm_local_bb4_ld__u103_inst0_burstcount,
-   output logic [30:0] avm_local_bb4_ld__u103_inst0_address,
-   output logic [511:0] avm_local_bb4_ld__u103_inst0_writedata,
-   output logic [63:0] avm_local_bb4_ld__u103_inst0_byteenable,
-   input logic avm_local_bb4_ld__u103_inst0_waitrequest,
-   input logic [511:0] avm_local_bb4_ld__u103_inst0_readdata,
-   input logic avm_local_bb4_ld__u103_inst0_readdatavalid,
-   input logic avm_local_bb4_ld__u103_inst0_writeack,
    // AVM avm_local_bb4_ld__u104_inst0
    output logic avm_local_bb4_ld__u104_inst0_enable,
    output logic avm_local_bb4_ld__u104_inst0_read,
@@ -24340,18 +24292,66 @@ module Krnl_InterE_top_wrapper_0
    input logic [511:0] avm_local_bb4_ld__u123_inst0_readdata,
    input logic avm_local_bb4_ld__u123_inst0_readdatavalid,
    input logic avm_local_bb4_ld__u123_inst0_writeack,
-   // AVM avm_local_bb4_ld__u95_inst0
-   output logic avm_local_bb4_ld__u95_inst0_enable,
-   output logic avm_local_bb4_ld__u95_inst0_read,
-   output logic avm_local_bb4_ld__u95_inst0_write,
-   output logic [4:0] avm_local_bb4_ld__u95_inst0_burstcount,
-   output logic [30:0] avm_local_bb4_ld__u95_inst0_address,
-   output logic [511:0] avm_local_bb4_ld__u95_inst0_writedata,
-   output logic [63:0] avm_local_bb4_ld__u95_inst0_byteenable,
-   input logic avm_local_bb4_ld__u95_inst0_waitrequest,
-   input logic [511:0] avm_local_bb4_ld__u95_inst0_readdata,
-   input logic avm_local_bb4_ld__u95_inst0_readdatavalid,
-   input logic avm_local_bb4_ld__u95_inst0_writeack,
+   // AVM avm_local_bb4_ld__u124_inst0
+   output logic avm_local_bb4_ld__u124_inst0_enable,
+   output logic avm_local_bb4_ld__u124_inst0_read,
+   output logic avm_local_bb4_ld__u124_inst0_write,
+   output logic [4:0] avm_local_bb4_ld__u124_inst0_burstcount,
+   output logic [30:0] avm_local_bb4_ld__u124_inst0_address,
+   output logic [511:0] avm_local_bb4_ld__u124_inst0_writedata,
+   output logic [63:0] avm_local_bb4_ld__u124_inst0_byteenable,
+   input logic avm_local_bb4_ld__u124_inst0_waitrequest,
+   input logic [511:0] avm_local_bb4_ld__u124_inst0_readdata,
+   input logic avm_local_bb4_ld__u124_inst0_readdatavalid,
+   input logic avm_local_bb4_ld__u124_inst0_writeack,
+   // AVM avm_local_bb4_ld__u125_inst0
+   output logic avm_local_bb4_ld__u125_inst0_enable,
+   output logic avm_local_bb4_ld__u125_inst0_read,
+   output logic avm_local_bb4_ld__u125_inst0_write,
+   output logic [4:0] avm_local_bb4_ld__u125_inst0_burstcount,
+   output logic [30:0] avm_local_bb4_ld__u125_inst0_address,
+   output logic [511:0] avm_local_bb4_ld__u125_inst0_writedata,
+   output logic [63:0] avm_local_bb4_ld__u125_inst0_byteenable,
+   input logic avm_local_bb4_ld__u125_inst0_waitrequest,
+   input logic [511:0] avm_local_bb4_ld__u125_inst0_readdata,
+   input logic avm_local_bb4_ld__u125_inst0_readdatavalid,
+   input logic avm_local_bb4_ld__u125_inst0_writeack,
+   // AVM avm_local_bb4_ld__u126_inst0
+   output logic avm_local_bb4_ld__u126_inst0_enable,
+   output logic avm_local_bb4_ld__u126_inst0_read,
+   output logic avm_local_bb4_ld__u126_inst0_write,
+   output logic [4:0] avm_local_bb4_ld__u126_inst0_burstcount,
+   output logic [30:0] avm_local_bb4_ld__u126_inst0_address,
+   output logic [511:0] avm_local_bb4_ld__u126_inst0_writedata,
+   output logic [63:0] avm_local_bb4_ld__u126_inst0_byteenable,
+   input logic avm_local_bb4_ld__u126_inst0_waitrequest,
+   input logic [511:0] avm_local_bb4_ld__u126_inst0_readdata,
+   input logic avm_local_bb4_ld__u126_inst0_readdatavalid,
+   input logic avm_local_bb4_ld__u126_inst0_writeack,
+   // AVM avm_local_bb4_ld__u127_inst0
+   output logic avm_local_bb4_ld__u127_inst0_enable,
+   output logic avm_local_bb4_ld__u127_inst0_read,
+   output logic avm_local_bb4_ld__u127_inst0_write,
+   output logic [4:0] avm_local_bb4_ld__u127_inst0_burstcount,
+   output logic [30:0] avm_local_bb4_ld__u127_inst0_address,
+   output logic [511:0] avm_local_bb4_ld__u127_inst0_writedata,
+   output logic [63:0] avm_local_bb4_ld__u127_inst0_byteenable,
+   input logic avm_local_bb4_ld__u127_inst0_waitrequest,
+   input logic [511:0] avm_local_bb4_ld__u127_inst0_readdata,
+   input logic avm_local_bb4_ld__u127_inst0_readdatavalid,
+   input logic avm_local_bb4_ld__u127_inst0_writeack,
+   // AVM avm_local_bb4_ld__u99_inst0
+   output logic avm_local_bb4_ld__u99_inst0_enable,
+   output logic avm_local_bb4_ld__u99_inst0_read,
+   output logic avm_local_bb4_ld__u99_inst0_write,
+   output logic [4:0] avm_local_bb4_ld__u99_inst0_burstcount,
+   output logic [30:0] avm_local_bb4_ld__u99_inst0_address,
+   output logic [511:0] avm_local_bb4_ld__u99_inst0_writedata,
+   output logic [63:0] avm_local_bb4_ld__u99_inst0_byteenable,
+   input logic avm_local_bb4_ld__u99_inst0_waitrequest,
+   input logic [511:0] avm_local_bb4_ld__u99_inst0_readdata,
+   input logic avm_local_bb4_ld__u99_inst0_readdatavalid,
+   input logic avm_local_bb4_ld__u99_inst0_writeack,
    // AVST avm_channel_id_chan_Conf2Intere_active_read
    input logic avm_channel_id_chan_Conf2Intere_active_read_valid,
    output logic avm_channel_id_chan_Conf2Intere_active_read_ready,
@@ -24483,54 +24483,6 @@ module Krnl_InterE_top_wrapper_0
       .avm_local_bb4_ld__inst0_readdata(avm_local_bb4_ld__inst0_readdata),
       .avm_local_bb4_ld__inst0_readdatavalid(avm_local_bb4_ld__inst0_readdatavalid),
       .avm_local_bb4_ld__inst0_writeack(avm_local_bb4_ld__inst0_writeack),
-      // AVM avm_local_bb4_ld__u100_inst0
-      .avm_local_bb4_ld__u100_inst0_enable(avm_local_bb4_ld__u100_inst0_enable),
-      .avm_local_bb4_ld__u100_inst0_read(avm_local_bb4_ld__u100_inst0_read),
-      .avm_local_bb4_ld__u100_inst0_write(avm_local_bb4_ld__u100_inst0_write),
-      .avm_local_bb4_ld__u100_inst0_burstcount(avm_local_bb4_ld__u100_inst0_burstcount),
-      .avm_local_bb4_ld__u100_inst0_address(avm_local_bb4_ld__u100_inst0_address),
-      .avm_local_bb4_ld__u100_inst0_writedata(avm_local_bb4_ld__u100_inst0_writedata),
-      .avm_local_bb4_ld__u100_inst0_byteenable(avm_local_bb4_ld__u100_inst0_byteenable),
-      .avm_local_bb4_ld__u100_inst0_waitrequest(avm_local_bb4_ld__u100_inst0_waitrequest),
-      .avm_local_bb4_ld__u100_inst0_readdata(avm_local_bb4_ld__u100_inst0_readdata),
-      .avm_local_bb4_ld__u100_inst0_readdatavalid(avm_local_bb4_ld__u100_inst0_readdatavalid),
-      .avm_local_bb4_ld__u100_inst0_writeack(avm_local_bb4_ld__u100_inst0_writeack),
-      // AVM avm_local_bb4_ld__u101_inst0
-      .avm_local_bb4_ld__u101_inst0_enable(avm_local_bb4_ld__u101_inst0_enable),
-      .avm_local_bb4_ld__u101_inst0_read(avm_local_bb4_ld__u101_inst0_read),
-      .avm_local_bb4_ld__u101_inst0_write(avm_local_bb4_ld__u101_inst0_write),
-      .avm_local_bb4_ld__u101_inst0_burstcount(avm_local_bb4_ld__u101_inst0_burstcount),
-      .avm_local_bb4_ld__u101_inst0_address(avm_local_bb4_ld__u101_inst0_address),
-      .avm_local_bb4_ld__u101_inst0_writedata(avm_local_bb4_ld__u101_inst0_writedata),
-      .avm_local_bb4_ld__u101_inst0_byteenable(avm_local_bb4_ld__u101_inst0_byteenable),
-      .avm_local_bb4_ld__u101_inst0_waitrequest(avm_local_bb4_ld__u101_inst0_waitrequest),
-      .avm_local_bb4_ld__u101_inst0_readdata(avm_local_bb4_ld__u101_inst0_readdata),
-      .avm_local_bb4_ld__u101_inst0_readdatavalid(avm_local_bb4_ld__u101_inst0_readdatavalid),
-      .avm_local_bb4_ld__u101_inst0_writeack(avm_local_bb4_ld__u101_inst0_writeack),
-      // AVM avm_local_bb4_ld__u102_inst0
-      .avm_local_bb4_ld__u102_inst0_enable(avm_local_bb4_ld__u102_inst0_enable),
-      .avm_local_bb4_ld__u102_inst0_read(avm_local_bb4_ld__u102_inst0_read),
-      .avm_local_bb4_ld__u102_inst0_write(avm_local_bb4_ld__u102_inst0_write),
-      .avm_local_bb4_ld__u102_inst0_burstcount(avm_local_bb4_ld__u102_inst0_burstcount),
-      .avm_local_bb4_ld__u102_inst0_address(avm_local_bb4_ld__u102_inst0_address),
-      .avm_local_bb4_ld__u102_inst0_writedata(avm_local_bb4_ld__u102_inst0_writedata),
-      .avm_local_bb4_ld__u102_inst0_byteenable(avm_local_bb4_ld__u102_inst0_byteenable),
-      .avm_local_bb4_ld__u102_inst0_waitrequest(avm_local_bb4_ld__u102_inst0_waitrequest),
-      .avm_local_bb4_ld__u102_inst0_readdata(avm_local_bb4_ld__u102_inst0_readdata),
-      .avm_local_bb4_ld__u102_inst0_readdatavalid(avm_local_bb4_ld__u102_inst0_readdatavalid),
-      .avm_local_bb4_ld__u102_inst0_writeack(avm_local_bb4_ld__u102_inst0_writeack),
-      // AVM avm_local_bb4_ld__u103_inst0
-      .avm_local_bb4_ld__u103_inst0_enable(avm_local_bb4_ld__u103_inst0_enable),
-      .avm_local_bb4_ld__u103_inst0_read(avm_local_bb4_ld__u103_inst0_read),
-      .avm_local_bb4_ld__u103_inst0_write(avm_local_bb4_ld__u103_inst0_write),
-      .avm_local_bb4_ld__u103_inst0_burstcount(avm_local_bb4_ld__u103_inst0_burstcount),
-      .avm_local_bb4_ld__u103_inst0_address(avm_local_bb4_ld__u103_inst0_address),
-      .avm_local_bb4_ld__u103_inst0_writedata(avm_local_bb4_ld__u103_inst0_writedata),
-      .avm_local_bb4_ld__u103_inst0_byteenable(avm_local_bb4_ld__u103_inst0_byteenable),
-      .avm_local_bb4_ld__u103_inst0_waitrequest(avm_local_bb4_ld__u103_inst0_waitrequest),
-      .avm_local_bb4_ld__u103_inst0_readdata(avm_local_bb4_ld__u103_inst0_readdata),
-      .avm_local_bb4_ld__u103_inst0_readdatavalid(avm_local_bb4_ld__u103_inst0_readdatavalid),
-      .avm_local_bb4_ld__u103_inst0_writeack(avm_local_bb4_ld__u103_inst0_writeack),
       // AVM avm_local_bb4_ld__u104_inst0
       .avm_local_bb4_ld__u104_inst0_enable(avm_local_bb4_ld__u104_inst0_enable),
       .avm_local_bb4_ld__u104_inst0_read(avm_local_bb4_ld__u104_inst0_read),
@@ -24771,30 +24723,78 @@ module Krnl_InterE_top_wrapper_0
       .avm_local_bb4_ld__u123_inst0_readdata(avm_local_bb4_ld__u123_inst0_readdata),
       .avm_local_bb4_ld__u123_inst0_readdatavalid(avm_local_bb4_ld__u123_inst0_readdatavalid),
       .avm_local_bb4_ld__u123_inst0_writeack(avm_local_bb4_ld__u123_inst0_writeack),
-      // AVM avm_local_bb4_ld__u95_inst0
-      .avm_local_bb4_ld__u95_inst0_enable(avm_local_bb4_ld__u95_inst0_enable),
-      .avm_local_bb4_ld__u95_inst0_read(avm_local_bb4_ld__u95_inst0_read),
-      .avm_local_bb4_ld__u95_inst0_write(avm_local_bb4_ld__u95_inst0_write),
-      .avm_local_bb4_ld__u95_inst0_burstcount(avm_local_bb4_ld__u95_inst0_burstcount),
-      .avm_local_bb4_ld__u95_inst0_address(avm_local_bb4_ld__u95_inst0_address),
-      .avm_local_bb4_ld__u95_inst0_writedata(avm_local_bb4_ld__u95_inst0_writedata),
-      .avm_local_bb4_ld__u95_inst0_byteenable(avm_local_bb4_ld__u95_inst0_byteenable),
-      .avm_local_bb4_ld__u95_inst0_waitrequest(avm_local_bb4_ld__u95_inst0_waitrequest),
-      .avm_local_bb4_ld__u95_inst0_readdata(avm_local_bb4_ld__u95_inst0_readdata),
-      .avm_local_bb4_ld__u95_inst0_readdatavalid(avm_local_bb4_ld__u95_inst0_readdatavalid),
-      .avm_local_bb4_ld__u95_inst0_writeack(avm_local_bb4_ld__u95_inst0_writeack),
-      // AVST avst_local_bb2__chan_Conf2Intere_active_inst0
-      .avst_local_bb2__chan_Conf2Intere_active_inst0_valid(avm_channel_id_chan_Conf2Intere_active_read_valid),
-      .avst_local_bb2__chan_Conf2Intere_active_inst0_ready(avm_channel_id_chan_Conf2Intere_active_read_ready),
-      .avst_local_bb2__chan_Conf2Intere_active_inst0_data(avm_channel_id_chan_Conf2Intere_active_read_data),
-      // AVST avst_local_bb2__chan_Conf2Intere_cnt_inst0
-      .avst_local_bb2__chan_Conf2Intere_cnt_inst0_valid(avm_channel_id_chan_Conf2Intere_cnt_read_valid),
-      .avst_local_bb2__chan_Conf2Intere_cnt_inst0_ready(avm_channel_id_chan_Conf2Intere_cnt_read_ready),
-      .avst_local_bb2__chan_Conf2Intere_cnt_inst0_data(avm_channel_id_chan_Conf2Intere_cnt_read_data),
-      // AVST avst_local_bb2__chan_Conf2Intere_mode_inst0
-      .avst_local_bb2__chan_Conf2Intere_mode_inst0_valid(avm_channel_id_chan_Conf2Intere_mode_read_valid),
-      .avst_local_bb2__chan_Conf2Intere_mode_inst0_ready(avm_channel_id_chan_Conf2Intere_mode_read_ready),
-      .avst_local_bb2__chan_Conf2Intere_mode_inst0_data(avm_channel_id_chan_Conf2Intere_mode_read_data),
+      // AVM avm_local_bb4_ld__u124_inst0
+      .avm_local_bb4_ld__u124_inst0_enable(avm_local_bb4_ld__u124_inst0_enable),
+      .avm_local_bb4_ld__u124_inst0_read(avm_local_bb4_ld__u124_inst0_read),
+      .avm_local_bb4_ld__u124_inst0_write(avm_local_bb4_ld__u124_inst0_write),
+      .avm_local_bb4_ld__u124_inst0_burstcount(avm_local_bb4_ld__u124_inst0_burstcount),
+      .avm_local_bb4_ld__u124_inst0_address(avm_local_bb4_ld__u124_inst0_address),
+      .avm_local_bb4_ld__u124_inst0_writedata(avm_local_bb4_ld__u124_inst0_writedata),
+      .avm_local_bb4_ld__u124_inst0_byteenable(avm_local_bb4_ld__u124_inst0_byteenable),
+      .avm_local_bb4_ld__u124_inst0_waitrequest(avm_local_bb4_ld__u124_inst0_waitrequest),
+      .avm_local_bb4_ld__u124_inst0_readdata(avm_local_bb4_ld__u124_inst0_readdata),
+      .avm_local_bb4_ld__u124_inst0_readdatavalid(avm_local_bb4_ld__u124_inst0_readdatavalid),
+      .avm_local_bb4_ld__u124_inst0_writeack(avm_local_bb4_ld__u124_inst0_writeack),
+      // AVM avm_local_bb4_ld__u125_inst0
+      .avm_local_bb4_ld__u125_inst0_enable(avm_local_bb4_ld__u125_inst0_enable),
+      .avm_local_bb4_ld__u125_inst0_read(avm_local_bb4_ld__u125_inst0_read),
+      .avm_local_bb4_ld__u125_inst0_write(avm_local_bb4_ld__u125_inst0_write),
+      .avm_local_bb4_ld__u125_inst0_burstcount(avm_local_bb4_ld__u125_inst0_burstcount),
+      .avm_local_bb4_ld__u125_inst0_address(avm_local_bb4_ld__u125_inst0_address),
+      .avm_local_bb4_ld__u125_inst0_writedata(avm_local_bb4_ld__u125_inst0_writedata),
+      .avm_local_bb4_ld__u125_inst0_byteenable(avm_local_bb4_ld__u125_inst0_byteenable),
+      .avm_local_bb4_ld__u125_inst0_waitrequest(avm_local_bb4_ld__u125_inst0_waitrequest),
+      .avm_local_bb4_ld__u125_inst0_readdata(avm_local_bb4_ld__u125_inst0_readdata),
+      .avm_local_bb4_ld__u125_inst0_readdatavalid(avm_local_bb4_ld__u125_inst0_readdatavalid),
+      .avm_local_bb4_ld__u125_inst0_writeack(avm_local_bb4_ld__u125_inst0_writeack),
+      // AVM avm_local_bb4_ld__u126_inst0
+      .avm_local_bb4_ld__u126_inst0_enable(avm_local_bb4_ld__u126_inst0_enable),
+      .avm_local_bb4_ld__u126_inst0_read(avm_local_bb4_ld__u126_inst0_read),
+      .avm_local_bb4_ld__u126_inst0_write(avm_local_bb4_ld__u126_inst0_write),
+      .avm_local_bb4_ld__u126_inst0_burstcount(avm_local_bb4_ld__u126_inst0_burstcount),
+      .avm_local_bb4_ld__u126_inst0_address(avm_local_bb4_ld__u126_inst0_address),
+      .avm_local_bb4_ld__u126_inst0_writedata(avm_local_bb4_ld__u126_inst0_writedata),
+      .avm_local_bb4_ld__u126_inst0_byteenable(avm_local_bb4_ld__u126_inst0_byteenable),
+      .avm_local_bb4_ld__u126_inst0_waitrequest(avm_local_bb4_ld__u126_inst0_waitrequest),
+      .avm_local_bb4_ld__u126_inst0_readdata(avm_local_bb4_ld__u126_inst0_readdata),
+      .avm_local_bb4_ld__u126_inst0_readdatavalid(avm_local_bb4_ld__u126_inst0_readdatavalid),
+      .avm_local_bb4_ld__u126_inst0_writeack(avm_local_bb4_ld__u126_inst0_writeack),
+      // AVM avm_local_bb4_ld__u127_inst0
+      .avm_local_bb4_ld__u127_inst0_enable(avm_local_bb4_ld__u127_inst0_enable),
+      .avm_local_bb4_ld__u127_inst0_read(avm_local_bb4_ld__u127_inst0_read),
+      .avm_local_bb4_ld__u127_inst0_write(avm_local_bb4_ld__u127_inst0_write),
+      .avm_local_bb4_ld__u127_inst0_burstcount(avm_local_bb4_ld__u127_inst0_burstcount),
+      .avm_local_bb4_ld__u127_inst0_address(avm_local_bb4_ld__u127_inst0_address),
+      .avm_local_bb4_ld__u127_inst0_writedata(avm_local_bb4_ld__u127_inst0_writedata),
+      .avm_local_bb4_ld__u127_inst0_byteenable(avm_local_bb4_ld__u127_inst0_byteenable),
+      .avm_local_bb4_ld__u127_inst0_waitrequest(avm_local_bb4_ld__u127_inst0_waitrequest),
+      .avm_local_bb4_ld__u127_inst0_readdata(avm_local_bb4_ld__u127_inst0_readdata),
+      .avm_local_bb4_ld__u127_inst0_readdatavalid(avm_local_bb4_ld__u127_inst0_readdatavalid),
+      .avm_local_bb4_ld__u127_inst0_writeack(avm_local_bb4_ld__u127_inst0_writeack),
+      // AVM avm_local_bb4_ld__u99_inst0
+      .avm_local_bb4_ld__u99_inst0_enable(avm_local_bb4_ld__u99_inst0_enable),
+      .avm_local_bb4_ld__u99_inst0_read(avm_local_bb4_ld__u99_inst0_read),
+      .avm_local_bb4_ld__u99_inst0_write(avm_local_bb4_ld__u99_inst0_write),
+      .avm_local_bb4_ld__u99_inst0_burstcount(avm_local_bb4_ld__u99_inst0_burstcount),
+      .avm_local_bb4_ld__u99_inst0_address(avm_local_bb4_ld__u99_inst0_address),
+      .avm_local_bb4_ld__u99_inst0_writedata(avm_local_bb4_ld__u99_inst0_writedata),
+      .avm_local_bb4_ld__u99_inst0_byteenable(avm_local_bb4_ld__u99_inst0_byteenable),
+      .avm_local_bb4_ld__u99_inst0_waitrequest(avm_local_bb4_ld__u99_inst0_waitrequest),
+      .avm_local_bb4_ld__u99_inst0_readdata(avm_local_bb4_ld__u99_inst0_readdata),
+      .avm_local_bb4_ld__u99_inst0_readdatavalid(avm_local_bb4_ld__u99_inst0_readdatavalid),
+      .avm_local_bb4_ld__u99_inst0_writeack(avm_local_bb4_ld__u99_inst0_writeack),
+      // AVST avst_local_bb1__chan_Conf2Intere_active_inst0
+      .avst_local_bb1__chan_Conf2Intere_active_inst0_valid(avm_channel_id_chan_Conf2Intere_active_read_valid),
+      .avst_local_bb1__chan_Conf2Intere_active_inst0_ready(avm_channel_id_chan_Conf2Intere_active_read_ready),
+      .avst_local_bb1__chan_Conf2Intere_active_inst0_data(avm_channel_id_chan_Conf2Intere_active_read_data),
+      // AVST avst_local_bb1__chan_Conf2Intere_cnt_inst0
+      .avst_local_bb1__chan_Conf2Intere_cnt_inst0_valid(avm_channel_id_chan_Conf2Intere_cnt_read_valid),
+      .avst_local_bb1__chan_Conf2Intere_cnt_inst0_ready(avm_channel_id_chan_Conf2Intere_cnt_read_ready),
+      .avst_local_bb1__chan_Conf2Intere_cnt_inst0_data(avm_channel_id_chan_Conf2Intere_cnt_read_data),
+      // AVST avst_local_bb1__chan_Conf2Intere_mode_inst0
+      .avst_local_bb1__chan_Conf2Intere_mode_inst0_valid(avm_channel_id_chan_Conf2Intere_mode_read_valid),
+      .avst_local_bb1__chan_Conf2Intere_mode_inst0_ready(avm_channel_id_chan_Conf2Intere_mode_read_ready),
+      .avst_local_bb1__chan_Conf2Intere_mode_inst0_data(avm_channel_id_chan_Conf2Intere_mode_read_data),
       // AVST avst_local_bb2__chan_Conf2Intere_x_inst0
       .avst_local_bb2__chan_Conf2Intere_x_inst0_valid(avm_channel_id_chan_Conf2Intere_x_read_valid),
       .avst_local_bb2__chan_Conf2Intere_x_inst0_ready(avm_channel_id_chan_Conf2Intere_x_read_ready),
@@ -24903,54 +24903,6 @@ module Krnl_IntraE_top_wrapper_0
    input logic [511:0] avm_local_bb3_st__inst0_readdata,
    input logic avm_local_bb3_st__inst0_readdatavalid,
    input logic avm_local_bb3_st__inst0_writeack,
-   // AVM avm_local_bb4_ld__u18_inst0
-   output logic avm_local_bb4_ld__u18_inst0_enable,
-   output logic avm_local_bb4_ld__u18_inst0_read,
-   output logic avm_local_bb4_ld__u18_inst0_write,
-   output logic [4:0] avm_local_bb4_ld__u18_inst0_burstcount,
-   output logic [30:0] avm_local_bb4_ld__u18_inst0_address,
-   output logic [511:0] avm_local_bb4_ld__u18_inst0_writedata,
-   output logic [63:0] avm_local_bb4_ld__u18_inst0_byteenable,
-   input logic avm_local_bb4_ld__u18_inst0_waitrequest,
-   input logic [511:0] avm_local_bb4_ld__u18_inst0_readdata,
-   input logic avm_local_bb4_ld__u18_inst0_readdatavalid,
-   input logic avm_local_bb4_ld__u18_inst0_writeack,
-   // AVM avm_local_bb4_ld__u19_inst0
-   output logic avm_local_bb4_ld__u19_inst0_enable,
-   output logic avm_local_bb4_ld__u19_inst0_read,
-   output logic avm_local_bb4_ld__u19_inst0_write,
-   output logic [4:0] avm_local_bb4_ld__u19_inst0_burstcount,
-   output logic [30:0] avm_local_bb4_ld__u19_inst0_address,
-   output logic [511:0] avm_local_bb4_ld__u19_inst0_writedata,
-   output logic [63:0] avm_local_bb4_ld__u19_inst0_byteenable,
-   input logic avm_local_bb4_ld__u19_inst0_waitrequest,
-   input logic [511:0] avm_local_bb4_ld__u19_inst0_readdata,
-   input logic avm_local_bb4_ld__u19_inst0_readdatavalid,
-   input logic avm_local_bb4_ld__u19_inst0_writeack,
-   // AVM avm_local_bb4_ld__u20_inst0
-   output logic avm_local_bb4_ld__u20_inst0_enable,
-   output logic avm_local_bb4_ld__u20_inst0_read,
-   output logic avm_local_bb4_ld__u20_inst0_write,
-   output logic [4:0] avm_local_bb4_ld__u20_inst0_burstcount,
-   output logic [30:0] avm_local_bb4_ld__u20_inst0_address,
-   output logic [511:0] avm_local_bb4_ld__u20_inst0_writedata,
-   output logic [63:0] avm_local_bb4_ld__u20_inst0_byteenable,
-   input logic avm_local_bb4_ld__u20_inst0_waitrequest,
-   input logic [511:0] avm_local_bb4_ld__u20_inst0_readdata,
-   input logic avm_local_bb4_ld__u20_inst0_readdatavalid,
-   input logic avm_local_bb4_ld__u20_inst0_writeack,
-   // AVM avm_local_bb4_ld__u21_inst0
-   output logic avm_local_bb4_ld__u21_inst0_enable,
-   output logic avm_local_bb4_ld__u21_inst0_read,
-   output logic avm_local_bb4_ld__u21_inst0_write,
-   output logic [4:0] avm_local_bb4_ld__u21_inst0_burstcount,
-   output logic [30:0] avm_local_bb4_ld__u21_inst0_address,
-   output logic [511:0] avm_local_bb4_ld__u21_inst0_writedata,
-   output logic [63:0] avm_local_bb4_ld__u21_inst0_byteenable,
-   input logic avm_local_bb4_ld__u21_inst0_waitrequest,
-   input logic [511:0] avm_local_bb4_ld__u21_inst0_readdata,
-   input logic avm_local_bb4_ld__u21_inst0_readdatavalid,
-   input logic avm_local_bb4_ld__u21_inst0_writeack,
    // AVM avm_local_bb4_ld__u22_inst0
    output logic avm_local_bb4_ld__u22_inst0_enable,
    output logic avm_local_bb4_ld__u22_inst0_read,
@@ -25035,6 +24987,54 @@ module Krnl_IntraE_top_wrapper_0
    input logic [511:0] avm_local_bb4_ld__u28_inst0_readdata,
    input logic avm_local_bb4_ld__u28_inst0_readdatavalid,
    input logic avm_local_bb4_ld__u28_inst0_writeack,
+   // AVM avm_local_bb4_ld__u29_inst0
+   output logic avm_local_bb4_ld__u29_inst0_enable,
+   output logic avm_local_bb4_ld__u29_inst0_read,
+   output logic avm_local_bb4_ld__u29_inst0_write,
+   output logic [4:0] avm_local_bb4_ld__u29_inst0_burstcount,
+   output logic [30:0] avm_local_bb4_ld__u29_inst0_address,
+   output logic [511:0] avm_local_bb4_ld__u29_inst0_writedata,
+   output logic [63:0] avm_local_bb4_ld__u29_inst0_byteenable,
+   input logic avm_local_bb4_ld__u29_inst0_waitrequest,
+   input logic [511:0] avm_local_bb4_ld__u29_inst0_readdata,
+   input logic avm_local_bb4_ld__u29_inst0_readdatavalid,
+   input logic avm_local_bb4_ld__u29_inst0_writeack,
+   // AVM avm_local_bb4_ld__u30_inst0
+   output logic avm_local_bb4_ld__u30_inst0_enable,
+   output logic avm_local_bb4_ld__u30_inst0_read,
+   output logic avm_local_bb4_ld__u30_inst0_write,
+   output logic [4:0] avm_local_bb4_ld__u30_inst0_burstcount,
+   output logic [30:0] avm_local_bb4_ld__u30_inst0_address,
+   output logic [511:0] avm_local_bb4_ld__u30_inst0_writedata,
+   output logic [63:0] avm_local_bb4_ld__u30_inst0_byteenable,
+   input logic avm_local_bb4_ld__u30_inst0_waitrequest,
+   input logic [511:0] avm_local_bb4_ld__u30_inst0_readdata,
+   input logic avm_local_bb4_ld__u30_inst0_readdatavalid,
+   input logic avm_local_bb4_ld__u30_inst0_writeack,
+   // AVM avm_local_bb4_ld__u31_inst0
+   output logic avm_local_bb4_ld__u31_inst0_enable,
+   output logic avm_local_bb4_ld__u31_inst0_read,
+   output logic avm_local_bb4_ld__u31_inst0_write,
+   output logic [4:0] avm_local_bb4_ld__u31_inst0_burstcount,
+   output logic [30:0] avm_local_bb4_ld__u31_inst0_address,
+   output logic [511:0] avm_local_bb4_ld__u31_inst0_writedata,
+   output logic [63:0] avm_local_bb4_ld__u31_inst0_byteenable,
+   input logic avm_local_bb4_ld__u31_inst0_waitrequest,
+   input logic [511:0] avm_local_bb4_ld__u31_inst0_readdata,
+   input logic avm_local_bb4_ld__u31_inst0_readdatavalid,
+   input logic avm_local_bb4_ld__u31_inst0_writeack,
+   // AVM avm_local_bb4_ld__u32_inst0
+   output logic avm_local_bb4_ld__u32_inst0_enable,
+   output logic avm_local_bb4_ld__u32_inst0_read,
+   output logic avm_local_bb4_ld__u32_inst0_write,
+   output logic [4:0] avm_local_bb4_ld__u32_inst0_burstcount,
+   output logic [30:0] avm_local_bb4_ld__u32_inst0_address,
+   output logic [511:0] avm_local_bb4_ld__u32_inst0_writedata,
+   output logic [63:0] avm_local_bb4_ld__u32_inst0_byteenable,
+   input logic avm_local_bb4_ld__u32_inst0_waitrequest,
+   input logic [511:0] avm_local_bb4_ld__u32_inst0_readdata,
+   input logic avm_local_bb4_ld__u32_inst0_readdatavalid,
+   input logic avm_local_bb4_ld__u32_inst0_writeack,
    // AVM avm_local_bb4_ld_memcoalesce_KerConst_load_0_inst0
    output logic avm_local_bb4_ld_memcoalesce_KerConst_load_0_inst0_enable,
    output logic avm_local_bb4_ld_memcoalesce_KerConst_load_0_inst0_read,
@@ -25216,54 +25216,6 @@ module Krnl_IntraE_top_wrapper_0
       .avm_local_bb3_st__inst0_readdata(avm_local_bb3_st__inst0_readdata),
       .avm_local_bb3_st__inst0_readdatavalid(avm_local_bb3_st__inst0_readdatavalid),
       .avm_local_bb3_st__inst0_writeack(avm_local_bb3_st__inst0_writeack),
-      // AVM avm_local_bb4_ld__u18_inst0
-      .avm_local_bb4_ld__u18_inst0_enable(avm_local_bb4_ld__u18_inst0_enable),
-      .avm_local_bb4_ld__u18_inst0_read(avm_local_bb4_ld__u18_inst0_read),
-      .avm_local_bb4_ld__u18_inst0_write(avm_local_bb4_ld__u18_inst0_write),
-      .avm_local_bb4_ld__u18_inst0_burstcount(avm_local_bb4_ld__u18_inst0_burstcount),
-      .avm_local_bb4_ld__u18_inst0_address(avm_local_bb4_ld__u18_inst0_address),
-      .avm_local_bb4_ld__u18_inst0_writedata(avm_local_bb4_ld__u18_inst0_writedata),
-      .avm_local_bb4_ld__u18_inst0_byteenable(avm_local_bb4_ld__u18_inst0_byteenable),
-      .avm_local_bb4_ld__u18_inst0_waitrequest(avm_local_bb4_ld__u18_inst0_waitrequest),
-      .avm_local_bb4_ld__u18_inst0_readdata(avm_local_bb4_ld__u18_inst0_readdata),
-      .avm_local_bb4_ld__u18_inst0_readdatavalid(avm_local_bb4_ld__u18_inst0_readdatavalid),
-      .avm_local_bb4_ld__u18_inst0_writeack(avm_local_bb4_ld__u18_inst0_writeack),
-      // AVM avm_local_bb4_ld__u19_inst0
-      .avm_local_bb4_ld__u19_inst0_enable(avm_local_bb4_ld__u19_inst0_enable),
-      .avm_local_bb4_ld__u19_inst0_read(avm_local_bb4_ld__u19_inst0_read),
-      .avm_local_bb4_ld__u19_inst0_write(avm_local_bb4_ld__u19_inst0_write),
-      .avm_local_bb4_ld__u19_inst0_burstcount(avm_local_bb4_ld__u19_inst0_burstcount),
-      .avm_local_bb4_ld__u19_inst0_address(avm_local_bb4_ld__u19_inst0_address),
-      .avm_local_bb4_ld__u19_inst0_writedata(avm_local_bb4_ld__u19_inst0_writedata),
-      .avm_local_bb4_ld__u19_inst0_byteenable(avm_local_bb4_ld__u19_inst0_byteenable),
-      .avm_local_bb4_ld__u19_inst0_waitrequest(avm_local_bb4_ld__u19_inst0_waitrequest),
-      .avm_local_bb4_ld__u19_inst0_readdata(avm_local_bb4_ld__u19_inst0_readdata),
-      .avm_local_bb4_ld__u19_inst0_readdatavalid(avm_local_bb4_ld__u19_inst0_readdatavalid),
-      .avm_local_bb4_ld__u19_inst0_writeack(avm_local_bb4_ld__u19_inst0_writeack),
-      // AVM avm_local_bb4_ld__u20_inst0
-      .avm_local_bb4_ld__u20_inst0_enable(avm_local_bb4_ld__u20_inst0_enable),
-      .avm_local_bb4_ld__u20_inst0_read(avm_local_bb4_ld__u20_inst0_read),
-      .avm_local_bb4_ld__u20_inst0_write(avm_local_bb4_ld__u20_inst0_write),
-      .avm_local_bb4_ld__u20_inst0_burstcount(avm_local_bb4_ld__u20_inst0_burstcount),
-      .avm_local_bb4_ld__u20_inst0_address(avm_local_bb4_ld__u20_inst0_address),
-      .avm_local_bb4_ld__u20_inst0_writedata(avm_local_bb4_ld__u20_inst0_writedata),
-      .avm_local_bb4_ld__u20_inst0_byteenable(avm_local_bb4_ld__u20_inst0_byteenable),
-      .avm_local_bb4_ld__u20_inst0_waitrequest(avm_local_bb4_ld__u20_inst0_waitrequest),
-      .avm_local_bb4_ld__u20_inst0_readdata(avm_local_bb4_ld__u20_inst0_readdata),
-      .avm_local_bb4_ld__u20_inst0_readdatavalid(avm_local_bb4_ld__u20_inst0_readdatavalid),
-      .avm_local_bb4_ld__u20_inst0_writeack(avm_local_bb4_ld__u20_inst0_writeack),
-      // AVM avm_local_bb4_ld__u21_inst0
-      .avm_local_bb4_ld__u21_inst0_enable(avm_local_bb4_ld__u21_inst0_enable),
-      .avm_local_bb4_ld__u21_inst0_read(avm_local_bb4_ld__u21_inst0_read),
-      .avm_local_bb4_ld__u21_inst0_write(avm_local_bb4_ld__u21_inst0_write),
-      .avm_local_bb4_ld__u21_inst0_burstcount(avm_local_bb4_ld__u21_inst0_burstcount),
-      .avm_local_bb4_ld__u21_inst0_address(avm_local_bb4_ld__u21_inst0_address),
-      .avm_local_bb4_ld__u21_inst0_writedata(avm_local_bb4_ld__u21_inst0_writedata),
-      .avm_local_bb4_ld__u21_inst0_byteenable(avm_local_bb4_ld__u21_inst0_byteenable),
-      .avm_local_bb4_ld__u21_inst0_waitrequest(avm_local_bb4_ld__u21_inst0_waitrequest),
-      .avm_local_bb4_ld__u21_inst0_readdata(avm_local_bb4_ld__u21_inst0_readdata),
-      .avm_local_bb4_ld__u21_inst0_readdatavalid(avm_local_bb4_ld__u21_inst0_readdatavalid),
-      .avm_local_bb4_ld__u21_inst0_writeack(avm_local_bb4_ld__u21_inst0_writeack),
       // AVM avm_local_bb4_ld__u22_inst0
       .avm_local_bb4_ld__u22_inst0_enable(avm_local_bb4_ld__u22_inst0_enable),
       .avm_local_bb4_ld__u22_inst0_read(avm_local_bb4_ld__u22_inst0_read),
@@ -25348,6 +25300,54 @@ module Krnl_IntraE_top_wrapper_0
       .avm_local_bb4_ld__u28_inst0_readdata(avm_local_bb4_ld__u28_inst0_readdata),
       .avm_local_bb4_ld__u28_inst0_readdatavalid(avm_local_bb4_ld__u28_inst0_readdatavalid),
       .avm_local_bb4_ld__u28_inst0_writeack(avm_local_bb4_ld__u28_inst0_writeack),
+      // AVM avm_local_bb4_ld__u29_inst0
+      .avm_local_bb4_ld__u29_inst0_enable(avm_local_bb4_ld__u29_inst0_enable),
+      .avm_local_bb4_ld__u29_inst0_read(avm_local_bb4_ld__u29_inst0_read),
+      .avm_local_bb4_ld__u29_inst0_write(avm_local_bb4_ld__u29_inst0_write),
+      .avm_local_bb4_ld__u29_inst0_burstcount(avm_local_bb4_ld__u29_inst0_burstcount),
+      .avm_local_bb4_ld__u29_inst0_address(avm_local_bb4_ld__u29_inst0_address),
+      .avm_local_bb4_ld__u29_inst0_writedata(avm_local_bb4_ld__u29_inst0_writedata),
+      .avm_local_bb4_ld__u29_inst0_byteenable(avm_local_bb4_ld__u29_inst0_byteenable),
+      .avm_local_bb4_ld__u29_inst0_waitrequest(avm_local_bb4_ld__u29_inst0_waitrequest),
+      .avm_local_bb4_ld__u29_inst0_readdata(avm_local_bb4_ld__u29_inst0_readdata),
+      .avm_local_bb4_ld__u29_inst0_readdatavalid(avm_local_bb4_ld__u29_inst0_readdatavalid),
+      .avm_local_bb4_ld__u29_inst0_writeack(avm_local_bb4_ld__u29_inst0_writeack),
+      // AVM avm_local_bb4_ld__u30_inst0
+      .avm_local_bb4_ld__u30_inst0_enable(avm_local_bb4_ld__u30_inst0_enable),
+      .avm_local_bb4_ld__u30_inst0_read(avm_local_bb4_ld__u30_inst0_read),
+      .avm_local_bb4_ld__u30_inst0_write(avm_local_bb4_ld__u30_inst0_write),
+      .avm_local_bb4_ld__u30_inst0_burstcount(avm_local_bb4_ld__u30_inst0_burstcount),
+      .avm_local_bb4_ld__u30_inst0_address(avm_local_bb4_ld__u30_inst0_address),
+      .avm_local_bb4_ld__u30_inst0_writedata(avm_local_bb4_ld__u30_inst0_writedata),
+      .avm_local_bb4_ld__u30_inst0_byteenable(avm_local_bb4_ld__u30_inst0_byteenable),
+      .avm_local_bb4_ld__u30_inst0_waitrequest(avm_local_bb4_ld__u30_inst0_waitrequest),
+      .avm_local_bb4_ld__u30_inst0_readdata(avm_local_bb4_ld__u30_inst0_readdata),
+      .avm_local_bb4_ld__u30_inst0_readdatavalid(avm_local_bb4_ld__u30_inst0_readdatavalid),
+      .avm_local_bb4_ld__u30_inst0_writeack(avm_local_bb4_ld__u30_inst0_writeack),
+      // AVM avm_local_bb4_ld__u31_inst0
+      .avm_local_bb4_ld__u31_inst0_enable(avm_local_bb4_ld__u31_inst0_enable),
+      .avm_local_bb4_ld__u31_inst0_read(avm_local_bb4_ld__u31_inst0_read),
+      .avm_local_bb4_ld__u31_inst0_write(avm_local_bb4_ld__u31_inst0_write),
+      .avm_local_bb4_ld__u31_inst0_burstcount(avm_local_bb4_ld__u31_inst0_burstcount),
+      .avm_local_bb4_ld__u31_inst0_address(avm_local_bb4_ld__u31_inst0_address),
+      .avm_local_bb4_ld__u31_inst0_writedata(avm_local_bb4_ld__u31_inst0_writedata),
+      .avm_local_bb4_ld__u31_inst0_byteenable(avm_local_bb4_ld__u31_inst0_byteenable),
+      .avm_local_bb4_ld__u31_inst0_waitrequest(avm_local_bb4_ld__u31_inst0_waitrequest),
+      .avm_local_bb4_ld__u31_inst0_readdata(avm_local_bb4_ld__u31_inst0_readdata),
+      .avm_local_bb4_ld__u31_inst0_readdatavalid(avm_local_bb4_ld__u31_inst0_readdatavalid),
+      .avm_local_bb4_ld__u31_inst0_writeack(avm_local_bb4_ld__u31_inst0_writeack),
+      // AVM avm_local_bb4_ld__u32_inst0
+      .avm_local_bb4_ld__u32_inst0_enable(avm_local_bb4_ld__u32_inst0_enable),
+      .avm_local_bb4_ld__u32_inst0_read(avm_local_bb4_ld__u32_inst0_read),
+      .avm_local_bb4_ld__u32_inst0_write(avm_local_bb4_ld__u32_inst0_write),
+      .avm_local_bb4_ld__u32_inst0_burstcount(avm_local_bb4_ld__u32_inst0_burstcount),
+      .avm_local_bb4_ld__u32_inst0_address(avm_local_bb4_ld__u32_inst0_address),
+      .avm_local_bb4_ld__u32_inst0_writedata(avm_local_bb4_ld__u32_inst0_writedata),
+      .avm_local_bb4_ld__u32_inst0_byteenable(avm_local_bb4_ld__u32_inst0_byteenable),
+      .avm_local_bb4_ld__u32_inst0_waitrequest(avm_local_bb4_ld__u32_inst0_waitrequest),
+      .avm_local_bb4_ld__u32_inst0_readdata(avm_local_bb4_ld__u32_inst0_readdata),
+      .avm_local_bb4_ld__u32_inst0_readdatavalid(avm_local_bb4_ld__u32_inst0_readdatavalid),
+      .avm_local_bb4_ld__u32_inst0_writeack(avm_local_bb4_ld__u32_inst0_writeack),
       // AVM avm_local_bb4_ld_memcoalesce_KerConst_load_0_inst0
       .avm_local_bb4_ld_memcoalesce_KerConst_load_0_inst0_enable(avm_local_bb4_ld_memcoalesce_KerConst_load_0_inst0_enable),
       .avm_local_bb4_ld_memcoalesce_KerConst_load_0_inst0_read(avm_local_bb4_ld_memcoalesce_KerConst_load_0_inst0_read),
@@ -25384,102 +25384,102 @@ module Krnl_IntraE_top_wrapper_0
       .avm_local_bb4_ld__inst0_readdata(local_avm_aspace16_readdata[0][1]),
       .avm_local_bb4_ld__inst0_readdatavalid(local_avm_aspace16_readdatavalid[0][1]),
       .avm_local_bb4_ld__inst0_writeack(local_avm_aspace16_writeack[0][1]),
-      // AVM avm_local_bb4_ld__u14_inst0
-      .avm_local_bb4_ld__u14_inst0_enable(local_avm_aspace16_enable[0][2]),
-      .avm_local_bb4_ld__u14_inst0_read(local_avm_aspace16_read[0][2]),
-      .avm_local_bb4_ld__u14_inst0_write(local_avm_aspace16_write[0][2]),
-      .avm_local_bb4_ld__u14_inst0_burstcount(local_avm_aspace16_burstcount[0][2]),
-      .avm_local_bb4_ld__u14_inst0_address(local_avm_aspace16_address[0][2]),
-      .avm_local_bb4_ld__u14_inst0_writedata(local_avm_aspace16_writedata[0][2]),
-      .avm_local_bb4_ld__u14_inst0_byteenable(local_avm_aspace16_byteenable[0][2]),
-      .avm_local_bb4_ld__u14_inst0_waitrequest(local_avm_aspace16_waitrequest[0][2]),
-      .avm_local_bb4_ld__u14_inst0_readdata(local_avm_aspace16_readdata[0][2]),
-      .avm_local_bb4_ld__u14_inst0_readdatavalid(local_avm_aspace16_readdatavalid[0][2]),
-      .avm_local_bb4_ld__u14_inst0_writeack(local_avm_aspace16_writeack[0][2]),
-      // AVM avm_local_bb2_st__u3_inst0
-      .avm_local_bb2_st__u3_inst0_enable(local_avm_aspace18_enable[0][0]),
-      .avm_local_bb2_st__u3_inst0_read(local_avm_aspace18_read[0][0]),
-      .avm_local_bb2_st__u3_inst0_write(local_avm_aspace18_write[0][0]),
-      .avm_local_bb2_st__u3_inst0_burstcount(local_avm_aspace18_burstcount[0][0]),
-      .avm_local_bb2_st__u3_inst0_address(local_avm_aspace18_address[0][0]),
-      .avm_local_bb2_st__u3_inst0_writedata(local_avm_aspace18_writedata[0][0]),
-      .avm_local_bb2_st__u3_inst0_byteenable(local_avm_aspace18_byteenable[0][0]),
-      .avm_local_bb2_st__u3_inst0_waitrequest(local_avm_aspace18_waitrequest[0][0]),
-      .avm_local_bb2_st__u3_inst0_readdata(local_avm_aspace18_readdata[0][0]),
-      .avm_local_bb2_st__u3_inst0_readdatavalid(local_avm_aspace18_readdatavalid[0][0]),
-      .avm_local_bb2_st__u3_inst0_writeack(local_avm_aspace18_writeack[0][0]),
-      // AVM avm_local_bb4_ld__u13_inst0
-      .avm_local_bb4_ld__u13_inst0_enable(local_avm_aspace18_enable[0][1]),
-      .avm_local_bb4_ld__u13_inst0_read(local_avm_aspace18_read[0][1]),
-      .avm_local_bb4_ld__u13_inst0_write(local_avm_aspace18_write[0][1]),
-      .avm_local_bb4_ld__u13_inst0_burstcount(local_avm_aspace18_burstcount[0][1]),
-      .avm_local_bb4_ld__u13_inst0_address(local_avm_aspace18_address[0][1]),
-      .avm_local_bb4_ld__u13_inst0_writedata(local_avm_aspace18_writedata[0][1]),
-      .avm_local_bb4_ld__u13_inst0_byteenable(local_avm_aspace18_byteenable[0][1]),
-      .avm_local_bb4_ld__u13_inst0_waitrequest(local_avm_aspace18_waitrequest[0][1]),
-      .avm_local_bb4_ld__u13_inst0_readdata(local_avm_aspace18_readdata[0][1]),
-      .avm_local_bb4_ld__u13_inst0_readdatavalid(local_avm_aspace18_readdatavalid[0][1]),
-      .avm_local_bb4_ld__u13_inst0_writeack(local_avm_aspace18_writeack[0][1]),
-      // AVM avm_local_bb4_ld__u15_inst0
-      .avm_local_bb4_ld__u15_inst0_enable(local_avm_aspace18_enable[0][2]),
-      .avm_local_bb4_ld__u15_inst0_read(local_avm_aspace18_read[0][2]),
-      .avm_local_bb4_ld__u15_inst0_write(local_avm_aspace18_write[0][2]),
-      .avm_local_bb4_ld__u15_inst0_burstcount(local_avm_aspace18_burstcount[0][2]),
-      .avm_local_bb4_ld__u15_inst0_address(local_avm_aspace18_address[0][2]),
-      .avm_local_bb4_ld__u15_inst0_writedata(local_avm_aspace18_writedata[0][2]),
-      .avm_local_bb4_ld__u15_inst0_byteenable(local_avm_aspace18_byteenable[0][2]),
-      .avm_local_bb4_ld__u15_inst0_waitrequest(local_avm_aspace18_waitrequest[0][2]),
-      .avm_local_bb4_ld__u15_inst0_readdata(local_avm_aspace18_readdata[0][2]),
-      .avm_local_bb4_ld__u15_inst0_readdatavalid(local_avm_aspace18_readdatavalid[0][2]),
-      .avm_local_bb4_ld__u15_inst0_writeack(local_avm_aspace18_writeack[0][2]),
-      // AVM avm_local_bb2_st__u5_inst0
-      .avm_local_bb2_st__u5_inst0_enable(local_avm_aspace20_enable[0][0]),
-      .avm_local_bb2_st__u5_inst0_read(local_avm_aspace20_read[0][0]),
-      .avm_local_bb2_st__u5_inst0_write(local_avm_aspace20_write[0][0]),
-      .avm_local_bb2_st__u5_inst0_burstcount(local_avm_aspace20_burstcount[0][0]),
-      .avm_local_bb2_st__u5_inst0_address(local_avm_aspace20_address[0][0]),
-      .avm_local_bb2_st__u5_inst0_writedata(local_avm_aspace20_writedata[0][0]),
-      .avm_local_bb2_st__u5_inst0_byteenable(local_avm_aspace20_byteenable[0][0]),
-      .avm_local_bb2_st__u5_inst0_waitrequest(local_avm_aspace20_waitrequest[0][0]),
-      .avm_local_bb2_st__u5_inst0_readdata(local_avm_aspace20_readdata[0][0]),
-      .avm_local_bb2_st__u5_inst0_readdatavalid(local_avm_aspace20_readdatavalid[0][0]),
-      .avm_local_bb2_st__u5_inst0_writeack(local_avm_aspace20_writeack[0][0]),
-      // AVM avm_local_bb4_ld__u16_inst0
-      .avm_local_bb4_ld__u16_inst0_enable(local_avm_aspace20_enable[0][1]),
-      .avm_local_bb4_ld__u16_inst0_read(local_avm_aspace20_read[0][1]),
-      .avm_local_bb4_ld__u16_inst0_write(local_avm_aspace20_write[0][1]),
-      .avm_local_bb4_ld__u16_inst0_burstcount(local_avm_aspace20_burstcount[0][1]),
-      .avm_local_bb4_ld__u16_inst0_address(local_avm_aspace20_address[0][1]),
-      .avm_local_bb4_ld__u16_inst0_writedata(local_avm_aspace20_writedata[0][1]),
-      .avm_local_bb4_ld__u16_inst0_byteenable(local_avm_aspace20_byteenable[0][1]),
-      .avm_local_bb4_ld__u16_inst0_waitrequest(local_avm_aspace20_waitrequest[0][1]),
-      .avm_local_bb4_ld__u16_inst0_readdata(local_avm_aspace20_readdata[0][1]),
-      .avm_local_bb4_ld__u16_inst0_readdatavalid(local_avm_aspace20_readdatavalid[0][1]),
-      .avm_local_bb4_ld__u16_inst0_writeack(local_avm_aspace20_writeack[0][1]),
+      // AVM avm_local_bb4_ld__u18_inst0
+      .avm_local_bb4_ld__u18_inst0_enable(local_avm_aspace16_enable[0][2]),
+      .avm_local_bb4_ld__u18_inst0_read(local_avm_aspace16_read[0][2]),
+      .avm_local_bb4_ld__u18_inst0_write(local_avm_aspace16_write[0][2]),
+      .avm_local_bb4_ld__u18_inst0_burstcount(local_avm_aspace16_burstcount[0][2]),
+      .avm_local_bb4_ld__u18_inst0_address(local_avm_aspace16_address[0][2]),
+      .avm_local_bb4_ld__u18_inst0_writedata(local_avm_aspace16_writedata[0][2]),
+      .avm_local_bb4_ld__u18_inst0_byteenable(local_avm_aspace16_byteenable[0][2]),
+      .avm_local_bb4_ld__u18_inst0_waitrequest(local_avm_aspace16_waitrequest[0][2]),
+      .avm_local_bb4_ld__u18_inst0_readdata(local_avm_aspace16_readdata[0][2]),
+      .avm_local_bb4_ld__u18_inst0_readdatavalid(local_avm_aspace16_readdatavalid[0][2]),
+      .avm_local_bb4_ld__u18_inst0_writeack(local_avm_aspace16_writeack[0][2]),
+      // AVM avm_local_bb2_st__u8_inst0
+      .avm_local_bb2_st__u8_inst0_enable(local_avm_aspace18_enable[0][0]),
+      .avm_local_bb2_st__u8_inst0_read(local_avm_aspace18_read[0][0]),
+      .avm_local_bb2_st__u8_inst0_write(local_avm_aspace18_write[0][0]),
+      .avm_local_bb2_st__u8_inst0_burstcount(local_avm_aspace18_burstcount[0][0]),
+      .avm_local_bb2_st__u8_inst0_address(local_avm_aspace18_address[0][0]),
+      .avm_local_bb2_st__u8_inst0_writedata(local_avm_aspace18_writedata[0][0]),
+      .avm_local_bb2_st__u8_inst0_byteenable(local_avm_aspace18_byteenable[0][0]),
+      .avm_local_bb2_st__u8_inst0_waitrequest(local_avm_aspace18_waitrequest[0][0]),
+      .avm_local_bb2_st__u8_inst0_readdata(local_avm_aspace18_readdata[0][0]),
+      .avm_local_bb2_st__u8_inst0_readdatavalid(local_avm_aspace18_readdatavalid[0][0]),
+      .avm_local_bb2_st__u8_inst0_writeack(local_avm_aspace18_writeack[0][0]),
       // AVM avm_local_bb4_ld__u17_inst0
-      .avm_local_bb4_ld__u17_inst0_enable(local_avm_aspace20_enable[0][2]),
-      .avm_local_bb4_ld__u17_inst0_read(local_avm_aspace20_read[0][2]),
-      .avm_local_bb4_ld__u17_inst0_write(local_avm_aspace20_write[0][2]),
-      .avm_local_bb4_ld__u17_inst0_burstcount(local_avm_aspace20_burstcount[0][2]),
-      .avm_local_bb4_ld__u17_inst0_address(local_avm_aspace20_address[0][2]),
-      .avm_local_bb4_ld__u17_inst0_writedata(local_avm_aspace20_writedata[0][2]),
-      .avm_local_bb4_ld__u17_inst0_byteenable(local_avm_aspace20_byteenable[0][2]),
-      .avm_local_bb4_ld__u17_inst0_waitrequest(local_avm_aspace20_waitrequest[0][2]),
-      .avm_local_bb4_ld__u17_inst0_readdata(local_avm_aspace20_readdata[0][2]),
-      .avm_local_bb4_ld__u17_inst0_readdatavalid(local_avm_aspace20_readdatavalid[0][2]),
-      .avm_local_bb4_ld__u17_inst0_writeack(local_avm_aspace20_writeack[0][2]),
-      // AVST avst_local_bb2__chan_Conf2Intrae_active_inst0
-      .avst_local_bb2__chan_Conf2Intrae_active_inst0_valid(avm_channel_id_chan_Conf2Intrae_active_read_valid),
-      .avst_local_bb2__chan_Conf2Intrae_active_inst0_ready(avm_channel_id_chan_Conf2Intrae_active_read_ready),
-      .avst_local_bb2__chan_Conf2Intrae_active_inst0_data(avm_channel_id_chan_Conf2Intrae_active_read_data),
-      // AVST avst_local_bb2__chan_Conf2Intrae_cnt_inst0
-      .avst_local_bb2__chan_Conf2Intrae_cnt_inst0_valid(avm_channel_id_chan_Conf2Intrae_cnt_read_valid),
-      .avst_local_bb2__chan_Conf2Intrae_cnt_inst0_ready(avm_channel_id_chan_Conf2Intrae_cnt_read_ready),
-      .avst_local_bb2__chan_Conf2Intrae_cnt_inst0_data(avm_channel_id_chan_Conf2Intrae_cnt_read_data),
-      // AVST avst_local_bb2__chan_Conf2Intrae_mode_inst0
-      .avst_local_bb2__chan_Conf2Intrae_mode_inst0_valid(avm_channel_id_chan_Conf2Intrae_mode_read_valid),
-      .avst_local_bb2__chan_Conf2Intrae_mode_inst0_ready(avm_channel_id_chan_Conf2Intrae_mode_read_ready),
-      .avst_local_bb2__chan_Conf2Intrae_mode_inst0_data(avm_channel_id_chan_Conf2Intrae_mode_read_data),
+      .avm_local_bb4_ld__u17_inst0_enable(local_avm_aspace18_enable[0][1]),
+      .avm_local_bb4_ld__u17_inst0_read(local_avm_aspace18_read[0][1]),
+      .avm_local_bb4_ld__u17_inst0_write(local_avm_aspace18_write[0][1]),
+      .avm_local_bb4_ld__u17_inst0_burstcount(local_avm_aspace18_burstcount[0][1]),
+      .avm_local_bb4_ld__u17_inst0_address(local_avm_aspace18_address[0][1]),
+      .avm_local_bb4_ld__u17_inst0_writedata(local_avm_aspace18_writedata[0][1]),
+      .avm_local_bb4_ld__u17_inst0_byteenable(local_avm_aspace18_byteenable[0][1]),
+      .avm_local_bb4_ld__u17_inst0_waitrequest(local_avm_aspace18_waitrequest[0][1]),
+      .avm_local_bb4_ld__u17_inst0_readdata(local_avm_aspace18_readdata[0][1]),
+      .avm_local_bb4_ld__u17_inst0_readdatavalid(local_avm_aspace18_readdatavalid[0][1]),
+      .avm_local_bb4_ld__u17_inst0_writeack(local_avm_aspace18_writeack[0][1]),
+      // AVM avm_local_bb4_ld__u19_inst0
+      .avm_local_bb4_ld__u19_inst0_enable(local_avm_aspace18_enable[0][2]),
+      .avm_local_bb4_ld__u19_inst0_read(local_avm_aspace18_read[0][2]),
+      .avm_local_bb4_ld__u19_inst0_write(local_avm_aspace18_write[0][2]),
+      .avm_local_bb4_ld__u19_inst0_burstcount(local_avm_aspace18_burstcount[0][2]),
+      .avm_local_bb4_ld__u19_inst0_address(local_avm_aspace18_address[0][2]),
+      .avm_local_bb4_ld__u19_inst0_writedata(local_avm_aspace18_writedata[0][2]),
+      .avm_local_bb4_ld__u19_inst0_byteenable(local_avm_aspace18_byteenable[0][2]),
+      .avm_local_bb4_ld__u19_inst0_waitrequest(local_avm_aspace18_waitrequest[0][2]),
+      .avm_local_bb4_ld__u19_inst0_readdata(local_avm_aspace18_readdata[0][2]),
+      .avm_local_bb4_ld__u19_inst0_readdatavalid(local_avm_aspace18_readdatavalid[0][2]),
+      .avm_local_bb4_ld__u19_inst0_writeack(local_avm_aspace18_writeack[0][2]),
+      // AVM avm_local_bb2_st__u10_inst0
+      .avm_local_bb2_st__u10_inst0_enable(local_avm_aspace20_enable[0][0]),
+      .avm_local_bb2_st__u10_inst0_read(local_avm_aspace20_read[0][0]),
+      .avm_local_bb2_st__u10_inst0_write(local_avm_aspace20_write[0][0]),
+      .avm_local_bb2_st__u10_inst0_burstcount(local_avm_aspace20_burstcount[0][0]),
+      .avm_local_bb2_st__u10_inst0_address(local_avm_aspace20_address[0][0]),
+      .avm_local_bb2_st__u10_inst0_writedata(local_avm_aspace20_writedata[0][0]),
+      .avm_local_bb2_st__u10_inst0_byteenable(local_avm_aspace20_byteenable[0][0]),
+      .avm_local_bb2_st__u10_inst0_waitrequest(local_avm_aspace20_waitrequest[0][0]),
+      .avm_local_bb2_st__u10_inst0_readdata(local_avm_aspace20_readdata[0][0]),
+      .avm_local_bb2_st__u10_inst0_readdatavalid(local_avm_aspace20_readdatavalid[0][0]),
+      .avm_local_bb2_st__u10_inst0_writeack(local_avm_aspace20_writeack[0][0]),
+      // AVM avm_local_bb4_ld__u20_inst0
+      .avm_local_bb4_ld__u20_inst0_enable(local_avm_aspace20_enable[0][1]),
+      .avm_local_bb4_ld__u20_inst0_read(local_avm_aspace20_read[0][1]),
+      .avm_local_bb4_ld__u20_inst0_write(local_avm_aspace20_write[0][1]),
+      .avm_local_bb4_ld__u20_inst0_burstcount(local_avm_aspace20_burstcount[0][1]),
+      .avm_local_bb4_ld__u20_inst0_address(local_avm_aspace20_address[0][1]),
+      .avm_local_bb4_ld__u20_inst0_writedata(local_avm_aspace20_writedata[0][1]),
+      .avm_local_bb4_ld__u20_inst0_byteenable(local_avm_aspace20_byteenable[0][1]),
+      .avm_local_bb4_ld__u20_inst0_waitrequest(local_avm_aspace20_waitrequest[0][1]),
+      .avm_local_bb4_ld__u20_inst0_readdata(local_avm_aspace20_readdata[0][1]),
+      .avm_local_bb4_ld__u20_inst0_readdatavalid(local_avm_aspace20_readdatavalid[0][1]),
+      .avm_local_bb4_ld__u20_inst0_writeack(local_avm_aspace20_writeack[0][1]),
+      // AVM avm_local_bb4_ld__u21_inst0
+      .avm_local_bb4_ld__u21_inst0_enable(local_avm_aspace20_enable[0][2]),
+      .avm_local_bb4_ld__u21_inst0_read(local_avm_aspace20_read[0][2]),
+      .avm_local_bb4_ld__u21_inst0_write(local_avm_aspace20_write[0][2]),
+      .avm_local_bb4_ld__u21_inst0_burstcount(local_avm_aspace20_burstcount[0][2]),
+      .avm_local_bb4_ld__u21_inst0_address(local_avm_aspace20_address[0][2]),
+      .avm_local_bb4_ld__u21_inst0_writedata(local_avm_aspace20_writedata[0][2]),
+      .avm_local_bb4_ld__u21_inst0_byteenable(local_avm_aspace20_byteenable[0][2]),
+      .avm_local_bb4_ld__u21_inst0_waitrequest(local_avm_aspace20_waitrequest[0][2]),
+      .avm_local_bb4_ld__u21_inst0_readdata(local_avm_aspace20_readdata[0][2]),
+      .avm_local_bb4_ld__u21_inst0_readdatavalid(local_avm_aspace20_readdatavalid[0][2]),
+      .avm_local_bb4_ld__u21_inst0_writeack(local_avm_aspace20_writeack[0][2]),
+      // AVST avst_local_bb1__chan_Conf2Intrae_active_inst0
+      .avst_local_bb1__chan_Conf2Intrae_active_inst0_valid(avm_channel_id_chan_Conf2Intrae_active_read_valid),
+      .avst_local_bb1__chan_Conf2Intrae_active_inst0_ready(avm_channel_id_chan_Conf2Intrae_active_read_ready),
+      .avst_local_bb1__chan_Conf2Intrae_active_inst0_data(avm_channel_id_chan_Conf2Intrae_active_read_data),
+      // AVST avst_local_bb1__chan_Conf2Intrae_cnt_inst0
+      .avst_local_bb1__chan_Conf2Intrae_cnt_inst0_valid(avm_channel_id_chan_Conf2Intrae_cnt_read_valid),
+      .avst_local_bb1__chan_Conf2Intrae_cnt_inst0_ready(avm_channel_id_chan_Conf2Intrae_cnt_read_ready),
+      .avst_local_bb1__chan_Conf2Intrae_cnt_inst0_data(avm_channel_id_chan_Conf2Intrae_cnt_read_data),
+      // AVST avst_local_bb1__chan_Conf2Intrae_mode_inst0
+      .avst_local_bb1__chan_Conf2Intrae_mode_inst0_valid(avm_channel_id_chan_Conf2Intrae_mode_read_valid),
+      .avst_local_bb1__chan_Conf2Intrae_mode_inst0_ready(avm_channel_id_chan_Conf2Intrae_mode_read_ready),
+      .avst_local_bb1__chan_Conf2Intrae_mode_inst0_data(avm_channel_id_chan_Conf2Intrae_mode_read_data),
       // AVST avst_local_bb2__chan_Conf2Intrae_x_inst0
       .avst_local_bb2__chan_Conf2Intrae_x_inst0_valid(avm_channel_id_chan_Conf2Intrae_x_read_valid),
       .avst_local_bb2__chan_Conf2Intrae_x_inst0_ready(avm_channel_id_chan_Conf2Intrae_x_read_ready),

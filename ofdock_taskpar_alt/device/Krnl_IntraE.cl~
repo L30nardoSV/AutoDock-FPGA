@@ -42,6 +42,12 @@ while(active) {
 	// --------------------------------------------------------------
 	// Wait for ligand atomic coordinates in channel
 	// --------------------------------------------------------------
+	active = read_channel_altera(chan_Conf2Intrae_active);
+	mem_fence(CLK_CHANNEL_MEM_FENCE);
+	mode   = read_channel_altera(chan_Conf2Intrae_mode);
+	mem_fence(CLK_CHANNEL_MEM_FENCE);
+	cnt    = read_channel_altera(chan_Conf2Intrae_cnt);
+mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 	for (uint pipe_cnt=0; pipe_cnt<DockConst->num_of_atoms; pipe_cnt++) {
 		loc_coords_x[pipe_cnt] = read_channel_altera(chan_Conf2Intrae_x);
@@ -49,12 +55,14 @@ while(active) {
 		loc_coords_y[pipe_cnt] = read_channel_altera(chan_Conf2Intrae_y);
 		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);
 		loc_coords_z[pipe_cnt] = read_channel_altera(chan_Conf2Intrae_z);
+		/*
 		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);
 		active = read_channel_altera(chan_Conf2Intrae_active);
 		mem_fence(CLK_CHANNEL_MEM_FENCE);
 		mode   = read_channel_altera(chan_Conf2Intrae_mode);
 		mem_fence(CLK_CHANNEL_MEM_FENCE);
 		cnt    = read_channel_altera(chan_Conf2Intrae_cnt);
+		*/
 	}
 	// --------------------------------------------------------------
 	//printf("AFTER In INTRA CHANNEL\n");
@@ -139,7 +147,7 @@ while(active) {
 				  ( KerConst->dspars_S_const[atom2_typeid] + DockConst->qasp*fabs(KerConst->atom_charges_const[atom2_id]) ) * KerConst->dspars_V_const[atom1_typeid]) * 
 				 DockConst->coeff_desolv*exp(-distance_leo*distance_leo/25.92f);
 			*/
-			partialE4 = = (
+			partialE4 = (
 				  ( KerConst->dspars_S_const[atom1_typeid] + DockConst->qasp*fabs(KerConst->atom_charges_const[atom1_id]) ) * KerConst->dspars_V_const[atom2_typeid] + 
 				  ( KerConst->dspars_S_const[atom2_typeid] + DockConst->qasp*fabs(KerConst->atom_charges_const[atom2_id]) ) * KerConst->dspars_V_const[atom1_typeid]) * 
 				 DockConst->coeff_desolv*exp(-distance_leo*distance_leo/25.92f);

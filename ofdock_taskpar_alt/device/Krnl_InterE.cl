@@ -60,6 +60,12 @@ while(active) {
 	// --------------------------------------------------------------
 	// Wait for ligand atomic coordinates in channel
 	// --------------------------------------------------------------
+	active = read_channel_altera(chan_Conf2Intere_active);
+	mem_fence(CLK_CHANNEL_MEM_FENCE);
+	mode   = read_channel_altera(chan_Conf2Intere_mode);
+	mem_fence(CLK_CHANNEL_MEM_FENCE);
+	cnt    = read_channel_altera(chan_Conf2Intere_cnt);
+	mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 	for (uint pipe_cnt=0; pipe_cnt<DockConst->num_of_atoms; pipe_cnt++) {
 		loc_coords_x[pipe_cnt] = read_channel_altera(chan_Conf2Intere_x);
@@ -67,12 +73,14 @@ while(active) {
 		loc_coords_y[pipe_cnt] = read_channel_altera(chan_Conf2Intere_y);
 		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);
 		loc_coords_z[pipe_cnt] = read_channel_altera(chan_Conf2Intere_z);
+		/*
 		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);
 		active = read_channel_altera(chan_Conf2Intere_active);
 		mem_fence(CLK_CHANNEL_MEM_FENCE);
 		mode   = read_channel_altera(chan_Conf2Intere_mode);
 		mem_fence(CLK_CHANNEL_MEM_FENCE);
 		cnt    = read_channel_altera(chan_Conf2Intere_cnt);
+		*/
 	}
 	// --------------------------------------------------------------
 	//printf("AFTER In INTER CHANNEL\n");

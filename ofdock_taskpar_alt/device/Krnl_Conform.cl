@@ -237,6 +237,15 @@ while(active) {
 	}
 */
 
+	write_channel_altera(chan_Conf2Intere_active, active);
+	write_channel_altera(chan_Conf2Intrae_active, active);
+	mem_fence(CLK_CHANNEL_MEM_FENCE);
+	write_channel_altera(chan_Conf2Intere_mode,   mode);
+	write_channel_altera(chan_Conf2Intrae_mode,   mode);
+	mem_fence(CLK_CHANNEL_MEM_FENCE);
+	write_channel_altera(chan_Conf2Intere_cnt,    cnt);
+	write_channel_altera(chan_Conf2Intrae_cnt,    cnt);
+	mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 	for (uint pipe_cnt=0; pipe_cnt<DockConst->num_of_atoms; pipe_cnt++) {
 		write_channel_altera(chan_Conf2Intere_x, loc_coords_x[pipe_cnt]);
@@ -247,6 +256,7 @@ while(active) {
 		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);
 		write_channel_altera(chan_Conf2Intere_z, loc_coords_z[pipe_cnt]);
 		write_channel_altera(chan_Conf2Intrae_z, loc_coords_z[pipe_cnt]);
+		/*
 		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);
 		write_channel_altera(chan_Conf2Intere_active, active);
 		write_channel_altera(chan_Conf2Intrae_active, active);
@@ -256,7 +266,11 @@ while(active) {
 		mem_fence(CLK_CHANNEL_MEM_FENCE);
 		write_channel_altera(chan_Conf2Intere_cnt,    cnt);
 		write_channel_altera(chan_Conf2Intrae_cnt,    cnt);
+		*/
 	}
+
+
+
 	// --------------------------------------------------------------
 	//printf("AFTER Out CONFORM CHANNEL\n");
 

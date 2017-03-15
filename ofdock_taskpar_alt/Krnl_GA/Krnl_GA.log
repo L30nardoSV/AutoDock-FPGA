@@ -223,47 +223,47 @@ Loop Report:
  | (can process an iteration every cycle).
  |      
  |     Loop "Block103" (file Krnl_Conform.cl line 86)
- |     Loop "Block104" (file Krnl_Conform.cl line 241)
+ |     Loop "Block105" (file Krnl_Conform.cl line 250)
  |     due to:
  |     Memory dependency on Load Operation from: (file Krnl_Conform.cl line 103)
  |       Channel Read Operation (file Krnl_Conform.cl line 53)
- |       Load Operation (file Krnl_Conform.cl line 86, line 241)
+ |       Load Operation (file Krnl_Conform.cl line 86, line 250)
  |       Store Operation (file Krnl_Conform.cl line 212)
  |      
  |     Loop "Block103" (file Krnl_Conform.cl line 86)
- |     Loop "Block104" (file Krnl_Conform.cl line 241)
+ |     Loop "Block105" (file Krnl_Conform.cl line 250)
  |     due to:
  |     Memory dependency on Load Operation from: (file Krnl_Conform.cl line 104)
  |       Channel Read Operation (file Krnl_Conform.cl line 53)
  |       Store Operation (file Krnl_Conform.cl line 213)
  |      
  |     Loop "Block103" (file Krnl_Conform.cl line 86)
- |     Loop "Block104" (file Krnl_Conform.cl line 241)
+ |     Loop "Block105" (file Krnl_Conform.cl line 250)
  |     due to:
  |     Memory dependency on Load Operation from: (file Krnl_Conform.cl line 105)
  |       Channel Read Operation (file Krnl_Conform.cl line 53)
  |       Store Operation (file Krnl_Conform.cl line 214)
  |      
  |     Loop "Block103" (file Krnl_Conform.cl line 86)
- |     Loop "Block104" (file Krnl_Conform.cl line 241)
+ |     Loop "Block105" (file Krnl_Conform.cl line 250)
  |     due to:
  |     Memory dependency on Store Operation from: (file Krnl_Conform.cl line 212)
  |       Channel Read Operation (file Krnl_Conform.cl line 53)
- |       Load Operation (file Krnl_Conform.cl line 242)
+ |       Load Operation (file Krnl_Conform.cl line 251)
  |      
  |     Loop "Block103" (file Krnl_Conform.cl line 86)
- |     Loop "Block104" (file Krnl_Conform.cl line 241)
+ |     Loop "Block105" (file Krnl_Conform.cl line 250)
  |     due to:
  |     Memory dependency on Store Operation from: (file Krnl_Conform.cl line 213)
  |       Channel Read Operation (file Krnl_Conform.cl line 53)
- |       Load Operation (file Krnl_Conform.cl line 245)
+ |       Load Operation (file Krnl_Conform.cl line 254)
  |      
  |     Loop "Block103" (file Krnl_Conform.cl line 86)
- |     Loop "Block104" (file Krnl_Conform.cl line 241)
+ |     Loop "Block105" (file Krnl_Conform.cl line 250)
  |     due to:
  |     Memory dependency on Store Operation from: (file Krnl_Conform.cl line 214)
  |       Channel Read Operation (file Krnl_Conform.cl line 53)
- |       Load Operation (file Krnl_Conform.cl line 248)
+ |       Load Operation (file Krnl_Conform.cl line 257)
  | 
  | 
  |-+ Loop "Block101" (file Krnl_Conform.cl line 60)
@@ -274,7 +274,7 @@ Loop Report:
  |   Pipelined with successive iterations launched every 45 cycles due to: 
  |        
  |       Memory dependency on Load Operation from: (file Krnl_Conform.cl line 103)
- |         Load Operation (file Krnl_Conform.cl line 86, line 241)
+ |         Load Operation (file Krnl_Conform.cl line 86, line 250)
  |       Largest Critical Path Contributors:
  |           16%: Load Operation  (file Krnl_Conform.cl line 103)
  |           11%: Hardened Floating-Point Multiply-Add Operation  (file Krnl_Conform.cl line 195)
@@ -302,15 +302,15 @@ Loop Report:
  |   Additional memory dependencies:
  |        
  |       Memory dependency on Load Operation from: (file Krnl_Conform.cl line 104)
- |         Load Operation (file Krnl_Conform.cl line 86, line 241)
+ |         Load Operation (file Krnl_Conform.cl line 86, line 250)
  |         Store Operation (file Krnl_Conform.cl line 213)
  |        
  |       Memory dependency on Load Operation from: (file Krnl_Conform.cl line 105)
- |         Load Operation (file Krnl_Conform.cl line 86, line 241)
+ |         Load Operation (file Krnl_Conform.cl line 86, line 250)
  |         Store Operation (file Krnl_Conform.cl line 214)
  |   
  |   
- |-+ Loop "Block104" (file Krnl_Conform.cl line 241)
+ |-+ Loop "Block105" (file Krnl_Conform.cl line 250)
      Pipelined well. Successive iterations are launched every cycle.
      
      
@@ -323,19 +323,15 @@ The kernel has a required work-group size of (1, 1, 1).
 
 Loop Report:
 
- + Loop "Block107" (file Krnl_InterE.cl line 58)
- | NOT pipelined due to: 
- |   Loop exit condition unresolvable at iteration initiation.
- |   Simplify loop exit condition to fix this problem.
- |   See "Unable to Resolve Loop Exit Condition at Iteration Initiation" section of the Best Practices Guide for more information.
- |   Not pipelining this loop will most likely lead to poor performance.
+ + Loop "Block108" (file Krnl_InterE.cl line 58)
+ | Pipelined well. Successive iterations are launched every cycle.
  | 
  | 
- |-+ Loop "Block108" (file Krnl_InterE.cl line 64)
+ |-+ Loop "Block109" (file Krnl_InterE.cl line 70)
  |   Pipelined well. Successive iterations are launched every cycle.
  |   
  |   
- |-+ Loop "Block110" (file Krnl_InterE.cl line 92)
+ |-+ Loop "Block111" (file Krnl_InterE.cl line 100)
      Pipelined well. Successive iterations are launched every cycle.
      
      
@@ -348,19 +344,42 @@ The kernel has a required work-group size of (1, 1, 1).
 
 Loop Report:
 
- + Loop "Block114" (file Krnl_IntraE.cl line 40)
- | NOT pipelined due to: 
- |   Loop exit condition unresolvable at iteration initiation.
- |   Simplify loop exit condition to fix this problem.
- |   See "Unable to Resolve Loop Exit Condition at Iteration Initiation" section of the Best Practices Guide for more information.
- |   Not pipelining this loop will most likely lead to poor performance.
+ + Loop "Block115" (file Krnl_IntraE.cl line 40)
+ | Pipelined with successive iterations launched every cycle.
+ |  
+ | Iterations executed serially across the regions listed below.
+ | Only a single loop iteration will execute inside the listed regions.
+ | This will cause performance degradation unless the regions are pipelined well
+ | (can process an iteration every cycle).
+ |      
+ |     Loop "Block116" (file Krnl_IntraE.cl line 52)
+ |     Loop "Block118" (file Krnl_IntraE.cl line 83)
+ |     due to:
+ |     Memory dependency on Store Operation from: (file Krnl_IntraE.cl line 53)
+ |       Channel Read Operation (file Krnl_IntraE.cl line 45)
+ |       Load Operation (file Krnl_IntraE.cl line 52, line 83, line 91, line 122, line 141, line 152)
+ |       Load Operation (file Krnl_IntraE.cl line 88)
+ |      
+ |     Loop "Block116" (file Krnl_IntraE.cl line 52)
+ |     Loop "Block118" (file Krnl_IntraE.cl line 83)
+ |     due to:
+ |     Memory dependency on Store Operation from: (file Krnl_IntraE.cl line 55)
+ |       Channel Read Operation (file Krnl_IntraE.cl line 45)
+ |       Load Operation (file Krnl_IntraE.cl line 89)
+ |      
+ |     Loop "Block116" (file Krnl_IntraE.cl line 52)
+ |     Loop "Block118" (file Krnl_IntraE.cl line 83)
+ |     due to:
+ |     Memory dependency on Store Operation from: (file Krnl_IntraE.cl line 57)
+ |       Channel Read Operation (file Krnl_IntraE.cl line 45)
+ |       Load Operation (file Krnl_IntraE.cl line 90)
  | 
  | 
- |-+ Loop "Block115" (file Krnl_IntraE.cl line 46)
+ |-+ Loop "Block116" (file Krnl_IntraE.cl line 52)
  |   Pipelined well. Successive iterations are launched every cycle.
  |   
  |   
- |-+ Loop "Block117" (file Krnl_IntraE.cl line 75)
+ |-+ Loop "Block118" (file Krnl_IntraE.cl line 83)
      Pipelined well. Successive iterations are launched every cycle.
      
      
@@ -373,7 +392,7 @@ The kernel has a required work-group size of (1, 1, 1).
 
 Loop Report:
 
- + Loop "Block121" (file Krnl_Store.cl line 33)
+ + Loop "Block122" (file Krnl_Store.cl line 33)
    Pipelined well. Successive iterations are launched every cycle.
    
    
@@ -384,10 +403,10 @@ Loop Report:
 +----------------------------------------+---------------------------+
 ; Resource                               + Usage                     ;
 +----------------------------------------+---------------------------+
-; Logic utilization                      ;  258%                     ;
-; ALUTs                                  ;  113%                     ;
-; Dedicated logic registers              ;  148%                     ;
-; Memory blocks                          ;  159%                     ;
+; Logic utilization                      ;  253%                     ;
+; ALUTs                                  ;  110%                     ;
+; Dedicated logic registers              ;  146%                     ;
+; Memory blocks                          ;  146%                     ;
 ; DSP blocks                             ;   27%                     ;
 +----------------------------------------+---------------------------;
 System name: Krnl_GA

@@ -209,7 +209,7 @@
 	</loop>
 	<loop>
 		<line> (file Krnl_InterE</line>
-		<II>0</II>
+		<II>1</II>
 	</loop>
 	<loop>
 		<line> (file Krnl_InterE</line>
@@ -221,7 +221,7 @@
 	</loop>
 	<loop>
 		<line> (file Krnl_IntraE</line>
-		<II>0</II>
+		<II>1</II>
 	</loop>
 	<loop>
 		<line> (file Krnl_IntraE</line>

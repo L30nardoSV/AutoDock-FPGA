@@ -757,7 +757,7 @@ var loopsJSON={
           "name":"See Area analysis of system for exact replication factor."
         }
         , {
-          "name":"Iteration executed serially across Block103, Block104 due to memory dependency between: "
+          "name":"Iteration executed serially across Block103, Block105 due to memory dependency between: "
           , "subinfos":
           [
             {
@@ -824,7 +824,7 @@ var loopsJSON={
                     }
                     , {
                       "filename":"Krnl_Conform.cl"
-                      , "line":241
+                      , "line":250
                     }
                   ]
                 ]
@@ -869,7 +869,7 @@ var loopsJSON={
           ]
         }
         , {
-          "name":"Iteration executed serially across Block103, Block104 due to memory dependency between: "
+          "name":"Iteration executed serially across Block103, Block105 due to memory dependency between: "
           , "subinfos":
           [
             {
@@ -936,7 +936,7 @@ var loopsJSON={
                     }
                     , {
                       "filename":"Krnl_Conform.cl"
-                      , "line":241
+                      , "line":250
                     }
                   ]
                 ]
@@ -981,7 +981,7 @@ var loopsJSON={
           ]
         }
         , {
-          "name":"Iteration executed serially across Block103, Block104 due to memory dependency between: "
+          "name":"Iteration executed serially across Block103, Block105 due to memory dependency between: "
           , "subinfos":
           [
             {
@@ -1048,7 +1048,7 @@ var loopsJSON={
                     }
                     , {
                       "filename":"Krnl_Conform.cl"
-                      , "line":241
+                      , "line":250
                     }
                   ]
                 ]
@@ -1093,7 +1093,7 @@ var loopsJSON={
           ]
         }
         , {
-          "name":"Iteration executed serially across Block103, Block104 due to memory dependency between: "
+          "name":"Iteration executed serially across Block103, Block105 due to memory dependency between: "
           , "subinfos":
           [
             {
@@ -1160,7 +1160,7 @@ var loopsJSON={
                     }
                     , {
                       "filename":"Krnl_Conform.cl"
-                      , "line":241
+                      , "line":250
                     }
                   ]
                 ]
@@ -1196,7 +1196,7 @@ var loopsJSON={
                   [
                     {
                       "filename":"Krnl_Conform.cl"
-                      , "line":242
+                      , "line":251
                     }
                   ]
                 ]
@@ -1205,7 +1205,7 @@ var loopsJSON={
           ]
         }
         , {
-          "name":"Iteration executed serially across Block103, Block104 due to memory dependency between: "
+          "name":"Iteration executed serially across Block103, Block105 due to memory dependency between: "
           , "subinfos":
           [
             {
@@ -1272,7 +1272,7 @@ var loopsJSON={
                     }
                     , {
                       "filename":"Krnl_Conform.cl"
-                      , "line":241
+                      , "line":250
                     }
                   ]
                 ]
@@ -1308,7 +1308,7 @@ var loopsJSON={
                   [
                     {
                       "filename":"Krnl_Conform.cl"
-                      , "line":245
+                      , "line":254
                     }
                   ]
                 ]
@@ -1317,7 +1317,7 @@ var loopsJSON={
           ]
         }
         , {
-          "name":"Iteration executed serially across Block103, Block104 due to memory dependency between: "
+          "name":"Iteration executed serially across Block103, Block105 due to memory dependency between: "
           , "subinfos":
           [
             {
@@ -1384,7 +1384,7 @@ var loopsJSON={
                     }
                     , {
                       "filename":"Krnl_Conform.cl"
-                      , "line":241
+                      , "line":250
                     }
                   ]
                 ]
@@ -1420,7 +1420,7 @@ var loopsJSON={
                   [
                     {
                       "filename":"Krnl_Conform.cl"
-                      , "line":248
+                      , "line":257
                     }
                   ]
                 ]
@@ -1497,7 +1497,7 @@ var loopsJSON={
                     }
                     , {
                       "filename":"Krnl_Conform.cl"
-                      , "line":241
+                      , "line":250
                     }
                   ]
                 ]
@@ -1855,7 +1855,7 @@ var loopsJSON={
                     }
                     , {
                       "filename":"Krnl_Conform.cl"
-                      , "line":241
+                      , "line":250
                     }
                   ]
                 ]
@@ -1931,7 +1931,7 @@ var loopsJSON={
                     }
                     , {
                       "filename":"Krnl_Conform.cl"
-                      , "line":241
+                      , "line":250
                     }
                   ]
                 ]
@@ -1978,7 +1978,7 @@ var loopsJSON={
       ]
     }
     , {
-      "name":"Block104"
+      "name":"Block105"
       , "data":
       ["Yes", "1", "n/a"]
       , "debug":
@@ -1986,37 +1986,10 @@ var loopsJSON={
         [
           {
             "filename":"Krnl_Conform.cl"
-            , "line":241
+            , "line":250
             , "level":1
           }
         ]
-      ]
-    }
-    , {
-      "name":"Block107"
-      , "data":
-      ["No", "n/a", "n/a"]
-      , "debug":
-      [
-        [
-          {
-            "filename":"Krnl_InterE.cl"
-            , "line":58
-            , "level":0
-          }
-        ]
-      ]
-      , "details":
-      [
-        "Unresolvable exit condition"      ]
-      , "resources":
-      [
-        {
-          "name":"Loop exit condition unresolvable at iteration initiation."
-        }
-        , {
-          "name":"See Nested Loops for more information."
-        }
       ]
     }
     , {
@@ -2028,14 +2001,14 @@ var loopsJSON={
         [
           {
             "filename":"Krnl_InterE.cl"
-            , "line":64
-            , "level":1
+            , "line":58
+            , "level":0
           }
         ]
       ]
     }
     , {
-      "name":"Block110"
+      "name":"Block109"
       , "data":
       ["Yes", "1", "n/a"]
       , "debug":
@@ -2043,16 +2016,31 @@ var loopsJSON={
         [
           {
             "filename":"Krnl_InterE.cl"
-            , "line":92
+            , "line":70
             , "level":1
           }
         ]
       ]
     }
     , {
-      "name":"Block114"
+      "name":"Block111"
       , "data":
-      ["No", "n/a", "n/a"]
+      ["Yes", "1", "n/a"]
+      , "debug":
+      [
+        [
+          {
+            "filename":"Krnl_InterE.cl"
+            , "line":100
+            , "level":1
+          }
+        ]
+      ]
+    }
+    , {
+      "name":"Block115"
+      , "data":
+      ["Yes", "1", "n/a"]
       , "debug":
       [
         [
@@ -2065,19 +2053,506 @@ var loopsJSON={
       ]
       , "details":
       [
-        "Unresolvable exit condition"      ]
+        "Serial exe: Memory dependency"
+      ]
       , "resources":
       [
         {
-          "name":"Loop exit condition unresolvable at iteration initiation."
+          "name":"Iteration executed serially across Block116, Block118 due to memory dependency between: "
+          , "subinfos":
+          [
+            {
+              "info":
+              {
+                "name":"Store Operation"
+                , "debug":
+                [
+                  [
+                    {
+                      "filename":"Krnl_IntraE.cl"
+                      , "line":53
+                    }
+                  ]
+                ]
+              }
+            }
+            , {
+              "info":
+              {
+                "name":"Channel Read Operation"
+                , "debug":
+                [
+                  [
+                    {
+                      "filename":"Krnl_IntraE.cl"
+                      , "line":45
+                    }
+                  ]
+                ]
+              }
+            }
+          ]
         }
         , {
-          "name":"See Nested Loops for more information."
+          "name":"Iteration executed serially due to memory dependency between: "
+          , "subinfos":
+          [
+            {
+              "info":
+              {
+                "name":"Store Operation"
+                , "debug":
+                [
+                  [
+                    {
+                      "filename":"Krnl_IntraE.cl"
+                      , "line":53
+                    }
+                  ]
+                ]
+              }
+            }
+            , {
+              "info":
+              {
+                "name":"Load Operation"
+                , "debug":
+                [
+                  [
+                    {
+                      "filename":"Krnl_IntraE.cl"
+                      , "line":52
+                    }
+                    , {
+                      "filename":"Krnl_IntraE.cl"
+                      , "line":83
+                    }
+                    , {
+                      "filename":"Krnl_IntraE.cl"
+                      , "line":91
+                    }
+                    , {
+                      "filename":"Krnl_IntraE.cl"
+                      , "line":122
+                    }
+                    , {
+                      "filename":"Krnl_IntraE.cl"
+                      , "line":141
+                    }
+                    , {
+                      "filename":"Krnl_IntraE.cl"
+                      , "line":152
+                    }
+                  ]
+                ]
+              }
+            }
+          ]
+        }
+        , {
+          "name":"Iteration executed serially due to memory dependency between: "
+          , "subinfos":
+          [
+            {
+              "info":
+              {
+                "name":"Store Operation"
+                , "debug":
+                [
+                  [
+                    {
+                      "filename":"Krnl_IntraE.cl"
+                      , "line":53
+                    }
+                  ]
+                ]
+              }
+            }
+            , {
+              "info":
+              {
+                "name":"Load Operation"
+                , "debug":
+                [
+                  [
+                    {
+                      "filename":"Krnl_IntraE.cl"
+                      , "line":88
+                    }
+                  ]
+                ]
+              }
+            }
+          ]
+        }
+        , {
+          "name":"Iteration executed serially due to memory dependency between: "
+          , "subinfos":
+          [
+            {
+              "info":
+              {
+                "name":"Store Operation"
+                , "debug":
+                [
+                  [
+                    {
+                      "filename":"Krnl_IntraE.cl"
+                      , "line":53
+                    }
+                  ]
+                ]
+              }
+            }
+            , {
+              "info":
+              {
+                "name":"Load Operation"
+                , "debug":
+                [
+                  [
+                    {
+                      "filename":"Krnl_IntraE.cl"
+                      , "line":88
+                    }
+                  ]
+                ]
+              }
+            }
+          ]
+        }
+        , {
+          "name":"Iteration executed serially across Block116, Block118 due to memory dependency between: "
+          , "subinfos":
+          [
+            {
+              "info":
+              {
+                "name":"Store Operation"
+                , "debug":
+                [
+                  [
+                    {
+                      "filename":"Krnl_IntraE.cl"
+                      , "line":55
+                    }
+                  ]
+                ]
+              }
+            }
+            , {
+              "info":
+              {
+                "name":"Channel Read Operation"
+                , "debug":
+                [
+                  [
+                    {
+                      "filename":"Krnl_IntraE.cl"
+                      , "line":45
+                    }
+                  ]
+                ]
+              }
+            }
+          ]
+        }
+        , {
+          "name":"Iteration executed serially due to memory dependency between: "
+          , "subinfos":
+          [
+            {
+              "info":
+              {
+                "name":"Store Operation"
+                , "debug":
+                [
+                  [
+                    {
+                      "filename":"Krnl_IntraE.cl"
+                      , "line":55
+                    }
+                  ]
+                ]
+              }
+            }
+            , {
+              "info":
+              {
+                "name":"Load Operation"
+                , "debug":
+                [
+                  [
+                    {
+                      "filename":"Krnl_IntraE.cl"
+                      , "line":52
+                    }
+                    , {
+                      "filename":"Krnl_IntraE.cl"
+                      , "line":83
+                    }
+                    , {
+                      "filename":"Krnl_IntraE.cl"
+                      , "line":91
+                    }
+                    , {
+                      "filename":"Krnl_IntraE.cl"
+                      , "line":122
+                    }
+                    , {
+                      "filename":"Krnl_IntraE.cl"
+                      , "line":141
+                    }
+                    , {
+                      "filename":"Krnl_IntraE.cl"
+                      , "line":152
+                    }
+                  ]
+                ]
+              }
+            }
+          ]
+        }
+        , {
+          "name":"Iteration executed serially due to memory dependency between: "
+          , "subinfos":
+          [
+            {
+              "info":
+              {
+                "name":"Store Operation"
+                , "debug":
+                [
+                  [
+                    {
+                      "filename":"Krnl_IntraE.cl"
+                      , "line":55
+                    }
+                  ]
+                ]
+              }
+            }
+            , {
+              "info":
+              {
+                "name":"Load Operation"
+                , "debug":
+                [
+                  [
+                    {
+                      "filename":"Krnl_IntraE.cl"
+                      , "line":89
+                    }
+                  ]
+                ]
+              }
+            }
+          ]
+        }
+        , {
+          "name":"Iteration executed serially due to memory dependency between: "
+          , "subinfos":
+          [
+            {
+              "info":
+              {
+                "name":"Store Operation"
+                , "debug":
+                [
+                  [
+                    {
+                      "filename":"Krnl_IntraE.cl"
+                      , "line":55
+                    }
+                  ]
+                ]
+              }
+            }
+            , {
+              "info":
+              {
+                "name":"Load Operation"
+                , "debug":
+                [
+                  [
+                    {
+                      "filename":"Krnl_IntraE.cl"
+                      , "line":89
+                    }
+                  ]
+                ]
+              }
+            }
+          ]
+        }
+        , {
+          "name":"Iteration executed serially across Block116, Block118 due to memory dependency between: "
+          , "subinfos":
+          [
+            {
+              "info":
+              {
+                "name":"Store Operation"
+                , "debug":
+                [
+                  [
+                    {
+                      "filename":"Krnl_IntraE.cl"
+                      , "line":57
+                    }
+                  ]
+                ]
+              }
+            }
+            , {
+              "info":
+              {
+                "name":"Channel Read Operation"
+                , "debug":
+                [
+                  [
+                    {
+                      "filename":"Krnl_IntraE.cl"
+                      , "line":45
+                    }
+                  ]
+                ]
+              }
+            }
+          ]
+        }
+        , {
+          "name":"Iteration executed serially due to memory dependency between: "
+          , "subinfos":
+          [
+            {
+              "info":
+              {
+                "name":"Store Operation"
+                , "debug":
+                [
+                  [
+                    {
+                      "filename":"Krnl_IntraE.cl"
+                      , "line":57
+                    }
+                  ]
+                ]
+              }
+            }
+            , {
+              "info":
+              {
+                "name":"Load Operation"
+                , "debug":
+                [
+                  [
+                    {
+                      "filename":"Krnl_IntraE.cl"
+                      , "line":52
+                    }
+                    , {
+                      "filename":"Krnl_IntraE.cl"
+                      , "line":83
+                    }
+                    , {
+                      "filename":"Krnl_IntraE.cl"
+                      , "line":91
+                    }
+                    , {
+                      "filename":"Krnl_IntraE.cl"
+                      , "line":122
+                    }
+                    , {
+                      "filename":"Krnl_IntraE.cl"
+                      , "line":141
+                    }
+                    , {
+                      "filename":"Krnl_IntraE.cl"
+                      , "line":152
+                    }
+                  ]
+                ]
+              }
+            }
+          ]
+        }
+        , {
+          "name":"Iteration executed serially due to memory dependency between: "
+          , "subinfos":
+          [
+            {
+              "info":
+              {
+                "name":"Store Operation"
+                , "debug":
+                [
+                  [
+                    {
+                      "filename":"Krnl_IntraE.cl"
+                      , "line":57
+                    }
+                  ]
+                ]
+              }
+            }
+            , {
+              "info":
+              {
+                "name":"Load Operation"
+                , "debug":
+                [
+                  [
+                    {
+                      "filename":"Krnl_IntraE.cl"
+                      , "line":90
+                    }
+                  ]
+                ]
+              }
+            }
+          ]
+        }
+        , {
+          "name":"Iteration executed serially due to memory dependency between: "
+          , "subinfos":
+          [
+            {
+              "info":
+              {
+                "name":"Store Operation"
+                , "debug":
+                [
+                  [
+                    {
+                      "filename":"Krnl_IntraE.cl"
+                      , "line":57
+                    }
+                  ]
+                ]
+              }
+            }
+            , {
+              "info":
+              {
+                "name":"Load Operation"
+                , "debug":
+                [
+                  [
+                    {
+                      "filename":"Krnl_IntraE.cl"
+                      , "line":90
+                    }
+                  ]
+                ]
+              }
+            }
+          ]
         }
       ]
     }
     , {
-      "name":"Block115"
+      "name":"Block116"
       , "data":
       ["Yes", "1", "n/a"]
       , "debug":
@@ -2085,14 +2560,14 @@ var loopsJSON={
         [
           {
             "filename":"Krnl_IntraE.cl"
-            , "line":46
+            , "line":52
             , "level":1
           }
         ]
       ]
     }
     , {
-      "name":"Block117"
+      "name":"Block118"
       , "data":
       ["Yes", "1", "n/a"]
       , "debug":
@@ -2100,14 +2575,14 @@ var loopsJSON={
         [
           {
             "filename":"Krnl_IntraE.cl"
-            , "line":75
+            , "line":83
             , "level":1
           }
         ]
       ]
     }
     , {
-      "name":"Block121"
+      "name":"Block122"
       , "data":
       ["Yes", "1", "n/a"]
       , "debug":
@@ -6301,7 +6776,7 @@ var loopsJSON={
               , "details":
               {
                 "Width":"8 bits"
-                , "Depth":"2128"
+                , "Depth":"2118"
                 , "Stall-free":"No"
                 , "Start-Cycle":"2"
                 , "Latency":"1"
@@ -6360,7 +6835,7 @@ var loopsJSON={
               , "details":
               {
                 "Width":"32 bits"
-                , "Depth":"2131"
+                , "Depth":"2121"
                 , "Stall-free":"No"
                 , "Start-Cycle":"2"
                 , "Latency":"1"
@@ -6643,7 +7118,7 @@ var loopsJSON={
     }
     , {
       "type":"kernel"
-      , "id":413
+      , "id":416
       , "name":"Krnl_Conform"
       , "file":""
       , "line":"0"
@@ -6657,7 +7132,7 @@ var loopsJSON={
           , "children":[
             {
               "type":"inst"
-              , "id":348
+              , "id":349
               , "name":"Load"
               , "file":"2"
               , "line":"86"
@@ -6673,7 +7148,7 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":349
+              , "id":350
               , "name":"Load"
               , "file":"2"
               , "line":"162"
@@ -6689,7 +7164,7 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":350
+              , "id":351
               , "name":"end"
               , "file":"0"
               , "line":"0"
@@ -6702,7 +7177,7 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":351
+              , "id":352
               , "name":"begin"
               , "file":""
               , "line":""
@@ -6749,7 +7224,7 @@ var loopsJSON={
           , "children":[
             {
               "type":"inst"
-              , "id":352
+              , "id":353
               , "name":"Channel Read"
               , "file":"2"
               , "line":"53"
@@ -6764,7 +7239,7 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":353
+              , "id":354
               , "name":"Channel Read"
               , "file":"2"
               , "line":"55"
@@ -6779,7 +7254,7 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":354
+              , "id":355
               , "name":"Channel Read"
               , "file":"2"
               , "line":"57"
@@ -6794,7 +7269,7 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":355
+              , "id":356
               , "name":"Store"
               , "file":"2"
               , "line":"53"
@@ -6809,7 +7284,7 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":356
+              , "id":357
               , "name":"end"
               , "file":"2"
               , "line":"60"
@@ -6822,7 +7297,7 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":357
+              , "id":358
               , "name":"loop"
               , "file":""
               , "line":""
@@ -6854,7 +7329,7 @@ var loopsJSON={
           , "children":[
             {
               "type":"inst"
-              , "id":358
+              , "id":359
               , "name":"Channel Read"
               , "file":"2"
               , "line":"61"
@@ -6869,7 +7344,7 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":359
+              , "id":360
               , "name":"Store"
               , "file":"2"
               , "line":"61"
@@ -6884,7 +7359,7 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":360
+              , "id":361
               , "name":"loop end"
               , "file":"2"
               , "line":"60"
@@ -6897,11 +7372,11 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":361
+              , "id":362
               , "name":"loop"
               , "file":""
               , "line":""
-              , "loopTo":360
+              , "loopTo":361
               , "details":
               {
                 "Start-Cycle":"0"
@@ -6924,7 +7399,7 @@ var loopsJSON={
           , "children":[
             {
               "type":"inst"
-              , "id":362
+              , "id":363
               , "name":"Load"
               , "file":"2"
               , "line":"66"
@@ -6940,7 +7415,7 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":363
+              , "id":364
               , "name":"Load"
               , "file":"2"
               , "line":"67"
@@ -6956,7 +7431,7 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":364
+              , "id":365
               , "name":"end"
               , "file":"2"
               , "line":"86"
@@ -6969,7 +7444,7 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":365
+              , "id":366
               , "name":"begin"
               , "file":""
               , "line":""
@@ -7000,7 +7475,7 @@ var loopsJSON={
           , "children":[
             {
               "type":"inst"
-              , "id":366
+              , "id":367
               , "name":"Load"
               , "file":"2"
               , "line":"88"
@@ -7015,7 +7490,7 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":367
+              , "id":368
               , "name":"Load"
               , "file":"2"
               , "line":"97"
@@ -7030,7 +7505,7 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":368
+              , "id":369
               , "name":"Load"
               , "file":"2"
               , "line":"98"
@@ -7045,7 +7520,7 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":369
+              , "id":370
               , "name":"Load"
               , "file":"2"
               , "line":"99"
@@ -7060,7 +7535,7 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":370
+              , "id":371
               , "name":"Load"
               , "file":"2"
               , "line":"125"
@@ -7075,7 +7550,7 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":371
+              , "id":372
               , "name":"Load"
               , "file":"2"
               , "line":"130"
@@ -7090,7 +7565,7 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":372
+              , "id":373
               , "name":"Load"
               , "file":"2"
               , "line":"119"
@@ -7106,7 +7581,7 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":373
+              , "id":374
               , "name":"Load"
               , "file":"2"
               , "line":"117"
@@ -7122,7 +7597,7 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":374
+              , "id":375
               , "name":"Load"
               , "file":"2"
               , "line":"103"
@@ -7138,7 +7613,7 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":375
+              , "id":376
               , "name":"Load"
               , "file":"2"
               , "line":"104"
@@ -7154,7 +7629,7 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":376
+              , "id":377
               , "name":"Load"
               , "file":"2"
               , "line":"105"
@@ -7170,7 +7645,7 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":377
+              , "id":378
               , "name":"Load"
               , "file":"2"
               , "line":"128"
@@ -7186,7 +7661,7 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":378
+              , "id":379
               , "name":"Store"
               , "file":"2"
               , "line":"212"
@@ -7202,7 +7677,7 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":379
+              , "id":380
               , "name":"Store"
               , "file":"2"
               , "line":"213"
@@ -7218,7 +7693,7 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":380
+              , "id":381
               , "name":"Store"
               , "file":"2"
               , "line":"214"
@@ -7234,7 +7709,7 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":381
+              , "id":382
               , "name":"loop end"
               , "file":"2"
               , "line":"86"
@@ -7247,11 +7722,11 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":382
+              , "id":383
               , "name":"loop"
               , "file":""
               , "line":""
-              , "loopTo":381
+              , "loopTo":382
               , "details":
               {
                 "Start-Cycle":"0"
@@ -7271,6 +7746,135 @@ var loopsJSON={
           , "name":"Block104"
           , "file":""
           , "line":"0"
+          , "children":[
+            {
+              "type":"inst"
+              , "id":384
+              , "name":"Channel Write"
+              , "file":"2"
+              , "line":"240"
+              , "details":
+              {
+                "Width":"8 bits"
+                , "Depth":"31"
+                , "Stall-free":"No"
+                , "Start-Cycle":"1"
+                , "Latency":"1"
+              }
+            }
+            , {
+              "type":"inst"
+              , "id":386
+              , "name":"Channel Write"
+              , "file":"2"
+              , "line":"241"
+              , "details":
+              {
+                "Width":"8 bits"
+                , "Depth":"24"
+                , "Stall-free":"No"
+                , "Start-Cycle":"1"
+                , "Latency":"1"
+              }
+            }
+            , {
+              "type":"inst"
+              , "id":388
+              , "name":"Channel Write"
+              , "file":"2"
+              , "line":"243"
+              , "details":
+              {
+                "Width":"8 bits"
+                , "Depth":"30"
+                , "Stall-free":"No"
+                , "Start-Cycle":"2"
+                , "Latency":"1"
+              }
+            }
+            , {
+              "type":"inst"
+              , "id":390
+              , "name":"Channel Write"
+              , "file":"2"
+              , "line":"244"
+              , "details":
+              {
+                "Width":"8 bits"
+                , "Depth":"23"
+                , "Stall-free":"No"
+                , "Start-Cycle":"2"
+                , "Latency":"1"
+              }
+            }
+            , {
+              "type":"inst"
+              , "id":392
+              , "name":"Channel Write"
+              , "file":"2"
+              , "line":"246"
+              , "details":
+              {
+                "Width":"32 bits"
+                , "Depth":"30"
+                , "Stall-free":"No"
+                , "Start-Cycle":"3"
+                , "Latency":"1"
+              }
+            }
+            , {
+              "type":"inst"
+              , "id":394
+              , "name":"Channel Write"
+              , "file":"2"
+              , "line":"247"
+              , "details":
+              {
+                "Width":"32 bits"
+                , "Depth":"23"
+                , "Stall-free":"No"
+                , "Start-Cycle":"3"
+                , "Latency":"1"
+              }
+            }
+            , {
+              "type":"inst"
+              , "id":396
+              , "name":"end"
+              , "file":"0"
+              , "line":"0"
+              , "details":
+              {
+                "Start-Cycle":"4"
+                , "Latency":"1"
+                , "Additional Info":"Exit from a basic block. Control flow branches at this node to one or more merge nodes. There is no control branching between merge and branch node for the same basic block."
+              }
+            }
+            , {
+              "type":"inst"
+              , "id":397
+              , "name":"begin"
+              , "file":""
+              , "line":""
+              , "details":
+              {
+                "Start-Cycle":"0"
+                , "Latency":"1"
+                , "Additional Info":"Entrance to a basic block. Control flow comes to this node from one or more branch nodes, unless it's the very first merge node in a kernel. There is no control branching between merge and branch node within the same basic block."
+              }
+            }
+          ]
+          , "details":
+          {
+            "Latency":"5"
+          }
+        }
+        , {
+          "type":"bb"
+          , "id":347
+          , "name":"Block105"
+          , "file":""
+          , "line":"0"
           , "II":1
           , "LoopInfo":""
           , "hasFmaxBottlenecks":"No"
@@ -7279,10 +7883,10 @@ var loopsJSON={
           , "children":[
             {
               "type":"inst"
-              , "id":383
+              , "id":398
               , "name":"Load"
               , "file":"2"
-              , "line":"242"
+              , "line":"251"
               , "details":
               {
                 "Width":"32 bits"
@@ -7295,14 +7899,14 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":384
+              , "id":399
               , "name":"Channel Write"
               , "file":"2"
-              , "line":"242"
+              , "line":"251"
               , "details":
               {
                 "Width":"32 bits"
-                , "Depth":"109"
+                , "Depth":"114"
                 , "Stall-free":"No"
                 , "Start-Cycle":"13"
                 , "Latency":"1"
@@ -7310,10 +7914,10 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":386
+              , "id":401
               , "name":"Channel Write"
               , "file":"2"
-              , "line":"243"
+              , "line":"252"
               , "details":
               {
                 "Width":"32 bits"
@@ -7325,10 +7929,10 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":388
+              , "id":403
               , "name":"Load"
               , "file":"2"
-              , "line":"245"
+              , "line":"254"
               , "details":
               {
                 "Width":"32 bits"
@@ -7341,14 +7945,14 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":389
+              , "id":404
               , "name":"Channel Write"
               , "file":"2"
-              , "line":"245"
+              , "line":"254"
               , "details":
               {
                 "Width":"32 bits"
-                , "Depth":"97"
+                , "Depth":"102"
                 , "Stall-free":"No"
                 , "Start-Cycle":"26"
                 , "Latency":"1"
@@ -7356,10 +7960,10 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":391
+              , "id":406
               , "name":"Channel Write"
               , "file":"2"
-              , "line":"246"
+              , "line":"255"
               , "details":
               {
                 "Width":"32 bits"
@@ -7371,10 +7975,10 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":393
+              , "id":408
               , "name":"Load"
               , "file":"2"
-              , "line":"248"
+              , "line":"257"
               , "details":
               {
                 "Width":"32 bits"
@@ -7387,144 +7991,54 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":394
-              , "name":"Channel Write"
-              , "file":"2"
-              , "line":"248"
-              , "details":
-              {
-                "Width":"32 bits"
-                , "Depth":"90"
-                , "Stall-free":"No"
-                , "Start-Cycle":"39"
-                , "Latency":"1"
-              }
-            }
-            , {
-              "type":"inst"
-              , "id":396
-              , "name":"Channel Write"
-              , "file":"2"
-              , "line":"249"
-              , "details":
-              {
-                "Width":"32 bits"
-                , "Depth":"90"
-                , "Stall-free":"No"
-                , "Start-Cycle":"39"
-                , "Latency":"1"
-              }
-            }
-            , {
-              "type":"inst"
-              , "id":398
-              , "name":"Channel Write"
-              , "file":"2"
-              , "line":"251"
-              , "details":
-              {
-                "Width":"8 bits"
-                , "Depth":"0"
-                , "Stall-free":"No"
-                , "Start-Cycle":"40"
-                , "Latency":"1"
-              }
-            }
-            , {
-              "type":"inst"
-              , "id":400
-              , "name":"Channel Write"
-              , "file":"2"
-              , "line":"252"
-              , "details":
-              {
-                "Width":"8 bits"
-                , "Depth":"1"
-                , "Stall-free":"No"
-                , "Start-Cycle":"40"
-                , "Latency":"1"
-              }
-            }
-            , {
-              "type":"inst"
-              , "id":402
-              , "name":"Channel Write"
-              , "file":"2"
-              , "line":"254"
-              , "details":
-              {
-                "Width":"8 bits"
-                , "Depth":"0"
-                , "Stall-free":"No"
-                , "Start-Cycle":"41"
-                , "Latency":"1"
-              }
-            }
-            , {
-              "type":"inst"
-              , "id":404
-              , "name":"Channel Write"
-              , "file":"2"
-              , "line":"255"
-              , "details":
-              {
-                "Width":"8 bits"
-                , "Depth":"1"
-                , "Stall-free":"No"
-                , "Start-Cycle":"41"
-                , "Latency":"1"
-              }
-            }
-            , {
-              "type":"inst"
-              , "id":406
+              , "id":409
               , "name":"Channel Write"
               , "file":"2"
               , "line":"257"
               , "details":
               {
                 "Width":"32 bits"
-                , "Depth":"0"
+                , "Depth":"90"
                 , "Stall-free":"No"
-                , "Start-Cycle":"42"
+                , "Start-Cycle":"39"
                 , "Latency":"1"
               }
             }
             , {
               "type":"inst"
-              , "id":408
+              , "id":411
               , "name":"Channel Write"
               , "file":"2"
               , "line":"258"
               , "details":
               {
                 "Width":"32 bits"
-                , "Depth":"1"
+                , "Depth":"90"
                 , "Stall-free":"No"
-                , "Start-Cycle":"42"
+                , "Start-Cycle":"39"
                 , "Latency":"1"
               }
             }
             , {
               "type":"inst"
-              , "id":410
+              , "id":413
               , "name":"loop end"
               , "file":"2"
-              , "line":"241"
+              , "line":"250"
               , "details":
               {
-                "Start-Cycle":"43"
+                "Start-Cycle":"40"
                 , "Latency":"1"
                 , "Additional Info":"Exit from a basic block. Control flow branches at this node to one or more merge nodes. There is no control branching between merge and branch node for the same basic block."
               }
             }
             , {
               "type":"inst"
-              , "id":411
+              , "id":414
               , "name":"loop"
               , "file":""
               , "line":""
-              , "loopTo":410
+              , "loopTo":413
               , "details":
               {
                 "Start-Cycle":"0"
@@ -7535,13 +8049,13 @@ var loopsJSON={
           ]
           , "details":
           {
-            "Latency":"44"
+            "Latency":"41"
           }
         }
         , {
           "type":"bb"
-          , "id":347
-          , "name":"Block105"
+          , "id":348
+          , "name":"Block106"
           , "file":""
           , "line":"0"
           , "details":
@@ -7551,14 +8065,14 @@ var loopsJSON={
         }
         , {
           "type":"memtype"
-          , "id":414
+          , "id":417
           , "name":"Local Memory"
           , "file":""
           , "line":"0"
           , "children":[
             {
               "type":"memsys"
-              , "id":415
+              , "id":418
               , "name":"genotype"
               , "file":""
               , "line":"0"
@@ -7568,14 +8082,14 @@ var loopsJSON={
               , "children":[
                 {
                   "type":"bank"
-                  , "id":416
+                  , "id":419
                   , "name":"Bank 0"
                   , "file":""
                   , "line":"0"
                 }
                 , {
                   "type":"bank"
-                  , "id":417
+                  , "id":420
                   , "name":"Bank 1"
                   , "file":""
                   , "line":"0"
@@ -7584,7 +8098,7 @@ var loopsJSON={
             }
             , {
               "type":"memsys"
-              , "id":418
+              , "id":421
               , "name":"loc_coords_x"
               , "file":""
               , "line":"0"
@@ -7594,7 +8108,7 @@ var loopsJSON={
               , "children":[
                 {
                   "type":"bank"
-                  , "id":419
+                  , "id":422
                   , "name":"Bank 0"
                   , "file":""
                   , "line":"0"
@@ -7603,7 +8117,7 @@ var loopsJSON={
             }
             , {
               "type":"memsys"
-              , "id":420
+              , "id":423
               , "name":"loc_coords_y"
               , "file":""
               , "line":"0"
@@ -7613,7 +8127,7 @@ var loopsJSON={
               , "children":[
                 {
                   "type":"bank"
-                  , "id":421
+                  , "id":424
                   , "name":"Bank 0"
                   , "file":""
                   , "line":"0"
@@ -7622,7 +8136,7 @@ var loopsJSON={
             }
             , {
               "type":"memsys"
-              , "id":422
+              , "id":425
               , "name":"loc_coords_z"
               , "file":""
               , "line":"0"
@@ -7632,7 +8146,7 @@ var loopsJSON={
               , "children":[
                 {
                   "type":"bank"
-                  , "id":423
+                  , "id":426
                   , "name":"Bank 0"
                   , "file":""
                   , "line":"0"
@@ -7645,21 +8159,21 @@ var loopsJSON={
     }
     , {
       "type":"kernel"
-      , "id":485
+      , "id":490
       , "name":"Krnl_InterE"
       , "file":""
       , "line":"0"
       , "children":[
         {
           "type":"bb"
-          , "id":425
-          , "name":"Block106.wii_blk"
+          , "id":428
+          , "name":"Block107.wii_blk"
           , "file":""
           , "line":"0"
           , "children":[
             {
               "type":"inst"
-              , "id":432
+              , "id":435
               , "name":"Load"
               , "file":"3"
               , "line":"50"
@@ -7675,7 +8189,7 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":433
+              , "id":436
               , "name":"end"
               , "file":"0"
               , "line":"0"
@@ -7688,7 +8202,7 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":434
+              , "id":437
               , "name":"begin"
               , "file":""
               , "line":""
@@ -7707,91 +8221,29 @@ var loopsJSON={
         }
         , {
           "type":"bb"
-          , "id":426
-          , "name":"Block107"
+          , "id":429
+          , "name":"Block108"
           , "file":""
           , "line":"0"
           , "II":1
           , "LoopInfo":"Entry to loop. "
           , "hasFmaxBottlenecks":"No"
           , "hasSubloops":"Yes"
-          , "isPipelined":"No"
-          , "loopTo":482
-          , "details":
-          {
-            "Latency":"2"
-          }
-        }
-        , {
-          "type":"bb"
-          , "id":427
-          , "name":"Block108"
-          , "file":""
-          , "line":"0"
-          , "II":1
-          , "LoopInfo":""
-          , "hasFmaxBottlenecks":"No"
-          , "hasSubloops":"No"
           , "isPipelined":"Yes"
           , "children":[
             {
               "type":"inst"
-              , "id":435
-              , "name":"Channel Read"
-              , "file":"3"
-              , "line":"65"
-              , "details":
-              {
-                "Width":"32 bits"
-                , "Depth":"109"
-                , "Stall-free":"No"
-                , "Start-Cycle":"9"
-                , "Latency":"1"
-              }
-            }
-            , {
-              "type":"inst"
-              , "id":436
-              , "name":"Channel Read"
-              , "file":"3"
-              , "line":"67"
-              , "details":
-              {
-                "Width":"32 bits"
-                , "Depth":"97"
-                , "Stall-free":"No"
-                , "Start-Cycle":"10"
-                , "Latency":"1"
-              }
-            }
-            , {
-              "type":"inst"
-              , "id":437
-              , "name":"Channel Read"
-              , "file":"3"
-              , "line":"69"
-              , "details":
-              {
-                "Width":"32 bits"
-                , "Depth":"90"
-                , "Stall-free":"No"
-                , "Start-Cycle":"16"
-                , "Latency":"1"
-              }
-            }
-            , {
-              "type":"inst"
               , "id":438
               , "name":"Channel Read"
               , "file":"3"
-              , "line":"71"
+              , "line":"63"
               , "details":
               {
                 "Width":"8 bits"
-                , "Depth":"0"
+                , "Depth":"31"
                 , "Stall-free":"No"
-                , "Start-Cycle":"17"
-                , "Latency":"1"
+                , "Start-Cycle":"1"
+                , "Latency":"0"
               }
             }
             , {
@@ -7799,13 +8251,13 @@ var loopsJSON={
               , "id":439
               , "name":"Channel Read"
               , "file":"3"
-              , "line":"73"
+              , "line":"65"
               , "details":
               {
                 "Width":"8 bits"
-                , "Depth":"0"
+                , "Depth":"30"
                 , "Stall-free":"No"
-                , "Start-Cycle":"18"
+                , "Start-Cycle":"1"
                 , "Latency":"1"
               }
             }
@@ -7814,25 +8266,25 @@ var loopsJSON={
               , "id":440
               , "name":"Channel Read"
               , "file":"3"
-              , "line":"75"
+              , "line":"67"
               , "details":
               {
                 "Width":"32 bits"
-                , "Depth":"0"
+                , "Depth":"30"
                 , "Stall-free":"No"
-                , "Start-Cycle":"19"
+                , "Start-Cycle":"2"
                 , "Latency":"1"
               }
             }
             , {
               "type":"inst"
               , "id":441
-              , "name":"loop end"
+              , "name":"end"
               , "file":"3"
-              , "line":"64"
+              , "line":"70"
               , "details":
               {
-                "Start-Cycle":"20"
+                "Start-Cycle":"3"
                 , "Latency":"1"
                 , "Additional Info":"Exit from a basic block. Control flow branches at this node to one or more merge nodes. There is no control branching between merge and branch node for the same basic block."
               }
@@ -7843,7 +8295,7 @@ var loopsJSON={
               , "name":"loop"
               , "file":""
               , "line":""
-              , "loopTo":441
+              , "loopTo":487
               , "details":
               {
                 "Start-Cycle":"0"
@@ -7854,22 +8306,112 @@ var loopsJSON={
           ]
           , "details":
           {
-            "Latency":"21"
+            "Latency":"4"
           }
         }
         , {
           "type":"bb"
-          , "id":428
+          , "id":430
           , "name":"Block109"
+          , "file":""
+          , "line":"0"
+          , "II":1
+          , "LoopInfo":""
+          , "hasFmaxBottlenecks":"No"
+          , "hasSubloops":"No"
+          , "isPipelined":"Yes"
+          , "children":[
+            {
+              "type":"inst"
+              , "id":443
+              , "name":"Channel Read"
+              , "file":"3"
+              , "line":"71"
+              , "details":
+              {
+                "Width":"32 bits"
+                , "Depth":"114"
+                , "Stall-free":"No"
+                , "Start-Cycle":"7"
+                , "Latency":"1"
+              }
+            }
+            , {
+              "type":"inst"
+              , "id":444
+              , "name":"Channel Read"
+              , "file":"3"
+              , "line":"73"
+              , "details":
+              {
+                "Width":"32 bits"
+                , "Depth":"102"
+                , "Stall-free":"No"
+                , "Start-Cycle":"8"
+                , "Latency":"1"
+              }
+            }
+            , {
+              "type":"inst"
+              , "id":445
+              , "name":"Channel Read"
+              , "file":"3"
+              , "line":"75"
+              , "details":
+              {
+                "Width":"32 bits"
+                , "Depth":"90"
+                , "Stall-free":"No"
+                , "Start-Cycle":"9"
+                , "Latency":"1"
+              }
+            }
+            , {
+              "type":"inst"
+              , "id":446
+              , "name":"loop end"
+              , "file":"3"
+              , "line":"70"
+              , "details":
+              {
+                "Start-Cycle":"18"
+                , "Latency":"1"
+                , "Additional Info":"Exit from a basic block. Control flow branches at this node to one or more merge nodes. There is no control branching between merge and branch node for the same basic block."
+              }
+            }
+            , {
+              "type":"inst"
+              , "id":447
+              , "name":"loop"
+              , "file":""
+              , "line":""
+              , "loopTo":446
+              , "details":
+              {
+                "Start-Cycle":"0"
+                , "Latency":"1"
+                , "Additional Info":"Entrance to a basic block. Control flow comes to this node from one or more branch nodes, unless it's the very first merge node in a kernel. There is no control branching between merge and branch node within the same basic block."
+              }
+            }
+          ]
+          , "details":
+          {
+            "Latency":"19"
+          }
+        }
+        , {
+          "type":"bb"
+          , "id":431
+          , "name":"Block110"
           , "file":""
           , "line":"0"
           , "children":[
             {
               "type":"inst"
-              , "id":443
+              , "id":448
               , "name":"Store"
               , "file":"3"
-              , "line":"80"
+              , "line":"88"
               , "details":
               {
                 "Width":"256 bits"
@@ -7881,7 +8423,7 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":444
+              , "id":449
               , "name":"end"
               , "file":"0"
               , "line":"0"
@@ -7894,7 +8436,7 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":445
+              , "id":450
               , "name":"begin"
               , "file":""
               , "line":""
@@ -7913,8 +8455,8 @@ var loopsJSON={
         }
         , {
           "type":"bb"
-          , "id":429
-          , "name":"Block110"
+          , "id":432
+          , "name":"Block111"
           , "file":""
           , "line":"0"
           , "II":1
@@ -7925,10 +8467,10 @@ var loopsJSON={
           , "children":[
             {
               "type":"inst"
-              , "id":446
+              , "id":451
               , "name":"Load"
               , "file":"3"
-              , "line":"94"
+              , "line":"102"
               , "details":
               {
                 "Width":"8 bits"
@@ -7940,10 +8482,10 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":447
+              , "id":452
               , "name":"Load"
               , "file":"3"
-              , "line":"98"
+              , "line":"106"
               , "details":
               {
                 "Width":"32 bits"
@@ -7955,85 +8497,10 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":448
-              , "name":"Load"
-              , "file":"3"
-              , "line":"163"
-              , "details":
-              {
-                "Width":"32 bits"
-                , "Type":"Burst-coalesced"
-                , "Stall-free":"No"
-                , "Start-Cycle":"35"
-                , "Latency":"160"
-              }
-            }
-            , {
-              "type":"inst"
-              , "id":449
-              , "name":"Load"
-              , "file":"3"
-              , "line":"164"
-              , "details":
-              {
-                "Width":"32 bits"
-                , "Type":"Burst-coalesced"
-                , "Stall-free":"No"
-                , "Start-Cycle":"35"
-                , "Latency":"160"
-              }
-            }
-            , {
-              "type":"inst"
-              , "id":450
-              , "name":"Load"
-              , "file":"3"
-              , "line":"165"
-              , "details":
-              {
-                "Width":"32 bits"
-                , "Type":"Burst-coalesced"
-                , "Stall-free":"No"
-                , "Start-Cycle":"35"
-                , "Latency":"160"
-              }
-            }
-            , {
-              "type":"inst"
-              , "id":451
-              , "name":"Load"
-              , "file":"3"
-              , "line":"166"
-              , "details":
-              {
-                "Width":"32 bits"
-                , "Type":"Burst-coalesced"
-                , "Stall-free":"No"
-                , "Start-Cycle":"35"
-                , "Latency":"160"
-              }
-            }
-            , {
-              "type":"inst"
-              , "id":452
-              , "name":"Load"
-              , "file":"3"
-              , "line":"167"
-              , "details":
-              {
-                "Width":"32 bits"
-                , "Type":"Burst-coalesced"
-                , "Stall-free":"No"
-                , "Start-Cycle":"35"
-                , "Latency":"160"
-              }
-            }
-            , {
-              "type":"inst"
               , "id":453
               , "name":"Load"
               , "file":"3"
-              , "line":"168"
+              , "line":"171"
               , "details":
               {
                 "Width":"32 bits"
@@ -8048,7 +8515,7 @@ var loopsJSON={
               , "id":454
               , "name":"Load"
               , "file":"3"
-              , "line":"169"
+              , "line":"172"
               , "details":
               {
                 "Width":"32 bits"
@@ -8063,7 +8530,7 @@ var loopsJSON={
               , "id":455
               , "name":"Load"
               , "file":"3"
-              , "line":"170"
+              , "line":"173"
               , "details":
               {
                 "Width":"32 bits"
@@ -8078,7 +8545,7 @@ var loopsJSON={
               , "id":456
               , "name":"Load"
               , "file":"3"
-              , "line":"196"
+              , "line":"174"
               , "details":
               {
                 "Width":"32 bits"
@@ -8093,7 +8560,7 @@ var loopsJSON={
               , "id":457
               , "name":"Load"
               , "file":"3"
-              , "line":"197"
+              , "line":"175"
               , "details":
               {
                 "Width":"32 bits"
@@ -8108,7 +8575,7 @@ var loopsJSON={
               , "id":458
               , "name":"Load"
               , "file":"3"
-              , "line":"198"
+              , "line":"176"
               , "details":
               {
                 "Width":"32 bits"
@@ -8123,7 +8590,7 @@ var loopsJSON={
               , "id":459
               , "name":"Load"
               , "file":"3"
-              , "line":"199"
+              , "line":"177"
               , "details":
               {
                 "Width":"32 bits"
@@ -8138,7 +8605,7 @@ var loopsJSON={
               , "id":460
               , "name":"Load"
               , "file":"3"
-              , "line":"200"
+              , "line":"178"
               , "details":
               {
                 "Width":"32 bits"
@@ -8153,7 +8620,7 @@ var loopsJSON={
               , "id":461
               , "name":"Load"
               , "file":"3"
-              , "line":"201"
+              , "line":"204"
               , "details":
               {
                 "Width":"32 bits"
@@ -8168,7 +8635,7 @@ var loopsJSON={
               , "id":462
               , "name":"Load"
               , "file":"3"
-              , "line":"202"
+              , "line":"205"
               , "details":
               {
                 "Width":"32 bits"
@@ -8183,7 +8650,7 @@ var loopsJSON={
               , "id":463
               , "name":"Load"
               , "file":"3"
-              , "line":"203"
+              , "line":"206"
               , "details":
               {
                 "Width":"32 bits"
@@ -8198,7 +8665,7 @@ var loopsJSON={
               , "id":464
               , "name":"Load"
               , "file":"3"
-              , "line":"229"
+              , "line":"207"
               , "details":
               {
                 "Width":"32 bits"
@@ -8213,7 +8680,7 @@ var loopsJSON={
               , "id":465
               , "name":"Load"
               , "file":"3"
-              , "line":"230"
+              , "line":"208"
               , "details":
               {
                 "Width":"32 bits"
@@ -8228,7 +8695,7 @@ var loopsJSON={
               , "id":466
               , "name":"Load"
               , "file":"3"
-              , "line":"231"
+              , "line":"209"
               , "details":
               {
                 "Width":"32 bits"
@@ -8243,7 +8710,7 @@ var loopsJSON={
               , "id":467
               , "name":"Load"
               , "file":"3"
-              , "line":"232"
+              , "line":"210"
               , "details":
               {
                 "Width":"32 bits"
@@ -8258,7 +8725,7 @@ var loopsJSON={
               , "id":468
               , "name":"Load"
               , "file":"3"
-              , "line":"233"
+              , "line":"211"
               , "details":
               {
                 "Width":"32 bits"
@@ -8273,7 +8740,7 @@ var loopsJSON={
               , "id":469
               , "name":"Load"
               , "file":"3"
-              , "line":"234"
+              , "line":"237"
               , "details":
               {
                 "Width":"32 bits"
@@ -8288,7 +8755,7 @@ var loopsJSON={
               , "id":470
               , "name":"Load"
               , "file":"3"
-              , "line":"235"
+              , "line":"238"
               , "details":
               {
                 "Width":"32 bits"
@@ -8303,7 +8770,7 @@ var loopsJSON={
               , "id":471
               , "name":"Load"
               , "file":"3"
-              , "line":"236"
+              , "line":"239"
               , "details":
               {
                 "Width":"32 bits"
@@ -8316,9 +8783,84 @@ var loopsJSON={
             , {
               "type":"inst"
               , "id":472
+              , "name":"Load"
+              , "file":"3"
+              , "line":"240"
+              , "details":
+              {
+                "Width":"32 bits"
+                , "Type":"Burst-coalesced"
+                , "Stall-free":"No"
+                , "Start-Cycle":"35"
+                , "Latency":"160"
+              }
+            }
+            , {
+              "type":"inst"
+              , "id":473
+              , "name":"Load"
+              , "file":"3"
+              , "line":"241"
+              , "details":
+              {
+                "Width":"32 bits"
+                , "Type":"Burst-coalesced"
+                , "Stall-free":"No"
+                , "Start-Cycle":"35"
+                , "Latency":"160"
+              }
+            }
+            , {
+              "type":"inst"
+              , "id":474
+              , "name":"Load"
+              , "file":"3"
+              , "line":"242"
+              , "details":
+              {
+                "Width":"32 bits"
+                , "Type":"Burst-coalesced"
+                , "Stall-free":"No"
+                , "Start-Cycle":"35"
+                , "Latency":"160"
+              }
+            }
+            , {
+              "type":"inst"
+              , "id":475
+              , "name":"Load"
+              , "file":"3"
+              , "line":"243"
+              , "details":
+              {
+                "Width":"32 bits"
+                , "Type":"Burst-coalesced"
+                , "Stall-free":"No"
+                , "Start-Cycle":"35"
+                , "Latency":"160"
+              }
+            }
+            , {
+              "type":"inst"
+              , "id":476
+              , "name":"Load"
+              , "file":"3"
+              , "line":"244"
+              , "details":
+              {
+                "Width":"32 bits"
+                , "Type":"Burst-coalesced"
+                , "Stall-free":"No"
+                , "Start-Cycle":"35"
+                , "Latency":"160"
+              }
+            }
+            , {
+              "type":"inst"
+              , "id":477
               , "name":"loop end"
               , "file":"3"
-              , "line":"92"
+              , "line":"100"
               , "details":
               {
                 "Start-Cycle":"268"
@@ -8328,11 +8870,11 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":473
+              , "id":478
               , "name":"loop"
               , "file":""
               , "line":""
-              , "loopTo":472
+              , "loopTo":477
               , "details":
               {
                 "Start-Cycle":"0"
@@ -8348,22 +8890,22 @@ var loopsJSON={
         }
         , {
           "type":"bb"
-          , "id":430
-          , "name":"Block111"
+          , "id":433
+          , "name":"Block112"
           , "file":""
           , "line":"0"
           , "II":1
           , "LoopInfo":"Exit which branches back to loop. "
           , "hasFmaxBottlenecks":"No"
           , "hasSubloops":"Yes"
-          , "isPipelined":"No"
+          , "isPipelined":"Yes"
           , "children":[
             {
               "type":"inst"
-              , "id":474
+              , "id":479
               , "name":"Channel Write"
               , "file":"3"
-              , "line":"268"
+              , "line":"276"
               , "details":
               {
                 "Width":"32 bits"
@@ -8375,10 +8917,10 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":476
+              , "id":481
               , "name":"Channel Write"
               , "file":"3"
-              , "line":"270"
+              , "line":"278"
               , "details":
               {
                 "Width":"8 bits"
@@ -8390,10 +8932,10 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":478
+              , "id":483
               , "name":"Channel Write"
               , "file":"3"
-              , "line":"272"
+              , "line":"280"
               , "details":
               {
                 "Width":"8 bits"
@@ -8405,10 +8947,10 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":480
+              , "id":485
               , "name":"Channel Write"
               , "file":"3"
-              , "line":"274"
+              , "line":"282"
               , "details":
               {
                 "Width":"32 bits"
@@ -8420,8 +8962,8 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":482
-              , "name":"end"
+              , "id":487
+              , "name":"loop end"
               , "file":"3"
               , "line":"58"
               , "details":
@@ -8433,7 +8975,7 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":483
+              , "id":488
               , "name":"begin"
               , "file":""
               , "line":""
@@ -8452,8 +8994,8 @@ var loopsJSON={
         }
         , {
           "type":"bb"
-          , "id":431
-          , "name":"Block112"
+          , "id":434
+          , "name":"Block113"
           , "file":""
           , "line":"0"
           , "details":
@@ -8465,24 +9007,24 @@ var loopsJSON={
     }
     , {
       "type":"kernel"
-      , "id":543
+      , "id":550
       , "name":"Krnl_IntraE"
       , "file":""
       , "line":"0"
       , "children":[
         {
           "type":"bb"
-          , "id":487
-          , "name":"Block113.wii_blk"
+          , "id":492
+          , "name":"Block114.wii_blk"
           , "file":""
           , "line":"0"
           , "children":[
             {
               "type":"inst"
-              , "id":494
+              , "id":499
               , "name":"Load"
               , "file":"4"
-              , "line":"46"
+              , "line":"52"
               , "details":
               {
                 "Width":"256 bits"
@@ -8495,10 +9037,10 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":495
+              , "id":500
               , "name":"Load"
               , "file":"4"
-              , "line":"142"
+              , "line":"150"
               , "details":
               {
                 "Width":"32 bits"
@@ -8511,7 +9053,7 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":496
+              , "id":501
               , "name":"end"
               , "file":"0"
               , "line":"0"
@@ -8524,7 +9066,7 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":497
+              , "id":502
               , "name":"begin"
               , "file":""
               , "line":""
@@ -8543,25 +9085,98 @@ var loopsJSON={
         }
         , {
           "type":"bb"
-          , "id":488
-          , "name":"Block114"
+          , "id":493
+          , "name":"Block115"
           , "file":""
           , "line":"0"
           , "II":1
           , "LoopInfo":"Entry to loop. "
           , "hasFmaxBottlenecks":"No"
           , "hasSubloops":"Yes"
-          , "isPipelined":"No"
-          , "loopTo":540
+          , "isPipelined":"Yes"
+          , "children":[
+            {
+              "type":"inst"
+              , "id":503
+              , "name":"Channel Read"
+              , "file":"4"
+              , "line":"45"
+              , "details":
+              {
+                "Width":"8 bits"
+                , "Depth":"24"
+                , "Stall-free":"No"
+                , "Start-Cycle":"1"
+                , "Latency":"0"
+              }
+            }
+            , {
+              "type":"inst"
+              , "id":504
+              , "name":"Channel Read"
+              , "file":"4"
+              , "line":"47"
+              , "details":
+              {
+                "Width":"8 bits"
+                , "Depth":"23"
+                , "Stall-free":"No"
+                , "Start-Cycle":"1"
+                , "Latency":"1"
+              }
+            }
+            , {
+              "type":"inst"
+              , "id":505
+              , "name":"Channel Read"
+              , "file":"4"
+              , "line":"49"
+              , "details":
+              {
+                "Width":"32 bits"
+                , "Depth":"23"
+                , "Stall-free":"No"
+                , "Start-Cycle":"2"
+                , "Latency":"1"
+              }
+            }
+            , {
+              "type":"inst"
+              , "id":506
+              , "name":"end"
+              , "file":"4"
+              , "line":"52"
+              , "details":
+              {
+                "Start-Cycle":"3"
+                , "Latency":"1"
+                , "Additional Info":"Exit from a basic block. Control flow branches at this node to one or more merge nodes. There is no control branching between merge and branch node for the same basic block."
+              }
+            }
+            , {
+              "type":"inst"
+              , "id":507
+              , "name":"loop"
+              , "file":""
+              , "line":""
+              , "loopTo":547
+              , "details":
+              {
+                "Start-Cycle":"0"
+                , "Latency":"1"
+                , "Additional Info":"Entrance to a basic block. Control flow comes to this node from one or more branch nodes, unless it's the very first merge node in a kernel. There is no control branching between merge and branch node within the same basic block."
+              }
+            }
+          ]
           , "details":
           {
-            "Latency":"2"
+            "Latency":"4"
           }
         }
         , {
           "type":"bb"
-          , "id":489
-          , "name":"Block115"
+          , "id":494
+          , "name":"Block116"
           , "file":""
           , "line":"0"
           , "II":1
@@ -8572,10 +9187,10 @@ var loopsJSON={
           , "children":[
             {
               "type":"inst"
-              , "id":498
+              , "id":508
               , "name":"Channel Read"
               , "file":"4"
-              , "line":"47"
+              , "line":"53"
               , "details":
               {
                 "Width":"32 bits"
@@ -8587,10 +9202,10 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":499
+              , "id":509
               , "name":"Store"
               , "file":"4"
-              , "line":"47"
+              , "line":"53"
               , "details":
               {
                 "Width":"32 bits"
@@ -8602,10 +9217,10 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":500
+              , "id":510
               , "name":"Channel Read"
               , "file":"4"
-              , "line":"49"
+              , "line":"55"
               , "details":
               {
                 "Width":"32 bits"
@@ -8617,10 +9232,10 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":501
+              , "id":511
               , "name":"Store"
               , "file":"4"
-              , "line":"49"
+              , "line":"55"
               , "details":
               {
                 "Width":"32 bits"
@@ -8632,10 +9247,10 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":502
+              , "id":512
               , "name":"Channel Read"
               , "file":"4"
-              , "line":"51"
+              , "line":"57"
               , "details":
               {
                 "Width":"32 bits"
@@ -8647,10 +9262,10 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":503
+              , "id":513
               , "name":"Store"
               , "file":"4"
-              , "line":"51"
+              , "line":"57"
               , "details":
               {
                 "Width":"32 bits"
@@ -8662,69 +9277,24 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":504
-              , "name":"Channel Read"
-              , "file":"4"
-              , "line":"53"
-              , "details":
-              {
-                "Width":"8 bits"
-                , "Depth":"1"
-                , "Stall-free":"No"
-                , "Start-Cycle":"19"
-                , "Latency":"1"
-              }
-            }
-            , {
-              "type":"inst"
-              , "id":505
-              , "name":"Channel Read"
-              , "file":"4"
-              , "line":"55"
-              , "details":
-              {
-                "Width":"8 bits"
-                , "Depth":"1"
-                , "Stall-free":"No"
-                , "Start-Cycle":"20"
-                , "Latency":"1"
-              }
-            }
-            , {
-              "type":"inst"
-              , "id":506
-              , "name":"Channel Read"
-              , "file":"4"
-              , "line":"57"
-              , "details":
-              {
-                "Width":"32 bits"
-                , "Depth":"1"
-                , "Stall-free":"No"
-                , "Start-Cycle":"21"
-                , "Latency":"1"
-              }
-            }
-            , {
-              "type":"inst"
-              , "id":507
+              , "id":514
               , "name":"loop end"
               , "file":"4"
-              , "line":"46"
+              , "line":"52"
               , "details":
               {
-                "Start-Cycle":"22"
+                "Start-Cycle":"19"
                 , "Latency":"1"
                 , "Additional Info":"Exit from a basic block. Control flow branches at this node to one or more merge nodes. There is no control branching between merge and branch node for the same basic block."
               }
             }
             , {
               "type":"inst"
-              , "id":508
+              , "id":515
               , "name":"loop"
               , "file":""
               , "line":""
-              , "loopTo":507
+              , "loopTo":514
               , "details":
               {
                 "Start-Cycle":"0"
@@ -8735,22 +9305,22 @@ var loopsJSON={
           ]
           , "details":
           {
-            "Latency":"23"
+            "Latency":"20"
           }
         }
         , {
           "type":"bb"
-          , "id":490
-          , "name":"Block116"
+          , "id":495
+          , "name":"Block117"
           , "file":""
           , "line":"0"
           , "children":[
             {
               "type":"inst"
-              , "id":509
+              , "id":516
               , "name":"Store"
               , "file":"4"
-              , "line":"62"
+              , "line":"70"
               , "details":
               {
                 "Width":"256 bits"
@@ -8762,7 +9332,7 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":510
+              , "id":517
               , "name":"end"
               , "file":"0"
               , "line":"0"
@@ -8775,7 +9345,7 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":511
+              , "id":518
               , "name":"begin"
               , "file":""
               , "line":""
@@ -8794,8 +9364,8 @@ var loopsJSON={
         }
         , {
           "type":"bb"
-          , "id":491
-          , "name":"Block117"
+          , "id":496
+          , "name":"Block118"
           , "file":""
           , "line":"0"
           , "II":1
@@ -8806,127 +9376,16 @@ var loopsJSON={
           , "children":[
             {
               "type":"inst"
-              , "id":512
+              , "id":519
               , "name":"Load"
               , "file":"4"
-              , "line":"77"
+              , "line":"85"
               , "details":
               {
                 "Width":"16 bits"
                 , "Type":"Burst-non-aligned"
                 , "Stall-free":"No"
-                , "Start-Cycle":"3"
-                , "Latency":"160"
-              }
-            }
-            , {
-              "type":"inst"
-              , "id":513
-              , "name":"Load"
-              , "file":"4"
-              , "line":"80"
-              , "details":
-              {
-                "Width":"32 bits"
-                , "Type":"Pipelined"
-                , "Stall-free":"Yes"
-                , "Start-Cycle":"165"
-                , "Latency":"5"
-                , "Additional Info":" Part of a stall-free cluster."
-              }
-            }
-            , {
-              "type":"inst"
-              , "id":514
-              , "name":"Load"
-              , "file":"4"
-              , "line":"80"
-              , "details":
-              {
-                "Width":"32 bits"
-                , "Type":"Pipelined"
-                , "Stall-free":"Yes"
-                , "Start-Cycle":"165"
-                , "Latency":"5"
-                , "Additional Info":" Part of a stall-free cluster."
-              }
-            }
-            , {
-              "type":"inst"
-              , "id":515
-              , "name":"Load"
-              , "file":"4"
-              , "line":"81"
-              , "details":
-              {
-                "Width":"32 bits"
-                , "Type":"Pipelined"
-                , "Stall-free":"Yes"
-                , "Start-Cycle":"165"
-                , "Latency":"5"
-                , "Additional Info":" Part of a stall-free cluster."
-              }
-            }
-            , {
-              "type":"inst"
-              , "id":516
-              , "name":"Load"
-              , "file":"4"
-              , "line":"81"
-              , "details":
-              {
-                "Width":"32 bits"
-                , "Type":"Pipelined"
-                , "Stall-free":"Yes"
-                , "Start-Cycle":"165"
-                , "Latency":"5"
-                , "Additional Info":" Part of a stall-free cluster."
-              }
-            }
-            , {
-              "type":"inst"
-              , "id":517
-              , "name":"Load"
-              , "file":"4"
-              , "line":"82"
-              , "details":
-              {
-                "Width":"32 bits"
-                , "Type":"Pipelined"
-                , "Stall-free":"Yes"
-                , "Start-Cycle":"172"
-                , "Latency":"5"
-                , "Additional Info":" Part of a stall-free cluster."
-              }
-            }
-            , {
-              "type":"inst"
-              , "id":518
-              , "name":"Load"
-              , "file":"4"
-              , "line":"82"
-              , "details":
-              {
-                "Width":"32 bits"
-                , "Type":"Pipelined"
-                , "Stall-free":"Yes"
-                , "Start-Cycle":"172"
-                , "Latency":"5"
-                , "Additional Info":" Part of a stall-free cluster."
-              }
-            }
-            , {
-              "type":"inst"
-              , "id":519
-              , "name":"Load"
-              , "file":"4"
-              , "line":"107"
-              , "details":
-              {
-                "Width":"8 bits"
-                , "Type":"Burst-coalesced"
-                , "Stall-free":"No"
-                , "Start-Cycle":"269"
+                , "Start-Cycle":"10"
                 , "Latency":"160"
               }
             }
@@ -8935,14 +9394,15 @@ var loopsJSON={
               , "id":520
               , "name":"Load"
               , "file":"4"
-              , "line":"116"
+              , "line":"88"
               , "details":
               {
-                "Width":"8 bits"
-                , "Type":"Burst-coalesced"
-                , "Stall-free":"No"
-                , "Start-Cycle":"434"
-                , "Latency":"160"
+                "Width":"32 bits"
+                , "Type":"Pipelined"
+                , "Stall-free":"Yes"
+                , "Start-Cycle":"172"
+                , "Latency":"5"
+                , "Additional Info":" Part of a stall-free cluster."
               }
             }
             , {
@@ -8950,14 +9410,15 @@ var loopsJSON={
               , "id":521
               , "name":"Load"
               , "file":"4"
-              , "line":"108"
+              , "line":"88"
               , "details":
               {
-                "Width":"8 bits"
-                , "Type":"Burst-coalesced"
-                , "Stall-free":"No"
-                , "Start-Cycle":"269"
-                , "Latency":"160"
+                "Width":"32 bits"
+                , "Type":"Pipelined"
+                , "Stall-free":"Yes"
+                , "Start-Cycle":"172"
+                , "Latency":"5"
+                , "Additional Info":" Part of a stall-free cluster."
               }
             }
             , {
@@ -8965,14 +9426,15 @@ var loopsJSON={
               , "id":522
               , "name":"Load"
               , "file":"4"
-              , "line":"133"
+              , "line":"89"
               , "details":
               {
                 "Width":"32 bits"
-                , "Type":"Burst-coalesced"
-                , "Stall-free":"No"
-                , "Start-Cycle":"269"
-                , "Latency":"160"
+                , "Type":"Pipelined"
+                , "Stall-free":"Yes"
+                , "Start-Cycle":"172"
+                , "Latency":"5"
+                , "Additional Info":" Part of a stall-free cluster."
               }
             }
             , {
@@ -8980,14 +9442,15 @@ var loopsJSON={
               , "id":523
               , "name":"Load"
               , "file":"4"
-              , "line":"133"
+              , "line":"89"
               , "details":
               {
                 "Width":"32 bits"
-                , "Type":"Burst-coalesced"
-                , "Stall-free":"No"
-                , "Start-Cycle":"269"
-                , "Latency":"160"
+                , "Type":"Pipelined"
+                , "Stall-free":"Yes"
+                , "Start-Cycle":"172"
+                , "Latency":"5"
+                , "Additional Info":" Part of a stall-free cluster."
               }
             }
             , {
@@ -8995,14 +9458,15 @@ var loopsJSON={
               , "id":524
               , "name":"Load"
               , "file":"4"
-              , "line":"114"
+              , "line":"90"
               , "details":
               {
                 "Width":"32 bits"
-                , "Type":"Burst-coalesced"
-                , "Stall-free":"No"
-                , "Start-Cycle":"434"
-                , "Latency":"160"
+                , "Type":"Pipelined"
+                , "Stall-free":"Yes"
+                , "Start-Cycle":"179"
+                , "Latency":"5"
+                , "Additional Info":" Part of a stall-free cluster."
               }
             }
             , {
@@ -9010,14 +9474,15 @@ var loopsJSON={
               , "id":525
               , "name":"Load"
               , "file":"4"
-              , "line":"120"
+              , "line":"90"
               , "details":
               {
                 "Width":"32 bits"
-                , "Type":"Burst-coalesced"
-                , "Stall-free":"No"
-                , "Start-Cycle":"434"
-                , "Latency":"160"
+                , "Type":"Pipelined"
+                , "Stall-free":"Yes"
+                , "Start-Cycle":"179"
+                , "Latency":"5"
+                , "Additional Info":" Part of a stall-free cluster."
               }
             }
             , {
@@ -9025,13 +9490,13 @@ var loopsJSON={
               , "id":526
               , "name":"Load"
               , "file":"4"
-              , "line":"142"
+              , "line":"115"
               , "details":
               {
-                "Width":"32 bits"
+                "Width":"8 bits"
                 , "Type":"Burst-coalesced"
                 , "Stall-free":"No"
-                , "Start-Cycle":"434"
+                , "Start-Cycle":"276"
                 , "Latency":"160"
               }
             }
@@ -9040,13 +9505,13 @@ var loopsJSON={
               , "id":527
               , "name":"Load"
               , "file":"4"
-              , "line":"144"
+              , "line":"124"
               , "details":
               {
-                "Width":"32 bits"
+                "Width":"8 bits"
                 , "Type":"Burst-coalesced"
                 , "Stall-free":"No"
-                , "Start-Cycle":"434"
+                , "Start-Cycle":"441"
                 , "Latency":"160"
               }
             }
@@ -9055,13 +9520,13 @@ var loopsJSON={
               , "id":528
               , "name":"Load"
               , "file":"4"
-              , "line":"143"
+              , "line":"116"
               , "details":
               {
-                "Width":"32 bits"
+                "Width":"8 bits"
                 , "Type":"Burst-coalesced"
                 , "Stall-free":"No"
-                , "Start-Cycle":"434"
+                , "Start-Cycle":"276"
                 , "Latency":"160"
               }
             }
@@ -9070,36 +9535,141 @@ var loopsJSON={
               , "id":529
               , "name":"Load"
               , "file":"4"
-              , "line":"143"
+              , "line":"141"
               , "details":
               {
                 "Width":"32 bits"
                 , "Type":"Burst-coalesced"
                 , "Stall-free":"No"
-                , "Start-Cycle":"434"
+                , "Start-Cycle":"441"
                 , "Latency":"160"
               }
             }
             , {
               "type":"inst"
               , "id":530
-              , "name":"loop end"
+              , "name":"Load"
               , "file":"4"
-              , "line":"75"
+              , "line":"141"
               , "details":
               {
-                "Start-Cycle":"652"
+                "Width":"32 bits"
+                , "Type":"Burst-coalesced"
+                , "Stall-free":"No"
+                , "Start-Cycle":"441"
+                , "Latency":"160"
+              }
+            }
+            , {
+              "type":"inst"
+              , "id":531
+              , "name":"Load"
+              , "file":"4"
+              , "line":"122"
+              , "details":
+              {
+                "Width":"32 bits"
+                , "Type":"Burst-coalesced"
+                , "Stall-free":"No"
+                , "Start-Cycle":"441"
+                , "Latency":"160"
+              }
+            }
+            , {
+              "type":"inst"
+              , "id":532
+              , "name":"Load"
+              , "file":"4"
+              , "line":"128"
+              , "details":
+              {
+                "Width":"32 bits"
+                , "Type":"Burst-coalesced"
+                , "Stall-free":"No"
+                , "Start-Cycle":"441"
+                , "Latency":"160"
+              }
+            }
+            , {
+              "type":"inst"
+              , "id":533
+              , "name":"Load"
+              , "file":"4"
+              , "line":"150"
+              , "details":
+              {
+                "Width":"32 bits"
+                , "Type":"Burst-coalesced"
+                , "Stall-free":"No"
+                , "Start-Cycle":"441"
+                , "Latency":"160"
+              }
+            }
+            , {
+              "type":"inst"
+              , "id":534
+              , "name":"Load"
+              , "file":"4"
+              , "line":"152"
+              , "details":
+              {
+                "Width":"32 bits"
+                , "Type":"Burst-coalesced"
+                , "Stall-free":"No"
+                , "Start-Cycle":"441"
+                , "Latency":"160"
+              }
+            }
+            , {
+              "type":"inst"
+              , "id":535
+              , "name":"Load"
+              , "file":"4"
+              , "line":"151"
+              , "details":
+              {
+                "Width":"32 bits"
+                , "Type":"Burst-coalesced"
+                , "Stall-free":"No"
+                , "Start-Cycle":"441"
+                , "Latency":"160"
+              }
+            }
+            , {
+              "type":"inst"
+              , "id":536
+              , "name":"Load"
+              , "file":"4"
+              , "line":"151"
+              , "details":
+              {
+                "Width":"32 bits"
+                , "Type":"Burst-coalesced"
+                , "Stall-free":"No"
+                , "Start-Cycle":"441"
+                , "Latency":"160"
+              }
+            }
+            , {
+              "type":"inst"
+              , "id":537
+              , "name":"loop end"
+              , "file":"4"
+              , "line":"83"
+              , "details":
+              {
+                "Start-Cycle":"659"
                 , "Latency":"1"
                 , "Additional Info":"Exit from a basic block. Control flow branches at this node to one or more merge nodes. There is no control branching between merge and branch node for the same basic block."
               }
             }
             , {
               "type":"inst"
-              , "id":531
+              , "id":538
               , "name":"loop"
               , "file":""
               , "line":""
-              , "loopTo":530
+              , "loopTo":537
               , "details":
               {
                 "Start-Cycle":"0"
@@ -9110,27 +9680,27 @@ var loopsJSON={
           ]
           , "details":
           {
-            "Latency":"653"
+            "Latency":"660"
           }
         }
         , {
           "type":"bb"
-          , "id":492
-          , "name":"Block118"
+          , "id":497
+          , "name":"Block119"
           , "file":""
           , "line":"0"
           , "II":1
           , "LoopInfo":"Exit which branches back to loop. "
           , "hasFmaxBottlenecks":"No"
           , "hasSubloops":"Yes"
-          , "isPipelined":"No"
+          , "isPipelined":"Yes"
           , "children":[
             {
               "type":"inst"
-              , "id":532
+              , "id":539
               , "name":"Channel Write"
               , "file":"4"
-              , "line":"157"
+              , "line":"165"
               , "details":
               {
                 "Width":"32 bits"
@@ -9142,10 +9712,10 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":534
+              , "id":541
               , "name":"Channel Write"
               , "file":"4"
-              , "line":"159"
+              , "line":"167"
               , "details":
               {
                 "Width":"8 bits"
@@ -9157,10 +9727,10 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":536
+              , "id":543
               , "name":"Channel Write"
               , "file":"4"
-              , "line":"161"
+              , "line":"169"
               , "details":
               {
                 "Width":"8 bits"
@@ -9172,10 +9742,10 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":538
+              , "id":545
               , "name":"Channel Write"
               , "file":"4"
-              , "line":"163"
+              , "line":"171"
               , "details":
               {
                 "Width":"32 bits"
@@ -9187,8 +9757,8 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":540
-              , "name":"end"
+              , "id":547
+              , "name":"loop end"
               , "file":"4"
               , "line":"40"
               , "details":
@@ -9200,7 +9770,7 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":541
+              , "id":548
               , "name":"begin"
               , "file":""
               , "line":""
@@ -9219,8 +9789,8 @@ var loopsJSON={
         }
         , {
           "type":"bb"
-          , "id":493
-          , "name":"Block119"
+          , "id":498
+          , "name":"Block120"
           , "file":""
           , "line":"0"
           , "details":
@@ -9230,14 +9800,14 @@ var loopsJSON={
         }
         , {
           "type":"memtype"
-          , "id":544
+          , "id":551
           , "name":"Local Memory"
           , "file":""
           , "line":"0"
           , "children":[
             {
               "type":"memsys"
-              , "id":545
+              , "id":552
               , "name":"loc_coords_x"
               , "file":""
               , "line":"0"
@@ -9247,7 +9817,7 @@ var loopsJSON={
               , "children":[
                 {
                   "type":"bank"
-                  , "id":546
+                  , "id":553
                   , "name":"Bank 0"
                   , "file":""
                   , "line":"0"
@@ -9256,7 +9826,7 @@ var loopsJSON={
             }
             , {
               "type":"memsys"
-              , "id":547
+              , "id":554
               , "name":"loc_coords_y"
               , "file":""
               , "line":"0"
@@ -9266,7 +9836,7 @@ var loopsJSON={
               , "children":[
                 {
                   "type":"bank"
-                  , "id":548
+                  , "id":555
                   , "name":"Bank 0"
                   , "file":""
                   , "line":"0"
@@ -9275,7 +9845,7 @@ var loopsJSON={
             }
             , {
               "type":"memsys"
-              , "id":549
+              , "id":556
               , "name":"loc_coords_z"
               , "file":""
               , "line":"0"
@@ -9285,7 +9855,7 @@ var loopsJSON={
               , "children":[
                 {
                   "type":"bank"
-                  , "id":550
+                  , "id":557
                   , "name":"Bank 0"
                   , "file":""
                   , "line":"0"
@@ -9298,15 +9868,15 @@ var loopsJSON={
     }
     , {
       "type":"kernel"
-      , "id":573
+      , "id":580
       , "name":"Krnl_Store"
       , "file":""
       , "line":"0"
       , "children":[
         {
           "type":"bb"
-          , "id":552
-          , "name":"Block120"
+          , "id":559
+          , "name":"Block121"
           , "file":""
           , "line":"0"
           , "details":
@@ -9316,8 +9886,8 @@ var loopsJSON={
         }
         , {
           "type":"bb"
-          , "id":553
-          , "name":"Block121"
+          , "id":560
+          , "name":"Block122"
           , "file":""
           , "line":"0"
           , "II":1
@@ -9328,7 +9898,7 @@ var loopsJSON={
           , "children":[
             {
               "type":"inst"
-              , "id":555
+              , "id":562
               , "name":"Channel Read"
               , "file":"5"
               , "line":"35"
@@ -9343,7 +9913,7 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":556
+              , "id":563
               , "name":"Channel Read"
               , "file":"5"
               , "line":"36"
@@ -9358,7 +9928,7 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":557
+              , "id":564
               , "name":"Channel Read"
               , "file":"5"
               , "line":"38"
@@ -9373,7 +9943,7 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":558
+              , "id":565
               , "name":"Channel Read"
               , "file":"5"
               , "line":"39"
@@ -9388,7 +9958,7 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":559
+              , "id":566
               , "name":"Channel Read"
               , "file":"5"
               , "line":"41"
@@ -9403,7 +9973,7 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":560
+              , "id":567
               , "name":"Channel Read"
               , "file":"5"
               , "line":"42"
@@ -9418,7 +9988,7 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":561
+              , "id":568
               , "name":"Channel Read"
               , "file":"5"
               , "line":"44"
@@ -9433,7 +10003,7 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":562
+              , "id":569
               , "name":"Channel Read"
               , "file":"5"
               , "line":"45"
@@ -9448,7 +10018,7 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":563
+              , "id":570
               , "name":"Store"
               , "file":"5"
               , "line":"49"
@@ -9463,7 +10033,7 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":564
+              , "id":571
               , "name":"Store"
               , "file":"5"
               , "line":"89"
@@ -9478,14 +10048,14 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":565
+              , "id":572
               , "name":"Channel Write"
               , "file":"5"
               , "line":"174"
               , "details":
               {
                 "Width":"8 bits"
-                , "Depth":"2128"
+                , "Depth":"2118"
                 , "Stall-free":"No"
                 , "Start-Cycle":"14"
                 , "Latency":"1"
@@ -9493,7 +10063,7 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":566
+              , "id":573
               , "name":"Store"
               , "file":"5"
               , "line":"52"
@@ -9508,7 +10078,7 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":567
+              , "id":574
               , "name":"Store"
               , "file":"5"
               , "line":"55"
@@ -9523,14 +10093,14 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":568
+              , "id":575
               , "name":"Channel Write"
               , "file":"5"
               , "line":"179"
               , "details":
               {
                 "Width":"32 bits"
-                , "Depth":"2131"
+                , "Depth":"2121"
                 , "Stall-free":"No"
                 , "Start-Cycle":"15"
                 , "Latency":"1"
@@ -9538,7 +10108,7 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":569
+              , "id":576
               , "name":"Store"
               , "file":"5"
               , "line":"58"
@@ -9553,7 +10123,7 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":570
+              , "id":577
               , "name":"loop end"
               , "file":"5"
               , "line":"33"
@@ -9566,11 +10136,11 @@ var loopsJSON={
             }
             , {
               "type":"inst"
-              , "id":571
+              , "id":578
               , "name":"loop"
               , "file":""
               , "line":""
-              , "loopTo":570
+              , "loopTo":577
               , "details":
               {
                 "Start-Cycle":"0"
@@ -9586,8 +10156,8 @@ var loopsJSON={
         }
         , {
           "type":"bb"
-          , "id":554
-          , "name":"Block122"
+          , "id":561
+          , "name":"Block123"
           , "file":""
           , "line":"0"
           , "details":
@@ -9627,67 +10197,67 @@ var loopsJSON={
     }
     , {
       "type":"channel"
-      , "id":399
+      , "id":385
       , "name":"chan_Conf2Intere_active"
       , "file":""
       , "line":"0"
       , "details":
       {
         "Width":"8 bits"
-        , "Depth":"0"
+        , "Depth":"31"
       }
     }
     , {
       "type":"channel"
-      , "id":407
+      , "id":393
       , "name":"chan_Conf2Intere_cnt"
       , "file":""
       , "line":"0"
       , "details":
       {
         "Width":"32 bits"
-        , "Depth":"0"
+        , "Depth":"30"
       }
     }
     , {
       "type":"channel"
-      , "id":403
+      , "id":389
       , "name":"chan_Conf2Intere_mode"
       , "file":""
       , "line":"0"
       , "details":
       {
         "Width":"8 bits"
-        , "Depth":"0"
+        , "Depth":"30"
       }
     }
     , {
       "type":"channel"
-      , "id":385
+      , "id":400
       , "name":"chan_Conf2Intere_x"
       , "file":""
       , "line":"0"
       , "details":
       {
         "Width":"32 bits"
-        , "Depth":"109"
+        , "Depth":"114"
       }
     }
     , {
       "type":"channel"
-      , "id":390
+      , "id":405
       , "name":"chan_Conf2Intere_y"
       , "file":""
       , "line":"0"
       , "details":
       {
         "Width":"32 bits"
-        , "Depth":"97"
+        , "Depth":"102"
       }
     }
     , {
       "type":"channel"
-      , "id":395
+      , "id":410
       , "name":"chan_Conf2Intere_z"
       , "file":""
       , "line":"0"
@@ -9699,43 +10269,43 @@ var loopsJSON={
     }
     , {
       "type":"channel"
-      , "id":401
+      , "id":387
       , "name":"chan_Conf2Intrae_active"
       , "file":""
       , "line":"0"
       , "details":
       {
         "Width":"8 bits"
-        , "Depth":"1"
+        , "Depth":"24"
       }
     }
     , {
       "type":"channel"
-      , "id":409
+      , "id":395
       , "name":"chan_Conf2Intrae_cnt"
       , "file":""
       , "line":"0"
       , "details":
       {
         "Width":"32 bits"
-        , "Depth":"1"
+        , "Depth":"23"
       }
     }
     , {
       "type":"channel"
-      , "id":405
+      , "id":391
       , "name":"chan_Conf2Intrae_mode"
       , "file":""
       , "line":"0"
       , "details":
       {
         "Width":"8 bits"
-        , "Depth":"1"
+        , "Depth":"23"
       }
     }
     , {
       "type":"channel"
-      , "id":387
+      , "id":402
       , "name":"chan_Conf2Intrae_x"
       , "file":""
       , "line":"0"
@@ -9747,7 +10317,7 @@ var loopsJSON={
     }
     , {
       "type":"channel"
-      , "id":392
+      , "id":407
       , "name":"chan_Conf2Intrae_y"
       , "file":""
       , "line":"0"
@@ -9759,7 +10329,7 @@ var loopsJSON={
     }
     , {
       "type":"channel"
-      , "id":397
+      , "id":412
       , "name":"chan_Conf2Intrae_z"
       , "file":""
       , "line":"0"
@@ -9819,7 +10389,7 @@ var loopsJSON={
     }
     , {
       "type":"channel"
-      , "id":477
+      , "id":482
       , "name":"chan_Intere2Store_active"
       , "file":""
       , "line":"0"
@@ -9831,7 +10401,7 @@ var loopsJSON={
     }
     , {
       "type":"channel"
-      , "id":481
+      , "id":486
       , "name":"chan_Intere2Store_cnt"
       , "file":""
       , "line":"0"
@@ -9843,7 +10413,7 @@ var loopsJSON={
     }
     , {
       "type":"channel"
-      , "id":475
+      , "id":480
       , "name":"chan_Intere2Store_intere"
       , "file":""
       , "line":"0"
@@ -9855,7 +10425,7 @@ var loopsJSON={
     }
     , {
       "type":"channel"
-      , "id":479
+      , "id":484
       , "name":"chan_Intere2Store_mode"
       , "file":""
       , "line":"0"
@@ -9867,7 +10437,7 @@ var loopsJSON={
     }
     , {
       "type":"channel"
-      , "id":535
+      , "id":542
       , "name":"chan_Intrae2Store_active"
       , "file":""
       , "line":"0"
@@ -9879,7 +10449,7 @@ var loopsJSON={
     }
     , {
       "type":"channel"
-      , "id":539
+      , "id":546
       , "name":"chan_Intrae2Store_cnt"
       , "file":""
       , "line":"0"
@@ -9891,7 +10461,7 @@ var loopsJSON={
     }
     , {
       "type":"channel"
-      , "id":533
+      , "id":540
       , "name":"chan_Intrae2Store_intrae"
       , "file":""
       , "line":"0"
@@ -9903,7 +10473,7 @@ var loopsJSON={
     }
     , {
       "type":"channel"
-      , "id":537
+      , "id":544
       , "name":"chan_Intrae2Store_mode"
       , "file":""
       , "line":"0"
@@ -9922,7 +10492,7 @@ var loopsJSON={
       , "details":
       {
         "Width":"32 bits"
-        , "Depth":"2131"
+        , "Depth":"2121"
       }
     }
     , {
@@ -9934,7 +10504,7 @@ var loopsJSON={
       , "details":
       {
         "Width":"8 bits"
-        , "Depth":"2128"
+        , "Depth":"2118"
       }
     }
   ]
@@ -11297,18 +11867,13 @@ var loopsJSON={
     }
     ,
     {
-      "from":296
-      , "to":292
-    }
-    ,
-    {
       "from":191
       , "to":187
     }
     ,
     {
-      "from":132
-      , "to":129
+      "from":296
+      , "to":292
     }
     ,
     {
@@ -11317,8 +11882,83 @@ var loopsJSON={
     }
     ,
     {
+      "from":119
+      , "to":121
+    }
+    ,
+    {
+      "from":175
+      , "to":176
+    }
+    ,
+    {
+      "from":154
+      , "to":155
+    }
+    ,
+    {
+      "from":204
+      , "to":202
+    }
+    ,
+    {
+      "from":174
+      , "to":171
+    }
+    ,
+    {
+      "from":125
+      , "to":126
+    }
+    ,
+    {
       "from":247
       , "to":245
+    }
+    ,
+    {
+      "from":132
+      , "to":129
+    }
+    ,
+    {
+      "from":231
+      , "to":228
+    }
+    ,
+    {
+      "from":273
+      , "to":271
+    }
+    ,
+    {
+      "from":108
+      , "to":105
+    }
+    ,
+    {
+      "from":280
+      , "to":278
+    }
+    ,
+    {
+      "from":174
+      , "to":170
+    }
+    ,
+    {
+      "from":228
+      , "to":229
+    }
+    ,
+    {
+      "from":185
+      , "to":188
+    }
+    ,
+    {
+      "from":186
+      , "to":189
     }
     ,
     {
@@ -11327,8 +11967,8 @@ var loopsJSON={
     }
     ,
     {
-      "from":262
-      , "to":263
+      "from":115
+      , "to":119
     }
     ,
     {
@@ -11342,168 +11982,13 @@ var loopsJSON={
     }
     ,
     {
-      "from":111
-      , "to":109
-    }
-    ,
-    {
-      "from":191
-      , "to":186
-    }
-    ,
-    {
-      "from":108
-      , "to":105
-    }
-    ,
-    {
-      "from":157
-      , "to":154
-    }
-    ,
-    {
-      "from":228
-      , "to":229
-    }
-    ,
-    {
-      "from":104
-      , "to":102
-    }
-    ,
-    {
-      "from":148
-      , "to":146
-    }
-    ,
-    {
-      "from":191
-      , "to":185
-    }
-    ,
-    {
-      "from":186
-      , "to":189
-    }
-    ,
-    {
-      "from":153
-      , "to":150
-    }
-    ,
-    {
-      "from":291
-      , "to":289
-    }
-    ,
-    {
-      "from":175
-      , "to":176
-    }
-    ,
-    {
-      "from":119
-      , "to":121
-    }
-    ,
-    {
-      "from":125
-      , "to":126
-    }
-    ,
-    {
-      "from":153
-      , "to":149
-    }
-    ,
-    {
-      "from":174
-      , "to":171
-    }
-    ,
-    {
-      "from":204
-      , "to":202
-    }
-    ,
-    {
-      "from":244
-      , "to":240
-    }
-    ,
-    {
-      "from":195
-      , "to":196
-    }
-    ,
-    {
-      "from":248
-      , "to":249
-    }
-    ,
-    {
-      "from":273
-      , "to":271
-    }
-    ,
-    {
-      "from":265
-      , "to":262
-    }
-    ,
-    {
-      "from":205
-      , "to":206
-    }
-    ,
-    {
-      "from":169
-      , "to":166
-    }
-    ,
-    {
-      "from":240
-      , "to":242
-    }
-    ,
-    {
-      "from":184
-      , "to":179
-    }
-    ,
-    {
-      "from":124
-      , "to":118
-    }
-    ,
-    {
-      "from":115
-      , "to":119
-    }
-    ,
-    {
-      "from":105
-      , "to":106
-    }
-    ,
-    {
-      "from":136
-      , "to":133
+      "from":239
+      , "to":232
     }
     ,
     {
       "from":132
       , "to":130
-    }
-    ,
-    {
-      "from":244
-      , "to":241
-    }
-    ,
-    {
-      "from":281
-      , "to":282
     }
     ,
     {
@@ -11517,13 +12002,273 @@ var loopsJSON={
     }
     ,
     {
-      "from":261
-      , "to":258
+      "from":111
+      , "to":109
     }
     ,
     {
-      "from":112
-      , "to":117
+      "from":239
+      , "to":233
+    }
+    ,
+    {
+      "from":216
+      , "to":217
+    }
+    ,
+    {
+      "from":165
+      , "to":167
+    }
+    ,
+    {
+      "from":166
+      , "to":167
+    }
+    ,
+    {
+      "from":251
+      , "to":248
+    }
+    ,
+    {
+      "from":128
+      , "to":125
+    }
+    ,
+    {
+      "from":124
+      , "to":112
+    }
+    ,
+    {
+      "from":184
+      , "to":179
+    }
+    ,
+    {
+      "from":248
+      , "to":249
+    }
+    ,
+    {
+      "from":224
+      , "to":225
+    }
+    ,
+    {
+      "from":265
+      , "to":262
+    }
+    ,
+    {
+      "from":153
+      , "to":149
+    }
+    ,
+    {
+      "from":148
+      , "to":146
+    }
+    ,
+    {
+      "from":180
+      , "to":182
+    }
+    ,
+    {
+      "from":270
+      , "to":266
+    }
+    ,
+    {
+      "from":184
+      , "to":180
+    }
+    ,
+    {
+      "from":219
+      , "to":216
+    }
+    ,
+    {
+      "from":153
+      , "to":150
+    }
+    ,
+    {
+      "from":149
+      , "to":151
+    }
+    ,
+    {
+      "from":150
+      , "to":151
+    }
+    ,
+    {
+      "from":304
+      , "to":301
+    }
+    ,
+    {
+      "from":191
+      , "to":185
+    }
+    ,
+    {
+      "from":194
+      , "to":192
+    }
+    ,
+    {
+      "from":220
+      , "to":221
+    }
+    ,
+    {
+      "from":262
+      , "to":263
+    }
+    ,
+    {
+      "from":212
+      , "to":213
+    }
+    ,
+    {
+      "from":266
+      , "to":268
+    }
+    ,
+    {
+      "from":270
+      , "to":267
+    }
+    ,
+    {
+      "from":191
+      , "to":186
+    }
+    ,
+    {
+      "from":239
+      , "to":234
+    }
+    ,
+    {
+      "from":179
+      , "to":181
+    }
+    ,
+    {
+      "from":124
+      , "to":114
+    }
+    ,
+    {
+      "from":201
+      , "to":199
+    }
+    ,
+    {
+      "from":261
+      , "to":256
+    }
+    ,
+    {
+      "from":285
+      , "to":286
+    }
+    ,
+    {
+      "from":170
+      , "to":172
+    }
+    ,
+    {
+      "from":171
+      , "to":172
+    }
+    ,
+    {
+      "from":239
+      , "to":236
+    }
+    ,
+    {
+      "from":227
+      , "to":224
+    }
+    ,
+    {
+      "from":261
+      , "to":257
+    }
+    ,
+    {
+      "from":178
+      , "to":175
+    }
+    ,
+    {
+      "from":284
+      , "to":281
+    }
+    ,
+    {
+      "from":145
+      , "to":141
+    }
+    ,
+    {
+      "from":233
+      , "to":237
+    }
+    ,
+    {
+      "from":234
+      , "to":237
+    }
+    ,
+    {
+      "from":235
+      , "to":237
+    }
+    ,
+    {
+      "from":236
+      , "to":237
+    }
+    ,
+    {
+      "from":239
+      , "to":235
+    }
+    ,
+    {
+      "from":277
+      , "to":274
+    }
+    ,
+    {
+      "from":223
+      , "to":220
+    }
+    ,
+    {
+      "from":124
+      , "to":113
+    }
+    ,
+    {
+      "from":161
+      , "to":162
+    }
+    ,
+    {
+      "from":104
+      , "to":101
     }
     ,
     {
@@ -11532,13 +12277,13 @@ var loopsJSON={
     }
     ,
     {
-      "from":239
-      , "to":232
+      "from":261
+      , "to":258
     }
     ,
     {
-      "from":154
-      , "to":155
+      "from":124
+      , "to":115
     }
     ,
     {
@@ -11562,223 +12307,33 @@ var loopsJSON={
     }
     ,
     {
-      "from":284
-      , "to":281
-    }
-    ,
-    {
-      "from":145
-      , "to":141
-    }
-    ,
-    {
-      "from":261
-      , "to":257
-    }
-    ,
-    {
-      "from":137
-      , "to":138
-    }
-    ,
-    {
-      "from":161
-      , "to":162
-    }
-    ,
-    {
-      "from":160
-      , "to":158
-    }
-    ,
-    {
-      "from":261
-      , "to":256
-    }
-    ,
-    {
-      "from":239
-      , "to":236
-    }
-    ,
-    {
-      "from":285
-      , "to":286
-    }
-    ,
-    {
-      "from":124
-      , "to":114
-    }
-    ,
-    {
-      "from":170
-      , "to":172
-    }
-    ,
-    {
-      "from":171
-      , "to":172
-    }
-    ,
-    {
-      "from":208
-      , "to":205
-    }
-    ,
-    {
-      "from":179
-      , "to":181
-    }
-    ,
-    {
-      "from":266
-      , "to":268
-    }
-    ,
-    {
-      "from":270
-      , "to":267
-    }
-    ,
-    {
-      "from":270
-      , "to":266
-    }
-    ,
-    {
-      "from":219
-      , "to":216
-    }
-    ,
-    {
-      "from":254
-      , "to":252
-    }
-    ,
-    {
-      "from":124
-      , "to":115
-    }
-    ,
-    {
-      "from":164
-      , "to":161
-    }
-    ,
-    {
       "from":140
       , "to":137
     }
     ,
     {
-      "from":261
-      , "to":255
+      "from":281
+      , "to":282
     }
     ,
     {
-      "from":211
-      , "to":209
+      "from":240
+      , "to":242
     }
     ,
     {
-      "from":227
-      , "to":224
-    }
-    ,
-    {
-      "from":178
-      , "to":175
-    }
-    ,
-    {
-      "from":304
-      , "to":301
-    }
-    ,
-    {
-      "from":288
-      , "to":285
-    }
-    ,
-    {
-      "from":277
-      , "to":274
-    }
-    ,
-    {
-      "from":201
-      , "to":199
-    }
-    ,
-    {
-      "from":184
-      , "to":180
-    }
-    ,
-    {
-      "from":223
-      , "to":220
-    }
-    ,
-    {
-      "from":274
-      , "to":275
-    }
-    ,
-    {
-      "from":233
-      , "to":237
-    }
-    ,
-    {
-      "from":234
-      , "to":237
-    }
-    ,
-    {
-      "from":235
-      , "to":237
-    }
-    ,
-    {
-      "from":236
-      , "to":237
-    }
-    ,
-    {
-      "from":239
-      , "to":233
-    }
-    ,
-    {
-      "from":128
-      , "to":125
-    }
-    ,
-    {
-      "from":251
-      , "to":248
-    }
-    ,
-    {
-      "from":215
-      , "to":212
-    }
-    ,
-    {
-      "from":216
-      , "to":217
+      "from":205
+      , "to":206
     }
     ,
     {
       "from":124
-      , "to":112
+      , "to":118
     }
     ,
     {
-      "from":220
-      , "to":221
+      "from":244
+      , "to":241
     }
     ,
     {
@@ -11787,323 +12342,238 @@ var loopsJSON={
     }
     ,
     {
-      "from":165
-      , "to":167
+      "from":288
+      , "to":285
     }
     ,
     {
-      "from":166
-      , "to":167
+      "from":215
+      , "to":212
     }
     ,
     {
-      "from":212
-      , "to":213
+      "from":291
+      , "to":289
     }
     ,
     {
-      "from":239
-      , "to":234
+      "from":195
+      , "to":196
+    }
+    ,
+    {
+      "from":137
+      , "to":138
+    }
+    ,
+    {
+      "from":112
+      , "to":117
+    }
+    ,
+    {
+      "from":254
+      , "to":252
+    }
+    ,
+    {
+      "from":274
+      , "to":275
+    }
+    ,
+    {
+      "from":261
+      , "to":255
     }
     ,
     {
       "from":104
-      , "to":101
+      , "to":102
     }
     ,
     {
-      "from":174
-      , "to":170
+      "from":244
+      , "to":240
     }
     ,
     {
-      "from":180
-      , "to":182
+      "from":157
+      , "to":154
     }
     ,
     {
-      "from":280
-      , "to":278
+      "from":211
+      , "to":209
     }
     ,
     {
-      "from":185
-      , "to":188
+      "from":208
+      , "to":205
     }
     ,
     {
-      "from":194
-      , "to":192
+      "from":164
+      , "to":161
     }
     ,
     {
-      "from":239
-      , "to":235
+      "from":105
+      , "to":106
     }
     ,
     {
-      "from":149
-      , "to":151
+      "from":136
+      , "to":133
     }
     ,
     {
-      "from":150
-      , "to":151
+      "from":160
+      , "to":158
     }
     ,
     {
-      "from":124
-      , "to":113
-    }
-    ,
-    {
-      "from":231
-      , "to":228
-    }
-    ,
-    {
-      "from":224
-      , "to":225
-    }
-    ,
-    {
-      "from":167
-      , "to":168
-    }
-    ,
-    {
-      "from":299
-      , "to":6
-    }
-    ,
-    {
-      "from":5
-      , "to":6
-    }
-    ,
-    {
-      "from":84
-      , "to":84
-    }
-    ,
-    {
-      "from":82
-      , "to":84
-    }
-    ,
-    {
-      "from":47
-      , "to":201
-    }
-    ,
-    {
-      "from":129
-      , "to":131
-    }
-    ,
-    {
-      "from":130
-      , "to":131
-    }
-    ,
-    {
-      "from":287
-      , "to":288
-    }
-    ,
-    {
-      "from":94
-      , "to":288
-    }
-    ,
-    {
-      "from":271
-      , "to":272
-    }
-    ,
-    {
-      "from":131
-      , "to":18
-    }
-    ,
-    {
-      "from":159
-      , "to":31
-    }
-    ,
-    {
-      "from":279
-      , "to":277
-    }
-    ,
-    {
-      "from":272
-      , "to":277
-    }
-    ,
-    {
-      "from":214
-      , "to":227
-    }
-    ,
-    {
-      "from":289
-      , "to":290
-    }
-    ,
-    {
-      "from":217
-      , "to":218
-    }
-    ,
-    {
-      "from":210
-      , "to":211
-    }
-    ,
-    {
-      "from":139
-      , "to":211
-    }
-    ,
-    {
-      "from":59
-      , "to":59
-    }
-    ,
-    {
-      "from":226
-      , "to":59
-    }
-    ,
-    {
-      "from":70
-      , "to":70
-    }
-    ,
-    {
-      "from":250
-      , "to":70
-    }
-    ,
-    {
-      "from":72
-      , "to":72
-    }
-    ,
-    {
-      "from":71
-      , "to":72
-    }
-    ,
-    {
-      "from":80
-      , "to":270
-    }
-    ,
-    {
-      "from":23
-      , "to":23
-    }
-    ,
-    {
-      "from":144
-      , "to":23
-    }
-    ,
-    {
-      "from":229
-      , "to":230
-    }
-    ,
-    {
-      "from":295
-      , "to":296
-    }
-    ,
-    {
-      "from":123
-      , "to":296
-    }
-    ,
-    {
-      "from":264
-      , "to":265
-    }
-    ,
-    {
-      "from":74
-      , "to":265
-    }
-    ,
-    {
-      "from":6
-      , "to":7
-    }
-    ,
-    {
-      "from":163
-      , "to":160
-    }
-    ,
-    {
-      "from":218
-      , "to":55
-    }
-    ,
-    {
-      "from":162
-      , "to":163
-    }
-    ,
-    {
-      "from":297
-      , "to":299
-    }
-    ,
-    {
-      "from":65
-      , "to":66
-    }
-    ,
-    {
-      "from":177
-      , "to":184
-    }
-    ,
-    {
-      "from":173
-      , "to":184
-    }
-    ,
-    {
-      "from":168
-      , "to":184
-    }
-    ,
-    {
-      "from":64
-      , "to":244
-    }
-    ,
-    {
-      "from":168
-      , "to":169
-    }
-    ,
-    {
-      "from":31
-      , "to":169
-    }
-    ,
-    {
-      "from":72
-      , "to":254
+      "from":169
+      , "to":166
     }
     ,
     {
       "from":295
       , "to":300
+    }
+    ,
+    {
+      "from":61
+      , "to":61
+    }
+    ,
+    {
+      "from":238
+      , "to":61
+    }
+    ,
+    {
+      "from":195
+      , "to":197
+    }
+    ,
+    {
+      "from":196
+      , "to":197
+    }
+    ,
+    {
+      "from":80
+      , "to":80
+    }
+    ,
+    {
+      "from":78
+      , "to":80
+    }
+    ,
+    {
+      "from":172
+      , "to":173
+    }
+    ,
+    {
+      "from":86
+      , "to":87
+    }
+    ,
+    {
+      "from":86
+      , "to":86
+    }
+    ,
+    {
+      "from":276
+      , "to":86
+    }
+    ,
+    {
+      "from":126
+      , "to":127
+    }
+    ,
+    {
+      "from":93
+      , "to":93
+    }
+    ,
+    {
+      "from":91
+      , "to":93
+    }
+    ,
+    {
+      "from":21
+      , "to":21
+    }
+    ,
+    {
+      "from":139
+      , "to":21
+    }
+    ,
+    {
+      "from":303
+      , "to":100
+    }
+    ,
+    {
+      "from":61
+      , "to":62
+    }
+    ,
+    {
+      "from":301
+      , "to":303
+    }
+    ,
+    {
+      "from":207
+      , "to":208
+    }
+    ,
+    {
+      "from":203
+      , "to":208
+    }
+    ,
+    {
+      "from":38
+      , "to":38
+    }
+    ,
+    {
+      "from":37
+      , "to":38
+    }
+    ,
+    {
+      "from":23
+      , "to":148
+    }
+    ,
+    {
+      "from":90
+      , "to":94
+    }
+    ,
+    {
+      "from":267
+      , "to":269
+    }
+    ,
+    {
+      "from":266
+      , "to":269
+    }
+    ,
+    {
+      "from":268
+      , "to":269
     }
     ,
     {
@@ -12117,88 +12587,438 @@ var loopsJSON={
     }
     ,
     {
-      "from":274
-      , "to":276
+      "from":137
+      , "to":139
     }
     ,
     {
-      "from":275
-      , "to":276
-    }
-    ,
-    {
-      "from":81
-      , "to":82
-    }
-    ,
-    {
-      "from":107
-      , "to":108
-    }
-    ,
-    {
-      "from":7
-      , "to":108
-    }
-    ,
-    {
-      "from":15
-      , "to":140
-    }
-    ,
-    {
-      "from":158
-      , "to":159
-    }
-    ,
-    {
-      "from":209
-      , "to":210
-    }
-    ,
-    {
-      "from":248
-      , "to":250
-    }
-    ,
-    {
-      "from":249
-      , "to":250
-    }
-    ,
-    {
-      "from":84
-      , "to":273
-    }
-    ,
-    {
-      "from":59
-      , "to":239
-    }
-    ,
-    {
-      "from":74
-      , "to":261
-    }
-    ,
-    {
-      "from":127
-      , "to":128
+      "from":138
+      , "to":139
     }
     ,
     {
       "from":10
-      , "to":128
+      , "to":15
     }
     ,
     {
-      "from":134
-      , "to":135
+      "from":36
+      , "to":37
     }
     ,
     {
-      "from":278
-      , "to":279
+      "from":6
+      , "to":10
+    }
+    ,
+    {
+      "from":101
+      , "to":103
+    }
+    ,
+    {
+      "from":102
+      , "to":103
+    }
+    ,
+    {
+      "from":176
+      , "to":177
+    }
+    ,
+    {
+      "from":135
+      , "to":136
+    }
+    ,
+    {
+      "from":18
+      , "to":136
+    }
+    ,
+    {
+      "from":36
+      , "to":36
+    }
+    ,
+    {
+      "from":183
+      , "to":36
+    }
+    ,
+    {
+      "from":199
+      , "to":200
+    }
+    ,
+    {
+      "from":224
+      , "to":226
+    }
+    ,
+    {
+      "from":225
+      , "to":226
+    }
+    ,
+    {
+      "from":260
+      , "to":90
+    }
+    ,
+    {
+      "from":15
+      , "to":52
+    }
+    ,
+    {
+      "from":303
+      , "to":5
+    }
+    ,
+    {
+      "from":4
+      , "to":5
+    }
+    ,
+    {
+      "from":103
+      , "to":4
+    }
+    ,
+    {
+      "from":155
+      , "to":156
+    }
+    ,
+    {
+      "from":52
+      , "to":215
+    }
+    ,
+    {
+      "from":200
+      , "to":204
+    }
+    ,
+    {
+      "from":218
+      , "to":55
+    }
+    ,
+    {
+      "from":67
+      , "to":247
+    }
+    ,
+    {
+      "from":40
+      , "to":40
+    }
+    ,
+    {
+      "from":190
+      , "to":40
+    }
+    ,
+    {
+      "from":109
+      , "to":110
+    }
+    ,
+    {
+      "from":252
+      , "to":253
+    }
+    ,
+    {
+      "from":293
+      , "to":295
+    }
+    ,
+    {
+      "from":107
+      , "to":12
+    }
+    ,
+    {
+      "from":40
+      , "to":41
+    }
+    ,
+    {
+      "from":88
+      , "to":88
+    }
+    ,
+    {
+      "from":87
+      , "to":88
+    }
+    ,
+    {
+      "from":282
+      , "to":283
+    }
+    ,
+    {
+      "from":182
+      , "to":183
+    }
+    ,
+    {
+      "from":180
+      , "to":183
+    }
+    ,
+    {
+      "from":181
+      , "to":183
+    }
+    ,
+    {
+      "from":38
+      , "to":191
+    }
+    ,
+    {
+      "from":81
+      , "to":81
+    }
+    ,
+    {
+      "from":269
+      , "to":81
+    }
+    ,
+    {
+      "from":64
+      , "to":244
+    }
+    ,
+    {
+      "from":218
+      , "to":219
+    }
+    ,
+    {
+      "from":52
+      , "to":219
+    }
+    ,
+    {
+      "from":177
+      , "to":178
+    }
+    ,
+    {
+      "from":159
+      , "to":178
+    }
+    ,
+    {
+      "from":47
+      , "to":47
+    }
+    ,
+    {
+      "from":46
+      , "to":47
+    }
+    ,
+    {
+      "from":192
+      , "to":193
+    }
+    ,
+    {
+      "from":245
+      , "to":246
+    }
+    ,
+    {
+      "from":84
+      , "to":84
+    }
+    ,
+    {
+      "from":82
+      , "to":84
+    }
+    ,
+    {
+      "from":212
+      , "to":214
+    }
+    ,
+    {
+      "from":213
+      , "to":214
+    }
+    ,
+    {
+      "from":200
+      , "to":198
+    }
+    ,
+    {
+      "from":193
+      , "to":198
+    }
+    ,
+    {
+      "from":222
+      , "to":223
+    }
+    ,
+    {
+      "from":55
+      , "to":223
+    }
+    ,
+    {
+      "from":287
+      , "to":288
+    }
+    ,
+    {
+      "from":94
+      , "to":288
+    }
+    ,
+    {
+      "from":121
+      , "to":123
+    }
+    ,
+    {
+      "from":118
+      , "to":123
+    }
+    ,
+    {
+      "from":112
+      , "to":123
+    }
+    ,
+    {
+      "from":113
+      , "to":123
+    }
+    ,
+    {
+      "from":114
+      , "to":123
+    }
+    ,
+    {
+      "from":117
+      , "to":123
+    }
+    ,
+    {
+      "from":187
+      , "to":190
+    }
+    ,
+    {
+      "from":186
+      , "to":190
+    }
+    ,
+    {
+      "from":189
+      , "to":190
+    }
+    ,
+    {
+      "from":188
+      , "to":190
+    }
+    ,
+    {
+      "from":226
+      , "to":74
+    }
+    ,
+    {
+      "from":162
+      , "to":163
+    }
+    ,
+    {
+      "from":42
+      , "to":194
+    }
+    ,
+    {
+      "from":65
+      , "to":66
+    }
+    ,
+    {
+      "from":70
+      , "to":71
+    }
+    ,
+    {
+      "from":77
+      , "to":77
+    }
+    ,
+    {
+      "from":260
+      , "to":77
+    }
+    ,
+    {
+      "from":279
+      , "to":277
+    }
+    ,
+    {
+      "from":272
+      , "to":277
+    }
+    ,
+    {
+      "from":167
+      , "to":168
+    }
+    ,
+    {
+      "from":77
+      , "to":78
+    }
+    ,
+    {
+      "from":210
+      , "to":211
+    }
+    ,
+    {
+      "from":139
+      , "to":211
+    }
+    ,
+    {
+      "from":221
+      , "to":222
+    }
+    ,
+    {
+      "from":129
+      , "to":131
+    }
+    ,
+    {
+      "from":130
+      , "to":131
+    }
+    ,
+    {
+      "from":159
+      , "to":31
     }
     ,
     {
@@ -12212,38 +13032,263 @@ var loopsJSON={
     }
     ,
     {
-      "from":237
-      , "to":238
+      "from":206
+      , "to":207
     }
     ,
     {
-      "from":233
-      , "to":238
+      "from":65
+      , "to":65
     }
     ,
     {
-      "from":234
-      , "to":238
+      "from":243
+      , "to":65
     }
     ,
     {
-      "from":235
-      , "to":238
+      "from":59
+      , "to":59
     }
     ,
     {
-      "from":236
-      , "to":238
+      "from":226
+      , "to":59
     }
     ,
     {
-      "from":232
-      , "to":238
+      "from":271
+      , "to":272
     }
     ,
     {
-      "from":61
-      , "to":62
+      "from":70
+      , "to":70
+    }
+    ,
+    {
+      "from":250
+      , "to":70
+    }
+    ,
+    {
+      "from":59
+      , "to":239
+    }
+    ,
+    {
+      "from":6
+      , "to":7
+    }
+    ,
+    {
+      "from":47
+      , "to":201
+    }
+    ,
+    {
+      "from":214
+      , "to":227
+    }
+    ,
+    {
+      "from":264
+      , "to":265
+    }
+    ,
+    {
+      "from":74
+      , "to":265
+    }
+    ,
+    {
+      "from":163
+      , "to":160
+    }
+    ,
+    {
+      "from":131
+      , "to":18
+    }
+    ,
+    {
+      "from":229
+      , "to":230
+    }
+    ,
+    {
+      "from":289
+      , "to":290
+    }
+    ,
+    {
+      "from":297
+      , "to":299
+    }
+    ,
+    {
+      "from":141
+      , "to":144
+    }
+    ,
+    {
+      "from":142
+      , "to":144
+    }
+    ,
+    {
+      "from":143
+      , "to":144
+    }
+    ,
+    {
+      "from":80
+      , "to":270
+    }
+    ,
+    {
+      "from":241
+      , "to":243
+    }
+    ,
+    {
+      "from":240
+      , "to":243
+    }
+    ,
+    {
+      "from":242
+      , "to":243
+    }
+    ,
+    {
+      "from":248
+      , "to":250
+    }
+    ,
+    {
+      "from":249
+      , "to":250
+    }
+    ,
+    {
+      "from":72
+      , "to":72
+    }
+    ,
+    {
+      "from":71
+      , "to":72
+    }
+    ,
+    {
+      "from":255
+      , "to":260
+    }
+    ,
+    {
+      "from":256
+      , "to":260
+    }
+    ,
+    {
+      "from":257
+      , "to":260
+    }
+    ,
+    {
+      "from":258
+      , "to":260
+    }
+    ,
+    {
+      "from":259
+      , "to":260
+    }
+    ,
+    {
+      "from":88
+      , "to":280
+    }
+    ,
+    {
+      "from":299
+      , "to":6
+    }
+    ,
+    {
+      "from":5
+      , "to":6
+    }
+    ,
+    {
+      "from":21
+      , "to":145
+    }
+    ,
+    {
+      "from":64
+      , "to":64
+    }
+    ,
+    {
+      "from":62
+      , "to":64
+    }
+    ,
+    {
+      "from":84
+      , "to":273
+    }
+    ,
+    {
+      "from":295
+      , "to":296
+    }
+    ,
+    {
+      "from":123
+      , "to":296
+    }
+    ,
+    {
+      "from":23
+      , "to":23
+    }
+    ,
+    {
+      "from":144
+      , "to":23
+    }
+    ,
+    {
+      "from":90
+      , "to":91
+    }
+    ,
+    {
+      "from":74
+      , "to":261
+    }
+    ,
+    {
+      "from":278
+      , "to":279
+    }
+    ,
+    {
+      "from":110
+      , "to":111
+    }
+    ,
+    {
+      "from":7
+      , "to":111
+    }
+    ,
+    {
+      "from":81
+      , "to":82
     }
     ,
     {
@@ -12259,6 +13304,41 @@ var loopsJSON={
     {
       "from":151
       , "to":152
+    }
+    ,
+    {
+      "from":67
+      , "to":67
+    }
+    ,
+    {
+      "from":66
+      , "to":67
+    }
+    ,
+    {
+      "from":263
+      , "to":264
+    }
+    ,
+    {
+      "from":168
+      , "to":169
+    }
+    ,
+    {
+      "from":31
+      , "to":169
+    }
+    ,
+    {
+      "from":290
+      , "to":291
+    }
+    ,
+    {
+      "from":94
+      , "to":291
     }
     ,
     {
@@ -12332,48 +13412,8 @@ var loopsJSON={
     }
     ,
     {
-      "from":202
-      , "to":203
-    }
-    ,
-    {
-      "from":299
-      , "to":304
-    }
-    ,
-    {
-      "from":141
-      , "to":144
-    }
-    ,
-    {
-      "from":142
-      , "to":144
-    }
-    ,
-    {
-      "from":143
-      , "to":144
-    }
-    ,
-    {
-      "from":21
-      , "to":21
-    }
-    ,
-    {
-      "from":139
-      , "to":21
-    }
-    ,
-    {
-      "from":45
-      , "to":46
-    }
-    ,
-    {
-      "from":301
-      , "to":303
+      "from":158
+      , "to":159
     }
     ,
     {
@@ -12387,123 +13427,68 @@ var loopsJSON={
     }
     ,
     {
-      "from":106
-      , "to":107
+      "from":217
+      , "to":218
     }
     ,
     {
-      "from":61
-      , "to":61
+      "from":45
+      , "to":46
     }
     ,
     {
-      "from":238
-      , "to":61
+      "from":134
+      , "to":135
     }
     ,
     {
-      "from":283
-      , "to":284
+      "from":202
+      , "to":203
     }
     ,
     {
-      "from":91
-      , "to":284
-    }
-    ,
-    {
-      "from":110
-      , "to":111
+      "from":107
+      , "to":108
     }
     ,
     {
       "from":7
-      , "to":111
-    }
-    ,
-    {
-      "from":42
-      , "to":194
-    }
-    ,
-    {
-      "from":221
-      , "to":222
-    }
-    ,
-    {
-      "from":25
-      , "to":153
-    }
-    ,
-    {
-      "from":137
-      , "to":139
-    }
-    ,
-    {
-      "from":138
-      , "to":139
+      , "to":108
     }
     ,
     {
       "from":156
-      , "to":157
+      , "to":28
     }
     ,
     {
-      "from":152
-      , "to":157
+      "from":286
+      , "to":287
     }
     ,
     {
-      "from":163
-      , "to":164
+      "from":127
+      , "to":128
     }
     ,
     {
-      "from":28
-      , "to":164
+      "from":10
+      , "to":128
     }
     ,
     {
-      "from":290
-      , "to":11
+      "from":209
+      , "to":210
     }
     ,
     {
-      "from":230
-      , "to":231
+      "from":15
+      , "to":140
     }
     ,
     {
-      "from":214
-      , "to":231
-    }
-    ,
-    {
-      "from":173
-      , "to":174
-    }
-    ,
-    {
-      "from":31
-      , "to":174
-    }
-    ,
-    {
-      "from":77
-      , "to":77
-    }
-    ,
-    {
-      "from":260
-      , "to":77
-    }
-    ,
-    {
-      "from":77
-      , "to":78
+      "from":299
+      , "to":304
     }
     ,
     {
@@ -12517,13 +13502,28 @@ var loopsJSON={
     }
     ,
     {
-      "from":38
-      , "to":38
+      "from":177
+      , "to":184
     }
     ,
     {
-      "from":37
-      , "to":38
+      "from":173
+      , "to":184
+    }
+    ,
+    {
+      "from":168
+      , "to":184
+    }
+    ,
+    {
+      "from":290
+      , "to":11
+    }
+    ,
+    {
+      "from":146
+      , "to":147
     }
     ,
     {
@@ -12537,23 +13537,18 @@ var loopsJSON={
     }
     ,
     {
-      "from":212
-      , "to":214
+      "from":163
+      , "to":164
     }
     ,
     {
-      "from":213
-      , "to":214
+      "from":28
+      , "to":164
     }
     ,
     {
-      "from":81
-      , "to":81
-    }
-    ,
-    {
-      "from":269
-      , "to":81
+      "from":72
+      , "to":254
     }
     ,
     {
@@ -12562,522 +13557,112 @@ var loopsJSON={
     }
     ,
     {
-      "from":146
-      , "to":147
-    }
-    ,
-    {
-      "from":286
-      , "to":287
-    }
-    ,
-    {
-      "from":177
-      , "to":178
-    }
-    ,
-    {
-      "from":159
-      , "to":178
-    }
-    ,
-    {
-      "from":303
-      , "to":100
-    }
-    ,
-    {
-      "from":101
-      , "to":103
-    }
-    ,
-    {
-      "from":102
-      , "to":103
-    }
-    ,
-    {
-      "from":135
-      , "to":136
-    }
-    ,
-    {
-      "from":18
-      , "to":136
-    }
-    ,
-    {
-      "from":126
-      , "to":127
-    }
-    ,
-    {
-      "from":207
-      , "to":208
-    }
-    ,
-    {
-      "from":203
-      , "to":208
-    }
-    ,
-    {
-      "from":290
-      , "to":291
-    }
-    ,
-    {
-      "from":94
-      , "to":291
-    }
-    ,
-    {
-      "from":15
-      , "to":52
-    }
-    ,
-    {
-      "from":156
-      , "to":28
-    }
-    ,
-    {
-      "from":224
-      , "to":226
-    }
-    ,
-    {
-      "from":225
-      , "to":226
-    }
-    ,
-    {
-      "from":199
-      , "to":200
-    }
-    ,
-    {
-      "from":23
-      , "to":148
-    }
-    ,
-    {
-      "from":241
-      , "to":243
-    }
-    ,
-    {
-      "from":240
-      , "to":243
-    }
-    ,
-    {
-      "from":242
-      , "to":243
-    }
-    ,
-    {
-      "from":86
-      , "to":86
-    }
-    ,
-    {
-      "from":276
-      , "to":86
-    }
-    ,
-    {
-      "from":195
-      , "to":197
-    }
-    ,
-    {
-      "from":196
-      , "to":197
-    }
-    ,
-    {
-      "from":176
-      , "to":177
-    }
-    ,
-    {
-      "from":80
-      , "to":80
-    }
-    ,
-    {
-      "from":78
-      , "to":80
-    }
-    ,
-    {
-      "from":90
-      , "to":94
-    }
-    ,
-    {
-      "from":64
-      , "to":64
-    }
-    ,
-    {
-      "from":62
-      , "to":64
-    }
-    ,
-    {
-      "from":86
-      , "to":87
-    }
-    ,
-    {
-      "from":90
-      , "to":91
-    }
-    ,
-    {
-      "from":103
-      , "to":4
-    }
-    ,
-    {
-      "from":36
-      , "to":37
-    }
-    ,
-    {
-      "from":293
-      , "to":295
-    }
-    ,
-    {
-      "from":65
-      , "to":65
-    }
-    ,
-    {
-      "from":243
-      , "to":65
-    }
-    ,
-    {
-      "from":67
-      , "to":67
-    }
-    ,
-    {
-      "from":66
-      , "to":67
-    }
-    ,
-    {
-      "from":155
-      , "to":156
-    }
-    ,
-    {
-      "from":245
-      , "to":246
-    }
-    ,
-    {
-      "from":36
-      , "to":36
-    }
-    ,
-    {
-      "from":183
-      , "to":36
-    }
-    ,
-    {
-      "from":303
-      , "to":5
-    }
-    ,
-    {
-      "from":4
-      , "to":5
-    }
-    ,
-    {
-      "from":263
-      , "to":264
-    }
-    ,
-    {
-      "from":88
-      , "to":280
-    }
-    ,
-    {
-      "from":226
-      , "to":74
-    }
-    ,
-    {
-      "from":255
-      , "to":260
-    }
-    ,
-    {
-      "from":256
-      , "to":260
-    }
-    ,
-    {
-      "from":257
-      , "to":260
-    }
-    ,
-    {
-      "from":258
-      , "to":260
-    }
-    ,
-    {
-      "from":259
-      , "to":260
-    }
-    ,
-    {
-      "from":260
-      , "to":90
-    }
-    ,
-    {
-      "from":6
-      , "to":10
-    }
-    ,
-    {
-      "from":282
-      , "to":283
-    }
-    ,
-    {
-      "from":10
-      , "to":15
-    }
-    ,
-    {
-      "from":21
-      , "to":145
-    }
-    ,
-    {
-      "from":200
-      , "to":204
-    }
-    ,
-    {
-      "from":107
-      , "to":12
-    }
-    ,
-    {
-      "from":192
-      , "to":193
-    }
-    ,
-    {
-      "from":267
-      , "to":269
-    }
-    ,
-    {
-      "from":266
-      , "to":269
-    }
-    ,
-    {
-      "from":268
-      , "to":269
-    }
-    ,
-    {
-      "from":252
-      , "to":253
-    }
-    ,
-    {
-      "from":38
-      , "to":191
-    }
-    ,
-    {
-      "from":40
-      , "to":41
-    }
-    ,
-    {
-      "from":47
-      , "to":47
-    }
-    ,
-    {
-      "from":46
-      , "to":47
-    }
-    ,
-    {
-      "from":200
-      , "to":198
-    }
-    ,
-    {
-      "from":193
-      , "to":198
-    }
-    ,
-    {
-      "from":187
-      , "to":190
-    }
-    ,
-    {
-      "from":186
-      , "to":190
-    }
-    ,
-    {
-      "from":189
-      , "to":190
-    }
-    ,
-    {
-      "from":188
-      , "to":190
-    }
-    ,
-    {
-      "from":88
-      , "to":88
-    }
-    ,
-    {
-      "from":87
-      , "to":88
-    }
-    ,
-    {
-      "from":182
-      , "to":183
-    }
-    ,
-    {
-      "from":180
-      , "to":183
-    }
-    ,
-    {
-      "from":181
-      , "to":183
-    }
-    ,
-    {
-      "from":206
-      , "to":207
-    }
-    ,
-    {
-      "from":109
-      , "to":110
-    }
-    ,
-    {
-      "from":222
-      , "to":223
-    }
-    ,
-    {
-      "from":55
-      , "to":223
-    }
-    ,
-    {
-      "from":70
-      , "to":71
-    }
-    ,
-    {
-      "from":40
-      , "to":40
-    }
-    ,
-    {
-      "from":190
-      , "to":40
-    }
-    ,
-    {
-      "from":121
-      , "to":123
-    }
-    ,
-    {
-      "from":118
-      , "to":123
-    }
-    ,
-    {
-      "from":112
-      , "to":123
-    }
-    ,
-    {
-      "from":113
-      , "to":123
-    }
-    ,
-    {
-      "from":114
-      , "to":123
-    }
-    ,
-    {
-      "from":117
-      , "to":123
-    }
-    ,
-    {
-      "from":52
-      , "to":215
-    }
-    ,
-    {
-      "from":93
-      , "to":93
+      "from":283
+      , "to":284
     }
     ,
     {
       "from":91
-      , "to":93
+      , "to":284
     }
     ,
     {
-      "from":218
-      , "to":219
+      "from":173
+      , "to":174
     }
     ,
     {
-      "from":52
-      , "to":219
+      "from":31
+      , "to":174
     }
     ,
     {
-      "from":67
-      , "to":247
+      "from":25
+      , "to":153
     }
     ,
     {
-      "from":172
-      , "to":173
+      "from":237
+      , "to":238
+    }
+    ,
+    {
+      "from":233
+      , "to":238
+    }
+    ,
+    {
+      "from":234
+      , "to":238
+    }
+    ,
+    {
+      "from":235
+      , "to":238
+    }
+    ,
+    {
+      "from":236
+      , "to":238
+    }
+    ,
+    {
+      "from":232
+      , "to":238
+    }
+    ,
+    {
+      "from":156
+      , "to":157
+    }
+    ,
+    {
+      "from":152
+      , "to":157
+    }
+    ,
+    {
+      "from":106
+      , "to":107
+    }
+    ,
+    {
+      "from":274
+      , "to":276
+    }
+    ,
+    {
+      "from":275
+      , "to":276
+    }
+    ,
+    {
+      "from":230
+      , "to":231
+    }
+    ,
+    {
+      "from":214
+      , "to":231
     }
     ,
     {
       "from":206
+      , "to":338
+    }
+    ,
+    {
+      "from":217
+      , "to":338
+    }
+    ,
+    {
+      "from":118
+      , "to":338
+    }
+    ,
+    {
+      "from":114
       , "to":338
     }
     ,
@@ -13087,37 +13672,7 @@ var loopsJSON={
     }
     ,
     {
-      "from":158
-      , "to":338
-    }
-    ,
-    {
-      "from":338
-      , "to":212
-    }
-    ,
-    {
-      "from":217
-      , "to":338
-    }
-    ,
-    {
-      "from":179
-      , "to":338
-    }
-    ,
-    {
       "from":134
-      , "to":338
-    }
-    ,
-    {
-      "from":286
-      , "to":338
-    }
-    ,
-    {
-      "from":114
       , "to":338
     }
     ,
@@ -13127,58 +13682,48 @@ var loopsJSON={
     }
     ,
     {
-      "from":118
-      , "to":338
-    }
-    ,
-    {
-      "from":221
-      , "to":338
-    }
-    ,
-    {
-      "from":181
+      "from":179
       , "to":338
     }
     ,
     {
       "from":338
-      , "to":133
+      , "to":212
     }
     ,
     {
-      "from":213
+      "from":338
+      , "to":224
+    }
+    ,
+    {
+      "from":202
+      , "to":338
+    }
+    ,
+    {
+      "from":225
+      , "to":338
+    }
+    ,
+    {
+      "from":286
       , "to":338
     }
     ,
     {
       "from":338
-      , "to":105
+      , "to":141
     }
     ,
     {
-      "from":143
+      "from":338
+      , "to":228
+    }
+    ,
+    {
+      "from":138
       , "to":338
-    }
-    ,
-    {
-      "from":338
-      , "to":101
-    }
-    ,
-    {
-      "from":338
-      , "to":154
-    }
-    ,
-    {
-      "from":338
-      , "to":216
-    }
-    ,
-    {
-      "from":338
-      , "to":102
     }
     ,
     {
@@ -13188,12 +13733,22 @@ var loopsJSON={
     ,
     {
       "from":338
-      , "to":142
+      , "to":220
     }
     ,
     {
-      "from":188
+      "from":113
       , "to":338
+    }
+    ,
+    {
+      "from":338
+      , "to":149
+    }
+    ,
+    {
+      "from":338
+      , "to":101
     }
     ,
     {
@@ -13203,7 +13758,62 @@ var loopsJSON={
     ,
     {
       "from":338
+      , "to":105
+    }
+    ,
+    {
+      "from":338
+      , "to":142
+    }
+    ,
+    {
+      "from":338
+      , "to":216
+    }
+    ,
+    {
+      "from":188
+      , "to":338
+    }
+    ,
+    {
+      "from":338
+      , "to":102
+    }
+    ,
+    {
+      "from":338
+      , "to":150
+    }
+    ,
+    {
+      "from":151
+      , "to":338
+    }
+    ,
+    {
+      "from":338
       , "to":137
+    }
+    ,
+    {
+      "from":338
+      , "to":154
+    }
+    ,
+    {
+      "from":221
+      , "to":338
+    }
+    ,
+    {
+      "from":185
+      , "to":338
+    }
+    ,
+    {
+      "from":213
+      , "to":338
     }
     ,
     {
@@ -13218,82 +13828,42 @@ var loopsJSON={
     ,
     {
       "from":338
-      , "to":150
+      , "to":133
     }
     ,
     {
-      "from":151
+      "from":158
       , "to":338
     }
     ,
     {
-      "from":185
+      "from":143
       , "to":338
     }
     ,
     {
-      "from":338
-      , "to":224
-    }
-    ,
-    {
-      "from":338
-      , "to":149
-    }
-    ,
-    {
-      "from":113
-      , "to":338
-    }
-    ,
-    {
-      "from":202
-      , "to":338
-    }
-    ,
-    {
-      "from":338
-      , "to":228
-    }
-    ,
-    {
-      "from":338
-      , "to":141
-    }
-    ,
-    {
-      "from":338
-      , "to":220
-    }
-    ,
-    {
-      "from":138
-      , "to":338
-    }
-    ,
-    {
-      "from":225
+      "from":181
       , "to":338
     }
     ,
     {
       "from":116
-      , "to":352
-    }
-    ,
-    {
-      "from":120
       , "to":353
     }
     ,
     {
-      "from":122
+      "from":120
       , "to":354
     }
     ,
     {
+      "from":122
+      , "to":355
+    }
+    ,
+    {
       "from":294
-      , "to":358
+      , "to":359
     }
     ,
     {
@@ -13307,13 +13877,18 @@ var loopsJSON={
     }
     ,
     {
-      "from":389
-      , "to":390
+      "from":388
+      , "to":389
     }
     ,
     {
-      "from":391
-      , "to":392
+      "from":390
+      , "to":391
+    }
+    ,
+    {
+      "from":392
+      , "to":393
     }
     ,
     {
@@ -13322,23 +13897,13 @@ var loopsJSON={
     }
     ,
     {
-      "from":396
-      , "to":397
+      "from":399
+      , "to":400
     }
     ,
     {
-      "from":398
-      , "to":399
-    }
-    ,
-    {
-      "from":400
-      , "to":401
-    }
-    ,
-    {
-      "from":402
-      , "to":403
+      "from":401
+      , "to":402
     }
     ,
     {
@@ -13352,547 +13917,117 @@ var loopsJSON={
     }
     ,
     {
-      "from":408
-      , "to":409
-    }
-    ,
-    {
-      "from":417
-      , "to":362
-    }
-    ,
-    {
-      "from":416
-      , "to":363
-    }
-    ,
-    {
-      "from":417
-      , "to":372
-    }
-    ,
-    {
-      "from":416
-      , "to":373
-    }
-    ,
-    {
-      "from":416
-      , "to":377
-    }
-    ,
-    {
-      "from":417
-      , "to":377
-    }
-    ,
-    {
-      "from":359
-      , "to":416
-    }
-    ,
-    {
-      "from":359
-      , "to":417
-    }
-    ,
-    {
-      "from":419
-      , "to":374
-    }
-    ,
-    {
-      "from":419
-      , "to":383
-    }
-    ,
-    {
-      "from":378
-      , "to":419
-    }
-    ,
-    {
-      "from":421
-      , "to":375
-    }
-    ,
-    {
-      "from":421
-      , "to":388
-    }
-    ,
-    {
-      "from":379
-      , "to":421
-    }
-    ,
-    {
-      "from":423
-      , "to":376
-    }
-    ,
-    {
-      "from":423
-      , "to":393
-    }
-    ,
-    {
-      "from":380
-      , "to":423
-    }
-    ,
-    {
-      "from":366
-      , "to":369
-    }
-    ,
-    {
-      "from":361
-      , "to":358
-    }
-    ,
-    {
-      "from":365
-      , "to":362
-    }
-    ,
-    {
-      "from":389
-      , "to":393
-    }
-    ,
-    {
-      "from":391
-      , "to":393
-    }
-    ,
-    {
-      "from":383
-      , "to":393
-    }
-    ,
-    {
-      "from":366
-      , "to":379
-    }
-    ,
-    {
-      "from":369
-      , "to":379
-    }
-    ,
-    {
-      "from":368
-      , "to":379
-    }
-    ,
-    {
-      "from":367
-      , "to":379
-    }
-    ,
-    {
-      "from":370
-      , "to":379
-    }
-    ,
-    {
-      "from":371
-      , "to":379
-    }
-    ,
-    {
-      "from":374
-      , "to":379
-    }
-    ,
-    {
-      "from":377
-      , "to":379
-    }
-    ,
-    {
-      "from":375
-      , "to":379
-    }
-    ,
-    {
-      "from":376
-      , "to":379
-    }
-    ,
-    {
-      "from":373
-      , "to":379
+      "from":409
+      , "to":410
     }
     ,
     {
       "from":411
-      , "to":383
+      , "to":412
     }
     ,
     {
-      "from":393
-      , "to":394
+      "from":420
+      , "to":363
     }
     ,
     {
-      "from":389
-      , "to":394
+      "from":419
+      , "to":364
     }
     ,
     {
-      "from":391
-      , "to":394
+      "from":420
+      , "to":373
     }
     ,
     {
-      "from":383
-      , "to":394
+      "from":419
+      , "to":374
     }
     ,
     {
-      "from":366
+      "from":419
       , "to":378
     }
     ,
     {
-      "from":369
+      "from":420
       , "to":378
     }
     ,
     {
-      "from":368
-      , "to":378
+      "from":360
+      , "to":419
     }
     ,
     {
-      "from":367
-      , "to":378
+      "from":360
+      , "to":420
     }
     ,
     {
-      "from":370
-      , "to":378
+      "from":422
+      , "to":375
     }
     ,
     {
-      "from":371
-      , "to":378
+      "from":422
+      , "to":398
     }
     ,
     {
-      "from":374
-      , "to":378
+      "from":379
+      , "to":422
     }
     ,
     {
-      "from":377
-      , "to":378
+      "from":424
+      , "to":376
     }
     ,
     {
-      "from":375
-      , "to":378
+      "from":424
+      , "to":403
     }
     ,
     {
-      "from":376
-      , "to":378
+      "from":380
+      , "to":424
     }
     ,
     {
-      "from":373
-      , "to":378
+      "from":426
+      , "to":377
     }
     ,
     {
-      "from":402
+      "from":426
       , "to":408
     }
     ,
     {
-      "from":404
-      , "to":408
-    }
-    ,
-    {
-      "from":383
-      , "to":408
-    }
-    ,
-    {
-      "from":353
-      , "to":354
+      "from":381
+      , "to":426
     }
     ,
     {
       "from":366
-      , "to":373
-    }
-    ,
-    {
-      "from":369
-      , "to":373
-    }
-    ,
-    {
-      "from":368
-      , "to":373
+      , "to":363
     }
     ,
     {
       "from":367
-      , "to":373
-    }
-    ,
-    {
-      "from":370
-      , "to":373
-    }
-    ,
-    {
-      "from":371
-      , "to":373
-    }
-    ,
-    {
-      "from":398
-      , "to":404
-    }
-    ,
-    {
-      "from":400
-      , "to":404
-    }
-    ,
-    {
-      "from":383
-      , "to":404
-    }
-    ,
-    {
-      "from":366
-      , "to":376
-    }
-    ,
-    {
-      "from":369
-      , "to":376
-    }
-    ,
-    {
-      "from":368
-      , "to":376
+      , "to":370
     }
     ,
     {
       "from":367
-      , "to":376
+      , "to":380
     }
     ,
     {
       "from":370
-      , "to":376
-    }
-    ,
-    {
-      "from":371
-      , "to":376
-    }
-    ,
-    {
-      "from":383
-      , "to":386
-    }
-    ,
-    {
-      "from":394
-      , "to":400
-    }
-    ,
-    {
-      "from":396
-      , "to":400
-    }
-    ,
-    {
-      "from":383
-      , "to":400
-    }
-    ,
-    {
-      "from":366
-      , "to":371
-    }
-    ,
-    {
-      "from":366
-      , "to":374
-    }
-    ,
-    {
-      "from":369
-      , "to":374
-    }
-    ,
-    {
-      "from":368
-      , "to":374
-    }
-    ,
-    {
-      "from":367
-      , "to":374
-    }
-    ,
-    {
-      "from":370
-      , "to":374
-    }
-    ,
-    {
-      "from":371
-      , "to":374
-    }
-    ,
-    {
-      "from":393
-      , "to":396
-    }
-    ,
-    {
-      "from":389
-      , "to":396
-    }
-    ,
-    {
-      "from":391
-      , "to":396
-    }
-    ,
-    {
-      "from":383
-      , "to":396
-    }
-    ,
-    {
-      "from":382
-      , "to":366
-    }
-    ,
-    {
-      "from":366
-      , "to":368
-    }
-    ,
-    {
-      "from":366
-      , "to":377
-    }
-    ,
-    {
-      "from":369
-      , "to":377
-    }
-    ,
-    {
-      "from":368
-      , "to":377
-    }
-    ,
-    {
-      "from":367
-      , "to":377
-    }
-    ,
-    {
-      "from":370
-      , "to":377
-    }
-    ,
-    {
-      "from":371
-      , "to":377
-    }
-    ,
-    {
-      "from":351
-      , "to":349
-    }
-    ,
-    {
-      "from":388
-      , "to":391
-    }
-    ,
-    {
-      "from":383
-      , "to":391
-    }
-    ,
-    {
-      "from":384
-      , "to":391
-    }
-    ,
-    {
-      "from":386
-      , "to":391
-    }
-    ,
-    {
-      "from":366
-      , "to":372
-    }
-    ,
-    {
-      "from":369
-      , "to":372
-    }
-    ,
-    {
-      "from":368
-      , "to":372
-    }
-    ,
-    {
-      "from":367
-      , "to":372
-    }
-    ,
-    {
-      "from":370
-      , "to":372
-    }
-    ,
-    {
-      "from":371
-      , "to":372
-    }
-    ,
-    {
-      "from":402
-      , "to":406
-    }
-    ,
-    {
-      "from":404
-      , "to":406
-    }
-    ,
-    {
-      "from":383
-      , "to":406
-    }
-    ,
-    {
-      "from":366
-      , "to":367
-    }
-    ,
-    {
-      "from":366
       , "to":380
     }
     ,
@@ -13907,37 +14042,7 @@ var loopsJSON={
     }
     ,
     {
-      "from":367
-      , "to":380
-    }
-    ,
-    {
-      "from":370
-      , "to":380
-    }
-    ,
-    {
       "from":371
-      , "to":380
-    }
-    ,
-    {
-      "from":374
-      , "to":380
-    }
-    ,
-    {
-      "from":377
-      , "to":380
-    }
-    ,
-    {
-      "from":375
-      , "to":380
-    }
-    ,
-    {
-      "from":376
       , "to":380
     }
     ,
@@ -13947,248 +14052,263 @@ var loopsJSON={
     }
     ,
     {
-      "from":365
-      , "to":363
-    }
-    ,
-    {
-      "from":366
-      , "to":370
-    }
-    ,
-    {
-      "from":351
-      , "to":348
-    }
-    ,
-    {
-      "from":398
-      , "to":402
-    }
-    ,
-    {
-      "from":400
-      , "to":402
-    }
-    ,
-    {
-      "from":383
-      , "to":402
-    }
-    ,
-    {
-      "from":357
-      , "to":352
-    }
-    ,
-    {
-      "from":352
-      , "to":353
-    }
-    ,
-    {
-      "from":388
-      , "to":389
-    }
-    ,
-    {
-      "from":383
-      , "to":389
-    }
-    ,
-    {
-      "from":384
-      , "to":389
-    }
-    ,
-    {
-      "from":386
-      , "to":389
-    }
-    ,
-    {
-      "from":358
-      , "to":359
-    }
-    ,
-    {
-      "from":383
-      , "to":384
-    }
-    ,
-    {
-      "from":366
-      , "to":375
-    }
-    ,
-    {
-      "from":369
-      , "to":375
-    }
-    ,
-    {
-      "from":368
-      , "to":375
-    }
-    ,
-    {
-      "from":367
-      , "to":375
-    }
-    ,
-    {
-      "from":370
-      , "to":375
-    }
-    ,
-    {
-      "from":371
-      , "to":375
-    }
-    ,
-    {
-      "from":352
-      , "to":355
-    }
-    ,
-    {
-      "from":383
-      , "to":388
-    }
-    ,
-    {
-      "from":384
-      , "to":388
-    }
-    ,
-    {
-      "from":386
-      , "to":388
-    }
-    ,
-    {
-      "from":394
-      , "to":398
-    }
-    ,
-    {
-      "from":396
-      , "to":398
-    }
-    ,
-    {
-      "from":383
-      , "to":398
+      "from":375
+      , "to":380
     }
     ,
     {
       "from":378
-      , "to":381
+      , "to":380
     }
     ,
     {
-      "from":379
-      , "to":381
+      "from":376
+      , "to":380
     }
     ,
     {
-      "from":380
-      , "to":381
+      "from":377
+      , "to":380
     }
     ,
     {
-      "from":366
-      , "to":381
-    }
-    ,
-    {
-      "from":369
-      , "to":381
-    }
-    ,
-    {
-      "from":368
-      , "to":381
-    }
-    ,
-    {
-      "from":367
-      , "to":381
-    }
-    ,
-    {
-      "from":370
-      , "to":381
-    }
-    ,
-    {
-      "from":371
-      , "to":381
-    }
-    ,
-    {
-      "from":383
-      , "to":410
-    }
-    ,
-    {
-      "from":388
-      , "to":410
+      "from":374
+      , "to":380
     }
     ,
     {
       "from":384
-      , "to":410
+      , "to":388
     }
     ,
     {
       "from":386
-      , "to":410
+      , "to":388
+    }
+    ,
+    {
+      "from":403
+      , "to":406
+    }
+    ,
+    {
+      "from":398
+      , "to":406
+    }
+    ,
+    {
+      "from":399
+      , "to":406
+    }
+    ,
+    {
+      "from":401
+      , "to":406
+    }
+    ,
+    {
+      "from":367
+      , "to":374
+    }
+    ,
+    {
+      "from":370
+      , "to":374
+    }
+    ,
+    {
+      "from":369
+      , "to":374
+    }
+    ,
+    {
+      "from":368
+      , "to":374
+    }
+    ,
+    {
+      "from":371
+      , "to":374
+    }
+    ,
+    {
+      "from":372
+      , "to":374
+    }
+    ,
+    {
+      "from":397
+      , "to":384
+    }
+    ,
+    {
+      "from":367
+      , "to":377
+    }
+    ,
+    {
+      "from":370
+      , "to":377
+    }
+    ,
+    {
+      "from":369
+      , "to":377
+    }
+    ,
+    {
+      "from":368
+      , "to":377
+    }
+    ,
+    {
+      "from":371
+      , "to":377
+    }
+    ,
+    {
+      "from":372
+      , "to":377
+    }
+    ,
+    {
+      "from":362
+      , "to":359
+    }
+    ,
+    {
+      "from":367
+      , "to":379
+    }
+    ,
+    {
+      "from":370
+      , "to":379
+    }
+    ,
+    {
+      "from":369
+      , "to":379
+    }
+    ,
+    {
+      "from":368
+      , "to":379
+    }
+    ,
+    {
+      "from":371
+      , "to":379
+    }
+    ,
+    {
+      "from":372
+      , "to":379
+    }
+    ,
+    {
+      "from":375
+      , "to":379
+    }
+    ,
+    {
+      "from":378
+      , "to":379
+    }
+    ,
+    {
+      "from":376
+      , "to":379
+    }
+    ,
+    {
+      "from":377
+      , "to":379
+    }
+    ,
+    {
+      "from":374
+      , "to":379
+    }
+    ,
+    {
+      "from":414
+      , "to":398
+    }
+    ,
+    {
+      "from":358
+      , "to":353
+    }
+    ,
+    {
+      "from":398
+      , "to":401
+    }
+    ,
+    {
+      "from":388
+      , "to":394
+    }
+    ,
+    {
+      "from":390
+      , "to":394
+    }
+    ,
+    {
+      "from":367
+      , "to":376
+    }
+    ,
+    {
+      "from":370
+      , "to":376
+    }
+    ,
+    {
+      "from":369
+      , "to":376
+    }
+    ,
+    {
+      "from":368
+      , "to":376
+    }
+    ,
+    {
+      "from":371
+      , "to":376
+    }
+    ,
+    {
+      "from":372
+      , "to":376
+    }
+    ,
+    {
+      "from":353
+      , "to":354
     }
     ,
     {
       "from":408
-      , "to":410
+      , "to":411
+    }
+    ,
+    {
+      "from":404
+      , "to":411
     }
     ,
     {
       "from":406
-      , "to":410
+      , "to":411
     }
     ,
     {
-      "from":393
-      , "to":410
-    }
-    ,
-    {
-      "from":389
-      , "to":410
-    }
-    ,
-    {
-      "from":391
-      , "to":410
-    }
-    ,
-    {
-      "from":360
-      , "to":361
-    }
-    ,
-    {
-      "from":356
-      , "to":361
-    }
-    ,
-    {
-      "from":341
-      , "to":357
-    }
-    ,
-    {
-      "from":350
-      , "to":357
+      "from":398
+      , "to":411
     }
     ,
     {
@@ -14197,33 +14317,13 @@ var loopsJSON={
     }
     ,
     {
-      "from":341
-      , "to":347
+      "from":384
+      , "to":390
     }
     ,
     {
-      "from":381
-      , "to":382
-    }
-    ,
-    {
-      "from":364
-      , "to":382
-    }
-    ,
-    {
-      "from":354
-      , "to":356
-    }
-    ,
-    {
-      "from":352
-      , "to":356
-    }
-    ,
-    {
-      "from":355
-      , "to":356
+      "from":386
+      , "to":390
     }
     ,
     {
@@ -14232,58 +14332,508 @@ var loopsJSON={
     }
     ,
     {
-      "from":363
-      , "to":364
+      "from":367
+      , "to":381
     }
     ,
     {
-      "from":362
-      , "to":364
+      "from":370
+      , "to":381
     }
     ,
     {
-      "from":410
-      , "to":411
+      "from":369
+      , "to":381
     }
     ,
     {
-      "from":381
-      , "to":411
+      "from":368
+      , "to":381
     }
     ,
     {
-      "from":348
+      "from":371
+      , "to":381
+    }
+    ,
+    {
+      "from":372
+      , "to":381
+    }
+    ,
+    {
+      "from":375
+      , "to":381
+    }
+    ,
+    {
+      "from":378
+      , "to":381
+    }
+    ,
+    {
+      "from":376
+      , "to":381
+    }
+    ,
+    {
+      "from":377
+      , "to":381
+    }
+    ,
+    {
+      "from":373
+      , "to":381
+    }
+    ,
+    {
+      "from":352
       , "to":350
     }
     ,
     {
-      "from":349
-      , "to":350
+      "from":367
+      , "to":372
     }
     ,
     {
-      "from":410
-      , "to":341
+      "from":367
+      , "to":375
     }
     ,
     {
-      "from":360
-      , "to":365
+      "from":370
+      , "to":375
     }
     ,
     {
-      "from":338
-      , "to":369
+      "from":369
+      , "to":375
     }
     ,
     {
-      "from":338
+      "from":368
+      , "to":375
+    }
+    ,
+    {
+      "from":371
+      , "to":375
+    }
+    ,
+    {
+      "from":372
+      , "to":375
+    }
+    ,
+    {
+      "from":367
+      , "to":373
+    }
+    ,
+    {
+      "from":370
+      , "to":373
+    }
+    ,
+    {
+      "from":369
+      , "to":373
+    }
+    ,
+    {
+      "from":368
+      , "to":373
+    }
+    ,
+    {
+      "from":371
+      , "to":373
+    }
+    ,
+    {
+      "from":372
+      , "to":373
+    }
+    ,
+    {
+      "from":397
+      , "to":386
+    }
+    ,
+    {
+      "from":367
+      , "to":368
+    }
+    ,
+    {
+      "from":366
+      , "to":364
+    }
+    ,
+    {
+      "from":352
+      , "to":349
+    }
+    ,
+    {
+      "from":403
+      , "to":404
+    }
+    ,
+    {
+      "from":398
+      , "to":404
+    }
+    ,
+    {
+      "from":399
+      , "to":404
+    }
+    ,
+    {
+      "from":401
+      , "to":404
+    }
+    ,
+    {
+      "from":354
+      , "to":355
+    }
+    ,
+    {
+      "from":367
       , "to":371
     }
     ,
     {
-      "from":338
+      "from":398
+      , "to":403
+    }
+    ,
+    {
+      "from":399
+      , "to":403
+    }
+    ,
+    {
+      "from":401
+      , "to":403
+    }
+    ,
+    {
+      "from":388
+      , "to":392
+    }
+    ,
+    {
+      "from":390
+      , "to":392
+    }
+    ,
+    {
+      "from":367
+      , "to":369
+    }
+    ,
+    {
+      "from":367
+      , "to":378
+    }
+    ,
+    {
+      "from":370
+      , "to":378
+    }
+    ,
+    {
+      "from":369
+      , "to":378
+    }
+    ,
+    {
+      "from":368
+      , "to":378
+    }
+    ,
+    {
+      "from":371
+      , "to":378
+    }
+    ,
+    {
+      "from":372
+      , "to":378
+    }
+    ,
+    {
+      "from":408
+      , "to":409
+    }
+    ,
+    {
+      "from":404
+      , "to":409
+    }
+    ,
+    {
+      "from":406
+      , "to":409
+    }
+    ,
+    {
+      "from":398
+      , "to":409
+    }
+    ,
+    {
+      "from":383
+      , "to":367
+    }
+    ,
+    {
+      "from":404
+      , "to":408
+    }
+    ,
+    {
+      "from":406
+      , "to":408
+    }
+    ,
+    {
+      "from":398
+      , "to":408
+    }
+    ,
+    {
+      "from":398
+      , "to":399
+    }
+    ,
+    {
+      "from":355
+      , "to":357
+    }
+    ,
+    {
+      "from":353
+      , "to":357
+    }
+    ,
+    {
+      "from":356
+      , "to":357
+    }
+    ,
+    {
+      "from":354
+      , "to":357
+    }
+    ,
+    {
+      "from":341
+      , "to":348
+    }
+    ,
+    {
+      "from":349
+      , "to":351
+    }
+    ,
+    {
+      "from":350
+      , "to":351
+    }
+    ,
+    {
+      "from":392
+      , "to":396
+    }
+    ,
+    {
+      "from":394
+      , "to":396
+    }
+    ,
+    {
+      "from":379
+      , "to":382
+    }
+    ,
+    {
+      "from":380
+      , "to":382
+    }
+    ,
+    {
+      "from":381
+      , "to":382
+    }
+    ,
+    {
+      "from":367
+      , "to":382
+    }
+    ,
+    {
+      "from":370
+      , "to":382
+    }
+    ,
+    {
+      "from":369
+      , "to":382
+    }
+    ,
+    {
+      "from":368
+      , "to":382
+    }
+    ,
+    {
+      "from":371
+      , "to":382
+    }
+    ,
+    {
+      "from":372
+      , "to":382
+    }
+    ,
+    {
+      "from":413
+      , "to":414
+    }
+    ,
+    {
+      "from":396
+      , "to":414
+    }
+    ,
+    {
+      "from":360
+      , "to":361
+    }
+    ,
+    {
+      "from":413
+      , "to":341
+    }
+    ,
+    {
+      "from":341
+      , "to":358
+    }
+    ,
+    {
+      "from":351
+      , "to":358
+    }
+    ,
+    {
+      "from":382
+      , "to":383
+    }
+    ,
+    {
+      "from":365
+      , "to":383
+    }
+    ,
+    {
+      "from":361
+      , "to":362
+    }
+    ,
+    {
+      "from":357
+      , "to":362
+    }
+    ,
+    {
+      "from":364
+      , "to":365
+    }
+    ,
+    {
+      "from":363
+      , "to":365
+    }
+    ,
+    {
+      "from":361
       , "to":366
+    }
+    ,
+    {
+      "from":411
+      , "to":413
+    }
+    ,
+    {
+      "from":409
+      , "to":413
+    }
+    ,
+    {
+      "from":408
+      , "to":413
+    }
+    ,
+    {
+      "from":404
+      , "to":413
+    }
+    ,
+    {
+      "from":406
+      , "to":413
+    }
+    ,
+    {
+      "from":398
+      , "to":413
+    }
+    ,
+    {
+      "from":403
+      , "to":413
+    }
+    ,
+    {
+      "from":399
+      , "to":413
+    }
+    ,
+    {
+      "from":401
+      , "to":413
+    }
+    ,
+    {
+      "from":382
+      , "to":397
+    }
+    ,
+    {
+      "from":338
+      , "to":370
+    }
+    ,
+    {
+      "from":356
+      , "to":338
+    }
+    ,
+    {
+      "from":338
+      , "to":350
+    }
+    ,
+    {
+      "from":338
+      , "to":372
     }
     ,
     {
@@ -14298,252 +14848,82 @@ var loopsJSON={
     ,
     {
       "from":338
+      , "to":371
+    }
+    ,
+    {
+      "from":338
+      , "to":369
+    }
+    ,
+    {
+      "from":338
       , "to":367
     }
     ,
     {
-      "from":338
-      , "to":370
-    }
-    ,
-    {
-      "from":338
-      , "to":348
-    }
-    ,
-    {
-      "from":355
-      , "to":338
-    }
-    ,
-    {
       "from":385
-      , "to":435
-    }
-    ,
-    {
-      "from":390
-      , "to":436
-    }
-    ,
-    {
-      "from":395
-      , "to":437
-    }
-    ,
-    {
-      "from":399
       , "to":438
     }
     ,
     {
-      "from":403
+      "from":389
       , "to":439
     }
     ,
     {
-      "from":407
+      "from":393
       , "to":440
     }
     ,
     {
-      "from":474
-      , "to":475
-    }
-    ,
-    {
-      "from":476
-      , "to":477
-    }
-    ,
-    {
-      "from":478
-      , "to":479
-    }
-    ,
-    {
-      "from":480
-      , "to":481
-    }
-    ,
-    {
-      "from":446
-      , "to":465
-    }
-    ,
-    {
-      "from":446
-      , "to":458
-    }
-    ,
-    {
-      "from":446
-      , "to":449
-    }
-    ,
-    {
-      "from":446
-      , "to":452
-    }
-    ,
-    {
-      "from":446
-      , "to":455
-    }
-    ,
-    {
-      "from":473
-      , "to":447
-    }
-    ,
-    {
-      "from":446
-      , "to":461
-    }
-    ,
-    {
-      "from":445
+      "from":400
       , "to":443
     }
     ,
     {
-      "from":446
-      , "to":464
+      "from":405
+      , "to":444
     }
     ,
     {
-      "from":474
-      , "to":476
+      "from":410
+      , "to":445
     }
     ,
     {
-      "from":483
-      , "to":474
-    }
-    ,
-    {
-      "from":437
-      , "to":438
-    }
-    ,
-    {
-      "from":446
-      , "to":448
-    }
-    ,
-    {
-      "from":446
-      , "to":470
-    }
-    ,
-    {
-      "from":446
-      , "to":467
-    }
-    ,
-    {
-      "from":435
-      , "to":436
-    }
-    ,
-    {
-      "from":446
-      , "to":466
-    }
-    ,
-    {
-      "from":446
-      , "to":463
-    }
-    ,
-    {
-      "from":473
-      , "to":446
-    }
-    ,
-    {
-      "from":446
-      , "to":469
-    }
-    ,
-    {
-      "from":478
+      "from":479
       , "to":480
     }
     ,
     {
-      "from":446
-      , "to":457
+      "from":481
+      , "to":482
     }
     ,
     {
-      "from":434
-      , "to":432
+      "from":483
+      , "to":484
     }
     ,
     {
-      "from":442
-      , "to":435
+      "from":485
+      , "to":486
     }
     ,
     {
-      "from":446
-      , "to":460
-    }
-    ,
-    {
-      "from":446
-      , "to":454
-    }
-    ,
-    {
-      "from":446
-      , "to":451
-    }
-    ,
-    {
-      "from":446
+      "from":451
       , "to":459
     }
     ,
     {
-      "from":476
-      , "to":478
+      "from":451
+      , "to":462
     }
     ,
     {
-      "from":436
-      , "to":437
-    }
-    ,
-    {
-      "from":438
-      , "to":439
-    }
-    ,
-    {
-      "from":446
-      , "to":468
-    }
-    ,
-    {
-      "from":446
-      , "to":453
-    }
-    ,
-    {
-      "from":446
-      , "to":450
-    }
-    ,
-    {
-      "from":446
-      , "to":471
-    }
-    ,
-    {
-      "from":446
-      , "to":456
+      "from":451
+      , "to":465
     }
     ,
     {
@@ -14552,103 +14932,38 @@ var loopsJSON={
     }
     ,
     {
-      "from":446
-      , "to":462
+      "from":451
+      , "to":455
     }
     ,
     {
-      "from":482
-      , "to":426
+      "from":478
+      , "to":451
     }
     ,
     {
-      "from":433
-      , "to":426
+      "from":451
+      , "to":458
     }
     ,
     {
-      "from":443
-      , "to":444
+      "from":451
+      , "to":469
     }
     ,
     {
-      "from":472
-      , "to":483
+      "from":451
+      , "to":460
     }
     ,
     {
-      "from":440
-      , "to":441
+      "from":451
+      , "to":463
     }
     ,
     {
-      "from":435
-      , "to":441
-    }
-    ,
-    {
-      "from":436
-      , "to":441
-    }
-    ,
-    {
-      "from":437
-      , "to":441
-    }
-    ,
-    {
-      "from":438
-      , "to":441
-    }
-    ,
-    {
-      "from":439
-      , "to":441
-    }
-    ,
-    {
-      "from":482
-      , "to":431
-    }
-    ,
-    {
-      "from":480
-      , "to":482
-    }
-    ,
-    {
-      "from":472
-      , "to":473
-    }
-    ,
-    {
-      "from":444
-      , "to":473
-    }
-    ,
-    {
-      "from":432
-      , "to":433
-    }
-    ,
-    {
-      "from":446
-      , "to":472
-    }
-    ,
-    {
-      "from":448
-      , "to":472
-    }
-    ,
-    {
-      "from":449
-      , "to":472
-    }
-    ,
-    {
-      "from":450
-      , "to":472
+      "from":451
+      , "to":466
     }
     ,
     {
@@ -14657,223 +14972,353 @@ var loopsJSON={
     }
     ,
     {
-      "from":452
-      , "to":472
-    }
-    ,
-    {
-      "from":453
-      , "to":472
-    }
-    ,
-    {
-      "from":454
-      , "to":472
-    }
-    ,
-    {
-      "from":455
-      , "to":472
-    }
-    ,
-    {
-      "from":456
-      , "to":472
-    }
-    ,
-    {
-      "from":457
-      , "to":472
-    }
-    ,
-    {
-      "from":458
-      , "to":472
-    }
-    ,
-    {
-      "from":459
-      , "to":472
-    }
-    ,
-    {
-      "from":460
-      , "to":472
-    }
-    ,
-    {
-      "from":461
-      , "to":472
-    }
-    ,
-    {
-      "from":462
-      , "to":472
-    }
-    ,
-    {
-      "from":463
-      , "to":472
-    }
-    ,
-    {
-      "from":447
-      , "to":472
-    }
-    ,
-    {
-      "from":464
-      , "to":472
-    }
-    ,
-    {
-      "from":465
-      , "to":472
-    }
-    ,
-    {
-      "from":466
-      , "to":472
-    }
-    ,
-    {
-      "from":467
-      , "to":472
-    }
-    ,
-    {
-      "from":468
-      , "to":472
-    }
-    ,
-    {
-      "from":469
-      , "to":472
-    }
-    ,
-    {
-      "from":470
-      , "to":472
-    }
-    ,
-    {
-      "from":471
-      , "to":472
-    }
-    ,
-    {
-      "from":441
+      "from":444
       , "to":445
     }
     ,
     {
-      "from":441
-      , "to":442
+      "from":479
+      , "to":481
     }
     ,
     {
-      "from":426
-      , "to":442
+      "from":451
+      , "to":475
     }
     ,
     {
-      "from":338
-      , "to":458
+      "from":483
+      , "to":485
     }
     ,
     {
-      "from":338
-      , "to":449
-    }
-    ,
-    {
-      "from":338
-      , "to":452
-    }
-    ,
-    {
-      "from":338
-      , "to":455
-    }
-    ,
-    {
-      "from":338
-      , "to":447
-    }
-    ,
-    {
-      "from":338
-      , "to":461
-    }
-    ,
-    {
-      "from":443
-      , "to":338
-    }
-    ,
-    {
-      "from":338
-      , "to":464
-    }
-    ,
-    {
-      "from":338
+      "from":450
       , "to":448
     }
     ,
     {
-      "from":338
-      , "to":470
+      "from":442
+      , "to":438
     }
     ,
     {
-      "from":338
-      , "to":467
+      "from":447
+      , "to":443
     }
     ,
     {
-      "from":338
-      , "to":466
-    }
-    ,
-    {
-      "from":338
-      , "to":463
-    }
-    ,
-    {
-      "from":338
-      , "to":446
-    }
-    ,
-    {
-      "from":338
-      , "to":469
-    }
-    ,
-    {
-      "from":338
-      , "to":457
-    }
-    ,
-    {
-      "from":338
-      , "to":432
-    }
-    ,
-    {
-      "from":338
-      , "to":460
-    }
-    ,
-    {
-      "from":338
+      "from":451
       , "to":454
     }
     ,
     {
-      "from":338
-      , "to":451
+      "from":478
+      , "to":452
+    }
+    ,
+    {
+      "from":451
+      , "to":457
+    }
+    ,
+    {
+      "from":451
+      , "to":461
+    }
+    ,
+    {
+      "from":451
+      , "to":464
+    }
+    ,
+    {
+      "from":451
+      , "to":467
+    }
+    ,
+    {
+      "from":451
+      , "to":473
+    }
+    ,
+    {
+      "from":451
+      , "to":470
+    }
+    ,
+    {
+      "from":451
+      , "to":476
+    }
+    ,
+    {
+      "from":437
+      , "to":435
+    }
+    ,
+    {
+      "from":451
+      , "to":474
+    }
+    ,
+    {
+      "from":443
+      , "to":444
+    }
+    ,
+    {
+      "from":488
+      , "to":479
+    }
+    ,
+    {
+      "from":481
+      , "to":483
+    }
+    ,
+    {
+      "from":451
+      , "to":471
+    }
+    ,
+    {
+      "from":451
+      , "to":468
+    }
+    ,
+    {
+      "from":451
+      , "to":456
+    }
+    ,
+    {
+      "from":438
+      , "to":439
+    }
+    ,
+    {
+      "from":451
+      , "to":453
+    }
+    ,
+    {
+      "from":485
+      , "to":487
+    }
+    ,
+    {
+      "from":477
+      , "to":478
+    }
+    ,
+    {
+      "from":449
+      , "to":478
+    }
+    ,
+    {
+      "from":451
+      , "to":477
+    }
+    ,
+    {
+      "from":453
+      , "to":477
+    }
+    ,
+    {
+      "from":454
+      , "to":477
+    }
+    ,
+    {
+      "from":455
+      , "to":477
+    }
+    ,
+    {
+      "from":456
+      , "to":477
+    }
+    ,
+    {
+      "from":457
+      , "to":477
+    }
+    ,
+    {
+      "from":458
+      , "to":477
+    }
+    ,
+    {
+      "from":459
+      , "to":477
+    }
+    ,
+    {
+      "from":460
+      , "to":477
+    }
+    ,
+    {
+      "from":461
+      , "to":477
+    }
+    ,
+    {
+      "from":462
+      , "to":477
+    }
+    ,
+    {
+      "from":463
+      , "to":477
+    }
+    ,
+    {
+      "from":464
+      , "to":477
+    }
+    ,
+    {
+      "from":465
+      , "to":477
+    }
+    ,
+    {
+      "from":466
+      , "to":477
+    }
+    ,
+    {
+      "from":467
+      , "to":477
+    }
+    ,
+    {
+      "from":468
+      , "to":477
+    }
+    ,
+    {
+      "from":452
+      , "to":477
+    }
+    ,
+    {
+      "from":469
+      , "to":477
+    }
+    ,
+    {
+      "from":470
+      , "to":477
+    }
+    ,
+    {
+      "from":471
+      , "to":477
+    }
+    ,
+    {
+      "from":472
+      , "to":477
+    }
+    ,
+    {
+      "from":473
+      , "to":477
+    }
+    ,
+    {
+      "from":474
+      , "to":477
+    }
+    ,
+    {
+      "from":475
+      , "to":477
+    }
+    ,
+    {
+      "from":476
+      , "to":477
+    }
+    ,
+    {
+      "from":448
+      , "to":449
+    }
+    ,
+    {
+      "from":440
+      , "to":441
+    }
+    ,
+    {
+      "from":438
+      , "to":441
+    }
+    ,
+    {
+      "from":439
+      , "to":441
+    }
+    ,
+    {
+      "from":435
+      , "to":436
+    }
+    ,
+    {
+      "from":487
+      , "to":442
+    }
+    ,
+    {
+      "from":436
+      , "to":442
+    }
+    ,
+    {
+      "from":477
+      , "to":488
+    }
+    ,
+    {
+      "from":446
+      , "to":447
+    }
+    ,
+    {
+      "from":441
+      , "to":447
+    }
+    ,
+    {
+      "from":487
+      , "to":434
+    }
+    ,
+    {
+      "from":446
+      , "to":450
+    }
+    ,
+    {
+      "from":444
+      , "to":446
+    }
+    ,
+    {
+      "from":443
+      , "to":446
+    }
+    ,
+    {
+      "from":445
+      , "to":446
     }
     ,
     {
@@ -14883,22 +15328,122 @@ var loopsJSON={
     ,
     {
       "from":338
-      , "to":468
+      , "to":462
     }
     ,
     {
       "from":338
-      , "to":453
+      , "to":455
     }
     ,
     {
       "from":338
-      , "to":450
+      , "to":451
+    }
+    ,
+    {
+      "from":338
+      , "to":458
+    }
+    ,
+    {
+      "from":338
+      , "to":469
+    }
+    ,
+    {
+      "from":338
+      , "to":460
+    }
+    ,
+    {
+      "from":338
+      , "to":463
+    }
+    ,
+    {
+      "from":338
+      , "to":466
+    }
+    ,
+    {
+      "from":338
+      , "to":472
+    }
+    ,
+    {
+      "from":338
+      , "to":475
+    }
+    ,
+    {
+      "from":448
+      , "to":338
+    }
+    ,
+    {
+      "from":338
+      , "to":452
+    }
+    ,
+    {
+      "from":338
+      , "to":454
+    }
+    ,
+    {
+      "from":338
+      , "to":457
+    }
+    ,
+    {
+      "from":338
+      , "to":461
+    }
+    ,
+    {
+      "from":338
+      , "to":464
+    }
+    ,
+    {
+      "from":338
+      , "to":467
+    }
+    ,
+    {
+      "from":338
+      , "to":473
+    }
+    ,
+    {
+      "from":338
+      , "to":470
+    }
+    ,
+    {
+      "from":338
+      , "to":476
+    }
+    ,
+    {
+      "from":338
+      , "to":435
+    }
+    ,
+    {
+      "from":338
+      , "to":474
     }
     ,
     {
       "from":338
       , "to":471
+    }
+    ,
+    {
+      "from":338
+      , "to":468
     }
     ,
     {
@@ -14913,307 +15458,107 @@ var loopsJSON={
     ,
     {
       "from":338
-      , "to":462
+      , "to":453
     }
     ,
     {
       "from":387
-      , "to":498
+      , "to":503
     }
     ,
     {
-      "from":392
-      , "to":500
-    }
-    ,
-    {
-      "from":397
-      , "to":502
-    }
-    ,
-    {
-      "from":401
+      "from":391
       , "to":504
     }
     ,
     {
-      "from":405
+      "from":395
       , "to":505
     }
     ,
     {
-      "from":409
-      , "to":506
+      "from":402
+      , "to":508
     }
     ,
     {
-      "from":532
-      , "to":533
+      "from":407
+      , "to":510
     }
     ,
     {
-      "from":534
-      , "to":535
+      "from":412
+      , "to":512
     }
     ,
     {
-      "from":536
-      , "to":537
+      "from":539
+      , "to":540
     }
     ,
     {
-      "from":538
-      , "to":539
+      "from":541
+      , "to":542
     }
     ,
     {
-      "from":546
-      , "to":513
+      "from":543
+      , "to":544
     }
     ,
     {
-      "from":546
-      , "to":514
-    }
-    ,
-    {
-      "from":499
+      "from":545
       , "to":546
     }
     ,
     {
-      "from":548
-      , "to":515
+      "from":553
+      , "to":520
     }
     ,
     {
-      "from":548
-      , "to":516
+      "from":553
+      , "to":521
     }
     ,
     {
-      "from":501
-      , "to":548
+      "from":509
+      , "to":553
     }
     ,
     {
-      "from":550
-      , "to":517
+      "from":555
+      , "to":522
     }
     ,
     {
-      "from":550
-      , "to":518
+      "from":555
+      , "to":523
     }
     ,
     {
-      "from":503
-      , "to":550
+      "from":511
+      , "to":555
+    }
+    ,
+    {
+      "from":557
+      , "to":524
+    }
+    ,
+    {
+      "from":557
+      , "to":525
     }
     ,
     {
       "from":513
-      , "to":522
+      , "to":557
     }
     ,
     {
-      "from":514
-      , "to":522
-    }
-    ,
-    {
-      "from":515
-      , "to":522
-    }
-    ,
-    {
-      "from":516
-      , "to":522
-    }
-    ,
-    {
-      "from":517
-      , "to":522
-    }
-    ,
-    {
-      "from":518
-      , "to":522
-    }
-    ,
-    {
-      "from":512
-      , "to":522
-    }
-    ,
-    {
-      "from":536
-      , "to":538
-    }
-    ,
-    {
-      "from":513
-      , "to":527
-    }
-    ,
-    {
-      "from":514
-      , "to":527
-    }
-    ,
-    {
-      "from":515
-      , "to":527
-    }
-    ,
-    {
-      "from":516
-      , "to":527
-    }
-    ,
-    {
-      "from":517
-      , "to":527
-    }
-    ,
-    {
-      "from":518
-      , "to":527
-    }
-    ,
-    {
-      "from":512
-      , "to":527
-    }
-    ,
-    {
-      "from":519
-      , "to":527
-    }
-    ,
-    {
-      "from":498
-      , "to":499
-    }
-    ,
-    {
-      "from":513
-      , "to":521
-    }
-    ,
-    {
-      "from":514
-      , "to":521
-    }
-    ,
-    {
-      "from":515
-      , "to":521
-    }
-    ,
-    {
-      "from":516
-      , "to":521
-    }
-    ,
-    {
-      "from":517
-      , "to":521
-    }
-    ,
-    {
-      "from":518
-      , "to":521
-    }
-    ,
-    {
-      "from":512
-      , "to":521
-    }
-    ,
-    {
-      "from":512
-      , "to":517
-    }
-    ,
-    {
-      "from":513
-      , "to":528
-    }
-    ,
-    {
-      "from":514
-      , "to":528
-    }
-    ,
-    {
-      "from":515
-      , "to":528
-    }
-    ,
-    {
-      "from":516
-      , "to":528
-    }
-    ,
-    {
-      "from":517
-      , "to":528
-    }
-    ,
-    {
-      "from":518
-      , "to":528
-    }
-    ,
-    {
-      "from":512
-      , "to":528
-    }
-    ,
-    {
-      "from":521
-      , "to":528
-    }
-    ,
-    {
-      "from":497
-      , "to":495
-    }
-    ,
-    {
-      "from":534
-      , "to":536
-    }
-    ,
-    {
-      "from":501
-      , "to":502
-    }
-    ,
-    {
-      "from":503
-      , "to":504
-    }
-    ,
-    {
-      "from":508
-      , "to":498
-    }
-    ,
-    {
-      "from":505
-      , "to":506
-    }
-    ,
-    {
-      "from":512
-      , "to":514
-    }
-    ,
-    {
-      "from":512
-      , "to":515
+      "from":541
+      , "to":543
     }
     ,
     {
@@ -15222,383 +15567,103 @@ var loopsJSON={
     }
     ,
     {
-      "from":500
-      , "to":505
-    }
-    ,
-    {
-      "from":502
-      , "to":505
-    }
-    ,
-    {
-      "from":498
-      , "to":505
-    }
-    ,
-    {
-      "from":513
-      , "to":529
-    }
-    ,
-    {
-      "from":514
-      , "to":529
-    }
-    ,
-    {
-      "from":515
-      , "to":529
-    }
-    ,
-    {
-      "from":516
-      , "to":529
-    }
-    ,
-    {
-      "from":517
-      , "to":529
-    }
-    ,
-    {
-      "from":518
-      , "to":529
-    }
-    ,
-    {
-      "from":512
-      , "to":529
-    }
-    ,
-    {
-      "from":521
-      , "to":529
-    }
-    ,
-    {
-      "from":512
-      , "to":518
-    }
-    ,
-    {
-      "from":513
-      , "to":523
-    }
-    ,
-    {
-      "from":514
-      , "to":523
-    }
-    ,
-    {
-      "from":515
-      , "to":523
-    }
-    ,
-    {
-      "from":516
-      , "to":523
-    }
-    ,
-    {
-      "from":517
-      , "to":523
-    }
-    ,
-    {
-      "from":518
-      , "to":523
-    }
-    ,
-    {
-      "from":512
-      , "to":523
+      "from":548
+      , "to":539
     }
     ,
     {
       "from":519
-      , "to":524
+      , "to":522
     }
     ,
     {
-      "from":521
-      , "to":524
-    }
-    ,
-    {
-      "from":513
-      , "to":524
-    }
-    ,
-    {
-      "from":514
-      , "to":524
-    }
-    ,
-    {
-      "from":515
-      , "to":524
-    }
-    ,
-    {
-      "from":516
-      , "to":524
-    }
-    ,
-    {
-      "from":517
-      , "to":524
-    }
-    ,
-    {
-      "from":518
-      , "to":524
-    }
-    ,
-    {
-      "from":512
-      , "to":524
-    }
-    ,
-    {
-      "from":499
-      , "to":500
-    }
-    ,
-    {
-      "from":513
-      , "to":520
-    }
-    ,
-    {
-      "from":514
-      , "to":520
-    }
-    ,
-    {
-      "from":515
-      , "to":520
-    }
-    ,
-    {
-      "from":516
-      , "to":520
-    }
-    ,
-    {
-      "from":517
-      , "to":520
-    }
-    ,
-    {
-      "from":518
-      , "to":520
-    }
-    ,
-    {
-      "from":512
-      , "to":520
+      "from":519
+      , "to":525
     }
     ,
     {
       "from":511
-      , "to":509
-    }
-    ,
-    {
-      "from":513
-      , "to":526
-    }
-    ,
-    {
-      "from":514
-      , "to":526
-    }
-    ,
-    {
-      "from":515
-      , "to":526
-    }
-    ,
-    {
-      "from":516
-      , "to":526
-    }
-    ,
-    {
-      "from":517
-      , "to":526
-    }
-    ,
-    {
-      "from":518
-      , "to":526
-    }
-    ,
-    {
-      "from":512
-      , "to":526
-    }
-    ,
-    {
-      "from":519
-      , "to":526
-    }
-    ,
-    {
-      "from":532
-      , "to":534
-    }
-    ,
-    {
-      "from":497
-      , "to":494
-    }
-    ,
-    {
-      "from":531
       , "to":512
     }
     ,
     {
-      "from":500
-      , "to":501
-    }
-    ,
-    {
-      "from":512
-      , "to":513
-    }
-    ,
-    {
-      "from":541
-      , "to":532
-    }
-    ,
-    {
-      "from":519
-      , "to":525
+      "from":520
+      , "to":528
     }
     ,
     {
       "from":521
-      , "to":525
+      , "to":528
     }
     ,
     {
-      "from":513
-      , "to":525
+      "from":522
+      , "to":528
     }
     ,
     {
-      "from":514
-      , "to":525
+      "from":523
+      , "to":528
     }
     ,
     {
-      "from":515
-      , "to":525
+      "from":524
+      , "to":528
     }
     ,
     {
-      "from":516
-      , "to":525
+      "from":525
+      , "to":528
     }
     ,
     {
-      "from":517
-      , "to":525
+      "from":519
+      , "to":528
     }
     ,
     {
-      "from":518
-      , "to":525
+      "from":520
+      , "to":534
     }
     ,
     {
-      "from":512
-      , "to":525
+      "from":521
+      , "to":534
+    }
+    ,
+    {
+      "from":522
+      , "to":534
+    }
+    ,
+    {
+      "from":523
+      , "to":534
+    }
+    ,
+    {
+      "from":524
+      , "to":534
+    }
+    ,
+    {
+      "from":525
+      , "to":534
+    }
+    ,
+    {
+      "from":519
+      , "to":534
+    }
+    ,
+    {
+      "from":526
+      , "to":534
     }
     ,
     {
       "from":502
-      , "to":503
-    }
-    ,
-    {
-      "from":512
-      , "to":516
-    }
-    ,
-    {
-      "from":513
-      , "to":519
-    }
-    ,
-    {
-      "from":514
-      , "to":519
-    }
-    ,
-    {
-      "from":515
-      , "to":519
-    }
-    ,
-    {
-      "from":516
-      , "to":519
-    }
-    ,
-    {
-      "from":517
-      , "to":519
-    }
-    ,
-    {
-      "from":518
-      , "to":519
-    }
-    ,
-    {
-      "from":512
-      , "to":519
-    }
-    ,
-    {
-      "from":540
-      , "to":488
-    }
-    ,
-    {
-      "from":496
-      , "to":488
-    }
-    ,
-    {
-      "from":530
-      , "to":531
-    }
-    ,
-    {
-      "from":510
-      , "to":531
-    }
-    ,
-    {
-      "from":540
-      , "to":493
-    }
-    ,
-    {
-      "from":507
-      , "to":508
-    }
-    ,
-    {
-      "from":488
-      , "to":508
+      , "to":499
     }
     ,
     {
@@ -15607,72 +15672,137 @@ var loopsJSON={
     }
     ,
     {
-      "from":506
-      , "to":507
+      "from":520
+      , "to":535
     }
     ,
     {
-      "from":504
-      , "to":507
+      "from":521
+      , "to":535
     }
     ,
     {
-      "from":505
-      , "to":507
+      "from":522
+      , "to":535
     }
     ,
     {
-      "from":507
-      , "to":511
+      "from":523
+      , "to":535
     }
     ,
     {
-      "from":530
-      , "to":541
+      "from":524
+      , "to":535
     }
     ,
     {
-      "from":494
-      , "to":496
+      "from":525
+      , "to":535
     }
     ,
     {
-      "from":495
-      , "to":496
+      "from":519
+      , "to":535
     }
     ,
     {
-      "from":513
+      "from":528
+      , "to":535
+    }
+    ,
+    {
+      "from":503
+      , "to":504
+    }
+    ,
+    {
+      "from":520
+      , "to":536
+    }
+    ,
+    {
+      "from":521
+      , "to":536
+    }
+    ,
+    {
+      "from":522
+      , "to":536
+    }
+    ,
+    {
+      "from":523
+      , "to":536
+    }
+    ,
+    {
+      "from":524
+      , "to":536
+    }
+    ,
+    {
+      "from":525
+      , "to":536
+    }
+    ,
+    {
+      "from":519
+      , "to":536
+    }
+    ,
+    {
+      "from":528
+      , "to":536
+    }
+    ,
+    {
+      "from":543
+      , "to":545
+    }
+    ,
+    {
+      "from":520
+      , "to":527
+    }
+    ,
+    {
+      "from":521
+      , "to":527
+    }
+    ,
+    {
+      "from":522
+      , "to":527
+    }
+    ,
+    {
+      "from":523
+      , "to":527
+    }
+    ,
+    {
+      "from":524
+      , "to":527
+    }
+    ,
+    {
+      "from":525
+      , "to":527
+    }
+    ,
+    {
+      "from":519
+      , "to":527
+    }
+    ,
+    {
+      "from":520
       , "to":530
     }
     ,
     {
-      "from":514
-      , "to":530
-    }
-    ,
-    {
-      "from":515
-      , "to":530
-    }
-    ,
-    {
-      "from":516
-      , "to":530
-    }
-    ,
-    {
-      "from":517
-      , "to":530
-    }
-    ,
-    {
-      "from":518
-      , "to":530
-    }
-    ,
-    {
-      "from":512
+      "from":521
       , "to":530
     }
     ,
@@ -15692,48 +15822,443 @@ var loopsJSON={
     }
     ,
     {
-      "from":520
-      , "to":530
-    }
-    ,
-    {
       "from":525
       , "to":530
     }
     ,
     {
+      "from":519
+      , "to":530
+    }
+    ,
+    {
+      "from":519
+      , "to":523
+    }
+    ,
+    {
+      "from":520
+      , "to":533
+    }
+    ,
+    {
+      "from":521
+      , "to":533
+    }
+    ,
+    {
+      "from":522
+      , "to":533
+    }
+    ,
+    {
+      "from":523
+      , "to":533
+    }
+    ,
+    {
+      "from":524
+      , "to":533
+    }
+    ,
+    {
+      "from":525
+      , "to":533
+    }
+    ,
+    {
+      "from":519
+      , "to":533
+    }
+    ,
+    {
       "from":526
-      , "to":530
+      , "to":533
     }
     ,
     {
-      "from":529
-      , "to":530
+      "from":539
+      , "to":541
     }
     ,
     {
-      "from":528
-      , "to":530
+      "from":508
+      , "to":509
     }
     ,
     {
-      "from":527
-      , "to":530
+      "from":512
+      , "to":513
+    }
+    ,
+    {
+      "from":519
+      , "to":520
     }
     ,
     {
       "from":538
-      , "to":540
+      , "to":519
     }
     ,
     {
-      "from":338
-      , "to":527
+      "from":510
+      , "to":511
     }
     ,
     {
-      "from":338
+      "from":515
+      , "to":508
+    }
+    ,
+    {
+      "from":526
+      , "to":531
+    }
+    ,
+    {
+      "from":528
+      , "to":531
+    }
+    ,
+    {
+      "from":520
+      , "to":531
+    }
+    ,
+    {
+      "from":521
+      , "to":531
+    }
+    ,
+    {
+      "from":522
+      , "to":531
+    }
+    ,
+    {
+      "from":523
+      , "to":531
+    }
+    ,
+    {
+      "from":524
+      , "to":531
+    }
+    ,
+    {
+      "from":525
+      , "to":531
+    }
+    ,
+    {
+      "from":519
+      , "to":531
+    }
+    ,
+    {
+      "from":526
+      , "to":532
+    }
+    ,
+    {
+      "from":528
+      , "to":532
+    }
+    ,
+    {
+      "from":520
+      , "to":532
+    }
+    ,
+    {
+      "from":521
+      , "to":532
+    }
+    ,
+    {
+      "from":522
+      , "to":532
+    }
+    ,
+    {
+      "from":523
+      , "to":532
+    }
+    ,
+    {
+      "from":524
+      , "to":532
+    }
+    ,
+    {
+      "from":525
+      , "to":532
+    }
+    ,
+    {
+      "from":519
+      , "to":532
+    }
+    ,
+    {
+      "from":519
+      , "to":524
+    }
+    ,
+    {
+      "from":519
       , "to":521
+    }
+    ,
+    {
+      "from":520
+      , "to":526
+    }
+    ,
+    {
+      "from":521
+      , "to":526
+    }
+    ,
+    {
+      "from":522
+      , "to":526
+    }
+    ,
+    {
+      "from":523
+      , "to":526
+    }
+    ,
+    {
+      "from":524
+      , "to":526
+    }
+    ,
+    {
+      "from":525
+      , "to":526
+    }
+    ,
+    {
+      "from":519
+      , "to":526
+    }
+    ,
+    {
+      "from":520
+      , "to":529
+    }
+    ,
+    {
+      "from":521
+      , "to":529
+    }
+    ,
+    {
+      "from":522
+      , "to":529
+    }
+    ,
+    {
+      "from":523
+      , "to":529
+    }
+    ,
+    {
+      "from":524
+      , "to":529
+    }
+    ,
+    {
+      "from":525
+      , "to":529
+    }
+    ,
+    {
+      "from":519
+      , "to":529
+    }
+    ,
+    {
+      "from":502
+      , "to":500
+    }
+    ,
+    {
+      "from":518
+      , "to":516
+    }
+    ,
+    {
+      "from":507
+      , "to":503
+    }
+    ,
+    {
+      "from":545
+      , "to":547
+    }
+    ,
+    {
+      "from":499
+      , "to":501
+    }
+    ,
+    {
+      "from":500
+      , "to":501
+    }
+    ,
+    {
+      "from":514
+      , "to":518
+    }
+    ,
+    {
+      "from":520
+      , "to":537
+    }
+    ,
+    {
+      "from":521
+      , "to":537
+    }
+    ,
+    {
+      "from":522
+      , "to":537
+    }
+    ,
+    {
+      "from":523
+      , "to":537
+    }
+    ,
+    {
+      "from":524
+      , "to":537
+    }
+    ,
+    {
+      "from":525
+      , "to":537
+    }
+    ,
+    {
+      "from":519
+      , "to":537
+    }
+    ,
+    {
+      "from":531
+      , "to":537
+    }
+    ,
+    {
+      "from":527
+      , "to":537
+    }
+    ,
+    {
+      "from":532
+      , "to":537
+    }
+    ,
+    {
+      "from":529
+      , "to":537
+    }
+    ,
+    {
+      "from":530
+      , "to":537
+    }
+    ,
+    {
+      "from":533
+      , "to":537
+    }
+    ,
+    {
+      "from":536
+      , "to":537
+    }
+    ,
+    {
+      "from":535
+      , "to":537
+    }
+    ,
+    {
+      "from":534
+      , "to":537
+    }
+    ,
+    {
+      "from":514
+      , "to":515
+    }
+    ,
+    {
+      "from":506
+      , "to":515
+    }
+    ,
+    {
+      "from":547
+      , "to":498
+    }
+    ,
+    {
+      "from":537
+      , "to":548
+    }
+    ,
+    {
+      "from":516
+      , "to":517
+    }
+    ,
+    {
+      "from":537
+      , "to":538
+    }
+    ,
+    {
+      "from":517
+      , "to":538
+    }
+    ,
+    {
+      "from":547
+      , "to":507
+    }
+    ,
+    {
+      "from":501
+      , "to":507
+    }
+    ,
+    {
+      "from":513
+      , "to":514
+    }
+    ,
+    {
+      "from":505
+      , "to":506
+    }
+    ,
+    {
+      "from":503
+      , "to":506
+    }
+    ,
+    {
+      "from":504
+      , "to":506
     }
     ,
     {
@@ -15743,7 +16268,57 @@ var loopsJSON={
     ,
     {
       "from":338
-      , "to":495
+      , "to":534
+    }
+    ,
+    {
+      "from":338
+      , "to":499
+    }
+    ,
+    {
+      "from":338
+      , "to":535
+    }
+    ,
+    {
+      "from":338
+      , "to":536
+    }
+    ,
+    {
+      "from":338
+      , "to":527
+    }
+    ,
+    {
+      "from":338
+      , "to":530
+    }
+    ,
+    {
+      "from":338
+      , "to":533
+    }
+    ,
+    {
+      "from":338
+      , "to":519
+    }
+    ,
+    {
+      "from":338
+      , "to":531
+    }
+    ,
+    {
+      "from":338
+      , "to":532
+    }
+    ,
+    {
+      "from":338
+      , "to":526
     }
     ,
     {
@@ -15753,352 +16328,122 @@ var loopsJSON={
     ,
     {
       "from":338
-      , "to":523
+      , "to":500
     }
     ,
     {
-      "from":338
-      , "to":524
-    }
-    ,
-    {
-      "from":338
-      , "to":520
-    }
-    ,
-    {
-      "from":338
-      , "to":526
-    }
-    ,
-    {
-      "from":509
+      "from":516
       , "to":338
     }
     ,
     {
-      "from":338
-      , "to":494
-    }
-    ,
-    {
-      "from":338
-      , "to":512
-    }
-    ,
-    {
-      "from":338
-      , "to":525
-    }
-    ,
-    {
-      "from":338
-      , "to":522
-    }
-    ,
-    {
-      "from":338
-      , "to":519
-    }
-    ,
-    {
-      "from":475
-      , "to":555
-    }
-    ,
-    {
-      "from":533
-      , "to":556
-    }
-    ,
-    {
-      "from":477
-      , "to":557
-    }
-    ,
-    {
-      "from":535
-      , "to":558
-    }
-    ,
-    {
-      "from":479
-      , "to":559
-    }
-    ,
-    {
-      "from":537
-      , "to":560
-    }
-    ,
-    {
-      "from":481
-      , "to":561
-    }
-    ,
-    {
-      "from":539
+      "from":480
       , "to":562
     }
     ,
     {
-      "from":565
+      "from":540
+      , "to":563
+    }
+    ,
+    {
+      "from":482
+      , "to":564
+    }
+    ,
+    {
+      "from":542
+      , "to":565
+    }
+    ,
+    {
+      "from":484
+      , "to":566
+    }
+    ,
+    {
+      "from":544
+      , "to":567
+    }
+    ,
+    {
+      "from":486
+      , "to":568
+    }
+    ,
+    {
+      "from":546
+      , "to":569
+    }
+    ,
+    {
+      "from":572
       , "to":298
     }
     ,
     {
-      "from":568
+      "from":575
       , "to":302
     }
     ,
     {
-      "from":555
-      , "to":557
+      "from":567
+      , "to":574
     }
     ,
     {
-      "from":556
-      , "to":557
+      "from":566
+      , "to":574
     }
     ,
     {
-      "from":560
-      , "to":561
+      "from":568
+      , "to":574
     }
     ,
     {
-      "from":559
-      , "to":561
-    }
-    ,
-    {
-      "from":560
-      , "to":565
-    }
-    ,
-    {
-      "from":559
-      , "to":565
-    }
-    ,
-    {
-      "from":561
-      , "to":565
+      "from":569
+      , "to":574
     }
     ,
     {
       "from":562
-      , "to":565
+      , "to":574
     }
     ,
     {
-      "from":555
-      , "to":565
+      "from":563
+      , "to":574
     }
     ,
     {
-      "from":556
-      , "to":565
-    }
-    ,
-    {
-      "from":557
-      , "to":563
-    }
-    ,
-    {
-      "from":558
-      , "to":563
-    }
-    ,
-    {
-      "from":557
-      , "to":569
-    }
-    ,
-    {
-      "from":558
-      , "to":569
-    }
-    ,
-    {
-      "from":571
-      , "to":556
-    }
-    ,
-    {
-      "from":557
-      , "to":559
-    }
-    ,
-    {
-      "from":558
-      , "to":559
-    }
-    ,
-    {
-      "from":571
-      , "to":555
-    }
-    ,
-    {
-      "from":560
-      , "to":567
-    }
-    ,
-    {
-      "from":559
-      , "to":567
-    }
-    ,
-    {
-      "from":561
-      , "to":567
-    }
-    ,
-    {
-      "from":562
-      , "to":567
-    }
-    ,
-    {
-      "from":555
-      , "to":567
-    }
-    ,
-    {
-      "from":556
+      "from":564
       , "to":567
     }
     ,
     {
       "from":565
-      , "to":568
-    }
-    ,
-    {
-      "from":560
-      , "to":568
-    }
-    ,
-    {
-      "from":559
-      , "to":568
-    }
-    ,
-    {
-      "from":561
-      , "to":568
+      , "to":567
     }
     ,
     {
       "from":562
-      , "to":568
+      , "to":565
     }
     ,
     {
-      "from":555
-      , "to":568
+      "from":563
+      , "to":565
     }
     ,
     {
-      "from":556
-      , "to":568
+      "from":567
+      , "to":569
     }
     ,
     {
-      "from":560
-      , "to":564
-    }
-    ,
-    {
-      "from":559
-      , "to":564
-    }
-    ,
-    {
-      "from":561
-      , "to":564
-    }
-    ,
-    {
-      "from":562
-      , "to":564
-    }
-    ,
-    {
-      "from":555
-      , "to":564
-    }
-    ,
-    {
-      "from":556
-      , "to":564
-    }
-    ,
-    {
-      "from":560
-      , "to":562
-    }
-    ,
-    {
-      "from":559
-      , "to":562
-    }
-    ,
-    {
-      "from":560
-      , "to":566
-    }
-    ,
-    {
-      "from":559
-      , "to":566
-    }
-    ,
-    {
-      "from":561
-      , "to":566
-    }
-    ,
-    {
-      "from":562
-      , "to":566
-    }
-    ,
-    {
-      "from":555
-      , "to":566
-    }
-    ,
-    {
-      "from":556
-      , "to":566
-    }
-    ,
-    {
-      "from":557
-      , "to":560
-    }
-    ,
-    {
-      "from":558
-      , "to":560
-    }
-    ,
-    {
-      "from":555
-      , "to":558
-    }
-    ,
-    {
-      "from":556
-      , "to":558
-    }
-    ,
-    {
-      "from":570
-      , "to":554
+      "from":566
+      , "to":569
     }
     ,
     {
@@ -16107,72 +16452,262 @@ var loopsJSON={
     }
     ,
     {
-      "from":557
+      "from":565
       , "to":570
     }
     ,
     {
-      "from":558
-      , "to":570
+      "from":578
+      , "to":563
+    }
+    ,
+    {
+      "from":567
+      , "to":572
+    }
+    ,
+    {
+      "from":566
+      , "to":572
     }
     ,
     {
       "from":568
-      , "to":570
-    }
-    ,
-    {
-      "from":563
-      , "to":570
+      , "to":572
     }
     ,
     {
       "from":569
-      , "to":570
+      , "to":572
     }
     ,
     {
-      "from":566
-      , "to":570
-    }
-    ,
-    {
-      "from":567
-      , "to":570
-    }
-    ,
-    {
-      "from":570
-      , "to":571
-    }
-    ,
-    {
-      "from":552
-      , "to":571
+      "from":562
+      , "to":572
     }
     ,
     {
       "from":563
-      , "to":338
-    }
-    ,
-    {
-      "from":569
-      , "to":338
-    }
-    ,
-    {
-      "from":567
-      , "to":338
+      , "to":572
     }
     ,
     {
       "from":564
-      , "to":338
+      , "to":576
+    }
+    ,
+    {
+      "from":565
+      , "to":576
+    }
+    ,
+    {
+      "from":578
+      , "to":562
+    }
+    ,
+    {
+      "from":567
+      , "to":573
     }
     ,
     {
       "from":566
+      , "to":573
+    }
+    ,
+    {
+      "from":568
+      , "to":573
+    }
+    ,
+    {
+      "from":569
+      , "to":573
+    }
+    ,
+    {
+      "from":562
+      , "to":573
+    }
+    ,
+    {
+      "from":563
+      , "to":573
+    }
+    ,
+    {
+      "from":562
+      , "to":564
+    }
+    ,
+    {
+      "from":563
+      , "to":564
+    }
+    ,
+    {
+      "from":567
+      , "to":568
+    }
+    ,
+    {
+      "from":566
+      , "to":568
+    }
+    ,
+    {
+      "from":564
+      , "to":566
+    }
+    ,
+    {
+      "from":565
+      , "to":566
+    }
+    ,
+    {
+      "from":567
+      , "to":571
+    }
+    ,
+    {
+      "from":566
+      , "to":571
+    }
+    ,
+    {
+      "from":568
+      , "to":571
+    }
+    ,
+    {
+      "from":569
+      , "to":571
+    }
+    ,
+    {
+      "from":562
+      , "to":571
+    }
+    ,
+    {
+      "from":563
+      , "to":571
+    }
+    ,
+    {
+      "from":572
+      , "to":575
+    }
+    ,
+    {
+      "from":567
+      , "to":575
+    }
+    ,
+    {
+      "from":566
+      , "to":575
+    }
+    ,
+    {
+      "from":568
+      , "to":575
+    }
+    ,
+    {
+      "from":569
+      , "to":575
+    }
+    ,
+    {
+      "from":562
+      , "to":575
+    }
+    ,
+    {
+      "from":563
+      , "to":575
+    }
+    ,
+    {
+      "from":577
+      , "to":578
+    }
+    ,
+    {
+      "from":559
+      , "to":578
+    }
+    ,
+    {
+      "from":577
+      , "to":561
+    }
+    ,
+    {
+      "from":571
+      , "to":577
+    }
+    ,
+    {
+      "from":564
+      , "to":577
+    }
+    ,
+    {
+      "from":565
+      , "to":577
+    }
+    ,
+    {
+      "from":575
+      , "to":577
+    }
+    ,
+    {
+      "from":570
+      , "to":577
+    }
+    ,
+    {
+      "from":576
+      , "to":577
+    }
+    ,
+    {
+      "from":573
+      , "to":577
+    }
+    ,
+    {
+      "from":574
+      , "to":577
+    }
+    ,
+    {
+      "from":574
+      , "to":338
+    }
+    ,
+    {
+      "from":570
+      , "to":338
+    }
+    ,
+    {
+      "from":576
+      , "to":338
+    }
+    ,
+    {
+      "from":573
+      , "to":338
+    }
+    ,
+    {
+      "from":571
       , "to":338
     }
   ]
@@ -16191,9 +16726,9 @@ var loopsJSON={
   "columns":["ALUTs", "FFs", "RAMs", "DSPs"]
   , "debug_enabled":1
   , "total_percent":
-  [258.191, 113.17, 148.093, 159.118, 26.9433]
+  [253.155, 110.155, 145.822, 146.218, 26.9433]
   , "total":
-  [891961, 2334419, 3787, 409]
+  [868201, 2298618, 3480, 409]
   , "name":"Kernel System"
   , "max_resources":
   [788160, 1576320, 2380, 1518]
@@ -16355,7 +16890,7 @@ var loopsJSON={
     , {
       "name":"Krnl_GA.cl:61 (chan_Conf2Intere_active)"
       , "data":
-      [8, 8, 0, 0]
+      [43, 65, 1, 0]
       , "debug":
       [
         [
@@ -16367,13 +16902,13 @@ var loopsJSON={
       ]
       , "details":
       [
-        "Channel is implemented 8 bits wide by 0 deep."
+        "Channel is implemented 8 bits wide by 64 deep."
       ]
     }
     , {
       "name":"Krnl_GA.cl:62 (chan_Conf2Intere_mode)"
       , "data":
-      [8, 8, 0, 0]
+      [43, 65, 1, 0]
       , "debug":
       [
         [
@@ -16385,13 +16920,13 @@ var loopsJSON={
       ]
       , "details":
       [
-        "Channel is implemented 8 bits wide by 0 deep."
+        "Channel is implemented 8 bits wide by 32 deep."
       ]
     }
     , {
       "name":"Krnl_GA.cl:63 (chan_Conf2Intere_cnt)"
       , "data":
-      [32, 32, 0, 0]
+      [49, 167, 1, 0]
       , "debug":
       [
         [
@@ -16403,7 +16938,7 @@ var loopsJSON={
       ]
       , "details":
       [
-        "Channel is implemented 32 bits wide by 0 deep."
+        "Channel is implemented 32 bits wide by 32 deep."
       ]
     }
     , {
@@ -16463,7 +16998,7 @@ var loopsJSON={
     , {
       "name":"Krnl_GA.cl:74 (chan_Conf2Intrae_active)"
       , "data":
-      [10, 37, 0, 0]
+      [43, 65, 1, 0]
       , "debug":
       [
         [
@@ -16475,13 +17010,13 @@ var loopsJSON={
       ]
       , "details":
       [
-        "Channel is implemented 8 bits wide by 3 deep."
+        "Channel is implemented 8 bits wide by 32 deep."
       ]
     }
     , {
       "name":"Krnl_GA.cl:75 (chan_Conf2Intrae_mode)"
       , "data":
-      [10, 37, 0, 0]
+      [43, 65, 1, 0]
       , "debug":
       [
         [
@@ -16493,13 +17028,13 @@ var loopsJSON={
       ]
       , "details":
       [
-        "Channel is implemented 8 bits wide by 3 deep."
+        "Channel is implemented 8 bits wide by 32 deep."
       ]
     }
     , {
       "name":"Krnl_GA.cl:76 (chan_Conf2Intrae_cnt)"
       , "data":
-      [10, 133, 0, 0]
+      [49, 167, 1, 0]
       , "debug":
       [
         [
@@ -16511,7 +17046,7 @@ var loopsJSON={
       ]
       , "details":
       [
-        "Channel is implemented 32 bits wide by 3 deep."
+        "Channel is implemented 32 bits wide by 32 deep."
       ]
     }
     , {
@@ -16788,7 +17323,7 @@ var loopsJSON={
           ]
         }
         , {
-          "name":"Private Variable: \n - 'pipe_cnt' (Krnl_Conform.cl:241)"
+          "name":"Private Variable: \n - 'pipe_cnt' (Krnl_Conform.cl:250)"
           , "data":
           [24, 101, 0, 0]
           , "debug":
@@ -16796,7 +17331,7 @@ var loopsJSON={
             [
               {
                 "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_Conform.cl"
-                , "line":241
+                , "line":250
               }
             ]
           ]
@@ -17365,7 +17900,7 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_Conform.cl:242"
+                    "name":"Krnl_Conform.cl:251"
                     , "data":
                     [5.5, 4.33333, 0.166667, 0]
                     , "debug":
@@ -17373,7 +17908,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_Conform.cl"
-                          , "line":242
+                          , "line":251
                         }
                       ]
                     ]
@@ -17383,7 +17918,7 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_Conform.cl:245"
+                    "name":"Krnl_Conform.cl:254"
                     , "data":
                     [5.5, 4.33333, 0.166667, 0]
                     , "debug":
@@ -17391,7 +17926,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_Conform.cl"
-                          , "line":245
+                          , "line":254
                         }
                       ]
                     ]
@@ -17401,7 +17936,7 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_Conform.cl:248"
+                    "name":"Krnl_Conform.cl:257"
                     , "data":
                     [5.5, 4.33333, 0.166667, 0]
                     , "debug":
@@ -17409,7 +17944,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_Conform.cl"
-                          , "line":248
+                          , "line":257
                         }
                       ]
                     ]
@@ -17742,7 +18277,7 @@ var loopsJSON={
             {
               "name":"State"
               , "data":
-              [4695.56, 8687.72, 40.5667, 0]
+              [4743.55, 8798.21, 40.5667, 0]
               , "details":
               [
                 "Resources for live values and control logic. To reduce this area:\n- reduce size of local variables\n- reduce scope of local variables, localizing them as much as possible\n- reduce number of nested loops"
@@ -17754,7 +18289,7 @@ var loopsJSON={
                   {
                     "name":"Control flow logic"
                     , "data":
-                    [313, 623.5, 0, 0]
+                    [313, 638, 0, 0]
                   }
                   , "count":0
                 }
@@ -17781,7 +18316,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_Conform.cl:104"
                     , "data":
-                    [50.5556, 81.5, 0.944444, 0]
+                    [50.5555, 81.5, 0.944444, 0]
                     , "debug":
                     [
                       [
@@ -18105,7 +18640,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_Conform.cl:143"
                     , "data":
-                    [32.8, 54.2008, 0.571429, 0]
+                    [77.6, 143.801, 0.571429, 0]
                     , "debug":
                     [
                       [
@@ -18177,7 +18712,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_Conform.cl:162"
                     , "data":
-                    [157.333, 303.267, 0.571429, 0]
+                    [147.733, 284.067, 0.571429, 0]
                     , "debug":
                     [
                       [
@@ -18195,7 +18730,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_Conform.cl:166"
                     , "data":
-                    [153.133, 305.367, 0.0714286, 0]
+                    [146.733, 292.567, 0.0714286, 0]
                     , "debug":
                     [
                       [
@@ -18213,7 +18748,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_Conform.cl:170"
                     , "data":
-                    [151.8, 302.701, 0.0714286, 0]
+                    [145.4, 289.901, 0.0714286, 0]
                     , "debug":
                     [
                       [
@@ -18231,7 +18766,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_Conform.cl:174"
                     , "data":
-                    [158.467, 316.034, 0.0714286, 0]
+                    [152.067, 303.234, 0.0714286, 0]
                     , "debug":
                     [
                       [
@@ -18321,7 +18856,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_Conform.cl:195"
                     , "data":
-                    [347.233, 661.217, 1.33333, 0]
+                    [371.233, 709.217, 1.33333, 0]
                     , "debug":
                     [
                       [
@@ -18357,7 +18892,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_Conform.cl:205"
                     , "data":
-                    [325.233, 638.217, 0.333333, 0]
+                    [333.233, 654.217, 0.333333, 0]
                     , "debug":
                     [
                       [
@@ -18393,7 +18928,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_Conform.cl:212"
                     , "data":
-                    [123.667, 159.357, 4.83333, 0]
+                    [122.267, 159.136, 4.73333, 0]
                     , "debug":
                     [
                       [
@@ -18411,7 +18946,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_Conform.cl:213"
                     , "data":
-                    [126.467, 155.8, 5.03333, 0]
+                    [127.867, 157.021, 5.13333, 0]
                     , "debug":
                     [
                       [
@@ -18429,7 +18964,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_Conform.cl:214"
                     , "data":
-                    [122.267, 153.636, 4.73333, 0]
+                    [123.2, 153.617, 4.8, 0]
                     , "debug":
                     [
                       [
@@ -18445,15 +18980,15 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_Conform.cl:242"
+                    "name":"Krnl_Conform.cl:251"
                     , "data":
-                    [15.4, 10.4714, 1.1, 0]
+                    [14.9333, 9.98095, 1.06667, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_Conform.cl"
-                          , "line":242
+                          , "line":251
                         }
                       ]
                     ]
@@ -18463,15 +18998,15 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_Conform.cl:245"
+                    "name":"Krnl_Conform.cl:254"
                     , "data":
-                    [18.2, 13.1643, 1.3, 0]
+                    [17.7333, 12.6738, 1.26667, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_Conform.cl"
-                          , "line":245
+                          , "line":254
                         }
                       ]
                     ]
@@ -18481,7 +19016,7 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_Conform.cl:248"
+                    "name":"Krnl_Conform.cl:257"
                     , "data":
                     [55.85, 44.2375, 1.65, 0]
                     , "debug":
@@ -18489,7 +19024,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_Conform.cl"
-                          , "line":248
+                          , "line":257
                         }
                       ]
                     ]
@@ -18762,7 +19297,7 @@ var loopsJSON={
             , {
               "name":"Feedback"
               , "data":
-              [371, 305, 14, 0]
+              [359, 293, 14, 0]
               , "details":
               [
                 "Resources for loop-carried dependencies. To reduce this area:\n- reduce number and size of loop-carried variables"
@@ -18810,7 +19345,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_Conform.cl:213"
                     , "data":
-                    [62, 50, 1, 0]
+                    [50, 38, 1, 0]
                     , "debug":
                     [
                       [
@@ -18844,7 +19379,7 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_Conform.cl:245"
+                    "name":"Krnl_Conform.cl:254"
                     , "data":
                     [37, 31, 1, 0]
                     , "debug":
@@ -18852,7 +19387,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_Conform.cl"
-                          , "line":245
+                          , "line":254
                         }
                       ]
                     ]
@@ -18862,7 +19397,7 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_Conform.cl:248"
+                    "name":"Krnl_Conform.cl:257"
                     , "data":
                     [25, 19, 1, 0]
                     , "debug":
@@ -18870,7 +19405,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_Conform.cl"
-                          , "line":248
+                          , "line":257
                         }
                       ]
                     ]
@@ -18954,7 +19489,7 @@ var loopsJSON={
             , {
               "name":"Cluster logic"
               , "data":
-              [843.442, 2616.78, 14.4333, 0]
+              [843.441, 2616.78, 14.4333, 0]
               , "details":
               [
                 "Logic required to efficiently support sets of operations that do not stall. This area cannot be affected directly."
@@ -20462,7 +20997,7 @@ var loopsJSON={
             {
               "name":"State"
               , "data":
-              [771, 4695.5, 13, 0]
+              [165, 450, 0, 0]
               , "details":
               [
                 "Resources for live values and control logic. To reduce this area:\n- reduce size of local variables\n- reduce scope of local variables, localizing them as much as possible\n- reduce number of nested loops"
@@ -20474,43 +21009,7 @@ var loopsJSON={
                   {
                     "name":"Control flow logic"
                     , "data":
-                    [118, 386.5, 0, 0]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_Conform.cl:241"
-                    , "data":
-                    [86.1762, 963.126, 2, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_Conform.cl"
-                          , "line":241
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_Conform.cl:242"
-                    , "data":
-                    [17.2333, 24.65, 0.0833333, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_Conform.cl"
-                          , "line":242
-                        }
-                      ]
-                    ]
+                    [146, 219, 0, 0]
                   }
                   , "count":0
                 }
@@ -20519,7 +21018,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_Conform.cl:243"
                     , "data":
-                    [9.23333, 8.65, 0.0833333, 0]
+                    [4.5, 14.5, 0, 0]
                     , "debug":
                     [
                       [
@@ -20535,15 +21034,15 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_Conform.cl:245"
+                    "name":"Krnl_Conform.cl:244"
                     , "data":
-                    [6.13333, 4.85, 0.183333, 0]
+                    [4.5, 14.5, 0, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_Conform.cl"
-                          , "line":245
+                          , "line":244
                         }
                       ]
                     ]
@@ -20555,7 +21054,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_Conform.cl:246"
                     , "data":
-                    [6.13333, 4.85, 0.183333, 0]
+                    [5, 66.5, 0, 0]
                     , "debug":
                     [
                       [
@@ -20571,15 +21070,15 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_Conform.cl:248"
+                    "name":"Krnl_Conform.cl:247"
                     , "data":
-                    [20.925, 18.7667, 0.308333, 0]
+                    [5, 66.5, 0, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_Conform.cl"
-                          , "line":248
+                          , "line":247
                         }
                       ]
                     ]
@@ -20589,15 +21088,54 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_Conform.cl:249"
+                    "name":"No Source Line"
                     , "data":
-                    [20.925, 18.7667, 0.308333, 0]
+                    [0, 69, 0, 0]
+                  }
+                  , "count":0
+                }
+              ]
+            }
+          ]
+          , "computation":
+          [
+          ]
+        }
+        , {
+          "name":"Block105"
+          , "resources":
+          [
+            {
+              "name":"State"
+              , "data":
+              [491, 1755, 12, 0]
+              , "details":
+              [
+                "Resources for live values and control logic. To reduce this area:\n- reduce size of local variables\n- reduce scope of local variables, localizing them as much as possible\n- reduce number of nested loops"
+              ]
+              , "subinfos":
+              [
+                {
+                  "info":
+                  {
+                    "name":"Control flow logic"
+                    , "data":
+                    [70, 317, 0, 0]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_Conform.cl:250"
+                    , "data":
+                    [75.4, 385.65, 3, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_Conform.cl"
-                          , "line":249
+                          , "line":250
                         }
                       ]
                     ]
@@ -20609,7 +21147,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_Conform.cl:251"
                     , "data":
-                    [15.7583, 13.4333, 0.308333, 0]
+                    [20.0667, 26.9, 0.166667, 0]
                     , "debug":
                     [
                       [
@@ -20627,7 +21165,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_Conform.cl:252"
                     , "data":
-                    [15.7583, 13.4333, 0.308333, 0]
+                    [12.0667, 10.9, 0.166667, 0]
                     , "debug":
                     [
                       [
@@ -20645,7 +21183,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_Conform.cl:254"
                     , "data":
-                    [18.0083, 15.4333, 0.308333, 0]
+                    [13.9167, 11, 0.416667, 0]
                     , "debug":
                     [
                       [
@@ -20663,7 +21201,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_Conform.cl:255"
                     , "data":
-                    [18.0083, 15.4333, 0.308333, 0]
+                    [13.9167, 11, 0.416667, 0]
                     , "debug":
                     [
                       [
@@ -20681,7 +21219,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_Conform.cl:257"
                     , "data":
-                    [34.5083, 31.4333, 0.308333, 0]
+                    [30.4167, 24, 0.916667, 0]
                     , "debug":
                     [
                       [
@@ -20699,7 +21237,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_Conform.cl:258"
                     , "data":
-                    [34.5083, 31.4333, 0.308333, 0]
+                    [30.4167, 24, 0.916667, 0]
                     , "debug":
                     [
                       [
@@ -20717,7 +21255,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_Conform.cl:53"
                     , "data":
-                    [4, 10.5, 0, 0]
+                    [0, 3, 0, 0]
                     , "debug":
                     [
                       [
@@ -20733,45 +21271,9 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_Conform.cl:55"
-                    , "data":
-                    [4, 8.25, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_Conform.cl"
-                          , "line":55
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_Conform.cl:57"
-                    , "data":
-                    [16, 32.25, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_Conform.cl"
-                          , "line":57
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
                     "name":"No Source Line"
                     , "data":
-                    [325.69, 3093.74, 8, 0]
+                    [224.8, 941.55, 6, 0]
                   }
                   , "count":0
                 }
@@ -20780,7 +21282,7 @@ var loopsJSON={
             , {
               "name":"Feedback"
               , "data":
-              [15, 203, 0, 0]
+              [15, 107, 0, 0]
               , "details":
               [
                 "Resources for loop-carried dependencies. To reduce this area:\n- reduce number and size of loop-carried variables"
@@ -20790,7 +21292,7 @@ var loopsJSON={
                 {
                   "info":
                   {
-                    "name":"Krnl_Conform.cl:241"
+                    "name":"Krnl_Conform.cl:250"
                     , "data":
                     [7, 6, 0, 0]
                     , "debug":
@@ -20798,7 +21300,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_Conform.cl"
-                          , "line":241
+                          , "line":250
                         }
                       ]
                     ]
@@ -20810,7 +21312,7 @@ var loopsJSON={
                   {
                     "name":"No Source Line"
                     , "data":
-                    [8, 197, 0, 0]
+                    [8, 101, 0, 0]
                   }
                   , "count":0
                 }
@@ -20829,7 +21331,7 @@ var loopsJSON={
           , "computation":
           [
             {
-              "name":"Krnl_Conform.cl:241"
+              "name":"Krnl_Conform.cl:250"
               , "data":
               [16, 0, 0, 0]
               , "debug":
@@ -20837,7 +21339,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_Conform.cl"
-                    , "line":241
+                    , "line":250
                   }
                 ]
               ]
@@ -20855,7 +21357,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_Conform.cl:242"
+              "name":"Krnl_Conform.cl:251"
               , "data":
               [9, 8, 0, 0]
               , "debug":
@@ -20863,7 +21365,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_Conform.cl"
-                    , "line":242
+                    , "line":251
                   }
                 ]
               ]
@@ -20885,7 +21387,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_Conform.cl:245"
+              "name":"Krnl_Conform.cl:254"
               , "data":
               [9, 8, 0, 0]
               , "debug":
@@ -20893,7 +21395,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_Conform.cl"
-                    , "line":245
+                    , "line":254
                   }
                 ]
               ]
@@ -20915,7 +21417,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_Conform.cl:248"
+              "name":"Krnl_Conform.cl:257"
               , "data":
               [9, 8, 0, 0]
               , "debug":
@@ -20923,7 +21425,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_Conform.cl"
-                    , "line":248
+                    , "line":257
                   }
                 ]
               ]
@@ -20947,7 +21449,7 @@ var loopsJSON={
           ]
         }
         , {
-          "name":"Block105"
+          "name":"Block106"
           , "resources":
           [
             {
@@ -21020,7 +21522,7 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_Conform.cl:241"
+                    "name":"Krnl_Conform.cl:250"
                     , "data":
                     [136, 136, 0, 0]
                     , "debug":
@@ -21028,7 +21530,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_Conform.cl"
-                          , "line":241
+                          , "line":250
                         }
                       ]
                     ]
@@ -21128,7 +21630,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_Conform.cl:241"
+              "name":"Krnl_Conform.cl:250"
               , "data":
               [1, 129, 0, 0]
               , "debug":
@@ -21136,7 +21638,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_Conform.cl"
-                    , "line":241
+                    , "line":250
                   }
                 ]
               ]
@@ -21166,7 +21668,7 @@ var loopsJSON={
             {
               "name":"State"
               , "data":
-              [420, 663, 0, 0]
+              [356, 567, 0, 0]
               , "details":
               [
                 "Resources for live values and control logic. To reduce this area:\n- reduce size of local variables\n- reduce scope of local variables, localizing them as much as possible\n- reduce number of nested loops"
@@ -21178,7 +21680,7 @@ var loopsJSON={
                   {
                     "name":"Control flow logic"
                     , "data":
-                    [420, 630, 0, 0]
+                    [356, 534, 0, 0]
                   }
                   , "count":0
                 }
@@ -21287,7 +21789,7 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_Conform.cl:242"
+                    "name":"Krnl_Conform.cl:251"
                     , "data":
                     [1.66667, 32.8333, 0, 0]
                     , "debug":
@@ -21295,7 +21797,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_Conform.cl"
-                          , "line":242
+                          , "line":251
                         }
                       ]
                     ]
@@ -21305,7 +21807,7 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_Conform.cl:245"
+                    "name":"Krnl_Conform.cl:254"
                     , "data":
                     [1.66667, 32.8333, 0, 0]
                     , "debug":
@@ -21313,7 +21815,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_Conform.cl"
-                          , "line":245
+                          , "line":254
                         }
                       ]
                     ]
@@ -21323,7 +21825,7 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_Conform.cl:248"
+                    "name":"Krnl_Conform.cl:257"
                     , "data":
                     [1.66667, 32.8333, 0, 0]
                     , "debug":
@@ -21331,7 +21833,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_Conform.cl"
-                          , "line":248
+                          , "line":257
                         }
                       ]
                     ]
@@ -22551,7 +23053,7 @@ var loopsJSON={
             {
               "name":"State"
               , "data":
-              [76578.7, 188386, 10, 0]
+              [76578.2, 188386, 10, 0]
               , "details":
               [
                 "Resources for live values and control logic. To reduce this area:\n- reduce size of local variables\n- reduce scope of local variables, localizing them as much as possible\n- reduce number of nested loops"
@@ -23958,7 +24460,7 @@ var loopsJSON={
                   {
                     "name":"No Source Line"
                     , "data":
-                    [63767.9, 132985, 0, 0]
+                    [63767.5, 132985, 0, 0]
                   }
                   , "count":0
                 }
@@ -35175,7 +35677,7 @@ var loopsJSON={
                   {
                     "name":"No Source Line"
                     , "data":
-                    [1994, 3085.01, 43, 0]
+                    [1994, 3085, 43, 0]
                   }
                   , "count":0
                 }
@@ -35381,7 +35883,7 @@ var loopsJSON={
             {
               "name":"State"
               , "data":
-              [6258.67, 19460, 13.3613, 0]
+              [6258.67, 19459.5, 13.3613, 0]
               , "details":
               [
                 "Resources for live values and control logic. To reduce this area:\n- reduce size of local variables\n- reduce scope of local variables, localizing them as much as possible\n- reduce number of nested loops"
@@ -37734,7 +38236,7 @@ var loopsJSON={
             {
               "name":"State"
               , "data":
-              [4315.6, 13824.5, 9.4, 0]
+              [4315.6, 13824.5, 9.39999, 0]
               , "details":
               [
                 "Resources for live values and control logic. To reduce this area:\n- reduce size of local variables\n- reduce scope of local variables, localizing them as much as possible\n- reduce number of nested loops"
@@ -37827,7 +38329,7 @@ var loopsJSON={
                   {
                     "name":"No Source Line"
                     , "data":
-                    [418.067, 7725.06, 8.2, 0]
+                    [418.067, 7725.07, 8.2, 0]
                   }
                   , "count":0
                 }
@@ -38092,7 +38594,7 @@ var loopsJSON={
             {
               "name":"State"
               , "data":
-              [7993.98, 24237.5, 6, 0]
+              [7993.98, 24237.4, 6, 0]
               , "details":
               [
                 "Resources for live values and control logic. To reduce this area:\n- reduce size of local variables\n- reduce scope of local variables, localizing them as much as possible\n- reduce number of nested loops"
@@ -38167,7 +38669,7 @@ var loopsJSON={
                   {
                     "name":"No Source Line"
                     , "data":
-                    [3153.92, 10801.8, 1.33333, 0]
+                    [3153.91, 10801.8, 1.33333, 0]
                   }
                   , "count":0
                 }
@@ -40108,7 +40610,7 @@ var loopsJSON={
                   {
                     "name":"No Source Line"
                     , "data":
-                    [3104.01, 6208.01, 0, 0]
+                    [3104, 6207.99, 0, 0]
                   }
                   , "count":0
                 }
@@ -41183,7 +41685,7 @@ var loopsJSON={
         , {
           "name":"Coalesced Private Variables: \n - 'loc_coords_x' (Krnl_InterE.cl:29)\n - 'loc_coords_y' (Krnl_InterE.cl:30)"
           , "data":
-          [720, 11970, 0, 0]
+          [8, 837, 0, 0]
           , "debug":
           [
             [
@@ -41201,7 +41703,31 @@ var loopsJSON={
           ]
           , "details":
           [
-            "Implemented using registers of the following size:\n- 180 registers of width 32 and depth 1"
+            "Implemented using registers of the following size:\n- 13 registers of width 32 and depth 1"
+          ]
+        }
+        , {
+          "name":"Coalesced Private Variables: \n - 'loc_coords_y' (Krnl_InterE.cl:30)\n - 'loc_coords_z' (Krnl_InterE.cl:31)"
+          , "data":
+          [8, 837, 0, 0]
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
+                , "line":30
+              }
+            ]
+            , [
+              {
+                "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
+                , "line":31
+              }
+            ]
+          ]
+          , "details":
+          [
+            "Implemented using registers of the following size:\n- 13 registers of width 32 and depth 1"
           ]
         }
         , {
@@ -41223,9 +41749,45 @@ var loopsJSON={
           ]
         }
         , {
+          "name":"Private Variable: \n - 'loc_coords_x' (Krnl_InterE.cl:29)"
+          , "data":
+          [48, 5022, 0, 0]
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
+                , "line":29
+              }
+            ]
+          ]
+          , "details":
+          [
+            "Implemented using registers of the following size:\n- 78 registers of width 32 and depth 1"
+          ]
+        }
+        , {
+          "name":"Private Variable: \n - 'loc_coords_y' (Krnl_InterE.cl:30)"
+          , "data":
+          [48, 5022, 0, 0]
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
+                , "line":30
+              }
+            ]
+          ]
+          , "details":
+          [
+            "Implemented using registers of the following size:\n- 78 registers of width 32 and depth 1"
+          ]
+        }
+        , {
           "name":"Private Variable: \n - 'loc_coords_z' (Krnl_InterE.cl:31)"
           , "data":
-          [720, 6210, 0, 0]
+          [56, 5667, 0, 0]
           , "debug":
           [
             [
@@ -41237,11 +41799,11 @@ var loopsJSON={
           ]
           , "details":
           [
-            "Implemented using registers of the following size:\n- 90 registers of width 32 and depth 1"
+            "Implemented using registers of the following size:\n- 88 registers of width 32 and depth 1"
           ]
         }
         , {
-          "name":"Private Variable: \n - 'pipe_cnt' (Krnl_InterE.cl:64)"
+          "name":"Private Variable: \n - 'pipe_cnt' (Krnl_InterE.cl:70)"
           , "data":
           [24, 101, 0, 0]
           , "debug":
@@ -41249,7 +41811,7 @@ var loopsJSON={
             [
               {
                 "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                , "line":64
+                , "line":70
               }
             ]
           ]
@@ -41262,7 +41824,7 @@ var loopsJSON={
       , "basicblocks":
       [
         {
-          "name":"Block106.wii_blk"
+          "name":"Block107.wii_blk"
           , "resources":
           [
             {
@@ -41287,7 +41849,25 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_InterE.cl:194"
+                    "name":"Krnl_InterE.cl:100"
+                    , "data":
+                    [2, 2, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
+                          , "line":100
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_InterE.cl:202"
                     , "data":
                     [25.6, 25.6, 0, 0]
                     , "debug":
@@ -41295,7 +41875,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":194
+                          , "line":202
                         }
                       ]
                     ]
@@ -41305,7 +41885,7 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_InterE.cl:195"
+                    "name":"Krnl_InterE.cl:203"
                     , "data":
                     [10.6667, 10.6667, 0, 0]
                     , "debug":
@@ -41313,7 +41893,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":195
+                          , "line":203
                         }
                       ]
                     ]
@@ -41323,7 +41903,7 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_InterE.cl:228"
+                    "name":"Krnl_InterE.cl:236"
                     , "data":
                     [10.6667, 10.6667, 0, 0]
                     , "debug":
@@ -41331,7 +41911,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":228
+                          , "line":236
                         }
                       ]
                     ]
@@ -41395,7 +41975,7 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_InterE.cl:64"
+                    "name":"Krnl_InterE.cl:70"
                     , "data":
                     [29.6, 29.6, 0, 0]
                     , "debug":
@@ -41403,25 +41983,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":64
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_InterE.cl:92"
-                    , "data":
-                    [2, 2, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":92
+                          , "line":70
                         }
                       ]
                     ]
@@ -41561,7 +42123,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_InterE.cl:64"
+              "name":"Krnl_InterE.cl:70"
               , "data":
               [0.8, 26.4, 0, 0]
               , "debug":
@@ -41569,7 +42131,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":64
+                    , "line":70
                   }
                 ]
               ]
@@ -41591,7 +42153,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_InterE.cl:101"
+              "name":"Krnl_InterE.cl:109"
               , "data":
               [516, 771, 0, 0]
               , "debug":
@@ -41599,7 +42161,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":101
+                    , "line":109
                   }
                 ]
               ]
@@ -41622,7 +42184,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_InterE.cl:194"
+              "name":"Krnl_InterE.cl:202"
               , "data":
               [0.8, 26.4, 0, 0]
               , "debug":
@@ -41630,7 +42192,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":194
+                    , "line":202
                   }
                 ]
               ]
@@ -41652,7 +42214,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_InterE.cl:195"
+              "name":"Krnl_InterE.cl:203"
               , "data":
               [0, 32, 0, 2]
               , "debug":
@@ -41660,7 +42222,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":195
+                    , "line":203
                   }
                 ]
               ]
@@ -41683,7 +42245,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_InterE.cl:228"
+              "name":"Krnl_InterE.cl:236"
               , "data":
               [0, 32, 0, 2]
               , "debug":
@@ -41691,7 +42253,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":228
+                    , "line":236
                   }
                 ]
               ]
@@ -41716,13 +42278,13 @@ var loopsJSON={
           ]
         }
         , {
-          "name":"Block107"
+          "name":"Block108"
           , "resources":
           [
             {
               "name":"State"
               , "data":
-              [33, 9045, 0, 0]
+              [82.8333, 520.167, 0, 0]
               , "details":
               [
                 "Resources for live values and control logic. To reduce this area:\n- reduce size of local variables\n- reduce scope of local variables, localizing them as much as possible\n- reduce number of nested loops"
@@ -41741,135 +42303,9 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_InterE.cl:29"
-                    , "data":
-                    [0, 1440, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":29
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_InterE.cl:30"
-                    , "data":
-                    [0, 1440, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":30
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_InterE.cl:31"
-                    , "data":
-                    [0, 1440, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":31
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_InterE.cl:34"
-                    , "data":
-                    [0, 4, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":34
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_InterE.cl:35"
-                    , "data":
-                    [0, 4, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":35
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_InterE.cl:36"
-                    , "data":
-                    [0, 16, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":36
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_InterE.cl:65"
-                    , "data":
-                    [0, 1440, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":65
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
                     "name":"Krnl_InterE.cl:67"
                     , "data":
-                    [0, 1440, 0, 0]
+                    [8, 69, 0, 0]
                     , "debug":
                     [
                       [
@@ -41885,15 +42321,15 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_InterE.cl:69"
+                    "name":"Krnl_InterE.cl:70"
                     , "data":
-                    [0, 1440, 0, 0]
+                    [25.5833, 61.9167, 0, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":69
+                          , "line":70
                         }
                       ]
                     ]
@@ -41903,243 +42339,15 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_InterE.cl:71"
+                    "name":"Krnl_InterE.cl:88"
                     , "data":
-                    [0, 4, 0, 0]
+                    [0.25, 0.25, 0, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":71
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_InterE.cl:73"
-                    , "data":
-                    [0, 4, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":73
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_InterE.cl:75"
-                    , "data":
-                    [0, 16, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":75
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-              ]
-            }
-          ]
-          , "computation":
-          [
-          ]
-        }
-        , {
-          "name":"Block108"
-          , "resources":
-          [
-            {
-              "name":"State"
-              , "data":
-              [273.352, 9277.35, 1, 0]
-              , "details":
-              [
-                "Resources for live values and control logic. To reduce this area:\n- reduce size of local variables\n- reduce scope of local variables, localizing them as much as possible\n- reduce number of nested loops"
-              ]
-              , "subinfos":
-              [
-                {
-                  "info":
-                  {
-                    "name":"Control flow logic"
-                    , "data":
-                    [33, 81, 0, 0]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_InterE.cl:64"
-                    , "data":
-                    [26, 107.333, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":64
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_InterE.cl:65"
-                    , "data":
-                    [5.66667, 4.5, 0.166667, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":65
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_InterE.cl:67"
-                    , "data":
-                    [7.26667, 5.9, 0.166667, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":67
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_InterE.cl:68"
-                    , "data":
-                    [13.3517, 5.35165, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":68
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_InterE.cl:69"
-                    , "data":
-                    [10.7667, 9.15, 0.166667, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":69
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_InterE.cl:71"
-                    , "data":
-                    [17.7667, 23.8167, 0.166667, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":71
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_InterE.cl:72"
-                    , "data":
-                    [4, 4, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":72
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_InterE.cl:73"
-                    , "data":
-                    [17.7667, 23.3167, 0.166667, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":73
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_InterE.cl:75"
-                    , "data":
-                    [25.7667, 54.3167, 0.166667, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":75
+                          , "line":88
                         }
                       ]
                     ]
@@ -42151,7 +42359,7 @@ var loopsJSON={
                   {
                     "name":"No Source Line"
                     , "data":
-                    [112, 8958.67, 0, 0]
+                    [16, 32, 0, 0]
                   }
                   , "count":0
                 }
@@ -42160,7 +42368,7 @@ var loopsJSON={
             , {
               "name":"Feedback"
               , "data":
-              [15, 75, 0, 0]
+              [17, 77, 0, 0]
               , "details":
               [
                 "Resources for loop-carried dependencies. To reduce this area:\n- reduce number and size of loop-carried variables"
@@ -42170,15 +42378,15 @@ var loopsJSON={
                 {
                   "info":
                   {
-                    "name":"Krnl_InterE.cl:64"
+                    "name":"Krnl_InterE.cl:88"
                     , "data":
-                    [7, 6, 0, 0]
+                    [9, 8, 0, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":64
+                          , "line":88
                         }
                       ]
                     ]
@@ -42199,7 +42407,328 @@ var loopsJSON={
             , {
               "name":"Cluster logic"
               , "data":
-              [48283.6, 99881.6, 365, 0]
+              [237.167, 580.833, 2, 0]
+              , "details":
+              [
+                "Logic required to efficiently support sets of operations that do not stall. This area cannot be affected directly."
+              ]
+            }
+          ]
+          , "computation":
+          [
+          ]
+        }
+        , {
+          "name":"Block109"
+          , "resources":
+          [
+            {
+              "name":"State"
+              , "data":
+              [572.002, 6315.49, 7, 0]
+              , "details":
+              [
+                "Resources for live values and control logic. To reduce this area:\n- reduce size of local variables\n- reduce scope of local variables, localizing them as much as possible\n- reduce number of nested loops"
+              ]
+              , "subinfos":
+              [
+                {
+                  "info":
+                  {
+                    "name":"Control flow logic"
+                    , "data":
+                    [116, 4695.5, 0, 0]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_InterE.cl:29"
+                    , "data":
+                    [0, 3.25, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
+                          , "line":29
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_InterE.cl:30"
+                    , "data":
+                    [0, 3.5, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
+                          , "line":30
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_InterE.cl:31"
+                    , "data":
+                    [0, 3.75, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
+                          , "line":31
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_InterE.cl:63"
+                    , "data":
+                    [4, 8.25, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
+                          , "line":63
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_InterE.cl:65"
+                    , "data":
+                    [4, 8.25, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
+                          , "line":65
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_InterE.cl:67"
+                    , "data":
+                    [16, 32.25, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
+                          , "line":67
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_InterE.cl:70"
+                    , "data":
+                    [35.3333, 307.333, 2.33333, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
+                          , "line":70
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_InterE.cl:71"
+                    , "data":
+                    [4.66667, 7.58333, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
+                          , "line":71
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_InterE.cl:72"
+                    , "data":
+                    [16, 16, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
+                          , "line":72
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_InterE.cl:73"
+                    , "data":
+                    [8.66667, 11.3333, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
+                          , "line":73
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_InterE.cl:75"
+                    , "data":
+                    [16.6667, 18.5833, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
+                          , "line":75
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_InterE.cl:88"
+                    , "data":
+                    [0, 1.25, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
+                          , "line":88
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"No Source Line"
+                    , "data":
+                    [350.663, 1198.68, 4.66667, 0]
+                  }
+                  , "count":0
+                }
+              ]
+            }
+            , {
+              "name":"Feedback"
+              , "data":
+              [23, 288, 0, 0]
+              , "details":
+              [
+                "Resources for loop-carried dependencies. To reduce this area:\n- reduce number and size of loop-carried variables"
+              ]
+              , "subinfos":
+              [
+                {
+                  "info":
+                  {
+                    "name":"Krnl_InterE.cl:70"
+                    , "data":
+                    [7, 6, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
+                          , "line":70
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_InterE.cl:88"
+                    , "data":
+                    [8, 37, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
+                          , "line":88
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"No Source Line"
+                    , "data":
+                    [8, 245, 0, 0]
+                  }
+                  , "count":0
+                }
+              ]
+            }
+            , {
+              "name":"Cluster logic"
+              , "data":
+              [462, 1191, 4, 0]
               , "details":
               [
                 "Logic required to efficiently support sets of operations that do not stall. This area cannot be affected directly."
@@ -42209,7 +42738,7 @@ var loopsJSON={
           , "computation":
           [
             {
-              "name":"Krnl_InterE.cl:64"
+              "name":"Krnl_InterE.cl:70"
               , "data":
               [16, 0, 0, 0]
               , "debug":
@@ -42217,7 +42746,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":64
+                    , "line":70
                   }
                 ]
               ]
@@ -42237,13 +42766,13 @@ var loopsJSON={
           ]
         }
         , {
-          "name":"Block109"
+          "name":"Block110"
           , "resources":
           [
             {
               "name":"State"
               , "data":
-              [126, 9392, 0, 0]
+              [9056, 22582.5, 0, 0]
               , "details":
               [
                 "Resources for live values and control logic. To reduce this area:\n- reduce size of local variables\n- reduce scope of local variables, localizing them as much as possible\n- reduce number of nested loops"
@@ -42255,238 +42784,22 @@ var loopsJSON={
                   {
                     "name":"Control flow logic"
                     , "data":
-                    [32, 48, 0, 0]
+                    [8993, 13489.5, 0, 0]
                   }
                   , "count":0
                 }
                 , {
                   "info":
                   {
-                    "name":"Krnl_InterE.cl:29"
+                    "name":"Krnl_InterE.cl:88"
                     , "data":
-                    [0, 1440, 0, 0]
+                    [53, 335, 0, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":29
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_InterE.cl:30"
-                    , "data":
-                    [0, 1440, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":30
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_InterE.cl:31"
-                    , "data":
-                    [0, 1440, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":31
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_InterE.cl:34"
-                    , "data":
-                    [0, 4, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":34
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_InterE.cl:35"
-                    , "data":
-                    [0, 4, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":35
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_InterE.cl:36"
-                    , "data":
-                    [0, 16, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":36
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_InterE.cl:65"
-                    , "data":
-                    [0, 1440, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":65
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_InterE.cl:67"
-                    , "data":
-                    [0, 1440, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":67
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_InterE.cl:69"
-                    , "data":
-                    [0, 1440, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":69
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_InterE.cl:71"
-                    , "data":
-                    [0, 4, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":71
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_InterE.cl:73"
-                    , "data":
-                    [0, 4, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":73
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_InterE.cl:75"
-                    , "data":
-                    [0, 16, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":75
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_InterE.cl:80"
-                    , "data":
-                    [54, 337, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":80
+                          , "line":88
                         }
                       ]
                     ]
@@ -42498,7 +42811,7 @@ var loopsJSON={
                   {
                     "name":"No Source Line"
                     , "data":
-                    [40, 319, 0, 0]
+                    [10, 8758, 0, 0]
                   }
                   , "count":0
                 }
@@ -42508,7 +42821,7 @@ var loopsJSON={
           , "computation":
           [
             {
-              "name":"Krnl_InterE.cl:80"
+              "name":"Krnl_InterE.cl:88"
               , "data":
               [1535, 3793, 16, 0]
               , "debug":
@@ -42516,7 +42829,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":80
+                    , "line":88
                   }
                 ]
               ]
@@ -42540,13 +42853,13 @@ var loopsJSON={
           ]
         }
         , {
-          "name":"Block110"
+          "name":"Block111"
           , "resources":
           [
             {
               "name":"State"
               , "data":
-              [4898.99, 19052, 44, 0]
+              [18115, 47510.9, 46, 0]
               , "details":
               [
                 "Resources for live values and control logic. To reduce this area:\n- reduce size of local variables\n- reduce scope of local variables, localizing them as much as possible\n- reduce number of nested loops"
@@ -42558,14 +42871,68 @@ var loopsJSON={
                   {
                     "name":"Control flow logic"
                     , "data":
-                    [33, 257, 0, 0]
+                    [8754, 17795, 0, 0]
                   }
                   , "count":0
                 }
                 , {
                   "info":
                   {
-                    "name":"Krnl_InterE.cl:101"
+                    "name":"Krnl_InterE.cl:100"
+                    , "data":
+                    [26.9333, 3094, 4.33333, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
+                          , "line":100
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_InterE.cl:102"
+                    , "data":
+                    [17.8909, 15.2818, 0.5, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
+                          , "line":102
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_InterE.cl:106"
+                    , "data":
+                    [51, 40.5, 1.5, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
+                          , "line":106
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_InterE.cl:109"
                     , "data":
                     [140.267, 252.533, 0.666667, 0]
                     , "debug":
@@ -42573,7 +42940,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":101
+                          , "line":109
                         }
                       ]
                     ]
@@ -42583,7 +42950,7 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_InterE.cl:115"
+                    "name":"Krnl_InterE.cl:123"
                     , "data":
                     [9.6, 19.2, 0, 0]
                     , "debug":
@@ -42591,79 +42958,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":115
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_InterE.cl:117"
-                    , "data":
-                    [3.2, 6.4, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":117
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_InterE.cl:118"
-                    , "data":
-                    [9.6, 19.2, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":118
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_InterE.cl:120"
-                    , "data":
-                    [3.2, 6.4, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":120
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_InterE.cl:121"
-                    , "data":
-                    [192, 384, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":121
+                          , "line":123
                         }
                       ]
                     ]
@@ -42675,7 +42970,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_InterE.cl:125"
                     , "data":
-                    [48.2667, 96.5333, 0, 0]
+                    [3.2, 6.4, 0, 0]
                     , "debug":
                     [
                       [
@@ -42693,7 +42988,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_InterE.cl:126"
                     , "data":
-                    [49.3333, 98.6667, 0, 0]
+                    [9.6, 19.2, 0, 0]
                     , "debug":
                     [
                       [
@@ -42709,27 +43004,9 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_InterE.cl:127"
-                    , "data":
-                    [89.3333, 178.667, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":127
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
                     "name":"Krnl_InterE.cl:128"
                     , "data":
-                    [110.667, 221.333, 0, 0]
+                    [3.2, 6.4, 0, 0]
                     , "debug":
                     [
                       [
@@ -42747,7 +43024,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_InterE.cl:129"
                     , "data":
-                    [29.6, 59.2, 0, 0]
+                    [192, 384, 0, 0]
                     , "debug":
                     [
                       [
@@ -42763,15 +43040,15 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_InterE.cl:130"
+                    "name":"Krnl_InterE.cl:133"
                     , "data":
-                    [93.6, 187.2, 0, 0]
+                    [48.2667, 96.5333, 0, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":130
+                          , "line":133
                         }
                       ]
                     ]
@@ -42781,15 +43058,15 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_InterE.cl:131"
+                    "name":"Krnl_InterE.cl:134"
                     , "data":
-                    [61.6, 123.2, 0, 0]
+                    [49.3333, 98.6667, 0, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":131
+                          , "line":134
                         }
                       ]
                     ]
@@ -42799,15 +43076,15 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_InterE.cl:132"
+                    "name":"Krnl_InterE.cl:135"
                     , "data":
-                    [61.6, 123.2, 0, 0]
+                    [89.3333, 178.667, 0, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":132
+                          , "line":135
                         }
                       ]
                     ]
@@ -42817,15 +43094,15 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_InterE.cl:152"
+                    "name":"Krnl_InterE.cl:136"
                     , "data":
-                    [8, 16, 0, 0]
+                    [110.667, 221.333, 0, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":152
+                          , "line":136
                         }
                       ]
                     ]
@@ -42835,15 +43112,15 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_InterE.cl:153"
+                    "name":"Krnl_InterE.cl:137"
                     , "data":
-                    [8, 16, 0, 0]
+                    [85.1, 164.95, 0, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":153
+                          , "line":137
                         }
                       ]
                     ]
@@ -42853,15 +43130,15 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_InterE.cl:154"
+                    "name":"Krnl_InterE.cl:138"
                     , "data":
-                    [8, 16, 0, 0]
+                    [85.1, 164.95, 0, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":154
+                          , "line":138
                         }
                       ]
                     ]
@@ -42871,15 +43148,15 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_InterE.cl:155"
+                    "name":"Krnl_InterE.cl:139"
                     , "data":
-                    [8, 16, 0, 0]
+                    [53.1, 100.95, 0, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":155
+                          , "line":139
                         }
                       ]
                     ]
@@ -42889,69 +43166,15 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_InterE.cl:156"
+                    "name":"Krnl_InterE.cl:140"
                     , "data":
-                    [8, 16, 0, 0]
+                    [53.1, 100.95, 0, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":156
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_InterE.cl:157"
-                    , "data":
-                    [8, 16, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":157
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_InterE.cl:158"
-                    , "data":
-                    [8, 16, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":158
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_InterE.cl:159"
-                    , "data":
-                    [8, 16, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":159
+                          , "line":140
                         }
                       ]
                     ]
@@ -42963,7 +43186,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_InterE.cl:160"
                     , "data":
-                    [30, 39, 0, 0]
+                    [8, 16, 0, 0]
                     , "debug":
                     [
                       [
@@ -42979,9 +43202,45 @@ var loopsJSON={
                 , {
                   "info":
                   {
+                    "name":"Krnl_InterE.cl:161"
+                    , "data":
+                    [8, 16, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
+                          , "line":161
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_InterE.cl:162"
+                    , "data":
+                    [8, 16, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
+                          , "line":162
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
                     "name":"Krnl_InterE.cl:163"
                     , "data":
-                    [25.6923, 224.615, 0, 0]
+                    [8, 16, 0, 0]
                     , "debug":
                     [
                       [
@@ -42999,7 +43258,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_InterE.cl:164"
                     , "data":
-                    [25.8182, 224.727, 0, 0]
+                    [8, 16, 0, 0]
                     , "debug":
                     [
                       [
@@ -43017,7 +43276,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_InterE.cl:165"
                     , "data":
-                    [25.8182, 224.727, 0, 0]
+                    [8, 16, 0, 0]
                     , "debug":
                     [
                       [
@@ -43035,7 +43294,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_InterE.cl:166"
                     , "data":
-                    [25.8182, 224.727, 0, 0]
+                    [8, 16, 0, 0]
                     , "debug":
                     [
                       [
@@ -43053,7 +43312,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_InterE.cl:167"
                     , "data":
-                    [25.8182, 224.727, 0, 0]
+                    [8, 16, 0, 0]
                     , "debug":
                     [
                       [
@@ -43071,7 +43330,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_InterE.cl:168"
                     , "data":
-                    [25.8182, 224.727, 0, 0]
+                    [30, 39, 0, 0]
                     , "debug":
                     [
                       [
@@ -43087,7 +43346,25 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_InterE.cl:169"
+                    "name":"Krnl_InterE.cl:171"
+                    , "data":
+                    [25.6923, 224.615, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
+                          , "line":171
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_InterE.cl:172"
                     , "data":
                     [25.8182, 224.727, 0, 0]
                     , "debug":
@@ -43095,7 +43372,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":169
+                          , "line":172
                         }
                       ]
                     ]
@@ -43105,7 +43382,7 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_InterE.cl:170"
+                    "name":"Krnl_InterE.cl:173"
                     , "data":
                     [25.8182, 224.727, 0, 0]
                     , "debug":
@@ -43113,7 +43390,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":170
+                          , "line":173
                         }
                       ]
                     ]
@@ -43123,25 +43400,7 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_InterE.cl:187"
-                    , "data":
-                    [552, 908.667, 9.33333, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":187
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_InterE.cl:196"
+                    "name":"Krnl_InterE.cl:174"
                     , "data":
                     [25.8182, 224.727, 0, 0]
                     , "debug":
@@ -43149,7 +43408,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":196
+                          , "line":174
                         }
                       ]
                     ]
@@ -43159,7 +43418,7 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_InterE.cl:197"
+                    "name":"Krnl_InterE.cl:175"
                     , "data":
                     [25.8182, 224.727, 0, 0]
                     , "debug":
@@ -43167,7 +43426,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":197
+                          , "line":175
                         }
                       ]
                     ]
@@ -43177,7 +43436,7 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_InterE.cl:198"
+                    "name":"Krnl_InterE.cl:176"
                     , "data":
                     [25.8182, 224.727, 0, 0]
                     , "debug":
@@ -43185,7 +43444,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":198
+                          , "line":176
                         }
                       ]
                     ]
@@ -43195,7 +43454,7 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_InterE.cl:199"
+                    "name":"Krnl_InterE.cl:177"
                     , "data":
                     [25.8182, 224.727, 0, 0]
                     , "debug":
@@ -43203,7 +43462,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":199
+                          , "line":177
                         }
                       ]
                     ]
@@ -43213,7 +43472,115 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_InterE.cl:200"
+                    "name":"Krnl_InterE.cl:178"
+                    , "data":
+                    [25.8182, 224.727, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
+                          , "line":178
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_InterE.cl:195"
+                    , "data":
+                    [552.667, 917, 9, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
+                          , "line":195
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_InterE.cl:204"
+                    , "data":
+                    [25.8182, 224.727, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
+                          , "line":204
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_InterE.cl:205"
+                    , "data":
+                    [25.8182, 224.727, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
+                          , "line":205
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_InterE.cl:206"
+                    , "data":
+                    [25.8182, 224.727, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
+                          , "line":206
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_InterE.cl:207"
+                    , "data":
+                    [25.8182, 224.727, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
+                          , "line":207
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_InterE.cl:208"
                     , "data":
                     [25.6923, 224.615, 0, 0]
                     , "debug":
@@ -43221,7 +43588,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":200
+                          , "line":208
                         }
                       ]
                     ]
@@ -43231,7 +43598,7 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_InterE.cl:201"
+                    "name":"Krnl_InterE.cl:209"
                     , "data":
                     [25.6923, 224.615, 0, 0]
                     , "debug":
@@ -43239,7 +43606,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":201
+                          , "line":209
                         }
                       ]
                     ]
@@ -43249,7 +43616,7 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_InterE.cl:202"
+                    "name":"Krnl_InterE.cl:210"
                     , "data":
                     [25.6923, 224.615, 0, 0]
                     , "debug":
@@ -43257,7 +43624,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":202
+                          , "line":210
                         }
                       ]
                     ]
@@ -43267,7 +43634,7 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_InterE.cl:203"
+                    "name":"Krnl_InterE.cl:211"
                     , "data":
                     [25.6923, 224.615, 0, 0]
                     , "debug":
@@ -43275,7 +43642,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":203
+                          , "line":211
                         }
                       ]
                     ]
@@ -43285,15 +43652,15 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_InterE.cl:220"
+                    "name":"Krnl_InterE.cl:228"
                     , "data":
-                    [559, 912.167, 9.83333, 0]
+                    [559.667, 920.5, 9.5, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":220
+                          , "line":228
                         }
                       ]
                     ]
@@ -43303,25 +43670,7 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_InterE.cl:229"
-                    , "data":
-                    [25.6923, 224.615, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":229
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_InterE.cl:230"
+                    "name":"Krnl_InterE.cl:237"
                     , "data":
                     [25.6923, 224.615, 0, 0]
                     , "debug":
@@ -43329,7 +43678,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":230
+                          , "line":237
                         }
                       ]
                     ]
@@ -43339,7 +43688,7 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_InterE.cl:231"
+                    "name":"Krnl_InterE.cl:238"
                     , "data":
                     [25.6923, 224.615, 0, 0]
                     , "debug":
@@ -43347,7 +43696,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":231
+                          , "line":238
                         }
                       ]
                     ]
@@ -43357,7 +43706,7 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_InterE.cl:232"
+                    "name":"Krnl_InterE.cl:239"
                     , "data":
                     [25.6923, 224.615, 0, 0]
                     , "debug":
@@ -43365,7 +43714,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":232
+                          , "line":239
                         }
                       ]
                     ]
@@ -43375,7 +43724,7 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_InterE.cl:233"
+                    "name":"Krnl_InterE.cl:240"
                     , "data":
                     [25.6923, 224.615, 0, 0]
                     , "debug":
@@ -43383,7 +43732,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":233
+                          , "line":240
                         }
                       ]
                     ]
@@ -43393,7 +43742,7 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_InterE.cl:234"
+                    "name":"Krnl_InterE.cl:241"
                     , "data":
                     [25.6923, 224.615, 0, 0]
                     , "debug":
@@ -43401,7 +43750,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":234
+                          , "line":241
                         }
                       ]
                     ]
@@ -43411,7 +43760,7 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_InterE.cl:235"
+                    "name":"Krnl_InterE.cl:242"
                     , "data":
                     [25.6923, 224.615, 0, 0]
                     , "debug":
@@ -43419,7 +43768,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":235
+                          , "line":242
                         }
                       ]
                     ]
@@ -43429,7 +43778,7 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_InterE.cl:236"
+                    "name":"Krnl_InterE.cl:243"
                     , "data":
                     [25.6923, 224.615, 0, 0]
                     , "debug":
@@ -43437,7 +43786,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":236
+                          , "line":243
                         }
                       ]
                     ]
@@ -43447,15 +43796,15 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_InterE.cl:253"
+                    "name":"Krnl_InterE.cl:244"
                     , "data":
-                    [559, 912.167, 9.83333, 0]
+                    [25.6923, 224.615, 0, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":253
+                          , "line":244
                         }
                       ]
                     ]
@@ -43465,15 +43814,33 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_InterE.cl:262"
+                    "name":"Krnl_InterE.cl:261"
                     , "data":
-                    [96, 224, 0, 0]
+                    [559.667, 920.5, 9.5, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":262
+                          , "line":261
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_InterE.cl:270"
+                    , "data":
+                    [96, 192, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
+                          , "line":270
                         }
                       ]
                     ]
@@ -43485,7 +43852,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_InterE.cl:29"
                     , "data":
-                    [0, 0.166045, 0, 0]
+                    [720, 1446.88, 0, 0]
                     , "debug":
                     [
                       [
@@ -43503,7 +43870,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_InterE.cl:30"
                     , "data":
-                    [0, 0.166045, 0, 0]
+                    [720, 1447, 0, 0]
                     , "debug":
                     [
                       [
@@ -43521,7 +43888,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_InterE.cl:31"
                     , "data":
-                    [0, 0.166045, 0, 0]
+                    [720, 1446.97, 0, 0]
                     , "debug":
                     [
                       [
@@ -43537,9 +43904,27 @@ var loopsJSON={
                 , {
                   "info":
                   {
+                    "name":"Krnl_InterE.cl:63"
+                    , "data":
+                    [4, 9.5, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
+                          , "line":63
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
                     "name":"Krnl_InterE.cl:65"
                     , "data":
-                    [0, 0.166045, 0, 0]
+                    [4, 8.1, 0, 0]
                     , "debug":
                     [
                       [
@@ -43557,7 +43942,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_InterE.cl:67"
                     , "data":
-                    [0, 0.166045, 0, 0]
+                    [16, 32.1, 0, 0]
                     , "debug":
                     [
                       [
@@ -43573,15 +43958,15 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_InterE.cl:69"
+                    "name":"Krnl_InterE.cl:71"
                     , "data":
-                    [0, 0.166045, 0, 0]
+                    [720, 1446.88, 0, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":69
+                          , "line":71
                         }
                       ]
                     ]
@@ -43591,15 +43976,15 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_InterE.cl:92"
+                    "name":"Krnl_InterE.cl:73"
                     , "data":
-                    [26.4048, 2407.5, 3.33333, 0]
+                    [720, 1447, 0, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":92
+                          , "line":73
                         }
                       ]
                     ]
@@ -43609,15 +43994,15 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_InterE.cl:94"
+                    "name":"Krnl_InterE.cl:75"
                     , "data":
-                    [17.2727, 14.0455, 0.5, 0]
+                    [720, 1446.97, 0, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":94
+                          , "line":75
                         }
                       ]
                     ]
@@ -43627,15 +44012,15 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_InterE.cl:98"
+                    "name":"Krnl_InterE.cl:88"
                     , "data":
-                    [51, 40.5, 1.5, 0]
+                    [0, 1.1, 0, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":98
+                          , "line":88
                         }
                       ]
                     ]
@@ -43647,7 +44032,7 @@ var loopsJSON={
                   {
                     "name":"No Source Line"
                     , "data":
-                    [1391.46, 6040.2, 9, 0]
+                    [1509.31, 7509.99, 11, 0]
                   }
                   , "count":0
                 }
@@ -43656,7 +44041,7 @@ var loopsJSON={
             , {
               "name":"Feedback"
               , "data":
-              [15, 75, 0, 0]
+              [351, 17677, 0, 0]
               , "details":
               [
                 "Resources for loop-carried dependencies. To reduce this area:\n- reduce number and size of loop-carried variables"
@@ -43666,7 +44051,7 @@ var loopsJSON={
                 {
                   "info":
                   {
-                    "name":"Krnl_InterE.cl:92"
+                    "name":"Krnl_InterE.cl:100"
                     , "data":
                     [7, 6, 0, 0]
                     , "debug":
@@ -43674,7 +44059,133 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":92
+                          , "line":100
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_InterE.cl:29"
+                    , "data":
+                    [52, 2560.5, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
+                          , "line":29
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_InterE.cl:30"
+                    , "data":
+                    [56, 2947, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
+                          , "line":30
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_InterE.cl:31"
+                    , "data":
+                    [56, 2947, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
+                          , "line":31
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_InterE.cl:63"
+                    , "data":
+                    [8, 21, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
+                          , "line":63
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_InterE.cl:71"
+                    , "data":
+                    [52, 2560.5, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
+                          , "line":71
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_InterE.cl:73"
+                    , "data":
+                    [56, 2947, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
+                          , "line":73
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_InterE.cl:75"
+                    , "data":
+                    [56, 2947, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
+                          , "line":75
                         }
                       ]
                     ]
@@ -43686,7 +44197,7 @@ var loopsJSON={
                   {
                     "name":"No Source Line"
                     , "data":
-                    [8, 69, 0, 0]
+                    [8, 741, 0, 0]
                   }
                   , "count":0
                 }
@@ -43705,7 +44216,7 @@ var loopsJSON={
           , "computation":
           [
             {
-              "name":"Krnl_InterE.cl:92"
+              "name":"Krnl_InterE.cl:100"
               , "data":
               [4, 0, 0, 0]
               , "debug":
@@ -43713,7 +44224,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":92
+                    , "line":100
                   }
                 ]
               ]
@@ -43731,7 +44242,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_InterE.cl:94"
+              "name":"Krnl_InterE.cl:102"
               , "data":
               [1285, 660, 13, 0]
               , "debug":
@@ -43739,7 +44250,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":94
+                    , "line":102
                   }
                 ]
               ]
@@ -43761,7 +44272,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_InterE.cl:98"
+              "name":"Krnl_InterE.cl:106"
               , "data":
               [421, 663, 13, 0]
               , "debug":
@@ -43769,7 +44280,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":98
+                    , "line":106
                   }
                 ]
               ]
@@ -43791,7 +44302,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_InterE.cl:101"
+              "name":"Krnl_InterE.cl:109"
               , "data":
               [378, 168, 0, 0]
               , "debug":
@@ -43799,7 +44310,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":101
+                    , "line":109
                   }
                 ]
               ]
@@ -43817,7 +44328,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_InterE.cl:115"
+              "name":"Krnl_InterE.cl:123"
               , "data":
               [350, 351, 0, 0]
               , "debug":
@@ -43825,7 +44336,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":115
+                    , "line":123
                   }
                 ]
               ]
@@ -43852,7 +44363,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_InterE.cl:116"
+              "name":"Krnl_InterE.cl:124"
               , "data":
               [350, 351, 0, 0]
               , "debug":
@@ -43860,7 +44371,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":116
+                    , "line":124
                   }
                 ]
               ]
@@ -43887,7 +44398,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_InterE.cl:117"
+              "name":"Krnl_InterE.cl:125"
               , "data":
               [350, 351, 0, 0]
               , "debug":
@@ -43895,7 +44406,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":117
+                    , "line":125
                   }
                 ]
               ]
@@ -43922,7 +44433,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_InterE.cl:118"
+              "name":"Krnl_InterE.cl:126"
               , "data":
               [349, 344, 0, 0]
               , "debug":
@@ -43930,7 +44441,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":118
+                    , "line":126
                   }
                 ]
               ]
@@ -43957,7 +44468,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_InterE.cl:119"
+              "name":"Krnl_InterE.cl:127"
               , "data":
               [349, 344, 0, 0]
               , "debug":
@@ -43965,7 +44476,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":119
+                    , "line":127
                   }
                 ]
               ]
@@ -43992,7 +44503,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_InterE.cl:120"
+              "name":"Krnl_InterE.cl:128"
               , "data":
               [349, 344, 0, 0]
               , "debug":
@@ -44000,7 +44511,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":120
+                    , "line":128
                   }
                 ]
               ]
@@ -44027,7 +44538,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_InterE.cl:121"
+              "name":"Krnl_InterE.cl:129"
               , "data":
               [516, 771, 0, 3]
               , "debug":
@@ -44035,7 +44546,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":121
+                    , "line":129
                   }
                 ]
               ]
@@ -44062,7 +44573,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_InterE.cl:125"
+              "name":"Krnl_InterE.cl:133"
               , "data":
               [0, 0, 0, 5]
               , "debug":
@@ -44070,7 +44581,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":125
+                    , "line":133
                   }
                 ]
               ]
@@ -44097,7 +44608,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_InterE.cl:126"
+              "name":"Krnl_InterE.cl:134"
               , "data":
               [0, 0, 0, 2]
               , "debug":
@@ -44105,7 +44616,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":126
+                    , "line":134
                   }
                 ]
               ]
@@ -44123,7 +44634,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_InterE.cl:127"
+              "name":"Krnl_InterE.cl:135"
               , "data":
               [0, 0, 0, 2]
               , "debug":
@@ -44131,7 +44642,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":127
+                    , "line":135
                   }
                 ]
               ]
@@ -44149,7 +44660,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_InterE.cl:128"
+              "name":"Krnl_InterE.cl:136"
               , "data":
               [0, 0, 0, 2]
               , "debug":
@@ -44157,7 +44668,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":128
+                    , "line":136
                   }
                 ]
               ]
@@ -44175,7 +44686,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_InterE.cl:129"
+              "name":"Krnl_InterE.cl:137"
               , "data":
               [0, 0, 0, 1]
               , "debug":
@@ -44183,7 +44694,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":129
+                    , "line":137
                   }
                 ]
               ]
@@ -44201,7 +44712,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_InterE.cl:130"
+              "name":"Krnl_InterE.cl:138"
               , "data":
               [0, 0, 0, 1]
               , "debug":
@@ -44209,7 +44720,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":130
+                    , "line":138
                   }
                 ]
               ]
@@ -44227,7 +44738,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_InterE.cl:131"
+              "name":"Krnl_InterE.cl:139"
               , "data":
               [0, 0, 0, 1]
               , "debug":
@@ -44235,7 +44746,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":131
+                    , "line":139
                   }
                 ]
               ]
@@ -44253,7 +44764,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_InterE.cl:132"
+              "name":"Krnl_InterE.cl:140"
               , "data":
               [0, 0, 0, 1]
               , "debug":
@@ -44261,7 +44772,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":132
+                    , "line":140
                   }
                 ]
               ]
@@ -44279,7 +44790,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_InterE.cl:150"
+              "name":"Krnl_InterE.cl:158"
               , "data":
               [0, 64, 0, 2]
               , "debug":
@@ -44287,7 +44798,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":150
+                    , "line":158
                   }
                 ]
               ]
@@ -44305,7 +44816,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_InterE.cl:151"
+              "name":"Krnl_InterE.cl:159"
               , "data":
               [0, 64, 0, 4]
               , "debug":
@@ -44313,7 +44824,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":151
+                    , "line":159
                   }
                 ]
               ]
@@ -44331,217 +44842,9 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_InterE.cl:152"
-              , "data":
-              [32, 0, 0, 0]
-              , "debug":
-              [
-                [
-                  {
-                    "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":152
-                  }
-                ]
-              ]
-              , "subinfos":
-              [
-                {
-                  "info":
-                  {
-                    "name":"Add"
-                    , "data":
-                    [32, 0, 0, 0]
-                  }
-                  , "count":2
-                }
-              ]
-            }
-            , {
-              "name":"Krnl_InterE.cl:153"
-              , "data":
-              [32, 0, 0, 0]
-              , "debug":
-              [
-                [
-                  {
-                    "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":153
-                  }
-                ]
-              ]
-              , "subinfos":
-              [
-                {
-                  "info":
-                  {
-                    "name":"Add"
-                    , "data":
-                    [32, 0, 0, 0]
-                  }
-                  , "count":2
-                }
-              ]
-            }
-            , {
-              "name":"Krnl_InterE.cl:154"
-              , "data":
-              [32, 0, 0, 0]
-              , "debug":
-              [
-                [
-                  {
-                    "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":154
-                  }
-                ]
-              ]
-              , "subinfos":
-              [
-                {
-                  "info":
-                  {
-                    "name":"Add"
-                    , "data":
-                    [32, 0, 0, 0]
-                  }
-                  , "count":2
-                }
-              ]
-            }
-            , {
-              "name":"Krnl_InterE.cl:155"
-              , "data":
-              [32, 0, 0, 0]
-              , "debug":
-              [
-                [
-                  {
-                    "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":155
-                  }
-                ]
-              ]
-              , "subinfos":
-              [
-                {
-                  "info":
-                  {
-                    "name":"Add"
-                    , "data":
-                    [32, 0, 0, 0]
-                  }
-                  , "count":2
-                }
-              ]
-            }
-            , {
-              "name":"Krnl_InterE.cl:156"
-              , "data":
-              [16, 0, 0, 0]
-              , "debug":
-              [
-                [
-                  {
-                    "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":156
-                  }
-                ]
-              ]
-              , "subinfos":
-              [
-                {
-                  "info":
-                  {
-                    "name":"Add"
-                    , "data":
-                    [16, 0, 0, 0]
-                  }
-                  , "count":1
-                }
-              ]
-            }
-            , {
-              "name":"Krnl_InterE.cl:157"
-              , "data":
-              [16, 0, 0, 0]
-              , "debug":
-              [
-                [
-                  {
-                    "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":157
-                  }
-                ]
-              ]
-              , "subinfos":
-              [
-                {
-                  "info":
-                  {
-                    "name":"Add"
-                    , "data":
-                    [16, 0, 0, 0]
-                  }
-                  , "count":1
-                }
-              ]
-            }
-            , {
-              "name":"Krnl_InterE.cl:158"
-              , "data":
-              [16, 0, 0, 0]
-              , "debug":
-              [
-                [
-                  {
-                    "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":158
-                  }
-                ]
-              ]
-              , "subinfos":
-              [
-                {
-                  "info":
-                  {
-                    "name":"Add"
-                    , "data":
-                    [16, 0, 0, 0]
-                  }
-                  , "count":1
-                }
-              ]
-            }
-            , {
-              "name":"Krnl_InterE.cl:159"
-              , "data":
-              [16, 0, 0, 0]
-              , "debug":
-              [
-                [
-                  {
-                    "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":159
-                  }
-                ]
-              ]
-              , "subinfos":
-              [
-                {
-                  "info":
-                  {
-                    "name":"Add"
-                    , "data":
-                    [16, 0, 0, 0]
-                  }
-                  , "count":1
-                }
-              ]
-            }
-            , {
               "name":"Krnl_InterE.cl:160"
               , "data":
-              [0, 32, 0, 2]
+              [32, 0, 0, 0]
               , "debug":
               [
                 [
@@ -44556,18 +44859,70 @@ var loopsJSON={
                 {
                   "info":
                   {
-                    "name":"Mul"
+                    "name":"Add"
                     , "data":
-                    [0, 32, 0, 2]
+                    [32, 0, 0, 0]
                   }
-                  , "count":1
+                  , "count":2
+                }
+              ]
+            }
+            , {
+              "name":"Krnl_InterE.cl:161"
+              , "data":
+              [32, 0, 0, 0]
+              , "debug":
+              [
+                [
+                  {
+                    "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
+                    , "line":161
+                  }
+                ]
+              ]
+              , "subinfos":
+              [
+                {
+                  "info":
+                  {
+                    "name":"Add"
+                    , "data":
+                    [32, 0, 0, 0]
+                  }
+                  , "count":2
+                }
+              ]
+            }
+            , {
+              "name":"Krnl_InterE.cl:162"
+              , "data":
+              [32, 0, 0, 0]
+              , "debug":
+              [
+                [
+                  {
+                    "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
+                    , "line":162
+                  }
+                ]
+              ]
+              , "subinfos":
+              [
+                {
+                  "info":
+                  {
+                    "name":"Add"
+                    , "data":
+                    [32, 0, 0, 0]
+                  }
+                  , "count":2
                 }
               ]
             }
             , {
               "name":"Krnl_InterE.cl:163"
               , "data":
-              [3053, 4266, 43, 0]
+              [32, 0, 0, 0]
               , "debug":
               [
                 [
@@ -44584,38 +44939,16 @@ var loopsJSON={
                   {
                     "name":"Add"
                     , "data":
-                    [16, 0, 0, 0]
+                    [32, 0, 0, 0]
                   }
-                  , "count":1
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Load"
-                    , "data":
-                    [3021, 4266, 43, 0]
-                    , "details":
-                    [
-                      "Load with a private 512 kilobit cache. Cache is not shared with any other load. It is flushed on kernel start. Use Dynamic Profiler to verify cache effectiveness. Other kernels should not be updating the data in global memory while this kernel is using it. Cache is created when memory access pattern is data-dependent or appears to be repetitive. Simplify access pattern or mark pointer as 'volatile' to disable generation of this cache."
-                    ]
-                  }
-                  , "count":1
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Pointer Computation"
-                    , "data":
-                    [16, 0, 0, 0]
-                  }
-                  , "count":1
+                  , "count":2
                 }
               ]
             }
             , {
               "name":"Krnl_InterE.cl:164"
               , "data":
-              [3053, 4266, 43, 0]
+              [16, 0, 0, 0]
               , "debug":
               [
                 [
@@ -44636,34 +44969,12 @@ var loopsJSON={
                   }
                   , "count":1
                 }
-                , {
-                  "info":
-                  {
-                    "name":"Load"
-                    , "data":
-                    [3021, 4266, 43, 0]
-                    , "details":
-                    [
-                      "Load with a private 512 kilobit cache. Cache is not shared with any other load. It is flushed on kernel start. Use Dynamic Profiler to verify cache effectiveness. Other kernels should not be updating the data in global memory while this kernel is using it. Cache is created when memory access pattern is data-dependent or appears to be repetitive. Simplify access pattern or mark pointer as 'volatile' to disable generation of this cache."
-                    ]
-                  }
-                  , "count":1
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Pointer Computation"
-                    , "data":
-                    [16, 0, 0, 0]
-                  }
-                  , "count":1
-                }
               ]
             }
             , {
               "name":"Krnl_InterE.cl:165"
               , "data":
-              [3053, 4266, 43, 0]
+              [16, 0, 0, 0]
               , "debug":
               [
                 [
@@ -44684,34 +44995,12 @@ var loopsJSON={
                   }
                   , "count":1
                 }
-                , {
-                  "info":
-                  {
-                    "name":"Load"
-                    , "data":
-                    [3021, 4266, 43, 0]
-                    , "details":
-                    [
-                      "Load with a private 512 kilobit cache. Cache is not shared with any other load. It is flushed on kernel start. Use Dynamic Profiler to verify cache effectiveness. Other kernels should not be updating the data in global memory while this kernel is using it. Cache is created when memory access pattern is data-dependent or appears to be repetitive. Simplify access pattern or mark pointer as 'volatile' to disable generation of this cache."
-                    ]
-                  }
-                  , "count":1
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Pointer Computation"
-                    , "data":
-                    [16, 0, 0, 0]
-                  }
-                  , "count":1
-                }
               ]
             }
             , {
               "name":"Krnl_InterE.cl:166"
               , "data":
-              [3053, 4266, 43, 0]
+              [16, 0, 0, 0]
               , "debug":
               [
                 [
@@ -44732,34 +45021,12 @@ var loopsJSON={
                   }
                   , "count":1
                 }
-                , {
-                  "info":
-                  {
-                    "name":"Load"
-                    , "data":
-                    [3021, 4266, 43, 0]
-                    , "details":
-                    [
-                      "Load with a private 512 kilobit cache. Cache is not shared with any other load. It is flushed on kernel start. Use Dynamic Profiler to verify cache effectiveness. Other kernels should not be updating the data in global memory while this kernel is using it. Cache is created when memory access pattern is data-dependent or appears to be repetitive. Simplify access pattern or mark pointer as 'volatile' to disable generation of this cache."
-                    ]
-                  }
-                  , "count":1
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Pointer Computation"
-                    , "data":
-                    [16, 0, 0, 0]
-                  }
-                  , "count":1
-                }
               ]
             }
             , {
               "name":"Krnl_InterE.cl:167"
               , "data":
-              [3053, 4266, 43, 0]
+              [16, 0, 0, 0]
               , "debug":
               [
                 [
@@ -44780,34 +45047,12 @@ var loopsJSON={
                   }
                   , "count":1
                 }
-                , {
-                  "info":
-                  {
-                    "name":"Load"
-                    , "data":
-                    [3021, 4266, 43, 0]
-                    , "details":
-                    [
-                      "Load with a private 512 kilobit cache. Cache is not shared with any other load. It is flushed on kernel start. Use Dynamic Profiler to verify cache effectiveness. Other kernels should not be updating the data in global memory while this kernel is using it. Cache is created when memory access pattern is data-dependent or appears to be repetitive. Simplify access pattern or mark pointer as 'volatile' to disable generation of this cache."
-                    ]
-                  }
-                  , "count":1
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Pointer Computation"
-                    , "data":
-                    [16, 0, 0, 0]
-                  }
-                  , "count":1
-                }
               ]
             }
             , {
               "name":"Krnl_InterE.cl:168"
               , "data":
-              [3053, 4266, 43, 0]
+              [0, 32, 0, 2]
               , "debug":
               [
                 [
@@ -44822,38 +45067,16 @@ var loopsJSON={
                 {
                   "info":
                   {
-                    "name":"Add"
+                    "name":"Mul"
                     , "data":
-                    [16, 0, 0, 0]
-                  }
-                  , "count":1
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Load"
-                    , "data":
-                    [3021, 4266, 43, 0]
-                    , "details":
-                    [
-                      "Load with a private 512 kilobit cache. Cache is not shared with any other load. It is flushed on kernel start. Use Dynamic Profiler to verify cache effectiveness. Other kernels should not be updating the data in global memory while this kernel is using it. Cache is created when memory access pattern is data-dependent or appears to be repetitive. Simplify access pattern or mark pointer as 'volatile' to disable generation of this cache."
-                    ]
-                  }
-                  , "count":1
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Pointer Computation"
-                    , "data":
-                    [16, 0, 0, 0]
+                    [0, 32, 0, 2]
                   }
                   , "count":1
                 }
               ]
             }
             , {
-              "name":"Krnl_InterE.cl:169"
+              "name":"Krnl_InterE.cl:171"
               , "data":
               [3053, 4266, 43, 0]
               , "debug":
@@ -44861,7 +45084,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":169
+                    , "line":171
                   }
                 ]
               ]
@@ -44901,7 +45124,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_InterE.cl:170"
+              "name":"Krnl_InterE.cl:172"
               , "data":
               [3053, 4266, 43, 0]
               , "debug":
@@ -44909,7 +45132,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":170
+                    , "line":172
                   }
                 ]
               ]
@@ -44949,7 +45172,295 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_InterE.cl:187"
+              "name":"Krnl_InterE.cl:173"
+              , "data":
+              [3053, 4266, 43, 0]
+              , "debug":
+              [
+                [
+                  {
+                    "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
+                    , "line":173
+                  }
+                ]
+              ]
+              , "subinfos":
+              [
+                {
+                  "info":
+                  {
+                    "name":"Add"
+                    , "data":
+                    [16, 0, 0, 0]
+                  }
+                  , "count":1
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Load"
+                    , "data":
+                    [3021, 4266, 43, 0]
+                    , "details":
+                    [
+                      "Load with a private 512 kilobit cache. Cache is not shared with any other load. It is flushed on kernel start. Use Dynamic Profiler to verify cache effectiveness. Other kernels should not be updating the data in global memory while this kernel is using it. Cache is created when memory access pattern is data-dependent or appears to be repetitive. Simplify access pattern or mark pointer as 'volatile' to disable generation of this cache."
+                    ]
+                  }
+                  , "count":1
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Pointer Computation"
+                    , "data":
+                    [16, 0, 0, 0]
+                  }
+                  , "count":1
+                }
+              ]
+            }
+            , {
+              "name":"Krnl_InterE.cl:174"
+              , "data":
+              [3053, 4266, 43, 0]
+              , "debug":
+              [
+                [
+                  {
+                    "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
+                    , "line":174
+                  }
+                ]
+              ]
+              , "subinfos":
+              [
+                {
+                  "info":
+                  {
+                    "name":"Add"
+                    , "data":
+                    [16, 0, 0, 0]
+                  }
+                  , "count":1
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Load"
+                    , "data":
+                    [3021, 4266, 43, 0]
+                    , "details":
+                    [
+                      "Load with a private 512 kilobit cache. Cache is not shared with any other load. It is flushed on kernel start. Use Dynamic Profiler to verify cache effectiveness. Other kernels should not be updating the data in global memory while this kernel is using it. Cache is created when memory access pattern is data-dependent or appears to be repetitive. Simplify access pattern or mark pointer as 'volatile' to disable generation of this cache."
+                    ]
+                  }
+                  , "count":1
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Pointer Computation"
+                    , "data":
+                    [16, 0, 0, 0]
+                  }
+                  , "count":1
+                }
+              ]
+            }
+            , {
+              "name":"Krnl_InterE.cl:175"
+              , "data":
+              [3053, 4266, 43, 0]
+              , "debug":
+              [
+                [
+                  {
+                    "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
+                    , "line":175
+                  }
+                ]
+              ]
+              , "subinfos":
+              [
+                {
+                  "info":
+                  {
+                    "name":"Add"
+                    , "data":
+                    [16, 0, 0, 0]
+                  }
+                  , "count":1
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Load"
+                    , "data":
+                    [3021, 4266, 43, 0]
+                    , "details":
+                    [
+                      "Load with a private 512 kilobit cache. Cache is not shared with any other load. It is flushed on kernel start. Use Dynamic Profiler to verify cache effectiveness. Other kernels should not be updating the data in global memory while this kernel is using it. Cache is created when memory access pattern is data-dependent or appears to be repetitive. Simplify access pattern or mark pointer as 'volatile' to disable generation of this cache."
+                    ]
+                  }
+                  , "count":1
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Pointer Computation"
+                    , "data":
+                    [16, 0, 0, 0]
+                  }
+                  , "count":1
+                }
+              ]
+            }
+            , {
+              "name":"Krnl_InterE.cl:176"
+              , "data":
+              [3053, 4266, 43, 0]
+              , "debug":
+              [
+                [
+                  {
+                    "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
+                    , "line":176
+                  }
+                ]
+              ]
+              , "subinfos":
+              [
+                {
+                  "info":
+                  {
+                    "name":"Add"
+                    , "data":
+                    [16, 0, 0, 0]
+                  }
+                  , "count":1
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Load"
+                    , "data":
+                    [3021, 4266, 43, 0]
+                    , "details":
+                    [
+                      "Load with a private 512 kilobit cache. Cache is not shared with any other load. It is flushed on kernel start. Use Dynamic Profiler to verify cache effectiveness. Other kernels should not be updating the data in global memory while this kernel is using it. Cache is created when memory access pattern is data-dependent or appears to be repetitive. Simplify access pattern or mark pointer as 'volatile' to disable generation of this cache."
+                    ]
+                  }
+                  , "count":1
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Pointer Computation"
+                    , "data":
+                    [16, 0, 0, 0]
+                  }
+                  , "count":1
+                }
+              ]
+            }
+            , {
+              "name":"Krnl_InterE.cl:177"
+              , "data":
+              [3053, 4266, 43, 0]
+              , "debug":
+              [
+                [
+                  {
+                    "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
+                    , "line":177
+                  }
+                ]
+              ]
+              , "subinfos":
+              [
+                {
+                  "info":
+                  {
+                    "name":"Add"
+                    , "data":
+                    [16, 0, 0, 0]
+                  }
+                  , "count":1
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Load"
+                    , "data":
+                    [3021, 4266, 43, 0]
+                    , "details":
+                    [
+                      "Load with a private 512 kilobit cache. Cache is not shared with any other load. It is flushed on kernel start. Use Dynamic Profiler to verify cache effectiveness. Other kernels should not be updating the data in global memory while this kernel is using it. Cache is created when memory access pattern is data-dependent or appears to be repetitive. Simplify access pattern or mark pointer as 'volatile' to disable generation of this cache."
+                    ]
+                  }
+                  , "count":1
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Pointer Computation"
+                    , "data":
+                    [16, 0, 0, 0]
+                  }
+                  , "count":1
+                }
+              ]
+            }
+            , {
+              "name":"Krnl_InterE.cl:178"
+              , "data":
+              [3053, 4266, 43, 0]
+              , "debug":
+              [
+                [
+                  {
+                    "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
+                    , "line":178
+                  }
+                ]
+              ]
+              , "subinfos":
+              [
+                {
+                  "info":
+                  {
+                    "name":"Add"
+                    , "data":
+                    [16, 0, 0, 0]
+                  }
+                  , "count":1
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Load"
+                    , "data":
+                    [3021, 4266, 43, 0]
+                    , "details":
+                    [
+                      "Load with a private 512 kilobit cache. Cache is not shared with any other load. It is flushed on kernel start. Use Dynamic Profiler to verify cache effectiveness. Other kernels should not be updating the data in global memory while this kernel is using it. Cache is created when memory access pattern is data-dependent or appears to be repetitive. Simplify access pattern or mark pointer as 'volatile' to disable generation of this cache."
+                    ]
+                  }
+                  , "count":1
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Pointer Computation"
+                    , "data":
+                    [16, 0, 0, 0]
+                  }
+                  , "count":1
+                }
+              ]
+            }
+            , {
+              "name":"Krnl_InterE.cl:195"
               , "data":
               [0, 0, 0, 8]
               , "debug":
@@ -44957,7 +45468,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":187
+                    , "line":195
                   }
                 ]
               ]
@@ -44975,7 +45486,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_InterE.cl:196"
+              "name":"Krnl_InterE.cl:204"
               , "data":
               [517, 2017, 13, 0]
               , "debug":
@@ -44983,7 +45494,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":196
+                    , "line":204
                   }
                 ]
               ]
@@ -45019,7 +45530,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_InterE.cl:197"
+              "name":"Krnl_InterE.cl:205"
               , "data":
               [517, 2017, 13, 0]
               , "debug":
@@ -45027,7 +45538,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":197
+                    , "line":205
                   }
                 ]
               ]
@@ -45063,7 +45574,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_InterE.cl:198"
+              "name":"Krnl_InterE.cl:206"
               , "data":
               [517, 2017, 13, 0]
               , "debug":
@@ -45071,7 +45582,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":198
+                    , "line":206
                   }
                 ]
               ]
@@ -45107,7 +45618,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_InterE.cl:199"
+              "name":"Krnl_InterE.cl:207"
               , "data":
               [517, 2017, 13, 0]
               , "debug":
@@ -45115,7 +45626,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":199
+                    , "line":207
                   }
                 ]
               ]
@@ -45151,7 +45662,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_InterE.cl:200"
+              "name":"Krnl_InterE.cl:208"
               , "data":
               [517, 2017, 13, 0]
               , "debug":
@@ -45159,7 +45670,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":200
+                    , "line":208
                   }
                 ]
               ]
@@ -45195,7 +45706,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_InterE.cl:201"
+              "name":"Krnl_InterE.cl:209"
               , "data":
               [517, 2017, 13, 0]
               , "debug":
@@ -45203,7 +45714,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":201
+                    , "line":209
                   }
                 ]
               ]
@@ -45239,7 +45750,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_InterE.cl:202"
+              "name":"Krnl_InterE.cl:210"
               , "data":
               [517, 2017, 13, 0]
               , "debug":
@@ -45247,7 +45758,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":202
+                    , "line":210
                   }
                 ]
               ]
@@ -45283,7 +45794,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_InterE.cl:203"
+              "name":"Krnl_InterE.cl:211"
               , "data":
               [517, 2017, 13, 0]
               , "debug":
@@ -45291,7 +45802,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":203
+                    , "line":211
                   }
                 ]
               ]
@@ -45327,7 +45838,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_InterE.cl:220"
+              "name":"Krnl_InterE.cl:228"
               , "data":
               [0, 0, 0, 9]
               , "debug":
@@ -45335,7 +45846,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":220
+                    , "line":228
                   }
                 ]
               ]
@@ -45362,7 +45873,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_InterE.cl:229"
+              "name":"Krnl_InterE.cl:237"
               , "data":
               [517, 2017, 13, 0]
               , "debug":
@@ -45370,7 +45881,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":229
+                    , "line":237
                   }
                 ]
               ]
@@ -45406,7 +45917,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_InterE.cl:230"
+              "name":"Krnl_InterE.cl:238"
               , "data":
               [517, 2017, 13, 0]
               , "debug":
@@ -45414,7 +45925,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":230
+                    , "line":238
                   }
                 ]
               ]
@@ -45450,7 +45961,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_InterE.cl:231"
+              "name":"Krnl_InterE.cl:239"
               , "data":
               [517, 2017, 13, 0]
               , "debug":
@@ -45458,7 +45969,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":231
+                    , "line":239
                   }
                 ]
               ]
@@ -45494,7 +46005,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_InterE.cl:232"
+              "name":"Krnl_InterE.cl:240"
               , "data":
               [517, 2017, 13, 0]
               , "debug":
@@ -45502,7 +46013,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":232
+                    , "line":240
                   }
                 ]
               ]
@@ -45538,7 +46049,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_InterE.cl:233"
+              "name":"Krnl_InterE.cl:241"
               , "data":
               [517, 2017, 13, 0]
               , "debug":
@@ -45546,7 +46057,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":233
+                    , "line":241
                   }
                 ]
               ]
@@ -45582,7 +46093,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_InterE.cl:234"
+              "name":"Krnl_InterE.cl:242"
               , "data":
               [517, 2017, 13, 0]
               , "debug":
@@ -45590,7 +46101,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":234
+                    , "line":242
                   }
                 ]
               ]
@@ -45626,7 +46137,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_InterE.cl:235"
+              "name":"Krnl_InterE.cl:243"
               , "data":
               [517, 2017, 13, 0]
               , "debug":
@@ -45634,7 +46145,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":235
+                    , "line":243
                   }
                 ]
               ]
@@ -45670,7 +46181,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_InterE.cl:236"
+              "name":"Krnl_InterE.cl:244"
               , "data":
               [517, 2017, 13, 0]
               , "debug":
@@ -45678,7 +46189,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":236
+                    , "line":244
                   }
                 ]
               ]
@@ -45714,7 +46225,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_InterE.cl:253"
+              "name":"Krnl_InterE.cl:261"
               , "data":
               [0, 0, 0, 9]
               , "debug":
@@ -45722,7 +46233,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":253
+                    , "line":261
                   }
                 ]
               ]
@@ -45749,7 +46260,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_InterE.cl:262"
+              "name":"Krnl_InterE.cl:270"
               , "data":
               [0, 0, 0, 2]
               , "debug":
@@ -45757,7 +46268,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                    , "line":262
+                    , "line":270
                   }
                 ]
               ]
@@ -45777,13 +46288,13 @@ var loopsJSON={
           ]
         }
         , {
-          "name":"Block111"
+          "name":"Block112"
           , "resources":
           [
             {
               "name":"State"
               , "data":
-              [408, 784, 0, 0]
+              [605, 1120, 0, 0]
               , "details":
               [
                 "Resources for live values and control logic. To reduce this area:\n- reduce size of local variables\n- reduce scope of local variables, localizing them as much as possible\n- reduce number of nested loops"
@@ -45795,22 +46306,22 @@ var loopsJSON={
                   {
                     "name":"Control flow logic"
                     , "data":
-                    [384, 576, 0, 0]
+                    [576, 864, 0, 0]
                   }
                   , "count":0
                 }
                 , {
                   "info":
                   {
-                    "name":"Krnl_InterE.cl:58"
+                    "name":"Krnl_InterE.cl:278"
                     , "data":
-                    [12, 197, 0, 0]
+                    [8, 21, 0, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":58
+                          , "line":278
                         }
                       ]
                     ]
@@ -45820,15 +46331,51 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_InterE.cl:80"
+                    "name":"Krnl_InterE.cl:280"
                     , "data":
-                    [12, 11, 0, 0]
+                    [10, 37, 0, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
-                          , "line":80
+                          , "line":280
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_InterE.cl:282"
+                    , "data":
+                    [11, 165, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
+                          , "line":282
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_InterE.cl:58"
+                    , "data":
+                    [0, 33, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl"
+                          , "line":58
                         }
                       ]
                     ]
@@ -45843,7 +46390,7 @@ var loopsJSON={
           ]
         }
         , {
-          "name":"Block112"
+          "name":"Block113"
           , "resources":
           [
             {
@@ -45965,15 +46512,15 @@ var loopsJSON={
           ]
         }
         , {
-          "name":"Private Variable: \n - 'contributor_counter' (Krnl_IntraE.cl:75)"
+          "name":"Private Variable: \n - 'contributor_counter' (Krnl_IntraE.cl:83)"
           , "data":
-          [8, 69, 0, 0]
+          [24, 101, 0, 0]
           , "debug":
           [
             [
               {
                 "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                , "line":75
+                , "line":83
               }
             ]
           ]
@@ -46019,7 +46566,7 @@ var loopsJSON={
           ]
         }
         , {
-          "name":"Private Variable: \n - 'pipe_cnt' (Krnl_IntraE.cl:46)"
+          "name":"Private Variable: \n - 'pipe_cnt' (Krnl_IntraE.cl:52)"
           , "data":
           [24, 101, 0, 0]
           , "debug":
@@ -46027,7 +46574,7 @@ var loopsJSON={
             [
               {
                 "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                , "line":46
+                , "line":52
               }
             ]
           ]
@@ -46040,7 +46587,7 @@ var loopsJSON={
       , "basicblocks":
       [
         {
-          "name":"Block113.wii_blk"
+          "name":"Block114.wii_blk"
           , "resources":
           [
             {
@@ -46065,7 +46612,7 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:114"
+                    "name":"Krnl_IntraE.cl:122"
                     , "data":
                     [42.6667, 42.6667, 0, 0]
                     , "debug":
@@ -46073,7 +46620,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":114
+                          , "line":122
                         }
                       ]
                     ]
@@ -46083,7 +46630,7 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:133"
+                    "name":"Krnl_IntraE.cl:141"
                     , "data":
                     [42.6667, 42.6667, 0, 0]
                     , "debug":
@@ -46091,7 +46638,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":133
+                          , "line":141
                         }
                       ]
                     ]
@@ -46101,7 +46648,7 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:142"
+                    "name":"Krnl_IntraE.cl:150"
                     , "data":
                     [62, 62, 0, 0]
                     , "debug":
@@ -46109,7 +46656,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":142
+                          , "line":150
                         }
                       ]
                     ]
@@ -46119,7 +46666,7 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:144"
+                    "name":"Krnl_IntraE.cl:152"
                     , "data":
                     [42.6667, 42.6667, 0, 0]
                     , "debug":
@@ -46127,7 +46674,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":144
+                          , "line":152
                         }
                       ]
                     ]
@@ -46137,7 +46684,7 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:46"
+                    "name":"Krnl_IntraE.cl:52"
                     , "data":
                     [50.6667, 50.6667, 0, 0]
                     , "debug":
@@ -46145,25 +46692,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":46
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_IntraE.cl:75"
-                    , "data":
-                    [58.6667, 58.6667, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":75
+                          , "line":52
                         }
                       ]
                     ]
@@ -46175,13 +46704,31 @@ var loopsJSON={
                   {
                     "name":"Krnl_IntraE.cl:83"
                     , "data":
-                    [42.6667, 42.6667, 0, 0]
+                    [58.6667, 58.6667, 0, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
                           , "line":83
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_IntraE.cl:91"
+                    , "data":
+                    [42.6667, 42.6667, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                          , "line":91
                         }
                       ]
                     ]
@@ -46203,7 +46750,7 @@ var loopsJSON={
           , "computation":
           [
             {
-              "name":"Krnl_IntraE.cl:46"
+              "name":"Krnl_IntraE.cl:52"
               , "data":
               [0.333333, 43, 0, 0]
               , "debug":
@@ -46211,37 +46758,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":46
-                  }
-                ]
-              ]
-              , "subinfos":
-              [
-                {
-                  "info":
-                  {
-                    "name":"Load"
-                    , "data":
-                    [0.333333, 43, 0, 0]
-                    , "details":
-                    [
-                      "Work-Item Invariant instruction."
-                    ]
-                  }
-                  , "count":1
-                }
-              ]
-            }
-            , {
-              "name":"Krnl_IntraE.cl:75"
-              , "data":
-              [0.333333, 43, 0, 0]
-              , "debug":
-              [
-                [
-                  {
-                    "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":75
+                    , "line":52
                   }
                 ]
               ]
@@ -46293,7 +46810,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:114"
+              "name":"Krnl_IntraE.cl:91"
               , "data":
               [0.333333, 43, 0, 0]
               , "debug":
@@ -46301,7 +46818,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":114
+                    , "line":91
                   }
                 ]
               ]
@@ -46323,7 +46840,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:133"
+              "name":"Krnl_IntraE.cl:122"
               , "data":
               [0.333333, 43, 0, 0]
               , "debug":
@@ -46331,7 +46848,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":133
+                    , "line":122
                   }
                 ]
               ]
@@ -46353,7 +46870,37 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:142"
+              "name":"Krnl_IntraE.cl:141"
+              , "data":
+              [0.333333, 43, 0, 0]
+              , "debug":
+              [
+                [
+                  {
+                    "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                    , "line":141
+                  }
+                ]
+              ]
+              , "subinfos":
+              [
+                {
+                  "info":
+                  {
+                    "name":"Load"
+                    , "data":
+                    [0.333333, 43, 0, 0]
+                    , "details":
+                    [
+                      "Work-Item Invariant instruction."
+                    ]
+                  }
+                  , "count":1
+                }
+              ]
+            }
+            , {
+              "name":"Krnl_IntraE.cl:150"
               , "data":
               [16, 48, 0, 0]
               , "debug":
@@ -46361,7 +46908,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":142
+                    , "line":150
                   }
                 ]
               ]
@@ -46383,7 +46930,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:144"
+              "name":"Krnl_IntraE.cl:152"
               , "data":
               [0.333333, 43, 0, 0]
               , "debug":
@@ -46391,7 +46938,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":144
+                    , "line":152
                   }
                 ]
               ]
@@ -46415,13 +46962,13 @@ var loopsJSON={
           ]
         }
         , {
-          "name":"Block114"
+          "name":"Block115"
           , "resources":
           [
             {
               "name":"State"
               , "data":
-              [33, 357, 0, 0]
+              [90.8333, 572.167, 0, 0]
               , "details":
               [
                 "Resources for live values and control logic. To reduce this area:\n- reduce size of local variables\n- reduce scope of local variables, localizing them as much as possible\n- reduce number of nested loops"
@@ -46440,183 +46987,9 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:24"
-                    , "data":
-                    [0, 4, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":24
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_IntraE.cl:25"
-                    , "data":
-                    [0, 4, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":25
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_IntraE.cl:26"
-                    , "data":
-                    [0, 16, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":26
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_IntraE.cl:53"
-                    , "data":
-                    [0, 4, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":53
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_IntraE.cl:55"
-                    , "data":
-                    [0, 4, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":55
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_IntraE.cl:57"
-                    , "data":
-                    [0, 16, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":57
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-              ]
-            }
-          ]
-          , "computation":
-          [
-          ]
-        }
-        , {
-          "name":"Block115"
-          , "resources":
-          [
-            {
-              "name":"State"
-              , "data":
-              [478, 1041, 1, 0]
-              , "details":
-              [
-                "Resources for live values and control logic. To reduce this area:\n- reduce size of local variables\n- reduce scope of local variables, localizing them as much as possible\n- reduce number of nested loops"
-              ]
-              , "subinfos":
-              [
-                {
-                  "info":
-                  {
-                    "name":"Control flow logic"
-                    , "data":
-                    [33, 81, 0, 0]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_IntraE.cl:46"
-                    , "data":
-                    [26, 107.333, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":46
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_IntraE.cl:47"
-                    , "data":
-                    [32.4583, 30.7778, 0.222222, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":47
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
                     "name":"Krnl_IntraE.cl:49"
                     , "data":
-                    [43.4405, 118.183, 0.222222, 0]
+                    [8, 69, 0, 0]
                     , "debug":
                     [
                       [
@@ -46632,15 +47005,15 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:51"
+                    "name":"Krnl_IntraE.cl:52"
                     , "data":
-                    [62.1905, 290.116, 0.222222, 0]
+                    [22.9167, 58.5833, 0, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":51
+                          , "line":52
                         }
                       ]
                     ]
@@ -46650,15 +47023,15 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:53"
+                    "name":"Krnl_IntraE.cl:70"
                     , "data":
-                    [15.3036, 21.3079, 0.111111, 0]
+                    [0.25, 0.25, 0, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":53
+                          , "line":70
                         }
                       ]
                     ]
@@ -46668,15 +47041,15 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:54"
+                    "name":"Krnl_IntraE.cl:88"
                     , "data":
-                    [106, 82, 0, 0]
+                    [8.88889, 101.778, 0, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":54
+                          , "line":88
                         }
                       ]
                     ]
@@ -46686,15 +47059,15 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:55"
+                    "name":"Krnl_IntraE.cl:89"
                     , "data":
-                    [19.8036, 25.3079, 0.111111, 0]
+                    [0.888889, 0.777778, 0, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":55
+                          , "line":89
                         }
                       ]
                     ]
@@ -46704,15 +47077,15 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:57"
+                    "name":"Krnl_IntraE.cl:90"
                     , "data":
-                    [27.8036, 56.3079, 0.111111, 0]
+                    [0.888889, 0.777778, 0, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":57
+                          , "line":90
                         }
                       ]
                     ]
@@ -46724,7 +47097,7 @@ var loopsJSON={
                   {
                     "name":"No Source Line"
                     , "data":
-                    [112, 228.667, 0, 0]
+                    [16, 32, 0, 0]
                   }
                   , "count":0
                 }
@@ -46733,7 +47106,7 @@ var loopsJSON={
             , {
               "name":"Feedback"
               , "data":
-              [15, 75, 0, 0]
+              [17, 77, 0, 0]
               , "details":
               [
                 "Resources for loop-carried dependencies. To reduce this area:\n- reduce number and size of loop-carried variables"
@@ -46743,15 +47116,15 @@ var loopsJSON={
                 {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:46"
+                    "name":"Krnl_IntraE.cl:70"
                     , "data":
-                    [7, 6, 0, 0]
+                    [9, 8, 0, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":46
+                          , "line":70
                         }
                       ]
                     ]
@@ -46772,6 +47145,291 @@ var loopsJSON={
             , {
               "name":"Cluster logic"
               , "data":
+              [237.167, 580.833, 2, 0]
+              , "details":
+              [
+                "Logic required to efficiently support sets of operations that do not stall. This area cannot be affected directly."
+              ]
+            }
+          ]
+          , "computation":
+          [
+          ]
+        }
+        , {
+          "name":"Block116"
+          , "resources":
+          [
+            {
+              "name":"State"
+              , "data":
+              [672, 6410.5, 1, 0]
+              , "details":
+              [
+                "Resources for live values and control logic. To reduce this area:\n- reduce size of local variables\n- reduce scope of local variables, localizing them as much as possible\n- reduce number of nested loops"
+              ]
+              , "subinfos":
+              [
+                {
+                  "info":
+                  {
+                    "name":"Control flow logic"
+                    , "data":
+                    [121, 369.5, 0, 0]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_IntraE.cl:45"
+                    , "data":
+                    [4, 8.14286, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                          , "line":45
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_IntraE.cl:47"
+                    , "data":
+                    [4, 8.14286, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                          , "line":47
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_IntraE.cl:49"
+                    , "data":
+                    [16, 32.1429, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                          , "line":49
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_IntraE.cl:52"
+                    , "data":
+                    [23.819, 978.56, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                          , "line":52
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_IntraE.cl:53"
+                    , "data":
+                    [52.8, 50.2667, 0.333333, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                          , "line":53
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_IntraE.cl:55"
+                    , "data":
+                    [68.1, 141.533, 0.333333, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                          , "line":55
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_IntraE.cl:57"
+                    , "data":
+                    [101.1, 326.2, 0.333333, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                          , "line":57
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_IntraE.cl:70"
+                    , "data":
+                    [0, 2.14286, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                          , "line":70
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_IntraE.cl:88"
+                    , "data":
+                    [0, 2.14286, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                          , "line":88
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_IntraE.cl:89"
+                    , "data":
+                    [0, 2.14286, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                          , "line":89
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_IntraE.cl:90"
+                    , "data":
+                    [0, 2.14286, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                          , "line":90
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"No Source Line"
+                    , "data":
+                    [281.181, 4487.44, 0, 0]
+                  }
+                  , "count":0
+                }
+              ]
+            }
+            , {
+              "name":"Feedback"
+              , "data":
+              [15, 363, 0, 0]
+              , "details":
+              [
+                "Resources for loop-carried dependencies. To reduce this area:\n- reduce number and size of loop-carried variables"
+              ]
+              , "subinfos":
+              [
+                {
+                  "info":
+                  {
+                    "name":"Krnl_IntraE.cl:52"
+                    , "data":
+                    [7, 6, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                          , "line":52
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"No Source Line"
+                    , "data":
+                    [8, 357, 0, 0]
+                  }
+                  , "count":0
+                }
+              ]
+            }
+            , {
+              "name":"Cluster logic"
+              , "data":
               [218, 502, 2, 0]
               , "details":
               [
@@ -46782,7 +47440,7 @@ var loopsJSON={
           , "computation":
           [
             {
-              "name":"Krnl_IntraE.cl:46"
+              "name":"Krnl_IntraE.cl:52"
               , "data":
               [16, 0, 0, 0]
               , "debug":
@@ -46790,7 +47448,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":46
+                    , "line":52
                   }
                 ]
               ]
@@ -46808,7 +47466,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:47"
+              "name":"Krnl_IntraE.cl:53"
               , "data":
               [34, 24, 0, 0]
               , "debug":
@@ -46816,7 +47474,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":47
+                    , "line":53
                   }
                 ]
               ]
@@ -46838,7 +47496,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:49"
+              "name":"Krnl_IntraE.cl:55"
               , "data":
               [34, 24, 0, 0]
               , "debug":
@@ -46846,7 +47504,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":49
+                    , "line":55
                   }
                 ]
               ]
@@ -46868,7 +47526,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:51"
+              "name":"Krnl_IntraE.cl:57"
               , "data":
               [34, 24, 0, 0]
               , "debug":
@@ -46876,7 +47534,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":51
+                    , "line":57
                   }
                 ]
               ]
@@ -46900,13 +47558,13 @@ var loopsJSON={
           ]
         }
         , {
-          "name":"Block116"
+          "name":"Block117"
           , "resources":
           [
             {
               "name":"State"
               , "data":
-              [126, 482, 0, 0]
+              [396, 945.5, 0, 0]
               , "details":
               [
                 "Resources for live values and control logic. To reduce this area:\n- reduce size of local variables\n- reduce scope of local variables, localizing them as much as possible\n- reduce number of nested loops"
@@ -46918,130 +47576,22 @@ var loopsJSON={
                   {
                     "name":"Control flow logic"
                     , "data":
-                    [32, 48, 0, 0]
+                    [321, 481.5, 0, 0]
                   }
                   , "count":0
                 }
                 , {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:24"
+                    "name":"Krnl_IntraE.cl:70"
                     , "data":
-                    [0, 4, 0, 0]
+                    [47.5, 330, 0, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":24
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_IntraE.cl:25"
-                    , "data":
-                    [0, 4, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":25
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_IntraE.cl:26"
-                    , "data":
-                    [0, 16, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":26
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_IntraE.cl:53"
-                    , "data":
-                    [0, 4, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":53
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_IntraE.cl:55"
-                    , "data":
-                    [0, 4, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":55
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_IntraE.cl:57"
-                    , "data":
-                    [0, 16, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":57
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_IntraE.cl:62"
-                    , "data":
-                    [54, 337, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":62
+                          , "line":70
                         }
                       ]
                     ]
@@ -47053,7 +47603,7 @@ var loopsJSON={
                   {
                     "name":"No Source Line"
                     , "data":
-                    [40, 49, 0, 0]
+                    [27.5, 134, 0, 0]
                   }
                   , "count":0
                 }
@@ -47063,7 +47613,7 @@ var loopsJSON={
           , "computation":
           [
             {
-              "name":"Krnl_IntraE.cl:62"
+              "name":"Krnl_IntraE.cl:70"
               , "data":
               [1535, 3793, 16, 0]
               , "debug":
@@ -47071,7 +47621,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":62
+                    , "line":70
                   }
                 ]
               ]
@@ -47095,13 +47645,13 @@ var loopsJSON={
           ]
         }
         , {
-          "name":"Block117"
+          "name":"Block118"
           , "resources":
           [
             {
               "name":"State"
               , "data":
-              [2765, 7349, 34, 0]
+              [3073, 15924.5, 72, 0]
               , "details":
               [
                 "Resources for live values and control logic. To reduce this area:\n- reduce size of local variables\n- reduce scope of local variables, localizing them as much as possible\n- reduce number of nested loops"
@@ -47113,58 +47663,22 @@ var loopsJSON={
                   {
                     "name":"Control flow logic"
                     , "data":
-                    [33, 193, 0, 0]
+                    [115, 773.5, 0, 0]
                   }
                   , "count":0
                 }
                 , {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:100"
+                    "name":"Krnl_IntraE.cl:106"
                     , "data":
-                    [64, 128, 0, 0]
+                    [16, 32, 0, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":100
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_IntraE.cl:102"
-                    , "data":
-                    [8, 16, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":102
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_IntraE.cl:105"
-                    , "data":
-                    [26.3048, 45.6095, 0.333333, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":105
+                          , "line":106
                         }
                       ]
                     ]
@@ -47176,7 +47690,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_IntraE.cl:107"
                     , "data":
-                    [80.0909, 328.591, 1, 0]
+                    [8, 16, 0, 0]
                     , "debug":
                     [
                       [
@@ -47194,7 +47708,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_IntraE.cl:108"
                     , "data":
-                    [80.0909, 328.591, 1, 0]
+                    [64, 128, 0, 0]
                     , "debug":
                     [
                       [
@@ -47210,15 +47724,51 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:114"
+                    "name":"Krnl_IntraE.cl:110"
                     , "data":
-                    [55.1481, 77.6481, 1.44286, 0]
+                    [8, 16, 0, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":114
+                          , "line":110
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_IntraE.cl:113"
+                    , "data":
+                    [26.3048, 45.6095, 0.333333, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                          , "line":113
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_IntraE.cl:115"
+                    , "data":
+                    [71.0909, 131.591, 1, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                          , "line":115
                         }
                       ]
                     ]
@@ -47230,7 +47780,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_IntraE.cl:116"
                     , "data":
-                    [20.9481, 35.9481, 0.142857, 0]
+                    [71.0909, 131.591, 1, 0]
                     , "debug":
                     [
                       [
@@ -47246,15 +47796,15 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:120"
+                    "name":"Krnl_IntraE.cl:122"
                     , "data":
-                    [34.4814, 42.9814, 0.77619, 0]
+                    [54.0687, 76.7909, 1.41111, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":120
+                          , "line":122
                         }
                       ]
                     ]
@@ -47264,7 +47814,43 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:127"
+                    "name":"Krnl_IntraE.cl:124"
+                    , "data":
+                    [27.8687, 51.0909, 0.111111, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                          , "line":124
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_IntraE.cl:128"
+                    , "data":
+                    [33.402, 42.1242, 0.744444, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                          , "line":128
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_IntraE.cl:135"
                     , "data":
                     [29.5333, 39.0333, 0.633333, 0]
                     , "debug":
@@ -47272,7 +47858,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":127
+                          , "line":135
                         }
                       ]
                     ]
@@ -47282,87 +47868,15 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:133"
+                    "name":"Krnl_IntraE.cl:141"
                     , "data":
-                    [395.87, 1100.18, 3.04167, 0]
+                    [385.426, 724.183, 3.26389, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":133
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_IntraE.cl:142"
-                    , "data":
-                    [82.9481, 122.948, 0.142857, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":142
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_IntraE.cl:143"
-                    , "data":
-                    [181.896, 252.896, 0.285714, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":143
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_IntraE.cl:144"
-                    , "data":
-                    [272.948, 456.948, 1.14286, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":144
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_IntraE.cl:145"
-                    , "data":
-                    [76.3548, 143.335, 0.708333, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":145
+                          , "line":141
                         }
                       ]
                     ]
@@ -47374,7 +47888,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_IntraE.cl:150"
                     , "data":
-                    [128, 288, 0, 0]
+                    [81.8687, 122.091, 0.111111, 0]
                     , "debug":
                     [
                       [
@@ -47390,7 +47904,151 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:65"
+                    "name":"Krnl_IntraE.cl:151"
+                    , "data":
+                    [179.737, 251.182, 0.222222, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                          , "line":151
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_IntraE.cl:152"
+                    , "data":
+                    [271.869, 456.091, 1.11111, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                          , "line":152
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_IntraE.cl:153"
+                    , "data":
+                    [76.3548, 143.335, 0.708333, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                          , "line":153
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_IntraE.cl:158"
+                    , "data":
+                    [128, 256, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                          , "line":158
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_IntraE.cl:45"
+                    , "data":
+                    [4, 8.25, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                          , "line":45
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_IntraE.cl:47"
+                    , "data":
+                    [4, 8.25, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                          , "line":47
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_IntraE.cl:49"
+                    , "data":
+                    [16, 32.25, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                          , "line":49
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_IntraE.cl:70"
+                    , "data":
+                    [0, 2.25, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                          , "line":70
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_IntraE.cl:73"
                     , "data":
                     [4.2, 2.7, 0.3, 0]
                     , "debug":
@@ -47398,7 +48056,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":65
+                          , "line":73
                         }
                       ]
                     ]
@@ -47408,7 +48066,7 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:66"
+                    "name":"Krnl_IntraE.cl:74"
                     , "data":
                     [6.53333, 3.53333, 0.133333, 0]
                     , "debug":
@@ -47416,43 +48074,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":66
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_IntraE.cl:67"
-                    , "data":
-                    [28.25, 40.625, 0.875, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":67
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_IntraE.cl:68"
-                    , "data":
-                    [5.25, 8.125, 0.375, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":68
+                          , "line":74
                         }
                       ]
                     ]
@@ -47464,7 +48086,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_IntraE.cl:75"
                     , "data":
-                    [113.533, 808.2, 7.58333, 0]
+                    [28.25, 40.625, 0.875, 0]
                     , "debug":
                     [
                       [
@@ -47480,87 +48102,15 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:77"
+                    "name":"Krnl_IntraE.cl:76"
                     , "data":
-                    [21, 36.5, 0, 0]
+                    [5.25, 8.125, 0.375, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":77
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_IntraE.cl:78"
-                    , "data":
-                    [5, 4.5, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":78
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_IntraE.cl:80"
-                    , "data":
-                    [32, 64, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":80
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_IntraE.cl:81"
-                    , "data":
-                    [32, 64, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":81
-                        }
-                      ]
-                    ]
-                  }
-                  , "count":0
-                }
-                , {
-                  "info":
-                  {
-                    "name":"Krnl_IntraE.cl:82"
-                    , "data":
-                    [96, 192, 0, 0]
-                    , "debug":
-                    [
-                      [
-                        {
-                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":82
+                          , "line":76
                         }
                       ]
                     ]
@@ -47572,7 +48122,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_IntraE.cl:83"
                     , "data":
-                    [80, 160, 0, 0]
+                    [56.575, 1834.69, 7.65, 0]
                     , "debug":
                     [
                       [
@@ -47590,7 +48140,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_IntraE.cl:85"
                     , "data":
-                    [48, 96, 0, 0]
+                    [41, 61.5, 0.5, 0]
                     , "debug":
                     [
                       [
@@ -47606,15 +48156,15 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:98"
+                    "name":"Krnl_IntraE.cl:86"
                     , "data":
-                    [16, 32, 0, 0]
+                    [17, 13.5, 0.5, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":98
+                          , "line":86
                         }
                       ]
                     ]
@@ -47624,15 +48174,87 @@ var loopsJSON={
                 , {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:99"
+                    "name":"Krnl_IntraE.cl:88"
                     , "data":
-                    [8, 16, 0, 0]
+                    [16, 32, 0, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":99
+                          , "line":88
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_IntraE.cl:89"
+                    , "data":
+                    [16, 32, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                          , "line":89
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_IntraE.cl:90"
+                    , "data":
+                    [80, 160, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                          , "line":90
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_IntraE.cl:91"
+                    , "data":
+                    [80, 160, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                          , "line":91
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_IntraE.cl:93"
+                    , "data":
+                    [48, 96, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                          , "line":93
                         }
                       ]
                     ]
@@ -47644,7 +48266,7 @@ var loopsJSON={
                   {
                     "name":"No Source Line"
                     , "data":
-                    [699.619, 2221.1, 14.0833, 0]
+                    [1002.58, 9992.61, 51.0167, 0]
                   }
                   , "count":0
                 }
@@ -47653,7 +48275,7 @@ var loopsJSON={
             , {
               "name":"Feedback"
               , "data":
-              [15, 75, 0, 0]
+              [15, 203, 0, 0]
               , "details":
               [
                 "Resources for loop-carried dependencies. To reduce this area:\n- reduce number and size of loop-carried variables"
@@ -47663,7 +48285,7 @@ var loopsJSON={
                 {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:75"
+                    "name":"Krnl_IntraE.cl:83"
                     , "data":
                     [7, 6, 0, 0]
                     , "debug":
@@ -47671,7 +48293,7 @@ var loopsJSON={
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":75
+                          , "line":83
                         }
                       ]
                     ]
@@ -47683,7 +48305,7 @@ var loopsJSON={
                   {
                     "name":"No Source Line"
                     , "data":
-                    [8, 69, 0, 0]
+                    [8, 197, 0, 0]
                   }
                   , "count":0
                 }
@@ -47692,7 +48314,7 @@ var loopsJSON={
             , {
               "name":"Cluster logic"
               , "data":
-              [1619, 3661, 15, 0]
+              [1667, 3390, 14, 0]
               , "details":
               [
                 "Logic required to efficiently support sets of operations that do not stall. This area cannot be affected directly."
@@ -47728,7 +48350,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:75"
+              "name":"Krnl_IntraE.cl:83"
               , "data":
               [26, 0, 0, 0]
               , "debug":
@@ -47736,7 +48358,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":75
+                    , "line":83
                   }
                 ]
               ]
@@ -47763,7 +48385,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:77"
+              "name":"Krnl_IntraE.cl:85"
               , "data":
               [1722, 1715.5, 21.5, 0]
               , "debug":
@@ -47771,7 +48393,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":77
+                    , "line":85
                   }
                 ]
               ]
@@ -47802,7 +48424,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:78"
+              "name":"Krnl_IntraE.cl:86"
               , "data":
               [1717, 1715.5, 21.5, 0]
               , "debug":
@@ -47810,7 +48432,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":78
+                    , "line":86
                   }
                 ]
               ]
@@ -47832,7 +48454,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:80"
+              "name":"Krnl_IntraE.cl:88"
               , "data":
               [18, 16, 0, 1]
               , "debug":
@@ -47840,7 +48462,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":80
+                    , "line":88
                   }
                 ]
               ]
@@ -47871,7 +48493,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:81"
+              "name":"Krnl_IntraE.cl:89"
               , "data":
               [18, 16, 0, 1]
               , "debug":
@@ -47879,7 +48501,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":81
+                    , "line":89
                   }
                 ]
               ]
@@ -47910,7 +48532,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:82"
+              "name":"Krnl_IntraE.cl:90"
               , "data":
               [18, 16, 0, 1]
               , "debug":
@@ -47918,7 +48540,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":82
+                    , "line":90
                   }
                 ]
               ]
@@ -47949,7 +48571,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:83"
+              "name":"Krnl_IntraE.cl:91"
               , "data":
               [129, 346, 3, 6]
               , "debug":
@@ -47957,7 +48579,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":83
+                    , "line":91
                   }
                 ]
               ]
@@ -48002,7 +48624,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:85"
+              "name":"Krnl_IntraE.cl:93"
               , "data":
               [63, 28, 0, 0]
               , "debug":
@@ -48010,7 +48632,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":85
+                    , "line":93
                   }
                 ]
               ]
@@ -48028,7 +48650,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:98"
+              "name":"Krnl_IntraE.cl:106"
               , "data":
               [0, 0, 0, 1]
               , "debug":
@@ -48036,7 +48658,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":98
+                    , "line":106
                   }
                 ]
               ]
@@ -48054,7 +48676,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:99"
+              "name":"Krnl_IntraE.cl:107"
               , "data":
               [0, 0, 0, 1]
               , "debug":
@@ -48062,7 +48684,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":99
+                    , "line":107
                   }
                 ]
               ]
@@ -48080,7 +48702,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:100"
+              "name":"Krnl_IntraE.cl:108"
               , "data":
               [0, 0, 0, 1]
               , "debug":
@@ -48088,7 +48710,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":100
+                    , "line":108
                   }
                 ]
               ]
@@ -48106,7 +48728,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:102"
+              "name":"Krnl_IntraE.cl:110"
               , "data":
               [0, 0, 0, 1]
               , "debug":
@@ -48114,7 +48736,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":102
+                    , "line":110
                   }
                 ]
               ]
@@ -48132,7 +48754,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:105"
+              "name":"Krnl_IntraE.cl:113"
               , "data":
               [126, 56, 0, 0]
               , "debug":
@@ -48140,7 +48762,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":105
+                    , "line":113
                   }
                 ]
               ]
@@ -48158,7 +48780,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:107"
+              "name":"Krnl_IntraE.cl:115"
               , "data":
               [3165, 4266, 43, 0]
               , "debug":
@@ -48166,7 +48788,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":107
+                    , "line":115
                   }
                 ]
               ]
@@ -48188,7 +48810,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:108"
+              "name":"Krnl_IntraE.cl:116"
               , "data":
               [3165, 4266, 43, 0]
               , "debug":
@@ -48196,7 +48818,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":108
+                    , "line":116
                   }
                 ]
               ]
@@ -48218,7 +48840,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:114"
+              "name":"Krnl_IntraE.cl:122"
               , "data":
               [3222, 4707, 48, 7]
               , "debug":
@@ -48226,7 +48848,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":114
+                    , "line":122
                   }
                 ]
               ]
@@ -48275,7 +48897,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:116"
+              "name":"Krnl_IntraE.cl:124"
               , "data":
               [3165, 4266, 43, 0]
               , "debug":
@@ -48283,7 +48905,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":116
+                    , "line":124
                   }
                 ]
               ]
@@ -48305,7 +48927,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:120"
+              "name":"Krnl_IntraE.cl:128"
               , "data":
               [3113.5, 4470.5, 45.5, 2.5]
               , "debug":
@@ -48313,7 +48935,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":120
+                    , "line":128
                   }
                 ]
               ]
@@ -48344,7 +48966,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:127"
+              "name":"Krnl_IntraE.cl:135"
               , "data":
               [92.5, 204.5, 2.5, 2.5]
               , "debug":
@@ -48352,7 +48974,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":127
+                    , "line":135
                   }
                 ]
               ]
@@ -48370,7 +48992,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:133"
+              "name":"Krnl_IntraE.cl:141"
               , "data":
               [6688, 9561, 99, 23]
               , "debug":
@@ -48378,7 +49000,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":133
+                    , "line":141
                   }
                 ]
               ]
@@ -48436,7 +49058,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:142"
+              "name":"Krnl_IntraE.cl:150"
               , "data":
               [3021, 4266, 43, 0]
               , "debug":
@@ -48444,7 +49066,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":142
+                    , "line":150
                   }
                 ]
               ]
@@ -48466,7 +49088,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:143"
+              "name":"Krnl_IntraE.cl:151"
               , "data":
               [6042, 8532, 86, 1]
               , "debug":
@@ -48474,7 +49096,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":143
+                    , "line":151
                   }
                 ]
               ]
@@ -48505,7 +49127,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:144"
+              "name":"Krnl_IntraE.cl:152"
               , "data":
               [3021, 4266, 43, 4]
               , "debug":
@@ -48513,7 +49135,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":144
+                    , "line":152
                   }
                 ]
               ]
@@ -48562,7 +49184,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:145"
+              "name":"Krnl_IntraE.cl:153"
               , "data":
               [461, 620, 8, 13]
               , "debug":
@@ -48570,7 +49192,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":145
+                    , "line":153
                   }
                 ]
               ]
@@ -48606,7 +49228,7 @@ var loopsJSON={
               ]
             }
             , {
-              "name":"Krnl_IntraE.cl:150"
+              "name":"Krnl_IntraE.cl:158"
               , "data":
               [0, 0, 0, 3]
               , "debug":
@@ -48614,7 +49236,7 @@ var loopsJSON={
                 [
                   {
                     "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                    , "line":150
+                    , "line":158
                   }
                 ]
               ]
@@ -48634,13 +49256,13 @@ var loopsJSON={
           ]
         }
         , {
-          "name":"Block118"
+          "name":"Block119"
           , "resources":
           [
             {
               "name":"State"
               , "data":
-              [280, 592, 0, 0]
+              [1118, 1895.5, 0, 0]
               , "details":
               [
                 "Resources for live values and control logic. To reduce this area:\n- reduce size of local variables\n- reduce scope of local variables, localizing them as much as possible\n- reduce number of nested loops"
@@ -48652,7 +49274,61 @@ var loopsJSON={
                   {
                     "name":"Control flow logic"
                     , "data":
-                    [256, 384, 0, 0]
+                    [1089, 1633.5, 0, 0]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_IntraE.cl:167"
+                    , "data":
+                    [8, 21, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                          , "line":167
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_IntraE.cl:169"
+                    , "data":
+                    [10, 37, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                          , "line":169
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_IntraE.cl:171"
+                    , "data":
+                    [11, 165, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                          , "line":171
+                        }
+                      ]
+                    ]
                   }
                   , "count":0
                 }
@@ -48661,7 +49337,7 @@ var loopsJSON={
                   {
                     "name":"Krnl_IntraE.cl:40"
                     , "data":
-                    [12, 197, 0, 0]
+                    [0, 39, 0, 0]
                     , "debug":
                     [
                       [
@@ -48674,18 +49350,66 @@ var loopsJSON={
                   }
                   , "count":0
                 }
-                , {
+              ]
+            }
+            , {
+              "name":"Feedback"
+              , "data":
+              [10, 197, 0, 0]
+              , "details":
+              [
+                "Resources for loop-carried dependencies. To reduce this area:\n- reduce number and size of loop-carried variables"
+              ]
+              , "subinfos":
+              [
+                {
                   "info":
                   {
-                    "name":"Krnl_IntraE.cl:62"
+                    "name":"Krnl_IntraE.cl:88"
                     , "data":
-                    [12, 11, 0, 0]
+                    [3.33333, 65.6667, 0, 0]
                     , "debug":
                     [
                       [
                         {
                           "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
-                          , "line":62
+                          , "line":88
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_IntraE.cl:89"
+                    , "data":
+                    [3.33333, 65.6667, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                          , "line":89
+                        }
+                      ]
+                    ]
+                  }
+                  , "count":0
+                }
+                , {
+                  "info":
+                  {
+                    "name":"Krnl_IntraE.cl:90"
+                    , "data":
+                    [3.33333, 65.6667, 0, 0]
+                    , "debug":
+                    [
+                      [
+                        {
+                          "filename":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl"
+                          , "line":90
                         }
                       ]
                     ]
@@ -48700,7 +49424,7 @@ var loopsJSON={
           ]
         }
         , {
-          "name":"Block119"
+          "name":"Block120"
           , "resources":
           [
             {
@@ -48837,7 +49561,7 @@ var loopsJSON={
       , "basicblocks":
       [
         {
-          "name":"Block120"
+          "name":"Block121"
           , "resources":
           [
             {
@@ -48867,13 +49591,13 @@ var loopsJSON={
           ]
         }
         , {
-          "name":"Block121"
+          "name":"Block122"
           , "resources":
           [
             {
               "name":"State"
               , "data":
-              [710.833, 2321.33, 3, 0]
+              [710.833, 2321.34, 3, 0]
               , "details":
               [
                 "Resources for live values and control logic. To reduce this area:\n- reduce size of local variables\n- reduce scope of local variables, localizing them as much as possible\n- reduce number of nested loops"
@@ -50161,7 +50885,7 @@ var loopsJSON={
           ]
         }
         , {
-          "name":"Block122"
+          "name":"Block123"
           , "resources":
           [
             {
@@ -50194,4 +50918,4 @@ var loopsJSON={
     }
   ]
 }
-;var fileJSON=[{"index":0, "path":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_GA.cl", "name":"Krnl_GA.cl", "content":"// Enable the channels extension\012#pragma OPENCL EXTENSION cl_altera_channels : enable\012\012//IC: initial calculation of energy of populations\012//GG: genetic generation \012//LS: local search\012//OFF: everything is done, disable other kernels\012/*\012enum STATES {S_IC 		= 0,		 \012	     S_IC_WAIT_END	= 1,\012	     S_GG		= 2,\012	     S_GG_WAIT_END	= 3,\012             S_LS		= 4, 	\012	     S_LS_WAIT_END	= 5,\012	     S_OFF		= 6,\012	     S_WAIT_END_OFF	= 7\012	    };*/\012#define STATE_IC 	   0\012#define STATE_IC_WAIT_END  1\012#define STATE_GG_FIND_BEST 2\012#define STATE_GG 	   3\012#define STATE_GG_WAIT_END  4\012#define STATE_UPDATE_POP   5\012#define STATE_LS           6\012#define STATE_LS_WAIT_END  7\012#define STATE_CHECK_TERMINATION 8\012#define STATE_END 	   9\012#define STATE_WAIT_END 	   10\012#define STATE_OFF 	   11\012\012\012#define LS_STATE_DIR_FIRST	12\012#define LS_STATE_WAIT_FIRST	13\012#define LS_STATE_ENERGY_FIRST	14\012#define LS_STATE_DIR_SECOND	15\012#define LS_STATE_WAIT_SECOND	16\012#define LS_STATE_ENERGY_SECOND	17\012#define LS_STATE_CHECK_RHO	18\012#define LS_STATE_CHECK_TERMINATION 19\012\012\012// Define kernel file-scope channel variable\012// Buffered channels \012// MAX_NUM_OF_ATOMS=90\012// ACTUAL_GENOTYPE_LENGTH (MAX_NUM_OF_ROTBONDS+6) =38\012\012channel float chan_GA2Conf_genotype __attribute__((depth(38)));\012channel char  chan_GA2Conf_active;	// active 1: receiving Kernel is active, 0 receiving Kernel is disabled\012channel char  chan_GA2Conf_mode;	// mode 1 or I: init calculation energy, 2 or G: genetic generation, 3 or P: local search\012channel uint  chan_GA2Conf_cnt;		// population count\012\012\012channel float chan_Conf2Intere_x __attribute__((depth(90)));\012channel float chan_Conf2Intere_y __attribute__((depth(90)));\012channel float chan_Conf2Intere_z __attribute__((depth(90)));\012/*\012channel float chan_Conf2Intere_x __attribute__((depth(45)));\012channel float chan_Conf2Intere_y __attribute__((depth(45)));\012channel float chan_Conf2Intere_z __attribute__((depth(45)));\012*/\012channel char  chan_Conf2Intere_active;	\012channel char  chan_Conf2Intere_mode;	\012channel uint  chan_Conf2Intere_cnt;	\012\012\012channel float chan_Conf2Intrae_x __attribute__((depth(90)));\012channel float chan_Conf2Intrae_y __attribute__((depth(90)));\012channel float chan_Conf2Intrae_z __attribute__((depth(90)));\012/*\012channel float chan_Conf2Intrae_x __attribute__((depth(45)));\012channel float chan_Conf2Intrae_y __attribute__((depth(45)));\012channel float chan_Conf2Intrae_z __attribute__((depth(45)));\012*/\012channel char  chan_Conf2Intrae_active;	\012channel char  chan_Conf2Intrae_mode;	\012channel uint  chan_Conf2Intrae_cnt;\012\012channel float chan_Intere2Store_intere;\012channel char  chan_Intere2Store_active;	\012channel char  chan_Intere2Store_mode;	\012channel uint  chan_Intere2Store_cnt;\012\012channel float chan_Intrae2Store_intrae;\012channel char  chan_Intrae2Store_active;	\012channel char  chan_Intrae2Store_mode;	\012channel uint  chan_Intrae2Store_cnt;\012\012channel char  chan_Store2GA_ack;\012channel float chan_Store2GA_LSenergy;\012\012#include \"../defines.h\"\012\012// Next structures were copied from calcenergy.h\012typedef struct\012{\012	char  	 	num_of_atoms;\012	char   		num_of_atypes;\012	int    		num_of_intraE_contributors;\012	char   		gridsize_x;\012	char   		gridsize_y;\012	char   		gridsize_z;\012	float  		grid_spacing;\012/*\012	float* 		fgrids;\012*/\012	int    		rotbondlist_length;\012	float  		coeff_elec;\012	float  		coeff_desolv;\012/*\012	float* 		conformations_current;\012	float* 		energies_current;\012	float* 		conformations_next;\012	float* 		energies_next;\012	int*   		evals_of_new_entities;\012	unsigned int* 	prng_states;\012*/\012\012	// L30nardoSV added\012	unsigned int num_of_energy_evals;\012	unsigned int num_of_generations;\012\012	int    		pop_size;\012	int    		num_of_genes;\012	float  		tournament_rate;\012	float  		crossover_rate;\012	float  		mutation_rate;\012	float  		abs_max_dmov;\012	float  		abs_max_dang;\012	float  		lsearch_rate;\012	unsigned int 	num_of_lsentities;\012	float  		rho_lower_bound;\012	float  		base_dmov_mul_sqrt3;\012	float  		base_dang_mul_sqrt3;\012	unsigned int 	cons_limit;\012	unsigned int 	max_num_of_iters;\012	float  		qasp;\012} Dockparameters;\012\012// Constant struct\012typedef struct\012{\012       float atom_charges_const[MAX_NUM_OF_ATOMS];\012       char  atom_types_const  [MAX_NUM_OF_ATOMS];\012       char  intraE_contributors_const[3*MAX_INTRAE_CONTRIBUTORS];\012       float VWpars_AC_const   [MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES];\012       float VWpars_BD_const   [MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES];\012       float dspars_S_const    [MAX_NUM_OF_ATYPES];\012       float dspars_V_const    [MAX_NUM_OF_ATYPES];\012       int   rotlist_const     [MAX_NUM_OF_ROTATIONS];\012       float ref_coords_x_const[MAX_NUM_OF_ATOMS];\012       float ref_coords_y_const[MAX_NUM_OF_ATOMS];\012       float ref_coords_z_const[MAX_NUM_OF_ATOMS];\012       float rotbonds_moving_vectors_const[3*MAX_NUM_OF_ROTBONDS];\012       float rotbonds_unit_vectors_const  [3*MAX_NUM_OF_ROTBONDS];\012       //float ref_orientation_quats_const  [4*MAX_NUM_OF_RUNS];\012       float ref_orientation_quats_const  [4];\012} kernelconstant;\012\012#include \"auxiliary_genetic.cl\"\012//#include \"auxiliary_performls.cl\"\012\012\012// --------------------------------------------------------------------------\012// The function performs a generational genetic algorithm based search \012// on the search space.\012// The first parameter is the population which must be filled with initial values \012// before calling this function. \012// The other parameters are variables which describe the grids, \012// the docking parameters and the ligand to be docked. \012// Originally from: searchoptimum.c\012// --------------------------------------------------------------------------\012__kernel __attribute__ ((reqd_work_group_size(1,1,1)))\012void Krnl_GA(//__global const float*           restrict GlobFgrids,\012	     __global       float*           restrict GlobPopulationCurrent,\012	     __global       float*           restrict GlobEnergyCurrent,\012	     __global       float*           restrict GlobPopulationNext,\012	     __global       float*           restrict GlobEnergyNext,\012             __global       unsigned int*    restrict GlobPRNG,\012	     __global const kernelconstant*  restrict KerConst,\012	     __global const Dockparameters*  restrict DockConst,\012	     __global       unsigned int*    restrict GlobEvals_performed,\012	     __global       unsigned int*    restrict GlobGenerations_performed)\012{\012	//Print algorithm parameters\012\012	#if defined (DEBUG_KERNEL1)\012	printf(\"\\nParameters of the genetic algorihtm:\\n\");\012	printf(\"\\nLigand num_of_atoms: %u\\n\",  DockConst->num_of_atoms);\012	printf(\"Ligand num_of_atypes:  %u\\n\",  DockConst->num_of_atypes);\012	printf(\"Ligand num_of_intraE_contributors: %u\\n\",  DockConst->num_of_atypes);\012	printf(\"Grid size_x: %u\\n\", 		DockConst->gridsize_x);\012	printf(\"Grid size_y: %u\\n\",   		DockConst->gridsize_y);\012	printf(\"Grid size_z: %u\\n\",   		DockConst->gridsize_z);\012	printf(\"Grid spacing: %f\\n\",  		DockConst->grid_spacing);\012	printf(\"Ligand rotbondlist_length: %u\\n\",  DockConst->rotbondlist_length);\012	printf(\"Ligand coeff_elec: %f\\n\",  	DockConst->coeff_elec);\012	printf(\"Ligand coeff_desolv: %f\\n\",  	DockConst->coeff_desolv);\012	printf(\"\\nnum_of_energy_evals: %u\\n\",   DockConst->num_of_energy_evals);\012	printf(\"num_of_generations: %u\\n\",   	DockConst->num_of_generations);\012	printf(\"Population size: %u\\n\",         DockConst->pop_size);\012	printf(\"Number of genes: %u\\n\",         DockConst->num_of_genes);\012	printf(\"Tournament rate: %f\\n\",  	DockConst->tournament_rate);\012	printf(\"Crossover rate: %f\\n\",  	DockConst->crossover_rate);\012	printf(\"Mutation rate: %f\\n\",  		DockConst->mutation_rate);\012	printf(\"Maximal delta movement during mutation: +/-%fA\\n\", DockConst->abs_max_dmov);\012	printf(\"maximal delta angle during mutation: +/-%f°\\n\",    DockConst->abs_max_dang);\012	printf(\"LS rate: %f\\n\",  		DockConst->lsearch_rate);\012	printf(\"LS num_of_lsentities: %u\\n\",    DockConst->num_of_lsentities);\012	printf(\"LS rho_lower_bound: %f\\n\",      DockConst->rho_lower_bound);	 //Rho lower bound\012	printf(\"LS base_dmov_mul_sqrt3: %f\\n\",  DockConst->base_dmov_mul_sqrt3); //Maximal delta movement during ls\012	printf(\"LS base_dang_mul_sqrt3: %f\\n\",  DockConst->base_dang_mul_sqrt3); //Maximal delta angle during ls\012	printf(\"LS cons_limit: %u\\n\",           DockConst->cons_limit);\012	printf(\"LS max_num_of_iters: %u\\n\",     DockConst->max_num_of_iters);\012	printf(\"qasp: %f\\n\",     DockConst->qasp);\012	#endif\012\012	//STATES docking_state = S_IC;\012	\012	// \012	__local float genotype [ACTUAL_GENOTYPE_LENGTH];\012	\012	// Find_best\012	uint best_entity_id;\012	__local float loc_energies[MAX_POPSIZE];\012\012	// Binary tournament\012	uint parent1, parent2;\012	__local float local_entity_1     [ACTUAL_GENOTYPE_LENGTH];\012	__local float local_entity_2     [ACTUAL_GENOTYPE_LENGTH];	\012	__local float offspring_genotype [ACTUAL_GENOTYPE_LENGTH];\012\012	// local search\012	uint entity_for_ls;\012	uint LS_eval;\012	uint evals_for_ls_in_this_cycle;\012	uint num_of_evals_for_ls  = 0;\012	//__local float local_entity_ls	 [ACTUAL_GENOTYPE_LENGTH];\012	//__local float entity_possible_new_genotype [ACTUAL_GENOTYPE_LENGTH];\012	float local_entity_energy;\012\012	// --------------------------------------------\012	// moved from auxiliary_performls.cl\012	float rho;\012	float candidate_energy;\012	float offspring_energy;\012\012	float genotype_deviate  [ACTUAL_GENOTYPE_LENGTH];		//38 would be enough...\012	float genotype_bias     [ACTUAL_GENOTYPE_LENGTH];\012\012	uint cons_succ = 0;\012	uint cons_fail = 0;	\012	uint iteration_cnt = 0;\012	\012\012	// --------------------------------------------\012\012	uint ls_ent_cnt=0;\012\012\012	//Calculating energies of initial population\012	uint eval_cnt = 0;\012	uint generation_cnt = 1;\012\012	bool active = true;\012	char active_work_kernels = 1;\012	//char mode   = 1;\012	char mode   = STATE_IC;\012	char ack    = 0;\012\012	bool write_to_channel_genotype = false;\012	bool read_from_channel_ack     = false;\012	bool read_from_channel_energy  = false;\012\012\012\012\012\012\012\012\012///*\012	\012\012	// State machine\012	uint pop_cnt = 0;	\012	bool first_step = true;\012\012\012	while (active) {\012\012\012	switch (mode) {\012		// ---------------------------------------------------------------------------------------------------------\012		case STATE_IC :			// IC: Init energy calculation of pop\012			if (pop_cnt < DockConst->pop_size-1) {\012				mode = STATE_IC;\012				write_to_channel_genotype = true;\012				read_from_channel_ack     = false;\012				read_from_channel_energy  = false;\012\012				if (first_step == true) {\012					first_step = false;\012				}\012				else {\012					pop_cnt++;\012				}\012					\012				for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {\012					genotype[pipe_cnt] = GlobPopulationCurrent[pop_cnt*ACTUAL_GENOTYPE_LENGTH+ pipe_cnt];\012				}	\012			}\012			else {\012				mode = STATE_IC_WAIT_END;\012				write_to_channel_genotype  = true;\012				read_from_channel_ack      = false;\012				read_from_channel_energy   = false;\012\012				for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {\012					genotype[pipe_cnt] = 0;\012				}	\012			}					\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case STATE_IC_WAIT_END :	// Signal IC finished \012			mode = STATE_GG_FIND_BEST;\012			write_to_channel_genotype = false;\012			read_from_channel_ack = true;\012			eval_cnt = DockConst->pop_size;	\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case STATE_GG_FIND_BEST:\012			mode = STATE_GG;\012			write_to_channel_genotype = false;\012			read_from_channel_ack = false ;\012\012			pop_cnt = 0;\012\012			//Identifying best entity\012			best_entity_id = find_best(GlobEnergyCurrent, loc_energies, DockConst->pop_size); \012			\012			//elitism - copying the best entity to new population\012			for (uint i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {\012				GlobPopulationNext[i] = GlobPopulationCurrent[best_entity_id*ACTUAL_GENOTYPE_LENGTH+i];\012			}\012			GlobEnergyNext[best_entity_id] = GlobEnergyCurrent[best_entity_id];\012\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case STATE_GG :			// GG: Genetic Generation\012			pop_cnt++;\012\012			if (pop_cnt < DockConst->pop_size) {\012				mode = STATE_GG;\012				write_to_channel_genotype = true;\012				read_from_channel_ack = false;\012\012				//selecting two individuals randomly\012				binary_tournament_selection(GlobEnergyCurrent, GlobPRNG, &parent1, &parent2,\012						            DockConst->pop_size, DockConst->tournament_rate);\012\012				async_work_group_copy(local_entity_1, GlobPopulationCurrent+parent1*ACTUAL_GENOTYPE_LENGTH, ACTUAL_GENOTYPE_LENGTH, 0);\012				async_work_group_copy(local_entity_2, GlobPopulationCurrent+parent2*ACTUAL_GENOTYPE_LENGTH, ACTUAL_GENOTYPE_LENGTH, 0);\012\012				// first two args are population [parent1], population [parent2]\012				gen_new_genotype(GlobPRNG, local_entity_1, local_entity_2,\012					         DockConst->mutation_rate, DockConst->abs_max_dmov, DockConst->abs_max_dang,\012					         DockConst->crossover_rate, ACTUAL_GENOTYPE_LENGTH, genotype);\012\012				async_work_group_copy(GlobPopulationNext+pop_cnt*ACTUAL_GENOTYPE_LENGTH, genotype, ACTUAL_GENOTYPE_LENGTH, 0);\012\012				//pop_cnt++;\012			}\012			else {\012				mode = STATE_GG_WAIT_END;\012				write_to_channel_genotype = true;\012				read_from_channel_ack = false;\012\012				for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {\012					genotype[pipe_cnt] = 0;\012				}	\012			}			\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case STATE_GG_WAIT_END :	// Signal GG finished 		\012			mode = STATE_UPDATE_POP;\012			write_to_channel_genotype = false;\012			read_from_channel_ack = true;\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case STATE_UPDATE_POP :\012			mode = STATE_LS;\012			write_to_channel_genotype = false;\012			read_from_channel_ack = false;\012\012			pop_cnt = 0;\012			eval_cnt += DockConst->pop_size;\012			evals_for_ls_in_this_cycle = 0;\012			//ls_ent_cnt=0;\012\012			// Updating old population with new one\012			for (uint i=0;i<DockConst->pop_size*ACTUAL_GENOTYPE_LENGTH; i++) {\012				GlobPopulationCurrent[i] = GlobPopulationNext[i];\012			}\012\012			// Updating old energy with new one\012			for (uint i=0;i<DockConst->pop_size; i++) {\012				GlobEnergyCurrent[i] = GlobEnergyNext[i];\012			}					\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case STATE_LS :			// LS: Local Search\012\012			//choosing an entity randomly,\012			//and without checking if it has already been subjected to LS in this cycle\012			entity_for_ls = myrand_uint(GlobPRNG, DockConst->pop_size);\012\012			for (uint i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {\012				offspring_genotype [i] = GlobPopulationCurrent[entity_for_ls*ACTUAL_GENOTYPE_LENGTH + i];\012				genotype_bias [i] = 0.0f;\012			}\012			offspring_energy = GlobEnergyCurrent[entity_for_ls];\012\012			mode = LS_STATE_DIR_FIRST;\012			write_to_channel_genotype = false;\012			read_from_channel_ack = false;\012\012			rho = 1.0f;\012			LS_eval = 0;\012			iteration_cnt = 0;\012\012\012/*\012			for (uint ls_ent_cnt=0; ls_ent_cnt<DockConst->num_of_lsentities; ls_ent_cnt++)	\012			{\012\012				perform_LS(GlobPopulationCurrent,\012				           GlobEnergyCurrent,\012				           GlobPRNG,\012				           KerConst,\012				           DockConst,\012				           entity_for_ls,\012				           local_entity_ls,\012				           entity_possible_new_genotype,\012				           &LS_eval);\012\012				eval_cnt += LS_eval;\012				evals_for_ls_in_this_cycle += LS_eval;\012				num_of_evals_for_ls += LS_eval;\012			}\012\012			generation_cnt++;\012			mode = STATE_LS_WAIT_END;\012*/\012\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case LS_STATE_DIR_FIRST:\012			//rho is the deviation of the uniform distribution\012			genotype_deviate [0] = rho*DockConst->base_dmov_mul_sqrt3*(2*myrand(GlobPRNG)-1);\012			genotype_deviate [1] = rho*DockConst->base_dmov_mul_sqrt3*(2*myrand(GlobPRNG)-1);\012			genotype_deviate [2] = rho*DockConst->base_dmov_mul_sqrt3*(2*myrand(GlobPRNG)-1);\012			for (uint i=3; i<DockConst->num_of_genes; i++) {\012				genotype_deviate [i] = rho*DockConst->base_dang_mul_sqrt3*(2*myrand(GlobPRNG)-1);\012			}\012\012			genotype [0] = offspring_genotype [0] + genotype_deviate [0] + genotype_bias [0];\012			genotype [1] = offspring_genotype [1] + genotype_deviate [1] + genotype_bias [1];\012			genotype [2] = offspring_genotype [2] + genotype_deviate [2] + genotype_bias [2];\012			genotype [3] = offspring_genotype [3] + genotype_deviate [3] + genotype_bias [3];\012			map_angle(&(genotype [3]), 360.0f);\012			genotype [4] = offspring_genotype [4] + genotype_deviate [4] + genotype_bias [4];\012			map_angle(&(genotype [4]), 180.0f);\012			for (uint i=5; i<DockConst->num_of_genes; i++) {\012				genotype [i] = offspring_genotype [i] + genotype_deviate [i] + genotype_bias [i];  \012				map_angle(&(genotype [i]), 360.0f);\012			}\012			\012			mode = LS_STATE_WAIT_FIRST;\012			write_to_channel_genotype = true;\012			read_from_channel_energy = false;\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case LS_STATE_WAIT_FIRST:\012			mode = LS_STATE_ENERGY_FIRST;\012			write_to_channel_genotype = false;\012			read_from_channel_energy = true;\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case LS_STATE_ENERGY_FIRST:\012			//if the new entity is better better\012			if (candidate_energy < offspring_energy) {\012\012				for (uint i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {\012					//updating offspring_genotype\012					offspring_genotype [i] = genotype [i];\012					//updating genotype_bias\012					genotype_bias [i] = 0.6f*genotype_bias [i] + 0.4f*genotype_deviate [i];\012				}\012\012				offspring_energy = candidate_energy;\012				cons_succ++;\012				cons_fail = 0;\012	\012				mode = LS_STATE_CHECK_RHO;\012				write_to_channel_genotype = false;\012				read_from_channel_energy = false;\012\012			}\012\012			//if worser, check the opposite direction\012			else {\012				mode = LS_STATE_DIR_SECOND;\012				write_to_channel_genotype = false;\012				read_from_channel_energy = false;\012			}\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case LS_STATE_DIR_SECOND:\012			genotype [0] = offspring_genotype [0] - genotype_deviate [0] - genotype_bias [0];				 \012			genotype [1] = offspring_genotype [1] - genotype_deviate [1] - genotype_bias [1];\012			genotype [2] = offspring_genotype [2] - genotype_deviate [2] - genotype_bias [2];\012			genotype [3] = offspring_genotype [3] - genotype_deviate [3] - genotype_bias [3];\012			map_angle(&(genotype [3]), 360.0f);\012			genotype [4] = offspring_genotype [4] - genotype_deviate [4] - genotype_bias [4];\012			map_angle(&(genotype [4]), 180.0f);\012			for (uint i=5; i<DockConst->num_of_genes; i++) {\012				genotype [i] = offspring_genotype [i] - genotype_deviate [i] - genotype_bias [i];\012				map_angle(&(genotype [i]), 360.0f);\012			}\012\012			mode = LS_STATE_WAIT_SECOND;\012			write_to_channel_genotype = true;\012			read_from_channel_energy = false;\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case LS_STATE_WAIT_SECOND:\012			mode = LS_STATE_ENERGY_SECOND;\012			write_to_channel_genotype = false;\012			read_from_channel_energy = true;\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case LS_STATE_ENERGY_SECOND:\012			LS_eval++;\012\012			//if the new entity is better\012			if (candidate_energy < offspring_energy) {\012				for (uint i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {\012					//updating offspring_genotype\012					offspring_genotype [i] = genotype [i];\012\012					//updating genotype_bias\012					genotype_bias [i] = 0.6f*genotype_bias [i] - 0.4f*genotype_deviate [i];\012				}\012\012				offspring_energy = candidate_energy;\012				cons_succ++;\012				cons_fail = 0;\012\012			}\012			//failure in both of the directions :-(\012			else {\012				//updating (halving) genotype_bias\012				for (uint i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {\012					genotype_bias [i] = 0.5f*genotype_bias [i];\012				}\012\012				cons_fail++;\012				cons_succ = 0;\012			}\012\012			mode = LS_STATE_CHECK_RHO;\012			write_to_channel_genotype = false;\012			read_from_channel_energy = false;\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case LS_STATE_CHECK_RHO:\012			//Changing deviation (rho), if needed\012			if (cons_succ >= DockConst->cons_limit) {\012			//this limitation is necessary in the FPGA due to the number representation\012				if ((rho*DockConst->base_dang_mul_sqrt3 < 90) && (rho*DockConst->base_dmov_mul_sqrt3 < 64)) {\012					rho = LS_EXP_FACTOR*rho;\012				}\012\012				cons_fail = 0;\012				cons_succ = 0;\012\012				}\012			else {\012				if (cons_fail >= DockConst->cons_limit) {\012					rho = LS_CONT_FACTOR*rho;\012					cons_fail = 0;\012					cons_succ = 0;\012				}\012			}\012\012			iteration_cnt++;\012			//printf(\"performLS: iteration_cnt (INC): %u, rho: %f, max: %f\\n\", iteration_cnt, rho, DockConst->rho_lower_bound);\012\012			mode = LS_STATE_CHECK_TERMINATION;\012			write_to_channel_genotype = false;\012			read_from_channel_energy = false;\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case LS_STATE_CHECK_TERMINATION:\012			if ((iteration_cnt < DockConst->max_num_of_iters) && (rho > DockConst->rho_lower_bound)) {\012				mode = LS_STATE_DIR_FIRST;\012				write_to_channel_genotype = false;\012				read_from_channel_energy = false;\012			}\012			else {\012				mode = STATE_LS_WAIT_END;\012				write_to_channel_genotype = false;\012				read_from_channel_energy = false;\012\012				for (uint i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {\012					GlobPopulationCurrent[entity_for_ls*ACTUAL_GENOTYPE_LENGTH + i] = offspring_genotype [i];\012				}\012				GlobEnergyCurrent[entity_for_ls] = offspring_energy;\012			}\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case STATE_LS_WAIT_END :	// Signal LS finished 		\012			eval_cnt += LS_eval;\012			evals_for_ls_in_this_cycle += LS_eval;\012			num_of_evals_for_ls += LS_eval;\012\012			ls_ent_cnt++;\012\012			if (ls_ent_cnt<DockConst->num_of_lsentities) {\012				//mode = LS_STATE_DIR_FIRST;\012				mode = STATE_LS;\012				write_to_channel_genotype = false;\012				read_from_channel_ack = false;\012			}\012			else {\012				mode = STATE_CHECK_TERMINATION;\012				write_to_channel_genotype = false;\012				read_from_channel_ack = false;\012\012				generation_cnt++;\012			}				\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case STATE_CHECK_TERMINATION :	// Signal LS finished 		\012			if((eval_cnt < DockConst->num_of_energy_evals) && (generation_cnt < DockConst->num_of_generations)) {\012				mode = STATE_GG_FIND_BEST;\012				pop_cnt = 0; \012				write_to_channel_genotype = false;\012				read_from_channel_ack = false;\012			}\012			else {\012				mode = STATE_END;\012				write_to_channel_genotype = false;\012				read_from_channel_ack = false;	\012			}\012			printf(\"eval_cnt: %u, generation_cnt: %u\\n\", eval_cnt, generation_cnt);	\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case STATE_END :		// Krnl_GA has finished execution!	\012			active_work_kernels = 0;\012			mode = STATE_WAIT_END;\012			write_to_channel_genotype = true;\012			read_from_channel_ack = false;\012\012			for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {\012				genotype[pipe_cnt] = 0;\012			}\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case STATE_WAIT_END :		\012			mode = STATE_OFF;\012			write_to_channel_genotype = false;\012			read_from_channel_ack = true;\012				\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case STATE_OFF :	\012			active = false;\012			GlobEvals_performed[0]       =  eval_cnt;\012			GlobGenerations_performed[0] =  generation_cnt;	\012\012			write_to_channel_genotype = false;\012			read_from_channel_ack = false;\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012	} // End of switch\012\012\012	if (write_to_channel_genotype == true) {\012		write_channel_altera(chan_GA2Conf_active, active_work_kernels);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		write_channel_altera(chan_GA2Conf_mode,   mode);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		write_channel_altera(chan_GA2Conf_cnt,    pop_cnt);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012\012		for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {\012			write_channel_altera(chan_GA2Conf_genotype, genotype[pipe_cnt]);\012		}\012	}\012\012	if (read_from_channel_ack == true) { \012		ack = read_channel_altera(chan_Store2GA_ack);	\012	}\012\012	if (read_from_channel_energy == true) {\012		candidate_energy = read_channel_altera(chan_Store2GA_LSenergy);\012	}\012\012	} // End of while\012\012\012\012\012\012\012\012//*/\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012/*\012\012	//active = 1;\012	//mode   = 1;\012\012	LOOP_GEN_GENERATIONAL_1:\012	for (uint pop_cnt = 0; pop_cnt < DockConst->pop_size; pop_cnt++)\012	{	\012		// --------------------------------------------------------------\012		// Send genotypes to channel\012		// --------------------------------------------------------------\012		write_channel_altera(chan_GA2Conf_active, active);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		write_channel_altera(chan_GA2Conf_mode,   mode);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		write_channel_altera(chan_GA2Conf_cnt,    pop_cnt);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012\012		for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {\012			//write_channel_altera(chan_GA2Conf_genotype, GlobPopulationCurrent[pop_cnt*ACTUAL_GENOTYPE_LENGTH+ pipe_cnt]);\012			write_channel_altera(chan_GA2Conf_IC_genotype, GlobPopulationCurrent[pop_cnt*ACTUAL_GENOTYPE_LENGTH+ pipe_cnt]);\012		}\012\012\012\012\012		// --------------------------------------------------------------\012		\012		#if defined (DEBUG_LEO)\012		printf(\"pop_cnt (INC): %u\\n\", pop_cnt);\012		#endif\012	} // End of LOOP_GEN_GENERATIONAL_1\012	\012	eval_cnt = DockConst->pop_size;\012	\012	#if defined (DEBUG_LEO)\012	printf(\"eval_cnt (INC): %u\\n\", eval_cnt);\012	#endif\012\012\012\012\012\012\012\012\012	// --------------------------------------------------------------\012	// Send DUMMY genotypes to channel to signal INI stop\012	// --------------------------------------------------------------\012	active = 1;\012	mode   = STATE_IC_WAIT_END;\012\012	write_channel_altera(chan_GA2Conf_active, active);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	write_channel_altera(chan_GA2Conf_mode,   mode);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	write_channel_altera(chan_GA2Conf_cnt,    0);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012\012	for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {\012		//write_channel_altera(chan_GA2Conf_genotype, 0);\012		write_channel_altera(chan_GA2Conf_IC_WAIT_genotype, 0);\012	}\012\012\012	//ack = read_channel_altera(chan_Store2GA_ack);\012	ack = read_channel_altera(chan_Store2GA_IC_ack);\012	//printf(\"INI ack: %u\\n\", ack);\012	// --------------------------------------------------------------\012		\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012	// **********************************************\012	// ADD VENDOR SPECIFIC PRAGMA\012	// **********************************************\012	float avg_energy;\012	\012	LOOP_WHILE_GEN_GENERATIONAL_1:\012	// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\012	// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\012	while ((eval_cnt < DockConst->num_of_energy_evals) && (generation_cnt < DockConst->num_of_generations))\012	{\012		//Creating a new population\012\012		//Identifying best entity\012		best_entity_id = find_best(GlobEnergyCurrent, loc_energies, DockConst->pop_size); \012\012		#if defined (DEBUG_KERNEL1)\012		avg_energy = 0.0f;\012		printf(\"\\n\\n\\nFinal state of the %u. generation:\\n\", generation_cnt);\012		printf(\"----------------------------\\n\\n\");\012		for (i=0; i<DockConst->pop_size; i++)\012		{\012			avg_energy += GlobEnergyCurrent [i];\012			printf(\"Entity %3u: \", i);\012			for (j=0; j<ACTUAL_GENOTYPE_LENGTH; j++) {\012				printf(\"%8.3f \", GlobPopulationCurrent [i*ACTUAL_GENOTYPE_LENGTH +j]);\012			}\012			printf(\"   energy sum: %10.3f\\n\", GlobEnergyCurrent [i*40 + 38]);\012		}\012		printf(\"\\nAverage energy: %f\\nBest energy sum: %f)\\n\\n\", avg_energy/DockConst->pop_size, \012		      GlobEnergyCurrent[best_entity_id]);\012		#endif\012\012		//elitism - copying the best entity to new population\012		for (uint i=0; i<ACTUAL_GENOTYPE_LENGTH; i++)\012		{\012			GlobPopulationNext[i] = GlobPopulationCurrent[best_entity_id*ACTUAL_GENOTYPE_LENGTH+i];\012		}\012		GlobEnergyNext[best_entity_id] = GlobEnergyCurrent[best_entity_id];\012\012\012		//new population consists of one member currently\012		// But not needed to be specified as the following loop does it\012		//new_pop_cnt = 1;\012\012\012\012\012\012\012\012		// -----------------------------------------------------------------------\012		active = 1;\012		mode = 2;\012\012		// **********************************************\012		// ADD VENDOR SPECIFIC PRAGMA\012		// **********************************************\012		LOOP_GEN_GENERATIONAL_2:\012		for (uint new_pop_cnt = 1; new_pop_cnt < DockConst->pop_size; new_pop_cnt++)\012		{\012			//printf(\"BEFORE BINARY TOURNAMENT, %u\\n\",new_pop_cnt);\012			//selecting two individuals randomly\012			binary_tournament_selection(GlobEnergyCurrent,\012						    GlobPRNG,\012						    &parent1,\012						    &parent2,\012						    DockConst->pop_size,\012						    DockConst->tournament_rate);\012			//printf(\"AFTER BINARY TOURNAMENT, %u\\n\",new_pop_cnt);\012\012\012			//mating parents	\012			async_work_group_copy(local_entity_1, GlobPopulationCurrent+parent1*ACTUAL_GENOTYPE_LENGTH, ACTUAL_GENOTYPE_LENGTH, 0);\012			async_work_group_copy(local_entity_2, GlobPopulationCurrent+parent2*ACTUAL_GENOTYPE_LENGTH, ACTUAL_GENOTYPE_LENGTH, 0);\012\012\012			//printf(\"BEFORE GEN NEW GENOTYPE, %u\\n\",new_pop_cnt);\012			// first two args are population [parent1], population [parent2]\012			gen_new_genotype(GlobPRNG,\012                                         local_entity_1, \012					 local_entity_2,\012					 DockConst->mutation_rate,\012					 DockConst->abs_max_dmov,\012					 DockConst->abs_max_dang,\012					 DockConst->crossover_rate,\012					 ACTUAL_GENOTYPE_LENGTH,\012					 offspring_genotype);\012\012			//printf(\"AFTER GEN NEW GENOTYPE, %u\\n\",new_pop_cnt);\012\012\012			//printf(\"BEFORE GA CHANNEL, %u\\n\",new_pop_cnt);\012			// --------------------------------------------------------------\012			// Send genotypes to channel\012			// --------------------------------------------------------------\012\012			for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {\012				write_channel_altera(chan_GA2Conf_genotype, offspring_genotype[pipe_cnt]);\012			}\012\012			write_channel_altera(chan_GA2Conf_active, active);\012			write_channel_altera(chan_GA2Conf_mode,   mode);\012			write_channel_altera(chan_GA2Conf_cnt,    new_pop_cnt);\012\012			// --------------------------------------------------------------\012			//printf(\"AFTER GA CHANNEL, %u\\n\",new_pop_cnt);\012\012			//copying offspring to population\012			// **********************************************\012			// ADD VENDOR SPECIFIC PRAGMA\012			// **********************************************\012			\012			//LOOP_GEN_GENERATIONAL_3:\012			//for (uint gene_cnt = 0; gene_cnt < ACTUAL_GENOTYPE_LENGTH; gene_cnt++) {\012			//	GlobPopulationNext[new_pop_cnt*ACTUAL_GENOTYPE_LENGTH + gene_cnt] = offspring_genotype[gene_cnt];\012			//}\012			\012			async_work_group_copy(GlobPopulationNext+new_pop_cnt*ACTUAL_GENOTYPE_LENGTH, offspring_genotype, ACTUAL_GENOTYPE_LENGTH, 0);\012	\012			#if defined (DEBUG_LEO)\012			printf(\"eval_cnt (INC): %u, new_pop_cnt (INC): %u\\n\", eval_cnt, new_pop_cnt);\012			#endif\012			\012\012\012		\012		} // End of LOOP_GEN_GENERATIONAL_2\012		// -----------------------------------------------------------------------\012\012\012\012\012\012		\012\012\012		#if defined (DEBUG_LEO)\012		printf(\"End of loop of new_pop_cnt, new_pop_cnt = %u\\n\", DockConst->pop_size);\012		#endif\012\012\012\012\012\012\012\012		// --------------------------------------------------------------\012		// Send DUMMY genotypes to channel to signal GG stop\012		// --------------------------------------------------------------\012		active = 1;\012		mode   = 0;\012		for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {\012			write_channel_altera(chan_GA2Conf_genotype, 0);\012		}\012\012		write_channel_altera(chan_GA2Conf_active, active);\012		write_channel_altera(chan_GA2Conf_mode,   mode);\012		write_channel_altera(chan_GA2Conf_cnt,    0);\012\012		ack = read_channel_altera(chan_Store2GA_ack);\012		//printf(\"GG ack: %u\\n\", ack);\012		// --------------------------------------------------------------\012		\012\012\012\012\012		// Updating old population with new one\012		// **********************************************\012		// ADD VENDOR SPECIFIC PRAGMA\012		// **********************************************\012		for (uint i=0;i<DockConst->pop_size*ACTUAL_GENOTYPE_LENGTH; i++)\012		{\012			GlobPopulationCurrent[i] = GlobPopulationNext[i];\012		}\012\012		// Updating old energy with new one\012		// **********************************************\012		// ADD VENDOR SPECIFIC PRAGMA\012		// **********************************************\012		for (uint i=0;i<DockConst->pop_size; i++)\012		{\012			GlobEnergyCurrent[i] = GlobEnergyNext[i];\012		}\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012		evals_for_ls_in_this_cycle = 0;\012\012		#if defined (DEBUG_LEO)\012		printf(\"num_of_entity_for_ls: %u \\n\", DockConst->num_of_lsentities);\012		#endif\012\012\012\012\012\012\012\012\012\012		// -----------------------------------------------------------------------\012		// **********************************************\012		// ADD VENDOR SPECIFIC PRAGMA\012		// **********************************************\012		LOOP_GEN_GENERATIONAL_4:\012		//subjecting num_of_entity_for_ls pieces of offsprings to LS\012		for (uint ls_ent_cnt=0; ls_ent_cnt<DockConst->num_of_lsentities; ls_ent_cnt++)	\012		{\012			//choosing an entity randomly,\012			//and without checking if it has already been subjected to LS in this cycle\012			entity_for_ls = myrand_uint(GlobPRNG, DockConst->pop_size);\012\012			#if defined (DEBUG_LEO)\012			printf(\"entity_for_ls: %u\\n\", entity_for_ls);\012			#endif\012\012\012			#if defined (DEBUG_KERNEL1)\012			printf(\"Entity %u before local search: \", entity_for_ls);\012			for (j=0; j<DockConst->rotbondlist_length+6; j++) {\012				printf(\"%f \", GlobPopulationCurrent [entity_for_ls*ACTUAL_GENOTYPE_LENGTH + j]);\012			}\012			printf(\"   energies: %f \\n\", GlobEnergyCurrent [entity_for_ls]);\012			#endif\012\012			//printf(\"BEFORE LS, %u\\n\",ls_ent_cnt);\012			//performing local search\012			//async_work_group_copy(local_entity_ls, GlobPopulationCurrent+entity_for_ls*ACTUAL_GENOTYPE_LENGTH, ACTUAL_GENOTYPE_LENGTH, 0);\012			//local_entity_energy = GlobEnergyCurrent[entity_for_ls];\012\012			perform_LS(GlobPopulationCurrent,\012				   GlobEnergyCurrent,\012				   GlobPRNG,\012				   KerConst,\012				   DockConst,\012				   entity_for_ls,\012				   local_entity_ls,\012				   entity_possible_new_genotype,\012				   &LS_eval);\012\012			//async_work_group_copy(GlobPopulationCurrent+entity_for_ls*ACTUAL_GENOTYPE_LENGTH, local_entity_ls, ACTUAL_GENOTYPE_LENGTH, 0);\012\012			//printf(\"AFTER LS, %u\\n\",ls_ent_cnt);\012\012\012			eval_cnt += LS_eval;\012			evals_for_ls_in_this_cycle += LS_eval;\012\012\012			#if defined (DEBUG_KERNEL1)\012			printf(\"Entity %u after local search (%u evaluations): \", entity_for_ls, LS_eval);\012			for (j=0; j<myligand_num_of_rotbonds+6; j++) {printf(\"%f \", GlobPopulation [entity_for_ls*40 + j]);}\012			printf(\"   energies: %f %f\\n\",\012				   GlobPopulation [entity_for_ls*40 + 38],\012				   GlobPopulation [entity_for_ls*40 + 39]);\012			#endif\012\012			num_of_evals_for_ls += LS_eval;\012\012			#if defined (DEBUG_LEO)\012			printf(\"eval_cnt (INC): %u, evals_for_ls_in_this_cycle(INC): % u\\n\", eval_cnt, evals_for_ls_in_this_cycle);\012			#endif\012\012\012		} // End of LOOP_GEN_GENERATIONAL_4\012\012		// -----------------------------------------------------------------------\012\012		generation_cnt++;\012\012		//#if defined (DEBUG_LEO)\012		printf(\"eval_cnt: %u, generation_cnt: %u\\n\", eval_cnt, generation_cnt);\012		//#endif\012\012\012\012\012	} // End of while ((eval_cnt < mypars->num_of_energy_evals) && (generation_cnt < mypars->num_of_generations))\012\012\012	// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\012	// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\012*/\012\012\012\012\012\012\012\012\012\012\012\012\012\012/*\012\012\012\012\012	printf(\"	%-20s: %s\\n\", \"Krnl_GA\", \"has finished execution!\");\012\012	\012	active = 0;\012	mode = 4;\012\012	// --------------------------------------------------------------\012	// Send DUMMY genotypes to channel\012	// --------------------------------------------------------------\012	for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {\012		write_channel_altera(chan_GA2Conf_genotype, 0);\012	}\012	write_channel_altera(chan_GA2Conf_active, active);\012	write_channel_altera(chan_GA2Conf_mode,   mode);\012	write_channel_altera(chan_GA2Conf_cnt,    0);\012	// --------------------------------------------------------------\012\012\012	GlobEvals_performed[0]       =  eval_cnt;\012	GlobGenerations_performed[0] =  generation_cnt;\012\012	#if defined (DEBUG_KERNEL1)\012	printf(\"Energy evaluations for LS: %u out of %u\\n\", num_of_evals_for_ls, eval_cnt);\012	printf(\"Number of generations: %u\\n\", generation_cnt);\012	#endif\012\012\012\012\012*/\012\012\012\012}\012\012// --------------------------------------------------------------------------\012// --------------------------------------------------------------------------\012\012\012#include \"Krnl_Conform.cl\"\012#include \"Krnl_InterE.cl\"\012#include \"Krnl_IntraE.cl\"\012#include \"Krnl_Store.cl\"\012\012"}, {"index":1, "path":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_Conform.cl", "name":"Krnl_Conform.cl", "content":"// --------------------------------------------------------------------------\012// The function changes the conformation of myligand according to \012// the genotype given by the second parameter.\012// Originally from: processligand.c\012// --------------------------------------------------------------------------\012__kernel __attribute__ ((reqd_work_group_size(1,1,1)))\012void Krnl_Conform(\012             //__global const float*           restrict GlobFgrids,\012	     //__global       float*           restrict GlobPopulationCurrent,\012	     //__global       float*           restrict GlobEnergyCurrent,\012	     //__global       float*           restrict GlobPopulationNext,\012	     //__global       float*           restrict GlobEnergyNext,\012             //__global       unsigned int*    restrict GlobPRNG,\012	     __global const kernelconstant*  restrict KerConst,\012	     __global const Dockparameters*  restrict DockConst)\012{\012\012	__local float loc_coords_x[MAX_NUM_OF_ATOMS];\012	__local float loc_coords_y[MAX_NUM_OF_ATOMS];\012	__local float loc_coords_z[MAX_NUM_OF_ATOMS];\012	__local float genotype[ACTUAL_GENOTYPE_LENGTH];\012/*\012	float __attribute__((register)) loc_coords_x[MAX_NUM_OF_ATOMS];\012	float __attribute__((register)) loc_coords_y[MAX_NUM_OF_ATOMS];\012	float __attribute__((register)) loc_coords_z[MAX_NUM_OF_ATOMS];\012	float __attribute__((register)) genotype[ACTUAL_GENOTYPE_LENGTH];\012*/\012\012\012	char active = 1;\012	char mode   = 0;\012	uint cnt    = 0;    \012\012	float phi, theta, genrotangle;\012	float genrot_unitvec [3];\012\012	int rotation_list_element;\012	uint atom_id, rotbond_id;\012	float atom_to_rotate[3];\012	float rotation_unitvec[3];\012	float rotation_movingvec[3];\012	float rotation_angle;\012	float sin_angle;\012	float quatrot_left_x, quatrot_left_y, quatrot_left_z, quatrot_left_q;\012	float quatrot_temp_x, quatrot_temp_y, quatrot_temp_z, quatrot_temp_q;\012\012while(active) {\012\012	//printf(\"BEFORE In CONFORM CHANNEL\\n\");\012	// --------------------------------------------------------------\012	// Wait for genotypes in channel\012	// --------------------------------------------------------------\012	active = read_channel_altera(chan_GA2Conf_active); if (active == 0) {printf(\"	%-20s: %s\\n\", \"Krnl_Conform\", \"disabled\");}\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	mode   = read_channel_altera(chan_GA2Conf_mode);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	cnt    = read_channel_altera(chan_GA2Conf_cnt);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012\012	for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {\012		genotype[pipe_cnt] = read_channel_altera(chan_GA2Conf_genotype);\012	}	\012	// --------------------------------------------------------------\012	//printf(\"AFTER In CONFORM CHANNEL\\n\");\012\012	phi         = genotype [3]*DEG_TO_RAD;\012	theta       = genotype [4]*DEG_TO_RAD;\012	genrotangle = genotype [5]*DEG_TO_RAD;\012\012	#if defined (NATIVE_PRECISION)\012	genrot_unitvec [0] = native_sin(theta)*native_cos(phi);\012	genrot_unitvec [1] = native_sin(theta)*native_sin(phi);\012	genrot_unitvec [2] = native_cos(theta);\012	#else\012	genrot_unitvec [0] = sin(theta)*cos(phi);\012	genrot_unitvec [1] = sin(theta)*sin(phi);\012	genrot_unitvec [2] = cos(theta);\012	#endif\012	\012	\012\012	// **********************************************\012	// ADD VENDOR SPECIFIC PRAGMA\012	// **********************************************\012	LOOP_CHANGE_CONFORM_1:\012	for (uint rotation_counter = 0; rotation_counter < DockConst->rotbondlist_length; rotation_counter++)\012	{\012		rotation_list_element = KerConst->rotlist_const[rotation_counter];\012\012		if ((rotation_list_element & RLIST_DUMMY_MASK) == 0)	//if not dummy rotation\012		{\012			atom_id = rotation_list_element & RLIST_ATOMID_MASK;\012\012			//capturing atom coordinates\012			if ((rotation_list_element & RLIST_FIRSTROT_MASK) != 0)	//if first rotation of this atom\012			{\012				atom_to_rotate[0] = KerConst->ref_coords_x_const[atom_id];\012				atom_to_rotate[1] = KerConst->ref_coords_y_const[atom_id];\012				atom_to_rotate[2] = KerConst->ref_coords_z_const[atom_id];\012			}\012			else\012			{\012				atom_to_rotate[0] = loc_coords_x[atom_id];\012				atom_to_rotate[1] = loc_coords_y[atom_id];\012				atom_to_rotate[2] = loc_coords_z[atom_id];\012			}\012\012			//capturing rotation vectors and angle\012			if ((rotation_list_element & RLIST_GENROT_MASK) != 0)	//if general rotation\012			{\012				rotation_unitvec[0] = genrot_unitvec[0];\012				rotation_unitvec[1] = genrot_unitvec[1];\012				rotation_unitvec[2] = genrot_unitvec[2];\012\012				rotation_angle = genrotangle;\012\012				rotation_movingvec[0] = genotype[0];\012				rotation_movingvec[1] = genotype[1];\012				rotation_movingvec[2] = genotype[2];\012			}\012			else	//if rotating around rotatable bond\012			{\012				rotbond_id = (rotation_list_element & RLIST_RBONDID_MASK) >> RLIST_RBONDID_SHIFT;\012	\012				rotation_unitvec[0] = KerConst->rotbonds_unit_vectors_const[3*rotbond_id];\012				rotation_unitvec[1] = KerConst->rotbonds_unit_vectors_const[3*rotbond_id+1];\012				rotation_unitvec[2] = KerConst->rotbonds_unit_vectors_const[3*rotbond_id+2];\012				rotation_angle = genotype[6+rotbond_id]*DEG_TO_RAD;\012\012				rotation_movingvec[0] = KerConst->rotbonds_moving_vectors_const[3*rotbond_id];\012				rotation_movingvec[1] = KerConst->rotbonds_moving_vectors_const[3*rotbond_id+1];\012				rotation_movingvec[2] = KerConst->rotbonds_moving_vectors_const[3*rotbond_id+2];\012\012				//in addition performing the first movement \012				//which is needed only if rotating around rotatable bond\012				atom_to_rotate[0] -= rotation_movingvec[0];\012				atom_to_rotate[1] -= rotation_movingvec[1];\012				atom_to_rotate[2] -= rotation_movingvec[2];\012			}\012\012			//performing rotation\012			rotation_angle = rotation_angle/2;\012			quatrot_left_q = cos(rotation_angle);\012			sin_angle = sin(rotation_angle);\012\012			quatrot_left_x = sin_angle*rotation_unitvec[0];\012			quatrot_left_y = sin_angle*rotation_unitvec[1];\012			quatrot_left_z = sin_angle*rotation_unitvec[2];\012\012			if ((rotation_list_element & RLIST_GENROT_MASK) != 0)	//if general rotation, \012										//two rotations should be performed \012										//(multiplying the quaternions)\012			{\012				//calculating quatrot_left*ref_orientation_quats_const, \012				//which means that reference orientation rotation is the first\012				quatrot_temp_q = quatrot_left_q;\012				quatrot_temp_x = quatrot_left_x;\012				quatrot_temp_y = quatrot_left_y;\012				quatrot_temp_z = quatrot_left_z;\012\012				// L30nardoSV: taking the first element of ref_orientation_quats_const member\012				quatrot_left_q = quatrot_temp_q*KerConst->ref_orientation_quats_const[0]-\012						 quatrot_temp_x*KerConst->ref_orientation_quats_const[1]-\012						 quatrot_temp_y*KerConst->ref_orientation_quats_const[2]-\012						 quatrot_temp_z*KerConst->ref_orientation_quats_const[3];\012				quatrot_left_x = quatrot_temp_q*KerConst->ref_orientation_quats_const[1]+\012						 KerConst->ref_orientation_quats_const[0]*quatrot_temp_x+\012						 quatrot_temp_y*KerConst->ref_orientation_quats_const[3]-\012						 KerConst->ref_orientation_quats_const[2]*quatrot_temp_z;\012				quatrot_left_y = quatrot_temp_q*KerConst->ref_orientation_quats_const[2]+\012						 KerConst->ref_orientation_quats_const[0]*quatrot_temp_y+\012						 KerConst->ref_orientation_quats_const[1]*quatrot_temp_z-\012						 quatrot_temp_x*KerConst->ref_orientation_quats_const[3];\012				quatrot_left_z = quatrot_temp_q*KerConst->ref_orientation_quats_const[3]+\012						 KerConst->ref_orientation_quats_const[0]*quatrot_temp_z+\012						 quatrot_temp_x*KerConst->ref_orientation_quats_const[2]-\012						 KerConst->ref_orientation_quats_const[1]*quatrot_temp_y;\012\012			}\012\012			quatrot_temp_q = 0 -\012					 quatrot_left_x*atom_to_rotate [0] -\012					 quatrot_left_y*atom_to_rotate [1] -\012					 quatrot_left_z*atom_to_rotate [2];\012			quatrot_temp_x = quatrot_left_q*atom_to_rotate [0] +\012					 quatrot_left_y*atom_to_rotate [2] -\012					 quatrot_left_z*atom_to_rotate [1];\012			quatrot_temp_y = quatrot_left_q*atom_to_rotate [1] -\012					 quatrot_left_x*atom_to_rotate [2] +\012					 quatrot_left_z*atom_to_rotate [0];\012			quatrot_temp_z = quatrot_left_q*atom_to_rotate [2] +\012					 quatrot_left_x*atom_to_rotate [1] -\012					 quatrot_left_y*atom_to_rotate [0];\012\012			atom_to_rotate [0] = 0 -\012					     quatrot_temp_q*quatrot_left_x +\012					     quatrot_temp_x*quatrot_left_q -\012					     quatrot_temp_y*quatrot_left_z +\012					     quatrot_temp_z*quatrot_left_y;\012			atom_to_rotate [1] = 0 -\012					     quatrot_temp_q*quatrot_left_y +\012					     quatrot_temp_x*quatrot_left_z +\012					     quatrot_temp_y*quatrot_left_q -\012					     quatrot_temp_z*quatrot_left_x;\012			atom_to_rotate [2] = 0 -\012					     quatrot_temp_q*quatrot_left_z -\012					     quatrot_temp_x*quatrot_left_y +\012					     quatrot_temp_y*quatrot_left_x +\012					     quatrot_temp_z*quatrot_left_q;\012\012			//performing final movement and storing values\012			loc_coords_x[atom_id] = atom_to_rotate [0] + rotation_movingvec[0];\012			loc_coords_y[atom_id] = atom_to_rotate [1] + rotation_movingvec[1];\012			loc_coords_z[atom_id] = atom_to_rotate [2] + rotation_movingvec[2];\012\012		} // End if-statement not dummy rotation\012	} // End rotation_counter for-loop\012\012	//printf(\"BEFORE Out CONFORM CHANNEL\\n\");\012	// --------------------------------------------------------------\012	// Send ligand atomic coordinates to channel \012	// --------------------------------------------------------------\012/*\012	for (uint pipe_cnt=0; pipe_cnt<DockConst->num_of_atoms; pipe_cnt++) {\012		write_channel_altera(chan_Conf2Intere_x, loc_coords_x[pipe_cnt]);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		write_channel_altera(chan_Conf2Intere_y, loc_coords_y[pipe_cnt]);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		write_channel_altera(chan_Conf2Intere_z, loc_coords_z[pipe_cnt]);\012		//mem_fence(CLK_CHANNEL_MEM_FENCE);\012\012		write_channel_altera(chan_Conf2Intrae_x, loc_coords_x[pipe_cnt]);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		write_channel_altera(chan_Conf2Intrae_y, loc_coords_y[pipe_cnt]);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		write_channel_altera(chan_Conf2Intrae_z, loc_coords_z[pipe_cnt]);\012	}\012*/\012\012\012	for (uint pipe_cnt=0; pipe_cnt<DockConst->num_of_atoms; pipe_cnt++) {\012		write_channel_altera(chan_Conf2Intere_x, loc_coords_x[pipe_cnt]);\012		write_channel_altera(chan_Conf2Intrae_x, loc_coords_x[pipe_cnt]);\012		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);\012		write_channel_altera(chan_Conf2Intere_y, loc_coords_y[pipe_cnt]);\012		write_channel_altera(chan_Conf2Intrae_y, loc_coords_y[pipe_cnt]);\012		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);\012		write_channel_altera(chan_Conf2Intere_z, loc_coords_z[pipe_cnt]);\012		write_channel_altera(chan_Conf2Intrae_z, loc_coords_z[pipe_cnt]);\012		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);\012		write_channel_altera(chan_Conf2Intere_active, active);\012		write_channel_altera(chan_Conf2Intrae_active, active);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		write_channel_altera(chan_Conf2Intere_mode,   mode);\012		write_channel_altera(chan_Conf2Intrae_mode,   mode);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		write_channel_altera(chan_Conf2Intere_cnt,    cnt);\012		write_channel_altera(chan_Conf2Intrae_cnt,    cnt);\012	}\012	// --------------------------------------------------------------\012	//printf(\"AFTER Out CONFORM CHANNEL\\n\");\012\012} // End of while(1)\012\012}\012// --------------------------------------------------------------------------\012// --------------------------------------------------------------------------\012"}, {"index":2, "path":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl", "name":"Krnl_InterE.cl", "content":"// --------------------------------------------------------------------------\012// The function calculates the intermolecular energy of a ligand given by \012// myligand parameter, and a receptor represented as a grid. \012// The grid point values must be stored at the location which starts at GlobFgrids, \012// the memory content can be generated with get_gridvalues function.\012// The mygrid parameter must be the corresponding grid informtaion. \012// If an atom is outside the grid, the coordinates will be changed with \012// the value of outofgrid_tolerance, \012// if it remains outside, a very high value will be added to the current energy as a penalty. \012// Originally from: processligand.c\012// --------------------------------------------------------------------------\012__kernel __attribute__ ((reqd_work_group_size(1,1,1)))\012void Krnl_InterE(\012             __global const float*           restrict GlobFgrids,\012	     //__global       float*           restrict GlobPopulationCurrent,\012	     //__global       float*           restrict GlobEnergyCurrent,\012	     //__global       float*           restrict GlobPopulationNext,\012	     //__global       float*           restrict GlobEnergyNext,\012             //__global       unsigned int*    restrict GlobPRNG,\012	     __global const kernelconstant*  restrict KerConst,\012	     __global const Dockparameters*  restrict DockConst)\012{\012/*\012	__local float loc_coords_x[MAX_NUM_OF_ATOMS];\012	__local float loc_coords_y[MAX_NUM_OF_ATOMS];\012	__local float loc_coords_z[MAX_NUM_OF_ATOMS];\012*/\012\012	float __attribute__((register)) loc_coords_x[MAX_NUM_OF_ATOMS];\012	float __attribute__((register)) loc_coords_y[MAX_NUM_OF_ATOMS];\012	float __attribute__((register)) loc_coords_z[MAX_NUM_OF_ATOMS];\012\012\012	char active = 1;\012	char mode   = 0;\012	uint cnt    = 0;   \012\012	float interE;\012	float partialE1, partialE2, partialE3;\012\012\012	char atom1_id, atom1_typeid;\012	float x, y, z, dx, dy, dz, q;\012	float cube [2][2][2];\012	float weights [2][2][2];\012	int x_low, x_high, y_low, y_high, z_low, z_high;\012\012	// L30nardoSV	\012	unsigned int  mul_tmp;\012	unsigned char g1 = DockConst->gridsize_x; 	\012	unsigned int  g2 = DockConst->gridsize_x * DockConst->gridsize_y;         \012	unsigned int  g3 = DockConst->gridsize_x * DockConst->gridsize_y * DockConst->gridsize_z;\012        unsigned int  ylow_times_g1, yhigh_times_g1;\012        unsigned int  zlow_times_g2, zhigh_times_g2;\012	unsigned int  cube_000, cube_100, cube_010, cube_110;\012        unsigned int  cube_001, cube_101, cube_011, cube_111;\012\012while(active) {\012	//printf(\"BEFORE In INTER CHANNEL\\n\");\012	// --------------------------------------------------------------\012	// Wait for ligand atomic coordinates in channel\012	// --------------------------------------------------------------\012\012	for (uint pipe_cnt=0; pipe_cnt<DockConst->num_of_atoms; pipe_cnt++) {\012		loc_coords_x[pipe_cnt] = read_channel_altera(chan_Conf2Intere_x);\012		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);\012		loc_coords_y[pipe_cnt] = read_channel_altera(chan_Conf2Intere_y);\012		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);\012		loc_coords_z[pipe_cnt] = read_channel_altera(chan_Conf2Intere_z);\012		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);\012		active = read_channel_altera(chan_Conf2Intere_active);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		mode   = read_channel_altera(chan_Conf2Intere_mode);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		cnt    = read_channel_altera(chan_Conf2Intere_cnt);\012	}\012	// --------------------------------------------------------------\012	//printf(\"AFTER In INTER CHANNEL\\n\");\012\012	if (active == 0) {printf(\"	%-20s: %s\\n\", \"Krnl_InterE\", \"disabled\");}\012\012	interE = 0.0f;\012	partialE1 = 0.0f;\012	partialE2 = 0.0f;\012	partialE3 = 0.0f;\012\012	// for each atom\012	// **********************************************\012	// ADD VENDOR SPECIFIC PRAGMA	\012	// **********************************************\012	LOOP_INTERE_1:\012	for (atom1_id=0; atom1_id<DockConst->num_of_atoms; atom1_id++)		\012	{\012		atom1_typeid = KerConst->atom_types_const[atom1_id];\012		x = loc_coords_x[atom1_id];\012		y = loc_coords_y[atom1_id];\012		z = loc_coords_z[atom1_id];\012		q = KerConst->atom_charges_const[atom1_id];\012\012		// if the atom is outside of the grid\012		if ((x < 0.0f) || (x >= DockConst->gridsize_x-1) || \012		    (y < 0.0f) || (y >= DockConst->gridsize_y-1) ||\012		    (z < 0.0f) || (z >= DockConst->gridsize_z-1))	\012		{\012			//penalty is 2^24 for each atom outside the grid\012			/*\012			interE += 16777216.0f; \012			*/\012			partialE1 = 16777216.0f; \012			partialE2 = 0.0f;\012			partialE3 = 0.0f;\012		} \012		else \012		{\012			x_low  = convert_int(floor(x));\012			y_low  = convert_int(floor(y));\012			z_low  = convert_int(floor(z));\012			x_high = convert_int(ceil(x));	 \012			y_high = convert_int(ceil(y));\012			z_high = convert_int(ceil(z));\012			dx = x - x_low; dy = y - y_low; dz = z - z_low;\012\012			// Calculates the weights for trilinear interpolation\012			// based on the location of the point inside\012			weights [0][0][0] = (1-dx)*(1-dy)*(1-dz);\012			weights [1][0][0] = dx*(1-dy)*(1-dz);\012			weights [0][1][0] = (1-dx)*dy*(1-dz);\012			weights [1][1][0] = dx*dy*(1-dz);\012			weights [0][0][1] = (1-dx)*(1-dy)*dz;\012			weights [1][0][1] = dx*(1-dy)*dz;\012			weights [0][1][1] = (1-dx)*dy*dz;\012			weights [1][1][1] = dx*dy*dz;\012\012			#if defined (DEBUG_KERNEL_INTER_E)\012			printf(\"\\n\\nPartial results for atom with id %i:\\n\", atom1_id);\012			printf(\"x_low = %d, x_high = %d, x_frac = %f\\n\", x_low, x_high, dx);\012			printf(\"y_low = %d, y_high = %d, y_frac = %f\\n\", y_low, y_high, dy);\012			printf(\"z_low = %d, z_high = %d, z_frac = %f\\n\\n\", z_low, z_high, dz);\012			printf(\"coeff(0,0,0) = %f\\n\", weights [0][0][0]);\012			printf(\"coeff(1,0,0) = %f\\n\", weights [1][0][0]);\012			printf(\"coeff(0,1,0) = %f\\n\", weights [0][1][0]);\012			printf(\"coeff(1,1,0) = %f\\n\", weights [1][1][0]);\012			printf(\"coeff(0,0,1) = %f\\n\", weights [0][0][1]);\012			printf(\"coeff(1,0,1) = %f\\n\", weights [1][0][1]);\012			printf(\"coeff(0,1,1) = %f\\n\", weights [0][1][1]);\012			printf(\"coeff(1,1,1) = %f\\n\", weights [1][1][1]);\012			#endif\012\012			// L30nardoSV\012			ylow_times_g1  = y_low*g1;	yhigh_times_g1 = y_high*g1;\012        	        zlow_times_g2  = z_low*g2;	zhigh_times_g2 = z_high*g2;\012        	        cube_000 = x_low  + ylow_times_g1  + zlow_times_g2;\012        	        cube_100 = x_high + ylow_times_g1  + zlow_times_g2;\012        	        cube_010 = x_low  + yhigh_times_g1 + zlow_times_g2;\012        	        cube_110 = x_high + yhigh_times_g1 + zlow_times_g2;\012        	        cube_001 = x_low  + ylow_times_g1  + zhigh_times_g2;\012        	        cube_101 = x_high + ylow_times_g1  + zhigh_times_g2;\012        	        cube_011 = x_low  + yhigh_times_g1 + zhigh_times_g2;\012        	        cube_111 = x_high + yhigh_times_g1 + zhigh_times_g2;\012        	        mul_tmp = atom1_typeid*g3;\012\012			//energy contribution of the current grid type\012	                cube [0][0][0] = *(GlobFgrids + cube_000 + mul_tmp);\012        	        cube [1][0][0] = *(GlobFgrids + cube_100 + mul_tmp);\012        	        cube [0][1][0] = *(GlobFgrids + cube_010 + mul_tmp);\012        	        cube [1][1][0] = *(GlobFgrids + cube_110 + mul_tmp);\012        	        cube [0][0][1] = *(GlobFgrids + cube_001 + mul_tmp);\012        	        cube [1][0][1] = *(GlobFgrids + cube_101 + mul_tmp);\012        	        cube [0][1][1] = *(GlobFgrids + cube_011 + mul_tmp);\012        	        cube [1][1][1] = *(GlobFgrids + cube_111 + mul_tmp);\012		\012			#if defined (DEBUG_KERNEL_INTER_E)\012			printf(\"Interpolation of van der Waals map:\\n\");\012			printf(\"cube(0,0,0) = %f\\n\", cube [0][0][0]);\012			printf(\"cube(1,0,0) = %f\\n\", cube [1][0][0]);\012			printf(\"cube(0,1,0) = %f\\n\", cube [0][1][0]);\012			printf(\"cube(1,1,0) = %f\\n\", cube [1][1][0]);\012			printf(\"cube(0,0,1) = %f\\n\", cube [0][0][1]);\012			printf(\"cube(1,0,1) = %f\\n\", cube [1][0][1]);\012			printf(\"cube(0,1,1) = %f\\n\", cube [0][1][1]);\012			printf(\"cube(1,1,1) = %f\\n\", cube [1][1][1]);\012			#endif\012\012			/*\012			interE += TRILININTERPOL(cube, weights);\012			*/\012			partialE1 = TRILININTERPOL(cube, weights);\012\012			#if defined (DEBUG_KERNEL_INTER_E)\012			printf(\"interpolated value = %f\\n\\n\", TRILININTERPOL(cube, weights));\012			#endif\012\012			//energy contribution of the electrostatic grid\012			atom1_typeid = DockConst->num_of_atypes;\012			mul_tmp = atom1_typeid*g3;\012        	        cube [0][0][0] = *(GlobFgrids + cube_000 + mul_tmp);\012        	        cube [1][0][0] = *(GlobFgrids + cube_100 + mul_tmp);\012        	        cube [0][1][0] = *(GlobFgrids + cube_010 + mul_tmp);\012        	        cube [1][1][0] = *(GlobFgrids + cube_110 + mul_tmp);\012        	        cube [0][0][1] = *(GlobFgrids + cube_001 + mul_tmp);\012        	        cube [1][0][1] = *(GlobFgrids + cube_101 + mul_tmp);\012        	        cube [0][1][1] = *(GlobFgrids + cube_011 + mul_tmp);\012        	        cube [1][1][1] = *(GlobFgrids + cube_111 + mul_tmp);\012\012			#if defined (DEBUG_KERNEL_INTER_E)\012			printf(\"Interpolation of electrostatic map:\\n\");\012			printf(\"cube(0,0,0) = %f\\n\", cube [0][0][0]);\012			printf(\"cube(1,0,0) = %f\\n\", cube [1][0][0]);\012			printf(\"cube(0,1,0) = %f\\n\", cube [0][1][0]);\012			printf(\"cube(1,1,0) = %f\\n\", cube [1][1][0]);\012			printf(\"cube(0,0,1) = %f\\n\", cube [0][0][1]);\012			printf(\"cube(1,0,1) = %f\\n\", cube [1][0][1]);\012			printf(\"cube(0,1,1) = %f\\n\", cube [0][1][1]);\012			printf(\"cube(1,1,1) = %f\\n\", cube [1][1][1]);\012			#endif\012\012			/*\012			interE += q * TRILININTERPOL(cube, weights);\012			*/\012			partialE2 = q * TRILININTERPOL(cube, weights);\012		\012			#if defined (DEBUG_KERNEL_INTER_E)\012			printf(\"interpoated value = %f, multiplied by q = %f\\n\\n\", TRILININTERPOL(cube, weights), q*TRILININTERPOL(cube, weights));\012			#endif\012\012			//energy contribution of the desolvation grid\012			atom1_typeid = DockConst->num_of_atypes+1;\012			mul_tmp = atom1_typeid*g3;\012        	        cube [0][0][0] = *(GlobFgrids + cube_000 + mul_tmp);\012        	        cube [1][0][0] = *(GlobFgrids + cube_100 + mul_tmp);\012        	        cube [0][1][0] = *(GlobFgrids + cube_010 + mul_tmp);\012        	        cube [1][1][0] = *(GlobFgrids + cube_110 + mul_tmp);\012        	        cube [0][0][1] = *(GlobFgrids + cube_001 + mul_tmp);\012        	        cube [1][0][1] = *(GlobFgrids + cube_101 + mul_tmp);\012        	        cube [0][1][1] = *(GlobFgrids + cube_011 + mul_tmp);\012        	        cube [1][1][1] = *(GlobFgrids + cube_111 + mul_tmp);\012\012			#if defined (DEBUG_KERNEL_INTER_E)\012			printf(\"Interpolation of desolvation map:\\n\");\012			printf(\"cube(0,0,0) = %f\\n\", cube [0][0][0]);\012			printf(\"cube(1,0,0) = %f\\n\", cube [1][0][0]);\012			printf(\"cube(0,1,0) = %f\\n\", cube [0][1][0]);\012			printf(\"cube(1,1,0) = %f\\n\", cube [1][1][0]);\012			printf(\"cube(0,0,1) = %f\\n\", cube [0][0][1]);\012			printf(\"cube(1,0,1) = %f\\n\", cube [1][0][1]);\012			printf(\"cube(0,1,1) = %f\\n\", cube [0][1][1]);\012			printf(\"cube(1,1,1) = %f\\n\", cube [1][1][1]);\012			#endif\012\012			/*\012			interE += fabs(q) * TRILININTERPOL(cube, weights);\012			*/\012			partialE3 = fabs(q) * TRILININTERPOL(cube, weights);\012\012			#if defined (DEBUG_KERNEL_KERNEL_INTER_E)\012			printf(\"interploated value = %f, multiplied by abs(q) = %f\\n\\n\", TRILININTERPOL(cube, weights), fabs(q) * trilin_interpol(cube, weights));\012			printf(\"Current value of intermolecular energy = %f\\n\\n\\n\", interE);\012			#endif\012		}\012\012\012		interE += partialE1 + partialE2 + partialE3;\012	} // End of LOOP_INTERE_1:	\012\012	// --------------------------------------------------------------\012	// Send intermolecular energy to chanel\012	// --------------------------------------------------------------\012	write_channel_altera(chan_Intere2Store_intere, interE);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	write_channel_altera(chan_Intere2Store_active, active);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	write_channel_altera(chan_Intere2Store_mode,   mode);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	write_channel_altera(chan_Intere2Store_cnt,    cnt);\012	// --------------------------------------------------------------\012 	\012	} // End of while(1)\012}\012// --------------------------------------------------------------------------\012// --------------------------------------------------------------------------\012"}, {"index":3, "path":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl", "name":"Krnl_IntraE.cl", "content":"// --------------------------------------------------------------------------\012// Originally from: processligand.c\012// --------------------------------------------------------------------------\012__kernel __attribute__ ((reqd_work_group_size(1,1,1)))\012void Krnl_IntraE(\012             //__global const float*           restrict GlobFgrids,\012	     //__global       float*           restrict GlobPopulationCurrent,\012	     //__global       float*           restrict GlobEnergyCurrent,\012	     //__global       float*           restrict GlobPopulationNext,\012	     //__global       float*           restrict GlobEnergyNext,\012             //__global       unsigned int*    restrict GlobPRNG,\012	     __global const kernelconstant*  restrict KerConst,\012	     __global const Dockparameters*  restrict DockConst)\012{\012\012	__local float loc_coords_x[MAX_NUM_OF_ATOMS];\012	__local float loc_coords_y[MAX_NUM_OF_ATOMS];\012	__local float loc_coords_z[MAX_NUM_OF_ATOMS];\012/*\012	float __attribute__((register)) loc_coords_x[MAX_NUM_OF_ATOMS];\012	float __attribute__((register)) loc_coords_y[MAX_NUM_OF_ATOMS];\012	float __attribute__((register)) loc_coords_z[MAX_NUM_OF_ATOMS];\012*/\012	char active = 1;\012	char mode   = 0;\012	uint cnt    = 0;   \012\012	int contributor_counter;\012	char atom1_id, atom2_id, atom1_typeid, atom2_typeid;\012	float subx, suby, subz, distance_leo;\012\012 	// Altera doesn't support power function 	\012	// so this is implemented with multiplications 	\012	// Full precision is used 	\012	float distance_pow_2, distance_pow_4, distance_pow_6, distance_pow_10, distance_pow_12;\012	float intraE;\012\012	float partialE1, partialE2, partialE3, partialE4;\012\012while(active) {\012	//printf(\"BEFORE In INTRA CHANNEL\\n\");\012	// --------------------------------------------------------------\012	// Wait for ligand atomic coordinates in channel\012	// --------------------------------------------------------------\012\012	for (uint pipe_cnt=0; pipe_cnt<DockConst->num_of_atoms; pipe_cnt++) {\012		loc_coords_x[pipe_cnt] = read_channel_altera(chan_Conf2Intrae_x);\012		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);\012		loc_coords_y[pipe_cnt] = read_channel_altera(chan_Conf2Intrae_y);\012		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);\012		loc_coords_z[pipe_cnt] = read_channel_altera(chan_Conf2Intrae_z);\012		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);\012		active = read_channel_altera(chan_Conf2Intrae_active);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		mode   = read_channel_altera(chan_Conf2Intrae_mode);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		cnt    = read_channel_altera(chan_Conf2Intrae_cnt);\012	}\012	// --------------------------------------------------------------\012	//printf(\"AFTER In INTRA CHANNEL\\n\");\012\012	if (active == 0) {printf(\"	%-20s: %s\\n\", \"Krnl_IntraE\", \"disabled\");}\012\012	intraE = 0.0f;\012	partialE1 = 0.0f;\012	partialE2 = 0.0f;\012	partialE3 = 0.0f;\012	partialE4 = 0.0f;\012\012	//for each intramolecular atom contributor pair\012	// **********************************************\012	// ADD VENDOR SPECIFIC PRAGMA\012	// **********************************************\012	LOOP_INTRAE_1:\012	for (uint contributor_counter=0; contributor_counter<DockConst->num_of_intraE_contributors; contributor_counter++)\012	{	\012		atom1_id = KerConst->intraE_contributors_const[3*contributor_counter]; \012		atom2_id = KerConst->intraE_contributors_const[3*contributor_counter+1];\012\012		subx = loc_coords_x[atom1_id] - loc_coords_x[atom2_id];\012		suby = loc_coords_y[atom1_id] - loc_coords_y[atom2_id];\012		subz = loc_coords_z[atom1_id] - loc_coords_z[atom2_id];\012		distance_leo = sqrt(subx*subx + suby*suby + subz*subz)*DockConst->grid_spacing;\012\012		if (distance_leo < 1.0f) {\012			#if defined (DEBUG_KERNEL_INTRA_E)\012			printf(\"\\n\\nToo low distance (%f) between atoms %u and %u\\n\", distance_leo, atom1_id, atom2_id);\012			#endif\012			//return HIGHEST_ENERGY;	//returning maximal value\012			distance_leo = 1.0f;\012		}\012\012		#if defined (DEBUG_KERNEL_INTRA_E)\012		printf(\"\\n\\nCalculating energy contribution of atoms %u and %u\\n\", atom1_id+1, atom2_id+1);\012		printf(\"Distance: %f\\n\", distance_leo);\012		#endif\012\012		distance_pow_2  = distance_leo*distance_leo; 		\012		distance_pow_4  = distance_pow_2*distance_pow_2; 		\012		distance_pow_6  = distance_pow_2*distance_pow_4; 		\012		distance_pow_10 = distance_pow_4*distance_pow_6; 		\012		distance_pow_12 = distance_pow_6*distance_pow_6;\012		\012		//but only if the distance is less than distance cutoff value and 20.48A (because of the tables)\012		if ((distance_leo < 8.0f) && (distance_leo < 20.48f)) \012		{\012			atom1_typeid = KerConst->atom_types_const [atom1_id];\012			atom2_typeid = KerConst->atom_types_const [atom2_id];\012\012			//calculating van der Waals / hydrogen bond term\012			/*\012			intraE += KerConst->VWpars_AC_const[atom1_typeid * DockConst->num_of_atypes+atom2_typeid]/distance_pow_12;\012			*/\012			partialE1 = KerConst->VWpars_AC_const[atom1_typeid * DockConst->num_of_atypes+atom2_typeid]/distance_pow_12;\012\012			if (KerConst->intraE_contributors_const[3*contributor_counter+2] == 1)	//H-bond\012				/*\012				intraE-= KerConst->VWpars_BD_const[atom1_typeid*DockConst->num_of_atypes+atom2_typeid]/distance_pow_10;	\012				*/\012				partialE2 = KerConst->VWpars_BD_const[atom1_typeid*DockConst->num_of_atypes+atom2_typeid]/distance_pow_10;	\012\012\012			else	//van der Waals\012				/*\012				intraE-= KerConst->VWpars_BD_const[atom1_typeid*DockConst->num_of_atypes+atom2_typeid]/distance_pow_6;\012				*/\012				partialE2 = KerConst->VWpars_BD_const[atom1_typeid*DockConst->num_of_atypes+atom2_typeid]/distance_pow_6;\012\012			//calculating electrostatic term\012			/*\012			intraE+= DockConst->coeff_elec*KerConst->atom_charges_const[atom1_id]*KerConst->atom_charges_const[atom2_id]/(distance_leo*(-8.5525f + 86.9525f/(1.0f + 7.7839f*exp(-0.3154f*distance_leo))));\012			*/\012			partialE3 = DockConst->coeff_elec*KerConst->atom_charges_const[atom1_id]*KerConst->atom_charges_const[atom2_id]/(distance_leo*(-8.5525f + 86.9525f/(1.0f + 7.7839f*exp(-0.3154f*distance_leo))));\012\012			//calculating desolvation term\012			/*\012			intraE+= (\012				  ( KerConst->dspars_S_const[atom1_typeid] + DockConst->qasp*fabs(KerConst->atom_charges_const[atom1_id]) ) * KerConst->dspars_V_const[atom2_typeid] + \012				  ( KerConst->dspars_S_const[atom2_typeid] + DockConst->qasp*fabs(KerConst->atom_charges_const[atom2_id]) ) * KerConst->dspars_V_const[atom1_typeid]) * \012				 DockConst->coeff_desolv*exp(-distance_leo*distance_leo/25.92f);\012			*/\012			partialE4 = (\012				  ( KerConst->dspars_S_const[atom1_typeid] + DockConst->qasp*fabs(KerConst->atom_charges_const[atom1_id]) ) * KerConst->dspars_V_const[atom2_typeid] + \012				  ( KerConst->dspars_S_const[atom2_typeid] + DockConst->qasp*fabs(KerConst->atom_charges_const[atom2_id]) ) * KerConst->dspars_V_const[atom1_typeid]) * \012				 DockConst->coeff_desolv*exp(-distance_leo*distance_leo/25.92f);\012			\012	\012		} // End of if: if ((dist < dcutoff) && (dist < 20.48))	\012\012		intraE += partialE1 + partialE2 + partialE3 + partialE4;\012\012	} // End of LOOP_INTRAE_1\012\012	// --------------------------------------------------------------\012	// Send intramolecular energy to channel\012	// --------------------------------------------------------------\012	write_channel_altera(chan_Intrae2Store_intrae, intraE);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	write_channel_altera(chan_Intrae2Store_active, active);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	write_channel_altera(chan_Intrae2Store_mode,   mode);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	write_channel_altera(chan_Intrae2Store_cnt,    cnt);\012	// --------------------------------------------------------------\012\012	} // End of while(1)\012}\012// --------------------------------------------------------------------------\012// --------------------------------------------------------------------------\012"}, {"index":4, "path":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_Store.cl", "name":"Krnl_Store.cl", "content":"__kernel __attribute__ ((reqd_work_group_size(1,1,1)))\012void Krnl_Store(\012             //__global const float*           restrict GlobFgrids,\012	     //__global       float*           restrict GlobPopulationCurrent,\012	     __global       float*           restrict GlobEnergyCurrent,\012	     //__global       float*           restrict GlobPopulationNext,\012	     __global       float*           restrict GlobEnergyNext\012		//,\012             //__global       unsigned int*    restrict GlobPRNG,\012	     //__global const kernelconstant*  restrict KerConst,\012	     //__global const Dockparameters*  restrict DockConst\012	     )\012{\012	// --------------------------------------------------------------\012	// Wait for enegies\012	// --------------------------------------------------------------\012	float InterE;\012	float IntraE;\012\012	char active = 1;\012	char mode   = 0;\012	uint cnt    = 0;  \012\012 	char active1, active2;\012	char mode1, mode2;\012	uint cnt1, cnt2;\012	bool write_to_channel_ack = false;\012	bool write_to_channel_energy = false;\012\012\012	float LSenergy;\012\012while(active) {\012\012	InterE = read_channel_altera(chan_Intere2Store_intere);\012	IntraE = read_channel_altera(chan_Intrae2Store_intrae);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	active1 = read_channel_altera(chan_Intere2Store_active);\012	active2 = read_channel_altera(chan_Intrae2Store_active);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	mode1 = read_channel_altera(chan_Intere2Store_mode);\012	mode2 = read_channel_altera(chan_Intrae2Store_mode);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	cnt1  = read_channel_altera(chan_Intere2Store_cnt);\012	cnt2  = read_channel_altera(chan_Intrae2Store_cnt);\012\012	// --------------------------------------------------------------\012	\012	if (active1 != active2) {printf(\"Store error: active are not equal!\\n\");}\012	else 			{active = active1;}\012\012	if (mode1 != mode2)     {printf(\"Store error: mode are not equal!\\n\");}\012	else 			{mode = mode1;}\012\012	if (cnt1  != cnt2)      {printf(\"Store error: mode are not equal!\\n\");}\012	else 			{cnt = cnt1;}\012\012	if (active == 0) {printf(\"	%-20s: %s\\n\", \"Krnl_Store\", \"disabled\");}\012\012/*\012	switch (mode) {\012//\012		case 0:	write_channel_altera(chan_Store2GA_ack, 1);	// Signal INI, GG or LS finished \012		break;\012		case 1:	GlobEnergyCurrent[cnt] = InterE + IntraE;	// INI: Init energy calculation of pop\012		break;\012		case 2:	GlobEnergyNext[cnt] = InterE + IntraE;		// GG: Genetic Generation\012		break;\012		case 3:	LSenergy = InterE + IntraE;		// LS: Local Search\012			write_channel_altera(chan_Store2GA_ack, 1);\012			mem_fence(CLK_CHANNEL_MEM_FENCE);\012			write_channel_altera(chan_Store2GA_LSenergy, LSenergy);\012		break;\012//\012\012\012		case 4:							// Krnl_GA has finished execution!\012		break;\012	}\012*/\012\012\012\012\012	switch (mode) {\012		case STATE_IC :\012			write_to_channel_ack = false;\012			write_to_channel_energy = false;	\012			GlobEnergyCurrent[cnt] = InterE + IntraE;\012		break;\012\012		case STATE_IC_WAIT_END :\012			write_to_channel_ack = true;\012			write_to_channel_energy = false;	\012		break;\012\012		case STATE_GG :\012			write_to_channel_ack = false;	\012			write_to_channel_energy = false;	\012			GlobEnergyNext[cnt] = InterE + IntraE;\012		break;\012\012		case STATE_GG_WAIT_END :	\012			write_to_channel_ack = true;	\012			write_to_channel_energy = false;\012		break;\012\012		case STATE_LS :	\012			write_to_channel_ack = false;\012			write_to_channel_energy = false;	\012		break;\012\012		case LS_STATE_DIR_FIRST:\012	\012		break;\012\012		case LS_STATE_WAIT_FIRST:\012			LSenergy = InterE + IntraE;\012			write_to_channel_ack = false;\012			write_to_channel_energy = true;	\012		break;\012\012		case LS_STATE_ENERGY_FIRST:\012			write_to_channel_ack = false;\012			write_to_channel_energy = false;	\012		break;\012\012		\012		case LS_STATE_DIR_SECOND:\012\012		break;\012\012		case LS_STATE_WAIT_SECOND:\012			LSenergy = InterE + IntraE;\012			write_to_channel_ack = false;\012			write_to_channel_energy = true;	\012		break;\012\012		case LS_STATE_CHECK_RHO:\012			write_to_channel_ack = false;\012			write_to_channel_energy = false;	\012		break;\012\012		case LS_STATE_CHECK_TERMINATION:\012			write_to_channel_ack = false;\012			write_to_channel_energy = false;	\012		break;\012\012\012		case STATE_LS_WAIT_END :	\012			write_to_channel_ack = false;\012			write_to_channel_energy = false;	\012		break;\012\012		case STATE_END :							\012			write_to_channel_ack = false;	\012			write_to_channel_energy = false;		\012		break;\012\012		case STATE_WAIT_END :	\012			write_to_channel_ack = true;	\012			write_to_channel_energy = false;					\012		break;\012\012		case STATE_OFF :							\012			write_to_channel_ack = false;\012			write_to_channel_energy = false;\012		break;\012	}\012\012\012	if (write_to_channel_ack == true) {	\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		write_channel_altera(chan_Store2GA_ack, 1);	// Signal IC finished \012	}\012\012	if (write_to_channel_energy == true) {\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		write_channel_altera(chan_Store2GA_LSenergy, LSenergy);\012	}\012\012} // End of while(1)\012\012}\012// --------------------------------------------------------------------------\012// --------------------------------------------------------------------------\012"}, {"index":5, "path":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/auxiliary_genetic.cl", "name":"auxiliary_genetic.cl", "content":"// --------------------------------------------------------------------------\012// The function maps the first parameter into the interval 0..ang_max\012// by adding/subtracting n*ang_max to/from it.\012// Originally from: searchoptimum.c\012// --------------------------------------------------------------------------\012void map_angle(__local float* angle, const float ang_max)\012{\012	float x = (*angle);\012\012	// **********************************************\012	// ADD VENDOR SPECIFIC PRAGMA\012	// **********************************************\012	LOOP_WHILE_MAP_ANGLE_1:\012	while (x < 0.0f) {\012		x += ang_max;\012	}\012\012	// **********************************************\012	// ADD VENDOR SPECIFIC PRAGMA\012	// **********************************************\012	LOOP_WHILE_MAP_ANGLE_2:\012	while (x > ang_max) {\012		x -= ang_max;\012	}\012\012	(*angle) = x;\012}\012\012// --------------------------------------------------------------------------\012// The function finds the best entity based on the energy value \012// i.e. sum of the 38th and 39th element\012// and returns its ID in the best_entity parameter. \012// The pop_size parameter must be equal to the population size.\012// Originally from: searchoptimum.c\012// --------------------------------------------------------------------------\012uint find_best(__global const float* restrict GlobEnergyCurrent, \012	       __local        float* restrict loc_energies,\012		        const uint pop_size)\012{\012	uint i;\012	uint best_entity = 0;\012\012	// **********************************************\012	// ADD VENDOR SPECIFIC PRAGMA\012	// **********************************************\012	LOOP_FIND_BEST_1:\012	for (i=0; i<pop_size; i++) {\012		loc_energies[i] = GlobEnergyCurrent[i];\012	}\012\012	// **********************************************\012	// ADD VENDOR SPECIFIC PRAGMA\012	// *********************************************\012	LOOP_FIND_BEST_2:\012	for (i=1; i<pop_size; i++) {\012\012		#if defined (DEBUG_FIND_BEST)\012		printf(\"iteration: %u, energy_iteration_entity: %f, best_entity: %u, energy_best_entity: %f ...\", \012			i, loc_energies[i], best_entity, loc_energies[best_entity]);\012		#endif\012		\012		if (loc_energies[best_entity] > loc_energies[i])    \012		{\012			best_entity = i;\012			\012			#if defined (DEBUG_FIND_BEST)\012			printf(\"RES: best_entity: %u, energy_best_entity: %f\\n\",\012			       best_entity, \012			       loc_energies[best_entity]);\012			#endif\012	\012		}\012		#if defined (DEBUG_FIND_BEST)\012		printf(\"\\n\");\012		#endif\012	}\012\012	return best_entity;\012}\012\012// --------------------------------------------------------------------------\012// --------------------------------------------------------------------------\012uint myrand_basic (__global uint* restrict GlobPRNG)\012{\012	uint temprand_uint;\012\012#if defined (REPRO)\012	temprand_uint = 1;\012#else\012	temprand_uint = GlobPRNG[0];\012	temprand_uint = (RAND_A*temprand_uint + RAND_C);\012#endif\012	GlobPRNG[0] = temprand_uint;\012\012	return temprand_uint;\012}\012\012// --------------------------------------------------------------------------\012// --------------------------------------------------------------------------\012float myrand(__global uint* restrict GlobPRNG)\012{\012	uint   temprand_uint;\012	float temprand_float;\012\012	temprand_uint = myrand_basic(GlobPRNG);\012	temprand_float = convert_float(native_divide(temprand_uint,MAX_UINT))*0.999999f;\012	return temprand_float;\012}\012\012// --------------------------------------------------------------------------\012// --------------------------------------------------------------------------\012uint myrand_uint(__global uint* restrict GlobPRNG,\012		 const uint limit)\012{\012	uint   temprand_uint;\012	temprand_uint = myrand_basic(GlobPRNG);\012	// no native_divide() used here as values are integers\012	temprand_uint = (temprand_uint/MAX_UINT)*limit;\012	return temprand_uint;\012	\012}\012\012// --------------------------------------------------------------------------\012// The function performs binary tournament selection. \012// The first parameter must containt the population data. \012// rand_level is the probability with which the new entity should be selected as parent. \012// The two selected parents are returned in the parent1 and parent2 parameters.\012// Originally from: searchoptimum.c\012// --------------------------------------------------------------------------\012void binary_tournament_selection(__global const float* restrict GlobEnergyCurrent,\012				 __global       uint*  restrict GlobPRNG,\012				                uint*           parent1, \012				                uint*           parent2,\012					  const uint            pop_size,  \012				          const float           rand_level)\012{\012	uint parent_candidates [2];\012\012	//generating two different parent candidates\012	parent_candidates [0] = myrand_uint(GlobPRNG, pop_size);\012\012	LOOP_DOWHILE_BIN_TOURNAMENT_SEL_1:\012	do\012	{\012#if defined (REPRO)\012		parent_candidates [1] = myrand_uint(GlobPRNG, pop_size) + 1;\012#else\012		parent_candidates [1] = myrand_uint(GlobPRNG, pop_size);\012#endif	\012	}\012	while (parent_candidates [0] == parent_candidates [1]);\012\012	//the better will be the first parent with rand_level prability \012	//and the second with 1-rand_level probability\012	if (GlobEnergyCurrent[parent_candidates[0]] < GlobEnergyCurrent[parent_candidates[1]])\012	{\012		if (myrand(GlobPRNG) < 100*rand_level) {*parent1 = parent_candidates [0];}\012		else			               {*parent1 = parent_candidates [1];}\012	}\012	else\012	{\012		if (myrand(GlobPRNG) < 100*rand_level) {*parent1 = parent_candidates [1];}\012		else			               {*parent1 = parent_candidates [0];}	\012	}\012\012\012	#if defined (DEBUG_TOURNAMENT_SELECTION)\012	printf(\"Selecting first parent: %u (candidates were %u (E=%f) and %u (E=%f))\\n\", *parent1, \012		parent_candidates [0], GlobEnergyCurrent [parent_candidates [0]],\012		parent_candidates [1], GlobEnergyCurrent [parent_candidates [1]]);\012	#endif\012\012	//generating two different parent candidates (which differ from parent1 as well)\012	LOOP_DOWHILE_BIN_TOURNAMENT_SEL_2:\012	do\012#if defined (REPRO)\012		parent_candidates [0] = myrand_uint(GlobPRNG, pop_size) + 2;\012#else\012		parent_candidates [0] = myrand_uint(GlobPRNG, pop_size);\012#endif\012	while (parent_candidates [0] == *parent1);\012\012	LOOP_DOWHILE_BIN_TOURNAMENT_SEL_3:\012	do\012#if defined (REPRO)\012		parent_candidates [1] = myrand_uint(GlobPRNG, pop_size) + 3;\012#else\012		parent_candidates [1] = myrand_uint(GlobPRNG, pop_size);\012#endif\012	while ((parent_candidates [1] == parent_candidates [0]) || (parent_candidates [1] == *parent1));\012\012	//the better will be the second parent\012	if (GlobEnergyCurrent[parent_candidates[0]] < GlobEnergyCurrent[parent_candidates[1]])\012	{\012		if (myrand(GlobPRNG) < 100*rand_level) {*parent2 = parent_candidates [0];}\012		else		          	       {*parent2 = parent_candidates [1];}\012	}\012	else\012	{\012		if (myrand(GlobPRNG) < 100*rand_level) {*parent2 = parent_candidates [1];}\012		else			               {*parent2 = parent_candidates [0];}	\012	}\012\012	#if defined (DEBUG_TOURNAMENT_SELECTION)\012	printf(\"Selecting second parent: %u (candidates were %u (E=%f) and %u (E=%f))\\n\", *parent2,\012	       parent_candidates [0], GlobEnergyCurrent [parent_candidates [0]] ,\012	       parent_candidates [1], GlobEnergyCurrent [(arent_candidates [1]]);\012	#endif\012}\012\012// --------------------------------------------------------------------------\012// The function performs crossover and mutation and \012// generates two offsprings from two parents whose genotypes are the functions parameters. \012// Mutation rate is the probability of mutating a gene in %, \012// abs_max_dmov and abs_max_dang are the maximal delta values of a translation \012// or an orientation/rotatable bond gene during mutation.\012// Originally from: searchoptimum.c\012// --------------------------------------------------------------------------\012void gen_new_genotype(__global      uint*  restrict GlobPRNG,\012		      __local const float*          parent1_genotype,\012		      __local const float*          parent2_genotype, \012		              const float           mutation_rate,\012			      const float           abs_max_dmov,\012			      const float           abs_max_dang,\012			      const float           crossover_rate,\012			      const uint            num_of_genes,\012		      __local       float*          offspring_genotype)\012{\012	uint covr_point_low, covr_point_high;\012	uint temp1, temp2;\012	uint i;\012\012	//choosing crossover points randomly\012	temp1 = myrand_uint(GlobPRNG, num_of_genes-1);\012	temp2 = myrand_uint(GlobPRNG, num_of_genes-1);\012\012\012	//if (temp1 < temp2) {covr_point_low = temp1;\012	//		    covr_point_high = temp2;}\012	//else {		    covr_point_low = temp2;\012	//		    covr_point_high = temp1;}\012\012\012	bool twopoint_cross_yes = false;\012	if (temp1 == temp2)\012	{	\012		covr_point_low = temp1;\012	}\012	else\012	{\012		twopoint_cross_yes = true;\012		if (temp1 < temp2) {\012			covr_point_low = temp1;\012			covr_point_high = temp2;\012		}\012		else {		    \012			covr_point_low = temp2;\012			covr_point_high = temp1;\012		}\012	}\012\012	#if defined (DEBUG_GEN_NEW_GENOTYPE)\012	printf(\"Crossover points: low: %u, high: %u\\n\", covr_point_low, covr_point_high);\012	printf(\"Parent1: \");\012	for (i=0; i<num_of_genes; i++) {printf(\"%f \", parent1_genotype [i]);} printf(\"\\n\");\012\012	printf(\"Parent2: \");\012	for (i=0; i<num_of_genes; i++) {printf(\"%f \", parent2_genotype [i]);} printf(\"\\n\");\012	#endif\012\012	//performing crossover\012	if (crossover_rate > 100.0f*myrand(GlobPRNG))\012	{\012		//two-point crossover\012		//if (covr_point_low != covr_point_high)\012		if (twopoint_cross_yes == true)\012		{\012			// **********************************************\012			// ADD VENDOR SPECIFIC PRAGMA\012			// **********************************************\012			LOOP_GEN_NEW_GENOTYPE_1:\012			for (i=0; i<num_of_genes; i++)\012			{\012				if ((i<=covr_point_low) || (i>covr_point_high)) \012				{\012					offspring_genotype [i] = parent1_genotype[i];\012				}\012				else {\012					offspring_genotype [i] = parent2_genotype[i];\012				}\012			}\012		}\012		//one-point crossover\012		else {\012			// **********************************************\012			// ADD VENDOR SPECIFIC PRAGMA\012			// **********************************************\012			LOOP_GEN_NEW_GENOTYPE_2:\012			for (i=0; i<num_of_genes; i++)\012			{\012				if (i <= covr_point_low)\012				{\012					offspring_genotype [i] = parent1_genotype[i];\012				}\012				else {\012					offspring_genotype [i] = parent2_genotype[i];\012				}\012			}\012		}\012\012		#if defined (DEBUG_GEN_NEW_GENOTYPE)\012		printf(\"Offspring1 after crossover: \");\012		for (i=0; i<num_of_genes; i++) {printf(\"%f \", offspring_genotype [i]);} printf(\"\\n\");\012		#endif\012\012	}\012	else	//if no crossover, the offsprings are the parents\012	{\012		// **********************************************\012		// ADD VENDOR SPECIFIC PRAGMA\012		// **********************************************\012		LOOP_GEN_NEW_GENOTYPE_3:\012		for (i=0; i<num_of_genes; i++)\012		{\012			offspring_genotype [i] = parent1_genotype[i];\012		}\012\012		#if defined (DEBUG_GEN_NEW_GENOTYPE)\012		printf(\"No crossover, offsprings' genotypes equals to those of the parents\\n\");\012		#endif\012	}\012\012	//performing mutation\012\012	////mutating first offspring\012	//// THIS LOOP IS NOT PIPELINED AS IT CONTAINS ANOTHER LOOP\012	////__attribute__ ((xcl_pipeline_loop))\012	//LOOP_GEN_NEW_GENOTYPE_4:\012	\012//	for (i=0; i<num_of_genes; i++)\012//	{\012//		if (mutation_rate > 100.0f*myrand(GlobPRNG))\012//		{\012//			if (i < 3)\012//			{\012//				offspring_genotype [i] = offspring1genotype [i] + 2.0f*abs_max_dmov*myrand(GlobPRNG)-abs_max_dmov;\012//			}\012//			else\012//			{\012//				offspring_genotype [i] = (offspring_genotype [i] + 2.0f*abs_max_dang*myrand(GlobPRNG)-abs_max_dang);\012//\012//				if (i == 4) {map_angle(&(offspring_genotype [i]), 180.0f);}	//mapping angle to 0..180\012//				else        {map_angle(&(offspring_genotype [i]), 360.0f);}	//mapping angle to 0..360\012//\012//			}\012//		}\012//	}\012\012	// **********************************************\012	// ADD VENDOR SPECIFIC PRAGMA\012	// **********************************************\012	LOOP_GEN_NEW_GENOTYPE_4:\012	for (i=0; i<3; i++)\012	{\012		if (mutation_rate > 100*myrand(GlobPRNG))\012		{\012			offspring_genotype [i] = offspring_genotype [i] + 2*abs_max_dmov*myrand(GlobPRNG)-abs_max_dmov;\012		}\012	}\012\012	if (mutation_rate > 100*myrand(GlobPRNG))\012	{\012		offspring_genotype [3] = offspring_genotype [3] + 2*abs_max_dmov*myrand(GlobPRNG)-abs_max_dmov;\012		map_angle(&(offspring_genotype [3]), 360.0f);\012	}\012		\012	if (mutation_rate > 100*myrand(GlobPRNG))\012	{\012		offspring_genotype [4] = offspring_genotype [4] + 2*abs_max_dang*myrand(GlobPRNG)-abs_max_dang;\012		map_angle(&(offspring_genotype [4]), 180.0f);\012	}\012\012	// **********************************************\012	// ADD VENDOR SPECIFIC PRAGMA\012	// **********************************************\012	LOOP_GEN_NEW_GENOTYPE_5:\012	for (i=5; i<num_of_genes; i++)\012	{\012		if (mutation_rate > 100*myrand(GlobPRNG))\012		{\012			offspring_genotype [i] = offspring_genotype [i] + 2*abs_max_dang*myrand(GlobPRNG)-abs_max_dang;\012			map_angle(&(offspring_genotype [i]), 360.0f);	//mapping angle to 0..360\012		}\012	}\012\012	#if defined (DEBUG_GEN_NEW_GENOTYPE)\012	printf(\"Offspring1 after mutation: \");\012	for (i=0; i<num_of_genes; i++) {printf(\"%f \", offspring_genotype [i]);} printf(\"\\n\");\012	#endif\012\012}\012"}];
+;var fileJSON=[{"index":0, "path":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_GA.cl", "name":"Krnl_GA.cl", "content":"// Enable the channels extension\012#pragma OPENCL EXTENSION cl_altera_channels : enable\012\012//IC: initial calculation of energy of populations\012//GG: genetic generation \012//LS: local search\012//OFF: everything is done, disable other kernels\012/*\012enum STATES {S_IC 		= 0,		 \012	     S_IC_WAIT_END	= 1,\012	     S_GG		= 2,\012	     S_GG_WAIT_END	= 3,\012             S_LS		= 4, 	\012	     S_LS_WAIT_END	= 5,\012	     S_OFF		= 6,\012	     S_WAIT_END_OFF	= 7\012	    };*/\012#define STATE_IC 	   0\012#define STATE_IC_WAIT_END  1\012#define STATE_GG_FIND_BEST 2\012#define STATE_GG 	   3\012#define STATE_GG_WAIT_END  4\012#define STATE_UPDATE_POP   5\012#define STATE_LS           6\012#define STATE_LS_WAIT_END  7\012#define STATE_CHECK_TERMINATION 8\012#define STATE_END 	   9\012#define STATE_WAIT_END 	   10\012#define STATE_OFF 	   11\012\012\012#define LS_STATE_DIR_FIRST	12\012#define LS_STATE_WAIT_FIRST	13\012#define LS_STATE_ENERGY_FIRST	14\012#define LS_STATE_DIR_SECOND	15\012#define LS_STATE_WAIT_SECOND	16\012#define LS_STATE_ENERGY_SECOND	17\012#define LS_STATE_CHECK_RHO	18\012#define LS_STATE_CHECK_TERMINATION 19\012\012\012// Define kernel file-scope channel variable\012// Buffered channels \012// MAX_NUM_OF_ATOMS=90\012// ACTUAL_GENOTYPE_LENGTH (MAX_NUM_OF_ROTBONDS+6) =38\012\012channel float chan_GA2Conf_genotype __attribute__((depth(38)));\012channel char  chan_GA2Conf_active;	// active 1: receiving Kernel is active, 0 receiving Kernel is disabled\012channel char  chan_GA2Conf_mode;	// mode 1 or I: init calculation energy, 2 or G: genetic generation, 3 or P: local search\012channel uint  chan_GA2Conf_cnt;		// population count\012\012\012channel float chan_Conf2Intere_x __attribute__((depth(90)));\012channel float chan_Conf2Intere_y __attribute__((depth(90)));\012channel float chan_Conf2Intere_z __attribute__((depth(90)));\012/*\012channel float chan_Conf2Intere_x __attribute__((depth(45)));\012channel float chan_Conf2Intere_y __attribute__((depth(45)));\012channel float chan_Conf2Intere_z __attribute__((depth(45)));\012*/\012channel char  chan_Conf2Intere_active;	\012channel char  chan_Conf2Intere_mode;	\012channel uint  chan_Conf2Intere_cnt;	\012\012\012channel float chan_Conf2Intrae_x __attribute__((depth(90)));\012channel float chan_Conf2Intrae_y __attribute__((depth(90)));\012channel float chan_Conf2Intrae_z __attribute__((depth(90)));\012/*\012channel float chan_Conf2Intrae_x __attribute__((depth(45)));\012channel float chan_Conf2Intrae_y __attribute__((depth(45)));\012channel float chan_Conf2Intrae_z __attribute__((depth(45)));\012*/\012channel char  chan_Conf2Intrae_active;	\012channel char  chan_Conf2Intrae_mode;	\012channel uint  chan_Conf2Intrae_cnt;\012\012channel float chan_Intere2Store_intere;\012channel char  chan_Intere2Store_active;	\012channel char  chan_Intere2Store_mode;	\012channel uint  chan_Intere2Store_cnt;\012\012channel float chan_Intrae2Store_intrae;\012channel char  chan_Intrae2Store_active;	\012channel char  chan_Intrae2Store_mode;	\012channel uint  chan_Intrae2Store_cnt;\012\012channel char  chan_Store2GA_ack;\012channel float chan_Store2GA_LSenergy;\012\012#include \"../defines.h\"\012\012// Next structures were copied from calcenergy.h\012typedef struct\012{\012	char  	 	num_of_atoms;\012	char   		num_of_atypes;\012	int    		num_of_intraE_contributors;\012	char   		gridsize_x;\012	char   		gridsize_y;\012	char   		gridsize_z;\012	float  		grid_spacing;\012/*\012	float* 		fgrids;\012*/\012	int    		rotbondlist_length;\012	float  		coeff_elec;\012	float  		coeff_desolv;\012/*\012	float* 		conformations_current;\012	float* 		energies_current;\012	float* 		conformations_next;\012	float* 		energies_next;\012	int*   		evals_of_new_entities;\012	unsigned int* 	prng_states;\012*/\012\012	// L30nardoSV added\012	unsigned int num_of_energy_evals;\012	unsigned int num_of_generations;\012\012	int    		pop_size;\012	int    		num_of_genes;\012	float  		tournament_rate;\012	float  		crossover_rate;\012	float  		mutation_rate;\012	float  		abs_max_dmov;\012	float  		abs_max_dang;\012	float  		lsearch_rate;\012	unsigned int 	num_of_lsentities;\012	float  		rho_lower_bound;\012	float  		base_dmov_mul_sqrt3;\012	float  		base_dang_mul_sqrt3;\012	unsigned int 	cons_limit;\012	unsigned int 	max_num_of_iters;\012	float  		qasp;\012} Dockparameters;\012\012// Constant struct\012typedef struct\012{\012       float atom_charges_const[MAX_NUM_OF_ATOMS];\012       char  atom_types_const  [MAX_NUM_OF_ATOMS];\012       char  intraE_contributors_const[3*MAX_INTRAE_CONTRIBUTORS];\012       float VWpars_AC_const   [MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES];\012       float VWpars_BD_const   [MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES];\012       float dspars_S_const    [MAX_NUM_OF_ATYPES];\012       float dspars_V_const    [MAX_NUM_OF_ATYPES];\012       int   rotlist_const     [MAX_NUM_OF_ROTATIONS];\012       float ref_coords_x_const[MAX_NUM_OF_ATOMS];\012       float ref_coords_y_const[MAX_NUM_OF_ATOMS];\012       float ref_coords_z_const[MAX_NUM_OF_ATOMS];\012       float rotbonds_moving_vectors_const[3*MAX_NUM_OF_ROTBONDS];\012       float rotbonds_unit_vectors_const  [3*MAX_NUM_OF_ROTBONDS];\012       //float ref_orientation_quats_const  [4*MAX_NUM_OF_RUNS];\012       float ref_orientation_quats_const  [4];\012} kernelconstant;\012\012#include \"auxiliary_genetic.cl\"\012//#include \"auxiliary_performls.cl\"\012\012\012// --------------------------------------------------------------------------\012// The function performs a generational genetic algorithm based search \012// on the search space.\012// The first parameter is the population which must be filled with initial values \012// before calling this function. \012// The other parameters are variables which describe the grids, \012// the docking parameters and the ligand to be docked. \012// Originally from: searchoptimum.c\012// --------------------------------------------------------------------------\012__kernel __attribute__ ((reqd_work_group_size(1,1,1)))\012void Krnl_GA(//__global const float*           restrict GlobFgrids,\012	     __global       float*           restrict GlobPopulationCurrent,\012	     __global       float*           restrict GlobEnergyCurrent,\012	     __global       float*           restrict GlobPopulationNext,\012	     __global       float*           restrict GlobEnergyNext,\012             __global       unsigned int*    restrict GlobPRNG,\012	     __global const kernelconstant*  restrict KerConst,\012	     __global const Dockparameters*  restrict DockConst,\012	     __global       unsigned int*    restrict GlobEvals_performed,\012	     __global       unsigned int*    restrict GlobGenerations_performed)\012{\012	//Print algorithm parameters\012\012	#if defined (DEBUG_KERNEL1)\012	printf(\"\\nParameters of the genetic algorihtm:\\n\");\012	printf(\"\\nLigand num_of_atoms: %u\\n\",  DockConst->num_of_atoms);\012	printf(\"Ligand num_of_atypes:  %u\\n\",  DockConst->num_of_atypes);\012	printf(\"Ligand num_of_intraE_contributors: %u\\n\",  DockConst->num_of_atypes);\012	printf(\"Grid size_x: %u\\n\", 		DockConst->gridsize_x);\012	printf(\"Grid size_y: %u\\n\",   		DockConst->gridsize_y);\012	printf(\"Grid size_z: %u\\n\",   		DockConst->gridsize_z);\012	printf(\"Grid spacing: %f\\n\",  		DockConst->grid_spacing);\012	printf(\"Ligand rotbondlist_length: %u\\n\",  DockConst->rotbondlist_length);\012	printf(\"Ligand coeff_elec: %f\\n\",  	DockConst->coeff_elec);\012	printf(\"Ligand coeff_desolv: %f\\n\",  	DockConst->coeff_desolv);\012	printf(\"\\nnum_of_energy_evals: %u\\n\",   DockConst->num_of_energy_evals);\012	printf(\"num_of_generations: %u\\n\",   	DockConst->num_of_generations);\012	printf(\"Population size: %u\\n\",         DockConst->pop_size);\012	printf(\"Number of genes: %u\\n\",         DockConst->num_of_genes);\012	printf(\"Tournament rate: %f\\n\",  	DockConst->tournament_rate);\012	printf(\"Crossover rate: %f\\n\",  	DockConst->crossover_rate);\012	printf(\"Mutation rate: %f\\n\",  		DockConst->mutation_rate);\012	printf(\"Maximal delta movement during mutation: +/-%fA\\n\", DockConst->abs_max_dmov);\012	printf(\"maximal delta angle during mutation: +/-%f°\\n\",    DockConst->abs_max_dang);\012	printf(\"LS rate: %f\\n\",  		DockConst->lsearch_rate);\012	printf(\"LS num_of_lsentities: %u\\n\",    DockConst->num_of_lsentities);\012	printf(\"LS rho_lower_bound: %f\\n\",      DockConst->rho_lower_bound);	 //Rho lower bound\012	printf(\"LS base_dmov_mul_sqrt3: %f\\n\",  DockConst->base_dmov_mul_sqrt3); //Maximal delta movement during ls\012	printf(\"LS base_dang_mul_sqrt3: %f\\n\",  DockConst->base_dang_mul_sqrt3); //Maximal delta angle during ls\012	printf(\"LS cons_limit: %u\\n\",           DockConst->cons_limit);\012	printf(\"LS max_num_of_iters: %u\\n\",     DockConst->max_num_of_iters);\012	printf(\"qasp: %f\\n\",     DockConst->qasp);\012	#endif\012\012	//STATES docking_state = S_IC;\012	\012	// \012	__local float genotype [ACTUAL_GENOTYPE_LENGTH];\012	\012	// Find_best\012	uint best_entity_id;\012	__local float loc_energies[MAX_POPSIZE];\012\012	// Binary tournament\012	uint parent1, parent2;\012	__local float local_entity_1     [ACTUAL_GENOTYPE_LENGTH];\012	__local float local_entity_2     [ACTUAL_GENOTYPE_LENGTH];	\012	__local float offspring_genotype [ACTUAL_GENOTYPE_LENGTH];\012\012	// local search\012	uint entity_for_ls;\012	uint LS_eval;\012	uint evals_for_ls_in_this_cycle;\012	uint num_of_evals_for_ls  = 0;\012	//__local float local_entity_ls	 [ACTUAL_GENOTYPE_LENGTH];\012	//__local float entity_possible_new_genotype [ACTUAL_GENOTYPE_LENGTH];\012	float local_entity_energy;\012\012	// --------------------------------------------\012	// moved from auxiliary_performls.cl\012	float rho;\012	float candidate_energy;\012	float offspring_energy;\012\012	float genotype_deviate  [ACTUAL_GENOTYPE_LENGTH];		//38 would be enough...\012	float genotype_bias     [ACTUAL_GENOTYPE_LENGTH];\012\012	uint cons_succ = 0;\012	uint cons_fail = 0;	\012	uint iteration_cnt = 0;\012	\012\012	// --------------------------------------------\012\012	uint ls_ent_cnt=0;\012\012\012	//Calculating energies of initial population\012	uint eval_cnt = 0;\012	uint generation_cnt = 1;\012\012	bool active = true;\012	char active_work_kernels = 1;\012	//char mode   = 1;\012	char mode   = STATE_IC;\012	char ack    = 0;\012\012	bool write_to_channel_genotype = false;\012	bool read_from_channel_ack     = false;\012	bool read_from_channel_energy  = false;\012\012\012\012\012\012\012\012\012///*\012	\012\012	// State machine\012	uint pop_cnt = 0;	\012	bool first_step = true;\012\012\012	while (active) {\012\012\012	switch (mode) {\012		// ---------------------------------------------------------------------------------------------------------\012		case STATE_IC :			// IC: Init energy calculation of pop\012			if (pop_cnt < DockConst->pop_size-1) {\012				mode = STATE_IC;\012				write_to_channel_genotype = true;\012				read_from_channel_ack     = false;\012				read_from_channel_energy  = false;\012\012				if (first_step == true) {\012					first_step = false;\012				}\012				else {\012					pop_cnt++;\012				}\012					\012				for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {\012					genotype[pipe_cnt] = GlobPopulationCurrent[pop_cnt*ACTUAL_GENOTYPE_LENGTH+ pipe_cnt];\012				}	\012			}\012			else {\012				mode = STATE_IC_WAIT_END;\012				write_to_channel_genotype  = true;\012				read_from_channel_ack      = false;\012				read_from_channel_energy   = false;\012\012				for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {\012					genotype[pipe_cnt] = 0;\012				}	\012			}					\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case STATE_IC_WAIT_END :	// Signal IC finished \012			mode = STATE_GG_FIND_BEST;\012			write_to_channel_genotype = false;\012			read_from_channel_ack = true;\012			eval_cnt = DockConst->pop_size;	\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case STATE_GG_FIND_BEST:\012			mode = STATE_GG;\012			write_to_channel_genotype = false;\012			read_from_channel_ack = false ;\012\012			pop_cnt = 0;\012\012			//Identifying best entity\012			best_entity_id = find_best(GlobEnergyCurrent, loc_energies, DockConst->pop_size); \012			\012			//elitism - copying the best entity to new population\012			for (uint i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {\012				GlobPopulationNext[i] = GlobPopulationCurrent[best_entity_id*ACTUAL_GENOTYPE_LENGTH+i];\012			}\012			GlobEnergyNext[best_entity_id] = GlobEnergyCurrent[best_entity_id];\012\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case STATE_GG :			// GG: Genetic Generation\012			pop_cnt++;\012\012			if (pop_cnt < DockConst->pop_size) {\012				mode = STATE_GG;\012				write_to_channel_genotype = true;\012				read_from_channel_ack = false;\012\012				//selecting two individuals randomly\012				binary_tournament_selection(GlobEnergyCurrent, GlobPRNG, &parent1, &parent2,\012						            DockConst->pop_size, DockConst->tournament_rate);\012\012				async_work_group_copy(local_entity_1, GlobPopulationCurrent+parent1*ACTUAL_GENOTYPE_LENGTH, ACTUAL_GENOTYPE_LENGTH, 0);\012				async_work_group_copy(local_entity_2, GlobPopulationCurrent+parent2*ACTUAL_GENOTYPE_LENGTH, ACTUAL_GENOTYPE_LENGTH, 0);\012\012				// first two args are population [parent1], population [parent2]\012				gen_new_genotype(GlobPRNG, local_entity_1, local_entity_2,\012					         DockConst->mutation_rate, DockConst->abs_max_dmov, DockConst->abs_max_dang,\012					         DockConst->crossover_rate, ACTUAL_GENOTYPE_LENGTH, genotype);\012\012				async_work_group_copy(GlobPopulationNext+pop_cnt*ACTUAL_GENOTYPE_LENGTH, genotype, ACTUAL_GENOTYPE_LENGTH, 0);\012\012				//pop_cnt++;\012			}\012			else {\012				mode = STATE_GG_WAIT_END;\012				write_to_channel_genotype = true;\012				read_from_channel_ack = false;\012\012				for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {\012					genotype[pipe_cnt] = 0;\012				}	\012			}			\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case STATE_GG_WAIT_END :	// Signal GG finished 		\012			mode = STATE_UPDATE_POP;\012			write_to_channel_genotype = false;\012			read_from_channel_ack = true;\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case STATE_UPDATE_POP :\012			mode = STATE_LS;\012			write_to_channel_genotype = false;\012			read_from_channel_ack = false;\012\012			pop_cnt = 0;\012			eval_cnt += DockConst->pop_size;\012			evals_for_ls_in_this_cycle = 0;\012			//ls_ent_cnt=0;\012\012			// Updating old population with new one\012			for (uint i=0;i<DockConst->pop_size*ACTUAL_GENOTYPE_LENGTH; i++) {\012				GlobPopulationCurrent[i] = GlobPopulationNext[i];\012			}\012\012			// Updating old energy with new one\012			for (uint i=0;i<DockConst->pop_size; i++) {\012				GlobEnergyCurrent[i] = GlobEnergyNext[i];\012			}					\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case STATE_LS :			// LS: Local Search\012\012			//choosing an entity randomly,\012			//and without checking if it has already been subjected to LS in this cycle\012			entity_for_ls = myrand_uint(GlobPRNG, DockConst->pop_size);\012\012			for (uint i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {\012				offspring_genotype [i] = GlobPopulationCurrent[entity_for_ls*ACTUAL_GENOTYPE_LENGTH + i];\012				genotype_bias [i] = 0.0f;\012			}\012			offspring_energy = GlobEnergyCurrent[entity_for_ls];\012\012			mode = LS_STATE_DIR_FIRST;\012			write_to_channel_genotype = false;\012			read_from_channel_ack = false;\012\012			rho = 1.0f;\012			LS_eval = 0;\012			iteration_cnt = 0;\012\012\012/*\012			for (uint ls_ent_cnt=0; ls_ent_cnt<DockConst->num_of_lsentities; ls_ent_cnt++)	\012			{\012\012				perform_LS(GlobPopulationCurrent,\012				           GlobEnergyCurrent,\012				           GlobPRNG,\012				           KerConst,\012				           DockConst,\012				           entity_for_ls,\012				           local_entity_ls,\012				           entity_possible_new_genotype,\012				           &LS_eval);\012\012				eval_cnt += LS_eval;\012				evals_for_ls_in_this_cycle += LS_eval;\012				num_of_evals_for_ls += LS_eval;\012			}\012\012			generation_cnt++;\012			mode = STATE_LS_WAIT_END;\012*/\012\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case LS_STATE_DIR_FIRST:\012			//rho is the deviation of the uniform distribution\012			genotype_deviate [0] = rho*DockConst->base_dmov_mul_sqrt3*(2*myrand(GlobPRNG)-1);\012			genotype_deviate [1] = rho*DockConst->base_dmov_mul_sqrt3*(2*myrand(GlobPRNG)-1);\012			genotype_deviate [2] = rho*DockConst->base_dmov_mul_sqrt3*(2*myrand(GlobPRNG)-1);\012			for (uint i=3; i<DockConst->num_of_genes; i++) {\012				genotype_deviate [i] = rho*DockConst->base_dang_mul_sqrt3*(2*myrand(GlobPRNG)-1);\012			}\012\012			genotype [0] = offspring_genotype [0] + genotype_deviate [0] + genotype_bias [0];\012			genotype [1] = offspring_genotype [1] + genotype_deviate [1] + genotype_bias [1];\012			genotype [2] = offspring_genotype [2] + genotype_deviate [2] + genotype_bias [2];\012			genotype [3] = offspring_genotype [3] + genotype_deviate [3] + genotype_bias [3];\012			map_angle(&(genotype [3]), 360.0f);\012			genotype [4] = offspring_genotype [4] + genotype_deviate [4] + genotype_bias [4];\012			map_angle(&(genotype [4]), 180.0f);\012			for (uint i=5; i<DockConst->num_of_genes; i++) {\012				genotype [i] = offspring_genotype [i] + genotype_deviate [i] + genotype_bias [i];  \012				map_angle(&(genotype [i]), 360.0f);\012			}\012			\012			mode = LS_STATE_WAIT_FIRST;\012			write_to_channel_genotype = true;\012			read_from_channel_energy = false;\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case LS_STATE_WAIT_FIRST:\012			mode = LS_STATE_ENERGY_FIRST;\012			write_to_channel_genotype = false;\012			read_from_channel_energy = true;\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case LS_STATE_ENERGY_FIRST:\012			//if the new entity is better better\012			if (candidate_energy < offspring_energy) {\012\012				for (uint i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {\012					//updating offspring_genotype\012					offspring_genotype [i] = genotype [i];\012					//updating genotype_bias\012					genotype_bias [i] = 0.6f*genotype_bias [i] + 0.4f*genotype_deviate [i];\012				}\012\012				offspring_energy = candidate_energy;\012				cons_succ++;\012				cons_fail = 0;\012	\012				mode = LS_STATE_CHECK_RHO;\012				write_to_channel_genotype = false;\012				read_from_channel_energy = false;\012\012			}\012\012			//if worser, check the opposite direction\012			else {\012				mode = LS_STATE_DIR_SECOND;\012				write_to_channel_genotype = false;\012				read_from_channel_energy = false;\012			}\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case LS_STATE_DIR_SECOND:\012			genotype [0] = offspring_genotype [0] - genotype_deviate [0] - genotype_bias [0];				 \012			genotype [1] = offspring_genotype [1] - genotype_deviate [1] - genotype_bias [1];\012			genotype [2] = offspring_genotype [2] - genotype_deviate [2] - genotype_bias [2];\012			genotype [3] = offspring_genotype [3] - genotype_deviate [3] - genotype_bias [3];\012			map_angle(&(genotype [3]), 360.0f);\012			genotype [4] = offspring_genotype [4] - genotype_deviate [4] - genotype_bias [4];\012			map_angle(&(genotype [4]), 180.0f);\012			for (uint i=5; i<DockConst->num_of_genes; i++) {\012				genotype [i] = offspring_genotype [i] - genotype_deviate [i] - genotype_bias [i];\012				map_angle(&(genotype [i]), 360.0f);\012			}\012\012			mode = LS_STATE_WAIT_SECOND;\012			write_to_channel_genotype = true;\012			read_from_channel_energy = false;\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case LS_STATE_WAIT_SECOND:\012			mode = LS_STATE_ENERGY_SECOND;\012			write_to_channel_genotype = false;\012			read_from_channel_energy = true;\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case LS_STATE_ENERGY_SECOND:\012			LS_eval++;\012\012			//if the new entity is better\012			if (candidate_energy < offspring_energy) {\012				for (uint i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {\012					//updating offspring_genotype\012					offspring_genotype [i] = genotype [i];\012\012					//updating genotype_bias\012					genotype_bias [i] = 0.6f*genotype_bias [i] - 0.4f*genotype_deviate [i];\012				}\012\012				offspring_energy = candidate_energy;\012				cons_succ++;\012				cons_fail = 0;\012\012			}\012			//failure in both of the directions :-(\012			else {\012				//updating (halving) genotype_bias\012				for (uint i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {\012					genotype_bias [i] = 0.5f*genotype_bias [i];\012				}\012\012				cons_fail++;\012				cons_succ = 0;\012			}\012\012			mode = LS_STATE_CHECK_RHO;\012			write_to_channel_genotype = false;\012			read_from_channel_energy = false;\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case LS_STATE_CHECK_RHO:\012			//Changing deviation (rho), if needed\012			if (cons_succ >= DockConst->cons_limit) {\012			//this limitation is necessary in the FPGA due to the number representation\012				if ((rho*DockConst->base_dang_mul_sqrt3 < 90) && (rho*DockConst->base_dmov_mul_sqrt3 < 64)) {\012					rho = LS_EXP_FACTOR*rho;\012				}\012\012				cons_fail = 0;\012				cons_succ = 0;\012\012				}\012			else {\012				if (cons_fail >= DockConst->cons_limit) {\012					rho = LS_CONT_FACTOR*rho;\012					cons_fail = 0;\012					cons_succ = 0;\012				}\012			}\012\012			iteration_cnt++;\012			//printf(\"performLS: iteration_cnt (INC): %u, rho: %f, max: %f\\n\", iteration_cnt, rho, DockConst->rho_lower_bound);\012\012			mode = LS_STATE_CHECK_TERMINATION;\012			write_to_channel_genotype = false;\012			read_from_channel_energy = false;\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case LS_STATE_CHECK_TERMINATION:\012			if ((iteration_cnt < DockConst->max_num_of_iters) && (rho > DockConst->rho_lower_bound)) {\012				mode = LS_STATE_DIR_FIRST;\012				write_to_channel_genotype = false;\012				read_from_channel_energy = false;\012			}\012			else {\012				mode = STATE_LS_WAIT_END;\012				write_to_channel_genotype = false;\012				read_from_channel_energy = false;\012\012				for (uint i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {\012					GlobPopulationCurrent[entity_for_ls*ACTUAL_GENOTYPE_LENGTH + i] = offspring_genotype [i];\012				}\012				GlobEnergyCurrent[entity_for_ls] = offspring_energy;\012			}\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case STATE_LS_WAIT_END :	// Signal LS finished 		\012			eval_cnt += LS_eval;\012			evals_for_ls_in_this_cycle += LS_eval;\012			num_of_evals_for_ls += LS_eval;\012\012			ls_ent_cnt++;\012\012			if (ls_ent_cnt<DockConst->num_of_lsentities) {\012				//mode = LS_STATE_DIR_FIRST;\012				mode = STATE_LS;\012				write_to_channel_genotype = false;\012				read_from_channel_ack = false;\012			}\012			else {\012				mode = STATE_CHECK_TERMINATION;\012				write_to_channel_genotype = false;\012				read_from_channel_ack = false;\012\012				generation_cnt++;\012			}				\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case STATE_CHECK_TERMINATION :	// Signal LS finished 		\012			if((eval_cnt < DockConst->num_of_energy_evals) && (generation_cnt < DockConst->num_of_generations)) {\012				mode = STATE_GG_FIND_BEST;\012				pop_cnt = 0; \012				write_to_channel_genotype = false;\012				read_from_channel_ack = false;\012			}\012			else {\012				mode = STATE_END;\012				write_to_channel_genotype = false;\012				read_from_channel_ack = false;	\012			}\012			printf(\"eval_cnt: %u, generation_cnt: %u\\n\", eval_cnt, generation_cnt);	\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case STATE_END :		// Krnl_GA has finished execution!	\012			active_work_kernels = 0;\012			mode = STATE_WAIT_END;\012			write_to_channel_genotype = true;\012			read_from_channel_ack = false;\012\012			for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {\012				genotype[pipe_cnt] = 0;\012			}\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case STATE_WAIT_END :		\012			mode = STATE_OFF;\012			write_to_channel_genotype = false;\012			read_from_channel_ack = true;\012				\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012		case STATE_OFF :	\012			active = false;\012			GlobEvals_performed[0]       =  eval_cnt;\012			GlobGenerations_performed[0] =  generation_cnt;	\012\012			write_to_channel_genotype = false;\012			read_from_channel_ack = false;\012		break;\012		// ---------------------------------------------------------------------------------------------------------\012	} // End of switch\012\012\012	if (write_to_channel_genotype == true) {\012		write_channel_altera(chan_GA2Conf_active, active_work_kernels);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		write_channel_altera(chan_GA2Conf_mode,   mode);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		write_channel_altera(chan_GA2Conf_cnt,    pop_cnt);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012\012		for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {\012			write_channel_altera(chan_GA2Conf_genotype, genotype[pipe_cnt]);\012		}\012	}\012\012	if (read_from_channel_ack == true) { \012		ack = read_channel_altera(chan_Store2GA_ack);	\012	}\012\012	if (read_from_channel_energy == true) {\012		candidate_energy = read_channel_altera(chan_Store2GA_LSenergy);\012	}\012\012	} // End of while\012\012\012\012\012\012\012\012//*/\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012/*\012\012	//active = 1;\012	//mode   = 1;\012\012	LOOP_GEN_GENERATIONAL_1:\012	for (uint pop_cnt = 0; pop_cnt < DockConst->pop_size; pop_cnt++)\012	{	\012		// --------------------------------------------------------------\012		// Send genotypes to channel\012		// --------------------------------------------------------------\012		write_channel_altera(chan_GA2Conf_active, active);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		write_channel_altera(chan_GA2Conf_mode,   mode);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		write_channel_altera(chan_GA2Conf_cnt,    pop_cnt);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012\012		for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {\012			//write_channel_altera(chan_GA2Conf_genotype, GlobPopulationCurrent[pop_cnt*ACTUAL_GENOTYPE_LENGTH+ pipe_cnt]);\012			write_channel_altera(chan_GA2Conf_IC_genotype, GlobPopulationCurrent[pop_cnt*ACTUAL_GENOTYPE_LENGTH+ pipe_cnt]);\012		}\012\012\012\012\012		// --------------------------------------------------------------\012		\012		#if defined (DEBUG_LEO)\012		printf(\"pop_cnt (INC): %u\\n\", pop_cnt);\012		#endif\012	} // End of LOOP_GEN_GENERATIONAL_1\012	\012	eval_cnt = DockConst->pop_size;\012	\012	#if defined (DEBUG_LEO)\012	printf(\"eval_cnt (INC): %u\\n\", eval_cnt);\012	#endif\012\012\012\012\012\012\012\012\012	// --------------------------------------------------------------\012	// Send DUMMY genotypes to channel to signal INI stop\012	// --------------------------------------------------------------\012	active = 1;\012	mode   = STATE_IC_WAIT_END;\012\012	write_channel_altera(chan_GA2Conf_active, active);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	write_channel_altera(chan_GA2Conf_mode,   mode);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	write_channel_altera(chan_GA2Conf_cnt,    0);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012\012	for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {\012		//write_channel_altera(chan_GA2Conf_genotype, 0);\012		write_channel_altera(chan_GA2Conf_IC_WAIT_genotype, 0);\012	}\012\012\012	//ack = read_channel_altera(chan_Store2GA_ack);\012	ack = read_channel_altera(chan_Store2GA_IC_ack);\012	//printf(\"INI ack: %u\\n\", ack);\012	// --------------------------------------------------------------\012		\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012	// **********************************************\012	// ADD VENDOR SPECIFIC PRAGMA\012	// **********************************************\012	float avg_energy;\012	\012	LOOP_WHILE_GEN_GENERATIONAL_1:\012	// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\012	// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\012	while ((eval_cnt < DockConst->num_of_energy_evals) && (generation_cnt < DockConst->num_of_generations))\012	{\012		//Creating a new population\012\012		//Identifying best entity\012		best_entity_id = find_best(GlobEnergyCurrent, loc_energies, DockConst->pop_size); \012\012		#if defined (DEBUG_KERNEL1)\012		avg_energy = 0.0f;\012		printf(\"\\n\\n\\nFinal state of the %u. generation:\\n\", generation_cnt);\012		printf(\"----------------------------\\n\\n\");\012		for (i=0; i<DockConst->pop_size; i++)\012		{\012			avg_energy += GlobEnergyCurrent [i];\012			printf(\"Entity %3u: \", i);\012			for (j=0; j<ACTUAL_GENOTYPE_LENGTH; j++) {\012				printf(\"%8.3f \", GlobPopulationCurrent [i*ACTUAL_GENOTYPE_LENGTH +j]);\012			}\012			printf(\"   energy sum: %10.3f\\n\", GlobEnergyCurrent [i*40 + 38]);\012		}\012		printf(\"\\nAverage energy: %f\\nBest energy sum: %f)\\n\\n\", avg_energy/DockConst->pop_size, \012		      GlobEnergyCurrent[best_entity_id]);\012		#endif\012\012		//elitism - copying the best entity to new population\012		for (uint i=0; i<ACTUAL_GENOTYPE_LENGTH; i++)\012		{\012			GlobPopulationNext[i] = GlobPopulationCurrent[best_entity_id*ACTUAL_GENOTYPE_LENGTH+i];\012		}\012		GlobEnergyNext[best_entity_id] = GlobEnergyCurrent[best_entity_id];\012\012\012		//new population consists of one member currently\012		// But not needed to be specified as the following loop does it\012		//new_pop_cnt = 1;\012\012\012\012\012\012\012\012		// -----------------------------------------------------------------------\012		active = 1;\012		mode = 2;\012\012		// **********************************************\012		// ADD VENDOR SPECIFIC PRAGMA\012		// **********************************************\012		LOOP_GEN_GENERATIONAL_2:\012		for (uint new_pop_cnt = 1; new_pop_cnt < DockConst->pop_size; new_pop_cnt++)\012		{\012			//printf(\"BEFORE BINARY TOURNAMENT, %u\\n\",new_pop_cnt);\012			//selecting two individuals randomly\012			binary_tournament_selection(GlobEnergyCurrent,\012						    GlobPRNG,\012						    &parent1,\012						    &parent2,\012						    DockConst->pop_size,\012						    DockConst->tournament_rate);\012			//printf(\"AFTER BINARY TOURNAMENT, %u\\n\",new_pop_cnt);\012\012\012			//mating parents	\012			async_work_group_copy(local_entity_1, GlobPopulationCurrent+parent1*ACTUAL_GENOTYPE_LENGTH, ACTUAL_GENOTYPE_LENGTH, 0);\012			async_work_group_copy(local_entity_2, GlobPopulationCurrent+parent2*ACTUAL_GENOTYPE_LENGTH, ACTUAL_GENOTYPE_LENGTH, 0);\012\012\012			//printf(\"BEFORE GEN NEW GENOTYPE, %u\\n\",new_pop_cnt);\012			// first two args are population [parent1], population [parent2]\012			gen_new_genotype(GlobPRNG,\012                                         local_entity_1, \012					 local_entity_2,\012					 DockConst->mutation_rate,\012					 DockConst->abs_max_dmov,\012					 DockConst->abs_max_dang,\012					 DockConst->crossover_rate,\012					 ACTUAL_GENOTYPE_LENGTH,\012					 offspring_genotype);\012\012			//printf(\"AFTER GEN NEW GENOTYPE, %u\\n\",new_pop_cnt);\012\012\012			//printf(\"BEFORE GA CHANNEL, %u\\n\",new_pop_cnt);\012			// --------------------------------------------------------------\012			// Send genotypes to channel\012			// --------------------------------------------------------------\012\012			for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {\012				write_channel_altera(chan_GA2Conf_genotype, offspring_genotype[pipe_cnt]);\012			}\012\012			write_channel_altera(chan_GA2Conf_active, active);\012			write_channel_altera(chan_GA2Conf_mode,   mode);\012			write_channel_altera(chan_GA2Conf_cnt,    new_pop_cnt);\012\012			// --------------------------------------------------------------\012			//printf(\"AFTER GA CHANNEL, %u\\n\",new_pop_cnt);\012\012			//copying offspring to population\012			// **********************************************\012			// ADD VENDOR SPECIFIC PRAGMA\012			// **********************************************\012			\012			//LOOP_GEN_GENERATIONAL_3:\012			//for (uint gene_cnt = 0; gene_cnt < ACTUAL_GENOTYPE_LENGTH; gene_cnt++) {\012			//	GlobPopulationNext[new_pop_cnt*ACTUAL_GENOTYPE_LENGTH + gene_cnt] = offspring_genotype[gene_cnt];\012			//}\012			\012			async_work_group_copy(GlobPopulationNext+new_pop_cnt*ACTUAL_GENOTYPE_LENGTH, offspring_genotype, ACTUAL_GENOTYPE_LENGTH, 0);\012	\012			#if defined (DEBUG_LEO)\012			printf(\"eval_cnt (INC): %u, new_pop_cnt (INC): %u\\n\", eval_cnt, new_pop_cnt);\012			#endif\012			\012\012\012		\012		} // End of LOOP_GEN_GENERATIONAL_2\012		// -----------------------------------------------------------------------\012\012\012\012\012\012		\012\012\012		#if defined (DEBUG_LEO)\012		printf(\"End of loop of new_pop_cnt, new_pop_cnt = %u\\n\", DockConst->pop_size);\012		#endif\012\012\012\012\012\012\012\012		// --------------------------------------------------------------\012		// Send DUMMY genotypes to channel to signal GG stop\012		// --------------------------------------------------------------\012		active = 1;\012		mode   = 0;\012		for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {\012			write_channel_altera(chan_GA2Conf_genotype, 0);\012		}\012\012		write_channel_altera(chan_GA2Conf_active, active);\012		write_channel_altera(chan_GA2Conf_mode,   mode);\012		write_channel_altera(chan_GA2Conf_cnt,    0);\012\012		ack = read_channel_altera(chan_Store2GA_ack);\012		//printf(\"GG ack: %u\\n\", ack);\012		// --------------------------------------------------------------\012		\012\012\012\012\012		// Updating old population with new one\012		// **********************************************\012		// ADD VENDOR SPECIFIC PRAGMA\012		// **********************************************\012		for (uint i=0;i<DockConst->pop_size*ACTUAL_GENOTYPE_LENGTH; i++)\012		{\012			GlobPopulationCurrent[i] = GlobPopulationNext[i];\012		}\012\012		// Updating old energy with new one\012		// **********************************************\012		// ADD VENDOR SPECIFIC PRAGMA\012		// **********************************************\012		for (uint i=0;i<DockConst->pop_size; i++)\012		{\012			GlobEnergyCurrent[i] = GlobEnergyNext[i];\012		}\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012\012		evals_for_ls_in_this_cycle = 0;\012\012		#if defined (DEBUG_LEO)\012		printf(\"num_of_entity_for_ls: %u \\n\", DockConst->num_of_lsentities);\012		#endif\012\012\012\012\012\012\012\012\012\012		// -----------------------------------------------------------------------\012		// **********************************************\012		// ADD VENDOR SPECIFIC PRAGMA\012		// **********************************************\012		LOOP_GEN_GENERATIONAL_4:\012		//subjecting num_of_entity_for_ls pieces of offsprings to LS\012		for (uint ls_ent_cnt=0; ls_ent_cnt<DockConst->num_of_lsentities; ls_ent_cnt++)	\012		{\012			//choosing an entity randomly,\012			//and without checking if it has already been subjected to LS in this cycle\012			entity_for_ls = myrand_uint(GlobPRNG, DockConst->pop_size);\012\012			#if defined (DEBUG_LEO)\012			printf(\"entity_for_ls: %u\\n\", entity_for_ls);\012			#endif\012\012\012			#if defined (DEBUG_KERNEL1)\012			printf(\"Entity %u before local search: \", entity_for_ls);\012			for (j=0; j<DockConst->rotbondlist_length+6; j++) {\012				printf(\"%f \", GlobPopulationCurrent [entity_for_ls*ACTUAL_GENOTYPE_LENGTH + j]);\012			}\012			printf(\"   energies: %f \\n\", GlobEnergyCurrent [entity_for_ls]);\012			#endif\012\012			//printf(\"BEFORE LS, %u\\n\",ls_ent_cnt);\012			//performing local search\012			//async_work_group_copy(local_entity_ls, GlobPopulationCurrent+entity_for_ls*ACTUAL_GENOTYPE_LENGTH, ACTUAL_GENOTYPE_LENGTH, 0);\012			//local_entity_energy = GlobEnergyCurrent[entity_for_ls];\012\012			perform_LS(GlobPopulationCurrent,\012				   GlobEnergyCurrent,\012				   GlobPRNG,\012				   KerConst,\012				   DockConst,\012				   entity_for_ls,\012				   local_entity_ls,\012				   entity_possible_new_genotype,\012				   &LS_eval);\012\012			//async_work_group_copy(GlobPopulationCurrent+entity_for_ls*ACTUAL_GENOTYPE_LENGTH, local_entity_ls, ACTUAL_GENOTYPE_LENGTH, 0);\012\012			//printf(\"AFTER LS, %u\\n\",ls_ent_cnt);\012\012\012			eval_cnt += LS_eval;\012			evals_for_ls_in_this_cycle += LS_eval;\012\012\012			#if defined (DEBUG_KERNEL1)\012			printf(\"Entity %u after local search (%u evaluations): \", entity_for_ls, LS_eval);\012			for (j=0; j<myligand_num_of_rotbonds+6; j++) {printf(\"%f \", GlobPopulation [entity_for_ls*40 + j]);}\012			printf(\"   energies: %f %f\\n\",\012				   GlobPopulation [entity_for_ls*40 + 38],\012				   GlobPopulation [entity_for_ls*40 + 39]);\012			#endif\012\012			num_of_evals_for_ls += LS_eval;\012\012			#if defined (DEBUG_LEO)\012			printf(\"eval_cnt (INC): %u, evals_for_ls_in_this_cycle(INC): % u\\n\", eval_cnt, evals_for_ls_in_this_cycle);\012			#endif\012\012\012		} // End of LOOP_GEN_GENERATIONAL_4\012\012		// -----------------------------------------------------------------------\012\012		generation_cnt++;\012\012		//#if defined (DEBUG_LEO)\012		printf(\"eval_cnt: %u, generation_cnt: %u\\n\", eval_cnt, generation_cnt);\012		//#endif\012\012\012\012\012	} // End of while ((eval_cnt < mypars->num_of_energy_evals) && (generation_cnt < mypars->num_of_generations))\012\012\012	// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\012	// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\012*/\012\012\012\012\012\012\012\012\012\012\012\012\012\012/*\012\012\012\012\012	printf(\"	%-20s: %s\\n\", \"Krnl_GA\", \"has finished execution!\");\012\012	\012	active = 0;\012	mode = 4;\012\012	// --------------------------------------------------------------\012	// Send DUMMY genotypes to channel\012	// --------------------------------------------------------------\012	for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {\012		write_channel_altera(chan_GA2Conf_genotype, 0);\012	}\012	write_channel_altera(chan_GA2Conf_active, active);\012	write_channel_altera(chan_GA2Conf_mode,   mode);\012	write_channel_altera(chan_GA2Conf_cnt,    0);\012	// --------------------------------------------------------------\012\012\012	GlobEvals_performed[0]       =  eval_cnt;\012	GlobGenerations_performed[0] =  generation_cnt;\012\012	#if defined (DEBUG_KERNEL1)\012	printf(\"Energy evaluations for LS: %u out of %u\\n\", num_of_evals_for_ls, eval_cnt);\012	printf(\"Number of generations: %u\\n\", generation_cnt);\012	#endif\012\012\012\012\012*/\012\012\012\012}\012\012// --------------------------------------------------------------------------\012// --------------------------------------------------------------------------\012\012\012#include \"Krnl_Conform.cl\"\012#include \"Krnl_InterE.cl\"\012#include \"Krnl_IntraE.cl\"\012#include \"Krnl_Store.cl\"\012\012"}, {"index":1, "path":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_Conform.cl", "name":"Krnl_Conform.cl", "content":"// --------------------------------------------------------------------------\012// The function changes the conformation of myligand according to \012// the genotype given by the second parameter.\012// Originally from: processligand.c\012// --------------------------------------------------------------------------\012__kernel __attribute__ ((reqd_work_group_size(1,1,1)))\012void Krnl_Conform(\012             //__global const float*           restrict GlobFgrids,\012	     //__global       float*           restrict GlobPopulationCurrent,\012	     //__global       float*           restrict GlobEnergyCurrent,\012	     //__global       float*           restrict GlobPopulationNext,\012	     //__global       float*           restrict GlobEnergyNext,\012             //__global       unsigned int*    restrict GlobPRNG,\012	     __global const kernelconstant*  restrict KerConst,\012	     __global const Dockparameters*  restrict DockConst)\012{\012\012	__local float loc_coords_x[MAX_NUM_OF_ATOMS];\012	__local float loc_coords_y[MAX_NUM_OF_ATOMS];\012	__local float loc_coords_z[MAX_NUM_OF_ATOMS];\012	__local float genotype[ACTUAL_GENOTYPE_LENGTH];\012/*\012	float __attribute__((register)) loc_coords_x[MAX_NUM_OF_ATOMS];\012	float __attribute__((register)) loc_coords_y[MAX_NUM_OF_ATOMS];\012	float __attribute__((register)) loc_coords_z[MAX_NUM_OF_ATOMS];\012	float __attribute__((register)) genotype[ACTUAL_GENOTYPE_LENGTH];\012*/\012\012\012	char active = 1;\012	char mode   = 0;\012	uint cnt    = 0;    \012\012	float phi, theta, genrotangle;\012	float genrot_unitvec [3];\012\012	int rotation_list_element;\012	uint atom_id, rotbond_id;\012	float atom_to_rotate[3];\012	float rotation_unitvec[3];\012	float rotation_movingvec[3];\012	float rotation_angle;\012	float sin_angle;\012	float quatrot_left_x, quatrot_left_y, quatrot_left_z, quatrot_left_q;\012	float quatrot_temp_x, quatrot_temp_y, quatrot_temp_z, quatrot_temp_q;\012\012while(active) {\012\012	//printf(\"BEFORE In CONFORM CHANNEL\\n\");\012	// --------------------------------------------------------------\012	// Wait for genotypes in channel\012	// --------------------------------------------------------------\012	active = read_channel_altera(chan_GA2Conf_active); if (active == 0) {printf(\"	%-20s: %s\\n\", \"Krnl_Conform\", \"disabled\");}\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	mode   = read_channel_altera(chan_GA2Conf_mode);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	cnt    = read_channel_altera(chan_GA2Conf_cnt);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012\012	for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {\012		genotype[pipe_cnt] = read_channel_altera(chan_GA2Conf_genotype);\012	}	\012	// --------------------------------------------------------------\012	//printf(\"AFTER In CONFORM CHANNEL\\n\");\012\012	phi         = genotype [3]*DEG_TO_RAD;\012	theta       = genotype [4]*DEG_TO_RAD;\012	genrotangle = genotype [5]*DEG_TO_RAD;\012\012	#if defined (NATIVE_PRECISION)\012	genrot_unitvec [0] = native_sin(theta)*native_cos(phi);\012	genrot_unitvec [1] = native_sin(theta)*native_sin(phi);\012	genrot_unitvec [2] = native_cos(theta);\012	#else\012	genrot_unitvec [0] = sin(theta)*cos(phi);\012	genrot_unitvec [1] = sin(theta)*sin(phi);\012	genrot_unitvec [2] = cos(theta);\012	#endif\012	\012	\012\012	// **********************************************\012	// ADD VENDOR SPECIFIC PRAGMA\012	// **********************************************\012	LOOP_CHANGE_CONFORM_1:\012	for (uint rotation_counter = 0; rotation_counter < DockConst->rotbondlist_length; rotation_counter++)\012	{\012		rotation_list_element = KerConst->rotlist_const[rotation_counter];\012\012		if ((rotation_list_element & RLIST_DUMMY_MASK) == 0)	//if not dummy rotation\012		{\012			atom_id = rotation_list_element & RLIST_ATOMID_MASK;\012\012			//capturing atom coordinates\012			if ((rotation_list_element & RLIST_FIRSTROT_MASK) != 0)	//if first rotation of this atom\012			{\012				atom_to_rotate[0] = KerConst->ref_coords_x_const[atom_id];\012				atom_to_rotate[1] = KerConst->ref_coords_y_const[atom_id];\012				atom_to_rotate[2] = KerConst->ref_coords_z_const[atom_id];\012			}\012			else\012			{\012				atom_to_rotate[0] = loc_coords_x[atom_id];\012				atom_to_rotate[1] = loc_coords_y[atom_id];\012				atom_to_rotate[2] = loc_coords_z[atom_id];\012			}\012\012			//capturing rotation vectors and angle\012			if ((rotation_list_element & RLIST_GENROT_MASK) != 0)	//if general rotation\012			{\012				rotation_unitvec[0] = genrot_unitvec[0];\012				rotation_unitvec[1] = genrot_unitvec[1];\012				rotation_unitvec[2] = genrot_unitvec[2];\012\012				rotation_angle = genrotangle;\012\012				rotation_movingvec[0] = genotype[0];\012				rotation_movingvec[1] = genotype[1];\012				rotation_movingvec[2] = genotype[2];\012			}\012			else	//if rotating around rotatable bond\012			{\012				rotbond_id = (rotation_list_element & RLIST_RBONDID_MASK) >> RLIST_RBONDID_SHIFT;\012	\012				rotation_unitvec[0] = KerConst->rotbonds_unit_vectors_const[3*rotbond_id];\012				rotation_unitvec[1] = KerConst->rotbonds_unit_vectors_const[3*rotbond_id+1];\012				rotation_unitvec[2] = KerConst->rotbonds_unit_vectors_const[3*rotbond_id+2];\012				rotation_angle = genotype[6+rotbond_id]*DEG_TO_RAD;\012\012				rotation_movingvec[0] = KerConst->rotbonds_moving_vectors_const[3*rotbond_id];\012				rotation_movingvec[1] = KerConst->rotbonds_moving_vectors_const[3*rotbond_id+1];\012				rotation_movingvec[2] = KerConst->rotbonds_moving_vectors_const[3*rotbond_id+2];\012\012				//in addition performing the first movement \012				//which is needed only if rotating around rotatable bond\012				atom_to_rotate[0] -= rotation_movingvec[0];\012				atom_to_rotate[1] -= rotation_movingvec[1];\012				atom_to_rotate[2] -= rotation_movingvec[2];\012			}\012\012			//performing rotation\012			rotation_angle = rotation_angle/2;\012			quatrot_left_q = cos(rotation_angle);\012			sin_angle = sin(rotation_angle);\012\012			quatrot_left_x = sin_angle*rotation_unitvec[0];\012			quatrot_left_y = sin_angle*rotation_unitvec[1];\012			quatrot_left_z = sin_angle*rotation_unitvec[2];\012\012			if ((rotation_list_element & RLIST_GENROT_MASK) != 0)	//if general rotation, \012										//two rotations should be performed \012										//(multiplying the quaternions)\012			{\012				//calculating quatrot_left*ref_orientation_quats_const, \012				//which means that reference orientation rotation is the first\012				quatrot_temp_q = quatrot_left_q;\012				quatrot_temp_x = quatrot_left_x;\012				quatrot_temp_y = quatrot_left_y;\012				quatrot_temp_z = quatrot_left_z;\012\012				// L30nardoSV: taking the first element of ref_orientation_quats_const member\012				quatrot_left_q = quatrot_temp_q*KerConst->ref_orientation_quats_const[0]-\012						 quatrot_temp_x*KerConst->ref_orientation_quats_const[1]-\012						 quatrot_temp_y*KerConst->ref_orientation_quats_const[2]-\012						 quatrot_temp_z*KerConst->ref_orientation_quats_const[3];\012				quatrot_left_x = quatrot_temp_q*KerConst->ref_orientation_quats_const[1]+\012						 KerConst->ref_orientation_quats_const[0]*quatrot_temp_x+\012						 quatrot_temp_y*KerConst->ref_orientation_quats_const[3]-\012						 KerConst->ref_orientation_quats_const[2]*quatrot_temp_z;\012				quatrot_left_y = quatrot_temp_q*KerConst->ref_orientation_quats_const[2]+\012						 KerConst->ref_orientation_quats_const[0]*quatrot_temp_y+\012						 KerConst->ref_orientation_quats_const[1]*quatrot_temp_z-\012						 quatrot_temp_x*KerConst->ref_orientation_quats_const[3];\012				quatrot_left_z = quatrot_temp_q*KerConst->ref_orientation_quats_const[3]+\012						 KerConst->ref_orientation_quats_const[0]*quatrot_temp_z+\012						 quatrot_temp_x*KerConst->ref_orientation_quats_const[2]-\012						 KerConst->ref_orientation_quats_const[1]*quatrot_temp_y;\012\012			}\012\012			quatrot_temp_q = 0 -\012					 quatrot_left_x*atom_to_rotate [0] -\012					 quatrot_left_y*atom_to_rotate [1] -\012					 quatrot_left_z*atom_to_rotate [2];\012			quatrot_temp_x = quatrot_left_q*atom_to_rotate [0] +\012					 quatrot_left_y*atom_to_rotate [2] -\012					 quatrot_left_z*atom_to_rotate [1];\012			quatrot_temp_y = quatrot_left_q*atom_to_rotate [1] -\012					 quatrot_left_x*atom_to_rotate [2] +\012					 quatrot_left_z*atom_to_rotate [0];\012			quatrot_temp_z = quatrot_left_q*atom_to_rotate [2] +\012					 quatrot_left_x*atom_to_rotate [1] -\012					 quatrot_left_y*atom_to_rotate [0];\012\012			atom_to_rotate [0] = 0 -\012					     quatrot_temp_q*quatrot_left_x +\012					     quatrot_temp_x*quatrot_left_q -\012					     quatrot_temp_y*quatrot_left_z +\012					     quatrot_temp_z*quatrot_left_y;\012			atom_to_rotate [1] = 0 -\012					     quatrot_temp_q*quatrot_left_y +\012					     quatrot_temp_x*quatrot_left_z +\012					     quatrot_temp_y*quatrot_left_q -\012					     quatrot_temp_z*quatrot_left_x;\012			atom_to_rotate [2] = 0 -\012					     quatrot_temp_q*quatrot_left_z -\012					     quatrot_temp_x*quatrot_left_y +\012					     quatrot_temp_y*quatrot_left_x +\012					     quatrot_temp_z*quatrot_left_q;\012\012			//performing final movement and storing values\012			loc_coords_x[atom_id] = atom_to_rotate [0] + rotation_movingvec[0];\012			loc_coords_y[atom_id] = atom_to_rotate [1] + rotation_movingvec[1];\012			loc_coords_z[atom_id] = atom_to_rotate [2] + rotation_movingvec[2];\012\012		} // End if-statement not dummy rotation\012	} // End rotation_counter for-loop\012\012	//printf(\"BEFORE Out CONFORM CHANNEL\\n\");\012	// --------------------------------------------------------------\012	// Send ligand atomic coordinates to channel \012	// --------------------------------------------------------------\012/*\012	for (uint pipe_cnt=0; pipe_cnt<DockConst->num_of_atoms; pipe_cnt++) {\012		write_channel_altera(chan_Conf2Intere_x, loc_coords_x[pipe_cnt]);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		write_channel_altera(chan_Conf2Intere_y, loc_coords_y[pipe_cnt]);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		write_channel_altera(chan_Conf2Intere_z, loc_coords_z[pipe_cnt]);\012		//mem_fence(CLK_CHANNEL_MEM_FENCE);\012\012		write_channel_altera(chan_Conf2Intrae_x, loc_coords_x[pipe_cnt]);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		write_channel_altera(chan_Conf2Intrae_y, loc_coords_y[pipe_cnt]);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		write_channel_altera(chan_Conf2Intrae_z, loc_coords_z[pipe_cnt]);\012	}\012*/\012\012	write_channel_altera(chan_Conf2Intere_active, active);\012	write_channel_altera(chan_Conf2Intrae_active, active);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	write_channel_altera(chan_Conf2Intere_mode,   mode);\012	write_channel_altera(chan_Conf2Intrae_mode,   mode);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	write_channel_altera(chan_Conf2Intere_cnt,    cnt);\012	write_channel_altera(chan_Conf2Intrae_cnt,    cnt);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012\012	for (uint pipe_cnt=0; pipe_cnt<DockConst->num_of_atoms; pipe_cnt++) {\012		write_channel_altera(chan_Conf2Intere_x, loc_coords_x[pipe_cnt]);\012		write_channel_altera(chan_Conf2Intrae_x, loc_coords_x[pipe_cnt]);\012		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);\012		write_channel_altera(chan_Conf2Intere_y, loc_coords_y[pipe_cnt]);\012		write_channel_altera(chan_Conf2Intrae_y, loc_coords_y[pipe_cnt]);\012		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);\012		write_channel_altera(chan_Conf2Intere_z, loc_coords_z[pipe_cnt]);\012		write_channel_altera(chan_Conf2Intrae_z, loc_coords_z[pipe_cnt]);\012		/*\012		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);\012		write_channel_altera(chan_Conf2Intere_active, active);\012		write_channel_altera(chan_Conf2Intrae_active, active);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		write_channel_altera(chan_Conf2Intere_mode,   mode);\012		write_channel_altera(chan_Conf2Intrae_mode,   mode);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		write_channel_altera(chan_Conf2Intere_cnt,    cnt);\012		write_channel_altera(chan_Conf2Intrae_cnt,    cnt);\012		*/\012	}\012\012\012\012	// --------------------------------------------------------------\012	//printf(\"AFTER Out CONFORM CHANNEL\\n\");\012\012} // End of while(1)\012\012}\012// --------------------------------------------------------------------------\012// --------------------------------------------------------------------------\012"}, {"index":2, "path":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_InterE.cl", "name":"Krnl_InterE.cl", "content":"// --------------------------------------------------------------------------\012// The function calculates the intermolecular energy of a ligand given by \012// myligand parameter, and a receptor represented as a grid. \012// The grid point values must be stored at the location which starts at GlobFgrids, \012// the memory content can be generated with get_gridvalues function.\012// The mygrid parameter must be the corresponding grid informtaion. \012// If an atom is outside the grid, the coordinates will be changed with \012// the value of outofgrid_tolerance, \012// if it remains outside, a very high value will be added to the current energy as a penalty. \012// Originally from: processligand.c\012// --------------------------------------------------------------------------\012__kernel __attribute__ ((reqd_work_group_size(1,1,1)))\012void Krnl_InterE(\012             __global const float*           restrict GlobFgrids,\012	     //__global       float*           restrict GlobPopulationCurrent,\012	     //__global       float*           restrict GlobEnergyCurrent,\012	     //__global       float*           restrict GlobPopulationNext,\012	     //__global       float*           restrict GlobEnergyNext,\012             //__global       unsigned int*    restrict GlobPRNG,\012	     __global const kernelconstant*  restrict KerConst,\012	     __global const Dockparameters*  restrict DockConst)\012{\012/*\012	__local float loc_coords_x[MAX_NUM_OF_ATOMS];\012	__local float loc_coords_y[MAX_NUM_OF_ATOMS];\012	__local float loc_coords_z[MAX_NUM_OF_ATOMS];\012*/\012\012	float __attribute__((register)) loc_coords_x[MAX_NUM_OF_ATOMS];\012	float __attribute__((register)) loc_coords_y[MAX_NUM_OF_ATOMS];\012	float __attribute__((register)) loc_coords_z[MAX_NUM_OF_ATOMS];\012\012\012	char active = 1;\012	char mode   = 0;\012	uint cnt    = 0;   \012\012	float interE;\012	float partialE1, partialE2, partialE3;\012\012\012	char atom1_id, atom1_typeid;\012	float x, y, z, dx, dy, dz, q;\012	float cube [2][2][2];\012	float weights [2][2][2];\012	int x_low, x_high, y_low, y_high, z_low, z_high;\012\012	// L30nardoSV	\012	unsigned int  mul_tmp;\012	unsigned char g1 = DockConst->gridsize_x; 	\012	unsigned int  g2 = DockConst->gridsize_x * DockConst->gridsize_y;         \012	unsigned int  g3 = DockConst->gridsize_x * DockConst->gridsize_y * DockConst->gridsize_z;\012        unsigned int  ylow_times_g1, yhigh_times_g1;\012        unsigned int  zlow_times_g2, zhigh_times_g2;\012	unsigned int  cube_000, cube_100, cube_010, cube_110;\012        unsigned int  cube_001, cube_101, cube_011, cube_111;\012\012while(active) {\012	//printf(\"BEFORE In INTER CHANNEL\\n\");\012	// --------------------------------------------------------------\012	// Wait for ligand atomic coordinates in channel\012	// --------------------------------------------------------------\012	active = read_channel_altera(chan_Conf2Intere_active);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	mode   = read_channel_altera(chan_Conf2Intere_mode);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	cnt    = read_channel_altera(chan_Conf2Intere_cnt);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012\012	for (uint pipe_cnt=0; pipe_cnt<DockConst->num_of_atoms; pipe_cnt++) {\012		loc_coords_x[pipe_cnt] = read_channel_altera(chan_Conf2Intere_x);\012		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);\012		loc_coords_y[pipe_cnt] = read_channel_altera(chan_Conf2Intere_y);\012		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);\012		loc_coords_z[pipe_cnt] = read_channel_altera(chan_Conf2Intere_z);\012		/*\012		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);\012		active = read_channel_altera(chan_Conf2Intere_active);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		mode   = read_channel_altera(chan_Conf2Intere_mode);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		cnt    = read_channel_altera(chan_Conf2Intere_cnt);\012		*/\012	}\012	// --------------------------------------------------------------\012	//printf(\"AFTER In INTER CHANNEL\\n\");\012\012	if (active == 0) {printf(\"	%-20s: %s\\n\", \"Krnl_InterE\", \"disabled\");}\012\012	interE = 0.0f;\012	partialE1 = 0.0f;\012	partialE2 = 0.0f;\012	partialE3 = 0.0f;\012\012	// for each atom\012	// **********************************************\012	// ADD VENDOR SPECIFIC PRAGMA	\012	// **********************************************\012	LOOP_INTERE_1:\012	for (atom1_id=0; atom1_id<DockConst->num_of_atoms; atom1_id++)		\012	{\012		atom1_typeid = KerConst->atom_types_const[atom1_id];\012		x = loc_coords_x[atom1_id];\012		y = loc_coords_y[atom1_id];\012		z = loc_coords_z[atom1_id];\012		q = KerConst->atom_charges_const[atom1_id];\012\012		// if the atom is outside of the grid\012		if ((x < 0.0f) || (x >= DockConst->gridsize_x-1) || \012		    (y < 0.0f) || (y >= DockConst->gridsize_y-1) ||\012		    (z < 0.0f) || (z >= DockConst->gridsize_z-1))	\012		{\012			//penalty is 2^24 for each atom outside the grid\012			/*\012			interE += 16777216.0f; \012			*/\012			partialE1 = 16777216.0f; \012			partialE2 = 0.0f;\012			partialE3 = 0.0f;\012		} \012		else \012		{\012			x_low  = convert_int(floor(x));\012			y_low  = convert_int(floor(y));\012			z_low  = convert_int(floor(z));\012			x_high = convert_int(ceil(x));	 \012			y_high = convert_int(ceil(y));\012			z_high = convert_int(ceil(z));\012			dx = x - x_low; dy = y - y_low; dz = z - z_low;\012\012			// Calculates the weights for trilinear interpolation\012			// based on the location of the point inside\012			weights [0][0][0] = (1-dx)*(1-dy)*(1-dz);\012			weights [1][0][0] = dx*(1-dy)*(1-dz);\012			weights [0][1][0] = (1-dx)*dy*(1-dz);\012			weights [1][1][0] = dx*dy*(1-dz);\012			weights [0][0][1] = (1-dx)*(1-dy)*dz;\012			weights [1][0][1] = dx*(1-dy)*dz;\012			weights [0][1][1] = (1-dx)*dy*dz;\012			weights [1][1][1] = dx*dy*dz;\012\012			#if defined (DEBUG_KERNEL_INTER_E)\012			printf(\"\\n\\nPartial results for atom with id %i:\\n\", atom1_id);\012			printf(\"x_low = %d, x_high = %d, x_frac = %f\\n\", x_low, x_high, dx);\012			printf(\"y_low = %d, y_high = %d, y_frac = %f\\n\", y_low, y_high, dy);\012			printf(\"z_low = %d, z_high = %d, z_frac = %f\\n\\n\", z_low, z_high, dz);\012			printf(\"coeff(0,0,0) = %f\\n\", weights [0][0][0]);\012			printf(\"coeff(1,0,0) = %f\\n\", weights [1][0][0]);\012			printf(\"coeff(0,1,0) = %f\\n\", weights [0][1][0]);\012			printf(\"coeff(1,1,0) = %f\\n\", weights [1][1][0]);\012			printf(\"coeff(0,0,1) = %f\\n\", weights [0][0][1]);\012			printf(\"coeff(1,0,1) = %f\\n\", weights [1][0][1]);\012			printf(\"coeff(0,1,1) = %f\\n\", weights [0][1][1]);\012			printf(\"coeff(1,1,1) = %f\\n\", weights [1][1][1]);\012			#endif\012\012			// L30nardoSV\012			ylow_times_g1  = y_low*g1;	yhigh_times_g1 = y_high*g1;\012        	        zlow_times_g2  = z_low*g2;	zhigh_times_g2 = z_high*g2;\012        	        cube_000 = x_low  + ylow_times_g1  + zlow_times_g2;\012        	        cube_100 = x_high + ylow_times_g1  + zlow_times_g2;\012        	        cube_010 = x_low  + yhigh_times_g1 + zlow_times_g2;\012        	        cube_110 = x_high + yhigh_times_g1 + zlow_times_g2;\012        	        cube_001 = x_low  + ylow_times_g1  + zhigh_times_g2;\012        	        cube_101 = x_high + ylow_times_g1  + zhigh_times_g2;\012        	        cube_011 = x_low  + yhigh_times_g1 + zhigh_times_g2;\012        	        cube_111 = x_high + yhigh_times_g1 + zhigh_times_g2;\012        	        mul_tmp = atom1_typeid*g3;\012\012			//energy contribution of the current grid type\012	                cube [0][0][0] = *(GlobFgrids + cube_000 + mul_tmp);\012        	        cube [1][0][0] = *(GlobFgrids + cube_100 + mul_tmp);\012        	        cube [0][1][0] = *(GlobFgrids + cube_010 + mul_tmp);\012        	        cube [1][1][0] = *(GlobFgrids + cube_110 + mul_tmp);\012        	        cube [0][0][1] = *(GlobFgrids + cube_001 + mul_tmp);\012        	        cube [1][0][1] = *(GlobFgrids + cube_101 + mul_tmp);\012        	        cube [0][1][1] = *(GlobFgrids + cube_011 + mul_tmp);\012        	        cube [1][1][1] = *(GlobFgrids + cube_111 + mul_tmp);\012		\012			#if defined (DEBUG_KERNEL_INTER_E)\012			printf(\"Interpolation of van der Waals map:\\n\");\012			printf(\"cube(0,0,0) = %f\\n\", cube [0][0][0]);\012			printf(\"cube(1,0,0) = %f\\n\", cube [1][0][0]);\012			printf(\"cube(0,1,0) = %f\\n\", cube [0][1][0]);\012			printf(\"cube(1,1,0) = %f\\n\", cube [1][1][0]);\012			printf(\"cube(0,0,1) = %f\\n\", cube [0][0][1]);\012			printf(\"cube(1,0,1) = %f\\n\", cube [1][0][1]);\012			printf(\"cube(0,1,1) = %f\\n\", cube [0][1][1]);\012			printf(\"cube(1,1,1) = %f\\n\", cube [1][1][1]);\012			#endif\012\012			/*\012			interE += TRILININTERPOL(cube, weights);\012			*/\012			partialE1 = TRILININTERPOL(cube, weights);\012\012			#if defined (DEBUG_KERNEL_INTER_E)\012			printf(\"interpolated value = %f\\n\\n\", TRILININTERPOL(cube, weights));\012			#endif\012\012			//energy contribution of the electrostatic grid\012			atom1_typeid = DockConst->num_of_atypes;\012			mul_tmp = atom1_typeid*g3;\012        	        cube [0][0][0] = *(GlobFgrids + cube_000 + mul_tmp);\012        	        cube [1][0][0] = *(GlobFgrids + cube_100 + mul_tmp);\012        	        cube [0][1][0] = *(GlobFgrids + cube_010 + mul_tmp);\012        	        cube [1][1][0] = *(GlobFgrids + cube_110 + mul_tmp);\012        	        cube [0][0][1] = *(GlobFgrids + cube_001 + mul_tmp);\012        	        cube [1][0][1] = *(GlobFgrids + cube_101 + mul_tmp);\012        	        cube [0][1][1] = *(GlobFgrids + cube_011 + mul_tmp);\012        	        cube [1][1][1] = *(GlobFgrids + cube_111 + mul_tmp);\012\012			#if defined (DEBUG_KERNEL_INTER_E)\012			printf(\"Interpolation of electrostatic map:\\n\");\012			printf(\"cube(0,0,0) = %f\\n\", cube [0][0][0]);\012			printf(\"cube(1,0,0) = %f\\n\", cube [1][0][0]);\012			printf(\"cube(0,1,0) = %f\\n\", cube [0][1][0]);\012			printf(\"cube(1,1,0) = %f\\n\", cube [1][1][0]);\012			printf(\"cube(0,0,1) = %f\\n\", cube [0][0][1]);\012			printf(\"cube(1,0,1) = %f\\n\", cube [1][0][1]);\012			printf(\"cube(0,1,1) = %f\\n\", cube [0][1][1]);\012			printf(\"cube(1,1,1) = %f\\n\", cube [1][1][1]);\012			#endif\012\012			/*\012			interE += q * TRILININTERPOL(cube, weights);\012			*/\012			partialE2 = q * TRILININTERPOL(cube, weights);\012		\012			#if defined (DEBUG_KERNEL_INTER_E)\012			printf(\"interpoated value = %f, multiplied by q = %f\\n\\n\", TRILININTERPOL(cube, weights), q*TRILININTERPOL(cube, weights));\012			#endif\012\012			//energy contribution of the desolvation grid\012			atom1_typeid = DockConst->num_of_atypes+1;\012			mul_tmp = atom1_typeid*g3;\012        	        cube [0][0][0] = *(GlobFgrids + cube_000 + mul_tmp);\012        	        cube [1][0][0] = *(GlobFgrids + cube_100 + mul_tmp);\012        	        cube [0][1][0] = *(GlobFgrids + cube_010 + mul_tmp);\012        	        cube [1][1][0] = *(GlobFgrids + cube_110 + mul_tmp);\012        	        cube [0][0][1] = *(GlobFgrids + cube_001 + mul_tmp);\012        	        cube [1][0][1] = *(GlobFgrids + cube_101 + mul_tmp);\012        	        cube [0][1][1] = *(GlobFgrids + cube_011 + mul_tmp);\012        	        cube [1][1][1] = *(GlobFgrids + cube_111 + mul_tmp);\012\012			#if defined (DEBUG_KERNEL_INTER_E)\012			printf(\"Interpolation of desolvation map:\\n\");\012			printf(\"cube(0,0,0) = %f\\n\", cube [0][0][0]);\012			printf(\"cube(1,0,0) = %f\\n\", cube [1][0][0]);\012			printf(\"cube(0,1,0) = %f\\n\", cube [0][1][0]);\012			printf(\"cube(1,1,0) = %f\\n\", cube [1][1][0]);\012			printf(\"cube(0,0,1) = %f\\n\", cube [0][0][1]);\012			printf(\"cube(1,0,1) = %f\\n\", cube [1][0][1]);\012			printf(\"cube(0,1,1) = %f\\n\", cube [0][1][1]);\012			printf(\"cube(1,1,1) = %f\\n\", cube [1][1][1]);\012			#endif\012\012			/*\012			interE += fabs(q) * TRILININTERPOL(cube, weights);\012			*/\012			partialE3 = fabs(q) * TRILININTERPOL(cube, weights);\012\012			#if defined (DEBUG_KERNEL_KERNEL_INTER_E)\012			printf(\"interploated value = %f, multiplied by abs(q) = %f\\n\\n\", TRILININTERPOL(cube, weights), fabs(q) * trilin_interpol(cube, weights));\012			printf(\"Current value of intermolecular energy = %f\\n\\n\\n\", interE);\012			#endif\012		}\012\012\012		interE += partialE1 + partialE2 + partialE3;\012	} // End of LOOP_INTERE_1:	\012\012	// --------------------------------------------------------------\012	// Send intermolecular energy to chanel\012	// --------------------------------------------------------------\012	write_channel_altera(chan_Intere2Store_intere, interE);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	write_channel_altera(chan_Intere2Store_active, active);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	write_channel_altera(chan_Intere2Store_mode,   mode);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	write_channel_altera(chan_Intere2Store_cnt,    cnt);\012	// --------------------------------------------------------------\012 	\012	} // End of while(1)\012}\012// --------------------------------------------------------------------------\012// --------------------------------------------------------------------------\012"}, {"index":3, "path":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_IntraE.cl", "name":"Krnl_IntraE.cl", "content":"// --------------------------------------------------------------------------\012// Originally from: processligand.c\012// --------------------------------------------------------------------------\012__kernel __attribute__ ((reqd_work_group_size(1,1,1)))\012void Krnl_IntraE(\012             //__global const float*           restrict GlobFgrids,\012	     //__global       float*           restrict GlobPopulationCurrent,\012	     //__global       float*           restrict GlobEnergyCurrent,\012	     //__global       float*           restrict GlobPopulationNext,\012	     //__global       float*           restrict GlobEnergyNext,\012             //__global       unsigned int*    restrict GlobPRNG,\012	     __global const kernelconstant*  restrict KerConst,\012	     __global const Dockparameters*  restrict DockConst)\012{\012\012	__local float loc_coords_x[MAX_NUM_OF_ATOMS];\012	__local float loc_coords_y[MAX_NUM_OF_ATOMS];\012	__local float loc_coords_z[MAX_NUM_OF_ATOMS];\012/*\012	float __attribute__((register)) loc_coords_x[MAX_NUM_OF_ATOMS];\012	float __attribute__((register)) loc_coords_y[MAX_NUM_OF_ATOMS];\012	float __attribute__((register)) loc_coords_z[MAX_NUM_OF_ATOMS];\012*/\012	char active = 1;\012	char mode   = 0;\012	uint cnt    = 0;   \012\012	int contributor_counter;\012	char atom1_id, atom2_id, atom1_typeid, atom2_typeid;\012	float subx, suby, subz, distance_leo;\012\012 	// Altera doesn't support power function 	\012	// so this is implemented with multiplications 	\012	// Full precision is used 	\012	float distance_pow_2, distance_pow_4, distance_pow_6, distance_pow_10, distance_pow_12;\012	float intraE;\012\012	float partialE1, partialE2, partialE3, partialE4;\012\012while(active) {\012	//printf(\"BEFORE In INTRA CHANNEL\\n\");\012	// --------------------------------------------------------------\012	// Wait for ligand atomic coordinates in channel\012	// --------------------------------------------------------------\012	active = read_channel_altera(chan_Conf2Intrae_active);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	mode   = read_channel_altera(chan_Conf2Intrae_mode);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	cnt    = read_channel_altera(chan_Conf2Intrae_cnt);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012\012	for (uint pipe_cnt=0; pipe_cnt<DockConst->num_of_atoms; pipe_cnt++) {\012		loc_coords_x[pipe_cnt] = read_channel_altera(chan_Conf2Intrae_x);\012		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);\012		loc_coords_y[pipe_cnt] = read_channel_altera(chan_Conf2Intrae_y);\012		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);\012		loc_coords_z[pipe_cnt] = read_channel_altera(chan_Conf2Intrae_z);\012		/*\012		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);\012		active = read_channel_altera(chan_Conf2Intrae_active);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		mode   = read_channel_altera(chan_Conf2Intrae_mode);\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		cnt    = read_channel_altera(chan_Conf2Intrae_cnt);\012		*/\012	}\012	// --------------------------------------------------------------\012	//printf(\"AFTER In INTRA CHANNEL\\n\");\012\012	if (active == 0) {printf(\"	%-20s: %s\\n\", \"Krnl_IntraE\", \"disabled\");}\012\012	intraE = 0.0f;\012	partialE1 = 0.0f;\012	partialE2 = 0.0f;\012	partialE3 = 0.0f;\012	partialE4 = 0.0f;\012\012	//for each intramolecular atom contributor pair\012	// **********************************************\012	// ADD VENDOR SPECIFIC PRAGMA\012	// **********************************************\012	LOOP_INTRAE_1:\012	for (uint contributor_counter=0; contributor_counter<DockConst->num_of_intraE_contributors; contributor_counter++)\012	{	\012		atom1_id = KerConst->intraE_contributors_const[3*contributor_counter]; \012		atom2_id = KerConst->intraE_contributors_const[3*contributor_counter+1];\012\012		subx = loc_coords_x[atom1_id] - loc_coords_x[atom2_id];\012		suby = loc_coords_y[atom1_id] - loc_coords_y[atom2_id];\012		subz = loc_coords_z[atom1_id] - loc_coords_z[atom2_id];\012		distance_leo = sqrt(subx*subx + suby*suby + subz*subz)*DockConst->grid_spacing;\012\012		if (distance_leo < 1.0f) {\012			#if defined (DEBUG_KERNEL_INTRA_E)\012			printf(\"\\n\\nToo low distance (%f) between atoms %u and %u\\n\", distance_leo, atom1_id, atom2_id);\012			#endif\012			//return HIGHEST_ENERGY;	//returning maximal value\012			distance_leo = 1.0f;\012		}\012\012		#if defined (DEBUG_KERNEL_INTRA_E)\012		printf(\"\\n\\nCalculating energy contribution of atoms %u and %u\\n\", atom1_id+1, atom2_id+1);\012		printf(\"Distance: %f\\n\", distance_leo);\012		#endif\012\012		distance_pow_2  = distance_leo*distance_leo; 		\012		distance_pow_4  = distance_pow_2*distance_pow_2; 		\012		distance_pow_6  = distance_pow_2*distance_pow_4; 		\012		distance_pow_10 = distance_pow_4*distance_pow_6; 		\012		distance_pow_12 = distance_pow_6*distance_pow_6;\012		\012		//but only if the distance is less than distance cutoff value and 20.48A (because of the tables)\012		if ((distance_leo < 8.0f) && (distance_leo < 20.48f)) \012		{\012			atom1_typeid = KerConst->atom_types_const [atom1_id];\012			atom2_typeid = KerConst->atom_types_const [atom2_id];\012\012			//calculating van der Waals / hydrogen bond term\012			/*\012			intraE += KerConst->VWpars_AC_const[atom1_typeid * DockConst->num_of_atypes+atom2_typeid]/distance_pow_12;\012			*/\012			partialE1 = KerConst->VWpars_AC_const[atom1_typeid * DockConst->num_of_atypes+atom2_typeid]/distance_pow_12;\012\012			if (KerConst->intraE_contributors_const[3*contributor_counter+2] == 1)	//H-bond\012				/*\012				intraE-= KerConst->VWpars_BD_const[atom1_typeid*DockConst->num_of_atypes+atom2_typeid]/distance_pow_10;	\012				*/\012				partialE2 = KerConst->VWpars_BD_const[atom1_typeid*DockConst->num_of_atypes+atom2_typeid]/distance_pow_10;	\012\012\012			else	//van der Waals\012				/*\012				intraE-= KerConst->VWpars_BD_const[atom1_typeid*DockConst->num_of_atypes+atom2_typeid]/distance_pow_6;\012				*/\012				partialE2 = KerConst->VWpars_BD_const[atom1_typeid*DockConst->num_of_atypes+atom2_typeid]/distance_pow_6;\012\012			//calculating electrostatic term\012			/*\012			intraE+= DockConst->coeff_elec*KerConst->atom_charges_const[atom1_id]*KerConst->atom_charges_const[atom2_id]/(distance_leo*(-8.5525f + 86.9525f/(1.0f + 7.7839f*exp(-0.3154f*distance_leo))));\012			*/\012			partialE3 = DockConst->coeff_elec*KerConst->atom_charges_const[atom1_id]*KerConst->atom_charges_const[atom2_id]/(distance_leo*(-8.5525f + 86.9525f/(1.0f + 7.7839f*exp(-0.3154f*distance_leo))));\012\012			//calculating desolvation term\012			/*\012			intraE+= (\012				  ( KerConst->dspars_S_const[atom1_typeid] + DockConst->qasp*fabs(KerConst->atom_charges_const[atom1_id]) ) * KerConst->dspars_V_const[atom2_typeid] + \012				  ( KerConst->dspars_S_const[atom2_typeid] + DockConst->qasp*fabs(KerConst->atom_charges_const[atom2_id]) ) * KerConst->dspars_V_const[atom1_typeid]) * \012				 DockConst->coeff_desolv*exp(-distance_leo*distance_leo/25.92f);\012			*/\012			partialE4 = (\012				  ( KerConst->dspars_S_const[atom1_typeid] + DockConst->qasp*fabs(KerConst->atom_charges_const[atom1_id]) ) * KerConst->dspars_V_const[atom2_typeid] + \012				  ( KerConst->dspars_S_const[atom2_typeid] + DockConst->qasp*fabs(KerConst->atom_charges_const[atom2_id]) ) * KerConst->dspars_V_const[atom1_typeid]) * \012				 DockConst->coeff_desolv*exp(-distance_leo*distance_leo/25.92f);\012			\012	\012		} // End of if: if ((dist < dcutoff) && (dist < 20.48))	\012\012		intraE += partialE1 + partialE2 + partialE3 + partialE4;\012\012	} // End of LOOP_INTRAE_1\012\012	// --------------------------------------------------------------\012	// Send intramolecular energy to channel\012	// --------------------------------------------------------------\012	write_channel_altera(chan_Intrae2Store_intrae, intraE);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	write_channel_altera(chan_Intrae2Store_active, active);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	write_channel_altera(chan_Intrae2Store_mode,   mode);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	write_channel_altera(chan_Intrae2Store_cnt,    cnt);\012	// --------------------------------------------------------------\012\012	} // End of while(1)\012}\012// --------------------------------------------------------------------------\012// --------------------------------------------------------------------------\012"}, {"index":4, "path":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/Krnl_Store.cl", "name":"Krnl_Store.cl", "content":"__kernel __attribute__ ((reqd_work_group_size(1,1,1)))\012void Krnl_Store(\012             //__global const float*           restrict GlobFgrids,\012	     //__global       float*           restrict GlobPopulationCurrent,\012	     __global       float*           restrict GlobEnergyCurrent,\012	     //__global       float*           restrict GlobPopulationNext,\012	     __global       float*           restrict GlobEnergyNext\012		//,\012             //__global       unsigned int*    restrict GlobPRNG,\012	     //__global const kernelconstant*  restrict KerConst,\012	     //__global const Dockparameters*  restrict DockConst\012	     )\012{\012	// --------------------------------------------------------------\012	// Wait for enegies\012	// --------------------------------------------------------------\012	float InterE;\012	float IntraE;\012\012	char active = 1;\012	char mode   = 0;\012	uint cnt    = 0;  \012\012 	char active1, active2;\012	char mode1, mode2;\012	uint cnt1, cnt2;\012	bool write_to_channel_ack = false;\012	bool write_to_channel_energy = false;\012\012\012	float LSenergy;\012\012while(active) {\012\012	InterE = read_channel_altera(chan_Intere2Store_intere);\012	IntraE = read_channel_altera(chan_Intrae2Store_intrae);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	active1 = read_channel_altera(chan_Intere2Store_active);\012	active2 = read_channel_altera(chan_Intrae2Store_active);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	mode1 = read_channel_altera(chan_Intere2Store_mode);\012	mode2 = read_channel_altera(chan_Intrae2Store_mode);\012	mem_fence(CLK_CHANNEL_MEM_FENCE);\012	cnt1  = read_channel_altera(chan_Intere2Store_cnt);\012	cnt2  = read_channel_altera(chan_Intrae2Store_cnt);\012\012	// --------------------------------------------------------------\012	\012	if (active1 != active2) {printf(\"Store error: active are not equal!\\n\");}\012	else 			{active = active1;}\012\012	if (mode1 != mode2)     {printf(\"Store error: mode are not equal!\\n\");}\012	else 			{mode = mode1;}\012\012	if (cnt1  != cnt2)      {printf(\"Store error: mode are not equal!\\n\");}\012	else 			{cnt = cnt1;}\012\012	if (active == 0) {printf(\"	%-20s: %s\\n\", \"Krnl_Store\", \"disabled\");}\012\012/*\012	switch (mode) {\012//\012		case 0:	write_channel_altera(chan_Store2GA_ack, 1);	// Signal INI, GG or LS finished \012		break;\012		case 1:	GlobEnergyCurrent[cnt] = InterE + IntraE;	// INI: Init energy calculation of pop\012		break;\012		case 2:	GlobEnergyNext[cnt] = InterE + IntraE;		// GG: Genetic Generation\012		break;\012		case 3:	LSenergy = InterE + IntraE;		// LS: Local Search\012			write_channel_altera(chan_Store2GA_ack, 1);\012			mem_fence(CLK_CHANNEL_MEM_FENCE);\012			write_channel_altera(chan_Store2GA_LSenergy, LSenergy);\012		break;\012//\012\012\012		case 4:							// Krnl_GA has finished execution!\012		break;\012	}\012*/\012\012\012\012\012	switch (mode) {\012		case STATE_IC :\012			write_to_channel_ack = false;\012			write_to_channel_energy = false;	\012			GlobEnergyCurrent[cnt] = InterE + IntraE;\012		break;\012\012		case STATE_IC_WAIT_END :\012			write_to_channel_ack = true;\012			write_to_channel_energy = false;	\012		break;\012\012		case STATE_GG :\012			write_to_channel_ack = false;	\012			write_to_channel_energy = false;	\012			GlobEnergyNext[cnt] = InterE + IntraE;\012		break;\012\012		case STATE_GG_WAIT_END :	\012			write_to_channel_ack = true;	\012			write_to_channel_energy = false;\012		break;\012\012		case STATE_LS :	\012			write_to_channel_ack = false;\012			write_to_channel_energy = false;	\012		break;\012\012		case LS_STATE_DIR_FIRST:\012	\012		break;\012\012		case LS_STATE_WAIT_FIRST:\012			LSenergy = InterE + IntraE;\012			write_to_channel_ack = false;\012			write_to_channel_energy = true;	\012		break;\012\012		case LS_STATE_ENERGY_FIRST:\012			write_to_channel_ack = false;\012			write_to_channel_energy = false;	\012		break;\012\012		\012		case LS_STATE_DIR_SECOND:\012\012		break;\012\012		case LS_STATE_WAIT_SECOND:\012			LSenergy = InterE + IntraE;\012			write_to_channel_ack = false;\012			write_to_channel_energy = true;	\012		break;\012\012		case LS_STATE_CHECK_RHO:\012			write_to_channel_ack = false;\012			write_to_channel_energy = false;	\012		break;\012\012		case LS_STATE_CHECK_TERMINATION:\012			write_to_channel_ack = false;\012			write_to_channel_energy = false;	\012		break;\012\012\012		case STATE_LS_WAIT_END :	\012			write_to_channel_ack = false;\012			write_to_channel_energy = false;	\012		break;\012\012		case STATE_END :							\012			write_to_channel_ack = false;	\012			write_to_channel_energy = false;		\012		break;\012\012		case STATE_WAIT_END :	\012			write_to_channel_ack = true;	\012			write_to_channel_energy = false;					\012		break;\012\012		case STATE_OFF :							\012			write_to_channel_ack = false;\012			write_to_channel_energy = false;\012		break;\012	}\012\012\012	if (write_to_channel_ack == true) {	\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		write_channel_altera(chan_Store2GA_ack, 1);	// Signal IC finished \012	}\012\012	if (write_to_channel_energy == true) {\012		mem_fence(CLK_CHANNEL_MEM_FENCE);\012		write_channel_altera(chan_Store2GA_LSenergy, LSenergy);\012	}\012\012} // End of while(1)\012\012}\012// --------------------------------------------------------------------------\012// --------------------------------------------------------------------------\012"}, {"index":5, "path":"/home/wimi/lvs/ofdock_altera/ofdock_taskpar_alt/device/auxiliary_genetic.cl", "name":"auxiliary_genetic.cl", "content":"// --------------------------------------------------------------------------\012// The function maps the first parameter into the interval 0..ang_max\012// by adding/subtracting n*ang_max to/from it.\012// Originally from: searchoptimum.c\012// --------------------------------------------------------------------------\012void map_angle(__local float* angle, const float ang_max)\012{\012	float x = (*angle);\012\012	// **********************************************\012	// ADD VENDOR SPECIFIC PRAGMA\012	// **********************************************\012	LOOP_WHILE_MAP_ANGLE_1:\012	while (x < 0.0f) {\012		x += ang_max;\012	}\012\012	// **********************************************\012	// ADD VENDOR SPECIFIC PRAGMA\012	// **********************************************\012	LOOP_WHILE_MAP_ANGLE_2:\012	while (x > ang_max) {\012		x -= ang_max;\012	}\012\012	(*angle) = x;\012}\012\012// --------------------------------------------------------------------------\012// The function finds the best entity based on the energy value \012// i.e. sum of the 38th and 39th element\012// and returns its ID in the best_entity parameter. \012// The pop_size parameter must be equal to the population size.\012// Originally from: searchoptimum.c\012// --------------------------------------------------------------------------\012uint find_best(__global const float* restrict GlobEnergyCurrent, \012	       __local        float* restrict loc_energies,\012		        const uint pop_size)\012{\012	uint i;\012	uint best_entity = 0;\012\012	// **********************************************\012	// ADD VENDOR SPECIFIC PRAGMA\012	// **********************************************\012	LOOP_FIND_BEST_1:\012	for (i=0; i<pop_size; i++) {\012		loc_energies[i] = GlobEnergyCurrent[i];\012	}\012\012	// **********************************************\012	// ADD VENDOR SPECIFIC PRAGMA\012	// *********************************************\012	LOOP_FIND_BEST_2:\012	for (i=1; i<pop_size; i++) {\012\012		#if defined (DEBUG_FIND_BEST)\012		printf(\"iteration: %u, energy_iteration_entity: %f, best_entity: %u, energy_best_entity: %f ...\", \012			i, loc_energies[i], best_entity, loc_energies[best_entity]);\012		#endif\012		\012		if (loc_energies[best_entity] > loc_energies[i])    \012		{\012			best_entity = i;\012			\012			#if defined (DEBUG_FIND_BEST)\012			printf(\"RES: best_entity: %u, energy_best_entity: %f\\n\",\012			       best_entity, \012			       loc_energies[best_entity]);\012			#endif\012	\012		}\012		#if defined (DEBUG_FIND_BEST)\012		printf(\"\\n\");\012		#endif\012	}\012\012	return best_entity;\012}\012\012// --------------------------------------------------------------------------\012// --------------------------------------------------------------------------\012uint myrand_basic (__global uint* restrict GlobPRNG)\012{\012	uint temprand_uint;\012\012#if defined (REPRO)\012	temprand_uint = 1;\012#else\012	temprand_uint = GlobPRNG[0];\012	temprand_uint = (RAND_A*temprand_uint + RAND_C);\012#endif\012	GlobPRNG[0] = temprand_uint;\012\012	return temprand_uint;\012}\012\012// --------------------------------------------------------------------------\012// --------------------------------------------------------------------------\012float myrand(__global uint* restrict GlobPRNG)\012{\012	uint   temprand_uint;\012	float temprand_float;\012\012	temprand_uint = myrand_basic(GlobPRNG);\012	temprand_float = convert_float(native_divide(temprand_uint,MAX_UINT))*0.999999f;\012	return temprand_float;\012}\012\012// --------------------------------------------------------------------------\012// --------------------------------------------------------------------------\012uint myrand_uint(__global uint* restrict GlobPRNG,\012		 const uint limit)\012{\012	uint   temprand_uint;\012	temprand_uint = myrand_basic(GlobPRNG);\012	// no native_divide() used here as values are integers\012	temprand_uint = (temprand_uint/MAX_UINT)*limit;\012	return temprand_uint;\012	\012}\012\012// --------------------------------------------------------------------------\012// The function performs binary tournament selection. \012// The first parameter must containt the population data. \012// rand_level is the probability with which the new entity should be selected as parent. \012// The two selected parents are returned in the parent1 and parent2 parameters.\012// Originally from: searchoptimum.c\012// --------------------------------------------------------------------------\012void binary_tournament_selection(__global const float* restrict GlobEnergyCurrent,\012				 __global       uint*  restrict GlobPRNG,\012				                uint*           parent1, \012				                uint*           parent2,\012					  const uint            pop_size,  \012				          const float           rand_level)\012{\012	uint parent_candidates [2];\012\012	//generating two different parent candidates\012	parent_candidates [0] = myrand_uint(GlobPRNG, pop_size);\012\012	LOOP_DOWHILE_BIN_TOURNAMENT_SEL_1:\012	do\012	{\012#if defined (REPRO)\012		parent_candidates [1] = myrand_uint(GlobPRNG, pop_size) + 1;\012#else\012		parent_candidates [1] = myrand_uint(GlobPRNG, pop_size);\012#endif	\012	}\012	while (parent_candidates [0] == parent_candidates [1]);\012\012	//the better will be the first parent with rand_level prability \012	//and the second with 1-rand_level probability\012	if (GlobEnergyCurrent[parent_candidates[0]] < GlobEnergyCurrent[parent_candidates[1]])\012	{\012		if (myrand(GlobPRNG) < 100*rand_level) {*parent1 = parent_candidates [0];}\012		else			               {*parent1 = parent_candidates [1];}\012	}\012	else\012	{\012		if (myrand(GlobPRNG) < 100*rand_level) {*parent1 = parent_candidates [1];}\012		else			               {*parent1 = parent_candidates [0];}	\012	}\012\012\012	#if defined (DEBUG_TOURNAMENT_SELECTION)\012	printf(\"Selecting first parent: %u (candidates were %u (E=%f) and %u (E=%f))\\n\", *parent1, \012		parent_candidates [0], GlobEnergyCurrent [parent_candidates [0]],\012		parent_candidates [1], GlobEnergyCurrent [parent_candidates [1]]);\012	#endif\012\012	//generating two different parent candidates (which differ from parent1 as well)\012	LOOP_DOWHILE_BIN_TOURNAMENT_SEL_2:\012	do\012#if defined (REPRO)\012		parent_candidates [0] = myrand_uint(GlobPRNG, pop_size) + 2;\012#else\012		parent_candidates [0] = myrand_uint(GlobPRNG, pop_size);\012#endif\012	while (parent_candidates [0] == *parent1);\012\012	LOOP_DOWHILE_BIN_TOURNAMENT_SEL_3:\012	do\012#if defined (REPRO)\012		parent_candidates [1] = myrand_uint(GlobPRNG, pop_size) + 3;\012#else\012		parent_candidates [1] = myrand_uint(GlobPRNG, pop_size);\012#endif\012	while ((parent_candidates [1] == parent_candidates [0]) || (parent_candidates [1] == *parent1));\012\012	//the better will be the second parent\012	if (GlobEnergyCurrent[parent_candidates[0]] < GlobEnergyCurrent[parent_candidates[1]])\012	{\012		if (myrand(GlobPRNG) < 100*rand_level) {*parent2 = parent_candidates [0];}\012		else		          	       {*parent2 = parent_candidates [1];}\012	}\012	else\012	{\012		if (myrand(GlobPRNG) < 100*rand_level) {*parent2 = parent_candidates [1];}\012		else			               {*parent2 = parent_candidates [0];}	\012	}\012\012	#if defined (DEBUG_TOURNAMENT_SELECTION)\012	printf(\"Selecting second parent: %u (candidates were %u (E=%f) and %u (E=%f))\\n\", *parent2,\012	       parent_candidates [0], GlobEnergyCurrent [parent_candidates [0]] ,\012	       parent_candidates [1], GlobEnergyCurrent [(arent_candidates [1]]);\012	#endif\012}\012\012// --------------------------------------------------------------------------\012// The function performs crossover and mutation and \012// generates two offsprings from two parents whose genotypes are the functions parameters. \012// Mutation rate is the probability of mutating a gene in %, \012// abs_max_dmov and abs_max_dang are the maximal delta values of a translation \012// or an orientation/rotatable bond gene during mutation.\012// Originally from: searchoptimum.c\012// --------------------------------------------------------------------------\012void gen_new_genotype(__global      uint*  restrict GlobPRNG,\012		      __local const float*          parent1_genotype,\012		      __local const float*          parent2_genotype, \012		              const float           mutation_rate,\012			      const float           abs_max_dmov,\012			      const float           abs_max_dang,\012			      const float           crossover_rate,\012			      const uint            num_of_genes,\012		      __local       float*          offspring_genotype)\012{\012	uint covr_point_low, covr_point_high;\012	uint temp1, temp2;\012	uint i;\012\012	//choosing crossover points randomly\012	temp1 = myrand_uint(GlobPRNG, num_of_genes-1);\012	temp2 = myrand_uint(GlobPRNG, num_of_genes-1);\012\012\012	//if (temp1 < temp2) {covr_point_low = temp1;\012	//		    covr_point_high = temp2;}\012	//else {		    covr_point_low = temp2;\012	//		    covr_point_high = temp1;}\012\012\012	bool twopoint_cross_yes = false;\012	if (temp1 == temp2)\012	{	\012		covr_point_low = temp1;\012	}\012	else\012	{\012		twopoint_cross_yes = true;\012		if (temp1 < temp2) {\012			covr_point_low = temp1;\012			covr_point_high = temp2;\012		}\012		else {		    \012			covr_point_low = temp2;\012			covr_point_high = temp1;\012		}\012	}\012\012	#if defined (DEBUG_GEN_NEW_GENOTYPE)\012	printf(\"Crossover points: low: %u, high: %u\\n\", covr_point_low, covr_point_high);\012	printf(\"Parent1: \");\012	for (i=0; i<num_of_genes; i++) {printf(\"%f \", parent1_genotype [i]);} printf(\"\\n\");\012\012	printf(\"Parent2: \");\012	for (i=0; i<num_of_genes; i++) {printf(\"%f \", parent2_genotype [i]);} printf(\"\\n\");\012	#endif\012\012	//performing crossover\012	if (crossover_rate > 100.0f*myrand(GlobPRNG))\012	{\012		//two-point crossover\012		//if (covr_point_low != covr_point_high)\012		if (twopoint_cross_yes == true)\012		{\012			// **********************************************\012			// ADD VENDOR SPECIFIC PRAGMA\012			// **********************************************\012			LOOP_GEN_NEW_GENOTYPE_1:\012			for (i=0; i<num_of_genes; i++)\012			{\012				if ((i<=covr_point_low) || (i>covr_point_high)) \012				{\012					offspring_genotype [i] = parent1_genotype[i];\012				}\012				else {\012					offspring_genotype [i] = parent2_genotype[i];\012				}\012			}\012		}\012		//one-point crossover\012		else {\012			// **********************************************\012			// ADD VENDOR SPECIFIC PRAGMA\012			// **********************************************\012			LOOP_GEN_NEW_GENOTYPE_2:\012			for (i=0; i<num_of_genes; i++)\012			{\012				if (i <= covr_point_low)\012				{\012					offspring_genotype [i] = parent1_genotype[i];\012				}\012				else {\012					offspring_genotype [i] = parent2_genotype[i];\012				}\012			}\012		}\012\012		#if defined (DEBUG_GEN_NEW_GENOTYPE)\012		printf(\"Offspring1 after crossover: \");\012		for (i=0; i<num_of_genes; i++) {printf(\"%f \", offspring_genotype [i]);} printf(\"\\n\");\012		#endif\012\012	}\012	else	//if no crossover, the offsprings are the parents\012	{\012		// **********************************************\012		// ADD VENDOR SPECIFIC PRAGMA\012		// **********************************************\012		LOOP_GEN_NEW_GENOTYPE_3:\012		for (i=0; i<num_of_genes; i++)\012		{\012			offspring_genotype [i] = parent1_genotype[i];\012		}\012\012		#if defined (DEBUG_GEN_NEW_GENOTYPE)\012		printf(\"No crossover, offsprings' genotypes equals to those of the parents\\n\");\012		#endif\012	}\012\012	//performing mutation\012\012	////mutating first offspring\012	//// THIS LOOP IS NOT PIPELINED AS IT CONTAINS ANOTHER LOOP\012	////__attribute__ ((xcl_pipeline_loop))\012	//LOOP_GEN_NEW_GENOTYPE_4:\012	\012//	for (i=0; i<num_of_genes; i++)\012//	{\012//		if (mutation_rate > 100.0f*myrand(GlobPRNG))\012//		{\012//			if (i < 3)\012//			{\012//				offspring_genotype [i] = offspring1genotype [i] + 2.0f*abs_max_dmov*myrand(GlobPRNG)-abs_max_dmov;\012//			}\012//			else\012//			{\012//				offspring_genotype [i] = (offspring_genotype [i] + 2.0f*abs_max_dang*myrand(GlobPRNG)-abs_max_dang);\012//\012//				if (i == 4) {map_angle(&(offspring_genotype [i]), 180.0f);}	//mapping angle to 0..180\012//				else        {map_angle(&(offspring_genotype [i]), 360.0f);}	//mapping angle to 0..360\012//\012//			}\012//		}\012//	}\012\012	// **********************************************\012	// ADD VENDOR SPECIFIC PRAGMA\012	// **********************************************\012	LOOP_GEN_NEW_GENOTYPE_4:\012	for (i=0; i<3; i++)\012	{\012		if (mutation_rate > 100*myrand(GlobPRNG))\012		{\012			offspring_genotype [i] = offspring_genotype [i] + 2*abs_max_dmov*myrand(GlobPRNG)-abs_max_dmov;\012		}\012	}\012\012	if (mutation_rate > 100*myrand(GlobPRNG))\012	{\012		offspring_genotype [3] = offspring_genotype [3] + 2*abs_max_dmov*myrand(GlobPRNG)-abs_max_dmov;\012		map_angle(&(offspring_genotype [3]), 360.0f);\012	}\012		\012	if (mutation_rate > 100*myrand(GlobPRNG))\012	{\012		offspring_genotype [4] = offspring_genotype [4] + 2*abs_max_dang*myrand(GlobPRNG)-abs_max_dang;\012		map_angle(&(offspring_genotype [4]), 180.0f);\012	}\012\012	// **********************************************\012	// ADD VENDOR SPECIFIC PRAGMA\012	// **********************************************\012	LOOP_GEN_NEW_GENOTYPE_5:\012	for (i=5; i<num_of_genes; i++)\012	{\012		if (mutation_rate > 100*myrand(GlobPRNG))\012		{\012			offspring_genotype [i] = offspring_genotype [i] + 2*abs_max_dang*myrand(GlobPRNG)-abs_max_dang;\012			map_angle(&(offspring_genotype [i]), 360.0f);	//mapping angle to 0..360\012		}\012	}\012\012	#if defined (DEBUG_GEN_NEW_GENOTYPE)\012	printf(\"Offspring1 after mutation: \");\012	for (i=0; i<num_of_genes; i++) {printf(\"%f \", offspring_genotype [i]);} printf(\"\\n\");\012	#endif\012\012}\012"}];
