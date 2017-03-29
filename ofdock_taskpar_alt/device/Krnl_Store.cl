@@ -53,7 +53,8 @@ while(active) {
 		//printf("Store error: active are not equal!\n");
 	}
 	else 			{
-		active = active1;}
+		active = active1;
+	}
 
 	if (mode1 != mode2)     {
 		//printf("Store error: mode are not equal!\n");

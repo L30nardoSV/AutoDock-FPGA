@@ -147,6 +147,9 @@ while(active) {
 			}
 			
 
+
+			if (active != 0) {
+
 			write_channel_altera(chan_LS2Conf_active, active);
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 			write_channel_altera(chan_LS2Conf_mode,   mode);
@@ -161,7 +164,11 @@ while(active) {
 
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 			candidate_energy = read_channel_altera(chan_Store2LS_LSenergy);
-			
+		
+
+			} // End of if (active != 0)
+
+	
 			//if the new entity is better better
 			if (candidate_energy < offspring_energy)
 			{

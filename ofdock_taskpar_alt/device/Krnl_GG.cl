@@ -97,6 +97,8 @@ while(active) {
 		//	GlobPopulationNext [new_pop_cnt*ACTUAL_GENOTYPE_LENGTH + i] = offspring_genotype [i];
 		//}
 
+		if ( (active!=0) || ((active==0) && (new_pop_cnt==1)) ) {
+
 		write_channel_altera(chan_GG2Conf_active, active);
 		mem_fence(CLK_CHANNEL_MEM_FENCE);
 		write_channel_altera(chan_GG2Conf_mode,   mode);
@@ -109,6 +111,9 @@ while(active) {
 			GlobPopulationNext [new_pop_cnt*ACTUAL_GENOTYPE_LENGTH + pipe_cnt] = offspring_genotype [pipe_cnt];
 			write_channel_altera(chan_GG2Conf_genotype, offspring_genotype[pipe_cnt]);
 		}
+
+		} // End of if enclosing write to channels
+
 		
 	} // End of for-loop new_pop_cnt
 
