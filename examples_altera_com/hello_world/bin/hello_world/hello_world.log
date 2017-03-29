@@ -1,1 +1,0 @@
-Compiler Command: aoc -march=emulator -v --board a10gx device/hello_world.cl -o bin/hello_world.aocx

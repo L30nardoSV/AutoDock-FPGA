@@ -72,6 +72,7 @@
 //WARNING: it is supposed that unsigned int is 32 bit long
 #define MAX_UINT 	4294967296.0f
 
+
 // Macro for capturing grid values
 // Original
 #define GETGRIDVALUE(mempoi,gridsize_x,gridsize_y,gridsize_z,t,z,y,x)   *(mempoi + gridsize_x*(y + gridsize_y*(z + gridsize_z*t)) + x)
@@ -107,5 +108,10 @@
 			// improvement: 77 (disabled) to 76 (enabled) sec 
 //#define REPRO
 // -----------------------------------------------------------------------------
+
+
+#define DEBUG_ACTIVE_KERNEL
+
+#define DEBUG_KRNL_GA
 
 #endif /* DEFINES_H_ */

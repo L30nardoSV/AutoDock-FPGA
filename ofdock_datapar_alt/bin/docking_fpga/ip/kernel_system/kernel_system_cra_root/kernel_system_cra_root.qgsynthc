@@ -1,0 +1,62 @@
+<?xml version="1.0" ?>
+<node xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:altera="http://www.altera.com/XMLSchema/Qsys/SystemTree">
+  <instanceKey xsi:type="xs:string">kernel_system_cra_root</instanceKey>
+  <instanceData xsi:type="data">
+    <parameters></parameters>
+    <interconnectAssignments>
+      <interconnectAssignment>
+        <name>qsys_mm.clockCrossingAdapter</name>
+        <value>HANDSHAKE</value>
+      </interconnectAssignment>
+      <interconnectAssignment>
+        <name>qsys_mm.maxAdditionalLatency</name>
+        <value>0</value>
+      </interconnectAssignment>
+    </interconnectAssignments>
+    <className>kernel_system_cra_root</className>
+    <version>1.0</version>
+    <name>kernel_system_cra_root</name>
+    <uniqueName>kernel_system_cra_root</uniqueName>
+    <nonce>0</nonce>
+    <incidentConnections></incidentConnections>
+  </instanceData>
+  <children>
+    <node>
+      <instanceKey xsi:type="xs:string">cra_root</instanceKey>
+      <instanceData xsi:type="data">
+        <parameters>
+          <parameter>
+            <name>ADDR_W</name>
+            <value>5</value>
+          </parameter>
+          <parameter>
+            <name>DATA_W</name>
+            <value>64</value>
+          </parameter>
+          <parameter>
+            <name>ID_W</name>
+            <value>2</value>
+          </parameter>
+          <parameter>
+            <name>ROM_ENABLE</name>
+            <value>1</value>
+          </parameter>
+          <parameter>
+            <name>ROM_EXT_W</name>
+            <value>0</value>
+          </parameter>
+        </parameters>
+        <interconnectAssignments></interconnectAssignments>
+        <className>cra_ring_root</className>
+        <version>1.0</version>
+        <name>cra_root</name>
+        <uniqueName>cra_ring_root</uniqueName>
+        <fixedName>cra_ring_root</fixedName>
+        <nonce>0</nonce>
+        <incidentConnections></incidentConnections>
+        <path>kernel_system_cra_root.cra_root</path>
+      </instanceData>
+      <children></children>
+    </node>
+  </children>
+</node>

@@ -9,7 +9,8 @@
 // if it remains outside, a very high value will be added to the current energy as a penalty. 
 // Originally from: processligand.c
 // --------------------------------------------------------------------------
-__kernel __attribute__ ((reqd_work_group_size(1,1,1)))
+__kernel __attribute__ ((max_global_work_dim(0)))
+//__attribute__ ((reqd_work_group_size(1,1,1)))
 void Krnl_InterE(
              __global const float*           restrict GlobFgrids,
 	     //__global       float*           restrict GlobPopulationCurrent,
@@ -39,7 +40,17 @@ void Krnl_InterE(
 	float partialE1, partialE2, partialE3;
 
 
-	char atom1_id, atom1_typeid;
+	//char atom1_id, atom1_typeid;
+	char atom1_typeid;
+
+	__local char  ref_atom_types_const  [MAX_NUM_OF_ATOMS];
+	__local float ref_atom_charges_const[MAX_NUM_OF_ATOMS];
+
+	for (uchar i=0; i<MAX_NUM_OF_ATOMS; i++) {
+		ref_atom_types_const [i] = KerConst->atom_types_const[i];
+		ref_atom_charges_const [i] = KerConst->atom_charges_const[i];
+	}
+	
 	float x, y, z, dx, dy, dz, q;
 	float cube [2][2][2];
 	float weights [2][2][2];
@@ -67,25 +78,23 @@ while(active) {
 	cnt    = read_channel_altera(chan_Conf2Intere_cnt);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 
-	for (uint pipe_cnt=0; pipe_cnt<DockConst->num_of_atoms; pipe_cnt++) {
+	//for (uint pipe_cnt=0; pipe_cnt<DockConst->num_of_atoms; pipe_cnt++) {
+	for (uchar pipe_cnt=0; pipe_cnt<DockConst->num_of_atoms; pipe_cnt++) {
 		loc_coords_x[pipe_cnt] = read_channel_altera(chan_Conf2Intere_x);
-		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);
+		//mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);
+		mem_fence(CLK_CHANNEL_MEM_FENCE);
 		loc_coords_y[pipe_cnt] = read_channel_altera(chan_Conf2Intere_y);
-		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);
+		//mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);
+		mem_fence(CLK_CHANNEL_MEM_FENCE);
 		loc_coords_z[pipe_cnt] = read_channel_altera(chan_Conf2Intere_z);
-		/*
-		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);
-		active = read_channel_altera(chan_Conf2Intere_active);
-		mem_fence(CLK_CHANNEL_MEM_FENCE);
-		mode   = read_channel_altera(chan_Conf2Intere_mode);
-		mem_fence(CLK_CHANNEL_MEM_FENCE);
-		cnt    = read_channel_altera(chan_Conf2Intere_cnt);
-		*/
+
 	}
 	// --------------------------------------------------------------
 	//printf("AFTER In INTER CHANNEL\n");
 
-	if (active == 0) {printf("	%-20s: %s\n", "Krnl_InterE", "disabled");}
+	#if defined (DEBUG_ACTIVE_KERNEL)
+	if (active == 0) {printf("	%-20s: %s\n", "Krnl_InterE", "must be disabled");}
+	#endif
 
 	interE = 0.0f;
 	partialE1 = 0.0f;
@@ -97,13 +106,16 @@ while(active) {
 	// ADD VENDOR SPECIFIC PRAGMA	
 	// **********************************************
 	LOOP_INTERE_1:
-	for (atom1_id=0; atom1_id<DockConst->num_of_atoms; atom1_id++)		
+	//for (atom1_id=0; atom1_id<DockConst->num_of_atoms; atom1_id++)	
+	for (uchar atom1_id=0; atom1_id<DockConst->num_of_atoms; atom1_id++)		
 	{
-		atom1_typeid = KerConst->atom_types_const[atom1_id];
+		//atom1_typeid = KerConst->atom_types_const[atom1_id];
+		atom1_typeid = ref_atom_types_const[atom1_id];
 		x = loc_coords_x[atom1_id];
 		y = loc_coords_y[atom1_id];
 		z = loc_coords_z[atom1_id];
-		q = KerConst->atom_charges_const[atom1_id];
+		//q = KerConst->atom_charges_const[atom1_id];
+		q = ref_atom_charges_const[atom1_id];
 
 		// if the atom is outside of the grid
 		if ((x < 0.0f) || (x >= DockConst->gridsize_x-1) || 
@@ -283,6 +295,10 @@ while(active) {
 	// --------------------------------------------------------------
  	
 	} // End of while(1)
+
+	#if defined (DEBUG_ACTIVE_KERNEL)
+	printf("	%-20s: %s\n", "Krnl_InterE", "disabled");
+	#endif
 }
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------

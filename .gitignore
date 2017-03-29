@@ -1,5 +1,7 @@
 # Ignore PDBs for a moment
 PDBs/*
+ofdock_taskpar_alt/Krnl_GA/*
+ofdock_taskpar_alt/device/docking_fpga_leo/*
 
 # ===================
 # C gitignore

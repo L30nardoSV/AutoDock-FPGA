@@ -1,0 +1,27 @@
+Info: Starting: Create HDL design files for synthesis
+Info: qsys-generate /home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_acl_internal_snoop.ip --synthesis=VERILOG --output-directory=/home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_acl_internal_snoop --family="Arria 10" --part=10AX115S2F45I1SG
+Warning: kernel_system_acl_internal_snoop.acl_internal_snoop: No adaptation is needed; a pass through bridge is inserted
+Info: kernel_system_acl_internal_snoop.acl_internal_snoop: Inserting channel_adapter: pass_through_0
+Info: kernel_system_acl_internal_snoop: "Transforming system: kernel_system_acl_internal_snoop"
+Info: kernel_system_acl_internal_snoop: Running transform generation_view_transform
+Info: kernel_system_acl_internal_snoop: Running transform generation_view_transform took 0.000s
+Info: acl_internal_snoop: Running transform generation_view_transform
+Info: acl_internal_snoop: Running transform generation_view_transform took 0.000s
+Info: clk_bridge_0: Running transform generation_view_transform
+Info: clk_bridge_0: Running transform generation_view_transform took 0.000s
+Info: rst_bridge_0: Running transform generation_view_transform
+Info: rst_bridge_0: Running transform generation_view_transform took 0.000s
+Info: pass_through_0: Running transform generation_view_transform
+Info: pass_through_0: Running transform generation_view_transform took 0.000s
+Info: kernel_system_acl_internal_snoop: Running transform interconnect_transform_chooser
+Info: kernel_system_acl_internal_snoop: Running transform interconnect_transform_chooser took 0.008s
+Info: acl_internal_snoop: Running transform interconnect_transform_chooser
+Info: acl_internal_snoop: Running transform interconnect_transform_chooser took 0.008s
+Info: kernel_system_acl_internal_snoop: "Naming system components in system: kernel_system_acl_internal_snoop"
+Info: kernel_system_acl_internal_snoop: "Processing generation queue"
+Info: kernel_system_acl_internal_snoop: "Generating: kernel_system_acl_internal_snoop"
+Info: kernel_system_acl_internal_snoop: "Generating: kernel_system_acl_internal_snoop_altera_avalon_st_adapter_161_2r3rbpy"
+Info: kernel_system_acl_internal_snoop: "Generating: kernel_system_acl_internal_snoop_channel_adapter_161_7lzkkci"
+Info: kernel_system_acl_internal_snoop: Done "kernel_system_acl_internal_snoop" with 3 modules, 3 files
+Info: qsys-generate succeeded.
+Info: Finished: Create HDL design files for synthesis

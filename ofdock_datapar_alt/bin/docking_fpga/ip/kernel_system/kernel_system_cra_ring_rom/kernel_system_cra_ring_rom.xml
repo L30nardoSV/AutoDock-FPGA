@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<deploy
+ date="2017.03.06.14:53:12"
+ outputDirectory="/home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_cra_ring_rom/">
+ <perimeter>
+  <parameter
+     name="AUTO_GENERATION_ID"
+     type="Integer"
+     defaultValue="0"
+     onHdl="0"
+     affectsHdl="1" />
+  <parameter
+     name="AUTO_UNIQUE_ID"
+     type="String"
+     defaultValue=""
+     onHdl="0"
+     affectsHdl="1" />
+  <parameter
+     name="AUTO_DEVICE_FAMILY"
+     type="String"
+     defaultValue="Arria 10"
+     onHdl="0"
+     affectsHdl="1" />
+  <parameter
+     name="AUTO_DEVICE"
+     type="String"
+     defaultValue="10AX115S2F45I1SG"
+     onHdl="0"
+     affectsHdl="1" />
+  <parameter
+     name="AUTO_DEVICE_SPEEDGRADE"
+     type="String"
+     defaultValue="1"
+     onHdl="0"
+     affectsHdl="1" />
+  <parameter
+     name="AUTO_CLOCK_CLOCK_RATE"
+     type="Long"
+     defaultValue="-1"
+     onHdl="0"
+     affectsHdl="1" />
+  <parameter
+     name="AUTO_CLOCK_CLOCK_DOMAIN"
+     type="Integer"
+     defaultValue="-1"
+     onHdl="0"
+     affectsHdl="1" />
+  <parameter
+     name="AUTO_CLOCK_RESET_DOMAIN"
+     type="Integer"
+     defaultValue="-1"
+     onHdl="0"
+     affectsHdl="1" />
+  <parameter
+     name="AUTO_CRA_MASTER_ADDRESS_MAP"
+     type="AddressMap"
+     defaultValue=""
+     onHdl="0"
+     affectsHdl="1" />
+  <parameter
+     name="AUTO_CRA_MASTER_ADDRESS_WIDTH"
+     type="AddressWidthType"
+     defaultValue="-1"
+     onHdl="0"
+     affectsHdl="1" />
+  <interface name="clock" kind="clock" start="0">
+   <property name="clockRate" value="0" />
+   <property name="externallyDriven" value="false" />
+   <property name="ptfSchematicName" value="" />
+   <port name="clk" direction="input" role="clk" width="1" />
+  </interface>
+  <interface name="cra_master" kind="avalon" start="1">
+   <property name="adaptsTo" value="" />
+   <property name="addressGroup" value="0" />
+   <property name="addressUnits" value="WORDS" />
+   <property name="alwaysBurstMaxBurst" value="false" />
+   <property name="associatedClock" value="clock" />
+   <property name="associatedReset" value="reset" />
+   <property name="bitsPerSymbol" value="8" />
+   <property name="burstOnBurstBoundariesOnly" value="false" />
+   <property name="burstcountUnits" value="WORDS" />
+   <property name="constantBurstBehavior" value="false" />
+   <property name="dBSBigEndian" value="false" />
+   <property name="doStreamReads" value="false" />
+   <property name="doStreamWrites" value="false" />
+   <property name="holdTime" value="0" />
+   <property name="interleaveBursts" value="false" />
+   <property name="isAsynchronous" value="false" />
+   <property name="isBigEndian" value="false" />
+   <property name="isReadable" value="false" />
+   <property name="isWriteable" value="false" />
+   <property name="linewrapBursts" value="false" />
+   <property name="maxAddressWidth" value="32" />
+   <property name="maximumPendingReadTransactions" value="1" />
+   <property name="maximumPendingWriteTransactions" value="0" />
+   <property name="readLatency" value="0" />
+   <property name="readWaitTime" value="0" />
+   <property name="registerIncomingSignals" value="false" />
+   <property name="registerOutgoingSignals" value="false" />
+   <property name="setupTime" value="0" />
+   <property name="timingUnits" value="Cycles" />
+   <property name="writeWaitTime" value="0" />
+   <port name="avm_read" direction="output" role="read" width="1" />
+   <port name="avm_addr" direction="output" role="address" width="7" />
+   <port name="avm_readdata" direction="input" role="readdata" width="64" />
+   <port
+       name="avm_readdatavalid"
+       direction="input"
+       role="readdatavalid"
+       width="1" />
+  </interface>
+  <interface name="reset" kind="reset" start="0">
+   <property name="associatedClock" value="clock" />
+   <property name="synchronousEdges" value="DEASSERT" />
+   <port name="rst_n" direction="input" role="reset_n" width="1" />
+  </interface>
+  <interface name="ring_in" kind="conduit" start="0">
+   <property name="associatedClock" value="clock" />
+   <property name="associatedReset" value="reset" />
+   <port name="ri_read" direction="input" role="read" width="1" />
+   <port name="ri_write" direction="input" role="write" width="1" />
+   <port name="ri_addr" direction="input" role="addr" width="8" />
+   <port name="ri_data" direction="input" role="data" width="64" />
+   <port name="ri_byteena" direction="input" role="byteena" width="8" />
+   <port name="ri_datavalid" direction="input" role="datavalid" width="1" />
+  </interface>
+  <interface name="ring_out" kind="conduit" start="0">
+   <property name="associatedClock" value="clock" />
+   <property name="associatedReset" value="reset" />
+   <port name="ro_read" direction="output" role="read" width="1" />
+   <port name="ro_write" direction="output" role="write" width="1" />
+   <port name="ro_addr" direction="output" role="addr" width="7" />
+   <port name="ro_data" direction="output" role="data" width="64" />
+   <port name="ro_byteena" direction="output" role="byteena" width="8" />
+   <port name="ro_datavalid" direction="output" role="datavalid" width="1" />
+  </interface>
+ </perimeter>
+ <entity
+   kind="kernel_system_cra_ring_rom"
+   version="1.0"
+   name="kernel_system_cra_ring_rom">
+  <parameter name="AUTO_CRA_MASTER_ADDRESS_MAP" value="" />
+  <parameter name="AUTO_CLOCK_CLOCK_RATE" value="-1" />
+  <parameter name="AUTO_CLOCK_CLOCK_DOMAIN" value="-1" />
+  <parameter name="AUTO_CLOCK_RESET_DOMAIN" value="-1" />
+  <parameter name="AUTO_GENERATION_ID" value="1488808392" />
+  <parameter name="AUTO_DEVICE" value="10AX115S2F45I1SG" />
+  <parameter name="AUTO_DEVICE_FAMILY" value="Arria 10" />
+  <parameter name="AUTO_UNIQUE_ID" value="" />
+  <parameter name="AUTO_DEVICE_SPEEDGRADE" value="1" />
+  <parameter name="AUTO_CRA_MASTER_ADDRESS_WIDTH" value="-1" />
+  <generatedFiles>
+   <file
+       path="/home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_cra_ring_rom/synth/kernel_system_cra_ring_rom.v"
+       attributes="CONTAINS_INLINE_CONFIGURATION" />
+  </generatedFiles>
+  <childGeneratedFiles>
+   <file
+       path="/home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_cra_ring_rom/synth/kernel_system_cra_ring_rom.v"
+       attributes="CONTAINS_INLINE_CONFIGURATION" />
+  </childGeneratedFiles>
+  <sourceFiles>
+   <file
+       path="/home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_cra_ring_rom.ip" />
+  </sourceFiles>
+  <childSourceFiles>
+   <file path="/opt/cad/altera/altera-16.1/hld/ip/cra_ring_rom_hw.tcl" />
+  </childSourceFiles>
+  <messages>
+   <message level="Info" culprit="kernel_system_cra_ring_rom">"Generating: kernel_system_cra_ring_rom"</message>
+   <message level="Info" culprit="kernel_system_cra_ring_rom">"Generating: cra_ring_rom"</message>
+  </messages>
+ </entity>
+ <entity kind="cra_ring_rom" version="1.0" name="cra_ring_rom">
+  <parameter name="ROM_W" value="7" />
+  <parameter name="ROM_EXT_W" value="0" />
+  <parameter name="RING_ADDR_W" value="5" />
+  <parameter name="ID_W" value="2" />
+  <parameter name="DATA_W" value="64" />
+  <generatedFiles>
+   <file
+       path="/home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_cra_ring_rom/cra_ring_rom_10/synth/cra_ring_rom.sv"
+       attributes="TOP_LEVEL_FILE" />
+  </generatedFiles>
+  <childGeneratedFiles>
+   <file
+       path="/home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_cra_ring_rom/cra_ring_rom_10/synth/cra_ring_rom.sv"
+       attributes="TOP_LEVEL_FILE" />
+  </childGeneratedFiles>
+  <sourceFiles>
+   <file path="/opt/cad/altera/altera-16.1/hld/ip/cra_ring_rom_hw.tcl" />
+  </sourceFiles>
+  <childSourceFiles/>
+  <instantiator instantiator="kernel_system_cra_ring_rom" as="cra_ring_rom" />
+  <messages>
+   <message level="Info" culprit="kernel_system_cra_ring_rom">"Generating: cra_ring_rom"</message>
+  </messages>
+ </entity>
+</deploy>

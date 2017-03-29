@@ -9,6 +9,12 @@ make
 aoc -march=emulator -v --board s5_ref ./device/calc_initpop.cl  -o bin/docking.aocx
 aoc -march=emulator -Werror -v --board a10gx device/Krnl_GA.cl -o bin/docking.aocx -DEMULATOR
 
+# Relaxed fp operations
+aoc -march=emulator --fp-relaxed --fpc -v --board a10gx device/Krnl_GA.cl -o bin/docking.aocx
+
+
+
+
 
 # Run ofdock (under ./bin)
 # Emulation: this will execute 1 run

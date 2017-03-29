@@ -1,0 +1,770 @@
+----------------
+First attempt:
+----------------
+Krnl_GA -> Krnl_Conform -> Krnl_InterE -> Krnl_Store
+			-> Krnl_IntraE -
+Emulation: OK
+Channels usage: WRONG, multiple calling site per each channel
+Area: RAM around 200%
+
+----------------
+Second attempt:
+----------------
+Krnl_GA -> Krnl_Conform -> Krnl_InterE -> Krnl_Store
+			-> Krnl_IntraE -
+
+Krnl_GA: is implemented as a big switch case or fsm
+Emulation: OK
+Channels usage: OK, single calling site per each channel
+Area: RAM around 200%
+
+----------------
+Third attempt:
+----------------
+Krnl_GA -> Krnl_IC-> Krnl_Conform -> Krnl_InterE -> Krnl_Store
+	-> Krnl_GG->		  -> Krnl_IntraE ->
+	-> Krnl_LS->
+
+Krnl_GA is divided into Krnl_IC, Krnl_GG, and Krnl_LS:
+-IC: Initial Calculation of energy of initial population
+-GG: Genetic Generation
+-LS: Local Search
+
+Emulation: ongoing
+Channels usage: OK, single calling site per each channel
+Area: RAM around 146%
+
+Use folder Krnl_GA/report/ and check report.html and lib folder:
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+ISSUE:
+Private Variable: 
+ - 'i' (Krnl_GG.cl:50):
+Implemented using registers of the following size:
+- 1 register of width 32 and depth 1
+
+for (uint i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) { 			
+	GlobPopulationNext[i] = GlobPopulationCurrent[best_entity_id*ACTUAL_GENOTYPE_LENGTH+i]; 		
+} 
+
+MODIFICATION:
+ACTUAL_GENOTYPE_LENGTH is equal to 38, so a counter declared as unsigned char suffices.
+
+for (uchar i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) { 			
+	GlobPopulationNext[i] = GlobPopulationCurrent[best_entity_id*ACTUAL_GENOTYPE_LENGTH+i]; 		
+} 
+
+Private Variable: 
+ - 'i' (Krnl_GG.cl:51):
+Implemented using registers of the following size:
+- 1 register of width 8 and depth 1
+
+
+Done for:
+
+Krnl_GA
+Krnl_Conform
+Krnl_GG
+Krnl_IC
+Krnl_InterE
+Krnl_IntraE
+Krnl_LS
+Krnl_Store
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+ISSUE:
+Krnl_Conform.cl
+					ALUTs	FFs	RAMs	DSPs	Details
+'__acl__sincosf' Function Call(x2)	1471	4226	8	9
+
+genrot_unitvec [0] = sin(theta)*cos(phi);
+genrot_unitvec [1] = sin(theta)*sin(phi);
+genrot_unitvec [2] = cos(theta);
+
+MODIFICATION:
+float sin_theta = sin(theta);
+genrot_unitvec [0] = sin_theta*cos(phi);
+genrot_unitvec [1] = sin_theta*sin(phi);
+genrot_unitvec [2] = cos(theta);
+					ALUTs	FFs	RAMs	DSPs	Details
+'__acl__sincosf' Function Call		736	2113	4	5
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+ISSUE:
+Krnl_Conform.cl
+printf("	%-20s: %s\n", "Krnl_Conform", "disabled");
+
+	ALUTs	FFs	RAMs	DSPs	Details
+State	42	325	0	0	
+Store	1535	3793	16	0
+
++--------------------------------------------------------------------+
+; Estimated Resource Usage Summary                                   ;
++----------------------------------------+---------------------------+
+; Resource                               + Usage                     ;
++----------------------------------------+---------------------------+
+; Logic utilization                      ;   91%                     ;
+; ALUTs                                  ;   44%                     ;
+; Dedicated logic registers              ;   50%                     ;
+; Memory blocks                          ;  145%                     ;
+; DSP blocks                             ;   27%                     ;
++----------------------------------------+---------------------------;
+
+
+MODIFICATION:
+Comment that printf statement	
++--------------------------------------------------------------------+
+; Estimated Resource Usage Summary                                   ;
++----------------------------------------+---------------------------+
+; Resource                               + Usage                     ;
++----------------------------------------+---------------------------+
+; Logic utilization                      ;   91%                     ;
+; ALUTs                                  ;   43%                     ;
+; Dedicated logic registers              ;   49%                     ;
+; Memory blocks                          ;  144%                     ;
+; DSP blocks                             ;   27%                     ;
++----------------------------------------+---------------------------;
+
+Done for:
+
+Krnl_GA
+Krnl_Conform
+Krnl_GG
+Krnl_IC
+Krnl_InterE
+Krnl_IntraE
+Krnl_LS
+Krnl_Store
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+ISSUE:
+Optimize channels type
+Krnl_GA
+channel uint  chan_IC2Conf_cnt;		// population count
+
+					ALUTs	FFs	RAMs	DSPs	Details
+Krnl_GA.cl:30 (chan_IC2Conf_cnt)	32	32	0	0	
+Channel is implemented 32 bits wide by 0 deep.
+
+MODIFICATION:
+channel ushort chan_IC2Conf_cnt;		// population count
+
+					ALUTs	FFs	RAMs	DSPs	Details
+Krnl_GA.cl:31 (chan_IC2Conf_cnt)	16	16	0	0	
+Channel is implemented 16 bits wide by 0 deep.
+
+Done for:
+Krnl_GA
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+ISSUE:
+
+Accesses to global memory incurr in RAM utilization for loads and stores:
+
+The initial RAM utilization per kernel is as follows:
+Krnl_GG:     32 %
+Krnl_InterE: 28 %
+Krnl_IntraE: 28 %
+
+Focusing on Krnl_GG/auxiliary_genetic.cl: binary_tournament_selection()
+
+	if (GlobEnergyCurrent[parent_candidates[0]] < GlobEnergyCurrent[parent_candidates[1]])
+	{
+		if (myrand(GlobPRNG) < 100*rand_level) {*parent1 = parent_candidates [0];}
+		else			               {*parent1 = parent_candidates [1];}
+	}
+	else
+	{
+		if (myrand(GlobPRNG) < 100*rand_level) {*parent1 = parent_candidates [1];}
+		else			               {*parent1 = parent_candidates [0];}	
+	}
+
+Accesing GlobEnergyCurrent is expensive:
++--------------------------------------------------------------------+
+; Estimated Resource Usage Summary                                   ;
++----------------------------------------+---------------------------+
+; Resource                               + Usage                     ;
++----------------------------------------+---------------------------+
+; Logic utilization                      ;   76%                     ;
+; ALUTs                                  ;   37%                     ;
+; Dedicated logic registers              ;   40%                     ;
+; Memory blocks                          ;  132%                     ;
+; DSP blocks                             ;   27%                     ;
++----------------------------------------+---------------------------;
+
+
+MODIFICATION:
+Use locl_energies (previously used in find_best()) and pass it to binary_tournament_selection()
+	if (loc_energies[parent_candidates[0]] < loc_energies[parent_candidates[1]])
+	{
+		if (myrand(GlobPRNG) < 100*rand_level) {*parent1 = parent_candidates [0];}
+		else			               {*parent1 = parent_candidates [1];}
+	}
+	else
+	{
+		if (myrand(GlobPRNG) < 100*rand_level) {*parent1 = parent_candidates [1];}
+		else			               {*parent1 = parent_candidates [0];}	
+	}
+
++--------------------------------------------------------------------+
+; Estimated Resource Usage Summary                                   ;
++----------------------------------------+---------------------------+
+; Resource                               + Usage                     ;
++----------------------------------------+---------------------------+
+; Logic utilization                      ;   74%                     ;
+; ALUTs                                  ;   36%                     ;
+; Dedicated logic registers              ;   39%                     ;
+; Memory blocks                          ;  126%                     ;
+; DSP blocks                             ;   27%                     ;
++----------------------------------------+---------------------------;
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+ISSUE:
+ 
+Further removing redundant accesses to global memory in  Krnl_GG/auxiliary_genetic.cl:
+- find_best() and binary_tournament_selection() share a common task
+- both read GlobEnergyCurrent (GLOBAL) and copy into loc_energies (LOCAL)
+- not needed to do this twice, this can be done outside both functions
+So in Krnl_GG.cl, any access to GlobEnergyCurrent is replaced by an access to loc_energies
+
++--------------------------------------------------------------------+
+; Estimated Resource Usage Summary                                   ;
++----------------------------------------+---------------------------+
+; Resource                               + Usage                     ;
++----------------------------------------+---------------------------+
+; Logic utilization                      ;   74%                     ;
+; ALUTs                                  ;   36%                     ;
+; Dedicated logic registers              ;   39%                     ;
+; Memory blocks                          ;  126%                     ;
+; DSP blocks                             ;   27%                     ;
++----------------------------------------+---------------------------;
+
+MODIFICATION:
+in find_best() and binary_tournament_selection()
+	for (ushort i=0; i<pop_size; i++) {
+		loc_energies[i] = GlobEnergyCurrent[i];
+	}
+is moved to Krnl_GG
+
++--------------------------------------------------------------------+
+; Estimated Resource Usage Summary                                   ;
++----------------------------------------+---------------------------+
+; Resource                               + Usage                     ;
++----------------------------------------+---------------------------+
+; Logic utilization                      ;   73%                     ;
+; ALUTs                                  ;   36%                     ;
+; Dedicated logic registers              ;   39%                     ;
+; Memory blocks                          ;  124%                     ;
+; DSP blocks                             ;   27%                     ;
++----------------------------------------+---------------------------;
+
+At this point, the new RAM utilization per kernel is as follows:
+Krnl_InterE: 28 %
+Krnl_IntraE: 28 %
+Krnl_GG:     24 %
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+ISSUE:
+Further removing redundant accesses to global memory in Krnl_GG and Krnl_LS
+due to myrand()
+
+myrand_basic(): (1) reads the PRNG from global memory, 
+		(2) produces a new prng
+		(3) writes the new prng to global memory
+
+uint myrand_basic (__global uint* restrict GlobPRNG){
+	uint temprand_uint;
+	temprand_uint = GlobPRNG[0];
+	temprand_uint = (RAND_A*temprand_uint + RAND_C);
+	GlobPRNG[0] = temprand_uint;
+	return temprand_uint;
+}
+
+Where each GlobPRNG[0] = temprand_uint; consumes 17 of RAM (not 17%)
+
++--------------------------------------------------------------------+
+; Estimated Resource Usage Summary                                   ;
++----------------------------------------+---------------------------+
+; Resource                               + Usage                     ;
++----------------------------------------+---------------------------+
+; Logic utilization                      ;   73%                     ;
+; ALUTs                                  ;   36%                     ;
+; Dedicated logic registers              ;   39%                     ;
+; Memory blocks                          ;  124%                     ;
+; DSP blocks                             ;   27%                     ;
++----------------------------------------+---------------------------;
+
+MODIFICATION:
+
+RE-write random generation functions, so prng values are not written back
+to global memory so often, i.e. at every call to myrand_basic(), but instead:
+
+-They are read at the beginning of caller functions such as 
+	binary_tournament_selection(), 
+	gen_new_genotype(), 
+	insisde while(active) of Krnl_LS.
+-They are written back at the end of such functions
+
+The prng value is kept alive inside the kernel/function, and passed using a pointer.
+myrand(), myrand_uint(): re-written
+myrand_basic(): removed
+
++--------------------------------------------------------------------+
+; Estimated Resource Usage Summary                                   ;
++----------------------------------------+---------------------------+
+; Resource                               + Usage                     ;
++----------------------------------------+---------------------------+
+; Logic utilization                      ;   71%                     ;
+; ALUTs                                  ;   35%                     ;
+; Dedicated logic registers              ;   38%                     ;
+; Memory blocks                          ;  114%                     ;
+; DSP blocks                             ;   27%                     ;
++----------------------------------------+---------------------------;
+
+At this point, the new RAM utilization per kernel is as follows:
+Krnl_InterE: 28 %
+Krnl_IntraE: 28 %
+Krnl_GG:     16 %
+Krnl_LS:      9 %
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+ISSUE:
+IntraE calculations can be simplified
+
+			partialE4 = (
+				  ( KerConst->dspars_S_const[atom1_typeid] + DockConst->qasp*fabs(KerConst->atom_charges_const[atom1_id]) ) * KerConst->dspars_V_const[atom2_typeid] + 
+				  ( KerConst->dspars_S_const[atom2_typeid] + DockConst->qasp*fabs(KerConst->atom_charges_const[atom2_id]) ) * KerConst->dspars_V_const[atom1_typeid]) * 
+				 DockConst->coeff_desolv*exp(-distance_leo*distance_leo/25.92f);
+
+The floating-point division consumes 5 of RAM (not 5%)
+
++--------------------------------------------------------------------+
+; Estimated Resource Usage Summary                                   ;
++----------------------------------------+---------------------------+
+; Resource                               + Usage                     ;
++----------------------------------------+---------------------------+
+; Logic utilization                      ;   71%                     ;
+; ALUTs                                  ;   35%                     ;
+; Dedicated logic registers              ;   38%                     ;
+; Memory blocks                          ;  114%                     ;
+; DSP blocks                             ;   27%                     ;
++----------------------------------------+---------------------------;
+
+MODIFICATION:
+
+			partialE4 = (
+				  ( KerConst->dspars_S_const[atom1_typeid] + DockConst->qasp*fabs(KerConst->atom_charges_const[atom1_id]) ) * KerConst->dspars_V_const[atom2_typeid] + 
+				  ( KerConst->dspars_S_const[atom2_typeid] + DockConst->qasp*fabs(KerConst->atom_charges_const[atom2_id]) ) * KerConst->dspars_V_const[atom1_typeid]) * 
+				 DockConst->coeff_desolv*exp(-distance_leo*distance_leo*0.0386f);
+
++--------------------------------------------------------------------+
+; Estimated Resource Usage Summary                                   ;
++----------------------------------------+---------------------------+
+; Resource                               + Usage                     ;
++----------------------------------------+---------------------------+
+; Logic utilization                      ;   71%                     ;
+; ALUTs                                  ;   35%                     ;
+; Dedicated logic registers              ;   37%                     ;
+; Memory blocks                          ;  113%                     ;
+; DSP blocks                             ;   27%                     ;
++----------------------------------------+---------------------------;
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+ISSUE:
+IntraE calculations can further be simplified:
+Divisions are replaced by multiplications as much as possible
+
+partialE1 = KerConst->VWpars_AC_const[atom1_typeid*DockConst->num_of_atypes+atom2_typeid]/distance_pow_12;
+
++--------------------------------------------------------------------+
+; Estimated Resource Usage Summary                                   ;
++----------------------------------------+---------------------------+
+; Resource                               + Usage                     ;
++----------------------------------------+---------------------------+
+; Logic utilization                      ;   71%                     ;
+; ALUTs                                  ;   35%                     ;
+; Dedicated logic registers              ;   37%                     ;
+; Memory blocks                          ;  113%                     ;
+; DSP blocks                             ;   27%                     ;
++----------------------------------------+---------------------------;
+
+
+MODIFICATION:
+Declared inverse_distance_pow_12 and calculate it from 1/distance_pow_12;
+Do the same for inverse_distance_pow_10 and inverse_distance_pow_6
+
+partialE1 = KerConst->VWpars_AC_const[atom1_typeid*DockConst->num_of_atypes+atom2_typeid]*inverse_distance_pow_12;
+
++--------------------------------------------------------------------+
+; Estimated Resource Usage Summary                                   ;
++----------------------------------------+---------------------------+
+; Resource                               + Usage                     ;
++----------------------------------------+---------------------------+
+; Logic utilization                      ;   70%                     ;
+; ALUTs                                  ;   35%                     ;
+; Dedicated logic registers              ;   37%                     ;
+; Memory blocks                          ;  111%                     ;
+; DSP blocks                             ;   27%                     ;
++----------------------------------------+---------------------------;
+
+At this point, the new RAM utilization per kernel is as follows:
+Krnl_InterE: 28 %
+Krnl_IntraE: 26 %
+Krnl_GG:     16 %
+Krnl_LS:      9 %
+
+----------------------------------------------------------------------
+Here a distance*distance was replaced by distance_pow_2 in partialE4
+This might explain the "surprising increase in resource utilization"
+----------------------------------------------------------------------
+
+ISSUE: 
+IntraE sqrt consumes 2 RAM (not 2%)
+
+distance_leo = sqrt(subx*subx + suby*suby + subz*subz)*DockConst->grid_spacing;
+
+			ALUTs	FFs	RAMs	DSPs	Details
+'sqrtf' Function Call	129	346	3	2	
+
++--------------------------------------------------------------------+
+; Estimated Resource Usage Summary                                   ;
++----------------------------------------+---------------------------+
+; Resource                               + Usage                     ;
++----------------------------------------+---------------------------+
+; Logic utilization                      ;   71%                     ;
+; ALUTs                                  ;   35%                     ;
+; Dedicated logic registers              ;   37%                     ;
+; Memory blocks                          ;  113%                     ;
+; DSP blocks                             ;   27%                     ;
++----------------------------------------+---------------------------;
+
+
+MODIFICATION:
+float sqrt_custom(const float x) 
+{ 	//uint i = as_uint(x);	
+	uint i = *(uint*) &x;    	
+	i  += 127 << 23;	// adjust bias   	
+	i >>= 1; 		// approximation of square root 	
+	return as_float(i);	//return *(float*) &i; 
+}  
+distance_leo = sqrt_custom(subx*subx + suby*suby + subz*subz)*DockConst->grid_spacing;
+
+
++--------------------------------------------------------------------+
+; Estimated Resource Usage Summary                                   ;
++----------------------------------------+---------------------------+
+; Resource                               + Usage                     ;
++----------------------------------------+---------------------------+
+; Logic utilization                      ;   70%                     ;
+; ALUTs                                  ;   35%                     ;
+; Dedicated logic registers              ;   37%                     ;
+; Memory blocks                          ;  113%                     ;
+; DSP blocks                             ;   26%                     ;
++----------------------------------------+---------------------------;
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+ISSUE
+
+For-loops can be merged:
+Krnl_GG:
+
+for (uchar i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {
+	GlobPopulationNext [new_pop_cnt*ACTUAL_GENOTYPE_LENGTH + i] = offspring_genotype [i];
+}
+
+for (uchar pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {
+	write_channel_altera(chan_GG2Conf_genotype, offspring_genotype[pipe_cnt]);
+}
+
++--------------------------------------------------------------------+
+; Estimated Resource Usage Summary                                   ;
++----------------------------------------+---------------------------+
+; Resource                               + Usage                     ;
++----------------------------------------+---------------------------+
+; Logic utilization                      ;   70%                     ;
+; ALUTs                                  ;   35%                     ;
+; Dedicated logic registers              ;   37%                     ;
+; Memory blocks                          ;  113%                     ;
+; DSP blocks                             ;   26%                     ;
++----------------------------------------+---------------------------;
+
+
+MODIFICATION:
+Remove first loop
+
+for (uchar pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {
+	GlobPopulationNext [new_pop_cnt*ACTUAL_GENOTYPE_LENGTH + pipe_cnt] = offspring_genotype [pipe_cnt];
+	write_channel_altera(chan_GG2Conf_genotype, offspring_genotype[pipe_cnt]);
+}
+
++--------------------------------------------------------------------+
+; Estimated Resource Usage Summary                                   ;
++----------------------------------------+---------------------------+
+; Resource                               + Usage                     ;
++----------------------------------------+---------------------------+
+; Logic utilization                      ;   70%                     ;
+; ALUTs                                  ;   35%                     ;
+; Dedicated logic registers              ;   37%                     ;
+; Memory blocks                          ;  112%                     ;
+; DSP blocks                             ;   26%                     ;
++----------------------------------------+---------------------------;
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+ISSUE:
+Maximize contiguos access to global memory
+IntraE:
+
+atom1_id = KerConst->intraE_contributors_const[3*contributor_counter]; 
+atom2_id = KerConst->intraE_contributors_const[3*contributor_counter+1];
+
+//if (KerConst->intraE_contributors_const[3*contributor_counter+2] == 1)
+
+Krnl_IntraE
+ALUTs		FFs		RAMs		DSPs
+46285 (6%)	78661 (5%)	663 (28%)	61 (4%)
+
+
+MODIFICATION:
+
+Create a temporal value and read contiguous values inside a for-loop
+
+char ref_intraE_contributors_const[3];
+for (uchar i=0; i<3; i++) {
+	ref_intraE_contributors_const[i] = KerConst->intraE_contributors_const[3*contributor_counter+i]; ;
+}
+atom1_id = ref_intraE_contributors_const[0];
+atom2_id = ref_intraE_contributors_const[1];
+
+if (ref_intraE_contributors_const[2] == 1)	//H-bond
+
+Krnl_IntraE
+ALUTs		FFs		RAMs		DSPs
+45637 (6%)	74833 (5%)	604 (25%)	61 (4%)
+
++--------------------------------------------------------------------+
+; Estimated Resource Usage Summary                                   ;
++----------------------------------------+---------------------------+
+; Resource                               + Usage                     ;
++----------------------------------------+---------------------------+
+; Logic utilization                      ;   70%                     ;
+; ALUTs                                  ;   35%                     ;
+; Dedicated logic registers              ;   37%                     ;
+; Memory blocks                          ;  110%                     ;
+; DSP blocks                             ;   26%                     ;
++----------------------------------------+---------------------------;
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+ISSUE:
+-In Krnl_GG and Krnl_LS we replaced local memories storing offspring
+for private.
+That implied changing map_angle_180() and map_angle_360() so 
+-- they return values, and 
+-- accept a private value as arg
+
+-Removing the num_of_genes arg in new_gen_genotype()
+-Changing from local to private private memory: 
+	float local_entity_1     [ACTUAL_GENOTYPE_LENGTH]; 
+        float local_entity_2     [ACTUAL_GENOTYPE_LENGTH]; 
+
+No improvement in area wrt to the previous issue.
+
+----------------------------------------------------------------------
+Before this point, we discovered why always creating the FPGA binaries
+failed: incompatibility between Quartus Pro and AOC version:
+16.1.2 and 16.1.0 respectively.
+Here we updated the AOC to 16.1.2.
+This probably affects following utilization estimation
+----------------------------------------------------------------------
+ISSUE:
+Redundant reads and writes to GlobPRNG inside:
+binary_tournament_selection(), and
+gen_new_genotype()
+
+MODIFICATION:
+The reads and writes are put outside both functions (in Krnl_GG)
+
++--------------------------------------------------------------------+
+; Estimated Resource Usage Summary                                   ;
++----------------------------------------+---------------------------+
+; Resource                               + Usage                     ;
++----------------------------------------+---------------------------+
+; Logic utilization                      ;   71%                     ;
+; ALUTs                                  ;   35%                     ;
+; Dedicated logic registers              ;   38%                     ;
+; Memory blocks                          ;  102%                     ;
+; DSP blocks                             ;   26%                     ;
++----------------------------------------+---------------------------;
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+ISSUE
+In Krnl_IntraE, removed redundant fp comparison:
+if ((distance_leo < 8.0f) && (distance_leo < 20.48f))
+
+MODIFICATION:
+if (distance_leo < 8.0f) 
+
+But this increases "Memory blocks" utilization estimation:
+
++--------------------------------------------------------------------+
+; Estimated Resource Usage Summary                                   ;
++----------------------------------------+---------------------------+
+; Resource                               + Usage                     ;
++----------------------------------------+---------------------------+
+; Logic utilization                      ;   71%                     ;
+; ALUTs                                  ;   35%                     ;
+; Dedicated logic registers              ;   38%                     ;
+; Memory blocks                          ;  103%                     ;
+; DSP blocks                             ;   26%                     ;
++----------------------------------------+---------------------------;
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+ISSUE:
+In Krnl_GA
+Reduce the number of access to global memory 
+by grouping them into consecutive accesses
+
+GlobEvals_performed[0]       =  eval_cnt; 	
+GlobGenerations_performed[0] =  generation_cnt;
+
+	ALUTs		FFs		RAMs	DSPs
+Krnl_GA	4025 (1%)	13384 (1%)	98 (4%)	0 (0%)
+
+
+MODIFICATION:
+The Global variables are merged into one in:
+- Krnl_GA.cl, and 
+- performdocking.cpp (host code)
+
+array_evals_and_generations_performed [0] = eval_cnt;
+array_evals_and_generations_performed [1] = generation_cnt;
+
+for (uchar i=0; i<2; i++) {
+	GlobEvalsGenerations_performed[i] = array_evals_and_generations_performed [i];
+}
+
+	ALUTs		FFs		RAMs	DSPs
+Krnl_GA	3674 (0%)	11928 (1%)	83 (3%)	0 (0%)
+
++--------------------------------------------------------------------+
+; Estimated Resource Usage Summary                                   ;
++----------------------------------------+---------------------------+
+; Resource                               + Usage                     ;
++----------------------------------------+---------------------------+
+; Logic utilization                      ;   71%                     ;
+; ALUTs                                  ;   35%                     ;
+; Dedicated logic registers              ;   38%                     ;
+; Memory blocks                          ;  103%                     ;
+; DSP blocks                             ;   26%                     ;
++----------------------------------------+---------------------------;
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+ISSUE:
+In Krnl_GA
+
+Reduce the number of access to global memory 
+by grouping them into consecutive accesses
+
+// Updating old population with new one
+for (ushort i=0;i<DockConst->pop_size*ACTUAL_GENOTYPE_LENGTH; i++) { 	
+	GlobPopulationCurrent[i] = GlobPopulationNext[i];}
+
+// Updating old energy with new one
+for (ushort i=0;i<DockConst->pop_size; i++) { 			
+	GlobEnergyCurrent[i] = GlobEnergyNext[i];}
+
+		ALUTs	FFs	RAMs	DSPs
+Krnl_GA.cl:242	764	2939	29	0	
+Krnl_GA.cl:247	764	2939	29	0	
+
+MODIFICATION:
+
+for (ushort i=0;i<DockConst->pop_size*ACTUAL_GENOTYPE_LENGTH; i++) { 	
+	GlobPopulationCurrent[i] = GlobPopulationNext[i];
+	if (i<DockConst->pop_size) {
+		GlobEnergyCurrent[i] = GlobEnergyNext[i];
+	}
+}
+		ALUTs	FFs	RAMs	DSPs
+Krnl_GA.cl:252	758	2781	29	0	
+Krnl_GA.cl:253	32	33	0	0	
+Krnl_GA.cl:254	840	2854	29	0
+
++--------------------------------------------------------------------+
+; Estimated Resource Usage Summary                                   ;
++----------------------------------------+---------------------------+
+; Resource                               + Usage                     ;
++----------------------------------------+---------------------------+
+; Logic utilization                      ;   71%                     ;
+; ALUTs                                  ;   35%                     ;
+; Dedicated logic registers              ;   38%                     ;
+; Memory blocks                          ;  102%                     ;
+; DSP blocks                             ;   26%                     ;
++----------------------------------------+---------------------------;
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+ISSUE:
+In Krnl_Conform
+
+Reduce the number of access to global memory 
+by grouping them into consecutive accesses
+
+rotation_unitvec[0] = KerConst->rotbonds_unit_vectors_const[3*rotbond_id];
+rotation_unitvec[1] = KerConst->rotbonds_unit_vectors_const[3*rotbond_id+1];
+rotation_unitvec[2] = KerConst->rotbonds_unit_vectors_const[3*rotbond_id+2];
+
+Part in question
+			ALUTs	FFs	RAMs	DSPs
+ Krnl_Conform.cl:179	1197	1332	14	0	
+ Krnl_Conform.cl:180	1180	1302	14	0	
+ Krnl_Conform.cl:181	1196	1346	15	0	
+ Krnl_Conform.cl:182	26	44	0	0	
+ Krnl_Conform.cl:184	1186	1320	15	0	
+ Krnl_Conform.cl:185	1210	1368	15	0	
+ Krnl_Conform.cl:186	1210	1368	15	0	
+
+Whole kernel
+		ALUTs		FFs		RAMs		DSPs
+Krnl_Conform	21848 (3%)	41617 (3%)	211 (9%)	94 (6%)
+
+MIDIFICATION
+
+for (uchar i=0; i<3; i++) {
+	rotation_unitvec[i] = KerConst->rotbonds_unit_vectors_const[3*rotbond_id + i];
+}
+
+ Krnl_Conform.cl:183	3573	3979	44	0	
+ Krnl_Conform.cl:186	26	44	0	0	
+ Krnl_Conform.cl:192	3605	4055	44	0	
+
+In general numbers, it seems it didn't optimize area.
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+
+Corrections in the Krnl_Store increase a bit RAM:
+GlobalEnergyCurrent was used instead of GlobalEnergyNext
+
++--------------------------------------------------------------------+
+; Estimated Resource Usage Summary                                   ;
++----------------------------------------+---------------------------+
+; Resource                               + Usage                     ;
++----------------------------------------+---------------------------+
+; Logic utilization                      ;   71%                     ;
+; ALUTs                                  ;   35%                     ;
+; Dedicated logic registers              ;   38%                     ;
+; Memory blocks                          ;  103%                     ;
+; DSP blocks                             ;   26%                     ;
++----------------------------------------+---------------------------;
+
+

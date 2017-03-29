@@ -66,6 +66,24 @@ static cl_kernel kernel5  = NULL;
 static const char *name_k5 = "Krnl_Store";
 #endif
 
+#ifdef ENABLE_KERNEL6
+static cl_command_queue command_queue6 = NULL;
+static cl_kernel kernel6  = NULL;
+static const char *name_k6 = "Krnl_IC";
+#endif
+
+#ifdef ENABLE_KERNEL7
+static cl_command_queue command_queue7 = NULL;
+static cl_kernel kernel7  = NULL;
+static const char *name_k7 = "Krnl_GG";
+#endif
+
+#ifdef ENABLE_KERNEL8
+static cl_command_queue command_queue8 = NULL;
+static cl_kernel kernel8  = NULL;
+static const char *name_k8 = "Krnl_LS";
+#endif
+
 static cl_program program = NULL;
 
 // Function prototypes
@@ -128,8 +146,9 @@ cl_mem mem_dockpars_conformations_next;
 cl_mem mem_dockpars_energies_next;
 cl_mem mem_dockpars_prng_states;
 
-cl_mem mem_evals_performed;
-cl_mem mem_generations_performed;
+//cl_mem mem_evals_performed;
+//cl_mem mem_generations_performed;
+cl_mem mem_evals_and_generations_performed;
 
 //// --------------------------------
 //// Docking
@@ -267,8 +286,11 @@ filled with clock() */
 	mallocBufferObject(context,CL_MEM_READ_WRITE,size_populations, &mem_dockpars_conformations_next);
 	mallocBufferObject(context,CL_MEM_READ_WRITE,size_energies,    &mem_dockpars_energies_next);
 	mallocBufferObject(context,CL_MEM_READ_WRITE,size_prng_seeds,  &mem_dockpars_prng_states);
-	mallocBufferObject(context,CL_MEM_READ_WRITE,sizeof(unsigned int),  &mem_evals_performed);
-	mallocBufferObject(context,CL_MEM_READ_WRITE,sizeof(unsigned int),  &mem_generations_performed);
+	//mallocBufferObject(context,CL_MEM_READ_WRITE,sizeof(unsigned int),  &mem_evals_performed);
+	//mallocBufferObject(context,CL_MEM_READ_WRITE,sizeof(unsigned int),  &mem_generations_performed);
+	mallocBufferObject(context,CL_MEM_READ_WRITE,2*sizeof(unsigned int),  &mem_evals_and_generations_performed);
+
+	unsigned int array_evals_and_generations_performed [2]; // [0]: evals, [1]: generations 
 
 /*
 	memcopyBufferObjectToDevice(command_queue1,mem_DockparametersConst, 		&dockpars,            sizeof(dockpars));
@@ -288,20 +310,21 @@ filled with clock() */
 
 	clock_start_docking = clock();
 
-#ifdef ENABLE_KERNEL1
+#ifdef ENABLE_KERNEL1 // Krnl_GA
         //setKernelArg(kernel1,0, sizeof(mem_dockpars_fgrids),                    &mem_dockpars_fgrids);
         setKernelArg(kernel1,0, sizeof(mem_dockpars_conformations_current),     &mem_dockpars_conformations_current);
         setKernelArg(kernel1,1, sizeof(mem_dockpars_energies_current),          &mem_dockpars_energies_current);
         setKernelArg(kernel1,2, sizeof(mem_dockpars_conformations_next),        &mem_dockpars_conformations_next);
         setKernelArg(kernel1,3, sizeof(mem_dockpars_energies_next),             &mem_dockpars_energies_next);
-        setKernelArg(kernel1,4, sizeof(mem_dockpars_prng_states),               &mem_dockpars_prng_states);
-	setKernelArg(kernel1,5, sizeof(cl_mem),                          	&mem_KerConst);
-        setKernelArg(kernel1,6, sizeof(cl_mem),                          	&mem_DockparametersConst);
-	setKernelArg(kernel1,7, sizeof(mem_evals_performed),                    &mem_evals_performed);
-        setKernelArg(kernel1,8, sizeof(mem_generations_performed),              &mem_generations_performed);
+        //setKernelArg(kernel1,4, sizeof(mem_dockpars_prng_states),              &mem_dockpars_prng_states);
+	//setKernelArg(kernel1,5, sizeof(cl_mem),                          	 &mem_KerConst);
+        setKernelArg(kernel1,4, sizeof(cl_mem),                          	&mem_DockparametersConst);
+	//setKernelArg(kernel1,5, sizeof(mem_evals_performed),                    &mem_evals_performed);
+        //setKernelArg(kernel1,6, sizeof(mem_generations_performed),              &mem_generations_performed);
+	setKernelArg(kernel1,5, sizeof(mem_evals_and_generations_performed),     &mem_evals_and_generations_performed);
 #endif // End of ENABLE_KERNEL1
 
-#ifdef ENABLE_KERNEL2
+#ifdef ENABLE_KERNEL2 // Krnl_Conform
         //setKernelArg(kernel2,0, sizeof(mem_dockpars_fgrids),                    &mem_dockpars_fgrids);
         //setKernelArg(kernel2,1, sizeof(mem_dockpars_conformations_current),     &mem_dockpars_conformations_current);
         //setKernelArg(kernel2,2, sizeof(mem_dockpars_energies_current),          &mem_dockpars_energies_current);
@@ -312,7 +335,7 @@ filled with clock() */
         setKernelArg(kernel2,1, sizeof(cl_mem),                          	&mem_DockparametersConst);
 #endif // End of ENABLE_KERNEL2
 
-#ifdef ENABLE_KERNEL3
+#ifdef ENABLE_KERNEL3 // Krnl_InterE
         setKernelArg(kernel3,0, sizeof(mem_dockpars_fgrids),                    &mem_dockpars_fgrids);
         //setKernelArg(kernel3,1, sizeof(mem_dockpars_conformations_current),     &mem_dockpars_conformations_current);
         //setKernelArg(kernel3,2, sizeof(mem_dockpars_energies_current),          &mem_dockpars_energies_current);
@@ -323,7 +346,7 @@ filled with clock() */
         setKernelArg(kernel3,2, sizeof(cl_mem),                          	&mem_DockparametersConst);
 #endif // End of ENABLE_KERNEL3
 
-#ifdef ENABLE_KERNEL4
+#ifdef ENABLE_KERNEL4 // Krnl_IntraE
         //setKernelArg(kernel4,0, sizeof(mem_dockpars_fgrids),                    &mem_dockpars_fgrids);
         //setKernelArg(kernel4,1, sizeof(mem_dockpars_conformations_current),     &mem_dockpars_conformations_current);
         //setKernelArg(kernel4,2, sizeof(mem_dockpars_energies_current),          &mem_dockpars_energies_current);
@@ -334,7 +357,7 @@ filled with clock() */
         setKernelArg(kernel4,1, sizeof(cl_mem),                          	&mem_DockparametersConst);
 #endif // End of ENABLE_KERNEL4
 
-#ifdef ENABLE_KERNEL5
+#ifdef ENABLE_KERNEL5 // Krnl_Store
         //setKernelArg(kernel5,0, sizeof(mem_dockpars_fgrids),                    &mem_dockpars_fgrids);
         //setKernelArg(kernel5,1, sizeof(mem_dockpars_conformations_current),     &mem_dockpars_conformations_current);
         setKernelArg(kernel5,0, sizeof(mem_dockpars_energies_current),          &mem_dockpars_energies_current);
@@ -342,12 +365,47 @@ filled with clock() */
         setKernelArg(kernel5,1, sizeof(mem_dockpars_energies_next),             &mem_dockpars_energies_next);
         //setKernelArg(kernel5,5, sizeof(mem_dockpars_prng_states),               &mem_dockpars_prng_states);
 	//setKernelArg(kernel5,6, sizeof(cl_mem),                          	&mem_KerConst);
-        //setKernelArg(kernel5,7, sizeof(cl_mem),                          	&mem_DockparametersConst);
-#endif // End of ENABLE_KERNEL3
+        setKernelArg(kernel5,2, sizeof(cl_mem),                          	&mem_DockparametersConst);
+#endif // End of ENABLE_KERNEL5
 
+#ifdef ENABLE_KERNEL6 // Krnl_IC
+        //setKernelArg(kernel1,0, sizeof(mem_dockpars_fgrids),                    &mem_dockpars_fgrids);
+        setKernelArg(kernel6,0, sizeof(mem_dockpars_conformations_current),     &mem_dockpars_conformations_current);
+        //setKernelArg(kernel6,1, sizeof(mem_dockpars_energies_current),          &mem_dockpars_energies_current);
+        //setKernelArg(kernel6,2, sizeof(mem_dockpars_conformations_next),        &mem_dockpars_conformations_next);
+        //setKernelArg(kernel6,3, sizeof(mem_dockpars_energies_next),             &mem_dockpars_energies_next);
+        //setKernelArg(kernel6,4, sizeof(mem_dockpars_prng_states),               &mem_dockpars_prng_states);
+	//setKernelArg(kernel6,5, sizeof(cl_mem),                          	&mem_KerConst);
+        setKernelArg(kernel6,1, sizeof(cl_mem),                          	&mem_DockparametersConst);
+	//setKernelArg(kernel6,7, sizeof(mem_evals_performed),                    &mem_evals_performed);
+        //setKernelArg(kernel6,8, sizeof(mem_generations_performed),              &mem_generations_performed);
+#endif // End of ENABLE_KERNEL6
 
+#ifdef ENABLE_KERNEL7 // Krnl_GG
+        //setKernelArg(kernel1,0, sizeof(mem_dockpars_fgrids),                    &mem_dockpars_fgrids);
+        setKernelArg(kernel7,0, sizeof(mem_dockpars_conformations_current),     &mem_dockpars_conformations_current);
+        setKernelArg(kernel7,1, sizeof(mem_dockpars_energies_current),          &mem_dockpars_energies_current);
+        setKernelArg(kernel7,2, sizeof(mem_dockpars_conformations_next),        &mem_dockpars_conformations_next);
+        setKernelArg(kernel7,3, sizeof(mem_dockpars_energies_next),             &mem_dockpars_energies_next);
+        setKernelArg(kernel7,4, sizeof(mem_dockpars_prng_states),               &mem_dockpars_prng_states);
+	//setKernelArg(kernel7,5, sizeof(cl_mem),                          	&mem_KerConst);
+        setKernelArg(kernel7,5, sizeof(cl_mem),                          	&mem_DockparametersConst);
+	//setKernelArg(kernel7,7, sizeof(mem_evals_performed),                    &mem_evals_performed);
+        //setKernelArg(kernel7,8, sizeof(mem_generations_performed),              &mem_generations_performed);
+#endif // End of ENABLE_KERNEL7
 
-
+#ifdef ENABLE_KERNEL8
+        //setKernelArg(kernel1,0, sizeof(mem_dockpars_fgrids),                    &mem_dockpars_fgrids);
+        setKernelArg(kernel8,0, sizeof(mem_dockpars_conformations_current),     &mem_dockpars_conformations_current);
+        setKernelArg(kernel8,1, sizeof(mem_dockpars_energies_current),          &mem_dockpars_energies_current);
+        //setKernelArg(kernel8,2, sizeof(mem_dockpars_conformations_next),        &mem_dockpars_conformations_next);
+        //setKernelArg(kernel8,3, sizeof(mem_dockpars_energies_next),             &mem_dockpars_energies_next);
+        setKernelArg(kernel8,2, sizeof(mem_dockpars_prng_states),               &mem_dockpars_prng_states);
+	//setKernelArg(kernel8,5, sizeof(cl_mem),                          	&mem_KerConst);
+        setKernelArg(kernel8,3, sizeof(cl_mem),                          	&mem_DockparametersConst);
+	//setKernelArg(kernel8,7, sizeof(mem_evals_performed),                    &mem_evals_performed);
+        //setKernelArg(kernel8,8, sizeof(mem_generations_performed),              &mem_generations_performed);
+#endif // End of ENABLE_KERNEL8
 
 	//unsigned long run_cnt;	/* int run_cnt; */
 
@@ -402,6 +460,19 @@ filled with clock() */
 		runKernelTask(command_queue5,kernel5,NULL,NULL);
 #endif // ENABLE_KERNEL5
 
+#ifdef ENABLE_KERNEL6
+		runKernelTask(command_queue6,kernel6,NULL,NULL);
+#endif // ENABLE_KERNEL6
+
+#ifdef ENABLE_KERNEL7
+		runKernelTask(command_queue7,kernel7,NULL,NULL);
+#endif // ENABLE_KERNEL7
+
+#ifdef ENABLE_KERNEL8
+		runKernelTask(command_queue8,kernel8,NULL,NULL);
+#endif // ENABLE_KERNEL8
+
+
 
 #ifdef ENABLE_KERNEL1 		
 		clFinish(command_queue1); 
@@ -423,7 +494,17 @@ filled with clock() */
 		clFinish(command_queue5); 
 #endif
 
+#ifdef ENABLE_KERNEL6
+		clFinish(command_queue6); 
+#endif
 
+#ifdef ENABLE_KERNEL7
+		clFinish(command_queue7);
+#endif
+
+#ifdef ENABLE_KERNEL8
+		clFinish(command_queue8);
+#endif
 
 		clock_stop_docking = clock();
 
@@ -435,8 +516,12 @@ filled with clock() */
 		//processing results
 
 
-		memcopyBufferObjectFromDevice(command_queue1,&mypars->num_of_energy_evals,mem_evals_performed,sizeof(unsigned int));
-		memcopyBufferObjectFromDevice(command_queue1,&mypars->num_of_generations,mem_generations_performed,sizeof(unsigned int));
+		//memcopyBufferObjectFromDevice(command_queue1,&mypars->num_of_energy_evals,mem_evals_performed,sizeof(unsigned int));
+		//memcopyBufferObjectFromDevice(command_queue1,&mypars->num_of_generations,mem_generations_performed,sizeof(unsigned int));
+		memcopyBufferObjectFromDevice(command_queue1,array_evals_and_generations_performed,mem_evals_and_generations_performed,2*sizeof(unsigned int));
+		mypars->num_of_energy_evals = array_evals_and_generations_performed [0];
+		mypars->num_of_generations  = array_evals_and_generations_performed [1];
+	
 		memcopyBufferObjectFromDevice(command_queue1,cpu_final_populations,mem_dockpars_conformations_current,size_populations);
 		memcopyBufferObjectFromDevice(command_queue1,cpu_energies,mem_dockpars_energies_current,size_energies);
 
@@ -639,6 +724,27 @@ bool init() {
   checkError(status, "Failed to create kernel");
 #endif
 
+#ifdef ENABLE_KERNEL6
+  command_queue6 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  checkError(status, "Failed to create command queue5");
+  kernel6 = clCreateKernel(program, name_k6, &status);
+  checkError(status, "Failed to create kernel");
+#endif
+
+#ifdef ENABLE_KERNEL7
+  command_queue7 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  checkError(status, "Failed to create command queue5");
+  kernel7 = clCreateKernel(program, name_k7, &status);
+  checkError(status, "Failed to create kernel");
+#endif
+
+#ifdef ENABLE_KERNEL8
+  command_queue8 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  checkError(status, "Failed to create command queue5");
+  kernel8 = clCreateKernel(program, name_k8, &status);
+  checkError(status, "Failed to create kernel");
+#endif
+
   return true;
 }
 
@@ -669,6 +775,21 @@ void cleanup() {
   if(command_queue5) {clReleaseCommandQueue(command_queue5);}
 #endif
 
+#ifdef ENABLE_KERNEL6
+  if(kernel6) {clReleaseKernel(kernel6);}
+  if(command_queue6) {clReleaseCommandQueue(command_queue6);}
+#endif
+
+#ifdef ENABLE_KERNEL7
+  if(kernel7) {clReleaseKernel(kernel7);}
+  if(command_queue7) {clReleaseCommandQueue(command_queue7);}
+#endif
+
+#ifdef ENABLE_KERNEL8
+  if(kernel8) {clReleaseKernel(kernel8);}
+  if(command_queue8) {clReleaseCommandQueue(command_queue8);}
+#endif
+
   if(program) {clReleaseProgram(program);}
   //if(command_queue) {clReleaseCommandQueue(command_queue);}
   if(context) {clReleaseContext(context);}
@@ -688,8 +809,9 @@ void cleanup() {
   if(mem_dockpars_conformations_next)   {clReleaseMemObject(mem_dockpars_conformations_next);}
   if(mem_dockpars_energies_next)        {clReleaseMemObject(mem_dockpars_energies_next);}
   if(mem_dockpars_prng_states)          {clReleaseMemObject(mem_dockpars_prng_states);}
-  if(mem_evals_performed)		{clReleaseMemObject(mem_evals_performed);}
-  if(mem_generations_performed)		{clReleaseMemObject(mem_generations_performed);}
+  //if(mem_evals_performed)		{clReleaseMemObject(mem_evals_performed);}
+  //if(mem_generations_performed)	{clReleaseMemObject(mem_generations_performed);}
+  if(mem_evals_and_generations_performed) {clReleaseMemObject(mem_evals_and_generations_performed);}
 }
 
 // Helper functions to display parameters returned by OpenCL queries

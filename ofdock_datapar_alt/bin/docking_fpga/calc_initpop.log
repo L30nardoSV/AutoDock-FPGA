@@ -1,0 +1,826 @@
+Compiler Command: aoc -v --board a10gx device/calc_initpop.cl -o bin/docking_fpga.aocx
+/home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/device/calc_energy.cl:630: Compiler Warning: Aggressive compiler optimization: removing unnecessary storage to local memory
+/home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/device/calc_energy.cl:636: Compiler Warning: Aggressive compiler optimization: removing unnecessary storage to local memory
+/home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/device/calc_energy.cl:630: Compiler Warning: Aggressive compiler optimization: removing unnecessary storage to local memory
+/home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/device/calc_energy.cl:636: Compiler Warning: Aggressive compiler optimization: removing unnecessary storage to local memory
+Compiler Warning: Kernel 'calc_initpop': limiting to 2 concurrent work-groups because threads might reach barrier out-of-order.
+Compiler Warning: Kernel 'sum_evals': limiting to 2 concurrent work-groups because threads might reach barrier out-of-order.
+Compiler Warning: Kernel 'gen_and_eval_newpops': limiting to 2 concurrent work-groups because threads might reach barrier out-of-order.
+Compiler Warning: Kernel 'perform_ls': limiting to 2 concurrent work-groups because threads might reach barrier out-of-order.
+=========================================================================================================
+                                   *** Optimization Report ***                                        
+
+Kernels that do not use any work-item built-in functions, such as get_global_id(), are compiled for single
+work-item execution (a task). Otherwise, a kernel is compiled as an ND-Range.
+
+For tasks, the compiler will attempt to pipeline every loop in the kernel to allow multiple iterations of
+the loop to execute concurrently. If some loops are not pipelined, or not pipelined well, you may not get
+good performance.
+
+For ND-Range kernels, the loops are not pipelined. Instead, they are built to accept multiple work-items
+simultaneously. Kernel throughput is usually reduced by the largest total number of iterations of nested
+loops. A large number of threads is usually required to efficiently utilize ND-Range kernels.
+
+=========================================================================================================
+Kernel: calc_initpop                                                                                     
+=========================================================================================================
+The kernel is compiled as an ND-Range.
+
+The kernel has a required work-group size of (32, 1, 1).
+
+Loop Report:
+
+ + Loop "Block2" (file calc_initpop.cl line 56)
+   
+   
+ + Loop "Block6" (file calc_energy.cl line 161)
+   
+   
+ + Loop "Block8" (file calc_energy.cl line 313)
+   
+   
+ + Loop "Block9" (file calc_energy.cl line 506)
+   
+   
+ + Loop "Block11" (file calc_energy.cl line 632)
+   
+   
+=========================================================================================================
+Kernel: sum_evals                                                                                        
+=========================================================================================================
+The kernel is compiled as an ND-Range.
+
+The kernel has a required work-group size of (32, 1, 1).
+
+Loop Report:
+
+ + Loop "Block15" (file sum_evals.cl line 26)
+   
+   
+ + Loop "Block17" (file sum_evals.cl line 29)
+   
+   
+ + Loop "Block19" (file sum_evals.cl line 45)
+   
+   
+=========================================================================================================
+Kernel: gen_and_eval_newpops                                                                             
+=========================================================================================================
+The kernel is compiled as an ND-Range.
+
+The kernel has a required work-group size of (32, 1, 1).
+
+Loop Report:
+
+ + Loop "Block24" (file perform_elitist_selection.cl line 41)
+   
+   
+ + Loop "Block26" (file perform_elitist_selection.cl line 61)
+   
+   
+ + Loop "Block28" (file perform_elitist_selection.cl line 84)
+   
+   
+ + Loop "Block29" (file gen_and_eval_newpops.cl line 99)
+   
+   
+ + Loop "Block32" (file gen_and_eval_newpops.cl line 156)
+   
+   
+ + Loop "Block43" (file calc_energy.cl line 161)
+   
+   
+ + Loop "Block33" (file gen_and_eval_newpops.cl line 176)
+   
+   
+ + Loop "Block35" (file gen_and_eval_newpops.cl line 194)
+ | 
+ | 
+ |-+ Loop "Block37" (file auxiliary.cl line 71)
+ |   
+ |   
+ |-+ Loop "Block39" (file auxiliary.cl line 74)
+     
+     
+ + Loop "Block50" (file gen_and_eval_newpops.cl line 279)
+   
+   
+ + Loop "Block45" (file calc_energy.cl line 313)
+   
+   
+ + Loop "Block46" (file calc_energy.cl line 506)
+   
+   
+ + Loop "Block48" (file calc_energy.cl line 632)
+   
+   
+=========================================================================================================
+Kernel: perform_ls                                                                                       
+=========================================================================================================
+The kernel is compiled as an ND-Range.
+
+The kernel has a required work-group size of (32, 1, 1).
+
+Loop Report:
+
+ + Loop "Block55" (file perform_ls.cl line 106)
+   
+   
+ + Loop "Block56" (file perform_ls.cl line 117)
+   
+   
+ + Loop "Block58" (file perform_ls.cl line 133)
+ | 
+ | 
+ |-+ Loop "Block76" (file calc_energy.cl line 313)
+ |   
+ |   
+ |-+ Loop "Block65" (file calc_energy.cl line 313)
+ |   
+ |   
+ |-+ Loop "Block59" (file perform_ls.cl line 137)
+ |   
+ |   
+ |-+ Loop "Block61" (file perform_ls.cl line 150)
+ |   
+ |   
+ |-+ Loop "Block74" (file calc_energy.cl line 161)
+ |   
+ |   
+ |-+ Loop "Block63" (file calc_energy.cl line 161)
+ |   
+ |   
+ |-+ Loop "Block71" (file perform_ls.cl line 221)
+ |   
+ |   
+ |-+ Loop "Block72" (file perform_ls.cl line 249)
+ |   
+ |   
+ |-+ Loop "Block82" (file perform_ls.cl line 321)
+ |   
+ |   
+ |-+ Loop "Block84" (file perform_ls.cl line 349)
+ |   
+ |   
+ |-+ Loop "Block78" (file calc_energy.cl line 506)
+ |   
+ |   
+ |-+ Loop "Block67" (file calc_energy.cl line 506)
+ |   
+ |   
+ |-+ Loop "Block80" (file calc_energy.cl line 632)
+ |   
+ |   
+ |-+ Loop "Block69" (file calc_energy.cl line 632)
+     
+     
+ + Loop "Block86" (file perform_ls.cl line 395)
+ | 
+ | 
+ |-+ Loop "Block87" (file auxiliary.cl line 71)
+ |   
+ |   
+ |-+ Loop "Block89" (file auxiliary.cl line 74)
+     
+     
+ + Loop "Block92" (file perform_ls.cl line 405)
+   
+   
+=========================================================================================================
+
++--------------------------------------------------------------------+
+; Estimated Resource Usage Summary                                   ;
++----------------------------------------+---------------------------+
+; Resource                               + Usage                     ;
++----------------------------------------+---------------------------+
+; Logic utilization                      ;  195%                     ;
+; ALUTs                                  ;  111%                     ;
+; Dedicated logic registers              ;   92%                     ;
+; Memory blocks                          ;  449%                     ;
+; DSP blocks                             ;   64%                     ;
++----------------------------------------+---------------------------;
+System name: calc_initpop
+
+2017.03.06.14:51:29 Info: Doing: qsys-script --quartus-project=top --script=kernel_system.tcl --Xmx512M --XX:+UseSerialGC
+2017.03.06.14:51:47 Info: set_validation_property AUTOMATIC_VALIDATION false
+2017.03.06.14:51:47 Info: add_instance clk_1x altera_clock_bridge 
+2017.03.06.14:51:47 Info: set_instance_parameter_value clk_1x EXPLICIT_CLOCK_RATE 0
+2017.03.06.14:51:47 Info: set_instance_parameter_value clk_1x NUM_CLOCK_OUTPUTS 1
+2017.03.06.14:51:48 Info: add_interface clock_reset clock sink
+2017.03.06.14:51:48 Info: set_interface_property clock_reset EXPORT_OF clk_1x.in_clk
+2017.03.06.14:51:48 Info: add_instance clk_2x altera_clock_bridge 
+2017.03.06.14:51:48 Info: set_instance_parameter_value clk_2x EXPLICIT_CLOCK_RATE 0
+2017.03.06.14:51:48 Info: set_instance_parameter_value clk_2x NUM_CLOCK_OUTPUTS 1
+2017.03.06.14:51:48 Info: add_interface clock_reset2x clock sink
+2017.03.06.14:51:48 Info: set_interface_property clock_reset2x EXPORT_OF clk_2x.in_clk
+2017.03.06.14:51:48 Info: add_instance clk_snoop altera_clock_bridge 
+2017.03.06.14:51:48 Info: set_instance_parameter_value clk_snoop EXPLICIT_CLOCK_RATE 0
+2017.03.06.14:51:48 Info: set_instance_parameter_value clk_snoop NUM_CLOCK_OUTPUTS 1
+2017.03.06.14:51:48 Info: add_interface cc_snoop_clk clock sink
+2017.03.06.14:51:48 Info: set_interface_property cc_snoop_clk EXPORT_OF clk_snoop.in_clk
+2017.03.06.14:51:48 Info: add_instance reset altera_reset_bridge 
+2017.03.06.14:51:48 Info: set_instance_parameter_value reset ACTIVE_LOW_RESET 1
+2017.03.06.14:51:48 Info: set_instance_parameter_value reset SYNCHRONOUS_EDGES deassert
+2017.03.06.14:51:48 Info: set_instance_parameter_value reset NUM_RESET_OUTPUTS 1
+2017.03.06.14:51:48 Info: add_interface clock_reset_reset reset sink
+2017.03.06.14:51:48 Info: set_interface_property clock_reset_reset EXPORT_OF reset.in_reset
+2017.03.06.14:51:48 Info: add_connection clk_1x.out_clk reset.clk
+2017.03.06.14:51:48 Info: add_instance calc_initpop_system calc_initpop_system 
+2017.03.06.14:51:48 Info: add_connection clk_1x.out_clk calc_initpop_system.clock_reset
+2017.03.06.14:51:48 Info: add_connection clk_2x.out_clk calc_initpop_system.clock_reset2x
+2017.03.06.14:51:48 Info: add_connection reset.out_reset calc_initpop_system.clock_reset_reset
+2017.03.06.14:51:48 Info: add_instance kernel_mem0 altera_avalon_mm_bridge 
+2017.03.06.14:51:48 Info: set_instance_parameter_value kernel_mem0 DATA_WIDTH 512
+2017.03.06.14:51:48 Info: set_instance_parameter_value kernel_mem0 SYMBOL_WIDTH 8
+2017.03.06.14:51:48 Info: set_instance_parameter_value kernel_mem0 ADDRESS_WIDTH 31
+2017.03.06.14:51:48 Info: set_instance_parameter_value kernel_mem0 USE_AUTO_ADDRESS_WIDTH 0
+2017.03.06.14:51:48 Info: set_instance_parameter_value kernel_mem0 ADDRESS_UNITS SYMBOLS
+2017.03.06.14:51:48 Info: set_instance_parameter_value kernel_mem0 MAX_BURST_SIZE 16
+2017.03.06.14:51:48 Info: set_instance_parameter_value kernel_mem0 MAX_PENDING_RESPONSES 64
+2017.03.06.14:51:48 Info: set_instance_parameter_value kernel_mem0 LINEWRAPBURSTS 0
+2017.03.06.14:51:48 Info: set_instance_parameter_value kernel_mem0 PIPELINE_COMMAND 1
+2017.03.06.14:51:48 Info: set_instance_parameter_value kernel_mem0 PIPELINE_RESPONSE 1
+2017.03.06.14:51:48 Info: add_connection clk_1x.out_clk kernel_mem0.clk
+2017.03.06.14:51:48 Info: add_connection reset.out_reset kernel_mem0.reset
+2017.03.06.14:51:48 Info: add_interface kernel_mem0 avalon slave
+2017.03.06.14:51:48 Info: set_interface_property kernel_mem0 EXPORT_OF kernel_mem0.m0
+2017.03.06.14:51:48 Info: add_connection calc_initpop_system.avm_memgmem0_DDR_port_0_0_rw kernel_mem0.s0
+2017.03.06.14:51:48 Info: add_instance kernel_irq altera_irq_bridge 
+2017.03.06.14:51:48 Info: set_instance_parameter_value kernel_irq IRQ_WIDTH 1
+2017.03.06.14:51:48 Info: set_instance_parameter_value kernel_irq IRQ_N 0
+2017.03.06.14:51:48 Info: add_interface kernel_irq irq sender
+2017.03.06.14:51:48 Info: set_interface_property kernel_irq EXPORT_OF kernel_irq.sender0_irq
+2017.03.06.14:51:48 Info: add_connection clk_1x.out_clk kernel_irq.clk
+2017.03.06.14:51:48 Info: add_connection reset.out_reset kernel_irq.clk_reset
+2017.03.06.14:51:48 Info: add_connection kernel_irq.receiver_irq calc_initpop_system.kernel_irq
+2017.03.06.14:51:48 Info: add_instance kernel_cra altera_avalon_mm_bridge 
+2017.03.06.14:51:48 Info: set_instance_parameter_value kernel_cra DATA_WIDTH 64
+2017.03.06.14:51:48 Info: set_instance_parameter_value kernel_cra SYMBOL_WIDTH 8
+2017.03.06.14:51:48 Info: set_instance_parameter_value kernel_cra ADDRESS_WIDTH 30
+2017.03.06.14:51:48 Info: set_instance_parameter_value kernel_cra USE_AUTO_ADDRESS_WIDTH 0
+2017.03.06.14:51:48 Info: set_instance_parameter_value kernel_cra ADDRESS_UNITS SYMBOLS
+2017.03.06.14:51:48 Info: set_instance_parameter_value kernel_cra MAX_BURST_SIZE 1
+2017.03.06.14:51:48 Info: set_instance_parameter_value kernel_cra MAX_PENDING_RESPONSES 1
+2017.03.06.14:51:48 Info: set_instance_parameter_value kernel_cra LINEWRAPBURSTS 0
+2017.03.06.14:51:48 Info: set_instance_parameter_value kernel_cra PIPELINE_COMMAND 0
+2017.03.06.14:51:48 Info: set_instance_parameter_value kernel_cra PIPELINE_RESPONSE 0
+2017.03.06.14:51:48 Info: add_connection clk_1x.out_clk kernel_cra.clk
+2017.03.06.14:51:48 Info: add_connection reset.out_reset kernel_cra.reset
+2017.03.06.14:51:48 Info: add_interface avs_kernel_cra avalon slave
+2017.03.06.14:51:48 Info: set_interface_property kernel_cra EXPORT_OF kernel_cra.s0
+2017.03.06.14:51:48 Info: add_instance cra_root cra_ring_root 
+2017.03.06.14:51:48 Info: set_instance_parameter_value cra_root DATA_W 64
+2017.03.06.14:51:48 Info: set_instance_parameter_value cra_root ADDR_W 5
+2017.03.06.14:51:48 Info: set_instance_parameter_value cra_root ID_W 2
+2017.03.06.14:51:48 Info: set_instance_parameter_value cra_root ROM_ENABLE 1
+2017.03.06.14:51:48 Info: add_connection clk_1x.out_clk cra_root.clock
+2017.03.06.14:51:48 Info: add_connection reset.out_reset cra_root.reset
+2017.03.06.14:51:48 Info: add_connection kernel_cra.m0 cra_root.cra_slave
+2017.03.06.14:51:48 Info: set_connection_parameter_value kernel_cra.m0/cra_root.cra_slave baseAddress 0x0
+2017.03.06.14:51:48 Info: add_instance cra_ring_rom cra_ring_rom 
+2017.03.06.14:51:48 Info: set_instance_parameter_value cra_ring_rom DATA_W 64
+2017.03.06.14:51:48 Info: set_instance_parameter_value cra_ring_rom RING_ADDR_W 5
+2017.03.06.14:51:48 Info: set_instance_parameter_value cra_ring_rom ID_W 2
+2017.03.06.14:51:48 Info: add_connection cra_root.ring_out cra_ring_rom.ring_in
+2017.03.06.14:51:48 Info: add_connection clk_1x.out_clk cra_ring_rom.clock
+2017.03.06.14:51:48 Info: add_connection reset.out_reset cra_ring_rom.reset
+2017.03.06.14:51:48 Info: add_instance avs_calc_initpop_cra_cra_ring cra_ring_node 
+2017.03.06.14:51:48 Info: set_instance_parameter_value avs_calc_initpop_cra_cra_ring DATA_W 64
+2017.03.06.14:51:48 Info: set_instance_parameter_value avs_calc_initpop_cra_cra_ring RING_ADDR_W 5
+2017.03.06.14:51:48 Info: set_instance_parameter_value avs_calc_initpop_cra_cra_ring CRA_ADDR_W 5
+2017.03.06.14:51:48 Info: set_instance_parameter_value avs_calc_initpop_cra_cra_ring ID_W 2
+2017.03.06.14:51:48 Info: set_instance_parameter_value avs_calc_initpop_cra_cra_ring ID 0
+2017.03.06.14:51:48 Info: add_connection clk_1x.out_clk avs_calc_initpop_cra_cra_ring.clock
+2017.03.06.14:51:48 Info: add_connection reset.out_reset avs_calc_initpop_cra_cra_ring.reset
+2017.03.06.14:51:48 Info: add_connection cra_ring_rom.ring_out avs_calc_initpop_cra_cra_ring.ring_in
+2017.03.06.14:51:48 Info: add_connection avs_calc_initpop_cra_cra_ring.cra_master calc_initpop_system.avs_calc_initpop_cra
+2017.03.06.14:51:48 Info: set_connection_parameter_value avs_calc_initpop_cra_cra_ring.cra_master/calc_initpop_system.avs_calc_initpop_cra baseAddress 0x0
+2017.03.06.14:51:48 Info: add_instance avs_gen_and_eval_newpops_cra_cra_ring cra_ring_node 
+2017.03.06.14:51:48 Info: set_instance_parameter_value avs_gen_and_eval_newpops_cra_cra_ring DATA_W 64
+2017.03.06.14:51:48 Info: set_instance_parameter_value avs_gen_and_eval_newpops_cra_cra_ring RING_ADDR_W 5
+2017.03.06.14:51:48 Info: set_instance_parameter_value avs_gen_and_eval_newpops_cra_cra_ring CRA_ADDR_W 5
+2017.03.06.14:51:48 Info: set_instance_parameter_value avs_gen_and_eval_newpops_cra_cra_ring ID_W 2
+2017.03.06.14:51:48 Info: set_instance_parameter_value avs_gen_and_eval_newpops_cra_cra_ring ID 1
+2017.03.06.14:51:48 Info: add_connection clk_1x.out_clk avs_gen_and_eval_newpops_cra_cra_ring.clock
+2017.03.06.14:51:48 Info: add_connection reset.out_reset avs_gen_and_eval_newpops_cra_cra_ring.reset
+2017.03.06.14:51:48 Info: add_connection avs_calc_initpop_cra_cra_ring.ring_out avs_gen_and_eval_newpops_cra_cra_ring.ring_in
+2017.03.06.14:51:48 Info: add_connection avs_gen_and_eval_newpops_cra_cra_ring.cra_master calc_initpop_system.avs_gen_and_eval_newpops_cra
+2017.03.06.14:51:48 Info: set_connection_parameter_value avs_gen_and_eval_newpops_cra_cra_ring.cra_master/calc_initpop_system.avs_gen_and_eval_newpops_cra baseAddress 0x0
+2017.03.06.14:51:48 Info: add_instance avs_perform_ls_cra_cra_ring cra_ring_node 
+2017.03.06.14:51:48 Info: set_instance_parameter_value avs_perform_ls_cra_cra_ring DATA_W 64
+2017.03.06.14:51:48 Info: set_instance_parameter_value avs_perform_ls_cra_cra_ring RING_ADDR_W 5
+2017.03.06.14:51:48 Info: set_instance_parameter_value avs_perform_ls_cra_cra_ring CRA_ADDR_W 5
+2017.03.06.14:51:48 Info: set_instance_parameter_value avs_perform_ls_cra_cra_ring ID_W 2
+2017.03.06.14:51:48 Info: set_instance_parameter_value avs_perform_ls_cra_cra_ring ID 2
+2017.03.06.14:51:48 Info: add_connection clk_1x.out_clk avs_perform_ls_cra_cra_ring.clock
+2017.03.06.14:51:48 Info: add_connection reset.out_reset avs_perform_ls_cra_cra_ring.reset
+2017.03.06.14:51:48 Info: add_connection avs_gen_and_eval_newpops_cra_cra_ring.ring_out avs_perform_ls_cra_cra_ring.ring_in
+2017.03.06.14:51:48 Info: add_connection avs_perform_ls_cra_cra_ring.cra_master calc_initpop_system.avs_perform_ls_cra
+2017.03.06.14:51:48 Info: set_connection_parameter_value avs_perform_ls_cra_cra_ring.cra_master/calc_initpop_system.avs_perform_ls_cra baseAddress 0x0
+2017.03.06.14:51:48 Info: add_instance avs_sum_evals_cra_cra_ring cra_ring_node 
+2017.03.06.14:51:48 Info: set_instance_parameter_value avs_sum_evals_cra_cra_ring DATA_W 64
+2017.03.06.14:51:48 Info: set_instance_parameter_value avs_sum_evals_cra_cra_ring RING_ADDR_W 5
+2017.03.06.14:51:48 Info: set_instance_parameter_value avs_sum_evals_cra_cra_ring CRA_ADDR_W 4
+2017.03.06.14:51:48 Info: set_instance_parameter_value avs_sum_evals_cra_cra_ring ID_W 2
+2017.03.06.14:51:48 Info: set_instance_parameter_value avs_sum_evals_cra_cra_ring ID 3
+2017.03.06.14:51:48 Info: add_connection clk_1x.out_clk avs_sum_evals_cra_cra_ring.clock
+2017.03.06.14:51:48 Info: add_connection reset.out_reset avs_sum_evals_cra_cra_ring.reset
+2017.03.06.14:51:48 Info: add_connection avs_perform_ls_cra_cra_ring.ring_out avs_sum_evals_cra_cra_ring.ring_in
+2017.03.06.14:51:48 Info: add_connection avs_sum_evals_cra_cra_ring.cra_master calc_initpop_system.avs_sum_evals_cra
+2017.03.06.14:51:48 Info: set_connection_parameter_value avs_sum_evals_cra_cra_ring.cra_master/calc_initpop_system.avs_sum_evals_cra baseAddress 0x0
+2017.03.06.14:51:48 Info: add_connection avs_sum_evals_cra_cra_ring.ring_out cra_root.ring_in
+2017.03.06.14:51:48 Info: add_instance acl_internal_snoop altera_avalon_st_adapter 
+2017.03.06.14:51:49 Info: set_instance_parameter_value acl_internal_snoop inBitsPerSymbol 31
+2017.03.06.14:51:49 Info: set_instance_parameter_value acl_internal_snoop inUsePackets 0
+2017.03.06.14:51:49 Info: set_instance_parameter_value acl_internal_snoop inDataWidth 31
+2017.03.06.14:51:49 Info: set_instance_parameter_value acl_internal_snoop inMaxChannel 0
+2017.03.06.14:51:49 Info: set_instance_parameter_value acl_internal_snoop inChannelWidth 0
+2017.03.06.14:51:49 Info: set_instance_parameter_value acl_internal_snoop inErrorWidth 0
+2017.03.06.14:51:49 Info: set_instance_parameter_value acl_internal_snoop inErrorDescriptor 
+2017.03.06.14:51:49 Info: set_instance_parameter_value acl_internal_snoop inUseEmptyPort 0
+2017.03.06.14:51:49 Info: set_instance_parameter_value acl_internal_snoop inUseValid 1
+2017.03.06.14:51:49 Info: set_instance_parameter_value acl_internal_snoop inUseReady 1
+2017.03.06.14:51:49 Info: set_instance_parameter_value acl_internal_snoop inReadyLatency 0
+2017.03.06.14:51:49 Info: set_instance_parameter_value acl_internal_snoop outDataWidth 31
+2017.03.06.14:51:49 Info: set_instance_parameter_value acl_internal_snoop outMaxChannel 0
+2017.03.06.14:51:49 Info: set_instance_parameter_value acl_internal_snoop outChannelWidth 0
+2017.03.06.14:51:49 Info: set_instance_parameter_value acl_internal_snoop outErrorWidth 0
+2017.03.06.14:51:49 Info: set_instance_parameter_value acl_internal_snoop outErrorDescriptor 
+2017.03.06.14:51:49 Info: set_instance_parameter_value acl_internal_snoop outUseEmptyPort 0
+2017.03.06.14:51:49 Info: set_instance_parameter_value acl_internal_snoop outUseValid 1
+2017.03.06.14:51:49 Info: set_instance_parameter_value acl_internal_snoop outUseReady 1
+2017.03.06.14:51:49 Info: set_instance_parameter_value acl_internal_snoop outReadyLatency 0
+2017.03.06.14:51:49 Info: add_connection clk_snoop.out_clk acl_internal_snoop.in_clk_0
+2017.03.06.14:51:49 Info: add_connection reset.out_reset acl_internal_snoop.in_rst_0
+2017.03.06.14:51:49 Info: add_interface cc_snoop avalon_streaming sink
+2017.03.06.14:51:49 Info: set_interface_property cc_snoop EXPORT_OF acl_internal_snoop.in_0
+2017.03.06.14:51:49 Info: add_instance sys_description_rom acl_rom_module 
+2017.03.06.14:51:49 Info: set_instance_parameter_value sys_description_rom INIT_FILE sys_description.hex
+2017.03.06.14:51:49 Info: set_instance_parameter_value sys_description_rom ADDRESS_WIDTH 4
+2017.03.06.14:51:49 Warning: add_connection: Extra arguments ignored clock
+2017.03.06.14:51:49 Info: add_connection clk_1x.out_clk sys_description_rom.clk0
+2017.03.06.14:51:49 Warning: add_connection: Extra arguments ignored reset
+2017.03.06.14:51:49 Info: add_connection reset.out_reset sys_description_rom.reset0
+2017.03.06.14:51:49 Info: set_instance_parameter_value sys_description_rom DATA_WIDTH 64
+2017.03.06.14:51:49 Warning: add_connection: Extra arguments ignored avalon
+2017.03.06.14:51:49 Info: add_connection cra_ring_rom.cra_master sys_description_rom.s0
+2017.03.06.14:51:49 Info: set_instance_parameter_value sys_description_rom ADDRESS_WIDTH 7
+2017.03.06.14:51:49 Info: set_instance_parameter_value cra_ring_rom ROM_W 7
+2017.03.06.14:51:49 Info: set_instance_parameter_value cra_ring_rom ROM_EXT_W 0
+2017.03.06.14:51:49 Info: set_instance_parameter_value cra_root ROM_EXT_W 0
+2017.03.06.14:51:49 Info: save_system kernel_system.qsys
+2017.03.06.14:51:50 Info: Replacing kernel_system.clk_1x with generic component
+2017.03.06.14:51:51 Info: Replacing kernel_system.clk_2x with generic component
+2017.03.06.14:52:00 Info: Replacing kernel_system.clk_snoop with generic component
+2017.03.06.14:52:01 Info: Replacing kernel_system.reset with generic component
+2017.03.06.14:52:04 Info: Replacing kernel_system.calc_initpop_system with generic component
+2017.03.06.14:52:04 Info: Replacing kernel_system.kernel_mem0 with generic component
+2017.03.06.14:52:10 Info: Replacing kernel_system.kernel_irq with generic component
+2017.03.06.14:52:11 Info: Replacing kernel_system.kernel_cra with generic component
+2017.03.06.14:52:12 Info: Replacing kernel_system.cra_root with generic component
+2017.03.06.14:52:12 Info: Replacing kernel_system.cra_ring_rom with generic component
+2017.03.06.14:52:12 Info: Replacing kernel_system.avs_calc_initpop_cra_cra_ring with generic component
+2017.03.06.14:52:15 Info: Replacing kernel_system.avs_gen_and_eval_newpops_cra_cra_ring with generic component
+2017.03.06.14:52:15 Info: Replacing kernel_system.avs_perform_ls_cra_cra_ring with generic component
+2017.03.06.14:52:19 Info: Replacing kernel_system.avs_sum_evals_cra_cra_ring with generic component
+2017.03.06.14:52:19 Info: Replacing kernel_system.acl_internal_snoop with generic component
+2017.03.06.14:52:22 Info: Replacing kernel_system.sys_description_rom with generic component
+2017.03.06.14:52:27 Info: Info: All modules have been converted to Generic Components.
+2017.03.06.14:53:00 Info: kernel_system: All Generic Component instances match their respective ip files.
+2017.03.06.14:53:02 Info: kernel_system_avs_gen_and_eval_newpops_cra_cra_ring: All Generic Component instances match their respective ip files.
+2017.03.06.14:53:02 Info: Saving generation log to /home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_avs_gen_and_eval_newpops_cra_cra_ring/kernel_system_avs_gen_and_eval_newpops_cra_cra_ring_generation.rpt
+2017.03.06.14:53:02 Info: Starting: Create HDL design files for synthesis
+2017.03.06.14:53:02 Info: qsys-generate /home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_avs_gen_and_eval_newpops_cra_cra_ring.ip --synthesis=VERILOG --output-directory=/home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_avs_gen_and_eval_newpops_cra_cra_ring --family="Arria 10" --part=10AX115S2F45I1SG
+2017.03.06.14:53:02 Info: kernel_system_avs_gen_and_eval_newpops_cra_cra_ring: "Transforming system: kernel_system_avs_gen_and_eval_newpops_cra_cra_ring"
+2017.03.06.14:53:02 Info: kernel_system_avs_gen_and_eval_newpops_cra_cra_ring: Running transform generation_view_transform
+2017.03.06.14:53:02 Info: kernel_system_avs_gen_and_eval_newpops_cra_cra_ring: Running transform generation_view_transform took 0.001s
+2017.03.06.14:53:02 Info: avs_gen_and_eval_newpops_cra_cra_ring: Running transform generation_view_transform
+2017.03.06.14:53:02 Info: avs_gen_and_eval_newpops_cra_cra_ring: Running transform generation_view_transform took 0.000s
+2017.03.06.14:53:02 Info: kernel_system_avs_gen_and_eval_newpops_cra_cra_ring: Running transform interconnect_transform_chooser
+2017.03.06.14:53:02 Info: kernel_system_avs_gen_and_eval_newpops_cra_cra_ring: Running transform interconnect_transform_chooser took 0.043s
+2017.03.06.14:53:02 Info: kernel_system_avs_gen_and_eval_newpops_cra_cra_ring: "Naming system components in system: kernel_system_avs_gen_and_eval_newpops_cra_cra_ring"
+2017.03.06.14:53:02 Info: kernel_system_avs_gen_and_eval_newpops_cra_cra_ring: "Processing generation queue"
+2017.03.06.14:53:02 Info: kernel_system_avs_gen_and_eval_newpops_cra_cra_ring: "Generating: kernel_system_avs_gen_and_eval_newpops_cra_cra_ring"
+2017.03.06.14:53:02 Info: kernel_system_avs_gen_and_eval_newpops_cra_cra_ring: "Generating: cra_ring_node"
+2017.03.06.14:53:03 Info: kernel_system_avs_gen_and_eval_newpops_cra_cra_ring: Done "kernel_system_avs_gen_and_eval_newpops_cra_cra_ring" with 2 modules, 2 files
+2017.03.06.14:53:03 Info: qsys-generate succeeded.
+2017.03.06.14:53:03 Info: Finished: Create HDL design files for synthesis
+2017.03.06.14:53:03 Info: 
+2017.03.06.14:53:03 Info: kernel_system_sys_description_rom: All Generic Component instances match their respective ip files.
+2017.03.06.14:53:03 Info: Saving generation log to /home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_sys_description_rom/kernel_system_sys_description_rom_generation.rpt
+2017.03.06.14:53:03 Info: Starting: Create HDL design files for synthesis
+2017.03.06.14:53:03 Info: qsys-generate /home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_sys_description_rom.ip --synthesis=VERILOG --output-directory=/home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_sys_description_rom --family="Arria 10" --part=10AX115S2F45I1SG
+2017.03.06.14:53:03 Info: kernel_system_sys_description_rom: "Transforming system: kernel_system_sys_description_rom"
+2017.03.06.14:53:03 Info: kernel_system_sys_description_rom: Running transform generation_view_transform
+2017.03.06.14:53:03 Info: kernel_system_sys_description_rom: Running transform generation_view_transform took 0.000s
+2017.03.06.14:53:03 Info: sys_description_rom: Running transform generation_view_transform
+2017.03.06.14:53:03 Info: sys_description_rom: Running transform generation_view_transform took 0.000s
+2017.03.06.14:53:03 Info: kernel_system_sys_description_rom: Running transform interconnect_transform_chooser
+2017.03.06.14:53:03 Info: kernel_system_sys_description_rom: Running transform interconnect_transform_chooser took 0.008s
+2017.03.06.14:53:03 Info: kernel_system_sys_description_rom: "Naming system components in system: kernel_system_sys_description_rom"
+2017.03.06.14:53:03 Info: kernel_system_sys_description_rom: "Processing generation queue"
+2017.03.06.14:53:03 Info: kernel_system_sys_description_rom: "Generating: kernel_system_sys_description_rom"
+2017.03.06.14:53:03 Info: kernel_system_sys_description_rom: "Generating: acl_rom_module"
+2017.03.06.14:53:03 Info: kernel_system_sys_description_rom: Done "kernel_system_sys_description_rom" with 2 modules, 2 files
+2017.03.06.14:53:03 Info: qsys-generate succeeded.
+2017.03.06.14:53:03 Info: Finished: Create HDL design files for synthesis
+2017.03.06.14:53:03 Info: 
+2017.03.06.14:53:04 Info: kernel_system_avs_perform_ls_cra_cra_ring: All Generic Component instances match their respective ip files.
+2017.03.06.14:53:04 Info: Saving generation log to /home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_avs_perform_ls_cra_cra_ring/kernel_system_avs_perform_ls_cra_cra_ring_generation.rpt
+2017.03.06.14:53:04 Info: Starting: Create HDL design files for synthesis
+2017.03.06.14:53:04 Info: qsys-generate /home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_avs_perform_ls_cra_cra_ring.ip --synthesis=VERILOG --output-directory=/home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_avs_perform_ls_cra_cra_ring --family="Arria 10" --part=10AX115S2F45I1SG
+2017.03.06.14:53:04 Info: kernel_system_avs_perform_ls_cra_cra_ring: "Transforming system: kernel_system_avs_perform_ls_cra_cra_ring"
+2017.03.06.14:53:04 Info: kernel_system_avs_perform_ls_cra_cra_ring: Running transform generation_view_transform
+2017.03.06.14:53:04 Info: kernel_system_avs_perform_ls_cra_cra_ring: Running transform generation_view_transform took 0.000s
+2017.03.06.14:53:04 Info: avs_perform_ls_cra_cra_ring: Running transform generation_view_transform
+2017.03.06.14:53:04 Info: avs_perform_ls_cra_cra_ring: Running transform generation_view_transform took 0.001s
+2017.03.06.14:53:04 Info: kernel_system_avs_perform_ls_cra_cra_ring: Running transform interconnect_transform_chooser
+2017.03.06.14:53:04 Info: kernel_system_avs_perform_ls_cra_cra_ring: Running transform interconnect_transform_chooser took 0.008s
+2017.03.06.14:53:04 Info: kernel_system_avs_perform_ls_cra_cra_ring: "Naming system components in system: kernel_system_avs_perform_ls_cra_cra_ring"
+2017.03.06.14:53:04 Info: kernel_system_avs_perform_ls_cra_cra_ring: "Processing generation queue"
+2017.03.06.14:53:04 Info: kernel_system_avs_perform_ls_cra_cra_ring: "Generating: kernel_system_avs_perform_ls_cra_cra_ring"
+2017.03.06.14:53:04 Info: kernel_system_avs_perform_ls_cra_cra_ring: "Generating: cra_ring_node"
+2017.03.06.14:53:04 Info: kernel_system_avs_perform_ls_cra_cra_ring: Done "kernel_system_avs_perform_ls_cra_cra_ring" with 2 modules, 2 files
+2017.03.06.14:53:04 Info: qsys-generate succeeded.
+2017.03.06.14:53:04 Info: Finished: Create HDL design files for synthesis
+2017.03.06.14:53:04 Info: 
+2017.03.06.14:53:05 Info: kernel_system_kernel_irq: All Generic Component instances match their respective ip files.
+2017.03.06.14:53:05 Info: Saving generation log to /home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_kernel_irq/kernel_system_kernel_irq_generation.rpt
+2017.03.06.14:53:05 Info: Starting: Create HDL design files for synthesis
+2017.03.06.14:53:05 Info: qsys-generate /home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_kernel_irq.ip --synthesis=VERILOG --output-directory=/home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_kernel_irq --family="Arria 10" --part=10AX115S2F45I1SG
+2017.03.06.14:53:05 Info: kernel_system_kernel_irq: "Transforming system: kernel_system_kernel_irq"
+2017.03.06.14:53:05 Info: kernel_system_kernel_irq: Running transform generation_view_transform
+2017.03.06.14:53:05 Info: kernel_system_kernel_irq: Running transform generation_view_transform took 0.000s
+2017.03.06.14:53:05 Info: kernel_irq: Running transform generation_view_transform
+2017.03.06.14:53:05 Info: kernel_irq: Running transform generation_view_transform took 0.000s
+2017.03.06.14:53:05 Info: kernel_system_kernel_irq: Running transform interconnect_transform_chooser
+2017.03.06.14:53:05 Info: kernel_system_kernel_irq: Running transform interconnect_transform_chooser took 0.008s
+2017.03.06.14:53:05 Info: kernel_system_kernel_irq: "Naming system components in system: kernel_system_kernel_irq"
+2017.03.06.14:53:05 Info: kernel_system_kernel_irq: "Processing generation queue"
+2017.03.06.14:53:05 Info: kernel_system_kernel_irq: "Generating: kernel_system_kernel_irq"
+2017.03.06.14:53:05 Info: kernel_system_kernel_irq: "Generating: altera_irq_bridge"
+2017.03.06.14:53:05 Info: kernel_system_kernel_irq: Done "kernel_system_kernel_irq" with 2 modules, 2 files
+2017.03.06.14:53:05 Info: qsys-generate succeeded.
+2017.03.06.14:53:05 Info: Finished: Create HDL design files for synthesis
+2017.03.06.14:53:05 Info: 
+2017.03.06.14:53:05 Info: kernel_system_clk_snoop: All Generic Component instances match their respective ip files.
+2017.03.06.14:53:05 Info: Saving generation log to /home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_clk_snoop/kernel_system_clk_snoop_generation.rpt
+2017.03.06.14:53:05 Info: Starting: Create HDL design files for synthesis
+2017.03.06.14:53:05 Info: qsys-generate /home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_clk_snoop.ip --synthesis=VERILOG --output-directory=/home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_clk_snoop --family="Arria 10" --part=10AX115S2F45I1SG
+2017.03.06.14:53:07 Info: kernel_system_clk_snoop: "Transforming system: kernel_system_clk_snoop"
+2017.03.06.14:53:07 Info: kernel_system_clk_snoop: Running transform generation_view_transform
+2017.03.06.14:53:07 Info: kernel_system_clk_snoop: Running transform generation_view_transform took 0.000s
+2017.03.06.14:53:07 Info: clk_snoop: Running transform generation_view_transform
+2017.03.06.14:53:07 Info: clk_snoop: Running transform generation_view_transform took 0.000s
+2017.03.06.14:53:07 Info: kernel_system_clk_snoop: Running transform interconnect_transform_chooser
+2017.03.06.14:53:07 Info: kernel_system_clk_snoop: Running transform interconnect_transform_chooser took 0.008s
+2017.03.06.14:53:07 Info: kernel_system_clk_snoop: "Naming system components in system: kernel_system_clk_snoop"
+2017.03.06.14:53:07 Info: kernel_system_clk_snoop: "Processing generation queue"
+2017.03.06.14:53:07 Info: kernel_system_clk_snoop: "Generating: kernel_system_clk_snoop"
+2017.03.06.14:53:07 Info: kernel_system_clk_snoop: Done "kernel_system_clk_snoop" with 1 modules, 1 files
+2017.03.06.14:53:07 Info: qsys-generate succeeded.
+2017.03.06.14:53:07 Info: Finished: Create HDL design files for synthesis
+2017.03.06.14:53:07 Info: 
+2017.03.06.14:53:07 Info: kernel_system_avs_calc_initpop_cra_cra_ring: All Generic Component instances match their respective ip files.
+2017.03.06.14:53:07 Info: Saving generation log to /home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_avs_calc_initpop_cra_cra_ring/kernel_system_avs_calc_initpop_cra_cra_ring_generation.rpt
+2017.03.06.14:53:07 Info: Starting: Create HDL design files for synthesis
+2017.03.06.14:53:07 Info: qsys-generate /home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_avs_calc_initpop_cra_cra_ring.ip --synthesis=VERILOG --output-directory=/home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_avs_calc_initpop_cra_cra_ring --family="Arria 10" --part=10AX115S2F45I1SG
+2017.03.06.14:53:07 Info: kernel_system_avs_calc_initpop_cra_cra_ring: "Transforming system: kernel_system_avs_calc_initpop_cra_cra_ring"
+2017.03.06.14:53:07 Info: kernel_system_avs_calc_initpop_cra_cra_ring: Running transform generation_view_transform
+2017.03.06.14:53:07 Info: kernel_system_avs_calc_initpop_cra_cra_ring: Running transform generation_view_transform took 0.000s
+2017.03.06.14:53:07 Info: avs_calc_initpop_cra_cra_ring: Running transform generation_view_transform
+2017.03.06.14:53:07 Info: avs_calc_initpop_cra_cra_ring: Running transform generation_view_transform took 0.000s
+2017.03.06.14:53:07 Info: kernel_system_avs_calc_initpop_cra_cra_ring: Running transform interconnect_transform_chooser
+2017.03.06.14:53:07 Info: kernel_system_avs_calc_initpop_cra_cra_ring: Running transform interconnect_transform_chooser took 0.008s
+2017.03.06.14:53:07 Info: kernel_system_avs_calc_initpop_cra_cra_ring: "Naming system components in system: kernel_system_avs_calc_initpop_cra_cra_ring"
+2017.03.06.14:53:07 Info: kernel_system_avs_calc_initpop_cra_cra_ring: "Processing generation queue"
+2017.03.06.14:53:07 Info: kernel_system_avs_calc_initpop_cra_cra_ring: "Generating: kernel_system_avs_calc_initpop_cra_cra_ring"
+2017.03.06.14:53:07 Info: kernel_system_avs_calc_initpop_cra_cra_ring: "Generating: cra_ring_node"
+2017.03.06.14:53:07 Info: kernel_system_avs_calc_initpop_cra_cra_ring: Done "kernel_system_avs_calc_initpop_cra_cra_ring" with 2 modules, 2 files
+2017.03.06.14:53:07 Info: qsys-generate succeeded.
+2017.03.06.14:53:07 Info: Finished: Create HDL design files for synthesis
+2017.03.06.14:53:07 Info: 
+2017.03.06.14:53:08 Info: kernel_system_kernel_mem0: All Generic Component instances match their respective ip files.
+2017.03.06.14:53:08 Info: Saving generation log to /home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_kernel_mem0/kernel_system_kernel_mem0_generation.rpt
+2017.03.06.14:53:08 Info: Starting: Create HDL design files for synthesis
+2017.03.06.14:53:08 Info: qsys-generate /home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_kernel_mem0.ip --synthesis=VERILOG --output-directory=/home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_kernel_mem0 --family="Arria 10" --part=10AX115S2F45I1SG
+2017.03.06.14:53:08 Info: kernel_system_kernel_mem0: "Transforming system: kernel_system_kernel_mem0"
+2017.03.06.14:53:08 Info: kernel_system_kernel_mem0: Running transform generation_view_transform
+2017.03.06.14:53:08 Info: kernel_system_kernel_mem0: Running transform generation_view_transform took 0.000s
+2017.03.06.14:53:08 Info: kernel_mem0: Running transform generation_view_transform
+2017.03.06.14:53:08 Info: kernel_mem0: Running transform generation_view_transform took 0.000s
+2017.03.06.14:53:08 Info: kernel_system_kernel_mem0: Running transform interconnect_transform_chooser
+2017.03.06.14:53:08 Info: kernel_system_kernel_mem0: Running transform interconnect_transform_chooser took 0.008s
+2017.03.06.14:53:08 Info: kernel_system_kernel_mem0: "Naming system components in system: kernel_system_kernel_mem0"
+2017.03.06.14:53:08 Info: kernel_system_kernel_mem0: "Processing generation queue"
+2017.03.06.14:53:08 Info: kernel_system_kernel_mem0: "Generating: kernel_system_kernel_mem0"
+2017.03.06.14:53:08 Info: kernel_system_kernel_mem0: "Generating: altera_avalon_mm_bridge"
+2017.03.06.14:53:08 Info: kernel_system_kernel_mem0: Done "kernel_system_kernel_mem0" with 2 modules, 2 files
+2017.03.06.14:53:08 Info: qsys-generate succeeded.
+2017.03.06.14:53:08 Info: Finished: Create HDL design files for synthesis
+2017.03.06.14:53:08 Info: 
+2017.03.06.14:53:08 Info: kernel_system_cra_root: All Generic Component instances match their respective ip files.
+2017.03.06.14:53:10 Info: Saving generation log to /home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_cra_root/kernel_system_cra_root_generation.rpt
+2017.03.06.14:53:10 Info: Starting: Create HDL design files for synthesis
+2017.03.06.14:53:10 Info: qsys-generate /home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_cra_root.ip --synthesis=VERILOG --output-directory=/home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_cra_root --family="Arria 10" --part=10AX115S2F45I1SG
+2017.03.06.14:53:10 Info: kernel_system_cra_root: "Transforming system: kernel_system_cra_root"
+2017.03.06.14:53:10 Info: kernel_system_cra_root: Running transform generation_view_transform
+2017.03.06.14:53:10 Info: kernel_system_cra_root: Running transform generation_view_transform took 0.000s
+2017.03.06.14:53:10 Info: cra_root: Running transform generation_view_transform
+2017.03.06.14:53:10 Info: cra_root: Running transform generation_view_transform took 0.000s
+2017.03.06.14:53:10 Info: kernel_system_cra_root: Running transform interconnect_transform_chooser
+2017.03.06.14:53:10 Info: kernel_system_cra_root: Running transform interconnect_transform_chooser took 0.009s
+2017.03.06.14:53:10 Info: kernel_system_cra_root: "Naming system components in system: kernel_system_cra_root"
+2017.03.06.14:53:10 Info: kernel_system_cra_root: "Processing generation queue"
+2017.03.06.14:53:10 Info: kernel_system_cra_root: "Generating: kernel_system_cra_root"
+2017.03.06.14:53:10 Info: kernel_system_cra_root: "Generating: cra_ring_root"
+2017.03.06.14:53:10 Info: kernel_system_cra_root: Done "kernel_system_cra_root" with 2 modules, 2 files
+2017.03.06.14:53:10 Info: qsys-generate succeeded.
+2017.03.06.14:53:10 Info: Finished: Create HDL design files for synthesis
+2017.03.06.14:53:10 Info: 
+2017.03.06.14:53:10 Info: kernel_system_kernel_cra: All Generic Component instances match their respective ip files.
+2017.03.06.14:53:10 Info: Saving generation log to /home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_kernel_cra/kernel_system_kernel_cra_generation.rpt
+2017.03.06.14:53:10 Info: Starting: Create HDL design files for synthesis
+2017.03.06.14:53:10 Info: qsys-generate /home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_kernel_cra.ip --synthesis=VERILOG --output-directory=/home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_kernel_cra --family="Arria 10" --part=10AX115S2F45I1SG
+2017.03.06.14:53:11 Info: kernel_system_kernel_cra: "Transforming system: kernel_system_kernel_cra"
+2017.03.06.14:53:11 Info: kernel_system_kernel_cra: Running transform generation_view_transform
+2017.03.06.14:53:11 Info: kernel_system_kernel_cra: Running transform generation_view_transform took 0.000s
+2017.03.06.14:53:11 Info: kernel_cra: Running transform generation_view_transform
+2017.03.06.14:53:11 Info: kernel_cra: Running transform generation_view_transform took 0.000s
+2017.03.06.14:53:11 Info: kernel_system_kernel_cra: Running transform interconnect_transform_chooser
+2017.03.06.14:53:11 Info: kernel_system_kernel_cra: Running transform interconnect_transform_chooser took 0.008s
+2017.03.06.14:53:11 Info: kernel_system_kernel_cra: "Naming system components in system: kernel_system_kernel_cra"
+2017.03.06.14:53:11 Info: kernel_system_kernel_cra: "Processing generation queue"
+2017.03.06.14:53:11 Info: kernel_system_kernel_cra: "Generating: kernel_system_kernel_cra"
+2017.03.06.14:53:11 Info: kernel_system_kernel_cra: "Generating: altera_avalon_mm_bridge"
+2017.03.06.14:53:11 Info: kernel_system_kernel_cra: Done "kernel_system_kernel_cra" with 2 modules, 2 files
+2017.03.06.14:53:11 Info: qsys-generate succeeded.
+2017.03.06.14:53:11 Info: Finished: Create HDL design files for synthesis
+2017.03.06.14:53:11 Info: 
+2017.03.06.14:53:11 Info: kernel_system_acl_internal_snoop: All Generic Component instances match their respective ip files.
+2017.03.06.14:53:11 Info: Saving generation log to /home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_acl_internal_snoop/kernel_system_acl_internal_snoop_generation.rpt
+2017.03.06.14:53:11 Info: Starting: Create HDL design files for synthesis
+2017.03.06.14:53:11 Info: qsys-generate /home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_acl_internal_snoop.ip --synthesis=VERILOG --output-directory=/home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_acl_internal_snoop --family="Arria 10" --part=10AX115S2F45I1SG
+2017.03.06.14:53:11 Warning: kernel_system_acl_internal_snoop.acl_internal_snoop: No adaptation is needed; a pass through bridge is inserted
+2017.03.06.14:53:11 Info: kernel_system_acl_internal_snoop.acl_internal_snoop: Inserting channel_adapter: pass_through_0
+2017.03.06.14:53:11 Info: kernel_system_acl_internal_snoop: "Transforming system: kernel_system_acl_internal_snoop"
+2017.03.06.14:53:11 Info: kernel_system_acl_internal_snoop: Running transform generation_view_transform
+2017.03.06.14:53:11 Info: kernel_system_acl_internal_snoop: Running transform generation_view_transform took 0.000s
+2017.03.06.14:53:11 Info: acl_internal_snoop: Running transform generation_view_transform
+2017.03.06.14:53:11 Info: acl_internal_snoop: Running transform generation_view_transform took 0.000s
+2017.03.06.14:53:11 Info: clk_bridge_0: Running transform generation_view_transform
+2017.03.06.14:53:11 Info: clk_bridge_0: Running transform generation_view_transform took 0.000s
+2017.03.06.14:53:11 Info: rst_bridge_0: Running transform generation_view_transform
+2017.03.06.14:53:11 Info: rst_bridge_0: Running transform generation_view_transform took 0.000s
+2017.03.06.14:53:11 Info: pass_through_0: Running transform generation_view_transform
+2017.03.06.14:53:11 Info: pass_through_0: Running transform generation_view_transform took 0.000s
+2017.03.06.14:53:11 Info: kernel_system_acl_internal_snoop: Running transform interconnect_transform_chooser
+2017.03.06.14:53:11 Info: kernel_system_acl_internal_snoop: Running transform interconnect_transform_chooser took 0.008s
+2017.03.06.14:53:11 Info: acl_internal_snoop: Running transform interconnect_transform_chooser
+2017.03.06.14:53:11 Info: acl_internal_snoop: Running transform interconnect_transform_chooser took 0.008s
+2017.03.06.14:53:11 Info: kernel_system_acl_internal_snoop: "Naming system components in system: kernel_system_acl_internal_snoop"
+2017.03.06.14:53:11 Info: kernel_system_acl_internal_snoop: "Processing generation queue"
+2017.03.06.14:53:11 Info: kernel_system_acl_internal_snoop: "Generating: kernel_system_acl_internal_snoop"
+2017.03.06.14:53:11 Info: kernel_system_acl_internal_snoop: "Generating: kernel_system_acl_internal_snoop_altera_avalon_st_adapter_161_2r3rbpy"
+2017.03.06.14:53:11 Info: kernel_system_acl_internal_snoop: "Generating: kernel_system_acl_internal_snoop_channel_adapter_161_7lzkkci"
+2017.03.06.14:53:11 Info: kernel_system_acl_internal_snoop: Done "kernel_system_acl_internal_snoop" with 3 modules, 3 files
+2017.03.06.14:53:11 Info: qsys-generate succeeded.
+2017.03.06.14:53:11 Info: Finished: Create HDL design files for synthesis
+2017.03.06.14:53:11 Info: 
+2017.03.06.14:53:12 Info: kernel_system_cra_ring_rom: All Generic Component instances match their respective ip files.
+2017.03.06.14:53:12 Info: Saving generation log to /home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_cra_ring_rom/kernel_system_cra_ring_rom_generation.rpt
+2017.03.06.14:53:12 Info: Starting: Create HDL design files for synthesis
+2017.03.06.14:53:12 Info: qsys-generate /home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_cra_ring_rom.ip --synthesis=VERILOG --output-directory=/home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_cra_ring_rom --family="Arria 10" --part=10AX115S2F45I1SG
+2017.03.06.14:53:12 Info: kernel_system_cra_ring_rom: "Transforming system: kernel_system_cra_ring_rom"
+2017.03.06.14:53:12 Info: kernel_system_cra_ring_rom: Running transform generation_view_transform
+2017.03.06.14:53:12 Info: kernel_system_cra_ring_rom: Running transform generation_view_transform took 0.000s
+2017.03.06.14:53:12 Info: cra_ring_rom: Running transform generation_view_transform
+2017.03.06.14:53:12 Info: cra_ring_rom: Running transform generation_view_transform took 0.000s
+2017.03.06.14:53:12 Info: kernel_system_cra_ring_rom: Running transform interconnect_transform_chooser
+2017.03.06.14:53:12 Info: kernel_system_cra_ring_rom: Running transform interconnect_transform_chooser took 0.008s
+2017.03.06.14:53:12 Info: kernel_system_cra_ring_rom: "Naming system components in system: kernel_system_cra_ring_rom"
+2017.03.06.14:53:12 Info: kernel_system_cra_ring_rom: "Processing generation queue"
+2017.03.06.14:53:12 Info: kernel_system_cra_ring_rom: "Generating: kernel_system_cra_ring_rom"
+2017.03.06.14:53:12 Info: kernel_system_cra_ring_rom: "Generating: cra_ring_rom"
+2017.03.06.14:53:12 Info: kernel_system_cra_ring_rom: Done "kernel_system_cra_ring_rom" with 2 modules, 2 files
+2017.03.06.14:53:12 Info: qsys-generate succeeded.
+2017.03.06.14:53:12 Info: Finished: Create HDL design files for synthesis
+2017.03.06.14:53:12 Info: 
+2017.03.06.14:53:12 Info: kernel_system_clk_1x: All Generic Component instances match their respective ip files.
+2017.03.06.14:53:12 Info: Saving generation log to /home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_clk_1x/kernel_system_clk_1x_generation.rpt
+2017.03.06.14:53:12 Info: Starting: Create HDL design files for synthesis
+2017.03.06.14:53:12 Info: qsys-generate /home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_clk_1x.ip --synthesis=VERILOG --output-directory=/home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_clk_1x --family="Arria 10" --part=10AX115S2F45I1SG
+2017.03.06.14:53:12 Info: kernel_system_clk_1x: "Transforming system: kernel_system_clk_1x"
+2017.03.06.14:53:12 Info: kernel_system_clk_1x: Running transform generation_view_transform
+2017.03.06.14:53:12 Info: kernel_system_clk_1x: Running transform generation_view_transform took 0.000s
+2017.03.06.14:53:12 Info: clk_1x: Running transform generation_view_transform
+2017.03.06.14:53:12 Info: clk_1x: Running transform generation_view_transform took 0.000s
+2017.03.06.14:53:12 Info: kernel_system_clk_1x: Running transform interconnect_transform_chooser
+2017.03.06.14:53:12 Info: kernel_system_clk_1x: Running transform interconnect_transform_chooser took 0.008s
+2017.03.06.14:53:12 Info: kernel_system_clk_1x: "Naming system components in system: kernel_system_clk_1x"
+2017.03.06.14:53:12 Info: kernel_system_clk_1x: "Processing generation queue"
+2017.03.06.14:53:12 Info: kernel_system_clk_1x: "Generating: kernel_system_clk_1x"
+2017.03.06.14:53:12 Info: kernel_system_clk_1x: Done "kernel_system_clk_1x" with 1 modules, 1 files
+2017.03.06.14:53:12 Info: qsys-generate succeeded.
+2017.03.06.14:53:12 Info: Finished: Create HDL design files for synthesis
+2017.03.06.14:53:12 Info: 
+2017.03.06.14:53:13 Info: kernel_system_reset: All Generic Component instances match their respective ip files.
+2017.03.06.14:53:13 Info: Saving generation log to /home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_reset/kernel_system_reset_generation.rpt
+2017.03.06.14:53:13 Info: Starting: Create HDL design files for synthesis
+2017.03.06.14:53:13 Info: qsys-generate /home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_reset.ip --synthesis=VERILOG --output-directory=/home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_reset --family="Arria 10" --part=10AX115S2F45I1SG
+2017.03.06.14:53:13 Info: kernel_system_reset: "Transforming system: kernel_system_reset"
+2017.03.06.14:53:13 Info: kernel_system_reset: Running transform generation_view_transform
+2017.03.06.14:53:13 Info: kernel_system_reset: Running transform generation_view_transform took 0.000s
+2017.03.06.14:53:13 Info: reset: Running transform generation_view_transform
+2017.03.06.14:53:13 Info: reset: Running transform generation_view_transform took 0.000s
+2017.03.06.14:53:13 Info: kernel_system_reset: Running transform interconnect_transform_chooser
+2017.03.06.14:53:13 Info: kernel_system_reset: Running transform interconnect_transform_chooser took 0.008s
+2017.03.06.14:53:13 Info: kernel_system_reset: "Naming system components in system: kernel_system_reset"
+2017.03.06.14:53:13 Info: kernel_system_reset: "Processing generation queue"
+2017.03.06.14:53:13 Info: kernel_system_reset: "Generating: kernel_system_reset"
+2017.03.06.14:53:13 Info: kernel_system_reset: Done "kernel_system_reset" with 1 modules, 1 files
+2017.03.06.14:53:13 Info: qsys-generate succeeded.
+2017.03.06.14:53:13 Info: Finished: Create HDL design files for synthesis
+2017.03.06.14:53:13 Info: 
+2017.03.06.14:53:13 Info: kernel_system_avs_sum_evals_cra_cra_ring: All Generic Component instances match their respective ip files.
+2017.03.06.14:53:13 Info: Saving generation log to /home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_avs_sum_evals_cra_cra_ring/kernel_system_avs_sum_evals_cra_cra_ring_generation.rpt
+2017.03.06.14:53:13 Info: Starting: Create HDL design files for synthesis
+2017.03.06.14:53:13 Info: qsys-generate /home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_avs_sum_evals_cra_cra_ring.ip --synthesis=VERILOG --output-directory=/home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_avs_sum_evals_cra_cra_ring --family="Arria 10" --part=10AX115S2F45I1SG
+2017.03.06.14:53:13 Info: kernel_system_avs_sum_evals_cra_cra_ring: "Transforming system: kernel_system_avs_sum_evals_cra_cra_ring"
+2017.03.06.14:53:13 Info: kernel_system_avs_sum_evals_cra_cra_ring: Running transform generation_view_transform
+2017.03.06.14:53:13 Info: kernel_system_avs_sum_evals_cra_cra_ring: Running transform generation_view_transform took 0.000s
+2017.03.06.14:53:13 Info: avs_sum_evals_cra_cra_ring: Running transform generation_view_transform
+2017.03.06.14:53:13 Info: avs_sum_evals_cra_cra_ring: Running transform generation_view_transform took 0.000s
+2017.03.06.14:53:13 Info: kernel_system_avs_sum_evals_cra_cra_ring: Running transform interconnect_transform_chooser
+2017.03.06.14:53:13 Info: kernel_system_avs_sum_evals_cra_cra_ring: Running transform interconnect_transform_chooser took 0.008s
+2017.03.06.14:53:13 Info: kernel_system_avs_sum_evals_cra_cra_ring: "Naming system components in system: kernel_system_avs_sum_evals_cra_cra_ring"
+2017.03.06.14:53:13 Info: kernel_system_avs_sum_evals_cra_cra_ring: "Processing generation queue"
+2017.03.06.14:53:13 Info: kernel_system_avs_sum_evals_cra_cra_ring: "Generating: kernel_system_avs_sum_evals_cra_cra_ring"
+2017.03.06.14:53:13 Info: kernel_system_avs_sum_evals_cra_cra_ring: "Generating: cra_ring_node"
+2017.03.06.14:53:13 Info: kernel_system_avs_sum_evals_cra_cra_ring: Done "kernel_system_avs_sum_evals_cra_cra_ring" with 2 modules, 2 files
+2017.03.06.14:53:13 Info: qsys-generate succeeded.
+2017.03.06.14:53:13 Info: Finished: Create HDL design files for synthesis
+2017.03.06.14:53:13 Info: 
+2017.03.06.14:53:14 Info: kernel_system_calc_initpop_system: All Generic Component instances match their respective ip files.
+2017.03.06.14:53:14 Info: Saving generation log to /home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_calc_initpop_system/kernel_system_calc_initpop_system_generation.rpt
+2017.03.06.14:53:14 Info: Starting: Create HDL design files for synthesis
+2017.03.06.14:53:14 Info: qsys-generate /home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_calc_initpop_system.ip --synthesis=VERILOG --output-directory=/home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_calc_initpop_system --family="Arria 10" --part=10AX115S2F45I1SG
+2017.03.06.14:53:14 Info: kernel_system_calc_initpop_system: "Transforming system: kernel_system_calc_initpop_system"
+2017.03.06.14:53:14 Info: kernel_system_calc_initpop_system: Running transform generation_view_transform
+2017.03.06.14:53:14 Info: kernel_system_calc_initpop_system: Running transform generation_view_transform took 0.000s
+2017.03.06.14:53:14 Info: calc_initpop_system: Running transform generation_view_transform
+2017.03.06.14:53:14 Info: calc_initpop_system: Running transform generation_view_transform took 0.000s
+2017.03.06.14:53:14 Info: kernel_system_calc_initpop_system: Running transform interconnect_transform_chooser
+2017.03.06.14:53:14 Info: kernel_system_calc_initpop_system: Running transform interconnect_transform_chooser took 0.009s
+2017.03.06.14:53:14 Info: kernel_system_calc_initpop_system: "Naming system components in system: kernel_system_calc_initpop_system"
+2017.03.06.14:53:14 Info: kernel_system_calc_initpop_system: "Processing generation queue"
+2017.03.06.14:53:14 Info: kernel_system_calc_initpop_system: "Generating: kernel_system_calc_initpop_system"
+2017.03.06.14:53:14 Info: kernel_system_calc_initpop_system: "Generating: calc_initpop_system"
+2017.03.06.14:53:16 Info: kernel_system_calc_initpop_system: Done "kernel_system_calc_initpop_system" with 2 modules, 112 files
+2017.03.06.14:53:16 Info: qsys-generate succeeded.
+2017.03.06.14:53:16 Info: Finished: Create HDL design files for synthesis
+2017.03.06.14:53:16 Info: 
+2017.03.06.14:53:17 Info: kernel_system_clk_2x: All Generic Component instances match their respective ip files.
+2017.03.06.14:53:17 Info: Saving generation log to /home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_clk_2x/kernel_system_clk_2x_generation.rpt
+2017.03.06.14:53:17 Info: Starting: Create HDL design files for synthesis
+2017.03.06.14:53:17 Info: qsys-generate /home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_clk_2x.ip --synthesis=VERILOG --output-directory=/home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_clk_2x --family="Arria 10" --part=10AX115S2F45I1SG
+2017.03.06.14:53:17 Info: kernel_system_clk_2x: "Transforming system: kernel_system_clk_2x"
+2017.03.06.14:53:17 Info: kernel_system_clk_2x: Running transform generation_view_transform
+2017.03.06.14:53:17 Info: kernel_system_clk_2x: Running transform generation_view_transform took 0.000s
+2017.03.06.14:53:17 Info: clk_2x: Running transform generation_view_transform
+2017.03.06.14:53:17 Info: clk_2x: Running transform generation_view_transform took 0.000s
+2017.03.06.14:53:17 Info: kernel_system_clk_2x: Running transform interconnect_transform_chooser
+2017.03.06.14:53:17 Info: kernel_system_clk_2x: Running transform interconnect_transform_chooser took 0.008s
+2017.03.06.14:53:17 Info: kernel_system_clk_2x: "Naming system components in system: kernel_system_clk_2x"
+2017.03.06.14:53:17 Info: kernel_system_clk_2x: "Processing generation queue"
+2017.03.06.14:53:17 Info: kernel_system_clk_2x: "Generating: kernel_system_clk_2x"
+2017.03.06.14:53:17 Info: kernel_system_clk_2x: Done "kernel_system_clk_2x" with 1 modules, 1 files
+2017.03.06.14:53:17 Info: qsys-generate succeeded.
+2017.03.06.14:53:17 Info: Finished: Create HDL design files for synthesis
+2017.03.06.14:53:17 Info: 
+2017.03.06.14:53:17 Info: Saving generation log to /home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/kernel_system/kernel_system_generation.rpt
+2017.03.06.14:53:17 Info: Starting: Create HDL design files for synthesis
+2017.03.06.14:53:17 Info: qsys-generate /home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/kernel_system.qsys --synthesis=VERILOG --output-directory=/home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/kernel_system --family="Arria 10" --part=10AX115S2F45I1SG
+2017.03.06.14:53:17 Info: Loading docking_fpga/kernel_system.qsys
+2017.03.06.14:53:17 Info: Reading input file
+2017.03.06.14:53:17 Info: Adding acl_internal_snoop [altera_generic_component 1.0]
+2017.03.06.14:53:17 Info: Parameterizing module acl_internal_snoop
+2017.03.06.14:53:17 Info: Adding avs_calc_initpop_cra_cra_ring [altera_generic_component 1.0]
+2017.03.06.14:53:17 Info: Parameterizing module avs_calc_initpop_cra_cra_ring
+2017.03.06.14:53:17 Info: Adding avs_gen_and_eval_newpops_cra_cra_ring [altera_generic_component 1.0]
+2017.03.06.14:53:17 Info: Parameterizing module avs_gen_and_eval_newpops_cra_cra_ring
+2017.03.06.14:53:17 Info: Adding avs_perform_ls_cra_cra_ring [altera_generic_component 1.0]
+2017.03.06.14:53:17 Info: Parameterizing module avs_perform_ls_cra_cra_ring
+2017.03.06.14:53:17 Info: Adding avs_sum_evals_cra_cra_ring [altera_generic_component 1.0]
+2017.03.06.14:53:17 Info: Parameterizing module avs_sum_evals_cra_cra_ring
+2017.03.06.14:53:17 Info: Adding calc_initpop_system [altera_generic_component 1.0]
+2017.03.06.14:53:17 Info: Parameterizing module calc_initpop_system
+2017.03.06.14:53:17 Info: Adding clk_1x [altera_generic_component 1.0]
+2017.03.06.14:53:17 Info: Parameterizing module clk_1x
+2017.03.06.14:53:17 Info: Adding clk_2x [altera_generic_component 1.0]
+2017.03.06.14:53:17 Info: Parameterizing module clk_2x
+2017.03.06.14:53:17 Info: Adding clk_snoop [altera_generic_component 1.0]
+2017.03.06.14:53:17 Info: Parameterizing module clk_snoop
+2017.03.06.14:53:17 Info: Adding cra_ring_rom [altera_generic_component 1.0]
+2017.03.06.14:53:17 Info: Parameterizing module cra_ring_rom
+2017.03.06.14:53:17 Info: Adding cra_root [altera_generic_component 1.0]
+2017.03.06.14:53:17 Info: Parameterizing module cra_root
+2017.03.06.14:53:17 Info: Adding kernel_cra [altera_generic_component 1.0]
+2017.03.06.14:53:17 Info: Parameterizing module kernel_cra
+2017.03.06.14:53:17 Info: Adding kernel_irq [altera_generic_component 1.0]
+2017.03.06.14:53:17 Info: Parameterizing module kernel_irq
+2017.03.06.14:53:17 Info: Adding kernel_mem0 [altera_generic_component 1.0]
+2017.03.06.14:53:17 Info: Parameterizing module kernel_mem0
+2017.03.06.14:53:17 Info: Adding reset [altera_generic_component 1.0]
+2017.03.06.14:53:17 Info: Parameterizing module reset
+2017.03.06.14:53:17 Info: Adding sys_description_rom [altera_generic_component 1.0]
+2017.03.06.14:53:17 Info: Parameterizing module sys_description_rom
+2017.03.06.14:53:17 Info: Building connections
+2017.03.06.14:53:17 Info: Parameterizing connections
+2017.03.06.14:53:17 Info: Validating
+2017.03.06.14:53:17 Info: Done reading input file
+2017.03.06.14:53:18 Warning: kernel_system.acl_internal_snoop: Warnings found in IP parameterization.
+2017.03.06.14:53:18 Warning: kernel_system.acl_internal_snoop.out_0: acl_internal_snoop.out_0 must be connected to an Avalon-ST sink
+2017.03.06.14:53:20 Info: kernel_system: "Transforming system: kernel_system"
+2017.03.06.14:53:20 Info: kernel_system: Running transform generation_view_transform
+2017.03.06.14:53:20 Info: kernel_system: Running transform generation_view_transform took 0.000s
+2017.03.06.14:53:20 Info: kernel_system: Running transform interconnect_transform_chooser
+2017.03.06.14:53:20 Info: Interconnect is inserted between master kernel_cra.m0 and slave cra_root.cra_slave because the master has burstcount signal 1 bit wide, but the slave is 0 bit wide.
+2017.03.06.14:53:20 Info: Interconnect is inserted between master kernel_cra.m0 and slave cra_root.cra_slave because the master has address signal 30 bit wide, but the slave is 8 bit wide.
+2017.03.06.14:53:20 Info: Interconnect is inserted between master kernel_cra.m0 and slave cra_root.cra_slave because the master has debugaccess signal 1 bit wide, but the slave is 0 bit wide.
+2017.03.06.14:53:20 Info: kernel_system: Running transform interconnect_transform_chooser took 0.592s
+2017.03.06.14:53:20 Info: mm_interconnect_0: Running transform interconnect_transform_chooser
+2017.03.06.14:53:20 Info: mm_interconnect_0: Running transform interconnect_transform_chooser took 0.033s
+2017.03.06.14:53:20 Info: mm_interconnect_6: Running transform interconnect_transform_chooser
+2017.03.06.14:53:20 Info: mm_interconnect_6: Running transform interconnect_transform_chooser took 0.032s
+2017.03.06.14:53:20 Info: kernel_system: "Naming system components in system: kernel_system"
+2017.03.06.14:53:20 Info: kernel_system: "Processing generation queue"
+2017.03.06.14:53:20 Info: kernel_system: "Generating: kernel_system"
+2017.03.06.14:53:21 Info: kernel_system: "Generating: kernel_system_acl_internal_snoop"
+2017.03.06.14:53:21 Info: kernel_system: "Generating: kernel_system_avs_calc_initpop_cra_cra_ring"
+2017.03.06.14:53:21 Info: kernel_system: "Generating: kernel_system_avs_gen_and_eval_newpops_cra_cra_ring"
+2017.03.06.14:53:21 Info: kernel_system: "Generating: kernel_system_avs_perform_ls_cra_cra_ring"
+2017.03.06.14:53:21 Info: kernel_system: "Generating: kernel_system_avs_sum_evals_cra_cra_ring"
+2017.03.06.14:53:21 Info: kernel_system: "Generating: kernel_system_calc_initpop_system"
+2017.03.06.14:53:21 Info: kernel_system: "Generating: kernel_system_clk_1x"
+2017.03.06.14:53:21 Info: kernel_system: "Generating: kernel_system_clk_2x"
+2017.03.06.14:53:21 Info: kernel_system: "Generating: kernel_system_clk_snoop"
+2017.03.06.14:53:21 Info: kernel_system: "Generating: kernel_system_cra_ring_rom"
+2017.03.06.14:53:21 Info: kernel_system: "Generating: kernel_system_cra_root"
+2017.03.06.14:53:21 Info: kernel_system: "Generating: kernel_system_kernel_cra"
+2017.03.06.14:53:21 Info: kernel_system: "Generating: kernel_system_kernel_irq"
+2017.03.06.14:53:21 Info: kernel_system: "Generating: kernel_system_kernel_mem0"
+2017.03.06.14:53:21 Info: kernel_system: "Generating: kernel_system_reset"
+2017.03.06.14:53:21 Info: kernel_system: "Generating: kernel_system_sys_description_rom"
+2017.03.06.14:53:21 Info: kernel_system: "Generating: kernel_system_altera_mm_interconnect_161_dqoemoq"
+2017.03.06.14:53:22 Info: kernel_system: "Generating: kernel_system_altera_mm_interconnect_161_jswm5jy"
+2017.03.06.14:53:22 Info: kernel_system: "Generating: kernel_system_altera_irq_mapper_161_nifn44i"
+2017.03.06.14:53:22 Info: kernel_system: "Generating: altera_reset_controller"
+2017.03.06.14:53:22 Info: kernel_system: "Generating: altera_merlin_master_translator"
+2017.03.06.14:53:22 Info: kernel_system: "Generating: altera_merlin_slave_translator"
+2017.03.06.14:53:22 Info: kernel_system: Done "kernel_system" with 23 modules, 9 files
+2017.03.06.14:53:22 Info: qsys-generate succeeded.
+2017.03.06.14:53:22 Info: Finished: Create HDL design files for synthesis
+sh: qsys-archive: command not found
+Info: *******************************************************************
+Info: Running Quartus Prime Shell
+    Info: Version 16.1.2 Build 203 01/18/2017 SJ Pro Edition
+    Info: Copyright (C) 2017  Intel Corporation. All rights reserved.
+    Info: Your use of Intel Corporation's design tools, logic functions 
+    Info: and other software and tools, and its AMPP partner logic 
+    Info: functions, and any output files from any of the foregoing 
+    Info: (including device programming or simulation files), and any 
+    Info: associated documentation or information are expressly subject 
+    Info: to the terms and conditions of the Intel Program License 
+    Info: Subscription Agreement, the Intel Quartus Prime License Agreement,
+    Info: the Intel MegaCore Function License Agreement, or other 
+    Info: applicable license agreement, including, without limitation, 
+    Info: that your use is for the sole purpose of programming logic 
+    Info: devices manufactured by Intel and sold by Intel or its 
+    Info: authorized distributors.  Please refer to the applicable 
+    Info: agreement for further details.
+    Info: Processing started: Mon Mar  6 14:52:37 2017
+Info: Command: quartus_sh -t scripts/pre_flow_pr.tcl
+Info: Using INI file /home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/quartus.ini
+Info: Running pre-flow script
+Info: Project name: top
+Info: Project name: top
+Info: Revision name: top
+Info: Device part name is 10AX115S2F45I1SG
+Info: Checking for OpenCL SDK installation, environment should have ALTERAOCLSDKROOT defined
+Info: ALTERAOCLSDKROOT=/opt/cad/altera/altera-16.1/hld
+Info: Compiling top revision -> nothing to be done with board.qsys
+Info: Generating kernel_system.qsys:
+Info:     qsys-generate -syn --family="Arria 10" --part=10AX115S2F45I1SG kernel_system.qsys
+------------------------------------------------
+
+    while executing
+"qexec "qsys-archive --quartus-project=$project_name --rev=opencl_bsp_ip kernel_system.qsys""
+    (file "scripts/pre_flow_pr.tcl" line 134)
+------------------------------------------------
+Error (23031): Evaluation of Tcl script scripts/pre_flow_pr.tcl unsuccessful
+Error: Quartus Prime Shell was unsuccessful. 1 error, 0 warnings
+    Error: Peak virtual memory: 874 megabytes
+    Error: Processing ended: Mon Mar  6 14:53:22 2017
+    Error: Elapsed time: 00:00:45
+    Error: Total CPU time (on all processors): 00:01:00

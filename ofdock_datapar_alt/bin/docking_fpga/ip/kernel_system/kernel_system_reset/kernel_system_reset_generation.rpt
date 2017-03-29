@@ -1,0 +1,15 @@
+Info: Starting: Create HDL design files for synthesis
+Info: qsys-generate /home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_reset.ip --synthesis=VERILOG --output-directory=/home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_reset --family="Arria 10" --part=10AX115S2F45I1SG
+Info: kernel_system_reset: "Transforming system: kernel_system_reset"
+Info: kernel_system_reset: Running transform generation_view_transform
+Info: kernel_system_reset: Running transform generation_view_transform took 0.000s
+Info: reset: Running transform generation_view_transform
+Info: reset: Running transform generation_view_transform took 0.000s
+Info: kernel_system_reset: Running transform interconnect_transform_chooser
+Info: kernel_system_reset: Running transform interconnect_transform_chooser took 0.008s
+Info: kernel_system_reset: "Naming system components in system: kernel_system_reset"
+Info: kernel_system_reset: "Processing generation queue"
+Info: kernel_system_reset: "Generating: kernel_system_reset"
+Info: kernel_system_reset: Done "kernel_system_reset" with 1 modules, 1 files
+Info: qsys-generate succeeded.
+Info: Finished: Create HDL design files for synthesis

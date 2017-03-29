@@ -1,0 +1,174 @@
+<optreport>
+	<loop>
+		<line> (file calc_initpop</line>
+		<II>0</II>
+	</loop>
+	<loop>
+		<line> (file calc_energy</line>
+		<II>0</II>
+	</loop>
+	<loop>
+		<line> (file calc_energy</line>
+		<II>0</II>
+	</loop>
+	<loop>
+		<line> (file calc_energy</line>
+		<II>0</II>
+	</loop>
+	<loop>
+		<line> (file calc_energy</line>
+		<II>0</II>
+	</loop>
+	<loop>
+		<line> (file sum_evals</line>
+		<II>0</II>
+	</loop>
+	<loop>
+		<line> (file sum_evals</line>
+		<II>0</II>
+	</loop>
+	<loop>
+		<line> (file sum_evals</line>
+		<II>0</II>
+	</loop>
+	<loop>
+		<line> (file perform_elitist_selection</line>
+		<II>0</II>
+	</loop>
+	<loop>
+		<line> (file perform_elitist_selection</line>
+		<II>0</II>
+	</loop>
+	<loop>
+		<line> (file auxiliary</line>
+		<II>0</II>
+	</loop>
+	<loop>
+		<line> (file auxiliary</line>
+		<II>0</II>
+	</loop>
+	<loop>
+		<line> (file perform_elitist_selection</line>
+		<II>0</II>
+	</loop>
+	<loop>
+		<line> (file gen_and_eval_newpops</line>
+		<II>0</II>
+	</loop>
+	<loop>
+		<line> (file gen_and_eval_newpops</line>
+		<II>0</II>
+	</loop>
+	<loop>
+		<line> (file calc_energy</line>
+		<II>0</II>
+	</loop>
+	<loop>
+		<line> (file gen_and_eval_newpops</line>
+		<II>0</II>
+	</loop>
+	<loop>
+		<line> (file gen_and_eval_newpops</line>
+		<II>0</II>
+	</loop>
+	<loop>
+		<line> (file gen_and_eval_newpops</line>
+		<II>0</II>
+	</loop>
+	<loop>
+		<line> (file calc_energy</line>
+		<II>0</II>
+	</loop>
+	<loop>
+		<line> (file calc_energy</line>
+		<II>0</II>
+	</loop>
+	<loop>
+		<line> (file calc_energy</line>
+		<II>0</II>
+	</loop>
+	<loop>
+		<line> (file calc_energy</line>
+		<II>0</II>
+	</loop>
+	<loop>
+		<line> (file calc_energy</line>
+		<II>0</II>
+	</loop>
+	<loop>
+		<line> (file auxiliary</line>
+		<II>0</II>
+	</loop>
+	<loop>
+		<line> (file auxiliary</line>
+		<II>0</II>
+	</loop>
+	<loop>
+		<line> (file perform_ls</line>
+		<II>0</II>
+	</loop>
+	<loop>
+		<line> (file perform_ls</line>
+		<II>0</II>
+	</loop>
+	<loop>
+		<line> (file perform_ls</line>
+		<II>0</II>
+	</loop>
+	<loop>
+		<line> (file perform_ls</line>
+		<II>0</II>
+	</loop>
+	<loop>
+		<line> (file perform_ls</line>
+		<II>0</II>
+	</loop>
+	<loop>
+		<line> (file calc_energy</line>
+		<II>0</II>
+	</loop>
+	<loop>
+		<line> (file calc_energy</line>
+		<II>0</II>
+	</loop>
+	<loop>
+		<line> (file perform_ls</line>
+		<II>0</II>
+	</loop>
+	<loop>
+		<line> (file perform_ls</line>
+		<II>0</II>
+	</loop>
+	<loop>
+		<line> (file perform_ls</line>
+		<II>0</II>
+	</loop>
+	<loop>
+		<line> (file perform_ls</line>
+		<II>0</II>
+	</loop>
+	<loop>
+		<line> (file perform_ls</line>
+		<II>0</II>
+	</loop>
+	<loop>
+		<line> (file perform_ls</line>
+		<II>0</II>
+	</loop>
+	<loop>
+		<line> (file calc_energy</line>
+		<II>0</II>
+	</loop>
+	<loop>
+		<line> (file calc_energy</line>
+		<II>0</II>
+	</loop>
+	<loop>
+		<line> (file calc_energy</line>
+		<II>0</II>
+	</loop>
+	<loop>
+		<line> (file calc_energy</line>
+		<II>0</II>
+	</loop>
+</optreport>

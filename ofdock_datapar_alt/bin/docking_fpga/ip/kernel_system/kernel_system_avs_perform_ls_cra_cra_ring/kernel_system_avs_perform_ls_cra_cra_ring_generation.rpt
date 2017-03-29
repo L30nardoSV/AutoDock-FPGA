@@ -1,0 +1,16 @@
+Info: Starting: Create HDL design files for synthesis
+Info: qsys-generate /home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_avs_perform_ls_cra_cra_ring.ip --synthesis=VERILOG --output-directory=/home/wimi/lvs/ofdock_altera/ofdock_datapar_alt/bin/docking_fpga/ip/kernel_system/kernel_system_avs_perform_ls_cra_cra_ring --family="Arria 10" --part=10AX115S2F45I1SG
+Info: kernel_system_avs_perform_ls_cra_cra_ring: "Transforming system: kernel_system_avs_perform_ls_cra_cra_ring"
+Info: kernel_system_avs_perform_ls_cra_cra_ring: Running transform generation_view_transform
+Info: kernel_system_avs_perform_ls_cra_cra_ring: Running transform generation_view_transform took 0.000s
+Info: avs_perform_ls_cra_cra_ring: Running transform generation_view_transform
+Info: avs_perform_ls_cra_cra_ring: Running transform generation_view_transform took 0.001s
+Info: kernel_system_avs_perform_ls_cra_cra_ring: Running transform interconnect_transform_chooser
+Info: kernel_system_avs_perform_ls_cra_cra_ring: Running transform interconnect_transform_chooser took 0.008s
+Info: kernel_system_avs_perform_ls_cra_cra_ring: "Naming system components in system: kernel_system_avs_perform_ls_cra_cra_ring"
+Info: kernel_system_avs_perform_ls_cra_cra_ring: "Processing generation queue"
+Info: kernel_system_avs_perform_ls_cra_cra_ring: "Generating: kernel_system_avs_perform_ls_cra_cra_ring"
+Info: kernel_system_avs_perform_ls_cra_cra_ring: "Generating: cra_ring_node"
+Info: kernel_system_avs_perform_ls_cra_cra_ring: Done "kernel_system_avs_perform_ls_cra_cra_ring" with 2 modules, 2 files
+Info: qsys-generate succeeded.
+Info: Finished: Create HDL design files for synthesis
