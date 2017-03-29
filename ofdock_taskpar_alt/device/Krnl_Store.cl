@@ -50,20 +50,26 @@ while(active) {
 	// --------------------------------------------------------------
 	
 	if (active1 != active2) {
-		//printf("Store error: active are not equal!\n");
+		#if defined (DEBUG_KRNL_STORE)
+		printf("Store error: active are not equal!\n");
+		#endif
 	}
 	else 			{
 		active = active1;
 	}
 
 	if (mode1 != mode2)     {
-		//printf("Store error: mode are not equal!\n");
+		#if defined (DEBUG_KRNL_STORE)
+		printf("Store error: mode are not equal!\n");
+		#endif
 	}
 	else 			{
 		mode = mode1;}
 
 	if (cnt1  != cnt2)      {
-		//printf("Store error: mode are not equal!\n");
+		#if defined (DEBUG_KRNL_STORE)
+		printf("Store error: mode are not equal!\n");
+		#endif
 	}
 	else 			{
 		cnt = cnt1;}

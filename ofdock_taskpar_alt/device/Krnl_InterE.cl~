@@ -151,7 +151,7 @@ while(active) {
 			weights [0][1][1] = (1-dx)*dy*dz;
 			weights [1][1][1] = dx*dy*dz;
 
-			#if defined (DEBUG_KERNEL_INTER_E)
+			#if defined (DEBUG_KRNL_INTERE)
 			printf("\n\nPartial results for atom with id %i:\n", atom1_id);
 			printf("x_low = %d, x_high = %d, x_frac = %f\n", x_low, x_high, dx);
 			printf("y_low = %d, y_high = %d, y_frac = %f\n", y_low, y_high, dy);
@@ -296,8 +296,9 @@ while(active) {
  	
 	} // End of while(1)
 
-//printf("	%-20s: %s\n", "Krnl_InterE", "disabled");
-
+	#if defined (DEBUG_ACTIVE_KERNEL)
+	printf("	%-20s: %s\n", "Krnl_InterE", "disabled");
+	#endif
 }
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------

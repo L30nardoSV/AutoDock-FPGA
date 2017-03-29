@@ -111,7 +111,14 @@
 
 
 #define DEBUG_ACTIVE_KERNEL
+//#define DEBUG_KRNL_GA
+//#define DEBUG_KRNL_IC
+//
+//
+//#define DEBUG_KRNL_CONFORM
+//#define DEBUG_KRNL_INTERE
+//#define DEBUG_KRNL_INTRAE
+//#define DEBUG_KRNL_STORE
 
-#define DEBUG_KRNL_GA
 
 #endif /* DEFINES_H_ */

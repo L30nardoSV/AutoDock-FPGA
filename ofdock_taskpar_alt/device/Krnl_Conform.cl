@@ -59,7 +59,9 @@ void Krnl_Conform(
 
 while(active) {
 
-	//printf("BEFORE In CONFORM CHANNEL\n");
+	#if defined (DEBUG_KRNL_CONFORM)
+	printf("BEFORE In CONFORM CHANNEL\n");
+	#endif
 	// --------------------------------------------------------------
 	// Wait for genotypes in channel
 	// --------------------------------------------------------------
@@ -124,7 +126,9 @@ while(active) {
 	#endif
 	
 	// --------------------------------------------------------------
-	//printf("AFTER In CONFORM CHANNEL\n");
+	#if defined (DEBUG_KRNL_CONFORM)
+	printf("AFTER In CONFORM CHANNEL\n");
+	#endif
 
 	phi         = genotype [3]*DEG_TO_RAD;
 	theta       = genotype [4]*DEG_TO_RAD;
@@ -307,7 +311,9 @@ while(active) {
 		} // End if-statement not dummy rotation
 	} // End rotation_counter for-loop
 
-	//printf("BEFORE Out CONFORM CHANNEL\n");
+	#if defined (DEBUG_KRNL_CONFORM)
+	printf("BEFORE Out CONFORM CHANNEL\n");
+	#endif
 	// --------------------------------------------------------------
 	// Send ligand atomic coordinates to channel 
 	// --------------------------------------------------------------
@@ -361,10 +367,10 @@ while(active) {
 		*/
 	}
 
-
-
 	// --------------------------------------------------------------
-	//printf("AFTER Out CONFORM CHANNEL\n");
+	#if defined (DEBUG_KRNL_CONFORM)
+	printf("AFTER Out CONFORM CHANNEL\n");
+	#endif
 
 } // End of while(1)
 

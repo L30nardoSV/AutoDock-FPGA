@@ -44,8 +44,11 @@ void Krnl_IC(//__global const float*           restrict GlobFgrids,
 		for (uchar pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {
 			write_channel_altera(chan_IC2Conf_genotype, genotype[pipe_cnt]);
 		}
+		
+		#if defined (DEBUG_KRNL_IC)
+		printf("pop_cnt (Krnl_IC): %u\n", pop_cnt); 		
+		#endif
 
-		//printf("pop_cnt (INC): %u\n", pop_cnt); 		
 	} // End of for-loop pop_cnt		
 
 
@@ -53,7 +56,9 @@ void Krnl_IC(//__global const float*           restrict GlobFgrids,
 
 	eval_cnt = DockConst->pop_size; 		
 	
-	//printf("eval_cnt (INC): %u\n", eval_cnt); 	
+	#if defined (DEBUG_KRNL_IC)
+	printf("eval_cnt (Krnl_IC): %u\n", eval_cnt); 	
+	#endif
 
 	write_channel_altera(chan_IC2GA_eval_cnt, eval_cnt);
 

@@ -151,7 +151,7 @@ while(active) {
 			weights [0][1][1] = (1-dx)*dy*dz;
 			weights [1][1][1] = dx*dy*dz;
 
-			#if defined (DEBUG_KERNEL_INTER_E)
+			#if defined (DEBUG_KRNL_INTERE)
 			printf("\n\nPartial results for atom with id %i:\n", atom1_id);
 			printf("x_low = %d, x_high = %d, x_frac = %f\n", x_low, x_high, dx);
 			printf("y_low = %d, y_high = %d, y_frac = %f\n", y_low, y_high, dy);
@@ -189,7 +189,7 @@ while(active) {
         	        cube [0][1][1] = *(GlobFgrids + cube_011 + mul_tmp);
         	        cube [1][1][1] = *(GlobFgrids + cube_111 + mul_tmp);
 		
-			#if defined (DEBUG_KERNEL_INTER_E)
+			#if defined (DEBUG_KRNL_INTERE)
 			printf("Interpolation of van der Waals map:\n");
 			printf("cube(0,0,0) = %f\n", cube [0][0][0]);
 			printf("cube(1,0,0) = %f\n", cube [1][0][0]);
@@ -206,7 +206,7 @@ while(active) {
 			*/
 			partialE1 = TRILININTERPOL(cube, weights);
 
-			#if defined (DEBUG_KERNEL_INTER_E)
+			#if defined (DEBUG_KRNL_INTERE)
 			printf("interpolated value = %f\n\n", TRILININTERPOL(cube, weights));
 			#endif
 
@@ -222,7 +222,7 @@ while(active) {
         	        cube [0][1][1] = *(GlobFgrids + cube_011 + mul_tmp);
         	        cube [1][1][1] = *(GlobFgrids + cube_111 + mul_tmp);
 
-			#if defined (DEBUG_KERNEL_INTER_E)
+			#if defined (DEBUG_KRNL_INTERE)
 			printf("Interpolation of electrostatic map:\n");
 			printf("cube(0,0,0) = %f\n", cube [0][0][0]);
 			printf("cube(1,0,0) = %f\n", cube [1][0][0]);
@@ -239,7 +239,7 @@ while(active) {
 			*/
 			partialE2 = q * TRILININTERPOL(cube, weights);
 		
-			#if defined (DEBUG_KERNEL_INTER_E)
+			#if defined (DEBUG_KRNL_INTERE)
 			printf("interpoated value = %f, multiplied by q = %f\n\n", TRILININTERPOL(cube, weights), q*TRILININTERPOL(cube, weights));
 			#endif
 
@@ -255,7 +255,7 @@ while(active) {
         	        cube [0][1][1] = *(GlobFgrids + cube_011 + mul_tmp);
         	        cube [1][1][1] = *(GlobFgrids + cube_111 + mul_tmp);
 
-			#if defined (DEBUG_KERNEL_INTER_E)
+			#if defined (DEBUG_KRNL_INTERE)
 			printf("Interpolation of desolvation map:\n");
 			printf("cube(0,0,0) = %f\n", cube [0][0][0]);
 			printf("cube(1,0,0) = %f\n", cube [1][0][0]);
@@ -272,7 +272,7 @@ while(active) {
 			*/
 			partialE3 = fabs(q) * TRILININTERPOL(cube, weights);
 
-			#if defined (DEBUG_KERNEL_KERNEL_INTER_E)
+			#if defined (DEBUG_KRNL_INTERE)
 			printf("interploated value = %f, multiplied by abs(q) = %f\n\n", TRILININTERPOL(cube, weights), fabs(q) * trilin_interpol(cube, weights));
 			printf("Current value of intermolecular energy = %f\n\n\n", interE);
 			#endif
