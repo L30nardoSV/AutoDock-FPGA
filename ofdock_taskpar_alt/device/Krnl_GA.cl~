@@ -78,36 +78,37 @@ channel float chan_Store2LS_LSenergy;
 #include "../defines.h"
 
 // Next structures were copied from calcenergy.h
+
 typedef struct
 {
-	char  	 	num_of_atoms;
-	char   		num_of_atypes;
-	int    		num_of_intraE_contributors;
-	char   		gridsize_x;
-	char   		gridsize_y;
-	char   		gridsize_z;
+	unsigned char  	num_of_atoms;
+	unsigned char   num_of_atypes;
+	unsigned int    num_of_intraE_contributors;
+	unsigned char   gridsize_x;
+	unsigned char   gridsize_y;
+	unsigned char   gridsize_z;
+	unsigned char	g1;
+	unsigned int	g2;
+	unsigned int 	g3;
 	float  		grid_spacing;
-/*
-	float* 		fgrids;
-*/
-	int    		rotbondlist_length;
+
+	unsigned int    rotbondlist_length;
 	float  		coeff_elec;
 	float  		coeff_desolv;
-/*
-	float* 		conformations_current;
-	float* 		energies_current;
-	float* 		conformations_next;
-	float* 		energies_next;
-	int*   		evals_of_new_entities;
-	unsigned int* 	prng_states;
-*/
+
+	//float* 		conformations_current;
+	//float* 		energies_current;
+	//float* 		conformations_next;
+	//float* 		energies_next;
+	//int*   		evals_of_new_entities;
+	//unsigned int* 	prng_states;
 
 	// L30nardoSV added
-	unsigned int num_of_energy_evals;
-	unsigned int num_of_generations;
+	unsigned int    num_of_energy_evals;
+	unsigned int    num_of_generations;
 
-	int    		pop_size;
-	int    		num_of_genes;
+	unsigned int 	pop_size;
+	unsigned int	num_of_genes;
 	float  		tournament_rate;
 	float  		crossover_rate;
 	float  		mutation_rate;
@@ -122,6 +123,7 @@ typedef struct
 	unsigned int 	max_num_of_iters;
 	float  		qasp;
 } Dockparameters;
+
 
 // Constant struct
 typedef struct
@@ -157,22 +159,21 @@ typedef struct
 // Originally from: searchoptimum.c
 // --------------------------------------------------------------------------
 __kernel __attribute__ ((max_global_work_dim(0)))
-void Krnl_GA(//__global const float*           restrict GlobFgrids,
-	     __global       float*           restrict GlobPopulationCurrent,
+void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 	     __global       float*           restrict GlobEnergyCurrent,
 	     __global       float*           restrict GlobPopulationNext,
 	     __global       float*           restrict GlobEnergyNext,
-             //__global       unsigned int*    restrict GlobPRNG,
-	     //__global const kernelconstant*  restrict KerConst,
+	     //__global const Dockparameters*  restrict DockConst,
 	     __global const Dockparameters*  restrict DockConst,
-	     //__global       unsigned int*    restrict GlobEvals_performed,
-	     //__global       unsigned int*    restrict GlobGenerations_performed
+	//		    const unsigned int        DockConst_num_of_energy_evals,
+	//		    const unsigned int        DockConst_num_of_generations,
+	//		    const unsigned int 	      DockConst_pop_size,	
 	     __global       unsigned int*    restrict GlobEvalsGenerations_performed
 	     )
 {
 	//Print algorithm parameters
 
-	#if defined (DEBUG_KERNEL1)
+	#if defined (DEBUG_KRNL_GA)
 	printf("\nParameters of the genetic algorihtm:\n");
 	printf("\nLigand num_of_atoms: %u\n",  DockConst->num_of_atoms);
 	printf("Ligand num_of_atypes:  %u\n",  DockConst->num_of_atypes);
@@ -224,6 +225,7 @@ void Krnl_GA(//__global const float*           restrict GlobFgrids,
 
 	while (active) {
 		if ((eval_cnt < DockConst->num_of_energy_evals) && (generation_cnt < DockConst->num_of_generations)) {
+		//if ((eval_cnt < DockConst_num_of_energy_evals) && (generation_cnt < DockConst_num_of_generations)) {
 
 			if (LS_done ==  true) {		
 				generation_cnt++;
@@ -251,9 +253,11 @@ void Krnl_GA(//__global const float*           restrict GlobFgrids,
 					GlobEnergyCurrent[i] = GlobEnergyNext[i];}
 */
 
-				for (ushort i=0;i<DockConst->pop_size*ACTUAL_GENOTYPE_LENGTH; i++) { 	
+				for (ushort i=0;i<DockConst->pop_size*ACTUAL_GENOTYPE_LENGTH; i++) { 
+				//for (ushort i=0;i<DockConst_pop_size*ACTUAL_GENOTYPE_LENGTH; i++) { 	
 					GlobPopulationCurrent[i] = GlobPopulationNext[i];
 					if (i<DockConst->pop_size) {
+					//if (i<DockConst_pop_size) {
 						GlobEnergyCurrent[i] = GlobEnergyNext[i];
 					}
 				}

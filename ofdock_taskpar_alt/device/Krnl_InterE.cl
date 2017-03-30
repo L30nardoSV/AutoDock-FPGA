@@ -13,13 +13,18 @@ __kernel __attribute__ ((max_global_work_dim(0)))
 //__attribute__ ((reqd_work_group_size(1,1,1)))
 void Krnl_InterE(
              __global const float*           restrict GlobFgrids,
-	     //__global       float*           restrict GlobPopulationCurrent,
-	     //__global       float*           restrict GlobEnergyCurrent,
-	     //__global       float*           restrict GlobPopulationNext,
-	     //__global       float*           restrict GlobEnergyNext,
-             //__global       unsigned int*    restrict GlobPRNG,
 	     __global const kernelconstant*  restrict KerConst,
-	     __global const Dockparameters*  restrict DockConst)
+	     //__global const Dockparameters*  restrict DockConst
+	     __constant const Dockparameters*  restrict DockConst
+		//      const unsigned char 		      DockConst_gridsize_x,
+		//      const unsigned char 		      DockConst_gridsize_y,
+		//      const unsigned char 		      DockConst_gridsize_z,
+		//      const unsigned char 		      DockConst_g1,
+		//      const unsigned int 		      DockConst_g2,
+		//      const unsigned int 		      DockConst_g3,
+		//      const unsigned char 		      DockConst_num_of_atoms,
+		//      const unsigned char 		      DockConst_num_of_atypes	
+)
 {
 /*
 	__local float loc_coords_x[MAX_NUM_OF_ATOMS];
@@ -58,9 +63,21 @@ void Krnl_InterE(
 
 	// L30nardoSV	
 	unsigned int  mul_tmp;
-	unsigned char g1 = DockConst->gridsize_x; 	
-	unsigned int  g2 = DockConst->gridsize_x * DockConst->gridsize_y;         
-	unsigned int  g3 = DockConst->gridsize_x * DockConst->gridsize_y * DockConst->gridsize_z;
+	//unsigned char g1 = DockConst->gridsize_x; 	
+	//unsigned int  g2 = DockConst->gridsize_x * DockConst->gridsize_y;         
+	//unsigned int  g3 = DockConst->gridsize_x * DockConst->gridsize_y * DockConst->gridsize_z;
+		//unsigned char g1 = DockConst_gridsize_x; 	
+		//unsigned int  g2 = DockConst_gridsize_x * DockConst_gridsize_y;         
+		//unsigned int  g3 = DockConst_gridsize_x * DockConst_gridsize_y * DockConst_gridsize_z;
+
+	//unsigned char g1 = DockConst_g1; 	
+	//unsigned int  g2 = DockConst_g2;         
+	//unsigned int  g3 = DockConst_g3;
+
+	unsigned char g1 = DockConst->g1; 	
+	unsigned int  g2 = DockConst->g2;         
+	unsigned int  g3 = DockConst->g3;
+
         unsigned int  ylow_times_g1, yhigh_times_g1;
         unsigned int  zlow_times_g2, zhigh_times_g2;
 	unsigned int  cube_000, cube_100, cube_010, cube_110;
@@ -80,6 +97,7 @@ while(active) {
 
 	//for (uint pipe_cnt=0; pipe_cnt<DockConst->num_of_atoms; pipe_cnt++) {
 	for (uchar pipe_cnt=0; pipe_cnt<DockConst->num_of_atoms; pipe_cnt++) {
+	//for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt++) {
 		loc_coords_x[pipe_cnt] = read_channel_altera(chan_Conf2Intere_x);
 		//mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);
 		mem_fence(CLK_CHANNEL_MEM_FENCE);
@@ -107,7 +125,8 @@ while(active) {
 	// **********************************************
 	LOOP_INTERE_1:
 	//for (atom1_id=0; atom1_id<DockConst->num_of_atoms; atom1_id++)	
-	for (uchar atom1_id=0; atom1_id<DockConst->num_of_atoms; atom1_id++)		
+	for (uchar atom1_id=0; atom1_id<DockConst->num_of_atoms; atom1_id++)
+	//for (uchar atom1_id=0; atom1_id<DockConst_num_of_atoms; atom1_id++)	
 	{
 		//atom1_typeid = KerConst->atom_types_const[atom1_id];
 		atom1_typeid = ref_atom_types_const[atom1_id];
@@ -120,8 +139,10 @@ while(active) {
 		// if the atom is outside of the grid
 		if ((x < 0.0f) || (x >= DockConst->gridsize_x-1) || 
 		    (y < 0.0f) || (y >= DockConst->gridsize_y-1) ||
-		    (z < 0.0f) || (z >= DockConst->gridsize_z-1))	
-		{
+		    (z < 0.0f) || (z >= DockConst->gridsize_z-1))	{
+		//if ((x < 0.0f) || (x >= DockConst_gridsize_x-1) || 
+		//    (y < 0.0f) || (y >= DockConst_gridsize_y-1) ||
+		//    (z < 0.0f) || (z >= DockConst_gridsize_z-1))	{
 			//penalty is 2^24 for each atom outside the grid
 			/*
 			interE += 16777216.0f; 
@@ -212,6 +233,7 @@ while(active) {
 
 			//energy contribution of the electrostatic grid
 			atom1_typeid = DockConst->num_of_atypes;
+			//atom1_typeid = DockConst_num_of_atypes;
 			mul_tmp = atom1_typeid*g3;
         	        cube [0][0][0] = *(GlobFgrids + cube_000 + mul_tmp);
         	        cube [1][0][0] = *(GlobFgrids + cube_100 + mul_tmp);
@@ -245,6 +267,7 @@ while(active) {
 
 			//energy contribution of the desolvation grid
 			atom1_typeid = DockConst->num_of_atypes+1;
+			//atom1_typeid = DockConst_num_of_atypes+1;
 			mul_tmp = atom1_typeid*g3;
         	        cube [0][0][0] = *(GlobFgrids + cube_000 + mul_tmp);
         	        cube [1][0][0] = *(GlobFgrids + cube_100 + mul_tmp);

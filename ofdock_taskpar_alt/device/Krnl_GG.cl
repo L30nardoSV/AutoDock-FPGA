@@ -3,17 +3,19 @@
 // --------------------------------------------------------------------------
 
 __kernel __attribute__ ((max_global_work_dim(0)))
-void Krnl_GG(//__global const float*           restrict GlobFgrids,
-	     __global       float*           restrict GlobPopulationCurrent,
+void Krnl_GG(__global       float*           restrict GlobPopulationCurrent,
 	     __global       float*           restrict GlobEnergyCurrent,
 	     __global       float*           restrict GlobPopulationNext,
 	     __global       float*           restrict GlobEnergyNext,
              __global       unsigned int*    restrict GlobPRNG,
-	     //__global const kernelconstant*  restrict KerConst,
-	     __global const Dockparameters*  restrict DockConst
-	     //,
-	     //__global       unsigned int*    restrict GlobEvals_performed,
-	     //__global       unsigned int*    restrict GlobGenerations_performed
+	     //__global const Dockparameters*  restrict DockConst
+	     __constant const Dockparameters*  restrict DockConst
+		//     const  unsigned int              DockConst_pop_size,
+		//     const  float		      DockConst_tournament_rate,
+	        //     const  float		      DockConst_crossover_rate,
+		//     const  float		      DockConst_mutation_rate,
+		//     const  float		      DockConst_abs_max_dmov,
+		//     const  float		      DockConst_abs_max_dang	      			      	      
 )
 {	
 	uint eval_cnt = 0; 	
@@ -45,12 +47,14 @@ while(active) {
 	#endif
 
 	for (ushort i=0; i<DockConst->pop_size; i++) {
+	//for (ushort i=0; i<DockConst_pop_size; i++) {
 		loc_energies[i] = GlobEnergyCurrent[i];
 	}
 
 	//Identifying best entity 		
 	//best_entity_id = find_best(GlobEnergyCurrent, loc_energies, DockConst->pop_size); 
-	best_entity_id = find_best(loc_energies, DockConst->pop_size); 
+	best_entity_id = find_best(loc_energies, DockConst->pop_size);
+	//best_entity_id = find_best(loc_energies, DockConst_pop_size); 
 
 	//elitism - copying the best entity to new population 		
 	//for (uint i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) { 
@@ -68,14 +72,17 @@ while(active) {
 	uint prng = GlobPRNG[0];
 
 	//for (uint new_pop_cnt = 1; new_pop_cnt < DockConst->pop_size; new_pop_cnt++) { 
-	for (ushort new_pop_cnt = 1; new_pop_cnt < DockConst->pop_size; new_pop_cnt++) { 
+	for (ushort new_pop_cnt = 1; new_pop_cnt < DockConst->pop_size; new_pop_cnt++) {
+	//for (ushort new_pop_cnt = 1; new_pop_cnt < DockConst_pop_size; new_pop_cnt++) { 
 		//selecting two individuals randomly 			
 		//binary_tournament_selection(GlobEnergyCurrent, GlobPRNG, loc_energies, &parent1, &parent2,			    
 		//		            DockConst->pop_size, DockConst->tournament_rate); 	
 		//binary_tournament_selection(GlobPRNG, loc_energies, &parent1, &parent2,			    
 		//		            DockConst->pop_size, DockConst->tournament_rate); 
 		binary_tournament_selection(&prng, loc_energies, &parent1, &parent2,			    
-				            DockConst->pop_size, DockConst->tournament_rate); 	
+				            DockConst->pop_size, DockConst->tournament_rate);
+		//binary_tournament_selection(&prng, loc_energies, &parent1, &parent2,			    
+		//		            DockConst_pop_size, DockConst_tournament_rate);
 
 		//mating parents				
 		//for (uint i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {
@@ -90,7 +97,10 @@ while(active) {
 		//		 DockConst->crossover_rate, offspring_genotype); 
 		gen_new_genotype(&prng, local_entity_1, local_entity_2, 					 
 				 DockConst->mutation_rate, DockConst->abs_max_dmov, DockConst->abs_max_dang,			 
-				 DockConst->crossover_rate, offspring_genotype); 			
+				 DockConst->crossover_rate, offspring_genotype); 	
+		//gen_new_genotype(&prng, local_entity_1, local_entity_2, 					 
+		//		 DockConst_mutation_rate, DockConst_abs_max_dmov, DockConst_abs_max_dang,			 
+		//		 DockConst_crossover_rate, offspring_genotype); 		
 
 		//for (uint i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {
 		//for (uchar i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {
@@ -122,7 +132,8 @@ while(active) {
 
 	ack = read_channel_altera(chan_Store2GG_ack);
 
-	eval_cnt = DockConst->pop_size; 		
+	eval_cnt = DockConst->pop_size; 
+	//eval_cnt = DockConst_pop_size;		
 
 	write_channel_altera(chan_GG2GA_eval_cnt, eval_cnt);
 

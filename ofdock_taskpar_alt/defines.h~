@@ -111,7 +111,6 @@
 
 
 #define DEBUG_ACTIVE_KERNEL
-
 //#define DEBUG_KRNL_GA
 //#define DEBUG_KRNL_IC
 //

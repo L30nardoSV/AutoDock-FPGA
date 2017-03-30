@@ -1,14 +1,12 @@
 __kernel __attribute__ ((max_global_work_dim(0)))
 //__attribute__ ((reqd_work_group_size(1,1,1)))
 void Krnl_Store(
-             //__global const float*           restrict GlobFgrids,
-	     //__global       float*           restrict GlobPopulationCurrent,
 	     __global       float*           restrict GlobEnergyCurrent,
-	     //__global       float*           restrict GlobPopulationNext,
 	     __global       float*           restrict GlobEnergyNext,
-             //__global       unsigned int*    restrict GlobPRNG,
-	     //__global const kernelconstant*  restrict KerConst,
-	     __global const Dockparameters*  restrict DockConst)
+	     //__global const Dockparameters*  restrict DockConst
+	     __constant const Dockparameters*  restrict DockConst
+		 //     const unsigned int              DockConst_pop_size
+)
 {
 	// --------------------------------------------------------------
 	// Wait for enegies
@@ -82,6 +80,7 @@ while(active) {
 		case 1:	// IC
 			GlobEnergyCurrent[cnt] = InterE + IntraE;
 			if (cnt == (DockConst->pop_size)-1) {
+			//if (cnt == (DockConst_pop_size)-1) {
 				//GlobDone[0] = 1;
 				write_channel_altera(chan_Store2IC_ack, 1);
 			}
@@ -92,6 +91,7 @@ while(active) {
 			
 			//if (cnt == (DockConst->pop_size)-1) {
 			if ((cnt == (DockConst->pop_size)-1) || (active == 0)) {
+			//if ((cnt == (DockConst_pop_size)-1) || (active == 0)) {
 				//GlobDone[1] = 1;	
 				write_channel_altera(chan_Store2GG_ack, 1);
 			}

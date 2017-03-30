@@ -10,17 +10,18 @@
 // --------------------------------------------------------------------------
 
 __kernel __attribute__ ((max_global_work_dim(0)))
-void Krnl_LS(//__global const float*           restrict GlobFgrids,
-	     __global       float*           restrict GlobPopulationCurrent,
+void Krnl_LS(__global       float*           restrict GlobPopulationCurrent,
 	     __global       float*           restrict GlobEnergyCurrent,
-	     //__global       float*           restrict GlobPopulationNext,
-	     //__global       float*           restrict GlobEnergyNext,
              __global       unsigned int*    restrict GlobPRNG,
-	     //__global const kernelconstant*  restrict KerConst,
 	     __global const Dockparameters*  restrict DockConst
-	     //,
-	     //__global       unsigned int*    restrict GlobEvals_performed,
-	     //__global       unsigned int*    restrict GlobGenerations_performed
+		  //    const unsigned int   	      DockConst_num_of_lsentities,
+		  //    const unsigned int 	      DockConst_pop_size,
+		  //    const unsigned int 	      DockConst_max_num_of_iters,
+		  //    const float		      DockConst_rho_lower_bound,
+		  //    const float		      DockConst_base_dmov_mul_sqrt3,
+	          //    const unsigned int 	      DockConst_num_of_genes,	            
+     		  //    const float		      DockConst_base_dang_mul_sqrt3,
+		  //    const unsigned int 	      DockConst_cons_limit      
 )
 {	
 	uint eval_cnt = 0; 	
@@ -63,12 +64,14 @@ while(active) {
 	uint prng = GlobPRNG[0];
 
 	//subjecting num_of_entity_for_ls pieces of offsprings to LS 		
-	for (uint ls_ent_cnt=0; ls_ent_cnt<DockConst->num_of_lsentities; ls_ent_cnt++) { 	
+	for (uint ls_ent_cnt=0; ls_ent_cnt<DockConst->num_of_lsentities; ls_ent_cnt++) {
+	//for (uint ls_ent_cnt=0; ls_ent_cnt<DockConst_num_of_lsentities; ls_ent_cnt++) { 	
 		
 		//choosing an entity randomly, 			
 		//and without checking if it has already been subjected to LS in this cycle 			
 		//entity_for_ls = myrand_uint(GlobPRNG, DockConst->pop_size); 
-		entity_for_ls = myrand_uint(&prng, DockConst->pop_size); 			
+		entity_for_ls = myrand_uint(&prng, DockConst->pop_size);
+		//entity_for_ls = myrand_uint(&prng, DockConst_pop_size);			
 		
 		//performing local search 
 		//for (uint i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {
@@ -84,20 +87,26 @@ while(active) {
 		LS_eval = 0;
 
 		// ------------------------------------------------------------------------------------------------------------
-		while ((iteration_cnt < DockConst->max_num_of_iters) && (rho > DockConst->rho_lower_bound))
-		{
+		while ((iteration_cnt < DockConst->max_num_of_iters) && (rho > DockConst->rho_lower_bound)) {
+		//while ((iteration_cnt < DockConst_max_num_of_iters) && (rho > DockConst_rho_lower_bound)) {
 			//new random deviate
 			//rho is the deviation of the uniform distribution
 			//genotype_deviate [0] = rho*DockConst->base_dmov_mul_sqrt3*(2*myrand(GlobPRNG)-1);
 			//genotype_deviate [1] = rho*DockConst->base_dmov_mul_sqrt3*(2*myrand(GlobPRNG)-1);
-			//genotype_deviate [2] = rho*DockConst->base_dmov_mul_sqrt3*(2*myrand(GlobPRNG)-1);	
+			//genotype_deviate [2] = rho*DockConst->base_dmov_mul_sqrt3*(2*myrand(GlobPRNG)-1);
 			genotype_deviate [0] = rho*DockConst->base_dmov_mul_sqrt3*(2*myrand(&prng)-1);
 			genotype_deviate [1] = rho*DockConst->base_dmov_mul_sqrt3*(2*myrand(&prng)-1);
 			genotype_deviate [2] = rho*DockConst->base_dmov_mul_sqrt3*(2*myrand(&prng)-1);
+			//genotype_deviate [0] = rho*DockConst_base_dmov_mul_sqrt3*(2*myrand(&prng)-1);
+			//genotype_deviate [1] = rho*DockConst_base_dmov_mul_sqrt3*(2*myrand(&prng)-1);
+			//genotype_deviate [2] = rho*DockConst_base_dmov_mul_sqrt3*(2*myrand(&prng)-1);
+
 			//for (uint i=3; i<DockConst->num_of_genes; i++) {
 			for (uchar i=3; i<DockConst->num_of_genes; i++) {
+			//for (uchar i=3; i<DockConst_num_of_genes; i++) {
 			//genotype_deviate [i] = rho*DockConst->base_dang_mul_sqrt3*(2*myrand(GlobPRNG)-1);
 			genotype_deviate [i] = rho*DockConst->base_dang_mul_sqrt3*(2*myrand(&prng)-1);
+			//genotype_deviate [i] = rho*DockConst_base_dang_mul_sqrt3*(2*myrand(&prng)-1);
 			}
 			
 			if (positive_direction == true) {
@@ -116,6 +125,7 @@ while(active) {
 
 				//for (uint i=5; i<DockConst->num_of_genes; i++) {
 				for (uchar i=5; i<DockConst->num_of_genes; i++) {
+				//for (uchar i=5; i<DockConst_num_of_genes; i++) {
 				entity_possible_new_genotype[i] = offspring_genotype [i] + genotype_deviate [i] + genotype_bias [i];  
 				//map_angle(&(entity_possible_new_genotype [i]), 360.0f);
 				//map_angle_360(&(entity_possible_new_genotype [i]));
@@ -139,6 +149,7 @@ while(active) {
 
 				//for (uint i=5; i<DockConst->num_of_genes; i++) {
 				for (uchar i=5; i<DockConst->num_of_genes; i++) {
+				//for (uchar i=5; i<DockConst_num_of_genes; i++) {
 				entity_possible_new_genotype[i] = offspring_genotype[i] - genotype_deviate[i] - genotype_bias[i];
 				//map_angle(&(entity_possible_new_genotype [i]), 360.0f);
 				//map_angle_360(&(entity_possible_new_genotype [i]));
@@ -166,7 +177,7 @@ while(active) {
 			candidate_energy = read_channel_altera(chan_Store2LS_LSenergy);
 		
 
-			}
+			} // End of if (active != 0)
 
 	
 			//if the new entity is better better
@@ -225,8 +236,10 @@ while(active) {
 			if (ls_pass_complete == true) { 
 				//Changing deviation (rho), if needed
 				if (cons_succ >= DockConst->cons_limit) {
+				//if (cons_succ >= DockConst_cons_limit) {
 					//this limitation is necessary in the FPGA due to the number representation
 					if ((rho*DockConst->base_dang_mul_sqrt3 < 90) && (rho*DockConst->base_dmov_mul_sqrt3 < 64)) {
+					//if ((rho*DockConst_base_dang_mul_sqrt3 < 90) && (rho*DockConst_base_dmov_mul_sqrt3 < 64)) {
 						rho = LS_EXP_FACTOR*rho;
 					}
 					cons_fail = 0;
@@ -234,6 +247,7 @@ while(active) {
 				}
 				else {
 					if (cons_fail >= DockConst->cons_limit) {
+					//if (cons_fail >= DockConst_cons_limit) {
 						rho = LS_CONT_FACTOR*rho;
 						cons_fail = 0;
 						cons_succ = 0;

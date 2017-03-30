@@ -242,22 +242,25 @@ filled with clock() */
 		return 1;
 
 	//preparing parameter struct
-	dockpars.num_of_atoms  = ((char)  myligand_reference.num_of_atoms);
-	dockpars.num_of_atypes = ((char)  myligand_reference.num_of_atypes);
-	dockpars.num_of_intraE_contributors = ((int) myligand_reference.num_of_intraE_contributors);
-	dockpars.gridsize_x    = ((char)  mygrid->size_xyz[0]);
-	dockpars.gridsize_y    = ((char)  mygrid->size_xyz[1]);
-	dockpars.gridsize_z    = ((char)  mygrid->size_xyz[2]);
+	dockpars.num_of_atoms  = ((unsigned char) myligand_reference.num_of_atoms);
+	dockpars.num_of_atypes = ((unsigned char) myligand_reference.num_of_atypes);
+	dockpars.num_of_intraE_contributors = ((unsigned int) myligand_reference.num_of_intraE_contributors);
+	dockpars.gridsize_x    = ((unsigned char)  mygrid->size_xyz[0]);
+	dockpars.gridsize_y    = ((unsigned char)  mygrid->size_xyz[1]);
+	dockpars.gridsize_z    = ((unsigned char)  mygrid->size_xyz[2]);
+	dockpars.g1	       = dockpars.gridsize_x ;
+	dockpars.g2	       = dockpars.gridsize_x * dockpars.gridsize_y;
+	dockpars.g3	       = dockpars.gridsize_x * dockpars.gridsize_y * dockpars.gridsize_z;
 	dockpars.grid_spacing  = ((float) mygrid->spacing);
-	dockpars.rotbondlist_length = ((int) NUM_OF_THREADS_PER_BLOCK*(myligand_reference.num_of_rotcyc));
+	dockpars.rotbondlist_length = ((unsigned int) NUM_OF_THREADS_PER_BLOCK*(myligand_reference.num_of_rotcyc));
 	dockpars.coeff_elec    = ((float) mypars->coeffs.scaled_AD4_coeff_elec);
 	dockpars.coeff_desolv  = ((float) mypars->coeffs.AD4_coeff_desolv);
 	// L30nardoSV added
 	dockpars.num_of_energy_evals = (unsigned int) mypars->num_of_energy_evals;
 	dockpars.num_of_generations  = (unsigned int) mypars->num_of_generations;
 
-	dockpars.pop_size      = mypars->pop_size;
-	dockpars.num_of_genes  = myligand_reference.num_of_rotbonds + 6;
+	dockpars.pop_size      = (unsigned int) mypars->pop_size;
+	dockpars.num_of_genes  = (unsigned int)(myligand_reference.num_of_rotbonds + 6);
 	dockpars.tournament_rate = mypars->tournament_rate;
 	dockpars.crossover_rate  = mypars->crossover_rate;
 	dockpars.mutation_rate   = mypars->mutation_rate;
@@ -278,7 +281,7 @@ filled with clock() */
 	//energies, evaluation counters and random number generator states
 	size_floatgrids = (sizeof(float)) * (mygrid->num_of_atypes+2) * (mygrid->size_xyz[0]) * (mygrid->size_xyz[1]) * (mygrid->size_xyz[2]);
 
-	mallocBufferObject(context,CL_MEM_READ_ONLY, sizeof(dockpars), &mem_DockparametersConst);
+	//mallocBufferObject(context,CL_MEM_READ_ONLY, sizeof(dockpars), &mem_DockparametersConst);
 	mallocBufferObject(context,CL_MEM_READ_ONLY, sizeof(KerConst), &mem_KerConst);
 	mallocBufferObject(context,CL_MEM_READ_ONLY,size_floatgrids,   &mem_dockpars_fgrids);
 	mallocBufferObject(context,CL_MEM_READ_ONLY,size_populations,  &mem_dockpars_conformations_current);
@@ -311,100 +314,91 @@ filled with clock() */
 	clock_start_docking = clock();
 
 #ifdef ENABLE_KERNEL1 // Krnl_GA
-        //setKernelArg(kernel1,0, sizeof(mem_dockpars_fgrids),                    &mem_dockpars_fgrids);
         setKernelArg(kernel1,0, sizeof(mem_dockpars_conformations_current),     &mem_dockpars_conformations_current);
         setKernelArg(kernel1,1, sizeof(mem_dockpars_energies_current),          &mem_dockpars_energies_current);
         setKernelArg(kernel1,2, sizeof(mem_dockpars_conformations_next),        &mem_dockpars_conformations_next);
         setKernelArg(kernel1,3, sizeof(mem_dockpars_energies_next),             &mem_dockpars_energies_next);
-        //setKernelArg(kernel1,4, sizeof(mem_dockpars_prng_states),              &mem_dockpars_prng_states);
-	//setKernelArg(kernel1,5, sizeof(cl_mem),                          	 &mem_KerConst);
         setKernelArg(kernel1,4, sizeof(cl_mem),                          	&mem_DockparametersConst);
-	//setKernelArg(kernel1,5, sizeof(mem_evals_performed),                    &mem_evals_performed);
-        //setKernelArg(kernel1,6, sizeof(mem_generations_performed),              &mem_generations_performed);
-	setKernelArg(kernel1,5, sizeof(mem_evals_and_generations_performed),     &mem_evals_and_generations_performed);
+	//setKernelArg(kernel1,4, sizeof(unsigned int),                          	&dockpars.num_of_energy_evals);
+	//setKernelArg(kernel1,5, sizeof(unsigned int),                          	&dockpars.num_of_generations);
+	//setKernelArg(kernel1,6, sizeof(unsigned int),                          	&dockpars.pop_size);
+	setKernelArg(kernel1,5, sizeof(mem_evals_and_generations_performed),    &mem_evals_and_generations_performed);
 #endif // End of ENABLE_KERNEL1
 
 #ifdef ENABLE_KERNEL2 // Krnl_Conform
-        //setKernelArg(kernel2,0, sizeof(mem_dockpars_fgrids),                    &mem_dockpars_fgrids);
-        //setKernelArg(kernel2,1, sizeof(mem_dockpars_conformations_current),     &mem_dockpars_conformations_current);
-        //setKernelArg(kernel2,2, sizeof(mem_dockpars_energies_current),          &mem_dockpars_energies_current);
-        //setKernelArg(kernel2,3, sizeof(mem_dockpars_conformations_next),        &mem_dockpars_conformations_next);
-        //setKernelArg(kernel2,4, sizeof(mem_dockpars_energies_next),             &mem_dockpars_energies_next);
-        //setKernelArg(kernel2,5, sizeof(mem_dockpars_prng_states),               &mem_dockpars_prng_states);
 	setKernelArg(kernel2,0, sizeof(cl_mem),                          	&mem_KerConst);
         setKernelArg(kernel2,1, sizeof(cl_mem),                          	&mem_DockparametersConst);
+	//setKernelArg(kernel2,1, sizeof(unsigned char),                         	&dockpars.num_of_atoms);
+	//setKernelArg(kernel2,2, sizeof(unsigned int),                         	&dockpars.rotbondlist_length);
 #endif // End of ENABLE_KERNEL2
 
 #ifdef ENABLE_KERNEL3 // Krnl_InterE
         setKernelArg(kernel3,0, sizeof(mem_dockpars_fgrids),                    &mem_dockpars_fgrids);
-        //setKernelArg(kernel3,1, sizeof(mem_dockpars_conformations_current),     &mem_dockpars_conformations_current);
-        //setKernelArg(kernel3,2, sizeof(mem_dockpars_energies_current),          &mem_dockpars_energies_current);
-        //setKernelArg(kernel3,3, sizeof(mem_dockpars_conformations_next),        &mem_dockpars_conformations_next);
-        //setKernelArg(kernel3,4, sizeof(mem_dockpars_energies_next),             &mem_dockpars_energies_next);
-        //setKernelArg(kernel3,5, sizeof(mem_dockpars_prng_states),               &mem_dockpars_prng_states);
 	setKernelArg(kernel3,1, sizeof(cl_mem),                          	&mem_KerConst);
         setKernelArg(kernel3,2, sizeof(cl_mem),                          	&mem_DockparametersConst);
+	//setKernelArg(kernel3,2, sizeof(unsigned char),                          &dockpars.gridsize_x);
+	//setKernelArg(kernel3,3, sizeof(unsigned char),                          &dockpars.gridsize_y);
+	//setKernelArg(kernel3,4, sizeof(unsigned char),                          &dockpars.gridsize_z);
+	//setKernelArg(kernel3,5, sizeof(unsigned char),                          &dockpars.g1);
+	//setKernelArg(kernel3,6, sizeof(unsigned int),                           &dockpars.g2);
+	//setKernelArg(kernel3,7, sizeof(unsigned int),                           &dockpars.g3);
+	//setKernelArg(kernel3,8, sizeof(unsigned char),                          &dockpars.num_of_atoms);
+	//setKernelArg(kernel3,9, sizeof(unsigned char),                          &dockpars.num_of_atypes);
 #endif // End of ENABLE_KERNEL3
 
 #ifdef ENABLE_KERNEL4 // Krnl_IntraE
-        //setKernelArg(kernel4,0, sizeof(mem_dockpars_fgrids),                    &mem_dockpars_fgrids);
-        //setKernelArg(kernel4,1, sizeof(mem_dockpars_conformations_current),     &mem_dockpars_conformations_current);
-        //setKernelArg(kernel4,2, sizeof(mem_dockpars_energies_current),          &mem_dockpars_energies_current);
-        //setKernelArg(kernel4,3, sizeof(mem_dockpars_conformations_next),        &mem_dockpars_conformations_next);
-        //setKernelArg(kernel4,4, sizeof(mem_dockpars_energies_next),             &mem_dockpars_energies_next);
-        //setKernelArg(kernel4,5, sizeof(mem_dockpars_prng_states),               &mem_dockpars_prng_states);
 	setKernelArg(kernel4,0, sizeof(cl_mem),                          	&mem_KerConst);
         setKernelArg(kernel4,1, sizeof(cl_mem),                          	&mem_DockparametersConst);
+	//setKernelArg(kernel4,1, sizeof(unsigned char),                          &dockpars.num_of_atoms);
+	//setKernelArg(kernel4,2, sizeof(unsigned char),                          &dockpars.num_of_atypes);
+	//setKernelArg(kernel4,3, sizeof(float),		                        &dockpars.coeff_elec);
+	//setKernelArg(kernel4,4, sizeof(float),		                        &dockpars.qasp);
+	//setKernelArg(kernel4,5, sizeof(float),		                        &dockpars.coeff_desolv);
+	//setKernelArg(kernel4,6, sizeof(unsigned int),	                        &dockpars.num_of_intraE_contributors);
+	//setKernelArg(kernel4,7, sizeof(float),		                        &dockpars.grid_spacing);
 #endif // End of ENABLE_KERNEL4
 
 #ifdef ENABLE_KERNEL5 // Krnl_Store
-        //setKernelArg(kernel5,0, sizeof(mem_dockpars_fgrids),                    &mem_dockpars_fgrids);
-        //setKernelArg(kernel5,1, sizeof(mem_dockpars_conformations_current),     &mem_dockpars_conformations_current);
         setKernelArg(kernel5,0, sizeof(mem_dockpars_energies_current),          &mem_dockpars_energies_current);
-        //setKernelArg(kernel5,3, sizeof(mem_dockpars_conformations_next),        &mem_dockpars_conformations_next);
         setKernelArg(kernel5,1, sizeof(mem_dockpars_energies_next),             &mem_dockpars_energies_next);
-        //setKernelArg(kernel5,5, sizeof(mem_dockpars_prng_states),               &mem_dockpars_prng_states);
-	//setKernelArg(kernel5,6, sizeof(cl_mem),                          	&mem_KerConst);
         setKernelArg(kernel5,2, sizeof(cl_mem),                          	&mem_DockparametersConst);
+	//setKernelArg(kernel5,2, sizeof(unsigned int),               		&dockpars.pop_size);
 #endif // End of ENABLE_KERNEL5
 
 #ifdef ENABLE_KERNEL6 // Krnl_IC
-        //setKernelArg(kernel1,0, sizeof(mem_dockpars_fgrids),                    &mem_dockpars_fgrids);
         setKernelArg(kernel6,0, sizeof(mem_dockpars_conformations_current),     &mem_dockpars_conformations_current);
-        //setKernelArg(kernel6,1, sizeof(mem_dockpars_energies_current),          &mem_dockpars_energies_current);
-        //setKernelArg(kernel6,2, sizeof(mem_dockpars_conformations_next),        &mem_dockpars_conformations_next);
-        //setKernelArg(kernel6,3, sizeof(mem_dockpars_energies_next),             &mem_dockpars_energies_next);
-        //setKernelArg(kernel6,4, sizeof(mem_dockpars_prng_states),               &mem_dockpars_prng_states);
-	//setKernelArg(kernel6,5, sizeof(cl_mem),                          	&mem_KerConst);
         setKernelArg(kernel6,1, sizeof(cl_mem),                          	&mem_DockparametersConst);
-	//setKernelArg(kernel6,7, sizeof(mem_evals_performed),                    &mem_evals_performed);
-        //setKernelArg(kernel6,8, sizeof(mem_generations_performed),              &mem_generations_performed);
+	//setKernelArg(kernel6,1, sizeof(unsigned int),                 		&dockpars.pop_size);
 #endif // End of ENABLE_KERNEL6
 
 #ifdef ENABLE_KERNEL7 // Krnl_GG
-        //setKernelArg(kernel1,0, sizeof(mem_dockpars_fgrids),                    &mem_dockpars_fgrids);
         setKernelArg(kernel7,0, sizeof(mem_dockpars_conformations_current),     &mem_dockpars_conformations_current);
         setKernelArg(kernel7,1, sizeof(mem_dockpars_energies_current),          &mem_dockpars_energies_current);
         setKernelArg(kernel7,2, sizeof(mem_dockpars_conformations_next),        &mem_dockpars_conformations_next);
         setKernelArg(kernel7,3, sizeof(mem_dockpars_energies_next),             &mem_dockpars_energies_next);
         setKernelArg(kernel7,4, sizeof(mem_dockpars_prng_states),               &mem_dockpars_prng_states);
-	//setKernelArg(kernel7,5, sizeof(cl_mem),                          	&mem_KerConst);
         setKernelArg(kernel7,5, sizeof(cl_mem),                          	&mem_DockparametersConst);
-	//setKernelArg(kernel7,7, sizeof(mem_evals_performed),                    &mem_evals_performed);
-        //setKernelArg(kernel7,8, sizeof(mem_generations_performed),              &mem_generations_performed);
+	//setKernelArg(kernel7,5, sizeof(unsigned int),               		&dockpars.pop_size);
+	//setKernelArg(kernel7,6, sizeof(float),       	        		&dockpars.tournament_rate);
+	//setKernelArg(kernel7,7, sizeof(float),       	        		&dockpars.crossover_rate);
+	//setKernelArg(kernel7,8, sizeof(float),       	        		&dockpars.mutation_rate);
+	//setKernelArg(kernel7,9, sizeof(float),       	        		&dockpars.abs_max_dmov);
+	//setKernelArg(kernel7,10,sizeof(float),       	        		&dockpars.abs_max_dang);
 #endif // End of ENABLE_KERNEL7
 
-#ifdef ENABLE_KERNEL8
-        //setKernelArg(kernel1,0, sizeof(mem_dockpars_fgrids),                    &mem_dockpars_fgrids);
+#ifdef ENABLE_KERNEL8 // Krnl_LS
         setKernelArg(kernel8,0, sizeof(mem_dockpars_conformations_current),     &mem_dockpars_conformations_current);
         setKernelArg(kernel8,1, sizeof(mem_dockpars_energies_current),          &mem_dockpars_energies_current);
-        //setKernelArg(kernel8,2, sizeof(mem_dockpars_conformations_next),        &mem_dockpars_conformations_next);
-        //setKernelArg(kernel8,3, sizeof(mem_dockpars_energies_next),             &mem_dockpars_energies_next);
         setKernelArg(kernel8,2, sizeof(mem_dockpars_prng_states),               &mem_dockpars_prng_states);
-	//setKernelArg(kernel8,5, sizeof(cl_mem),                          	&mem_KerConst);
         setKernelArg(kernel8,3, sizeof(cl_mem),                          	&mem_DockparametersConst);
-	//setKernelArg(kernel8,7, sizeof(mem_evals_performed),                    &mem_evals_performed);
-        //setKernelArg(kernel8,8, sizeof(mem_generations_performed),              &mem_generations_performed);
+	//setKernelArg(kernel8,3, sizeof(unsigned int),                          	&dockpars.num_of_lsentities);
+	//setKernelArg(kernel8,4, sizeof(unsigned int),                          	&dockpars.pop_size);
+	//setKernelArg(kernel8,5, sizeof(unsigned int),                          	&dockpars.max_num_of_iters);
+	//setKernelArg(kernel8,6, sizeof(float),                          	&dockpars.rho_lower_bound);
+	//setKernelArg(kernel8,7, sizeof(float),                          	&dockpars.base_dmov_mul_sqrt3);
+	//setKernelArg(kernel8,8, sizeof(unsigned int),                          	&dockpars.num_of_genes);
+	//setKernelArg(kernel8,9, sizeof(float),                          	&dockpars.base_dang_mul_sqrt3);
+	//setKernelArg(kernel8,10,sizeof(unsigned int),                          	&dockpars.cons_limit);
 #endif // End of ENABLE_KERNEL8
 
 	//unsigned long run_cnt;	/* int run_cnt; */

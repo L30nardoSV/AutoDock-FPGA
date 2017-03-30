@@ -109,8 +109,9 @@
 //#define REPRO
 // -----------------------------------------------------------------------------
 
-
-#define DEBUG_ACTIVE_KERNEL
+// Enable to debug kernels using printf
+// Disable them to save RAM resources
+//#define DEBUG_ACTIVE_KERNEL
 //#define DEBUG_KRNL_GA
 //#define DEBUG_KRNL_IC
 //

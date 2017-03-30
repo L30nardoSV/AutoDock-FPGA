@@ -26,17 +26,18 @@
 // the evaluation counters and the random number generator states.
 typedef struct
 {
-	char  	 	num_of_atoms;
-	char   		num_of_atypes;
-	int    		num_of_intraE_contributors;
-	char   		gridsize_x;
-	char   		gridsize_y;
-	char   		gridsize_z;
+	unsigned char  	num_of_atoms;
+	unsigned char   num_of_atypes;
+	unsigned int    num_of_intraE_contributors;
+	unsigned char   gridsize_x;
+	unsigned char   gridsize_y;
+	unsigned char   gridsize_z;
+	unsigned char	g1;
+	unsigned int	g2;
+	unsigned int 	g3;
 	float  		grid_spacing;
-/*
-	float* 		fgrids;
-*/
-	int    		rotbondlist_length;
+
+	unsigned int    rotbondlist_length;
 	float  		coeff_elec;
 	float  		coeff_desolv;
 /*
@@ -51,8 +52,8 @@ typedef struct
 	unsigned int num_of_energy_evals;
 	unsigned int num_of_generations;
 
-	int    		pop_size;
-	int    		num_of_genes;
+	unsigned int    pop_size;
+	unsigned int   	num_of_genes;
 	float  		tournament_rate;
 	float  		crossover_rate;
 	float  		mutation_rate;

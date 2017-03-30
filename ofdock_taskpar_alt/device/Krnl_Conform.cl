@@ -6,14 +6,12 @@
 __kernel __attribute__ ((max_global_work_dim(0)))
 //__attribute__ ((reqd_work_group_size(1,1,1)))
 void Krnl_Conform(
-             //__global const float*           restrict GlobFgrids,
-	     //__global       float*           restrict GlobPopulationCurrent,
-	     //__global       float*           restrict GlobEnergyCurrent,
-	     //__global       float*           restrict GlobPopulationNext,
-	     //__global       float*           restrict GlobEnergyNext,
-             //__global       unsigned int*    restrict GlobPRNG,
 	     __global const kernelconstant*  restrict KerConst,
-	     __global const Dockparameters*  restrict DockConst)
+	     //__global const Dockparameters*  restrict DockConst
+	     __constant const Dockparameters*  restrict DockConst
+		//      const unsigned char             DockConst_num_of_atoms,
+		//      const unsigned int	      DockConst_rotbondlist_length
+)
 {
 
 	__local float loc_coords_x[MAX_NUM_OF_ATOMS];
@@ -144,6 +142,7 @@ while(active) {
 	// **********************************************
 	//for (uint rotation_counter = 0; rotation_counter < DockConst->rotbondlist_length; rotation_counter++)
 	for (ushort rotation_counter = 0; rotation_counter < DockConst->rotbondlist_length; rotation_counter++)
+	//for (ushort rotation_counter = 0; rotation_counter < DockConst_rotbondlist_length; rotation_counter++)
 	{
 		rotation_list_element = KerConst->rotlist_const[rotation_counter];
 
@@ -346,6 +345,7 @@ while(active) {
 
 	//for (uint pipe_cnt=0; pipe_cnt<DockConst->num_of_atoms; pipe_cnt++) {
 	for (uchar pipe_cnt=0; pipe_cnt<DockConst->num_of_atoms; pipe_cnt++) {
+	//for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt++) {
 		write_channel_altera(chan_Conf2Intere_x, loc_coords_x[pipe_cnt]);
 		write_channel_altera(chan_Conf2Intrae_x, loc_coords_x[pipe_cnt]);
 		mem_fence(CLK_CHANNEL_MEM_FENCE);

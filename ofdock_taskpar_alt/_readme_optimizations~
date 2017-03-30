@@ -768,3 +768,98 @@ GlobalEnergyCurrent was used instead of GlobalEnergyNext
 +----------------------------------------+---------------------------;
 
 
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+
+Correcting the functionality so the program runs without stalling any 
+KrnlXXX, produces a version that requires same amount of hw resources.
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+
+Replacing (Dockparameters struct args) with (private args), increase resource usage:
+
+With Dockparameters struct args:
++--------------------------------------------------------------------+
+; Estimated Resource Usage Summary                                   ;
++----------------------------------------+---------------------------+
+; Resource                               + Usage                     ;
++----------------------------------------+---------------------------+
+; Logic utilization                      ;   78%                     ;
+; ALUTs                                  ;   40%                     ;
+; Dedicated logic registers              ;   40%                     ;
+; Memory blocks                          ;  126%                     ;
+; DSP blocks                             ;   26%                     ;
++----------------------------------------+---------------------------;
+
+		ALUTs		FFs		RAMs		DSPs
+ Krnl_Conform	21514 (3%)	41010 (3%)	212 (9%)	94 (6%)	
+ Krnl_GA	3412 (0%)	10335 (1%)	79 (3%)		0 (0%)	
+ Krnl_GG	40980 (5%)	81637 (5%)	296 (12%)	114 (8%)	
+ Krnl_IC	4786 (1%)	9422 (1%)	56 (2%)		0 (0%)	
+ Krnl_InterE	102207 (13%)	205058 (13%)	1177 (49%)	58 (4%)	
+ Krnl_IntraE	46554 (6%)	78768 (5%)	644 (27%)	60 (4%)	
+ Krnl_LS	26556 (3%)	67543 (4%)	165 (7%)	69 (5%)	
+ Krnl_Store	1453 (0%)	4230 (0%)	20 (1%)		1 (0%)	
+
+
+
+
+With private args: (passing also interE/g1,g2,g3 already calculated 
+		    in the host)
+
++--------------------------------------------------------------------+
+; Estimated Resource Usage Summary                                   ;
++----------------------------------------+---------------------------+
+; Resource                               + Usage                     ;
++----------------------------------------+---------------------------+
+; Logic utilization                      ;   72%                     ;
+; ALUTs                                  ;   35%                     ;
+; Dedicated logic registers              ;   38%                     ;
+; Memory blocks                          ;  105%                     ;
+; DSP blocks                             ;   26%                     ;
++----------------------------------------+---------------------------;
+
+		ALUTs		FFs		RAMs		DSPs
+Krnl_Conform	21846 (3%)	41602 (3%)	212 (9%)	94 (6%)	
+ Krnl_GA	3603 (0%)	10750 (1%)	79 (3%)		0 (0%)	
+ Krnl_GG	41589 (5%)	82726 (5%)	296 (12%)	114 (8%)	
+ Krnl_IC	4896 (1%)	9596 (1%)	56 (2%)		0 (0%)	
+ Krnl_InterE	62093 (8%)	169153 (11%)	694 (29%)	58 (4%)	
+ Krnl_IntraE	47279 (6%)	80205 (5%)	644 (27%)	60 (4%)	
+ Krnl_LS	27259 (3%)	67519 (4%)	163 (7%)	69 (5%)	
+ Krnl_Store	1563 (0%)	4372 (0%)	20 (1%)		1 (0%)	
+
+
+So we re enable Dockparameters struct args!!!!
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+
+Using Dockparameters struct as args in all kernels, but this time 
+declaring it as a __constant instead of __global:
+
++--------------------------------------------------------------------+
+; Estimated Resource Usage Summary                                   ;
++----------------------------------------+---------------------------+
+; Resource                               + Usage                     ;
++----------------------------------------+---------------------------+
+; Logic utilization                      ;   61%                     ;
+; ALUTs                                  ;   27%                     ;
+; Dedicated logic registers              ;   35%                     ;
+; Memory blocks                          ;   74%                     ;
+; DSP blocks                             ;   26%                     ;
++----------------------------------------+---------------------------;
+
+		ALUTs		FFs		RAMs		DSPs
+Krnl_Conform	16891 (2%)	42527 (3%)	157 (7%)	94 (6%)	
+ Krnl_GA	3603 (0%)	10750 (1%)	79 (3%)		0 (0%)	
+ Krnl_GG	36517 (5%)	78228 (5%)	236 (10%)	114 (8%)	
+ Krnl_IC	2360 (0%)	7347 (0%)	26 (1%)		0 (0%)	
+ Krnl_InterE	41805 (5%)	151161 (10%)	454 (19%)	58 (4%)	
+ Krnl_IntraE	16747 (2%)	54064 (3%)	287 (12%)	60 (4%)	
+ Krnl_LS	27154 (3%)	67391 (4%)	163 (7%)	69 (5%)	
+ Krnl_Store	1563 (0%)	4372 (0%)	20 (1%)		1 (0%)	
+
+
+

@@ -15,14 +15,17 @@ float sqrt_custom(const float x)
 __kernel __attribute__ ((max_global_work_dim(0)))
 //__attribute__ ((reqd_work_group_size(1,1,1)))
 void Krnl_IntraE(
-             //__global const float*           restrict GlobFgrids,
-	     //__global       float*           restrict GlobPopulationCurrent,
-	     //__global       float*           restrict GlobEnergyCurrent,
-	     //__global       float*           restrict GlobPopulationNext,
-	     //__global       float*           restrict GlobEnergyNext,
-             //__global       unsigned int*    restrict GlobPRNG,
 	     __global const kernelconstant*  restrict KerConst,
-	     __global const Dockparameters*  restrict DockConst)
+	     //__global const Dockparameters*  restrict DockConst
+	     __constant const Dockparameters*  restrict DockConst
+		//      const unsigned char 	        DockConst_num_of_atoms,
+		//      const unsigned char 	        DockConst_num_of_atypes,
+		//      const float			DockConst_coeff_elec,
+		//      const float			DockConst_qasp,
+		//      const float			DockConst_coeff_desolv,
+		//      const unsigned int		DockConst_num_of_intraE_contributors,
+		//      const float			DockConst_grid_spacing
+)
 {
 
 	__local float loc_coords_x[MAX_NUM_OF_ATOMS];
@@ -68,6 +71,7 @@ while(active) {
 
 	//for (uint pipe_cnt=0; pipe_cnt<DockConst->num_of_atoms; pipe_cnt++) {
 	for (uchar pipe_cnt=0; pipe_cnt<DockConst->num_of_atoms; pipe_cnt++) {
+	//for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt++) {
 		loc_coords_x[pipe_cnt] = read_channel_altera(chan_Conf2Intrae_x);
 		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);
 		loc_coords_y[pipe_cnt] = read_channel_altera(chan_Conf2Intrae_y);
@@ -101,8 +105,8 @@ while(active) {
 	// **********************************************
 	LOOP_INTRAE_1:
 	//for (uint contributor_counter=0; contributor_counter<DockConst->num_of_intraE_contributors; contributor_counter++)
-	for (ushort contributor_counter=0; contributor_counter<DockConst->num_of_intraE_contributors; contributor_counter++)
-	{	
+	for (ushort contributor_counter=0; contributor_counter<DockConst->num_of_intraE_contributors; contributor_counter++) {
+	//for (ushort contributor_counter=0; contributor_counter<DockConst_num_of_intraE_contributors; contributor_counter++) {	
 		//atom1_id = KerConst->intraE_contributors_const[3*contributor_counter]; 
 		//atom2_id = KerConst->intraE_contributors_const[3*contributor_counter+1];
 
@@ -117,6 +121,7 @@ while(active) {
 		subz = loc_coords_z[atom1_id] - loc_coords_z[atom2_id];
 		//distance_leo = sqrt(subx*subx + suby*suby + subz*subz)*DockConst->grid_spacing;
 		distance_leo = sqrt_custom(subx*subx + suby*suby + subz*subz)*DockConst->grid_spacing;
+		//distance_leo = sqrt_custom(subx*subx + suby*suby + subz*subz)*DockConst_grid_spacing;
 
 		if (distance_leo < 1.0f) {
 			#if defined (DEBUG_KRNL_INTRAE)
@@ -153,6 +158,7 @@ while(active) {
 			*/
 			//partialE1 = KerConst->VWpars_AC_const[atom1_typeid*DockConst->num_of_atypes+atom2_typeid]/distance_pow_12;
 			partialE1 = KerConst->VWpars_AC_const[atom1_typeid*DockConst->num_of_atypes+atom2_typeid]*inverse_distance_pow_12;
+			//partialE1 = KerConst->VWpars_AC_const[atom1_typeid*DockConst_num_of_atypes+atom2_typeid]*inverse_distance_pow_12;
 
 			//if (KerConst->intraE_contributors_const[3*contributor_counter+2] == 1)	//H-bond
 			if (ref_intraE_contributors_const[2] == 1)	//H-bond
@@ -160,7 +166,8 @@ while(active) {
 				intraE-= KerConst->VWpars_BD_const[atom1_typeid*DockConst->num_of_atypes+atom2_typeid]/distance_pow_10;	
 				*/
 				//partialE2 = KerConst->VWpars_BD_const[atom1_typeid*DockConst->num_of_atypes+atom2_typeid]/distance_pow_10;	
-				partialE2 = KerConst->VWpars_BD_const[atom1_typeid*DockConst->num_of_atypes+atom2_typeid]*inverse_distance_pow_10;	
+				partialE2 = KerConst->VWpars_BD_const[atom1_typeid*DockConst->num_of_atypes+atom2_typeid]*inverse_distance_pow_10;
+				//partialE2 = KerConst->VWpars_BD_const[atom1_typeid*DockConst_num_of_atypes+atom2_typeid]*inverse_distance_pow_10;		
 
 
 			else	//van der Waals
@@ -168,7 +175,8 @@ while(active) {
 				intraE-= KerConst->VWpars_BD_const[atom1_typeid*DockConst->num_of_atypes+atom2_typeid]/distance_pow_6;
 				*/
 				//partialE2 = KerConst->VWpars_BD_const[atom1_typeid*DockConst->num_of_atypes+atom2_typeid]/distance_pow_6;
-				partialE2 = KerConst->VWpars_BD_const[atom1_typeid*DockConst->num_of_atypes+atom2_typeid]*inverse_distance_pow_6 ;
+				partialE2 = KerConst->VWpars_BD_const[atom1_typeid*DockConst->num_of_atypes+atom2_typeid]*inverse_distance_pow_6;
+				//partialE2 = KerConst->VWpars_BD_const[atom1_typeid*DockConst_num_of_atypes+atom2_typeid]*inverse_distance_pow_6;
 
 			//calculating electrostatic term
 			/*
@@ -178,6 +186,8 @@ while(active) {
 
 
 			partialE3 = DockConst->coeff_elec*KerConst->atom_charges_const[atom1_id]*KerConst->atom_charges_const[atom2_id]/(distance_leo*(-8.5525f + 86.9525f/(1.0f + 7.7839f*exp(-0.3154f*distance_leo))));
+
+			//partialE3 = DockConst_coeff_elec*KerConst->atom_charges_const[atom1_id]*KerConst->atom_charges_const[atom2_id]/(distance_leo*(-8.5525f + 86.9525f/(1.0f + 7.7839f*exp(-0.3154f*distance_leo))));
 				
 
 
@@ -197,6 +207,11 @@ while(active) {
 				  ( KerConst->dspars_S_const[atom1_typeid] + DockConst->qasp*fabs(KerConst->atom_charges_const[atom1_id]) ) * KerConst->dspars_V_const[atom2_typeid] + 
 				  ( KerConst->dspars_S_const[atom2_typeid] + DockConst->qasp*fabs(KerConst->atom_charges_const[atom2_id]) ) * KerConst->dspars_V_const[atom1_typeid]) * 
 				 DockConst->coeff_desolv*exp(-0.0386f*distance_pow_2);
+
+			//partialE4 = (
+			//	  ( KerConst->dspars_S_const[atom1_typeid] + DockConst_qasp*fabs(KerConst->atom_charges_const[atom1_id]) ) * KerConst->dspars_V_const[atom2_typeid] + 
+			//	  ( KerConst->dspars_S_const[atom2_typeid] + DockConst_qasp*fabs(KerConst->atom_charges_const[atom2_id]) ) * KerConst->dspars_V_const[atom1_typeid]) * 
+			//	 DockConst_coeff_desolv*exp(-0.0386f*distance_pow_2);
 
 		} // End of if: if ((dist < dcutoff) && (dist < 20.48))	
 
