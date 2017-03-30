@@ -99,8 +99,9 @@ static void display_device_info( cl_device_id device );
 //// Host constant struct
 //// --------------------------------
 Dockparameters dockpars;
-kernelconstant KerConst;
-
+//kernelconstant KerConst;
+kernelconstant_static  KerConstStatic;
+kernelconstant_dynamic KerConstDynamic;
 
 //// --------------------------------
 //// Host memory buffers
@@ -121,7 +122,9 @@ float* cpu_ref_ori_angles;
 // are not supported as OpenCL kernel args
 
 cl_mem mem_DockparametersConst;	
-cl_mem mem_KerConst;	
+//cl_mem mem_KerConst;
+cl_mem mem_KerConstStatic;
+cl_mem mem_KerConstDynamic;	
 	
 /*								                  // Nr elements	// Nr bytes
 cl_mem mem_atom_charges_const;		// float [MAX_NUM_OF_ATOMS];			// 90	 = 90	//360
@@ -223,13 +226,16 @@ filled with clock() */
 	size_prng_seeds = sizeof(unsigned int);
 	cpu_prng_seeds = (unsigned int*) alignedMalloc(size_prng_seeds);
 
-	genseed(time(NULL));	//initializing seed generator
+	//genseed(time(NULL));	//initializing seed generator
 
+/*
 #if defined (REPRO)
 	cpu_prng_seeds[0] = 1u;
 #else
 	cpu_prng_seeds[0] = genseed(0u);	
 #endif
+*/
+	srand(time(NULL));
 
 	//preparing the constant data fields for the GPU
 	// ----------------------------------------------------------------------
@@ -238,7 +244,8 @@ filled with clock() */
 	// and return them <here> (<here> = where prepare_const_fields_for_gpu() is called),
 	// so we can send them to Kernels from <here>, instead of from calcenergy.cpp as originally.
 	// ----------------------------------------------------------------------
-	if (prepare_const_fields_for_gpu(&myligand_reference, mypars, cpu_ref_ori_angles, &KerConst) == 1)
+	//if (prepare_const_fields_for_gpu(&myligand_reference, mypars, cpu_ref_ori_angles, &KerConst) == 1)
+	if (prepare_conststatic_fields_for_gpu(&myligand_reference, mypars, cpu_ref_ori_angles, &KerConstStatic) == 1)
 		return 1;
 
 	//preparing parameter struct
@@ -277,13 +284,19 @@ filled with clock() */
 
 
 
+
+
+
  	//allocating GPU memory for populations, floatgrids,
 	//energies, evaluation counters and random number generator states
 	size_floatgrids = (sizeof(float)) * (mygrid->num_of_atypes+2) * (mygrid->size_xyz[0]) * (mygrid->size_xyz[1]) * (mygrid->size_xyz[2]);
 
 	mallocBufferObject(context,CL_MEM_READ_ONLY, sizeof(dockpars), &mem_DockparametersConst);
 
-	mallocBufferObject(context,CL_MEM_READ_ONLY, sizeof(KerConst), &mem_KerConst);
+	//mallocBufferObject(context,CL_MEM_READ_ONLY, sizeof(KerConst), &mem_KerConst);
+	mallocBufferObject(context,CL_MEM_READ_ONLY, sizeof(KerConstStatic),  &mem_KerConstStatic);
+	mallocBufferObject(context,CL_MEM_READ_ONLY, sizeof(KerConstDynamic), &mem_KerConstDynamic);
+
 	mallocBufferObject(context,CL_MEM_READ_ONLY,size_floatgrids,   &mem_dockpars_fgrids);
 	mallocBufferObject(context,CL_MEM_READ_ONLY,size_populations,  &mem_dockpars_conformations_current);
 	mallocBufferObject(context,CL_MEM_READ_WRITE,size_energies,    &mem_dockpars_energies_current);
@@ -312,6 +325,10 @@ filled with clock() */
 	memcopyBufferObjectToDevice(command_queue1,mem_dockpars_prng_states,     	cpu_prng_seeds,       size_prng_seeds);
 */
 
+	memcopyBufferObjectToDevice(command_queue1,mem_DockparametersConst, 	&dockpars,            sizeof(dockpars));
+	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic, 	   	&KerConstStatic,      sizeof(KerConstStatic));
+	memcopyBufferObjectToDevice(command_queue1,mem_dockpars_fgrids, 	cpu_floatgrids,       size_floatgrids);
+
 	clock_start_docking = clock();
 
 #ifdef ENABLE_KERNEL1 // Krnl_GA
@@ -327,15 +344,18 @@ filled with clock() */
 #endif // End of ENABLE_KERNEL1
 
 #ifdef ENABLE_KERNEL2 // Krnl_Conform
-	setKernelArg(kernel2,0, sizeof(cl_mem),                          	&mem_KerConst);
-        setKernelArg(kernel2,1, sizeof(cl_mem),                          	&mem_DockparametersConst);
+	//setKernelArg(kernel2,0, sizeof(cl_mem),                          	&mem_KerConst);
+	setKernelArg(kernel2,0, sizeof(cl_mem),                          	&mem_KerConstStatic);
+	setKernelArg(kernel2,1, sizeof(cl_mem),                          	&mem_KerConstDynamic);
+        setKernelArg(kernel2,2, sizeof(cl_mem),                          	&mem_DockparametersConst);
 	//setKernelArg(kernel2,1, sizeof(unsigned char),                         	&dockpars.num_of_atoms);
 	//setKernelArg(kernel2,2, sizeof(unsigned int),                         	&dockpars.rotbondlist_length);
 #endif // End of ENABLE_KERNEL2
 
 #ifdef ENABLE_KERNEL3 // Krnl_InterE
         setKernelArg(kernel3,0, sizeof(mem_dockpars_fgrids),                    &mem_dockpars_fgrids);
-	setKernelArg(kernel3,1, sizeof(cl_mem),                          	&mem_KerConst);
+	//setKernelArg(kernel3,1, sizeof(cl_mem),                          	&mem_KerConst);
+	setKernelArg(kernel3,1, sizeof(cl_mem),                          	&mem_KerConstStatic);
         setKernelArg(kernel3,2, sizeof(cl_mem),                          	&mem_DockparametersConst);
 	//setKernelArg(kernel3,2, sizeof(unsigned char),                          &dockpars.gridsize_x);
 	//setKernelArg(kernel3,3, sizeof(unsigned char),                          &dockpars.gridsize_y);
@@ -348,7 +368,8 @@ filled with clock() */
 #endif // End of ENABLE_KERNEL3
 
 #ifdef ENABLE_KERNEL4 // Krnl_IntraE
-	setKernelArg(kernel4,0, sizeof(cl_mem),                          	&mem_KerConst);
+	//setKernelArg(kernel4,0, sizeof(cl_mem),                          	&mem_KerConst);
+	setKernelArg(kernel4,0, sizeof(cl_mem),                          	&mem_KerConstStatic);
         setKernelArg(kernel4,1, sizeof(cl_mem),                          	&mem_DockparametersConst);
 	//setKernelArg(kernel4,1, sizeof(unsigned char),                          &dockpars.num_of_atoms);
 	//setKernelArg(kernel4,2, sizeof(unsigned char),                          &dockpars.num_of_atypes);
@@ -416,19 +437,24 @@ filled with clock() */
 	gen_initpop_and_reflig(mypars, cpu_init_populations, cpu_ref_ori_angles, &myligand_reference, mygrid);
 
 
-	if (prepare_const_fields_for_gpu(&myligand_reference, mypars, cpu_ref_ori_angles, &KerConst) == 1)
+	//if (prepare_const_fields_for_gpu(&myligand_reference, mypars, cpu_ref_ori_angles, &KerConst) == 1)
+	if (prepare_constdynamic_fields_for_gpu(&myligand_reference, mypars, cpu_ref_ori_angles, &KerConstDynamic) == 1)
 		return 1;
 
-/*
+///*
 #if defined (REPRO)
 	cpu_prng_seeds[0] = 1u;
 #else
-	cpu_prng_seeds[0] = genseed(0u);	
+	//cpu_prng_seeds[0] = genseed(0u);
+	cpu_prng_seeds[0] = rand();
 #endif
-*/
-	memcopyBufferObjectToDevice(command_queue1,mem_DockparametersConst, 		&dockpars,            sizeof(dockpars));
-	memcopyBufferObjectToDevice(command_queue1,mem_KerConst, 	   		&KerConst,            sizeof(KerConst));
-	memcopyBufferObjectToDevice(command_queue1,mem_dockpars_fgrids, 		cpu_floatgrids,       size_floatgrids);
+//*/
+	//memcopyBufferObjectToDevice(command_queue1,mem_DockparametersConst, 		&dockpars,            sizeof(dockpars));
+
+	//memcopyBufferObjectToDevice(command_queue1,mem_KerConst, 	   		&KerConst,            sizeof(KerConst));
+	memcopyBufferObjectToDevice(command_queue1,mem_KerConstDynamic, 	 &KerConstDynamic,         sizeof(KerConstDynamic));
+
+	//memcopyBufferObjectToDevice(command_queue1,mem_dockpars_fgrids, 		cpu_floatgrids,       size_floatgrids);
  	memcopyBufferObjectToDevice(command_queue1,mem_dockpars_conformations_current, 	cpu_init_populations, size_populations);
 	memcopyBufferObjectToDevice(command_queue1,mem_dockpars_prng_states,     	cpu_prng_seeds,       size_prng_seeds);
 
@@ -505,7 +531,8 @@ filled with clock() */
 
 
 
-		printf("\n\n"); fflush(stdout);
+		//printf("\n\n"); 
+		fflush(stdout);
 
 
 		//processing results
@@ -797,7 +824,9 @@ void cleanup() {
   if(cpu_ref_ori_angles)   {alignedFree(cpu_ref_ori_angles);}
 
   if(mem_DockparametersConst)		{clReleaseMemObject(mem_DockparametersConst);}
-  if(mem_KerConst)			{clReleaseMemObject(mem_KerConst);}
+  //if(mem_KerConst)			{clReleaseMemObject(mem_KerConst);}
+  if(mem_KerConstStatic)		{clReleaseMemObject(mem_KerConstStatic);}
+  if(mem_KerConstDynamic)		{clReleaseMemObject(mem_KerConstDynamic);}
   if(mem_dockpars_fgrids) 		{clReleaseMemObject(mem_dockpars_fgrids);}
   if(mem_dockpars_conformations_current){clReleaseMemObject(mem_dockpars_conformations_current);}
   if(mem_dockpars_energies_current) 	{clReleaseMemObject(mem_dockpars_energies_current);}

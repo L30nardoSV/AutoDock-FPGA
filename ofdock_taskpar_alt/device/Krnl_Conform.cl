@@ -6,9 +6,11 @@
 __kernel __attribute__ ((max_global_work_dim(0)))
 //__attribute__ ((reqd_work_group_size(1,1,1)))
 void Krnl_Conform(
-	     __global const kernelconstant*  restrict KerConst,
+	     //__global const kernelconstant*  restrict KerConst,
+             __global   const kernelconstant_static*  restrict KerConstStatic,
+	     __global   const kernelconstant_dynamic* restrict KerConstDynamic,
 	     //__global const Dockparameters*  restrict DockConst
-	     __constant const Dockparameters*  restrict DockConst
+	     __constant       Dockparameters*  restrict DockConst
 		//      const unsigned char             DockConst_num_of_atoms,
 		//      const unsigned int	      DockConst_rotbondlist_length
 )
@@ -50,10 +52,14 @@ void Krnl_Conform(
 	float quatrot_left_x, quatrot_left_y, quatrot_left_z, quatrot_left_q;
 	float quatrot_temp_x, quatrot_temp_y, quatrot_temp_z, quatrot_temp_q;
 	
-	float ref_orientation_quats_const_0 = KerConst->ref_orientation_quats_const[0]; 
-	float ref_orientation_quats_const_1 = KerConst->ref_orientation_quats_const[1];
-	float ref_orientation_quats_const_2 = KerConst->ref_orientation_quats_const[2];
-	float ref_orientation_quats_const_3 = KerConst->ref_orientation_quats_const[3];
+	//float ref_orientation_quats_const_0 = KerConst->ref_orientation_quats_const[0]; 
+	//float ref_orientation_quats_const_1 = KerConst->ref_orientation_quats_const[1];
+	//float ref_orientation_quats_const_2 = KerConst->ref_orientation_quats_const[2];
+	//float ref_orientation_quats_const_3 = KerConst->ref_orientation_quats_const[3];
+	float ref_orientation_quats_const_0 = KerConstDynamic->ref_orientation_quats_const[0]; 
+	float ref_orientation_quats_const_1 = KerConstDynamic->ref_orientation_quats_const[1];
+	float ref_orientation_quats_const_2 = KerConstDynamic->ref_orientation_quats_const[2];
+	float ref_orientation_quats_const_3 = KerConstDynamic->ref_orientation_quats_const[3];
 
 while(active) {
 
@@ -144,7 +150,8 @@ while(active) {
 	for (ushort rotation_counter = 0; rotation_counter < DockConst->rotbondlist_length; rotation_counter++)
 	//for (ushort rotation_counter = 0; rotation_counter < DockConst_rotbondlist_length; rotation_counter++)
 	{
-		rotation_list_element = KerConst->rotlist_const[rotation_counter];
+		//rotation_list_element = KerConst->rotlist_const[rotation_counter];
+		rotation_list_element = KerConstStatic->rotlist_const[rotation_counter];
 
 		if ((rotation_list_element & RLIST_DUMMY_MASK) == 0)	//if not dummy rotation
 		{
@@ -153,9 +160,12 @@ while(active) {
 			//capturing atom coordinates
 			if ((rotation_list_element & RLIST_FIRSTROT_MASK) != 0)	//if first rotation of this atom
 			{	
-				atom_to_rotate[0] = KerConst->ref_coords_x_const[atom_id];
-				atom_to_rotate[1] = KerConst->ref_coords_y_const[atom_id];
-				atom_to_rotate[2] = KerConst->ref_coords_z_const[atom_id];
+				//atom_to_rotate[0] = KerConst->ref_coords_x_const[atom_id];
+				//atom_to_rotate[1] = KerConst->ref_coords_y_const[atom_id];
+				//atom_to_rotate[2] = KerConst->ref_coords_z_const[atom_id];
+				atom_to_rotate[0] = KerConstDynamic->ref_coords_x_const[atom_id];
+				atom_to_rotate[1] = KerConstDynamic->ref_coords_y_const[atom_id];
+				atom_to_rotate[2] = KerConstDynamic->ref_coords_z_const[atom_id];
 			}
 			else
 			{
@@ -186,7 +196,8 @@ while(active) {
 				//rotation_unitvec[2] = KerConst->rotbonds_unit_vectors_const[3*rotbond_id+2];
 				//#pragma unroll 1
 				for (uchar i=0; i<3; i++) {
-					rotation_unitvec[i] = KerConst->rotbonds_unit_vectors_const[3*rotbond_id + i];
+					//rotation_unitvec[i] = KerConst->rotbonds_unit_vectors_const[3*rotbond_id + i];
+					rotation_unitvec[i] = KerConstDynamic->rotbonds_unit_vectors_const[3*rotbond_id + i];
 				}
 
 				rotation_angle = genotype[6+rotbond_id]*DEG_TO_RAD;
@@ -196,7 +207,8 @@ while(active) {
 				//rotation_movingvec[2] = KerConst->rotbonds_moving_vectors_const[3*rotbond_id+2];
 				//#pragma unroll 1
 				for (uchar i=0; i<3; i++) {
-					rotation_movingvec[i] = KerConst->rotbonds_moving_vectors_const[3*rotbond_id + i];
+					//rotation_movingvec[i] = KerConst->rotbonds_moving_vectors_const[3*rotbond_id + i];
+					rotation_movingvec[i] = KerConstDynamic->rotbonds_moving_vectors_const[3*rotbond_id + i];
 				}
 
 				//in addition performing the first movement 

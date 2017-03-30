@@ -9,7 +9,7 @@ void Krnl_GG(__global       float*           restrict GlobPopulationCurrent,
 	     __global       float*           restrict GlobEnergyNext,
              __global       unsigned int*    restrict GlobPRNG,
 	     //__global const Dockparameters*  restrict DockConst
-	     __constant const Dockparameters*  restrict DockConst
+	     __constant     Dockparameters*  restrict DockConst
 		//     const  unsigned int              DockConst_pop_size,
 		//     const  float		      DockConst_tournament_rate,
 	        //     const  float		      DockConst_crossover_rate,

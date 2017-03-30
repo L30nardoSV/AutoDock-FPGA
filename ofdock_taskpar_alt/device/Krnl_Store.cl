@@ -4,7 +4,7 @@ void Krnl_Store(
 	     __global       float*           restrict GlobEnergyCurrent,
 	     __global       float*           restrict GlobEnergyNext,
 	     //__global const Dockparameters*  restrict DockConst
-	     __constant const Dockparameters*  restrict DockConst
+	     __constant     Dockparameters*  restrict DockConst
 		 //     const unsigned int              DockConst_pop_size
 )
 {

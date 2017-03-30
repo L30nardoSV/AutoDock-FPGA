@@ -13,9 +13,10 @@ __kernel __attribute__ ((max_global_work_dim(0)))
 //__attribute__ ((reqd_work_group_size(1,1,1)))
 void Krnl_InterE(
              __global const float*           restrict GlobFgrids,
-	     __global const kernelconstant*  restrict KerConst,
+	     //__global const kernelconstant*  restrict KerConst,
+	     __global const kernelconstant_static*  restrict KerConstStatic,
 	     //__global const Dockparameters*  restrict DockConst
-	     __constant const Dockparameters*  restrict DockConst
+	     __constant     Dockparameters*  restrict DockConst
 		//      const unsigned char 		      DockConst_gridsize_x,
 		//      const unsigned char 		      DockConst_gridsize_y,
 		//      const unsigned char 		      DockConst_gridsize_z,
@@ -52,8 +53,10 @@ void Krnl_InterE(
 	__local float ref_atom_charges_const[MAX_NUM_OF_ATOMS];
 
 	for (uchar i=0; i<MAX_NUM_OF_ATOMS; i++) {
-		ref_atom_types_const [i] = KerConst->atom_types_const[i];
-		ref_atom_charges_const [i] = KerConst->atom_charges_const[i];
+		//ref_atom_types_const [i] = KerConst->atom_types_const[i];
+		ref_atom_types_const [i] = KerConstStatic->atom_types_const[i];
+		//ref_atom_charges_const [i] = KerConst->atom_charges_const[i];
+		ref_atom_charges_const [i] = KerConstStatic->atom_charges_const[i];
 	}
 	
 	float x, y, z, dx, dy, dz, q;

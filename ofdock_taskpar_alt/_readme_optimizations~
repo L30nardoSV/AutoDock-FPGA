@@ -803,8 +803,6 @@ With Dockparameters struct args:
  Krnl_Store	1453 (0%)	4230 (0%)	20 (1%)		1 (0%)	
 
 
-
-
 With private args: (passing also interE/g1,g2,g3 already calculated 
 		    in the host)
 
@@ -861,5 +859,40 @@ Krnl_Conform	16891 (2%)	42527 (3%)	157 (7%)	94 (6%)
  Krnl_LS	27154 (3%)	67391 (4%)	163 (7%)	69 (5%)	
  Krnl_Store	1563 (0%)	4372 (0%)	20 (1%)		1 (0%)	
 
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+Correcting frecuency at which prng seeds are calculated in host.
+Split KerConst in KerConstStatic and KerConstDynamic
+Both as __global const in kernels Conform, InterE, IntraE
+It seems there was no area improvement: there actaully were in 
+	 			        Krnl_Conform: ALUTs and FFs
 
++--------------------------------------------------------------------+
+; Estimated Resource Usage Summary                                   ;
++----------------------------------------+---------------------------+
+; Resource                               + Usage                     ;
++----------------------------------------+---------------------------+
+; Logic utilization                      ;   61%                     ;
+; ALUTs                                  ;   27%                     ;
+; Dedicated logic registers              ;   35%                     ;
+; Memory blocks                          ;   74%                     ;
+; DSP blocks                             ;   26%                     ;
++----------------------------------------+---------------------------;
+
+		ALUTs		FFs		RAMs		DSPs
+Krnl_Conform	16837 (2%)	42345 (3%)	157 (7%)	94 (6%)	
+ Krnl_GA	3603 (0%)	10750 (1%)	79 (3%)		0 (0%)	
+ Krnl_GG	36517 (5%)	78228 (5%)	236 (10%)	114 (8%)	
+ Krnl_IC	2360 (0%)	7347 (0%)	26 (1%)		0 (0%)	
+ Krnl_InterE	41805 (5%)	151161 (10%)	454 (19%)	58 (4%)	
+ Krnl_IntraE	16747 (2%)	54064 (3%)	287 (12%)	60 (4%)	
+ Krnl_LS	27154 (3%)	67391 (4%)	163 (7%)	69 (5%)	
+ Krnl_Store	1563 (0%)	4372 (0%)	20 (1%)		1 (0%)	
+
+
+
+
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
 

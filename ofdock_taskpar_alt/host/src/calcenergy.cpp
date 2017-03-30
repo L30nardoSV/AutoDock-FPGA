@@ -9,6 +9,7 @@
 
 #include "calcenergy.h"
 
+/*
 int prepare_const_fields_for_gpu(Liganddata*     myligand_reference,
                                  Dockpars*       mypars,
                                  float*          cpu_ref_ori_angles,
@@ -194,21 +195,20 @@ int prepare_const_fields_for_gpu(Liganddata*     myligand_reference,
 
 
 	//reference orientation quaternions
-/*
-	for (i=0; i<mypars->num_of_runs; i++)
-	{
-		//printf("Pregenerated angles for run %d: %f %f %f\n", i, cpu_ref_ori_angles[3*i], cpu_ref_ori_angles[3*i+1], cpu_ref_ori_angles[3*i+2]);
-		phi = cpu_ref_ori_angles[3*i]*DEG_TO_RAD;
-		theta = cpu_ref_ori_angles[3*i+1]*DEG_TO_RAD;
-		genrotangle = cpu_ref_ori_angles[3*i+2]*DEG_TO_RAD;
+//	for (i=0; i<mypars->num_of_runs; i++)
+//	{
+//		//printf("Pregenerated angles for run %d: %f %f %f\n", i, cpu_ref_ori_angles[3*i], cpu_ref_ori_angles[3*i+1], cpu_ref_ori_angles[3*i+2]);
+//		phi = cpu_ref_ori_angles[3*i]*DEG_TO_RAD;
+//		theta = cpu_ref_ori_angles[3*i+1]*DEG_TO_RAD;
+//		genrotangle = cpu_ref_ori_angles[3*i+2]*DEG_TO_RAD;
 
-		ref_orientation_quats[4*i] = cosf(genrotangle/2.0f);					//q
-		ref_orientation_quats[4*i+1] = sinf(genrotangle/2.0f)*sinf(theta)*cosf(phi);		//x
-		ref_orientation_quats[4*i+2] = sinf(genrotangle/2.0f)*sinf(theta)*sinf(phi);		//y
-		ref_orientation_quats[4*i+3] = sinf(genrotangle/2.0f)*cosf(theta);			//z
-		//printf("Precalculated quaternion for run %d: %f %f %f %f\n", i, ref_orientation_quats[4*i], ref_orientation_quats[4*i+1], ref_orientation_quats[4*i+2], ref_orientation_quats[4*i+3]);
-	}
-*/
+//		ref_orientation_quats[4*i] = cosf(genrotangle/2.0f);					//q
+//		ref_orientation_quats[4*i+1] = sinf(genrotangle/2.0f)*sinf(theta)*cosf(phi);		//x
+//		ref_orientation_quats[4*i+2] = sinf(genrotangle/2.0f)*sinf(theta)*sinf(phi);		//y
+//		ref_orientation_quats[4*i+3] = sinf(genrotangle/2.0f)*cosf(theta);			//z
+//		//printf("Precalculated quaternion for run %d: %f %f %f %f\n", i, ref_orientation_quats[4*i], ref_orientation_quats[4*i+1], ref_orientation_quats[4*i+2], ref_orientation_quats[4*i+3]);
+//	}
+
 	phi         = cpu_ref_ori_angles[0]*DEG_TO_RAD;
 	theta       = cpu_ref_ori_angles[1]*DEG_TO_RAD;
 	genrotangle = cpu_ref_ori_angles[2]*DEG_TO_RAD;
@@ -238,6 +238,256 @@ int prepare_const_fields_for_gpu(Liganddata*     myligand_reference,
 
 	return 0;
 }
+*/
+
+
+
+
+
+
+
+
+
+
+int prepare_conststatic_fields_for_gpu(Liganddata* 	       myligand_reference,
+				 	Dockpars*   	       mypars,
+				 	float*      	       cpu_ref_ori_angles,
+				 	kernelconstant_static* KerConstStatic)
+{
+	int i, j;
+	int type_id1, type_id2;
+	float* floatpoi;
+	char* charpoi;
+	//float phi, theta, genrotangle;
+
+	// ------------------------------
+	float atom_charges[MAX_NUM_OF_ATOMS];
+	char  atom_types[MAX_NUM_OF_ATOMS];
+	char  intraE_contributors[3*MAX_INTRAE_CONTRIBUTORS];
+	float VWpars_AC[MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES];
+	float VWpars_BD[MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES];
+	float dspars_S[MAX_NUM_OF_ATYPES];
+	float dspars_V[MAX_NUM_OF_ATYPES];
+	int   rotlist[MAX_NUM_OF_ROTATIONS];
+	// ------------------------------
+
+	//charges and type id-s
+	floatpoi = atom_charges;
+	charpoi = atom_types;
+
+	for (i=0; i < myligand_reference->num_of_atoms; i++)
+	{
+		*floatpoi = (float) myligand_reference->atom_idxyzq[i][4];
+		*charpoi = (char) myligand_reference->atom_idxyzq[i][0];
+		floatpoi++;
+		charpoi++;
+	}
+
+	//intramolecular energy contributors
+	myligand_reference->num_of_intraE_contributors = 0;
+	for (i=0; i<myligand_reference->num_of_atoms-1; i++)
+		for (j=i+1; j<myligand_reference->num_of_atoms; j++)
+		{
+			if (myligand_reference->intraE_contributors[i][j])
+				myligand_reference->num_of_intraE_contributors++;
+		}
+
+	if (myligand_reference->num_of_intraE_contributors > MAX_INTRAE_CONTRIBUTORS)
+	{
+		printf("Error: number of intramolecular energy contributor is too high!\n");
+		fflush(stdout);
+		return 1;
+	}
+
+	charpoi = intraE_contributors;
+	for (i=0; i<myligand_reference->num_of_atoms-1; i++)
+		for (j=i+1; j<myligand_reference->num_of_atoms; j++)
+		{
+			if (myligand_reference->intraE_contributors[i][j] == 1)
+			{
+				*charpoi = (char) i;
+				charpoi++;
+				*charpoi = (char) j;
+				charpoi++;
+
+				type_id1 = (int) myligand_reference->atom_idxyzq [i][0];
+				type_id2 = (int) myligand_reference->atom_idxyzq [j][0];
+				if (is_H_bond(myligand_reference->atom_types[type_id1], myligand_reference->atom_types[type_id2]) != 0)
+					*charpoi = (char) 1;
+				else
+					*charpoi = (char) 0;
+				charpoi++;
+			}
+		}
+
+	//van der Waals parameters
+	for (i=0; i<myligand_reference->num_of_atypes; i++)
+		for (j=0; j<myligand_reference->num_of_atypes; j++)
+		{
+			if (is_H_bond(myligand_reference->atom_types[i], myligand_reference->atom_types[j]) != 0)
+			{
+				floatpoi = VWpars_AC + i*myligand_reference->num_of_atypes + j;
+				*floatpoi = (float) myligand_reference->VWpars_C[i][j];
+				floatpoi = VWpars_AC + j*myligand_reference->num_of_atypes + i;
+				*floatpoi = (float) myligand_reference->VWpars_C[j][i];
+
+				floatpoi = VWpars_BD + i*myligand_reference->num_of_atypes + j;
+				*floatpoi = (float) myligand_reference->VWpars_D[i][j];
+				floatpoi = VWpars_BD + j*myligand_reference->num_of_atypes + i;
+				*floatpoi = (float) myligand_reference->VWpars_D[j][i];
+			}
+			else
+			{
+				floatpoi = VWpars_AC + i*myligand_reference->num_of_atypes + j;
+				*floatpoi = (float) myligand_reference->VWpars_A[i][j];
+				floatpoi = VWpars_AC + j*myligand_reference->num_of_atypes + i;
+				*floatpoi = (float) myligand_reference->VWpars_A[j][i];
+
+				floatpoi = VWpars_BD + i*myligand_reference->num_of_atypes + j;
+				*floatpoi = (float) myligand_reference->VWpars_B[i][j];
+				floatpoi = VWpars_BD + j*myligand_reference->num_of_atypes + i;
+				*floatpoi = (float) myligand_reference->VWpars_B[j][i];
+			}
+		}
+
+	//desolvation parameters
+	for (i=0; i<myligand_reference->num_of_atypes; i++)
+	{
+		dspars_S[i] = myligand_reference->solpar[i];
+		dspars_V[i] = myligand_reference->volume[i];
+	}
+
+	//generate rotation list
+	if (gen_rotlist(myligand_reference, rotlist) != 0)
+	{
+		printf("Error: number of required rotations is too high!\n");
+		return 1;
+	}
+
+	int m;
+	for (m=0;m<MAX_NUM_OF_ATOMS;m++){ KerConstStatic->atom_charges_const[m] = atom_charges[m]; }
+	for (m=0;m<MAX_NUM_OF_ATOMS;m++){ KerConstStatic->atom_types_const[m]   = atom_types[m]; }
+	for (m=0;m<3*MAX_INTRAE_CONTRIBUTORS;m++){ KerConstStatic->intraE_contributors_const[m]   = intraE_contributors[m]; }
+	for (m=0;m<MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES;m++){ KerConstStatic->VWpars_AC_const[m]   = VWpars_AC[m]; }
+	for (m=0;m<MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES;m++){ KerConstStatic->VWpars_BD_const[m]   = VWpars_BD[m]; }
+	for (m=0;m<MAX_NUM_OF_ATYPES;m++)		   { KerConstStatic->dspars_S_const[m]    = dspars_S[m]; }
+	for (m=0;m<MAX_NUM_OF_ATYPES;m++)		   { KerConstStatic->dspars_V_const[m]    = dspars_V[m]; }
+	for (m=0;m<MAX_NUM_OF_ROTATIONS;m++)		   { KerConstStatic->rotlist_const[m]     = rotlist[m]; }
+
+	return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+int prepare_constdynamic_fields_for_gpu(Liganddata* 	 	myligand_reference,
+				 	Dockpars*   	 	mypars,
+				 	float*      	 	cpu_ref_ori_angles,
+				 	kernelconstant_dynamic* KerConstDynamic)
+{
+
+	int i, j;
+	//int type_id1, type_id2;
+	//float* floatpoi;
+	//char* charpoi;
+	float phi, theta, genrotangle;
+
+	// ------------------------------
+	float ref_coords_x[MAX_NUM_OF_ATOMS];
+	float ref_coords_y[MAX_NUM_OF_ATOMS];
+	float ref_coords_z[MAX_NUM_OF_ATOMS];
+	float rotbonds_moving_vectors[3*MAX_NUM_OF_ROTBONDS];
+	float rotbonds_unit_vectors[3*MAX_NUM_OF_ROTBONDS];
+	//float ref_orientation_quats[4*MAX_NUM_OF_RUNS];
+	float ref_orientation_quats[4];
+	// ------------------------------
+
+
+	//coordinates of reference ligand
+	for (i=0; i < myligand_reference->num_of_atoms; i++)
+	{
+		ref_coords_x[i] = myligand_reference->atom_idxyzq[i][1];
+		ref_coords_y[i] = myligand_reference->atom_idxyzq[i][2];
+		ref_coords_z[i] = myligand_reference->atom_idxyzq[i][3];
+	}
+
+	//rotatable bond vectors
+	for (i=0; i < myligand_reference->num_of_rotbonds; i++)
+		for (j=0; j<3; j++)
+		{
+			rotbonds_moving_vectors[3*i+j] = myligand_reference->rotbonds_moving_vectors[i][j];
+			rotbonds_unit_vectors[3*i+j] = myligand_reference->rotbonds_unit_vectors[i][j];
+		}
+
+
+	//reference orientation quaternions
+//	for (i=0; i<mypars->num_of_runs; i++)
+//	{
+//		//printf("Pregenerated angles for run %d: %f %f %f\n", i, cpu_ref_ori_angles[3*i], cpu_ref_ori_angles[3*i+1], cpu_ref_ori_angles[3*i+2]);
+//		phi = cpu_ref_ori_angles[3*i]*DEG_TO_RAD;
+//		theta = cpu_ref_ori_angles[3*i+1]*DEG_TO_RAD;
+//		genrotangle = cpu_ref_ori_angles[3*i+2]*DEG_TO_RAD;
+
+//		ref_orientation_quats[4*i] = cosf(genrotangle/2.0f);					//q
+//		ref_orientation_quats[4*i+1] = sinf(genrotangle/2.0f)*sinf(theta)*cosf(phi);		//x
+//		ref_orientation_quats[4*i+2] = sinf(genrotangle/2.0f)*sinf(theta)*sinf(phi);		//y
+//		ref_orientation_quats[4*i+3] = sinf(genrotangle/2.0f)*cosf(theta);			//z
+//		//printf("Precalculated quaternion for run %d: %f %f %f %f\n", i, ref_orientation_quats[4*i], ref_orientation_quats[4*i+1], ref_orientation_quats[4*i+2], ref_orientation_quats[4*i+3]);
+//	}
+
+	phi         = cpu_ref_ori_angles[0]*DEG_TO_RAD;
+	theta       = cpu_ref_ori_angles[1]*DEG_TO_RAD;
+	genrotangle = cpu_ref_ori_angles[2]*DEG_TO_RAD;
+
+	ref_orientation_quats[0] = cosf(genrotangle/2.0f);				//q
+	ref_orientation_quats[1] = sinf(genrotangle/2.0f)*sinf(theta)*cosf(phi);	//x
+	ref_orientation_quats[2] = sinf(genrotangle/2.0f)*sinf(theta)*sinf(phi);	//y
+	ref_orientation_quats[3] = sinf(genrotangle/2.0f)*cosf(theta);			//z
+
+
+	int m;
+	for (m=0;m<MAX_NUM_OF_ATOMS;m++)		   { KerConstDynamic->ref_coords_x_const[m]= ref_coords_x[m]; }
+	for (m=0;m<MAX_NUM_OF_ATOMS;m++)		   { KerConstDynamic->ref_coords_y_const[m]= ref_coords_y[m]; }
+	for (m=0;m<MAX_NUM_OF_ATOMS;m++)		   { KerConstDynamic->ref_coords_z_const[m]= ref_coords_z[m]; }
+	for (m=0;m<3*MAX_NUM_OF_ROTBONDS;m++){ KerConstDynamic->rotbonds_moving_vectors_const[m]= rotbonds_moving_vectors[m]; }
+	for (m=0;m<3*MAX_NUM_OF_ROTBONDS;m++){ KerConstDynamic->rotbonds_unit_vectors_const[m]  = rotbonds_unit_vectors[m]; }
+	//for (m=0;m<4*MAX_NUM_OF_RUNS;m++)    { KerConst->ref_orientation_quats_const[m]  = ref_orientation_quats[m]; }
+	for (m=0;m<4;m++)    { KerConstDynamic->ref_orientation_quats_const[m]  = ref_orientation_quats[m]; }
+
+	return 0;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

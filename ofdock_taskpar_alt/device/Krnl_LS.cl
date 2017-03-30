@@ -14,7 +14,7 @@ void Krnl_LS(__global       float*           restrict GlobPopulationCurrent,
 	     __global       float*           restrict GlobEnergyCurrent,
              __global       unsigned int*    restrict GlobPRNG,
 	     //__global const Dockparameters*  restrict DockConst
-	     __constant const Dockparameters*  restrict DockConst
+	     __constant     Dockparameters*  restrict DockConst
 		  //    const unsigned int   	      DockConst_num_of_lsentities,
 		  //    const unsigned int 	      DockConst_pop_size,
 		  //    const unsigned int 	      DockConst_max_num_of_iters,
