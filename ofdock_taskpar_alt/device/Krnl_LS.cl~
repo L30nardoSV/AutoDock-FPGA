@@ -14,7 +14,7 @@ void Krnl_LS(__global       float*           restrict GlobPopulationCurrent,
 	     __global       float*           restrict GlobEnergyCurrent,
              __global       unsigned int*    restrict GlobPRNG,
 	     //__global const Dockparameters*  restrict DockConst
-	     __constant const Dockparameters*  restrict DockConst
+	     __constant     Dockparameters*  restrict DockConst
 		  //    const unsigned int   	      DockConst_num_of_lsentities,
 		  //    const unsigned int 	      DockConst_pop_size,
 		  //    const unsigned int 	      DockConst_max_num_of_iters,
@@ -117,12 +117,14 @@ while(active) {
 				entity_possible_new_genotype[3] = offspring_genotype[3] + genotype_deviate[3] + genotype_bias[3];
 				//map_angle(&(entity_possible_new_genotype [3]), 360.0f);
 				//map_angle_360(&(entity_possible_new_genotype [3]));
-				entity_possible_new_genotype [3] = map_angle_360(entity_possible_new_genotype [3]);
+				//entity_possible_new_genotype [3] = map_angle_360(entity_possible_new_genotype [3]);
+					//entity_possible_new_genotype [3] = map_angle(entity_possible_new_genotype [3], 360.0f);
 
 				entity_possible_new_genotype[4] = offspring_genotype[4] + genotype_deviate[4] + genotype_bias[4];
 				//map_angle(&(entity_possible_new_genotype [4]), 180.0f);	
 				//map_angle_180(&(entity_possible_new_genotype [4]));
-				entity_possible_new_genotype [4] = map_angle_180(entity_possible_new_genotype [4]);	
+				//entity_possible_new_genotype [4] = map_angle_180(entity_possible_new_genotype [4]);
+					//entity_possible_new_genotype [4] = map_angle(entity_possible_new_genotype [4], 180.0f);
 
 				//for (uint i=5; i<DockConst->num_of_genes; i++) {
 				for (uchar i=5; i<DockConst->num_of_genes; i++) {
@@ -130,7 +132,8 @@ while(active) {
 				entity_possible_new_genotype[i] = offspring_genotype [i] + genotype_deviate [i] + genotype_bias [i];  
 				//map_angle(&(entity_possible_new_genotype [i]), 360.0f);
 				//map_angle_360(&(entity_possible_new_genotype [i]));
-				entity_possible_new_genotype [i] = map_angle_360(entity_possible_new_genotype [i]);
+				//entity_possible_new_genotype [i] = map_angle_360(entity_possible_new_genotype [i]);
+					//entity_possible_new_genotype [i] = map_angle(entity_possible_new_genotype [i], 360.0f);
 				}
 			}
 			// negative direction
@@ -141,12 +144,14 @@ while(active) {
 				entity_possible_new_genotype[3] = offspring_genotype[3] - genotype_deviate[3] - genotype_bias[3];
 				//map_angle(&(entity_possible_new_genotype [3]), 360.0f);
 				//map_angle_360(&(entity_possible_new_genotype [3]));
-				entity_possible_new_genotype [3] = map_angle_360(entity_possible_new_genotype [3]);
+				//entity_possible_new_genotype [3] = map_angle_360(entity_possible_new_genotype [3]);
+					//entity_possible_new_genotype [3] = map_angle(entity_possible_new_genotype [3], 360.0f);
 
 				entity_possible_new_genotype[4] = offspring_genotype[4] - genotype_deviate[4] - genotype_bias[4];
 				//map_angle(&(entity_possible_new_genotype [4]), 180.0f);
 				//map_angle_180(&(entity_possible_new_genotype [4]));
-				entity_possible_new_genotype [4] = map_angle_180(entity_possible_new_genotype [4]);
+				//entity_possible_new_genotype [4] = map_angle_180(entity_possible_new_genotype [4]);
+				entity_possible_new_genotype [4] = map_angle(entity_possible_new_genotype [4], 180.0f);
 
 				//for (uint i=5; i<DockConst->num_of_genes; i++) {
 				for (uchar i=5; i<DockConst->num_of_genes; i++) {
@@ -154,10 +159,41 @@ while(active) {
 				entity_possible_new_genotype[i] = offspring_genotype[i] - genotype_deviate[i] - genotype_bias[i];
 				//map_angle(&(entity_possible_new_genotype [i]), 360.0f);
 				//map_angle_360(&(entity_possible_new_genotype [i]));
-				entity_possible_new_genotype [i] = map_angle_360(entity_possible_new_genotype [i]);
+				//entity_possible_new_genotype [i] = map_angle_360(entity_possible_new_genotype [i]);
+					//entity_possible_new_genotype [i] = map_angle(entity_possible_new_genotype [i], 360.0f);
 				}
 			}
+
+			/*
+			entity_possible_new_genotype [3] = map_angle(entity_possible_new_genotype [3], 360.0f);
 			
+			for (uchar i=5; i<DockConst->num_of_genes; i++) {
+
+				entity_possible_new_genotype [i] = map_angle(entity_possible_new_genotype [i], 360.0f);
+			}
+			*/
+			entity_possible_new_genotype [3] = map_angle_360(entity_possible_new_genotype [3]);
+			entity_possible_new_genotype [4] = map_angle_180(entity_possible_new_genotype [4]);
+
+			for (uchar i=5; i<DockConst->num_of_genes; i++) {
+
+				entity_possible_new_genotype [i] = map_angle_360(entity_possible_new_genotype [i]);
+			}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 			if (active != 0) {

@@ -1,0 +1,134 @@
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+Krnl_GG, auxiliary_genetic
+In binary_tournament_selection, rand_level(tournament rate) was 
+multiplied by 100 unnecesarily in 4 times.
+
+MODIFICATION
+tournament_rate is multiplied by 100 in the host, and then passed
+to Krnl_GG
+
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+Declare global args as __global const where appropriate 
+
+MODIFICATION
+
+Krnl_GA: GlobPopulationNext, GlobEnergyNext
+Krnl_IC: GlobPopulationCurrent
+Krnl_GG: GlobPopulationCurrent, GlobEnergyCurrent
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+
+Remove complex parent selection in binary tournament
+
+Originally, while loops were used to make sure both parents are different.
+But we didnt care about this in the ofdock_amd.
+
+MODIFICATION
+
+Corresponding while loops were removed and not-guarded calls to rand() 
+were placed.
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+
+First improvement of Krnl_LS
+
+Recode loop so redundand calls are avoided:
+
+if (positive_direction == true) {
+entity_possible_new_genotype [3] = map_angle(entity_possible_new_genotype [3], 360.0f);
+
+else {
+entity_possible_new_genotype [3] = map_angle(entity_possible_new_genotype [3], 360.0f);
+
+}
+
+
+MODIFICATION
+
+if (positive_direction == true) {
+
+else {
+}
+
+entity_possible_new_genotype [3] = map_angle(entity_possible_new_genotype [3], 360.0f);
+
+
+Taking into account all previous steps, hw utilization was reduced down to:
+
++--------------------------------------------------------------------+
+; Estimated Resource Usage Summary                                   ;
++----------------------------------------+---------------------------+
+; Resource                               + Usage                     ;
++----------------------------------------+---------------------------+
+; Logic utilization                      ;   59%                     ;
+; ALUTs                                  ;   26%                     ;
+; Dedicated logic registers              ;   34%                     ;
+; Memory blocks                          ;   74%                     ;
+; DSP blocks                             ;   26%                     ;
++----------------------------------------+---------------------------;
+
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

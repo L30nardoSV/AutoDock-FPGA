@@ -864,8 +864,10 @@ Krnl_Conform	16891 (2%)	42527 (3%)	157 (7%)	94 (6%)
 Correcting frecuency at which prng seeds are calculated in host.
 Split KerConst in KerConstStatic and KerConstDynamic
 Both as __global const in kernels Conform, InterE, IntraE
-It seems there was no area improvement: there actaully were in 
+It seems there was no area improvement: -there actaully were in 
 	 			        Krnl_Conform: ALUTs and FFs
+					-look at reported amount, 
+					not just percentages!
 
 +--------------------------------------------------------------------+
 ; Estimated Resource Usage Summary                                   ;
@@ -889,10 +891,10 @@ Krnl_Conform	16837 (2%)	42345 (3%)	157 (7%)	94 (6%)
  Krnl_LS	27154 (3%)	67391 (4%)	163 (7%)	69 (5%)	
  Krnl_Store	1563 (0%)	4372 (0%)	20 (1%)		1 (0%)	
 
-
-
-
-
 ----------------------------------------------------------------------
 ----------------------------------------------------------------------
+
+RESOURCE UTILIZATION LOOKS GOOD. SO FOR NOW NO AREA OPTIMIZATION IS DONE.
+WE PROCEED WITH PERFORMANCE OPTIMIZATIONS.
+
 

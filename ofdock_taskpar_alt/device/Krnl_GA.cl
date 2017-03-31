@@ -185,10 +185,13 @@ typedef struct
 __kernel __attribute__ ((max_global_work_dim(0)))
 void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 	     __global       float*           restrict GlobEnergyCurrent,
-	     __global       float*           restrict GlobPopulationNext,
-	     __global       float*           restrict GlobEnergyNext,
+	     //__global       float*           restrict GlobPopulationNext,
+	     __global const float*           restrict GlobPopulationNext,
+	     //__global       float*           restrict GlobEnergyNext,
+	     __global const float*           restrict GlobEnergyNext,
 	     //__global const Dockparameters*  restrict DockConst,
 	     __constant     Dockparameters*  restrict DockConst,
+
 	//		    const unsigned int        DockConst_num_of_energy_evals,
 	//		    const unsigned int        DockConst_num_of_generations,
 	//		    const unsigned int 	      DockConst_pop_size,	

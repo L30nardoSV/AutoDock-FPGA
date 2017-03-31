@@ -61,6 +61,8 @@ void map_angle_360(__local float* angle)
 }
 */
 
+
+
 float map_angle_180(float angle)
 {
 	float x = angle;
@@ -68,13 +70,61 @@ float map_angle_180(float angle)
 	while (x < 0.0f) {
 		x += 180.0f;
 	}
-
+	
 	while (x > 180.0f) {
 		x -= 180.0f;
 	}
 
 	return x;
 }
+	
+/*
+float map_angle_180(float angle)
+{
+	float x = angle;
+
+	bool lt180n       = false;
+	//bool gt180n_lt0   = false;
+	//bool gt0_lt180p	  = false;
+	bool gt180p	  = false;	
+
+	if (x < -180.0f){
+		lt180n = true;	
+		x = -1*x;			
+	}
+	else {
+		if (x < 0) {
+			//gt180n_lt0 = true;
+			x = x + 180.0f;
+		}
+		else {	// x is positive
+
+			//if (x < 180.0f) {
+			//	gt0_lt180p = true;
+			//}
+			//else {
+			//	gt180p = true;			
+			//}	
+
+			if (x > 180.0f) {
+				gt180p = true;			
+			}		
+		}
+	}
+	
+	if ((lt180n==true) || (gt180p==true)) {
+		while(x > 180.0f) {
+			x -= 180.0f;
+		}
+		
+		if (lt180n==true) {
+			x = 180.0f-x;
+		}
+	}
+
+	return x;
+}
+*/
 
 float map_angle_360(float angle)
 {
@@ -90,6 +140,45 @@ float map_angle_360(float angle)
 
 	return x;
 }
+
+
+/*
+float map_angle(float angle, const float limit)
+{
+	float x = angle;
+
+	bool lt_nlimit = false;
+	bool gt_plimit = false;	
+
+	if (x < -limit){
+		lt_nlimit = true;	
+		x = -1*x;			
+	}
+	else {
+		if (x < 0) {
+			x = x + limit;
+		}
+		else {	// x is positive
+			if (x > limit) {
+				gt_plimit = true;			
+			}		
+		}
+	}
+	
+	if ((lt_nlimit==true) || (gt_plimit==true)) {
+		while(x > limit) {
+			x -= limit;
+		}
+		
+		if (lt_nlimit==true) {
+			x = limit-x;
+		}
+	}
+
+	return x;
+}
+*/
+
 // --------------------------------------------------------------------------
 // The function finds the best entity based on the energy value 
 // i.e. sum of the 38th and 39th element
@@ -230,6 +319,8 @@ void binary_tournament_selection(//__global const float* restrict GlobEnergyCurr
 	//parent_candidates [0] = myrand_uint(&prng, pop_size);
 	parent_candidates [0] = myrand_uint(prng, pop_size);
 
+
+/*
 	LOOP_DOWHILE_BIN_TOURNAMENT_SEL_1:
 	do
 	{
@@ -244,6 +335,22 @@ void binary_tournament_selection(//__global const float* restrict GlobEnergyCurr
 #endif	
 	}
 	while (parent_candidates [0] == parent_candidates [1]);
+*/
+	parent_candidates [1] = myrand_uint(prng, pop_size);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //#if defined (REPRO)
@@ -259,7 +366,8 @@ void binary_tournament_selection(//__global const float* restrict GlobEnergyCurr
 	{
 		//if (myrand(GlobPRNG) < 100*rand_level) {
 		//if (myrand(&prng) < 100*rand_level) {
-		if (myrand(prng) < 100*rand_level) {
+		//if (myrand(prng) < 100*rand_level) {
+		if (myrand(prng) < rand_level) {
 			*parent1 = parent_candidates [0];}
 		else			               {
 			*parent1 = parent_candidates [1];}
@@ -268,7 +376,8 @@ void binary_tournament_selection(//__global const float* restrict GlobEnergyCurr
 	{
 		//if (myrand(GlobPRNG) < 100*rand_level) {
 		//if (myrand(&prng) < 100*rand_level) {
-		if (myrand(prng) < 100*rand_level) {
+		//if (myrand(prng) < 100*rand_level) {
+		if (myrand(prng) < rand_level) {
 			*parent1 = parent_candidates [1];}
 		else			               {
 			*parent1 = parent_candidates [0];}	
@@ -281,7 +390,15 @@ void binary_tournament_selection(//__global const float* restrict GlobEnergyCurr
 		parent_candidates [1], GlobEnergyCurrent [parent_candidates [1]]);
 	#endif
 
+
+
+
+
+
+
+
 	//generating two different parent candidates (which differ from parent1 as well)
+/*
 	LOOP_DOWHILE_BIN_TOURNAMENT_SEL_2:
 	do
 #if defined (REPRO)
@@ -313,6 +430,22 @@ void binary_tournament_selection(//__global const float* restrict GlobEnergyCurr
 		parent_candidates [1] = myrand_uint(prng, pop_size);
 #endif
 	while ((parent_candidates [1] == parent_candidates [0]) || (parent_candidates [1] == *parent1));
+*/
+	parent_candidates [0] = myrand_uint(prng, pop_size);
+	parent_candidates [1] = myrand_uint(prng, pop_size);
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //#if defined (REPRO)
 //	parent_candidates [1] = myrand_uint(GlobPRNG, pop_size) + 3;
@@ -326,7 +459,8 @@ void binary_tournament_selection(//__global const float* restrict GlobEnergyCurr
 	{
 		//if (myrand(GlobPRNG) < 100*rand_level) {
 		//if (myrand(&prng) < 100*rand_level) {
-		if (myrand(prng) < 100*rand_level) {
+		//if (myrand(prng) < 100*rand_level) {
+		if (myrand(prng) < rand_level) {
 			*parent2 = parent_candidates [0];}
 		else		          	       {
 			*parent2 = parent_candidates [1];}
@@ -335,7 +469,8 @@ void binary_tournament_selection(//__global const float* restrict GlobEnergyCurr
 	{
 		//if (myrand(GlobPRNG) < 100*rand_level) {
 		//if (myrand(&prng) < 100*rand_level) {
-		if (myrand(prng) < 100*rand_level) {
+		//if (myrand(prng) < 100*rand_level) {
+		if (myrand(prng) < rand_level) {
 			*parent2 = parent_candidates [1];}
 		else			               {
 			*parent2 = parent_candidates [0];}	
@@ -546,6 +681,7 @@ void gen_new_genotype(//__global      uint*  restrict GlobPRNG,
 		//map_angle(&(offspring_genotype [3]), 360.0f);
 		//map_angle_360(&(offspring_genotype [3]));
 		priv_offspring_genotype [3] = map_angle_360(priv_offspring_genotype [3]);
+		//priv_offspring_genotype [3] = map_angle(priv_offspring_genotype [3],360.0f);
 	}
 		
 	//if (mutation_rate > 100*myrand(GlobPRNG))
@@ -560,6 +696,7 @@ void gen_new_genotype(//__global      uint*  restrict GlobPRNG,
 		//map_angle(&(offspring_genotype [4]), 180.0f);
 		//map_angle_180(&(offspring_genotype [4]));
 		priv_offspring_genotype [4] = map_angle_180(priv_offspring_genotype [4]);
+		//priv_offspring_genotype [4] = map_angle(priv_offspring_genotype [4], 180.0f);
 	}
 
 	// **********************************************
@@ -580,6 +717,7 @@ void gen_new_genotype(//__global      uint*  restrict GlobPRNG,
 			//map_angle(&(offspring_genotype [i]), 360.0f);	//mapping angle to 0..360
 			//map_angle_360(&(offspring_genotype [i]));
 			priv_offspring_genotype [i] = map_angle_360(priv_offspring_genotype [i]);
+			//priv_offspring_genotype [i] = map_angle(priv_offspring_genotype [i], 360.0f);
 		}
 	}
 

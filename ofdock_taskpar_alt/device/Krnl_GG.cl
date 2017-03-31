@@ -3,8 +3,10 @@
 // --------------------------------------------------------------------------
 
 __kernel __attribute__ ((max_global_work_dim(0)))
-void Krnl_GG(__global       float*           restrict GlobPopulationCurrent,
-	     __global       float*           restrict GlobEnergyCurrent,
+void Krnl_GG(//__global       float*           restrict GlobPopulationCurrent,
+	     __global const float*           restrict GlobPopulationCurrent,
+	     //__global       float*           restrict GlobEnergyCurrent,
+	     __global const float*           restrict GlobEnergyCurrent,
 	     __global       float*           restrict GlobPopulationNext,
 	     __global       float*           restrict GlobEnergyNext,
              __global       unsigned int*    restrict GlobPRNG,

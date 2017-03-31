@@ -3,9 +3,10 @@
 // --------------------------------------------------------------------------
 
 __kernel __attribute__ ((max_global_work_dim(0)))
-void Krnl_IC(__global       float*           restrict GlobPopulationCurrent,
+void Krnl_IC(//__global       float*           restrict GlobPopulationCurrent,
+	     __global   const float*           restrict GlobPopulationCurrent,
 	     //__global const Dockparameters*  restrict DockConst
-	     __constant     Dockparameters*  restrict DockConst
+	     __constant       Dockparameters*  restrict DockConst
 	     //         const unsigned int              DockConst_pop_size
 )
 {	
