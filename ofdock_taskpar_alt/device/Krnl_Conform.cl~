@@ -4,15 +4,10 @@
 // Originally from: processligand.c
 // --------------------------------------------------------------------------
 __kernel __attribute__ ((max_global_work_dim(0)))
-//__attribute__ ((reqd_work_group_size(1,1,1)))
 void Krnl_Conform(
-	     //__global const kernelconstant*  restrict KerConst,
              __global   const kernelconstant_static*  restrict KerConstStatic,
 	     __global   const kernelconstant_dynamic* restrict KerConstDynamic,
-	     //__global const Dockparameters*  restrict DockConst
 	     __constant       Dockparameters*  restrict DockConst
-		//      const unsigned char             DockConst_num_of_atoms,
-		//      const unsigned int	      DockConst_rotbondlist_length
 )
 {
 
@@ -52,10 +47,6 @@ void Krnl_Conform(
 	float quatrot_left_x, quatrot_left_y, quatrot_left_z, quatrot_left_q;
 	float quatrot_temp_x, quatrot_temp_y, quatrot_temp_z, quatrot_temp_q;
 	
-	//float ref_orientation_quats_const_0 = KerConst->ref_orientation_quats_const[0]; 
-	//float ref_orientation_quats_const_1 = KerConst->ref_orientation_quats_const[1];
-	//float ref_orientation_quats_const_2 = KerConst->ref_orientation_quats_const[2];
-	//float ref_orientation_quats_const_3 = KerConst->ref_orientation_quats_const[3];
 	float ref_orientation_quats_const_0 = KerConstDynamic->ref_orientation_quats_const[0]; 
 	float ref_orientation_quats_const_1 = KerConstDynamic->ref_orientation_quats_const[1];
 	float ref_orientation_quats_const_2 = KerConstDynamic->ref_orientation_quats_const[2];
@@ -70,7 +61,6 @@ while(active) {
 	// Wait for genotypes in channel
 	// --------------------------------------------------------------
 	while ((IC_valid == false) && (GG_valid == false) && (LS_valid == false)) {
-	//GA_mode = read_channel_altera(chan_GA2Conf_mode);
 		IC_active = read_channel_nb_altera(chan_IC2Conf_active, &IC_valid);
 		GG_active = read_channel_nb_altera(chan_GG2Conf_active, &GG_valid);
 		LS_active = read_channel_nb_altera(chan_LS2Conf_active, &LS_valid);
@@ -84,7 +74,6 @@ while(active) {
 		cnt    = read_channel_altera(chan_IC2Conf_cnt);
 		mem_fence(CLK_CHANNEL_MEM_FENCE);
 
-		//for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {
 		for (uchar pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {
 			genotype[pipe_cnt] = read_channel_altera(chan_IC2Conf_genotype);}	
 	}
@@ -97,7 +86,6 @@ while(active) {
 			cnt    = read_channel_altera(chan_GG2Conf_cnt);
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 
-			//for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {
 			for (uchar pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {
 				genotype[pipe_cnt] = read_channel_altera(chan_GG2Conf_genotype);}	
 		}
@@ -110,7 +98,6 @@ while(active) {
 				cnt    = read_channel_altera(chan_LS2Conf_cnt);
 				mem_fence(CLK_CHANNEL_MEM_FENCE);
 
-				//for (uint pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {
 				for (uchar pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {
 					genotype[pipe_cnt] = read_channel_altera(chan_LS2Conf_genotype);}
 			}
@@ -146,11 +133,8 @@ while(active) {
 	// **********************************************
 	// ADD VENDOR SPECIFIC PRAGMA
 	// **********************************************
-	//for (uint rotation_counter = 0; rotation_counter < DockConst->rotbondlist_length; rotation_counter++)
 	for (ushort rotation_counter = 0; rotation_counter < DockConst->rotbondlist_length; rotation_counter++)
-	//for (ushort rotation_counter = 0; rotation_counter < DockConst_rotbondlist_length; rotation_counter++)
 	{
-		//rotation_list_element = KerConst->rotlist_const[rotation_counter];
 		rotation_list_element = KerConstStatic->rotlist_const[rotation_counter];
 
 		if ((rotation_list_element & RLIST_DUMMY_MASK) == 0)	//if not dummy rotation
@@ -160,9 +144,6 @@ while(active) {
 			//capturing atom coordinates
 			if ((rotation_list_element & RLIST_FIRSTROT_MASK) != 0)	//if first rotation of this atom
 			{	
-				//atom_to_rotate[0] = KerConst->ref_coords_x_const[atom_id];
-				//atom_to_rotate[1] = KerConst->ref_coords_y_const[atom_id];
-				//atom_to_rotate[2] = KerConst->ref_coords_z_const[atom_id];
 				atom_to_rotate[0] = KerConstDynamic->ref_coords_x_const[atom_id];
 				atom_to_rotate[1] = KerConstDynamic->ref_coords_y_const[atom_id];
 				atom_to_rotate[2] = KerConstDynamic->ref_coords_z_const[atom_id];
@@ -191,24 +172,16 @@ while(active) {
 			{
 				rotbond_id = (rotation_list_element & RLIST_RBONDID_MASK) >> RLIST_RBONDID_SHIFT;
 	
-				//rotation_unitvec[0] = KerConst->rotbonds_unit_vectors_const[3*rotbond_id];
-				//rotation_unitvec[1] = KerConst->rotbonds_unit_vectors_const[3*rotbond_id+1];
-				//rotation_unitvec[2] = KerConst->rotbonds_unit_vectors_const[3*rotbond_id+2];
 				//#pragma unroll 1
 				for (uchar i=0; i<3; i++) {
-					//rotation_unitvec[i] = KerConst->rotbonds_unit_vectors_const[3*rotbond_id + i];
 					rotation_unitvec[i] = KerConstDynamic->rotbonds_unit_vectors_const[3*rotbond_id + i];
 				}
 
 				rotation_angle = genotype[6+rotbond_id]*DEG_TO_RAD;
 
-				//rotation_movingvec[0] = KerConst->rotbonds_moving_vectors_const[3*rotbond_id];
-				//rotation_movingvec[1] = KerConst->rotbonds_moving_vectors_const[3*rotbond_id+1];
-				//rotation_movingvec[2] = KerConst->rotbonds_moving_vectors_const[3*rotbond_id+2];
 				//#pragma unroll 1
 				for (uchar i=0; i<3; i++) {
-					rotation_movingvec[i] = KerConst->rotbonds_moving_vectors_const[3*rotbond_id + i];
-					rotation_movingvec[i] = KerConst->rotbonds_moving_vectors_const[3*rotbond_id + i];
+					rotation_movingvec[i] = KerConstDynamic->rotbonds_moving_vectors_const[3*rotbond_id + i];
 				}
 
 				//in addition performing the first movement 
@@ -239,24 +212,6 @@ while(active) {
 				quatrot_temp_z = quatrot_left_z;
 
 				// L30nardoSV: taking the first element of ref_orientation_quats_const member
-				/*
-				quatrot_left_q = quatrot_temp_q*KerConst->ref_orientation_quats_const[0]-
-						 quatrot_temp_x*KerConst->ref_orientation_quats_const[1]-
-						 quatrot_temp_y*KerConst->ref_orientation_quats_const[2]-
-						 quatrot_temp_z*KerConst->ref_orientation_quats_const[3];
-				quatrot_left_x = quatrot_temp_q*KerConst->ref_orientation_quats_const[1]+
-						 KerConst->ref_orientation_quats_const[0]*quatrot_temp_x+
-						 quatrot_temp_y*KerConst->ref_orientation_quats_const[3]-
-						 KerConst->ref_orientation_quats_const[2]*quatrot_temp_z;
-				quatrot_left_y = quatrot_temp_q*KerConst->ref_orientation_quats_const[2]+
-						 KerConst->ref_orientation_quats_const[0]*quatrot_temp_y+
-						 KerConst->ref_orientation_quats_const[1]*quatrot_temp_z-
-						 quatrot_temp_x*KerConst->ref_orientation_quats_const[3];
-				quatrot_left_z = quatrot_temp_q*KerConst->ref_orientation_quats_const[3]+
-						 KerConst->ref_orientation_quats_const[0]*quatrot_temp_z+
-						 quatrot_temp_x*KerConst->ref_orientation_quats_const[2]-
-						 KerConst->ref_orientation_quats_const[1]*quatrot_temp_y;
-				*/
 				quatrot_left_q = quatrot_temp_q*ref_orientation_quats_const_0-
 						 quatrot_temp_x*ref_orientation_quats_const_1-
 						 quatrot_temp_y*ref_orientation_quats_const_2-
@@ -289,23 +244,7 @@ while(active) {
 			quatrot_temp_z = quatrot_left_q*atom_to_rotate [2] +
 					 quatrot_left_x*atom_to_rotate [1] -
 					 quatrot_left_y*atom_to_rotate [0];
-			/*
-			atom_to_rotate [0] = 0 -
-					     quatrot_temp_q*quatrot_left_x +
-					     quatrot_temp_x*quatrot_left_q -
-					     quatrot_temp_y*quatrot_left_z +
-					     quatrot_temp_z*quatrot_left_y;
-			atom_to_rotate [1] = 0 -
-					     quatrot_temp_q*quatrot_left_y +
-					     quatrot_temp_x*quatrot_left_z +
-					     quatrot_temp_y*quatrot_left_q -
-					     quatrot_temp_z*quatrot_left_x;
-			atom_to_rotate [2] = 0 -
-					     quatrot_temp_q*quatrot_left_z -
-					     quatrot_temp_x*quatrot_left_y +
-					     quatrot_temp_y*quatrot_left_x +
-					     quatrot_temp_z*quatrot_left_q;
-			*/
+
 			atom_to_rotate [0] = quatrot_temp_x*quatrot_left_q - quatrot_temp_q*quatrot_left_x - 
 					     quatrot_temp_y*quatrot_left_z + quatrot_temp_z*quatrot_left_y;
 			atom_to_rotate [1] = quatrot_temp_x*quatrot_left_z + quatrot_temp_y*quatrot_left_q - 
@@ -328,23 +267,6 @@ while(active) {
 	// --------------------------------------------------------------
 	// Send ligand atomic coordinates to channel 
 	// --------------------------------------------------------------
-/*
-	for (uint pipe_cnt=0; pipe_cnt<DockConst->num_of_atoms; pipe_cnt++) {
-		write_channel_altera(chan_Conf2Intere_x, loc_coords_x[pipe_cnt]);
-		mem_fence(CLK_CHANNEL_MEM_FENCE);
-		write_channel_altera(chan_Conf2Intere_y, loc_coords_y[pipe_cnt]);
-		mem_fence(CLK_CHANNEL_MEM_FENCE);
-		write_channel_altera(chan_Conf2Intere_z, loc_coords_z[pipe_cnt]);
-		//mem_fence(CLK_CHANNEL_MEM_FENCE);
-
-		write_channel_altera(chan_Conf2Intrae_x, loc_coords_x[pipe_cnt]);
-		mem_fence(CLK_CHANNEL_MEM_FENCE);
-		write_channel_altera(chan_Conf2Intrae_y, loc_coords_y[pipe_cnt]);
-		mem_fence(CLK_CHANNEL_MEM_FENCE);
-		write_channel_altera(chan_Conf2Intrae_z, loc_coords_z[pipe_cnt]);
-	}
-*/
-
 	write_channel_altera(chan_Conf2Intere_active, active);
 	write_channel_altera(chan_Conf2Intrae_active, active);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
@@ -355,9 +277,7 @@ while(active) {
 	write_channel_altera(chan_Conf2Intrae_cnt,    cnt);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 
-	//for (uint pipe_cnt=0; pipe_cnt<DockConst->num_of_atoms; pipe_cnt++) {
 	for (uchar pipe_cnt=0; pipe_cnt<DockConst->num_of_atoms; pipe_cnt++) {
-	//for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt++) {
 		write_channel_altera(chan_Conf2Intere_x, loc_coords_x[pipe_cnt]);
 		write_channel_altera(chan_Conf2Intrae_x, loc_coords_x[pipe_cnt]);
 		mem_fence(CLK_CHANNEL_MEM_FENCE);
@@ -366,17 +286,6 @@ while(active) {
 		mem_fence(CLK_CHANNEL_MEM_FENCE);
 		write_channel_altera(chan_Conf2Intere_z, loc_coords_z[pipe_cnt]);
 		write_channel_altera(chan_Conf2Intrae_z, loc_coords_z[pipe_cnt]);
-		/*
-		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);
-		write_channel_altera(chan_Conf2Intere_active, active);
-		write_channel_altera(chan_Conf2Intrae_active, active);
-		mem_fence(CLK_CHANNEL_MEM_FENCE);
-		write_channel_altera(chan_Conf2Intere_mode,   mode);
-		write_channel_altera(chan_Conf2Intrae_mode,   mode);
-		mem_fence(CLK_CHANNEL_MEM_FENCE);
-		write_channel_altera(chan_Conf2Intere_cnt,    cnt);
-		write_channel_altera(chan_Conf2Intrae_cnt,    cnt);
-		*/
 	}
 
 	// --------------------------------------------------------------
