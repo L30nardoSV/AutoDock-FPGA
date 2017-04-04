@@ -4,7 +4,7 @@
 //IC: initial calculation of energy of populations
 //GG: genetic generation 
 //LS: local search
-//OFF: everything is done, disable other kernels
+
 
 
 
@@ -22,58 +22,52 @@ channel uint  chan_GG2GA_eval_cnt;
 channel char  chan_GA2LS_active;
 channel uint  chan_LS2GA_eval_cnt;
 
-//channel char chan_GA2Conf_mode;
-//channel char chan_GA2Store_mode;
+// active 1: receiving Kernel is active, 0 receiving Kernel is disabled
+// mode 1 for I: init calculation energy, 2 for G: genetic generation, 3 for L: local search
+// cnt: population count
 
-channel char  chan_IC2Conf_active;	// active 1: receiving Kernel is active, 0 receiving Kernel is disabled
-channel char  chan_IC2Conf_mode;	// mode 1 or I: init calculation energy, 2 or G: genetic generation, 3 or P: local search
-//channel uint  chan_IC2Conf_cnt;		// population count
-channel ushort chan_IC2Conf_cnt;		// population count
-channel float  chan_IC2Conf_genotype __attribute__((depth(38)));
+channel char  	chan_IC2Conf_active;	
+channel char  	chan_IC2Conf_mode;	
+channel ushort	chan_IC2Conf_cnt;		
+channel float  	chan_IC2Conf_genotype __attribute__((depth(38)));
 
-channel char  chan_GG2Conf_active;	// active 1: receiving Kernel is active, 0 receiving Kernel is disabled
-channel char  chan_GG2Conf_mode;	// mode 1 or I: init calculation energy, 2 or G: genetic generation, 3 or P: local search
-//channel uint  chan_GG2Conf_cnt;		// population count
-channel ushort chan_GG2Conf_cnt;		// population count
-channel float  chan_GG2Conf_genotype __attribute__((depth(38)));
+channel char  	chan_GG2Conf_active;
+channel char  	chan_GG2Conf_mode;
+channel ushort 	chan_GG2Conf_cnt;
+channel float  	chan_GG2Conf_genotype __attribute__((depth(38)));
 
-channel char  chan_LS2Conf_active;	// active 1: receiving Kernel is active, 0 receiving Kernel is disabled
-channel char  chan_LS2Conf_mode;	// mode 1 or I: init calculation energy, 2 or G: genetic generation, 3 or P: local search
-//channel uint  chan_LS2Conf_cnt;		// population count
-channel ushort chan_LS2Conf_cnt;		// population count
-channel float  chan_LS2Conf_genotype __attribute__((depth(38)));
+channel char  	chan_LS2Conf_active;
+channel char  	chan_LS2Conf_mode;
+channel ushort 	chan_LS2Conf_cnt;
+channel float  	chan_LS2Conf_genotype __attribute__((depth(38)));
 
-channel float chan_Conf2Intere_x __attribute__((depth(90)));
-channel float chan_Conf2Intere_y __attribute__((depth(90)));
-channel float chan_Conf2Intere_z __attribute__((depth(90)));
-channel char  chan_Conf2Intere_active;	
-channel char  chan_Conf2Intere_mode;	
-//channel uint  chan_Conf2Intere_cnt;
+channel float 	chan_Conf2Intere_x __attribute__((depth(90)));
+channel float 	chan_Conf2Intere_y __attribute__((depth(90)));
+channel float 	chan_Conf2Intere_z __attribute__((depth(90)));
+channel char  	chan_Conf2Intere_active;	
+channel char  	chan_Conf2Intere_mode;	
 channel ushort  chan_Conf2Intere_cnt;	
 
-channel float chan_Conf2Intrae_x __attribute__((depth(90)));
-channel float chan_Conf2Intrae_y __attribute__((depth(90)));
-channel float chan_Conf2Intrae_z __attribute__((depth(90)));
-channel char  chan_Conf2Intrae_active;	
-channel char  chan_Conf2Intrae_mode;	
-//channel uint  chan_Conf2Intrae_cnt;
+channel float 	chan_Conf2Intrae_x __attribute__((depth(90)));
+channel float 	chan_Conf2Intrae_y __attribute__((depth(90)));
+channel float 	chan_Conf2Intrae_z __attribute__((depth(90)));
+channel char  	chan_Conf2Intrae_active;	
+channel char  	chan_Conf2Intrae_mode;	
 channel ushort  chan_Conf2Intrae_cnt;
 
-channel float chan_Intere2Store_intere;
-channel char  chan_Intere2Store_active;	
-channel char  chan_Intere2Store_mode;	
-//channel uint  chan_Intere2Store_cnt;
+channel float 	chan_Intere2Store_intere;
+channel char 	chan_Intere2Store_active;	
+channel char  	chan_Intere2Store_mode;	
 channel ushort  chan_Intere2Store_cnt;
 
-channel float chan_Intrae2Store_intrae;
-channel char  chan_Intrae2Store_active;	
-channel char  chan_Intrae2Store_mode;	
-//channel uint  chan_Intrae2Store_cnt;
+channel float 	chan_Intrae2Store_intrae;
+channel char  	chan_Intrae2Store_active;	
+channel char  	chan_Intrae2Store_mode;	
 channel ushort  chan_Intrae2Store_cnt;
 
-channel char  chan_Store2IC_ack;
-channel char  chan_Store2GG_ack;
-channel float chan_Store2LS_LSenergy;
+channel char  	chan_Store2IC_ack;
+channel char  	chan_Store2GG_ack;
+channel float 	chan_Store2LS_LSenergy;
 
 #include "../defines.h"
 
@@ -185,13 +179,9 @@ typedef struct
 __kernel __attribute__ ((max_global_work_dim(0)))
 void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 	     __global       float*           restrict GlobEnergyCurrent,
-	     __global       float*           restrict GlobPopulationNext,
-	     __global       float*           restrict GlobEnergyNext,
-	     //__global const Dockparameters*  restrict DockConst,
-	     __constant     Dockparameters*  restrict DockConst,
-	//		    const unsigned int        DockConst_num_of_energy_evals,
-	//		    const unsigned int        DockConst_num_of_generations,
-	//		    const unsigned int 	      DockConst_pop_size,	
+	     __global const float*           restrict GlobPopulationNext,
+	     __global const float*           restrict GlobEnergyNext,
+	     __constant     Dockparameters*  restrict DockConst,	
 	     __global       unsigned int*    restrict GlobEvalsGenerations_performed
 	     )
 {
@@ -229,7 +219,6 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 	#endif
 
 	uint eval_cnt = 0;
-	//uint eval_dummy;
 	uint generation_cnt = 1;
 
 	char active = 1;
@@ -249,7 +238,6 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 
 	while (active) {
 		if ((eval_cnt < DockConst->num_of_energy_evals) && (generation_cnt < DockConst->num_of_generations)) {
-		//if ((eval_cnt < DockConst_num_of_energy_evals) && (generation_cnt < DockConst_num_of_generations)) {
 
 			if (LS_done ==  true) {		
 				generation_cnt++;
@@ -277,11 +265,9 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 					GlobEnergyCurrent[i] = GlobEnergyNext[i];}
 */
 
-				for (ushort i=0;i<DockConst->pop_size*ACTUAL_GENOTYPE_LENGTH; i++) { 
-				//for (ushort i=0;i<DockConst_pop_size*ACTUAL_GENOTYPE_LENGTH; i++) { 	
+				for (ushort i=0;i<DockConst->pop_size*ACTUAL_GENOTYPE_LENGTH; i++) { 	
 					GlobPopulationCurrent[i] = GlobPopulationNext[i];
 					if (i<DockConst->pop_size) {
-					//if (i<DockConst_pop_size) {
 						GlobEnergyCurrent[i] = GlobEnergyNext[i];
 					}
 				}
@@ -303,9 +289,6 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			LS_act  = true;
 			LS_done = false;
 			
-			//GlobEvals_performed[0]       =  eval_cnt; 	
-			//GlobGenerations_performed[0] =  generation_cnt;
-
 			array_evals_and_generations_performed [0] = eval_cnt;
 			array_evals_and_generations_performed [1] = generation_cnt;
 	
