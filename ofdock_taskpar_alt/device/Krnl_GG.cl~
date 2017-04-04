@@ -10,11 +10,10 @@ void Krnl_GG(__global const float*           restrict GlobPopulationCurrent,
              __global       unsigned int*    restrict GlobPRNG,
 	     __constant     Dockparameters*  restrict DockConst      			      	      
 )
-{	
-	uint eval_cnt = 0; 	
-	char active = 1; 	
-	char mode   = 2; 	
-	char ack    = 0;
+{		
+	      char active = 1; 	
+	const char mode   = 2; 	
+	      char ack    = 0;
 	
 	// Find_best 	
 	uint best_entity_id; 	
@@ -98,11 +97,7 @@ while(active) {
 	GlobPRNG[0] = prng;
 
 	ack = read_channel_altera(chan_Store2GG_ack);
-
-	eval_cnt = DockConst->pop_size; 
-	//eval_cnt = DockConst_pop_size;		
-
-	write_channel_altera(chan_GG2GA_eval_cnt, eval_cnt);
+	write_channel_altera(chan_GG2GA_eval_cnt, (DockConst->pop_size - 1));
 
 } // End of while (active)
 

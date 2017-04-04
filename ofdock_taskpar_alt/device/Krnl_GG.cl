@@ -10,11 +10,10 @@ void Krnl_GG(__global const float*           restrict GlobPopulationCurrent,
              __global       unsigned int*    restrict GlobPRNG,
 	     __constant     Dockparameters*  restrict DockConst      			      	      
 )
-{	
-	uint eval_cnt = 0; 	
-	char active = 1; 	
-	char mode   = 2; 	
-	char ack    = 0;
+{		
+	      char active = 1; 	
+	const char mode   = 2; 	
+	      char ack    = 0;
 	
 	// Find_best 	
 	uint best_entity_id; 	
@@ -75,7 +74,6 @@ while(active) {
 				 DockConst->mutation_rate, DockConst->abs_max_dmov, DockConst->abs_max_dang,			 
 				 DockConst->crossover_rate, offspring_genotype);		
 
-
 		if ( (active!=0) || ((active==0) && (new_pop_cnt==1)) ) {
 
 			write_channel_altera(chan_GG2Conf_active, active);
@@ -98,8 +96,7 @@ while(active) {
 	GlobPRNG[0] = prng;
 
 	ack = read_channel_altera(chan_Store2GG_ack);
-	eval_cnt = DockConst->pop_size; 
-	write_channel_altera(chan_GG2GA_eval_cnt, eval_cnt);
+	write_channel_altera(chan_GG2GA_eval_cnt, (DockConst->pop_size - 1));
 
 } // End of while (active)
 

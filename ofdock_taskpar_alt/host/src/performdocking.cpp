@@ -430,7 +430,7 @@ filled with clock() */
 	for (unsigned int run_cnt = 0; run_cnt < mypars->num_of_runs; run_cnt++)
 	{
 
-		printf("Run %u started...     \n", run_cnt+1); fflush(stdout);
+		printf("Run %u started ...     \n", run_cnt+1); fflush(stdout);
 
 
 
