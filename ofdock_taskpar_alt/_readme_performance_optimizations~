@@ -221,6 +221,10 @@ THIS PROVIDES UTILIZATION SAVINGS, INDEED. BUT IT CAUSES THE LOOP TO NOT
 BE PIPELINED AS IT PRESENTS A DIVERGENT INNER LOOP. WE SWITCHED IT BACK
 TO THE PREVIOUS VERSION.
 
+Krnl_LS
+ALUTs		FFs		RAMs		DSPs
+18790 (2%)	50257 (3%)	143 (6%)	25 (2%)
+
 +--------------------------------------------------------------------+
 ; Estimated Resource Usage Summary                                   ;
 +----------------------------------------+---------------------------+
@@ -240,22 +244,38 @@ TO THE PREVIOUS VERSION.
 ----------------------------------------------------------------------
 ----------------------------------------------------------------------
 
+Position data is transferred between kernels using three 
+separate channels: x, y, z, but this implies having fences between them.
+This could be unnecessary as the x,y,z data is used together.
+
+					ALUTs	FFs	RAMs	DSPs
+Krnl_GA.cl:44 (chan_Conf2Intere_x)	49	223	1	0
+Krnl_GA.cl:45 (chan_Conf2Intere_y)	49	223	1	0
+Krnl_GA.cl:46 (chan_Conf2Intere_z)	49	223	1	0
+
+Krnl_GA.cl:51 (chan_Conf2Intrae_x)	49	223	1	0	
+Krnl_GA.cl:52 (chan_Conf2Intrae_y)	49	223	1	0	
+Krnl_GA.cl:53 (chan_Conf2Intrae_z)	49	223	1	0
+
+MODIFICATION
+
+Krnl_GA.cl:47 (chan_Conf2Intere_xyz)	52	498	3	0
+Krnl_GA.cl:56 (chan_Conf2Intrae_xyz)	52	498	3	0
+
+Overall utilization % is the same
+But we can see we won in ALUs.
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+In Krnl_Conform
+Using a vector to replace loc_coords_x, loc_coords_y, loc_coords_z requires more logic
+even though, the overall hw utilization is the same.
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+----------------------------------------------------------------------
+----------------------------------------------------------------------
 
 

@@ -186,26 +186,11 @@ float map_angle(float angle, const float limit)
 // The pop_size parameter must be equal to the population size.
 // Originally from: searchoptimum.c
 // --------------------------------------------------------------------------
-uint find_best(//__global const float* restrict GlobEnergyCurrent, 
-	       __local        float* restrict loc_energies,
+uint find_best(__local        float* restrict loc_energies,
 		        const uint pop_size)
 {
-	//uint i;
-	//uint best_entity = 0;
 	ushort best_entity = 0;
 
-	// **********************************************
-	// ADD VENDOR SPECIFIC PRAGMA
-	// **********************************************	
-	//for (i=0; i<pop_size; i++) {
-	//for (ushort i=0; i<pop_size; i++) {
-	//	loc_energies[i] = GlobEnergyCurrent[i];
-	//}
-
-	// **********************************************
-	// ADD VENDOR SPECIFIC PRAGMA
-	// *********************************************	
-	//for (i=1; i<pop_size; i++) {
 	for (ushort i=1; i<pop_size; i++) {
 		#if defined (DEBUG_FIND_BEST)
 		printf("iteration: %u, energy_iteration_entity: %f, best_entity: %u, energy_best_entity: %f ...", 
@@ -234,37 +219,6 @@ uint find_best(//__global const float* restrict GlobEnergyCurrent,
 
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------
-/*
-uint myrand_basic (__global uint* restrict GlobPRNG)
-{
-	uint temprand_uint;
-
-#if defined (REPRO)
-	temprand_uint = 1;
-#else
-	temprand_uint = GlobPRNG[0];
-	temprand_uint = (RAND_A*temprand_uint + RAND_C);
-#endif
-	GlobPRNG[0] = temprand_uint;
-
-	return temprand_uint;
-}
-*/
-// --------------------------------------------------------------------------
-// --------------------------------------------------------------------------
-/*
-float myrand(__global uint* restrict GlobPRNG)
-{
-	uint   temprand_uint;
-	float temprand_float;
-
-	temprand_uint = myrand_basic(GlobPRNG);
-	temprand_float = convert_float(temprand_uint/MAX_UINT)*0.999999f;
-
-	return temprand_float;
-}
-*/
-
 float myrand(uint* prng)
 {
 	*prng = RAND_A*(*prng) + RAND_C;
@@ -273,16 +227,6 @@ float myrand(uint* prng)
 
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------
-/*
-uint myrand_uint(__global uint* restrict GlobPRNG,
-		 const uint limit)
-{
-	uint   temprand_uint;
-	temprand_uint = myrand_basic(GlobPRNG);
-	temprand_uint = (temprand_uint/MAX_UINT)*limit;
-	return temprand_uint;
-}
-*/
 uint myrand_uint(uint* prng, const uint limit)
 {
 	*prng = RAND_A*(*prng) + RAND_C;
@@ -296,93 +240,32 @@ uint myrand_uint(uint* prng, const uint limit)
 // The two selected parents are returned in the parent1 and parent2 parameters.
 // Originally from: searchoptimum.c
 // --------------------------------------------------------------------------
-void binary_tournament_selection(//__global const float* restrict GlobEnergyCurrent,
-				 //__global       uint*  restrict GlobPRNG,
-                                                uint*           prng,
+void binary_tournament_selection(               uint*           prng,
 				 __local        float* restrict loc_energies,
 				                uint*           parent1, 
 				                uint*           parent2,
 					  const uint            pop_size,  
 				          const float           rand_level)
 {
-	//for (ushort i=0; i<pop_size; i++) {
-	//	loc_energies[i] = GlobEnergyCurrent[i];
-	//}
-
 	uint parent_candidates [2];
 
-	//read GlobPRNG
-	//uint prng = GlobPRNG[0];
-
-	//generating two different parent candidates
-	//parent_candidates [0] = myrand_uint(GlobPRNG, pop_size);
-	//parent_candidates [0] = myrand_uint(&prng, pop_size);
 	parent_candidates [0] = myrand_uint(prng, pop_size);
-
-
-/*
-	LOOP_DOWHILE_BIN_TOURNAMENT_SEL_1:
-	do
-	{
-#if defined (REPRO)
-		//parent_candidates [1] = myrand_uint(GlobPRNG, pop_size) + 1;
-		//parent_candidates [1] = myrand_uint(&prng, pop_size) + 1;
-		parent_candidates [1] = myrand_uint(prng, pop_size) + 1;
-#else
-		//parent_candidates [1] = myrand_uint(GlobPRNG, pop_size);
-		//parent_candidates [1] = myrand_uint(&prng, pop_size);
-		parent_candidates [1] = myrand_uint(prng, pop_size);
-#endif	
-	}
-	while (parent_candidates [0] == parent_candidates [1]);
-*/
 	parent_candidates [1] = myrand_uint(prng, pop_size);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//#if defined (REPRO)
-//	parent_candidates [1] = myrand_uint(GlobPRNG, pop_size) + 1;
-//#else
-//	parent_candidates [1] = myrand_uint(GlobPRNG, pop_size);
-//#endif
-	
-	//the better will be the first parent with rand_level prability 
-	//and the second with 1-rand_level probability
-	//if (GlobEnergyCurrent[parent_candidates[0]] < GlobEnergyCurrent[parent_candidates[1]])
 	if (loc_energies[parent_candidates[0]] < loc_energies[parent_candidates[1]])
 	{
-		//if (myrand(GlobPRNG) < 100*rand_level) {
-		//if (myrand(&prng) < 100*rand_level) {
-		//if (myrand(prng) < 100*rand_level) {
 		if (myrand(prng) < rand_level) {
 			*parent1 = parent_candidates [0];}
-		else			               {
+		else	{
 			*parent1 = parent_candidates [1];}
 	}
 	else
 	{
-		//if (myrand(GlobPRNG) < 100*rand_level) {
-		//if (myrand(&prng) < 100*rand_level) {
-		//if (myrand(prng) < 100*rand_level) {
 		if (myrand(prng) < rand_level) {
 			*parent1 = parent_candidates [1];}
-		else			               {
+		else	{
 			*parent1 = parent_candidates [0];}	
 	}
-
 
 	#if defined (DEBUG_TOURNAMENT_SELECTION)
 	printf("Selecting first parent: %u (candidates were %u (E=%f) and %u (E=%f))\n", *parent1, 
@@ -390,76 +273,13 @@ void binary_tournament_selection(//__global const float* restrict GlobEnergyCurr
 		parent_candidates [1], GlobEnergyCurrent [parent_candidates [1]]);
 	#endif
 
-
-
-
-
-
-
-
 	//generating two different parent candidates (which differ from parent1 as well)
-/*
-	LOOP_DOWHILE_BIN_TOURNAMENT_SEL_2:
-	do
-#if defined (REPRO)
-		//parent_candidates [0] = myrand_uint(GlobPRNG, pop_size) + 2;
-		//parent_candidates [0] = myrand_uint(&prng, pop_size) + 2;
-		parent_candidates [0] = myrand_uint(prng, pop_size) + 2;
-#else
-		//parent_candidates [0] = myrand_uint(GlobPRNG, pop_size);
-		//parent_candidates [0] = myrand_uint(&prng, pop_size);
-		parent_candidates [0] = myrand_uint(prng, pop_size);
-#endif
-	while (parent_candidates [0] == *parent1);
-
-//#if defined (REPRO)
-//	parent_candidates [0] = myrand_uint(GlobPRNG, pop_size) + 2;
-//#else
-//	parent_candidates [0] = myrand_uint(GlobPRNG, pop_size);
-//#endif
-
-	LOOP_DOWHILE_BIN_TOURNAMENT_SEL_3:
-	do
-#if defined (REPRO)
-		//parent_candidates [1] = myrand_uint(GlobPRNG, pop_size) + 3;
-		//parent_candidates [1] = myrand_uint(&prng, pop_size) + 3;
-		parent_candidates [1] = myrand_uint(prng, pop_size) + 3;
-#else
-		//parent_candidates [1] = myrand_uint(GlobPRNG, pop_size);
-		//parent_candidates [1] = myrand_uint(&prng, pop_size);
-		parent_candidates [1] = myrand_uint(prng, pop_size);
-#endif
-	while ((parent_candidates [1] == parent_candidates [0]) || (parent_candidates [1] == *parent1));
-*/
 	parent_candidates [0] = myrand_uint(prng, pop_size);
 	parent_candidates [1] = myrand_uint(prng, pop_size);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-//#if defined (REPRO)
-//	parent_candidates [1] = myrand_uint(GlobPRNG, pop_size) + 3;
-//#else
-//	parent_candidates [1] = myrand_uint(GlobPRNG, pop_size);
-//#endif
-
 	//the better will be the second parent
-	//if (GlobEnergyCurrent[parent_candidates[0]] < GlobEnergyCurrent[parent_candidates[1]])
 	if (loc_energies[parent_candidates[0]] < loc_energies[parent_candidates[1]])
 	{
-		//if (myrand(GlobPRNG) < 100*rand_level) {
-		//if (myrand(&prng) < 100*rand_level) {
-		//if (myrand(prng) < 100*rand_level) {
 		if (myrand(prng) < rand_level) {
 			*parent2 = parent_candidates [0];}
 		else		          	       {
@@ -467,9 +287,6 @@ void binary_tournament_selection(//__global const float* restrict GlobEnergyCurr
 	}
 	else
 	{
-		//if (myrand(GlobPRNG) < 100*rand_level) {
-		//if (myrand(&prng) < 100*rand_level) {
-		//if (myrand(prng) < 100*rand_level) {
 		if (myrand(prng) < rand_level) {
 			*parent2 = parent_candidates [1];}
 		else			               {
@@ -481,9 +298,6 @@ void binary_tournament_selection(//__global const float* restrict GlobEnergyCurr
 	       parent_candidates [0], GlobEnergyCurrent [parent_candidates [0]] ,
 	       parent_candidates [1], GlobEnergyCurrent [(arent_candidates [1]]);
 	#endif
-
-	//write back to GlobPRNG
-	//GlobPRNG[0] = prng;
 }
 
 // --------------------------------------------------------------------------
@@ -494,29 +308,18 @@ void binary_tournament_selection(//__global const float* restrict GlobEnergyCurr
 // or an orientation/rotatable bond gene during mutation.
 // Originally from: searchoptimum.c
 // --------------------------------------------------------------------------
-void gen_new_genotype(//__global      uint*  restrict GlobPRNG,
-			                uint*           prng,
+void gen_new_genotype(	                uint*           prng,
 		      /*__local*/ const float*          parent1_genotype,
 		      /*__local*/ const float*          parent2_genotype, 
 		              const float           mutation_rate,
 			      const float           abs_max_dmov,
 			      const float           abs_max_dang,
 			      const float           crossover_rate,
-			      //const uint            num_of_genes,
 		      __local       float*          offspring_genotype)
 {
 	uint covr_point_low, covr_point_high;
 	uint temp1, temp2;
-	//uint i;
 
-	//read GlobPRNG
-	//uint prng = GlobPRNG[0];
-
-	//choosing crossover points randomly
-	//temp1 = myrand_uint(GlobPRNG, num_of_genes-1);
-	//temp2 = myrand_uint(GlobPRNG, num_of_genes-1);
-	//temp1 = myrand_uint(&prng, ACTUAL_GENOTYPE_LENGTH-1);
-	//temp2 = myrand_uint(&prng, ACTUAL_GENOTYPE_LENGTH-1);
 	temp1 = myrand_uint(prng, ACTUAL_GENOTYPE_LENGTH-1);
 	temp2 = myrand_uint(prng, ACTUAL_GENOTYPE_LENGTH-1);
 
@@ -558,18 +361,12 @@ void gen_new_genotype(//__global      uint*  restrict GlobPRNG,
 	#endif
 
 	//performing crossover
-	//if (crossover_rate > 100.0f*myrand(GlobPRNG))
-	//if (crossover_rate > 100*myrand(&prng))
 	if (crossover_rate > 100*myrand(prng))
 	{
 		//two-point crossover
 		//if (covr_point_low != covr_point_high)
 		if (twopoint_cross_yes == true)
 		{
-			// **********************************************
-			// ADD VENDOR SPECIFIC PRAGMA
-			// **********************************************
-			//for (i=0; i<num_of_genes; i++)
 			for (uchar i=0; i<ACTUAL_GENOTYPE_LENGTH; i++)
 			{
 				if ((i<=covr_point_low) || (i>covr_point_high)) 
@@ -585,10 +382,6 @@ void gen_new_genotype(//__global      uint*  restrict GlobPRNG,
 		}
 		//one-point crossover
 		else {
-			// **********************************************
-			// ADD VENDOR SPECIFIC PRAGMA
-			// **********************************************
-			//for (i=0; i<num_of_genes; i++)
 			for (uchar i=0; i<ACTUAL_GENOTYPE_LENGTH; i++)
 			{
 				if (i <= covr_point_low)
@@ -611,10 +404,6 @@ void gen_new_genotype(//__global      uint*  restrict GlobPRNG,
 	}
 	else	//if no crossover, the offsprings are the parents
 	{
-		// **********************************************
-		// ADD VENDOR SPECIFIC PRAGMA
-		// **********************************************
-		//for (i=0; i<num_of_genes; i++)
 		for (uchar i=0; i<ACTUAL_GENOTYPE_LENGTH; i++)
 		{
 			//offspring_genotype [i] = parent1_genotype[i];
@@ -652,72 +441,33 @@ void gen_new_genotype(//__global      uint*  restrict GlobPRNG,
 //		}
 //	}
 
-	// **********************************************
-	// ADD VENDOR SPECIFIC PRAGMA
-	// **********************************************
-	//for (i=0; i<3; i++)
+
 	for (uchar i=0; i<3; i++)
 	{
-		//if (mutation_rate > 100*myrand(GlobPRNG))
-		//if (mutation_rate > 100*myrand(&prng))
 		if (mutation_rate > 100*myrand(prng))
 		{
-			//offspring_genotype [i] = offspring_genotype [i] + 2*abs_max_dmov*myrand(GlobPRNG)-abs_max_dmov;
-			//offspring_genotype [i] = offspring_genotype [i] + 2*abs_max_dmov*myrand(&prng)-abs_max_dmov;
-			//priv_offspring_genotype [i] = priv_offspring_genotype [i] + 2*abs_max_dmov*myrand(&prng)-abs_max_dmov;
 			priv_offspring_genotype [i] = priv_offspring_genotype [i] + 2*abs_max_dmov*myrand(prng)-abs_max_dmov;
 		}
 	}
 
-	//if (mutation_rate > 100*myrand(GlobPRNG))
-	//if (mutation_rate > 100*myrand(&prng))
 	if (mutation_rate > 100*myrand(prng))
 	{
-		//offspring_genotype [3] = offspring_genotype [3] + 2*abs_max_dmov*myrand(GlobPRNG)-abs_max_dmov;
-		//offspring_genotype [3] = offspring_genotype [3] + 2*abs_max_dmov*myrand(&prng)-abs_max_dmov;
-		//priv_offspring_genotype [3] = priv_offspring_genotype [3] + 2*abs_max_dmov*myrand(&prng)-abs_max_dmov;
 		priv_offspring_genotype [3] = priv_offspring_genotype [3] + 2*abs_max_dmov*myrand(prng)-abs_max_dmov;
-
-		//map_angle(&(offspring_genotype [3]), 360.0f);
-		//map_angle_360(&(offspring_genotype [3]));
 		priv_offspring_genotype [3] = map_angle_360(priv_offspring_genotype [3]);
-		//priv_offspring_genotype [3] = map_angle(priv_offspring_genotype [3],360.0f);
 	}
 		
-	//if (mutation_rate > 100*myrand(GlobPRNG))
-	//if (mutation_rate > 100*myrand(&prng))
 	if (mutation_rate > 100*myrand(prng))
 	{
-		//offspring_genotype [4] = offspring_genotype [4] + 2*abs_max_dang*myrand(GlobPRNG)-abs_max_dang;
-		//offspring_genotype [4] = offspring_genotype [4] + 2*abs_max_dang*myrand(&prng)-abs_max_dang;
-		//priv_offspring_genotype [4] = priv_offspring_genotype [4] + 2*abs_max_dang*myrand(&prng)-abs_max_dang;
 		priv_offspring_genotype [4] = priv_offspring_genotype [4] + 2*abs_max_dang*myrand(prng)-abs_max_dang;
-
-		//map_angle(&(offspring_genotype [4]), 180.0f);
-		//map_angle_180(&(offspring_genotype [4]));
 		priv_offspring_genotype [4] = map_angle_180(priv_offspring_genotype [4]);
-		//priv_offspring_genotype [4] = map_angle(priv_offspring_genotype [4], 180.0f);
 	}
 
-	// **********************************************
-	// ADD VENDOR SPECIFIC PRAGMA
-	// **********************************************
-	//for (i=5; i<num_of_genes; i++)
 	for (uchar i=5; i<ACTUAL_GENOTYPE_LENGTH; i++)
 	{
-		//if (mutation_rate > 100*myrand(GlobPRNG))
-		//if (mutation_rate > 100*myrand(&prng))
 		if (mutation_rate > 100*myrand(prng))
 		{
-			//offspring_genotype [i] = offspring_genotype [i] + 2*abs_max_dang*myrand(GlobPRNG)-abs_max_dang;
-			//offspring_genotype [i] = offspring_genotype [i] + 2*abs_max_dang*myrand(&prng)-abs_max_dang;
-			//priv_offspring_genotype [i] = priv_offspring_genotype [i] + 2*abs_max_dang*myrand(&prng)-abs_max_dang;
 			priv_offspring_genotype [i] = priv_offspring_genotype [i] + 2*abs_max_dang*myrand(prng)-abs_max_dang;
-
-			//map_angle(&(offspring_genotype [i]), 360.0f);	//mapping angle to 0..360
-			//map_angle_360(&(offspring_genotype [i]));
 			priv_offspring_genotype [i] = map_angle_360(priv_offspring_genotype [i]);
-			//priv_offspring_genotype [i] = map_angle(priv_offspring_genotype [i], 360.0f);
 		}
 	}
 
@@ -729,7 +479,4 @@ void gen_new_genotype(//__global      uint*  restrict GlobPRNG,
 	for (uchar i=0; i< ACTUAL_GENOTYPE_LENGTH; i++) {
 		offspring_genotype [i] = priv_offspring_genotype [i];
 	}
-
-	//write back to GlobPRNG
-	//GlobPRNG[0] = prng;
 }

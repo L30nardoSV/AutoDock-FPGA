@@ -10,7 +10,6 @@ void Krnl_Conform(
 	     __constant       Dockparameters*  restrict DockConst
 )
 {
-
 	__local float loc_coords_x[MAX_NUM_OF_ATOMS];
 	__local float loc_coords_y[MAX_NUM_OF_ATOMS];
 	__local float loc_coords_z[MAX_NUM_OF_ATOMS];
@@ -228,7 +227,6 @@ while(active) {
 						 ref_orientation_quats_const_0*quatrot_temp_z+
 						 quatrot_temp_x*ref_orientation_quats_const_2-
 						 ref_orientation_quats_const_1*quatrot_temp_y;
-
 			}
 			
 			quatrot_temp_q = 0 -
@@ -256,14 +254,13 @@ while(active) {
 			loc_coords_x[atom_id] = atom_to_rotate [0] + rotation_movingvec[0];
 			loc_coords_y[atom_id] = atom_to_rotate [1] + rotation_movingvec[1];
 			loc_coords_z[atom_id] = atom_to_rotate [2] + rotation_movingvec[2];
-
-
 		} // End if-statement not dummy rotation
 	} // End rotation_counter for-loop
 
 	#if defined (DEBUG_KRNL_CONFORM)
 	printf("BEFORE Out CONFORM CHANNEL\n");
 	#endif
+
 	// --------------------------------------------------------------
 	// Send ligand atomic coordinates to channel 
 	// --------------------------------------------------------------
@@ -277,7 +274,9 @@ while(active) {
 	write_channel_altera(chan_Conf2Intrae_cnt,    cnt);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 
+	//float3 position_xyz;
 	for (uchar pipe_cnt=0; pipe_cnt<DockConst->num_of_atoms; pipe_cnt++) {
+		/*
 		write_channel_altera(chan_Conf2Intere_x, loc_coords_x[pipe_cnt]);
 		write_channel_altera(chan_Conf2Intrae_x, loc_coords_x[pipe_cnt]);
 		mem_fence(CLK_CHANNEL_MEM_FENCE);
@@ -286,6 +285,13 @@ while(active) {
 		mem_fence(CLK_CHANNEL_MEM_FENCE);
 		write_channel_altera(chan_Conf2Intere_z, loc_coords_z[pipe_cnt]);
 		write_channel_altera(chan_Conf2Intrae_z, loc_coords_z[pipe_cnt]);
+		*/
+		//position_xyz = (float3) (loc_coords_x[pipe_cnt], loc_coords_y[pipe_cnt], loc_coords_z[pipe_cnt]);
+		//write_channel_altera(chan_Conf2Intere_xyz, position_xyz);
+		//write_channel_altera(chan_Conf2Intrae_xyz, position_xyz);
+
+		write_channel_altera(chan_Conf2Intere_xyz, (float3) (loc_coords_x[pipe_cnt], loc_coords_y[pipe_cnt], loc_coords_z[pipe_cnt]));
+		write_channel_altera(chan_Conf2Intrae_xyz, (float3) (loc_coords_x[pipe_cnt], loc_coords_y[pipe_cnt], loc_coords_z[pipe_cnt]));
 	}
 
 	// --------------------------------------------------------------

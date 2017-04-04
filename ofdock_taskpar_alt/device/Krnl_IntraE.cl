@@ -60,12 +60,20 @@ while(active) {
 	cnt    = read_channel_altera(chan_Conf2Intrae_cnt);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 
+	float3 position_xyz;
+
 	for (uchar pipe_cnt=0; pipe_cnt<DockConst->num_of_atoms; pipe_cnt++) {
+		/*
 		loc_coords_x[pipe_cnt] = read_channel_altera(chan_Conf2Intrae_x);
 		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);
 		loc_coords_y[pipe_cnt] = read_channel_altera(chan_Conf2Intrae_y);
 		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);
 		loc_coords_z[pipe_cnt] = read_channel_altera(chan_Conf2Intrae_z);
+		*/
+		position_xyz = read_channel_altera(chan_Conf2Intrae_xyz);
+		loc_coords_x[pipe_cnt] = position_xyz.x;
+		loc_coords_y[pipe_cnt] = position_xyz.y;
+		loc_coords_z[pipe_cnt] = position_xyz.z;
 	}
 	// --------------------------------------------------------------
 	//printf("AFTER In INTRA CHANNEL\n");
