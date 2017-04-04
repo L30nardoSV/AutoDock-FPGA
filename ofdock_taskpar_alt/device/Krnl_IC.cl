@@ -6,8 +6,7 @@ __kernel __attribute__ ((max_global_work_dim(0)))
 void Krnl_IC(__global   const float*           restrict GlobPopulationCurrent,
 	     __constant       Dockparameters*  restrict DockConst
 )
-{	
-	      uint eval_cnt = 0; 	
+{		
 	      char active   = 1; 	
 	const char mode     = 1; 	
 	      char ack      = 0;
@@ -39,14 +38,13 @@ void Krnl_IC(__global   const float*           restrict GlobPopulationCurrent,
 
 	} // End of for-loop pop_cnt		
 
-	ack = read_channel_altera(chan_Store2IC_ack);	
-	eval_cnt = DockConst->pop_size;	
+	ack = read_channel_altera(chan_Store2IC_ack);		
 	
 	#if defined (DEBUG_KRNL_IC)
-	printf("eval_cnt (Krnl_IC): %u\n", eval_cnt); 	
+	printf("eval_cnt (Krnl_IC): %u\n", DockConst->pop_size); 	
 	#endif
 
-	write_channel_altera(chan_IC2GA_eval_cnt, eval_cnt);
+	write_channel_altera(chan_IC2GA_eval_cnt, DockConst->pop_size);
 
 	#if defined (DEBUG_ACTIVE_KERNEL)
 	printf("	%-20s: %s\n", "Krnl_IC", "disabled");
