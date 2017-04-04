@@ -1,11 +1,8 @@
 __kernel __attribute__ ((max_global_work_dim(0)))
-//__attribute__ ((reqd_work_group_size(1,1,1)))
 void Krnl_Store(
 	     __global       float*           restrict GlobEnergyCurrent,
 	     __global       float*           restrict GlobEnergyNext,
-	     //__global const Dockparameters*  restrict DockConst
-	     __constant const Dockparameters*  restrict DockConst
-		 //     const unsigned int              DockConst_pop_size
+	     __constant     Dockparameters*  restrict DockConst
 )
 {
 	// --------------------------------------------------------------
@@ -16,12 +13,7 @@ void Krnl_Store(
 
 	char active = 1;
 	char mode   = 0;
-	//uint cnt    = 0;
 	ushort cnt  = 0; 
-
-	//char active_tmp = 1;
-
-	//char Store_mode = 0;
 
  	char   active1, active2;
 	char   mode1, mode2;
@@ -29,10 +21,6 @@ void Krnl_Store(
 	float LSenergy;
 
 while(active) {
-//while(active_tmp) {
-	//Store_mode = read_channel_altera(chan_GA2Store_mode);
-	//mem_fence(CLK_CHANNEL_MEM_FENCE);
-
 	InterE = read_channel_altera(chan_Intere2Store_intere);
 	IntraE = read_channel_altera(chan_Intrae2Store_intrae);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
@@ -80,8 +68,6 @@ while(active) {
 		case 1:	// IC
 			GlobEnergyCurrent[cnt] = InterE + IntraE;
 			if (cnt == (DockConst->pop_size)-1) {
-			//if (cnt == (DockConst_pop_size)-1) {
-				//GlobDone[0] = 1;
 				write_channel_altera(chan_Store2IC_ack, 1);
 			}
 		break;
@@ -89,10 +75,7 @@ while(active) {
 		case 2: // GG
 			GlobEnergyNext[cnt] = InterE + IntraE;
 			
-			//if (cnt == (DockConst->pop_size)-1) {
-			if ((cnt == (DockConst->pop_size)-1) || (active == 0)) {
-			//if ((cnt == (DockConst_pop_size)-1) || (active == 0)) {
-				//GlobDone[1] = 1;	
+			if ((cnt == (DockConst->pop_size)-1) || (active == 0)) {	
 				write_channel_altera(chan_Store2GG_ack, 1);
 			}
 		break;
