@@ -75,43 +75,174 @@ Taking into account all previous steps, hw utilization was reduced down to:
 
 ----------------------------------------------------------------------
 ----------------------------------------------------------------------
+Reduced number of bits for counter in Krnl_LS
+This counter is used for indexing entities subjected to LS
+which represent typically 6% of the population
+
+for (uint ls_ent_cnt=0; ls_ent_cnt<DockConst->num_of_lsentities; ls_ent_cnt++) {
+
+Krnl_LS
+ALUTs		FFs		RAMs		DSPs
+21896 (3%)	56096 (4%)	163 (7%)	63 (4%
+
+
+MODIFICATION
+
+for (ushort ls_ent_cnt=0; ls_ent_cnt<DockConst->num_of_lsentities; ls_ent_cnt++) {
+
+Krnl_LS
+ALUTs		FFs		RAMs		DSPs
+21885 (3%)	56025 (4%)	163 (7%)	63 (4%)
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+
+Second improvement of Krnl_LS
+
+In one of the previous modifications, we came out with 
+this modification:
+
+
+if (positive_direction == true) {
+
+else {
+}
+
+entity_possible_new_genotype [3] = map_angle(entity_possible_new_genotype [3], 360.0f);
+
+The code inside either the if or else branches contain statements
+that can be grouped into one single for loop.
+
+Krnl_LS
+ALUTs		FFs		RAMs		DSPs
+21885 (3%)	56025 (4%)	163 (7%)	63 (4%)
+
+MODIFICATION
+Grouping all them helps reducing area as well
+
+Krnl_LS
+ALUTs		FFs		RAMs		DSPs
+20652 (3%)	53356 (3%)	143 (6%)	43 (3%)
+
++--------------------------------------------------------------------+
+; Estimated Resource Usage Summary                                   ;
++----------------------------------------+---------------------------+
+; Resource                               + Usage                     ;
++----------------------------------------+---------------------------+
+; Logic utilization                      ;   59%                     ;
+; ALUTs                                  ;   26%                     ;
+; Dedicated logic registers              ;   34%                     ;
+; Memory blocks                          ;   73%                     ;
+; DSP blocks                             ;   24%                     ;
++----------------------------------------+---------------------------;
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+
+The same type of modification as in the previous item.
+This time the for loop is related to genotyoe_deviation[]:
+
+genotype_deviate [0] = rho*DockConst->base_dmov_mul_sqrt3*(2*myrand(&prng)-1);
+genotype_deviate [1] = rho*DockConst->base_dmov_mul_sqrt3*(2*myrand(&prng)-1);
+genotype_deviate [2] = rho*DockConst->base_dmov_mul_sqrt3*(2*myrand(&prng)-1);
+
+for (uchar i=3; i<DockConst->num_of_genes; i++) {
+	genotype_deviate [i] = rho*DockConst->base_dang_mul_sqrt3*(2*myrand(&prng)-1);
+}
+
+
+MODIFICATION:
+
+for (uchar i=0; i<DockConst->num_of_genes; i++) {
+	genotype_deviate [i] = rho*DockConst->base_dang_mul_sqrt3*(2*myrand(&prng)-1);
+}
+
+It also helps reducing area:
+
+Krnl_LS
+ALUTs		FFs		RAMs		DSPs
+18790 (2%)	50257 (3%)	143 (6%)	25 (2%)
+
++--------------------------------------------------------------------+
+; Estimated Resource Usage Summary                                   ;
++----------------------------------------+---------------------------+
+; Resource                               + Usage                     ;
++----------------------------------------+---------------------------+
+; Logic utilization                      ;   58%                     ;
+; ALUTs                                  ;   26%                     ;
+; Dedicated logic registers              ;   33%                     ;
+; Memory blocks                          ;   73%                     ;
+; DSP blocks                             ;   23%                     ;
++----------------------------------------+---------------------------;
+
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+
+
+
+Again in Krnl_LS, calculation can be grouped inside a single for loop:
+
+entity_possible_new_genotype [3] = map_angle_360(entity_possible_new_genotype [3]);
+entity_possible_new_genotype [4] = map_angle_180(entity_possible_new_genotype [4]);
+
+for (uchar i=5; i<DockConst->num_of_genes; i++) {
+	entity_possible_new_genotype [i] = map_angle_360(entity_possible_new_genotype [i]);
+}
+
+MODIFICATION:
+
+for (uchar i=3; i<DockConst->num_of_genes; i++) {
+	if (i == 4) {
+		entity_possible_new_genotype [i] = map_angle_180(entity_possible_new_genotype [i]);
+	} else {
+		entity_possible_new_genotype [i] = map_angle_360(entity_possible_new_genotype [i]);
+	}
+}
+
+
+Krnl_LS
+ALUTs		FFs		RAMs		DSPs
+15854 (2%)	43513 (3%)	135 (6%)	23 (2%)
+
++--------------------------------------------------------------------+
+; Estimated Resource Usage Summary                                   ;
++----------------------------------------+---------------------------+
+; Resource                               + Usage                     ;
++----------------------------------------+---------------------------+
+; Logic utilization                      ;   58%                     ;
+; ALUTs                                  ;   25%                     ;
+; Dedicated logic registers              ;   33%                     ;
+; Memory blocks                          ;   73%                     ;
+; DSP blocks                             ;   23%                     ;
++----------------------------------------+---------------------------;
+	
+THIS PROVIDES UTILIZATION SAVINGS, INDEED. BUT IT CAUSES THE LOOP TO NOT 
+BE PIPELINED AS IT PRESENTS A DIVERGENT INNER LOOP. WE SWITCHED IT BACK
+TO THE PREVIOUS VERSION.
+
+Krnl_LS
+ALUTs		FFs		RAMs		DSPs
+18790 (2%)	50257 (3%)	143 (6%)	25 (2%)
+
++--------------------------------------------------------------------+
+; Estimated Resource Usage Summary                                   ;
++----------------------------------------+---------------------------+
+; Resource                               + Usage                     ;
++----------------------------------------+---------------------------+
+; Logic utilization                      ;   58%                     ;
+; ALUTs                                  ;   26%                     ;
+; Dedicated logic registers              ;   33%                     ;
+; Memory blocks                          ;   73%                     ;
+; DSP blocks                             ;   23%                     ;
++----------------------------------------+---------------------------;
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+----------------------------------------------------------------------
+----------------------------------------------------------------------
 
 
 
