@@ -272,10 +272,33 @@ Using a vector to replace loc_coords_x, loc_coords_y, loc_coords_z requires more
 even though, the overall hw utilization is the same.
 This idea is discarded.
 
-
-
-
 ----------------------------------------------------------------------
 ----------------------------------------------------------------------
+
+Deviation dmov and dang were incorrectly assigned in both Krnl_GG and Krnl_LS, 
+and have been being used that way all this time!!!
+
+We tried removing map_angle(), getting (possibly faster execution) and less area
+consumption. However it shouldn't be removed as spherical coordinates used in 
+the genotypes, require a restriction on angles (see wikipedia) in order the define 
+a unique set of spherical coordinates for a point. SO WE PUt THEM BACK!
+
+MODIFICATION:
+
+Overall utilization results:
+
++--------------------------------------------------------------------+
+; Estimated Resource Usage Summary                                   ;
++----------------------------------------+---------------------------+
+; Resource                               + Usage                     ;
++----------------------------------------+---------------------------+
+; Logic utilization                      ;   59%                     ;
+; ALUTs                                  ;   26%                     ;
+; Dedicated logic registers              ;   34%                     ;
+; Memory blocks                          ;   73%                     ;
+; DSP blocks                             ;   24%                     ;
++----------------------------------------+---------------------------;
+
+
 
 
