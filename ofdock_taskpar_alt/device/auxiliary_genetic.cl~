@@ -63,6 +63,18 @@ void map_angle_360(__local float* angle)
 
 
 
+
+
+
+
+
+
+
+// **********************************************
+// **********************************************
+// **********************************************
+// **********************************************
+
 float map_angle_180(float angle)
 {
 	float x = angle;
@@ -77,6 +89,12 @@ float map_angle_180(float angle)
 
 	return x;
 }
+
+// **********************************************
+// **********************************************
+// **********************************************
+// **********************************************
+
 	
 /*
 float map_angle_180(float angle)
@@ -126,6 +144,11 @@ float map_angle_180(float angle)
 }
 */
 
+// **********************************************
+// **********************************************
+// **********************************************
+// **********************************************
+/*
 float map_angle_360(float angle)
 {
 	float x = angle;
@@ -140,6 +163,11 @@ float map_angle_360(float angle)
 
 	return x;
 }
+*/
+// **********************************************
+// **********************************************
+// **********************************************
+// **********************************************
 
 
 /*
@@ -452,7 +480,8 @@ void gen_new_genotype(	                uint*           prng,
 
 	if (mutation_rate > 100*myrand(prng))
 	{
-		priv_offspring_genotype [3] = priv_offspring_genotype [3] + 2*abs_max_dmov*myrand(prng)-abs_max_dmov;
+		//priv_offspring_genotype [3] = priv_offspring_genotype [3] + 2*abs_max_dmov*myrand(prng)-abs_max_dmov;
+		priv_offspring_genotype [3] = priv_offspring_genotype [3] + 2*abs_max_dang*myrand(prng)-abs_max_dang;
 		priv_offspring_genotype [3] = map_angle_360(priv_offspring_genotype [3]);
 	}
 		
@@ -462,25 +491,12 @@ void gen_new_genotype(	                uint*           prng,
 		priv_offspring_genotype [4] = map_angle_180(priv_offspring_genotype [4]);
 	}
 
-	// **********************************************
-	// ADD VENDOR SPECIFIC PRAGMA
-	// **********************************************
-	//for (i=5; i<num_of_genes; i++)
 	for (uchar i=5; i<ACTUAL_GENOTYPE_LENGTH; i++)
 	{
-		//if (mutation_rate > 100*myrand(GlobPRNG))
-		//if (mutation_rate > 100*myrand(&prng))
 		if (mutation_rate > 100*myrand(prng))
 		{
-			//offspring_genotype [i] = offspring_genotype [i] + 2*abs_max_dang*myrand(GlobPRNG)-abs_max_dang;
-			//offspring_genotype [i] = offspring_genotype [i] + 2*abs_max_dang*myrand(&prng)-abs_max_dang;
-			//priv_offspring_genotype [i] = priv_offspring_genotype [i] + 2*abs_max_dang*myrand(&prng)-abs_max_dang;
 			priv_offspring_genotype [i] = priv_offspring_genotype [i] + 2*abs_max_dang*myrand(prng)-abs_max_dang;
-
-			//map_angle(&(offspring_genotype [i]), 360.0f);	//mapping angle to 0..360
-			//map_angle_360(&(offspring_genotype [i]));
 			priv_offspring_genotype [i] = map_angle_360(priv_offspring_genotype [i]);
-			//priv_offspring_genotype [i] = map_angle(priv_offspring_genotype [i], 360.0f);
 		}
 	}
 

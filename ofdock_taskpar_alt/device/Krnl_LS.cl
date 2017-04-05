@@ -78,7 +78,10 @@ while(active) {
 		while ((iteration_cnt < DockConst->max_num_of_iters) && (rho > DockConst->rho_lower_bound)) {
 			//new random deviate
 			//rho is the deviation of the uniform distribution
-			for (uchar i=0; i<DockConst->num_of_genes; i++) {
+			for (uchar i=0; i<3; i++) {
+				genotype_deviate [i] = rho*DockConst->base_dmov_mul_sqrt3*(2*myrand(&prng)-1);
+			}
+			for (uchar i=3; i<DockConst->num_of_genes; i++) {
 				genotype_deviate [i] = rho*DockConst->base_dang_mul_sqrt3*(2*myrand(&prng)-1);
 			}
 			
@@ -100,6 +103,9 @@ while(active) {
 			for (uchar i=5; i<DockConst->num_of_genes; i++) {
 				entity_possible_new_genotype [i] = map_angle_360(entity_possible_new_genotype [i]);
 			}
+
+
+
 
 /*
 			for (uchar i=3; i<DockConst->num_of_genes; i++) {
