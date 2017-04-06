@@ -148,7 +148,7 @@ float map_angle_180(float angle)
 // **********************************************
 // **********************************************
 // **********************************************
-/*
+
 float map_angle_360(float angle)
 {
 	float x = angle;
@@ -163,7 +163,7 @@ float map_angle_360(float angle)
 
 	return x;
 }
-*/
+
 // **********************************************
 // **********************************************
 // **********************************************
@@ -389,7 +389,8 @@ void gen_new_genotype(	                uint*           prng,
 	#endif
 
 	//performing crossover
-	if (crossover_rate > 100*myrand(prng))
+	//if (crossover_rate > 100*myrand(prng))
+	if (crossover_rate > myrand(prng))
 	{
 		//two-point crossover
 		//if (covr_point_low != covr_point_high)
@@ -472,20 +473,23 @@ void gen_new_genotype(	                uint*           prng,
 
 	for (uchar i=0; i<3; i++)
 	{
-		if (mutation_rate > 100*myrand(prng))
+		//if (mutation_rate > 100*myrand(prng))
+		if (mutation_rate > myrand(prng))
 		{
 			priv_offspring_genotype [i] = priv_offspring_genotype [i] + 2*abs_max_dmov*myrand(prng)-abs_max_dmov;
 		}
 	}
 
-	if (mutation_rate > 100*myrand(prng))
+	//if (mutation_rate > 100*myrand(prng))
+	if (mutation_rate > myrand(prng))
 	{
 		//priv_offspring_genotype [3] = priv_offspring_genotype [3] + 2*abs_max_dmov*myrand(prng)-abs_max_dmov;
 		priv_offspring_genotype [3] = priv_offspring_genotype [3] + 2*abs_max_dang*myrand(prng)-abs_max_dang;
 		priv_offspring_genotype [3] = map_angle_360(priv_offspring_genotype [3]);
 	}
 		
-	if (mutation_rate > 100*myrand(prng))
+	//if (mutation_rate > 100*myrand(prng))
+	if (mutation_rate > myrand(prng))
 	{
 		priv_offspring_genotype [4] = priv_offspring_genotype [4] + 2*abs_max_dang*myrand(prng)-abs_max_dang;
 		priv_offspring_genotype [4] = map_angle_180(priv_offspring_genotype [4]);
@@ -494,6 +498,7 @@ void gen_new_genotype(	                uint*           prng,
 	for (uchar i=5; i<ACTUAL_GENOTYPE_LENGTH; i++)
 	{
 		if (mutation_rate > 100*myrand(prng))
+		if (mutation_rate > myrand(prng))
 		{
 			priv_offspring_genotype [i] = priv_offspring_genotype [i] + 2*abs_max_dang*myrand(prng)-abs_max_dang;
 			priv_offspring_genotype [i] = map_angle_360(priv_offspring_genotype [i]);
