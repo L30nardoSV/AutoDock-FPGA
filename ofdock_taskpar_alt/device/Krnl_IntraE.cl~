@@ -70,7 +70,7 @@ while(active) {
 		mem_fence(CLK_CHANNEL_MEM_FENCE | CLK_LOCAL_MEM_FENCE);
 		loc_coords_z[pipe_cnt] = read_channel_altera(chan_Conf2Intrae_z);
 		*/
-		position_xyz = read_channel_altera(chan_Conf2Intere_xyz);
+		position_xyz = read_channel_altera(chan_Conf2Intrae_xyz);
 		loc_coords_x[pipe_cnt] = position_xyz.x;
 		loc_coords_y[pipe_cnt] = position_xyz.y;
 		loc_coords_z[pipe_cnt] = position_xyz.z;
@@ -100,8 +100,8 @@ while(active) {
 		suby = loc_coords_y[atom1_id] - loc_coords_y[atom2_id];
 		subz = loc_coords_z[atom1_id] - loc_coords_z[atom2_id];
 
-		//distance_leo = sqrt(subx*subx + suby*suby + subz*subz)*DockConst->grid_spacing;
-		distance_leo = sqrt_custom(subx*subx + suby*suby + subz*subz)*DockConst->grid_spacing;
+		distance_leo = sqrt(subx*subx + suby*suby + subz*subz)*DockConst->grid_spacing;
+		//distance_leo = sqrt_custom(subx*subx + suby*suby + subz*subz)*DockConst->grid_spacing;
 
 		if (distance_leo < 1.0f) {
 			#if defined (DEBUG_KRNL_INTRAE)

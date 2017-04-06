@@ -10,7 +10,9 @@
 // --------------------------------------------------------------------------
 
 __kernel __attribute__ ((max_global_work_dim(0)))
-void Krnl_LS(__global       float*           restrict GlobPopulationCurrent,
+void Krnl_LS(////__global       float*           restrict GlobPopulationCurrent,
+	     __global       float*           restrict GlobPopulationNext,
+	     ////__global       float*           restrict GlobEnergyCurrent,
 	     __global       float*           restrict GlobEnergyCurrent,
              __global       unsigned int*    restrict GlobPRNG,
 	     __constant     Dockparameters*  restrict DockConst    
@@ -64,10 +66,12 @@ while(active) {
 		
 		//performing local search 
 		for (uchar i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {
-			offspring_genotype [i] = GlobPopulationCurrent[entity_for_ls*ACTUAL_GENOTYPE_LENGTH + i];
+			////offspring_genotype [i] = GlobPopulationCurrent[entity_for_ls*ACTUAL_GENOTYPE_LENGTH + i];
+			offspring_genotype [i] = GlobPopulationNext[entity_for_ls*ACTUAL_GENOTYPE_LENGTH + i];
 			genotype_bias [i] = 0.0f;
 		}
-		offspring_energy = GlobEnergyCurrent[entity_for_ls];		
+		////offspring_energy = GlobEnergyCurrent[entity_for_ls];
+		offspring_energy = GlobEnergyNext[entity_for_ls];		
 	
 		positive_direction = true;
 		ls_pass_complete = true;
@@ -220,9 +224,11 @@ while(active) {
 		// ------------------------------------------------------------------------------------------------------------
 
 		for (uchar i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {
-			GlobPopulationCurrent[entity_for_ls*ACTUAL_GENOTYPE_LENGTH + i] = offspring_genotype [i];
+			////GlobPopulationCurrent[entity_for_ls*ACTUAL_GENOTYPE_LENGTH + i] = offspring_genotype [i];
+			GlobPopulationNext[entity_for_ls*ACTUAL_GENOTYPE_LENGTH + i] = offspring_genotype [i];
 		}
-		GlobEnergyCurrent[entity_for_ls] = offspring_energy;
+		////GlobEnergyCurrent[entity_for_ls] = offspring_energy;
+		GlobEnergyNext[entity_for_ls] = offspring_energy;
 
 		eval_cnt += LS_eval;
 

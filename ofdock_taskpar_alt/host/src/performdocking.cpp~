@@ -417,8 +417,10 @@ filled with clock() */
 #endif // End of ENABLE_KERNEL7
 
 #ifdef ENABLE_KERNEL8 // Krnl_LS
-        setKernelArg(kernel8,0, sizeof(mem_dockpars_conformations_current),     &mem_dockpars_conformations_current);
-        setKernelArg(kernel8,1, sizeof(mem_dockpars_energies_current),          &mem_dockpars_energies_current);
+        ////setKernelArg(kernel8,0, sizeof(mem_dockpars_conformations_current),     &mem_dockpars_conformations_current);
+        setKernelArg(kernel8,0, sizeof(mem_dockpars_conformations_next),     	&mem_dockpars_conformations_next);
+        ////setKernelArg(kernel8,1, sizeof(mem_dockpars_energies_current),          &mem_dockpars_energies_current);
+        setKernelArg(kernel8,1, sizeof(mem_dockpars_energies_next),         	&mem_dockpars_energies_next);
         setKernelArg(kernel8,2, sizeof(mem_dockpars_prng_states),               &mem_dockpars_prng_states);
         setKernelArg(kernel8,3, sizeof(cl_mem),                          	&mem_DockparametersConst);
 #endif // End of ENABLE_KERNEL8

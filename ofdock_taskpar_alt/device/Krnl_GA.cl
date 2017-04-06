@@ -246,6 +246,16 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			if (LS_done ==  true) {		
 				generation_cnt++;
 
+
+				for (ushort i=0;i<DockConst->pop_size*ACTUAL_GENOTYPE_LENGTH; i++) { 	
+					GlobPopulationCurrent[i] = GlobPopulationNext[i];
+					if (i<DockConst->pop_size) {
+						GlobEnergyCurrent[i] = GlobEnergyNext[i];
+					}
+				}
+
+
+
 				#if defined (DEBUG_KRNL_GA)
 				printf("eval_cnt: %u, generation_cnt: %u\n", eval_cnt, generation_cnt);
 				#endif
@@ -257,24 +267,15 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			LS_act = false;
 			
 			if (GG_done == true) {
+
 /*
-				// Updating old population with new one
-				//for (uint i=0;i<DockConst->pop_size*ACTUAL_GENOTYPE_LENGTH; i++) {
-				for (ushort i=0;i<DockConst->pop_size*ACTUAL_GENOTYPE_LENGTH; i++) { 	
-					GlobPopulationCurrent[i] = GlobPopulationNext[i];}
-
-				// Updating old energy with new one
-				//for (uint i=0;i<DockConst->pop_size; i++) {
-				for (ushort i=0;i<DockConst->pop_size; i++) { 			
-					GlobEnergyCurrent[i] = GlobEnergyNext[i];}
-*/
-
 				for (ushort i=0;i<DockConst->pop_size*ACTUAL_GENOTYPE_LENGTH; i++) { 	
 					GlobPopulationCurrent[i] = GlobPopulationNext[i];
 					if (i<DockConst->pop_size) {
 						GlobEnergyCurrent[i] = GlobEnergyNext[i];
 					}
 				}
+*/
 
 				// LS
 				LS_act = true;

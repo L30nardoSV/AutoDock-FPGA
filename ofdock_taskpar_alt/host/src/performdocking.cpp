@@ -304,7 +304,8 @@ filled with clock() */
 	// and return them <here> (<here> = where prepare_const_fields_for_gpu() is called),
 	// so we can send them to Kernels from <here>, instead of from calcenergy.cpp as originally.
 	// ----------------------------------------------------------------------
-	if (prepare_conststatic_fields_for_gpu(&myligand_reference, mypars, cpu_ref_ori_angles, &KerConstStatic) == 1)
+	//if (prepare_conststatic_fields_for_gpu(&myligand_reference, mypars, cpu_ref_ori_angles, &KerConstStatic) == 1)
+	if (prepare_conststatic_fields_for_gpu(&myligand_reference, mypars, &KerConstStatic) == 1)
 		return 1;
 
 	//preparing parameter struct
@@ -417,8 +418,10 @@ filled with clock() */
 #endif // End of ENABLE_KERNEL7
 
 #ifdef ENABLE_KERNEL8 // Krnl_LS
-        setKernelArg(kernel8,0, sizeof(mem_dockpars_conformations_current),     &mem_dockpars_conformations_current);
-        setKernelArg(kernel8,1, sizeof(mem_dockpars_energies_current),          &mem_dockpars_energies_current);
+        ////setKernelArg(kernel8,0, sizeof(mem_dockpars_conformations_current),     &mem_dockpars_conformations_current);
+        setKernelArg(kernel8,0, sizeof(mem_dockpars_conformations_next),     	&mem_dockpars_conformations_next);
+        ////setKernelArg(kernel8,1, sizeof(mem_dockpars_energies_current),          &mem_dockpars_energies_current);
+        setKernelArg(kernel8,1, sizeof(mem_dockpars_energies_next),         	&mem_dockpars_energies_next);
         setKernelArg(kernel8,2, sizeof(mem_dockpars_prng_states),               &mem_dockpars_prng_states);
         setKernelArg(kernel8,3, sizeof(cl_mem),                          	&mem_DockparametersConst);
 #endif // End of ENABLE_KERNEL8

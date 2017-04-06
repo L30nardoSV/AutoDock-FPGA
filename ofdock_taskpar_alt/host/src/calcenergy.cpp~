@@ -258,7 +258,7 @@ int prepare_conststatic_fields_for_gpu(Liganddata* 	       myligand_reference,
 	int type_id1, type_id2;
 	float* floatpoi;
 	char* charpoi;
-	float phi, theta, genrotangle;
+	//float phi, theta, genrotangle;
 
 	// ------------------------------
 	float atom_charges[MAX_NUM_OF_ATOMS];

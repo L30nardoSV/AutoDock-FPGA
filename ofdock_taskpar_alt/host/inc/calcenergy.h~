@@ -139,7 +139,7 @@ int prepare_conststatic_fields_for_gpu(Liganddata* 	       myligand_reference,
 int prepare_constdynamic_fields_for_gpu(Liganddata* 	 	myligand_reference,
 				 	Dockpars*   	 	mypars,
 				 	float*      	 	cpu_ref_ori_angles,
-				 	kernelconstant* KerConst);
+				 	kernelconstant_dynamic* KerConstDynamic);
 
 void make_reqrot_ordering(char number_of_req_rotations[MAX_NUM_OF_ATOMS],
 			  char atom_id_of_numrots[MAX_NUM_OF_ATOMS],

@@ -133,7 +133,7 @@ int prepare_const_fields_for_gpu(Liganddata* 	 myligand_reference,
 */
 int prepare_conststatic_fields_for_gpu(Liganddata* 	       myligand_reference,
 				 	Dockpars*   	       mypars,
-				 	float*      	       cpu_ref_ori_angles,
+				 	//float*      	       cpu_ref_ori_angles,
 				 	kernelconstant_static* KerConstStatic);
 
 int prepare_constdynamic_fields_for_gpu(Liganddata* 	 	myligand_reference,

@@ -284,6 +284,9 @@ the genotypes, require a restriction on angles (see wikipedia) in order the defi
 a unique set of spherical coordinates for a point. SO WE PUt THEM BACK!
 
 MODIFICATION:
+Now bigger cluster is at least 20% in size compared to whole number of runs.
+Still some big energy values are computed by both cpu and device (check final_population_runXX.txt)
+
 
 Overall utilization results:
 

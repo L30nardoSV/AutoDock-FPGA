@@ -53,7 +53,7 @@ channel ushort  chan_Conf2Intere_cnt;
 //channel float 	chan_Conf2Intrae_x __attribute__((depth(90)));
 //channel float 	chan_Conf2Intrae_y __attribute__((depth(90)));
 //channel float 	chan_Conf2Intrae_z __attribute__((depth(90)));
-channel float 	chan_Conf2Intrae_xyz __attribute__((depth(90)));
+channel float3 	chan_Conf2Intrae_xyz __attribute__((depth(90)));
 
 channel char  	chan_Conf2Intrae_active;	
 channel char  	chan_Conf2Intrae_mode;	
@@ -257,24 +257,15 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			LS_act = false;
 			
 			if (GG_done == true) {
+
 /*
-				// Updating old population with new one
-				//for (uint i=0;i<DockConst->pop_size*ACTUAL_GENOTYPE_LENGTH; i++) {
-				for (ushort i=0;i<DockConst->pop_size*ACTUAL_GENOTYPE_LENGTH; i++) { 	
-					GlobPopulationCurrent[i] = GlobPopulationNext[i];}
-
-				// Updating old energy with new one
-				//for (uint i=0;i<DockConst->pop_size; i++) {
-				for (ushort i=0;i<DockConst->pop_size; i++) { 			
-					GlobEnergyCurrent[i] = GlobEnergyNext[i];}
-*/
-
 				for (ushort i=0;i<DockConst->pop_size*ACTUAL_GENOTYPE_LENGTH; i++) { 	
 					GlobPopulationCurrent[i] = GlobPopulationNext[i];
 					if (i<DockConst->pop_size) {
 						GlobEnergyCurrent[i] = GlobEnergyNext[i];
 					}
 				}
+*/
 
 				// LS
 				LS_act = true;
