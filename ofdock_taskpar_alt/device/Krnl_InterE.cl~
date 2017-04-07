@@ -85,6 +85,7 @@ while(active) {
 		position_xyz = read_channel_altera(chan_Conf2Intere_xyz);
 		loc_coords_x[pipe_cnt] = position_xyz.x;
 		loc_coords_y[pipe_cnt] = position_xyz.y;
+		loc_coords_z[pipe_cnt] = position_xyz.z;
 	}
 	// --------------------------------------------------------------
 	//printf("AFTER In INTER CHANNEL\n");

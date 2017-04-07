@@ -16,6 +16,8 @@ void Krnl_IC(__global   const float*           restrict GlobPopulationCurrent,
 	active = read_channel_altera(chan_GA2IC_active);
 
 	for (ushort pop_cnt = 0; pop_cnt < DockConst->pop_size; pop_cnt++) {
+
+		///*__local*/ float genotype [ACTUAL_GENOTYPE_LENGTH];
 		
 		for (uchar pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {
 			genotype[pipe_cnt] = GlobPopulationCurrent[pop_cnt*ACTUAL_GENOTYPE_LENGTH + pipe_cnt];			

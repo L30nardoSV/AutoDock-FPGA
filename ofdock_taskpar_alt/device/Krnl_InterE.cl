@@ -16,16 +16,17 @@ void Krnl_InterE(
 	     __constant     Dockparameters*  restrict DockConst	
 )
 {
-/*
+///*
 	__local float loc_coords_x[MAX_NUM_OF_ATOMS];
 	__local float loc_coords_y[MAX_NUM_OF_ATOMS];
 	__local float loc_coords_z[MAX_NUM_OF_ATOMS];
-*/
+//*/
 
+/*
 	float __attribute__((register)) loc_coords_x[MAX_NUM_OF_ATOMS];
 	float __attribute__((register)) loc_coords_y[MAX_NUM_OF_ATOMS];
 	float __attribute__((register)) loc_coords_z[MAX_NUM_OF_ATOMS];
-
+*/
 
 	char active = 1;
 	char mode   = 0;

@@ -284,6 +284,9 @@ the genotypes, require a restriction on angles (see wikipedia) in order the defi
 a unique set of spherical coordinates for a point. SO WE PUt THEM BACK!
 
 MODIFICATION:
+Now bigger cluster is at least 20% in size compared to whole number of runs.
+Still some big energy values are computed by both cpu and device (check final_population_runXX.txt)
+
 
 Overall utilization results:
 
@@ -298,6 +301,118 @@ Overall utilization results:
 ; Memory blocks                          ;   73%                     ;
 ; DSP blocks                             ;   24%                     ;
 +----------------------------------------+---------------------------;
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+
+After correcting LS, so it correctly assigns pops and energies
+(there was a mistake between current and next
+After simplifyng crossover and mutation associated generation 
+(removing mul-by-100 from Krnl, and moving it to performdocking.cpp)
+
+The area results are same as before:
+				ALUTs		FFs		RAMs		DSPs
+Kernel System (Logic: 59%)	203101 (26%)	528781 (34%)	1739 (73%)	354 (23%)	
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+
+Here we aim to reduce the area utiized for storing "State"
+pag 43 Best practices, and pag 90 for explanation
+
+Krnl_IC:
+
+__local float genotype [ACTUAL_GENOTYPE_LENGTH];
+...
+for (ushort pop_cnt = 0; ...) {
+	for (uchar pipe_cnt=0; ...) {
+		genotype = ...
+	}
+}
+
+
+Krnl_IC.cl:14 (genotype):
+Local memory: Good but replicated.
+Requested size 256 bytes (rounded up to nearest power of 2), implemented size 768 bytes, replicated 3 times total, stall-free, 1 read and 1 write. Additional information:
+- Replicated 3 times to create private copies for simultaneous execution of 3 threads in the loop containing accesses to the array.
+
+Usage:
+		ALUTs		FFs		RAMs	DSPs
+ Krnl_IC	2360 (0%)	7347 (0%)	26 (1%)	0 (0%)
+
+
+
+
+
+
+
+MODIFICATION:
+Decrease the scope of local variables
+
+Note that is implement explicity as __local, but in the end, it is 
+mapped to RAM as this array is big.
+
+...
+for (ushort pop_cnt = 0; ...) {
+	float genotype [ACTUAL_GENOTYPE_LENGTH];
+	
+	for (uchar pipe_cnt=0; ...) {
+		genotype = ...
+	}
+}
+
+
+Krnl_IC.cl:20 (genotype):
+Private memory implemented in on-chip block RAM.
+Private memory: Good but replicated.
+Requested size 256 bytes (rounded up to nearest power of 2), implemented size 768 bytes, replicated 3 times total, stall-free, 1 read and 1 write. Additional information:
+- Replicated 3 times to create private copies for simultaneous execution of 3 threads in the loop containing accesses to the array.
+
+Usage:
+		ALUTs		FFs		RAMs	DSPs
+ Krnl_IC	2360 (0%)	7347 (0%)	26 (1%)	0 (0%)
+
+
+CONCLUSION: NO ADVANTAGE OF DOING THIS!!!!
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+
+In Krnl_InterE
+
+WE switch back to use __local and remove the attribute that forces
+implementation of x,y,z variables as private memory. WE got a big save in resources:
+
+float __attribute__((register)) loc_coords_x[MAX_NUM_OF_ATOMS];
+float __attribute__((register)) loc_coords_y[MAX_NUM_OF_ATOMS];
+float __attribute__((register)) loc_coords_z[MAX_NUM_OF_ATOMS];
+
+
+Kernel System (Logic: 59%)	203101 (26%)	528781 (34%)	1739 (73%)	354 (23%)	
+		 Krnl_InterE	41759 (5%)	150983 (10%)	454 (19%)	58 (4%)
+
+Krnl_IntraE.cl:22 (loc_coords_x):
+Local memory: Good but replicated.
+Requested size 512 bytes (rounded up to nearest power of 2), implemented size 1024 bytes, replicated 2 times total, stall-free, 2 reads and 1 write. Additional information:
+- Replicated 2 times to efficiently support multiple accesses. To reduce this replication factor, reduce number of read and write accesses
+
+MODIFICATION:
+
+__local float loc_coords_x[MAX_NUM_OF_ATOMS];
+__local float loc_coords_y[MAX_NUM_OF_ATOMS];
+__local float loc_coords_z[MAX_NUM_OF_ATOMS];
+
+
+Kernel System (Logic: 53%)	189611 (24%)	463520 (29%)	1691 (71%)	354 (23%)	
+		Krnl_InterE	28269 (4%)	85722 (5%)	406 (17%)	58 (4%)
+
+Krnl_InterE.cl:20 (loc_coords_x):
+Local memory: Optimal.
+Requested size 512 bytes (rounded up to nearest power of 2), implemented size 512 bytes, stall-free, 1 read and 1 write. Additional information:
+- No additional details.
+
+Note that according to the tool, this local memory is optimal,
+and the previous one is good!
 
 
 
