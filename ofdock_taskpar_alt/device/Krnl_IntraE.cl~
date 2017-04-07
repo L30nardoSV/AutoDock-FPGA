@@ -29,6 +29,7 @@ void Krnl_IntraE(
 */
 	char active = 1;
 	char mode   = 0;
+	ushort cnt  = 0; //uint cnt    = 0; 
 	uint cnt    = 0;   
 
 	int contributor_counter;
@@ -157,18 +158,11 @@ while(active) {
 	} // End of LOOP_INTRAE_1
 
 	//////======================================================
-	/*
 	if ((active == 0) && (cnt == (DockConst->pop_size -1))) {
 		active = 0;	
 	}
 	else {
 		active = 1;
-	}
-	*/
-	if (cnt == DockConst->pop_size-1) {	
-		if (active == 0) {
-			active = 0;	
-		}
 	}
 	//////======================================================
 

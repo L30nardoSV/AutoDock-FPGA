@@ -520,3 +520,19 @@ Kernel System (Logic: 52%)	189222 (24%)	462250 (29%)	1685 (71%)	354 (23%)
 
 ----------------------------------------------------------------------
 ----------------------------------------------------------------------
+
+Here the channels btw Krnl_Conform and Krnl_InterE were removed:
+only mode channel!
+
+MODIFICATION:
+				ALUTs		FFs		RAMs		DSPs
+ Kernel System (Logic: 52%)	189196 (24%)	462224 (29%)	1685 (71%)	354 (23%)
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+
+Conform, InterE, IntraE, changed types of cnt from uint to ushort:
+
+				ALUTs		FFs		RAMs		DSPs
+ Kernel System (Logic: 52%)	189130 (24%)	461684 (29%)	1685 (71%)	354 (23%)
+
+

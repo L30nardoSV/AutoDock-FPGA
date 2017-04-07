@@ -29,7 +29,7 @@ void Krnl_IntraE(
 */
 	char active = 1;
 	char mode   = 0;
-	uint cnt    = 0;   
+	ushort cnt  = 0; //uint cnt    = 0; 
 
 	int contributor_counter;
 	char atom1_id, atom2_id, atom1_typeid, atom2_typeid;

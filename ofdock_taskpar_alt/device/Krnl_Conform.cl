@@ -24,7 +24,7 @@ void Krnl_Conform(
 
 	char active = 1;
 	char mode   = 0;
-	uint cnt    = 0;    
+	ushort cnt  = 0; //uint cnt    = 0;    
 
 	char IC_active, GG_active, LS_active;
 	bool IC_valid = false;

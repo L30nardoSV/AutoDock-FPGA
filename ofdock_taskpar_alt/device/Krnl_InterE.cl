@@ -32,7 +32,7 @@ void Krnl_InterE(
 /*
 	char mode   = 0;
 */
-	uint cnt    = 0;   
+	ushort cnt  = 0; //uint cnt    = 0; 
 
 	float interE;
 	float partialE1, partialE2, partialE3;
