@@ -1,0 +1,16 @@
+Info: Starting: Create HDL design files for synthesis
+Info: qsys-generate /home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_cra_root.ip --synthesis=VERILOG --output-directory=/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_cra_root --family="Arria 10" --part=10AX115S2F45I1SG
+Info: kernel_system_cra_root: "Transforming system: kernel_system_cra_root"
+Info: kernel_system_cra_root: Running transform generation_view_transform
+Info: kernel_system_cra_root: Running transform generation_view_transform took 0.000s
+Info: cra_root: Running transform generation_view_transform
+Info: cra_root: Running transform generation_view_transform took 0.000s
+Info: kernel_system_cra_root: Running transform interconnect_transform_chooser
+Info: kernel_system_cra_root: Running transform interconnect_transform_chooser took 0.011s
+Info: kernel_system_cra_root: "Naming system components in system: kernel_system_cra_root"
+Info: kernel_system_cra_root: "Processing generation queue"
+Info: kernel_system_cra_root: "Generating: kernel_system_cra_root"
+Info: kernel_system_cra_root: "Generating: cra_ring_root"
+Info: kernel_system_cra_root: Done "kernel_system_cra_root" with 2 modules, 2 files
+Info: qsys-generate succeeded.
+Info: Finished: Create HDL design files for synthesis

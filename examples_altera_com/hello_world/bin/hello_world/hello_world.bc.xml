@@ -1,0 +1,69 @@
+<KERNEL_LIST>
+	<PROGRAM_GLOBAL_MEM_SIZE value="0" />
+	<KERNEL_BUNDLE name="hello_world" compute_units="1">
+		<KERNEL name="hello_world" filename="hello_world.v" version="1" cosim_name="hello_world" enable_global_profiling="1" workgroup_invariant="1" has_global_atomics="0" num_vector_lanes="1" num_profiling_signals="0">
+			<RESOURCE_INFO>
+				<ID value="0" />
+				<AGGREGATE_STATIC_LOCAL_MEM_SIZE value="0" />
+				<MAX_WORK_GROUP_SIZE value="2147483647" />
+				<REQUIRED_WORK_GROUP_SIZE x="0" y="0" z="0" />
+			</RESOURCE_INFO>
+			<CONFIGURATION>
+				<INTERFACE port="clock_reset" type="clock"/>
+				<INTERFACE port="cra_irq" type="irq"/>
+				<INTERFACE port="cra" type="slave" cosim_name="" width="64" size="128" latency="0" />
+			</CONFIGURATION>
+			<REQUIREMENTS>
+				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/acl_data_fifo.v" />
+				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/acl_fifo.v" />
+				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/acl_ll_fifo.v" />
+				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/acl_ll_ram_fifo.v" />
+				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/acl_valid_fifo_counter.v" />
+				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/acl_staging_reg.v" />
+				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/acl_printf_buffer_address_generator.v" />
+				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/lsu_top.v" />
+				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/lsu_pipelined.v" />
+				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/lsu_enabled.v" />
+				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/lsu_basic_coalescer.v" />
+				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/lsu_simple.v" />
+				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/lsu_streaming.v" />
+				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/lsu_burst_master.v" />
+				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/lsu_bursting_load_stores.v" />
+				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/lsu_non_aligned_write.v" />
+				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/lsu_read_cache.v" />
+				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/lsu_atomic.v" />
+				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/lsu_prefetch_block.v" />
+				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/lsu_wide_wrapper.v" />
+				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/lsu_streaming_prefetch.v" />
+				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/lsu_permute_address.v" />
+				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/acl_aligned_burst_coalesced_lsu.v" />
+				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/acl_loop_limiter.v" />
+				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/acl_work_group_limiter.v" />
+				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/acl_kernel_finish_detector.v" />
+				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/acl_task_copy_finish_detector.v" />
+				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/acl_start_signal_chain_element.v" />
+				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/acl_finish_signal_chain_element.v" />
+				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/acl_toggle_detect.v" />
+				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/acl_debug_mem.v" />
+				<FILE name="$::env(ALTERAOCLSDKROOT)/ip/acl_printf_counter.v" />
+			</REQUIREMENTS>
+			<DATA>
+				<INTERFACE port="local_bb0_st_printf_data1_inst0" cosim_name="" type="master" width="512" burstwidth="5" pipelined="true" addr_space="__global" aspace_id="1" optype="write" criticality="1024" buffer_location="" group_id="0" />
+			</DATA>
+			<KERNEL_ARGS>
+				<ARGUMENT name="thread_id_from_which_to_print_message" cosim_name="" opencl_access_type="ACL_ARG_ADDR_NONE" opencl_type_category="ACL_ARG_BY_VALUE" size="4" type_qualifier="ARG_TYPE_NONE" access_qualifier="ARG_ACCESS_NONE" type_name="int" >
+			</ARGUMENT>
+				<ARGUMENT name="acl.printf.buffer.start" cosim_name="" opencl_access_type="ACL_ARG_ADDR_GLOBAL" opencl_type_category="ACL_ARG_MEM_OBJ" size="8" type_qualifier="" access_qualifier="" type_name="" >
+			</ARGUMENT>
+				<ARGUMENT name="acl.printf.buffer.size" cosim_name="" opencl_access_type="ACL_ARG_ADDR_NONE" opencl_type_category="ACL_ARG_BY_VALUE" size="4" type_qualifier="" access_qualifier="" type_name="" >
+			</ARGUMENT>
+			</KERNEL_ARGS>
+			<PRINTF_FORMAT_STRINGS>
+				<FORMAT_STRING id="0" string="Thread&#32;#%u:&#32;Hello&#32;from&#32;Altera's&#32;OpenCL&#32;Compiler!&#10;" />
+			</PRINTF_FORMAT_STRINGS>
+			<PRINTF_INTERFACES>
+				<INTERFACE port="local_bb0_printf_addr_acl_printf_p1i8_32_inst0" />
+			</PRINTF_INTERFACES>
+		</KERNEL>
+	</KERNEL_BUNDLE>
+</KERNEL_LIST>

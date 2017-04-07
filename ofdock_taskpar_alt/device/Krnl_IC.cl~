@@ -11,7 +11,7 @@ void Krnl_IC(__global   const float*           restrict GlobPopulationCurrent,
 	const char mode     = 1; 	
 	      char ack      = 0;
 
-	//__local float genotype [ACTUAL_GENOTYPE_LENGTH];
+	__local float genotype [ACTUAL_GENOTYPE_LENGTH];
 
 	active = read_channel_altera(chan_GA2IC_active);
 

@@ -1,0 +1,27 @@
+	component kernel_system_cra_root is
+		port (
+			clk               : in  std_logic                     := 'X';             -- clk
+			avs_write         : in  std_logic                     := 'X';             -- write
+			avs_addr          : in  std_logic_vector(5 downto 0)  := (others => 'X'); -- address
+			avs_byteena       : in  std_logic_vector(7 downto 0)  := (others => 'X'); -- byteenable
+			avs_writedata     : in  std_logic_vector(63 downto 0) := (others => 'X'); -- writedata
+			avs_readdata      : out std_logic_vector(63 downto 0);                    -- readdata
+			avs_readdatavalid : out std_logic;                                        -- readdatavalid
+			avs_waitrequest   : out std_logic;                                        -- waitrequest
+			avs_read          : in  std_logic                     := 'X';             -- read
+			rst_n             : in  std_logic                     := 'X';             -- reset_n
+			ri_write          : in  std_logic                     := 'X';             -- write
+			ri_addr           : in  std_logic_vector(3 downto 0)  := (others => 'X'); -- addr
+			ri_byteena        : in  std_logic_vector(7 downto 0)  := (others => 'X'); -- byteena
+			ri_data           : in  std_logic_vector(63 downto 0) := (others => 'X'); -- data
+			ri_read           : in  std_logic                     := 'X';             -- read
+			ri_datavalid      : in  std_logic                     := 'X';             -- datavalid
+			ro_read           : out std_logic;                                        -- read
+			ro_write          : out std_logic;                                        -- write
+			ro_addr           : out std_logic_vector(5 downto 0);                     -- addr
+			ro_data           : out std_logic_vector(63 downto 0);                    -- data
+			ro_byteena        : out std_logic_vector(7 downto 0);                     -- byteena
+			ro_datavalid      : out std_logic                                         -- datavalid
+		);
+	end component kernel_system_cra_root;
+

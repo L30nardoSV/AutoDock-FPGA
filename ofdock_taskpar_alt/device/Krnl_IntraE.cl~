@@ -100,8 +100,8 @@ while(active) {
 		suby = loc_coords_y[atom1_id] - loc_coords_y[atom2_id];
 		subz = loc_coords_z[atom1_id] - loc_coords_z[atom2_id];
 
-		distance_leo = sqrt(subx*subx + suby*suby + subz*subz)*DockConst->grid_spacing;
-		//distance_leo = sqrt_custom(subx*subx + suby*suby + subz*subz)*DockConst->grid_spacing;
+		//distance_leo = sqrt(subx*subx + suby*suby + subz*subz)*DockConst->grid_spacing;
+		distance_leo = sqrt_custom(subx*subx + suby*suby + subz*subz)*DockConst->grid_spacing;
 
 		if (distance_leo < 1.0f) {
 			#if defined (DEBUG_KRNL_INTRAE)
@@ -155,6 +155,22 @@ while(active) {
 		intraE += partialE1 + partialE2 + partialE3 + partialE4;
 
 	} // End of LOOP_INTRAE_1
+
+	//////======================================================
+	/*
+	if ((active == 0) && (cnt == (DockConst->pop_size -1))) {
+		active = 0;	
+	}
+	else {
+		active = 1;
+	}
+	*/
+	if (cnt == DockConst->pop_size-1) {	
+		if (active == 0) {
+			active = 0;	
+		}
+	}
+	//////======================================================
 
 	// --------------------------------------------------------------
 	// Send intramolecular energy to channel

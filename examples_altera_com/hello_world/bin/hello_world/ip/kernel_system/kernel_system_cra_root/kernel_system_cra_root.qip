@@ -1,0 +1,37 @@
+set_global_assignment -entity "kernel_system_cra_root" -library "kernel_system_cra_root" -name IP_TOOL_NAME "QsysPrimePro"
+set_global_assignment -entity "kernel_system_cra_root" -library "kernel_system_cra_root" -name IP_TOOL_VERSION "16.1"
+set_global_assignment -entity "kernel_system_cra_root" -library "kernel_system_cra_root" -name IP_TOOL_ENV "QsysPrimePro"
+set_global_assignment -library "kernel_system_cra_root" -name MISC_FILE [file join $::quartus(qip_path) "kernel_system_cra_root.cmp"]
+set_global_assignment -entity "kernel_system_cra_root" -library "kernel_system_cra_root" -name IP_TARGETED_DEVICE_FAMILY "Arria 10"
+set_global_assignment -entity "kernel_system_cra_root" -library "kernel_system_cra_root" -name IP_GENERATED_DEVICE_FAMILY "{Arria 10}"
+set_global_assignment -entity "kernel_system_cra_root" -library "kernel_system_cra_root" -name IP_QSYS_MODE "STANDALONE"
+set_global_assignment -name SYNTHESIS_ONLY_QIP ON
+set_global_assignment -library "kernel_system_cra_root" -name MISC_FILE [file join $::quartus(qip_path) "../kernel_system_cra_root.ip"]
+set_global_assignment -entity "kernel_system_cra_root" -library "kernel_system_cra_root" -name IP_COMPONENT_NAME "a2VybmVsX3N5c3RlbV9jcmFfcm9vdA=="
+set_global_assignment -entity "kernel_system_cra_root" -library "kernel_system_cra_root" -name IP_COMPONENT_DISPLAY_NAME "c3lzdGVt"
+set_global_assignment -entity "kernel_system_cra_root" -library "kernel_system_cra_root" -name IP_COMPONENT_REPORT_HIERARCHY "On"
+set_global_assignment -entity "kernel_system_cra_root" -library "kernel_system_cra_root" -name IP_COMPONENT_INTERNAL "Off"
+set_global_assignment -entity "kernel_system_cra_root" -library "kernel_system_cra_root" -name IP_COMPONENT_VERSION "MS4w"
+set_global_assignment -entity "kernel_system_cra_root" -library "kernel_system_cra_root" -name IP_COMPONENT_PARAMETER "QVVUT19HRU5FUkFUSU9OX0lE::MTQ5MDYyMDM2OQ==::QXV0byBHRU5FUkFUSU9OX0lE"
+set_global_assignment -entity "kernel_system_cra_root" -library "kernel_system_cra_root" -name IP_COMPONENT_PARAMETER "QVVUT19ERVZJQ0VfRkFNSUxZ::QXJyaWEgMTA=::QXV0byBERVZJQ0VfRkFNSUxZ"
+set_global_assignment -entity "kernel_system_cra_root" -library "kernel_system_cra_root" -name IP_COMPONENT_PARAMETER "QVVUT19ERVZJQ0U=::MTBBWDExNVMyRjQ1STFTRw==::QXV0byBERVZJQ0U="
+set_global_assignment -entity "kernel_system_cra_root" -library "kernel_system_cra_root" -name IP_COMPONENT_PARAMETER "QVVUT19ERVZJQ0VfU1BFRURHUkFERQ==::MQ==::QXV0byBERVZJQ0VfU1BFRURHUkFERQ=="
+set_global_assignment -entity "kernel_system_cra_root" -library "kernel_system_cra_root" -name IP_COMPONENT_PARAMETER "QVVUT19DTE9DS19DTE9DS19SQVRF::LTE=::QXV0byBDTE9DS19SQVRF"
+set_global_assignment -entity "kernel_system_cra_root" -library "kernel_system_cra_root" -name IP_COMPONENT_PARAMETER "QVVUT19DTE9DS19DTE9DS19ET01BSU4=::LTE=::QXV0byBDTE9DS19ET01BSU4="
+set_global_assignment -entity "kernel_system_cra_root" -library "kernel_system_cra_root" -name IP_COMPONENT_PARAMETER "QVVUT19DTE9DS19SRVNFVF9ET01BSU4=::LTE=::QXV0byBSRVNFVF9ET01BSU4="
+set_global_assignment -entity "cra_ring_root" -library "cra_ring_root_10" -name IP_COMPONENT_NAME "Y3JhX3Jpbmdfcm9vdA=="
+set_global_assignment -entity "cra_ring_root" -library "cra_ring_root_10" -name IP_COMPONENT_DISPLAY_NAME "Y3JhX3Jpbmdfcm9vdA=="
+set_global_assignment -entity "cra_ring_root" -library "cra_ring_root_10" -name IP_COMPONENT_REPORT_HIERARCHY "Off"
+set_global_assignment -entity "cra_ring_root" -library "cra_ring_root_10" -name IP_COMPONENT_INTERNAL "Off"
+set_global_assignment -entity "cra_ring_root" -library "cra_ring_root_10" -name IP_COMPONENT_AUTHOR "Sm9obiBGcmVlbWFu"
+set_global_assignment -entity "cra_ring_root" -library "cra_ring_root_10" -name IP_COMPONENT_VERSION "MS4w"
+set_global_assignment -entity "cra_ring_root" -library "cra_ring_root_10" -name IP_COMPONENT_DESCRIPTION "T3BlbkNMIENSQSBBZGRyZXNzIERlY29kZSBSaW5nIFJvb3QgTm9kZQ=="
+set_global_assignment -entity "cra_ring_root" -library "cra_ring_root_10" -name IP_COMPONENT_PARAMETER "QUREUl9X::NA==::QUREUl9X"
+set_global_assignment -entity "cra_ring_root" -library "cra_ring_root_10" -name IP_COMPONENT_PARAMETER "REFUQV9X::NjQ=::REFUQV9X"
+set_global_assignment -entity "cra_ring_root" -library "cra_ring_root_10" -name IP_COMPONENT_PARAMETER "SURfVw==::MA==::SURfVw=="
+set_global_assignment -entity "cra_ring_root" -library "cra_ring_root_10" -name IP_COMPONENT_PARAMETER "Uk9NX0VYVF9X::MQ==::Uk9NX0VYVF9X"
+set_global_assignment -entity "cra_ring_root" -library "cra_ring_root_10" -name IP_COMPONENT_PARAMETER "Uk9NX0VOQUJMRQ==::MQ==::Uk9NX0VOQUJMRQ=="
+set_global_assignment -entity "cra_ring_root" -library "cra_ring_root_10" -name IP_COMPONENT_GROUP "T3BlbkNM"
+
+set_global_assignment -library "kernel_system_cra_root" -name VERILOG_FILE [file join $::quartus(qip_path) "synth/kernel_system_cra_root.v"]
+set_global_assignment -library "cra_ring_root_10" -name SYSTEMVERILOG_FILE [file join $::quartus(qip_path) "cra_ring_root_10/synth/cra_ring_root.sv"]

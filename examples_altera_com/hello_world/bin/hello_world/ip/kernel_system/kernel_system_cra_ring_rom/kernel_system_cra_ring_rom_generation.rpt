@@ -1,0 +1,16 @@
+Info: Starting: Create HDL design files for synthesis
+Info: qsys-generate /home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_cra_ring_rom.ip --synthesis=VERILOG --output-directory=/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_cra_ring_rom --family="Arria 10" --part=10AX115S2F45I1SG
+Info: kernel_system_cra_ring_rom: "Transforming system: kernel_system_cra_ring_rom"
+Info: kernel_system_cra_ring_rom: Running transform generation_view_transform
+Info: kernel_system_cra_ring_rom: Running transform generation_view_transform took 0.000s
+Info: cra_ring_rom: Running transform generation_view_transform
+Info: cra_ring_rom: Running transform generation_view_transform took 0.000s
+Info: kernel_system_cra_ring_rom: Running transform interconnect_transform_chooser
+Info: kernel_system_cra_ring_rom: Running transform interconnect_transform_chooser took 0.009s
+Info: kernel_system_cra_ring_rom: "Naming system components in system: kernel_system_cra_ring_rom"
+Info: kernel_system_cra_ring_rom: "Processing generation queue"
+Info: kernel_system_cra_ring_rom: "Generating: kernel_system_cra_ring_rom"
+Info: kernel_system_cra_ring_rom: "Generating: cra_ring_rom"
+Info: kernel_system_cra_ring_rom: Done "kernel_system_cra_ring_rom" with 2 modules, 2 files
+Info: qsys-generate succeeded.
+Info: Finished: Create HDL design files for synthesis

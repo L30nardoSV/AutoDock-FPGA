@@ -1,0 +1,176 @@
+Flow report for top
+Mon Mar 27 16:53:13 2017
+Quartus Prime Version 16.1.2 Build 203 01/18/2017 SJ Pro Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Flow Summary
+  3. Flow Settings
+  4. Flow Non-Default Global Settings
+  5. Flow Elapsed Time
+  6. Flow OS Summary
+  7. Flow Log
+  8. Flow Messages
+  9. Flow Suppressed Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2017  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel MegaCore Function License Agreement, or other 
+applicable license agreement, including, without limitation, 
+that your use is for the sole purpose of programming logic 
+devices manufactured by Intel and sold by Intel or its 
+authorized distributors.  Please refer to the applicable 
+agreement for further details.
+
+
+
++--------------------------------------------------------------------------+
+; Flow Summary                                                             ;
++-----------------------------+--------------------------------------------+
+; Flow Status                 ; Successful - Mon Mar 27 16:53:13 2017      ;
+; Quartus Prime Version       ; 16.1.2 Build 203 01/18/2017 SJ Pro Edition ;
+; Revision Name               ; top                                        ;
+; Top-level Entity Name       ; top                                        ;
+; Family                      ; Arria 10                                   ;
+; Device                      ; 10AX115S2F45I1SG                           ;
+; Timing Models               ; Final                                      ;
+; Logic utilization (in ALMs) ; 32,247 / 427,200 ( 8 % )                   ;
+; Total registers             ; 48071                                      ;
+; Total pins                  ; 173 / 960 ( 18 % )                         ;
+; Total virtual pins          ; 0                                          ;
+; Total block memory bits     ; 1,233,040 / 55,562,240 ( 2 % )             ;
+; Total DSP Blocks            ; 0 / 1,518 ( 0 % )                          ;
+; Total HSSI RX channels      ; 8 / 72 ( 11 % )                            ;
+; Total HSSI TX channels      ; 8 / 72 ( 11 % )                            ;
+; Total PLLs                  ; 78 / 144 ( 54 % )                          ;
++-----------------------------+--------------------------------------------+
+
+
++-----------------------------------------+
+; Flow Settings                           ;
++-------------------+---------------------+
+; Option            ; Setting             ;
++-------------------+---------------------+
+; Start date & time ; 03/27/2017 16:07:56 ;
+; Main task         ; Compilation         ;
+; Revision Name     ; top                 ;
++-------------------+---------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Flow Non-Default Global Settings                                                                                                                                                                                ;
++-------------------------------------------------+--------------------------------------------------------------------------------------------------------------+---------------+---------------+----------------+
+; Assignment Name                                 ; Value                                                                                                        ; Default Value ; Entity Name   ; Section Id     ;
++-------------------------------------------------+--------------------------------------------------------------------------------------------------------------+---------------+---------------+----------------+
+; ALLOW_SHIFT_REGISTER_MERGING_ACROSS_HIERARCHIES ; Off                                                                                                          ; Auto          ; --            ; --             ;
+; AUTO_GLOBAL_CLOCK                               ; Off                                                                                                          ; On            ; --            ; --             ;
+; AUTO_GLOBAL_REGISTER_CONTROLS                   ; Off                                                                                                          ; On            ; --            ; --             ;
+; COMPILER_SIGNATURE_ID                           ; 220037193212550.149062367000573                                                                              ; --            ; --            ; --             ;
+; DISABLE_REGISTER_MERGING_ACROSS_HIERARCHIES     ; On                                                                                                           ; Auto          ; --            ; --             ;
+; EDA_GENERATE_FUNCTIONAL_NETLIST                 ; On                                                                                                           ; --            ; --            ; eda_simulation ;
+; FITTER_EFFORT                                   ; Standard Fit                                                                                                 ; Auto Fit      ; --            ; --             ;
+; FIT_ONLY_ONE_ATTEMPT                            ; -- (Not supported for targeted family)                                                                       ; Off           ; --            ; --             ;
+; MAX_CORE_JUNCTION_TEMP                          ; 100                                                                                                          ; --            ; --            ; --             ;
+; MIN_CORE_JUNCTION_TEMP                          ; 0                                                                                                            ; --            ; --            ; --             ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_clk_1x/kernel_system_clk_1x.cmp                                               ; --            ; --            ; --             ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_clk_1x/../kernel_system_clk_1x.ip                                             ; --            ; --            ; --             ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_kernel_cra/kernel_system_kernel_cra.cmp                                       ; --            ; --            ; --             ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_kernel_cra/../kernel_system_kernel_cra.ip                                     ; --            ; --            ; --             ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_sys_description_rom/kernel_system_sys_description_rom.cmp                     ; --            ; --            ; --             ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_sys_description_rom/../kernel_system_sys_description_rom.ip                   ; --            ; --            ; --             ;
+; MISC_FILE                                       ; kernel_system/kernel_system.cmp                                                                              ; --            ; --            ; --             ;
+; MISC_FILE                                       ; kernel_system/../kernel_system.qsys                                                                          ; --            ; --            ; --             ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_clk_2x/kernel_system_clk_2x.cmp                                               ; --            ; --            ; --             ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_clk_2x/../kernel_system_clk_2x.ip                                             ; --            ; --            ; --             ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_clk_snoop/kernel_system_clk_snoop.cmp                                         ; --            ; --            ; --             ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_clk_snoop/../kernel_system_clk_snoop.ip                                       ; --            ; --            ; --             ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_reset/kernel_system_reset.cmp                                                 ; --            ; --            ; --             ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_reset/../kernel_system_reset.ip                                               ; --            ; --            ; --             ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_hello_world_system/kernel_system_hello_world_system.cmp                       ; --            ; --            ; --             ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_hello_world_system/../kernel_system_hello_world_system.ip                     ; --            ; --            ; --             ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_kernel_mem0/kernel_system_kernel_mem0.cmp                                     ; --            ; --            ; --             ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_kernel_mem0/../kernel_system_kernel_mem0.ip                                   ; --            ; --            ; --             ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_kernel_irq/kernel_system_kernel_irq.cmp                                       ; --            ; --            ; --             ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_kernel_irq/../kernel_system_kernel_irq.ip                                     ; --            ; --            ; --             ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_cra_root/kernel_system_cra_root.cmp                                           ; --            ; --            ; --             ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_cra_root/../kernel_system_cra_root.ip                                         ; --            ; --            ; --             ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_cra_ring_rom/kernel_system_cra_ring_rom.cmp                                   ; --            ; --            ; --             ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_cra_ring_rom/../kernel_system_cra_ring_rom.ip                                 ; --            ; --            ; --             ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_avs_hello_world_cra_cra_ring/kernel_system_avs_hello_world_cra_cra_ring.cmp   ; --            ; --            ; --             ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_avs_hello_world_cra_cra_ring/../kernel_system_avs_hello_world_cra_cra_ring.ip ; --            ; --            ; --             ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_acl_internal_snoop/kernel_system_acl_internal_snoop.cmp                       ; --            ; --            ; --             ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_acl_internal_snoop/../kernel_system_acl_internal_snoop.ip                     ; --            ; --            ; --             ;
+; NOMINAL_CORE_SUPPLY_VOLTAGE                     ; 0.95V                                                                                                        ; --            ; --            ; --             ;
+; NUM_PARALLEL_PROCESSORS                         ; 4                                                                                                            ; --            ; --            ; --             ;
+; OPTIMIZATION_TECHNIQUE                          ; Speed                                                                                                        ; Balanced      ; --            ; --             ;
+; OUTPUT_IO_TIMING_FAR_END_VMEAS                  ; Half Signal Swing                                                                                            ; --            ; --            ; --             ;
+; OUTPUT_IO_TIMING_FAR_END_VMEAS                  ; Half Signal Swing                                                                                            ; --            ; --            ; --             ;
+; OUTPUT_IO_TIMING_NEAR_END_VMEAS                 ; Half Vccio                                                                                                   ; --            ; --            ; --             ;
+; OUTPUT_IO_TIMING_NEAR_END_VMEAS                 ; Half Vccio                                                                                                   ; --            ; --            ; --             ;
+; PLACEMENT_EFFORT_MULTIPLIER                     ; 4.0                                                                                                          ; 1.0           ; --            ; --             ;
+; POST_FLOW_SCRIPT_FILE                           ; quartus_cdb:scripts/post_flow_pr.tcl                                                                         ; --            ; --            ; --             ;
+; POWER_BOARD_THERMAL_MODEL                       ; None (CONSERVATIVE)                                                                                          ; --            ; --            ; --             ;
+; POWER_PRESET_COOLING_SOLUTION                   ; 23 MM HEAT SINK WITH 200 LFPM AIRFLOW                                                                        ; --            ; --            ; --             ;
+; QHD_MODE                                        ; On                                                                                                           ; --            ; --            ; --             ;
+; REVISION_TYPE                                   ; PR_Impl                                                                                                      ; --            ; --            ; --             ;
+; ROUTER_TIMING_OPTIMIZATION_LEVEL                ; MAXIMUM                                                                                                      ; Normal        ; --            ; --             ;
+; SEARCH_PATH                                     ; /opt/cad/altera/altera-16.1/hld/ip                                                                           ; --            ; --            ; --             ;
+; SLD_INFO                                        ; QSYS_NAME kernel_system HAS_SOPCINFO 1 GENERATION_ID 1490620377                                              ; --            ; kernel_system ; --             ;
+; SOPCINFO_FILE                                   ; kernel_system/../kernel_system.sopcinfo                                                                      ; --            ; --            ; --             ;
+; SYNTHESIS_ONLY_QIP                              ; On                                                                                                           ; --            ; --            ; --             ;
+; VCCERAM_USER_VOLTAGE                            ; 0.95V                                                                                                        ; --            ; --            ; --             ;
+; VCCP_USER_VOLTAGE                               ; 0.95V                                                                                                        ; --            ; --            ; --             ;
+; VERILOG_CONSTANT_LOOP_LIMIT                     ; 10000                                                                                                        ; 5000          ; --            ; --             ;
+; VERILOG_INPUT_VERSION                           ; SystemVerilog_2005                                                                                           ; Verilog_2001  ; --            ; --             ;
++-------------------------------------------------+--------------------------------------------------------------------------------------------------------------+---------------+---------------+----------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------+
+; Flow Elapsed Time                                                                                                             ;
++---------------------------+--------------+-------------------------+---------------------+------------------------------------+
+; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
++---------------------------+--------------+-------------------------+---------------------+------------------------------------+
+; Fitter                    ; 00:29:12     ; 1.3                     ; 12114 MB            ; 01:15:07                           ;
+; TimeQuest Timing Analyzer ; 00:04:28     ; 1.2                     ; 6731 MB             ; 00:12:55                           ;
+; TimeQuest Timing Analyzer ; 00:04:08     ; 1.2                     ; 6888 MB             ; 00:12:40                           ;
+; Assembler                 ; 00:02:08     ; 1.0                     ; 9761 MB             ; 00:02:18                           ;
+; Total                     ; 00:39:56     ; --                      ; --                  ; 01:43:00                           ;
++---------------------------+--------------+-------------------------+---------------------+------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------+
+; Flow OS Summary                                                                                                      ;
++---------------------------+-----------------------------------------+------------------+------------+----------------+
+; Module Name               ; Machine Hostname                        ; OS Name          ; OS Version ; Processor type ;
++---------------------------+-----------------------------------------+------------------+------------+----------------+
+; Fitter                    ; celebdil.esa.informatik.tu-darmstadt.de ; Scientific Linux ; 6          ; x86_64         ;
+; TimeQuest Timing Analyzer ; celebdil.esa.informatik.tu-darmstadt.de ; Scientific Linux ; 6          ; x86_64         ;
+; TimeQuest Timing Analyzer ; celebdil.esa.informatik.tu-darmstadt.de ; Scientific Linux ; 6          ; x86_64         ;
+; Assembler                 ; celebdil.esa.informatik.tu-darmstadt.de ; Scientific Linux ; 6          ; x86_64         ;
++---------------------------+-----------------------------------------+------------------+------------+----------------+
+
+
+------------
+; Flow Log ;
+------------
+quartus_fit top -c top
+quartus_sta top -c top
+quartus_sta top -c top --report_script=/opt/cad/altera/altera-16.1/hld/ip/board/bsp/failing_clocks.tcl
+quartus_asm --read_settings_files=on --write_settings_files=off top -c top
+
+
+

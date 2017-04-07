@@ -414,6 +414,106 @@ Requested size 512 bytes (rounded up to nearest power of 2), implemented size 51
 Note that according to the tool, this local memory is optimal,
 and the previous one is good!
 
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+
+(1) Remove conditional write to channels within Krnl_GG
+    Krnl_GG communicates to Krnl_Conform, but writing to channels is conditional
+    because the it must not send always data, i.e.
+    initially it must stop when active is equal to 0.
+    This could (likely) impose a serialization within Krnl_GG, so removing it is 
+    tested.
+    Removing it, requires fixing the subsequent kernels in the processing chain:
+    Conform, Inter, Intra, and Store. Basically these four kernels:
+    - read the value of active (as originally)
+    - instead of directly sending it, evaluate it first, so it can be switched from
+      0 to 1, i.e. the kernel could be maintained active, so the remaining data
+      still present in the channels can be processed.
+
+    Krnl_Store had a Fmax issue due to a critical path formed by the integer
+    comparisons. In order to reduce the comparison number, unnecessary channels are
+    removed.
+
+
+(2) Eliminate redundant channels betwwen Krnl_InterE and Krnl_Store
+    Krnl_InterE and Krnl_IntraE, both communicate data to Krnl_Store.
+    The only difference betwwen them is the date they send. Initially both 
+    send also active, mode, and cnt values (through channels), but the 
+    corresponding channels send the same data always (unless a serious error).
+    Considering the info from Evopro paper, in which Krnl_InterE is said to be 
+    the most expensive in exec time, we rremove the channels communicating 
+    Knrl_InterE and Krnl_Store (this helps further reducing area utilization)
+    
+
+
+----------------------------
+Krnl_Store
+
+while(active) {
+	case 2: // GG
+		GlobEnergyNext[cnt] = InterE + IntraE;
+
+		if ((cnt == (DockConst->pop_size)-1) || (active == 0)) {	
+			write_channel_altera(chan_Store2GG_ack, 1);
+		}
+
+}
+----------------------------
+				ALUTs		FFs		RAMs		DSPs
+Kernel System (Logic: 53%)	189664 (24%)	463726 (29%)	1687 (71%)	354 (23%)	
+ 		Krnl_Conform	17059 (2%)	42647 (3%)	157 (7%)	94 (6%)	
+		Krnl_GA		3837 (0%)	11300 (1%)	83 (3%)		0 (0%)	
+		Krnl_GG		32485 (4%)	70431 (4%)	225 (9%)	98 (6%)	
+ 		Krnl_IC		2360 (0%)	7347 (0%)	26 (1%)		0 (0%)	
+	 	Krnl_InterE	28556 (4%)	86280 (5%)	406 (17%)	58 (4%)	
+		Krnl_IntraE	16887 (2%)	54486 (3%)	289 (12%)	60 (4%)	
+		Krnl_LS		20652 (3%)	53356 (3%)	143 (6%)	43 (3%)	
+ 		Krnl_Store	881 (0%)	3317 (0%)	16 (1%)		1 (0%)
 
 
 
+
+MODIFICATIONS:
+
+Krnl_Conform, Krnl_InterE and Krnl_IntraE (added)
+
+} // End of LOOP_INTERE_1:	
+
+if ((active == 0) && (cnt == (DockConst->pop_size -1))) {
+	active = 0;	
+}
+else {
+	active = 1;
+}
+
+----------------------------
+Krnl_Store
+
+while(active) {
+	case 2: // GG
+		GlobEnergyNext[cnt] = InterE + IntraE;
+
+
+		if (cnt == DockConst->pop_size-1) {	
+			write_channel_altera(chan_Store2GG_ack, 1);
+		}
+
+		if ((active == 0) && (cnt == (DockConst->pop_size -1))) {
+			active = 0;	
+		}
+		else {
+			active = 1;
+		}
+}
+----------------------------
+
+				ALUTs		FFs		RAMs		DSPs
+Kernel System (Logic: 52%)	189222 (24%)	462250 (29%)	1685 (71%)	354 (23%)	
+		Krnl_Conform	17059 (2%)	42647 (3%)	157 (7%)	94 (6%)	
+ 		Krnl_GA		3837 (0%)	11300 (1%)	83 (3%)		0 (0%)	
+ 		Krnl_GG		32485 (4%)	70431 (4%)	225 (9%)	98 (6%)	
+ 		Krnl_IC		2360 (0%)	7347 (0%)	26 (1%)		0 (0%)	
+ 		Krnl_InterE	28234 (4%)	85021 (5%)	404 (17%)	58 (4%)	
+ 		Krnl_IntraE	16887 (2%)	54486 (3%)	289 (12%)	60 (4%)	
+ 		Krnl_LS		20652 (3%)	53356 (3%)	143 (6%)	43 (3%)	
+		Krnl_Store	793 (0%)	3132 (0%)	16 (1%)		1 (0%)

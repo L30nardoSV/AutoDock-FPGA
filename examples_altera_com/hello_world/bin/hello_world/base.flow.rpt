@@ -1,0 +1,318 @@
+Flow report for base
+Mon Mar 27 16:50:57 2017
+Quartus Prime Version 16.1.2 Build 203 01/18/2017 SJ Pro Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Legal Notice
+  3. Flow Summary
+  4. Flow Settings
+  5. Flow Non-Default Global Settings
+  6. Flow Elapsed Time
+  7. Flow OS Summary
+  8. Flow Log
+  9. Flow Messages
+ 10. Flow Suppressed Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2017  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel MegaCore Function License Agreement, or other 
+applicable license agreement, including, without limitation, 
+that your use is for the sole purpose of programming logic 
+devices manufactured by Intel and sold by Intel or its 
+authorized distributors.  Please refer to the applicable 
+agreement for further details.
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2017  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel MegaCore Function License Agreement, or other 
+applicable license agreement, including, without limitation, 
+that your use is for the sole purpose of programming logic 
+devices manufactured by Intel and sold by Intel or its 
+authorized distributors.  Please refer to the applicable 
+agreement for further details.
+
+
+
++--------------------------------------------------------------------------+
+; Flow Summary                                                             ;
++-----------------------------+--------------------------------------------+
+; Flow Status                 ; Successful - Mon Mar 27 16:50:57 2017      ;
+; Quartus Prime Version       ; 16.1.2 Build 203 01/18/2017 SJ Pro Edition ;
+; Revision Name               ; base                                       ;
+; Top-level Entity Name       ; top                                        ;
+; Family                      ; Arria 10                                   ;
+; Device                      ; 10AX115S2F45I1SG                           ;
+; Timing Models               ; Final                                      ;
+; Logic utilization (in ALMs) ; 53,645 / 427,200 ( 13 % )                  ;
+; Total registers             ; 77190                                      ;
+; Total pins                  ; 173 / 960 ( 18 % )                         ;
+; Total virtual pins          ; 0                                          ;
+; Total block memory bits     ; 2,145,040 / 55,562,240 ( 4 % )             ;
+; Total DSP Blocks            ; 2 / 1,518 ( < 1 % )                        ;
+; Total HSSI RX channels      ; 8 / 72 ( 11 % )                            ;
+; Total HSSI TX channels      ; 8 / 72 ( 11 % )                            ;
+; Total PLLs                  ; 78 / 144 ( 54 % )                          ;
++-----------------------------+--------------------------------------------+
+
+
++-----------------------------------------+
+; Flow Settings                           ;
++-------------------+---------------------+
+; Option            ; Setting             ;
++-------------------+---------------------+
+; Start date & time ; 01/18/2017 11:19:34 ;
+; Main task         ; Compilation         ;
+; Revision Name     ; base                ;
++-------------------+---------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Flow Non-Default Global Settings                                                                                                                                                                                                        ;
++-------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------+---------------+-------------------+--------------------+
+; Assignment Name                                 ; Value                                                                                                                        ; Default Value ; Entity Name       ; Section Id         ;
++-------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------+---------------+-------------------+--------------------+
+; ALLOW_SHIFT_REGISTER_MERGING_ACROSS_HIERARCHIES ; Off                                                                                                                          ; Auto          ; --                ; --                 ;
+; AUTO_GLOBAL_CLOCK                               ; Off                                                                                                                          ; On            ; --                ; --                 ;
+; AUTO_GLOBAL_REGISTER_CONTROLS                   ; Off                                                                                                                          ; On            ; --                ; --                 ;
+; COMPILER_SIGNATURE_ID                           ; 45015798639447.148475637402078                                                                                               ; --            ; --                ; --                 ;
+; DISABLE_REGISTER_MERGING_ACROSS_HIERARCHIES     ; On                                                                                                                           ; Auto          ; --                ; --                 ;
+; EDA_GENERATE_FUNCTIONAL_NETLIST                 ; On                                                                                                                           ; --            ; --                ; eda_simulation     ;
+; FITTER_EFFORT                                   ; Standard Fit                                                                                                                 ; Auto Fit      ; --                ; --                 ;
+; FIT_ONLY_ONE_ATTEMPT                            ; -- (Not supported for targeted family)                                                                                       ; Off           ; --                ; --                 ;
+; INI_VARS                                        ; force_msf_write=on                                                                                                           ; --            ; --                ; --                 ;
+; MAX_CORE_JUNCTION_TEMP                          ; 100                                                                                                                          ; --            ; --                ; --                 ;
+; MIN_CORE_JUNCTION_TEMP                          ; 0                                                                                                                            ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_clk_1x/kernel_system_clk_1x.cmp                                                               ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_clk_1x/../kernel_system_clk_1x.ip                                                             ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_kernel_mem0/kernel_system_kernel_mem0.cmp                                                     ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_kernel_mem0/../kernel_system_kernel_mem0.ip                                                   ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_clk_snoop/kernel_system_clk_snoop.cmp                                                         ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_clk_snoop/../kernel_system_clk_snoop.ip                                                       ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_reset/kernel_system_reset.cmp                                                                 ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_reset/../kernel_system_reset.ip                                                               ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_kernel_irq/kernel_system_kernel_irq.cmp                                                       ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_kernel_irq/../kernel_system_kernel_irq.ip                                                     ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_kernel_cra/kernel_system_kernel_cra.cmp                                                       ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_kernel_cra/../kernel_system_kernel_cra.ip                                                     ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_boardtest_system/kernel_system_boardtest_system.cmp                                           ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_boardtest_system/../kernel_system_boardtest_system.ip                                         ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_clk_2x/kernel_system_clk_2x.cmp                                                               ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_clk_2x/../kernel_system_clk_2x.ip                                                             ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_avs_kernel_sender_cra_cra_ring/kernel_system_avs_kernel_sender_cra_cra_ring.cmp               ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_avs_kernel_sender_cra_cra_ring/../kernel_system_avs_kernel_sender_cra_cra_ring.ip             ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_cra_root/kernel_system_cra_root.cmp                                                           ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_cra_root/../kernel_system_cra_root.ip                                                         ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_avs_mem_burstcoalesced_cra_cra_ring/kernel_system_avs_mem_burstcoalesced_cra_cra_ring.cmp     ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_avs_mem_burstcoalesced_cra_cra_ring/../kernel_system_avs_mem_burstcoalesced_cra_cra_ring.ip   ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_avs_kclk_cra_cra_ring/kernel_system_avs_kclk_cra_cra_ring.cmp                                 ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_avs_kclk_cra_cra_ring/../kernel_system_avs_kclk_cra_cra_ring.ip                               ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_avs_kernel_receiver_cra_cra_ring/kernel_system_avs_kernel_receiver_cra_cra_ring.cmp           ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_avs_kernel_receiver_cra_cra_ring/../kernel_system_avs_kernel_receiver_cra_cra_ring.ip         ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_cra_ring_rom/kernel_system_cra_ring_rom.cmp                                                   ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_cra_ring_rom/../kernel_system_cra_ring_rom.ip                                                 ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_avs_mem_stream_cra_cra_ring/kernel_system_avs_mem_stream_cra_cra_ring.cmp                     ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_avs_mem_stream_cra_cra_ring/../kernel_system_avs_mem_stream_cra_cra_ring.ip                   ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_avs_reorder_const_cra_cra_ring/kernel_system_avs_reorder_const_cra_cra_ring.cmp               ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_avs_reorder_const_cra_cra_ring/../kernel_system_avs_reorder_const_cra_cra_ring.ip             ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_acl_internal_snoop/kernel_system_acl_internal_snoop.cmp                                       ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_acl_internal_snoop/../kernel_system_acl_internal_snoop.ip                                     ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_avs_mem_writestream_cra_cra_ring/kernel_system_avs_mem_writestream_cra_cra_ring.cmp           ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_avs_mem_writestream_cra_cra_ring/../kernel_system_avs_mem_writestream_cra_cra_ring.ip         ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_sys_description_rom/kernel_system_sys_description_rom.cmp                                     ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/kernel_system/kernel_system_sys_description_rom/../kernel_system_sys_description_rom.ip                                   ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; kernel_system/kernel_system.cmp                                                                                              ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; kernel_system/../kernel_system.qsys                                                                                          ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; board/board.cmp                                                                                                              ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; board/../board.qsys                                                                                                          ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; acl_ddr4_a10/acl_ddr4_a10.cmp                                                                                                ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; acl_ddr4_a10/../acl_ddr4_a10.qsys                                                                                            ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; acl_ddr4_a10_core/acl_ddr4_a10_core.cmp                                                                                      ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; acl_ddr4_a10_core/../acl_ddr4_a10_core.qsys                                                                                  ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/acl_ddr4_a10/acl_ddr4_a10_reset_controller_ddr4a_pipe/acl_ddr4_a10_reset_controller_ddr4a_pipe.cmp                        ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/acl_ddr4_a10/acl_ddr4_a10_reset_controller_ddr4a_pipe/../acl_ddr4_a10_reset_controller_ddr4a_pipe.ip                      ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/acl_ddr4_a10/acl_ddr4_a10_ddr4_calibrate/acl_ddr4_a10_ddr4_calibrate.cmp                                                  ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/acl_ddr4_a10/acl_ddr4_a10_ddr4_calibrate/../acl_ddr4_a10_ddr4_calibrate.ip                                                ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/acl_ddr4_a10/acl_ddr4_a10_pipe_stage_ddr4a_dimm/acl_ddr4_a10_pipe_stage_ddr4a_dimm.cmp                                    ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/acl_ddr4_a10/acl_ddr4_a10_pipe_stage_ddr4a_dimm/../acl_ddr4_a10_pipe_stage_ddr4a_dimm.ip                                  ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/board/board_pcie_refclk/board_pcie_refclk.cmp                                                                             ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/board/board_pcie_refclk/../board_pcie_refclk.ip                                                                           ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/board/board_pcie_irq/board_pcie_irq.cmp                                                                                   ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/board/board_pcie_irq/../board_pcie_irq.ip                                                                                 ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/board/board_alt_pr/board_alt_pr.cmp                                                                                       ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/board/board_alt_pr/../board_alt_pr.ip                                                                                     ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/board/board_kernel_clk_gen/board_kernel_clk_gen.cmp                                                                       ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/board/board_kernel_clk_gen/../board_kernel_clk_gen.ip                                                                     ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/board/board_pipe_stage_pcie_to_memwindow_mem/board_pipe_stage_pcie_to_memwindow_mem.cmp                                   ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/board/board_pipe_stage_pcie_to_memwindow_mem/../board_pipe_stage_pcie_to_memwindow_mem.ip                                 ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/acl_ddr4_a10/acl_ddr4_a10_kernel_clk_in/acl_ddr4_a10_kernel_clk_in.cmp                                                    ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/acl_ddr4_a10/acl_ddr4_a10_kernel_clk_in/../acl_ddr4_a10_kernel_clk_in.ip                                                  ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/board/board_pcie/board_pcie.cmp                                                                                           ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/board/board_pcie/../board_pcie.ip                                                                                         ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/board/board_pipe_stage_dma_rdwr_master/board_pipe_stage_dma_rdwr_master.cmp                                               ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/board/board_pipe_stage_dma_rdwr_master/../board_pipe_stage_dma_rdwr_master.ip                                             ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/board/board_pr_base_id/board_pr_base_id.cmp                                                                               ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/board/board_pr_base_id/../board_pr_base_id.ip                                                                             ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/board/board_memory_bank_divider_ddr4a/board_memory_bank_divider_ddr4a.cmp                                                 ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/board/board_memory_bank_divider_ddr4a/../board_memory_bank_divider_ddr4a.ip                                               ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/board/board_reset_controller_global/board_reset_controller_global.cmp                                                     ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/board/board_reset_controller_global/../board_reset_controller_global.ip                                                   ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/board/board_pipe_stage_pcie_to_memwindow_ctrl/board_pipe_stage_pcie_to_memwindow_ctrl.cmp                                 ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/board/board_pipe_stage_pcie_to_memwindow_ctrl/../board_pipe_stage_pcie_to_memwindow_ctrl.ip                               ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/acl_ddr4_a10/acl_ddr4_a10_pcie_clk_in/acl_ddr4_a10_pcie_clk_in.cmp                                                        ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/acl_ddr4_a10/acl_ddr4_a10_pcie_clk_in/../acl_ddr4_a10_pcie_clk_in.ip                                                      ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/board/board_memwindow/board_memwindow.cmp                                                                                 ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/board/board_memwindow/../board_memwindow.ip                                                                               ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/acl_ddr4_a10/acl_ddr4_a10_clock_cross_pcie_to_ddr4a/acl_ddr4_a10_clock_cross_pcie_to_ddr4a.cmp                            ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/acl_ddr4_a10/acl_ddr4_a10_clock_cross_pcie_to_ddr4a/../acl_ddr4_a10_clock_cross_pcie_to_ddr4a.ip                          ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/board/board_pipe_stage_host_ctrl/board_pipe_stage_host_ctrl.cmp                                                           ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/board/board_pipe_stage_host_ctrl/../board_pipe_stage_host_ctrl.ip                                                         ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/board/board_kernel_clk_export/board_kernel_clk_export.cmp                                                                 ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/board/board_kernel_clk_export/../board_kernel_clk_export.ip                                                               ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/acl_ddr4_a10/acl_ddr4_a10_uniphy_status_20nm/acl_ddr4_a10_uniphy_status_20nm.cmp                                          ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/acl_ddr4_a10/acl_ddr4_a10_uniphy_status_20nm/../acl_ddr4_a10_uniphy_status_20nm.ip                                        ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/board/board_version_id/board_version_id.cmp                                                                               ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/board/board_version_id/../board_version_id.ip                                                                             ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/board/board_config_clk/board_config_clk.cmp                                                                               ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/board/board_config_clk/../board_config_clk.ip                                                                             ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/acl_ddr4_a10/acl_ddr4_a10_global_reset_in/acl_ddr4_a10_global_reset_in.cmp                                                ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/acl_ddr4_a10/acl_ddr4_a10_global_reset_in/../acl_ddr4_a10_global_reset_in.ip                                              ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/acl_ddr4_a10_core/acl_ddr4_a10_core_pipe_stage_ddr4a_dimm_post_4th/acl_ddr4_a10_core_pipe_stage_ddr4a_dimm_post_4th.cmp   ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/acl_ddr4_a10_core/acl_ddr4_a10_core_pipe_stage_ddr4a_dimm_post_4th/../acl_ddr4_a10_core_pipe_stage_ddr4a_dimm_post_4th.ip ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/board/board_pipe_stage_dma_rd_master/board_pipe_stage_dma_rd_master.cmp                                                   ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/board/board_pipe_stage_dma_rd_master/../board_pipe_stage_dma_rd_master.ip                                                 ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/board/board_global_reset_in/board_global_reset_in.cmp                                                                     ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/board/board_global_reset_in/../board_global_reset_in.ip                                                                   ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/board/board_kernel_interface/board_kernel_interface.cmp                                                                   ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/board/board_kernel_interface/../board_kernel_interface.ip                                                                 ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/board/board_por_reset_counter/board_por_reset_counter.cmp                                                                 ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/board/board_por_reset_counter/../board_por_reset_counter.ip                                                               ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/acl_ddr4_a10_core/acl_ddr4_a10_core_reset_bridge_0/acl_ddr4_a10_core_reset_bridge_0.cmp                                   ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/acl_ddr4_a10_core/acl_ddr4_a10_core_reset_bridge_0/../acl_ddr4_a10_core_reset_bridge_0.ip                                 ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/board/board_temperature/board_temperature.cmp                                                                             ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/board/board_temperature/../board_temperature.ip                                                                           ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/acl_ddr4_a10/acl_ddr4_a10_reset_controller_ddr4a/acl_ddr4_a10_reset_controller_ddr4a.cmp                                  ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/acl_ddr4_a10/acl_ddr4_a10_reset_controller_ddr4a/../acl_ddr4_a10_reset_controller_ddr4a.ip                                ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/acl_ddr4_a10_core/acl_ddr4_a10_core_ddr4a/acl_ddr4_a10_core_ddr4a.cmp                                                     ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/acl_ddr4_a10_core/acl_ddr4_a10_core_ddr4a/../acl_ddr4_a10_core_ddr4a.ip                                                   ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/board/board_pipe_stage_dma_rdwr_master_512/board_pipe_stage_dma_rdwr_master_512.cmp                                       ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/board/board_pipe_stage_dma_rdwr_master_512/../board_pipe_stage_dma_rdwr_master_512.ip                                     ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/acl_ddr4_a10_core/acl_ddr4_a10_core_clock_bridge_0/acl_ddr4_a10_core_clock_bridge_0.cmp                                   ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/acl_ddr4_a10_core/acl_ddr4_a10_core_clock_bridge_0/../acl_ddr4_a10_core_clock_bridge_0.ip                                 ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/board/board_reset_controller_pcie/board_reset_controller_pcie.cmp                                                         ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/board/board_reset_controller_pcie/../board_reset_controller_pcie.ip                                                       ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/board/board_npor_export/board_npor_export.cmp                                                                             ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/board/board_npor_export/../board_npor_export.ip                                                                           ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/board/board_kernel_ddr4a_bridge/board_kernel_ddr4a_bridge.cmp                                                             ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/board/board_kernel_ddr4a_bridge/../board_kernel_ddr4a_bridge.ip                                                           ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/acl_ddr4_a10/acl_ddr4_a10_clock_cross_kernel_to_ddr4a/acl_ddr4_a10_clock_cross_kernel_to_ddr4a.cmp                        ; --            ; --                ; --                 ;
+; MISC_FILE                                       ; ip/acl_ddr4_a10/acl_ddr4_a10_clock_cross_kernel_to_ddr4a/../acl_ddr4_a10_clock_cross_kernel_to_ddr4a.ip                      ; --            ; --                ; --                 ;
+; NOMINAL_CORE_SUPPLY_VOLTAGE                     ; 0.95V                                                                                                                        ; --            ; --                ; --                 ;
+; NUM_PARALLEL_PROCESSORS                         ; 4                                                                                                                            ; --            ; --                ; --                 ;
+; OPTIMIZATION_TECHNIQUE                          ; Speed                                                                                                                        ; Balanced      ; --                ; --                 ;
+; OUTPUT_IO_TIMING_FAR_END_VMEAS                  ; Half Signal Swing                                                                                                            ; --            ; --                ; --                 ;
+; OUTPUT_IO_TIMING_FAR_END_VMEAS                  ; Half Signal Swing                                                                                                            ; --            ; --                ; --                 ;
+; OUTPUT_IO_TIMING_NEAR_END_VMEAS                 ; Half Vccio                                                                                                                   ; --            ; --                ; --                 ;
+; OUTPUT_IO_TIMING_NEAR_END_VMEAS                 ; Half Vccio                                                                                                                   ; --            ; --                ; --                 ;
+; PARTITION_COLOR                                 ; -- (Not supported for targeted family)                                                                                       ; --            ; top               ; kernel_system_inst ;
+; PARTITION_COLOR                                 ; -- (Not supported for targeted family)                                                                                       ; --            ; top               ; Top                ;
+; PARTITION_FITTER_PRESERVATION_LEVEL             ; -- (Not supported for targeted family)                                                                                       ; --            ; top               ; kernel_system_inst ;
+; PARTITION_FITTER_PRESERVATION_LEVEL             ; -- (Not supported for targeted family)                                                                                       ; --            ; top               ; Top                ;
+; PARTITION_NETLIST_TYPE                          ; -- (Not supported for targeted family)                                                                                       ; --            ; top               ; kernel_system_inst ;
+; PARTITION_NETLIST_TYPE                          ; -- (Not supported for targeted family)                                                                                       ; --            ; top               ; Top                ;
+; PLACEMENT_EFFORT_MULTIPLIER                     ; 4.0                                                                                                                          ; 1.0           ; --                ; --                 ;
+; POST_FLOW_SCRIPT_FILE                           ; quartus_cdb:scripts/post_flow_pr.tcl                                                                                         ; --            ; --                ; --                 ;
+; POWER_BOARD_THERMAL_MODEL                       ; None (CONSERVATIVE)                                                                                                          ; --            ; --                ; --                 ;
+; POWER_PRESET_COOLING_SOLUTION                   ; 23 MM HEAT SINK WITH 200 LFPM AIRFLOW                                                                                        ; --            ; --                ; --                 ;
+; QHD_MODE                                        ; On                                                                                                                           ; --            ; --                ; --                 ;
+; REVISION_TYPE                                   ; PR_Base                                                                                                                      ; --            ; --                ; --                 ;
+; ROUTER_TIMING_OPTIMIZATION_LEVEL                ; MAXIMUM                                                                                                                      ; Normal        ; --                ; --                 ;
+; SEARCH_PATH                                     ; /build/arc/cache/tools/acl/16.1.2/201/linux64/ip                                                                             ; --            ; --                ; --                 ;
+; SLD_INFO                                        ; QSYS_NAME acl_ddr4_a10 HAS_SOPCINFO 1 GENERATION_ID 1484756249                                                               ; --            ; acl_ddr4_a10      ; --                 ;
+; SLD_INFO                                        ; QSYS_NAME acl_ddr4_a10_core HAS_SOPCINFO 1 GENERATION_ID 1484756247                                                          ; --            ; acl_ddr4_a10_core ; --                 ;
+; SLD_INFO                                        ; QSYS_NAME board HAS_SOPCINFO 1 GENERATION_ID 1484756255                                                                      ; --            ; board             ; --                 ;
+; SLD_INFO                                        ; QSYS_NAME kernel_system HAS_SOPCINFO 1 GENERATION_ID 1484756334                                                              ; --            ; kernel_system     ; --                 ;
+; SOPCINFO_FILE                                   ; kernel_system/../kernel_system.sopcinfo                                                                                      ; --            ; --                ; --                 ;
+; SOPCINFO_FILE                                   ; board/../board.sopcinfo                                                                                                      ; --            ; --                ; --                 ;
+; SOPCINFO_FILE                                   ; acl_ddr4_a10/../acl_ddr4_a10.sopcinfo                                                                                        ; --            ; --                ; --                 ;
+; SOPCINFO_FILE                                   ; acl_ddr4_a10_core/../acl_ddr4_a10_core.sopcinfo                                                                              ; --            ; --                ; --                 ;
+; SYNTHESIS_ONLY_QIP                              ; On                                                                                                                           ; --            ; --                ; --                 ;
+; TOP_LEVEL_ENTITY                                ; top                                                                                                                          ; base          ; --                ; --                 ;
+; VCCERAM_USER_VOLTAGE                            ; 0.95V                                                                                                                        ; --            ; --                ; --                 ;
+; VCCP_USER_VOLTAGE                               ; 0.95V                                                                                                                        ; --            ; --                ; --                 ;
+; VERILOG_CONSTANT_LOOP_LIMIT                     ; 10000                                                                                                                        ; 5000          ; --                ; --                 ;
+; VERILOG_INPUT_VERSION                           ; SystemVerilog_2005                                                                                                           ; Verilog_2001  ; --                ; --                 ;
++-------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------+---------------+-------------------+--------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------+
+; Flow Elapsed Time                                                                                                             ;
++---------------------------+--------------+-------------------------+---------------------+------------------------------------+
+; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
++---------------------------+--------------+-------------------------+---------------------+------------------------------------+
+; Spectra-Q Synthesis       ; 00:12:17     ; 1.5                     ; 6902 MB             ; 00:20:25                           ;
+; Fitter                    ; 01:47:50     ; 1.4                     ; 16153 MB            ; 03:57:32                           ;
+; TimeQuest Timing Analyzer ; 00:08:15     ; 1.6                     ; 10124 MB            ; 00:13:54                           ;
+; Assembler                 ; 00:07:28     ; 1.0                     ; 11709 MB            ; 00:08:45                           ;
+; Fitter                    ; 00:29:18     ; 1.3                     ; 14413 MB            ; 01:15:22                           ;
+; Assembler                 ; 00:02:04     ; 1.0                     ; 9867 MB             ; 00:02:10                           ;
+; Assembler                 ; 00:01:58     ; 1.0                     ; 9884 MB             ; 00:02:10                           ;
+; Total                     ; 02:49:10     ; --                      ; --                  ; 06:00:18                           ;
++---------------------------+--------------+-------------------------+---------------------+------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------+
+; Flow OS Summary                                                                                                      ;
++---------------------------+-----------------------------------------+------------------+------------+----------------+
+; Module Name               ; Machine Hostname                        ; OS Name          ; OS Version ; Processor type ;
++---------------------------+-----------------------------------------+------------------+------------+----------------+
+; Spectra-Q Synthesis       ; to-swcf2694-031                         ; Red Hat          ; 6          ; x86_64         ;
+; Fitter                    ; to-swcf2694-031                         ; Red Hat          ; 6          ; x86_64         ;
+; TimeQuest Timing Analyzer ; to-swcf2694-031                         ; Red Hat          ; 6          ; x86_64         ;
+; Assembler                 ; to-swcf2694-031                         ; Red Hat          ; 6          ; x86_64         ;
+; Fitter                    ; celebdil.esa.informatik.tu-darmstadt.de ; Scientific Linux ; 6          ; x86_64         ;
+; Assembler                 ; celebdil.esa.informatik.tu-darmstadt.de ; Scientific Linux ; 6          ; x86_64         ;
+; Assembler                 ; celebdil.esa.informatik.tu-darmstadt.de ; Scientific Linux ; 6          ; x86_64         ;
++---------------------------+-----------------------------------------+------------------+------------+----------------+
+
+
+------------
+; Flow Log ;
+------------
+quartus_syn --read_settings_files=off --write_settings_files=off top -c base
+quartus_syn --read_settings_files=off --write_settings_files=off top -c base
+quartus_syn --read_settings_files=off --write_settings_files=off top -c base
+quartus_fit --read_settings_files=off --write_settings_files=off top -c base
+quartus_sta top -c base --mode=finalize
+quartus_asm --read_settings_files=off --write_settings_files=off top -c base
+quartus_fit top -c base
+quartus_asm top -c base
+quartus_asm --read_settings_files=on --write_settings_files=off top -c base
+
+
+

@@ -1,0 +1,16 @@
+Info: Starting: Create HDL design files for synthesis
+Info: qsys-generate /home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_kernel_mem0.ip --synthesis=VERILOG --output-directory=/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_kernel_mem0 --family="Arria 10" --part=10AX115S2F45I1SG
+Info: kernel_system_kernel_mem0: "Transforming system: kernel_system_kernel_mem0"
+Info: kernel_system_kernel_mem0: Running transform generation_view_transform
+Info: kernel_system_kernel_mem0: Running transform generation_view_transform took 0.000s
+Info: kernel_mem0: Running transform generation_view_transform
+Info: kernel_mem0: Running transform generation_view_transform took 0.000s
+Info: kernel_system_kernel_mem0: Running transform interconnect_transform_chooser
+Info: kernel_system_kernel_mem0: Running transform interconnect_transform_chooser took 0.008s
+Info: kernel_system_kernel_mem0: "Naming system components in system: kernel_system_kernel_mem0"
+Info: kernel_system_kernel_mem0: "Processing generation queue"
+Info: kernel_system_kernel_mem0: "Generating: kernel_system_kernel_mem0"
+Info: kernel_system_kernel_mem0: "Generating: altera_avalon_mm_bridge"
+Info: kernel_system_kernel_mem0: Done "kernel_system_kernel_mem0" with 2 modules, 2 files
+Info: qsys-generate succeeded.
+Info: Finished: Create HDL design files for synthesis

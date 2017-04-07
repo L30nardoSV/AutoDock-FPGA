@@ -60,9 +60,12 @@ channel char  	chan_Conf2Intrae_mode;
 channel ushort  chan_Conf2Intrae_cnt;
 
 channel float 	chan_Intere2Store_intere;
+
+/*
 channel char 	chan_Intere2Store_active;	
 channel char  	chan_Intere2Store_mode;	
 channel ushort  chan_Intere2Store_cnt;
+*/
 
 channel float 	chan_Intrae2Store_intrae;
 channel char  	chan_Intrae2Store_active;	

@@ -264,16 +264,30 @@ while(active) {
 		interE += partialE1 + partialE2 + partialE3;
 	} // End of LOOP_INTERE_1:	
 
+
+	//////======================================================
+	if ((active == 0) && (cnt == (DockConst->pop_size -1))) {
+		active = 0;	
+	}
+	else {
+		active = 1;
+	}
+	//////======================================================
+
+
 	// --------------------------------------------------------------
 	// Send intermolecular energy to chanel
 	// --------------------------------------------------------------
 	write_channel_altera(chan_Intere2Store_intere, interE);
+
+/*
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 	write_channel_altera(chan_Intere2Store_active, active);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 	write_channel_altera(chan_Intere2Store_mode,   mode);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 	write_channel_altera(chan_Intere2Store_cnt,    cnt);
+*/
 	// --------------------------------------------------------------
  	
 	} // End of while(1)

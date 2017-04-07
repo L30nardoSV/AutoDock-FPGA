@@ -1,0 +1,15 @@
+Info: Starting: Create HDL design files for synthesis
+Info: qsys-generate /home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_clk_1x.ip --synthesis=VERILOG --output-directory=/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_clk_1x --family="Arria 10" --part=10AX115S2F45I1SG
+Info: kernel_system_clk_1x: "Transforming system: kernel_system_clk_1x"
+Info: kernel_system_clk_1x: Running transform generation_view_transform
+Info: kernel_system_clk_1x: Running transform generation_view_transform took 0.000s
+Info: clk_1x: Running transform generation_view_transform
+Info: clk_1x: Running transform generation_view_transform took 0.000s
+Info: kernel_system_clk_1x: Running transform interconnect_transform_chooser
+Info: kernel_system_clk_1x: Running transform interconnect_transform_chooser took 0.008s
+Info: kernel_system_clk_1x: "Naming system components in system: kernel_system_clk_1x"
+Info: kernel_system_clk_1x: "Processing generation queue"
+Info: kernel_system_clk_1x: "Generating: kernel_system_clk_1x"
+Info: kernel_system_clk_1x: Done "kernel_system_clk_1x" with 1 modules, 1 files
+Info: qsys-generate succeeded.
+Info: Finished: Create HDL design files for synthesis

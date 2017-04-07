@@ -38,6 +38,7 @@ void Krnl_IC(__global   const float*           restrict GlobPopulationCurrent,
 		printf("pop_cnt (Krnl_IC): %u\n", pop_cnt); 		
 		#endif
 
+
 	} // End of for-loop pop_cnt		
 
 	ack = read_channel_altera(chan_Store2IC_ack);		

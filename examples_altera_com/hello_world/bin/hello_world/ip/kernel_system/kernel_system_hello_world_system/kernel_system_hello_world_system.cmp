@@ -1,0 +1,25 @@
+	component kernel_system_hello_world_system is
+		port (
+			avm_memgmem0_DDR_port_0_0_rw_address       : out std_logic_vector(30 downto 0);                     -- address
+			avm_memgmem0_DDR_port_0_0_rw_read          : out std_logic;                                         -- read
+			avm_memgmem0_DDR_port_0_0_rw_write         : out std_logic;                                         -- write
+			avm_memgmem0_DDR_port_0_0_rw_writedata     : out std_logic_vector(511 downto 0);                    -- writedata
+			avm_memgmem0_DDR_port_0_0_rw_byteenable    : out std_logic_vector(63 downto 0);                     -- byteenable
+			avm_memgmem0_DDR_port_0_0_rw_readdata      : in  std_logic_vector(511 downto 0) := (others => 'X'); -- readdata
+			avm_memgmem0_DDR_port_0_0_rw_burstcount    : out std_logic_vector(4 downto 0);                      -- burstcount
+			avm_memgmem0_DDR_port_0_0_rw_waitrequest   : in  std_logic                      := 'X';             -- waitrequest
+			avm_memgmem0_DDR_port_0_0_rw_readdatavalid : in  std_logic                      := 'X';             -- readdatavalid
+			avs_hello_world_cra_read                   : in  std_logic                      := 'X';             -- read
+			avs_hello_world_cra_write                  : in  std_logic                      := 'X';             -- write
+			avs_hello_world_cra_address                : in  std_logic_vector(3 downto 0)   := (others => 'X'); -- address
+			avs_hello_world_cra_writedata              : in  std_logic_vector(63 downto 0)  := (others => 'X'); -- writedata
+			avs_hello_world_cra_byteenable             : in  std_logic_vector(7 downto 0)   := (others => 'X'); -- byteenable
+			avs_hello_world_cra_readdata               : out std_logic_vector(63 downto 0);                     -- readdata
+			avs_hello_world_cra_readdatavalid          : out std_logic;                                         -- readdatavalid
+			clock                                      : in  std_logic                      := 'X';             -- clk
+			clock2x                                    : in  std_logic                      := 'X';             -- clk
+			resetn                                     : in  std_logic                      := 'X';             -- reset_n
+			kernel_irq                                 : out std_logic                                          -- irq
+		);
+	end component kernel_system_hello_world_system;
+

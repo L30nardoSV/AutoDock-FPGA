@@ -1,0 +1,11 @@
+	component kernel_system_sys_description_rom is
+		port (
+			clk           : in  std_logic                     := 'X';             -- clk
+			rst_n         : in  std_logic                     := 'X';             -- reset_n
+			address       : in  std_logic_vector(4 downto 0)  := (others => 'X'); -- address
+			readdata      : out std_logic_vector(63 downto 0);                    -- readdata
+			read          : in  std_logic                     := 'X';             -- read
+			readdatavalid : out std_logic                                         -- readdatavalid
+		);
+	end component kernel_system_sys_description_rom;
+

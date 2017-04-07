@@ -1,0 +1,52 @@
+Fitter Finalize Stage Report for top
+Mon Mar 27 16:36:38 2017
+Quartus Prime Version 16.1.2 Build 203 01/18/2017 SJ Pro Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Fitter HSLP Summary
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2017  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel MegaCore Function License Agreement, or other 
+applicable license agreement, including, without limitation, 
+that your use is for the sole purpose of programming logic 
+devices manufactured by Intel and sold by Intel or its 
+authorized distributors.  Please refer to the applicable 
+agreement for further details.
+
+
+
++---------------------------------------------------------------------------------+
+; Fitter HSLP Summary                                                             ;
++--------------------------------------------------------+-----------------+------+
+; Resource                                               ; Usage           ; %    ;
++--------------------------------------------------------+-----------------+------+
+;                                                        ;                 ;      ;
+; Programmable power technology high-speed tiles         ; 1,331 / 18,244  ; 7 %  ;
+; Programmable power technology low-power tiles          ; 16,913 / 18,244 ; 93 % ;
+;     -- low-power tiles that are used by the design     ; 2,798 / 16,913  ; 17 % ;
+;     -- unused tiles (low-power)                        ; 14,115 / 16,913 ; 83 % ;
+;                                                        ;                 ;      ;
+; Programmable power technology high-speed LAB tiles     ; 1,166 / 13,898  ; 8 %  ;
+; Programmable power technology low-power LAB tiles      ; 12,732 / 13,898 ; 92 % ;
+;     -- low-power LAB tiles that are used by the design ; 2,575 / 12,732  ; 20 % ;
+;     -- unused LAB tiles (low-power)                    ; 10,157 / 12,732 ; 80 % ;
+;                                                        ;                 ;      ;
++--------------------------------------------------------+-----------------+------+
+
+

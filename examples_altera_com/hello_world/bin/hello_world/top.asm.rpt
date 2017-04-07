@@ -1,0 +1,146 @@
+Assembler report for top
+Mon Mar 27 16:53:13 2017
+Quartus Prime Version 16.1.2 Build 203 01/18/2017 SJ Pro Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Assembler Summary
+  3. Assembler Settings
+  4. Assembler Encrypted IP Cores Summary
+  5. Assembler INI Usage
+  6. Assembler Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2017  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel MegaCore Function License Agreement, or other 
+applicable license agreement, including, without limitation, 
+that your use is for the sole purpose of programming logic 
+devices manufactured by Intel and sold by Intel or its 
+authorized distributors.  Please refer to the applicable 
+agreement for further details.
+
+
+
++---------------------------------------------------------------+
+; Assembler Summary                                             ;
++-----------------------+---------------------------------------+
+; Assembler Status      ; Successful - Mon Mar 27 16:53:13 2017 ;
+; Revision Name         ; top                                   ;
+; Top-level Entity Name ; top                                   ;
+; Family                ; Arria 10                              ;
+; Device                ; 10AX115S2F45I1SG                      ;
++-----------------------+---------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------+
+; Assembler Settings                                                                                            ;
++-----------------------------------------------------------------------------+----------------+----------------+
+; Option                                                                      ; Setting        ; Default Value  ;
++-----------------------------------------------------------------------------+----------------+----------------+
+; Maximum processors allowed for parallel compilation                         ; 4              ;                ;
+; Generate compressed bitstreams                                              ; Off            ; On             ;
+; Enable compact report table                                                 ; Off            ; Off            ;
+; Generate Raw Binary File (.rbf) For Target Device                           ; On             ; Off            ;
+; Compression mode                                                            ; Off            ; Off            ;
+; Clock source for configuration device                                       ; Internal       ; Internal       ;
+; Clock frequency of the configuration device                                 ; 10 MHz         ; 10 MHz         ;
+; Divide clock frequency by                                                   ; 1              ; 1              ;
+; Auto user code                                                              ; On             ; On             ;
+; Configuration device                                                        ; Auto           ; Auto           ;
+; Voltage output format                                                       ; Auto discovery ; Auto discovery ;
+; Configuration device auto user code                                         ; Off            ; Off            ;
+; Generate Tabular Text File (.ttf) For Target Device                         ; Off            ; Off            ;
+; Generate Hexadecimal (Intel-Format) Output File (.hexout) for Target Device ; Off            ; Off            ;
+; Hexadecimal Output File start address                                       ; 0              ; 0              ;
+; Hexadecimal Output File count direction                                     ; Up             ; Up             ;
+; Release clears before tri-states                                            ; Off            ; Off            ;
+; Auto-restart configuration after error                                      ; On             ; On             ;
+; Enable OCT_DONE                                                             ; Off            ; Off            ;
+; Use Checkered Pattern as Uninitialized RAM Content                          ; Off            ; Off            ;
+; Enable autonomous PCIe HIP mode                                             ; Off            ; Off            ;
+; Generate Serial Vector Format File (.svf) for Target Device                 ; Off            ; Off            ;
+; Generate a JEDEC STAPL Format File (.jam) for Target Device                 ; Off            ; Off            ;
+; Generate a compressed Jam STAPL Byte Code 2.0 File (.jbc) for Target Device ; Off            ; Off            ;
+; Generate a compressed Jam STAPL Byte Code 2.0 File (.jbc) for Target Device ; On             ; On             ;
+; Enables the HPS early release of HPS IO                                     ; Off            ; Off            ;
++-----------------------------------------------------------------------------+----------------+----------------+
+
+
++------------------------------------------------+
+; Assembler Encrypted IP Cores Summary           ;
++--------+------------------------+--------------+
+; Vendor ; IP Core Name           ; License Type ;
++--------+------------------------+--------------+
+; Altera ; Signal Tap (6AF7 BCE1) ; Licensed     ;
+; Altera ; Signal Tap (6AF7 BCEC) ; Licensed     ;
++--------+------------------------+--------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------+
+; Assembler INI Usage                                                                                                              ;
++---------------------------------------+------------------------------------------------------------------------------------------+
+; Option                                ; Usage                                                                                    ;
++---------------------------------------+------------------------------------------------------------------------------------------+
+; Initialization file:                  ; /home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/quartus.ini ;
+; qhd_compare_global_assignments_for_pr ; off                                                                                      ;
++---------------------------------------+------------------------------------------------------------------------------------------+
+
+
++--------------------+
+; Assembler Messages ;
++--------------------+
+Info: *******************************************************************
+Info: Running Quartus Prime Assembler
+    Info: Version 16.1.2 Build 203 01/18/2017 SJ Pro Edition
+    Info: Copyright (C) 2017  Intel Corporation. All rights reserved.
+    Info: Your use of Intel Corporation's design tools, logic functions 
+    Info: and other software and tools, and its AMPP partner logic 
+    Info: functions, and any output files from any of the foregoing 
+    Info: (including device programming or simulation files), and any 
+    Info: associated documentation or information are expressly subject 
+    Info: to the terms and conditions of the Intel Program License 
+    Info: Subscription Agreement, the Intel Quartus Prime License Agreement,
+    Info: the Intel MegaCore Function License Agreement, or other 
+    Info: applicable license agreement, including, without limitation, 
+    Info: that your use is for the sole purpose of programming logic 
+    Info: devices manufactured by Intel and sold by Intel or its 
+    Info: authorized distributors.  Please refer to the applicable 
+    Info: agreement for further details.
+    Info: Processing started: Mon Mar 27 16:51:05 2017
+Info: Command: quartus_asm --read_settings_files=on --write_settings_files=off top -c top
+Info: Using INI file /home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/quartus.ini
+Info (16677): Loading final database
+Info (16734): Loading "final" snapshot for partition "|".
+Info (16734): Loading "final" snapshot for partition "freeze_wrapper_inst|kernel_system_inst".
+Warning (17912): Partition "freeze_wrapper_inst|kernel_system_inst" contains an output port, "kernel_mem0_address[0]~OPORT", that connects to partition and has no routing. It is possible that the destination logic was swept away.  Consider modifying your design by inserting Wire LUTs so that every partition output has a routed destination.
+Warning (17912): Partition "freeze_wrapper_inst|kernel_system_inst" contains an output port, "kernel_mem0_address[1]~OPORT", that connects to partition and has no routing. It is possible that the destination logic was swept away.  Consider modifying your design by inserting Wire LUTs so that every partition output has a routed destination.
+Warning (17912): Partition "freeze_wrapper_inst|kernel_system_inst" contains an output port, "kernel_mem0_address[2]~OPORT", that connects to partition and has no routing. It is possible that the destination logic was swept away.  Consider modifying your design by inserting Wire LUTs so that every partition output has a routed destination.
+Warning (17912): Partition "freeze_wrapper_inst|kernel_system_inst" contains an output port, "kernel_mem0_address[3]~OPORT", that connects to partition and has no routing. It is possible that the destination logic was swept away.  Consider modifying your design by inserting Wire LUTs so that every partition output has a routed destination.
+Warning (17912): Partition "freeze_wrapper_inst|kernel_system_inst" contains an output port, "kernel_mem0_address[4]~OPORT", that connects to partition and has no routing. It is possible that the destination logic was swept away.  Consider modifying your design by inserting Wire LUTs so that every partition output has a routed destination.
+Warning (17912): Partition "freeze_wrapper_inst|kernel_system_inst" contains an output port, "kernel_mem0_address[5]~OPORT", that connects to partition and has no routing. It is possible that the destination logic was swept away.  Consider modifying your design by inserting Wire LUTs so that every partition output has a routed destination.
+Warning (17912): Partition "freeze_wrapper_inst|kernel_system_inst" contains an output port, "kernel_mem0_debugaccess~OPORT", that connects to partition and has no routing. It is possible that the destination logic was swept away.  Consider modifying your design by inserting Wire LUTs so that every partition output has a routed destination.
+Info (16678): Successfully loaded final database: elapsed time is 00:00:14
+Info (18936): Using revision base.kernel.pmsf as a baseline for top.kernel mask verification
+Info (18938): Using revision base.static.msf as a baseline for static mask verification
+Info (18937): Using revision base.sof as a baseline for logic preservation verification
+Info: Quartus Prime Assembler was successful. 0 errors, 7 warnings
+    Info: Peak virtual memory: 9761 megabytes
+    Info: Processing ended: Mon Mar 27 16:53:17 2017
+    Info: Elapsed time: 00:02:12
+    Info: Total CPU time (on all processors): 00:02:21
+
+

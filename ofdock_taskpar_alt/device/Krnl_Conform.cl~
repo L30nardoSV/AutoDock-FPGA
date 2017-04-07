@@ -261,6 +261,16 @@ while(active) {
 	printf("BEFORE Out CONFORM CHANNEL\n");
 	#endif
 
+
+	//////======================================================
+	if ((active == 0) && (cnt == (DockConst->pop_size -1))) {
+		active = 0;	
+	}
+	else {
+		active = 1;
+	}
+	//////======================================================
+
 	// --------------------------------------------------------------
 	// Send ligand atomic coordinates to channel 
 	// --------------------------------------------------------------
@@ -286,10 +296,6 @@ while(active) {
 		write_channel_altera(chan_Conf2Intere_z, loc_coords_z[pipe_cnt]);
 		write_channel_altera(chan_Conf2Intrae_z, loc_coords_z[pipe_cnt]);
 		*/
-		//position_xyz = (float3) (loc_coords_x[pipe_cnt], loc_coords_y[pipe_cnt], loc_coords_z[pipe_cnt]);
-		//write_channel_altera(chan_Conf2Intere_xyz, position_xyz);
-		//write_channel_altera(chan_Conf2Intrae_xyz, position_xyz);
-
 		write_channel_altera(chan_Conf2Intere_xyz, (float3) (loc_coords_x[pipe_cnt], loc_coords_y[pipe_cnt], loc_coords_z[pipe_cnt]));
 		write_channel_altera(chan_Conf2Intrae_xyz, (float3) (loc_coords_x[pipe_cnt], loc_coords_y[pipe_cnt], loc_coords_z[pipe_cnt]));
 	}

@@ -1,0 +1,649 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<deploy
+ date="2017.03.27.15:12:52"
+ outputDirectory="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/">
+ <perimeter>
+  <parameter
+     name="AUTO_GENERATION_ID"
+     type="Integer"
+     defaultValue="0"
+     onHdl="0"
+     affectsHdl="1" />
+  <parameter
+     name="AUTO_UNIQUE_ID"
+     type="String"
+     defaultValue=""
+     onHdl="0"
+     affectsHdl="1" />
+  <parameter
+     name="AUTO_DEVICE_FAMILY"
+     type="String"
+     defaultValue="Arria 10"
+     onHdl="0"
+     affectsHdl="1" />
+  <parameter
+     name="AUTO_DEVICE"
+     type="String"
+     defaultValue="10AX115S2F45I1SG"
+     onHdl="0"
+     affectsHdl="1" />
+  <parameter
+     name="AUTO_DEVICE_SPEEDGRADE"
+     type="String"
+     defaultValue="1"
+     onHdl="0"
+     affectsHdl="1" />
+  <parameter
+     name="AUTO_AVM_MEMGMEM0_DDR_PORT_0_0_RW_ADDRESS_MAP"
+     type="AddressMap"
+     defaultValue=""
+     onHdl="0"
+     affectsHdl="1" />
+  <parameter
+     name="AUTO_AVM_MEMGMEM0_DDR_PORT_0_0_RW_ADDRESS_WIDTH"
+     type="AddressWidthType"
+     defaultValue="-1"
+     onHdl="0"
+     affectsHdl="1" />
+  <parameter
+     name="AUTO_CLOCK_RESET_CLOCK_RATE"
+     type="Long"
+     defaultValue="-1"
+     onHdl="0"
+     affectsHdl="1" />
+  <parameter
+     name="AUTO_CLOCK_RESET_CLOCK_DOMAIN"
+     type="Integer"
+     defaultValue="-1"
+     onHdl="0"
+     affectsHdl="1" />
+  <parameter
+     name="AUTO_CLOCK_RESET_RESET_DOMAIN"
+     type="Integer"
+     defaultValue="-1"
+     onHdl="0"
+     affectsHdl="1" />
+  <parameter
+     name="AUTO_CLOCK_RESET2X_CLOCK_RATE"
+     type="Long"
+     defaultValue="-1"
+     onHdl="0"
+     affectsHdl="1" />
+  <parameter
+     name="AUTO_CLOCK_RESET2X_CLOCK_DOMAIN"
+     type="Integer"
+     defaultValue="-1"
+     onHdl="0"
+     affectsHdl="1" />
+  <parameter
+     name="AUTO_CLOCK_RESET2X_RESET_DOMAIN"
+     type="Integer"
+     defaultValue="-1"
+     onHdl="0"
+     affectsHdl="1" />
+  <interface name="avm_memgmem0_DDR_port_0_0_rw" kind="avalon" start="1">
+   <property name="adaptsTo" value="" />
+   <property name="addressGroup" value="0" />
+   <property name="addressUnits" value="SYMBOLS" />
+   <property name="alwaysBurstMaxBurst" value="false" />
+   <property name="associatedClock" value="clock_reset" />
+   <property name="associatedReset" value="clock_reset_reset" />
+   <property name="bitsPerSymbol" value="8" />
+   <property name="burstOnBurstBoundariesOnly" value="false" />
+   <property name="burstcountUnits" value="WORDS" />
+   <property name="constantBurstBehavior" value="false" />
+   <property name="dBSBigEndian" value="false" />
+   <property name="doStreamReads" value="false" />
+   <property name="doStreamWrites" value="false" />
+   <property name="holdTime" value="0" />
+   <property name="interleaveBursts" value="false" />
+   <property name="isAsynchronous" value="false" />
+   <property name="isBigEndian" value="false" />
+   <property name="isReadable" value="false" />
+   <property name="isWriteable" value="false" />
+   <property name="linewrapBursts" value="false" />
+   <property name="maxAddressWidth" value="32" />
+   <property name="maximumPendingReadTransactions" value="0" />
+   <property name="maximumPendingWriteTransactions" value="0" />
+   <property name="readLatency" value="0" />
+   <property name="readWaitTime" value="0" />
+   <property name="registerIncomingSignals" value="false" />
+   <property name="registerOutgoingSignals" value="false" />
+   <property name="setupTime" value="0" />
+   <property name="timingUnits" value="Cycles" />
+   <property name="writeWaitTime" value="0" />
+   <port
+       name="avm_memgmem0_DDR_port_0_0_rw_address"
+       direction="output"
+       role="address"
+       width="31" />
+   <port
+       name="avm_memgmem0_DDR_port_0_0_rw_read"
+       direction="output"
+       role="read"
+       width="1" />
+   <port
+       name="avm_memgmem0_DDR_port_0_0_rw_write"
+       direction="output"
+       role="write"
+       width="1" />
+   <port
+       name="avm_memgmem0_DDR_port_0_0_rw_writedata"
+       direction="output"
+       role="writedata"
+       width="512" />
+   <port
+       name="avm_memgmem0_DDR_port_0_0_rw_byteenable"
+       direction="output"
+       role="byteenable"
+       width="64" />
+   <port
+       name="avm_memgmem0_DDR_port_0_0_rw_readdata"
+       direction="input"
+       role="readdata"
+       width="512" />
+   <port
+       name="avm_memgmem0_DDR_port_0_0_rw_burstcount"
+       direction="output"
+       role="burstcount"
+       width="5" />
+   <port
+       name="avm_memgmem0_DDR_port_0_0_rw_waitrequest"
+       direction="input"
+       role="waitrequest"
+       width="1" />
+   <port
+       name="avm_memgmem0_DDR_port_0_0_rw_readdatavalid"
+       direction="input"
+       role="readdatavalid"
+       width="1" />
+  </interface>
+  <interface name="avs_hello_world_cra" kind="avalon" start="0">
+   <property name="addressAlignment" value="DYNAMIC" />
+   <property name="addressGroup" value="0" />
+   <property name="addressSpan" value="128" />
+   <property name="addressUnits" value="WORDS" />
+   <property name="alwaysBurstMaxBurst" value="false" />
+   <property name="associatedClock" value="clock_reset" />
+   <property name="associatedReset" value="clock_reset_reset" />
+   <property name="bitsPerSymbol" value="8" />
+   <property name="bridgedAddressOffset" value="0" />
+   <property name="bridgesToMaster" value="" />
+   <property name="burstOnBurstBoundariesOnly" value="false" />
+   <property name="burstcountUnits" value="WORDS" />
+   <property name="constantBurstBehavior" value="false" />
+   <property name="explicitAddressSpan" value="0" />
+   <property name="holdTime" value="0" />
+   <property name="interleaveBursts" value="false" />
+   <property name="isBigEndian" value="false" />
+   <property name="isFlash" value="false" />
+   <property name="isMemoryDevice" value="false" />
+   <property name="isNonVolatileStorage" value="false" />
+   <property name="linewrapBursts" value="false" />
+   <property name="maximumPendingReadTransactions" value="1" />
+   <property name="maximumPendingWriteTransactions" value="0" />
+   <property name="minimumUninterruptedRunLength" value="1" />
+   <property name="printableDevice" value="false" />
+   <property name="readLatency" value="0" />
+   <property name="readWaitStates" value="0" />
+   <property name="readWaitTime" value="0" />
+   <property name="registerIncomingSignals" value="false" />
+   <property name="registerOutgoingSignals" value="false" />
+   <property name="setupTime" value="0" />
+   <property name="timingUnits" value="Cycles" />
+   <property name="transparentBridge" value="false" />
+   <property name="wellBehavedWaitrequest" value="false" />
+   <property name="writeLatency" value="0" />
+   <property name="writeWaitStates" value="0" />
+   <property name="writeWaitTime" value="0" />
+   <port
+       name="avs_hello_world_cra_read"
+       direction="input"
+       role="read"
+       width="1" />
+   <port
+       name="avs_hello_world_cra_write"
+       direction="input"
+       role="write"
+       width="1" />
+   <port
+       name="avs_hello_world_cra_address"
+       direction="input"
+       role="address"
+       width="4" />
+   <port
+       name="avs_hello_world_cra_writedata"
+       direction="input"
+       role="writedata"
+       width="64" />
+   <port
+       name="avs_hello_world_cra_byteenable"
+       direction="input"
+       role="byteenable"
+       width="8" />
+   <port
+       name="avs_hello_world_cra_readdata"
+       direction="output"
+       role="readdata"
+       width="64" />
+   <port
+       name="avs_hello_world_cra_readdatavalid"
+       direction="output"
+       role="readdatavalid"
+       width="1" />
+  </interface>
+  <interface name="clock_reset" kind="clock" start="0">
+   <property name="clockRate" value="0" />
+   <property name="externallyDriven" value="false" />
+   <property name="ptfSchematicName" value="" />
+   <port name="clock" direction="input" role="clk" width="1" />
+  </interface>
+  <interface name="clock_reset2x" kind="clock" start="0">
+   <property name="clockRate" value="0" />
+   <property name="externallyDriven" value="false" />
+   <property name="ptfSchematicName" value="" />
+   <port name="clock2x" direction="input" role="clk" width="1" />
+  </interface>
+  <interface name="clock_reset_reset" kind="reset" start="0">
+   <property name="associatedClock" value="clock_reset" />
+   <property name="synchronousEdges" value="DEASSERT" />
+   <port name="resetn" direction="input" role="reset_n" width="1" />
+  </interface>
+  <interface name="kernel_irq" kind="interrupt" start="0">
+   <property name="associatedAddressablePoint" value="" />
+   <property name="associatedClock" value="clock_reset" />
+   <property name="associatedReset" value="clock_reset_reset" />
+   <property name="bridgedReceiverOffset" value="0" />
+   <property name="bridgesToReceiver" value="" />
+   <property name="irqScheme" value="NONE" />
+   <port name="kernel_irq" direction="output" role="irq" width="1" />
+  </interface>
+ </perimeter>
+ <entity
+   kind="kernel_system_hello_world_system"
+   version="1.0"
+   name="kernel_system_hello_world_system">
+  <parameter name="AUTO_CLOCK_RESET2X_CLOCK_RATE" value="-1" />
+  <parameter name="AUTO_AVM_MEMGMEM0_DDR_PORT_0_0_RW_ADDRESS_WIDTH" value="-1" />
+  <parameter name="AUTO_GENERATION_ID" value="1490620372" />
+  <parameter name="AUTO_DEVICE_FAMILY" value="Arria 10" />
+  <parameter name="AUTO_UNIQUE_ID" value="" />
+  <parameter name="AUTO_CLOCK_RESET2X_CLOCK_DOMAIN" value="-1" />
+  <parameter name="AUTO_DEVICE_SPEEDGRADE" value="1" />
+  <parameter name="AUTO_CLOCK_RESET_CLOCK_DOMAIN" value="-1" />
+  <parameter name="AUTO_CLOCK_RESET2X_RESET_DOMAIN" value="-1" />
+  <parameter name="AUTO_CLOCK_RESET_RESET_DOMAIN" value="-1" />
+  <parameter name="AUTO_DEVICE" value="10AX115S2F45I1SG" />
+  <parameter name="AUTO_CLOCK_RESET_CLOCK_RATE" value="-1" />
+  <parameter name="AUTO_AVM_MEMGMEM0_DDR_PORT_0_0_RW_ADDRESS_MAP" value="" />
+  <generatedFiles>
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/synth/kernel_system_hello_world_system.v"
+       attributes="CONTAINS_INLINE_CONFIGURATION" />
+  </generatedFiles>
+  <childGeneratedFiles>
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/synth/kernel_system_hello_world_system.v"
+       attributes="CONTAINS_INLINE_CONFIGURATION" />
+  </childGeneratedFiles>
+  <sourceFiles>
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system.ip" />
+  </sourceFiles>
+  <childSourceFiles>
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/hello_world_system_hw.tcl" />
+  </childSourceFiles>
+  <messages>
+   <message level="Info" culprit="kernel_system_hello_world_system">"Generating: kernel_system_hello_world_system"</message>
+   <message level="Info" culprit="kernel_system_hello_world_system">"Generating: hello_world_system"</message>
+  </messages>
+ </entity>
+ <entity kind="hello_world_system" version="14.0" name="hello_world_system">
+  <generatedFiles>
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_work_group_dispatcher.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_id_iterator.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_work_item_iterator.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_multistage_adder.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_start_signal_chain_element.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_finish_signal_chain_element.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_task_copy_finish_detector.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_kernel_finish_detector.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_multistage_accumulator.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_fifo.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_shift_register.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_data_fifo.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_ll_fifo.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_ll_ram_fifo.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_valid_fifo_counter.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_staging_reg.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_printf_buffer_address_generator.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/lsu_top.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/lsu_pipelined.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/lsu_enabled.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/lsu_basic_coalescer.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/lsu_simple.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/lsu_streaming.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/lsu_burst_master.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/lsu_bursting_load_stores.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/lsu_non_aligned_write.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/lsu_read_cache.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/lsu_atomic.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/lsu_prefetch_block.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/lsu_wide_wrapper.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/lsu_streaming_prefetch.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/lsu_permute_address.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_aligned_burst_coalesced_lsu.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_loop_limiter.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_work_group_limiter.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_toggle_detect.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_debug_mem.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_printf_counter.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/hello_world.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/hello_world_system.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_arb2.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_arb_intf.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_avm_to_ic.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_ic_intf.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_ic_master_endpoint.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_ic_slave_endpoint.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_ic_slave_rrp.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_ic_slave_wrp.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_ic_rrp_reg.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_ic_wrp_reg.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_ic_to_avm.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_atomics_nostall.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_atomics_arb_stall.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_address_to_bankaddress.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_ic_mem_router.v"
+       attributes="TOP_LEVEL_FILE" />
+  </generatedFiles>
+  <childGeneratedFiles>
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_work_group_dispatcher.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_id_iterator.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_work_item_iterator.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_multistage_adder.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_start_signal_chain_element.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_finish_signal_chain_element.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_task_copy_finish_detector.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_kernel_finish_detector.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_multistage_accumulator.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_fifo.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_shift_register.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_data_fifo.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_ll_fifo.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_ll_ram_fifo.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_valid_fifo_counter.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_staging_reg.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_printf_buffer_address_generator.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/lsu_top.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/lsu_pipelined.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/lsu_enabled.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/lsu_basic_coalescer.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/lsu_simple.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/lsu_streaming.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/lsu_burst_master.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/lsu_bursting_load_stores.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/lsu_non_aligned_write.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/lsu_read_cache.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/lsu_atomic.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/lsu_prefetch_block.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/lsu_wide_wrapper.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/lsu_streaming_prefetch.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/lsu_permute_address.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_aligned_burst_coalesced_lsu.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_loop_limiter.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_work_group_limiter.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_toggle_detect.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_debug_mem.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_printf_counter.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/hello_world.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/hello_world_system.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_arb2.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_arb_intf.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_avm_to_ic.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_ic_intf.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_ic_master_endpoint.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_ic_slave_endpoint.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_ic_slave_rrp.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_ic_slave_wrp.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_ic_rrp_reg.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_ic_wrp_reg.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_ic_to_avm.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_atomics_nostall.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_atomics_arb_stall.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_address_to_bankaddress.v"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/ip/kernel_system/kernel_system_hello_world_system/hello_world_system_140/synth/acl_ic_mem_router.v"
+       attributes="TOP_LEVEL_FILE" />
+  </childGeneratedFiles>
+  <sourceFiles>
+   <file
+       path="/home/wimi/lvs/ofdock_altera/examples_altera_com/hello_world/bin/hello_world/hello_world_system_hw.tcl" />
+  </sourceFiles>
+  <childSourceFiles/>
+  <instantiator
+     instantiator="kernel_system_hello_world_system"
+     as="hello_world_system" />
+  <messages>
+   <message level="Info" culprit="kernel_system_hello_world_system">"Generating: hello_world_system"</message>
+  </messages>
+ </entity>
+</deploy>
