@@ -29,7 +29,9 @@ void Krnl_InterE(
 */
 
 	char active = 1;
+/*
 	char mode   = 0;
+*/
 	uint cnt    = 0;   
 
 	float interE;
@@ -68,8 +70,10 @@ while(active) {
 	// --------------------------------------------------------------
 	active = read_channel_altera(chan_Conf2Intere_active);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
+/*
 	mode   = read_channel_altera(chan_Conf2Intere_mode);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
+*/
 	cnt    = read_channel_altera(chan_Conf2Intere_cnt);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 

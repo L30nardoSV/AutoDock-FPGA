@@ -45,22 +45,21 @@ channel float  	chan_LS2Conf_genotype __attribute__((depth(38)));
 //channel float 	chan_Conf2Intere_y __attribute__((depth(90)));
 //channel float 	chan_Conf2Intere_z __attribute__((depth(90)));
 channel float3  chan_Conf2Intere_xyz __attribute__((depth(90)));
-
-channel char  	chan_Conf2Intere_active;	
-channel char  	chan_Conf2Intere_mode;	
+channel char  	chan_Conf2Intere_active;
+/*	
+channel char  	chan_Conf2Intere_mode;
+*/
 channel ushort  chan_Conf2Intere_cnt;	
 
 //channel float 	chan_Conf2Intrae_x __attribute__((depth(90)));
 //channel float 	chan_Conf2Intrae_y __attribute__((depth(90)));
 //channel float 	chan_Conf2Intrae_z __attribute__((depth(90)));
 channel float3 	chan_Conf2Intrae_xyz __attribute__((depth(90)));
-
 channel char  	chan_Conf2Intrae_active;	
 channel char  	chan_Conf2Intrae_mode;	
 channel ushort  chan_Conf2Intrae_cnt;
 
 channel float 	chan_Intere2Store_intere;
-
 /*
 channel char 	chan_Intere2Store_active;	
 channel char  	chan_Intere2Store_mode;	

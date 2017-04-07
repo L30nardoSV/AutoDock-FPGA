@@ -277,10 +277,14 @@ while(active) {
 	write_channel_altera(chan_Conf2Intere_active, active);
 	write_channel_altera(chan_Conf2Intrae_active, active);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
+/*
 	write_channel_altera(chan_Conf2Intere_mode,   mode);
+*/
 	write_channel_altera(chan_Conf2Intrae_mode,   mode);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
+/*
 	write_channel_altera(chan_Conf2Intere_cnt,    cnt);
+*/
 	write_channel_altera(chan_Conf2Intrae_cnt,    cnt);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 
