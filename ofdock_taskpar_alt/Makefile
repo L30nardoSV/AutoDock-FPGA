@@ -25,6 +25,8 @@
 # See http://www.altera.com/literature/hb/opencl-sdk/aocl_getting_started.pdf 
 # for more information on installing and configuring the Intel(R) FPGA SDK for OpenCL(TM).
 
+VERBOSE = 1
+
 ifeq ($(VERBOSE),1)
 ECHO := 
 else
@@ -42,8 +44,6 @@ endif
 # OpenCL compile and link flags.
 AOCL_COMPILE_CONFIG := $(shell aocl compile-config )
 AOCL_LINK_CONFIG := $(shell aocl link-config )
-
-
 
 #= defines a recursively-expanded variable
 #:= defines a simply-expanded variable
@@ -208,11 +208,34 @@ $(TARGET_DIR)/$(TARGET) : Makefile $(SRCS) $(INCS) $(TARGET_DIR)
 
 
 
+
+
+emu: $(TARGET_DIR)/$(TARGET) keremu runemu
+
+DEV_DIRS := device
+DEV_SRC  := $(DEV_DIRS)/Krnl_GA.cl
+
+keremu: $(DEV_SRC)
+	aoc -march=emulator -v --board a10gx $(DEV_SRC) -o $(TARGET_DIR)/docking.aocx
+
+runemu:	$(TARGET)
+	cd $(TARGET_DIR) && \
+	CL_CONTEXT_EMULATOR_DEVICE_ALTERA=1 ./$(TARGET) -ffile ../input_data/3ptb/derived/3ptb_protein.maps.fld -lfile ../input_data/3ptb/derived/3ptb_ligand.pdbqt -nev 250000 -nrun 10
+
+
+
+
+
+
+
+
+
 $(TARGET_DIR) :
 	$(ECHO)mkdir $(TARGET_DIR)
 	
 # Standard make targets
 clean :
 	$(ECHO)rm -f $(TARGET_DIR)/$(TARGET)
+	$(ECHO)rm -f $(TARGET_DIR)/initpop.txt
 
 .PHONY : all clean
