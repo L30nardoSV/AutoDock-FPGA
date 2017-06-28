@@ -223,7 +223,7 @@ keremu: $(DEV_SRC)
 
 runemu:	$(TARGET)
 	cd $(TARGET_DIR) && \
-	CL_CONTEXT_EMULATOR_DEVICE_ALTERA=1 ./$(TARGET) -ffile ../input_data/3ptb/derived/3ptb_protein.maps.fld -lfile ../input_data/3ptb/derived/3ptb_ligand.pdbqt -nev 250000 -nrun 4
+	CL_CONTEXT_EMULATOR_DEVICE_ALTERA=1 ./$(TARGET) -ffile ../input/3ptb/derived/3ptb_protein.maps.fld -lfile ../input/3ptb/derived/3ptb_ligand.pdbqt -nev 250000 -nrun 4
 
 
 
