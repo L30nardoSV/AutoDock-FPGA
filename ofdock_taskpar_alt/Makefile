@@ -186,6 +186,8 @@ else
 	K8 =
 endif
 
+ENABLE_KERNELS = $(K1) $(K2) $(K3) $(K4) $(K5) $(K6) $(K7) $(K8)
+
 
 # Make it all!
 all : $(TARGET_DIR)/$(TARGET)
@@ -203,12 +205,13 @@ $(TARGET_DIR)/$(TARGET) : Makefile $(SRCS) $(INCS) $(TARGET_DIR)
 			$(AOCL_COMPILE_CONFIG) $(SRCS) $(AOCL_LINK_CONFIG) \
 			$(foreach D,$(LIB_DIRS),-L$D) \
 			$(foreach L,$(LIBS),-l$L) \
-			-o $(TARGET_DIR)/$(TARGET) $(DOCK_DEBUG_FLAG) $(DEV) $(DOCK_PROG) $(K1) $(K2) $(K3) $(K4) $(K5) $(K6) $(K7) $(K8)
+			-o $(TARGET_DIR)/$(TARGET) $(DOCK_DEBUG_FLAG) $(DEV) $(DOCK_PROG) $(ENABLE_KERNELS)
 
 
 
 
-
+# Make it all: compilation (host & device) + run
+# Notice, it switches automatically to /bin folder
 
 emu: $(TARGET_DIR)/$(TARGET) keremu runemu
 
@@ -220,7 +223,7 @@ keremu: $(DEV_SRC)
 
 runemu:	$(TARGET)
 	cd $(TARGET_DIR) && \
-	CL_CONTEXT_EMULATOR_DEVICE_ALTERA=1 ./$(TARGET) -ffile ../input_data/3ptb/derived/3ptb_protein.maps.fld -lfile ../input_data/3ptb/derived/3ptb_ligand.pdbqt -nev 250000 -nrun 10
+	CL_CONTEXT_EMULATOR_DEVICE_ALTERA=1 ./$(TARGET) -ffile ../input_data/3ptb/derived/3ptb_protein.maps.fld -lfile ../input_data/3ptb/derived/3ptb_ligand.pdbqt -nev 250000 -nrun 4
 
 
 
