@@ -65,7 +65,7 @@ TARGET_DIR := bin
 
 # Directories
 #INC_DIRS := ../common/inc
-INC_DIRS := ../common/inc opencl_lvs/inc host/inc ./
+INC_DIRS := ../common/inc wrapcl/inc host/inc ./
 LIB_DIRS := 
 
 # Files
@@ -74,14 +74,14 @@ INCS := $(wildcard )
 #SRCS := $(wildcard host/src/*.cpp ../common/src/AOCLUtils/*.cpp)
 
 #AOCL_SRCS:=$(../common/src/AOCLUtils/*.cpp)
-#OCL_SRCS:=$(wildcard opencl_lvs/src/*.cpp)
+#OCL_SRCS:=$(wildcard wrapcl/src/*.cpp)
 #DOCK_SRCS:=$(wildcard host/src/*.cpp)
 #SRCS := $(AOCL_SRCS) $(OCL_SRCS) $(DOCK_SRCS) 
 # Do not separate them
 # Compilation and linking are done in a single step
 # Otherwise, undefined functions when make
 # http://stackoverflow.com/questions/5559250/c-error-undefined-reference-to-function-but-it-is-defined
-SRCS := $(wildcard ../common/src/AOCLUtils/*.cpp opencl_lvs/src/*.cpp host/src/*.cpp)
+SRCS := $(wildcard ../common/src/AOCLUtils/*.cpp wrapcl/src/*.cpp host/src/*.cpp)
 
 LIBS := rt pthread
 
