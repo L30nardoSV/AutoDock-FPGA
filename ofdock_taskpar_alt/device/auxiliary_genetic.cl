@@ -249,7 +249,11 @@ uint find_best(__local        float* restrict loc_energies,
 // --------------------------------------------------------------------------
 float myrand(uint* prng)
 {
+#if defined (REPRO)
+	*prng = 1;
+#else
 	*prng = RAND_A*(*prng) + RAND_C;
+#endif
 	return convert_float(*prng/MAX_UINT)*0.999999f;	
 }
 
@@ -257,7 +261,11 @@ float myrand(uint* prng)
 // --------------------------------------------------------------------------
 uint myrand_uint(uint* prng, const uint limit)
 {
+#if defined (REPRO)
+	*prng = 1;
+#else
 	*prng = RAND_A*(*prng) + RAND_C;
+#endif
 	return  (*prng/MAX_UINT)*limit;	
 }
 

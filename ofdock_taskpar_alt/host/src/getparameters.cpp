@@ -548,7 +548,7 @@ void gen_initpop_and_reflig(Dockpars*       mypars,
 	//Reading initial population from file if only 1 run was requested
 	if (mypars->initpop_gen_or_loadfile == 1)
 	{
-/*
+///*
 		if (mypars->num_of_runs != 1)
 		{
 			printf("Warning: more than 1 run was requested. New populations will be generated \ninstead of being loaded from initpop.txt\n");
@@ -556,7 +556,7 @@ void gen_initpop_and_reflig(Dockpars*       mypars,
 		}
 		else
 		{
-*/
+//*/
 			fp = fopen("initpop.txt","r");
 			if (fp == NULL)
 			{
@@ -577,9 +577,9 @@ void gen_initpop_and_reflig(Dockpars*       mypars,
 
 				fclose(fp);
 			}
-/*
+///*
 		}
-*/
+//*/
 	}
 	else
 		gen_pop = 1;
@@ -665,6 +665,7 @@ void gen_initpop_and_reflig(Dockpars*       mypars,
 			//init_populations [entity_id*GENOTYPE_LENGTH_IN_GLOBMEM+gene_id] = init_populations [entity_id*GENOTYPE_LENGTH_IN_GLOBMEM+gene_id]/mygrid->spacing;
 			init_populations [entity_id*ACTUAL_GENOTYPE_LENGTH+gene_id] = init_populations [entity_id*ACTUAL_GENOTYPE_LENGTH+gene_id]/mygrid->spacing;
 
+/*
 	//changing initial orientation of reference ligand
 	for (uint i=0; i<38; i++)
 		switch (i)
@@ -680,6 +681,7 @@ void gen_initpop_and_reflig(Dockpars*       mypars,
 	
 	//change_conform_f(myligand, init_orientation, 0);
 	change_conform_f(myligand, init_orientation, ref_ori_angles, 0);
+*/
 
 	//initial orientation will be calculated during docking,
 	//only the required angles are generated here,

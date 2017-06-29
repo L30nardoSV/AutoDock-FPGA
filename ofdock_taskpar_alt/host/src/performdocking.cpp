@@ -286,7 +286,7 @@ filled with clock() */
 	size_prng_seeds = sizeof(unsigned int);
 	cpu_prng_seeds = (unsigned int*) alignedMalloc(size_prng_seeds);
 
-	//genseed(time(NULL));	//initializing seed generator
+	genseed(time(NULL));	//initializing seed generator
 
 /*
 #if defined (REPRO)
@@ -295,7 +295,7 @@ filled with clock() */
 	cpu_prng_seeds[0] = genseed(0u);	
 #endif
 */
-	srand(time(NULL));
+	//srand(time(NULL));
 
 	//preparing the constant data fields for the GPU
 	// ----------------------------------------------------------------------
@@ -444,7 +444,8 @@ filled with clock() */
 		#if defined (REPRO)
 			cpu_prng_seeds[0] = 1u;
 		#else
-			cpu_prng_seeds[0] = rand();
+			//cpu_prng_seeds[0] = rand();
+			cpu_prng_seeds[0] = genseed(0u);
 		#endif
 
 		memcopyBufferObjectToDevice(command_queue1,mem_KerConstDynamic, 		&KerConstDynamic,         sizeof(KerConstDynamic));
