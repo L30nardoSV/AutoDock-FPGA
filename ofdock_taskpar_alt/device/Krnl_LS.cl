@@ -145,6 +145,8 @@ while(active) {
 			candidate_energy = read_channel_altera(chan_Store2LS_LSenergy);
 		
 
+			LS_eval++;
+
 			} // End of if (active != 0)
 
 
@@ -157,7 +159,7 @@ while(active) {
 
 
 	
-			//if the new entity is better better
+			//if the new entity is better
 			if (candidate_energy < offspring_energy)
 			{
 				// updating offspring_genotype
@@ -184,9 +186,9 @@ while(active) {
 				if (positive_direction == true) {
 					positive_direction = false;
 					ls_pass_complete   = false;
-					LS_eval++;
+					//LS_eval++;
 				}
-				else {
+				else {	// failure in both directions
 					positive_direction = true;
 					ls_pass_complete   = true;
 
@@ -204,9 +206,9 @@ while(active) {
 				//Changing deviation (rho), if needed
 				if (cons_succ >= DockConst->cons_limit) {
 					//this limitation is necessary in the FPGA due to the number representation
-					if ((rho*DockConst->base_dang_mul_sqrt3 < 90) && (rho*DockConst->base_dmov_mul_sqrt3 < 64)) {
+					//if ((rho*DockConst->base_dang_mul_sqrt3 < 90) && (rho*DockConst->base_dmov_mul_sqrt3 < 64)) {
 						rho = LS_EXP_FACTOR*rho;
-					}
+					//}
 					cons_fail = 0;
 					cons_succ = 0;
 				}

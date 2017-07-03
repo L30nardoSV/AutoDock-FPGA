@@ -191,7 +191,7 @@ ENABLE_KERNELS = $(K1) $(K2) $(K3) $(K4) $(K5) $(K6) $(K7) $(K8)
 # =============================
 # Reproduce result (remove randomness)
 # =============================
-REPRO=YES
+REPRO=NO
 
 ifeq ($(REPRO), YES)
 	REP=-DREPRO
@@ -224,6 +224,13 @@ $(TARGET_DIR)/$(TARGET) : Makefile $(SRCS) $(INCS) $(TARGET_DIR)
 
 
 
+
+
+PDB  := 1stp
+NRUN := 10
+NEV  := 100000
+
+
 # Make it all: compilation (host & device) + run
 # Notice, it switches automatically to /bin folder
 
@@ -237,12 +244,12 @@ keremu: $(DEV_SRC)
 
 runemu:	$(TARGET)
 	cd $(TARGET_DIR) && \
-	CL_CONTEXT_EMULATOR_DEVICE_ALTERA=1 ./$(TARGET) -ffile ../input/3ptb/derived/3ptb_protein.maps.fld -lfile ../input/3ptb/derived/3ptb_ligand.pdbqt -nev 250000 -nrun 40
+	CL_CONTEXT_EMULATOR_DEVICE_ALTERA=1 ./$(TARGET) -ffile ../input/$(PDB)/derived/$(PDB)_protein.maps.fld -lfile ../input/$(PDB)/derived/$(PDB)_ligand.pdbqt -nev $(NEV) -nrun $(NRUN) -gfpop 1
 
 
 
 
-
+#	CL_CONTEXT_EMULATOR_DEVICE_ALTERA=1 ./$(TARGET) -ffile ../input/3ptb/derived/3ptb_protein.maps.fld -lfile ../input/3ptb/derived/3ptb_ligand.pdbqt -nev 250000 -nrun 40
 
 
 

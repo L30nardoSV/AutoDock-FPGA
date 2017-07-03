@@ -225,7 +225,7 @@ uint find_best(__local        float* restrict loc_energies,
 			i, loc_energies[i], best_entity, loc_energies[best_entity]);
 		#endif
 				
-		if (loc_energies[best_entity] > loc_energies[i])
+		if (loc_energies[i] < loc_energies[best_entity])
 		{
 			best_entity = i;
 			
@@ -286,7 +286,15 @@ void binary_tournament_selection(               uint*           prng,
 	uint parent_candidates [2];
 
 	parent_candidates [0] = myrand_uint(prng, pop_size);
+//do {
+#if defined (REPRO)
+	parent_candidates [1] = myrand_uint(prng, pop_size) + 1;
+#else
 	parent_candidates [1] = myrand_uint(prng, pop_size);
+#endif
+//}
+//while (parent_candidates [0] == parent_candidates [1]);
+
 
 	if (loc_energies[parent_candidates[0]] < loc_energies[parent_candidates[1]])
 	{
@@ -310,8 +318,25 @@ void binary_tournament_selection(               uint*           prng,
 	#endif
 
 	//generating two different parent candidates (which differ from parent1 as well)
+//do {
+#if defined (REPRO)
+	parent_candidates [0] = myrand_uint(prng, pop_size) + 2;
+#else
 	parent_candidates [0] = myrand_uint(prng, pop_size);
+#endif
+//}
+//while (parent_candidates [0] == *parent1);
+
+
+//do {
+#if defined (REPRO)
+	parent_candidates [1] = myrand_uint(prng, pop_size) + 3;
+#else
 	parent_candidates [1] = myrand_uint(prng, pop_size);
+#endif
+//}
+//while ((parent_candidates [1] == parent_candidates [0]) || (parent_candidates [1] == *parent1));
+
 
 	//the better will be the second parent
 	if (loc_energies[parent_candidates[0]] < loc_energies[parent_candidates[1]])
@@ -338,7 +363,7 @@ void binary_tournament_selection(               uint*           prng,
 
 // --------------------------------------------------------------------------
 // The function performs crossover and mutation and 
-// generates two offsprings from two parents whose genotypes are the functions parameters. 
+// generates an offspring from two parents whose genotypes are the functions parameters. 
 // Mutation rate is the probability of mutating a gene in %, 
 // abs_max_dmov and abs_max_dang are the maximal delta values of a translation 
 // or an orientation/rotatable bond gene during mutation.
