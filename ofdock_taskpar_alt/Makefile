@@ -230,7 +230,6 @@ PDB  := 3ptb
 NRUN := 20
 NEV  := 300000
 
-
 # Make it all: compilation (host & device) + run
 # Notice, it switches automatically to /bin folder
 
