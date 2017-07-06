@@ -225,6 +225,9 @@ while(active) {
 		} // end of while (iteration_cnt)
 		// ------------------------------------------------------------------------------------------------------------
 
+		rho = 1.0f;
+		iteration_cnt = 0;
+
 		for (uchar i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {
 			////GlobPopulationCurrent[entity_for_ls*ACTUAL_GENOTYPE_LENGTH + i] = offspring_genotype [i];
 			GlobPopulationNext[entity_for_ls*ACTUAL_GENOTYPE_LENGTH + i] = offspring_genotype [i];

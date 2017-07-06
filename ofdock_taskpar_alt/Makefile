@@ -226,9 +226,9 @@ $(TARGET_DIR)/$(TARGET) : Makefile $(SRCS) $(INCS) $(TARGET_DIR)
 
 
 
-PDB  := 1stp
-NRUN := 10
-NEV  := 100000
+PDB  := 3ptb
+NRUN := 20
+NEV  := 300000
 
 
 # Make it all: compilation (host & device) + run

@@ -328,9 +328,9 @@ filled with clock() */
 
 	dockpars.pop_size      = (unsigned int) mypars->pop_size;
 	dockpars.num_of_genes  = (unsigned int)(myligand_reference.num_of_rotbonds + 6);
-	dockpars.tournament_rate = 100*mypars->tournament_rate;	//dockpars.tournament_rate = mypars->tournament_rate;
-	dockpars.crossover_rate  = (mypars->crossover_rate)/100;//dockpars.crossover_rate  = mypars->crossover_rate;
-	dockpars.mutation_rate   = (mypars->mutation_rate)/100;	//dockpars.mutation_rate   = mypars->mutation_rate;
+	dockpars.tournament_rate = (mypars->tournament_rate)/100;//dockpars.tournament_rate = mypars->tournament_rate;
+	dockpars.crossover_rate  = (mypars->crossover_rate)/100; //dockpars.crossover_rate  = mypars->crossover_rate;
+	dockpars.mutation_rate   = (mypars->mutation_rate)/100;	 //dockpars.mutation_rate   = mypars->mutation_rate;
 	dockpars.abs_max_dang    = mypars->abs_max_dang;
 	dockpars.abs_max_dmov    = mypars->abs_max_dmov;
 	dockpars.lsearch_rate    = mypars->lsearch_rate;
