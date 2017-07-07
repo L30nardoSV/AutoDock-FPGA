@@ -2,7 +2,15 @@
 PDBs/*
 ofdock_taskpar_alt/Krnl_GA/*
 ofdock_taskpar_alt/device/docking_fpga_leo/*
+
+# Ignore FPGA binaries
+ofdock_taskpar_alt/docking/*
+ofdock_taskpar_alt/docking.aoco
+ofdock_taskpar_alt/docking.aocx
+
+# Ignore docking debug/tmp output
 *~
+final_population_run*
 
 # ===================
 # C gitignore

@@ -199,7 +199,6 @@ else
 	REP=
 endif
 
-
 # =============================
 
 
@@ -220,35 +219,86 @@ $(TARGET_DIR)/$(TARGET) : Makefile $(SRCS) $(INCS) $(TARGET_DIR)
 			$(foreach D,$(LIB_DIRS),-L$D) \
 			$(foreach L,$(LIBS),-l$L) \
 			-o $(TARGET_DIR)/$(TARGET) $(DOCK_DEBUG_FLAG) $(DEV) $(DOCK_PROG) $(ENABLE_KERNELS) $(REP)
+	@echo " "
+	@echo "================================"
+	@echo "INFO: host binary is under: bin/"
+	@echo "================================"
+	@echo " "
 
 
 
 
 
+# Docking parameters
+PDB  := 1stp
+NRUN := 10
+NEV  := 200000
 
-PDB  := 3ptb
-NRUN := 20
-NEV  := 300000
-
-# Make it all: compilation (host & device) + run
-# Notice, it switches automatically to /bin folder
-
-emu: $(TARGET_DIR)/$(TARGET) keremu runemu
-
+# Device folder
+# Device main kernel name
+# Device main kernel source
 DEV_DIRS := device
 DEV_SRC  := $(DEV_DIRS)/Krnl_GA.cl
 
+## Make it all: compilation (host & device) + run emulation
+## Notice, it switches automatically to /bin folder
+#emu: $(TARGET_DIR)/$(TARGET) keremu runemu
+
+# Build kernel binary only for emulation
+# Creates under bin: 
+	# "docking" folder
+	# docking.aoco
+	# docking.aocx
 keremu: $(DEV_SRC)
 	aoc -march=emulator -v --board a10gx $(DEV_SRC) -o $(TARGET_DIR)/docking.aocx $(REP)
+	@echo " "
+	@echo "=========================================================="
+	@echo "INFO: emulation files are under: bin/docking(.aoco)(.aocx)"
+	@echo "=========================================================="
+	@echo " "
 
-runemu:	$(TARGET)
+# Run emulation
+# Compilation (host & device) if not done previously
+# The working directory is changed
+# So .dlg file is written there
+emu: $(TARGET_DIR)/$(TARGET) keremu
 	cd $(TARGET_DIR) && \
 	CL_CONTEXT_EMULATOR_DEVICE_ALTERA=1 ./$(TARGET) -ffile ../input/$(PDB)/derived/$(PDB)_protein.maps.fld -lfile ../input/$(PDB)/derived/$(PDB)_ligand.pdbqt -nev $(NEV) -nrun $(NRUN) -gfpop 1
+	@echo " "
+	@echo "========================================"
+	@echo "INFO: log file is under: bin/docking.dlg"
+	@echo "========================================"
+	@echo " "
 
 
+# Reports are generated
+# Could be used in multistep compilation
+# Creates under bin:
+	# "docking" folder -> /reports/report.html, to see details
+	# docking.aoco
+	# No actual hardware is built (NO .aocx)
+kerrpt: $(DEV_SRC)
+	aoc --board a10gx $(DEV_SRC) -o $(TARGET_DIR)/docking.aoco $(REP) -c --report
+	@echo " "
+	@echo "============================================================="
+	@echo "INFO: report files are under: bin/docking/reports/report.html"
+	@echo "============================================================="
+	@echo " "
 
+# Build hw (FPGA bitstream)
+# NOT integrated yet in a multistep compilation
+# Creates under root folder:
+	# "docking" folder
+	# docking.aoco
+	# docking.aocx
+hw: 	
+	aoc --board a10gx $(DEV_SRC) -o docking.aocx
+	@echo " "
+	@echo "================================="
+	@echo "INFO: FPGA bitstream is under: ./"
+	@echo "================================="
+	@echo " "
 
-#	CL_CONTEXT_EMULATOR_DEVICE_ALTERA=1 ./$(TARGET) -ffile ../input/3ptb/derived/3ptb_protein.maps.fld -lfile ../input/3ptb/derived/3ptb_ligand.pdbqt -nev 250000 -nrun 40
 
 
 
