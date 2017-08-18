@@ -59,9 +59,17 @@ endif
 # Compiler
 CXX := g++
 
-# Target
+# Target name
 TARGET := host
+
+# Target folder for host & emulation binaries
 TARGET_DIR := bin
+
+# Target folder for FPGA binary
+TARGET_DIR_HW := bin_hw
+
+# Target folder for FPGA binary instrumented with performance counters
+TARGET_DIR_HW_PROF := bin_hw_profile
 
 # Directories
 #INC_DIRS := ../common/inc
@@ -293,11 +301,24 @@ kerrpt: $(DEV_SRC)
 	# docking.aoco
 	# docking.aocx
 hw: 	
-	aoc --board $(BOARD_HARP2) $(DEV_SRC) -o docking.aocx
+	aoc --board $(BOARD_HARP2) $(DEV_SRC) -o $(TARGET_DIR_HW)/docking.aocx
 	@echo " "
 	@echo "================================="
 	@echo "INFO: FPGA bitstream is under: ./"
 	@echo "================================="
+	@echo " "
+
+# Build hw (FPGA bitstream) instrumented with performance counters
+# NOT integrated yet in a multistep compilation
+# Creates under bin_hw_profile
+	# docking.aoco
+	# docking.aocx
+hw_profile:
+	aoc --profile --board $(BOARD_HARP2) $(DEV_SRC) -o $(TARGET_DIR_HW_PROF)/docking.aocx
+	@echo " "
+	@echo "================================================================================"
+	@echo "INFO: instrumented FPGA bitstream is under: bin_hw_profile/docking(.aoco)(.aocx)"
+	@echo "================================================================================"
 	@echo " "
 
 
