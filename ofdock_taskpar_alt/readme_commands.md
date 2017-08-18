@@ -1,3 +1,4 @@
+
 # Compile host
 # Executable "host" in put under ./bin
 make clean
@@ -19,7 +20,7 @@ aoc -march=emulator --fp-relaxed --fpc -v --board a10gx device/Krnl_GA.cl -o bin
 # Run ofdock (under ./bin)
 # Emulation: this will execute 1 run
 env CL_CONTEXT_EMULATOR_DEVICE_ALTERA=1 ./host -ffile ../input_data/1hvr_vegl.maps.fld -lfile ../input_data/1hvrl.pdbqt
-env CL_CONTEXT_EMULATOR_DEVICE_ALTERA=1 ./host -ffile ../input_data/3ptb/derived/3ptb_protein.maps.fld -lfile ../input_data/3ptb/derived/3ptb_ligand.pdbqt
+env CL_CONTEXT_EMULATOR_DEVICE_ALTERA=1 ./host -ffile ../input_data/3ptb/derived/3ptb_protein.maps.fld -lfile ../input_data/3ptb/deri$
 
 
 
