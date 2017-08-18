@@ -239,6 +239,7 @@ NEV  := 200000
 # Device main kernel source
 DEV_DIRS := device
 DEV_SRC  := $(DEV_DIRS)/Krnl_GA.cl
+BOARD_HARP2 := bdw_fpga_v1.0
 
 ## Make it all: compilation (host & device) + run emulation
 ## Notice, it switches automatically to /bin folder
@@ -250,7 +251,7 @@ DEV_SRC  := $(DEV_DIRS)/Krnl_GA.cl
 	# docking.aoco
 	# docking.aocx
 keremu: $(DEV_SRC)
-	aoc -march=emulator -v --board a10gx $(DEV_SRC) -o $(TARGET_DIR)/docking.aocx $(REP)
+	aoc -march=emulator -v --board $(BOARD_HARP2) $(DEV_SRC) -o $(TARGET_DIR)/docking.aocx $(REP)
 	@echo " "
 	@echo "=========================================================="
 	@echo "INFO: emulation files are under: bin/docking(.aoco)(.aocx)"
@@ -278,7 +279,7 @@ emu: $(TARGET_DIR)/$(TARGET) keremu
 	# docking.aoco
 	# No actual hardware is built (NO .aocx)
 kerrpt: $(DEV_SRC)
-	aoc --board a10gx $(DEV_SRC) -o $(TARGET_DIR)/docking.aoco $(REP) -c --report
+	aoc --board $(BOARD_HARP2) $(DEV_SRC) -o $(TARGET_DIR)/docking.aoco $(REP) -c --report
 	@echo " "
 	@echo "============================================================="
 	@echo "INFO: report files are under: bin/docking/reports/report.html"
@@ -292,7 +293,7 @@ kerrpt: $(DEV_SRC)
 	# docking.aoco
 	# docking.aocx
 hw: 	
-	aoc --board a10gx $(DEV_SRC) -o docking.aocx
+	aoc --board $(BOARD_HARP2) $(DEV_SRC) -o docking.aocx
 	@echo " "
 	@echo "================================="
 	@echo "INFO: FPGA bitstream is under: ./"
