@@ -323,7 +323,38 @@ hw_profile:
 	@echo " "
 
 
+HARP2_DIR := copyharp2
+HARP2_DIR_DOCK := ofdock_taskpar_alt
 
+# Delete an existing folder if previously created
+# Create a folder $(HARP2_DIR) in the parent directory
+# Copy binaries into $(HARP2_DIR) folder, avoiding the (innecesary) compilation intermediate files
+# Copy source files into $(HARP2_DIR) as host is built in the HARP2 front-end
+# Create a zip file out of the $(HARP2_DIR) folder
+copyharp2: clean_copyharp2
+	mkdir ../$(HARP2_DIR)
+	mkdir ../$(HARP2_DIR)/$(HARP2_DIR_DOCK)
+	mkdir ../$(HARP2_DIR)/$(HARP2_DIR_DOCK)/$(TARGET_DIR_HW)
+	mkdir ../$(HARP2_DIR)/$(HARP2_DIR_DOCK)/$(TARGET_DIR_HW_PROF)
+	cp $(TARGET_DIR_HW)/docking.* ../$(HARP2_DIR)/$(HARP2_DIR_DOCK)/$(TARGET_DIR_HW)/
+	cp $(TARGET_DIR_HW_PROF)/docking.* ../$(HARP2_DIR)/$(HARP2_DIR_DOCK)/$(TARGET_DIR_HW_PROF)/
+	cp Makefile ../$(HARP2_DIR)/$(HARP2_DIR_DOCK)/
+	cp defines.h ../$(HARP2_DIR)/$(HARP2_DIR_DOCK)/
+	cp -r device/ ../$(HARP2_DIR)/$(HARP2_DIR_DOCK)/
+	cp -r host/ ../$(HARP2_DIR)/$(HARP2_DIR_DOCK)/
+	cp -r input/ ../$(HARP2_DIR)/$(HARP2_DIR_DOCK)/
+	cp -r wrapcl/ ../$(HARP2_DIR)/$(HARP2_DIR_DOCK)/
+	cp -r ../common ../$(HARP2_DIR)/
+	cd ../;	zip -r $(HARP2_DIR).zip $(HARP2_DIR)
+	@echo "================================================================================"
+	@echo "The next step is to transfer the .zip file to the HARP2 fron-end: "
+	@echo "> cd .."
+	@echo "> scp copyharp2.zip h2solis@fe-1.harp.pc2.uni-paderborn.de:~/ocladock/"
+	@echo "================================================================================"
+	@echo " "
+
+clean_copyharp2:
+	rm -r ../$(HARP2_DIR)
 
 
 $(TARGET_DIR) :
