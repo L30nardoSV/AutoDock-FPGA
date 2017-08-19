@@ -296,21 +296,22 @@ kerrpt: $(DEV_SRC)
 
 # Build hw (FPGA bitstream)
 # NOT integrated yet in a multistep compilation
-# Creates under root folder:
+# Creates under bin_hw:
 	# "docking" folder
 	# docking.aoco
 	# docking.aocx
 hw: 	
 	aoc --board $(BOARD_HARP2) $(DEV_SRC) -o $(TARGET_DIR_HW)/docking.aocx
 	@echo " "
-	@echo "================================="
-	@echo "INFO: FPGA bitstream is under: ./"
-	@echo "================================="
+	@echo "==========================================================="
+	@echo "INFO: FPGA bitstream is under: bin_hw/docking(.aoco)(.aocx)"
+	@echo "==========================================================="
 	@echo " "
 
 # Build hw (FPGA bitstream) instrumented with performance counters
 # NOT integrated yet in a multistep compilation
 # Creates under bin_hw_profile
+	# "docking" folder
 	# docking.aoco
 	# docking.aocx
 hw_profile:

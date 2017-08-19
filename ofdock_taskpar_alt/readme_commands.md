@@ -1,3 +1,9 @@
+# Important
+Before building, Altera tools must be initialized.
+
+```zsh
+source init_aoc_esa.sh
+```
 
 # Compile host
 
