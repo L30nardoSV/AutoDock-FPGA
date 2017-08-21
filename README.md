@@ -1,4 +1,4 @@
-Version compiled with Intel Altera Tools 16.0 (Quartus upgraded and patched) and targeting `harp2` machine.
+Version compiled with Intel `Altera Tools 16.0` **(Quartus upgraded & patched)** and targeting `harp2` machine.
 
 Source first: 
 
