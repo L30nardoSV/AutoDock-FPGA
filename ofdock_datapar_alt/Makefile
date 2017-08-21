@@ -25,6 +25,8 @@
 # See http://www.altera.com/literature/hb/opencl-sdk/aocl_getting_started.pdf 
 # for more information on installing and configuring the Intel(R) FPGA SDK for OpenCL(TM).
 
+VERBOSE = 1
+
 ifeq ($(VERBOSE),1)
 ECHO := 
 else
@@ -43,21 +45,10 @@ endif
 AOCL_COMPILE_CONFIG := $(shell aocl compile-config )
 AOCL_LINK_CONFIG := $(shell aocl link-config )
 
-
-
 #= defines a recursively-expanded variable
 #:= defines a simply-expanded variable
 
-
-
 DEBUG=1
-
-
-
-
-
-
-
 
 # Compilation flags
 ifeq ($(DEBUG),1)
@@ -69,9 +60,17 @@ endif
 # Compiler
 CXX := g++
 
-# Target
+# Target name
 TARGET := host
+
+# Target folder for host & emulation binaries
 TARGET_DIR := bin
+
+# Target folder for FPGA binary
+TARGET_DIR_HW := bin_hw
+
+# Target folder for FPGA binary instrumented with performance counters
+TARGET_DIR_HW_PROF := bin_hw_profile
 
 # Directories
 #INC_DIRS := ../common/inc
@@ -168,10 +167,9 @@ else
 	K4 =
 endif
 
+ENABLE_KERNELS = $(K1) $(K2) $(K3) $(K4)
 
-
-
-
+# =============================
 
 # Make it all!
 all : $(TARGET_DIR)/$(TARGET)
@@ -189,9 +187,98 @@ $(TARGET_DIR)/$(TARGET) : Makefile $(SRCS) $(INCS) $(TARGET_DIR)
 			$(AOCL_COMPILE_CONFIG) $(SRCS) $(AOCL_LINK_CONFIG) \
 			$(foreach D,$(LIB_DIRS),-L$D) \
 			$(foreach L,$(LIBS),-l$L) \
-			-o $(TARGET_DIR)/$(TARGET) $(DOCK_DEBUG_FLAG) $(DEV) $(DOCK_PROG) $(K1) $(K2) $(K3) $(K4)
+			-o $(TARGET_DIR)/$(TARGET) $(DOCK_DEBUG_FLAG) $(DEV) $(DOCK_PROG) $(ENABLE_KERNELS)
+	@echo " "
+	@echo "================================"
+	@echo "INFO: host binary is under: bin/"
+	@echo "================================"
+	@echo " "
 
 
+
+
+
+# Docking parameters
+PDB  := 1stp
+NRUN := 10
+NEV  := 200000
+
+# Device folder
+# Device main kernel name
+# Device main kernel source
+DEV_DIRS := device
+DEV_SRC  := $(DEV_DIRS)/calc_initpop.cl
+BOARD_HARP2 := bdw_fpga_v1.0
+
+
+#keremu
+
+#emu
+
+#kerrpt
+
+
+# Build hw (FPGA bitstream)
+# NOT integrated yet in a multistep compilation
+# Creates under bin_hw:
+	# "docking" folder
+	# docking.aoco
+	# docking.aocx
+hw: 	
+	aoc --board $(BOARD_HARP2) $(DEV_SRC) -o $(TARGET_DIR_HW)/docking.aocx
+	@echo " "
+	@echo "==========================================================="
+	@echo "INFO: FPGA bitstream is under: bin_hw/docking(.aoco)(.aocx)"
+	@echo "==========================================================="
+	@echo " "
+
+# Build hw (FPGA bitstream) instrumented with performance counters
+# NOT integrated yet in a multistep compilation
+# Creates under bin_hw_profile
+	# "docking" folder
+	# docking.aoco
+	# docking.aocx
+hw_profile:
+	aoc --profile --board $(BOARD_HARP2) $(DEV_SRC) -o $(TARGET_DIR_HW_PROF)/docking.aocx
+	@echo " "
+	@echo "================================================================================"
+	@echo "INFO: instrumented FPGA bitstream is under: bin_hw_profile/docking(.aoco)(.aocx)"
+	@echo "================================================================================"
+	@echo " "
+
+
+HARP2_DIR := copyharp2_datapar
+HARP2_DIR_DOCK := ofdock_datapar_alt
+
+# Delete an existing folder if previously created
+# Create a folder $(HARP2_DIR) in the parent directory
+# Copy binaries into $(HARP2_DIR) folder, avoiding the (innecesary) compilation intermediate files
+# Copy source files into $(HARP2_DIR) as host is built in the HARP2 front-end
+# Create a zip file out of the $(HARP2_DIR) folder
+copyharp2: clean_copyharp2
+	mkdir ../$(HARP2_DIR)
+	mkdir ../$(HARP2_DIR)/$(HARP2_DIR_DOCK)
+	mkdir ../$(HARP2_DIR)/$(HARP2_DIR_DOCK)/$(TARGET_DIR_HW)
+	mkdir ../$(HARP2_DIR)/$(HARP2_DIR_DOCK)/$(TARGET_DIR_HW_PROF)
+	cp $(TARGET_DIR_HW)/docking.* ../$(HARP2_DIR)/$(HARP2_DIR_DOCK)/$(TARGET_DIR_HW)/
+	cp $(TARGET_DIR_HW_PROF)/docking.* ../$(HARP2_DIR)/$(HARP2_DIR_DOCK)/$(TARGET_DIR_HW_PROF)/
+	cp Makefile ../$(HARP2_DIR)/$(HARP2_DIR_DOCK)/
+	cp defines.h ../$(HARP2_DIR)/$(HARP2_DIR_DOCK)/
+	cp -r device/ ../$(HARP2_DIR)/$(HARP2_DIR_DOCK)/
+	cp -r host/ ../$(HARP2_DIR)/$(HARP2_DIR_DOCK)/
+	cp -r input/ ../$(HARP2_DIR)/$(HARP2_DIR_DOCK)/
+	cp -r wrapcl/ ../$(HARP2_DIR)/$(HARP2_DIR_DOCK)/
+	cp -r ../common ../$(HARP2_DIR)/
+	cd ../;	zip -r $(HARP2_DIR).zip $(HARP2_DIR)
+	@echo "================================================================================"
+	@echo "The next step is to transfer the .zip file to the HARP2 fron-end: "
+	@echo "> cd .."
+	@echo "> scp copyharp2.zip h2solis@fe-1.harp.pc2.uni-paderborn.de:~/ocladock/"
+	@echo "================================================================================"
+	@echo " "
+
+clean_copyharp2:
+	rm -r ../$(HARP2_DIR)
 
 
 $(TARGET_DIR) :

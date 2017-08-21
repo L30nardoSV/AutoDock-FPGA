@@ -323,7 +323,7 @@ hw_profile:
 	@echo " "
 
 
-HARP2_DIR := copyharp2
+HARP2_DIR := copyharp2_taskpar
 HARP2_DIR_DOCK := ofdock_taskpar_alt
 
 # Delete an existing folder if previously created
