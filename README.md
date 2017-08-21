@@ -1,7 +1,12 @@
-Version compiled with Intel Altera Tools 16.0 (Quartus upgraded and patched)
+Version compiled with Intel Altera Tools 16.0 (Quartus upgraded and patched) and targeting `harp2` machine.
 
-Source first: init_aoc_esa.sh
+Source first: 
 
-**ofdock_datapar_xl**: data-parallel version
-**ofdock_taskpar_xl**: task-parallel version
+```zsh
+source init_aoc_esa.sh
+```
+
+**ofdock_datapar_alt**: data-parallel version
+
+**ofdock_taskpar_alt**: task-parallel version
 
