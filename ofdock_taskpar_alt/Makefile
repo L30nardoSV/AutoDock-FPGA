@@ -256,7 +256,7 @@ $(TARGET_DIR)/$(TARGET) : Makefile $(SRCS) $(INCS) $(TARGET_DIR)
 
 
 # Docking parameters
-PDB  := 1stp
+PDB  := 3ptb
 NRUN := 10
 NEV  := 200000
 
