@@ -208,6 +208,11 @@ else
 endif
 
 # =============================
+# This flag was adapted only for host-compilation on celebdil using HARP2 BSP.
+# Kernel compilation (emu, hw) must used the default flags.
+
+AOCL_LINK_CONFIG_ADAPTED := -L/opt/cad/altera/altera-16.0/hld/linux64/lib -L/opt/cad/altera/HARP2/BSP/bdw_fpga_pilot_opencl_bsp_v1.0.2/host/linux64/lib -L$AALSDK/mybuild/myinstall/usr/local/lib -L/opt/cad/altera/altera-16.0/hld/host/linux64/lib -Wl,--no-as-needed -lalteracl  
+
 
 
 # Make it all!
@@ -221,9 +226,22 @@ all : $(TARGET_DIR)/$(TARGET)
 #			$(foreach L,$(LIBS),-l$L) \
 #			-o $(TARGET_DIR)/$(TARGET)
 
+#$(TARGET_DIR)/$(TARGET) : Makefile $(SRCS) $(INCS) $(TARGET_DIR)
+#	$(ECHO)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -fPIC $(foreach D,$(INC_DIRS),-I$D) \
+#			$(AOCL_COMPILE_CONFIG) $(SRCS) $(AOCL_LINK_CONFIG) \
+#			$(foreach D,$(LIB_DIRS),-L$D) \
+#			$(foreach L,$(LIBS),-l$L) \
+#			-o $(TARGET_DIR)/$(TARGET) $(DOCK_DEBUG_FLAG) $(DEV) $(DOCK_PROG) $(ENABLE_KERNELS) $(REP)
+#	@echo " "
+#	@echo "================================"
+#	@echo "INFO: host binary is under: bin/"
+#	@echo "================================"
+#	@echo " "
+
+# Adapted for emulating HARP2 BSP on celebdil
 $(TARGET_DIR)/$(TARGET) : Makefile $(SRCS) $(INCS) $(TARGET_DIR)
 	$(ECHO)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -fPIC $(foreach D,$(INC_DIRS),-I$D) \
-			$(AOCL_COMPILE_CONFIG) $(SRCS) $(AOCL_LINK_CONFIG) \
+			$(AOCL_COMPILE_CONFIG) $(SRCS) $(AOCL_LINK_CONFIG_ADAPTED) \
 			$(foreach D,$(LIB_DIRS),-L$D) \
 			$(foreach L,$(LIBS),-l$L) \
 			-o $(TARGET_DIR)/$(TARGET) $(DOCK_DEBUG_FLAG) $(DEV) $(DOCK_PROG) $(ENABLE_KERNELS) $(REP)
