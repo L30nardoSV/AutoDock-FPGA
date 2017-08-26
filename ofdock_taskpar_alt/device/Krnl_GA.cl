@@ -257,6 +257,8 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 				}
 
 
+				mem_fence(CLK_GLOBAL_MEM_FENCE); // lvs added during hw evaluation
+
 
 				#if defined (DEBUG_KRNL_GA)
 				printf("eval_cnt: %u, generation_cnt: %u\n", eval_cnt, generation_cnt);

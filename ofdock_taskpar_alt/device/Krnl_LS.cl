@@ -235,13 +235,14 @@ while(active) {
 		////GlobEnergyCurrent[entity_for_ls] = offspring_energy;
 		GlobEnergyNext[entity_for_ls] = offspring_energy;
 
+		mem_fence(CLK_GLOBAL_MEM_FENCE | CLK_CHANNEL_MEM_FENCE); // lvs added during hw evaluation
+
 		eval_cnt += LS_eval;
 
 	} // End of for-loop ls_ent_cnt
 
 	//write back to GlobPRNG
 	GlobPRNG[0] = prng;
-
 	write_channel_altera(chan_LS2GA_eval_cnt, eval_cnt);
 	
 } // End of while (active)		

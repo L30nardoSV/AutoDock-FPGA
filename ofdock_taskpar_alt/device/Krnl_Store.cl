@@ -83,7 +83,9 @@ while(active) {
 		case 1:	// IC
 			GlobEnergyCurrent[cnt] = InterE + IntraE;
 			if (cnt == (DockConst->pop_size)-1) {
-				write_mem_fence(CLK_GLOBAL_MEM_FENCE);	// it makes sure all writes were finished before ack
+				// lvs commented as there was a worng result running in hw
+				//write_mem_fence(CLK_GLOBAL_MEM_FENCE); // it makes sure all writes were finished before ack	
+				mem_fence(CLK_GLOBAL_MEM_FENCE); // lvs added during hw evaluation
 				write_channel_altera(chan_Store2IC_ack, 1);
 			}
 		break;
@@ -108,8 +110,10 @@ while(active) {
 			}
 			*/
 
-			if (cnt == DockConst->pop_size-1) {	
-				write_mem_fence(CLK_GLOBAL_MEM_FENCE); // it makes sure all writes were finished before ack
+			if (cnt == DockConst->pop_size-1) {
+				// lvs commented as there was a worng result running in hw					
+				//write_mem_fence(CLK_GLOBAL_MEM_FENCE); // it makes sure all writes were finished before ack
+				mem_fence(CLK_GLOBAL_MEM_FENCE); // lvs added during hw evaluation
 				write_channel_altera(chan_Store2GG_ack, 1);
 			}
 

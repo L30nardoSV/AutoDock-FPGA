@@ -112,6 +112,9 @@ while(active) {
 	GlobPRNG[0] = prng;
 
 	ack = read_channel_altera(chan_Store2GG_ack);
+
+	mem_fence(CLK_GLOBAL_MEM_FENCE | CLK_CHANNEL_MEM_FENCE); // lvs added during hw evaluation
+
 	write_channel_altera(chan_GG2GA_eval_cnt, (DockConst->pop_size - 1));
 
 } // End of while (active)

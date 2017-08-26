@@ -209,7 +209,7 @@ endif
 
 # =============================
 # This flag was adapted only for host-compilation on celebdil using HARP2 BSP.
-# Kernel compilation (emu, hw) must used the default flags.
+# Kernel compilation (emu, hw) must use the default flags.
 
 AOCL_LINK_CONFIG_ADAPTED := -L/opt/cad/altera/altera-16.0/hld/linux64/lib -L/opt/cad/altera/HARP2/BSP/bdw_fpga_pilot_opencl_bsp_v1.0.2/host/linux64/lib -L$AALSDK/mybuild/myinstall/usr/local/lib -L/opt/cad/altera/altera-16.0/hld/host/linux64/lib -Wl,--no-as-needed -lalteracl  
 
@@ -226,6 +226,7 @@ all : $(TARGET_DIR)/$(TARGET)
 #			$(foreach L,$(LIBS),-l$L) \
 #			-o $(TARGET_DIR)/$(TARGET)
 
+# Enable this when compiling host in HARP2 machine
 #$(TARGET_DIR)/$(TARGET) : Makefile $(SRCS) $(INCS) $(TARGET_DIR)
 #	$(ECHO)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -fPIC $(foreach D,$(INC_DIRS),-I$D) \
 #			$(AOCL_COMPILE_CONFIG) $(SRCS) $(AOCL_LINK_CONFIG) \
@@ -238,7 +239,8 @@ all : $(TARGET_DIR)/$(TARGET)
 #	@echo "================================"
 #	@echo " "
 
-# Adapted for emulating HARP2 BSP on celebdil
+# Adapted only for emulating HARP2 BSP on celebdil
+# Disable this when compiling host in HARP2 machine
 $(TARGET_DIR)/$(TARGET) : Makefile $(SRCS) $(INCS) $(TARGET_DIR)
 	$(ECHO)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -fPIC $(foreach D,$(INC_DIRS),-I$D) \
 			$(AOCL_COMPILE_CONFIG) $(SRCS) $(AOCL_LINK_CONFIG_ADAPTED) \
@@ -367,12 +369,12 @@ copyharp2: clean_copyharp2
 	@echo "================================================================================"
 	@echo "The next step is to transfer the .zip file to the HARP2 fron-end: "
 	@echo "> cd .."
-	@echo "> scp copyharp2.zip h2solis@fe-1.harp.pc2.uni-paderborn.de:~/ocladock/"
+	@echo "> scp copyharp2_taskpar.zip h2solis@fe-1.harp.pc2.uni-paderborn.de:~/ocladock/"
 	@echo "================================================================================"
 	@echo " "
 
 clean_copyharp2:
-	rm -r ../$(HARP2_DIR)
+	rm -rf ../$(HARP2_DIR)
 
 
 $(TARGET_DIR) :
