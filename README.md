@@ -23,7 +23,7 @@ The memory access seems to not be synchronized even though `mem_fence(CLK_GLOBAL
 
 According to [this forum post](https://www.alteraforum.com/forum/showthread.php?t=56402), it is suggested to access off-chip memory using a single kernel. 
 
-A new branch called `fusion` is created where `GA`, `IC`, `GG`, `LS`, and `Store` are merged into a single kernel `GA`.
+A new branch called [`fusion`](https://gitlab/lvs/ofdock_altera/tree/fusion) is created where `GA`, `IC`, `GG`, `LS`, and `Store` are merged into a single kernel `GA`.
 That way the design doesn't rely anymore on `mem_fence`s.
 
 
