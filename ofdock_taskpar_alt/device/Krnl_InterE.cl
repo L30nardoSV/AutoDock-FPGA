@@ -29,9 +29,7 @@ void Krnl_InterE(
 */
 
 	char active = 1;
-/*
 	char mode   = 0;
-*/
 	ushort cnt  = 0; //uint cnt    = 0; 
 
 	float interE;
@@ -70,10 +68,8 @@ while(active) {
 	// --------------------------------------------------------------
 	active = read_channel_altera(chan_Conf2Intere_active);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
-/*
 	mode   = read_channel_altera(chan_Conf2Intere_mode);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
-*/
 	cnt    = read_channel_altera(chan_Conf2Intere_cnt);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 
@@ -270,20 +266,40 @@ while(active) {
 
 
 	//////======================================================
+	//printf("InterE: %u %u\n", active, cnt);
+/*
 	if ((active == 0) && (cnt == (DockConst->pop_size -1))) {
 		active = 0;	
 	}
 	else {
 		active = 1;
 	}
+*/
 	//////======================================================
 
 
 	// --------------------------------------------------------------
 	// Send intermolecular energy to chanel
 	// --------------------------------------------------------------
-	write_channel_altera(chan_Intere2Store_intere, interE);
 
+
+
+	//write_channel_altera(chan_Intere2Store_intere, interE);
+
+	switch (mode) {
+		case 1:	// IC
+			write_channel_altera(chan_Intere2StoreIC_intere, interE);
+		break;
+		case 2:	// GG
+			write_channel_altera(chan_Intere2StoreGG_intere, interE);
+		break;
+		case 3:	// LS
+			write_channel_altera(chan_Intere2StoreLS_intere, interE);
+		break;
+		case 4:	// Off
+			write_channel_altera(chan_Intere2StoreOff_intere, interE);
+		break;
+	}
 /*
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 	write_channel_altera(chan_Intere2Store_active, active);

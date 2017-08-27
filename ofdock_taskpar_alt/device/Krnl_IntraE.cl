@@ -157,24 +157,45 @@ while(active) {
 	} // End of LOOP_INTRAE_1
 
 	//////======================================================
+	//printf("IntraE: %u %u\n", active, cnt);
+/*
 	if ((active == 0) && (cnt == (DockConst->pop_size -1))) {
 		active = 0;	
 	}
 	else {
 		active = 1;
 	}
+*/
 	//////======================================================
 
 	// --------------------------------------------------------------
 	// Send intramolecular energy to channel
 	// --------------------------------------------------------------
-	write_channel_altera(chan_Intrae2Store_intrae, intraE);
+	//write_channel_altera(chan_Intrae2Store_intrae, intraE);
+
+	switch (mode) {
+		case 1:	// IC
+			write_channel_altera(chan_Intrae2StoreIC_intrae, intraE);
+		break;
+		case 2:	// GG
+			write_channel_altera(chan_Intrae2StoreGG_intrae, intraE);
+		break;
+		case 3:	// LS
+			write_channel_altera(chan_Intrae2StoreLS_intrae, intraE);
+		break;
+		case 4:	// Off
+			write_channel_altera(chan_Intrae2StoreOff_intrae, intraE);
+		break;
+	}
+
+/*
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 	write_channel_altera(chan_Intrae2Store_active, active);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 	write_channel_altera(chan_Intrae2Store_mode,   mode);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 	write_channel_altera(chan_Intrae2Store_cnt,    cnt);
+*/
 	// --------------------------------------------------------------
 
 	} // End of while(1)

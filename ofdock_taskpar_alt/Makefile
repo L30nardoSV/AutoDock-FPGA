@@ -141,10 +141,10 @@ ENABLE_K1 = YES
 ENABLE_K2 = YES
 ENABLE_K3 = YES
 ENABLE_K4 = YES
-ENABLE_K5 = YES
-ENABLE_K6 = YES
-ENABLE_K7 = YES
-ENABLE_K8 = YES
+ENABLE_K5 = NO
+ENABLE_K6 = NO
+ENABLE_K7 = NO
+ENABLE_K8 = NO
 
 ifeq ($(ENABLE_K1),YES)
 	K1 =-DENABLE_KERNEL1
@@ -259,8 +259,8 @@ $(TARGET_DIR)/$(TARGET) : Makefile $(SRCS) $(INCS) $(TARGET_DIR)
 
 # Docking parameters
 PDB  := 3ptb
-NRUN := 10
-NEV  := 200000
+NRUN := 20
+NEV  := 40000
 
 # Device folder
 # Device main kernel name
@@ -268,6 +268,7 @@ NEV  := 200000
 DEV_DIRS := device
 DEV_SRC  := $(DEV_DIRS)/Krnl_GA.cl
 BOARD_HARP2 := bdw_fpga_v1.0
+#BOARD_HARP2 := a10gx
 
 ## Make it all: compilation (host & device) + run emulation
 ## Notice, it switches automatically to /bin folder

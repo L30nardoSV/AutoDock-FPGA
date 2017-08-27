@@ -26,11 +26,12 @@ void Krnl_Conform(
 	char mode   = 0;
 	ushort cnt  = 0; //uint cnt    = 0;    
 
-	char IC_active, GG_active, LS_active;
+	char IC_active, GG_active, LS_active, Off_active;
 	bool IC_valid = false;
 	bool GG_valid = false;
 	bool LS_valid = false;
-	char IC_mode, GG_mode, LS_mode = 0;
+	bool Off_valid = false;
+	char IC_mode, GG_mode, LS_mode, Off_mode = 0;
 	
 
 	float phi, theta, genrotangle;
@@ -59,10 +60,11 @@ while(active) {
 	// --------------------------------------------------------------
 	// Wait for genotypes in channel
 	// --------------------------------------------------------------
-	while ((IC_valid == false) && (GG_valid == false) && (LS_valid == false)) {
+	while ((IC_valid == false) && (GG_valid == false) && (LS_valid == false) && (Off_valid == false)) {
 		IC_active = read_channel_nb_altera(chan_IC2Conf_active, &IC_valid);
 		GG_active = read_channel_nb_altera(chan_GG2Conf_active, &GG_valid);
 		LS_active = read_channel_nb_altera(chan_LS2Conf_active, &LS_valid);
+		Off_active = read_channel_nb_altera(chan_Off2Conf_active, &Off_valid);
 	}
 
 	if (IC_valid) {
@@ -100,16 +102,31 @@ while(active) {
 				for (uchar pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {
 					genotype[pipe_cnt] = read_channel_altera(chan_LS2Conf_genotype);}
 			}
+			else {
+				if (Off_valid) {
+					active = Off_active;
+					mem_fence(CLK_CHANNEL_MEM_FENCE);
+					mode   = read_channel_altera(chan_Off2Conf_mode);
+					mem_fence(CLK_CHANNEL_MEM_FENCE);
+					cnt    = read_channel_altera(chan_Off2Conf_cnt);
+					mem_fence(CLK_CHANNEL_MEM_FENCE);
+
+					for (uchar pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {
+						genotype[pipe_cnt] = read_channel_altera(chan_Off2Conf_genotype);}
+					}
+			}
 		}	
 	}
 
 	IC_valid = false;	
 	GG_valid = false;
 	LS_valid = false;
+	Off_valid = false;
 
 	IC_active = 0;
 	GG_active = 0;
 	LS_active = 0; 
+	Off_active = 0; 
 	
 	#if defined (DEBUG_ACTIVE_KERNEL)
 	if (active == 0) {printf("	%-20s: %s\n", "Krnl_Conform", "must be disabled");}
@@ -263,12 +280,15 @@ while(active) {
 
 
 	//////======================================================
+	//printf("Conform: %u %u\n", active, cnt);
+/*
 	if ((active == 0) && (cnt == (DockConst->pop_size -1))) {
 		active = 0;	
 	}
 	else {
 		active = 1;
 	}
+*/
 	//////======================================================
 
 	// --------------------------------------------------------------
@@ -277,9 +297,8 @@ while(active) {
 	write_channel_altera(chan_Conf2Intere_active, active);
 	write_channel_altera(chan_Conf2Intrae_active, active);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
-/*
+
 	write_channel_altera(chan_Conf2Intere_mode,   mode);
-*/
 	write_channel_altera(chan_Conf2Intrae_mode,   mode);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 
