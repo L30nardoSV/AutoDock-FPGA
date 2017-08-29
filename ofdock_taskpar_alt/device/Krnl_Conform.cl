@@ -7,20 +7,14 @@ __kernel __attribute__ ((max_global_work_dim(0)))
 void Krnl_Conform(
              __global   const kernelconstant_static*  restrict KerConstStatic,
 	     __global   const kernelconstant_dynamic* restrict KerConstDynamic,
-	     __constant       Dockparameters*  restrict DockConst
+			      unsigned int                     DockConst_rotbondlist_length,
+			      unsigned char                    DockConst_num_of_atoms
 )
 {
 	__local float loc_coords_x[MAX_NUM_OF_ATOMS];
 	__local float loc_coords_y[MAX_NUM_OF_ATOMS];
 	__local float loc_coords_z[MAX_NUM_OF_ATOMS];
 	__local float genotype[ACTUAL_GENOTYPE_LENGTH];
-
-	/*
-	float __attribute__((memory, numbanks(1), bankwidth(4), singlepump, numreadports(3), numwriteports(1))) loc_coords_x[MAX_NUM_OF_ATOMS];
-	float __attribute__((memory, numbanks(1), bankwidth(4), singlepump, numreadports(3), numwriteports(1))) loc_coords_y[MAX_NUM_OF_ATOMS];
-	float __attribute__((memory, numbanks(1), bankwidth(4), singlepump, numreadports(3), numwriteports(1))) loc_coords_z[MAX_NUM_OF_ATOMS];
-	//float __attribute__((register)) genotype[ACTUAL_GENOTYPE_LENGTH];
-	*/
 
 	char active = 1;
 	char mode   = 0;
@@ -149,7 +143,7 @@ while(active) {
 	// **********************************************
 	// ADD VENDOR SPECIFIC PRAGMA
 	// **********************************************
-	for (ushort rotation_counter = 0; rotation_counter < DockConst->rotbondlist_length; rotation_counter++)
+	for (ushort rotation_counter = 0; rotation_counter < DockConst_rotbondlist_length; rotation_counter++)
 	{
 		rotation_list_element = KerConstStatic->rotlist_const[rotation_counter];
 
@@ -278,19 +272,6 @@ while(active) {
 	printf("BEFORE Out CONFORM CHANNEL\n");
 	#endif
 
-
-	//////======================================================
-	//printf("Conform: %u %u\n", active, cnt);
-/*
-	if ((active == 0) && (cnt == (DockConst->pop_size -1))) {
-		active = 0;	
-	}
-	else {
-		active = 1;
-	}
-*/
-	//////======================================================
-
 	// --------------------------------------------------------------
 	// Send ligand atomic coordinates to channel 
 	// --------------------------------------------------------------
@@ -307,17 +288,7 @@ while(active) {
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 	//float3 position_xyz;
-	for (uchar pipe_cnt=0; pipe_cnt<DockConst->num_of_atoms; pipe_cnt++) {
-		/*
-		write_channel_altera(chan_Conf2Intere_x, loc_coords_x[pipe_cnt]);
-		write_channel_altera(chan_Conf2Intrae_x, loc_coords_x[pipe_cnt]);
-		mem_fence(CLK_CHANNEL_MEM_FENCE);
-		write_channel_altera(chan_Conf2Intere_y, loc_coords_y[pipe_cnt]);
-		write_channel_altera(chan_Conf2Intrae_y, loc_coords_y[pipe_cnt]);
-		mem_fence(CLK_CHANNEL_MEM_FENCE);
-		write_channel_altera(chan_Conf2Intere_z, loc_coords_z[pipe_cnt]);
-		write_channel_altera(chan_Conf2Intrae_z, loc_coords_z[pipe_cnt]);
-		*/
+	for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt++) {
 		write_channel_altera(chan_Conf2Intere_xyz, (float3) (loc_coords_x[pipe_cnt], loc_coords_y[pipe_cnt], loc_coords_z[pipe_cnt]));
 		write_channel_altera(chan_Conf2Intrae_xyz, (float3) (loc_coords_x[pipe_cnt], loc_coords_y[pipe_cnt], loc_coords_z[pipe_cnt]));
 	}

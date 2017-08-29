@@ -98,16 +98,6 @@ static void display_device_info( cl_device_id device );
 
 
 
-/*
-float map_angle_180(float angle);
-float map_angle_360(float angle);
-*/
-
-
-
-
-
-
 
 //// --------------------------------
 //// Host constant struct
@@ -134,7 +124,7 @@ float* cpu_ref_ori_angles;
 // Created because structs containing array
 // are not supported as OpenCL kernel args
 
-cl_mem mem_DockparametersConst;	
+//cl_mem mem_DockparametersConst;	
 //cl_mem mem_KerConst;
 cl_mem mem_KerConstStatic;
 cl_mem mem_KerConstDynamic;	
@@ -351,7 +341,7 @@ filled with clock() */
 	//energies, evaluation counters and random number generator states
 	size_floatgrids = (sizeof(float)) * (mygrid->num_of_atypes+2) * (mygrid->size_xyz[0]) * (mygrid->size_xyz[1]) * (mygrid->size_xyz[2]);
 
-	mallocBufferObject(context,CL_MEM_READ_ONLY, sizeof(dockpars), 		&mem_DockparametersConst);
+	//mallocBufferObject(context,CL_MEM_READ_ONLY, sizeof(dockpars), 		&mem_DockparametersConst);
 	mallocBufferObject(context,CL_MEM_READ_ONLY, sizeof(KerConstStatic), 	&mem_KerConstStatic);
 	mallocBufferObject(context,CL_MEM_READ_ONLY, sizeof(KerConstDynamic), 	&mem_KerConstDynamic);
 	mallocBufferObject(context,CL_MEM_READ_ONLY,size_floatgrids,   		&mem_dockpars_fgrids);
@@ -360,11 +350,11 @@ filled with clock() */
 	mallocBufferObject(context,CL_MEM_READ_WRITE,size_populations, 		&mem_dockpars_conformations_next);
 	mallocBufferObject(context,CL_MEM_READ_WRITE,size_energies,    		&mem_dockpars_energies_next);
 	mallocBufferObject(context,CL_MEM_READ_WRITE,size_prng_seeds,  		&mem_dockpars_prng_states);
-	mallocBufferObject(context,CL_MEM_READ_WRITE,2*sizeof(unsigned int),  	&mem_evals_and_generations_performed);
+	mallocBufferObject(context,CL_MEM_WRITE_ONLY,2*sizeof(unsigned int),  	&mem_evals_and_generations_performed);
 
 	unsigned int array_evals_and_generations_performed [2]; // [0]: evals, [1]: generations 
 
-	memcopyBufferObjectToDevice(command_queue1,mem_DockparametersConst, 	&dockpars,            sizeof(dockpars));
+	//memcopyBufferObjectToDevice(command_queue1,mem_DockparametersConst, 	&dockpars,            sizeof(dockpars));
 	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic, 	   	&KerConstStatic,      sizeof(KerConstStatic));
 	memcopyBufferObjectToDevice(command_queue1,mem_dockpars_fgrids, 	cpu_floatgrids,       size_floatgrids);
 
@@ -376,26 +366,76 @@ filled with clock() */
         setKernelArg(kernel1,2, sizeof(mem_dockpars_conformations_next),        &mem_dockpars_conformations_next);
         setKernelArg(kernel1,3, sizeof(mem_dockpars_energies_next),             &mem_dockpars_energies_next);
 	setKernelArg(kernel1,4, sizeof(mem_dockpars_prng_states),               &mem_dockpars_prng_states);
-        setKernelArg(kernel1,5, sizeof(cl_mem),                          	&mem_DockparametersConst);
-	setKernelArg(kernel1,6, sizeof(mem_evals_and_generations_performed),    &mem_evals_and_generations_performed);
+
+        //setKernelArg(kernel1,5, sizeof(cl_mem),                          	&mem_DockparametersConst);
+	//setKernelArg(kernel1,6, sizeof(mem_evals_and_generations_performed),    &mem_evals_and_generations_performed);
+	setKernelArg(kernel1,5, sizeof(mem_evals_and_generations_performed),    &mem_evals_and_generations_performed);
+	// private args added in the order in which their values are used in kernel
+	setKernelArg(kernel1,6,  sizeof(unsigned int),                  	&dockpars.pop_size);
+	setKernelArg(kernel1,7,  sizeof(unsigned int),                 		&dockpars.num_of_energy_evals);
+	setKernelArg(kernel1,8,  sizeof(unsigned int),                 		&dockpars.num_of_generations);
+	setKernelArg(kernel1,9,  sizeof(float),                          	&dockpars.tournament_rate);
+	setKernelArg(kernel1,10, sizeof(float),                          	&dockpars.mutation_rate);
+	setKernelArg(kernel1,11, sizeof(float),                          	&dockpars.abs_max_dmov);
+	setKernelArg(kernel1,12, sizeof(float),                          	&dockpars.abs_max_dang);
+	setKernelArg(kernel1,13, sizeof(float),                          	&dockpars.crossover_rate);
+	setKernelArg(kernel1,14, sizeof(unsigned int),                          &dockpars.num_of_lsentities);
+	setKernelArg(kernel1,15, sizeof(unsigned int),                          &dockpars.max_num_of_iters);
+	setKernelArg(kernel1,16, sizeof(float),                          	&dockpars.rho_lower_bound);
+	setKernelArg(kernel1,17, sizeof(float),                          	&dockpars.base_dmov_mul_sqrt3);
+	setKernelArg(kernel1,18, sizeof(unsigned int),                          &dockpars.num_of_genes);
+	setKernelArg(kernel1,19, sizeof(float),                          	&dockpars.base_dang_mul_sqrt3);
+	setKernelArg(kernel1,20, sizeof(unsigned int),                          &dockpars.cons_limit);
 #endif // End of ENABLE_KERNEL1
 
 #ifdef ENABLE_KERNEL2 // Krnl_Conform
 	setKernelArg(kernel2,0, sizeof(cl_mem),                          	&mem_KerConstStatic);
 	setKernelArg(kernel2,1, sizeof(cl_mem),                          	&mem_KerConstDynamic);
-        setKernelArg(kernel2,2, sizeof(cl_mem),                          	&mem_DockparametersConst);
+        //setKernelArg(kernel2,2, sizeof(cl_mem),                          	&mem_DockparametersConst);
+	// private args added in the order in which their values are used in kernel
+	setKernelArg(kernel2,2, sizeof(unsigned int),                          	&dockpars.rotbondlist_length);
+	setKernelArg(kernel2,3, sizeof(unsigned char),                          &dockpars.num_of_atoms);
 #endif // End of ENABLE_KERNEL2
+
+
+	unsigned char gridsizex_minus1 = dockpars.gridsize_x - 1;
+	unsigned char gridsizey_minus1 = dockpars.gridsize_y - 1;
+	unsigned char gridsizez_minus1 = dockpars.gridsize_z - 1;
+
 
 #ifdef ENABLE_KERNEL3 // Krnl_InterE
         setKernelArg(kernel3,0, sizeof(mem_dockpars_fgrids),                    &mem_dockpars_fgrids);
 	setKernelArg(kernel3,1, sizeof(cl_mem),                          	&mem_KerConstStatic);
-        setKernelArg(kernel3,2, sizeof(cl_mem),                          	&mem_DockparametersConst);
+        //setKernelArg(kernel3,2, sizeof(cl_mem),                          	&mem_DockparametersConst);
+	// private args added in the order in which their values are used in kernel
+	setKernelArg(kernel3,2, sizeof(unsigned char),                          &dockpars.g1);
+	setKernelArg(kernel3,3, sizeof(unsigned int),                          	&dockpars.g2);
+	setKernelArg(kernel3,4, sizeof(unsigned int),                          	&dockpars.g3);
+	setKernelArg(kernel3,5, sizeof(unsigned char),                          &dockpars.num_of_atoms);
+	setKernelArg(kernel3,6, sizeof(unsigned char),                          &gridsizex_minus1);
+	setKernelArg(kernel3,7, sizeof(unsigned char),                          &gridsizey_minus1);
+	setKernelArg(kernel3,8, sizeof(unsigned char),                          &gridsizez_minus1);
+	setKernelArg(kernel3,9, sizeof(unsigned char),                          &dockpars.num_of_atypes);
 #endif // End of ENABLE_KERNEL3
 
 #ifdef ENABLE_KERNEL4 // Krnl_IntraE
 	setKernelArg(kernel4,0, sizeof(cl_mem),                          	&mem_KerConstStatic);
-        setKernelArg(kernel4,1, sizeof(cl_mem),                          	&mem_DockparametersConst);
+        //setKernelArg(kernel4,1, sizeof(cl_mem),                          	&mem_DockparametersConst);
+	// private args added in the order in which their values are used in kernel
+	setKernelArg(kernel4,1, sizeof(unsigned char),                          &dockpars.num_of_atoms);
+	setKernelArg(kernel4,2, sizeof(unsigned int),                          	&dockpars.num_of_intraE_contributors);
+	setKernelArg(kernel4,3, sizeof(float),                          	&dockpars.grid_spacing);
+	setKernelArg(kernel4,4, sizeof(unsigned char),                          &dockpars.num_of_atypes);
+	setKernelArg(kernel4,5, sizeof(float),                          	&dockpars.coeff_elec);
+	setKernelArg(kernel4,6, sizeof(float),                          	&dockpars.qasp);
+	setKernelArg(kernel4,7, sizeof(float),                          	&dockpars.coeff_desolv);
 #endif // End of ENABLE_KERNEL4
+
+
+
+
+
+
 
 #ifdef ENABLE_KERNEL5 // Krnl_Store
         setKernelArg(kernel5,0, sizeof(mem_dockpars_energies_current),          &mem_dockpars_energies_current);
@@ -884,7 +924,7 @@ void cleanup() {
   if(cpu_prng_seeds)       {alignedFree(cpu_prng_seeds);}
   if(cpu_ref_ori_angles)   {alignedFree(cpu_ref_ori_angles);}
 
-  if(mem_DockparametersConst)		  {clReleaseMemObject(mem_DockparametersConst);}
+  //if(mem_DockparametersConst)		  {clReleaseMemObject(mem_DockparametersConst);}
   if(mem_KerConstStatic)		  {clReleaseMemObject(mem_KerConstStatic);}
   if(mem_KerConstDynamic)		  {clReleaseMemObject(mem_KerConstDynamic);}
   if(mem_dockpars_fgrids) 		  {clReleaseMemObject(mem_dockpars_fgrids);}
@@ -957,37 +997,3 @@ static void display_device_info( cl_device_id device ) {
       printf("%-40s = %s\n", "Command queue profiling enabled? ", ((ccp & CL_QUEUE_PROFILING_ENABLE)?"true":"false"));
    }
 }
-
-
-
-/*
-float map_angle_180(float angle)
-{
-	float x = angle;
-
-	while (x < 0.0f) {
-		x += 180.0f;
-	}
-	
-	while (x > 180.0f) {
-		x -= 180.0f;
-	}
-
-	return x;
-}
-
-float map_angle_360(float angle)
-{
-	float x = angle;
-
-	while (x < 0.0f) {
-		x += 360.0f;
-	}
-
-	while (x > 360.0f) {
-		x -= 360.0f;
-	}
-
-	return x;
-}
-*/

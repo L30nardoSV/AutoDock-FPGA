@@ -11,22 +11,21 @@
 // --------------------------------------------------------------------------
 __kernel __attribute__ ((max_global_work_dim(0)))
 void Krnl_InterE(
-             __global const float*           restrict GlobFgrids,
+           __constant /*__global const*/ float*                  restrict GlobFgrids,
 	     __global const kernelconstant_static*  restrict KerConstStatic,
-	     __constant     Dockparameters*  restrict DockConst	
+			    unsigned char                    DockConst_g1,
+  			    unsigned int                     DockConst_g2,
+			    unsigned int                     DockConst_g3,
+   			    unsigned char                    DockConst_num_of_atoms,
+			    unsigned char                    DockConst_gridsize_x_minus1,
+			    unsigned char                    DockConst_gridsize_y_minus1,
+			    unsigned char                    DockConst_gridsize_z_minus1,
+			    unsigned char                    DockConst_num_of_atypes
 )
 {
-///*
 	__local float loc_coords_x[MAX_NUM_OF_ATOMS];
 	__local float loc_coords_y[MAX_NUM_OF_ATOMS];
 	__local float loc_coords_z[MAX_NUM_OF_ATOMS];
-//*/
-
-/*
-	float __attribute__((register)) loc_coords_x[MAX_NUM_OF_ATOMS];
-	float __attribute__((register)) loc_coords_y[MAX_NUM_OF_ATOMS];
-	float __attribute__((register)) loc_coords_z[MAX_NUM_OF_ATOMS];
-*/
 
 	char active = 1;
 	char mode   = 0;
@@ -52,9 +51,9 @@ void Krnl_InterE(
 
 	// L30nardoSV	
 	unsigned int  mul_tmp;
-	unsigned char g1 = DockConst->g1; 	
-	unsigned int  g2 = DockConst->g2;         
-	unsigned int  g3 = DockConst->g3;
+	unsigned char g1 = DockConst_g1; 	
+	unsigned int  g2 = DockConst_g2;         
+	unsigned int  g3 = DockConst_g3;
 
         unsigned int  ylow_times_g1, yhigh_times_g1;
         unsigned int  zlow_times_g2, zhigh_times_g2;
@@ -75,14 +74,7 @@ while(active) {
 
 	float3 position_xyz;
 
-	for (uchar pipe_cnt=0; pipe_cnt<DockConst->num_of_atoms; pipe_cnt++) {
-		/*
-		loc_coords_x[pipe_cnt] = read_channel_altera(chan_Conf2Intere_x);
-		mem_fence(CLK_CHANNEL_MEM_FENCE);
-		loc_coords_y[pipe_cnt] = read_channel_altera(chan_Conf2Intere_y);
-		mem_fence(CLK_CHANNEL_MEM_FENCE);
-		loc_coords_z[pipe_cnt] = read_channel_altera(chan_Conf2Intere_z);
-		*/
+	for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt++) {
 		position_xyz = read_channel_altera(chan_Conf2Intere_xyz);
 		loc_coords_x[pipe_cnt] = position_xyz.x;
 		loc_coords_y[pipe_cnt] = position_xyz.y;
@@ -101,7 +93,7 @@ while(active) {
 	partialE3 = 0.0f;
 
 	// for each atom
-	for (uchar atom1_id=0; atom1_id<DockConst->num_of_atoms; atom1_id++)
+	for (uchar atom1_id=0; atom1_id<DockConst_num_of_atoms; atom1_id++)
 	{
 		atom1_typeid = ref_atom_types_const[atom1_id];
 		x = loc_coords_x[atom1_id];
@@ -110,9 +102,9 @@ while(active) {
 		q = ref_atom_charges_const[atom1_id];
 
 		// if the atom is outside of the grid
-		if ((x < 0.0f) || (x >= DockConst->gridsize_x-1) || 
-		    (y < 0.0f) || (y >= DockConst->gridsize_y-1) ||
-		    (z < 0.0f) || (z >= DockConst->gridsize_z-1))	{
+		if ((x < 0.0f) || (x >= DockConst_gridsize_x_minus1) || 
+		    (y < 0.0f) || (y >= DockConst_gridsize_y_minus1) ||
+		    (z < 0.0f) || (z >= DockConst_gridsize_z_minus1))	{
 			//penalty is 2^24 for each atom outside the grid
 			/*
 			interE += 16777216.0f; 
@@ -199,7 +191,7 @@ while(active) {
 			#endif
 
 			//energy contribution of the electrostatic grid
-			atom1_typeid = DockConst->num_of_atypes;
+			atom1_typeid = DockConst_num_of_atypes;
 			mul_tmp = atom1_typeid*g3;
         	        cube [0][0][0] = *(GlobFgrids + cube_000 + mul_tmp);
         	        cube [1][0][0] = *(GlobFgrids + cube_100 + mul_tmp);
@@ -229,7 +221,7 @@ while(active) {
 			#endif
 
 			//energy contribution of the desolvation grid
-			atom1_typeid = DockConst->num_of_atypes+1;
+			atom1_typeid = DockConst_num_of_atypes+1;
 			mul_tmp = atom1_typeid*g3;
         	        cube [0][0][0] = *(GlobFgrids + cube_000 + mul_tmp);
         	        cube [1][0][0] = *(GlobFgrids + cube_100 + mul_tmp);
@@ -264,28 +256,9 @@ while(active) {
 		interE += partialE1 + partialE2 + partialE3;
 	} // End of LOOP_INTERE_1:	
 
-
-	//////======================================================
-	//printf("InterE: %u %u\n", active, cnt);
-/*
-	if ((active == 0) && (cnt == (DockConst->pop_size -1))) {
-		active = 0;	
-	}
-	else {
-		active = 1;
-	}
-*/
-	//////======================================================
-
-
 	// --------------------------------------------------------------
 	// Send intermolecular energy to chanel
 	// --------------------------------------------------------------
-
-
-
-	//write_channel_altera(chan_Intere2Store_intere, interE);
-
 	switch (mode) {
 		case 1:	// IC
 			write_channel_altera(chan_Intere2StoreIC_intere, interE);
@@ -300,14 +273,6 @@ while(active) {
 			write_channel_altera(chan_Intere2StoreOff_intere, interE);
 		break;
 	}
-/*
-	mem_fence(CLK_CHANNEL_MEM_FENCE);
-	write_channel_altera(chan_Intere2Store_active, active);
-	mem_fence(CLK_CHANNEL_MEM_FENCE);
-	write_channel_altera(chan_Intere2Store_mode,   mode);
-	mem_fence(CLK_CHANNEL_MEM_FENCE);
-	write_channel_altera(chan_Intere2Store_cnt,    cnt);
-*/
 	// --------------------------------------------------------------
  	
 	} // End of while(1)

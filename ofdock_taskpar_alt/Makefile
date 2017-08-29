@@ -259,8 +259,8 @@ $(TARGET_DIR)/$(TARGET) : Makefile $(SRCS) $(INCS) $(TARGET_DIR)
 
 # Docking parameters
 PDB  := 3ptb
-NRUN := 20
-NEV  := 40000
+NRUN := 10
+NEV  := 100000
 
 # Device folder
 # Device main kernel name
