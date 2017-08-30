@@ -16,34 +16,34 @@
 
 channel char  	chan_IC2Conf_active;	
 channel char  	chan_IC2Conf_mode;	
-channel ushort	chan_IC2Conf_cnt;		
+/*channel ushort	chan_IC2Conf_cnt;*/
 channel float  	chan_IC2Conf_genotype __attribute__((depth(38)));
 
 channel char  	chan_GG2Conf_active;
 channel char  	chan_GG2Conf_mode;
-channel ushort 	chan_GG2Conf_cnt;
+/*channel ushort 	chan_GG2Conf_cnt;*/
 channel float  	chan_GG2Conf_genotype __attribute__((depth(38)));
 
 channel char  	chan_LS2Conf_active;
 channel char  	chan_LS2Conf_mode;
-channel ushort 	chan_LS2Conf_cnt;
+/*channel ushort 	chan_LS2Conf_cnt;*/
 channel float  	chan_LS2Conf_genotype __attribute__((depth(38)));
 
 // To turn off Conform, InterE, IntraE
 channel char  	chan_Off2Conf_active;
 channel char  	chan_Off2Conf_mode;
-channel ushort 	chan_Off2Conf_cnt;
+/*channel ushort 	chan_Off2Conf_cnt;*/
 channel float  	chan_Off2Conf_genotype __attribute__((depth(38)));
 
 channel float3  chan_Conf2Intere_xyz __attribute__((depth(90)));
 channel char  	chan_Conf2Intere_active;
 channel char  	chan_Conf2Intere_mode;
-channel ushort  chan_Conf2Intere_cnt;	
+/*channel ushort  chan_Conf2Intere_cnt;*/
 
 channel float3 	chan_Conf2Intrae_xyz __attribute__((depth(90)));
 channel char  	chan_Conf2Intrae_active;	
 channel char  	chan_Conf2Intrae_mode;	
-channel ushort  chan_Conf2Intrae_cnt;
+/*channel ushort  chan_Conf2Intrae_cnt;*/
 
 channel float 	chan_Intere2StoreIC_intere;
 channel float 	chan_Intere2StoreGG_intere;
@@ -214,9 +214,10 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 			write_channel_altera(chan_IC2Conf_mode,   mode);
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
+/*			
 			write_channel_altera(chan_IC2Conf_cnt,    pop_cnt);
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
-		
+*/		
 			for (uchar pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {
 				write_channel_altera(chan_IC2Conf_genotype, genotype_tx[pipe_cnt]);
 			}
@@ -320,9 +321,10 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 				mem_fence(CLK_CHANNEL_MEM_FENCE);
 				write_channel_altera(chan_GG2Conf_mode,   mode);
 				mem_fence(CLK_CHANNEL_MEM_FENCE);
+/*
 				write_channel_altera(chan_GG2Conf_cnt,    new_pop_cnt);
 				mem_fence(CLK_CHANNEL_MEM_FENCE);
-
+*/
 				for (uchar pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {
 					GlobPopulationNext [new_pop_cnt*ACTUAL_GENOTYPE_LENGTH + pipe_cnt] = offspring_genotype [pipe_cnt];
 					write_channel_altera(chan_GG2Conf_genotype, offspring_genotype[pipe_cnt]);
@@ -437,9 +439,10 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 				mem_fence(CLK_CHANNEL_MEM_FENCE);
 				write_channel_altera(chan_LS2Conf_mode,   mode);
 				mem_fence(CLK_CHANNEL_MEM_FENCE);
+/*
 				write_channel_altera(chan_LS2Conf_cnt,    iteration_cnt);
 				mem_fence(CLK_CHANNEL_MEM_FENCE);	
-		
+*/		
 				for (uchar pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {
 					write_channel_altera(chan_LS2Conf_genotype, entity_possible_new_genotype[pipe_cnt]);
 				}
@@ -568,9 +571,10 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 	write_channel_altera(chan_Off2Conf_mode,   mode);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
+/*
 	write_channel_altera(chan_Off2Conf_cnt,    0);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
-
+*/
 	for (uchar pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {
 		write_channel_altera(chan_Off2Conf_genotype, 0);
 	}

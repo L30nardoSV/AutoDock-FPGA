@@ -28,13 +28,21 @@ void Krnl_InterE(
 	__local float loc_coords_z[MAX_NUM_OF_ATOMS];
 
 	char active = 1;
+/*
 	char mode   = 0;
+*/
+/*
 	ushort cnt  = 0; //uint cnt    = 0; 
-
+*/
+/*
 	float interE;
+*/
+/*
 	float partialE1, partialE2, partialE3;
-
+*/
+/*
 	char atom1_typeid;
+*/
 
 	__local char  ref_atom_types_const  [MAX_NUM_OF_ATOMS];
 	__local float ref_atom_charges_const[MAX_NUM_OF_ATOMS];
@@ -43,24 +51,45 @@ void Krnl_InterE(
 		ref_atom_types_const [i]   = KerConstStatic->atom_types_const[i];
 		ref_atom_charges_const [i] = KerConstStatic->atom_charges_const[i];
 	}
-	
-	float x, y, z, dx, dy, dz, q;
+/*
+	float x, y, z;
+*/
+/*
+	float q;
+*/
+/*
+	float dx, dy, dz;
+*/
+/*
 	float cube [2][2][2];
+*/
+/*
 	float weights [2][2][2];
+*/
+/*
 	int x_low, x_high, y_low, y_high, z_low, z_high;
-
-	// L30nardoSV	
+*/
+	// L30nardoSV
+/*	
 	unsigned int  mul_tmp;
+*/
+/*
 	unsigned char g1 = DockConst_g1; 	
 	unsigned int  g2 = DockConst_g2;         
 	unsigned int  g3 = DockConst_g3;
-
+*/
+/*
         unsigned int  ylow_times_g1, yhigh_times_g1;
         unsigned int  zlow_times_g2, zhigh_times_g2;
+*/
+/*
 	unsigned int  cube_000, cube_100, cube_010, cube_110;
         unsigned int  cube_001, cube_101, cube_011, cube_111;
+*/
 
 while(active) {
+	char mode;
+
 	//printf("BEFORE In INTER CHANNEL\n");
 	// --------------------------------------------------------------
 	// Wait for ligand atomic coordinates in channel
@@ -69,9 +98,10 @@ while(active) {
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 	mode   = read_channel_altera(chan_Conf2Intere_mode);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
+/*
 	cnt    = read_channel_altera(chan_Conf2Intere_cnt);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
-
+*/
 	float3 position_xyz;
 
 	for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt++) {
@@ -87,19 +117,41 @@ while(active) {
 	if (active == 0) {printf("	%-20s: %s\n", "Krnl_InterE", "must be disabled");}
 	#endif
 
+/*
 	interE = 0.0f;
+*/
+	float interE = 0.0f;
+
+/*
 	partialE1 = 0.0f;
 	partialE2 = 0.0f;
 	partialE3 = 0.0f;
+*/
 
 	// for each atom
 	for (uchar atom1_id=0; atom1_id<DockConst_num_of_atoms; atom1_id++)
 	{
+/*
 		atom1_typeid = ref_atom_types_const[atom1_id];
+*/
+		char atom1_typeid = ref_atom_types_const[atom1_id];
+
+/*
 		x = loc_coords_x[atom1_id];
 		y = loc_coords_y[atom1_id];
 		z = loc_coords_z[atom1_id];
+*/
+		float x = loc_coords_x[atom1_id];
+		float y = loc_coords_y[atom1_id];
+		float z = loc_coords_z[atom1_id];
+/*
 		q = ref_atom_charges_const[atom1_id];
+*/
+		float q = ref_atom_charges_const[atom1_id];
+
+		float partialE1;
+		float partialE2;
+		float partialE3;
 
 		// if the atom is outside of the grid
 		if ((x < 0.0f) || (x >= DockConst_gridsize_x_minus1) || 
@@ -115,16 +167,33 @@ while(active) {
 		} 
 		else 
 		{
+/*
 			x_low  = convert_int(floor(x));
 			y_low  = convert_int(floor(y));
 			z_low  = convert_int(floor(z));
 			x_high = convert_int(ceil(x));	 
 			y_high = convert_int(ceil(y));
 			z_high = convert_int(ceil(z));
-			dx = x - x_low; dy = y - y_low; dz = z - z_low;
+*/
+
+			int x_low  = convert_int(floor(x));
+			int y_low  = convert_int(floor(y));
+			int z_low  = convert_int(floor(z));
+			int x_high = convert_int(ceil(x));	 
+			int y_high = convert_int(ceil(y));
+			int z_high = convert_int(ceil(z));
+/*
+			dx = x - x_low; 
+			dy = y - y_low; 
+			dz = z - z_low;
+*/
+			float dx = x - x_low; 
+			float dy = y - y_low; 
+			float dz = z - z_low;
 
 			// Calculates the weights for trilinear interpolation
 			// based on the location of the point inside
+			float weights [2][2][2];
 			weights [0][0][0] = (1-dx)*(1-dy)*(1-dz);
 			weights [1][0][0] = dx*(1-dy)*(1-dz);
 			weights [0][1][0] = (1-dx)*dy*(1-dz);
@@ -149,9 +218,26 @@ while(active) {
 			printf("coeff(1,1,1) = %f\n", weights [1][1][1]);
 			#endif
 
-			// L30nardoSV
-			ylow_times_g1  = y_low*g1;	yhigh_times_g1 = y_high*g1;
-        	        zlow_times_g2  = z_low*g2;	zhigh_times_g2 = z_high*g2;
+			// lvs added temporal variables
+			uint cube_000, cube_100, cube_010, cube_110, cube_001, cube_101, cube_011, cube_111;
+			uint mul_tmp;
+/*
+			ylow_times_g1  = y_low*g1;	
+			yhigh_times_g1 = y_high*g1;
+        	        zlow_times_g2  = z_low*g2;	
+			zhigh_times_g2 = z_high*g2;
+*/
+/*
+			ylow_times_g1  = y_low  * DockConst_g1;	
+			yhigh_times_g1 = y_high * DockConst_g1;
+        	        zlow_times_g2  = z_low  * DockConst_g2;	
+			zhigh_times_g2 = z_high * DockConst_g2;
+*/
+			uint ylow_times_g1  = y_low  * DockConst_g1;	
+			uint yhigh_times_g1 = y_high * DockConst_g1;
+        	        uint zlow_times_g2  = z_low  * DockConst_g2;	
+			uint zhigh_times_g2 = z_high * DockConst_g2;
+
         	        cube_000 = x_low  + ylow_times_g1  + zlow_times_g2;
         	        cube_100 = x_high + ylow_times_g1  + zlow_times_g2;
         	        cube_010 = x_low  + yhigh_times_g1 + zlow_times_g2;
@@ -160,9 +246,13 @@ while(active) {
         	        cube_101 = x_high + ylow_times_g1  + zhigh_times_g2;
         	        cube_011 = x_low  + yhigh_times_g1 + zhigh_times_g2;
         	        cube_111 = x_high + yhigh_times_g1 + zhigh_times_g2;
+/*
         	        mul_tmp = atom1_typeid*g3;
+*/
+			mul_tmp = atom1_typeid * DockConst_g3;
 
 			//energy contribution of the current grid type
+			float cube [2][2][2];
 	                cube [0][0][0] = *(GlobFgrids + cube_000 + mul_tmp);
         	        cube [1][0][0] = *(GlobFgrids + cube_100 + mul_tmp);
         	        cube [0][1][0] = *(GlobFgrids + cube_010 + mul_tmp);
@@ -192,7 +282,11 @@ while(active) {
 
 			//energy contribution of the electrostatic grid
 			atom1_typeid = DockConst_num_of_atypes;
+/*
 			mul_tmp = atom1_typeid*g3;
+*/
+			mul_tmp = atom1_typeid * DockConst_g3;
+
         	        cube [0][0][0] = *(GlobFgrids + cube_000 + mul_tmp);
         	        cube [1][0][0] = *(GlobFgrids + cube_100 + mul_tmp);
         	        cube [0][1][0] = *(GlobFgrids + cube_010 + mul_tmp);
@@ -217,12 +311,16 @@ while(active) {
 			partialE2 = q * TRILININTERPOL(cube, weights);
 		
 			#if defined (DEBUG_KRNL_INTERE)
-			printf("interpoated value = %f, multiplied by q = %f\n\n", TRILININTERPOL(cube, weights), q*TRILININTERPOL(cube, weights));
+			printf("interpolated value = %f, multiplied by q = %f\n\n", TRILININTERPOL(cube, weights), q*TRILININTERPOL(cube, weights));
 			#endif
 
 			//energy contribution of the desolvation grid
 			atom1_typeid = DockConst_num_of_atypes+1;
+/*
 			mul_tmp = atom1_typeid*g3;
+*/
+			mul_tmp = atom1_typeid * DockConst_g3;
+
         	        cube [0][0][0] = *(GlobFgrids + cube_000 + mul_tmp);
         	        cube [1][0][0] = *(GlobFgrids + cube_100 + mul_tmp);
         	        cube [0][1][0] = *(GlobFgrids + cube_010 + mul_tmp);
@@ -247,14 +345,13 @@ while(active) {
 			partialE3 = fabs(q) * TRILININTERPOL(cube, weights);
 
 			#if defined (DEBUG_KRNL_INTERE)
-			printf("interploated value = %f, multiplied by abs(q) = %f\n\n", TRILININTERPOL(cube, weights), fabs(q) * trilin_interpol(cube, weights));
+			printf("interpolated value = %f, multiplied by abs(q) = %f\n\n", TRILININTERPOL(cube, weights), fabs(q) * trilin_interpol(cube, weights));
 			printf("Current value of intermolecular energy = %f\n\n\n", interE);
 			#endif
 		}
 
-
 		interE += partialE1 + partialE2 + partialE3;
-	} // End of LOOP_INTERE_1:	
+	} // End of atom1_id for-loop
 
 	// --------------------------------------------------------------
 	// Send intermolecular energy to chanel
@@ -275,7 +372,7 @@ while(active) {
 	}
 	// --------------------------------------------------------------
  	
-	} // End of while(1)
+} // End of while(1)
 
 	#if defined (DEBUG_ACTIVE_KERNEL)
 	printf("	%-20s: %s\n", "Krnl_InterE", "disabled");
