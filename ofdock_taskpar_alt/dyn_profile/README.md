@@ -25,6 +25,7 @@ First version running correctly on hardware.
 ### Measurements from non-instrumented program
 
 ** Execution time (s) **
+
 | Configuration     |    FPGA      |  CPU (AutoDock)  |  Speed-up | Comments       |
 | :---------------: | :----------: | :--------------: | :-------: | :------------: |
 | 3ptb, 10 runs     | 367.67       | 59.49            |  0.161    | ~ 6.18x slower | 
@@ -35,6 +36,7 @@ Speedup is independent from the number of runs as parallelization is explotied w
 ### Measurements from instrumented program 
 
 ** Execution time (s) **
+
 | Configuration    |    FPGA      |  CPU (AutoDock)  |  Speed-up | Comments       |
 | :--------------: | :----------: | :--------------: | :-------: | :------------: |
 | 3ptb, 10 runs    | 392.30       | 59.49            | 0.151     | ~ 6.59x slower | 
@@ -64,6 +66,7 @@ This will make the host code much more verbose, but will remove the access to co
 * In `Krnl_InterE`, change specifier of GlobFgrids from `__global` to `__constant` as HARP2 FPGA has `CL_DEVICE_MAX_CONSTANT_BUFFER_SIZE` of 70 368 744 177 664 bytes.
 
 ** Estimated resource usage **
+
 | Resource                             | Usage        |
 | :----------------------------------: | :----------: |
 | Logic utilization                    |   97%        |
@@ -76,6 +79,7 @@ This will make the host code much more verbose, but will remove the access to co
 ### Measurements from non-instrumented program
 
 ** Execution time (s) **
+
 | Configuration    |    FPGA      |  CPU (AutoDock)  |  Speed-up | Comments       |
 | :--------------: | :----------: | :--------------: | :-------: | :------------: |
 | 3ptb, 100 runs   | 2979.04      | 586.27           | 0.197     | ~ 5.08x slower |
@@ -84,6 +88,7 @@ This will make the host code much more verbose, but will remove the access to co
 ### Measurements from instrumented program 
 
 ** Execution time (s) **
+
 | Configuration    |    FPGA      |  CPU (AutoDock)  |  Speed-up | Comments       |
 | :--------------: | :----------: | :--------------: | :-------: | :------------: |
 | 3ptb, 10 runs    |  346.43      | 59.49            | 0.172     | ~ 5.82x slower | 
@@ -138,6 +143,7 @@ This optimization step consists of reducing the scope of variable to the deepest
 * `unsigned int  ylow_times_g1` and similar were moved inside `while(active)` right to its first assignment
 
 ** Krnl_IntraE **
+
 * `char mode;` moved inside `while(active)`
 * `int contributor_counter;` removed as it was declared already as a ushort iteration counter
 * `char atom1_id, atom2_id;` moved inside `while(active)` right to its first assignment
@@ -150,6 +156,7 @@ This optimization step consists of reducing the scope of variable to the deepest
 * `char ref_intraE_contributors_const[3];` moved inside `while(active)`
 
 ** Estimated resource usage **
+
 | Resource                             | Usage        |
 | :----------------------------------: | :----------: |
 | Logic utilization                    |   96%        |
@@ -161,6 +168,7 @@ This optimization step consists of reducing the scope of variable to the deepest
 ### Measurements from non-instrumented program
 
 ** Execution time (s) **
+
 | Configuration    |    FPGA      |  CPU (AutoDock)  |  Speed-up | Comments       |
 | :--------------: | :----------: | :--------------: | :-------: | :------------: |
 | 3ptb, 10 runs    |    305.04    | 59.49            |   0.195   | ~ 5.13x slower |
@@ -169,6 +177,58 @@ This optimization step consists of reducing the scope of variable to the deepest
 ### Measurements from instrumented program 
 
 ** Execution time (s) **
+
 | Configuration    |    FPGA      |  CPU (AutoDock)  |  Speed-up | Comments       |
 | :--------------: | :----------: | :--------------: | :-------: | :------------: |
 | 3ptb, 10 runs    |  338.88      | 59.49            |   0.175   | ~ 5.69x slower | 
+
+
+
+## `fourth_run_harp2`
+
+** Krnl_GA **
+
+* Increase depth to `MAX_POPSIZE` of channels `interE` and `interE` to avoid stall at all cost between (`Krnl_IntraE`, `Krnl_InterE`) and `Krnl_GA`
+* Refactor IC for-loop so it can be fully pipelined. Data from `interE` and `intraE` channels are separated in another for-loop, and potentially can be read faster as such channels have now depth different than 0
+* Refactor IC for-loop so data from global memory is copied directly to channels without using and intermediate __local array. This led to the removal of `genotype_tx`
+* Refactor GG for-loop in a similar way IC for-loop was. This led to correct the corresponding update of `GlobEnergyNext` after GG
+* Create `energyIA_LS_rx_dummy` and `energyIE_LS_rx_dummy` dummy vars so dependencies on `energyIA_LS_rx` and `energyIE_LS_rx` can be relaxed.
+* Reduced scope of `energyIA_LS_rx`, moved inside right to its first assignment
+* Reduced scope of `entity_for_ls`, moved inside right to its first assignment
+* Reduced scope of `offspring_energy`, moved inside right to its first assignment
+* Reduced scope of `candidate_energy` moved inside right to its first assignment
+* Reduced scope of `LS_eval` moved inside right to its first assignment
+
+** Krnl_Conform **
+
+* Removal of `ref_orientation_quats_const_0` and similar from `Krnl_Conform`. This requires setting additional kernel args in host and passing their values as private
+
+
+** Estimated resource usage **
+
+| Resource                             | Usage        |
+| :----------------------------------: | :----------: |
+| Logic utilization                    |   96%        |
+| ALUTs                                |   40%        |
+| Dedicated logic registers            |   56%        |
+| Memory blocks                        |   88%        |
+| DSP blocks                           |   37%        |
+
+
+### Measurements from non-instrumented program
+
+** Execution time (s) **
+
+| Configuration    |    FPGA      |  CPU (AutoDock)  |  Speed-up | Comments       |
+| :--------------: | :----------: | :--------------: | :-------: | :------------: |
+| 3ptb, 10 runs    |  312.48      | 59.49            | 0.190     | ~ 5.25x slower |
+
+
+### Measurements from instrumented program 
+
+** Execution time (s) **
+
+| Configuration    |    FPGA      |  CPU (AutoDock)  |  Speed-up | Comments       |
+| :--------------: | :----------: | :--------------: | :-------: | :------------: |
+| 3ptb, 10 runs    |  324.56      | 59.49            | 0.183     | ~ 5.45x slower | 
+

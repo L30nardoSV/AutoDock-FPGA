@@ -308,7 +308,7 @@ emu: $(TARGET_DIR)/$(TARGET) keremu
 	# docking.aoco
 	# No actual hardware is built (NO .aocx)
 kerrpt: $(DEV_SRC)
-	aoc --board $(BOARD_HARP2) $(DEV_SRC) -o $(TARGET_DIR)/docking.aoco $(REP) -c --report
+	aoc --board $(BOARD_HARP2) $(DEV_SRC) -o $(TARGET_DIR)/docking.aoco $(REP) -c --report -g
 	@echo " "
 	@echo "============================================================="
 	@echo "INFO: report files are under: bin/docking/reports/report.html"

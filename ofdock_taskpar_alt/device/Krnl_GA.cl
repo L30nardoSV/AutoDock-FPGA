@@ -14,48 +14,43 @@
 // mode 1 for I: init calculation energy, 2 for G: genetic generation, 3 for L: local search, 4 for O: off
 // cnt: population count
 
+
+#include "../defines.h"
+
 channel char  	chan_IC2Conf_active;	
 channel char  	chan_IC2Conf_mode;	
-/*channel ushort	chan_IC2Conf_cnt;*/
-channel float  	chan_IC2Conf_genotype __attribute__((depth(38)));
+channel float  	chan_IC2Conf_genotype __attribute__((depth(MAX_NUM_OF_ROTBONDS+6)));
 
 channel char  	chan_GG2Conf_active;
 channel char  	chan_GG2Conf_mode;
-/*channel ushort 	chan_GG2Conf_cnt;*/
-channel float  	chan_GG2Conf_genotype __attribute__((depth(38)));
+channel float  	chan_GG2Conf_genotype __attribute__((depth(MAX_NUM_OF_ROTBONDS+6)));
 
 channel char  	chan_LS2Conf_active;
 channel char  	chan_LS2Conf_mode;
-/*channel ushort 	chan_LS2Conf_cnt;*/
-channel float  	chan_LS2Conf_genotype __attribute__((depth(38)));
+channel float  	chan_LS2Conf_genotype __attribute__((depth(MAX_NUM_OF_ROTBONDS+6)));
 
 // To turn off Conform, InterE, IntraE
 channel char  	chan_Off2Conf_active;
 channel char  	chan_Off2Conf_mode;
-/*channel ushort 	chan_Off2Conf_cnt;*/
-channel float  	chan_Off2Conf_genotype __attribute__((depth(38)));
+channel float  	chan_Off2Conf_genotype __attribute__((depth(MAX_NUM_OF_ROTBONDS+6)));
 
-channel float3  chan_Conf2Intere_xyz __attribute__((depth(90)));
+channel float3  chan_Conf2Intere_xyz __attribute__((depth(MAX_NUM_OF_ATOMS)));
 channel char  	chan_Conf2Intere_active;
 channel char  	chan_Conf2Intere_mode;
-/*channel ushort  chan_Conf2Intere_cnt;*/
 
-channel float3 	chan_Conf2Intrae_xyz __attribute__((depth(90)));
+channel float3 	chan_Conf2Intrae_xyz __attribute__((depth(MAX_NUM_OF_ATOMS)));
 channel char  	chan_Conf2Intrae_active;	
 channel char  	chan_Conf2Intrae_mode;	
-/*channel ushort  chan_Conf2Intrae_cnt;*/
 
-channel float 	chan_Intere2StoreIC_intere;
-channel float 	chan_Intere2StoreGG_intere;
+channel float 	chan_Intere2StoreIC_intere __attribute__((depth(MAX_POPSIZE)));
+channel float 	chan_Intere2StoreGG_intere __attribute__((depth(MAX_POPSIZE)));
 channel float 	chan_Intere2StoreLS_intere;
 channel float 	chan_Intere2StoreOff_intere;
 
-channel float 	chan_Intrae2StoreIC_intrae;
-channel float 	chan_Intrae2StoreGG_intrae;
+channel float 	chan_Intrae2StoreIC_intrae __attribute__((depth(MAX_POPSIZE)));
+channel float 	chan_Intrae2StoreGG_intrae __attribute__((depth(MAX_POPSIZE)));
 channel float 	chan_Intrae2StoreLS_intrae;
 channel float 	chan_Intrae2StoreOff_intrae;
-
-#include "../defines.h"
 
 // Next structures were copied from calcenergy.h
 /*
@@ -193,49 +188,32 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 	// ------------------------------------------------------------------
 	// IC: Init Calculation
 	// ------------------------------------------------------------------
-	__local float genotype_tx [ACTUAL_GENOTYPE_LENGTH];
-
 	__local float energyIE_ICGG_rx [MAX_POPSIZE];
 	__local float energyIA_ICGG_rx [MAX_POPSIZE];
-	float energyIE_LS_rx;
-	float energyIA_LS_rx;
 
-	// Send genotype: only (0)
-	// Send    genotype: from (1) to (last-1), receive energy:   from (0) to (last-2)
-	// Receive energy: (last-1)
-	for (ushort pop_cnt = 0; pop_cnt < DockConst_pop_size+1; pop_cnt++) {
+	for (ushort pop_cnt = 0; pop_cnt < DockConst_pop_size; pop_cnt++) {
+		write_channel_altera(chan_IC2Conf_active, active);
+		mem_fence(CLK_CHANNEL_MEM_FENCE);
+		write_channel_altera(chan_IC2Conf_mode,   mode);
+		mem_fence(CLK_CHANNEL_MEM_FENCE);
 		
-		if (pop_cnt < DockConst_pop_size) {
-			for (uchar pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {
-				genotype_tx[pipe_cnt] = GlobPopulationCurrent[pop_cnt*ACTUAL_GENOTYPE_LENGTH + pipe_cnt];			
-			} 	
-
-			write_channel_altera(chan_IC2Conf_active, active);
-			mem_fence(CLK_CHANNEL_MEM_FENCE);
-			write_channel_altera(chan_IC2Conf_mode,   mode);
-			mem_fence(CLK_CHANNEL_MEM_FENCE);
-/*			
-			write_channel_altera(chan_IC2Conf_cnt,    pop_cnt);
-			mem_fence(CLK_CHANNEL_MEM_FENCE);
-*/		
-			for (uchar pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {
-				write_channel_altera(chan_IC2Conf_genotype, genotype_tx[pipe_cnt]);
-			}
-			
-			#if defined (DEBUG_KRNL_IC)
-			printf("IC - tx pop: %u", pop_cnt); 		
-			#endif
-		}	
-	
-		if (pop_cnt > 0) {
-			energyIA_ICGG_rx[pop_cnt-1] = read_channel_altera(chan_Intrae2StoreIC_intrae);
-			energyIE_ICGG_rx[pop_cnt-1] = read_channel_altera(chan_Intere2StoreIC_intere);
-
-			#if defined (DEBUG_KRNL_IC)
-			printf(", IC - rx pop: %u\n", pop_cnt-1); 		
-			#endif
+		for (uchar pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {
+			write_channel_altera(chan_IC2Conf_genotype, GlobPopulationCurrent[pop_cnt*ACTUAL_GENOTYPE_LENGTH + pipe_cnt]);
 		}
-	} // End of IC for-loop pop_cnt		
+			
+		#if defined (DEBUG_KRNL_IC)
+		printf("IC - tx pop: %u", pop_cnt); 		
+		#endif
+	} // End of IC tx for-loop pop_cnt	
+
+	for (ushort pop_cnt = 0; pop_cnt < DockConst_pop_size; pop_cnt++) {
+		energyIA_ICGG_rx[pop_cnt] = read_channel_altera(chan_Intrae2StoreIC_intrae);
+		energyIE_ICGG_rx[pop_cnt] = read_channel_altera(chan_Intere2StoreIC_intere);
+
+		#if defined (DEBUG_KRNL_IC)
+		printf(", IC - rx pop: %u\n", pop_cnt-1); 		
+		#endif
+	} // End of IC rx for-loop pop_cnt	
 
 	// Store energies to Current-Energies
 	for (ushort pop_cnt = 0; pop_cnt < DockConst_pop_size; pop_cnt++) {
@@ -265,7 +243,6 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 	// Temporal storage for LS
 	// ---------------------------
 
-
 	// read GlobPRNG
 	uint prng = GlobPRNG[0];
 
@@ -293,60 +270,51 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 		} 		
 		GlobEnergyNext[0] = loc_energies[best_entity_id];
 
-		// Send genotype: only (1)
-		// Send    genotype: from (2) to (last-1), receive energy:   from (2) to (last-2)
-		// Receive energy: (last-1)
-		for (ushort new_pop_cnt = 1; new_pop_cnt < DockConst_pop_size+1; new_pop_cnt++) {
+		for (ushort new_pop_cnt = 1; new_pop_cnt < DockConst_pop_size; new_pop_cnt++) {
+			//selecting two individuals randomly 			
+			binary_tournament_selection(&prng, loc_energies, &parent1, &parent2,			    
+				                    DockConst_pop_size, DockConst_tournament_rate);
 
-			if (new_pop_cnt < DockConst_pop_size) {
-				//selecting two individuals randomly 			
-				binary_tournament_selection(&prng, loc_energies, &parent1, &parent2,			    
-				           		    DockConst_pop_size, DockConst_tournament_rate);
-
-				//mating parents				
-				for (uchar i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {
-					local_entity_1[i] = GlobPopulationCurrent[parent1*ACTUAL_GENOTYPE_LENGTH+i];
-					local_entity_2[i] = GlobPopulationCurrent[parent2*ACTUAL_GENOTYPE_LENGTH+i];
-				}
-
-				// first two args are population [parent1], population [parent2] 			
-				gen_new_genotype(&prng, local_entity_1, local_entity_2, 					 
-				 		 DockConst_mutation_rate, 
-						 DockConst_abs_max_dmov, 
-						 DockConst_abs_max_dang,			 
-				 		 DockConst_crossover_rate, 
-						 offspring_genotype);
-
-				write_channel_altera(chan_GG2Conf_active, active);
-				mem_fence(CLK_CHANNEL_MEM_FENCE);
-				write_channel_altera(chan_GG2Conf_mode,   mode);
-				mem_fence(CLK_CHANNEL_MEM_FENCE);
-/*
-				write_channel_altera(chan_GG2Conf_cnt,    new_pop_cnt);
-				mem_fence(CLK_CHANNEL_MEM_FENCE);
-*/
-				for (uchar pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {
-					GlobPopulationNext [new_pop_cnt*ACTUAL_GENOTYPE_LENGTH + pipe_cnt] = offspring_genotype [pipe_cnt];
-					write_channel_altera(chan_GG2Conf_genotype, offspring_genotype[pipe_cnt]);
-				}
-	
-				#if defined (DEBUG_KRNL_GG)
-				printf("GG - tx pop: %u", new_pop_cnt); 		
-				#endif
-			}	
-	
-			if (new_pop_cnt > 1) {
-				energyIA_ICGG_rx[new_pop_cnt-1] = read_channel_altera(chan_Intrae2StoreGG_intrae);
-				energyIE_ICGG_rx[new_pop_cnt-1] = read_channel_altera(chan_Intere2StoreGG_intere);
-
-				#if defined (DEBUG_KRNL_GG)
-				printf(", GG - rx pop: %u\n", new_pop_cnt-1); 		
-				#endif
+			//mating parents				
+			for (uchar i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {
+				local_entity_1[i] = GlobPopulationCurrent[parent1*ACTUAL_GENOTYPE_LENGTH+i];
+				local_entity_2[i] = GlobPopulationCurrent[parent2*ACTUAL_GENOTYPE_LENGTH+i];
 			}
-		} // End of for-loop new_pop_cnt
+
+			// first two args are population [parent1], population [parent2] 			
+			gen_new_genotype(&prng, local_entity_1, local_entity_2, 					 
+			 		 DockConst_mutation_rate, 
+					 DockConst_abs_max_dmov, 
+				         DockConst_abs_max_dang,			 
+				         DockConst_crossover_rate, 
+				         offspring_genotype);
+
+			write_channel_altera(chan_GG2Conf_active, active);
+			mem_fence(CLK_CHANNEL_MEM_FENCE);
+			write_channel_altera(chan_GG2Conf_mode,   mode);
+			mem_fence(CLK_CHANNEL_MEM_FENCE);
+
+			for (uchar pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {
+				GlobPopulationNext [new_pop_cnt*ACTUAL_GENOTYPE_LENGTH + pipe_cnt] = offspring_genotype [pipe_cnt];
+				write_channel_altera(chan_GG2Conf_genotype, offspring_genotype[pipe_cnt]);
+			}
+	
+			#if defined (DEBUG_KRNL_GG)
+			printf("GG - tx pop: %u", new_pop_cnt); 		
+			#endif	
+		} // End of GG tx for-loop new_pop_cnt
+
+		for (ushort new_pop_cnt = 1; new_pop_cnt < DockConst_pop_size; new_pop_cnt++) {
+			energyIA_ICGG_rx[new_pop_cnt] = read_channel_altera(chan_Intrae2StoreGG_intrae);
+			energyIE_ICGG_rx[new_pop_cnt] = read_channel_altera(chan_Intere2StoreGG_intere);
+
+			#if defined (DEBUG_KRNL_GG)
+			printf(", GG - rx pop: %u\n", new_pop_cnt-1); 		
+			#endif
+		} // End of GG rx for-loop new_pop_cnt
 
 		// store energies to Next-Energies
-		for (ushort pop_cnt = 0; pop_cnt < DockConst_pop_size; pop_cnt++) {
+		for (ushort pop_cnt = 1; pop_cnt < DockConst_pop_size; pop_cnt++) {
 			GlobEnergyNext[pop_cnt] = energyIA_ICGG_rx[pop_cnt] + energyIE_ICGG_rx[pop_cnt];
 		}
 		// ------------------------------------------------------------------
@@ -360,17 +328,8 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 		active = 1;
 		mode   = 3; 
 
-		
-		uint entity_for_ls; 	
-
-		//__local float offspring_genotype [ACTUAL_GENOTYPE_LENGTH]; // FIXME defined above
-		float offspring_energy;
-
 		//__local float entity_possible_new_genotype [ACTUAL_GENOTYPE_LENGTH]; 
 		float entity_possible_new_genotype [ACTUAL_GENOTYPE_LENGTH]; 
-
-		float candidate_energy;
-
 		float genotype_deviate  [ACTUAL_GENOTYPE_LENGTH];
 		float genotype_bias     [ACTUAL_GENOTYPE_LENGTH];
 
@@ -381,14 +340,13 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 		
 		bool positive_direction = true;
 		bool ls_pass_complete = false;
-		uint LS_eval = 0;
 
 		// subject num_of_entity_for_ls pieces of offsprings to LS 		
 		for (ushort ls_ent_cnt=0; ls_ent_cnt<DockConst_num_of_lsentities; ls_ent_cnt++) {
 
 			// choosing an entity randomly, 			
 			// and without checking if it has already been subjected to LS in this cycle 			
-			entity_for_ls = myrand_uint(&prng, DockConst_pop_size);
+			uint entity_for_ls = myrand_uint(&prng, DockConst_pop_size);
 
 			// performing local search 
 			for (uchar i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {
@@ -397,12 +355,12 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			}
 
 			// read energy
-			offspring_energy = GlobEnergyNext[entity_for_ls];
+			float offspring_energy = GlobEnergyNext[entity_for_ls];
 
 			positive_direction = true;
 			ls_pass_complete = true;
-			LS_eval = 0;
 
+			uint LS_eval = 0;
 			//------------------------------------------------------------------------------------------------------------
 			while ((iteration_cnt < DockConst_max_num_of_iters) && (rho > DockConst_rho_lower_bound)) {
 				//new random deviate
@@ -439,17 +397,15 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 				mem_fence(CLK_CHANNEL_MEM_FENCE);
 				write_channel_altera(chan_LS2Conf_mode,   mode);
 				mem_fence(CLK_CHANNEL_MEM_FENCE);
-/*
-				write_channel_altera(chan_LS2Conf_cnt,    iteration_cnt);
-				mem_fence(CLK_CHANNEL_MEM_FENCE);	
-*/		
+		
 				for (uchar pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {
 					write_channel_altera(chan_LS2Conf_genotype, entity_possible_new_genotype[pipe_cnt]);
 				}
 				mem_fence(CLK_CHANNEL_MEM_FENCE);
-				energyIA_LS_rx = read_channel_altera(chan_Intrae2StoreLS_intrae);
-				energyIE_LS_rx = read_channel_altera(chan_Intere2StoreLS_intere);
-				candidate_energy = energyIA_LS_rx + energyIE_LS_rx;
+
+				float energyIA_LS_rx = read_channel_altera(chan_Intrae2StoreLS_intrae);
+				float energyIE_LS_rx = read_channel_altera(chan_Intere2StoreLS_intere);
+				float candidate_energy = energyIA_LS_rx + energyIE_LS_rx;
 
 				// update LS energy-evaluation count
 				LS_eval++;
@@ -497,8 +453,6 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 					}
 				}
 
-
-
 				if (ls_pass_complete == true) { 
 					//Changing deviation (rho), if needed
 					if (cons_succ >= DockConst_cons_limit) {
@@ -518,9 +472,6 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 					}
 					iteration_cnt++;
 				}
-
-
-
 
 			} // end of while (iteration_cnt)
 			//------------------------------------------------------------------------------------------------------------
@@ -571,10 +522,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 	write_channel_altera(chan_Off2Conf_mode,   mode);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
-/*
-	write_channel_altera(chan_Off2Conf_cnt,    0);
-	mem_fence(CLK_CHANNEL_MEM_FENCE);
-*/
+
 	for (uchar pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {
 		write_channel_altera(chan_Off2Conf_genotype, 0);
 	}
@@ -584,8 +532,8 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 	#endif
 
 	// read latest energies but do not use them
-	energyIA_LS_rx = read_channel_altera(chan_Intrae2StoreOff_intrae);
-	energyIE_LS_rx = read_channel_altera(chan_Intere2StoreOff_intere);
+	float energyIA_LS_rx_dummy = read_channel_altera(chan_Intrae2StoreOff_intrae);
+	float energyIE_LS_rx_dummy = read_channel_altera(chan_Intere2StoreOff_intere);
 
 	#if defined (DEBUG_ACTIVE_KERNEL)
 	printf("	%-20s: %s\n", "Krnl_GA", "disabled");

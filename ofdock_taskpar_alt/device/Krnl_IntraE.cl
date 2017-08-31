@@ -24,49 +24,13 @@ void Krnl_IntraE(
 			    float                            DockConst_coeff_desolv
 )
 {
-
+	// local vars are allowed only at kernel scope
 	__local float loc_coords_x[MAX_NUM_OF_ATOMS];
 	__local float loc_coords_y[MAX_NUM_OF_ATOMS];
 	__local float loc_coords_z[MAX_NUM_OF_ATOMS];
 
 	char active = 1;
-/*
-	char mode   = 0;
-*/
-/*
-	ushort cnt  = 0; //uint cnt    = 0; 
-*/
-/*
-	int contributor_counter;
-*/
-/*
-	char atom1_id, atom2_id;
-*/
-/*
-	char atom1_typeid, atom2_typeid;
-*/
-/*
-	float subx, suby, subz, distance_leo;
-*/
- 	// Altera doesn't support power function 	
-	// so this is implemented with multiplications 	
-	// Full precision is used
-/* 	
-	float distance_pow_2, distance_pow_4, distance_pow_6, distance_pow_10, distance_pow_12;
-*/
-/*
-	float inverse_distance_pow_12, inverse_distance_pow_10, inverse_distance_pow_6;
-*/
-/*
-	float intraE;
-*/
-/*
-	float partialE1, partialE2, partialE3, partialE4;
-*/
-	// To store global values KerConst->intraE_contributors_const
-/*
-	char ref_intraE_contributors_const[3];
-*/
+
 while(active) {
 	char mode;
 
@@ -78,10 +42,7 @@ while(active) {
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 	mode   = read_channel_altera(chan_Conf2Intrae_mode);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
-/*
-	cnt    = read_channel_altera(chan_Conf2Intrae_cnt);
-	mem_fence(CLK_CHANNEL_MEM_FENCE);
-*/
+
 	float3 position_xyz;
 
 	for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt++) {
@@ -96,16 +57,8 @@ while(active) {
 	#if defined (DEBUG_ACTIVE_KERNEL)
 	if (active == 0) {printf("	%-20s: %s\n", "Krnl_IntraE", "must be disabled");}
 	#endif
-/*
-	intraE = 0.0f;
-*/
+
 	float intraE = 0.0f;
-/*
-	partialE1 = 0.0f;
-	partialE2 = 0.0f;
-	partialE3 = 0.0f;
-	partialE4 = 0.0f;
-*/
 
 	//for each intramolecular atom contributor pair
 	for (ushort contributor_counter=0; contributor_counter<DockConst_num_of_intraE_contributors; contributor_counter++) {
@@ -115,25 +68,15 @@ while(active) {
 		for (uchar i=0; i<3; i++) {
 			ref_intraE_contributors_const[i] = KerConstStatic->intraE_contributors_const[3*contributor_counter+i];
 		}
-/*
-		atom1_id = ref_intraE_contributors_const[0];
-		atom2_id = ref_intraE_contributors_const[1];
-*/
+
 		char atom1_id = ref_intraE_contributors_const[0];
 		char atom2_id = ref_intraE_contributors_const[1];
-/*
-		subx = loc_coords_x[atom1_id] - loc_coords_x[atom2_id];
-		suby = loc_coords_y[atom1_id] - loc_coords_y[atom2_id];
-		subz = loc_coords_z[atom1_id] - loc_coords_z[atom2_id];
-*/
+
 		float subx = loc_coords_x[atom1_id] - loc_coords_x[atom2_id];
 		float suby = loc_coords_y[atom1_id] - loc_coords_y[atom2_id];
 		float subz = loc_coords_z[atom1_id] - loc_coords_z[atom2_id];
 
 		//distance_leo = sqrt(subx*subx + suby*suby + subz*subz)*DockConst_grid_spacing;
-/*
-		distance_leo = sqrt_custom(subx*subx + suby*suby + subz*subz)*DockConst_grid_spacing;
-*/
 		float distance_leo = sqrt_custom(subx*subx + suby*suby + subz*subz)*DockConst_grid_spacing;
 
 		if (distance_leo < 1.0f) {
@@ -148,23 +91,13 @@ while(active) {
 		printf("\n\nCalculating energy contribution of atoms %u and %u\n", atom1_id+1, atom2_id+1);
 		printf("Distance: %f\n", distance_leo);
 		#endif
-/*
-		distance_pow_2  = distance_leo*distance_leo; 		
-		distance_pow_4  = distance_pow_2*distance_pow_2; 		
-		distance_pow_6  = distance_pow_2*distance_pow_4; 		
-		distance_pow_10 = distance_pow_4*distance_pow_6; 		
-		distance_pow_12 = distance_pow_6*distance_pow_6;
-*/
+
 		float distance_pow_2  = distance_leo*distance_leo; 		
 		float distance_pow_4  = distance_pow_2*distance_pow_2; 		
 		float distance_pow_6  = distance_pow_2*distance_pow_4; 		
 		float distance_pow_10 = distance_pow_4*distance_pow_6; 		
 		float distance_pow_12 = distance_pow_6*distance_pow_6;
-/*
-		inverse_distance_pow_12 = 1 / distance_pow_12;
-		inverse_distance_pow_10 = inverse_distance_pow_12 * distance_pow_2;
-		inverse_distance_pow_6  = inverse_distance_pow_10 * distance_pow_4;
-*/
+
 		float inverse_distance_pow_12 = 1 / distance_pow_12;
 		float inverse_distance_pow_10 = inverse_distance_pow_12 * distance_pow_2;
 		float inverse_distance_pow_6  = inverse_distance_pow_10 * distance_pow_4;
@@ -178,10 +111,6 @@ while(active) {
 		//if ((distance_leo < 8.0f) && (distance_leo < 20.48f))
 		if (distance_leo < 8.0f) 
 		{
-/*
-			atom1_typeid = KerConstStatic->atom_types_const [atom1_id];
-			atom2_typeid = KerConstStatic->atom_types_const [atom2_id];
-*/
 			char atom1_typeid = KerConstStatic->atom_types_const [atom1_id];
 			char atom2_typeid = KerConstStatic->atom_types_const [atom2_id];
 

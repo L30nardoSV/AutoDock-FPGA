@@ -395,6 +395,13 @@ filled with clock() */
 	// private args added in the order in which their values are used in kernel
 	setKernelArg(kernel2,2, sizeof(unsigned int),                          	&dockpars.rotbondlist_length);
 	setKernelArg(kernel2,3, sizeof(unsigned char),                          &dockpars.num_of_atoms);
+
+	setKernelArg(kernel2,4, sizeof(float),                          	&KerConstDynamic.ref_orientation_quats_const[0]);
+	setKernelArg(kernel2,5, sizeof(float),                          	&KerConstDynamic.ref_orientation_quats_const[1]);
+	setKernelArg(kernel2,6, sizeof(float),                          	&KerConstDynamic.ref_orientation_quats_const[2]);
+	setKernelArg(kernel2,7, sizeof(float),                          	&KerConstDynamic.ref_orientation_quats_const[3]);
+
+
 #endif // End of ENABLE_KERNEL2
 
 
@@ -492,6 +499,13 @@ filled with clock() */
 		memcopyBufferObjectToDevice(command_queue1,mem_KerConstDynamic, 		&KerConstDynamic,         sizeof(KerConstDynamic));
  		memcopyBufferObjectToDevice(command_queue1,mem_dockpars_conformations_current, 	cpu_init_populations, size_populations);
 		memcopyBufferObjectToDevice(command_queue1,mem_dockpars_prng_states,     	cpu_prng_seeds,       size_prng_seeds);
+
+#ifdef ENABLE_KERNEL2 // Krnl_Conform
+	setKernelArg(kernel2,4, sizeof(float),                          	&KerConstDynamic.ref_orientation_quats_const[0]);
+	setKernelArg(kernel2,5, sizeof(float),                          	&KerConstDynamic.ref_orientation_quats_const[1]);
+	setKernelArg(kernel2,6, sizeof(float),                          	&KerConstDynamic.ref_orientation_quats_const[2]);
+	setKernelArg(kernel2,7, sizeof(float),                          	&KerConstDynamic.ref_orientation_quats_const[3]);
+#endif // End of ENABLE_KERNEL2
 
 		#ifdef ENABLE_KERNEL1
 		runKernelTask(command_queue1,kernel1,NULL,NULL);
