@@ -14,7 +14,17 @@ float sqrt_custom(const float x)
 // --------------------------------------------------------------------------
 __kernel __attribute__ ((max_global_work_dim(0)))
 void Krnl_IntraE(
+/*
 	     __global const kernelconstant_static*  restrict KerConstStatic,
+*/
+ 	     __constant float* restrict KerConstStatic_atom_charges_const,
+ 	     __constant char*  restrict KerConstStatic_atom_types_const,
+	     __constant char*  restrict KerConstStatic_intraE_contributors_const,
+	     __constant float* restrict KerConstStatic_VWpars_AC_const,
+	     __constant float* restrict KerConstStatic_VWpars_BD_const,
+	     __constant float* restrict KerConstStatic_dspars_S_const,
+ 	     __constant float* restrict KerConstStatic_dspars_V_const,
+
 			    unsigned char                    DockConst_num_of_atoms,
 		   	    unsigned int                     DockConst_num_of_intraE_contributors,
 		  	    float                            DockConst_grid_spacing,
@@ -66,7 +76,10 @@ while(active) {
 		char ref_intraE_contributors_const[3];
 
 		for (uchar i=0; i<3; i++) {
+/*
 			ref_intraE_contributors_const[i] = KerConstStatic->intraE_contributors_const[3*contributor_counter+i];
+*/
+			ref_intraE_contributors_const[i] = KerConstStatic_intraE_contributors_const[3*contributor_counter+i];
 		}
 
 		char atom1_id = ref_intraE_contributors_const[0];
@@ -111,25 +124,48 @@ while(active) {
 		//if ((distance_leo < 8.0f) && (distance_leo < 20.48f))
 		if (distance_leo < 8.0f) 
 		{
+/*
 			char atom1_typeid = KerConstStatic->atom_types_const [atom1_id];
 			char atom2_typeid = KerConstStatic->atom_types_const [atom2_id];
+*/
+			char atom1_typeid = KerConstStatic_atom_types_const [atom1_id];
+			char atom2_typeid = KerConstStatic_atom_types_const [atom2_id];
 
 			//calculating van der Waals / hydrogen bond term
+/*
 			partialE1 = KerConstStatic->VWpars_AC_const[atom1_typeid*DockConst_num_of_atypes+atom2_typeid]*inverse_distance_pow_12;
+*/
+
+			partialE1 = KerConstStatic_VWpars_AC_const[atom1_typeid*DockConst_num_of_atypes+atom2_typeid]*inverse_distance_pow_12;
 
 			if (ref_intraE_contributors_const[2] == 1)	//H-bond
+/*
 				partialE2 = KerConstStatic->VWpars_BD_const[atom1_typeid*DockConst_num_of_atypes+atom2_typeid]*inverse_distance_pow_10;
+*/
+				partialE2 = KerConstStatic_VWpars_BD_const[atom1_typeid*DockConst_num_of_atypes+atom2_typeid]*inverse_distance_pow_10;
 
 			else	//van der Waals
+/*
 				partialE2 = KerConstStatic->VWpars_BD_const[atom1_typeid*DockConst_num_of_atypes+atom2_typeid]*inverse_distance_pow_6;
+*/
+				partialE2 = KerConstStatic_VWpars_BD_const[atom1_typeid*DockConst_num_of_atypes+atom2_typeid]*inverse_distance_pow_6;
 
 			//calculating electrostatic term
+/*
 			partialE3 = DockConst_coeff_elec*KerConstStatic->atom_charges_const[atom1_id]*KerConstStatic->atom_charges_const[atom2_id]/(distance_leo*(-8.5525f + 86.9525f/(1.0f + 7.7839f*exp(-0.3154f*distance_leo))));
+*/
+			partialE3 = DockConst_coeff_elec*KerConstStatic_atom_charges_const[atom1_id]*KerConstStatic_atom_charges_const[atom2_id]/(distance_leo*(-8.5525f + 86.9525f/(1.0f + 7.7839f*exp(-0.3154f*distance_leo))));
 
 			//calculating desolvation term
+/*
 			partialE4 = (
 				  ( KerConstStatic->dspars_S_const[atom1_typeid] + DockConst_qasp*fabs(KerConstStatic->atom_charges_const[atom1_id]) ) * KerConstStatic->dspars_V_const[atom2_typeid] + 
 				  ( KerConstStatic->dspars_S_const[atom2_typeid] + DockConst_qasp*fabs(KerConstStatic->atom_charges_const[atom2_id]) ) * KerConstStatic->dspars_V_const[atom1_typeid]) * 
+				 DockConst_coeff_desolv*exp(-0.0386f*distance_pow_2);
+*/
+			partialE4 = (
+				  ( KerConstStatic_dspars_S_const[atom1_typeid] + DockConst_qasp*fabs(KerConstStatic_atom_charges_const[atom1_id]) ) * KerConstStatic_dspars_V_const[atom2_typeid] + 
+				  ( KerConstStatic_dspars_S_const[atom2_typeid] + DockConst_qasp*fabs(KerConstStatic_atom_charges_const[atom2_id]) ) * KerConstStatic_dspars_V_const[atom1_typeid]) * 
 				 DockConst_coeff_desolv*exp(-0.0386f*distance_pow_2);
 
 		} // End of if: if ((dist < dcutoff) && (dist < 20.48))	

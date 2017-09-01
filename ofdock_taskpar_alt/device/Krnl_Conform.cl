@@ -5,8 +5,16 @@
 // --------------------------------------------------------------------------
 __kernel __attribute__ ((max_global_work_dim(0)))
 void Krnl_Conform(
-             __global   const kernelconstant_static*  restrict KerConstStatic,
-	     __global   const kernelconstant_dynamic* restrict KerConstDynamic,
+/*__global   const kernelconstant_static*  restrict KerConstStatic,*/
+	     __constant int*   restrict KerConstStatic_rotlist_const,
+
+/*__global   const kernelconstant_dynamic* restrict KerConstDynamic,*/
+	     __constant float* restrict KerConstDynamic_ref_coords_x_const,
+	     __constant float* restrict KerConstDynamic_ref_coords_y_const,
+	     __constant float* restrict KerConstDynamic_ref_coords_z_const,
+ 	     __constant float* restrict KerConstDynamic_rotbonds_moving_vectors_const,
+	     __constant float* restrict KerConstDynamic_rotbonds_unit_vectors_const,
+	    
 			      unsigned int                     DockConst_rotbondlist_length,
 			      unsigned char                    DockConst_num_of_atoms,
 			      float                            ref_orientation_quats_const_0,
@@ -26,7 +34,10 @@ void Krnl_Conform(
 	// local mem to cache KerConstStatic->rotlist_const[], marked as bottleneck by profiler
 	__local int rotlist_localcache [MAX_NUM_OF_ROTATIONS];
 	for (ushort c = 0; c < DockConst_rotbondlist_length; c++) {
+/*
 		rotlist_localcache [c] = KerConstStatic->rotlist_const [c];
+*/
+		rotlist_localcache [c] = KerConstStatic_rotlist_const [c];
 	}
 
 while(active) {
@@ -119,9 +130,6 @@ while(active) {
 	
 	for (ushort rotation_counter = 0; rotation_counter < DockConst_rotbondlist_length; rotation_counter++)
 	{
-/*
-		int rotation_list_element = KerConstStatic->rotlist_const[rotation_counter];
-*/
 		int rotation_list_element = rotlist_localcache [rotation_counter];
 
 		if ((rotation_list_element & RLIST_DUMMY_MASK) == 0)	//if not dummy rotation
@@ -133,9 +141,14 @@ while(active) {
 
 			if ((rotation_list_element & RLIST_FIRSTROT_MASK) != 0)	//if first rotation of this atom
 			{	
+/*
 				atom_to_rotate[0] = KerConstDynamic->ref_coords_x_const[atom_id];
 				atom_to_rotate[1] = KerConstDynamic->ref_coords_y_const[atom_id];
 				atom_to_rotate[2] = KerConstDynamic->ref_coords_z_const[atom_id];
+*/
+				atom_to_rotate[0] = KerConstDynamic_ref_coords_x_const[atom_id];
+				atom_to_rotate[1] = KerConstDynamic_ref_coords_y_const[atom_id];
+				atom_to_rotate[2] = KerConstDynamic_ref_coords_z_const[atom_id];
 			}
 			else
 			{
@@ -167,14 +180,20 @@ while(active) {
 	
 				//#pragma unroll 1
 				for (uchar i=0; i<3; i++) {
+/*
 					rotation_unitvec[i] = KerConstDynamic->rotbonds_unit_vectors_const[3*rotbond_id + i];
+*/
+					rotation_unitvec[i] = KerConstDynamic_rotbonds_unit_vectors_const[3*rotbond_id + i];
 				}
 
 				rotation_angle = genotype[6+rotbond_id]*DEG_TO_RAD;
 
 				//#pragma unroll 1
 				for (uchar i=0; i<3; i++) {
+/*
 					rotation_movingvec[i] = KerConstDynamic->rotbonds_moving_vectors_const[3*rotbond_id + i];
+*/
+					rotation_movingvec[i] = KerConstDynamic_rotbonds_moving_vectors_const[3*rotbond_id + i];
 				}
 
 				//in addition performing the first movement 

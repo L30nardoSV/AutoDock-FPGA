@@ -279,4 +279,35 @@ This optimization step consists of reducing the scope of variable to the deepest
 | 3ptb, 10 runs    |  296.88      | 59.49            | 0.200     | ~ 4.99x slower | 
 
 
+## `sixth_run_harp2`
+
+* In `Krnl_Conform`, `Krnl_InterE`, and `Krnl_IntraE` pass arrays separately instead of including them in a struct (as originally). Declare these as `__constant` kernel arguments. This implies modifying host too.
+
+** Estimated resource usage **
+
+| Resource                             | Usage        |
+| :----------------------------------: | :----------: |
+| Logic utilization                    |   84%        |
+| ALUTs                                |   34%        |
+| Dedicated logic registers            |   50%        |
+| Memory blocks                        |   64%        |
+| DSP blocks                           |   36%        |
+
+### Measurements from non-instrumented program
+
+** Execution time (s) **
+
+| Configuration    |    FPGA      |  CPU (AutoDock)  |  Speed-up | Comments       |
+| :--------------: | :----------: | :--------------: | :-------: | :------------: |
+| 3ptb, 10 runs    |   276.23     | 59.49            |  0.215    | ~ 4.64x slower |
+
+
+### Measurements from instrumented program 
+
+** Execution time (s) **
+
+| Configuration    |    FPGA      |  CPU (AutoDock)  |  Speed-up | Comments       |
+| :--------------: | :----------: | :--------------: | :-------: | :------------: |
+| 3ptb, 10 runs    |   302.54     | 59.49            | 0.196     | ~ 5.08x slower | 
+
 

@@ -141,10 +141,6 @@ ENABLE_K1 = YES
 ENABLE_K2 = YES
 ENABLE_K3 = YES
 ENABLE_K4 = YES
-ENABLE_K5 = NO
-ENABLE_K6 = NO
-ENABLE_K7 = NO
-ENABLE_K8 = NO
 
 ifeq ($(ENABLE_K1),YES)
 	K1 =-DENABLE_KERNEL1
@@ -170,31 +166,7 @@ else
 	K4 =
 endif
 
-ifeq ($(ENABLE_K5),YES)
-	K5 =-DENABLE_KERNEL5
-else
-	K5 =
-endif
-
-ifeq ($(ENABLE_K6),YES)
-	K6 =-DENABLE_KERNEL6
-else
-	K6 =
-endif
-
-ifeq ($(ENABLE_K7),YES)
-	K7 =-DENABLE_KERNEL7
-else
-	K7 =
-endif
-
-ifeq ($(ENABLE_K8),YES)
-	K8 =-DENABLE_KERNEL8
-else
-	K8 =
-endif
-
-ENABLE_KERNELS = $(K1) $(K2) $(K3) $(K4) $(K5) $(K6) $(K7) $(K8)
+ENABLE_KERNELS = $(K1) $(K2) $(K3) $(K4)
 
 # =============================
 # Reproduce result (remove randomness)
