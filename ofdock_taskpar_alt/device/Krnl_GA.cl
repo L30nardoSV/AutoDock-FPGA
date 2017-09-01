@@ -124,7 +124,10 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 	     __global       float*           restrict GlobEnergyCurrent,
 	     __global 	    float*           restrict GlobPopulationNext,
 	     __global       float*           restrict GlobEnergyNext,
+/*
              __global       unsigned int*    restrict GlobPRNG,	
+*/
+	                    unsigned int              GlobPRNG,
 	     __global       unsigned int*    restrict GlobEvalsGenerations_performed,
 			    unsigned int              DockConst_pop_size,
 		     	    unsigned int              DockConst_num_of_energy_evals,
@@ -231,6 +234,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 	uint best_entity_id; 	
 	__local float loc_energies[MAX_POPSIZE]; 
 
+
 	// Binary tournament 	
 	uint parent1, parent2; 
 	float local_entity_1     [ACTUAL_GENOTYPE_LENGTH]; 	
@@ -244,8 +248,10 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 	// ---------------------------
 
 	// read GlobPRNG
+/*
 	uint prng = GlobPRNG[0];
-
+*/
+	uint prng = GlobPRNG;
 
 	while ((eval_cnt < DockConst_num_of_energy_evals) && (generation_cnt < DockConst_num_of_generations)) {
 
@@ -365,6 +371,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			while ((iteration_cnt < DockConst_max_num_of_iters) && (rho > DockConst_rho_lower_bound)) {
 				//new random deviate
 				//rho is the deviation of the uniform distribution
+
 				for (uchar i=0; i<3; i++) {
 					genotype_deviate [i] = rho*DockConst_base_dmov_mul_sqrt3*(2*myrand(&prng)-1);
 				}
@@ -413,18 +420,38 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 				// if the new entity is better
 				if (candidate_energy < offspring_energy)
 				{
+					// temporal 
+					float g_bias_tmp     [ACTUAL_GENOTYPE_LENGTH];
+					float g_deviate_tmp  [ACTUAL_GENOTYPE_LENGTH];
+
 					// updating offspring_genotype
+					for (uchar i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {
+						offspring_genotype [i] = entity_possible_new_genotype [i];
+						g_bias_tmp [i] = 0.6f * genotype_bias [i];
+						g_deviate_tmp [i] = 0.4f * genotype_deviate [i];
+					}
+
 					// updating genotype_bias
 					if (positive_direction == true) { 
 						for (uchar i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {
+							/*
 							offspring_genotype [i] = entity_possible_new_genotype [i];
+							*/
+							/*
 							genotype_bias [i] = 0.6f*genotype_bias [i] + 0.4f*genotype_deviate [i];
+							*/
+							genotype_bias [i] = g_bias_tmp [i] + g_deviate_tmp [i];
 						}
 					}
 					else {
 						for (uchar i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {
+							/*
 							offspring_genotype [i] = entity_possible_new_genotype [i];
+							*/
+							/*
 							genotype_bias [i] = 0.6f*genotype_bias [i] - 0.4f*genotype_deviate [i];
+							*/
+							genotype_bias [i] = g_bias_tmp [i] - g_deviate_tmp [i];
 						}
 					}
 
@@ -507,10 +534,10 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			
 	} // End while eval_cnt & generation_cnt
 
-
+/*
 	// write back to GlobPRNG FIXME
 	GlobPRNG[0] = prng;
-
+*/
 
 	// ------------------------------------------------------------------
 	// Off: turn off Conform, InterE, IntraE

@@ -214,12 +214,33 @@ float map_angle(float angle, const float limit)
 // The pop_size parameter must be equal to the population size.
 // Originally from: searchoptimum.c
 // --------------------------------------------------------------------------
+uint find_best(__local        float* restrict loc_energies,
+		        const uint pop_size)
+{
+	float tmp_energy [MAX_POPSIZE];
+	for (ushort i=0; i<pop_size; i++) {
+		tmp_energy [i] = loc_energies [i];
+	}
 
+	ushort best_entity = 0;
+	for (ushort i=1; i<pop_size; i++) {
+		if (tmp_energy[i] < tmp_energy[best_entity]) {
+			best_entity = i;
+		}
+	}
+
+	return best_entity;
+}
+
+
+
+/*
 // lvs: outer loop is pipelined with II = 11
 uint find_best(__local        float* restrict loc_energies,
 		        const uint pop_size)
 {
 	ushort best_entity = 0;
+
 
 	for (ushort i=1; i<pop_size; i++) {
 		#if defined (DEBUG_FIND_BEST)
@@ -246,6 +267,7 @@ uint find_best(__local        float* restrict loc_energies,
 
 	return best_entity;
 }
+*/
 
 /*
 // lvs: outer loop is pipelined with II = 12
@@ -295,7 +317,13 @@ float myrand(uint* prng)
 #else
 	*prng = RAND_A*(*prng) + RAND_C;
 #endif
+
+/*
 	return convert_float(*prng/MAX_UINT)*0.999999f;	
+*/
+	float res_tmp = 0.999999f / MAX_UINT;
+	res_tmp *= *prng;
+	return res_tmp;
 }
 
 // --------------------------------------------------------------------------

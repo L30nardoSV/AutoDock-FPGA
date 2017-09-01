@@ -23,6 +23,12 @@ void Krnl_Conform(
 
 	char active = 1;
 
+	// local mem to cache KerConstStatic->rotlist_const[], marked as bottleneck by profiler
+	__local int rotlist_localcache [MAX_NUM_OF_ROTATIONS];
+	for (ushort c = 0; c < DockConst_rotbondlist_length; c++) {
+		rotlist_localcache [c] = KerConstStatic->rotlist_const [c];
+	}
+
 while(active) {
 	#if defined (DEBUG_KRNL_CONFORM)
 	printf("BEFORE In CONFORM CHANNEL\n");
@@ -113,7 +119,10 @@ while(active) {
 	
 	for (ushort rotation_counter = 0; rotation_counter < DockConst_rotbondlist_length; rotation_counter++)
 	{
+/*
 		int rotation_list_element = KerConstStatic->rotlist_const[rotation_counter];
+*/
+		int rotation_list_element = rotlist_localcache [rotation_counter];
 
 		if ((rotation_list_element & RLIST_DUMMY_MASK) == 0)	//if not dummy rotation
 		{

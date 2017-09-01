@@ -232,3 +232,51 @@ This optimization step consists of reducing the scope of variable to the deepest
 | :--------------: | :----------: | :--------------: | :-------: | :------------: |
 | 3ptb, 10 runs    |  324.56      | 59.49            | 0.183     | ~ 5.45x slower | 
 
+
+## `fifth_run_harp2`
+
+** Krnl_GA **
+
+* Copy `loc_energies` to a private array `tmp_energy` before finding the best entity, this reduces II from 11 downto 6
+* `LS` genotype update was simplified to reduce code inside conditional
+* Removed write `to GlobPRNG[0]` because it was never needed. Host passes a new prng number on every docking run, so the prng number is passed to `Krnl_GA` as a private arg instead of global
+
+** auxiliary_genetic.cl **
+
+* `myrand` included an explicit convert_float enclosing a multiplication. This is changed with an implicit conversion of only `*prng`. This reduces the II from 24 downto 16 in the latest `gen_new_genotype` for-loop (index: 5 -ACTUAL_GENOTYPE_LENGTH)
+
+** Krnl_Conform **
+
+* Added a local memory as a cache for `KerConstStatic->rotlist_const`. This should resolved bottleneck shown by the profiler
+
+
+** Estimated resource usage **
+
+| Resource                             | Usage        |
+| :----------------------------------: | :----------: |
+| Logic utilization                    |  95 %        |
+| ALUTs                                |  40 %        |
+| Dedicated logic registers            |  56 %        |
+| Memory blocks                        |  88 %        |
+| DSP blocks                           |  36 %        |
+
+
+### Measurements from non-instrumented program
+
+** Execution time (s) **
+
+| Configuration    |    FPGA      |  CPU (AutoDock)  |  Speed-up | Comments       |
+| :--------------: | :----------: | :--------------: | :-------: | :------------: |
+| 3ptb, 10 runs    |   282.95     | 59.49            |   0.210   | ~ 4.75x slower |
+
+
+### Measurements from instrumented program 
+
+** Execution time (s) **
+
+| Configuration    |    FPGA      |  CPU (AutoDock)  |  Speed-up | Comments       |
+| :--------------: | :----------: | :--------------: | :-------: | :------------: |
+| 3ptb, 10 runs    |  296.88      | 59.49            | 0.200     | ~ 4.99x slower | 
+
+
+
