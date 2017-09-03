@@ -311,3 +311,69 @@ This optimization step consists of reducing the scope of variable to the deepest
 | 3ptb, 10 runs    |   302.54     | 59.49            | 0.196     | ~ 5.08x slower | 
 
 
+
+
+
+
+
+
+
+
+## `seventh_run_harp2`
+
+** Krnl_GA **
+
+* Upper bound of loops over ALL entity elements (ACTUAL_GENOTYPE_LENGTH genes) are changed approprietely to "DockConst_num_of_genes". The aim is to reduce the latency of the for loop while keeping throughput (II = 1)
+
+* Remove sending of "mode" through channel from `Knrl_GA` to `Krnl_Conform`, as it is enough for `Krnl_Conform` to know which `mode` is enabled by reading `active`
+
+* In ** auxiliary_genetic.cl ** / `gen_new_genotype()` add `DockConst_num_of_genes` as argument and replace upper bounds of loops as previously
+
+
+** Krnl_Conform ** 
+
+* Add the argument `DockConst_num_of_genes` so reduction of loop latency can be attempted in this kernel too
+
+* Remove receiving of "mode" through channel from `Knrl_GA` to `Krnl_Conform`, as it is enough for `Krnl_Conform` to know which `mode` is enabled by reading `active`
+
+** Krnl_IntraE **
+
+* Reduce computation inside conditional statement `if (ref_intraE_contributors_const[2] == 1)	//H-bond`
+
+
+** Estimated resource usage **
+
+| Resource                             | Usage        |
+| :----------------------------------: | :----------: |
+| Logic utilization                    |   84%        |
+| ALUTs                                |   34%        |
+| Dedicated logic registers            |   50%        |
+| Memory blocks                        |   63%        |
+| DSP blocks                           |   36%        |
+
+### Measurements from non-instrumented program
+
+** Execution time (s) **
+
+| Configuration    |    FPGA      |  CPU (AutoDock)  |  Speed-up | Comments       |
+| :--------------: | :----------: | :--------------: | :-------: | :------------: |
+| 3ptb, 10 runs    | 258.59       | 59.49            | 0.230     | ~ 4.34x slower |
+
+
+### Measurements from instrumented program 
+
+** Execution time (s) **
+
+| Configuration    |    FPGA      |  CPU (AutoDock)  |  Speed-up | Comments       |
+| :--------------: | :----------: | :--------------: | :-------: | :------------: |
+| 3ptb, 10 runs    | 295.76       | 59.49            | 0.201     | ~ 4.97x slower | 
+
+
+
+
+## `eigth_run_harp2`
+
+** Krnl_GA **
+
+* Send genotypes faster from `Krnl_GA` to `Knrl_Conform` during `GG` by 
+

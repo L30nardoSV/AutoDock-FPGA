@@ -440,7 +440,8 @@ void binary_tournament_selection(               uint*           prng,
 // --------------------------------------------------------------------------
 void gen_new_genotype(	                uint*           prng,
 		      /*__local*/ const float*          parent1_genotype,
-		      /*__local*/ const float*          parent2_genotype, 
+		      /*__local*/ const float*          parent2_genotype,
+			      const uint            num_genes,
 		              const float           mutation_rate,
 			      const float           abs_max_dmov,
 			      const float           abs_max_dang,
@@ -450,8 +451,12 @@ void gen_new_genotype(	                uint*           prng,
 	uint covr_point_low, covr_point_high;
 	uint temp1, temp2;
 
+/*
 	temp1 = myrand_uint(prng, ACTUAL_GENOTYPE_LENGTH-1);
 	temp2 = myrand_uint(prng, ACTUAL_GENOTYPE_LENGTH-1);
+*/
+	temp1 = myrand_uint(prng, num_genes-1);
+	temp2 = myrand_uint(prng, num_genes-1);
 
 	//if (temp1 < temp2) {covr_point_low = temp1;
 	//		    covr_point_high = temp2;}
@@ -498,7 +503,10 @@ void gen_new_genotype(	                uint*           prng,
 		//if (covr_point_low != covr_point_high)
 		if (twopoint_cross_yes == true)
 		{
+/*
 			for (uchar i=0; i<ACTUAL_GENOTYPE_LENGTH; i++)
+*/
+			for (uchar i=0; i<num_genes; i++)
 			{
 				if ((i<=covr_point_low) || (i>covr_point_high)) 
 				{
@@ -513,7 +521,10 @@ void gen_new_genotype(	                uint*           prng,
 		}
 		//one-point crossover
 		else {
+/*
 			for (uchar i=0; i<ACTUAL_GENOTYPE_LENGTH; i++)
+*/
+			for (uchar i=0; i<num_genes; i++)
 			{
 				if (i <= covr_point_low)
 				{
@@ -535,7 +546,10 @@ void gen_new_genotype(	                uint*           prng,
 	}
 	else	//if no crossover, the offsprings are the parents
 	{
+/*
 		for (uchar i=0; i<ACTUAL_GENOTYPE_LENGTH; i++)
+*/
+		for (uchar i=0; i<num_genes; i++)
 		{
 			//offspring_genotype [i] = parent1_genotype[i];
 			priv_offspring_genotype [i] = parent1_genotype[i];
@@ -597,7 +611,10 @@ void gen_new_genotype(	                uint*           prng,
 		priv_offspring_genotype [4] = map_angle_180(priv_offspring_genotype [4]);
 	}
 
+/*
 	for (uchar i=5; i<ACTUAL_GENOTYPE_LENGTH; i++)
+*/
+	for (uchar i=5; i<num_genes; i++)
 	{
 		//if (mutation_rate > 100*myrand(prng))
 		if (mutation_rate > myrand(prng))
@@ -612,7 +629,10 @@ void gen_new_genotype(	                uint*           prng,
 	for (i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {printf("%f ", offspring_genotype [i]);} printf("\n");
 	#endif
 
+/*
 	for (uchar i=0; i< ACTUAL_GENOTYPE_LENGTH; i++) {
+*/
+	for (uchar i=0; i<num_genes; i++) {
 		offspring_genotype [i] = priv_offspring_genotype [i];
 	}
 }

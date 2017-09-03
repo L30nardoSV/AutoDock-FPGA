@@ -5,10 +5,8 @@
 // --------------------------------------------------------------------------
 __kernel __attribute__ ((max_global_work_dim(0)))
 void Krnl_Conform(
-/*__global   const kernelconstant_static*  restrict KerConstStatic,*/
 	     __constant int*   restrict KerConstStatic_rotlist_const,
 
-/*__global   const kernelconstant_dynamic* restrict KerConstDynamic,*/
 	     __constant float* restrict KerConstDynamic_ref_coords_x_const,
 	     __constant float* restrict KerConstDynamic_ref_coords_y_const,
 	     __constant float* restrict KerConstDynamic_ref_coords_z_const,
@@ -17,12 +15,22 @@ void Krnl_Conform(
 	    
 			      unsigned int                     DockConst_rotbondlist_length,
 			      unsigned char                    DockConst_num_of_atoms,
+
+			      unsigned int                     DockConst_num_of_genes,
+
 			      float                            ref_orientation_quats_const_0,
 			      float                            ref_orientation_quats_const_1,
 			      float                            ref_orientation_quats_const_2,
 			      float                            ref_orientation_quats_const_3
 )
 {
+	#if defined (DEBUG_KRNL_Conform) 
+	printf("\n");
+	printf("%-40s %u\n", "DockConst->rotbondlist_length: ",	DockConst_rotbondlist_length);
+	printf("%-40s %u\n", "DockConst->num_of_atoms: ",  	DockConst_num_of_atoms);
+	printf("%-40s %u\n", "DockConst_num_of_genes: ",        DockConst_num_of_genes);	
+	#endif
+
 	// local vars are allowed only at kernel scope
 	__local float loc_coords_x[MAX_NUM_OF_ATOMS];
 	__local float loc_coords_y[MAX_NUM_OF_ATOMS];
@@ -34,16 +42,11 @@ void Krnl_Conform(
 	// local mem to cache KerConstStatic->rotlist_const[], marked as bottleneck by profiler
 	__local int rotlist_localcache [MAX_NUM_OF_ROTATIONS];
 	for (ushort c = 0; c < DockConst_rotbondlist_length; c++) {
-/*
-		rotlist_localcache [c] = KerConstStatic->rotlist_const [c];
-*/
 		rotlist_localcache [c] = KerConstStatic_rotlist_const [c];
 	}
 
 while(active) {
-	#if defined (DEBUG_KRNL_CONFORM)
-	printf("BEFORE In CONFORM CHANNEL\n");
-	#endif
+	//printf("BEFORE In CONFORM CHANNEL\n");
 	// --------------------------------------------------------------
 	// Wait for genotypes in channel
 	// --------------------------------------------------------------
@@ -68,54 +71,43 @@ while(active) {
 
 	if (IC_valid) {
 		active = IC_active;
-		mem_fence(CLK_CHANNEL_MEM_FENCE);
-		mode   = read_channel_altera(chan_IC2Conf_mode);
-		mem_fence(CLK_CHANNEL_MEM_FENCE);
+		mode = 1;
 
-		for (uchar pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {
+		for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_genes; pipe_cnt++) {
 			genotype[pipe_cnt] = read_channel_altera(chan_IC2Conf_genotype);}	
 	}
 	else {
 		if (GG_valid) {
 			active = GG_active;
-			mem_fence(CLK_CHANNEL_MEM_FENCE);
-			mode   = read_channel_altera(chan_GG2Conf_mode);
-			mem_fence(CLK_CHANNEL_MEM_FENCE);
+			mode = 2;
 
-			for (uchar pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {
+			for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_genes; pipe_cnt++) {
 				genotype[pipe_cnt] = read_channel_altera(chan_GG2Conf_genotype);}	
 		}
 		else {
 			if (LS_valid) {
 				active = LS_active;
-				mem_fence(CLK_CHANNEL_MEM_FENCE);
-				mode   = read_channel_altera(chan_LS2Conf_mode);
-				mem_fence(CLK_CHANNEL_MEM_FENCE);
+				mode = 3;
 
-				for (uchar pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {
+				for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_genes; pipe_cnt++) {
 					genotype[pipe_cnt] = read_channel_altera(chan_LS2Conf_genotype);}
 			}
 			else {
 				if (Off_valid) {
 					active = Off_active;
-					mem_fence(CLK_CHANNEL_MEM_FENCE);
-					mode   = read_channel_altera(chan_Off2Conf_mode);
-					mem_fence(CLK_CHANNEL_MEM_FENCE);
+					mode = 4;
 
-					for (uchar pipe_cnt=0; pipe_cnt<ACTUAL_GENOTYPE_LENGTH; pipe_cnt++) {
+					for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_genes; pipe_cnt++) {
 						genotype[pipe_cnt] = read_channel_altera(chan_Off2Conf_genotype);}
 					}
 			}
 		}	
 	}
-	
+	// --------------------------------------------------------------
+	//printf("AFTER In CONFORM CHANNEL\n");
+
 	#if defined (DEBUG_ACTIVE_KERNEL)
 	if (active == 0) {printf("	%-20s: %s\n", "Krnl_Conform", "must be disabled");}
-	#endif
-	
-	// --------------------------------------------------------------
-	#if defined (DEBUG_KRNL_CONFORM)
-	printf("AFTER In CONFORM CHANNEL\n");
 	#endif
 
 	float phi         = genotype [3]*DEG_TO_RAD;
@@ -141,11 +133,6 @@ while(active) {
 
 			if ((rotation_list_element & RLIST_FIRSTROT_MASK) != 0)	//if first rotation of this atom
 			{	
-/*
-				atom_to_rotate[0] = KerConstDynamic->ref_coords_x_const[atom_id];
-				atom_to_rotate[1] = KerConstDynamic->ref_coords_y_const[atom_id];
-				atom_to_rotate[2] = KerConstDynamic->ref_coords_z_const[atom_id];
-*/
 				atom_to_rotate[0] = KerConstDynamic_ref_coords_x_const[atom_id];
 				atom_to_rotate[1] = KerConstDynamic_ref_coords_y_const[atom_id];
 				atom_to_rotate[2] = KerConstDynamic_ref_coords_z_const[atom_id];
@@ -180,9 +167,6 @@ while(active) {
 	
 				//#pragma unroll 1
 				for (uchar i=0; i<3; i++) {
-/*
-					rotation_unitvec[i] = KerConstDynamic->rotbonds_unit_vectors_const[3*rotbond_id + i];
-*/
 					rotation_unitvec[i] = KerConstDynamic_rotbonds_unit_vectors_const[3*rotbond_id + i];
 				}
 
@@ -190,9 +174,6 @@ while(active) {
 
 				//#pragma unroll 1
 				for (uchar i=0; i<3; i++) {
-/*
-					rotation_movingvec[i] = KerConstDynamic->rotbonds_moving_vectors_const[3*rotbond_id + i];
-*/
 					rotation_movingvec[i] = KerConstDynamic_rotbonds_moving_vectors_const[3*rotbond_id + i];
 				}
 

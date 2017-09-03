@@ -439,20 +439,21 @@ filled with clock() */
 	setKernelArg(kernel2,5, sizeof(mem_KerConstDynamic_rotbonds_unit_vectors_const),  &mem_KerConstDynamic_rotbonds_unit_vectors_const);
 
 	// private args added in the order in which their values are used in kernel
-/*
-	setKernelArg(kernel2,2, sizeof(unsigned int),                          	&dockpars.rotbondlist_length);
-	setKernelArg(kernel2,3, sizeof(unsigned char),                          &dockpars.num_of_atoms);
-	setKernelArg(kernel2,4, sizeof(float),                          	&KerConstDynamic.ref_orientation_quats_const[0]);
-	setKernelArg(kernel2,5, sizeof(float),                          	&KerConstDynamic.ref_orientation_quats_const[1]);
-	setKernelArg(kernel2,6, sizeof(float),                          	&KerConstDynamic.ref_orientation_quats_const[2]);
-	setKernelArg(kernel2,7, sizeof(float),                          	&KerConstDynamic.ref_orientation_quats_const[3]);
-*/
 	setKernelArg(kernel2,6, sizeof(unsigned int),                          	&dockpars.rotbondlist_length);
 	setKernelArg(kernel2,7, sizeof(unsigned char),                          &dockpars.num_of_atoms);
+
+	setKernelArg(kernel2,8, sizeof(unsigned int),                           &dockpars.num_of_genes);
+
+/*
 	setKernelArg(kernel2,8, sizeof(float),                          	&KerConstDynamic.ref_orientation_quats_const[0]);
 	setKernelArg(kernel2,9, sizeof(float),                          	&KerConstDynamic.ref_orientation_quats_const[1]);
 	setKernelArg(kernel2,10, sizeof(float),                          	&KerConstDynamic.ref_orientation_quats_const[2]);
 	setKernelArg(kernel2,11, sizeof(float),                          	&KerConstDynamic.ref_orientation_quats_const[3]);
+*/
+	setKernelArg(kernel2,9, sizeof(float),                          	&KerConstDynamic.ref_orientation_quats_const[0]);
+	setKernelArg(kernel2,10, sizeof(float),                          	&KerConstDynamic.ref_orientation_quats_const[1]);
+	setKernelArg(kernel2,11, sizeof(float),                          	&KerConstDynamic.ref_orientation_quats_const[2]);
+	setKernelArg(kernel2,12, sizeof(float),                          	&KerConstDynamic.ref_orientation_quats_const[3]);
 
 #endif // End of ENABLE_KERNEL2
 
@@ -472,16 +473,6 @@ filled with clock() */
 	
 
 	// private args added in the order in which their values are used in kernel
-/*
-	setKernelArg(kernel3,2, sizeof(unsigned char),                          &dockpars.g1);
-	setKernelArg(kernel3,3, sizeof(unsigned int),                          	&dockpars.g2);
-	setKernelArg(kernel3,4, sizeof(unsigned int),                          	&dockpars.g3);
-	setKernelArg(kernel3,5, sizeof(unsigned char),                          &dockpars.num_of_atoms);
-	setKernelArg(kernel3,6, sizeof(unsigned char),                          &gridsizex_minus1);
-	setKernelArg(kernel3,7, sizeof(unsigned char),                          &gridsizey_minus1);
-	setKernelArg(kernel3,8, sizeof(unsigned char),                          &gridsizez_minus1);
-	setKernelArg(kernel3,9, sizeof(unsigned char),                          &dockpars.num_of_atypes);
-*/
 	setKernelArg(kernel3,3, sizeof(unsigned char),                          &dockpars.g1);
 	setKernelArg(kernel3,4, sizeof(unsigned int),                          	&dockpars.g2);
 	setKernelArg(kernel3,5, sizeof(unsigned int),                          	&dockpars.g3);
@@ -505,15 +496,6 @@ filled with clock() */
 	setKernelArg(kernel4,6, sizeof(mem_KerConstStatic_dspars_V_const),     	      &mem_KerConstStatic_dspars_V_const);
 
 	// private args added in the order in which their values are used in kernel
-/*
-	setKernelArg(kernel4,1, sizeof(unsigned char),                          &dockpars.num_of_atoms);
-	setKernelArg(kernel4,2, sizeof(unsigned int),                          	&dockpars.num_of_intraE_contributors);
-	setKernelArg(kernel4,3, sizeof(float),                          	&dockpars.grid_spacing);
-	setKernelArg(kernel4,4, sizeof(unsigned char),                          &dockpars.num_of_atypes);
-	setKernelArg(kernel4,5, sizeof(float),                          	&dockpars.coeff_elec);
-	setKernelArg(kernel4,6, sizeof(float),                          	&dockpars.qasp);
-	setKernelArg(kernel4,7, sizeof(float),                          	&dockpars.coeff_desolv);
-*/
 	setKernelArg(kernel4,7,  sizeof(unsigned char),                         &dockpars.num_of_atoms);
 	setKernelArg(kernel4,8,  sizeof(unsigned int),                          &dockpars.num_of_intraE_contributors);
 	setKernelArg(kernel4,9,  sizeof(float),                          	&dockpars.grid_spacing);
@@ -563,10 +545,10 @@ filled with clock() */
 #endif // End of ENABLE_KERNEL1
 
 #ifdef ENABLE_KERNEL2 // Krnl_Conform
-		setKernelArg(kernel2,8, sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[0]);
-		setKernelArg(kernel2,9, sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[1]);	
-		setKernelArg(kernel2,10, sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[2]);	
-		setKernelArg(kernel2,11, sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[3]);
+		setKernelArg(kernel2,9,  sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[0]);
+		setKernelArg(kernel2,10, sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[1]);	
+		setKernelArg(kernel2,11, sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[2]);	
+		setKernelArg(kernel2,12, sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[3]);
 #endif // End of ENABLE_KERNEL2
 
 		#ifdef ENABLE_KERNEL1

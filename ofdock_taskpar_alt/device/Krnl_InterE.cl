@@ -11,10 +11,8 @@
 // --------------------------------------------------------------------------
 __kernel __attribute__ ((max_global_work_dim(0)))
 void Krnl_InterE(
-           __constant /*__global const*/ float*                  restrict GlobFgrids,
-/*
-	     __global const kernelconstant_static*  restrict KerConstStatic,
-*/
+             __constant float* restrict GlobFgrids,
+  
  	     __constant float* restrict KerConstStatic_atom_charges_const,
  	     __constant char*  restrict KerConstStatic_atom_types_const,
 
@@ -39,10 +37,6 @@ void Krnl_InterE(
 	__local float ref_atom_charges_const[MAX_NUM_OF_ATOMS];
 
 	for (uchar i=0; i<MAX_NUM_OF_ATOMS; i++) {
-/*
-		ref_atom_types_const [i]   = KerConstStatic->atom_types_const[i];
-		ref_atom_charges_const [i] = KerConstStatic->atom_charges_const[i];
-*/
 		ref_atom_types_const [i]   = KerConstStatic_atom_types_const[i];
 		ref_atom_charges_const [i] = KerConstStatic_atom_charges_const[i];
 	}
