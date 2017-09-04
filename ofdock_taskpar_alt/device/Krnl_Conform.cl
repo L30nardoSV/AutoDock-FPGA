@@ -32,9 +32,20 @@ void Krnl_Conform(
 	#endif
 
 	// local vars are allowed only at kernel scope
+///*
 	__local float loc_coords_x[MAX_NUM_OF_ATOMS];
 	__local float loc_coords_y[MAX_NUM_OF_ATOMS];
 	__local float loc_coords_z[MAX_NUM_OF_ATOMS];
+//*/
+
+/*
+	// check best practices guide
+	// Table 11. Effects of numbanks and bankwidth on the Bank Geometry ...
+	// only first three indexes of the lower array are used
+	// however size of lower array was declared as 4, just to keep sizes equal to power of 2
+	__local float  __attribute__((numbanks(8), bankwidth(16))) loc_coords[MAX_NUM_OF_ATOMS][4];
+*/
+
 	__local float genotype[ACTUAL_GENOTYPE_LENGTH];
 
 	char active = 1;
@@ -139,9 +150,16 @@ while(active) {
 			}
 			else
 			{
+///*
 				atom_to_rotate[0] = loc_coords_x[atom_id];
 				atom_to_rotate[1] = loc_coords_y[atom_id];
 				atom_to_rotate[2] = loc_coords_z[atom_id];
+//*/
+/*
+				atom_to_rotate[0] = loc_coords[atom_id][0];
+				atom_to_rotate[1] = loc_coords[atom_id][1];
+				atom_to_rotate[2] = loc_coords[atom_id][2];
+*/
 			}
 
 			//capturing rotation vectors and angle
@@ -249,9 +267,16 @@ while(active) {
 					     quatrot_temp_q*quatrot_left_z + quatrot_temp_z*quatrot_left_q;
 
 			//performing final movement and storing values
+///*
 			loc_coords_x[atom_id] = atom_to_rotate [0] + rotation_movingvec[0];
 			loc_coords_y[atom_id] = atom_to_rotate [1] + rotation_movingvec[1];
 			loc_coords_z[atom_id] = atom_to_rotate [2] + rotation_movingvec[2];
+//*/
+/*
+			loc_coords[atom_id][0] = atom_to_rotate [0] + rotation_movingvec[0];
+			loc_coords[atom_id][1] = atom_to_rotate [1] + rotation_movingvec[1];
+			loc_coords[atom_id][2] = atom_to_rotate [2] + rotation_movingvec[2];
+*/
 		} // End if-statement not dummy rotation
 	} // End rotation_counter for-loop
 
@@ -272,8 +297,14 @@ while(active) {
 
 	//float3 position_xyz;
 	for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt++) {
+///*
 		write_channel_altera(chan_Conf2Intere_xyz, (float3) (loc_coords_x[pipe_cnt], loc_coords_y[pipe_cnt], loc_coords_z[pipe_cnt]));
 		write_channel_altera(chan_Conf2Intrae_xyz, (float3) (loc_coords_x[pipe_cnt], loc_coords_y[pipe_cnt], loc_coords_z[pipe_cnt]));
+//*/
+/*
+		write_channel_altera(chan_Conf2Intere_xyz, (float3) (loc_coords[pipe_cnt][0], loc_coords[pipe_cnt][1], loc_coords[pipe_cnt][2]));
+		write_channel_altera(chan_Conf2Intrae_xyz, (float3) (loc_coords[pipe_cnt][0], loc_coords[pipe_cnt][1], loc_coords[pipe_cnt][2]));
+*/
 	}
 
 	// --------------------------------------------------------------

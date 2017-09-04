@@ -371,9 +371,76 @@ This optimization step consists of reducing the scope of variable to the deepest
 
 
 
+
+
+
+
+
+
+
+
+
+
+
 ## `eigth_run_harp2`
 
 ** Krnl_GA **
 
-* Send genotypes faster from `Krnl_GA` to `Knrl_Conform` during `GG` by 
+* Send genotypes faster from `Krnl_GA` to `Knrl_Conform` during `GG` by using two different for-loops for updating `GlobPopulationNext`, and writing genes to `chan_GG2Conf_genotype`
+
+* Increase the number of variables that hold the `prng` variable in order to avoid data dependence on this variable as much as possible. This requires sending _twenty_ random numbers from host, and then distributing _ten_ to `GG`, and _ten_ to `LS`. this implies passing to global instead to private
+
+
+** Krnl_Conform **
+
+This is added but commented in the code because it didn't improve loop II, and even increase area usage.
+~~ * Merge local memories `loc_coords_x`, `loc_coords_y`, and `loc_coords_z` into `loc_coords`, so number of load operations is reduced. The merged local memory is banked to enable parallel access ~~
+
+** Estimated resource usage **
+
+| Resource                             | Usage        |
+| :----------------------------------: | :----------: |
+| Logic utilization                    |   85%        |
+| ALUTs                                |   35%        |
+| Dedicated logic registers            |   51%        |
+| Memory blocks                        |   68%        |
+| DSP blocks                           |   36%        |
+
+
+### Measurements from non-instrumented program
+
+** Execution time (s) **
+
+| Configuration    |    FPGA      |  CPU (AutoDock)  |  Speed-up | Comments       |
+| :--------------: | :----------: | :--------------: | :-------: | :------------: |
+| 3ptb, 10 runs    | 266.47       | 59.49            | 0.223     | ~ 4.47x slower |
+
+
+### Measurements from instrumented program 
+
+** Execution time (s) **
+
+| Configuration    |    FPGA      |  CPU (AutoDock)  |  Speed-up | Comments       |
+| :--------------: | :----------: | :--------------: | :-------: | :------------: |
+| 3ptb, 10 runs    | 312.61       | 59.49            |  0.190    | ~ 5.41x slower | 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

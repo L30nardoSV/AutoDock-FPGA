@@ -120,10 +120,11 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 	     __global       float*           restrict GlobEnergyCurrent,
 	     __global 	    float*           restrict GlobPopulationNext,
 	     __global       float*           restrict GlobEnergyNext,
-/*
+
              __global       unsigned int*    restrict GlobPRNG,	
-*/
+/*
 	                    unsigned int              GlobPRNG,
+*/
 	     __global       unsigned int*    restrict GlobEvalsGenerations_performed,
 			    unsigned int              DockConst_pop_size,
 		     	    unsigned int              DockConst_num_of_energy_evals,
@@ -240,9 +241,16 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 
 	// read GlobPRNG
 /*
-	uint prng = GlobPRNG[0];
-*/
 	uint prng = GlobPRNG;
+*/
+	// prng distribution
+	// GG: 0  - 9
+	// LS: 10 - 19
+
+	uint prng[20];
+	for (uint prng_cnt = 0; prng_cnt < 20; prng_cnt++) {
+		prng[prng_cnt] = GlobPRNG[prng_cnt];
+	}
 
 	while ((eval_cnt < DockConst_num_of_energy_evals) && (generation_cnt < DockConst_num_of_generations)) {
 
@@ -268,8 +276,16 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 
 		for (ushort new_pop_cnt = 1; new_pop_cnt < DockConst_pop_size; new_pop_cnt++) {
 			//selecting two individuals randomly 			
-			binary_tournament_selection(&prng, loc_energies, &parent1, &parent2,			    
-				                    DockConst_pop_size, DockConst_tournament_rate);
+			binary_tournament_selection(
+						/*
+						    &prng,
+						*/
+                                                    &prng[0],
+						    loc_energies,
+						    &parent1,
+						    &parent2,			    
+				                    DockConst_pop_size,
+						    DockConst_tournament_rate);
 
 			//mating parents	
 			for (uchar i=0; i<DockConst_num_of_genes; i++) {
@@ -278,7 +294,20 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			}
 
 			// first two args are population [parent1], population [parent2] 			
-			gen_new_genotype(&prng, 
+			gen_new_genotype(
+					/*
+					 &prng, 
+					*/
+					 &prng[0],
+					 &prng[1],
+					 &prng[2],
+					 &prng[3],
+					 &prng[4],
+					 &prng[5],
+					 &prng[6],
+					 &prng[7],
+					 &prng[8],
+					 &prng[9],
 					 local_entity_1, 
 					 local_entity_2,
 					 DockConst_num_of_genes,				 
@@ -291,11 +320,21 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			write_channel_altera(chan_GG2Conf_active, active);
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 
+/*
 			for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_genes; pipe_cnt++) {
 				GlobPopulationNext [new_pop_cnt*ACTUAL_GENOTYPE_LENGTH + pipe_cnt] = offspring_genotype [pipe_cnt];
 				write_channel_altera(chan_GG2Conf_genotype, offspring_genotype[pipe_cnt]);
 			}
+*/
+
+			for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_genes; pipe_cnt++) {
+				write_channel_altera(chan_GG2Conf_genotype, offspring_genotype[pipe_cnt]);
+			}
 	
+			for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_genes; pipe_cnt++) {
+				GlobPopulationNext [new_pop_cnt*ACTUAL_GENOTYPE_LENGTH + pipe_cnt] = offspring_genotype [pipe_cnt];
+			}
+
 			#if defined (DEBUG_KRNL_GG)
 			printf("GG - tx pop: %u", new_pop_cnt); 		
 			#endif	
@@ -342,7 +381,12 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 
 			// choosing an entity randomly, 			
 			// and without checking if it has already been subjected to LS in this cycle 			
-			uint entity_for_ls = myrand_uint(&prng, DockConst_pop_size);
+			uint entity_for_ls = myrand_uint(
+							/*
+							 &prng, 
+							*/
+							 &prng[10],
+						         DockConst_pop_size);
 
 			// performing local search
 			for (uchar i=0; i<DockConst_num_of_genes; i++) {
@@ -363,10 +407,16 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 				//rho is the deviation of the uniform distribution
 
 				for (uchar i=0; i<3; i++) {
+/*
 					genotype_deviate [i] = rho*DockConst_base_dmov_mul_sqrt3*(2*myrand(&prng)-1);
+*/
+					genotype_deviate [i] = rho*DockConst_base_dmov_mul_sqrt3*(2*myrand(&prng[11])-1);
 				}
 				for (uchar i=3; i<DockConst_num_of_genes; i++) {
+/*
 					genotype_deviate [i] = rho*DockConst_base_dang_mul_sqrt3*(2*myrand(&prng)-1);
+*/
+					genotype_deviate [i] = rho*DockConst_base_dang_mul_sqrt3*(2*myrand(&prng[12])-1);
 				}
 
 				// define genotype values depending on descent direction
@@ -509,11 +559,6 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 		#endif
 			
 	} // End while eval_cnt & generation_cnt
-
-/*
-	// write back to GlobPRNG FIXME
-	GlobPRNG[0] = prng;
-*/
 
 	// ------------------------------------------------------------------
 	// Off: turn off Conform, InterE, IntraE
