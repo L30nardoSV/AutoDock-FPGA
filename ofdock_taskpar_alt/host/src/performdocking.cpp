@@ -162,9 +162,9 @@ cl_mem mem_dockpars_conformations_current;
 cl_mem mem_dockpars_energies_current;
 cl_mem mem_dockpars_conformations_next;
 cl_mem mem_dockpars_energies_next;
-
+/*
 cl_mem mem_dockpars_prng_states;
-
+*/
 cl_mem mem_evals_and_generations_performed;
 
 
@@ -287,7 +287,8 @@ filled with clock() */
 /*
 	size_prng_seeds = sizeof(unsigned int);
 */
-	size_prng_seeds = 20*sizeof(unsigned int);
+
+	size_prng_seeds = 6*sizeof(unsigned int);
 	cpu_prng_seeds = (unsigned int*) alignedMalloc(size_prng_seeds);
 
 	genseed(time(NULL));	//initializing seed generator
@@ -377,9 +378,9 @@ filled with clock() */
 	mallocBufferObject(context,CL_MEM_READ_WRITE,size_energies,    		&mem_dockpars_energies_current);
 	mallocBufferObject(context,CL_MEM_READ_WRITE,size_populations, 		&mem_dockpars_conformations_next);
 	mallocBufferObject(context,CL_MEM_READ_WRITE,size_energies,    		&mem_dockpars_energies_next);
-
+/*
 	mallocBufferObject(context,CL_MEM_READ_ONLY,size_prng_seeds,  		&mem_dockpars_prng_states);
-
+*/
 	mallocBufferObject(context,CL_MEM_WRITE_ONLY,2*sizeof(unsigned int),  	&mem_evals_and_generations_performed);
 
 	unsigned int array_evals_and_generations_performed [2]; // [0]: evals, [1]: generations 
@@ -403,11 +404,18 @@ filled with clock() */
         setKernelArg(kernel1,1, sizeof(mem_dockpars_energies_current),          &mem_dockpars_energies_current);
         setKernelArg(kernel1,2, sizeof(mem_dockpars_conformations_next),        &mem_dockpars_conformations_next);
         setKernelArg(kernel1,3, sizeof(mem_dockpars_energies_next),             &mem_dockpars_energies_next);
-
-	setKernelArg(kernel1,4, sizeof(mem_dockpars_prng_states),               &mem_dockpars_prng_states);
 /*
-	setKernelArg(kernel1,4, sizeof(unsigned int),               		&cpu_prng_seeds[0]);
+	setKernelArg(kernel1,4, sizeof(mem_dockpars_prng_states),               &mem_dockpars_prng_states);
 */
+
+	setKernelArg(kernel1,4, sizeof(unsigned int),               		&cpu_prng_seeds[0]);
+	setKernelArg(kernel1,5, sizeof(unsigned int),               		&cpu_prng_seeds[1]);
+	setKernelArg(kernel1,6, sizeof(unsigned int),               		&cpu_prng_seeds[2]);
+	setKernelArg(kernel1,7, sizeof(unsigned int),               		&cpu_prng_seeds[3]);
+	setKernelArg(kernel1,8, sizeof(unsigned int),               		&cpu_prng_seeds[4]);
+	setKernelArg(kernel1,9, sizeof(unsigned int),               		&cpu_prng_seeds[5]);
+
+/*
 	setKernelArg(kernel1,5, sizeof(mem_evals_and_generations_performed),    &mem_evals_and_generations_performed);
 	// private args added in the order in which their values are used in kernel
 	setKernelArg(kernel1,6,  sizeof(unsigned int),                  	&dockpars.pop_size);
@@ -425,6 +433,24 @@ filled with clock() */
 	setKernelArg(kernel1,18, sizeof(unsigned int),                          &dockpars.num_of_genes);
 	setKernelArg(kernel1,19, sizeof(float),                          	&dockpars.base_dang_mul_sqrt3);
 	setKernelArg(kernel1,20, sizeof(unsigned int),                          &dockpars.cons_limit);
+*/
+	setKernelArg(kernel1,10, sizeof(mem_evals_and_generations_performed),    &mem_evals_and_generations_performed);
+	// private args added in the order in which their values are used in kernel
+	setKernelArg(kernel1,11,  sizeof(unsigned int),                  	&dockpars.pop_size);
+	setKernelArg(kernel1,12, sizeof(unsigned int),                 		&dockpars.num_of_energy_evals);
+	setKernelArg(kernel1,13, sizeof(unsigned int),                 		&dockpars.num_of_generations);
+	setKernelArg(kernel1,14, sizeof(float),                          	&dockpars.tournament_rate);
+	setKernelArg(kernel1,15, sizeof(float),                          	&dockpars.mutation_rate);
+	setKernelArg(kernel1,16, sizeof(float),                          	&dockpars.abs_max_dmov);
+	setKernelArg(kernel1,17, sizeof(float),                          	&dockpars.abs_max_dang);
+	setKernelArg(kernel1,18, sizeof(float),                          	&dockpars.crossover_rate);
+	setKernelArg(kernel1,19, sizeof(unsigned int),                          &dockpars.num_of_lsentities);
+	setKernelArg(kernel1,20, sizeof(unsigned int),                          &dockpars.max_num_of_iters);
+	setKernelArg(kernel1,21, sizeof(float),                          	&dockpars.rho_lower_bound);
+	setKernelArg(kernel1,22, sizeof(float),                          	&dockpars.base_dmov_mul_sqrt3);
+	setKernelArg(kernel1,23, sizeof(unsigned int),                          &dockpars.num_of_genes);
+	setKernelArg(kernel1,24, sizeof(float),                          	&dockpars.base_dang_mul_sqrt3);
+	setKernelArg(kernel1,25, sizeof(unsigned int),                          &dockpars.cons_limit);
 #endif // End of ENABLE_KERNEL1
 
 #ifdef ENABLE_KERNEL2 // Krnl_Conform
@@ -527,12 +553,19 @@ filled with clock() */
 		#if defined (REPRO)
 			cpu_prng_seeds[0] = 1u;
 		#else
-/*
+
 			cpu_prng_seeds[0] = genseed(0u);
-*/	
+			cpu_prng_seeds[1] = genseed(0u);
+			cpu_prng_seeds[2] = genseed(0u);
+			cpu_prng_seeds[3] = genseed(0u);
+			cpu_prng_seeds[4] = genseed(0u);
+			cpu_prng_seeds[5] = genseed(0u);
+	
+/*
 			for (unsigned prng_cnt = 0; prng_cnt < 20; prng_cnt++) {
 				cpu_prng_seeds[prng_cnt] = genseed(0u);
 			}
+*/
 		#endif
 
 /*
@@ -545,14 +578,19 @@ filled with clock() */
 		memcopyBufferObjectToDevice(command_queue1,mem_KerConstDynamic_rotbonds_unit_vectors_const,   &KerConstDynamic.rotbonds_unit_vectors_const[0],   3*MAX_NUM_OF_ROTBONDS*sizeof(float));
 
  		memcopyBufferObjectToDevice(command_queue1,mem_dockpars_conformations_current, 	cpu_init_populations, size_populations);
-
-		memcopyBufferObjectToDevice(command_queue1,mem_dockpars_prng_states,     	cpu_prng_seeds,       size_prng_seeds);
-
 /*
+		memcopyBufferObjectToDevice(command_queue1,mem_dockpars_prng_states,     	cpu_prng_seeds,       size_prng_seeds);
+*/
+
 #ifdef ENABLE_KERNEL1 // Krnl_GA
 		setKernelArg(kernel1,4, sizeof(unsigned int),   &cpu_prng_seeds[0]);
+		setKernelArg(kernel1,5, sizeof(unsigned int),   &cpu_prng_seeds[1]);
+		setKernelArg(kernel1,6, sizeof(unsigned int),   &cpu_prng_seeds[2]);
+		setKernelArg(kernel1,7, sizeof(unsigned int),   &cpu_prng_seeds[3]);
+		setKernelArg(kernel1,8, sizeof(unsigned int),   &cpu_prng_seeds[4]);
+		setKernelArg(kernel1,9, sizeof(unsigned int),   &cpu_prng_seeds[5]);
 #endif // End of ENABLE_KERNEL1
-*/
+
 
 #ifdef ENABLE_KERNEL2 // Krnl_Conform
 		setKernelArg(kernel2,9,  sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[0]);
@@ -1014,9 +1052,9 @@ void cleanup() {
   if(mem_dockpars_energies_current) 	  {clReleaseMemObject(mem_dockpars_energies_current);}
   if(mem_dockpars_conformations_next)     {clReleaseMemObject(mem_dockpars_conformations_next);}
   if(mem_dockpars_energies_next)          {clReleaseMemObject(mem_dockpars_energies_next);}
-
+/*
   if(mem_dockpars_prng_states)            {clReleaseMemObject(mem_dockpars_prng_states);}
-
+*/
   if(mem_evals_and_generations_performed) {clReleaseMemObject(mem_evals_and_generations_performed);}
 }
 
