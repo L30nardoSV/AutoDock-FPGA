@@ -63,18 +63,48 @@ while(active) {
 	// --------------------------------------------------------------
 	bool IC_valid = false;
 	bool GG_valid = false;
+/*
 	bool LS_valid = false;
+*/
+	bool LS_pos_valid = false;
+	bool LS_neg_valid = false;
+	
 	bool Off_valid = false;
+
+
+
 
 	char IC_active;
 	char GG_active;
+/*
 	char LS_active;
+*/
+	char LS_pos_active;
+	char LS_neg_active;
+	
 	char Off_active;
 	
+/*
 	while ((IC_valid == false) && (GG_valid == false) && (LS_valid == false) && (Off_valid == false)) {
+*/
+	while ((IC_valid == false) && 
+	       (GG_valid == false) && 
+/*
+	       (LS_valid == false) && 
+*/
+	       (LS_pos_valid == false) && 
+	       (LS_neg_valid == false) &&
+
+               (Off_valid == false)
+	) {
 		IC_active = read_channel_nb_altera(chan_IC2Conf_active, &IC_valid);
 		GG_active = read_channel_nb_altera(chan_GG2Conf_active, &GG_valid);
+/*
 		LS_active = read_channel_nb_altera(chan_LS2Conf_active, &LS_valid);
+*/
+		LS_pos_active = read_channel_nb_altera(chan_LS2Conf_pos_active, &LS_pos_valid);
+		LS_neg_active = read_channel_nb_altera(chan_LS2Conf_neg_active, &LS_neg_valid);
+
 		Off_active = read_channel_nb_altera(chan_Off2Conf_active, &Off_valid);
 	}
 
@@ -96,6 +126,8 @@ while(active) {
 				genotype[pipe_cnt] = read_channel_altera(chan_GG2Conf_genotype);}	
 		}
 		else {
+
+/*
 			if (LS_valid) {
 				active = LS_active;
 				mode = 3;
@@ -111,6 +143,35 @@ while(active) {
 					for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_genes; pipe_cnt++) {
 						genotype[pipe_cnt] = read_channel_altera(chan_Off2Conf_genotype);}
 					}
+			}
+*/
+
+
+
+			if (LS_pos_valid) {
+				active = LS_pos_active;
+				mode = 3;
+
+				for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_genes; pipe_cnt++) {
+					genotype[pipe_cnt] = read_channel_altera(chan_LS2Conf_pos_genotype);}
+			}
+			else {
+				if (LS_neg_valid) {
+					active = LS_neg_active;
+					mode = 4;
+
+					for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_genes; pipe_cnt++) {
+						genotype[pipe_cnt] = read_channel_altera(chan_LS2Conf_neg_genotype);}
+				}
+				else {
+					if (Off_valid) {
+						active = Off_active;
+						mode = 5;
+
+						for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_genes; pipe_cnt++) {
+							genotype[pipe_cnt] = read_channel_altera(chan_Off2Conf_genotype);}
+					}
+				}
 			}
 		}	
 	}

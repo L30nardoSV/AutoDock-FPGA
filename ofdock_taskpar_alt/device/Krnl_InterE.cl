@@ -260,10 +260,13 @@ while(active) {
 		case 2:	// GG
 			write_channel_altera(chan_Intere2StoreGG_intere, interE);
 		break;
-		case 3:	// LS
-			write_channel_altera(chan_Intere2StoreLS_intere, interE);
+		case 3:	// LS - positive descent
+			write_channel_altera(chan_Intere2StoreLS_pos_intere, interE);
 		break;
-		case 4:	// Off
+		case 4:	// LS - negative descent
+			write_channel_altera(chan_Intere2StoreLS_neg_intere, interE);
+		break;
+		case 5:	// Off
 			write_channel_altera(chan_Intere2StoreOff_intere, interE);
 		break;
 	}

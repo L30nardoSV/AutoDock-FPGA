@@ -1,79 +1,8 @@
 // --------------------------------------------------------------------------
-// The function maps the first parameter into the interval 0..ang_max
+// These functions map the argument into the interval 0 - 180, or 0 - 360
 // by adding/subtracting n*ang_max to/from it.
 // Originally from: searchoptimum.c
 // --------------------------------------------------------------------------
-/*
-void map_angle(__local float* angle, const float ang_max)
-{
-	float x = (*angle);
-
-
-	// **********************************************
-	// ADD VENDOR SPECIFIC PRAGMA
-	// **********************************************
-	LOOP_WHILE_MAP_ANGLE_1:
-	while (x < 0.0f) {
-		x += ang_max;
-	}
-
-	// **********************************************
-	// ADD VENDOR SPECIFIC PRAGMA
-	// **********************************************
-	LOOP_WHILE_MAP_ANGLE_2:
-	while (x > ang_max) {
-		x -= ang_max;
-	}
-
-	(*angle) = x;
-}
-*/
-
-/*
-void map_angle_180(__local float* angle)
-{
-	float x = (*angle);
-
-	while (x < 0.0f) {
-		x += 180.0f;
-	}
-
-	while (x > 180.0f) {
-		x -= 180.0f;
-	}
-
-	(*angle) = x;
-}
-
-void map_angle_360(__local float* angle)
-{
-	float x = (*angle);
-
-	while (x < 0.0f) {
-		x += 360.0f;
-	}
-
-	while (x > 360.0f) {
-		x -= 360.0f;
-	}
-
-	(*angle) = x;
-}
-*/
-
-
-
-
-
-
-
-
-
-
-// **********************************************
-// **********************************************
-// **********************************************
-// **********************************************
 
 float map_angle_180(float angle)
 {
@@ -92,65 +21,6 @@ float map_angle_180(float angle)
 	return x;
 }
 
-// **********************************************
-// **********************************************
-// **********************************************
-// **********************************************
-
-	
-/*
-float map_angle_180(float angle)
-{
-	float x = angle;
-
-	bool lt180n       = false;
-	//bool gt180n_lt0   = false;
-	//bool gt0_lt180p	  = false;
-	bool gt180p	  = false;	
-
-	if (x < -180.0f){
-		lt180n = true;	
-		x = -1*x;			
-	}
-	else {
-		if (x < 0) {
-			//gt180n_lt0 = true;
-			x = x + 180.0f;
-		}
-		else {	// x is positive
-
-			//if (x < 180.0f) {
-			//	gt0_lt180p = true;
-			//}
-			//else {
-			//	gt180p = true;			
-			//}	
-
-			if (x > 180.0f) {
-				gt180p = true;			
-			}		
-		}
-	}
-	
-	if ((lt180n==true) || (gt180p==true)) {
-		while(x > 180.0f) {
-			x -= 180.0f;
-		}
-		
-		if (lt180n==true) {
-			x = 180.0f-x;
-		}
-	}
-
-	return x;
-}
-*/
-
-// **********************************************
-// **********************************************
-// **********************************************
-// **********************************************
-
 float map_angle_360(float angle)
 {
 	float x = angle;
@@ -168,56 +38,14 @@ float map_angle_360(float angle)
 	return x;
 }
 
-// **********************************************
-// **********************************************
-// **********************************************
-// **********************************************
-
-
-/*
-float map_angle(float angle, const float limit)
-{
-	float x = angle;
-
-	bool lt_nlimit = false;
-	bool gt_plimit = false;	
-
-	if (x < -limit){
-		lt_nlimit = true;	
-		x = -1*x;			
-	}
-	else {
-		if (x < 0) {
-			x = x + limit;
-		}
-		else {	// x is positive
-			if (x > limit) {
-				gt_plimit = true;			
-			}		
-		}
-	}
-	
-	if ((lt_nlimit==true) || (gt_plimit==true)) {
-		while(x > limit) {
-			x -= limit;
-		}
-		
-		if (lt_nlimit==true) {
-			x = limit-x;
-		}
-	}
-
-	return x;
-}
-*/
-
 // --------------------------------------------------------------------------
 // The function finds the best entity based on the energy value 
-// i.e. sum of the 38th and 39th element
 // and returns its ID in the best_entity parameter. 
 // The pop_size parameter must be equal to the population size.
 // Originally from: searchoptimum.c
 // --------------------------------------------------------------------------
+#if 1
+// current implementation, II (inner loop) = 6
 uint find_best(
 /*	
 	 __local        float* restrict loc_energies,
@@ -226,29 +54,20 @@ uint find_best(
 	 __local 	float* restrict loc_energies2,
 		        const uint pop_size)
 {
-/*
-	float tmp_energy [MAX_POPSIZE];
-	for (ushort i=0; i<pop_size; i++) {
-		tmp_energy [i] = loc_energies [i];
-	}
-*/
 	ushort best_entity = 0;
+
 	for (ushort i=1; i<pop_size; i++) {
-		/*if (tmp_energy[i] < tmp_energy[best_entity]) {*/
-		/*if (loc_energies[i] < loc_energies[best_entity]) {*/
 		if (loc_energies1[i] < loc_energies2[best_entity]) {
 			best_entity = i;
 		}
-
 	}
 
 	return best_entity;
 }
+#endif
 
-
-
-/*
-// lvs: outer loop is pipelined with II = 11
+#if 0
+// alternative implementation, II (inner loop) = 11
 uint find_best(__local        float* restrict loc_energies,
 		        const uint pop_size)
 {
@@ -280,10 +99,10 @@ uint find_best(__local        float* restrict loc_energies,
 
 	return best_entity;
 }
-*/
+#endif
 
-/*
-// lvs: outer loop is pipelined with II = 12
+#if 0
+// alternative implementation, II (inner loop) = 12
 uint find_best(__local        float* restrict loc_energies,
 		        const uint pop_size)
 {
@@ -320,7 +139,8 @@ uint find_best(__local        float* restrict loc_energies,
 
 	return best_entity;
 }
-*/
+#endif
+
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------
 #if 0
@@ -371,7 +191,6 @@ uint myrand_uint(uint* prng, const uint limit)
 
 // --------------------------------------------------------------------------
 // The function performs binary tournament selection. 
-// The first parameter must containt the population data. 
 // rand_level is the probability with which the new entity should be selected as parent. 
 // The two selected parents are returned in the parent1 and parent2 parameters.
 // Originally from: searchoptimum.c
@@ -508,12 +327,10 @@ void gen_new_genotype(
 
 
 	bool twopoint_cross_yes = false;
-	if (temp1 == temp2)
-	{	
+	if (temp1 == temp2) {	
 		covr_point_low = temp1;
 	}
-	else
-	{
+	else {
 		twopoint_cross_yes = true;
 		if (temp1 < temp2) {
 			covr_point_low = temp1;
@@ -535,9 +352,12 @@ void gen_new_genotype(
 	#endif
 
 
+	// =======================================
+	// performing crossover
+	// =======================================
 
 #if 0
-	//performing crossover
+// alternative implementation, crossover split
 
 	if (crossover_rate > myrand(prng))
 /*
@@ -598,13 +418,10 @@ void gen_new_genotype(
 #endif
 
 
-
-
-
-	//performing crossover
+#if 1
+// Current implementation, crossover compacted, fully unrolled
 
 	bool crossover_yes = (crossover_rate > myrand(prng));
-
 
 	#pragma unroll
 	for (uchar i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {
@@ -624,33 +441,16 @@ void gen_new_genotype(
 	}
 
 
+#endif
 
 
 
-	//performing mutation
 
-
-
-	
-//	for (i=0; i<num_of_genes; i++)
-//	{
-//		if (mutation_rate > 100.0f*myrand(GlobPRNG))
-//		{
-//			if (i < 3)
-//			{
-//				offspring_genotype [i] = offspring1genotype [i] + 2.0f*abs_max_dmov*myrand(GlobPRNG)-abs_max_dmov;
-//			}
-//			else
-//			{
-//				offspring_genotype [i] = (offspring_genotype [i] + 2.0f*abs_max_dang*myrand(GlobPRNG)-abs_max_dang);
-//
-//				if (i == 4) {map_angle(&(offspring_genotype [i]), 180.0f);}	//mapping angle to 0..180
-//				else        {map_angle(&(offspring_genotype [i]), 360.0f);}	//mapping angle to 0..360
-//
-//			}
-//		}
-//	}
-
+	// =======================================
+	// performing mutation
+	// =======================================
+#if 0
+// alternative implementation, mutation compacted, fully unrolled, II (GG) = 165
 
 	#pragma unroll
 	for (uchar i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {
@@ -666,111 +466,53 @@ void gen_new_genotype(
 			}
 		}
 	}
+#endif
 
-
-
-
-
-
-
-
-
-#if 0
+#if 1
+// Current implementation, mutation split, II (GG) = 18
 
 	#pragma unroll
-	for (uchar i=0; i<3; i++)
-	{
-		if (mutation_rate > myrand(prng))
-		{
+	for (uchar i=0; i<3; i++) {
+		if (mutation_rate > myrand(prng)) {
 			priv_offspring_genotype [i] = priv_offspring_genotype [i] + 2*abs_max_dmov*myrand(prng)-abs_max_dmov;
 		}
-/*
-		if (mutation_rate > myrand(prng2))
-		{
-			priv_offspring_genotype [i] = priv_offspring_genotype [i] + 2*abs_max_dmov*myrand(prng3)-abs_max_dmov;
-		}
-*/
 	}
 
-
-	if (mutation_rate > myrand(prng))
-	{
+	if (mutation_rate > myrand(prng)) {
 		priv_offspring_genotype [3] = priv_offspring_genotype [3] + 2*abs_max_dang*myrand(prng)-abs_max_dang;
 		priv_offspring_genotype [3] = map_angle_360(priv_offspring_genotype [3]);
 	}
-/*
-	if (mutation_rate > myrand(prng4))
-	{
-		priv_offspring_genotype [3] = priv_offspring_genotype [3] + 2*abs_max_dang*myrand(prng5)-abs_max_dang;
-		priv_offspring_genotype [3] = map_angle_360(priv_offspring_genotype [3]);
-	}
-*/
 		
-	if (mutation_rate > myrand(prng))
-	{
+	if (mutation_rate > myrand(prng)) {
 		priv_offspring_genotype [4] = priv_offspring_genotype [4] + 2*abs_max_dang*myrand(prng)-abs_max_dang;
 		priv_offspring_genotype [4] = map_angle_180(priv_offspring_genotype [4]);
 	}
-/*
-	if (mutation_rate > myrand(prng6))
-	{
-		priv_offspring_genotype [4] = priv_offspring_genotype [4] + 2*abs_max_dang*myrand(prng7)-abs_max_dang;
-		priv_offspring_genotype [4] = map_angle_180(priv_offspring_genotype [4]);
-	}
-*/
 
+	#if 0
+	// alternative implementation, unrolling 2, II = 6
+	//#pragma unroll 2
+	//for (uchar i=5; i<ACTUAL_GENOTYPE_LENGTH; i++)
+	#endif
 
-
-/*
-	for (uchar i=5; i<num_genes; i++)
-*/
-	#pragma unroll 2
-	for (uchar i=5; i<ACTUAL_GENOTYPE_LENGTH; i++)
-	{
-/*
-		if (mutation_rate > myrand(prng))
-		{
-			priv_offspring_genotype [i] = priv_offspring_genotype [i] + 2*abs_max_dang*myrand(prng)-abs_max_dang;
-			priv_offspring_genotype [i] = map_angle_360(priv_offspring_genotype [i]);
-		}
-*/
-
-
-		if (mutation_rate > myrand(prng))
-		{
-
+	#if 1
+	// current implementation, pipeline, II = 3
+	for (uchar i=5; i<num_genes; i++) {
+		if (mutation_rate > myrand(prng)) {
 			priv_offspring_genotype [i] = priv_offspring_genotype [i] + 2*abs_max_dang*myrand(prng1)-abs_max_dang;
 			priv_offspring_genotype [i] = map_angle_360(priv_offspring_genotype [i]);
-
 		}
-
 	}
-
-
+	#endif
 #endif
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 	#if defined (DEBUG_GEN_NEW_GENOTYPE)
 	printf("Offspring1 after mutation: ");
 	for (i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {printf("%f ", offspring_genotype [i]);} printf("\n");
 	#endif
 
-	#pragma unroll
-	/*for (uchar i=0; i<num_genes; i++) {*/
-	for (uchar i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {
+	//#pragma unroll
+	//for (uchar i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {
+	for (uchar i=0; i<num_genes; i++) {
 		offspring_genotype [i] = priv_offspring_genotype [i];
 	}
 }

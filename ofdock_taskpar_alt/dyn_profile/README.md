@@ -408,7 +408,7 @@ It seems changes made in `eigth_run_harp2` were not so effective in terms of per
 
 * From `eigth_run_harp2`: ~~Send genotypes faster from `Krnl_GA` to `Knrl_Conform` during `GG` by using two different for-loops for updating `GlobPopulationNext`, and writing genes to `chan_GG2Conf_genotype`~~. Merge these loops back again
 
-* From `eigth_run_harp2`: ~~ Increase the number of variables that hold the `prng` variable in order to avoid data dependence on this variable as much as possible. This requires sending _twenty_ random numbers from host, and then distributing _ten_ to `GG`, and _ten_ to `LS`. this implies passing to global instead to private~~. Use only _six_ prng variables and pass them from host to device as private
+* From `eigth_run_harp2`: ~~Increase the number of variables that hold the `prng` variable in order to avoid data dependence on this variable as much as possible. This requires sending _twenty_ random numbers from host, and then distributing _ten_ to `GG`, and _ten_ to `LS`. this implies passing to global instead to private~~. Use only _six_ prng variables and pass them from host to device as private
 
 * In `IC` merge loop that receives energy values and loop that stores sum in `GlobEnergyCurrent` as II = 1 in the merged loop
 
@@ -416,12 +416,12 @@ It seems changes made in `eigth_run_harp2` were not so effective in terms of per
 
 
 
-
+>>>
 ** NOTICE **
 At this run, we identified the causes on why GG loop was not pipelined.
 * `map_angle_` functions: due to their while-loops
 * `gen_new_genotype`: crossover and mutation conditional code inside for loops 
-
+>>>
 
 
 
@@ -462,19 +462,7 @@ At this run, we identified the causes on why GG loop was not pipelined.
 
 | Configuration    |    FPGA      |  CPU (AutoDock)  |  Speed-up | Comments       |
 | :--------------: | :----------: | :--------------: | :-------: | :------------: |
-| 3ptb, 10 runs    | 275.88       | 59.49            | 0.215     | ~4.63 x slower | 
-
-
-
-
-
-
-
-
-
-
-
-
+| 3ptb, 10 runs    | 275.88       | 59.49            | 0.215     | ~4.63x slower  | 
 
 
 
@@ -487,10 +475,40 @@ At this run, we identified the causes on why GG loop was not pipelined.
 
 ## `10_run_harp2`
 
+Reduction of execution time was not achieved with previous changes. It was possibly due to the II = 165 of GG. The idea in this optimization is to play around with unrolling, pipelining, so II gets down to the minimum possible.
+
+
+* In `gen_new_genotype` loops are re-configured with unrolling or pipeling so II (GG) gets reduced. It was possible to reduce it from II (GG) = 165 down to II (GG) = 18
+
+* While loop inside `LS` was recoded so loops are unconditional as much as possible. Now `LS` supports two sets of channels, one for positive and another for negative descent. Adding one set of channels implies adding the logic in the other kernels too.
 
 
 
 
+
+** Estimated resource usage **
+
+| Resource                             | Usage        |
+| :----------------------------------: | :----------: |
+| Logic utilization                    |   83%        |
+| ALUTs                                |   34%        |
+| Dedicated logic registers            |   50%        |
+| Memory blocks                        |   70%        |
+| DSP blocks                           |   36%        |
+
+
+### Execution time (s) measurements from non-instrumented program
+
+| Configuration    |    FPGA      |  CPU (AutoDock)  |  Speed-up | Comments       |
+| :--------------: | :----------: | :--------------: | :-------: | :------------: |
+| 3ptb, 10 runs    | 245.06       | 59.49            | 0.243     | ~4.11x slower  |
+
+
+### Execution time (s) measurements from instrumented program 
+
+| Configuration    |    FPGA      |  CPU (AutoDock)  |  Speed-up | Comments       |
+| :--------------: | :----------: | :--------------: | :-------: | :------------: |
+| 3ptb, 10 runs    | 284.09       | 59.49            | 0.209     | ~4.77x slower  | 
 
 
 
