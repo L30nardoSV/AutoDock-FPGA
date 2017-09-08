@@ -32,11 +32,11 @@ void Krnl_Conform(
 	#endif
 
 	// local vars are allowed only at kernel scope
-///*
+/*
 	__local float loc_coords_x[MAX_NUM_OF_ATOMS];
 	__local float loc_coords_y[MAX_NUM_OF_ATOMS];
 	__local float loc_coords_z[MAX_NUM_OF_ATOMS];
-//*/
+*/
 
 /*
 	// check best practices guide
@@ -46,7 +46,9 @@ void Krnl_Conform(
 	__local float  __attribute__((numbanks(8), bankwidth(16))) loc_coords[MAX_NUM_OF_ATOMS][4];
 */
 
+/*
 	__local float genotype[ACTUAL_GENOTYPE_LENGTH];
+*/
 
 	char active = 1;
 
@@ -70,9 +72,6 @@ while(active) {
 	bool LS_neg_valid = false;
 	
 	bool Off_valid = false;
-
-
-
 
 	char IC_active;
 	char GG_active;
@@ -109,6 +108,10 @@ while(active) {
 	}
 
 	char mode;
+
+
+	float genotype[ACTUAL_GENOTYPE_LENGTH];
+
 
 	if (IC_valid) {
 		active = IC_active;
@@ -167,9 +170,10 @@ while(active) {
 					if (Off_valid) {
 						active = Off_active;
 						mode = 5;
-
+/*
 						for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_genes; pipe_cnt++) {
 							genotype[pipe_cnt] = read_channel_altera(chan_Off2Conf_genotype);}
+*/
 					}
 				}
 			}
@@ -177,6 +181,19 @@ while(active) {
 	}
 	// --------------------------------------------------------------
 	//printf("AFTER In CONFORM CHANNEL\n");
+
+///*
+	float __attribute__ ((
+			      memory,
+			      numbanks(4),
+			      bankwidth(4),
+			      singlepump,
+			      numreadports(2),//3
+			      numwriteports(1)
+			    )) loc_coords[MAX_NUM_OF_ATOMS][4];
+//*/
+
+	//float loc_coords[MAX_NUM_OF_ATOMS][4];
 
 	#if defined (DEBUG_ACTIVE_KERNEL)
 	if (active == 0) {printf("	%-20s: %s\n", "Krnl_Conform", "must be disabled");}
@@ -211,16 +228,16 @@ while(active) {
 			}
 			else
 			{
-///*
+/*
 				atom_to_rotate[0] = loc_coords_x[atom_id];
 				atom_to_rotate[1] = loc_coords_y[atom_id];
 				atom_to_rotate[2] = loc_coords_z[atom_id];
-//*/
-/*
-				atom_to_rotate[0] = loc_coords[atom_id][0];
-				atom_to_rotate[1] = loc_coords[atom_id][1];
-				atom_to_rotate[2] = loc_coords[atom_id][2];
 */
+///*
+				atom_to_rotate[0] = loc_coords[atom_id][0x0];
+				atom_to_rotate[1] = loc_coords[atom_id][0x1];
+				atom_to_rotate[2] = loc_coords[atom_id][0x2];
+//*/
 			}
 
 			//capturing rotation vectors and angle
@@ -244,17 +261,31 @@ while(active) {
 			{
 				uint rotbond_id = (rotation_list_element & RLIST_RBONDID_MASK) >> RLIST_RBONDID_SHIFT;
 	
+///*
 				//#pragma unroll 1
 				for (uchar i=0; i<3; i++) {
 					rotation_unitvec[i] = KerConstDynamic_rotbonds_unit_vectors_const[3*rotbond_id + i];
 				}
+//*/
+/*
+rotation_unitvec[0] = KerConstDynamic_rotbonds_unit_vectors_const[3*rotbond_id];
+rotation_unitvec[1] = KerConstDynamic_rotbonds_unit_vectors_const[3*rotbond_id + 1];
+rotation_unitvec[2] = KerConstDynamic_rotbonds_unit_vectors_const[3*rotbond_id + 2];
+*/
 
 				rotation_angle = genotype[6+rotbond_id]*DEG_TO_RAD;
 
+///*
 				//#pragma unroll 1
 				for (uchar i=0; i<3; i++) {
 					rotation_movingvec[i] = KerConstDynamic_rotbonds_moving_vectors_const[3*rotbond_id + i];
 				}
+//*/
+/*
+rotation_movingvec[0] = KerConstDynamic_rotbonds_moving_vectors_const[3*rotbond_id];
+rotation_movingvec[1] = KerConstDynamic_rotbonds_moving_vectors_const[3*rotbond_id + 1];
+rotation_movingvec[2] = KerConstDynamic_rotbonds_moving_vectors_const[3*rotbond_id + 2];			
+*/
 
 				//in addition performing the first movement 
 				//which is needed only if rotating around rotatable bond
@@ -328,16 +359,16 @@ while(active) {
 					     quatrot_temp_q*quatrot_left_z + quatrot_temp_z*quatrot_left_q;
 
 			//performing final movement and storing values
-///*
+/*
 			loc_coords_x[atom_id] = atom_to_rotate [0] + rotation_movingvec[0];
 			loc_coords_y[atom_id] = atom_to_rotate [1] + rotation_movingvec[1];
 			loc_coords_z[atom_id] = atom_to_rotate [2] + rotation_movingvec[2];
-//*/
-/*
-			loc_coords[atom_id][0] = atom_to_rotate [0] + rotation_movingvec[0];
-			loc_coords[atom_id][1] = atom_to_rotate [1] + rotation_movingvec[1];
-			loc_coords[atom_id][2] = atom_to_rotate [2] + rotation_movingvec[2];
 */
+///*
+			loc_coords[atom_id][0x0] = atom_to_rotate [0] + rotation_movingvec[0];
+			loc_coords[atom_id][0x1] = atom_to_rotate [1] + rotation_movingvec[1];
+			loc_coords[atom_id][0x2] = atom_to_rotate [2] + rotation_movingvec[2];
+//*/
 		} // End if-statement not dummy rotation
 	} // End rotation_counter for-loop
 
@@ -358,14 +389,15 @@ while(active) {
 
 	//float3 position_xyz;
 	for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt++) {
-///*
+/*
 		write_channel_altera(chan_Conf2Intere_xyz, (float3) (loc_coords_x[pipe_cnt], loc_coords_y[pipe_cnt], loc_coords_z[pipe_cnt]));
 		write_channel_altera(chan_Conf2Intrae_xyz, (float3) (loc_coords_x[pipe_cnt], loc_coords_y[pipe_cnt], loc_coords_z[pipe_cnt]));
-//*/
-/*
-		write_channel_altera(chan_Conf2Intere_xyz, (float3) (loc_coords[pipe_cnt][0], loc_coords[pipe_cnt][1], loc_coords[pipe_cnt][2]));
-		write_channel_altera(chan_Conf2Intrae_xyz, (float3) (loc_coords[pipe_cnt][0], loc_coords[pipe_cnt][1], loc_coords[pipe_cnt][2]));
 */
+///*
+		write_channel_altera(chan_Conf2Intere_xyz, (float3) (loc_coords[pipe_cnt][0x0], loc_coords[pipe_cnt][0x1], loc_coords[pipe_cnt][0x2]));
+		write_channel_altera(chan_Conf2Intrae_xyz, (float3) (loc_coords[pipe_cnt][0x0], loc_coords[pipe_cnt][0x1], loc_coords[pipe_cnt][0x2]));
+//*/
+
 	}
 
 	// --------------------------------------------------------------

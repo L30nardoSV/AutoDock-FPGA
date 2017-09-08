@@ -27,10 +27,14 @@ void Krnl_InterE(
 )
 {
 	// local vars are allowed only at kernel scope
+	// however, they can be moved inside loops and still be local
+	// see how to do that here!
+
+/*
 	__local float loc_coords_x[MAX_NUM_OF_ATOMS];
 	__local float loc_coords_y[MAX_NUM_OF_ATOMS];
 	__local float loc_coords_z[MAX_NUM_OF_ATOMS];
-
+*/
 	char active = 1;
 
 	__local char  ref_atom_types_const  [MAX_NUM_OF_ATOMS];
@@ -53,13 +57,29 @@ while(active) {
 	mode   = read_channel_altera(chan_Conf2Intere_mode);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 
+	float __attribute__ ((
+			      memory,
+			      numbanks(2),
+			      bankwidth(16),
+			      singlepump,
+			      numreadports(2),
+			      numwriteports(1)
+			    )) loc_coords[MAX_NUM_OF_ATOMS][3];
+
 	float3 position_xyz;
 
 	for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt++) {
 		position_xyz = read_channel_altera(chan_Conf2Intere_xyz);
+
+/*
 		loc_coords_x[pipe_cnt] = position_xyz.x;
 		loc_coords_y[pipe_cnt] = position_xyz.y;
 		loc_coords_z[pipe_cnt] = position_xyz.z;
+*/
+
+		loc_coords[pipe_cnt][0x0] = position_xyz.x;
+		loc_coords[pipe_cnt][0x1] = position_xyz.y;
+		loc_coords[pipe_cnt][0x2] = position_xyz.z;
 	}
 	// --------------------------------------------------------------
 	//printf("AFTER In INTER CHANNEL\n");
@@ -74,9 +94,16 @@ while(active) {
 	for (uchar atom1_id=0; atom1_id<DockConst_num_of_atoms; atom1_id++)
 	{
 		char atom1_typeid = ref_atom_types_const[atom1_id];
+/*
 		float x = loc_coords_x[atom1_id];
 		float y = loc_coords_y[atom1_id];
 		float z = loc_coords_z[atom1_id];
+*/
+
+		float x = loc_coords[atom1_id][0x0];
+		float y = loc_coords[atom1_id][0x1];
+		float z = loc_coords[atom1_id][0x2];
+
 		float q = ref_atom_charges_const[atom1_id];
 
 		float partialE1;

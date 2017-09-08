@@ -315,7 +315,7 @@ This optimization step consists of reducing the scope of variable to the deepest
 * Reduce computation inside conditional statement `if (ref_intraE_contributors_const[2] == 1)	//H-bond`
 
 
-** Estimated resource usage **
+**Estimated resource usage**
 
 | Resource                             | Usage        |
 | :----------------------------------: | :----------: |
@@ -366,7 +366,7 @@ This optimization step consists of reducing the scope of variable to the deepest
 This is added but commented in the code because it didn't improve loop II, and even increase area usage.
 ~~* Merge local memories `loc_coords_x`, `loc_coords_y`, and `loc_coords_z` into `loc_coords`, so number of load operations is reduced. The merged local memory is banked to enable parallel access~~
 
-** Estimated resource usage **
+**Estimated resource usage**
 
 | Resource                             | Usage        |
 | :----------------------------------: | :----------: |
@@ -417,7 +417,7 @@ It seems changes made in `eigth_run_harp2` were not so effective in terms of per
 
 
 >>>
-** NOTICE **
+**NOTICE**
 At this run, we identified the causes on why GG loop was not pipelined.
 * `map_angle_` functions: due to their while-loops
 * `gen_new_genotype`: crossover and mutation conditional code inside for loops 
@@ -440,7 +440,7 @@ At this run, we identified the causes on why GG loop was not pipelined.
 
 
 
-** Estimated resource usage **
+**Estimated resource usage**
 
 | Resource                             | Usage        |
 | :----------------------------------: | :----------: |
@@ -486,7 +486,7 @@ Reduction of execution time was not achieved with previous changes. It was possi
 
 
 
-** Estimated resource usage **
+**Estimated resource usage**
 
 | Resource                             | Usage        |
 | :----------------------------------: | :----------: |
@@ -514,6 +514,142 @@ Reduction of execution time was not achieved with previous changes. It was possi
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## `11_run_harp2`
+
+The idea here is to pipelined `LS` _at all cost_.
+
+* In `LS`, the exit condition of the while loop is based on `iteration_cnt` and `rho`. `rho` is one obstacle for pipelining as its value is determined originally at the end of the loop, so NO new iteration can be launched when the current iteration is being processed. That's why the calculation of `rho` has been moved at the beginning of such while loop. The correctness of this relies on the initial values of `rho`, `cons_succ`, `cons_fail`
+
+* The update of `offspring_genotype` and `genotype_bias` is done with for-loops which are enclosed by if-statements. Conditional execution of loops prevents their pipelining. **The corresponding for-loops were fully unrolled so while-loop (LS) is pipelined with II = 9, and the main LS loop with II = 3**. Unrolling in such manner causes area usage of 130%!!
+
+* In `GG` `local_entity_1` and `local_entity_2` were changed to `__local` (default) instead of memories with 3 read ports, as the latter left unsued ports 
+
+* `active` variable is removed, and values (char: `1` o `0`) are directly written to "activation" channels
+
+* `positive_new_genotype` and `negative_new_genotype` declarations are moved inside while(LS) loop to reduce area usage
+
+* `genotype_deviate` declaration is moved inside while(LS) loop to reduce area usage
+
+* `genotype_bias` declaration moved inside for(LS) to reduce area usage
+
+* `float rho = 1.0f;` declaration moved inside for(LS) to reduce area usage. It implies removing update after while(LS)
+
+* `uint iteration_cnt = 0;` declaration moved inside for(LS) to reduce area usage. It implies removing update after while(LS)
+
+* `uint cons_succ = 0;` and `uint cons_fail = 0;` declarations moved inside for(LS) to reduce area usage
+
+
+
+
+**Estimated resource usage**
+
+| Resource                             | Usage        |
+| :----------------------------------: | :----------: |
+| Logic utilization                    | 148 %        |
+| ALUTs                                |  54 %        |
+| Dedicated logic registers            |  93 %        |
+| Memory blocks                        | 139 %        |
+| DSP blocks                           |  43 %        |
+
+
+### Execution time (s) measurements from non-instrumented program
+
+| Configuration    |    FPGA      |  CPU (AutoDock)  |  Speed-up | Comments       |
+| :--------------: | :----------: | :--------------: | :-------: | :------------: |
+| 3ptb, 10 runs    |        | 59.49            |      | ~x slower  |
+
+
+### Execution time (s) measurements from instrumented program 
+
+| Configuration    |    FPGA      |  CPU (AutoDock)  |  Speed-up | Comments       |
+| :--------------: | :----------: | :--------------: | :-------: | :------------: |
+| 3ptb, 10 runs    |        | 59.49            |      | ~x slower  | 
+
+
+
+
+
+
+
+
+Compilation failed: it throws an error message "Evaluation of Tcl script import_compile.tcl unsuccessful". 
+At this point it is assumed that over utilization is the cause. We aim to reduce resources:
+
+* Memory blocks are scarce, they are consumed by local memory. Try to declare arrays in the deepest scope possible, and implement small arrays with private memory
+
+* Reduce the type of non-kernel function arguments such as from `int` to `short`, i.e. `pop_size`
+
+>>> Up to here:  `Logic utilization: 144% ` and `Memory blocks: 139%`
+
+* Reduce max. number of rotatblt bonds from 32 downto `#define MAX_NUM_OF_ROTBONDS 	10`
+
+>>> Up to here:  `Logic utilization: 126% ` and `Memory blocks: 84%`
+
+* In `Krnl_GA`: implement arrays (which were already moved to the deepest possible scope) as local variables including the `memory` attribute and multiple ports, singlepump. Try different number of read and write ports, so no ports are left unused and area usage is reduced as much as possible
+
+* In `Krnl_IntraE`: implement local arrays inside the main `while(active)` loop, and make it compact, including the `memory` attribute and multiple ports, singlepump. Try two banks. Try different number of read and write ports, so no ports are left unused and area usage is reduced as much as possible
+
+* In `Krnl_InterE`: implement local arrays inside the main `while(active)` loop, and make it compact, including the `memory` attribute and multiple ports, singlepump. Try two banks. Try different number of read and write ports, so no ports are left unused and area usage is reduced as much as possible
+
+>>> Up to here:  Banking of local memory in `Krnl_IntraE` and `Krnl_InterE` was the solution to pipeline such kernels **perfectly**
+
+
+* In `Krnl_InterE`: implement local arrays inside the main `while(active)` loop. No performance degradation was caused, neither improvement in area usage
+
+>>> Up to here:  `Logic utilization: 105% ` and `Memory blocks: 92%`
+
+* For mode `Off` or `5`, it is actually not needed to send "dummy" genotypes. Removed corresponding channels and logic in `Krnl_GA` and `Krnl_Conform`
+
+>>> Up to here:  `Logic utilization: 105% ` and `Memory blocks: 91%`
+
+
+**Estimated resource usage**
+
+| Resource                             | Usage        |
+| :----------------------------------: | :----------: |
+| Logic utilization                    |  105%        |
+| ALUTs                                |   40%        |
+| Dedicated logic registers            |   64%        |
+| Memory blocks                        |   91%        |
+| DSP blocks                           |   39%        |
+
+
+### Execution time (s) measurements from non-instrumented program
+
+| Configuration    |    FPGA      |  CPU (AutoDock)  |  Speed-up | Comments       |
+| :--------------: | :----------: | :--------------: | :-------: | :------------: |
+| 3ptb, 10 runs    |        | 59.49            |      | ~x slower  |
+
+
+### Execution time (s) measurements from instrumented program 
+
+| Configuration    |    FPGA      |  CPU (AutoDock)  |  Speed-up | Comments       |
+| :--------------: | :----------: | :--------------: | :-------: | :------------: |
+| 3ptb, 10 runs    |        | 59.49            |      | ~x slower  | 
+
+
+
+Error: Compiler Error, not able to generate hardware (SAVED in GitLab )
+It is confirmed that over utilization is the cause. We aim to further reduce resources
 
 
 

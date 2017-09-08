@@ -31,10 +31,12 @@ void Krnl_IntraE(
 			    float                            DockConst_coeff_desolv
 )
 {
+/*
 	// local vars are allowed only at kernel scope
 	__local float loc_coords_x[MAX_NUM_OF_ATOMS];
 	__local float loc_coords_y[MAX_NUM_OF_ATOMS];
 	__local float loc_coords_z[MAX_NUM_OF_ATOMS];
+*/
 
 	char active = 1;
 
@@ -50,13 +52,31 @@ while(active) {
 	mode   = read_channel_altera(chan_Conf2Intrae_mode);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 
+///*
+	float __attribute__ ((
+			      memory,
+			      numbanks(2),
+			      bankwidth(16),
+			      singlepump,
+			      numreadports(2),
+			      numwriteports(1)
+			    )) loc_coords[MAX_NUM_OF_ATOMS][3];
+//*/
+
 	float3 position_xyz;
 
 	for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt++) {
 		position_xyz = read_channel_altera(chan_Conf2Intrae_xyz);
+/*
 		loc_coords_x[pipe_cnt] = position_xyz.x;
 		loc_coords_y[pipe_cnt] = position_xyz.y;
 		loc_coords_z[pipe_cnt] = position_xyz.z;
+*/
+///*
+		loc_coords[pipe_cnt][0x0] = position_xyz.x;
+		loc_coords[pipe_cnt][0x1] = position_xyz.y;
+		loc_coords[pipe_cnt][0x2] = position_xyz.z;
+//*/
 	}
 	// --------------------------------------------------------------
 	//printf("AFTER In INTRA CHANNEL\n");
@@ -72,18 +92,30 @@ while(active) {
 
 		char ref_intraE_contributors_const[3];
 
+///*
 		for (uchar i=0; i<3; i++) {
 			ref_intraE_contributors_const[i] = KerConstStatic_intraE_contributors_const[3*contributor_counter+i];
 		}
-
+//*/
+/*
+ref_intraE_contributors_const[0] = KerConstStatic_intraE_contributors_const[3*contributor_counter];
+ref_intraE_contributors_const[1] = KerConstStatic_intraE_contributors_const[3*contributor_counter + 1];
+ref_intraE_contributors_const[2] = KerConstStatic_intraE_contributors_const[3*contributor_counter + 2];
+*/
 		char atom1_id = ref_intraE_contributors_const[0];
 		char atom2_id = ref_intraE_contributors_const[1];
 
+/*
 		float subx = loc_coords_x[atom1_id] - loc_coords_x[atom2_id];
 		float suby = loc_coords_y[atom1_id] - loc_coords_y[atom2_id];
 		float subz = loc_coords_z[atom1_id] - loc_coords_z[atom2_id];
+*/
+///*
+		float subx = loc_coords[atom1_id][0x0] - loc_coords[atom2_id][0x0];
+		float suby = loc_coords[atom1_id][0x1] - loc_coords[atom2_id][0x1];
+		float subz = loc_coords[atom1_id][0x2] - loc_coords[atom2_id][0x2];
 
-		//distance_leo = sqrt(subx*subx + suby*suby + subz*subz)*DockConst_grid_spacing;
+//*/		//distance_leo = sqrt(subx*subx + suby*suby + subz*subz)*DockConst_grid_spacing;
 		float distance_leo = sqrt_custom(subx*subx + suby*suby + subz*subz)*DockConst_grid_spacing;
 
 		if (distance_leo < 1.0f) {

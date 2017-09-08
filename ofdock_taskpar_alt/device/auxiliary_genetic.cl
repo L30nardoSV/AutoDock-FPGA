@@ -50,14 +50,20 @@ uint find_best(
 /*	
 	 __local        float* restrict loc_energies,
 */
-	 __local 	float* restrict loc_energies1,
-	 __local 	float* restrict loc_energies2,
-		        const uint pop_size)
+	 /*__local*/ 	float* restrict loc_energies1,
+	 /*__local*/ 	/*float* restrict loc_energies2,*/
+		        /*const uint pop_size*/
+			const ushort pop_size
+
+		)
 {
 	ushort best_entity = 0;
 
 	for (ushort i=1; i<pop_size; i++) {
+/*		
 		if (loc_energies1[i] < loc_energies2[best_entity]) {
+*/
+		if (loc_energies1[i] < loc_energies1[best_entity]) {
 			best_entity = i;
 		}
 	}
@@ -179,7 +185,8 @@ float myrand(uint* prng)
 
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------
-uint myrand_uint(uint* prng, const uint limit)
+/*uint myrand_uint(uint* prng, const uint limit)*/
+uint myrand_uint(uint* prng, const ushort limit)
 {
 #if defined (REPRO)
 	*prng = 1;
@@ -197,14 +204,17 @@ uint myrand_uint(uint* prng, const uint limit)
 // --------------------------------------------------------------------------
 void binary_tournament_selection(               uint*           prng,
 
-				 __local        float* restrict loc_energies1,
-				 __local        float* restrict loc_energies2,
+				 /*__local*/        float* restrict loc_energies1,
+				 /*__local*/        /*float* restrict loc_energies2,*/
 /*
 				                float* restrict loc_energies,
 */
 				                uint*           parent1, 
 				                uint*           parent2,
+/*
 					  const uint            pop_size,  
+*/
+ 					  const ushort          pop_size, 
 				          const float           rand_level)
 {
 	uint parent_candidates [2];
@@ -219,10 +229,11 @@ void binary_tournament_selection(               uint*           prng,
 //}
 //while (parent_candidates [0] == parent_candidates [1]);
 
+
+	if (loc_energies1[parent_candidates[0]] < loc_energies1[parent_candidates[1]])
 /*
-	if (loc_energies[parent_candidates[0]] < loc_energies[parent_candidates[1]])
-*/
 	if (loc_energies1[parent_candidates[0]] < loc_energies2[parent_candidates[1]])
+*/
 	{
 		if (myrand(prng) < rand_level) {
 			*parent1 = parent_candidates [0];}
@@ -265,10 +276,11 @@ void binary_tournament_selection(               uint*           prng,
 
 
 	//the better will be the second parent
+
+	if (loc_energies1[parent_candidates[0]] < loc_energies1[parent_candidates[1]])
 /*
-	if (loc_energies[parent_candidates[0]] < loc_energies[parent_candidates[1]])
-*/
 	if (loc_energies1[parent_candidates[0]] < loc_energies2[parent_candidates[1]])
+*/
 	{
 		if (myrand(prng) < rand_level) {
 			*parent2 = parent_candidates [0];}
@@ -299,16 +311,18 @@ void binary_tournament_selection(               uint*           prng,
 // Originally from: searchoptimum.c
 // --------------------------------------------------------------------------
 void gen_new_genotype(	                
-					uint*           prng,
-					uint*           prng1,
-		      /*__local*/ const float*          parent1_genotype,
-		      /*__local*/ const float*          parent2_genotype,
-			      const uint            num_genes,
-		              const float           mutation_rate,
-			      const float           abs_max_dmov,
-			      const float           abs_max_dang,
-			      const float           crossover_rate,
-		      __local       float*          offspring_genotype)
+					uint*         prng,
+					uint*         prng1,
+		      /*__local*/ const float*        parent1_genotype,
+		      /*__local*/ const float*        parent2_genotype,
+
+			 /*     const uint            num_genes,*/
+				const ushort          num_genes,
+		              	const float           mutation_rate,
+			      	const float           abs_max_dmov,
+			      	const float           abs_max_dang,
+			      	const float           crossover_rate,
+		      /*__local*/     float*          offspring_genotype)
 {
 	uint covr_point_low, covr_point_high;
 	uint temp1, temp2;
@@ -322,7 +336,18 @@ void gen_new_genotype(
 	//		    covr_point_high = temp1;}
 
 
+/*
 	float priv_offspring_genotype [ACTUAL_GENOTYPE_LENGTH];
+*/
+
+	float __attribute__ ((
+			      memory,
+			      numbanks(1),
+			      bankwidth(4),//64
+			      singlepump,
+			      numreadports(2),
+			      numwriteports(1)
+			    )) priv_offspring_genotype [ACTUAL_GENOTYPE_LENGTH]; 
 
 
 
