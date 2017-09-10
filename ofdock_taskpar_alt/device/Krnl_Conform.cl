@@ -6,7 +6,6 @@
 __kernel __attribute__ ((max_global_work_dim(0)))
 void Krnl_Conform(
 	     __constant int*   restrict KerConstStatic_rotlist_const,
-
 	     __constant float* restrict KerConstDynamic_ref_coords_x_const,
 	     __constant float* restrict KerConstDynamic_ref_coords_y_const,
 	     __constant float* restrict KerConstDynamic_ref_coords_z_const,
@@ -15,7 +14,6 @@ void Krnl_Conform(
 	    
 			      unsigned int                     DockConst_rotbondlist_length,
 			      unsigned char                    DockConst_num_of_atoms,
-
 			      unsigned int                     DockConst_num_of_genes,
 
 			      float                            ref_orientation_quats_const_0,
@@ -50,7 +48,8 @@ void Krnl_Conform(
 	__local float genotype[ACTUAL_GENOTYPE_LENGTH];
 */
 
-	char active = 1;
+	/*char active = 1;*/
+	bool active = true;
 
 	// local mem to cache KerConstStatic->rotlist_const[], marked as bottleneck by profiler
 	__local int rotlist_localcache [MAX_NUM_OF_ROTATIONS];
@@ -63,47 +62,37 @@ while(active) {
 	// --------------------------------------------------------------
 	// Wait for genotypes in channel
 	// --------------------------------------------------------------
+
 	bool IC_valid = false;
 	bool GG_valid = false;
-/*
-	bool LS_valid = false;
-*/
 	bool LS_pos_valid = false;
 	bool LS_neg_valid = false;
-	
 	bool Off_valid = false;
 
+/*
 	char IC_active;
 	char GG_active;
-/*
-	char LS_active;
-*/
 	char LS_pos_active;
 	char LS_neg_active;
-	
 	char Off_active;
+*/
+	bool IC_active;
+	bool GG_active;
+	bool LS_pos_active;
+	bool LS_neg_active;
+	bool Off_active;
 	
-/*
-	while ((IC_valid == false) && (GG_valid == false) && (LS_valid == false) && (Off_valid == false)) {
-*/
-	while ((IC_valid == false) && 
+	while (
+	       (IC_valid == false) && 
 	       (GG_valid == false) && 
-/*
-	       (LS_valid == false) && 
-*/
 	       (LS_pos_valid == false) && 
 	       (LS_neg_valid == false) &&
-
                (Off_valid == false)
 	) {
 		IC_active = read_channel_nb_altera(chan_IC2Conf_active, &IC_valid);
 		GG_active = read_channel_nb_altera(chan_GG2Conf_active, &GG_valid);
-/*
-		LS_active = read_channel_nb_altera(chan_LS2Conf_active, &LS_valid);
-*/
 		LS_pos_active = read_channel_nb_altera(chan_LS2Conf_pos_active, &LS_pos_valid);
 		LS_neg_active = read_channel_nb_altera(chan_LS2Conf_neg_active, &LS_neg_valid);
-
 		Off_active = read_channel_nb_altera(chan_Off2Conf_active, &Off_valid);
 	}
 
@@ -112,10 +101,9 @@ while(active) {
 
 	float genotype[ACTUAL_GENOTYPE_LENGTH];
 
-
 	if (IC_valid) {
 		active = IC_active;
-		mode = 1;
+		mode = 0x01;
 
 		for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_genes; pipe_cnt++) {
 			genotype[pipe_cnt] = read_channel_altera(chan_IC2Conf_genotype);}	
@@ -123,37 +111,15 @@ while(active) {
 	else {
 		if (GG_valid) {
 			active = GG_active;
-			mode = 2;
+			mode = 0x02;
 
 			for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_genes; pipe_cnt++) {
 				genotype[pipe_cnt] = read_channel_altera(chan_GG2Conf_genotype);}	
 		}
 		else {
-
-/*
-			if (LS_valid) {
-				active = LS_active;
-				mode = 3;
-
-				for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_genes; pipe_cnt++) {
-					genotype[pipe_cnt] = read_channel_altera(chan_LS2Conf_genotype);}
-			}
-			else {
-				if (Off_valid) {
-					active = Off_active;
-					mode = 4;
-
-					for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_genes; pipe_cnt++) {
-						genotype[pipe_cnt] = read_channel_altera(chan_Off2Conf_genotype);}
-					}
-			}
-*/
-
-
-
 			if (LS_pos_valid) {
 				active = LS_pos_active;
-				mode = 3;
+				mode = 0x03;
 
 				for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_genes; pipe_cnt++) {
 					genotype[pipe_cnt] = read_channel_altera(chan_LS2Conf_pos_genotype);}
@@ -161,7 +127,7 @@ while(active) {
 			else {
 				if (LS_neg_valid) {
 					active = LS_neg_active;
-					mode = 4;
+					mode = 0x04;
 
 					for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_genes; pipe_cnt++) {
 						genotype[pipe_cnt] = read_channel_altera(chan_LS2Conf_neg_genotype);}
@@ -169,19 +135,21 @@ while(active) {
 				else {
 					if (Off_valid) {
 						active = Off_active;
-						mode = 5;
-/*
-						for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_genes; pipe_cnt++) {
-							genotype[pipe_cnt] = read_channel_altera(chan_Off2Conf_genotype);}
-*/
+						mode = 0x05;
+
+						//for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_genes; pipe_cnt++) {
+						//	genotype[pipe_cnt] = read_channel_altera(chan_Off2Conf_genotype);}
+
 					}
 				}
+
 			}
 		}	
+
 	}
+
 	// --------------------------------------------------------------
 	//printf("AFTER In CONFORM CHANNEL\n");
-
 ///*
 	float __attribute__ ((
 			      memory,

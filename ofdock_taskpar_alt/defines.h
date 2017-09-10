@@ -52,7 +52,8 @@
 #define MAX_INTRAE_CONTRIBUTORS 8128
 #define MAX_NUM_OF_ROTATIONS 	4096
 //#define MAX_NUM_OF_ROTBONDS 	32
-#define MAX_NUM_OF_ROTBONDS 	10	
+#define MAX_NUM_OF_ROTBONDS 	10
+//#define MAX_NUM_OF_ROTBONDS 	5
 // to fit on FPGA
 //#define MAX_POPSIZE 		2048
 #define MAX_POPSIZE 		256
@@ -73,7 +74,6 @@
 #define RAND_C 		12345u
 //WARNING: it is supposed that unsigned int is 32 bit long
 #define MAX_UINT 	4294967296.0f
-
 
 // Macro for capturing grid values
 // Original

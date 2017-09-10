@@ -549,7 +549,6 @@ filled with clock() */
 		if (prepare_constdynamic_fields_for_gpu(&myligand_reference, mypars, cpu_ref_ori_angles, &KerConstDynamic) == 1)
 			return 1;
 
-
 		#if defined (REPRO)
 			cpu_prng_seeds[0] = 1u;
 		#else

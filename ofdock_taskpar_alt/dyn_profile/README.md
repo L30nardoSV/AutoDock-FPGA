@@ -571,19 +571,7 @@ The idea here is to pipelined `LS` _at all cost_.
 | DSP blocks                           |  43 %        |
 
 
-### Execution time (s) measurements from non-instrumented program
-
-| Configuration    |    FPGA      |  CPU (AutoDock)  |  Speed-up | Comments       |
-| :--------------: | :----------: | :--------------: | :-------: | :------------: |
-| 3ptb, 10 runs    |        | 59.49            |      | ~x slower  |
-
-
-### Execution time (s) measurements from instrumented program 
-
-| Configuration    |    FPGA      |  CPU (AutoDock)  |  Speed-up | Comments       |
-| :--------------: | :----------: | :--------------: | :-------: | :------------: |
-| 3ptb, 10 runs    |        | 59.49            |      | ~x slower  | 
-
+**ATTEMPT TO BUILD FAILED**
 
 
 
@@ -633,23 +621,181 @@ At this point it is assumed that over utilization is the cause. We aim to reduce
 | DSP blocks                           |   39%        |
 
 
+**ATTEMPT TO BUILD FAILED**
+
+Error: Compiler Error, not able to generate hardware (SAVED in GitLab )
+It is confirmed that over utilization is the cause. We aim to further reduce resources
+
+* For mode `Off` or `5`, it is actually not needed to receive "dummy" energiess. Removed corresponding channels and logic in `Krnl_GA`, `Krnl_InterE`, and `Krnl_IntraE`
+
+>>> Up to here:  `Logic utilization: 104% ` and `Memory blocks: 91%`
+
+* Reduce number of conditional calculation inside conditional for-loops by relocating `genotype_bias`
+
+>>> Up to here:  `Logic utilization: 103% ` and `Memory blocks: 91%`
+
+* Replace `DockConst_num_of_genes` upper bounds of some loops with `ACTUAL_GENOTYPE_LENGTH` to reduce hw but keeping same pipelining
+
+>>> Up to here:  `Logic utilization: 102% ` and `Memory blocks: 91%`
+
+
+**Estimated resource usage**
+
+| Resource                             | Usage        |
+| :----------------------------------: | :----------: |
+| Logic utilization                    |  102%        |
+| ALUTs                                |   40%        |
+| Dedicated logic registers            |   63%        |
+| Memory blocks                        |   91%        |
+| DSP blocks                           |   40%        |
+
+
+Error: Compiler Error, not able to generate hardware.
+It is confirmed that over utilization is the cause. We aim to further reduce resources
+
+
+
+
+* Switched to old `crossover implementation` which leads to **non-pipelined GG** + **pipelined LS** but reduces area usage
+
++--------------------------------------------------------------------+
+; Estimated Resource Usage Summary                                   ;
++----------------------------------------+---------------------------+
+; Resource                               + Usage                     ;
++----------------------------------------+---------------------------+
+; Logic utilization                      ;   99%                     ;
+; ALUTs                                  ;   39%                     ;
+; Dedicated logic registers              ;   60%                     ;
+; Memory blocks                          ;   87%                     ;
+; DSP blocks                             ;   40%                     ;
++----------------------------------------+---------------------------;
+
+
+
+Error: Compiler Error, not able to generate hardware.
+It is confirmed that over utilization is the cause. We aim to further reduce resources
+
+
+
+* Channel for transmitting `active` signals are changed from `char` to `bool` type
+
+* Use bit-masking on some values such as `mode`
+
+* Reduce type of `entity_for_ls` from `uint` to `ushort`
+* Reduce type of `iteration_cnt` from `uint` to `ushort` (max. value it reaches is 300)
+* Reduce type of `cons_succ` from `uint` to `uchar` (max. value it reaches is 4)
+* Reduce type of `cons_fail` from `uint` to `uchar` (max. value it reaches is 4)
+* Reduce type of `best_entity_id` from `uint` to `ushort`
+* Reduce type of `parent1` from `uint` to `ushort`
+* Reduce type of `parent2` from `uint` to `ushort`
+* Reduce type of `covr_point_low` from `uint` to `uchar`
+* Reduce type of `covr_point_high` from `uint` to `uchar`
+* Reduce type of `temp1` from `uint` to `uchar`
+* Reduce type of `temp2` from `uint` to `uchar`
+* Replace `myrand_uint` by either `myrand_ushort` or `myrand_uchar` accordingly
+* Remove caching of `__constant` memory in `Krnl_InterE`, as it was not done either in `Krnl_IntraE`
+* Switched back to **pipelined GG (II=18)**
+* Evaluation of `eval_cnt` and `generation_cnt` is moved at the very beginning of main while loop (Something very similar was done with LS while-loop). This allows pipelining basically everything!
+
+>>> 
+Macro `PIPELINE_ALL` is added
+When enabled, `main while-loop`(II=2), `GG`(II=18) and `LS`(II(main)=2, II(inner)=9) are all pipelined
+`Logic utilization: 108% ` and `Memory blocks: 98%`
+>>> 
+
+>>>
+Macro `PIPELINE_ALL` is added
+When disabled, only `GG`(II=18) is pipelined, but `LS` is not pipelined, and therefore `main while-loop` is not pipelined
+`Logic utilization: 87% ` and `Memory blocks: 79%`
+>>> 
+
+Another try but disabling `PIPELINE_ALL`
+
++--------------------------------------------------------------------+
+; Estimated Resource Usage Summary                                   ;
++----------------------------------------+---------------------------+
+; Resource                               + Usage                     ;
++----------------------------------------+---------------------------+
+; Logic utilization                      ;   87%                     ;
+; ALUTs                                  ;   35%                     ;
+; Dedicated logic registers              ;   52%                     ;
+; Memory blocks                          ;   79%                     ;
+; DSP blocks                             ;   36%                     ;
++----------------------------------------+---------------------------;
+
+
+
 ### Execution time (s) measurements from non-instrumented program
 
 | Configuration    |    FPGA      |  CPU (AutoDock)  |  Speed-up | Comments       |
 | :--------------: | :----------: | :--------------: | :-------: | :------------: |
-| 3ptb, 10 runs    |        | 59.49            |      | ~x slower  |
+| 3ptb, 10 runs    | 271.84       | 59.49            | 0.219     | ~4.56x slower  |
 
 
 ### Execution time (s) measurements from instrumented program 
 
 | Configuration    |    FPGA      |  CPU (AutoDock)  |  Speed-up | Comments       |
 | :--------------: | :----------: | :--------------: | :-------: | :------------: |
-| 3ptb, 10 runs    |        | 59.49            |      | ~x slower  | 
+| 3ptb, 10 runs    | 287.34       | 59.49            | 0.207     | ~4.83x slower  | 
 
 
 
-Error: Compiler Error, not able to generate hardware (SAVED in GitLab )
-It is confirmed that over utilization is the cause. We aim to further reduce resources
+
+
+
+
+
+
+
+
+
+
+
+
+
+## `12_run_harp2`
+
+
+
+
+
+
+
+
+**NOTE 1**: the small pipelined-loops have to be switched back to variable upper bound rather then the constant `ACTUAL_GENOTYPE_LENGTH`
+
+
+
+
+
+
+
+
+
+
+**NOTE 2**: there is possiblity to reduce logic usage down to 100% by removing `IC` from `Krnl_GA`. That would require 
+to move its corresponding energy-calculation to host and pass them
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -12,7 +12,6 @@
 __kernel __attribute__ ((max_global_work_dim(0)))
 void Krnl_InterE(
              __constant float* restrict GlobFgrids,
-  
  	     __constant float* restrict KerConstStatic_atom_charges_const,
  	     __constant char*  restrict KerConstStatic_atom_types_const,
 
@@ -30,21 +29,18 @@ void Krnl_InterE(
 	// however, they can be moved inside loops and still be local
 	// see how to do that here!
 
-/*
-	__local float loc_coords_x[MAX_NUM_OF_ATOMS];
-	__local float loc_coords_y[MAX_NUM_OF_ATOMS];
-	__local float loc_coords_z[MAX_NUM_OF_ATOMS];
-*/
-	char active = 1;
+	/*char active = 1;*/
+	bool active = true;
 
+/*
 	__local char  ref_atom_types_const  [MAX_NUM_OF_ATOMS];
 	__local float ref_atom_charges_const[MAX_NUM_OF_ATOMS];
 
-	for (uchar i=0; i<MAX_NUM_OF_ATOMS; i++) {
+	for (uchar i=0; i<DockConst_num_of_atoms; i++) {
 		ref_atom_types_const [i]   = KerConstStatic_atom_types_const[i];
 		ref_atom_charges_const [i] = KerConstStatic_atom_charges_const[i];
 	}
-
+*/
 while(active) {
 	char mode;
 
@@ -70,13 +66,6 @@ while(active) {
 
 	for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt++) {
 		position_xyz = read_channel_altera(chan_Conf2Intere_xyz);
-
-/*
-		loc_coords_x[pipe_cnt] = position_xyz.x;
-		loc_coords_y[pipe_cnt] = position_xyz.y;
-		loc_coords_z[pipe_cnt] = position_xyz.z;
-*/
-
 		loc_coords[pipe_cnt][0x0] = position_xyz.x;
 		loc_coords[pipe_cnt][0x1] = position_xyz.y;
 		loc_coords[pipe_cnt][0x2] = position_xyz.z;
@@ -93,18 +82,13 @@ while(active) {
 	// for each atom
 	for (uchar atom1_id=0; atom1_id<DockConst_num_of_atoms; atom1_id++)
 	{
-		char atom1_typeid = ref_atom_types_const[atom1_id];
-/*
-		float x = loc_coords_x[atom1_id];
-		float y = loc_coords_y[atom1_id];
-		float z = loc_coords_z[atom1_id];
-*/
-
+		/*char atom1_typeid = ref_atom_types_const[atom1_id];*/
+		char atom1_typeid = KerConstStatic_atom_types_const[atom1_id];
 		float x = loc_coords[atom1_id][0x0];
 		float y = loc_coords[atom1_id][0x1];
 		float z = loc_coords[atom1_id][0x2];
-
-		float q = ref_atom_charges_const[atom1_id];
+		/*float q = ref_atom_charges_const[atom1_id];*/
+		float q = KerConstStatic_atom_charges_const[atom1_id];
 
 		float partialE1;
 		float partialE2;
@@ -281,21 +265,25 @@ while(active) {
 	// Send intermolecular energy to chanel
 	// --------------------------------------------------------------
 	switch (mode) {
-		case 1:	// IC
+///*
+		case 0x01:	// IC
 			write_channel_altera(chan_Intere2StoreIC_intere, interE);
 		break;
-		case 2:	// GG
+//*/
+		case 0x02:	// GG
 			write_channel_altera(chan_Intere2StoreGG_intere, interE);
 		break;
-		case 3:	// LS - positive descent
+		case 0x03:	// LS - positive descent
 			write_channel_altera(chan_Intere2StoreLS_pos_intere, interE);
 		break;
-		case 4:	// LS - negative descent
+		case 0x04:	// LS - negative descent
 			write_channel_altera(chan_Intere2StoreLS_neg_intere, interE);
 		break;
-		case 5:	// Off
-			write_channel_altera(chan_Intere2StoreOff_intere, interE);
-		break;
+
+		//case 5:	// Off
+		//	write_channel_altera(chan_Intere2StoreOff_intere, interE);
+		//break;
+
 	}
 	// --------------------------------------------------------------
  	
