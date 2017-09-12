@@ -658,19 +658,16 @@ It is confirmed that over utilization is the cause. We aim to further reduce res
 
 * Switched to old `crossover implementation` which leads to **non-pipelined GG** + **pipelined LS** but reduces area usage
 
-+--------------------------------------------------------------------+
-; Estimated Resource Usage Summary                                   ;
-+----------------------------------------+---------------------------+
-; Resource                               + Usage                     ;
-+----------------------------------------+---------------------------+
-; Logic utilization                      ;   99%                     ;
-; ALUTs                                  ;   39%                     ;
-; Dedicated logic registers              ;   60%                     ;
-; Memory blocks                          ;   87%                     ;
-; DSP blocks                             ;   40%                     ;
-+----------------------------------------+---------------------------;
 
+**Estimated resource usage**
 
+| Resource                             | Usage        |
+| :----------------------------------: | :----------: |
+| Logic utilization                    |   99%        |
+| ALUTs                                |   39%        |
+| Dedicated logic registers            |   60%        |
+| Memory blocks                        |   87%        |
+| DSP blocks                           |   40%        |
 
 Error: Compiler Error, not able to generate hardware.
 It is confirmed that over utilization is the cause. We aim to further reduce resources
@@ -711,18 +708,13 @@ When disabled, only `GG`(II=18) is pipelined, but `LS` is not pipelined, and the
 
 Another try but disabling `PIPELINE_ALL`
 
-+--------------------------------------------------------------------+
-; Estimated Resource Usage Summary                                   ;
-+----------------------------------------+---------------------------+
-; Resource                               + Usage                     ;
-+----------------------------------------+---------------------------+
-; Logic utilization                      ;   87%                     ;
-; ALUTs                                  ;   35%                     ;
-; Dedicated logic registers              ;   52%                     ;
-; Memory blocks                          ;   79%                     ;
-; DSP blocks                             ;   36%                     ;
-+----------------------------------------+---------------------------;
-
+| Resource                             | Usage        |
+| :----------------------------------: | :----------: |
+| Logic utilization                    |   87%        |
+| ALUTs                                |   35%        |
+| Dedicated logic registers            |   52%        |
+| Memory blocks                        |   79%        |
+| DSP blocks                           |   36%        |
 
 
 ### Execution time (s) measurements from non-instrumented program
@@ -756,13 +748,47 @@ Another try but disabling `PIPELINE_ALL`
 ## `12_run_harp2`
 
 
+* Small pipelined-loops have to be switched back to variable upper bound rather then the constant `ACTUAL_GENOTYPE_LENGTH`. Also to those loops depending on `PIPELINE_ALL`
+
+* Update of `iteration_cnt` in `LS` moved close to the update of `cons_succ` and `cons_fail` at the beginning of `LS` while-loop
+
+* Merge for-loops that update `positive_new_genotype` and `negative_new_genotype`. Requires to reduce read ports to 2 of `offspring_genotype`
+
+* Clean up of `binary_tournament_selection`
+
+* To reduce `GG` II, pass 6 prng variables to `binary_tournament_selection`. Reduces II=18 downto II=3 
+
+| Resource                             | Usage        |
+| :----------------------------------: | :----------: |
+| Logic utilization                    |   87%        |
+| ALUTs                                |   35%        |
+| Dedicated logic registers            |   52%        |
+| Memory blocks                        |   78%        |
+| DSP blocks                           |   36%        |
+
+
+
+
+### Execution time (s) measurements from non-instrumented program
+
+| Configuration    |    FPGA      |  CPU (AutoDock)  |  Speed-up | Comments       |
+| :--------------: | :----------: | :--------------: | :-------: | :------------: |
+| 3ptb, 10 runs    | 272.69       | 59.49            | 0.218     | ~4.58x slower  |
+
+
+### Execution time (s) measurements from instrumented program 
+Execution of this instrumented version appears to hang :( ...
 
 
 
 
 
 
-**NOTE 1**: the small pipelined-loops have to be switched back to variable upper bound rather then the constant `ACTUAL_GENOTYPE_LENGTH`
+
+
+
+
+
 
 
 

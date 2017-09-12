@@ -153,7 +153,16 @@ uchar myrand_uchar(uint* prng, const uchar limit)
 // The two selected parents are returned in the parent1 and parent2 parameters.
 // Originally from: searchoptimum.c
 // --------------------------------------------------------------------------
-void binary_tournament_selection(               uint*           prng,
+void binary_tournament_selection(              
+				/*
+						     uint*           prng,
+				*/
+						     uint*           prngA,
+						     uint*           prngB,
+						     uint*           prngC,
+						     uint*           prngD,
+						     uint*           prngE,
+						     uint*           prngF,
 
 				 /*__local*/        float* restrict loc_energies1,
 				 /*__local*/        /*float* restrict loc_energies2,*/
@@ -163,34 +172,28 @@ void binary_tournament_selection(               uint*           prng,
  					  const ushort          pop_size, 
 				          const float           rand_level)
 {
-	/*uint*/ushort parent_candidates [2];
+	ushort parent_candidates [2];
 
-	/*parent_candidates [0] = myrand_uint(prng, pop_size);*/
-	parent_candidates [0] = myrand_ushort(prng, pop_size);
-//do {
+	//parent_candidates [0] = myrand_ushort(prng, pop_size);
+	parent_candidates [0] = myrand_ushort(prngA, pop_size);
+
 #if defined (REPRO)
 	parent_candidates [1] = myrand_uint(prng, pop_size) + 1;
 #else
-	/*parent_candidates [1] = myrand_uint(prng, pop_size);*/
-	parent_candidates [1] = myrand_ushort(prng, pop_size);
+	//parent_candidates [1] = myrand_ushort(prng, pop_size);
+	parent_candidates [1] = myrand_ushort(prngB, pop_size);
 #endif
-//}
-//while (parent_candidates [0] == parent_candidates [1]);
 
-
-	if (loc_energies1[parent_candidates[0]] < loc_energies1[parent_candidates[1]])
-/*
-	if (loc_energies1[parent_candidates[0]] < loc_energies2[parent_candidates[1]])
-*/
-	{
-		if (myrand(prng) < rand_level) {
+	if (loc_energies1[parent_candidates[0]] < loc_energies1[parent_candidates[1]]) {
+		//if (myrand(prng) < rand_level) {
+		if (myrand(prngC) < rand_level) {
 			*parent1 = parent_candidates [0];}
 		else	{
 			*parent1 = parent_candidates [1];}
 	}
-	else
-	{
-		if (myrand(prng) < rand_level) {
+	else {
+		//if (myrand(prng) < rand_level) {
+		if (myrand(prngC) < rand_level) {
 			*parent1 = parent_candidates [1];}
 		else	{
 			*parent1 = parent_candidates [0];}	
@@ -203,43 +206,28 @@ void binary_tournament_selection(               uint*           prng,
 	#endif
 
 	//generating two different parent candidates (which differ from parent1 as well)
-//do {
 #if defined (REPRO)
 	parent_candidates [0] = myrand_uint(prng, pop_size) + 2;
-#else
-	/*parent_candidates [0] = myrand_uint(prng, pop_size);*/
-	parent_candidates [0] = myrand_ushort(prng, pop_size);
-#endif
-//}
-//while (parent_candidates [0] == *parent1);
-
-
-//do {
-#if defined (REPRO)
 	parent_candidates [1] = myrand_uint(prng, pop_size) + 3;
 #else
-	/*parent_candidates [1] = myrand_uint(prng, pop_size);*/
-	parent_candidates [1] = myrand_ushort(prng, pop_size);
-#endif
-//}
-//while ((parent_candidates [1] == parent_candidates [0]) || (parent_candidates [1] == *parent1));
+	//parent_candidates [0] = myrand_ushort(prng, pop_size);
+	//parent_candidates [1] = myrand_ushort(prng, pop_size);
 
+	parent_candidates [0] = myrand_ushort(prngD, pop_size);
+	parent_candidates [1] = myrand_ushort(prngE, pop_size);
+#endif
 
 	//the better will be the second parent
-
-	if (loc_energies1[parent_candidates[0]] < loc_energies1[parent_candidates[1]])
-/*
-	if (loc_energies1[parent_candidates[0]] < loc_energies2[parent_candidates[1]])
-*/
-	{
-		if (myrand(prng) < rand_level) {
+	if (loc_energies1[parent_candidates[0]] < loc_energies1[parent_candidates[1]]) {
+		//if (myrand(prng) < rand_level) {
+		if (myrand(prngF) < rand_level) {
 			*parent2 = parent_candidates [0];}
 		else		          	       {
 			*parent2 = parent_candidates [1];}
 	}
-	else
-	{
-		if (myrand(prng) < rand_level) {
+	else {
+		//if (myrand(prng) < rand_level) {
+		if (myrand(prngF) < rand_level) {
 			*parent2 = parent_candidates [1];}
 		else			               {
 			*parent2 = parent_candidates [0];}	
@@ -499,8 +487,8 @@ void gen_new_genotype(
 
 	#if 1
 	// current implementation, pipeline, II = 3
-	for (uchar i=5; i<ACTUAL_GENOTYPE_LENGTH; i++) {
-	/*for (uchar i=5; i<num_genes; i++) {*/
+	//for (uchar i=5; i<ACTUAL_GENOTYPE_LENGTH; i++) {
+	for (uchar i=5; i<num_genes; i++) {
 		if (mutation_rate > myrand(prng)) {
 			priv_offspring_genotype [i] = priv_offspring_genotype [i] + 2*abs_max_dang*myrand(prng1)-abs_max_dang;
 			priv_offspring_genotype [i] = map_angle_360(priv_offspring_genotype [i]);
@@ -515,8 +503,8 @@ void gen_new_genotype(
 	#endif
 
 	#pragma unroll 1
-	for (uchar i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {
-	/*for (uchar i=0; i<num_genes; i++) {*/
+	//for (uchar i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {
+	for (uchar i=0; i<num_genes; i++) {
 		offspring_genotype [i] = priv_offspring_genotype [i];
 	}
 }
