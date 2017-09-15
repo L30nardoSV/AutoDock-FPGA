@@ -57,7 +57,6 @@ channel float 	chan_Intrae2StoreLS_neg_intrae;
 
 
 
-//#define PIPELINE_ALL
 
 
 
@@ -231,10 +230,10 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 	// ------------------------------------------------------------------
 
 	// Find_best 	
-	/*uint*/ ushort best_entity_id;
+	ushort best_entity_id;
 
 	// Binary tournament 	
-	/*uint*/ ushort parent1, parent2; 
+	ushort parent1, parent2; 
 
 	// read GlobPRNG
 	// GG: 0 - 2
@@ -257,35 +256,31 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 
 	while ((eval_cnt < DockConst_num_of_energy_evals) && (generation_cnt < DockConst_num_of_generations)) {
 
-
-		// update evaluations
+		// update energy evaluations
 		eval_cnt += tmp_eval_cnt + DockConst_pop_size;
 
 		// update generations
 		generation_cnt++;
 
-
-
 		// ------------------------------------------------------------------
 		// GG: Genetic Generation
 		// ------------------------------------------------------------------
-		float loc_energies1[MAX_POPSIZE]; 
+		float loc_energies[MAX_POPSIZE]; 
 
 		// copy energy to local memory
 		for (ushort i=0; i<DockConst_pop_size; i++) {
-			loc_energies1[i] = GlobEnergyCurrent[i];
+			loc_energies[i] = GlobEnergyCurrent[i];
 		}
 
 		// identifying best entity 		
-		best_entity_id = find_best(
-					   loc_energies1,
+		best_entity_id = find_best(loc_energies,
 					   DockConst_pop_size);
 
 		// elitism - copying the best entity to new population 	
 		for (uchar i=0; i<DockConst_num_of_genes; i++) { 		
 			GlobPopulationNext[i] = GlobPopulationCurrent[best_entity_id*ACTUAL_GENOTYPE_LENGTH+i]; 		
 		} 		
-		GlobEnergyNext[0] = loc_energies1[best_entity_id];
+		GlobEnergyNext[0] = loc_energies[best_entity_id];
 
 		for (ushort new_pop_cnt = 1; new_pop_cnt < DockConst_pop_size; new_pop_cnt++) {
 
@@ -327,7 +322,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 						    &prngD,
 						    &prngE,
 						    &prngF,
-						    loc_energies1,
+						    loc_energies,
 						    &parent1,
 						    &parent2,			    
 				                    DockConst_pop_size,
@@ -379,71 +374,56 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 		} // End of GG rx for-loop new_pop_cnt
 
 		// ------------------------------------------------------------------
-
-/*
+		/*
 		// update energy-evaluation count
 		eval_cnt += DockConst_pop_size;
-*/
+		*/
+
 		// ------------------------------------------------------------------
 		// LS: Local Search
 		// ------------------------------------------------------------------
-///*
 		// choose random entities	
 		ushort rand_ls_entities [16]; 
 	
 		for (ushort ls_ent_cnt=0; ls_ent_cnt<DockConst_num_of_lsentities; ls_ent_cnt++) {
-			rand_ls_entities[ls_ent_cnt] = myrand_ushort(
-							 &prng3, 
-						         DockConst_pop_size);
+			rand_ls_entities[ls_ent_cnt] = myrand_ushort(&prng3, 
+						         	     DockConst_pop_size);
 		}
-//*/
 
-		/*uint*/ tmp_eval_cnt = 0;
+		tmp_eval_cnt = 0;
 
 		// subject num_of_entity_for_ls pieces of offsprings to LS 	
 		for (ushort ls_ent_cnt=0; ls_ent_cnt<DockConst_num_of_lsentities; ls_ent_cnt++) {
 
 			float __attribute__ ((
-			      memory,
-			      numbanks(1),
-			      bankwidth(64),
-			      singlepump,
-			      numreadports(2),//3
-			      numwriteports(1)
-			    )) offspring_genotype [ACTUAL_GENOTYPE_LENGTH]; 	
+			memory,
+			numbanks(1),
+			bankwidth(64),
+			singlepump,
+			numreadports(2),
+			numwriteports(1)
+			)) offspring_genotype [ACTUAL_GENOTYPE_LENGTH]; 	
 
 			float __attribute__ ((
-			      memory,
-			      numbanks(1),
-			      bankwidth(64),
-			      singlepump,
-			      numreadports(3),
-			      numwriteports(1)
-			    )) genotype_bias [ACTUAL_GENOTYPE_LENGTH]; 
+			memory,
+			numbanks(1),
+			bankwidth(64),
+			singlepump,
+			numreadports(2),
+			numwriteports(1)
+			)) genotype_bias [ACTUAL_GENOTYPE_LENGTH]; 
 
 			float rho = 1.0f;
-			/*uint*/ ushort iteration_cnt = 0;
-			/*uint*/ uchar cons_succ = 0;
-			/*uint*/ uchar cons_fail = 0;
-			uint LS_eval   = 0;
+			ushort iteration_cnt = 0;
+			uchar  cons_succ     = 0;
+			uchar  cons_fail     = 0;
+			uint   LS_eval       = 0;
 
 			// choosing an entity randomly, 			
 			// and without checking if it has already been subjected to LS in this cycle 	
-/*
-			ushort entity_for_ls = myrand_uint(
-							 &prng3, 
-						         DockConst_pop_size);
-*/
-/*
-			ushort entity_for_ls = myrand_ushort(
-							 &prng3, 
-						         DockConst_pop_size);
-*/
-///*
 			ushort entity_for_ls = rand_ls_entities[ls_ent_cnt];
-//*/
+
 			// read population, init genotype bias
-			//for (uchar i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {
 			for (uchar i=0; i<DockConst_num_of_genes; i++) {
 				offspring_genotype [i] = GlobPopulationNext[entity_for_ls*ACTUAL_GENOTYPE_LENGTH + i];
 				genotype_bias [i] = 0.0f;
@@ -455,36 +435,36 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			// performing local search
 			while ((iteration_cnt < DockConst_max_num_of_iters)  && (rho > DockConst_rho_lower_bound)) {
 
-			float __attribute__ ((
-			      memory,
-			      numbanks(1),
-			      bankwidth(64),
-			      singlepump,
-			      numreadports(4),
-			      numwriteports(1)
-			    )) positive_new_genotype [ACTUAL_GENOTYPE_LENGTH]; 	
+				float __attribute__ ((
+			     	memory,
+			      	numbanks(1),
+			      	bankwidth(64),
+			      	singlepump,
+			      	numreadports(3),
+			      	numwriteports(1)
+			    	)) positive_new_genotype [ACTUAL_GENOTYPE_LENGTH]; 	
 
-			float __attribute__ ((
-			      memory,
-			      numbanks(1),
-			      bankwidth(64),
-			      singlepump,
-			      numreadports(4),
-			      numwriteports(1)
-			    )) negative_new_genotype [ACTUAL_GENOTYPE_LENGTH]; 	
+				float __attribute__ ((
+			      	memory,
+			      	numbanks(1),
+			      	bankwidth(64),
+			      	singlepump,
+			      	numreadports(3),
+			      	numwriteports(1)
+			    	)) negative_new_genotype [ACTUAL_GENOTYPE_LENGTH]; 	
 
-			float __attribute__ ((
-			      memory,
-			      numbanks(1),
-			      bankwidth(64),
-			      singlepump,
-			      numreadports(3),
-			      numwriteports(1)
-			    )) genotype_deviate [ACTUAL_GENOTYPE_LENGTH]; 	
+				float __attribute__ ((
+			     	memory,
+			      	numbanks(1),
+			      	bankwidth(64),
+			      	singlepump,
+			     	numreadports(2),
+			      	numwriteports(1)
+			    	)) genotype_deviate [ACTUAL_GENOTYPE_LENGTH]; 	
 
-#if 1
-// current implementation
-// allows (partially) pipeling enclosing while-loop
+				// -----------------------------------------------
+				// Exit condition is groups here. It allows pipelining
+
 				// changing deviation (rho), if needed
 				if (cons_succ >= DockConst_cons_limit) {
 					rho = LS_EXP_FACTOR*rho;
@@ -500,15 +480,14 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 				}
 				
 				iteration_cnt++;
-#endif
+				// -----------------------------------------------
 
 				//new random deviate
 				//rho is the deviation of the uniform distribution
+				#pragma unroll
 				for (uchar i=0; i<3; i++) {
 					genotype_deviate [i] = rho*DockConst_base_dmov_mul_sqrt3*(2*myrand(&prng4)-1);
 				}
-
-				//for (uchar i=3; i<ACTUAL_GENOTYPE_LENGTH; i++) {
 				for (uchar i=3; i<DockConst_num_of_genes; i++) {
 					genotype_deviate [i] = rho*DockConst_base_dang_mul_sqrt3*(2*myrand(&prng5)-1);
 				}
@@ -527,7 +506,6 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 				negative_new_genotype [3] = map_angle_360(negative_new_genotype [3]);
 				negative_new_genotype [4] = map_angle_180(negative_new_genotype [4]);
 
-				//for (uchar i=5; i<ACTUAL_GENOTYPE_LENGTH; i++) {
 				for (uchar i=5; i<DockConst_num_of_genes; i++) {
 					positive_new_genotype [i] = map_angle_360(positive_new_genotype [i]);
 					negative_new_genotype [i] = map_angle_360(negative_new_genotype [i]);
@@ -547,7 +525,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 				float positive_candidate_energy = pos_energyIA_LS_rx + pos_energyIE_LS_rx;
 				
 				// update LS energy-evaluation count
-				LS_eval++;
+				//LS_eval++;
 
 				// calculate energy of negative genotype
 				write_channel_altera(chan_LS2Conf_neg_active, true);
@@ -563,7 +541,8 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 				float negative_candidate_energy = neg_energyIA_LS_rx + neg_energyIE_LS_rx;
 
 				// update LS energy-evaluation count
-				LS_eval++;
+				//LS_eval++;
+				LS_eval = LS_eval + 2;
 
 				// update energy
 				// update offspring_genotype
@@ -574,92 +553,38 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 				bool pos = (positive_candidate_energy < offspring_energy);
 				bool neg = (negative_candidate_energy < offspring_energy);
 
-#if 1
-				if (pos || neg ) {
-
-#if defined(PIPELINE_ALL)
-					#pragma unroll
-					for (uchar i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {
-#else
-					#pragma unroll 1
-					for (uchar i=0; i<DockConst_num_of_genes; i++) {
-#endif
-						genotype_bias [i] = 0.6f * genotype_bias [i];
-					}
-
-
+				if (pos || neg) {
 					if (pos) {
 						offspring_energy = positive_candidate_energy;
-#if defined(PIPELINE_ALL)
-						#pragma unroll
-						for (uchar i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {
-#else	
-						#pragma unroll 1
-						for (uchar i=0; i<DockConst_num_of_genes; i++) {
-#endif
-							offspring_genotype [i] = positive_new_genotype [i];
-							genotype_bias [i] += 0.4f * genotype_deviate [i];
-						}
 					}
 					else {
 						offspring_energy = negative_candidate_energy;
-#if defined(PIPELINE_ALL)
-						#pragma unroll
-						for (uchar i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {
-#else
-						#pragma unroll 1
-						for (uchar i=0; i<DockConst_num_of_genes; i++) {
-#endif
-							offspring_genotype [i] = negative_new_genotype [i];
-							genotype_bias [i] -= 0.4f * genotype_deviate [i];
-						}
 					}
 
 					cons_succ++;
 					cons_fail = 0;
 				}
-				else {	// failure in both directions
-#if defined(PIPELINE_ALL)
-					#pragma unroll
-					for (uchar i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {
-#else
-					#pragma unroll 1
-					for (uchar i=0; i<DockConst_num_of_genes; i++) {
-#endif
-						genotype_bias [i] = 0.5f*genotype_bias [i];
-					}
-
-					cons_fail++;
-					cons_succ = 0;
-			
-				}
-#endif
-
-#if 0
-// alternative implementation, 
-// rho update was moved to the beginning of enclosing while-loop
-				// changing deviation (rho), if needed
-				if (cons_succ >= DockConst_cons_limit) {
-					rho = LS_EXP_FACTOR*rho;
-					cons_fail = 0;
-					cons_succ = 0;
-				}
 				else {
-					if (cons_fail >= DockConst_cons_limit) {
-						rho = LS_CONT_FACTOR*rho;
-						cons_fail = 0;
-						cons_succ = 0;
-					}
+					cons_fail++;
+					cons_succ = 0;			
 				}
-				
-				iteration_cnt++;
-#endif
 
-				
+				for (uchar i=0; i<DockConst_num_of_genes; i++) {	
+					genotype_bias[i] = (pos) ? 0.6f*genotype_bias[i] + 0.4f * genotype_deviate [i] :
+							   (neg) ? 0.6f*genotype_bias[i] - 0.4f * genotype_deviate [i] :
+							   0.5f*genotype_bias [i];
 
+					if (pos) {
+						offspring_genotype[i] =  positive_new_genotype[i];
+					}
+					else {
+						if  (neg && !pos) {
+							offspring_genotype[i] = negative_new_genotype[i];
+						}
+					}
+				}		
 
 			} // end of while (iteration_cnt)
-
 			//------------------------------------------------------------------------------------------------------------
 
 			// store pops & energies to Next
@@ -670,18 +595,8 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 
 			tmp_eval_cnt += LS_eval;
 		} // End of for-loop ls_ent_cnt
-
 		// ------------------------------------------------------------------
-/*
-		// update evaluations
-		//eval_cnt += tmp_eval_cnt;
-		eval_cnt += tmp_eval_cnt + DockConst_pop_size;
-*/
-/*
-		// update generations
-		generation_cnt++;
-*/
-		
+
 		// update current pops & energies
 		for (ushort i=0;i<DockConst_pop_size*ACTUAL_GENOTYPE_LENGTH; i++) { 	
 			GlobPopulationCurrent[i] = GlobPopulationNext[i];

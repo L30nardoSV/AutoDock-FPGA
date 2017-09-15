@@ -782,6 +782,18 @@ Execution of this instrumented version appears to hang :( ...
 
 
 
+## `13_run_harp2`
+
+* Avoid contiditional code by using ternary operator or conditional inside for-loops in `LS`
+* Remove `PIPELINE_ALL` as it is no more necessary to unroll
+* Re-enable `#define MAX_NUM_OF_ROTBONDS 32`
+* In `Krnl_Conform` make for-loops of `genotype` unconditional using ternary operator
+
+>>> 
+`main while-loop`(II=2), `GG`(II=3) and `LS`(II(main)=2, II(inner)=9) are all pipelined
+`Logic utilization: 105% ` and `Memory blocks: 91%`
+It is still too large, but much better than previous designs
+>>> 
 
 
 
@@ -790,11 +802,7 @@ Execution of this instrumented version appears to hang :( ...
 
 
 
-
-
-
-
-
+**NOTE 1**: add restrict to all pointerss
 
 
 

@@ -46,24 +46,14 @@ float map_angle_360(float angle)
 // --------------------------------------------------------------------------
 #if 1
 // current implementation, II (inner loop) = 6
-/*uint*/ ushort find_best(
-/*	
-	 __local        float* restrict loc_energies,
-*/
-	 /*__local*/ 	float* restrict loc_energies1,
-	 /*__local*/ 	/*float* restrict loc_energies2,*/
-		        /*const uint pop_size*/
-			const ushort pop_size
+ushort find_best(
+		      float* restrict loc_energies,
+		const ushort          pop_size) {
 
-		)
-{
 	ushort best_entity = 0;
 
 	for (ushort i=1; i<pop_size; i++) {
-/*		
-		if (loc_energies1[i] < loc_energies2[best_entity]) {
-*/
-		if (loc_energies1[i] < loc_energies1[best_entity]) {
+		if (loc_energies[i] < loc_energies[best_entity]) {
 			best_entity = i;
 		}
 	}
@@ -92,7 +82,7 @@ float myrand(uint* prng)
 }
 #endif
 
-float myrand(uint* prng)
+float myrand(uint* restrict prng)
 {
 	uint p_tmp = *prng;
 
@@ -111,7 +101,7 @@ float myrand(uint* prng)
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------
 /*uint myrand_uint(uint* prng, const uint limit)*/
-uint myrand_uint(uint* prng, const ushort limit)
+uint myrand_uint(uint* restrict prng, const ushort limit)
 {
 #if defined (REPRO)
 	*prng = 1;
@@ -123,7 +113,7 @@ uint myrand_uint(uint* prng, const ushort limit)
 
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------
-ushort myrand_ushort(uint* prng, const ushort limit)
+ushort myrand_ushort(uint* restrict prng, const ushort limit)
 {
 #if defined (REPRO)
 	*prng = 1;
@@ -136,7 +126,7 @@ ushort myrand_ushort(uint* prng, const ushort limit)
 
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------
-uchar myrand_uchar(uint* prng, const uchar limit)
+uchar myrand_uchar(uint* restrict prng, const uchar limit)
 {
 #if defined (REPRO)
 	*prng = 1;
@@ -154,21 +144,16 @@ uchar myrand_uchar(uint* prng, const uchar limit)
 // Originally from: searchoptimum.c
 // --------------------------------------------------------------------------
 void binary_tournament_selection(              
-				/*
-						     uint*           prng,
-				*/
-						     uint*           prngA,
-						     uint*           prngB,
-						     uint*           prngC,
-						     uint*           prngD,
-						     uint*           prngE,
-						     uint*           prngF,
-
-				 /*__local*/        float* restrict loc_energies1,
-				 /*__local*/        /*float* restrict loc_energies2,*/
-
-				                /*uint**/ ushort*           parent1, 
-				                /*uint**/ ushort*           parent2,
+						/*uint*           prng,*/
+						uint*  restrict prngA,
+						uint*  restrict prngB,
+						uint*  restrict prngC,
+						uint*  restrict prngD,
+						uint*  restrict prngE,
+					        uint*  restrict prngF,
+				 	        float* restrict loc_energies,
+				                ushort*         parent1, 
+				                ushort*         parent2,
  					  const ushort          pop_size, 
 				          const float           rand_level)
 {
@@ -184,7 +169,7 @@ void binary_tournament_selection(
 	parent_candidates [1] = myrand_ushort(prngB, pop_size);
 #endif
 
-	if (loc_energies1[parent_candidates[0]] < loc_energies1[parent_candidates[1]]) {
+	if (loc_energies[parent_candidates[0]] < loc_energies[parent_candidates[1]]) {
 		//if (myrand(prng) < rand_level) {
 		if (myrand(prngC) < rand_level) {
 			*parent1 = parent_candidates [0];}
@@ -218,7 +203,7 @@ void binary_tournament_selection(
 #endif
 
 	//the better will be the second parent
-	if (loc_energies1[parent_candidates[0]] < loc_energies1[parent_candidates[1]]) {
+	if (loc_energies[parent_candidates[0]] < loc_energies[parent_candidates[1]]) {
 		//if (myrand(prng) < rand_level) {
 		if (myrand(prngF) < rand_level) {
 			*parent2 = parent_candidates [0];}
@@ -248,25 +233,20 @@ void binary_tournament_selection(
 // or an orientation/rotatable bond gene during mutation.
 // Originally from: searchoptimum.c
 // --------------------------------------------------------------------------
-void gen_new_genotype(	                
-					uint*         prng,
-					uint*         prng1,
-		   	        const float*          parent1_genotype,
-		                const float*          parent2_genotype,
-			 /*     const uint            num_genes,*/
-				const ushort          num_genes,
-		              	const float           mutation_rate,
-			      	const float           abs_max_dmov,
-			      	const float           abs_max_dang,
-			      	const float           crossover_rate,
-		      /*__local*/     float*          offspring_genotype)
+void gen_new_genotype(     
+					uint* restrict prng,
+					uint* restrict prng1,
+		   	        const float*  restrict parent1_genotype,
+		                const float*  restrict parent2_genotype,
+				const ushort           num_genes,
+		              	const float            mutation_rate,
+			      	const float            abs_max_dmov,
+			      	const float            abs_max_dang,
+			      	const float            crossover_rate,
+		      		      float*  restrict offspring_genotype)
 {
-	/*uint*/ uchar covr_point_low, covr_point_high;
-	/*uint*/ uchar temp1, temp2;
-	/*
-	temp1 = myrand_uint(prng, num_genes-1);
-	temp2 = myrand_uint(prng, num_genes-1);
-	*/
+	uchar covr_point_low, covr_point_high;
+	uchar temp1, temp2;
 	temp1 = myrand_uchar(prng, num_genes-1);
 	temp2 = myrand_uchar(prng, num_genes-1);
 
@@ -283,7 +263,7 @@ void gen_new_genotype(
 	float __attribute__ ((
 			      memory,
 			      numbanks(1),
-			      bankwidth(4),//64
+			      bankwidth(4),
 			      singlepump,
 			      numreadports(2),
 			      numwriteports(1)
@@ -417,7 +397,7 @@ void gen_new_genotype(
 	// performing mutation
 	// =======================================
 #if 0
-// alternative implementation, mutation compacted, fully unrolled, II (GG) = 165
+// alternative implementation, mutation compacted, fully unrolled, II (GG) = 99
 
 	#pragma unroll
 	for (uchar i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {
@@ -436,65 +416,31 @@ void gen_new_genotype(
 #endif
 
 #if 1
-// Current implementation, mutation split, II (GG) = 18
-/*
+// Current implementation, mutation split, II (GG) = 3
+
 	#pragma unroll
 	for (uchar i=0; i<3; i++) {
 		if (mutation_rate > myrand(prng)) {
-			priv_offspring_genotype [i] = priv_offspring_genotype [i] + 2*abs_max_dmov*myrand(prng)-abs_max_dmov;
+			priv_offspring_genotype [i] = priv_offspring_genotype [i] + 2*abs_max_dmov*myrand(prng1)-abs_max_dmov;
 		}
 	}
-*/
-
-		if (mutation_rate > myrand(prng)) {
-			priv_offspring_genotype [0] = priv_offspring_genotype [0] + 2*abs_max_dmov*myrand(prng)-abs_max_dmov;
-		}
-
-		if (mutation_rate > myrand(prng)) {
-			priv_offspring_genotype [1] = priv_offspring_genotype [1] + 2*abs_max_dmov*myrand(prng)-abs_max_dmov;
-		}
-
-		if (mutation_rate > myrand(prng)) {
-			priv_offspring_genotype [2] = priv_offspring_genotype [2] + 2*abs_max_dmov*myrand(prng)-abs_max_dmov;
-		}
-
-
-
-
-
-
-
-
-
-
-
 
 	if (mutation_rate > myrand(prng)) {
-		priv_offspring_genotype [3] = priv_offspring_genotype [3] + 2*abs_max_dang*myrand(prng)-abs_max_dang;
+		priv_offspring_genotype [3] = priv_offspring_genotype [3] + 2*abs_max_dang*myrand(prng1)-abs_max_dang;
 		priv_offspring_genotype [3] = map_angle_360(priv_offspring_genotype [3]);
 	}
 		
 	if (mutation_rate > myrand(prng)) {
-		priv_offspring_genotype [4] = priv_offspring_genotype [4] + 2*abs_max_dang*myrand(prng)-abs_max_dang;
+		priv_offspring_genotype [4] = priv_offspring_genotype [4] + 2*abs_max_dang*myrand(prng1)-abs_max_dang;
 		priv_offspring_genotype [4] = map_angle_180(priv_offspring_genotype [4]);
 	}
 
-	#if 0
-	// alternative implementation, unrolling 2, II = 6
-	//#pragma unroll 2
-	//for (uchar i=5; i<ACTUAL_GENOTYPE_LENGTH; i++)
-	#endif
-
-	#if 1
-	// current implementation, pipeline, II = 3
-	//for (uchar i=5; i<ACTUAL_GENOTYPE_LENGTH; i++) {
 	for (uchar i=5; i<num_genes; i++) {
 		if (mutation_rate > myrand(prng)) {
 			priv_offspring_genotype [i] = priv_offspring_genotype [i] + 2*abs_max_dang*myrand(prng1)-abs_max_dang;
 			priv_offspring_genotype [i] = map_angle_360(priv_offspring_genotype [i]);
 		}
 	}
-	#endif
 #endif
 
 	#if defined (DEBUG_GEN_NEW_GENOTYPE)
@@ -502,8 +448,6 @@ void gen_new_genotype(
 	for (i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {printf("%f ", offspring_genotype [i]);} printf("\n");
 	#endif
 
-	#pragma unroll 1
-	//for (uchar i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {
 	for (uchar i=0; i<num_genes; i++) {
 		offspring_genotype [i] = priv_offspring_genotype [i];
 	}

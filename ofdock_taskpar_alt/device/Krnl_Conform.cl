@@ -48,7 +48,6 @@ void Krnl_Conform(
 	__local float genotype[ACTUAL_GENOTYPE_LENGTH];
 */
 
-	/*char active = 1;*/
 	bool active = true;
 
 	// local mem to cache KerConstStatic->rotlist_const[], marked as bottleneck by profiler
@@ -58,30 +57,23 @@ void Krnl_Conform(
 	}
 
 while(active) {
+
 	//printf("BEFORE In CONFORM CHANNEL\n");
 	// --------------------------------------------------------------
 	// Wait for genotypes in channel
 	// --------------------------------------------------------------
-
-	bool IC_valid = false;
-	bool GG_valid = false;
+	bool IC_valid     = false;
+	bool GG_valid     = false;
 	bool LS_pos_valid = false;
 	bool LS_neg_valid = false;
-	bool Off_valid = false;
+	bool Off_valid    = false;
 
-/*
-	char IC_active;
-	char GG_active;
-	char LS_pos_active;
-	char LS_neg_active;
-	char Off_active;
-*/
 	bool IC_active;
 	bool GG_active;
 	bool LS_pos_active;
 	bool LS_neg_active;
 	bool Off_active;
-	
+
 	while (
 	       (IC_valid == false) && 
 	       (GG_valid == false) && 
@@ -97,64 +89,37 @@ while(active) {
 	}
 
 	char mode;
-
-
 	float genotype[ACTUAL_GENOTYPE_LENGTH];
 
-	if (IC_valid) {
-		active = IC_active;
-		mode = 0x01;
+	active = (IC_valid)     ? IC_active :
+		 (GG_valid)     ? GG_active :
+		 (LS_pos_valid) ? LS_pos_active :
+	         (LS_neg_valid) ? LS_neg_active :
+		 (Off_valid)    ? Off_active :
+		 false; // last case should never occur, otherwise above while would be still running
 
-		for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_genes; pipe_cnt++) {
-			genotype[pipe_cnt] = read_channel_altera(chan_IC2Conf_genotype);}	
+	mode = (IC_valid)     ? 0x01 :
+	       (GG_valid)     ? 0x02 :
+	       (LS_pos_valid) ? 0x03 :
+	       (LS_neg_valid) ? 0x04 :
+	       (Off_valid)    ? 0x05 :
+	       0x05; // last case should never occur, otherwise above while would be still running
+
+	for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_genes; pipe_cnt++) {
+		genotype[pipe_cnt] = (IC_valid)     ?  read_channel_altera(chan_IC2Conf_genotype)     :
+	       			     (GG_valid)     ?  read_channel_altera(chan_GG2Conf_genotype)     : 
+		   	             (LS_pos_valid) ?  read_channel_altera(chan_LS2Conf_pos_genotype) :
+	                             (LS_neg_valid) ?  read_channel_altera(chan_LS2Conf_neg_genotype) :
+                                     (Off_valid) ?  0.0f:
+				     0.0f; // last case should never occur, otherwise above while would be still running
 	}
-	else {
-		if (GG_valid) {
-			active = GG_active;
-			mode = 0x02;
-
-			for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_genes; pipe_cnt++) {
-				genotype[pipe_cnt] = read_channel_altera(chan_GG2Conf_genotype);}	
-		}
-		else {
-			if (LS_pos_valid) {
-				active = LS_pos_active;
-				mode = 0x03;
-
-				for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_genes; pipe_cnt++) {
-					genotype[pipe_cnt] = read_channel_altera(chan_LS2Conf_pos_genotype);}
-			}
-			else {
-				if (LS_neg_valid) {
-					active = LS_neg_active;
-					mode = 0x04;
-
-					for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_genes; pipe_cnt++) {
-						genotype[pipe_cnt] = read_channel_altera(chan_LS2Conf_neg_genotype);}
-				}
-				else {
-					if (Off_valid) {
-						active = Off_active;
-						mode = 0x05;
-
-						//for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_genes; pipe_cnt++) {
-						//	genotype[pipe_cnt] = read_channel_altera(chan_Off2Conf_genotype);}
-
-					}
-				}
-
-			}
-		}	
-
-	}
-
 	// --------------------------------------------------------------
 	//printf("AFTER In CONFORM CHANNEL\n");
 ///*
 	float __attribute__ ((
 			      memory,
-			      numbanks(4),
-			      bankwidth(4),
+			      numbanks(2),
+			      bankwidth(16),
 			      singlepump,
 			      numreadports(2),//3
 			      numwriteports(1)
@@ -229,31 +194,17 @@ while(active) {
 			{
 				uint rotbond_id = (rotation_list_element & RLIST_RBONDID_MASK) >> RLIST_RBONDID_SHIFT;
 	
-///*
-				//#pragma unroll 1
+				#pragma unroll
 				for (uchar i=0; i<3; i++) {
 					rotation_unitvec[i] = KerConstDynamic_rotbonds_unit_vectors_const[3*rotbond_id + i];
 				}
-//*/
-/*
-rotation_unitvec[0] = KerConstDynamic_rotbonds_unit_vectors_const[3*rotbond_id];
-rotation_unitvec[1] = KerConstDynamic_rotbonds_unit_vectors_const[3*rotbond_id + 1];
-rotation_unitvec[2] = KerConstDynamic_rotbonds_unit_vectors_const[3*rotbond_id + 2];
-*/
 
 				rotation_angle = genotype[6+rotbond_id]*DEG_TO_RAD;
 
-///*
-				//#pragma unroll 1
+				#pragma unroll
 				for (uchar i=0; i<3; i++) {
 					rotation_movingvec[i] = KerConstDynamic_rotbonds_moving_vectors_const[3*rotbond_id + i];
 				}
-//*/
-/*
-rotation_movingvec[0] = KerConstDynamic_rotbonds_moving_vectors_const[3*rotbond_id];
-rotation_movingvec[1] = KerConstDynamic_rotbonds_moving_vectors_const[3*rotbond_id + 1];
-rotation_movingvec[2] = KerConstDynamic_rotbonds_moving_vectors_const[3*rotbond_id + 2];			
-*/
 
 				//in addition performing the first movement 
 				//which is needed only if rotating around rotatable bond

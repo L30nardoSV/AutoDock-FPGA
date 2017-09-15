@@ -77,11 +77,11 @@ while(active) {
 
 		char ref_intraE_contributors_const[3];
 
-///*
+		#pragma unroll
 		for (uchar i=0; i<3; i++) {
 			ref_intraE_contributors_const[i] = KerConstStatic_intraE_contributors_const[3*contributor_counter+i];
 		}
-//*/
+
 /*
 ref_intraE_contributors_const[0] = KerConstStatic_intraE_contributors_const[3*contributor_counter];
 ref_intraE_contributors_const[1] = KerConstStatic_intraE_contributors_const[3*contributor_counter + 1];
