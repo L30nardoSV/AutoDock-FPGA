@@ -82,11 +82,6 @@ while(active) {
 			ref_intraE_contributors_const[i] = KerConstStatic_intraE_contributors_const[3*contributor_counter+i];
 		}
 
-/*
-ref_intraE_contributors_const[0] = KerConstStatic_intraE_contributors_const[3*contributor_counter];
-ref_intraE_contributors_const[1] = KerConstStatic_intraE_contributors_const[3*contributor_counter + 1];
-ref_intraE_contributors_const[2] = KerConstStatic_intraE_contributors_const[3*contributor_counter + 2];
-*/
 		char atom1_id = ref_intraE_contributors_const[0];
 		char atom2_id = ref_intraE_contributors_const[1];
 
@@ -161,25 +156,21 @@ ref_intraE_contributors_const[2] = KerConstStatic_intraE_contributors_const[3*co
 	// Send intramolecular energy to channel
 	// --------------------------------------------------------------
 	switch (mode) {
-///*
 		case 0x01:	// IC
 			write_channel_altera(chan_Intrae2StoreIC_intrae, intraE);
 		break;
-//*/
+
 		case 0x02:	// GG
 			write_channel_altera(chan_Intrae2StoreGG_intrae, intraE);
 		break;
-		case 0x03:	// LS - positive descent
-			write_channel_altera(chan_Intrae2StoreLS_pos_intrae, intraE);
-		break;
-		case 0x04:	// LS - negative descent
-			write_channel_altera(chan_Intrae2StoreLS_neg_intrae, intraE);
+
+		case 0x03:	// LS
+			write_channel_altera(chan_Intrae2StoreLS_intrae, intraE);
 		break;
 
 		//case 5:	// Off
 		//	write_channel_altera(chan_Intrae2StoreOff_intrae, intraE);
 		//break;
-
 	}
 	// --------------------------------------------------------------
 

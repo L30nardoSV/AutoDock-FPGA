@@ -265,25 +265,21 @@ while(active) {
 	// Send intermolecular energy to chanel
 	// --------------------------------------------------------------
 	switch (mode) {
-///*
 		case 0x01:	// IC
 			write_channel_altera(chan_Intere2StoreIC_intere, interE);
 		break;
-//*/
+
 		case 0x02:	// GG
 			write_channel_altera(chan_Intere2StoreGG_intere, interE);
 		break;
-		case 0x03:	// LS - positive descent
-			write_channel_altera(chan_Intere2StoreLS_pos_intere, interE);
-		break;
-		case 0x04:	// LS - negative descent
-			write_channel_altera(chan_Intere2StoreLS_neg_intere, interE);
+
+		case 0x03:	// LS
+			write_channel_altera(chan_Intere2StoreLS_intere, interE);
 		break;
 
 		//case 5:	// Off
 		//	write_channel_altera(chan_Intere2StoreOff_intere, interE);
 		//break;
-
 	}
 	// --------------------------------------------------------------
  	

@@ -44,9 +44,8 @@ void Krnl_Conform(
 	__local float  __attribute__((numbanks(8), bankwidth(16))) loc_coords[MAX_NUM_OF_ATOMS][4];
 */
 
-/*
 	__local float genotype[ACTUAL_GENOTYPE_LENGTH];
-*/
+
 
 	bool active = true;
 
@@ -64,52 +63,47 @@ while(active) {
 	// --------------------------------------------------------------
 	bool IC_valid     = false;
 	bool GG_valid     = false;
-	bool LS_pos_valid = false;
-	bool LS_neg_valid = false;
+	bool LS_valid     = false;
 	bool Off_valid    = false;
 
 	bool IC_active;
 	bool GG_active;
-	bool LS_pos_active;
-	bool LS_neg_active;
+	bool LS_active;
 	bool Off_active;
 
 	while (
-	       (IC_valid == false) && 
-	       (GG_valid == false) && 
-	       (LS_pos_valid == false) && 
-	       (LS_neg_valid == false) &&
+	       (IC_valid  == false) && 
+	       (GG_valid  == false) && 
+	       (LS_valid  == false) &&
                (Off_valid == false)
 	) {
-		IC_active = read_channel_nb_altera(chan_IC2Conf_active, &IC_valid);
-		GG_active = read_channel_nb_altera(chan_GG2Conf_active, &GG_valid);
-		LS_pos_active = read_channel_nb_altera(chan_LS2Conf_pos_active, &LS_pos_valid);
-		LS_neg_active = read_channel_nb_altera(chan_LS2Conf_neg_active, &LS_neg_valid);
+		IC_active  = read_channel_nb_altera(chan_IC2Conf_active, &IC_valid);
+		GG_active  = read_channel_nb_altera(chan_GG2Conf_active, &GG_valid);
+		LS_active  = read_channel_nb_altera(chan_LS2Conf_active, &LS_valid);
 		Off_active = read_channel_nb_altera(chan_Off2Conf_active, &Off_valid);
 	}
 
 	char mode;
+	/*
 	float genotype[ACTUAL_GENOTYPE_LENGTH];
+	*/
 
 	active = (IC_valid)     ? IC_active :
 		 (GG_valid)     ? GG_active :
-		 (LS_pos_valid) ? LS_pos_active :
-	         (LS_neg_valid) ? LS_neg_active :
+		 (LS_valid)     ? LS_active :
 		 (Off_valid)    ? Off_active :
 		 false; // last case should never occur, otherwise above while would be still running
 
 	mode = (IC_valid)     ? 0x01 :
 	       (GG_valid)     ? 0x02 :
-	       (LS_pos_valid) ? 0x03 :
-	       (LS_neg_valid) ? 0x04 :
+	       (LS_valid)     ? 0x03 :
 	       (Off_valid)    ? 0x05 :
 	       0x05; // last case should never occur, otherwise above while would be still running
 
 	for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_genes; pipe_cnt++) {
-		genotype[pipe_cnt] = (IC_valid)     ?  read_channel_altera(chan_IC2Conf_genotype)     :
-	       			     (GG_valid)     ?  read_channel_altera(chan_GG2Conf_genotype)     : 
-		   	             (LS_pos_valid) ?  read_channel_altera(chan_LS2Conf_pos_genotype) :
-	                             (LS_neg_valid) ?  read_channel_altera(chan_LS2Conf_neg_genotype) :
+		genotype[pipe_cnt] = (IC_valid)     ?  read_channel_altera(chan_IC2Conf_genotype) :
+	       			     (GG_valid)     ?  read_channel_altera(chan_GG2Conf_genotype) : 
+				     (LS_valid)     ?  read_channel_altera(chan_LS2Conf_genotype) :
                                      (Off_valid) ?  0.0f:
 				     0.0f; // last case should never occur, otherwise above while would be still running
 	}

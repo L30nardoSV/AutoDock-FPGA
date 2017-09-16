@@ -792,8 +792,56 @@ Execution of this instrumented version appears to hang :( ...
 >>> 
 `main while-loop`(II=2), `GG`(II=3) and `LS`(II(main)=2, II(inner)=9) are all pipelined
 `Logic utilization: 105% ` and `Memory blocks: 91%`
-It is still too large, but much better than previous designs
+It is still too large, but much better in terms of performance and area than previous designs
 >>> 
+
+This is saved in GitLab, but the next move is to reduce resource utilization by switching back to one channel in LS, taking advantage of ternary operator.
+
+
+
+
+
+
+
+
+
+
+## `14_run_harp2`
+
+The goal is to start with previous version and switch it back to LS-implementation with one channel for both directions so area utilization is reduced.
+
+* Replaced LS implementation (with channels for positive and negative descent) with only one channel for both directions. The reference is `seventh_run_harp2`. This involves removing `positive_new_genotype` and `positive_new_genotype` arrays, and enabling back `entity_possible_new_genotype` array.
+
+* `ushort rand_ls_entities [16];` moved outside main while-loop and declared as `_local`, in that it uses less logic. A similar procedure is used for re-locating other arrays.
+
+
+| Resource                             | Usage        |
+| :----------------------------------: | :----------: |
+| Logic utilization                    |   95%        |
+| ALUTs                                |   37%        |
+| Dedicated logic registers            |   58%        |
+| Memory blocks                        |   85%        |
+| DSP blocks                           |   35%        |
+
+### Execution time (s) measurements from non-instrumented program
+
+| Configuration    |    FPGA      |  CPU (AutoDock)  |  Speed-up | Comments       |
+| :--------------: | :----------: | :--------------: | :-------: | :------------: |
+| 3ptb, 10 runs    |  287.49      | 59.49            | 0.207     | ~4.83x slower  |
+
+
+### Execution time (s) measurements from instrumented program
+
+| Configuration    |    FPGA      |  CPU (AutoDock)  |  Speed-up | Comments       |
+| :--------------: | :----------: | :--------------: | :-------: | :------------: |
+| 3ptb, 10 runs    |  301.64      | 59.49            | 0.197     | ~5.07x slower  |
+
+
+
+
+
+
+
 
 
 
@@ -803,9 +851,6 @@ It is still too large, but much better than previous designs
 
 
 **NOTE 1**: add restrict to all pointerss
-
-
-
 
 **NOTE 2**: there is possiblity to reduce logic usage down to 100% by removing `IC` from `Krnl_GA`. That would require 
 to move its corresponding energy-calculation to host and pass them

@@ -47,7 +47,7 @@ float map_angle_360(float angle)
 #if 1
 // current implementation, II (inner loop) = 6
 ushort find_best(
-		      float* restrict loc_energies,
+	 __local      float* restrict loc_energies,
 		const ushort          pop_size) {
 
 	ushort best_entity = 0;
@@ -151,7 +151,7 @@ void binary_tournament_selection(
 						uint*  restrict prngD,
 						uint*  restrict prngE,
 					        uint*  restrict prngF,
-				 	        float* restrict loc_energies,
+				 __local        float* restrict loc_energies,
 				                ushort*         parent1, 
 				                ushort*         parent2,
  					  const ushort          pop_size, 
@@ -243,7 +243,7 @@ void gen_new_genotype(
 			      	const float            abs_max_dmov,
 			      	const float            abs_max_dang,
 			      	const float            crossover_rate,
-		      		      float*  restrict offspring_genotype)
+		      	 __local      float*  restrict offspring_genotype)
 {
 	uchar covr_point_low, covr_point_high;
 	uchar temp1, temp2;
