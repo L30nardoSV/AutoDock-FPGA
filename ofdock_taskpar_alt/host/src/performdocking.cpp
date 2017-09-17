@@ -135,9 +135,12 @@ cl_mem mem_KerConstStatic_dspars_V_const;
 cl_mem mem_KerConstStatic_rotlist_const;
 
 /*cl_mem mem_KerConstDynamic;*/
+/*
 cl_mem mem_KerConstDynamic_ref_coords_x_const;
 cl_mem mem_KerConstDynamic_ref_coords_y_const;
 cl_mem mem_KerConstDynamic_ref_coords_z_const;
+*/
+cl_mem mem_KerConstDynamic_ref_coords_const;
 cl_mem mem_KerConstDynamic_rotbonds_moving_vectors_const;
 cl_mem mem_KerConstDynamic_rotbonds_unit_vectors_const;
 	
@@ -367,11 +370,19 @@ filled with clock() */
 	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ROTATIONS*sizeof(int), 			&mem_KerConstStatic_rotlist_const);
 
 /*	mallocBufferObject(context,CL_MEM_READ_ONLY, sizeof(KerConstDynamic), 	&mem_KerConstDynamic);*/
+	/*
 	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ATOMS*sizeof(float), 		&mem_KerConstDynamic_ref_coords_x_const);
 	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ATOMS*sizeof(float), 		&mem_KerConstDynamic_ref_coords_y_const);
 	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ATOMS*sizeof(float), 		&mem_KerConstDynamic_ref_coords_z_const);
+	*/
+	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ATOMS*sizeof(cl_float3), 		&mem_KerConstDynamic_ref_coords_const);
+
+	/*
 	mallocBufferObject(context,CL_MEM_READ_ONLY, 3*MAX_NUM_OF_ROTBONDS*sizeof(float), 	&mem_KerConstDynamic_rotbonds_moving_vectors_const);
 	mallocBufferObject(context,CL_MEM_READ_ONLY, 3*MAX_NUM_OF_ROTBONDS*sizeof(float), 	&mem_KerConstDynamic_rotbonds_unit_vectors_const);
+	*/
+	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ROTBONDS*sizeof(cl_float3), 	&mem_KerConstDynamic_rotbonds_moving_vectors_const);
+	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ROTBONDS*sizeof(cl_float3), 	&mem_KerConstDynamic_rotbonds_unit_vectors_const);
 
 	mallocBufferObject(context,CL_MEM_READ_ONLY,size_floatgrids,   		&mem_dockpars_fgrids);
 	mallocBufferObject(context,CL_MEM_READ_WRITE,size_populations,  	&mem_dockpars_conformations_current);
@@ -462,28 +473,25 @@ filled with clock() */
 /*
 	setKernelArg(kernel2,1, sizeof(cl_mem),                          	&mem_KerConstDynamic);
 */
+	/*
 	setKernelArg(kernel2,1, sizeof(mem_KerConstDynamic_ref_coords_x_const), &mem_KerConstDynamic_ref_coords_x_const);
 	setKernelArg(kernel2,2, sizeof(mem_KerConstDynamic_ref_coords_y_const), &mem_KerConstDynamic_ref_coords_y_const);
 	setKernelArg(kernel2,3, sizeof(mem_KerConstDynamic_ref_coords_z_const), &mem_KerConstDynamic_ref_coords_z_const);
-	setKernelArg(kernel2,4, sizeof(mem_KerConstDynamic_rotbonds_moving_vectors_const), &mem_KerConstDynamic_rotbonds_moving_vectors_const);
-	setKernelArg(kernel2,5, sizeof(mem_KerConstDynamic_rotbonds_unit_vectors_const),  &mem_KerConstDynamic_rotbonds_unit_vectors_const);
+	*/
+	setKernelArg(kernel2,1,  sizeof(mem_KerConstDynamic_ref_coords_const), &mem_KerConstDynamic_ref_coords_const);
+
+	setKernelArg(kernel2,2,  sizeof(mem_KerConstDynamic_rotbonds_moving_vectors_const), &mem_KerConstDynamic_rotbonds_moving_vectors_const);
+	setKernelArg(kernel2,3,  sizeof(mem_KerConstDynamic_rotbonds_unit_vectors_const),  &mem_KerConstDynamic_rotbonds_unit_vectors_const);
 
 	// private args added in the order in which their values are used in kernel
-	setKernelArg(kernel2,6, sizeof(unsigned int),                          	&dockpars.rotbondlist_length);
-	setKernelArg(kernel2,7, sizeof(unsigned char),                          &dockpars.num_of_atoms);
+	setKernelArg(kernel2,4,  sizeof(unsigned int),        &dockpars.rotbondlist_length);
+	setKernelArg(kernel2,5,  sizeof(unsigned char),       &dockpars.num_of_atoms);
+	setKernelArg(kernel2,6,  sizeof(unsigned int),        &dockpars.num_of_genes);
 
-	setKernelArg(kernel2,8, sizeof(unsigned int),                           &dockpars.num_of_genes);
-
-/*
-	setKernelArg(kernel2,8, sizeof(float),                          	&KerConstDynamic.ref_orientation_quats_const[0]);
-	setKernelArg(kernel2,9, sizeof(float),                          	&KerConstDynamic.ref_orientation_quats_const[1]);
-	setKernelArg(kernel2,10, sizeof(float),                          	&KerConstDynamic.ref_orientation_quats_const[2]);
-	setKernelArg(kernel2,11, sizeof(float),                          	&KerConstDynamic.ref_orientation_quats_const[3]);
-*/
-	setKernelArg(kernel2,9, sizeof(float),                          	&KerConstDynamic.ref_orientation_quats_const[0]);
-	setKernelArg(kernel2,10, sizeof(float),                          	&KerConstDynamic.ref_orientation_quats_const[1]);
-	setKernelArg(kernel2,11, sizeof(float),                          	&KerConstDynamic.ref_orientation_quats_const[2]);
-	setKernelArg(kernel2,12, sizeof(float),                          	&KerConstDynamic.ref_orientation_quats_const[3]);
+	setKernelArg(kernel2,7,  sizeof(float),              &KerConstDynamic.ref_orientation_quats_const[0]);
+	setKernelArg(kernel2,8,  sizeof(float),              &KerConstDynamic.ref_orientation_quats_const[1]);
+	setKernelArg(kernel2,9,  sizeof(float),              &KerConstDynamic.ref_orientation_quats_const[2]);
+	setKernelArg(kernel2,10, sizeof(float),              &KerConstDynamic.ref_orientation_quats_const[3]);
 
 #endif // End of ENABLE_KERNEL2
 
@@ -570,11 +578,19 @@ filled with clock() */
 /*
 		memcopyBufferObjectToDevice(command_queue1,mem_KerConstDynamic, 		&KerConstDynamic,         sizeof(KerConstDynamic));
 */
+		/*
 		memcopyBufferObjectToDevice(command_queue1,mem_KerConstDynamic_ref_coords_x_const,            &KerConstDynamic.ref_coords_x_const[0],            MAX_NUM_OF_ATOMS*sizeof(float));
 		memcopyBufferObjectToDevice(command_queue1,mem_KerConstDynamic_ref_coords_y_const,            &KerConstDynamic.ref_coords_y_const[0],            MAX_NUM_OF_ATOMS*sizeof(float));
 		memcopyBufferObjectToDevice(command_queue1,mem_KerConstDynamic_ref_coords_z_const, 	      &KerConstDynamic.ref_coords_z_const[0],            MAX_NUM_OF_ATOMS*sizeof(float));
+		*/
+		memcopyBufferObjectToDevice(command_queue1,mem_KerConstDynamic_ref_coords_const, 	      	&KerConstDynamic.ref_coords_const[0],            MAX_NUM_OF_ATOMS*sizeof(cl_float3));
+
+		/*
 		memcopyBufferObjectToDevice(command_queue1,mem_KerConstDynamic_rotbonds_moving_vectors_const, &KerConstDynamic.rotbonds_moving_vectors_const[0], 3*MAX_NUM_OF_ROTBONDS*sizeof(float));
 		memcopyBufferObjectToDevice(command_queue1,mem_KerConstDynamic_rotbonds_unit_vectors_const,   &KerConstDynamic.rotbonds_unit_vectors_const[0],   3*MAX_NUM_OF_ROTBONDS*sizeof(float));
+		*/
+		memcopyBufferObjectToDevice(command_queue1,mem_KerConstDynamic_rotbonds_moving_vectors_const, &KerConstDynamic.rotbonds_moving_vectors_const[0], MAX_NUM_OF_ROTBONDS*sizeof(cl_float3));
+		memcopyBufferObjectToDevice(command_queue1,mem_KerConstDynamic_rotbonds_unit_vectors_const,   &KerConstDynamic.rotbonds_unit_vectors_const[0],   MAX_NUM_OF_ROTBONDS*sizeof(cl_float3));
 
  		memcopyBufferObjectToDevice(command_queue1,mem_dockpars_conformations_current, 	cpu_init_populations, size_populations);
 /*
@@ -592,10 +608,10 @@ filled with clock() */
 
 
 #ifdef ENABLE_KERNEL2 // Krnl_Conform
-		setKernelArg(kernel2,9,  sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[0]);
-		setKernelArg(kernel2,10, sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[1]);	
-		setKernelArg(kernel2,11, sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[2]);	
-		setKernelArg(kernel2,12, sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[3]);
+		setKernelArg(kernel2,7,  sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[0]);
+		setKernelArg(kernel2,8,  sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[1]);	
+		setKernelArg(kernel2,9,  sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[2]);	
+		setKernelArg(kernel2,10, sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[3]);
 #endif // End of ENABLE_KERNEL2
 
 		#ifdef ENABLE_KERNEL1
@@ -1040,9 +1056,13 @@ void cleanup() {
   if(mem_KerConstStatic_rotlist_const)		   {clReleaseMemObject(mem_KerConstStatic_rotlist_const);}
 
 /*if(mem_KerConstDynamic)		  {clReleaseMemObject(mem_KerConstDynamic);}*/
+  /*
   if(mem_KerConstDynamic_ref_coords_x_const)		  {clReleaseMemObject(mem_KerConstDynamic_ref_coords_x_const);}
   if(mem_KerConstDynamic_ref_coords_y_const)		  {clReleaseMemObject(mem_KerConstDynamic_ref_coords_y_const);}
   if(mem_KerConstDynamic_ref_coords_z_const)		  {clReleaseMemObject(mem_KerConstDynamic_ref_coords_z_const);}
+  */
+  if(mem_KerConstDynamic_ref_coords_const)		  {clReleaseMemObject(mem_KerConstDynamic_ref_coords_const);}
+
   if(mem_KerConstDynamic_rotbonds_moving_vectors_const)   {clReleaseMemObject(mem_KerConstDynamic_rotbonds_moving_vectors_const);}
   if(mem_KerConstDynamic_rotbonds_unit_vectors_const)	  {clReleaseMemObject(mem_KerConstDynamic_rotbonds_unit_vectors_const);}
 

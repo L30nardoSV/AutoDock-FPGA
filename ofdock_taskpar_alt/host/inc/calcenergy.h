@@ -113,13 +113,24 @@ typedef struct
 } kernelconstant_static;
 
 
+#include "CL/opencl.h"
+
 typedef struct
 {
+       /*
        float ref_coords_x_const[MAX_NUM_OF_ATOMS];
        float ref_coords_y_const[MAX_NUM_OF_ATOMS];
        float ref_coords_z_const[MAX_NUM_OF_ATOMS];
+       */
+       cl_float3 ref_coords_const[MAX_NUM_OF_ATOMS];
+
+       /*
        float rotbonds_moving_vectors_const[3*MAX_NUM_OF_ROTBONDS];
        float rotbonds_unit_vectors_const  [3*MAX_NUM_OF_ROTBONDS];
+       */
+       cl_float3 rotbonds_moving_vectors_const[MAX_NUM_OF_ROTBONDS];
+       cl_float3 rotbonds_unit_vectors_const  [MAX_NUM_OF_ROTBONDS];
+
        float ref_orientation_quats_const  [4];
 } kernelconstant_dynamic;
 

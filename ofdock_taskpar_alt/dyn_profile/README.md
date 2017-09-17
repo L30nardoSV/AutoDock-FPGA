@@ -850,6 +850,55 @@ The goal is to start with previous version and switch it back to LS-implementati
 
 
 
+## `15_run_harp2`
+
+In order to increase performance: improving pipelining keeping same area usage.
+
+* Increase depth for energies comming back during `LS` but only to 6% of MAX_POP ~ < 20 (in case population size raises up to 300)
+* Enable SIMD in `Knrl_Conform`. It requires modifying the host accordingly
+* Add a local array `prngLS` so small for-loops can be pipeline with II=1 instead of II=3
+* Crossover loop has been pipelined (II=1) instead of unrolled
+
+
+| Resource                             | Usage        |
+| :----------------------------------: | :----------: |
+| Logic utilization                    |   95%        |
+| ALUTs                                |   37%        |
+| Dedicated logic registers            |   58%        |
+| Memory blocks                        |   81%        |
+| DSP blocks                           |   35%        |
+
+
+### Execution time (s) measurements from non-instrumented program
+
+| Configuration    |    FPGA      |  CPU (AutoDock)  |  Speed-up | Comments       |
+| :--------------: | :----------: | :--------------: | :-------: | :------------: |
+| 3ptb, 10 runs    |  287.80      | 59.49            | 0.207     | ~4.84x slower  |
+
+
+### Execution time (s) measurements from instrumented program
+
+| Configuration    |    FPGA      |  CPU (AutoDock)  |  Speed-up | Comments       |
+| :--------------: | :----------: | :--------------: | :-------: | :------------: |
+| 3ptb, 10 runs    | 315.60       | 59.49            | 0.188     | ~5.30x slower  |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 **NOTE 1**: add restrict to all pointerss
 
 **NOTE 2**: there is possiblity to reduce logic usage down to 100% by removing `IC` from `Krnl_GA`. That would require 

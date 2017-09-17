@@ -98,6 +98,22 @@ float myrand(uint* restrict prng)
 	return res_tmp;
 }
 
+float myrand_local(__local uint* restrict prng)
+{
+	uint p_tmp = *prng;
+
+#if defined (REPRO)
+	p_tmp = 1;
+#else
+	p_tmp = RAND_A * p_tmp + RAND_C;
+#endif
+	*prng = p_tmp;
+
+	float res_tmp = 0.999999f / MAX_UINT;
+	res_tmp *= p_tmp;	
+	return res_tmp;
+}
+
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------
 /*uint myrand_uint(uint* prng, const uint limit)*/
@@ -124,9 +140,31 @@ ushort myrand_ushort(uint* restrict prng, const ushort limit)
 	//return ((*prng >> 31)*limit) & 0xFFFF;
 }
 
+ushort myrand_local_ushort(__local uint* restrict prng, const ushort limit)
+{
+#if defined (REPRO)
+	*prng = 1;
+#else
+	*prng = RAND_A*(*prng) + RAND_C;
+#endif
+	return (*prng/MAX_UINT)*limit;
+	//return ((*prng >> 31)*limit) & 0xFFFF;
+}
+
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------
 uchar myrand_uchar(uint* restrict prng, const uchar limit)
+{
+#if defined (REPRO)
+	*prng = 1;
+#else
+	*prng = RAND_A*(*prng) + RAND_C;
+#endif
+	return (*prng/MAX_UINT)*limit;
+	//return ((*prng >> 31)*limit) & 0xFF;
+}
+
+uchar myrand_local_uchar(__local uint* restrict prng, const uchar limit)
 {
 #if defined (REPRO)
 	*prng = 1;
@@ -234,6 +272,7 @@ void binary_tournament_selection(
 // Originally from: searchoptimum.c
 // --------------------------------------------------------------------------
 void gen_new_genotype(     
+			
 					uint* restrict prng,
 					uint* restrict prng1,
 		   	        const float*  restrict parent1_genotype,
@@ -247,8 +286,14 @@ void gen_new_genotype(
 {
 	uchar covr_point_low, covr_point_high;
 	uchar temp1, temp2;
+
 	temp1 = myrand_uchar(prng, num_genes-1);
 	temp2 = myrand_uchar(prng, num_genes-1);
+
+	/*
+	temp1 = myrand_local_uchar(&prngGG[0], num_genes-1);
+	temp2 = myrand_local_uchar(&prngGG[1], num_genes-1);
+	*/
 
 	//if (temp1 < temp2) {covr_point_low = temp1;
 	//		    covr_point_high = temp2;}
@@ -361,17 +406,21 @@ void gen_new_genotype(
 
 
 #if 1
-// Current implementation, crossover compacted, fully unrolled
-
+// Current implementation, crossover compacted, fully pipelined
+	///*
 	bool crossover_yes = (crossover_rate > myrand(prng));
+	//*/
+	/*
+	bool crossover_yes = (crossover_rate > myrand_local(&prngGG[2]));
+	*/
 
-/*
-	for (uchar i=0; i<num_genes; i++) {
-*/
 ///*
+	for (uchar i=0; i<num_genes; i++) {
+//*/
+/*
 	#pragma unroll
 	for (uchar i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {
-//*/
+*/
 		if (   	(
 			crossover_yes && (										// crossover
 			( (twopoint_cross_yes == true)  && ((i <= covr_point_low) || (i > covr_point_high)) )  ||	// two-point crossover 			 		
@@ -417,7 +466,7 @@ void gen_new_genotype(
 
 #if 1
 // Current implementation, mutation split, II (GG) = 3
-
+	
 	#pragma unroll
 	for (uchar i=0; i<3; i++) {
 		if (mutation_rate > myrand(prng)) {
@@ -434,13 +483,22 @@ void gen_new_genotype(
 		priv_offspring_genotype [4] = priv_offspring_genotype [4] + 2*abs_max_dang*myrand(prng1)-abs_max_dang;
 		priv_offspring_genotype [4] = map_angle_180(priv_offspring_genotype [4]);
 	}
-
+	///*
 	for (uchar i=5; i<num_genes; i++) {
 		if (mutation_rate > myrand(prng)) {
 			priv_offspring_genotype [i] = priv_offspring_genotype [i] + 2*abs_max_dang*myrand(prng1)-abs_max_dang;
 			priv_offspring_genotype [i] = map_angle_360(priv_offspring_genotype [i]);
 		}
 	}
+	//*/
+	/*
+	for (uchar i=5; i<num_genes; i++) {
+		if (mutation_rate > myrand(prng)) {
+			priv_offspring_genotype [i] = priv_offspring_genotype [i] + 2*abs_max_dang*myrand_local(&prngGG[i])-abs_max_dang;
+			priv_offspring_genotype [i] = map_angle_360(priv_offspring_genotype [i]);
+		}
+	}
+	*/
 #endif
 
 	#if defined (DEBUG_GEN_NEW_GENOTYPE)

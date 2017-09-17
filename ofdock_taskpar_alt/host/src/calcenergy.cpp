@@ -405,11 +405,20 @@ int prepare_constdynamic_fields_for_gpu(Liganddata* 	 	myligand_reference,
 	float phi, theta, genrotangle;
 
 	// ------------------------------
+	/*
 	float ref_coords_x[MAX_NUM_OF_ATOMS];
 	float ref_coords_y[MAX_NUM_OF_ATOMS];
 	float ref_coords_z[MAX_NUM_OF_ATOMS];
+	*/
+	cl_float3 ref_coords[MAX_NUM_OF_ATOMS];
+
+	/*
 	float rotbonds_moving_vectors[3*MAX_NUM_OF_ROTBONDS];
 	float rotbonds_unit_vectors[3*MAX_NUM_OF_ROTBONDS];
+	*/
+	cl_float3 rotbonds_moving_vectors[MAX_NUM_OF_ROTBONDS];
+	cl_float3 rotbonds_unit_vectors[MAX_NUM_OF_ROTBONDS];
+
 	//float ref_orientation_quats[4*MAX_NUM_OF_RUNS];
 	float ref_orientation_quats[4];
 	// ------------------------------
@@ -418,19 +427,34 @@ int prepare_constdynamic_fields_for_gpu(Liganddata* 	 	myligand_reference,
 	//coordinates of reference ligand
 	for (i=0; i < myligand_reference->num_of_atoms; i++)
 	{
+		/*
 		ref_coords_x[i] = myligand_reference->atom_idxyzq[i][1];
 		ref_coords_y[i] = myligand_reference->atom_idxyzq[i][2];
 		ref_coords_z[i] = myligand_reference->atom_idxyzq[i][3];
+		*/
+		ref_coords[i].x = myligand_reference->atom_idxyzq[i][1];
+		ref_coords[i].y = myligand_reference->atom_idxyzq[i][2];
+		ref_coords[i].z = myligand_reference->atom_idxyzq[i][3];
 	}
 
 	//rotatable bond vectors
-	for (i=0; i < myligand_reference->num_of_rotbonds; i++)
+	for (i=0; i < myligand_reference->num_of_rotbonds; i++) {
+		/*	
 		for (j=0; j<3; j++)
 		{
 			rotbonds_moving_vectors[3*i+j] = myligand_reference->rotbonds_moving_vectors[i][j];
 			rotbonds_unit_vectors[3*i+j] = myligand_reference->rotbonds_unit_vectors[i][j];
 		}
+		*/
 
+		rotbonds_moving_vectors[i].x = myligand_reference->rotbonds_moving_vectors[i][0];
+		rotbonds_moving_vectors[i].y = myligand_reference->rotbonds_moving_vectors[i][1];
+		rotbonds_moving_vectors[i].z = myligand_reference->rotbonds_moving_vectors[i][2];
+
+		rotbonds_unit_vectors[i].x = myligand_reference->rotbonds_unit_vectors[i][0];
+		rotbonds_unit_vectors[i].y = myligand_reference->rotbonds_unit_vectors[i][1];
+		rotbonds_unit_vectors[i].z = myligand_reference->rotbonds_unit_vectors[i][2];
+	}
 
 	//reference orientation quaternions
 //	for (i=0; i<mypars->num_of_runs; i++)
@@ -458,11 +482,21 @@ int prepare_constdynamic_fields_for_gpu(Liganddata* 	 	myligand_reference,
 
 
 	int m;
+	/*
 	for (m=0;m<MAX_NUM_OF_ATOMS;m++)		   { KerConstDynamic->ref_coords_x_const[m]= ref_coords_x[m]; }
 	for (m=0;m<MAX_NUM_OF_ATOMS;m++)		   { KerConstDynamic->ref_coords_y_const[m]= ref_coords_y[m]; }
 	for (m=0;m<MAX_NUM_OF_ATOMS;m++)		   { KerConstDynamic->ref_coords_z_const[m]= ref_coords_z[m]; }
+	*/
+	for (m=0;m<MAX_NUM_OF_ATOMS;m++)		   { KerConstDynamic->ref_coords_const[m]= ref_coords[m]; }
+
+	/*
 	for (m=0;m<3*MAX_NUM_OF_ROTBONDS;m++){ KerConstDynamic->rotbonds_moving_vectors_const[m]= rotbonds_moving_vectors[m]; }
 	for (m=0;m<3*MAX_NUM_OF_ROTBONDS;m++){ KerConstDynamic->rotbonds_unit_vectors_const[m]  = rotbonds_unit_vectors[m]; }
+	*/
+	for (m=0;m<MAX_NUM_OF_ROTBONDS;m++){ KerConstDynamic->rotbonds_moving_vectors_const[m]= rotbonds_moving_vectors[m]; }
+	for (m=0;m<MAX_NUM_OF_ROTBONDS;m++){ KerConstDynamic->rotbonds_unit_vectors_const[m]  = rotbonds_unit_vectors[m]; }
+
+
 	//for (m=0;m<4*MAX_NUM_OF_RUNS;m++)    { KerConst->ref_orientation_quats_const[m]  = ref_orientation_quats[m]; }
 	for (m=0;m<4;m++)    { KerConstDynamic->ref_orientation_quats_const[m]  = ref_orientation_quats[m]; }
 

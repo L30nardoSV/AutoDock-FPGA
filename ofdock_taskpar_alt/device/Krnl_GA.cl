@@ -43,11 +43,11 @@ channel char  	chan_Conf2Intrae_mode;
 
 channel float 	chan_Intere2StoreIC_intere __attribute__((depth(MAX_POPSIZE)));
 channel float 	chan_Intere2StoreGG_intere __attribute__((depth(MAX_POPSIZE)));
-channel float 	chan_Intere2StoreLS_intere;
+channel float 	chan_Intere2StoreLS_intere __attribute__((depth(20)));	// it requires 6% MAX_POPSIZE
 
 channel float 	chan_Intrae2StoreIC_intrae __attribute__((depth(MAX_POPSIZE)));
 channel float 	chan_Intrae2StoreGG_intrae __attribute__((depth(MAX_POPSIZE)));
-channel float 	chan_Intrae2StoreLS_intrae;
+channel float 	chan_Intrae2StoreLS_intrae __attribute__((depth(20)));	// it requires 6% MAX_POPSIZE
 
 
 
@@ -252,15 +252,17 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 	__local float loc_energies[MAX_POPSIZE]; 
 	__local ushort rand_ls_entities [16]; 
 
+	__local uint prngLS[ACTUAL_GENOTYPE_LENGTH];
+	for (uchar i=0; i<ACTUAL_GENOTYPE_LENGTH; i++){
+		prngLS[i] = GlobPRNG1 + i;
+	}
+
 	while ((eval_cnt < DockConst_num_of_energy_evals) && (generation_cnt < DockConst_num_of_generations)) {
 		// update energy evaluations
 		eval_cnt += tmp_eval_cnt + DockConst_pop_size;
 
 		// update generations
 		generation_cnt++;
-
-		
-
 
 		// ------------------------------------------------------------------
 		// GG: Genetic Generation
@@ -285,52 +287,11 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 		GlobEnergyNext[0] = loc_energies[best_entity_id];
 
 		for (ushort new_pop_cnt = 1; new_pop_cnt < DockConst_pop_size; new_pop_cnt++) {
-			/*
-			float __attribute__ ((
-			      memory,
-			      numbanks(1),
-			      bankwidth(64),
-			      singlepump,
-			      numreadports(1),
-			      numwriteports(1)
-			    )) local_entity_1 [ACTUAL_GENOTYPE_LENGTH]; 
-			*/
-			/*
-			float __attribute__ ((
-			      memory,
-			      numbanks(1),
-			      bankwidth(64),
-			      singlepump,
-			      numreadports(1),
-			      numwriteports(1)
-			    )) local_entity_2 [ACTUAL_GENOTYPE_LENGTH]; 
-			*/
-
 			float local_entity_1 [ACTUAL_GENOTYPE_LENGTH];
 			float local_entity_2 [ACTUAL_GENOTYPE_LENGTH]; 
 			
-			/*
-			float __attribute__ ((
-			      memory,
-			      numbanks(1),
-			      bankwidth(64),
-			      singlepump,
-			      numreadports(1),
-			      numwriteports(1)
-			    )) offspring_GGgenotype [ACTUAL_GENOTYPE_LENGTH]; 
-			*/
-			/*
-			float offspring_GGgenotype [ACTUAL_GENOTYPE_LENGTH]; 
-			*/
-			/*
-			float offspring_genotype [ACTUAL_GENOTYPE_LENGTH]; 
-			*/
-
 			// selecting two individuals randomly 			
 			binary_tournament_selection(
-						    /*
-						    &prng,
-						    */
 						    &prngA,
 					            &prngB,
 						    &prngC,
@@ -352,6 +313,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 
 			// local_entity_1 and local_entity_2 are population [parent1], population [parent2] 		
 			gen_new_genotype(
+					 
 					 &prng1,
 					 &prng2,
 					 local_entity_1, 
@@ -410,38 +372,18 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 		*/
 
 		for (ushort ls_ent_cnt=0; ls_ent_cnt<DockConst_num_of_lsentities; ls_ent_cnt++) {
+			/*
 			rand_ls_entities[ls_ent_cnt] = myrand_ushort(&prng3, 
 						         	     DockConst_pop_size);
+			*/
+			rand_ls_entities[ls_ent_cnt] = myrand_local_ushort(&prngLS[ls_ent_cnt], 
+						         	           DockConst_pop_size);
 		}
 
 		tmp_eval_cnt = 0;
 
 		// subject num_of_entity_for_ls pieces of offsprings to LS 	
 		for (ushort ls_ent_cnt=0; ls_ent_cnt<DockConst_num_of_lsentities; ls_ent_cnt++) {
-			/*
-			float __attribute__ ((
-			memory,
-			numbanks(1),
-			bankwidth(64),
-			singlepump,
-			numreadports(2),
-			numwriteports(1)
-			)) offspring_genotype [ACTUAL_GENOTYPE_LENGTH]; 	
-			*/
-			/*
-			float offspring_genotype [ACTUAL_GENOTYPE_LENGTH]; 
-			*/
-
-			/*
-			float __attribute__ ((
-			memory,
-			numbanks(1),
-			bankwidth(64),
-			singlepump,
-			numreadports(2),
-			numwriteports(1)
-			)) genotype_bias [ACTUAL_GENOTYPE_LENGTH]; 
-			*/
 
 			float genotype_bias [ACTUAL_GENOTYPE_LENGTH]; 
 			float entity_possible_new_genotype [ACTUAL_GENOTYPE_LENGTH];
@@ -470,27 +412,6 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 
 			// performing local search
 			while ((iteration_cnt < DockConst_max_num_of_iters)  && (rho > DockConst_rho_lower_bound)) {
-				/*
-				float __attribute__ ((
-			      	memory,
-			      	numbanks(1),
-			      	bankwidth(64),
-			      	singlepump,
-			      	numreadports(3),
-			      	numwriteports(1)
-			    	)) entity_possible_new_genotype [ACTUAL_GENOTYPE_LENGTH]; 	
-				*/
-
-				/*
-				float __attribute__ ((
-			     	memory,
-			      	numbanks(1),
-			      	bankwidth(64),
-			      	singlepump,
-			     	numreadports(2),
-			      	numwriteports(1)
-			    	)) genotype_deviate [ACTUAL_GENOTYPE_LENGTH]; 	
-				*/
 
 				// -----------------------------------------------
 				// Exit condition is groups here. It allows pipelining
@@ -518,8 +439,13 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 				for (uchar i=0; i<3; i++) {
 					genotype_deviate [i] = rho*DockConst_base_dmov_mul_sqrt3*(2*myrand(&prng4)-1);
 				}
+				/*
 				for (uchar i=3; i<DockConst_num_of_genes; i++) {
 					genotype_deviate [i] = rho*DockConst_base_dang_mul_sqrt3*(2*myrand(&prng5)-1);
+				}
+				*/
+				for (uchar i=3; i<DockConst_num_of_genes; i++) {
+					genotype_deviate [i] = rho*DockConst_base_dang_mul_sqrt3*(2*myrand_local(&prngLS[i])-1);
 				}
 
 				// define genotype values depending on descent direction
