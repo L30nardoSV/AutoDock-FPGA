@@ -891,6 +891,42 @@ In order to increase performance: improving pipelining keeping same area usage.
 
 
 
+## `16_run_harp2`
+
+* Clean up in auxiliary_genetic(), basically removing optional code for `REPRO`
+
+* myrand() functions implementation is changed to LFSR (Galois32 bits) (https://en.wikipedia.org/wiki/Linear-feedback_shift_register). The coefficients are taken from here: https://web.archive.org/web/20161007061934/http://courses.cse.tamu.edu/csce680/walker/lfsr_table.pdf
+
+| Resource                             | Usage        |
+| :----------------------------------: | :----------: |
+| Logic utilization                    |   95%        |
+| ALUTs                                |   37%        |
+| Dedicated logic registers            |   58%        |
+| Memory blocks                        |   81%        |
+| DSP blocks                           |   32%        |
+
+
+### Execution time (s) measurements from non-instrumented program
+
+| Configuration    |    FPGA      |  CPU (AutoDock)  |  Speed-up | Comments       |
+| :--------------: | :----------: | :--------------: | :-------: | :------------: |
+| 3ptb, 10 runs    | 333.73       | 59.49            |      | ~x slower  |
+
+
+### Execution time (s) measurements from instrumented program
+
+| Configuration    |    FPGA      |  CPU (AutoDock)  |  Speed-up | Comments       |
+| :--------------: | :----------: | :--------------: | :-------: | :------------: |
+| 3ptb, 10 runs    | 305.55       | 59.49            |      | ~x slower  |
+
+
+
+Results are strange here as they were supposed to be better with a LFSR.
+
+
+
+
+
 
 
 

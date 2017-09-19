@@ -152,6 +152,14 @@ while(active) {
 
 	float3 genotype_xyz = {genotype[0], genotype[1], genotype[2]};
 
+
+/*
+	float3 copies[38];
+
+	for(i=0;i<38;i++) {
+		copies[i] = 0.0f;
+	}
+*/
 	
 	for (ushort rotation_counter = 0; rotation_counter < DockConst_rotbondlist_length; rotation_counter++)
 	{
@@ -379,7 +387,11 @@ while(active) {
 			loc_coords[atom_id].y = atom_to_rotate [1] + rotation_movingvec[1];
 			loc_coords[atom_id].z = atom_to_rotate [2] + rotation_movingvec[2];
 			*/
+
+
 			loc_coords[atom_id] = atom_to_rotate + rotation_movingvec;
+
+
 		} // End if-statement not dummy rotation
 	} // End rotation_counter for-loop
 

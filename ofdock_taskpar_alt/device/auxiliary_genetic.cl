@@ -85,12 +85,10 @@ float myrand(uint* prng)
 float myrand(uint* restrict prng)
 {
 	uint p_tmp = *prng;
-
-#if defined (REPRO)
-	p_tmp = 1;
-#else
-	p_tmp = RAND_A * p_tmp + RAND_C;
-#endif
+	//p_tmp = RAND_A * p_tmp + RAND_C;
+	uchar lsb = p_tmp & 0x01u;
+	p_tmp >>= 1;
+	p_tmp ^= (-lsb) & 0xA3000000u;
 	*prng = p_tmp;
 
 	float res_tmp = 0.999999f / MAX_UINT;
@@ -101,12 +99,10 @@ float myrand(uint* restrict prng)
 float myrand_local(__local uint* restrict prng)
 {
 	uint p_tmp = *prng;
-
-#if defined (REPRO)
-	p_tmp = 1;
-#else
-	p_tmp = RAND_A * p_tmp + RAND_C;
-#endif
+	//p_tmp = RAND_A * p_tmp + RAND_C;
+	uchar lsb = p_tmp & 0x01u;
+	p_tmp >>= 1;
+	p_tmp ^= (-lsb) & 0xA3000000u;
 	*prng = p_tmp;
 
 	float res_tmp = 0.999999f / MAX_UINT;
@@ -119,60 +115,61 @@ float myrand_local(__local uint* restrict prng)
 /*uint myrand_uint(uint* prng, const uint limit)*/
 uint myrand_uint(uint* restrict prng, const ushort limit)
 {
-#if defined (REPRO)
-	*prng = 1;
-#else
-	*prng = RAND_A*(*prng) + RAND_C;
-#endif
-	return  (*prng/MAX_UINT)*limit;
+	//*prng = RAND_A*(*prng) + RAND_C;
+	uint p_tmp = *prng;
+	uchar lsb = p_tmp & 0x01u;
+	p_tmp >>= 1;
+	p_tmp ^= (-lsb) & 0xA3000000u;
+	*prng = p_tmp;
+	return  (p_tmp/MAX_UINT)*limit;
 }
 
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------
 ushort myrand_ushort(uint* restrict prng, const ushort limit)
 {
-#if defined (REPRO)
-	*prng = 1;
-#else
-	*prng = RAND_A*(*prng) + RAND_C;
-#endif
-	return (*prng/MAX_UINT)*limit;
-	//return ((*prng >> 31)*limit) & 0xFFFF;
+	//*prng = RAND_A*(*prng) + RAND_C;
+	uint p_tmp = *prng;
+	uchar lsb = p_tmp & 0x01u;
+	p_tmp >>= 1;
+	p_tmp ^= (-lsb) & 0xA3000000u;
+	*prng = p_tmp;
+	return (p_tmp/MAX_UINT)*limit;
 }
 
 ushort myrand_local_ushort(__local uint* restrict prng, const ushort limit)
 {
-#if defined (REPRO)
-	*prng = 1;
-#else
-	*prng = RAND_A*(*prng) + RAND_C;
-#endif
-	return (*prng/MAX_UINT)*limit;
-	//return ((*prng >> 31)*limit) & 0xFFFF;
+	//*prng = RAND_A*(*prng) + RAND_C;
+	uint p_tmp = *prng;
+	uchar lsb = p_tmp & 0x01u;
+	p_tmp >>= 1;
+	p_tmp ^= (-lsb) & 0xA3000000u;
+	*prng = p_tmp;
+	return (p_tmp/MAX_UINT)*limit;
 }
 
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------
 uchar myrand_uchar(uint* restrict prng, const uchar limit)
 {
-#if defined (REPRO)
-	*prng = 1;
-#else
-	*prng = RAND_A*(*prng) + RAND_C;
-#endif
-	return (*prng/MAX_UINT)*limit;
-	//return ((*prng >> 31)*limit) & 0xFF;
+	//*prng = RAND_A*(*prng) + RAND_C;
+	uint p_tmp = *prng;
+	uchar lsb = p_tmp & 0x01u;
+	p_tmp >>= 1;
+	p_tmp ^= (-lsb) & 0xA3000000u;
+	*prng = p_tmp;
+	return (p_tmp/MAX_UINT)*limit;
 }
 
 uchar myrand_local_uchar(__local uint* restrict prng, const uchar limit)
 {
-#if defined (REPRO)
-	*prng = 1;
-#else
-	*prng = RAND_A*(*prng) + RAND_C;
-#endif
-	return (*prng/MAX_UINT)*limit;
-	//return ((*prng >> 31)*limit) & 0xFF;
+	//*prng = RAND_A*(*prng) + RAND_C;
+	uint p_tmp = *prng;
+	uchar lsb = p_tmp & 0x01u;
+	p_tmp >>= 1;
+	p_tmp ^= (-lsb) & 0xA3000000u;
+	*prng = p_tmp;
+	return (p_tmp/MAX_UINT)*limit;
 }
 
 // --------------------------------------------------------------------------
@@ -197,15 +194,8 @@ void binary_tournament_selection(
 {
 	ushort parent_candidates [2];
 
-	//parent_candidates [0] = myrand_ushort(prng, pop_size);
 	parent_candidates [0] = myrand_ushort(prngA, pop_size);
-
-#if defined (REPRO)
-	parent_candidates [1] = myrand_uint(prng, pop_size) + 1;
-#else
-	//parent_candidates [1] = myrand_ushort(prng, pop_size);
 	parent_candidates [1] = myrand_ushort(prngB, pop_size);
-#endif
 
 	if (loc_energies[parent_candidates[0]] < loc_energies[parent_candidates[1]]) {
 		//if (myrand(prng) < rand_level) {
@@ -229,16 +219,8 @@ void binary_tournament_selection(
 	#endif
 
 	//generating two different parent candidates (which differ from parent1 as well)
-#if defined (REPRO)
-	parent_candidates [0] = myrand_uint(prng, pop_size) + 2;
-	parent_candidates [1] = myrand_uint(prng, pop_size) + 3;
-#else
-	//parent_candidates [0] = myrand_ushort(prng, pop_size);
-	//parent_candidates [1] = myrand_ushort(prng, pop_size);
-
 	parent_candidates [0] = myrand_ushort(prngD, pop_size);
 	parent_candidates [1] = myrand_ushort(prngE, pop_size);
-#endif
 
 	//the better will be the second parent
 	if (loc_energies[parent_candidates[0]] < loc_energies[parent_candidates[1]]) {
@@ -289,18 +271,6 @@ void gen_new_genotype(
 
 	temp1 = myrand_uchar(prng, num_genes-1);
 	temp2 = myrand_uchar(prng, num_genes-1);
-
-	/*
-	temp1 = myrand_local_uchar(&prngGG[0], num_genes-1);
-	temp2 = myrand_local_uchar(&prngGG[1], num_genes-1);
-	*/
-
-	//if (temp1 < temp2) {covr_point_low = temp1;
-	//		    covr_point_high = temp2;}
-	//else {		    covr_point_low = temp2;
-	//		    covr_point_high = temp1;}
-
-
 /*
 	float priv_offspring_genotype [ACTUAL_GENOTYPE_LENGTH];
 */
@@ -345,82 +315,11 @@ void gen_new_genotype(
 	// =======================================
 	// performing crossover
 	// =======================================
-
-#if 0
-// alternative implementation, crossover split
-
-	if (crossover_rate > myrand(prng))
-/*
-	if (crossover_rate > myrand(prng1))
-*/
-	{
-		//two-point crossover
-		//if (covr_point_low != covr_point_high)
-		if (twopoint_cross_yes == true)
-		{
-			for (uchar i=0; i<num_genes; i++) {
-				if ((i<=covr_point_low) || (i>covr_point_high)) 
-				{
-					//offspring_genotype [i] = parent1_genotype[i];
-					priv_offspring_genotype [i] = parent1_genotype[i];
-				}
-				else {
-					//offspring_genotype [i] = parent2_genotype[i];
-					priv_offspring_genotype [i] = parent2_genotype[i];
-				}
-			}
-		}
-		//one-point crossover
-		else {
-			for (uchar i=0; i<num_genes; i++) {
-				if (i <= covr_point_low)
-				{
-					//offspring_genotype [i] = parent1_genotype[i];
-					priv_offspring_genotype [i] = parent1_genotype[i];
-				}
-				else {
-					//offspring_genotype [i] = parent2_genotype[i];
-					priv_offspring_genotype [i] = parent2_genotype[i];
-				}
-			}
-		}
-
-		#if defined (DEBUG_GEN_NEW_GENOTYPE)
-		printf("Offspring1 after crossover: ");
-		for (i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {printf("%f ", offspring_genotype [i]);} printf("\n");
-		#endif
-
-	}
-	else	//if no crossover, the offsprings are the parents
-	{
-		for (uchar i=0; i<num_genes; i++) {
-			//offspring_genotype [i] = parent1_genotype[i];
-			priv_offspring_genotype [i] = parent1_genotype[i];
-		}
-
-		#if defined (DEBUG_GEN_NEW_GENOTYPE)
-		printf("No crossover, offsprings' genotypes equals to those of the parents\n");
-		#endif
-	}
-#endif
-
-
 #if 1
 // Current implementation, crossover compacted, fully pipelined
-	///*
 	bool crossover_yes = (crossover_rate > myrand(prng));
-	//*/
-	/*
-	bool crossover_yes = (crossover_rate > myrand_local(&prngGG[2]));
-	*/
 
-///*
 	for (uchar i=0; i<num_genes; i++) {
-//*/
-/*
-	#pragma unroll
-	for (uchar i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {
-*/
 		if (   	(
 			crossover_yes && (										// crossover
 			( (twopoint_cross_yes == true)  && ((i <= covr_point_low) || (i > covr_point_high)) )  ||	// two-point crossover 			 		
@@ -435,8 +334,6 @@ void gen_new_genotype(
 			priv_offspring_genotype [i] = parent2_genotype[i];
 		}
 	}
-
-
 #endif
 
 
@@ -445,25 +342,6 @@ void gen_new_genotype(
 	// =======================================
 	// performing mutation
 	// =======================================
-#if 0
-// alternative implementation, mutation compacted, fully unrolled, II (GG) = 99
-
-	#pragma unroll
-	for (uchar i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {
-		if (mutation_rate > myrand(prng)) {
-			if (i < 3) {
-				priv_offspring_genotype [i] = priv_offspring_genotype [i] + 2*abs_max_dmov*myrand(prng)-abs_max_dmov;
-			}
-			else {
-				priv_offspring_genotype [i] = priv_offspring_genotype [i] + 2*abs_max_dang*myrand(prng1)-abs_max_dang;
-
-				if (i == 4) {priv_offspring_genotype [4] = map_angle_180(priv_offspring_genotype [4]);}	//mapping angle to 0..180
-				else        {priv_offspring_genotype [i] = map_angle_360(priv_offspring_genotype [i]);}	//mapping angle to 0..360
-			}
-		}
-	}
-#endif
-
 #if 1
 // Current implementation, mutation split, II (GG) = 3
 	
@@ -483,22 +361,13 @@ void gen_new_genotype(
 		priv_offspring_genotype [4] = priv_offspring_genotype [4] + 2*abs_max_dang*myrand(prng1)-abs_max_dang;
 		priv_offspring_genotype [4] = map_angle_180(priv_offspring_genotype [4]);
 	}
-	///*
+
 	for (uchar i=5; i<num_genes; i++) {
 		if (mutation_rate > myrand(prng)) {
 			priv_offspring_genotype [i] = priv_offspring_genotype [i] + 2*abs_max_dang*myrand(prng1)-abs_max_dang;
 			priv_offspring_genotype [i] = map_angle_360(priv_offspring_genotype [i]);
 		}
 	}
-	//*/
-	/*
-	for (uchar i=5; i<num_genes; i++) {
-		if (mutation_rate > myrand(prng)) {
-			priv_offspring_genotype [i] = priv_offspring_genotype [i] + 2*abs_max_dang*myrand_local(&prngGG[i])-abs_max_dang;
-			priv_offspring_genotype [i] = map_angle_360(priv_offspring_genotype [i]);
-		}
-	}
-	*/
 #endif
 
 	#if defined (DEBUG_GEN_NEW_GENOTYPE)
