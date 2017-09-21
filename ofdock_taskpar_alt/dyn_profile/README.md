@@ -1013,6 +1013,12 @@ THIS WAS NOT SAVED BECAUSE RESULTS ARE WORSE
 
 
 
+
+
+
+
+
+
 **NOTE 1**: add restrict to all pointerss
 
 **NOTE 2**: there is possiblity to reduce logic usage down to 100% by removing `IC` from `Krnl_GA`. That would require 

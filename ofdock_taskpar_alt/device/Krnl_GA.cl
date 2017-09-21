@@ -21,19 +21,8 @@
 
 
 #include "../defines.h"
-/*
-channel bool  	chan_IC2Conf_active;
-*/
 channel float  	chan_IC2Conf_genotype     __attribute__((depth(MAX_NUM_OF_ROTBONDS+6)));
-
-/*
-channel bool  	chan_GG2Conf_active;
-*/
 channel float  	chan_GG2Conf_genotype     __attribute__((depth(MAX_NUM_OF_ROTBONDS+6)));
-
-/*
-channel bool  	chan_LS2Conf_active;
-*/
 channel float  	chan_LS2Conf_genotype     __attribute__((depth(MAX_NUM_OF_ROTBONDS+6)));
 
 // To turn off Conform, InterE, IntraE
@@ -228,10 +217,6 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 	// IC: Init Calculation
 	// ------------------------------------------------------------------
 	for (ushort pop_cnt = 0; pop_cnt < DockConst_pop_size; pop_cnt++) {
-/*
-		write_channel_altera(chan_IC2Conf_active, true);
-		mem_fence(CLK_CHANNEL_MEM_FENCE);
-*/
 		for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_genes; pipe_cnt++) {
 			write_channel_altera(chan_IC2Conf_genotype, GlobPopulationCurrent[pop_cnt*ACTUAL_GENOTYPE_LENGTH + pipe_cnt]);
 		}
@@ -317,26 +302,6 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
  			               numreadports(7),
 			               numwriteports(1)
 			              )) loc_energies[MAX_POPSIZE];
-
-/*
-		// copy energy to local memory
-		for (ushort i=0; i<DockConst_pop_size; i++) {
-			loc_energies[i] = GlobEnergyCurrent[i];
-		}
-
-		// identifying best entity
-		ushort best_entity = 0;
-		for (ushort i=1; i<DockConst_pop_size; i++) {
-			if (loc_energies[i] < loc_energies[best_entity]) {
-				best_entity = i;
-			}
-		}
-*/
-
-
-
-
-
 
 #if 1
 		// copy energy to local memory
@@ -719,69 +684,6 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 
 				// new random deviate
 				// rho is the deviation of the uniform distribution
-/*
-				#pragma unroll
-				for (uchar i=0; i<3; i++) {
-					genotype_deviate [i] = rho*DockConst_base_dmov_mul_sqrt3*(2.0f *prngLS[i]-1);
-				}
-				for (uchar i=3; i<DockConst_num_of_genes; i++) {
-					genotype_deviate [i] = rho*DockConst_base_dang_mul_sqrt3*(2.0f *prngLS[i]-1);
-				}
-*/
-
-
-/*
-				for (uchar i=0; i<DockConst_num_of_genes; i++) {
-					float tmp = rho * (2.0f *prngLS[i]-1);
-
-					if (i<3) {
-						tmp = tmp * DockConst_base_dmov_mul_sqrt3;
-					}
-					else {
-						tmp = tmp * DockConst_base_dang_mul_sqrt3;
-					}
-
-					genotype_deviate [i] = tmp;
-				}
-
-				// define genotype values depending on descent direction
-				for (uchar i=0; i<DockConst_num_of_genes; i++) {
-					float tmp = genotype_deviate[i] + genotype_bias[i];
-					entity_possible_new_genotype[i] = (positive_direction == true)? 
-									  (offspring_genotype[i] + tmp): 
-								          (offspring_genotype[i] - tmp);
-
-				}
-*/
-
-/*
-				for (uchar i=0; i<DockConst_num_of_genes; i++) {
-					float tmp1 = rho * (2.0f *prngLS[i]-1);
-
-					if (i<3) {
-						tmp1 = tmp1 * DockConst_base_dmov_mul_sqrt3;
-					}
-					else {
-						tmp1 = tmp1 * DockConst_base_dang_mul_sqrt3;
-					}
-
-					genotype_deviate [i] = tmp1;
-
-					float tmp2 = tmp1 + genotype_bias[i];
-					entity_possible_new_genotype[i] = (positive_direction == true)? 
-									  (offspring_genotype[i] + tmp2): 
-								          (offspring_genotype[i] - tmp2);
-				}
-
-				entity_possible_new_genotype [3] = map_angle_360(entity_possible_new_genotype [3]);
-				entity_possible_new_genotype [4] = map_angle_180(entity_possible_new_genotype [4]);
-
-				for (uchar i=5; i<DockConst_num_of_genes; i++) {
-					entity_possible_new_genotype [i] = map_angle_360(entity_possible_new_genotype [i]);
-				}
-*/  
-
-
 				for (uchar i=0; i<DockConst_num_of_genes; i++) {
 					write_channel_altera(chan_GA2PRNG_LS_float_active, true);
 					mem_fence(CLK_CHANNEL_MEM_FENCE);
@@ -817,19 +719,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 					write_channel_altera(chan_LS2Conf_genotype, tmp3);
 				}
 
-
 				// calculate energy of genotype
-/*
-				write_channel_altera(chan_LS2Conf_active, true);
-				mem_fence(CLK_CHANNEL_MEM_FENCE);
-*/
-/*
-				for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_genes; pipe_cnt++) {
-					write_channel_altera(chan_LS2Conf_genotype, entity_possible_new_genotype[pipe_cnt]);
-				}
-				mem_fence(CLK_CHANNEL_MEM_FENCE);
-*/
-
 				float energyIA_LS_rx = read_channel_altera(chan_Intrae2StoreLS_intrae);
 				float energyIE_LS_rx = read_channel_altera(chan_Intere2StoreLS_intere);
 				float candidate_energy = energyIA_LS_rx + energyIE_LS_rx;
@@ -925,8 +815,6 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 	// ------------------------------------------------------------------
 	write_channel_altera(chan_Off2Conf_active, false);
 	write_channel_altera(chan_GA2PRNG_Off_active, false);
-
-
 	//mem_fence(CLK_CHANNEL_MEM_FENCE);
 	
 	#if defined (DEBUG_KRNL_GA)
@@ -936,16 +824,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 	#if defined (DEBUG_ACTIVE_KERNEL)
 	printf("	%-20s: %s\n", "Krnl_GA", "disabled");
 	#endif
-/*
-	uint array_evals_and_generations_performed [2];
-	array_evals_and_generations_performed [0] = eval_cnt;
-	array_evals_and_generations_performed [1] = generation_cnt;
-	
-	//#pragma unroll 1
-	for (uchar i=0; i<2; i++) {
-		GlobEvalsGenerations_performed[i] = array_evals_and_generations_performed [i];
-	}
-*/
+
 	GlobEvalsGenerations_performed[0] = eval_cnt;
 	GlobEvalsGenerations_performed[1] = generation_cnt;
 }
