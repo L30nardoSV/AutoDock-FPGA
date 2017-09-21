@@ -927,7 +927,85 @@ Results are strange here as they were supposed to be better with a LFSR.
 
 
 
+## `17_run_harp2`
 
+
+* Clean up a bit in `Krnl_Conform` usage of cossin, operations moved outside main loop
+* Create six kernels for PRNGs. It requires creating kernels in host
+* Moved moce from `binary_tournament` and `gen_new_generation` to `Krnl_GA`
+
+>>>
+The order of the operands in the prng calculation can change the clustering quality. 
+
+In this version clustering quality is negatively affected.
+>>>
+
+| Resource                             | Usage        |
+| :----------------------------------: | :----------: |
+| Logic utilization                    |   97%        |
+| ALUTs                                |   38%        |
+| Dedicated logic registers            |   59%        |
+| Memory blocks                        |   82%        |
+| DSP blocks                           |   31%        |
+
+
+### Execution time (s) measurements from non-instrumented program
+
+| Configuration    |    FPGA      |  CPU (AutoDock)  |  Speed-up | Comments       |
+| :--------------: | :----------: | :--------------: | :-------: | :------------: |
+| 3ptb, 10 runs    | 294.25      | 59.49            |      | ~x slower  |
+
+
+### Execution time (s) measurements from instrumented program
+
+| Configuration    |    FPGA      |  CPU (AutoDock)  |  Speed-up | Comments       |
+| :--------------: | :----------: | :--------------: | :-------: | :------------: |
+| 3ptb, 10 runs    |  311     | 59.49            |      | ~x slower  |
+
+
+
+
+
+
+THIS WAS NOT SAVED BECAUSE RESULTS ARE WORSE
+
+
+
+
+
+
+
+
+
+## `18_run_harp2`
+
+* Added and Arbiter kernel so prng kernels can be fully pipelined
+* Remove active channels in `GA` (those that go from `IC`, `GG`, `LS` to `Krnl_Conform`) as these are not needed. `Krnl_Conform` was also updated
+* In `LS` and `GG`, group more computation inside single for-loops as much as possible. That way, even if only one-iteration of containing loop is executed, there will be less of these serialized regions
+* Use shift registers to reduce II in finding `best_entity`
+
+
+| Resource                             | Usage        |
+| :----------------------------------: | :----------: |
+| Logic utilization                    |   87%        |
+| ALUTs                                |   35%        |
+| Dedicated logic registers            |   52%        |
+| Memory blocks                        |   75%        |
+| DSP blocks                           |   29%        |
+
+
+### Execution time (s) measurements from non-instrumented program
+
+| Configuration    |    FPGA      |  CPU (AutoDock)  |  Speed-up | Comments       |
+| :--------------: | :----------: | :--------------: | :-------: | :------------: |
+| 3ptb, 10 runs    |  267         | 59.49            | 0.222     | ~4.48x slower  |
+
+
+### Execution time (s) measurements from instrumented program
+
+| Configuration    |    FPGA      |  CPU (AutoDock)  |  Speed-up | Comments       |
+| :--------------: | :----------: | :--------------: | :-------: | :------------: |
+| 3ptb, 10 runs    | 316    | 59.49            |      | ~x slower  |
 
 
 
