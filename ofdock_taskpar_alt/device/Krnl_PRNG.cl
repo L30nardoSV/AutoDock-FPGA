@@ -114,7 +114,7 @@ while(active) {
 }
 
 __kernel __attribute__ ((max_global_work_dim(0)))
-void Krnl_Prng_BT_float(const unsigned int  seed){
+void Krnl_Prng_BT_float(const unsigned int seed){
 
 	uint lfsr = seed;
 	bool active = true;

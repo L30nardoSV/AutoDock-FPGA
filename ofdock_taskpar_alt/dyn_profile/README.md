@@ -1010,6 +1010,61 @@ THIS WAS NOT SAVED BECAUSE RESULTS ARE WORSE
 
 
 
+>>>
+By a typing mistake `18_run_harp2` version was initially saved as `19_run_harp2`, this error was latter corrected.
+Anyway, in order to avoid mistakes, `19_run_harp2` is not created and the `20` version is the next one
+>>>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## `20_run_harp2`
+* Cleanup: remove struct definition in `Krnl_GA` which are not needed anymore
+* Merged for-loops in `IC` to improve pipelining
+* Merged for-loops in `GG` to improve pipelining
+* Removed `ls_pass_complete` from `LS` as `positive_direction` appears to be enough
+* Moved both `map_angle` functions to `Krnl_GA`, i.e. `auxiliary_genetic.cl` is not invoked anymore
+* Global memory is not accessed anymore during computation, now only local memory is used. `Next` kernel arguments are removed
+
+| Resource                             | Usage        |
+| :----------------------------------: | :----------: |
+| Logic utilization                    |   84%        |
+| ALUTs                                |   34%        |
+| Dedicated logic registers            |   50%        |
+| Memory blocks                        |   68%        |
+| DSP blocks                           |   29%        |
+
+
+### Execution time (s) measurements from non-instrumented program
+
+| Configuration    |    FPGA      |  CPU (AutoDock)  |  Speed-up | Comments       |
+| :--------------: | :----------: | :--------------: | :-------: | :------------: |
+| 3ptb, 10 runs    |   267.70     | 59.49            | 0.222     | ~4.5x slower  |
+
+
+### Execution time (s) measurements from instrumented program
+
+| Configuration    |    FPGA      |  CPU (AutoDock)  |  Speed-up | Comments       |
+| :--------------: | :----------: | :--------------: | :-------: | :------------: |
+| 3ptb, 10 runs    |   280.05     | 59.49            |      | ~x slower  |
+
+
 
 
 
