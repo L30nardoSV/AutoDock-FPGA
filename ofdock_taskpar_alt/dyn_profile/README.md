@@ -1074,10 +1074,42 @@ Anyway, in order to avoid mistakes, `19_run_harp2` is not created and the `20` v
 
 
 
-**NOTE 1**: add restrict to all pointerss
 
-**NOTE 2**: there is possiblity to reduce logic usage down to 100% by removing `IC` from `Krnl_GA`. That would require 
-to move its corresponding energy-calculation to host and pass them
+
+
+
+
+
+
+
+
+## `21_run_harp2`
+
+* Remove `offspring_energy` in `LS` and use simply the local variable `LocalEneNext[entity_for_ls]`
+* Remove `offspring_genotype` in `LS` and use simply the local variable `LocalPopNext[entity_for_ls][i & 0x3F]`
+* Initialize `genotype_bias[i] = 0.0f` differently, i.e. using ternary operator depending on `iterator_cnt`
+
+| Resource                             | Usage        |
+| :----------------------------------: | :----------: |
+| Logic utilization                    |   80%        |
+| ALUTs                                |   33%        |
+| Dedicated logic registers            |   48%        |
+| Memory blocks                        |   64%        |
+| DSP blocks                           |   29%        |
+
+
+### Execution time (s) measurements from non-instrumented program
+
+| Configuration    |    FPGA      |  CPU (AutoDock)  |  Speed-up | Comments       |
+| :--------------: | :----------: | :--------------: | :-------: | :------------: |
+| 3ptb, 10 runs    |  267.67      | 59.49            |      | ~x slower  |
+
+
+### Execution time (s) measurements from instrumented program
+
+| Configuration    |    FPGA      |  CPU (AutoDock)  |  Speed-up | Comments       |
+| :--------------: | :----------: | :--------------: | :-------: | :------------: |
+| 3ptb, 10 runs    |        | 59.49            |      | ~x slower  |
 
 
 

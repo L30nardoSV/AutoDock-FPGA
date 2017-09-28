@@ -5,18 +5,8 @@
 // --------------------------------------------------------------------------
 __kernel __attribute__ ((max_global_work_dim(0)))
 void Krnl_Conform(
-	     __constant int*   restrict KerConstStatic_rotlist_const,
-	     /*
-	     __constant float* restrict KerConstDynamic_ref_coords_x_const,
-	     __constant float* restrict KerConstDynamic_ref_coords_y_const,
-	     __constant float* restrict KerConstDynamic_ref_coords_z_const,
-	     */
+	     __constant int*    restrict KerConstStatic_rotlist_const,
 	     __constant float3* restrict KerConstDynamic_ref_coords_const,
-
-	     /*
- 	     __constant float* restrict KerConstDynamic_rotbonds_moving_vectors_const,
-	     __constant float* restrict KerConstDynamic_rotbonds_unit_vectors_const,
-	     */
 	     __constant float3* restrict KerConstDynamic_rotbonds_moving_vectors_const,
 	     __constant float3* restrict KerConstDynamic_rotbonds_unit_vectors_const,
 	    
