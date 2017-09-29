@@ -1119,11 +1119,52 @@ Anyway, in order to avoid mistakes, `19_run_harp2` is not created and the `20` v
 
 
 
+## `22_run_harp2`
+
+* Replace `0.6f` instead on `0.6` in `LS` `genotype_bias` calculation (0.6 means double while 0.6f means float)
+* In `LS`, multiplication of `4.0f` by `genotype_deviate[i]` is moved inside loop before channel read
+* Add statement to init correctly `genotype_bias` (missing in previos commit)
+
+BAD IDEA
+It is commented out before commiting
+* Transform second loop into a conditional execution of unrolled loops
+
+
+Using BAD IDEA
+
+| Resource                             | Usage        |
+| :----------------------------------: | :----------: |
+| Logic utilization                    |   98%        |
+| ALUTs                                |   38%        |
+| Dedicated logic registers            |   60%        |
+| Memory blocks                        |   87%        |
+| DSP blocks                           |   34%        |
+
+
+### Execution time (s) measurements from non-instrumented program
+
+| Configuration    |    FPGA      |  CPU (AutoDock)  |  Speed-up | Comments       |
+| :--------------: | :----------: | :--------------: | :-------: | :------------: |
+| 3ptb, 10 runs    | 318.04       | 59.49            |      | ~x slower  |
+
+
+### Execution time (s) measurements from instrumented program
+
+| Configuration    |    FPGA      |  CPU (AutoDock)  |  Speed-up | Comments       |
+| :--------------: | :----------: | :--------------: | :-------: | :------------: |
+| 3ptb, 10 runs    |        | 59.49            |      | ~x slower  |
 
 
 
+After commenting BAD IDEA:
 
-
+| Resource                             | Usage        |
+| :----------------------------------: | :----------: |
+| Logic utilization                    |   81%        |
+| ALUTs                                |   33%        |
+| Dedicated logic registers            |   48%        |
+| Memory blocks                        |   64%        |
+| DSP blocks                           |   29%        |
 
 
 
