@@ -142,6 +142,7 @@ ENABLE_K2  = YES
 ENABLE_K3  = YES
 ENABLE_K4  = YES
 
+# Prng kernels
 ENABLE_K5  = YES
 ENABLE_K6  = YES
 ENABLE_K7  = YES
@@ -149,6 +150,13 @@ ENABLE_K8  = YES
 ENABLE_K9  = YES
 ENABLE_K10 = YES
 ENABLE_K11 = YES
+
+# LS kernels
+ENABLE_K12 = YES
+ENABLE_K13 = YES
+
+#ENABLE_K14 = YES
+#ENABLE_K15 = YES
 
 ifeq ($(ENABLE_K1),YES)
 	K1 =-DENABLE_KERNEL1
@@ -216,7 +224,32 @@ else
 	K11 =
 endif
 
-ENABLE_KERNELS = $(K1) $(K2) $(K3) $(K4) $(K5) $(K6) $(K7) $(K8) $(K9) $(K10) $(K11)
+
+ifeq ($(ENABLE_K12),YES)
+	K12 =-DENABLE_KERNEL12
+else
+	K12 =
+endif
+
+ifeq ($(ENABLE_K13),YES)
+	K13 =-DENABLE_KERNEL13
+else
+	K13 =
+endif
+
+ifeq ($(ENABLE_K14),YES)
+	K14 =-DENABLE_KERNEL14
+else
+	K14 =
+endif
+
+ifeq ($(ENABLE_K15),YES)
+	K15 =-DENABLE_KERNEL15
+else
+	K15 =
+endif
+
+ENABLE_KERNELS = $(K1) $(K2) $(K3) $(K4) $(K5) $(K6) $(K7) $(K8) $(K9) $(K10) $(K11) $(K12) $(K13) $(K14) $(K15)
 
 # =============================
 # Reproduce result (remove randomness)

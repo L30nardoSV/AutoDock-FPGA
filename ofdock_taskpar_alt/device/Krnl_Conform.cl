@@ -63,11 +63,7 @@ while(active) {
 	bool GG_valid     = false;
 	bool LS_valid     = false;
 	bool Off_valid    = false;
-/*
-	bool IC_active;
-	bool GG_active;
-	bool LS_active;
-*/
+
 	float IC_active;
 	float GG_active;
 	float LS_active;
@@ -81,7 +77,7 @@ while(active) {
 	       (GG_valid  == false) && 
 	       (LS_valid  == false) &&
 */
-               (Off_valid == false) && (pipe_cnt < DockConst_num_of_genes) 
+	       (Off_valid == false) && (pipe_cnt < DockConst_num_of_genes) 
 	) {
 		IC_active  = read_channel_nb_altera(chan_IC2Conf_genotype, &IC_valid);
 		GG_active  = read_channel_nb_altera(chan_GG2Conf_genotype, &GG_valid);
@@ -99,20 +95,16 @@ while(active) {
 	}
 
 	char mode;
-	/*
-	float genotype[ACTUAL_GENOTYPE_LENGTH];
-	*/
 
-/*
-	active = (IC_valid)     ? IC_active :
-		 (GG_valid)     ? GG_active :
-		 (LS_valid)     ? LS_active :
-*/
+
+//printf("LS_valid: %u, LS2_valid: %u\n", LS_valid, LS2_valid);
+
 	active = (IC_valid)     ? true :
 		 (GG_valid)     ? true :
 		 (LS_valid)     ? true :
 		 (Off_valid)    ? Off_active :
 		 false; // last case should never occur, otherwise above while would be still running
+
 
 	mode = (IC_valid)     ? 0x01 :
 	       (GG_valid)     ? 0x02 :
@@ -120,16 +112,6 @@ while(active) {
 	       (Off_valid)    ? 0x05 :
 	       0x05; // last case should never occur, otherwise above while would be still running
 
-
-/*
-	for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_genes; pipe_cnt++) {
-		genotype[pipe_cnt] = (IC_valid)     ?  read_channel_altera(chan_IC2Conf_genotype) :
-	       			     (GG_valid)     ?  read_channel_altera(chan_GG2Conf_genotype) : 
-				     (LS_valid)     ?  read_channel_altera(chan_LS2Conf_genotype) :
-                                     (Off_valid) ?  0.0f:
-				     0.0f; // last case should never occur, otherwise above while would be still running
-	}
-*/
 	// --------------------------------------------------------------
 	//printf("AFTER In CONFORM CHANNEL\n");
 /*
@@ -317,6 +299,13 @@ while(active) {
 	printf("BEFORE Out CONFORM CHANNEL\n");
 	#endif
 
+/*
+if (mode == 0x04) {
+printf("Krnl_Conform after loop\n");
+}
+*/
+
+
 	// --------------------------------------------------------------
 	// Send ligand atomic coordinates to channel 
 	// --------------------------------------------------------------
@@ -333,6 +322,11 @@ while(active) {
 		write_channel_altera(chan_Conf2Intere_xyz, loc_coords[pipe_cnt]);
 		write_channel_altera(chan_Conf2Intrae_xyz, loc_coords[pipe_cnt]);
 	}
+/*
+if (mode == 0x04) {
+printf("Krnl_Conform sent\n");
+}
+*/
 
 	// --------------------------------------------------------------
 	#if defined (DEBUG_KRNL_CONFORM)

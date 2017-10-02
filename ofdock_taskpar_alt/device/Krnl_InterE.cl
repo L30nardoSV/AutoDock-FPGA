@@ -276,7 +276,15 @@ while(active) {
 		case 0x03:	// LS
 			write_channel_altera(chan_Intere2StoreLS_intere, interE);
 		break;
+/*
+		case 0x04:	// LS 2
+			write_channel_altera(chan_Intere2StoreLS_LS2_intere, interE);
+		break;
 
+		case 0x06:	// LS 2
+			write_channel_altera(chan_Intere2StoreLS_LS2_intere, interE);
+		break;
+*/
 		//case 5:	// Off
 		//	write_channel_altera(chan_Intere2StoreOff_intere, interE);
 		//break;

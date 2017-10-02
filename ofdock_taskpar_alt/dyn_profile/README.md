@@ -1172,6 +1172,39 @@ After commenting BAD IDEA:
 
 
 
+## `23_run_harp2`
 
+Idea: replicate LS while-loop as this seems to be serial and unlikey to be further optimized.
+But first, `LS` is separated an made a kernel.
+
+* Prngs for `LS` are generated all in a sequence.
+* Re-enabled `Krnl_LS` which executes only LS while-loop
+* Added a kernel for enabling `LS` kernel
+
+Notice that logic utilization is further reduced:
+
+| Resource                             | Usage        |
+| :----------------------------------: | :----------: |
+| Logic utilization                    |   78%        |
+| ALUTs                                |   32%        |
+| Dedicated logic registers            |   46%        |
+| Memory blocks                        |   62%        |
+| DSP blocks                           |   29%        |
+
+
+Working frequency is 213.3MHz
+
+### Execution time (s) measurements from non-instrumented program
+
+| Configuration    |    FPGA      |  CPU (AutoDock)  |  Speed-up | Comments       |
+| :--------------: | :----------: | :--------------: | :-------: | :------------: |
+| 3ptb, 10 runs    |  252.25      | 59.49            |      | ~4.24x slower  |
+
+
+### Execution time (s) measurements from instrumented program
+
+| Configuration    |    FPGA      |  CPU (AutoDock)  |  Speed-up | Comments       |
+| :--------------: | :----------: | :--------------: | :-------: | :------------: |
+| 3ptb, 10 runs    |  262.11      | 59.49            |      | ~x slower  |
 
 
