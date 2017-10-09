@@ -4,7 +4,7 @@
 // Originally from: processligand.c
 // --------------------------------------------------------------------------
 __kernel __attribute__ ((max_global_work_dim(0)))
-void Krnl_Conform(
+void Krnl_Conform2(
 	     __constant int*    restrict KerConstStatic_rotlist_const,
 	     __constant float3* restrict KerConstDynamic_ref_coords_const,
 	     __constant float3* restrict KerConstDynamic_rotbonds_moving_vectors_const,
@@ -44,7 +44,6 @@ void Krnl_Conform(
 
 	__local float genotype[ACTUAL_GENOTYPE_LENGTH];
 
-
 	bool active = true;
 
 	// local mem to cache KerConstStatic->rotlist_const[], marked as bottleneck by profiler
@@ -59,59 +58,38 @@ while(active) {
 	// --------------------------------------------------------------
 	// Wait for genotypes in channel
 	// --------------------------------------------------------------
-	bool IC_valid     = false;
-	bool GG_valid     = false;
-	bool LS_valid     = false;
-	bool Off_valid    = false;
+	bool LS2_valid  = false;
+	bool Off2_valid = false;
 
-	float IC_active;
-	float GG_active;
-	float LS_active;
-	bool Off_active;
+	float LS2_active;
+	bool  Off2_active;
 
 	uchar pipe_cnt = 0;
 
 	while (
-/*
-	       (IC_valid  == false) && 
-	       (GG_valid  == false) && 
-	       (LS_valid  == false) &&
-*/
-	       (Off_valid == false) && (pipe_cnt < DockConst_num_of_genes) 
+		(Off2_valid == false) && (pipe_cnt < DockConst_num_of_genes)
 	) {
-		IC_active  = read_channel_nb_altera(chan_IC2Conf_genotype, &IC_valid);
-		GG_active  = read_channel_nb_altera(chan_GG2Conf_genotype, &GG_valid);
-		LS_active  = read_channel_nb_altera(chan_LS2Conf_genotype, &LS_valid);
-		Off_active = read_channel_nb_altera(chan_Off2Conf_active,  &Off_valid);
+		LS2_active = read_channel_nb_altera(chan_LS2Conf_LS2_genotype, &LS2_valid);
+		Off2_active = read_channel_nb_altera(chan_LS2Conf_Off, &Off2_valid);
 
-		if (IC_valid || GG_valid || LS_valid) {
-			genotype[pipe_cnt] = (IC_valid)  ?  IC_active :
-	       			    	     (GG_valid)  ?  GG_active : 
-				     	     (LS_valid)  ?  LS_active :
-                                     	     (Off_valid) ?  0.0f:
-				     	     0.0f; // last case should never occur, otherwise above while would be still running
-			
+		if (LS2_valid) {
+			genotype [pipe_cnt] = (LS2_valid)? LS2_active:
+					      (Off2_valid)? 0.0f:
+					      0.0f; // last case should never occur, otherwise above while would be still running
 			if (pipe_cnt > 2) {
 				genotype [pipe_cnt] = genotype [pipe_cnt]*DEG_TO_RAD;
 			}
-			
+
 			pipe_cnt++;
 		}
 	}
 
 	char mode;
 
-	active = (IC_valid)     ? true :
-		 (GG_valid)     ? true :
-		 (LS_valid)     ? true :
-		 (Off_valid)    ? Off_active :
-		 false; // last case should never occur, otherwise above while would be still running
+	active = (LS2_valid) ? true :
+		 (Off2_valid)? Off2_active :
+		 false;	// last case should never occur, otherwise above while would be still running
 
-	mode = (IC_valid)     ? 0x01 :
-	       (GG_valid)     ? 0x02 :
-	       (LS_valid)     ? 0x03 :
-	       (Off_valid)    ? 0x05 :
-	       0x05; // last case should never occur, otherwise above while would be still running
 
 	// --------------------------------------------------------------
 	//printf("AFTER In CONFORM CHANNEL\n");
@@ -126,14 +104,11 @@ while(active) {
 			    )) loc_coords[MAX_NUM_OF_ATOMS];
 */
 
-
 	float3 loc_coords[MAX_NUM_OF_ATOMS];
-
 
 	#if defined (DEBUG_ACTIVE_KERNEL)
 	if (active == 0) {printf("	%-20s: %s\n", "Krnl_Conform", "must be disabled");}
 	#endif
-
 /*
 	for(uchar i=3; i<DockConst_num_of_genes; i++) {
 		genotype [i] = genotype [i]*DEG_TO_RAD;
@@ -302,19 +277,19 @@ while(active) {
 	// --------------------------------------------------------------
 	// Send ligand atomic coordinates to channel 
 	// --------------------------------------------------------------
-	write_channel_altera(chan_Conf2Intere_active, active);
-	write_channel_altera(chan_Conf2Intrae_active, active);
+	write_channel_altera(chan_Conf2Intere_LS2_active, active);
+	write_channel_altera(chan_Conf2Intrae_LS2_active, active);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
-
+/*
 	write_channel_altera(chan_Conf2Intere_mode,   mode);
 	write_channel_altera(chan_Conf2Intrae_mode,   mode);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
-
+*/
 	//float3 position_xyz;
 	#pragma ivdep
 	for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt++) {
-		write_channel_altera(chan_Conf2Intere_xyz, loc_coords[pipe_cnt]);
-		write_channel_altera(chan_Conf2Intrae_xyz, loc_coords[pipe_cnt]);
+		write_channel_altera(chan_Conf2Intere_LS2_xyz, loc_coords[pipe_cnt]);
+		write_channel_altera(chan_Conf2Intrae_LS2_xyz, loc_coords[pipe_cnt]);
 	}
 
 	// --------------------------------------------------------------

@@ -1,50 +1,53 @@
-channel bool  chan_Arbiter_LS1_active;
-channel float chan_Arbiter_LS1_energy;
-channel float chan_Arbiter_LS1_genotype     __attribute__((depth(MAX_NUM_OF_ROTBONDS+6)));
+channel bool  chan_Arbiter_LS2_active;
+channel float chan_Arbiter_LS2_energy;
+channel float chan_Arbiter_LS2_genotype     __attribute__((depth(MAX_NUM_OF_ROTBONDS+6)));
+
+
+channel bool chan_LS2Conf_Off;
 
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------
 __kernel __attribute__ ((max_global_work_dim(0)))
-void Krnl_LS_Arbiter(const unsigned int DockConst_num_of_genes){
+void Krnl_LS2_Arbiter(const unsigned int DockConst_num_of_genes){
 
 	bool active = true;
 	__local float genotype [ACTUAL_GENOTYPE_LENGTH];
 	
 while(active) {
-	bool LS1_valid = false;
+	bool LS2_valid = false;
 	bool Off_valid = false;
 
-	bool LS1_active;
+	bool LS2_active;
 	bool Off_active;
 
-	while((LS1_valid  == false) &&
+	while((LS2_valid  == false) &&
 	      (Off_valid  == false) 
 	){
-		LS1_active = read_channel_nb_altera(chan_GA2LS_LS1_active, &LS1_valid);
-		Off_active = read_channel_nb_altera(chan_GA2LS_Off_active, &Off_valid);
+		LS2_active = read_channel_nb_altera(chan_GA2LS_LS2_active, &LS2_valid);
+		Off_active = read_channel_nb_altera(chan_GA2LS_Off2_active, &Off_valid);
 	}
 
-	active = (LS1_valid)? LS1_active : 
+	active = (LS2_valid)? LS2_active : 
 		 (Off_valid)? Off_active :
 		 false; // last case should never occur, otherwise above while would be still running
 
-	float energy =  (LS1_valid)? read_channel_altera(chan_GA2LS_LS1_energy) : 
+	float energy =  (LS2_valid)? read_channel_altera(chan_GA2LS_LS2_energy) : 
 		 	(Off_valid)? 0.0f :
 		 	0.0f; // last case should never occur, otherwise above while would be still running
 
 	for (uchar i=0; i<DockConst_num_of_genes; i++) {
-		genotype[i] = (LS1_valid)? read_channel_altera(chan_GA2LS_LS1_genotype) : 
+		genotype[i] = (LS2_valid)? read_channel_altera(chan_GA2LS_LS2_genotype) : 
 			      (Off_valid)? 0.0f :
 		 	      0.0f; // last case should never occur, otherwise above while would be still running
 	}
 
-	if ((LS1_valid == true) || (Off_valid == true)) {
-		write_channel_altera(chan_Arbiter_LS1_active, active);
+	if ((LS2_valid == true) || (Off_valid == true)) {
+		write_channel_altera(chan_Arbiter_LS2_active, active);
 		mem_fence(CLK_CHANNEL_MEM_FENCE);
-		write_channel_altera(chan_Arbiter_LS1_energy, energy);
+		write_channel_altera(chan_Arbiter_LS2_energy, energy);
 		mem_fence(CLK_CHANNEL_MEM_FENCE);
 		for (uchar i=0; i<DockConst_num_of_genes; i++) {
-			write_channel_altera(chan_Arbiter_LS1_genotype, genotype[i]);
+			write_channel_altera(chan_Arbiter_LS2_genotype, genotype[i]);
 		}
 	}
 } // End of while(active)
@@ -55,11 +58,12 @@ printf("	%-20s: %s\n", "Krnl_Arbiter_LS", "disabled");
 
 }
 
-// --------------------------------------------------------------------------
-// --------------------------------------------------------------------------
 
+
+// --------------------------------------------------------------------------
+// --------------------------------------------------------------------------
 __kernel __attribute__ ((max_global_work_dim(0)))
-void Krnl_LS(
+void Krnl_LS2(
 		unsigned int              DockConst_max_num_of_iters,
 		float                     DockConst_rho_lower_bound,
 		float                     DockConst_base_dmov_mul_sqrt3,
@@ -77,14 +81,14 @@ void Krnl_LS(
 	bool active = true;
 
 while(active) {
-	active = read_channel_altera(chan_Arbiter_LS1_active);
+	active = read_channel_altera(chan_Arbiter_LS2_active);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 
-	float current_energy = read_channel_altera(chan_Arbiter_LS1_energy);
+	float current_energy = read_channel_altera(chan_Arbiter_LS2_energy);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 	
 	for (uchar i=0; i<DockConst_num_of_genes; i++) {
-		genotype[i] = read_channel_altera(chan_Arbiter_LS1_genotype);
+		genotype[i] = read_channel_altera(chan_Arbiter_LS2_genotype);
 	}
 	
 	float rho = 1.0f;
@@ -94,11 +98,14 @@ while(active) {
 	uint   LS_eval       = 0;
 	bool   positive_direction = true;
 
+
 if (active == true) {
 
-	// performing local search
-	while ((iteration_cnt < DockConst_max_num_of_iters) && (rho > DockConst_rho_lower_bound)) {
 
+
+//printf("In of while iter LS2\n");
+	// performing local search
+	while ((iteration_cnt < DockConst_max_num_of_iters) && (rho > DockConst_rho_lower_bound)) {	
 		// -----------------------------------------------
 		// Exit condition is groups here. It allows pipelining
 		if (positive_direction == true) { 
@@ -118,14 +125,16 @@ if (active == true) {
 		}
 
 //printf("positive?: %u, iteration_cnt: %u, rho: %f, limit rho: %f\n", positive_direction, iteration_cnt, rho, DockConst_rho_lower_bound);
+		
 		// -----------------------------------------------
+//printf("LS2_active sent\n");
 
 		// new random deviate
 		// rho is the deviation of the uniform distribution
 		for (uchar i=0; i<DockConst_num_of_genes; i++) {
-			write_channel_altera(chan_GA2PRNG_LS_float_active, true);
+			write_channel_altera(chan_GA2PRNG_LS2_float_active, true);
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
-			float tmp_prng = read_channel_altera(chan_PRNG2GA_LS_float_prng);
+			float tmp_prng = read_channel_altera(chan_PRNG2GA_LS2_float_prng);
 
 			// tmp1 is genotype_deviate
 			float tmp1 = rho * (2.0f*tmp_prng - 1.0f);
@@ -157,12 +166,17 @@ if (active == true) {
 			}
 
 			entity_possible_new_genotype [i] = tmp3;
-			write_channel_altera(chan_LS2Conf_genotype, tmp3);
+			write_channel_altera(chan_LS2Conf_LS2_genotype, tmp3);
+//printf("LS2_genotype sent\n");
 		}
 
+//printf("Energy to calculate sent from LS2 ... ");
+
 		// calculate energy of genotype
-		float energyIA_LS_rx = read_channel_altera(chan_Intrae2StoreLS_intrae);
-		float energyIE_LS_rx = read_channel_altera(chan_Intere2StoreLS_intere);
+		float energyIA_LS_rx = read_channel_altera(chan_Intrae2StoreLS_LS2_intrae);
+//printf("INTRAE received in LS2 ... ");
+		float energyIE_LS_rx = read_channel_altera(chan_Intere2StoreLS_LS2_intere);
+//printf("INTERE received in LS2\n");
 		float candidate_energy = energyIA_LS_rx + energyIE_LS_rx;
 
 		// update LS energy-evaluation count
@@ -205,18 +219,26 @@ if (active == true) {
 		}
 
 	} // end of while (iteration_cnt) && (rho)
-		
+	
+//printf("Out of while iter LS2\n");
+	
+
 	// write back data to GA
-	write_channel_altera(chan_LS2GA_LS1_eval, LS_eval);
+	write_channel_altera(chan_LS2GA_LS2_eval, LS_eval);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 
-	write_channel_altera(chan_LS2GA_LS1_energy, current_energy);
+	write_channel_altera(chan_LS2GA_LS2_energy, current_energy);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 	
 	for (uchar i=0; i<DockConst_num_of_genes; i++) {
-		write_channel_altera(chan_LS2GA_LS1_genotype, genotype[i]);
+		write_channel_altera(chan_LS2GA_LS2_genotype, genotype[i]);
 	}
+
 }
+else {
+	write_channel_altera(chan_LS2Conf_Off, false);
+}
+
 	
 } // End of while (active)		
 
@@ -225,5 +247,6 @@ printf("	%-20s: %s\n", "Krnl_LS", "disabled");
 #endif
 	
 }
+
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------

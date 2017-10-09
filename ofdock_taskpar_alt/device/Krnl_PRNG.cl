@@ -5,8 +5,8 @@ channel bool chan_Arbiter_GG_float_active;
 channel bool chan_Arbiter_LS_ushort_active;
 
 channel bool chan_Arbiter_LS_float_active;
-/*
 channel bool chan_Arbiter_LS2_float_active;
+/*
 channel bool chan_Arbiter_LS3_float_active;
 */
 // --------------------------------------------------------------------------
@@ -59,8 +59,8 @@ while(active) {
 		GG_float_active  = read_channel_nb_altera(chan_GA2PRNG_GG_float_active,  &GG_float_valid);
 		LS_ushort_active = read_channel_nb_altera(chan_GA2PRNG_LS_ushort_active, &LS_ushort_valid);
 		LS_float_active  = read_channel_nb_altera(chan_GA2PRNG_LS_float_active,  &LS_float_valid);
-/*
 		LS2_float_active  = read_channel_nb_altera(chan_GA2PRNG_LS2_float_active,  &LS2_float_valid);
+/*
 		LS3_float_active  = read_channel_nb_altera(chan_GA2PRNG_LS3_float_active,  &LS3_float_valid);
 */
 		Off_active       = read_channel_nb_altera(chan_GA2PRNG_Off_active,       &Off_valid);
@@ -72,8 +72,8 @@ while(active) {
 		 (GG_float_valid) ? GG_float_active  : 
 		 (LS_ushort_valid)? LS_ushort_active :
 		 (LS_float_valid) ? LS_float_active  :
-/*
 		 (LS2_float_valid) ? LS2_float_active  :
+/*
 		 (LS3_float_valid) ? LS3_float_active  :
 */
 		 (Off_valid)      ? Off_active       :
@@ -102,10 +102,11 @@ while(active) {
 	if ((LS_float_valid == true) || (Off_valid == true)) {
 		write_channel_altera(chan_Arbiter_LS_float_active, active);
 	}
-/*
+
 	if ((LS2_float_valid == true) || (Off_valid == true)) {
 		write_channel_altera(chan_Arbiter_LS2_float_active, active);
 	}
+/*
 	if ((LS_float_valid == true) || (Off_valid == true)) {
 		write_channel_altera(chan_Arbiter_LS_float_active, active);
 	}
@@ -297,7 +298,6 @@ while(active) {
 
 }
 
-#if 0
 __kernel __attribute__ ((max_global_work_dim(0)))
 void Krnl_Prng_LS2_float(const unsigned int seed
 			){
@@ -328,7 +328,5 @@ while(active) {
 } // End of while(active)
 
 }
-#endif
-
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------     

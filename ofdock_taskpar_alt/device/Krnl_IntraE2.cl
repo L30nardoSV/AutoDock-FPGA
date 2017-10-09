@@ -1,3 +1,4 @@
+/*
 // sqrt7 ////https://www.codeproject.com/Articles/69941/Best-Square-Root-Method-Algorithm-Function-Precisi
 float sqrt_custom(const float x) 
 { 	//uint i = as_uint(x);	
@@ -6,14 +7,13 @@ float sqrt_custom(const float x)
 	i >>= 1; 		// approximation of square root 	
 	return as_float(i);	//return *(float*) &i; 
 }  
-
-
+*/
 
 // --------------------------------------------------------------------------
 // Originally from: processligand.c
 // --------------------------------------------------------------------------
 __kernel __attribute__ ((max_global_work_dim(0)))
-void Krnl_IntraE(
+void Krnl_IntraE2(
  	     __constant float* restrict KerConstStatic_atom_charges_const,
  	     __constant char*  restrict KerConstStatic_atom_types_const,
 	     __constant char*  restrict KerConstStatic_intraE_contributors_const,
@@ -34,17 +34,19 @@ void Krnl_IntraE(
 	bool active = true;
 
 while(active) {
+/*
 	char mode;
-
+*/
 	//printf("BEFORE In INTRA CHANNEL\n");
 	// --------------------------------------------------------------
 	// Wait for ligand atomic coordinates in channel
 	// --------------------------------------------------------------
-	active = read_channel_altera(chan_Conf2Intrae_active);
+	active = read_channel_altera(chan_Conf2Intrae_LS2_active);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
+/*
 	mode   = read_channel_altera(chan_Conf2Intrae_mode);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
-
+*/
 	float __attribute__ ((
 			      memory,
 			      numbanks(2),
@@ -57,7 +59,7 @@ while(active) {
 	float3 position_xyz;
 
 	for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt++) {
-		position_xyz = read_channel_altera(chan_Conf2Intrae_xyz);
+		position_xyz = read_channel_altera(chan_Conf2Intrae_LS2_xyz);
 		loc_coords[pipe_cnt][0x0] = position_xyz.x;
 		loc_coords[pipe_cnt][0x1] = position_xyz.y;
 		loc_coords[pipe_cnt][0x2] = position_xyz.z;
@@ -154,30 +156,8 @@ while(active) {
 	// --------------------------------------------------------------
 	// Send intramolecular energy to channel
 	// --------------------------------------------------------------
-	switch (mode) {
-		case 0x01:	// IC
-			write_channel_altera(chan_Intrae2StoreIC_intrae, intraE);
-		break;
-
-		case 0x02:	// GG
-			write_channel_altera(chan_Intrae2StoreGG_intrae, intraE);
-		break;
-
-		case 0x03:	// LS 1
-			write_channel_altera(chan_Intrae2StoreLS_intrae, intraE);
-		break;
-/*
-		case 0x04:	// LS 2
-			write_channel_altera(chan_Intrae2StoreLS_LS2_intrae, intraE);
-		break;
-
-		case 0x06:	// LS 3
-			write_channel_altera(chan_Intrae2StoreLS_LS3_intrae, intraE);
-		break;
-*/
-		//case 5:	// Off
-		//	write_channel_altera(chan_Intrae2StoreOff_intrae, intraE);
-		//break;
+	if (active == true) {
+		write_channel_altera(chan_Intrae2StoreLS_LS2_intrae, intraE);
 	}
 	// --------------------------------------------------------------
 

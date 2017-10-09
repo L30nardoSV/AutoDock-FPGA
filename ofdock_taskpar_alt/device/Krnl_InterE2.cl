@@ -10,7 +10,7 @@
 // Originally from: processligand.c
 // --------------------------------------------------------------------------
 __kernel __attribute__ ((max_global_work_dim(0)))
-void Krnl_InterE(
+void Krnl_InterE2(
              __constant float* restrict GlobFgrids,
  	     __constant float* restrict KerConstStatic_atom_charges_const,
  	     __constant char*  restrict KerConstStatic_atom_types_const,
@@ -41,17 +41,19 @@ void Krnl_InterE(
 	}
 */
 while(active) {
+/*
 	char mode;
-
+*/
 	//printf("BEFORE In INTER CHANNEL\n");
 	// --------------------------------------------------------------
 	// Wait for ligand atomic coordinates in channel
 	// --------------------------------------------------------------
-	active = read_channel_altera(chan_Conf2Intere_active);
+	active = read_channel_altera(chan_Conf2Intere_LS2_active);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
+/*
 	mode   = read_channel_altera(chan_Conf2Intere_mode);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
-
+*/
 	float __attribute__ ((
 			      memory,
 			      numbanks(2),
@@ -64,7 +66,7 @@ while(active) {
 	float3 position_xyz;
 
 	for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt++) {
-		position_xyz = read_channel_altera(chan_Conf2Intere_xyz);
+		position_xyz = read_channel_altera(chan_Conf2Intere_LS2_xyz);
 		loc_coords[pipe_cnt][0x0] = position_xyz.x;
 		loc_coords[pipe_cnt][0x1] = position_xyz.y;
 		loc_coords[pipe_cnt][0x2] = position_xyz.z;
@@ -263,30 +265,8 @@ while(active) {
 	// --------------------------------------------------------------
 	// Send intermolecular energy to chanel
 	// --------------------------------------------------------------
-	switch (mode) {
-		case 0x01:	// IC
-			write_channel_altera(chan_Intere2StoreIC_intere, interE);
-		break;
-
-		case 0x02:	// GG
-			write_channel_altera(chan_Intere2StoreGG_intere, interE);
-		break;
-
-		case 0x03:	// LS 1
-			write_channel_altera(chan_Intere2StoreLS_intere, interE);
-		break;
-/*
-		case 0x04:	// LS 2
-			write_channel_altera(chan_Intere2StoreLS_LS2_intere, interE);
-		break;
-
-		case 0x06:	// LS 2
-			write_channel_altera(chan_Intere2StoreLS_LS2_intere, interE);
-		break;
-*/
-		//case 5:	// Off
-		//	write_channel_altera(chan_Intere2StoreOff_intere, interE);
-		//break;
+	if (active == true) {
+		write_channel_altera(chan_Intere2StoreLS_LS2_intere, interE);
 	}
 	// --------------------------------------------------------------
  	

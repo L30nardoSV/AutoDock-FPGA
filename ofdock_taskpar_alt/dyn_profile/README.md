@@ -1208,3 +1208,59 @@ Working frequency is 213.3MHz
 | 3ptb, 10 runs    |  262.11      | 59.49            |      | ~x slower  |
 
 
+
+## `24_run_harp2` (fits only in the a10gx)
+
+Idea: replicate LS while-loop as this seems to be serial and unlikey to be further optimized.
+
+* Replicate for `LS2`:  `Krnl_LS2`, `Krnl_LS2_Arbiter`, `Krnl_Conform2`, `Krnl_InterE2`, `Krnl_IntraE2`
+* Add needed logic so I doesn't stall
+* Improve code in `LS` for-loop
+* In `Krnl_Conform` and `Krnl_Conform2`, include the multiplication by `DEG_TO_RAD` inside the initial while-loop
+
+CHECK THIS
+* Use `#pragma ivdep` to remove loop-carried dependencies caused by accesses to memory arrays (might improve II and reduce hw)
+
+
+
+
+| Resource                             | Usage        |
+| :----------------------------------: | :----------: |
+| Logic utilization                    |   95%        |
+| ALUTs                                |   39%        |
+| Dedicated logic registers            |   57%        |
+| Memory blocks                        |   84%        |
+| DSP blocks                           |   45%        |
+
+
+Working frequency is 213.3MHz
+
+### Execution time (s) measurements from non-instrumented program
+
+| Configuration    |    FPGA      |  CPU (AutoDock)  |  Speed-up | Comments       |
+| :--------------: | :----------: | :--------------: | :-------: | :------------: |
+| 3ptb, 10 runs    |        | 59.49            |      | ~x slower  |
+
+
+### Execution time (s) measurements from instrumented program
+
+| Configuration    |    FPGA      |  CPU (AutoDock)  |  Speed-up | Comments       |
+| :--------------: | :----------: | :--------------: | :-------: | :------------: |
+| 3ptb, 10 runs    |        | 59.49            |      | ~x slower  |
+
+>>>
+It does NOT fit in the bdw, but fits in the a10gx
+>>>
+
+hw utilization in the a10gx 
+
+| Resource                             | Usage        |
+| :----------------------------------: | :----------: |
+| Logic utilization                    |   50%        |
+| ALUTs                                |   25%        |
+| Dedicated logic registers            |   27%        |
+| Memory blocks                        |   54%        |
+| DSP blocks                           |   30%        |
+
+
+

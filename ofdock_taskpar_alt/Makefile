@@ -155,8 +155,12 @@ ENABLE_K11 = YES
 ENABLE_K12 = YES
 ENABLE_K13 = YES
 
-#ENABLE_K14 = YES
-#ENABLE_K15 = YES
+ENABLE_K14 = YES
+ENABLE_K15 = YES
+ENABLE_K16 = YES
+ENABLE_K17 = YES
+ENABLE_K18 = YES
+ENABLE_K19 = YES
 
 ifeq ($(ENABLE_K1),YES)
 	K1 =-DENABLE_KERNEL1
@@ -237,6 +241,7 @@ else
 	K13 =
 endif
 
+
 ifeq ($(ENABLE_K14),YES)
 	K14 =-DENABLE_KERNEL14
 else
@@ -249,7 +254,31 @@ else
 	K15 =
 endif
 
-ENABLE_KERNELS = $(K1) $(K2) $(K3) $(K4) $(K5) $(K6) $(K7) $(K8) $(K9) $(K10) $(K11) $(K12) $(K13) $(K14) $(K15)
+ifeq ($(ENABLE_K16),YES)
+	K16 =-DENABLE_KERNEL16
+else
+	K16 =
+endif
+
+ifeq ($(ENABLE_K17),YES)
+	K17 =-DENABLE_KERNEL17
+else
+	K17 =
+endif
+
+ifeq ($(ENABLE_K18),YES)
+	K18 =-DENABLE_KERNEL18
+else
+	K18 =
+endif
+
+ifeq ($(ENABLE_K19),YES)
+	K19 =-DENABLE_KERNEL19
+else
+	K19 =
+endif
+
+ENABLE_KERNELS = $(K1) $(K2) $(K3) $(K4) $(K5) $(K6) $(K7) $(K8) $(K9) $(K10) $(K11) $(K12) $(K13) $(K14) $(K15) $(K16) $(K17) $(K18) $(K19)
 
 # =============================
 # Reproduce result (remove randomness)
@@ -322,8 +351,8 @@ NEV  := 100000
 # Device main kernel source
 DEV_DIRS := device
 DEV_SRC  := $(DEV_DIRS)/Krnl_GA.cl
-BOARD_HARP2 := bdw_fpga_v1.0
-#BOARD_HARP2 := a10gx
+#BOARD_HARP2 := bdw_fpga_v1.0
+BOARD_HARP2 := a10gx
 
 ## Make it all: compilation (host & device) + run emulation
 ## Notice, it switches automatically to /bin folder

@@ -135,6 +135,30 @@ static cl_kernel kernel15  = NULL;
 static const char *name_k15 = "Krnl_LS2";
 #endif
 
+#ifdef ENABLE_KERNEL16
+static cl_command_queue command_queue16 = NULL;
+static cl_kernel kernel16  = NULL;
+static const char *name_k16 = "Krnl_LS2_Arbiter";
+#endif
+
+#ifdef ENABLE_KERNEL17
+static cl_command_queue command_queue17 = NULL;
+static cl_kernel kernel17  = NULL;
+static const char *name_k17 = "Krnl_Conform2";
+#endif
+
+#ifdef ENABLE_KERNEL18
+static cl_command_queue command_queue18 = NULL;
+static cl_kernel kernel18  = NULL;
+static const char *name_k18 = "Krnl_InterE2";
+#endif
+
+#ifdef ENABLE_KERNEL19
+static cl_command_queue command_queue19 = NULL;
+static cl_kernel kernel19  = NULL;
+static const char *name_k19 = "Krnl_IntraE2";
+#endif
+
 
 
 static cl_program program = NULL;
@@ -587,6 +611,63 @@ filled with clock() */
 	setKernelArg(kernel15,5, sizeof(unsigned int),  &dockpars.cons_limit);
 #endif // End of ENABLE_KERNEL15
 
+#ifdef ENABLE_KERNEL16 // Krnl_LS2_Arbiter
+	setKernelArg(kernel16,0, sizeof(unsigned int),  &dockpars.num_of_genes);
+#endif // End of ENABLE_KERNEL12
+
+#ifdef ENABLE_KERNEL17 // Krnl_Conform2
+	setKernelArg(kernel17,0,  sizeof(mem_KerConstStatic_rotlist_const),     &mem_KerConstStatic_rotlist_const);
+	setKernelArg(kernel17,1,  sizeof(mem_KerConstDynamic_ref_coords_const), &mem_KerConstDynamic_ref_coords_const);
+	setKernelArg(kernel17,2,  sizeof(mem_KerConstDynamic_rotbonds_moving_vectors_const), &mem_KerConstDynamic_rotbonds_moving_vectors_const);
+	setKernelArg(kernel17,3,  sizeof(mem_KerConstDynamic_rotbonds_unit_vectors_const),  &mem_KerConstDynamic_rotbonds_unit_vectors_const);
+
+	// private args added in the order in which their values are used in kernel
+	setKernelArg(kernel17,4,  sizeof(unsigned int),        &dockpars.rotbondlist_length);
+	setKernelArg(kernel17,5,  sizeof(unsigned char),       &dockpars.num_of_atoms);
+	setKernelArg(kernel17,6,  sizeof(unsigned int),        &dockpars.num_of_genes);
+
+	setKernelArg(kernel17,7,  sizeof(float),              &KerConstDynamic.ref_orientation_quats_const[0]);
+	setKernelArg(kernel17,8,  sizeof(float),              &KerConstDynamic.ref_orientation_quats_const[1]);
+	setKernelArg(kernel17,9,  sizeof(float),              &KerConstDynamic.ref_orientation_quats_const[2]);
+	setKernelArg(kernel17,10, sizeof(float),              &KerConstDynamic.ref_orientation_quats_const[3]);
+
+#endif // End of ENABLE_KERNEL2
+
+
+#ifdef ENABLE_KERNEL18 // Krnl_InterE2
+        setKernelArg(kernel18,0, sizeof(mem_dockpars_fgrids),                    &mem_dockpars_fgrids);
+	setKernelArg(kernel18,1, sizeof(mem_KerConstStatic_atom_charges_const),  &mem_KerConstStatic_atom_charges_const);
+	setKernelArg(kernel18,2, sizeof(mem_KerConstStatic_atom_types_const),    &mem_KerConstStatic_atom_types_const);
+
+	// private args added in the order in which their values are used in kernel
+	setKernelArg(kernel18,3, sizeof(unsigned char),                          &dockpars.g1);
+	setKernelArg(kernel18,4, sizeof(unsigned int),                           &dockpars.g2);
+	setKernelArg(kernel18,5, sizeof(unsigned int),                           &dockpars.g3);
+	setKernelArg(kernel18,6, sizeof(unsigned char),                          &dockpars.num_of_atoms);
+	setKernelArg(kernel18,7, sizeof(unsigned char),                          &gridsizex_minus1);
+	setKernelArg(kernel18,8, sizeof(unsigned char),                          &gridsizey_minus1);
+	setKernelArg(kernel18,9, sizeof(unsigned char),                          &gridsizez_minus1);
+	setKernelArg(kernel18,10, sizeof(unsigned char),                         &dockpars.num_of_atypes);
+#endif // End of ENABLE_KERNEL18
+
+#ifdef ENABLE_KERNEL19 // Krnl_IntraE2
+	setKernelArg(kernel19,0, sizeof(mem_KerConstStatic_atom_charges_const),        &mem_KerConstStatic_atom_charges_const);
+	setKernelArg(kernel19,1, sizeof(mem_KerConstStatic_atom_types_const),          &mem_KerConstStatic_atom_types_const);
+	setKernelArg(kernel19,2, sizeof(mem_KerConstStatic_intraE_contributors_const), &mem_KerConstStatic_intraE_contributors_const);
+	setKernelArg(kernel19,3, sizeof(mem_KerConstStatic_VWpars_AC_const),          &mem_KerConstStatic_VWpars_AC_const);
+	setKernelArg(kernel19,4, sizeof(mem_KerConstStatic_VWpars_BD_const),          &mem_KerConstStatic_VWpars_BD_const);
+	setKernelArg(kernel19,5, sizeof(mem_KerConstStatic_dspars_S_const),           &mem_KerConstStatic_dspars_S_const);
+	setKernelArg(kernel19,6, sizeof(mem_KerConstStatic_dspars_V_const),           &mem_KerConstStatic_dspars_V_const);
+
+	// private args added in the order in which their values are used in kernel
+	setKernelArg(kernel19,7,  sizeof(unsigned char),                         &dockpars.num_of_atoms);
+	setKernelArg(kernel19,8,  sizeof(unsigned int),                          &dockpars.num_of_intraE_contributors);
+	setKernelArg(kernel19,9,  sizeof(float),                          	&dockpars.grid_spacing);
+	setKernelArg(kernel19,10, sizeof(unsigned char),                         &dockpars.num_of_atypes);
+	setKernelArg(kernel19,11, sizeof(float),                          	&dockpars.coeff_elec);
+	setKernelArg(kernel19,12, sizeof(float),                          	&dockpars.qasp);
+	setKernelArg(kernel19,13, sizeof(float),                          	&dockpars.coeff_desolv);
+#endif // End of ENABLE_KERNEL19
 	for (unsigned int run_cnt = 0; run_cnt < mypars->num_of_runs; run_cnt++)
 	{
 
@@ -660,6 +741,15 @@ filled with clock() */
 		setKernelArg(kernel14,0, sizeof(unsigned int),   &cpu_prng_seeds[6]);
 #endif // End of ENABLE_KERNEL7
 
+#ifdef ENABLE_KERNEL17 // Krnl_Conform2
+		setKernelArg(kernel17,7,  sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[0]);
+		setKernelArg(kernel17,8,  sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[1]);	
+		setKernelArg(kernel17,9,  sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[2]);	
+		setKernelArg(kernel17,10, sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[3]);
+#endif // End of ENABLE_KERNEL2
+
+
+
 		#ifdef ENABLE_KERNEL1
 		runKernelTask(command_queue1,kernel1,NULL,NULL);
 		#endif // ENABLE_KERNEL1
@@ -720,6 +810,21 @@ filled with clock() */
 		runKernelTask(command_queue15,kernel15,NULL,NULL);
 		#endif // ENABLE_KERNEL14
 
+		#ifdef ENABLE_KERNEL16
+		runKernelTask(command_queue16,kernel16,NULL,NULL);
+		#endif // ENABLE_KERNEL16
+
+		#ifdef ENABLE_KERNEL17
+		runKernelTask(command_queue17,kernel17,NULL,NULL);
+		#endif // ENABLE_KERNEL17
+
+		#ifdef ENABLE_KERNEL18
+		runKernelTask(command_queue18,kernel18,NULL,NULL);
+		#endif // ENABLE_KERNEL18
+
+		#ifdef ENABLE_KERNEL19
+		runKernelTask(command_queue19,kernel19,NULL,NULL);
+		#endif // ENABLE_KERNEL19
 
 		#ifdef ENABLE_KERNEL1 		
 		clFinish(command_queue1); 
@@ -779,6 +884,22 @@ filled with clock() */
 
 		#ifdef ENABLE_KERNEL15
 		clFinish(command_queue15);
+		#endif
+
+		#ifdef ENABLE_KERNEL16
+		clFinish(command_queue16);
+		#endif
+
+		#ifdef ENABLE_KERNEL17
+		clFinish(command_queue17);
+		#endif
+
+		#ifdef ENABLE_KERNEL18
+		clFinish(command_queue18);
+		#endif
+
+		#ifdef ENABLE_KERNEL19
+		clFinish(command_queue19);
 		#endif
 
 		clock_stop_docking = clock();
@@ -980,8 +1101,8 @@ bool init() {
   }
 
   // Get the OpenCL platform.
-  //platform = findPlatform("Intel(R) FPGA"); // use it from aoc v16.1
-  platform = findPlatform("Altera SDK");      // works for harp2, i.e. v16.0 patched
+  platform = findPlatform("Intel(R) FPGA"); // use it from aoc v16.1
+  //platform = findPlatform("Altera SDK");      // works for harp2, i.e. v16.0 patched
   if(platform == NULL) {
     printf("ERROR: Unable to find Intel(R) FPGA OpenCL platform.\n");
     return false;
@@ -1142,6 +1263,34 @@ bool init() {
   checkError(status, "Failed to create kernel");
 #endif
 
+#ifdef ENABLE_KERNEL16
+  command_queue16 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  checkError(status, "Failed to create command queue13");
+  kernel16 = clCreateKernel(program, name_k16, &status);
+  checkError(status, "Failed to create kernel");
+#endif
+
+#ifdef ENABLE_KERNEL17
+  command_queue17 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  checkError(status, "Failed to create command queue13");
+  kernel17 = clCreateKernel(program, name_k17, &status);
+  checkError(status, "Failed to create kernel");
+#endif
+
+#ifdef ENABLE_KERNEL18
+  command_queue18 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  checkError(status, "Failed to create command queue13");
+  kernel18 = clCreateKernel(program, name_k18, &status);
+  checkError(status, "Failed to create kernel");
+#endif
+
+#ifdef ENABLE_KERNEL19
+  command_queue19 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  checkError(status, "Failed to create command queue13");
+  kernel19 = clCreateKernel(program, name_k19, &status);
+  checkError(status, "Failed to create kernel");
+#endif
+
   return true;
 }
 
@@ -1220,6 +1369,26 @@ void cleanup() {
 #ifdef ENABLE_KERNEL15
   if(kernel15) {clReleaseKernel(kernel15);}
   if(command_queue15) {clReleaseCommandQueue(command_queue15);}
+#endif
+
+#ifdef ENABLE_KERNEL16
+  if(kernel16) {clReleaseKernel(kernel16);}
+  if(command_queue16) {clReleaseCommandQueue(command_queue16);}
+#endif
+
+#ifdef ENABLE_KERNEL17
+  if(kernel17) {clReleaseKernel(kernel17);}
+  if(command_queue17) {clReleaseCommandQueue(command_queue17);}
+#endif
+
+#ifdef ENABLE_KERNEL18
+  if(kernel18) {clReleaseKernel(kernel18);}
+  if(command_queue18) {clReleaseCommandQueue(command_queue18);}
+#endif
+
+#ifdef ENABLE_KERNEL19
+  if(kernel19) {clReleaseKernel(kernel19);}
+  if(command_queue19) {clReleaseCommandQueue(command_queue19);}
 #endif
 
   if(program) {clReleaseProgram(program);}
