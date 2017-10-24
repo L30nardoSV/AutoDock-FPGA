@@ -295,9 +295,9 @@ while(active) {
 		} // End if-statement not dummy rotation
 	} // End rotation_counter for-loop
 
-	#if defined (DEBUG_KRNL_CONFORM)
+#if defined (DEBUG_KRNL_CONFORM)
 	printf("BEFORE Out CONFORM CHANNEL\n");
-	#endif
+#endif
 
 	// --------------------------------------------------------------
 	// Send ligand atomic coordinates to channel 
@@ -318,9 +318,9 @@ while(active) {
 	}
 
 	// --------------------------------------------------------------
-	#if defined (DEBUG_KRNL_CONFORM)
+#if defined (DEBUG_KRNL_CONFORM)
 	printf("AFTER Out CONFORM CHANNEL\n");
-	#endif
+#endif
 
 } // End of while(1)
 

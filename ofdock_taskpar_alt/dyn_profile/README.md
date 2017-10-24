@@ -1209,9 +1209,18 @@ Working frequency is 213.3MHz
 
 
 
+
+
+
+
+
+
+
+
+
 ## `24_run_harp2` (fits only in the a10gx)
 
-Idea: replicate LS while-loop as this seems to be serial and unlikey to be further optimized.
+Idea: replicate LS while-loop as this seems to be serial and unlikely to be further optimized.
 
 * Replicate for `LS2`:  `Krnl_LS2`, `Krnl_LS2_Arbiter`, `Krnl_Conform2`, `Krnl_InterE2`, `Krnl_IntraE2`
 * Add needed logic so I doesn't stall
@@ -1262,5 +1271,53 @@ hw utilization in the a10gx
 | Memory blocks                        |   54%        |
 | DSP blocks                           |   30%        |
 
+
+
+
+
+## 25_run_gidel
+
+The block generating LS genotypes has been triplicated:
+
+IC, GG, LS1 -> Conform -> InterE, IntraE
+
+LS2, LS3 -> Conform2 -> IntraE2, InterE2
+
+There are additional blocks like arbiters for Confom2, LSs, PRNGs.
+LS1, LS2, LS3 run simultaneously during LS, and each operate on a different initial genotype.
+
+This design targets the Gidel board that ftech has acquired.
+
+Estimation:
+
+| Resource                             | Usage        |
+| :----------------------------------: | :----------: |
+| Logic utilization                    |   77%        |
+| ALUTs                                |   27%        |
+| Dedicated logic registers            |   49%        |
+| Memory blocks                        |   79%        |
+| DSP blocks                           |   38%        |
+
+Real utilization ("top.fit.summary"):
+
+>>>
+Fitter Status : Successful - Mon Oct 23 18:42:58 2017
+Quartus Prime Version : 16.0.2 Build 222 07/20/2016 Patches 2.06 SJ Pro Edition
+Revision Name : top
+Top-level Entity Name : top
+Family : Arria 10
+Device : 10AX115H3F34I2SG
+Timing Models : Final
+Logic utilization (in ALMs) : 209,020 / 427,200 ( 49 % )
+Total registers : 528747
+Total pins : 169 / 618 ( 27 % )
+Total virtual pins : 0
+Total block memory bits : 10,344,771 / 55,562,240 ( 19 % )
+Total RAM Blocks : 1,813 / 2,713 ( 67 % )
+Total DSP Blocks : 523 / 1,518 ( 34 % )
+Total HSSI RX channels : 8 / 24 ( 33 % )
+Total HSSI TX channels : 8 / 24 ( 33 % )
+Total PLLs : 30 / 80 ( 38 % )
+>>>
 
 

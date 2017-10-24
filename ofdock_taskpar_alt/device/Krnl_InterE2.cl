@@ -41,19 +41,19 @@ void Krnl_InterE2(
 	}
 */
 while(active) {
-/*
+
 	char mode;
-*/
+
 	//printf("BEFORE In INTER CHANNEL\n");
 	// --------------------------------------------------------------
 	// Wait for ligand atomic coordinates in channel
 	// --------------------------------------------------------------
 	active = read_channel_altera(chan_Conf2Intere_LS2_active);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
-/*
-	mode   = read_channel_altera(chan_Conf2Intere_mode);
+
+	mode   = read_channel_altera(chan_Conf2Intere_LS2_mode);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
-*/
+
 	float __attribute__ ((
 			      memory,
 			      numbanks(2),
@@ -265,9 +265,21 @@ while(active) {
 	// --------------------------------------------------------------
 	// Send intermolecular energy to chanel
 	// --------------------------------------------------------------
+/*
 	if (active == true) {
 		write_channel_altera(chan_Intere2StoreLS_LS2_intere, interE);
 	}
+*/
+	switch (mode) {
+		case 0x02:	// LS 2
+			write_channel_altera(chan_Intere2StoreLS_LS2_intere, interE);
+		break;
+
+		case 0x03:	// LS 3
+			write_channel_altera(chan_Intere2StoreLS_LS3_intere, interE);
+		break;
+	}
+	mem_fence(CLK_CHANNEL_MEM_FENCE);
 	// --------------------------------------------------------------
  	
 } // End of while(1)

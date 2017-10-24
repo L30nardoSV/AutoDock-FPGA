@@ -34,19 +34,19 @@ void Krnl_IntraE2(
 	bool active = true;
 
 while(active) {
-/*
+
 	char mode;
-*/
+
 	//printf("BEFORE In INTRA CHANNEL\n");
 	// --------------------------------------------------------------
 	// Wait for ligand atomic coordinates in channel
 	// --------------------------------------------------------------
 	active = read_channel_altera(chan_Conf2Intrae_LS2_active);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
-/*
-	mode   = read_channel_altera(chan_Conf2Intrae_mode);
+
+	mode   = read_channel_altera(chan_Conf2Intrae_LS2_mode);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
-*/
+
 	float __attribute__ ((
 			      memory,
 			      numbanks(2),
@@ -156,9 +156,21 @@ while(active) {
 	// --------------------------------------------------------------
 	// Send intramolecular energy to channel
 	// --------------------------------------------------------------
+/*
 	if (active == true) {
 		write_channel_altera(chan_Intrae2StoreLS_LS2_intrae, intraE);
 	}
+*/
+	switch (mode) {
+		case 0x02:	// LS 2
+			write_channel_altera(chan_Intrae2StoreLS_LS2_intrae, intraE);
+		break;
+
+		case 0x03:	// LS 3
+			write_channel_altera(chan_Intrae2StoreLS_LS3_intrae, intraE);
+		break;
+	}
+	mem_fence(CLK_CHANNEL_MEM_FENCE);
 	// --------------------------------------------------------------
 
 } // End of while(1)

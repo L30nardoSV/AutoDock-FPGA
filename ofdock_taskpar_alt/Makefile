@@ -162,6 +162,12 @@ ENABLE_K17 = YES
 ENABLE_K18 = YES
 ENABLE_K19 = YES
 
+ENABLE_K20 = YES
+ENABLE_K21 = YES
+ENABLE_K22 = YES
+ENABLE_K23 = YES
+
+
 ifeq ($(ENABLE_K1),YES)
 	K1 =-DENABLE_KERNEL1
 else
@@ -278,7 +284,35 @@ else
 	K19 =
 endif
 
-ENABLE_KERNELS = $(K1) $(K2) $(K3) $(K4) $(K5) $(K6) $(K7) $(K8) $(K9) $(K10) $(K11) $(K12) $(K13) $(K14) $(K15) $(K16) $(K17) $(K18) $(K19)
+
+
+
+
+ifeq ($(ENABLE_K20),YES)
+	K20 =-DENABLE_KERNEL20
+else
+	K20 =
+endif
+
+ifeq ($(ENABLE_K21),YES)
+	K21 =-DENABLE_KERNEL21
+else
+	K21 =
+endif
+
+ifeq ($(ENABLE_K22),YES)
+	K22 =-DENABLE_KERNEL22
+else
+	K22 =
+endif
+
+ifeq ($(ENABLE_K23),YES)
+	K23 =-DENABLE_KERNEL23
+else
+	K23 =
+endif
+
+ENABLE_KERNELS = $(K1) $(K2) $(K3) $(K4) $(K5) $(K6) $(K7) $(K8) $(K9) $(K10) $(K11) $(K12) $(K13) $(K14) $(K15) $(K16) $(K17) $(K18) $(K19) $(K20) $(K21) $(K22) $(K23)
 
 # =============================
 # Reproduce result (remove randomness)
@@ -352,13 +386,15 @@ NEV  := 100000
 DEV_DIRS := device
 DEV_SRC  := $(DEV_DIRS)/Krnl_GA.cl
 #BOARD_HARP2 := bdw_fpga_v1.0
-BOARD_HARP2 := a10gx
+#BOARD_HARP2 := a10gx
+BOARD_HARP2 := Proc10A_X115
 
 ## Make it all: compilation (host & device) + run emulation
 ## Notice, it switches automatically to /bin folder
 #emu: $(TARGET_DIR)/$(TARGET) keremu runemu
 
 # Build kernel binary only for emulation
+# Add "-g" to support kernel debug
 # Creates under bin: 
 	# "docking" folder
 	# docking.aoco

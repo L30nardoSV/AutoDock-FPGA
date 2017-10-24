@@ -3,8 +3,7 @@
 
 //IC: initial calculation of energy of populations
 //GG: genetic generation 
-//LS: pos local search
-//LS: neg local search
+//LS: local search
 //OFF: turn off IC, GG, LS
 
 // Define kernel file-scope channel variable
@@ -21,55 +20,45 @@
 
 
 #include "../defines.h"
-channel float  	chan_IC2Conf_genotype      __attribute__((depth(MAX_NUM_OF_ROTBONDS+6)));
-channel float  	chan_GG2Conf_genotype      __attribute__((depth(MAX_NUM_OF_ROTBONDS+6)));
-channel float  	chan_LS2Conf_genotype      __attribute__((depth(MAX_NUM_OF_ROTBONDS+6)));
-channel float  	chan_LS2Conf_LS2_genotype  __attribute__((depth(MAX_NUM_OF_ROTBONDS+6)));
-
+channel float  	chan_IC2Conf_genotype          __attribute__((depth(MAX_NUM_OF_ROTBONDS+6)));
+channel float  	chan_GG2Conf_genotype          __attribute__((depth(MAX_NUM_OF_ROTBONDS+6)));
+channel float  	chan_LS2Conf_genotype          __attribute__((depth(MAX_NUM_OF_ROTBONDS+6)));
+channel float  	chan_LS2Conf_LS2_genotype      __attribute__((depth(MAX_NUM_OF_ROTBONDS+6)));
+channel float  	chan_LS2Conf_LS3_genotype      __attribute__((depth(MAX_NUM_OF_ROTBONDS+6)));
 
 // To turn off Conform, InterE, IntraE
-/*
-channel bool 	chan_IC2Conf_active;
-channel bool 	chan_GG2Conf_active;
-channel bool 	chan_LS2Conf_LS1_active;
-*/
 channel bool 	chan_LS2Conf_LS2_active;
-
 channel bool  	chan_Off2Conf_active;
 
-
-channel float3  chan_Conf2Intere_xyz      __attribute__((depth(MAX_NUM_OF_ATOMS)));
+// IC, GG, LS1
+channel float3  chan_Conf2Intere_xyz           __attribute__((depth(MAX_NUM_OF_ATOMS)));
 channel bool  	chan_Conf2Intere_active;
 channel char  	chan_Conf2Intere_mode;
 
-channel float3 	chan_Conf2Intrae_xyz      __attribute__((depth(MAX_NUM_OF_ATOMS)));
+channel float3 	chan_Conf2Intrae_xyz           __attribute__((depth(MAX_NUM_OF_ATOMS)));
 channel bool  	chan_Conf2Intrae_active;
 channel char  	chan_Conf2Intrae_mode;	
 
-
-channel float3  chan_Conf2Intere_LS2_xyz      __attribute__((depth(MAX_NUM_OF_ATOMS)));
+// LS2 and LS3
+channel float3  chan_Conf2Intere_LS2_xyz       __attribute__((depth(MAX_NUM_OF_ATOMS)));
 channel bool  	chan_Conf2Intere_LS2_active;
+channel char    chan_Conf2Intere_LS2_mode;
 
-channel float3 	chan_Conf2Intrae_LS2_xyz      __attribute__((depth(MAX_NUM_OF_ATOMS)));
+channel float3 	chan_Conf2Intrae_LS2_xyz       __attribute__((depth(MAX_NUM_OF_ATOMS)));
 channel bool  	chan_Conf2Intrae_LS2_active;
+channel char    chan_Conf2Intrae_LS2_mode;
 
-
-channel float 	chan_Intere2StoreIC_intere __attribute__((depth(MAX_POPSIZE)));
-channel float 	chan_Intere2StoreGG_intere __attribute__((depth(MAX_POPSIZE)));
-channel float 	chan_Intere2StoreLS_intere __attribute__((depth(20)));	// it requires 6% MAX_POPSIZE
+channel float 	chan_Intere2StoreIC_intere     __attribute__((depth(MAX_POPSIZE)));
+channel float 	chan_Intere2StoreGG_intere     __attribute__((depth(MAX_POPSIZE)));
+channel float 	chan_Intere2StoreLS_intere     __attribute__((depth(20)));	// it requires 6% MAX_POPSIZE
 channel float 	chan_Intere2StoreLS_LS2_intere __attribute__((depth(20)));	// it requires 6% MAX_POPSIZE
-/*
 channel float 	chan_Intere2StoreLS_LS3_intere __attribute__((depth(20)));	// it requires 6% MAX_POPSIZE
-*/
 
-channel float 	chan_Intrae2StoreIC_intrae __attribute__((depth(MAX_POPSIZE)));
-channel float 	chan_Intrae2StoreGG_intrae __attribute__((depth(MAX_POPSIZE)));
-channel float 	chan_Intrae2StoreLS_intrae __attribute__((depth(20)));	// it requires 6% MAX_POPSIZE
+channel float 	chan_Intrae2StoreIC_intrae     __attribute__((depth(MAX_POPSIZE)));
+channel float 	chan_Intrae2StoreGG_intrae     __attribute__((depth(MAX_POPSIZE)));
+channel float 	chan_Intrae2StoreLS_intrae     __attribute__((depth(20)));	// it requires 6% MAX_POPSIZE
 channel float 	chan_Intrae2StoreLS_LS2_intrae __attribute__((depth(20)));	// it requires 6% MAX_POPSIZE
-/*
 channel float 	chan_Intrae2StoreLS_LS3_intrae __attribute__((depth(20)));	// it requires 6% MAX_POPSIZE
-*/
-
 
 // PRNG kernerls
 channel bool  	chan_GA2PRNG_BT_ushort_active;
@@ -93,40 +82,41 @@ channel float   chan_PRNG2GA_LS_float_prng;
 channel bool  	chan_GA2PRNG_LS2_float_active;
 channel float   chan_PRNG2GA_LS2_float_prng;
 
-/*
-channel bool  	chan_GA2PRNG_LS23_float_active;
+channel bool  	chan_GA2PRNG_LS3_float_active;
 channel float   chan_PRNG2GA_LS3_float_prng;
-*/
+
 channel bool  	chan_GA2PRNG_Off_active;
 
-
+// LS1, LS2, LS3
 channel bool 	chan_GA2LS_LS1_active;
 channel float   chan_GA2LS_LS1_energy;
 channel float  	chan_GA2LS_LS1_genotype     __attribute__((depth(MAX_NUM_OF_ROTBONDS+6)));
-
-channel uint 	chan_LS2GA_LS1_eval;
-channel float   chan_LS2GA_LS1_energy;
-channel float  	chan_LS2GA_LS1_genotype     __attribute__((depth(MAX_NUM_OF_ROTBONDS+6)));
 
 channel bool 	chan_GA2LS_LS2_active;
 channel float   chan_GA2LS_LS2_energy;
 channel float  	chan_GA2LS_LS2_genotype     __attribute__((depth(MAX_NUM_OF_ROTBONDS+6)));
 
-channel uint 	chan_LS2GA_LS2_eval;
-channel float   chan_LS2GA_LS2_energy;
-channel float  	chan_LS2GA_LS2_genotype     __attribute__((depth(MAX_NUM_OF_ROTBONDS+6)));
-
-/*
 channel bool 	chan_GA2LS_LS3_active;
 channel float   chan_GA2LS_LS3_energy;
 channel float  	chan_GA2LS_LS3_genotype     __attribute__((depth(MAX_NUM_OF_ROTBONDS+6)));
 
+channel bool    chan_GA2LS_Off_active;
+channel bool    chan_GA2LS_Off2_active;
+channel bool    chan_GA2LS_Off3_active;
+
+channel uint 	chan_LS2GA_LS1_eval;
+channel float   chan_LS2GA_LS1_energy;
+channel float  	chan_LS2GA_LS1_genotype     __attribute__((depth(MAX_NUM_OF_ROTBONDS+6)));
+
+channel uint 	chan_LS2GA_LS2_eval;
+channel float   chan_LS2GA_LS2_energy;
+channel float  	chan_LS2GA_LS2_genotype     __attribute__((depth(MAX_NUM_OF_ROTBONDS+6)));
+
 channel uint 	chan_LS2GA_LS3_eval;
 channel float   chan_LS2GA_LS3_energy;
 channel float  	chan_LS2GA_LS3_genotype     __attribute__((depth(MAX_NUM_OF_ROTBONDS+6)));
-*/
-channel bool    chan_GA2LS_Off_active;
-channel bool    chan_GA2LS_Off2_active;
+
+channel bool    chan_ConfArbiter_Off;
 
 // --------------------------------------------------------------------------
 // These functions map the argument into the interval 0 - 180, or 0 - 360
@@ -516,43 +506,55 @@ printf("LS entities idx: %u\n", entity_ls [i]);
 */
 
 		//#pragma ivdep
-		for (ushort ls_ent_cnt=0; ls_ent_cnt<DockConst_num_of_lsentities; ls_ent_cnt+=2) {
+		//for (ushort ls_ent_cnt=0; ls_ent_cnt<DockConst_num_of_lsentities; ls_ent_cnt+=2) {
+		for (ushort ls_ent_cnt=0; ls_ent_cnt<DockConst_num_of_lsentities; ls_ent_cnt+=3) {
 
 			// LS1
 			// LS2
+			// LS3
 			write_channel_altera(chan_GA2LS_LS1_active, true);
 			write_channel_altera(chan_GA2LS_LS2_active, true);
+			write_channel_altera(chan_GA2LS_LS3_active, true);
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 			write_channel_altera(chan_GA2LS_LS1_energy, LocalEneNext[entity_ls[ls_ent_cnt]]);
 			write_channel_altera(chan_GA2LS_LS2_energy, LocalEneNext[entity_ls[ls_ent_cnt+1]]);
+			write_channel_altera(chan_GA2LS_LS3_energy, LocalEneNext[entity_ls[ls_ent_cnt+2]]);
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 			#pragma ivdep
 			for (uchar i=0; i<DockConst_num_of_genes; i++) {
 				write_channel_altera(chan_GA2LS_LS1_genotype, LocalPopNext[entity_ls[ls_ent_cnt]][i & 0x3F]);
 				write_channel_altera(chan_GA2LS_LS2_genotype, LocalPopNext[entity_ls[ls_ent_cnt+1]][i & 0x3F]);
+				write_channel_altera(chan_GA2LS_LS3_genotype, LocalPopNext[entity_ls[ls_ent_cnt+2]][i & 0x3F]);
 			}
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 			// LS1
 			// LS2
+			// LS3
 			uint eval_tmp1 = read_channel_altera(chan_LS2GA_LS1_eval);
 			uint eval_tmp2 = read_channel_altera(chan_LS2GA_LS2_eval);
+			uint eval_tmp3 = read_channel_altera(chan_LS2GA_LS3_eval);
+//printf("Got all LS eval\n");
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 	
-			uint LS_eval = eval_tmp1 + eval_tmp2;
+			uint LS_eval = eval_tmp1 + eval_tmp2 + eval_tmp3;
 			
-			LocalEneNext[entity_ls[ls_ent_cnt]] = read_channel_altera(chan_LS2GA_LS1_energy);
+			LocalEneNext[entity_ls[ls_ent_cnt]] = read_channel_altera(chan_LS2GA_LS1_energy);	
 			LocalEneNext[entity_ls[ls_ent_cnt+1]] = read_channel_altera(chan_LS2GA_LS2_energy);
+			LocalEneNext[entity_ls[ls_ent_cnt+2]] = read_channel_altera(chan_LS2GA_LS3_energy);
+//printf("Got all LS ener\n");
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 			#pragma ivdep
 			for (uchar i=0; i<DockConst_num_of_genes; i++) {
 				LocalPopNext[entity_ls[ls_ent_cnt]][i & 0x3F]   = read_channel_altera(chan_LS2GA_LS1_genotype);
 				LocalPopNext[entity_ls[ls_ent_cnt+1]][i & 0x3F] = read_channel_altera(chan_LS2GA_LS2_genotype);
+				LocalPopNext[entity_ls[ls_ent_cnt+2]][i & 0x3F] = read_channel_altera(chan_LS2GA_LS3_genotype);
 			}
-
+			mem_fence(CLK_CHANNEL_MEM_FENCE);
+//printf("Got all LS geno\n");
 			tmp_eval_cnt += LS_eval;
 		} // End of for-loop ls_ent_cnt
 		// ------------------------------------------------------------------
@@ -582,10 +584,13 @@ printf("LS entities idx: %u\n", entity_ls [i]);
 	// ------------------------------------------------------------------
 	// Off: turn off Conform, InterE, IntraE
 	// ------------------------------------------------------------------
-	write_channel_altera(chan_GA2LS_Off_active, false);
-	write_channel_altera(chan_GA2LS_Off2_active, false);
-	write_channel_altera(chan_GA2PRNG_Off_active, false);
-	write_channel_altera(chan_Off2Conf_active, false);
+	write_channel_altera(chan_GA2LS_Off_active, false);	// turn off LS_Arbiter, LS
+	write_channel_altera(chan_GA2LS_Off2_active, false);	// turn off LS2_Arbiter, LS2 
+	write_channel_altera(chan_GA2LS_Off3_active, false);	// turn off LS3_Arbiter, LS3 
+	write_channel_altera(chan_GA2PRNG_Off_active, false);	// turn off all PRNGs kernels
+	write_channel_altera(chan_Off2Conf_active, false);	// turn off Conform, InterE, IntraE
+
+	write_channel_altera(chan_ConfArbiter_Off, false);      // turn off Krnl_Conf_Arbiter,Conform2, InterE2, IntraE2
 	
 	
 
@@ -615,6 +620,7 @@ printf("LS entities idx: %u\n", entity_ls [i]);
 // --------------------------------------------------------------------------
 
 #include "Krnl_PRNG.cl"
+#include "Krnl_Conf_Arbiter.cl"
 
 #include "Krnl_LS.cl"
 #include "Krnl_Conform.cl"
@@ -622,6 +628,7 @@ printf("LS entities idx: %u\n", entity_ls [i]);
 #include "Krnl_IntraE.cl"
 
 #include "Krnl_LS2.cl"
+#include "Krnl_LS3.cl"
 #include "Krnl_Conform2.cl"
 #include "Krnl_InterE2.cl"
 #include "Krnl_IntraE2.cl"

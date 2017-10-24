@@ -165,6 +165,7 @@ while(active) {
 
 		case 0x03:	// LS 1
 			write_channel_altera(chan_Intrae2StoreLS_intrae, intraE);
+//printf("WRITE LS1 INTRAE\n");
 		break;
 /*
 		case 0x04:	// LS 2

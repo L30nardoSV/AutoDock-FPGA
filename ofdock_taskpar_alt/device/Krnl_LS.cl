@@ -158,11 +158,14 @@ if (active == true) {
 
 			entity_possible_new_genotype [i] = tmp3;
 			write_channel_altera(chan_LS2Conf_genotype, tmp3);
+//printf("LS1_genotype sent\n");
 		}
 
 		// calculate energy of genotype
 		float energyIA_LS_rx = read_channel_altera(chan_Intrae2StoreLS_intrae);
+//printf("INTRAE received in LS1 ... ");
 		float energyIE_LS_rx = read_channel_altera(chan_Intere2StoreLS_intere);
+//printf("INTERE received in LS1 ... ");
 		float candidate_energy = energyIA_LS_rx + energyIE_LS_rx;
 
 		// update LS energy-evaluation count
@@ -205,6 +208,8 @@ if (active == true) {
 		}
 
 	} // end of while (iteration_cnt) && (rho)
+
+//printf("Out of while iter LS\n");
 		
 	// write back data to GA
 	write_channel_altera(chan_LS2GA_LS1_eval, LS_eval);

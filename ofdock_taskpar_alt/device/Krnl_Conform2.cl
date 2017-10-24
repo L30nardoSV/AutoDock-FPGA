@@ -58,6 +58,7 @@ while(active) {
 	// --------------------------------------------------------------
 	// Wait for genotypes in channel
 	// --------------------------------------------------------------
+/*
 	bool LS2_valid  = false;
 	bool Off2_valid = false;
 
@@ -89,10 +90,21 @@ while(active) {
 	active = (LS2_valid) ? true :
 		 (Off2_valid)? Off2_active :
 		 false;	// last case should never occur, otherwise above while would be still running
+*/
+	active = read_channel_altera(chan_LS23_active);
+	mem_fence(CLK_CHANNEL_MEM_FENCE);
 
+	char mode = read_channel_altera(chan_LS23_mode);
+	mem_fence(CLK_CHANNEL_MEM_FENCE);
 
+	for (uchar i=0; i<DockConst_num_of_genes; i++) {
+		genotype [i] = read_channel_altera(chan_LS23_genotype);
+		if (i > 2) {
+			genotype [i] = genotype [i]*DEG_TO_RAD;
+		}
+	}
 	// --------------------------------------------------------------
-	//printf("AFTER In CONFORM CHANNEL\n");
+	//printf("AFTER In CONFORM 2 CHANNEL\n");
 /*
 	float3 __attribute__ ((
 			      memory,
@@ -280,17 +292,18 @@ while(active) {
 	write_channel_altera(chan_Conf2Intere_LS2_active, active);
 	write_channel_altera(chan_Conf2Intrae_LS2_active, active);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
-/*
-	write_channel_altera(chan_Conf2Intere_mode,   mode);
-	write_channel_altera(chan_Conf2Intrae_mode,   mode);
+
+	write_channel_altera(chan_Conf2Intere_LS2_mode,   mode);
+	write_channel_altera(chan_Conf2Intrae_LS2_mode,   mode);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
-*/
+
 	//float3 position_xyz;
 	#pragma ivdep
 	for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt++) {
 		write_channel_altera(chan_Conf2Intere_LS2_xyz, loc_coords[pipe_cnt]);
 		write_channel_altera(chan_Conf2Intrae_LS2_xyz, loc_coords[pipe_cnt]);
 	}
+	mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 	// --------------------------------------------------------------
 	#if defined (DEBUG_KRNL_CONFORM)

@@ -161,6 +161,38 @@ static const char *name_k19 = "Krnl_IntraE2";
 
 
 
+
+
+
+
+
+
+#ifdef ENABLE_KERNEL20
+static cl_command_queue command_queue20 = NULL;
+static cl_kernel kernel20  = NULL;
+static const char *name_k20 = "Krnl_Prng_LS3_float";
+#endif
+
+#ifdef ENABLE_KERNEL21
+static cl_command_queue command_queue21 = NULL;
+static cl_kernel kernel21  = NULL;
+static const char *name_k21 = "Krnl_LS3";
+#endif
+
+#ifdef ENABLE_KERNEL22
+static cl_command_queue command_queue22 = NULL;
+static cl_kernel kernel22  = NULL;
+static const char *name_k22 = "Krnl_LS3_Arbiter";
+#endif
+
+#ifdef ENABLE_KERNEL23
+static cl_command_queue command_queue23 = NULL;
+static cl_kernel kernel23  = NULL;
+static const char *name_k23 = "Krnl_Conf_Arbiter";
+#endif
+
+
+
 static cl_program program = NULL;
 
 // Function prototypes
@@ -668,6 +700,24 @@ filled with clock() */
 	setKernelArg(kernel19,12, sizeof(float),                          	&dockpars.qasp);
 	setKernelArg(kernel19,13, sizeof(float),                          	&dockpars.coeff_desolv);
 #endif // End of ENABLE_KERNEL19
+
+#ifdef ENABLE_KERNEL21 // Krnl_LS3
+	setKernelArg(kernel21,0, sizeof(unsigned int),  &dockpars.max_num_of_iters);
+	setKernelArg(kernel21,1, sizeof(float),  	&dockpars.rho_lower_bound);
+	setKernelArg(kernel21,2, sizeof(float),  	&dockpars.base_dmov_mul_sqrt3);
+	setKernelArg(kernel21,3, sizeof(unsigned int),  &dockpars.num_of_genes);
+	setKernelArg(kernel21,4, sizeof(float),  	&dockpars.base_dang_mul_sqrt3);
+	setKernelArg(kernel21,5, sizeof(unsigned int),  &dockpars.cons_limit);
+#endif // End of ENABLE_KERNEL21
+
+#ifdef ENABLE_KERNEL22 // Krnl_LS3_Arbiter
+	setKernelArg(kernel22,0, sizeof(unsigned int),  &dockpars.num_of_genes);
+#endif // End of ENABLE_KERNEL22
+
+#ifdef ENABLE_KERNEL23 // Krnl_Conf_Arbiter
+	setKernelArg(kernel23,0, sizeof(unsigned int),  &dockpars.num_of_genes);
+#endif // End of ENABLE_KERNEL23
+
 	for (unsigned int run_cnt = 0; run_cnt < mypars->num_of_runs; run_cnt++)
 	{
 
@@ -692,7 +742,7 @@ filled with clock() */
 			cpu_prng_seeds[4] = genseed(0u);
 			cpu_prng_seeds[5] = genseed(0u);
 			cpu_prng_seeds[6] = genseed(0u);
-	
+			cpu_prng_seeds[7] = genseed(0u);
 		#endif
 
 
@@ -747,6 +797,11 @@ filled with clock() */
 		setKernelArg(kernel17,9,  sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[2]);	
 		setKernelArg(kernel17,10, sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[3]);
 #endif // End of ENABLE_KERNEL2
+
+
+#ifdef ENABLE_KERNEL20 // Krnl_PRNG_LS3_float
+		setKernelArg(kernel20,0, sizeof(unsigned int),   &cpu_prng_seeds[7]);
+#endif // End of ENABLE_KERNEL20
 
 
 
@@ -826,6 +881,24 @@ filled with clock() */
 		runKernelTask(command_queue19,kernel19,NULL,NULL);
 		#endif // ENABLE_KERNEL19
 
+		#ifdef ENABLE_KERNEL20
+		runKernelTask(command_queue20,kernel20,NULL,NULL);
+		#endif // ENABLE_KERNEL19
+
+		#ifdef ENABLE_KERNEL21
+		runKernelTask(command_queue21,kernel21,NULL,NULL);
+		#endif // ENABLE_KERNEL21
+
+		#ifdef ENABLE_KERNEL22
+		runKernelTask(command_queue22,kernel22,NULL,NULL);
+		#endif // ENABLE_KERNEL22
+
+		#ifdef ENABLE_KERNEL23
+		runKernelTask(command_queue23,kernel23,NULL,NULL);
+		#endif // ENABLE_KERNEL23
+
+
+
 		#ifdef ENABLE_KERNEL1 		
 		clFinish(command_queue1); 
 		#endif
@@ -900,6 +973,22 @@ filled with clock() */
 
 		#ifdef ENABLE_KERNEL19
 		clFinish(command_queue19);
+		#endif
+
+		#ifdef ENABLE_KERNEL20
+		clFinish(command_queue20);
+		#endif
+
+		#ifdef ENABLE_KERNEL21
+		clFinish(command_queue21);
+		#endif
+
+		#ifdef ENABLE_KERNEL22
+		clFinish(command_queue22);
+		#endif
+
+		#ifdef ENABLE_KERNEL23
+		clFinish(command_queue23);
 		#endif
 
 		clock_stop_docking = clock();
@@ -1101,8 +1190,8 @@ bool init() {
   }
 
   // Get the OpenCL platform.
-  platform = findPlatform("Intel(R) FPGA"); // use it from aoc v16.1
-  //platform = findPlatform("Altera SDK");      // works for harp2, i.e. v16.0 patched
+  //platform = findPlatform("Intel(R) FPGA"); // use it from aoc v16.1
+  platform = findPlatform("Altera SDK");      // works for harp2, i.e. v16.0 patched
   if(platform == NULL) {
     printf("ERROR: Unable to find Intel(R) FPGA OpenCL platform.\n");
     return false;
@@ -1251,14 +1340,14 @@ bool init() {
 
 #ifdef ENABLE_KERNEL14
   command_queue14 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
-  checkError(status, "Failed to create command queue13");
+  checkError(status, "Failed to create command queue14");
   kernel14 = clCreateKernel(program, name_k14, &status);
   checkError(status, "Failed to create kernel");
 #endif
 
 #ifdef ENABLE_KERNEL15
   command_queue15 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
-  checkError(status, "Failed to create command queue13");
+  checkError(status, "Failed to create command queue15");
   kernel15 = clCreateKernel(program, name_k15, &status);
   checkError(status, "Failed to create kernel");
 #endif
@@ -1272,22 +1361,50 @@ bool init() {
 
 #ifdef ENABLE_KERNEL17
   command_queue17 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
-  checkError(status, "Failed to create command queue13");
+  checkError(status, "Failed to create command queue17");
   kernel17 = clCreateKernel(program, name_k17, &status);
   checkError(status, "Failed to create kernel");
 #endif
 
 #ifdef ENABLE_KERNEL18
   command_queue18 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
-  checkError(status, "Failed to create command queue13");
+  checkError(status, "Failed to create command queue18");
   kernel18 = clCreateKernel(program, name_k18, &status);
   checkError(status, "Failed to create kernel");
 #endif
 
 #ifdef ENABLE_KERNEL19
   command_queue19 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
-  checkError(status, "Failed to create command queue13");
+  checkError(status, "Failed to create command queue19");
   kernel19 = clCreateKernel(program, name_k19, &status);
+  checkError(status, "Failed to create kernel");
+#endif
+
+#ifdef ENABLE_KERNEL20
+  command_queue20 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  checkError(status, "Failed to create command queue20");
+  kernel20 = clCreateKernel(program, name_k20, &status);
+  checkError(status, "Failed to create kernel");
+#endif
+
+#ifdef ENABLE_KERNEL21
+  command_queue21 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  checkError(status, "Failed to create command queue21");
+  kernel21 = clCreateKernel(program, name_k21, &status);
+  checkError(status, "Failed to create kernel");
+#endif
+
+#ifdef ENABLE_KERNEL22
+  command_queue22 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  checkError(status, "Failed to create command queue22");
+  kernel22 = clCreateKernel(program, name_k22, &status);
+  checkError(status, "Failed to create kernel");
+#endif
+
+#ifdef ENABLE_KERNEL23
+  command_queue23 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  checkError(status, "Failed to create command queue23");
+  kernel23 = clCreateKernel(program, name_k23, &status);
   checkError(status, "Failed to create kernel");
 #endif
 
@@ -1389,6 +1506,26 @@ void cleanup() {
 #ifdef ENABLE_KERNEL19
   if(kernel19) {clReleaseKernel(kernel19);}
   if(command_queue19) {clReleaseCommandQueue(command_queue19);}
+#endif
+
+#ifdef ENABLE_KERNEL20
+  if(kernel20) {clReleaseKernel(kernel20);}
+  if(command_queue20) {clReleaseCommandQueue(command_queue20);}
+#endif
+
+#ifdef ENABLE_KERNEL21
+  if(kernel21) {clReleaseKernel(kernel21);}
+  if(command_queue21) {clReleaseCommandQueue(command_queue21);}
+#endif
+
+#ifdef ENABLE_KERNEL22
+  if(kernel22) {clReleaseKernel(kernel22);}
+  if(command_queue22) {clReleaseCommandQueue(command_queue22);}
+#endif
+
+#ifdef ENABLE_KERNEL23
+  if(kernel23) {clReleaseKernel(kernel23);}
+  if(command_queue23) {clReleaseCommandQueue(command_queue23);}
 #endif
 
   if(program) {clReleaseProgram(program);}

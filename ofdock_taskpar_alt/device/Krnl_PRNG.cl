@@ -6,9 +6,8 @@ channel bool chan_Arbiter_LS_ushort_active;
 
 channel bool chan_Arbiter_LS_float_active;
 channel bool chan_Arbiter_LS2_float_active;
-/*
 channel bool chan_Arbiter_LS3_float_active;
-*/
+
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------
 __kernel __attribute__ ((max_global_work_dim(0)))
@@ -24,9 +23,7 @@ while(active) {
 	bool LS_ushort_valid = false;
 	bool LS_float_valid  = false;
 	bool LS2_float_valid  = false;
-/*
 	bool LS3_float_valid  = false;
-*/
 	bool Off_valid       = false;	
 
 	bool BT_ushort_active;
@@ -36,9 +33,7 @@ while(active) {
 	bool LS_ushort_active;
 	bool LS_float_active;
 	bool LS2_float_active;
-/*
 	bool LS3_float_active;
-*/
 	bool Off_active;
 
 	while((BT_ushort_valid == false) &&
@@ -47,10 +42,8 @@ while(active) {
 	      (GG_float_valid  == false) &&
 	      (LS_ushort_valid == false) &&
 	      (LS_float_valid  == false) &&
-	      (LS2_float_valid  == false) &&
-/*
-(LS3_float_valid  == false) &&
-*/
+	      (LS2_float_valid == false) &&
+	      (LS3_float_valid == false) &&
 	      (Off_valid       == false) 
 	){
 		BT_ushort_active = read_channel_nb_altera(chan_GA2PRNG_BT_ushort_active, &BT_ushort_valid);
@@ -59,10 +52,8 @@ while(active) {
 		GG_float_active  = read_channel_nb_altera(chan_GA2PRNG_GG_float_active,  &GG_float_valid);
 		LS_ushort_active = read_channel_nb_altera(chan_GA2PRNG_LS_ushort_active, &LS_ushort_valid);
 		LS_float_active  = read_channel_nb_altera(chan_GA2PRNG_LS_float_active,  &LS_float_valid);
-		LS2_float_active  = read_channel_nb_altera(chan_GA2PRNG_LS2_float_active,  &LS2_float_valid);
-/*
-		LS3_float_active  = read_channel_nb_altera(chan_GA2PRNG_LS3_float_active,  &LS3_float_valid);
-*/
+		LS2_float_active = read_channel_nb_altera(chan_GA2PRNG_LS2_float_active,  &LS2_float_valid);
+		LS3_float_active = read_channel_nb_altera(chan_GA2PRNG_LS3_float_active,  &LS3_float_valid);
 		Off_active       = read_channel_nb_altera(chan_GA2PRNG_Off_active,       &Off_valid);
 	}
 
@@ -73,9 +64,7 @@ while(active) {
 		 (LS_ushort_valid)? LS_ushort_active :
 		 (LS_float_valid) ? LS_float_active  :
 		 (LS2_float_valid) ? LS2_float_active  :
-/*
 		 (LS3_float_valid) ? LS3_float_active  :
-*/
 		 (Off_valid)      ? Off_active       :
 		 false; // last case should never occur, otherwise above while would be still running
 
@@ -106,11 +95,11 @@ while(active) {
 	if ((LS2_float_valid == true) || (Off_valid == true)) {
 		write_channel_altera(chan_Arbiter_LS2_float_active, active);
 	}
-/*
-	if ((LS_float_valid == true) || (Off_valid == true)) {
-		write_channel_altera(chan_Arbiter_LS_float_active, active);
+
+	if ((LS3_float_valid == true) || (Off_valid == true)) {
+		write_channel_altera(chan_Arbiter_LS3_float_active, active);
 	}
-*/
+
 } // End of while(active)
 
 }
@@ -321,6 +310,37 @@ while(active) {
 
 		if(active) {
 			write_channel_altera(chan_PRNG2GA_LS2_float_prng, tmp);
+		}
+	/*
+	}
+	*/
+} // End of while(active)
+}
+
+
+__kernel __attribute__ ((max_global_work_dim(0)))
+void Krnl_Prng_LS3_float(const unsigned int seed
+			){
+
+	uint lfsr = seed;
+	bool active = true;
+
+while(active) {
+	//active  = read_channel_altera(chan_GA2PRNG_LS_float_active);
+	active  = read_channel_altera(chan_Arbiter_LS3_float_active);
+	
+	/*
+	for(uchar i=0; i<num_genes; i++) {
+	*/
+		float tmp;
+		uchar lsb;
+		lsb = lfsr & 0x01u;
+		lfsr >>= 1;
+		lfsr ^= (-lsb) & 0xA3000000u;
+		tmp = (0.999999f/MAX_UINT)*lfsr;
+
+		if(active) {
+			write_channel_altera(chan_PRNG2GA_LS3_float_prng, tmp);
 		}
 	/*
 	}
