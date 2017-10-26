@@ -265,11 +265,6 @@ while(active) {
 	// --------------------------------------------------------------
 	// Send intermolecular energy to chanel
 	// --------------------------------------------------------------
-/*
-	if (active == true) {
-		write_channel_altera(chan_Intere2StoreLS_LS2_intere, interE);
-	}
-*/
 	switch (mode) {
 		case 0x02:	// LS 2
 			write_channel_altera(chan_Intere2StoreLS_LS2_intere, interE);
@@ -279,7 +274,6 @@ while(active) {
 			write_channel_altera(chan_Intere2StoreLS_LS3_intere, interE);
 		break;
 	}
-	mem_fence(CLK_CHANNEL_MEM_FENCE);
 	// --------------------------------------------------------------
  	
 } // End of while(1)

@@ -50,7 +50,7 @@ while(active) {
 } // End of while(active)
 
 #if defined (DEBUG_ACTIVE_KERNEL)
-printf("	%-20s: %s\n", "Krnl_Arbiter_LS", "disabled");		
+printf("	%-20s: %s\n", "Krnl_LS_Arbiter", "disabled");		
 #endif
 
 }
@@ -117,7 +117,9 @@ if (active == true) {
 			iteration_cnt++;
 		}
 
-//printf("positive?: %u, iteration_cnt: %u, rho: %f, limit rho: %f\n", positive_direction, iteration_cnt, rho, DockConst_rho_lower_bound);
+		#if defined (DEBUG_KRNL_LS)
+		printf("positive?: %u, iteration_cnt: %u, rho: %f, limit rho: %f\n", positive_direction, iteration_cnt, rho, DockConst_rho_lower_bound);
+		#endif
 		// -----------------------------------------------
 
 		// new random deviate
@@ -158,8 +160,13 @@ if (active == true) {
 
 			entity_possible_new_genotype [i] = tmp3;
 			write_channel_altera(chan_LS2Conf_genotype, tmp3);
-//printf("LS1_genotype sent\n");
+
+			#if defined (DEBUG_KRNL_LS)
+			printf("LS1_genotype sent\n");
+			#endif
 		}
+
+//printf("Energy to calculate sent from LS ... ");
 
 		// calculate energy of genotype
 		float energyIA_LS_rx = read_channel_altera(chan_Intrae2StoreLS_intrae);
@@ -209,7 +216,9 @@ if (active == true) {
 
 	} // end of while (iteration_cnt) && (rho)
 
-//printf("Out of while iter LS\n");
+	#if defined (DEBUG_KRNL_LS)
+	printf("Out of while iter LS\n");
+	#endif
 		
 	// write back data to GA
 	write_channel_altera(chan_LS2GA_LS1_eval, LS_eval);

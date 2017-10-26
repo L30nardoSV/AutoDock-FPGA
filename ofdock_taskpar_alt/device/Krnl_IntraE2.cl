@@ -1,3 +1,4 @@
+// already defined in Krnl_IntraE.cl
 /*
 // sqrt7 ////https://www.codeproject.com/Articles/69941/Best-Square-Root-Method-Algorithm-Function-Precisi
 float sqrt_custom(const float x) 
@@ -43,7 +44,6 @@ while(active) {
 	// --------------------------------------------------------------
 	active = read_channel_altera(chan_Conf2Intrae_LS2_active);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
-
 	mode   = read_channel_altera(chan_Conf2Intrae_LS2_mode);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 
@@ -156,11 +156,6 @@ while(active) {
 	// --------------------------------------------------------------
 	// Send intramolecular energy to channel
 	// --------------------------------------------------------------
-/*
-	if (active == true) {
-		write_channel_altera(chan_Intrae2StoreLS_LS2_intrae, intraE);
-	}
-*/
 	switch (mode) {
 		case 0x02:	// LS 2
 			write_channel_altera(chan_Intrae2StoreLS_LS2_intrae, intraE);
@@ -170,7 +165,6 @@ while(active) {
 			write_channel_altera(chan_Intrae2StoreLS_LS3_intrae, intraE);
 		break;
 	}
-	mem_fence(CLK_CHANNEL_MEM_FENCE);
 	// --------------------------------------------------------------
 
 } // End of while(1)

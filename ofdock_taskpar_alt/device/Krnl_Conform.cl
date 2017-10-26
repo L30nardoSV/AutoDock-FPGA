@@ -27,13 +27,6 @@ void Krnl_Conform(
 	printf("%-40s %u\n", "DockConst_num_of_genes: ",        DockConst_num_of_genes);	
 	#endif
 
-	// local vars are allowed only at kernel scope
-/*
-	__local float loc_coords_x[MAX_NUM_OF_ATOMS];
-	__local float loc_coords_y[MAX_NUM_OF_ATOMS];
-	__local float loc_coords_z[MAX_NUM_OF_ATOMS];
-*/
-
 /*
 	// check best practices guide
 	// Table 11. Effects of numbanks and bankwidth on the Bank Geometry ...
@@ -43,7 +36,6 @@ void Krnl_Conform(
 */
 
 	__local float genotype[ACTUAL_GENOTYPE_LENGTH];
-
 
 	bool active = true;
 
@@ -126,14 +118,11 @@ while(active) {
 			    )) loc_coords[MAX_NUM_OF_ATOMS];
 */
 
-
 	float3 loc_coords[MAX_NUM_OF_ATOMS];
-
 
 	#if defined (DEBUG_ACTIVE_KERNEL)
 	if (active == 0) {printf("	%-20s: %s\n", "Krnl_Conform", "must be disabled");}
 	#endif
-
 /*
 	for(uchar i=3; i<DockConst_num_of_genes; i++) {
 		genotype [i] = genotype [i]*DEG_TO_RAD;
@@ -295,9 +284,9 @@ while(active) {
 		} // End if-statement not dummy rotation
 	} // End rotation_counter for-loop
 
-#if defined (DEBUG_KRNL_CONFORM)
+	#if defined (DEBUG_KRNL_CONFORM)
 	printf("BEFORE Out CONFORM CHANNEL\n");
-#endif
+	#endif
 
 	// --------------------------------------------------------------
 	// Send ligand atomic coordinates to channel 
@@ -311,16 +300,15 @@ while(active) {
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 	//float3 position_xyz;
-	#pragma ivdep
 	for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt++) {
 		write_channel_altera(chan_Conf2Intere_xyz, loc_coords[pipe_cnt]);
 		write_channel_altera(chan_Conf2Intrae_xyz, loc_coords[pipe_cnt]);
 	}
 
 	// --------------------------------------------------------------
-#if defined (DEBUG_KRNL_CONFORM)
+	#if defined (DEBUG_KRNL_CONFORM)
 	printf("AFTER Out CONFORM CHANNEL\n");
-#endif
+	#endif
 
 } // End of while(1)
 

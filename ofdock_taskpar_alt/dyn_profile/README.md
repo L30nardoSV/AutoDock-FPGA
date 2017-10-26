@@ -1321,3 +1321,48 @@ Total PLLs : 30 / 80 ( 38 % )
 >>>
 
 
+
+
+
+
+
+
+
+
+## 26_run_gidel
+
+* Clean up of previous version, same Gidel target
+* Added `#pragma ivdep` in LS for-loop in `Krnl_GA`, and in genotype assignment in `Krnl_Conf_Arbiter` in order to get II=1
+
+Estimation:
+
+| Resource                             | Usage        |
+| :----------------------------------: | :----------: |
+| Logic utilization                    |   77%        |
+| ALUTs                                |   27%        |
+| Dedicated logic registers            |   49%        |
+| Memory blocks                        |   79%        |
+| DSP blocks                           |   38%        |
+
+builds? yes!
+
+>>>
+Fitter Status : Successful - Tue Oct 24 19:40:44 2017
+Quartus Prime Version : 16.0.2 Build 222 07/20/2016 Patches 2.06 SJ Pro Edition
+Revision Name : top
+Top-level Entity Name : top
+Family : Arria 10
+Device : 10AX115H3F34I2SG
+Timing Models : Final
+Logic utilization (in ALMs) : 209,053 / 427,200 ( 49 % )
+Total registers : 528669
+Total pins : 169 / 618 ( 27 % )
+Total virtual pins : 0
+Total block memory bits : 10,344,087 / 55,562,240 ( 19 % )
+Total RAM Blocks : 1,812 / 2,713 ( 67 % )
+Total DSP Blocks : 523 / 1,518 ( 34 % )
+Total HSSI RX channels : 8 / 24 ( 33 % )
+Total HSSI TX channels : 8 / 24 ( 33 % )
+Total PLLs : 30 / 80 ( 38 % )
+>>>
+

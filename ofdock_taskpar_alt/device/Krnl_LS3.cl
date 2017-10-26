@@ -1,9 +1,7 @@
 channel bool  chan_Arbiter_LS3_active;
 channel float chan_Arbiter_LS3_energy;
 channel float chan_Arbiter_LS3_genotype     __attribute__((depth(MAX_NUM_OF_ROTBONDS+6)));
-/*
-channel bool chan_LS2Conf_LS3_Off;
-*/
+
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------
 __kernel __attribute__ ((max_global_work_dim(0)))
@@ -53,12 +51,10 @@ while(active) {
 } // End of while(active)
 
 #if defined (DEBUG_ACTIVE_KERNEL)
-printf("	%-20s: %s\n", "Krnl_Arbiter_LS3", "disabled");		
+printf("	%-20s: %s\n", "Krnl_LS3_Arbiter", "disabled");		
 #endif
 
 }
-
-
 
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------
@@ -98,12 +94,12 @@ while(active) {
 	uint   LS_eval       = 0;
 	bool   positive_direction = true;
 
-
 if (active == true) {
+	
+	#if defined (DEBUG_KRNL_LS3)
+	printf("In of while iter LS3\n");
+	#endif
 
-
-
-//printf("In of while iter LS3\n");
 	// performing local search
 	while ((iteration_cnt < DockConst_max_num_of_iters) && (rho > DockConst_rho_lower_bound)) {	
 		// -----------------------------------------------
@@ -124,13 +120,14 @@ if (active == true) {
 			iteration_cnt++;
 		}
 
-//printf("LS3 positive?: %u, iteration_cnt: %u, rho: %f, limit rho: %f\n", positive_direction, iteration_cnt, rho, DockConst_rho_lower_bound);
-		
+		#if defined (DEBUG_KRNL_LS3)
+		printf("LS3 positive?: %u, iteration_cnt: %u, rho: %f, limit rho: %f\n", positive_direction, iteration_cnt, rho, DockConst_rho_lower_bound);
+		#endif
 		// -----------------------------------------------
-//printf("LS3_active sent\n");
 
-		//read_channel_altera(chan_Conf2LS_LS3_token);
 		// Tell Krnl_Conf_Arbiter, LS3 is done
+		// Not completely strict as the (iteration_cnt < DockConst_max_num_of_iters) is ignored
+		// In practice, rho condition dominates most of the cases
 		write_channel_altera(chan_LS2Arbiter_LS3_end, (rho < DockConst_rho_lower_bound)?true:false);
 		mem_fence(CLK_CHANNEL_MEM_FENCE);
 
@@ -173,7 +170,10 @@ if (active == true) {
 
 			entity_possible_new_genotype [i] = tmp3;
 			write_channel_altera(chan_LS2Conf_LS3_genotype, tmp3);
-//printf("LS3_genotype sent\n");
+
+			#if defined (DEBUG_KRNL_LS3)
+			printf("LS3_genotype sent: %u\n", i);
+			#endif
 		}
 
 //printf("Energy to calculate sent from LS3 ... ");
@@ -188,7 +188,10 @@ if (active == true) {
 
 		// update LS energy-evaluation count
 		LS_eval++;
-//////printf("INTERE received in LS3: %u\n", LS_eval);
+
+		#if defined (DEBUG_KRNL_LS3)
+		printf("INTERE received in LS3: %u\n", LS_eval);
+		#endif
 
 		for (uchar i=0; i<DockConst_num_of_genes; i++) {
 			// updating offspring_genotype
@@ -228,7 +231,9 @@ if (active == true) {
 
 	} // end of while (iteration_cnt) && (rho)
 	
-//////printf("Out of while iter LS3\n");
+	#if defined (DEBUG_KRNL_LS3)
+	printf("Out of while iter LS3\n");
+	#endif
 
 	// write back data to GA
 	write_channel_altera(chan_LS2GA_LS3_eval, LS_eval);
@@ -251,7 +256,7 @@ else {
 } // End of while (active)		
 
 #if defined (DEBUG_ACTIVE_KERNEL)
-printf("	%-20s: %s\n", "Krnl_LS", "disabled");		
+printf("	%-20s: %s\n", "Krnl_LS3", "disabled");		
 #endif
 	
 }

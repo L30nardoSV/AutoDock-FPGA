@@ -46,15 +46,15 @@ while(active) {
 	      (LS3_float_valid == false) &&
 	      (Off_valid       == false) 
 	){
-		BT_ushort_active = read_channel_nb_altera(chan_GA2PRNG_BT_ushort_active, &BT_ushort_valid);
-		BT_float_active  = read_channel_nb_altera(chan_GA2PRNG_BT_float_active,  &BT_float_valid);
-		GG_uchar_active  = read_channel_nb_altera(chan_GA2PRNG_GG_uchar_active,  &GG_uchar_valid);
-		GG_float_active  = read_channel_nb_altera(chan_GA2PRNG_GG_float_active,  &GG_float_valid);
-		LS_ushort_active = read_channel_nb_altera(chan_GA2PRNG_LS_ushort_active, &LS_ushort_valid);
-		LS_float_active  = read_channel_nb_altera(chan_GA2PRNG_LS_float_active,  &LS_float_valid);
+		BT_ushort_active = read_channel_nb_altera(chan_GA2PRNG_BT_ushort_active,  &BT_ushort_valid);
+		BT_float_active  = read_channel_nb_altera(chan_GA2PRNG_BT_float_active,   &BT_float_valid);
+		GG_uchar_active  = read_channel_nb_altera(chan_GA2PRNG_GG_uchar_active,   &GG_uchar_valid);
+		GG_float_active  = read_channel_nb_altera(chan_GA2PRNG_GG_float_active,   &GG_float_valid);
+		LS_ushort_active = read_channel_nb_altera(chan_GA2PRNG_LS_ushort_active,  &LS_ushort_valid);
+		LS_float_active  = read_channel_nb_altera(chan_GA2PRNG_LS_float_active,   &LS_float_valid);
 		LS2_float_active = read_channel_nb_altera(chan_GA2PRNG_LS2_float_active,  &LS2_float_valid);
 		LS3_float_active = read_channel_nb_altera(chan_GA2PRNG_LS3_float_active,  &LS3_float_valid);
-		Off_active       = read_channel_nb_altera(chan_GA2PRNG_Off_active,       &Off_valid);
+		Off_active       = read_channel_nb_altera(chan_GA2PRNG_Off_active,        &Off_valid);
 	}
 
 	active = (BT_ushort_valid)? BT_ushort_active : 
@@ -63,8 +63,8 @@ while(active) {
 		 (GG_float_valid) ? GG_float_active  : 
 		 (LS_ushort_valid)? LS_ushort_active :
 		 (LS_float_valid) ? LS_float_active  :
-		 (LS2_float_valid) ? LS2_float_active  :
-		 (LS3_float_valid) ? LS3_float_active  :
+		 (LS2_float_valid)? LS2_float_active :
+		 (LS3_float_valid)? LS3_float_active :
 		 (Off_valid)      ? Off_active       :
 		 false; // last case should never occur, otherwise above while would be still running
 
