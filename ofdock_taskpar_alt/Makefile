@@ -449,6 +449,14 @@ hw:
 	@echo "==========================================================="
 	@echo " "
 
+hw_higheffort:
+	aoc --high-effort --board $(BOARD_HARP2) $(DEV_SRC) -o $(TARGET_DIR_HW)/docking.aocx
+	@echo " "
+	@echo "==========================================================="
+	@echo "INFO: FPGA bitstream is under: bin_hw/docking(.aoco)(.aocx)"
+	@echo "==========================================================="
+	@echo " "
+
 # Build hw (FPGA bitstream) instrumented with performance counters
 # NOT integrated yet in a multistep compilation
 # Creates under bin_hw_profile
