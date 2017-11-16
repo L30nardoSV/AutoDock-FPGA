@@ -24,7 +24,7 @@ echo "ALTERAOCLSDKROOT: "
 echo $ALTERAOCLSDKROOT
 echo " "
 
-export AOCL_BOARD_PACKAGE_ROOT=/opt/cad/altera/HARP2/BSP/bdw_fpga_pilot_opencl_bsp_v1.0.2
+export AOCL_BOARD_PACKAGE_ROOT=~/BSP_AOC_GIDEL/Proc10A_16.0.2/
 echo "AOCL_BOARD_PACKAGE_ROOT: "
 echo $AOCL_BOARD_PACKAGE_ROOT
 echo " "

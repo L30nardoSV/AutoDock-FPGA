@@ -329,7 +329,7 @@ endif
 # This flag was adapted only for host-compilation on celebdil using HARP2 BSP.
 # Kernel compilation (emu, hw) must use the default flags.
 
-AOCL_LINK_CONFIG_ADAPTED := -L/opt/cad/altera/altera-16.0/hld/linux64/lib -L/opt/cad/altera/HARP2/BSP/bdw_fpga_pilot_opencl_bsp_v1.0.2/host/linux64/lib -L$AALSDK/mybuild/myinstall/usr/local/lib -L/opt/cad/altera/altera-16.0/hld/host/linux64/lib -Wl,--no-as-needed -lalteracl  
+#AOCL_LINK_CONFIG_ADAPTED := -L/opt/cad/altera/altera-16.0/hld/linux64/lib -L/opt/cad/altera/HARP2/BSP/bdw_fpga_pilot_opencl_bsp_v1.0.2/host/linux64/lib -L$AALSDK/mybuild/myinstall/usr/local/lib -L/opt/cad/altera/altera-16.0/hld/host/linux64/lib -Wl,--no-as-needed -lalteracl  
 
 
 
