@@ -326,12 +326,6 @@ else
 endif
 
 # =============================
-# This flag was adapted only for host-compilation on celebdil using HARP2 BSP.
-# Kernel compilation (emu, hw) must use the default flags.
-
-#AOCL_LINK_CONFIG_ADAPTED := -L/opt/cad/altera/altera-16.0/hld/linux64/lib -L/opt/cad/altera/HARP2/BSP/bdw_fpga_pilot_opencl_bsp_v1.0.2/host/linux64/lib -L$AALSDK/mybuild/myinstall/usr/local/lib -L/opt/cad/altera/altera-16.0/hld/host/linux64/lib -Wl,--no-as-needed -lalteracl  
-
-
 
 # Make it all!
 all : $(TARGET_DIR)/$(TARGET)
@@ -344,7 +338,6 @@ all : $(TARGET_DIR)/$(TARGET)
 #			$(foreach L,$(LIBS),-l$L) \
 #			-o $(TARGET_DIR)/$(TARGET)
 
-# Enable this when compiling host in HARP2 machine
 $(TARGET_DIR)/$(TARGET) : Makefile $(SRCS) $(INCS) $(TARGET_DIR)
 	$(ECHO)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -fPIC $(foreach D,$(INC_DIRS),-I$D) \
 			$(AOCL_COMPILE_CONFIG) $(SRCS) $(AOCL_LINK_CONFIG) \
@@ -357,24 +350,6 @@ $(TARGET_DIR)/$(TARGET) : Makefile $(SRCS) $(INCS) $(TARGET_DIR)
 	@echo "================================"
 	@echo " "
 
-## Adapted only for emulating HARP2 BSP on celebdil
-## Disable this when compiling host in HARP2 machine
-#$(TARGET_DIR)/$(TARGET) : Makefile $(SRCS) $(INCS) $(TARGET_DIR)
-#	$(ECHO)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -fPIC $(foreach D,$(INC_DIRS),-I$D) \
-#			$(AOCL_COMPILE_CONFIG) $(SRCS) $(AOCL_LINK_CONFIG_ADAPTED) \
-#			$(foreach D,$(LIB_DIRS),-L$D) \
-#			$(foreach L,$(LIBS),-l$L) \
-#			-o $(TARGET_DIR)/$(TARGET) $(DOCK_DEBUG_FLAG) $(DEV) $(DOCK_PROG) $(ENABLE_KERNELS) $(REP)
-#	@echo " "
-#	@echo "================================"
-#	@echo "INFO: host binary is under: bin/"
-#	@echo "================================"
-#	@echo " "
-
-
-
-
-
 # Docking parameters
 PDB  := 3ptb
 NRUN := 10
@@ -385,9 +360,7 @@ NEV  := 100000
 # Device main kernel source
 DEV_DIRS := device
 DEV_SRC  := $(DEV_DIRS)/Krnl_GA.cl
-#BOARD_HARP2 := bdw_fpga_v1.0
-#BOARD_HARP2 := a10gx
-BOARD_HARP2 := Proc10A_X115
+BOARD    := Proc10A_X115
 
 ## Make it all: compilation (host & device) + run emulation
 ## Notice, it switches automatically to /bin folder
@@ -400,7 +373,7 @@ BOARD_HARP2 := Proc10A_X115
 	# docking.aoco
 	# docking.aocx
 keremu: $(DEV_SRC)
-	aoc -march=emulator -v --board $(BOARD_HARP2) $(DEV_SRC) -o $(TARGET_DIR)/docking.aocx $(REP)
+	aoc -march=emulator -v --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR)/docking.aocx $(REP)
 	@echo " "
 	@echo "=========================================================="
 	@echo "INFO: emulation files are under: bin/docking(.aoco)(.aocx)"
@@ -410,7 +383,7 @@ keremu: $(DEV_SRC)
 # Run emulation
 # Compilation (host & device) if not done previously
 # The working directory is changed
-# So .dlg file is written there
+# So .dlg file is written in $(TARGET_DIR)
 emu: $(TARGET_DIR)/$(TARGET) keremu
 	cd $(TARGET_DIR) && \
 	CL_CONTEXT_EMULATOR_DEVICE_ALTERA=1 ./$(TARGET) -ffile ../input/$(PDB)/derived/$(PDB)_protein.maps.fld -lfile ../input/$(PDB)/derived/$(PDB)_ligand.pdbqt -nev $(NEV) -nrun $(NRUN) -gfpop 1
@@ -428,7 +401,7 @@ emu: $(TARGET_DIR)/$(TARGET) keremu
 	# docking.aoco
 	# No actual hardware is built (NO .aocx)
 kerrpt: $(DEV_SRC)
-	aoc --board $(BOARD_HARP2) $(DEV_SRC) -o $(TARGET_DIR)/docking.aoco $(REP) -c --report -g
+	aoc --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR)/docking.aoco $(REP) -c --report -g
 	@echo " "
 	@echo "============================================================="
 	@echo "INFO: report files are under: bin/docking/reports/report.html"
@@ -442,7 +415,7 @@ kerrpt: $(DEV_SRC)
 	# docking.aoco
 	# docking.aocx
 hw: 	
-	aoc --board $(BOARD_HARP2) $(DEV_SRC) -o $(TARGET_DIR_HW)/docking.aocx
+	aoc --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW)/docking.aocx
 	@echo " "
 	@echo "==========================================================="
 	@echo "INFO: FPGA bitstream is under: bin_hw/docking(.aoco)(.aocx)"
@@ -450,7 +423,7 @@ hw:
 	@echo " "
 
 hw_higheffort:
-	aoc --high-effort --board $(BOARD_HARP2) $(DEV_SRC) -o $(TARGET_DIR_HW)/docking.aocx
+	aoc --high-effort --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW)/docking.aocx
 	@echo " "
 	@echo "==========================================================="
 	@echo "INFO: FPGA bitstream is under: bin_hw/docking(.aoco)(.aocx)"
@@ -464,7 +437,7 @@ hw_higheffort:
 	# docking.aoco
 	# docking.aocx
 hw_profile:
-	aoc --profile --board $(BOARD_HARP2) $(DEV_SRC) -o $(TARGET_DIR_HW_PROF)/docking.aocx
+	aoc --profile --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW_PROF)/docking.aocx
 	@echo " "
 	@echo "================================================================================"
 	@echo "INFO: instrumented FPGA bitstream is under: bin_hw_profile/docking(.aoco)(.aocx)"
@@ -472,38 +445,70 @@ hw_profile:
 	@echo " "
 
 
-HARP2_DIR := copyharp2_taskpar
-HARP2_DIR_DOCK := ofdock_taskpar_alt
+# Execute on sauron server
+# Host-recompilation
+# Copy of host to $(TARGET_DIR_HW)
+# The working directory is changed
+# So .dlg file is written in $(TARGET_DIR_HW)
+exe: $(TARGET_DIR)/$(TARGET)
+	cp $(TARGET_DIR)/$(TARGET) $(TARGET_DIR_HW)/ && \
+	cd $(TARGET_DIR_HW) && \
+	./$(TARGET) -ffile ../input/$(PDB)/derived/$(PDB)_protein.maps.fld -lfile ../input/$(PDB)/derived/$(PDB)_ligand.pdbqt -nrun 10
+	@echo " "
+	@echo "==========================================="
+	@echo "INFO: log file is under: bin_hw/docking.dlg"
+	@echo "==========================================="
+	@echo " "
+
+
+# Execute and profile on sauron server
+# Host-recompilation
+# Copy of host to $(TARGET_DIR_HW_PROF)
+# The working directory is changed
+# So .dlg file is written in $(TARGET_DIR_HW_PROF)
+exe-prof: $(TARGET_DIR)/$(TARGET)
+	cp $(TARGET_DIR)/$(TARGET) $(TARGET_DIR_HW_PROF)/ && \
+	cd $(TARGET_DIR_HW_PROF) && \
+	./$(TARGET) -ffile ../input/$(PDB)/derived/$(PDB)_protein.maps.fld -lfile ../input/$(PDB)/derived/$(PDB)_ligand.pdbqt  -nev $(NEV) -nrun 10
+	@echo " "
+	@echo "==================================================="
+	@echo "INFO: log file is under: bin_hw_profile/docking.dlg"
+	@echo "==================================================="
+	@echo " "
+
+COPY_DIR := copy_taskpar
+COPY_DIR_DOCK := ofdock_taskpar_alt
 
 # Delete an existing folder if previously created
-# Create a folder $(HARP2_DIR) in the parent directory
-# Copy binaries into $(HARP2_DIR) folder, avoiding the (innecesary) compilation intermediate files
-# Copy source files into $(HARP2_DIR) as host is built in the HARP2 front-end
-# Create a zip file out of the $(HARP2_DIR) folder
-copyharp2: clean_copyharp2
-	mkdir ../$(HARP2_DIR)
-	mkdir ../$(HARP2_DIR)/$(HARP2_DIR_DOCK)
-	mkdir ../$(HARP2_DIR)/$(HARP2_DIR_DOCK)/$(TARGET_DIR_HW)
-	mkdir ../$(HARP2_DIR)/$(HARP2_DIR_DOCK)/$(TARGET_DIR_HW_PROF)
-	cp $(TARGET_DIR_HW)/docking.* ../$(HARP2_DIR)/$(HARP2_DIR_DOCK)/$(TARGET_DIR_HW)/
-	cp $(TARGET_DIR_HW_PROF)/docking.* ../$(HARP2_DIR)/$(HARP2_DIR_DOCK)/$(TARGET_DIR_HW_PROF)/
-	cp Makefile ../$(HARP2_DIR)/$(HARP2_DIR_DOCK)/
-	cp defines.h ../$(HARP2_DIR)/$(HARP2_DIR_DOCK)/
-	cp -r device/ ../$(HARP2_DIR)/$(HARP2_DIR_DOCK)/
-	cp -r host/ ../$(HARP2_DIR)/$(HARP2_DIR_DOCK)/
-	cp -r input/ ../$(HARP2_DIR)/$(HARP2_DIR_DOCK)/
-	cp -r wrapcl/ ../$(HARP2_DIR)/$(HARP2_DIR_DOCK)/
-	cp -r ../common ../$(HARP2_DIR)/
-	cd ../;	zip -r $(HARP2_DIR).zip $(HARP2_DIR)
+# Create a folder $(COPY_DIR) in the parent directory
+# Copy binaries into $(COPY_DIR) folder, avoiding the (innecesary) compilation intermediate files
+# Copy source files into $(COPY_DIR) as host is built in the HARP2 front-end
+# Create a zip file out of the $(COPY_DIR) folder
+copy: clean-copy
+	mkdir ../$(COPY_DIR)
+	mkdir ../$(COPY_DIR)/$(COPY_DIR_DOCK)
+	mkdir ../$(COPY_DIR)/$(COPY_DIR_DOCK)/$(TARGET_DIR_HW)
+	mkdir ../$(COPY_DIR)/$(COPY_DIR_DOCK)/$(TARGET_DIR_HW_PROF)
+	cp $(TARGET_DIR_HW)/docking.* ../$(COPY_DIR)/$(COPY_DIR_DOCK)/$(TARGET_DIR_HW)/
+	cp $(TARGET_DIR_HW_PROF)/docking.* ../$(COPY_DIR)/$(COPY_DIR_DOCK)/$(TARGET_DIR_HW_PROF)/
+	cp Makefile ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
+	cp defines.h ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
+	cp -r device/ ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
+	cp -r host/ ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
+	cp -r input/ ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
+	cp -r wrapcl/ ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
+	cp -r ../common ../$(COPY_DIR)/
+	cp ../conf_aoc160_sauron.sh ../$(COPY_DIR)/
+	cd ../;	zip -r $(COPY_DIR).zip $(COPY_DIR)
 	@echo "================================================================================"
-	@echo "The next step is to transfer the .zip file to the HARP2 fron-end: "
+	@echo "The next step is to transfer the .zip file to sauron server: "
 	@echo "> cd .."
-	@echo "> scp copyharp2_taskpar.zip h2solis@fe-1.harp.pc2.uni-paderborn.de:~/ocladock/"
+	@echo "> scp copy_taskpar.zip sauron:~/"
 	@echo "================================================================================"
 	@echo " "
 
-clean_copyharp2:
-	rm -rf ../$(HARP2_DIR)
+clean-copy:
+	rm -rf ../$(COPY_DIR)
 
 
 $(TARGET_DIR) :
