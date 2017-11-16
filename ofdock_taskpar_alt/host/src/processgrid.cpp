@@ -9,7 +9,9 @@
 
 
 #include "processgrid.h"
+#include "AOCLUtils/aocl_utils.h"
 
+using namespace aocl_utils;
 
 int get_gridinfo(const char* fldfilename, Gridinfo* mygrid)
 {
@@ -120,7 +122,13 @@ int get_gridvalues_f(const Gridinfo* mygrid, float** fgrids)
 	char tempstr [128];
 	float* mypoi;
 
+/*
 	*fgrids = (float*) malloc((sizeof(float))*(mygrid->num_of_atypes+2)*
+						  (mygrid->size_xyz[0])*
+					          (mygrid->size_xyz[1])*
+						  (mygrid->size_xyz[2]));
+*/
+	*fgrids = (float*) alignedMalloc((sizeof(float))*(mygrid->num_of_atypes+2)*
 						  (mygrid->size_xyz[0])*
 					          (mygrid->size_xyz[1])*
 						  (mygrid->size_xyz[2]));

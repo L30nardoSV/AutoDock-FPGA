@@ -345,23 +345,9 @@ all : $(TARGET_DIR)/$(TARGET)
 #			-o $(TARGET_DIR)/$(TARGET)
 
 # Enable this when compiling host in HARP2 machine
-#$(TARGET_DIR)/$(TARGET) : Makefile $(SRCS) $(INCS) $(TARGET_DIR)
-#	$(ECHO)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -fPIC $(foreach D,$(INC_DIRS),-I$D) \
-#			$(AOCL_COMPILE_CONFIG) $(SRCS) $(AOCL_LINK_CONFIG) \
-#			$(foreach D,$(LIB_DIRS),-L$D) \
-#			$(foreach L,$(LIBS),-l$L) \
-#			-o $(TARGET_DIR)/$(TARGET) $(DOCK_DEBUG_FLAG) $(DEV) $(DOCK_PROG) $(ENABLE_KERNELS) $(REP)
-#	@echo " "
-#	@echo "================================"
-#	@echo "INFO: host binary is under: bin/"
-#	@echo "================================"
-#	@echo " "
-
-# Adapted only for emulating HARP2 BSP on celebdil
-# Disable this when compiling host in HARP2 machine
 $(TARGET_DIR)/$(TARGET) : Makefile $(SRCS) $(INCS) $(TARGET_DIR)
 	$(ECHO)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -fPIC $(foreach D,$(INC_DIRS),-I$D) \
-			$(AOCL_COMPILE_CONFIG) $(SRCS) $(AOCL_LINK_CONFIG_ADAPTED) \
+			$(AOCL_COMPILE_CONFIG) $(SRCS) $(AOCL_LINK_CONFIG) \
 			$(foreach D,$(LIB_DIRS),-L$D) \
 			$(foreach L,$(LIBS),-l$L) \
 			-o $(TARGET_DIR)/$(TARGET) $(DOCK_DEBUG_FLAG) $(DEV) $(DOCK_PROG) $(ENABLE_KERNELS) $(REP)
@@ -370,6 +356,20 @@ $(TARGET_DIR)/$(TARGET) : Makefile $(SRCS) $(INCS) $(TARGET_DIR)
 	@echo "INFO: host binary is under: bin/"
 	@echo "================================"
 	@echo " "
+
+## Adapted only for emulating HARP2 BSP on celebdil
+## Disable this when compiling host in HARP2 machine
+#$(TARGET_DIR)/$(TARGET) : Makefile $(SRCS) $(INCS) $(TARGET_DIR)
+#	$(ECHO)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -fPIC $(foreach D,$(INC_DIRS),-I$D) \
+#			$(AOCL_COMPILE_CONFIG) $(SRCS) $(AOCL_LINK_CONFIG_ADAPTED) \
+#			$(foreach D,$(LIB_DIRS),-L$D) \
+#			$(foreach L,$(LIBS),-l$L) \
+#			-o $(TARGET_DIR)/$(TARGET) $(DOCK_DEBUG_FLAG) $(DEV) $(DOCK_PROG) $(ENABLE_KERNELS) $(REP)
+#	@echo " "
+#	@echo "================================"
+#	@echo "INFO: host binary is under: bin/"
+#	@echo "================================"
+#	@echo " "
 
 
 
