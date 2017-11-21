@@ -436,7 +436,7 @@ hw_higheffort:
 	# "docking" folder
 	# docking.aoco
 	# docking.aocx
-hw_profile:
+hw-prof:
 	aoc --profile --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW_PROF)/docking.aocx
 	@echo " "
 	@echo "================================================================================"

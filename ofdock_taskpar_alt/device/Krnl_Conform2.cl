@@ -45,6 +45,19 @@ void Krnl_Conform2(
 		rotlist_localcache [c] = KerConstStatic_rotlist_const [c];
 	}
 
+	__local float3 ref_coords_localcache [MAX_NUM_OF_ATOMS];
+	for (uchar c = 0; c < DockConst_num_of_atoms; c++) {
+		ref_coords_localcache [c] = KerConstDynamic_ref_coords_const [c];
+	}
+
+	__local float3 rotbonds_moving_vectors_localcache[MAX_NUM_OF_ROTBONDS];
+	__local float3 rotbonds_unit_vectors_localcache[MAX_NUM_OF_ROTBONDS];
+	for (uchar c = 0; c < MAX_NUM_OF_ROTBONDS; c++) {
+		rotbonds_moving_vectors_localcache [c] = KerConstDynamic_rotbonds_moving_vectors_const[c];
+		rotbonds_unit_vectors_localcache   [c] = KerConstDynamic_rotbonds_unit_vectors_const [c];
+	}
+
+
 while(active) {
 
 	//printf("BEFORE In CONFORM CHANNEL\n");
@@ -162,7 +175,10 @@ while(active) {
 				atom_to_rotate[1] = KerConstDynamic_ref_coords_y_const[atom_id];
 				atom_to_rotate[2] = KerConstDynamic_ref_coords_z_const[atom_id];
 				*/
+				/*
 				atom_to_rotate = KerConstDynamic_ref_coords_const[atom_id];
+				*/
+				atom_to_rotate = ref_coords_localcache [atom_id];
 			}
 			else
 			{	
@@ -185,15 +201,20 @@ while(active) {
 			else	//if rotating around rotatable bond
 			{
 				uint rotbond_id = (rotation_list_element & RLIST_RBONDID_MASK) >> RLIST_RBONDID_SHIFT;
-	
+				/*
 				rotation_unitvec = KerConstDynamic_rotbonds_unit_vectors_const[rotbond_id];
+				*/
+				rotation_unitvec = rotbonds_unit_vectors_localcache [rotbond_id];
 				
 				/*
 				rotation_angle = genotype[6+rotbond_id]*DEG_TO_RAD;
 				*/
 				rotation_angle = genotype[6+rotbond_id];
 
+				/*
 				rotation_movingvec = KerConstDynamic_rotbonds_moving_vectors_const[rotbond_id];
+				*/
+				rotation_movingvec = rotbonds_moving_vectors_localcache [rotbond_id];
 
 				//in addition performing the first movement 
 				//which is needed only if rotating around rotatable bond
@@ -204,7 +225,7 @@ while(active) {
 			float quatrot_left_x, quatrot_left_y, quatrot_left_z, quatrot_left_q;
 			float quatrot_temp_x, quatrot_temp_y, quatrot_temp_z, quatrot_temp_q;
 
-			rotation_angle = rotation_angle*0.5;
+			rotation_angle = rotation_angle*0.5f;
 
 			/*
 			quatrot_left_q = cos(rotation_angle);

@@ -33,6 +33,28 @@ void Krnl_IntraE(
 {
 	bool active = true;
 
+	__local char  atom_types_localcache   [MAX_NUM_OF_ATOMS];
+	__local float atom_charges_localcache [MAX_NUM_OF_ATOMS];
+	__local float VWpars_AC_localcache    [MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES];
+	__local float VWpars_BD_localcache    [MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES];
+	__local float dspars_S_localcache     [MAX_NUM_OF_ATYPES];
+	__local float dspars_V_localcache     [MAX_NUM_OF_ATYPES];
+
+	for (uchar i=0; i<DockConst_num_of_atoms; i++) {
+		atom_types_localcache   [i] = KerConstStatic_atom_types_const   [i];
+		atom_charges_localcache [i] = KerConstStatic_atom_charges_const [i];
+	}
+
+	for (uchar i=0; i<DockConst_num_of_atypes*DockConst_num_of_atypes; i++) {
+		if (i < DockConst_num_of_atypes) {
+			dspars_S_localcache [i] = KerConstStatic_dspars_S_const [i];
+			dspars_V_localcache [i] = KerConstStatic_dspars_V_const [i];
+		}
+	
+		VWpars_AC_localcache [i] = KerConstStatic_VWpars_AC_const [i];
+		VWpars_BD_localcache [i] = KerConstStatic_VWpars_BD_const [i];
+	}
+
 while(active) {
 	char mode;
 
@@ -127,9 +149,15 @@ while(active) {
 			char atom2_typeid = KerConstStatic_atom_types_const [atom2_id];
 
 			//calculating van der Waals / hydrogen bond term
+			/*
 			partialE1 = KerConstStatic_VWpars_AC_const[atom1_typeid*DockConst_num_of_atypes+atom2_typeid]*inverse_distance_pow_12;
+			*/
+			partialE1 = VWpars_AC_localcache [atom1_typeid*DockConst_num_of_atypes+atom2_typeid]*inverse_distance_pow_12;
 
+			/*
 			float tmp_pE2 = KerConstStatic_VWpars_BD_const[atom1_typeid*DockConst_num_of_atypes+atom2_typeid];
+			*/
+			float tmp_pE2 = VWpars_BD_localcache [atom1_typeid*DockConst_num_of_atypes+atom2_typeid];
 
 			if (ref_intraE_contributors_const[2] == 1)	//H-bond
 				partialE2 = tmp_pE2 * inverse_distance_pow_10;
@@ -137,12 +165,21 @@ while(active) {
 				partialE2 = tmp_pE2 * inverse_distance_pow_6;
 
 			//calculating electrostatic term
+			/*
 			partialE3 = DockConst_coeff_elec*KerConstStatic_atom_charges_const[atom1_id]*KerConstStatic_atom_charges_const[atom2_id]/(distance_leo*(-8.5525f + 86.9525f/(1.0f + 7.7839f*exp(-0.3154f*distance_leo))));
+			*/
+			partialE3 = DockConst_coeff_elec*atom_charges_localcache[atom1_id]*atom_charges_localcache[atom2_id]/(distance_leo*(-8.5525f + 86.9525f/(1.0f + 7.7839f*exp(-0.3154f*distance_leo))));
 
 			//calculating desolvation term
+			/*
 			partialE4 = (
 				  ( KerConstStatic_dspars_S_const[atom1_typeid] + DockConst_qasp*fabs(KerConstStatic_atom_charges_const[atom1_id]) ) * KerConstStatic_dspars_V_const[atom2_typeid] + 
 				  ( KerConstStatic_dspars_S_const[atom2_typeid] + DockConst_qasp*fabs(KerConstStatic_atom_charges_const[atom2_id]) ) * KerConstStatic_dspars_V_const[atom1_typeid]) * 
+				 DockConst_coeff_desolv*exp(-0.0386f*distance_pow_2);
+			*/
+			partialE4 = (
+				  (dspars_S_localcache[atom1_typeid] + DockConst_qasp*fabs(atom_charges_localcache[atom1_id])) * dspars_V_localcache[atom2_typeid] + 
+				  (dspars_S_localcache[atom2_typeid] + DockConst_qasp*fabs(atom_charges_localcache[atom2_id])) * dspars_V_localcache[atom1_typeid]) * 
 				 DockConst_coeff_desolv*exp(-0.0386f*distance_pow_2);
 
 		} // End of if: if ((dist < dcutoff) && (dist < 20.48))	

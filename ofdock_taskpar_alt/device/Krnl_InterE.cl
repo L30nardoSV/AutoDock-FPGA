@@ -31,16 +31,16 @@ void Krnl_InterE(
 
 	bool active = true;
 
-/*
-	__local char  ref_atom_types_const  [MAX_NUM_OF_ATOMS];
-	__local float ref_atom_charges_const[MAX_NUM_OF_ATOMS];
+	__local char  atom_types_localcache   [MAX_NUM_OF_ATOMS];
+	__local float atom_charges_localcache [MAX_NUM_OF_ATOMS];
 
 	for (uchar i=0; i<DockConst_num_of_atoms; i++) {
-		ref_atom_types_const [i]   = KerConstStatic_atom_types_const[i];
-		ref_atom_charges_const [i] = KerConstStatic_atom_charges_const[i];
+		atom_types_localcache [i]   = KerConstStatic_atom_types_const   [i];
+		atom_charges_localcache [i] = KerConstStatic_atom_charges_const [i];
 	}
-*/
+
 while(active) {
+
 	char mode;
 
 	//printf("BEFORE In INTER CHANNEL\n");
@@ -49,6 +49,7 @@ while(active) {
 	// --------------------------------------------------------------
 	active = read_channel_altera(chan_Conf2Intere_active);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
+
 	mode   = read_channel_altera(chan_Conf2Intere_mode);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 
@@ -81,13 +82,18 @@ while(active) {
 	// for each atom
 	for (uchar atom1_id=0; atom1_id<DockConst_num_of_atoms; atom1_id++)
 	{
-		/*char atom1_typeid = ref_atom_types_const[atom1_id];*/
+		/*
 		char atom1_typeid = KerConstStatic_atom_types_const[atom1_id];
+		*/
+		char atom1_typeid = atom_types_localcache [atom1_id];
+
 		float x = loc_coords[atom1_id][0x0];
 		float y = loc_coords[atom1_id][0x1];
 		float z = loc_coords[atom1_id][0x2];
-		/*float q = ref_atom_charges_const[atom1_id];*/
+		/*
 		float q = KerConstStatic_atom_charges_const[atom1_id];
+		*/
+		float q = atom_charges_localcache [atom1_id];
 
 		float partialE1;
 		float partialE2;
