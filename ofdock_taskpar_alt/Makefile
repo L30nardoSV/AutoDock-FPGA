@@ -469,7 +469,7 @@ exe: $(TARGET_DIR)/$(TARGET)
 exe-prof: $(TARGET_DIR)/$(TARGET)
 	cp $(TARGET_DIR)/$(TARGET) $(TARGET_DIR_HW_PROF)/ && \
 	cd $(TARGET_DIR_HW_PROF) && \
-	./$(TARGET) -ffile ../input/$(PDB)/derived/$(PDB)_protein.maps.fld -lfile ../input/$(PDB)/derived/$(PDB)_ligand.pdbqt  -nev $(NEV) -nrun 10
+	./$(TARGET) -ffile ../input/$(PDB)/derived/$(PDB)_protein.maps.fld -lfile ../input/$(PDB)/derived/$(PDB)_ligand.pdbqt -nrun 10
 	@echo " "
 	@echo "==================================================="
 	@echo "INFO: log file is under: bin_hw_profile/docking.dlg"

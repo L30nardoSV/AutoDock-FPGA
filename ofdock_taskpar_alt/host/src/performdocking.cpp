@@ -721,7 +721,8 @@ filled with clock() */
 	for (unsigned int run_cnt = 0; run_cnt < mypars->num_of_runs; run_cnt++)
 	{
 
-		printf("Run %u started ...     \n", run_cnt+1); fflush(stdout);
+		printf("Run %u started ...     \n", run_cnt+1); 
+		fflush(stdout);
 
 
 
@@ -995,9 +996,9 @@ filled with clock() */
 
 
 
-
+		/*
 		fflush(stdout);
-
+		*/
 
 		//copy results from device
 		memcopyBufferObjectFromDevice(command_queue1,array_evals_and_generations_performed,mem_evals_and_generations_performed,2*sizeof(unsigned int));
