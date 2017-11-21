@@ -1247,28 +1247,32 @@ bool init() {
   // Create the kernel - name passed in here must match kernel name in the
   // original CL file, that was compiled into an AOCX file using the AOC tool
 #ifdef ENABLE_KERNEL1
-  command_queue1 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  //command_queue1 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  command_queue1 = clCreateCommandQueue(context, device, 0, &status);
   checkError(status, "Failed to create command queue1");
   kernel1 = clCreateKernel(program, name_k1, &status);
   checkError(status, "Failed to create kernel");
 #endif
 
 #ifdef ENABLE_KERNEL2
-  command_queue2 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  //command_queue2 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  command_queue2 = clCreateCommandQueue(context, device, 0, &status);
   checkError(status, "Failed to create command queue2");
   kernel2 = clCreateKernel(program, name_k2, &status);
   checkError(status, "Failed to create kernel");
 #endif
 
 #ifdef ENABLE_KERNEL3
-  command_queue3 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  //command_queue3 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  command_queue3 = clCreateCommandQueue(context, device, 0, &status);
   checkError(status, "Failed to create command queue3");
   kernel3 = clCreateKernel(program, name_k3, &status);
   checkError(status, "Failed to create kernel");
 #endif
 
 #ifdef ENABLE_KERNEL4
-  command_queue4 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  //command_queue4 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  command_queue4 = clCreateCommandQueue(context, device, 0, &status);
   checkError(status, "Failed to create command queue4");
   kernel4 = clCreateKernel(program, name_k4, &status);
   checkError(status, "Failed to create kernel");
@@ -1277,133 +1281,152 @@ bool init() {
 
 
 #ifdef ENABLE_KERNEL5
-  command_queue5 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  //command_queue5 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  command_queue5 = clCreateCommandQueue(context, device, 0, &status);
   checkError(status, "Failed to create command queue5");
   kernel5 = clCreateKernel(program, name_k5, &status);
   checkError(status, "Failed to create kernel");
 #endif
 
 #ifdef ENABLE_KERNEL6
-  command_queue6 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  //command_queue6 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  command_queue6 = clCreateCommandQueue(context, device, 0, &status);
   checkError(status, "Failed to create command queue6");
   kernel6 = clCreateKernel(program, name_k6, &status);
   checkError(status, "Failed to create kernel");
 #endif
 
 #ifdef ENABLE_KERNEL7
-  command_queue7 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  //command_queue7 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  command_queue7 = clCreateCommandQueue(context, device, 0, &status);
   checkError(status, "Failed to create command queue7");
   kernel7 = clCreateKernel(program, name_k7, &status);
   checkError(status, "Failed to create kernel");
 #endif
 
 #ifdef ENABLE_KERNEL8
-  command_queue8 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  //command_queue8 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  command_queue8 = clCreateCommandQueue(context, device, 0, &status);
   checkError(status, "Failed to create command queue8");
   kernel8 = clCreateKernel(program, name_k8, &status);
   checkError(status, "Failed to create kernel");
 #endif
 
 #ifdef ENABLE_KERNEL9
-  command_queue9 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  //command_queue9 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  command_queue9 = clCreateCommandQueue(context, device, 0, &status);
   checkError(status, "Failed to create command queue9");
   kernel9 = clCreateKernel(program, name_k9, &status);
   checkError(status, "Failed to create kernel");
 #endif
 
 #ifdef ENABLE_KERNEL10
-  command_queue10 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  //command_queue10 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  command_queue10 = clCreateCommandQueue(context, device, 0, &status);
   checkError(status, "Failed to create command queue10");
   kernel10 = clCreateKernel(program, name_k10, &status);
   checkError(status, "Failed to create kernel");
 #endif
 
 #ifdef ENABLE_KERNEL11
-  command_queue11 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  //command_queue11 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  command_queue11 = clCreateCommandQueue(context, device, 0, &status);
   checkError(status, "Failed to create command queue10");
   kernel11 = clCreateKernel(program, name_k11, &status);
   checkError(status, "Failed to create kernel");
 #endif
 
 #ifdef ENABLE_KERNEL12
-  command_queue12 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  //command_queue12 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  command_queue12 = clCreateCommandQueue(context, device, 0, &status);
   checkError(status, "Failed to create command queue12");
   kernel12 = clCreateKernel(program, name_k12, &status);
   checkError(status, "Failed to create kernel");
 #endif
 
 #ifdef ENABLE_KERNEL13
-  command_queue13 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  //command_queue13 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  command_queue13 = clCreateCommandQueue(context, device, 0, &status);
   checkError(status, "Failed to create command queue13");
   kernel13 = clCreateKernel(program, name_k13, &status);
   checkError(status, "Failed to create kernel");
 #endif
 
 #ifdef ENABLE_KERNEL14
-  command_queue14 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  //command_queue14 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  command_queue14 = clCreateCommandQueue(context, device, 0, &status);
   checkError(status, "Failed to create command queue14");
   kernel14 = clCreateKernel(program, name_k14, &status);
   checkError(status, "Failed to create kernel");
 #endif
 
 #ifdef ENABLE_KERNEL15
-  command_queue15 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  //command_queue15 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  command_queue15 = clCreateCommandQueue(context, device, 0, &status);
   checkError(status, "Failed to create command queue15");
   kernel15 = clCreateKernel(program, name_k15, &status);
   checkError(status, "Failed to create kernel");
 #endif
 
 #ifdef ENABLE_KERNEL16
-  command_queue16 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  //command_queue16 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  command_queue16 = clCreateCommandQueue(context, device, 0, &status);
   checkError(status, "Failed to create command queue13");
   kernel16 = clCreateKernel(program, name_k16, &status);
   checkError(status, "Failed to create kernel");
 #endif
 
 #ifdef ENABLE_KERNEL17
-  command_queue17 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  //command_queue17 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  command_queue17 = clCreateCommandQueue(context, device, 0, &status);
   checkError(status, "Failed to create command queue17");
   kernel17 = clCreateKernel(program, name_k17, &status);
   checkError(status, "Failed to create kernel");
 #endif
 
 #ifdef ENABLE_KERNEL18
-  command_queue18 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  //command_queue18 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  command_queue18 = clCreateCommandQueue(context, device, 0, &status);
   checkError(status, "Failed to create command queue18");
   kernel18 = clCreateKernel(program, name_k18, &status);
   checkError(status, "Failed to create kernel");
 #endif
 
 #ifdef ENABLE_KERNEL19
-  command_queue19 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  //command_queue19 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  command_queue19 = clCreateCommandQueue(context, device, 0, &status);
   checkError(status, "Failed to create command queue19");
   kernel19 = clCreateKernel(program, name_k19, &status);
   checkError(status, "Failed to create kernel");
 #endif
 
 #ifdef ENABLE_KERNEL20
-  command_queue20 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  //command_queue20 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  command_queue20 = clCreateCommandQueue(context, device, 0, &status);
   checkError(status, "Failed to create command queue20");
   kernel20 = clCreateKernel(program, name_k20, &status);
   checkError(status, "Failed to create kernel");
 #endif
 
 #ifdef ENABLE_KERNEL21
-  command_queue21 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  //command_queue21 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  command_queue21 = clCreateCommandQueue(context, device, 0, &status);
   checkError(status, "Failed to create command queue21");
   kernel21 = clCreateKernel(program, name_k21, &status);
   checkError(status, "Failed to create kernel");
 #endif
 
 #ifdef ENABLE_KERNEL22
-  command_queue22 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  //command_queue22 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  command_queue22 = clCreateCommandQueue(context, device, 0, &status);
   checkError(status, "Failed to create command queue22");
   kernel22 = clCreateKernel(program, name_k22, &status);
   checkError(status, "Failed to create kernel");
 #endif
 
 #ifdef ENABLE_KERNEL23
-  command_queue23 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  //command_queue23 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  command_queue23 = clCreateCommandQueue(context, device, 0, &status);
   checkError(status, "Failed to create command queue23");
   kernel23 = clCreateKernel(program, name_k23, &status);
   checkError(status, "Failed to create kernel");
