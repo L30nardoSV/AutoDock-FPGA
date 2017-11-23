@@ -253,11 +253,8 @@ while(active) {
 }
 
 __kernel __attribute__ ((max_global_work_dim(0)))
-void Krnl_Prng_LS_float(const unsigned int seed
-			/*
-			,
+void Krnl_Prng_LS_float(const unsigned int seed,
 		        const unsigned int num_genes
-			*/
 			){
 
 	uint lfsr = seed;
@@ -267,9 +264,7 @@ while(active) {
 	//active  = read_channel_altera(chan_GA2PRNG_LS_float_active);
 	active  = read_channel_altera(chan_Arbiter_LS_float_active);
 	
-	/*
 	for(uchar i=0; i<num_genes; i++) {
-	*/
 		float tmp;
 		uchar lsb;
 		lsb = lfsr & 0x01u;
@@ -280,15 +275,14 @@ while(active) {
 		if(active) {
 			write_channel_altera(chan_PRNG2GA_LS_float_prng, tmp);
 		}
-	/*
 	}
-	*/
 } // End of while(active)
 
 }
 
 __kernel __attribute__ ((max_global_work_dim(0)))
-void Krnl_Prng_LS2_float(const unsigned int seed
+void Krnl_Prng_LS2_float(const unsigned int seed,
+			 const unsigned int num_genes
 			){
 
 	uint lfsr = seed;
@@ -298,9 +292,7 @@ while(active) {
 	//active  = read_channel_altera(chan_GA2PRNG_LS_float_active);
 	active  = read_channel_altera(chan_Arbiter_LS2_float_active);
 	
-	/*
 	for(uchar i=0; i<num_genes; i++) {
-	*/
 		float tmp;
 		uchar lsb;
 		lsb = lfsr & 0x01u;
@@ -311,15 +303,15 @@ while(active) {
 		if(active) {
 			write_channel_altera(chan_PRNG2GA_LS2_float_prng, tmp);
 		}
-	/*
 	}
-	*/
 } // End of while(active)
+
 }
 
 
 __kernel __attribute__ ((max_global_work_dim(0)))
-void Krnl_Prng_LS3_float(const unsigned int seed
+void Krnl_Prng_LS3_float(const unsigned int seed,
+			 const unsigned int num_genes
 			){
 
 	uint lfsr = seed;
@@ -329,9 +321,7 @@ while(active) {
 	//active  = read_channel_altera(chan_GA2PRNG_LS_float_active);
 	active  = read_channel_altera(chan_Arbiter_LS3_float_active);
 	
-	/*
 	for(uchar i=0; i<num_genes; i++) {
-	*/
 		float tmp;
 		uchar lsb;
 		lsb = lfsr & 0x01u;
@@ -342,9 +332,7 @@ while(active) {
 		if(active) {
 			write_channel_altera(chan_PRNG2GA_LS3_float_prng, tmp);
 		}
-	/*
 	}
-	*/
 } // End of while(active)
 
 }

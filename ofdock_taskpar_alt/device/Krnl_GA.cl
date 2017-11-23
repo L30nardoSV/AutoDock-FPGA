@@ -77,13 +77,13 @@ channel bool  	chan_GA2PRNG_LS_ushort_active;
 channel ushort  chan_PRNG2GA_LS_ushort_prng;
 
 channel bool  	chan_GA2PRNG_LS_float_active;
-channel float   chan_PRNG2GA_LS_float_prng;
+channel float   chan_PRNG2GA_LS_float_prng __attribute__((depth(MAX_NUM_OF_ROTBONDS+6)));
 
 channel bool  	chan_GA2PRNG_LS2_float_active;
-channel float   chan_PRNG2GA_LS2_float_prng;
+channel float   chan_PRNG2GA_LS2_float_prng __attribute__((depth(MAX_NUM_OF_ROTBONDS+6)));
 
 channel bool  	chan_GA2PRNG_LS3_float_active;
-channel float   chan_PRNG2GA_LS3_float_prng;
+channel float   chan_PRNG2GA_LS3_float_prng __attribute__((depth(MAX_NUM_OF_ROTBONDS+6)));
 
 channel bool  	chan_GA2PRNG_Off_active;
 

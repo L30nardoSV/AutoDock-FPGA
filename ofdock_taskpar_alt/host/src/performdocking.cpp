@@ -603,7 +603,7 @@ filled with clock() */
 
 
 #ifdef ENABLE_KERNEL7 // Krnl_PRNG_float
-	//setKernelArg(kernel7,1, sizeof(unsigned int),  &dockpars.num_of_genes);
+	setKernelArg(kernel7,1, sizeof(unsigned int),  &dockpars.num_of_genes);
 #endif // End of ENABLE_KERNEL7
 
 #ifdef ENABLE_KERNEL8 // Krnl_PRNG_ushort
@@ -633,6 +633,10 @@ filled with clock() */
 #ifdef ENABLE_KERNEL13 // Krnl_LS_Arbiter
 	setKernelArg(kernel13,0, sizeof(unsigned int),  &dockpars.num_of_genes);
 #endif // End of ENABLE_KERNEL12
+
+#ifdef ENABLE_KERNEL14 // Krnl_PRNG_LS2_float
+	setKernelArg(kernel14,1, sizeof(unsigned int),  &dockpars.num_of_genes);
+#endif // End of ENABLE_KERNEL14
 
 #ifdef ENABLE_KERNEL15 // Krnl_LS2
 	setKernelArg(kernel15,0, sizeof(unsigned int),  &dockpars.max_num_of_iters);
@@ -700,6 +704,10 @@ filled with clock() */
 	setKernelArg(kernel19,12, sizeof(float),                          	&dockpars.qasp);
 	setKernelArg(kernel19,13, sizeof(float),                          	&dockpars.coeff_desolv);
 #endif // End of ENABLE_KERNEL19
+
+#ifdef ENABLE_KERNEL20 // Krnl_PRNG_LS3_float
+	setKernelArg(kernel20,1, sizeof(unsigned int),  &dockpars.num_of_genes);
+#endif // End of ENABLE_KERNEL20
 
 #ifdef ENABLE_KERNEL21 // Krnl_LS3
 	setKernelArg(kernel21,0, sizeof(unsigned int),  &dockpars.max_num_of_iters);

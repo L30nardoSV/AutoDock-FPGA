@@ -351,9 +351,10 @@ $(TARGET_DIR)/$(TARGET) : Makefile $(SRCS) $(INCS) $(TARGET_DIR)
 	@echo " "
 
 # Docking parameters
+# NEV was usually set to 100000
 PDB  := 3ptb
 NRUN := 10
-NEV  := 100000
+NEV  := 100000 
 
 # Device folder
 # Device main kernel name
@@ -422,7 +423,7 @@ hw:
 	@echo "==========================================================="
 	@echo " "
 
-hw_higheffort:
+hw-higheffort:
 	aoc --high-effort --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW)/docking.aocx
 	@echo " "
 	@echo "==========================================================="

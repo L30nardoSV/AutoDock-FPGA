@@ -74,6 +74,8 @@ void Krnl_LS(
 	__local float genotype_deviate [ACTUAL_GENOTYPE_LENGTH];
 	__local float genotype_bias [ACTUAL_GENOTYPE_LENGTH];  
 
+	//__local float tmp_prng [ACTUAL_GENOTYPE_LENGTH];
+
 	bool active = true;
 
 while(active) {
@@ -122,15 +124,26 @@ if (active == true) {
 		#endif
 		// -----------------------------------------------
 
+		write_channel_altera(chan_GA2PRNG_LS_float_active, true);
+		mem_fence(CLK_CHANNEL_MEM_FENCE);
+
 		// new random deviate
 		// rho is the deviation of the uniform distribution
 		for (uchar i=0; i<DockConst_num_of_genes; i++) {
+			/*
 			write_channel_altera(chan_GA2PRNG_LS_float_active, true);
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 			float tmp_prng = read_channel_altera(chan_PRNG2GA_LS_float_prng);
+			mem_fence(CLK_CHANNEL_MEM_FENCE);
+			*/
+			//tmp_prng [i] = read_channel_altera(chan_PRNG2GA_LS_float_prng);
+			float tmp_prng = read_channel_altera(chan_PRNG2GA_LS_float_prng);
+			mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 			// tmp1 is genotype_deviate
+			
 			float tmp1 = rho * (2.0f*tmp_prng - 1.0f);
+			//float tmp1 = rho * (2.0f*tmp_prng[i] - 1.0f);
 
 			if (i<3) {
 				tmp1 = tmp1 * DockConst_base_dmov_mul_sqrt3;
