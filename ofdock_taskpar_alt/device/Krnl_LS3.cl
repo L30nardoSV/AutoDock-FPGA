@@ -131,7 +131,7 @@ if (active == true) {
 		// Not completely strict as the (iteration_cnt < DockConst_max_num_of_iters) is ignored
 		// In practice, rho condition dominates most of the cases
 		write_channel_altera(chan_LS2Arbiter_LS3_end, (rho < DockConst_rho_lower_bound)?true:false);
-		mem_fence(CLK_CHANNEL_MEM_FENCE);
+		//mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 		write_channel_altera(chan_GA2PRNG_LS3_float_active, true);
 		mem_fence(CLK_CHANNEL_MEM_FENCE);
@@ -194,7 +194,7 @@ if (active == true) {
 		float energyIA_LS_rx = read_channel_altera(chan_Intrae2StoreLS_LS3_intrae);
 //printf("INTRAE received in LS3 ... ");
 		float energyIE_LS_rx = read_channel_altera(chan_Intere2StoreLS_LS3_intere);
-		mem_fence(CLK_CHANNEL_MEM_FENCE);
+		//mem_fence(CLK_CHANNEL_MEM_FENCE);
 //printf("INTERE received in LS3\n");
 		float candidate_energy = energyIA_LS_rx + energyIE_LS_rx;
 

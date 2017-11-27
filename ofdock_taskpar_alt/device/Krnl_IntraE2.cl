@@ -69,6 +69,7 @@ while(active) {
 	mode   = read_channel_altera(chan_Conf2Intrae_LS2_mode);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 
+	/*
 	float __attribute__ ((
 			      memory,
 			      numbanks(2),
@@ -77,14 +78,27 @@ while(active) {
 			      numreadports(2),
 			      numwriteports(1)
 			    )) loc_coords[MAX_NUM_OF_ATOMS][3];
+	*/
 
+	float3 __attribute__ ((
+			      memory,
+			      numbanks(2),
+			      bankwidth(16),
+			      singlepump,
+			      numreadports(2),
+			      numwriteports(1)
+			    )) loc_coords[MAX_NUM_OF_ATOMS];
+	/*
 	float3 position_xyz;
-
+	*/
 	for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt++) {
+		/*
 		position_xyz = read_channel_altera(chan_Conf2Intrae_LS2_xyz);
 		loc_coords[pipe_cnt][0x0] = position_xyz.x;
 		loc_coords[pipe_cnt][0x1] = position_xyz.y;
 		loc_coords[pipe_cnt][0x2] = position_xyz.z;
+		*/
+		loc_coords[pipe_cnt] = read_channel_altera(chan_Conf2Intrae_LS2_xyz);
 	}
 	// --------------------------------------------------------------
 	//printf("AFTER In INTRA CHANNEL\n");
@@ -108,9 +122,17 @@ while(active) {
 		char atom1_id = ref_intraE_contributors_const[0];
 		char atom2_id = ref_intraE_contributors_const[1];
 
+		/*
 		float subx = loc_coords[atom1_id][0x0] - loc_coords[atom2_id][0x0];
 		float suby = loc_coords[atom1_id][0x1] - loc_coords[atom2_id][0x1];
 		float subz = loc_coords[atom1_id][0x2] - loc_coords[atom2_id][0x2];
+		*/
+	
+		float3 loc_coords_atid1 = loc_coords[atom1_id];
+		float3 loc_coords_atid2 = loc_coords[atom2_id];
+		float subx = loc_coords_atid1.x - loc_coords_atid2.x;
+		float suby = loc_coords_atid1.y - loc_coords_atid2.y;
+		float subz = loc_coords_atid1.z - loc_coords_atid2.z;
 
 		//distance_leo = sqrt(subx*subx + suby*suby + subz*subz)*DockConst_grid_spacing;
 		float distance_leo = sqrt_custom(subx*subx + suby*suby + subz*subz)*DockConst_grid_spacing;
