@@ -145,11 +145,20 @@ while(active) {
 	float sin_theta = sin(theta);
 	*/
 	float sin_theta, cos_theta;
+	/*
 	sin_theta = sincos(theta, &cos_theta);
+	*/
+	sin_theta = native_sin(theta);
+	cos_theta = native_cos(theta);
 
 	float3 genrot_unitvec;
+	/*
 	genrot_unitvec.x = sin_theta*cos(phi);
 	genrot_unitvec.y = sin_theta*sin(phi);
+	*/
+	genrot_unitvec.x = sin_theta*native_cos(phi);
+	genrot_unitvec.y = sin_theta*native_sin(phi);
+
 	/*
 	genrot_unitvec.z = cos(theta);
 	*/
@@ -232,7 +241,11 @@ while(active) {
 			float sin_angle = sin(rotation_angle);
 			*/
 			float sin_angle, cos_angle;
+			/*
 			sin_angle = sincos(rotation_angle, &cos_angle);
+			*/
+			sin_angle = native_sin(rotation_angle);
+			cos_angle = native_cos(rotation_angle);
 			quatrot_left_x = sin_angle*rotation_unitvec.x;
 			quatrot_left_y = sin_angle*rotation_unitvec.y;
 			quatrot_left_z = sin_angle*rotation_unitvec.z;

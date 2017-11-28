@@ -194,7 +194,10 @@ while(active) {
 			/*
 			partialE3 = DockConst_coeff_elec*KerConstStatic_atom_charges_const[atom1_id]*KerConstStatic_atom_charges_const[atom2_id]/(distance_leo*(-8.5525f + 86.9525f/(1.0f + 7.7839f*exp(-0.3154f*distance_leo))));
 			*/
+			/*
 			partialE3 = DockConst_coeff_elec*atom_charges_localcache[atom1_id]*atom_charges_localcache[atom2_id]/(distance_leo*(-8.5525f + 86.9525f/(1.0f + 7.7839f*exp(-0.3154f*distance_leo))));
+			*/
+			partialE3 = DockConst_coeff_elec*atom_charges_localcache[atom1_id]*atom_charges_localcache[atom2_id]/(distance_leo*(-8.5525f + 86.9525f/(1.0f + 7.7839f*native_exp(-0.3154f*distance_leo))));
 
 			//calculating desolvation term
 			/*
@@ -203,10 +206,16 @@ while(active) {
 				  ( KerConstStatic_dspars_S_const[atom2_typeid] + DockConst_qasp*fabs(KerConstStatic_atom_charges_const[atom2_id]) ) * KerConstStatic_dspars_V_const[atom1_typeid]) * 
 				 DockConst_coeff_desolv*exp(-0.0386f*distance_pow_2);
 			*/
+			/*
 			partialE4 = (
 				  (dspars_S_localcache[atom1_typeid] + DockConst_qasp*fabs(atom_charges_localcache[atom1_id])) * dspars_V_localcache[atom2_typeid] + 
 				  (dspars_S_localcache[atom2_typeid] + DockConst_qasp*fabs(atom_charges_localcache[atom2_id])) * dspars_V_localcache[atom1_typeid]) * 
 				 DockConst_coeff_desolv*exp(-0.0386f*distance_pow_2);
+			*/
+			partialE4 = (
+				  (dspars_S_localcache[atom1_typeid] + DockConst_qasp*fabs(atom_charges_localcache[atom1_id])) * dspars_V_localcache[atom2_typeid] + 
+				  (dspars_S_localcache[atom2_typeid] + DockConst_qasp*fabs(atom_charges_localcache[atom2_id])) * dspars_V_localcache[atom1_typeid]) * 
+				 DockConst_coeff_desolv*native_exp(-0.0386f*distance_pow_2);
 
 		} // End of if: if ((dist < dcutoff) && (dist < 20.48))	
 
