@@ -19,4 +19,4 @@ freq: 185,76 MHz
 10. `Krnl_InterE` and `Krnl_InterE2`: transform *(GlobFgrids + a + b) --> into GlobFgrids [a + b]
 
 
-
+freq: 197.9 MHz
