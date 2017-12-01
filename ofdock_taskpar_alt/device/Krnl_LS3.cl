@@ -248,6 +248,7 @@ if (active == true) {
 	#endif
 
 	// write back data to GA
+	/*
 	write_channel_altera(chan_LS2GA_LS3_eval, LS_eval);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 
@@ -255,6 +256,17 @@ if (active == true) {
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 	
 	for (uchar i=0; i<DockConst_num_of_genes; i++) {
+		write_channel_altera(chan_LS2GA_LS3_genotype, genotype[i]);
+	}
+	*/
+	for (uchar i=0; i<DockConst_num_of_genes; i++) {
+		if (i == 0) {
+			write_channel_altera(chan_LS2GA_LS3_eval, LS_eval);
+			mem_fence(CLK_CHANNEL_MEM_FENCE);
+	
+			write_channel_altera(chan_LS2GA_LS3_energy, current_energy);
+			mem_fence(CLK_CHANNEL_MEM_FENCE);
+		}
 		write_channel_altera(chan_LS2GA_LS3_genotype, genotype[i]);
 	}
 

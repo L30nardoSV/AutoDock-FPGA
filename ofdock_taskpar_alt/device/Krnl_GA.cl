@@ -116,16 +116,16 @@ channel bool    chan_GA2LS_Off_active;
 channel bool    chan_GA2LS_Off2_active;
 channel bool    chan_GA2LS_Off3_active;
 
-channel uint 	chan_LS2GA_LS1_eval;
-channel float   chan_LS2GA_LS1_energy;
+channel uint 	chan_LS2GA_LS1_eval	    __attribute__((depth(8)));	// it requires 6% MAX_POPSIZE
+channel float   chan_LS2GA_LS1_energy	    __attribute__((depth(8)));	// it requires 6% MAX_POPSIZE
 channel float  	chan_LS2GA_LS1_genotype     __attribute__((depth(MAX_NUM_OF_ROTBONDS+6)));
 
-channel uint 	chan_LS2GA_LS2_eval;
-channel float   chan_LS2GA_LS2_energy;
+channel uint 	chan_LS2GA_LS2_eval	    __attribute__((depth(8)));	// it requires 6% MAX_POPSIZE
+channel float   chan_LS2GA_LS2_energy	    __attribute__((depth(8)));	// it requires 6% MAX_POPSIZE
 channel float  	chan_LS2GA_LS2_genotype     __attribute__((depth(MAX_NUM_OF_ROTBONDS+6)));
 
-channel uint 	chan_LS2GA_LS3_eval;
-channel float   chan_LS2GA_LS3_energy;
+channel uint 	chan_LS2GA_LS3_eval	    __attribute__((depth(8)));	// it requires 6% MAX_POPSIZE
+channel float   chan_LS2GA_LS3_energy       __attribute__((depth(8)));	// it requires 6% MAX_POPSIZE
 channel float  	chan_LS2GA_LS3_genotype     __attribute__((depth(MAX_NUM_OF_ROTBONDS+6)));
 
 channel bool    chan_ConfArbiter_Off;
@@ -350,7 +350,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 
 			// get ushort binary_tournament selection prngs (parent index)
 			write_channel_altera(chan_GA2PRNG_BT_ushort_active, true);
-			mem_fence(CLK_CHANNEL_MEM_FENCE);
+				//mem_fence(CLK_CHANNEL_MEM_FENCE);
 			// get float binary_tournament selection prngs (tournament rate)
 			write_channel_altera(chan_GA2PRNG_BT_float_active, true);
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
@@ -431,7 +431,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 
 			// get uchar genetic_generation prngs (gene index)
 			write_channel_altera(chan_GA2PRNG_GG_uchar_active, true);
-			mem_fence(CLK_CHANNEL_MEM_FENCE);
+				//mem_fence(CLK_CHANNEL_MEM_FENCE);
 			// get float genetic_generation prngs (mutation rate)
 			write_channel_altera(chan_GA2PRNG_GG_float_active, true);
 			mem_fence(CLK_CHANNEL_MEM_FENCE);

@@ -61,6 +61,7 @@ while(active) {
 		 false; // last case should never occur, otherwise above while would be still running
 
 	// get genos from LS2 and LS3
+/*
 	if (active == true) {
 
 		// if LS2 sent geno
@@ -89,6 +90,49 @@ while(active) {
 			#endif
 		}
 	} // End if (active == true)
+*/
+
+
+
+	if (active == true) {
+		for (uchar i=0; i<DockConst_num_of_genes; i++) {
+			// if LS2 sent geno
+			if (LS2_end_valid == true) {
+				genotype2 [i] = read_channel_altera(chan_LS2Conf_LS2_genotype);
+			}
+
+			// if LS3 sent geno
+			if (LS3_end_valid == true) {
+				genotype3 [i] = read_channel_altera(chan_LS2Conf_LS3_genotype);
+			}
+		}
+		
+		// if LS2 sent geno
+		if (LS2_end_valid == true) {
+			bound_tmp++;
+			LS2_eval++;
+		}
+
+		// if LS3 sent geno
+		if (LS3_end_valid == true) {
+			bound_tmp++;
+			LS3_eval++;
+		}
+	} // End if (active == true)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	
 	uchar bound = (active)?bound_tmp:1;
 

@@ -43,27 +43,6 @@ while(active) {
 
 	char mode;
 
-	//printf("BEFORE In INTER CHANNEL\n");
-	// --------------------------------------------------------------
-	// Wait for ligand atomic coordinates in channel
-	// --------------------------------------------------------------
-	active = read_channel_altera(chan_Conf2Intere_LS2_active);
-	mem_fence(CLK_CHANNEL_MEM_FENCE);
-
-	mode   = read_channel_altera(chan_Conf2Intere_LS2_mode);
-	mem_fence(CLK_CHANNEL_MEM_FENCE);
-
-	/*
-	float __attribute__ ((
-			      memory,
-			      numbanks(2),
-			      bankwidth(16),
-			      singlepump,
-			      numreadports(2),
-			      numwriteports(1)
-			    )) loc_coords[MAX_NUM_OF_ATOMS][3];
-	*/
-
 	float3 __attribute__ ((
 			      memory,
 			      numbanks(2),
@@ -72,16 +51,31 @@ while(active) {
 			      numreadports(1),
 			      numwriteports(1)
 			    )) loc_coords[MAX_NUM_OF_ATOMS];
+
+	//printf("BEFORE In INTER CHANNEL\n");
+	// --------------------------------------------------------------
+	// Wait for ligand atomic coordinates in channel
+	// --------------------------------------------------------------
 	/*
-	float3 position_xyz;
-	*/
+	active = read_channel_altera(chan_Conf2Intere_LS2_active);
+	mem_fence(CLK_CHANNEL_MEM_FENCE);
+
+	mode   = read_channel_altera(chan_Conf2Intere_LS2_mode);
+	mem_fence(CLK_CHANNEL_MEM_FENCE);
+
 	for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt++) {
-		/*
-		position_xyz = read_channel_altera(chan_Conf2Intere_LS2_xyz);
-		loc_coords[pipe_cnt][0x0] = position_xyz.x;
-		loc_coords[pipe_cnt][0x1] = position_xyz.y;
-		loc_coords[pipe_cnt][0x2] = position_xyz.z;
-		*/
+		loc_coords[pipe_cnt] = read_channel_altera(chan_Conf2Intere_LS2_xyz);
+	}
+	*/
+
+	active = read_channel_altera(chan_Conf2Intere_LS2_active);
+	mem_fence(CLK_CHANNEL_MEM_FENCE);
+
+	for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt++) {
+		if (pipe_cnt == 0) {
+			mode   = read_channel_altera(chan_Conf2Intere_LS2_mode);
+			mem_fence(CLK_CHANNEL_MEM_FENCE);
+		}
 		loc_coords[pipe_cnt] = read_channel_altera(chan_Conf2Intere_LS2_xyz);
 	}
 	// --------------------------------------------------------------
@@ -96,24 +90,12 @@ while(active) {
 	// for each atom
 	for (uchar atom1_id=0; atom1_id<DockConst_num_of_atoms; atom1_id++)
 	{
-		/*
-		char atom1_typeid = KerConstStatic_atom_types_const[atom1_id];
-		*/
 		char atom1_typeid = atom_types_localcache [atom1_id];
 
-		/*
-		float x = loc_coords[atom1_id][0x0];
-		float y = loc_coords[atom1_id][0x1];
-		float z = loc_coords[atom1_id][0x2];
-		*/
 		float3 loc_coords_atid1 = loc_coords[atom1_id];
 		float x = loc_coords_atid1.x;
 		float y = loc_coords_atid1.y;
 		float z = loc_coords_atid1.z;
-		
-		/*
-		float q = KerConstStatic_atom_charges_const[atom1_id];
-		*/
 		float q = atom_charges_localcache [atom1_id];	
 
 		float partialE1;
@@ -193,16 +175,6 @@ while(active) {
 
 			//energy contribution of the current grid type
 			float cube [2][2][2];
-			/*
-	                cube [0][0][0] = *(GlobFgrids + cube_000 + mul_tmp);
-        	        cube [1][0][0] = *(GlobFgrids + cube_100 + mul_tmp);
-        	        cube [0][1][0] = *(GlobFgrids + cube_010 + mul_tmp);
-        	        cube [1][1][0] = *(GlobFgrids + cube_110 + mul_tmp);
-        	        cube [0][0][1] = *(GlobFgrids + cube_001 + mul_tmp);
-        	        cube [1][0][1] = *(GlobFgrids + cube_101 + mul_tmp);
-        	        cube [0][1][1] = *(GlobFgrids + cube_011 + mul_tmp);
-        	        cube [1][1][1] = *(GlobFgrids + cube_111 + mul_tmp);
-			*/
 	                cube [0][0][0] = GlobFgrids[cube_000 + mul_tmp];
         	        cube [1][0][0] = GlobFgrids[cube_100 + mul_tmp];
         	        cube [0][1][0] = GlobFgrids[cube_010 + mul_tmp];
@@ -233,16 +205,7 @@ while(active) {
 			//energy contribution of the electrostatic grid
 			atom1_typeid = DockConst_num_of_atypes;
 			mul_tmp = atom1_typeid * DockConst_g3;
-			/*
-        	        cube [0][0][0] = *(GlobFgrids + cube_000 + mul_tmp);
-        	        cube [1][0][0] = *(GlobFgrids + cube_100 + mul_tmp);
-        	        cube [0][1][0] = *(GlobFgrids + cube_010 + mul_tmp);
-        	        cube [1][1][0] = *(GlobFgrids + cube_110 + mul_tmp);
-        	        cube [0][0][1] = *(GlobFgrids + cube_001 + mul_tmp);
-        	        cube [1][0][1] = *(GlobFgrids + cube_101 + mul_tmp);
-        	        cube [0][1][1] = *(GlobFgrids + cube_011 + mul_tmp);
-        	        cube [1][1][1] = *(GlobFgrids + cube_111 + mul_tmp);
-			*/
+
 			cube [0][0][0] = GlobFgrids[cube_000 + mul_tmp];
         	        cube [1][0][0] = GlobFgrids[cube_100 + mul_tmp];
         	        cube [0][1][0] = GlobFgrids[cube_010 + mul_tmp];
@@ -273,16 +236,7 @@ while(active) {
 			//energy contribution of the desolvation grid
 			atom1_typeid = DockConst_num_of_atypes+1;
 			mul_tmp = atom1_typeid * DockConst_g3;
-			/*
-        	        cube [0][0][0] = *(GlobFgrids + cube_000 + mul_tmp);
-        	        cube [1][0][0] = *(GlobFgrids + cube_100 + mul_tmp);
-        	        cube [0][1][0] = *(GlobFgrids + cube_010 + mul_tmp);
-        	        cube [1][1][0] = *(GlobFgrids + cube_110 + mul_tmp);
-        	        cube [0][0][1] = *(GlobFgrids + cube_001 + mul_tmp);
-        	        cube [1][0][1] = *(GlobFgrids + cube_101 + mul_tmp);
-        	        cube [0][1][1] = *(GlobFgrids + cube_011 + mul_tmp);
-        	        cube [1][1][1] = *(GlobFgrids + cube_111 + mul_tmp);
-			*/
+
 			cube [0][0][0] = GlobFgrids[cube_000 + mul_tmp];
         	        cube [1][0][0] = GlobFgrids[cube_100 + mul_tmp];
         	        cube [0][1][0] = GlobFgrids[cube_010 + mul_tmp];

@@ -58,26 +58,6 @@ void Krnl_IntraE(
 while(active) {
 	char mode;
 
-	//printf("BEFORE In INTRA CHANNEL\n");
-	// --------------------------------------------------------------
-	// Wait for ligand atomic coordinates in channel
-	// --------------------------------------------------------------
-	active = read_channel_altera(chan_Conf2Intrae_active);
-	mem_fence(CLK_CHANNEL_MEM_FENCE);
-	mode   = read_channel_altera(chan_Conf2Intrae_mode);
-	mem_fence(CLK_CHANNEL_MEM_FENCE);
-
-	/*
-	float __attribute__ ((
-			      memory,
-			      numbanks(2),
-			      bankwidth(16),
-			      singlepump,
-			      numreadports(2),
-			      numwriteports(1)
-			    )) loc_coords[MAX_NUM_OF_ATOMS][3];
-	*/
-
 	float3 __attribute__ ((
 			      memory,
 			      numbanks(2),
@@ -86,18 +66,34 @@ while(active) {
 			      numreadports(2),
 			      numwriteports(1)
 			    )) loc_coords[MAX_NUM_OF_ATOMS];
+
+	//printf("BEFORE In INTRA CHANNEL\n");
+	// --------------------------------------------------------------
+	// Wait for ligand atomic coordinates in channel
+	// --------------------------------------------------------------
 	/*
-	float3 position_xyz;
-	*/
+	active = read_channel_altera(chan_Conf2Intrae_active);
+	mem_fence(CLK_CHANNEL_MEM_FENCE);
+	mode   = read_channel_altera(chan_Conf2Intrae_mode);
+	mem_fence(CLK_CHANNEL_MEM_FENCE);
+
 	for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt++) {
-		/*
-		position_xyz = read_channel_altera(chan_Conf2Intrae_xyz);
-		loc_coords[pipe_cnt][0x0] = position_xyz.x;
-		loc_coords[pipe_cnt][0x1] = position_xyz.y;
-		loc_coords[pipe_cnt][0x2] = position_xyz.z;
-		*/
 		loc_coords[pipe_cnt] = read_channel_altera(chan_Conf2Intrae_xyz);
 	}
+	*/
+
+	active = read_channel_altera(chan_Conf2Intrae_active);
+	mem_fence(CLK_CHANNEL_MEM_FENCE);
+
+	for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt++) {
+		if (pipe_cnt == 0) {
+			mode   = read_channel_altera(chan_Conf2Intrae_mode);
+			mem_fence(CLK_CHANNEL_MEM_FENCE);
+		}
+
+		loc_coords[pipe_cnt] = read_channel_altera(chan_Conf2Intrae_xyz);
+	}
+
 	// --------------------------------------------------------------
 	//printf("AFTER In INTRA CHANNEL\n");
 
@@ -119,12 +115,6 @@ while(active) {
 
 		char atom1_id = ref_intraE_contributors_const[0];
 		char atom2_id = ref_intraE_contributors_const[1];
-
-		/*
-		float subx = loc_coords[atom1_id][0x0] - loc_coords[atom2_id][0x0];
-		float suby = loc_coords[atom1_id][0x1] - loc_coords[atom2_id][0x1];
-		float subz = loc_coords[atom1_id][0x2] - loc_coords[atom2_id][0x2];
-		*/
 
 		float3 loc_coords_atid1 = loc_coords[atom1_id];
 		float3 loc_coords_atid2 = loc_coords[atom2_id];
@@ -148,16 +138,23 @@ while(active) {
 		printf("Distance: %f\n", distance_leo);
 		#endif
 
-		float distance_pow_2  = distance_leo*distance_leo; 		
+		float distance_pow_2  = distance_leo*distance_leo; 	
 		float distance_pow_4  = distance_pow_2*distance_pow_2; 		
 		float distance_pow_6  = distance_pow_2*distance_pow_4; 		
 		float distance_pow_10 = distance_pow_4*distance_pow_6; 		
 		float distance_pow_12 = distance_pow_6*distance_pow_6;
 
+		/*
 		float inverse_distance_pow_12 = 1 / distance_pow_12;
 		float inverse_distance_pow_10 = inverse_distance_pow_12 * distance_pow_2;
 		float inverse_distance_pow_6  = inverse_distance_pow_10 * distance_pow_4;
-		
+		*/
+		/*
+		float inverse_distance_pow_12 = native_divide(1.0f, distance_pow_12);
+		float inverse_distance_pow_10 = native_divide(1.0f, distance_pow_10);
+		float inverse_distance_pow_6  = native_divide(1.0f, distance_pow_6);
+		*/
+
 		float partialE1;
 		float partialE2;
 		float partialE3;
@@ -167,51 +164,35 @@ while(active) {
 		//if ((distance_leo < 8.0f) && (distance_leo < 20.48f))
 		if (distance_leo < 8.0f) 
 		{
-			/*
-			char atom1_typeid = KerConstStatic_atom_types_const [atom1_id];
-			char atom2_typeid = KerConstStatic_atom_types_const [atom2_id];
-			*/
 			char atom1_typeid = atom_types_localcache [atom1_id];
 			char atom2_typeid = atom_types_localcache [atom2_id];
 
 			//calculating van der Waals / hydrogen bond term
 			/*
-			partialE1 = KerConstStatic_VWpars_AC_const[atom1_typeid*DockConst_num_of_atypes+atom2_typeid]*inverse_distance_pow_12;
-			*/
 			partialE1 = VWpars_AC_localcache [atom1_typeid*DockConst_num_of_atypes+atom2_typeid]*inverse_distance_pow_12;
-
-			/*
-			float tmp_pE2 = KerConstStatic_VWpars_BD_const[atom1_typeid*DockConst_num_of_atypes+atom2_typeid];
 			*/
+			partialE1 = native_divide(VWpars_AC_localcache [atom1_typeid*DockConst_num_of_atypes+atom2_typeid], distance_pow_12);
+
 			float tmp_pE2 = VWpars_BD_localcache [atom1_typeid*DockConst_num_of_atypes+atom2_typeid];
 
 			if (ref_intraE_contributors_const[2] == 1)	//H-bond
+				/*
 				partialE2 = tmp_pE2 * inverse_distance_pow_10;
+				*/
+				partialE2 = native_divide(tmp_pE2, distance_pow_10);
 			else	//van der Waals
+				/*
 				partialE2 = tmp_pE2 * inverse_distance_pow_6;
+				*/
+				partialE2 = native_divide(tmp_pE2, distance_pow_6);
 
 			//calculating electrostatic term
 			/*
-			partialE3 = DockConst_coeff_elec*KerConstStatic_atom_charges_const[atom1_id]*KerConstStatic_atom_charges_const[atom2_id]/(distance_leo*(-8.5525f + 86.9525f/(1.0f + 7.7839f*exp(-0.3154f*distance_leo))));
-			*/
-			/*
-			partialE3 = DockConst_coeff_elec*atom_charges_localcache[atom1_id]*atom_charges_localcache[atom2_id]/(distance_leo*(-8.5525f + 86.9525f/(1.0f + 7.7839f*exp(-0.3154f*distance_leo))));
-			*/
 			partialE3 = DockConst_coeff_elec*atom_charges_localcache[atom1_id]*atom_charges_localcache[atom2_id]/(distance_leo*(-8.5525f + 86.9525f/(1.0f + 7.7839f*native_exp(-0.3154f*distance_leo))));
+			*/
+			partialE3 = native_divide(  (DockConst_coeff_elec*atom_charges_localcache[atom1_id]*atom_charges_localcache[atom2_id]) , (distance_leo*(-8.5525f + native_divide(86.9525f, (1.0f + 7.7839f*native_exp(-0.3154f*distance_leo)))))       );
 
 			//calculating desolvation term
-			/*
-			partialE4 = (
-				  ( KerConstStatic_dspars_S_const[atom1_typeid] + DockConst_qasp*fabs(KerConstStatic_atom_charges_const[atom1_id]) ) * KerConstStatic_dspars_V_const[atom2_typeid] + 
-				  ( KerConstStatic_dspars_S_const[atom2_typeid] + DockConst_qasp*fabs(KerConstStatic_atom_charges_const[atom2_id]) ) * KerConstStatic_dspars_V_const[atom1_typeid]) * 
-				 DockConst_coeff_desolv*exp(-0.0386f*distance_pow_2);
-			*/
-			/*
-			partialE4 = (
-				  (dspars_S_localcache[atom1_typeid] + DockConst_qasp*fabs(atom_charges_localcache[atom1_id])) * dspars_V_localcache[atom2_typeid] + 
-				  (dspars_S_localcache[atom2_typeid] + DockConst_qasp*fabs(atom_charges_localcache[atom2_id])) * dspars_V_localcache[atom1_typeid]) * 
-				 DockConst_coeff_desolv*exp(-0.0386f*distance_pow_2);
-			*/
 			partialE4 = (
 				  (dspars_S_localcache[atom1_typeid] + DockConst_qasp*fabs(atom_charges_localcache[atom1_id])) * dspars_V_localcache[atom2_typeid] + 
 				  (dspars_S_localcache[atom2_typeid] + DockConst_qasp*fabs(atom_charges_localcache[atom2_id])) * dspars_V_localcache[atom1_typeid]) * 

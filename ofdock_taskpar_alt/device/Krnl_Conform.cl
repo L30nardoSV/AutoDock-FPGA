@@ -135,41 +135,18 @@ while(active) {
 	#if defined (DEBUG_ACTIVE_KERNEL)
 	if (active == 0) {printf("	%-20s: %s\n", "Krnl_Conform", "must be disabled");}
 	#endif
-/*
-	for(uchar i=3; i<DockConst_num_of_genes; i++) {
-		genotype [i] = genotype [i]*DEG_TO_RAD;
-	}
-*/
-/*
-	float phi         = genotype [3]*DEG_TO_RAD;
-	float theta       = genotype [4]*DEG_TO_RAD;
-	float genrotangle = genotype [5]*DEG_TO_RAD;
-*/
+
 	float phi         = genotype [3];
 	float theta       = genotype [4];
 	float genrotangle = genotype [5];
 
-	/*
-	float sin_theta = sin(theta);
-	*/
 	float sin_theta, cos_theta;
-	/*
-	sin_theta = sincos(theta, &cos_theta);
-	*/
 	sin_theta = native_sin(theta);
 	cos_theta = native_cos(theta);
 
 	float3 genrot_unitvec;
-	/*
-	genrot_unitvec.x = sin_theta*cos(phi);
-	genrot_unitvec.y = sin_theta*sin(phi);
-	*/
 	genrot_unitvec.x = sin_theta*native_cos(phi);
 	genrot_unitvec.y = sin_theta*native_sin(phi);
-
-	/*
-	genrot_unitvec.z = cos(theta);
-	*/
 	genrot_unitvec.z = cos_theta;
 	
 	float3 genotype_xyz = {genotype[0], genotype[1], genotype[2]};
@@ -183,18 +160,10 @@ while(active) {
 			uint atom_id = rotation_list_element & RLIST_ATOMID_MASK;
 
 			//capturing atom coordinates
-			//float atom_to_rotate[3];
 			float3 atom_to_rotate;
 
 			if ((rotation_list_element & RLIST_FIRSTROT_MASK) != 0)	//if first rotation of this atom
-			{	/*
-				atom_to_rotate[0] = KerConstDynamic_ref_coords_x_const[atom_id];
-				atom_to_rotate[1] = KerConstDynamic_ref_coords_y_const[atom_id];
-				atom_to_rotate[2] = KerConstDynamic_ref_coords_z_const[atom_id];
-				*/
-				/*
-				atom_to_rotate = KerConstDynamic_ref_coords_const[atom_id];
-				*/
+			{	
 				atom_to_rotate = ref_coords_localcache [atom_id];
 			}
 			else
@@ -218,19 +187,10 @@ while(active) {
 			else	//if rotating around rotatable bond
 			{
 				uint rotbond_id = (rotation_list_element & RLIST_RBONDID_MASK) >> RLIST_RBONDID_SHIFT;
-				/*
-				rotation_unitvec = KerConstDynamic_rotbonds_unit_vectors_const[rotbond_id];
-				*/
 				rotation_unitvec = rotbonds_unit_vectors_localcache [rotbond_id];
 				
-				/*
-				rotation_angle = genotype[6+rotbond_id]*DEG_TO_RAD;
-				*/
 				rotation_angle = genotype[6+rotbond_id];
 
-				/*
-				rotation_movingvec = KerConstDynamic_rotbonds_moving_vectors_const[rotbond_id];
-				*/
 				rotation_movingvec = rotbonds_moving_vectors_localcache [rotbond_id];
 
 				//in addition performing the first movement 
@@ -244,15 +204,7 @@ while(active) {
 
 			rotation_angle = rotation_angle*0.5f;
 
-			/*
-			quatrot_left_q = cos(rotation_angle);
-			float sin_angle = sin(rotation_angle);
-			*/
-
 			float sin_angle, cos_angle;
-			/*
-			sin_angle = sincos(rotation_angle, &cos_angle);
-			*/
 			sin_angle = native_sin(rotation_angle);
 			cos_angle = native_cos(rotation_angle);
 			quatrot_left_x = sin_angle*rotation_unitvec.x;
@@ -325,6 +277,7 @@ while(active) {
 	// --------------------------------------------------------------
 	// Send ligand atomic coordinates to channel 
 	// --------------------------------------------------------------
+	/*
 	write_channel_altera(chan_Conf2Intere_active, active);
 	write_channel_altera(chan_Conf2Intrae_active, active);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
@@ -335,6 +288,22 @@ while(active) {
 
 	//float3 position_xyz;
 	for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt++) {
+		write_channel_altera(chan_Conf2Intere_xyz, loc_coords[pipe_cnt]);
+		write_channel_altera(chan_Conf2Intrae_xyz, loc_coords[pipe_cnt]);
+	}*/
+
+
+	for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt++) {
+		if (pipe_cnt == 0) {
+			write_channel_altera(chan_Conf2Intere_active, active);
+			write_channel_altera(chan_Conf2Intrae_active, active);
+			mem_fence(CLK_CHANNEL_MEM_FENCE);
+
+			write_channel_altera(chan_Conf2Intere_mode,   mode);
+			write_channel_altera(chan_Conf2Intrae_mode,   mode);
+			mem_fence(CLK_CHANNEL_MEM_FENCE);
+		}
+
 		write_channel_altera(chan_Conf2Intere_xyz, loc_coords[pipe_cnt]);
 		write_channel_altera(chan_Conf2Intrae_xyz, loc_coords[pipe_cnt]);
 	}
