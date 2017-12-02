@@ -59,6 +59,7 @@ void Krnl_Conform(
 
 while(active) {
 
+/*
 	//printf("BEFORE In CONFORM CHANNEL\n");
 	// --------------------------------------------------------------
 	// Wait for genotypes in channel
@@ -76,11 +77,6 @@ while(active) {
 	uchar pipe_cnt = 0;
 
 	while (
-/*
-	       (IC_valid  == false) && 
-	       (GG_valid  == false) && 
-	       (LS_valid  == false) &&
-*/
 	       (Off_valid == false) && (pipe_cnt < DockConst_num_of_genes) 
 	) {
 		IC_active  = read_channel_nb_altera(chan_IC2Conf_genotype, &IC_valid);
@@ -119,6 +115,29 @@ while(active) {
 
 	// --------------------------------------------------------------
 	//printf("AFTER In CONFORM CHANNEL\n");
+*/
+
+
+
+	char mode;
+
+	active = read_channel_altera(chan_IGL_active);
+	mem_fence(CLK_CHANNEL_MEM_FENCE);
+
+	for (uchar i=0; i<DockConst_num_of_genes; i++) {
+		if (i == 0) {
+			mode = read_channel_altera(chan_IGL_mode);
+			mem_fence(CLK_CHANNEL_MEM_FENCE);
+		}
+
+		genotype [i] = read_channel_altera(chan_IGL_genotype);
+	}
+
+
+
+
+
+
 /*
 	float3 __attribute__ ((
 			      memory,

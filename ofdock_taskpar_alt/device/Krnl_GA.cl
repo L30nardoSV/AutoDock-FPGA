@@ -20,11 +20,11 @@
 
 
 #include "../defines.h"
-channel float  	chan_IC2Conf_genotype          __attribute__((depth(MAX_NUM_OF_ROTBONDS+6)));
-channel float  	chan_GG2Conf_genotype          __attribute__((depth(MAX_NUM_OF_ROTBONDS+6)));
-channel float  	chan_LS2Conf_genotype          __attribute__((depth(MAX_NUM_OF_ROTBONDS+6)));
-channel float  	chan_LS2Conf_LS2_genotype      __attribute__((depth(MAX_NUM_OF_ROTBONDS+6)));
-channel float  	chan_LS2Conf_LS3_genotype      __attribute__((depth(MAX_NUM_OF_ROTBONDS+6)));
+channel float  	chan_IC2Conf_genotype          __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
+channel float  	chan_GG2Conf_genotype          __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
+channel float  	chan_LS2Conf_genotype          __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
+channel float  	chan_LS2Conf_LS2_genotype      __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
+channel float  	chan_LS2Conf_LS3_genotype      __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
 
 // To turn off Conform, InterE, IntraE
 channel bool 	chan_LS2Conf_LS2_active;
@@ -83,34 +83,34 @@ channel bool  	chan_GA2PRNG_GG_float_active;
 /*
 channel float   chan_PRNG2GA_GG_float_prng;
 */
-channel float   chan_PRNG2GA_GG_float_prng __attribute__((depth(MAX_NUM_OF_ROTBONDS+6)));
+channel float   chan_PRNG2GA_GG_float_prng __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
 
 channel bool  	chan_GA2PRNG_LS_ushort_active;
 channel ushort  chan_PRNG2GA_LS_ushort_prng;
 
 channel bool  	chan_GA2PRNG_LS_float_active;
-channel float   chan_PRNG2GA_LS_float_prng __attribute__((depth(MAX_NUM_OF_ROTBONDS+6)));
+channel float   chan_PRNG2GA_LS_float_prng  __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
 
 channel bool  	chan_GA2PRNG_LS2_float_active;
-channel float   chan_PRNG2GA_LS2_float_prng __attribute__((depth(MAX_NUM_OF_ROTBONDS+6)));
+channel float   chan_PRNG2GA_LS2_float_prng __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
 
 channel bool  	chan_GA2PRNG_LS3_float_active;
-channel float   chan_PRNG2GA_LS3_float_prng __attribute__((depth(MAX_NUM_OF_ROTBONDS+6)));
+channel float   chan_PRNG2GA_LS3_float_prng __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
 
 channel bool  	chan_GA2PRNG_Off_active;
 
 // LS1, LS2, LS3
 channel bool 	chan_GA2LS_LS1_active;
 channel float   chan_GA2LS_LS1_energy;
-channel float  	chan_GA2LS_LS1_genotype     __attribute__((depth(MAX_NUM_OF_ROTBONDS+6)));
+channel float  	chan_GA2LS_LS1_genotype     __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
 
 channel bool 	chan_GA2LS_LS2_active;
 channel float   chan_GA2LS_LS2_energy;
-channel float  	chan_GA2LS_LS2_genotype     __attribute__((depth(MAX_NUM_OF_ROTBONDS+6)));
+channel float  	chan_GA2LS_LS2_genotype     __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
 
 channel bool 	chan_GA2LS_LS3_active;
 channel float   chan_GA2LS_LS3_energy;
-channel float  	chan_GA2LS_LS3_genotype     __attribute__((depth(MAX_NUM_OF_ROTBONDS+6)));
+channel float  	chan_GA2LS_LS3_genotype     __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
 
 channel bool    chan_GA2LS_Off_active;
 channel bool    chan_GA2LS_Off2_active;
@@ -118,15 +118,15 @@ channel bool    chan_GA2LS_Off3_active;
 
 channel uint 	chan_LS2GA_LS1_eval	    __attribute__((depth(8)));	// it requires 6% MAX_POPSIZE
 channel float   chan_LS2GA_LS1_energy	    __attribute__((depth(8)));	// it requires 6% MAX_POPSIZE
-channel float  	chan_LS2GA_LS1_genotype     __attribute__((depth(MAX_NUM_OF_ROTBONDS+6)));
+channel float  	chan_LS2GA_LS1_genotype     __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
 
 channel uint 	chan_LS2GA_LS2_eval	    __attribute__((depth(8)));	// it requires 6% MAX_POPSIZE
 channel float   chan_LS2GA_LS2_energy	    __attribute__((depth(8)));	// it requires 6% MAX_POPSIZE
-channel float  	chan_LS2GA_LS2_genotype     __attribute__((depth(MAX_NUM_OF_ROTBONDS+6)));
+channel float  	chan_LS2GA_LS2_genotype     __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
 
 channel uint 	chan_LS2GA_LS3_eval	    __attribute__((depth(8)));	// it requires 6% MAX_POPSIZE
 channel float   chan_LS2GA_LS3_energy       __attribute__((depth(8)));	// it requires 6% MAX_POPSIZE
-channel float  	chan_LS2GA_LS3_genotype     __attribute__((depth(MAX_NUM_OF_ROTBONDS+6)));
+channel float  	chan_LS2GA_LS3_genotype     __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
 
 channel bool    chan_ConfArbiter_Off;
 
@@ -183,8 +183,6 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			    //unsigned int              DockConst_cons_limit
 	     )
 {
-	//Print algorithm parameters
-
 	#if defined (DEBUG_KRNL_GA)
 	printf("\n");
 	//printf("%-40s %u\n", "DockConst->num_of_atypes: ",        	DockConst_num_of_atypes);
@@ -208,12 +206,12 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 	printf("%-40s %f\n", "DockConst_crossover_rate: ", 		DockConst_crossover_rate);
 	//printf("%-40s %f\n", "DockConst->lsearch_rate: ", 		DockConst_lsearch_rate);
 	printf("%-40s %u\n", "DockConst_num_of_lsentities: ",   	DockConst_num_of_lsentities);
-	printf("%-40s %u\n", "DockConst_max_num_of_iters: ",    	DockConst_max_num_of_iters);
-	printf("%-40s %f\n", "DockConst_rho_lower_bound: ",     	DockConst_rho_lower_bound);
-	printf("%-40s %f\n", "DockConst_base_dmov_mul_sqrt3: ", 	DockConst_base_dmov_mul_sqrt3);
+	//printf("%-40s %u\n", "DockConst_max_num_of_iters: ",    	DockConst_max_num_of_iters);
+	//printf("%-40s %f\n", "DockConst_rho_lower_bound: ",     	DockConst_rho_lower_bound);
+	//printf("%-40s %f\n", "DockConst_base_dmov_mul_sqrt3: ", 	DockConst_base_dmov_mul_sqrt3);
 	printf("%-40s %u\n", "DockConst_num_of_genes: ",        	DockConst_num_of_genes);
-	printf("%-40s %f\n", "DockConst_base_dang_mul_sqrt3: ", 	DockConst_base_dang_mul_sqrt3);
-	printf("%-40s %u\n", "DockConst_cons_limit: ",          	DockConst_cons_limit);
+	//printf("%-40s %f\n", "DockConst_base_dang_mul_sqrt3: ", 	DockConst_base_dang_mul_sqrt3);
+	//printf("%-40s %u\n", "DockConst_cons_limit: ",          	DockConst_cons_limit);
 	//printf("%-40s %f\n", "DockConst->qasp: ",    			DockConst_qasp);
 	#endif
 
@@ -231,7 +229,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 		// calculate energy
 		for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_genes; pipe_cnt++) {
 			LocalPopCurr[pop_cnt][pipe_cnt & 0x3F] = GlobPopulationCurrent[pop_cnt*ACTUAL_GENOTYPE_LENGTH + pipe_cnt];
-			write_channel_altera(chan_IC2Conf_genotype, LocalPopCurr[pop_cnt][pipe_cnt & 0x3F]);
+			write_channel_altera(chan_IC2Conf_genotype, LocalPopCurr[pop_cnt][pipe_cnt & 0x3F]);	
 		}	
 		#if defined (DEBUG_KRNL_IC)
 		printf("\nIC - tx pop: %u", pop_cnt); 		
@@ -570,7 +568,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 
 		// subject num_of_entity_for_ls pieces of offsprings to LS 	
 
-		//#pragma ivdep
+		#pragma ivdep
 		//for (ushort ls_ent_cnt=0; ls_ent_cnt<DockConst_num_of_lsentities; ls_ent_cnt++) {
 		//for (ushort ls_ent_cnt=0; ls_ent_cnt<DockConst_num_of_lsentities; ls_ent_cnt+=2) {
 		for (ushort ls_ent_cnt=0; ls_ent_cnt<DockConst_num_of_lsentities; ls_ent_cnt+=3) {
@@ -681,6 +679,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 
 #include "Krnl_PRNG.cl"
 #include "Krnl_Conf_Arbiter.cl"
+#include "Krnl_Conf_Arbiter2.cl"
 
 #include "Krnl_LS.cl"
 #include "Krnl_Conform.cl"

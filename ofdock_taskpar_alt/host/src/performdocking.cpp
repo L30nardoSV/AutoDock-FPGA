@@ -191,6 +191,11 @@ static cl_kernel kernel23  = NULL;
 static const char *name_k23 = "Krnl_Conf_Arbiter";
 #endif
 
+#ifdef ENABLE_KERNEL24
+static cl_command_queue command_queue24 = NULL;
+static cl_kernel kernel24  = NULL;
+static const char *name_k24 = "Krnl_Conf_Arbiter2";
+#endif
 
 
 static cl_program program = NULL;
@@ -726,6 +731,10 @@ filled with clock() */
 	setKernelArg(kernel23,0, sizeof(unsigned int),  &dockpars.num_of_genes);
 #endif // End of ENABLE_KERNEL23
 
+#ifdef ENABLE_KERNEL24 // Krnl_Conf_Arbiter2
+	setKernelArg(kernel24,0, sizeof(unsigned int),  &dockpars.num_of_genes);
+#endif // End of ENABLE_KERNEL24
+
 	for (unsigned int run_cnt = 0; run_cnt < mypars->num_of_runs; run_cnt++)
 	{
 
@@ -906,6 +915,10 @@ filled with clock() */
 		runKernelTask(command_queue23,kernel23,NULL,NULL);
 		#endif // ENABLE_KERNEL23
 
+		#ifdef ENABLE_KERNEL24
+		runKernelTask(command_queue24,kernel24,NULL,NULL);
+		#endif // ENABLE_KERNEL24
+
 
 
 		#ifdef ENABLE_KERNEL1 		
@@ -998,6 +1011,10 @@ filled with clock() */
 
 		#ifdef ENABLE_KERNEL23
 		clFinish(command_queue23);
+		#endif
+
+		#ifdef ENABLE_KERNEL24
+		clFinish(command_queue24);
 		#endif
 
 		clock_stop_docking = clock();
@@ -1440,6 +1457,13 @@ bool init() {
   checkError(status, "Failed to create kernel");
 #endif
 
+#ifdef ENABLE_KERNEL24
+  command_queue24 = clCreateCommandQueue(context, device, 0, &status);
+  checkError(status, "Failed to create command queue24");
+  kernel24 = clCreateKernel(program, name_k24, &status);
+  checkError(status, "Failed to create kernel");
+#endif
+
   return true;
 }
 
@@ -1558,6 +1582,11 @@ void cleanup() {
 #ifdef ENABLE_KERNEL23
   if(kernel23) {clReleaseKernel(kernel23);}
   if(command_queue23) {clReleaseCommandQueue(command_queue23);}
+#endif
+
+#ifdef ENABLE_KERNEL24
+  if(kernel24) {clReleaseKernel(kernel24);}
+  if(command_queue24) {clReleaseCommandQueue(command_queue24);}
 #endif
 
   if(program) {clReleaseProgram(program);}

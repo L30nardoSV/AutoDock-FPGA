@@ -97,36 +97,46 @@ while(active) {
 		 (Off2_valid)? Off2_active :
 		 false;	// last case should never occur, otherwise above while would be still running
 */
+	char mode;
+
 	active = read_channel_altera(chan_LS23_active);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 
-	char mode = read_channel_altera(chan_LS23_mode);
-	mem_fence(CLK_CHANNEL_MEM_FENCE);
-
 	for (uchar i=0; i<DockConst_num_of_genes; i++) {
+		if (i == 0) {
+			mode = read_channel_altera(chan_LS23_mode);
+			mem_fence(CLK_CHANNEL_MEM_FENCE);
+		}
+
 		genotype [i] = read_channel_altera(chan_LS23_genotype);
+		/*
 		if (i > 2) {
 			genotype [i] = genotype [i]*DEG_TO_RAD;
 		}
+		*/
 	}
+	
 	// --------------------------------------------------------------
 	//printf("AFTER In CONFORM 2 CHANNEL\n");
-/*
+
+	/*
 	float3 __attribute__ ((
 			      memory,
-			      numbanks(1),
+			      numbanks(2),
 			      bankwidth(16),
-			      doublepump,
-			      numreadports(3),//3
+			      singlepump,
+			      numreadports(2),
 			      numwriteports(1)
 			    )) loc_coords[MAX_NUM_OF_ATOMS];
-*/
-
+	*/
 	float3 loc_coords[MAX_NUM_OF_ATOMS];
 
 	#if defined (DEBUG_ACTIVE_KERNEL)
 	if (active == 0) {printf("	%-20s: %s\n", "Krnl_Conform", "must be disabled");}
 	#endif
+
+	
+	float3 genotype_xyz = {genotype[0], genotype[1], genotype[2]};
 
 	float phi         = genotype [3];
 	float theta       = genotype [4];
@@ -141,8 +151,6 @@ while(active) {
 	genrot_unitvec.y = sin_theta*native_sin(phi);
 	genrot_unitvec.z = cos_theta;
 
-	float3 genotype_xyz = {genotype[0], genotype[1], genotype[2]};
-	
 	for (ushort rotation_counter = 0; rotation_counter < DockConst_rotbondlist_length; rotation_counter++)
 	{
 		int rotation_list_element = rotlist_localcache [rotation_counter];

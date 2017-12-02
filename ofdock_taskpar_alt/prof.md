@@ -32,13 +32,21 @@ freq: 197.9 MHz
 20. `Krnl_IntraE`, `Krnl_IntraE2`: remove `inverse_distance_pow_12/10/6` and replace it with `native_divide()`
 21. `Krnl_IntraE`, `Krnl_IntraE2`: use `native_divide()` for calculating partialE3 
 22. `Krnl_LS`, `Krnl_LS2`, `Krnl_LS3`: enclose LS_eval- and current_energy-related write channel statements by the for-loop of genotype channel statements
-23. `Krnl_GA`: increase deep of `chan_LS2GA_LS1_eval` and `chan_LS2GA_LS1_energy` from 1 to 8 for LS, LS2, LS3.
+23. `Krnl_GA`: increase deep of `chan_LS2GA_LS1_eval` and `chan_LS2GA_LS1_energy` from 1 to 8 for LS, LS2, LS3
 
 freq: 195.31 MHz
 
+24. `Krnl_Conform2`: move genotype multiplication by DEG_TO_RAD to `Krnl_Conf_Arbiter`
+25. Change name of `Knrl_Conf_Arbiter` to `Krnl_Conf_Arbiter2`
+26. Create `Krnl_Conf_Arbiter` so channel read-input logic in `Krnl_Conform` is moved into it, and `Krnl_Conform` is better pipelined
+27. Genotype channels are created with depth using ACTUAL_GENOTYPE_LENGTH (instead of MAX_NUM_OF_ROTBONDS+6)
+28. `Krnl_Prng_Arbiter`: simplify calculation of `active`
+29. `Knrl_Conf_Arbiter`: simplify calculation of `active`
+30. `Knrl_Conf_Arbiter2`: simplify calculation of `active`
+31. `Krnl_LS_Arbiter`: simplify read & write channel, apply loop fusion, remove local genotype
+32. `Krnl_LS2_Arbiter`: simplify read & write channel, apply loop fusion, remove local genotype
+33. `Krnl_LS3_Arbiter`: simplify read & write channel, apply loop fusion, remove local genotype
+34. `Krnl_GA`: add pragma ivdep to for (ushort ls_ent_cnt=0; ls_ent_cnt<DockConst_num_of_lsentities; ls_ent_cnt+=3)
 
-
-
-
-
+freq: 190.625 MHz
 

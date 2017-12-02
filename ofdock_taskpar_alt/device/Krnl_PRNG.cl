@@ -57,6 +57,7 @@ while(active) {
 		Off_active       = read_channel_nb_altera(chan_GA2PRNG_Off_active,        &Off_valid);
 	}
 
+	/*
 	active = (BT_ushort_valid)? BT_ushort_active : 
 		 (BT_float_valid) ? BT_float_active  :
 	         (GG_uchar_valid) ? GG_uchar_active  :
@@ -67,37 +68,88 @@ while(active) {
 		 (LS3_float_valid)? LS3_float_active :
 		 (Off_valid)      ? Off_active       :
 		 false; // last case should never occur, otherwise above while would be still running
+	*/
+
+	active = (Off_valid) ? Off_active : true;
 
 	if ((BT_ushort_valid == true) || (Off_valid == true)) {
+		
 		write_channel_altera(chan_Arbiter_BT_ushort_active, active);
+		
+		/*
+		bool active_tmp =  (Off_valid) ? Off_active : BT_ushort_active;
+		write_channel_altera(chan_Arbiter_BT_ushort_active, active_tmp);
+		*/
 	}
 
 	if ((BT_float_valid == true) || (Off_valid == true)) {
+		
 		write_channel_altera(chan_Arbiter_BT_float_active, active);
+		
+		/*
+		bool active_tmp =  (Off_valid) ? Off_active : BT_float_active;
+		write_channel_altera(chan_Arbiter_BT_float_active, active_tmp);
+		*/
 	}
 
 	if ((GG_uchar_valid == true) || (Off_valid == true)) {
+		
 		write_channel_altera(chan_Arbiter_GG_uchar_active, active);
+		
+		/*
+		bool active_tmp =  (Off_valid) ? Off_active : GG_uchar_active;
+		write_channel_altera(chan_Arbiter_GG_uchar_active, active_tmp);
+		*/
 	}
 
 	if ((GG_float_valid == true) || (Off_valid == true)) {
+		
 		write_channel_altera(chan_Arbiter_GG_float_active, active);
+		
+		/*
+		bool active_tmp =  (Off_valid) ? Off_active : GG_float_active;
+		write_channel_altera(chan_Arbiter_GG_float_active, active_tmp);
+		*/
 	}
 
  	if ((LS_ushort_valid == true) || (Off_valid == true)) {
+		
 		write_channel_altera(chan_Arbiter_LS_ushort_active, active);
+		
+		/*
+		bool active_tmp =  (Off_valid) ? Off_active : LS_ushort_active;
+		write_channel_altera(chan_Arbiter_LS_ushort_active, active_tmp);
+		*/
 	}
 
 	if ((LS_float_valid == true) || (Off_valid == true)) {
+		
 		write_channel_altera(chan_Arbiter_LS_float_active, active);
+		
+		/*
+		bool active_tmp =  (Off_valid) ? Off_active : LS_float_active;
+		write_channel_altera(chan_Arbiter_LS_float_active, active_tmp);
+		*/
 	}
 
 	if ((LS2_float_valid == true) || (Off_valid == true)) {
+		
 		write_channel_altera(chan_Arbiter_LS2_float_active, active);
+		
+		/*
+		bool active_tmp =  (Off_valid) ? Off_active : LS2_float_active;
+		write_channel_altera(chan_Arbiter_LS2_float_active, active_tmp);
+		*/
 	}
 
 	if ((LS3_float_valid == true) || (Off_valid == true)) {
+		
 		write_channel_altera(chan_Arbiter_LS3_float_active, active);
+		
+		/*
+		bool active_tmp =  (Off_valid) ? Off_active : LS3_float_active;
+		write_channel_altera(chan_Arbiter_LS3_float_active, active_tmp);
+		*/
 	}
 
 } // End of while(active)

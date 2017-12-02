@@ -1,6 +1,6 @@
 channel bool  chan_Arbiter_LS2_active;
 channel float chan_Arbiter_LS2_energy;
-channel float chan_Arbiter_LS2_genotype     __attribute__((depth(MAX_NUM_OF_ROTBONDS+6)));
+channel float chan_Arbiter_LS2_genotype     __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
 
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------
@@ -8,8 +8,10 @@ __kernel __attribute__ ((max_global_work_dim(0)))
 void Krnl_LS2_Arbiter(const unsigned int DockConst_num_of_genes){
 
 	bool active = true;
+	/*
 	__local float genotype [ACTUAL_GENOTYPE_LENGTH];
-	
+	*/
+
 while(active) {
 	bool LS2_valid = false;
 	bool Off_valid = false;
@@ -24,6 +26,7 @@ while(active) {
 		Off_active = read_channel_nb_altera(chan_GA2LS_Off2_active, &Off_valid);
 	}
 
+	/*
 	active = (LS2_valid)? LS2_active : 
 		 (Off_valid)? Off_active :
 		 false; // last case should never occur, otherwise above while would be still running
@@ -37,7 +40,27 @@ while(active) {
 			      (Off_valid)? 0.0f :
 		 	      0.0f; // last case should never occur, otherwise above while would be still running
 	}
+	*/
 
+	for (uchar i=0; i<DockConst_num_of_genes; i++) {
+		if (i == 0) {
+			active = (Off_valid)? Off_active : true; 
+			write_channel_altera(chan_Arbiter_LS2_active, active);
+			mem_fence(CLK_CHANNEL_MEM_FENCE);
+
+			float energy;
+			energy =  (LS2_valid)? read_channel_altera(chan_GA2LS_LS2_energy) : 0.0f;
+			write_channel_altera(chan_Arbiter_LS2_energy, energy);
+			mem_fence(CLK_CHANNEL_MEM_FENCE);
+		}
+
+		float genotype;
+		genotype = (LS2_valid)? read_channel_altera(chan_GA2LS_LS2_genotype) : 0.0f;
+		mem_fence(CLK_CHANNEL_MEM_FENCE);
+		write_channel_altera(chan_Arbiter_LS2_genotype, genotype);
+	}
+
+	/*
 	if ((LS2_valid == true) || (Off_valid == true)) {
 		write_channel_altera(chan_Arbiter_LS2_active, active);
 		mem_fence(CLK_CHANNEL_MEM_FENCE);
@@ -47,6 +70,7 @@ while(active) {
 			write_channel_altera(chan_Arbiter_LS2_genotype, genotype[i]);
 		}
 	}
+	*/
 } // End of while(active)
 
 #if defined (DEBUG_ACTIVE_KERNEL)
