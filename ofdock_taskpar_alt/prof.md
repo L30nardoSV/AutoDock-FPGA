@@ -50,3 +50,7 @@ freq: 195.31 MHz
 
 freq: 190.625 MHz
 
+35. `Krnl_InterE`, `Krnl_InterE2`, `performdocking.cpp`: calculate multiplication of constants in host and pass values via kernel arguments `mul_tmp2` and `mul_tmp3`
+36. `Krnl_IntraE`, `Krnl_IntraE2`, `performdocking.cpp`: calculate multiplication of constants in host and pass value via kernel arguments `square_num_of_atypes`
+
+freq: 196.9 MHz

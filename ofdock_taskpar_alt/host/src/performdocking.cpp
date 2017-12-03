@@ -462,10 +462,14 @@ filled with clock() */
 	dockpars.max_num_of_iters  = (unsigned int) mypars->max_num_of_iters;
 	dockpars.qasp = mypars->qasp;
 
+	// these variables hold multiplications between kernel-constants
+	// better calculate them here and then pass them to Krnl_InterE and Krnl_InterE2
+	unsigned int mul_tmp2 = dockpars.num_of_atypes * dockpars.g3;
+	unsigned int mul_tmp3 = (dockpars.num_of_atypes + 1) * dockpars.g3;
 
-
-
-
+	// this variable holds a multiplicationa between kernel-constants
+	// better calculate them here and then pass them to Krnl_IntraE and Krnl_IntraE2
+	unsigned int square_num_of_atypes = dockpars.num_of_atypes * dockpars.num_of_atypes;
 
  	//allocating GPU memory for populations, floatgrids,
 	//energies, evaluation counters and random number generator states
@@ -580,7 +584,11 @@ filled with clock() */
 	setKernelArg(kernel3,7, sizeof(unsigned char),                          &gridsizex_minus1);
 	setKernelArg(kernel3,8, sizeof(unsigned char),                          &gridsizey_minus1);
 	setKernelArg(kernel3,9, sizeof(unsigned char),                          &gridsizez_minus1);
+/*
 	setKernelArg(kernel3,10, sizeof(unsigned char),                         &dockpars.num_of_atypes);
+*/
+	setKernelArg(kernel3,10, sizeof(unsigned int),                          &mul_tmp2);
+	setKernelArg(kernel3,11, sizeof(unsigned int),                          &mul_tmp3);
 #endif // End of ENABLE_KERNEL3
 
 #ifdef ENABLE_KERNEL4 // Krnl_IntraE
@@ -600,6 +608,7 @@ filled with clock() */
 	setKernelArg(kernel4,11, sizeof(float),                          	&dockpars.coeff_elec);
 	setKernelArg(kernel4,12, sizeof(float),                          	&dockpars.qasp);
 	setKernelArg(kernel4,13, sizeof(float),                          	&dockpars.coeff_desolv);
+	setKernelArg(kernel4,14, sizeof(unsigned int),                          &square_num_of_atypes);
 #endif // End of ENABLE_KERNEL4
 
 #ifdef ENABLE_KERNEL6 // Krnl_PRNG_GG_float
@@ -688,26 +697,31 @@ filled with clock() */
 	setKernelArg(kernel18,7, sizeof(unsigned char),                          &gridsizex_minus1);
 	setKernelArg(kernel18,8, sizeof(unsigned char),                          &gridsizey_minus1);
 	setKernelArg(kernel18,9, sizeof(unsigned char),                          &gridsizez_minus1);
+/*
 	setKernelArg(kernel18,10, sizeof(unsigned char),                         &dockpars.num_of_atypes);
+*/
+	setKernelArg(kernel18,10, sizeof(unsigned int),                          &mul_tmp2);
+	setKernelArg(kernel18,11, sizeof(unsigned int),                          &mul_tmp3);
 #endif // End of ENABLE_KERNEL18
 
 #ifdef ENABLE_KERNEL19 // Krnl_IntraE2
 	setKernelArg(kernel19,0, sizeof(mem_KerConstStatic_atom_charges_const),        &mem_KerConstStatic_atom_charges_const);
 	setKernelArg(kernel19,1, sizeof(mem_KerConstStatic_atom_types_const),          &mem_KerConstStatic_atom_types_const);
 	setKernelArg(kernel19,2, sizeof(mem_KerConstStatic_intraE_contributors_const), &mem_KerConstStatic_intraE_contributors_const);
-	setKernelArg(kernel19,3, sizeof(mem_KerConstStatic_VWpars_AC_const),          &mem_KerConstStatic_VWpars_AC_const);
-	setKernelArg(kernel19,4, sizeof(mem_KerConstStatic_VWpars_BD_const),          &mem_KerConstStatic_VWpars_BD_const);
-	setKernelArg(kernel19,5, sizeof(mem_KerConstStatic_dspars_S_const),           &mem_KerConstStatic_dspars_S_const);
-	setKernelArg(kernel19,6, sizeof(mem_KerConstStatic_dspars_V_const),           &mem_KerConstStatic_dspars_V_const);
+	setKernelArg(kernel19,3, sizeof(mem_KerConstStatic_VWpars_AC_const),           &mem_KerConstStatic_VWpars_AC_const);
+	setKernelArg(kernel19,4, sizeof(mem_KerConstStatic_VWpars_BD_const),           &mem_KerConstStatic_VWpars_BD_const);
+	setKernelArg(kernel19,5, sizeof(mem_KerConstStatic_dspars_S_const),            &mem_KerConstStatic_dspars_S_const);
+	setKernelArg(kernel19,6, sizeof(mem_KerConstStatic_dspars_V_const),            &mem_KerConstStatic_dspars_V_const);
 
 	// private args added in the order in which their values are used in kernel
 	setKernelArg(kernel19,7,  sizeof(unsigned char),                         &dockpars.num_of_atoms);
 	setKernelArg(kernel19,8,  sizeof(unsigned int),                          &dockpars.num_of_intraE_contributors);
-	setKernelArg(kernel19,9,  sizeof(float),                          	&dockpars.grid_spacing);
+	setKernelArg(kernel19,9,  sizeof(float),                          	 &dockpars.grid_spacing);
 	setKernelArg(kernel19,10, sizeof(unsigned char),                         &dockpars.num_of_atypes);
-	setKernelArg(kernel19,11, sizeof(float),                          	&dockpars.coeff_elec);
-	setKernelArg(kernel19,12, sizeof(float),                          	&dockpars.qasp);
-	setKernelArg(kernel19,13, sizeof(float),                          	&dockpars.coeff_desolv);
+	setKernelArg(kernel19,11, sizeof(float),                          	 &dockpars.coeff_elec);
+	setKernelArg(kernel19,12, sizeof(float),                          	 &dockpars.qasp);
+	setKernelArg(kernel19,13, sizeof(float),                          	 &dockpars.coeff_desolv);
+	setKernelArg(kernel19,14, sizeof(unsigned int),                          &square_num_of_atypes);
 #endif // End of ENABLE_KERNEL19
 
 #ifdef ENABLE_KERNEL20 // Krnl_PRNG_LS3_float

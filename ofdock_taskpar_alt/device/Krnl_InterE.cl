@@ -22,7 +22,11 @@ void Krnl_InterE(
 			    unsigned char                    DockConst_gridsize_x_minus1,
 			    unsigned char                    DockConst_gridsize_y_minus1,
 			    unsigned char                    DockConst_gridsize_z_minus1,
+			    /*
 			    unsigned char                    DockConst_num_of_atypes
+			    */
+			    unsigned int                     Host_mul_tmp2,
+			    unsigned int                     Host_mul_tmp3
 )
 {
 	// local vars are allowed only at kernel scope
@@ -157,8 +161,9 @@ while(active) {
 
 			// lvs added temporal variables
 			uint cube_000, cube_100, cube_010, cube_110, cube_001, cube_101, cube_011, cube_111;
+/*
 			uint mul_tmp;
-
+*/
 			uint ylow_times_g1  = y_low  * DockConst_g1;	
 			uint yhigh_times_g1 = y_high * DockConst_g1;
         	        uint zlow_times_g2  = z_low  * DockConst_g2;	
@@ -173,7 +178,7 @@ while(active) {
         	        cube_011 = x_low  + yhigh_times_g1 + zhigh_times_g2;
         	        cube_111 = x_high + yhigh_times_g1 + zhigh_times_g2;
 
-			mul_tmp = atom1_typeid * DockConst_g3;
+			uint mul_tmp = atom1_typeid * DockConst_g3;
 
 			//energy contribution of the current grid type
 			float cube [2][2][2];
@@ -205,17 +210,20 @@ while(active) {
 			#endif
 
 			//energy contribution of the electrostatic grid
+/*
 			atom1_typeid = DockConst_num_of_atypes;
 			mul_tmp = atom1_typeid * DockConst_g3;
+*/
+			uint mul_tmp2 = Host_mul_tmp2;
 
-			cube [0][0][0] = GlobFgrids[cube_000 + mul_tmp];
-        	        cube [1][0][0] = GlobFgrids[cube_100 + mul_tmp];
-        	        cube [0][1][0] = GlobFgrids[cube_010 + mul_tmp];
-        	        cube [1][1][0] = GlobFgrids[cube_110 + mul_tmp];
-        	        cube [0][0][1] = GlobFgrids[cube_001 + mul_tmp];
-        	        cube [1][0][1] = GlobFgrids[cube_101 + mul_tmp];
-        	        cube [0][1][1] = GlobFgrids[cube_011 + mul_tmp];
-        	        cube [1][1][1] = GlobFgrids[cube_111 + mul_tmp];
+			cube [0][0][0] = GlobFgrids[cube_000 + mul_tmp2];
+        	        cube [1][0][0] = GlobFgrids[cube_100 + mul_tmp2];
+        	        cube [0][1][0] = GlobFgrids[cube_010 + mul_tmp2];
+        	        cube [1][1][0] = GlobFgrids[cube_110 + mul_tmp2];
+        	        cube [0][0][1] = GlobFgrids[cube_001 + mul_tmp2];
+        	        cube [1][0][1] = GlobFgrids[cube_101 + mul_tmp2];
+        	        cube [0][1][1] = GlobFgrids[cube_011 + mul_tmp2];
+        	        cube [1][1][1] = GlobFgrids[cube_111 + mul_tmp2];
 
 			#if defined (DEBUG_KRNL_INTERE)
 			printf("Interpolation of electrostatic map:\n");
@@ -236,17 +244,20 @@ while(active) {
 			#endif
 
 			//energy contribution of the desolvation grid
+/*
 			atom1_typeid = DockConst_num_of_atypes+1;
 			mul_tmp = atom1_typeid * DockConst_g3;
+*/
+			uint mul_tmp3 = Host_mul_tmp3;
 
-			cube [0][0][0] = GlobFgrids[cube_000 + mul_tmp];
-        	        cube [1][0][0] = GlobFgrids[cube_100 + mul_tmp];
-        	        cube [0][1][0] = GlobFgrids[cube_010 + mul_tmp];
-        	        cube [1][1][0] = GlobFgrids[cube_110 + mul_tmp];
-        	        cube [0][0][1] = GlobFgrids[cube_001 + mul_tmp];
-        	        cube [1][0][1] = GlobFgrids[cube_101 + mul_tmp];
-        	        cube [0][1][1] = GlobFgrids[cube_011 + mul_tmp];
-        	        cube [1][1][1] = GlobFgrids[cube_111 + mul_tmp];
+			cube [0][0][0] = GlobFgrids[cube_000 + mul_tmp3];
+        	        cube [1][0][0] = GlobFgrids[cube_100 + mul_tmp3];
+        	        cube [0][1][0] = GlobFgrids[cube_010 + mul_tmp3];
+        	        cube [1][1][0] = GlobFgrids[cube_110 + mul_tmp3];
+        	        cube [0][0][1] = GlobFgrids[cube_001 + mul_tmp3];
+        	        cube [1][0][1] = GlobFgrids[cube_101 + mul_tmp3];
+        	        cube [0][1][1] = GlobFgrids[cube_011 + mul_tmp3];
+        	        cube [1][1][1] = GlobFgrids[cube_111 + mul_tmp3];
 
 			#if defined (DEBUG_KRNL_INTERE)
 			printf("Interpolation of desolvation map:\n");

@@ -29,7 +29,8 @@ void Krnl_IntraE2(
 			    unsigned char                    DockConst_num_of_atypes,
 			    float                            DockConst_coeff_elec,
 			    float                            DockConst_qasp,
-			    float                            DockConst_coeff_desolv
+			    float                            DockConst_coeff_desolv,
+			    unsigned int                     Host_square_num_of_atypes
 )
 {
 	bool active = true;
@@ -46,7 +47,10 @@ void Krnl_IntraE2(
 		atom_charges_localcache [i] = KerConstStatic_atom_charges_const [i];
 	}
 
+/*
 	for (uchar i=0; i<DockConst_num_of_atypes*DockConst_num_of_atypes; i++) {
+*/
+	for (uchar i=0; i<Host_square_num_of_atypes; i++) {
 		if (i < DockConst_num_of_atypes) {
 			dspars_S_localcache [i] = KerConstStatic_dspars_S_const [i];
 			dspars_V_localcache [i] = KerConstStatic_dspars_V_const [i];
