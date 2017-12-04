@@ -16,40 +16,73 @@ void Krnl_Prng_Arbiter(){
 	bool active = true;
 
 while(active) {
+/*
 	bool BT_ushort_valid = false;
 	bool BT_float_valid  = false;
+*/
+	bool BT_valid = false;
+
+/*
 	bool GG_uchar_valid  = false;
 	bool GG_float_valid  = false;
+*/
+	bool GG_valid  = false;
+
 	bool LS_ushort_valid = false;
 	bool LS_float_valid  = false;
 	bool LS2_float_valid  = false;
 	bool LS3_float_valid  = false;
 	bool Off_valid       = false;	
 
+/*
 	bool BT_ushort_active;
 	bool BT_float_active;
+*/
+	bool BT_active;
+
+/*
 	bool GG_uchar_active;
 	bool GG_float_active;
+*/
+	bool GG_active;
+
 	bool LS_ushort_active;
 	bool LS_float_active;
 	bool LS2_float_active;
 	bool LS3_float_active;
 	bool Off_active;
 
-	while((BT_ushort_valid == false) &&
+	while(
+/*
+	      (BT_ushort_valid == false) &&
 	      (BT_float_valid  == false) &&
+*/
+	      (BT_valid == false) &&
+	
+/*
 	      (GG_uchar_valid  == false) &&
 	      (GG_float_valid  == false) &&
+*/
+	      (GG_valid  == false) &&
+
 	      (LS_ushort_valid == false) &&
 	      (LS_float_valid  == false) &&
 	      (LS2_float_valid == false) &&
 	      (LS3_float_valid == false) &&
 	      (Off_valid       == false) 
 	){
+/*
 		BT_ushort_active = read_channel_nb_altera(chan_GA2PRNG_BT_ushort_active,  &BT_ushort_valid);
 		BT_float_active  = read_channel_nb_altera(chan_GA2PRNG_BT_float_active,   &BT_float_valid);
+*/
+		BT_active = read_channel_nb_altera(chan_GA2PRNG_BT_active,  &BT_valid);
+
+/*
 		GG_uchar_active  = read_channel_nb_altera(chan_GA2PRNG_GG_uchar_active,   &GG_uchar_valid);
 		GG_float_active  = read_channel_nb_altera(chan_GA2PRNG_GG_float_active,   &GG_float_valid);
+*/
+		GG_active  = read_channel_nb_altera(chan_GA2PRNG_GG_active,   &GG_valid);
+
 		LS_ushort_active = read_channel_nb_altera(chan_GA2PRNG_LS_ushort_active,  &LS_ushort_valid);
 		LS_float_active  = read_channel_nb_altera(chan_GA2PRNG_LS_float_active,   &LS_float_valid);
 		LS2_float_active = read_channel_nb_altera(chan_GA2PRNG_LS2_float_active,  &LS2_float_valid);
@@ -72,45 +105,34 @@ while(active) {
 
 	active = (Off_valid) ? Off_active : true;
 
+/*
 	if ((BT_ushort_valid == true) || (Off_valid == true)) {
-		
 		write_channel_altera(chan_Arbiter_BT_ushort_active, active);
-		
-		/*
-		bool active_tmp =  (Off_valid) ? Off_active : BT_ushort_active;
-		write_channel_altera(chan_Arbiter_BT_ushort_active, active_tmp);
-		*/
 	}
 
 	if ((BT_float_valid == true) || (Off_valid == true)) {
-		
 		write_channel_altera(chan_Arbiter_BT_float_active, active);
-		
-		/*
-		bool active_tmp =  (Off_valid) ? Off_active : BT_float_active;
-		write_channel_altera(chan_Arbiter_BT_float_active, active_tmp);
-		*/
+	}
+*/
+	if ((BT_valid == true) || (Off_valid == true)) {
+		write_channel_altera(chan_Arbiter_BT_ushort_active, active);
+		write_channel_altera(chan_Arbiter_BT_float_active,  active);
 	}
 
+/*
 	if ((GG_uchar_valid == true) || (Off_valid == true)) {
-		
 		write_channel_altera(chan_Arbiter_GG_uchar_active, active);
-		
-		/*
-		bool active_tmp =  (Off_valid) ? Off_active : GG_uchar_active;
-		write_channel_altera(chan_Arbiter_GG_uchar_active, active_tmp);
-		*/
 	}
 
 	if ((GG_float_valid == true) || (Off_valid == true)) {
-		
 		write_channel_altera(chan_Arbiter_GG_float_active, active);
-		
-		/*
-		bool active_tmp =  (Off_valid) ? Off_active : GG_float_active;
-		write_channel_altera(chan_Arbiter_GG_float_active, active_tmp);
-		*/
 	}
+*/
+	if ((GG_valid == true) || (Off_valid == true)) {
+		write_channel_altera(chan_Arbiter_GG_uchar_active, active);
+		write_channel_altera(chan_Arbiter_GG_float_active, active);
+	}
+
 
  	if ((LS_ushort_valid == true) || (Off_valid == true)) {
 		

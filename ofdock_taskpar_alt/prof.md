@@ -54,3 +54,5 @@ freq: 190.625 MHz
 36. `Krnl_IntraE`, `Krnl_IntraE2`, `performdocking.cpp`: calculate multiplication of constants in host and pass value via kernel arguments `square_num_of_atypes`
 
 freq: 196.9 MHz
+
+37. `Krnl_GA`, `Krnl_PRNG`: start BT and GG prng calculation by using one channel/simpler call instead of two (one for BT, one for GG)

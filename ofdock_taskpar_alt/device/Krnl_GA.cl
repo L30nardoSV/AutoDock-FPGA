@@ -61,29 +61,41 @@ channel float 	chan_Intrae2StoreLS_LS2_intrae __attribute__((depth(20)));	// it 
 channel float 	chan_Intrae2StoreLS_LS3_intrae __attribute__((depth(20)));	// it requires 6% MAX_POPSIZE
 
 // PRNG kernerls
+channel bool    chan_GA2PRNG_BT_active;
+/*
 channel bool  	chan_GA2PRNG_BT_ushort_active;
+*/
 /*
 channel ushort4 chan_PRNG2GA_BT_ushort_prng;
 */
 channel ushort  chan_PRNG2GA_BT_ushort_prng __attribute__((depth(4)));
-
+/*
 channel bool  	chan_GA2PRNG_BT_float_active;
+*/
 /*
 channel float4  chan_PRNG2GA_BT_float_prng;
 */
 channel float   chan_PRNG2GA_BT_float_prng __attribute__((depth(4)));
 
+
+channel bool  	chan_GA2PRNG_GG_active;
+/*
 channel bool  	chan_GA2PRNG_GG_uchar_active;
+*/
 /*
 channel uchar2  chan_PRNG2GA_GG_uchar_prng;
 */
 channel uchar   chan_PRNG2GA_GG_uchar_prng __attribute__((depth(2)));
-
+/*
 channel bool  	chan_GA2PRNG_GG_float_active;
+*/
 /*
 channel float   chan_PRNG2GA_GG_float_prng;
 */
 channel float   chan_PRNG2GA_GG_float_prng __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
+
+
+
 
 channel bool  	chan_GA2PRNG_LS_ushort_active;
 channel ushort  chan_PRNG2GA_LS_ushort_prng;
@@ -346,11 +358,17 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			float4 prng_BT_F = read_channel_altera(chan_PRNG2GA_BT_float_prng);
 			*/
 
+/*
 			// get ushort binary_tournament selection prngs (parent index)
 			write_channel_altera(chan_GA2PRNG_BT_ushort_active, true);
 				//mem_fence(CLK_CHANNEL_MEM_FENCE);
 			// get float binary_tournament selection prngs (tournament rate)
 			write_channel_altera(chan_GA2PRNG_BT_float_active, true);
+			mem_fence(CLK_CHANNEL_MEM_FENCE);
+*/
+			// get ushort binary_tournament selection prngs (parent index)
+			// get float binary_tournament selection prngs (tournament rate)
+			write_channel_altera(chan_GA2PRNG_BT_active, true);
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 			ushort prng_BT_U[4];
@@ -426,12 +444,17 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 				prngGG[i] = read_channel_altera(chan_PRNG2GA_GG_float_prng);
 			}
 			*/
-
+/*
 			// get uchar genetic_generation prngs (gene index)
 			write_channel_altera(chan_GA2PRNG_GG_uchar_active, true);
 				//mem_fence(CLK_CHANNEL_MEM_FENCE);
 			// get float genetic_generation prngs (mutation rate)
 			write_channel_altera(chan_GA2PRNG_GG_float_active, true);
+			mem_fence(CLK_CHANNEL_MEM_FENCE);
+*/
+			// get uchar genetic_generation prngs (gene index)
+			// get float genetic_generation prngs (mutation rate)
+			write_channel_altera(chan_GA2PRNG_GG_active, true);
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 			uchar prng_GG_C[2];
