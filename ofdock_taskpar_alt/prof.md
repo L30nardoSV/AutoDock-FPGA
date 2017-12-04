@@ -56,3 +56,7 @@ freq: 190.625 MHz
 freq: 196.9 MHz
 
 37. `Krnl_GA`, `Krnl_PRNG`: start BT and GG prng calculation by using one channel/simpler call instead of two (one for BT, one for GG)
+
+freq: 177.5 MHz
+
+
