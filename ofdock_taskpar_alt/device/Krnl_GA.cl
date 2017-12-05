@@ -62,43 +62,17 @@ channel float 	chan_Intrae2StoreLS_LS3_intrae __attribute__((depth(20)));	// it 
 
 // PRNG kernerls
 channel bool    chan_GA2PRNG_BT_active;
-/*
-channel bool  	chan_GA2PRNG_BT_ushort_active;
-*/
-/*
-channel ushort4 chan_PRNG2GA_BT_ushort_prng;
-*/
 channel ushort  chan_PRNG2GA_BT_ushort_prng __attribute__((depth(4)));
-/*
-channel bool  	chan_GA2PRNG_BT_float_active;
-*/
-/*
-channel float4  chan_PRNG2GA_BT_float_prng;
-*/
 channel float   chan_PRNG2GA_BT_float_prng __attribute__((depth(4)));
 
-
 channel bool  	chan_GA2PRNG_GG_active;
-/*
-channel bool  	chan_GA2PRNG_GG_uchar_active;
-*/
-/*
-channel uchar2  chan_PRNG2GA_GG_uchar_prng;
-*/
 channel uchar   chan_PRNG2GA_GG_uchar_prng __attribute__((depth(2)));
-/*
-channel bool  	chan_GA2PRNG_GG_float_active;
-*/
-/*
-channel float   chan_PRNG2GA_GG_float_prng;
-*/
 channel float   chan_PRNG2GA_GG_float_prng __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
-
-
-
 
 channel bool  	chan_GA2PRNG_LS_ushort_active;
 channel ushort  chan_PRNG2GA_LS_ushort_prng;
+	channel ushort  chan_PRNG2GA_LS2_ushort_prng;
+	channel ushort  chan_PRNG2GA_LS3_ushort_prng;
 
 channel bool  	chan_GA2PRNG_LS_float_active;
 channel float   chan_PRNG2GA_LS_float_prng  __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
@@ -268,9 +242,10 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 	__local float genotype_bias [ACTUAL_GENOTYPE_LENGTH];  
 	__local float entity_possible_new_genotype [ACTUAL_GENOTYPE_LENGTH];
 */
-	
-	__local ushort entity_ls[20];
 
+/*
+	__local ushort entity_ls[20];
+*/
 
 	__local float LocalPopNext[MAX_POPSIZE][ACTUAL_GENOTYPE_LENGTH];
 /*
@@ -346,26 +321,6 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			// binary_tournament_selection
 			// ----------------------------------------
 
-			/*
-			// get ushort binary_tournament selection prngs (parent index)
-			write_channel_altera(chan_GA2PRNG_BT_ushort_active, true);
-			mem_fence(CLK_CHANNEL_MEM_FENCE);
-			ushort4 prng_BT_U = read_channel_altera(chan_PRNG2GA_BT_ushort_prng);
-
-			// get float binary_tournament selection prngs (tournament rate)
-			write_channel_altera(chan_GA2PRNG_BT_float_active, true);
-			mem_fence(CLK_CHANNEL_MEM_FENCE);
-			float4 prng_BT_F = read_channel_altera(chan_PRNG2GA_BT_float_prng);
-			*/
-
-/*
-			// get ushort binary_tournament selection prngs (parent index)
-			write_channel_altera(chan_GA2PRNG_BT_ushort_active, true);
-				//mem_fence(CLK_CHANNEL_MEM_FENCE);
-			// get float binary_tournament selection prngs (tournament rate)
-			write_channel_altera(chan_GA2PRNG_BT_float_active, true);
-			mem_fence(CLK_CHANNEL_MEM_FENCE);
-*/
 			// get ushort binary_tournament selection prngs (parent index)
 			// get float binary_tournament selection prngs (tournament rate)
 			write_channel_altera(chan_GA2PRNG_BT_active, true);
@@ -430,28 +385,6 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			                       numwriteports(1)
 			                    )) prngGG [ACTUAL_GENOTYPE_LENGTH]; 		
 
-			/*
-			// get uchar genetic_generation prngs (gene index)
-			write_channel_altera(chan_GA2PRNG_GG_uchar_active, true);
-			mem_fence(CLK_CHANNEL_MEM_FENCE);
-			uchar2 prng_GG_C = read_channel_altera(chan_PRNG2GA_GG_uchar_prng);
-			
-			// get float genetic_generation prngs (mutation rate)
-			write_channel_altera(chan_GA2PRNG_GG_float_active, true);
-			mem_fence(CLK_CHANNEL_MEM_FENCE);
-
-			for (uchar i=0; i<DockConst_num_of_genes; i++) {
-				prngGG[i] = read_channel_altera(chan_PRNG2GA_GG_float_prng);
-			}
-			*/
-/*
-			// get uchar genetic_generation prngs (gene index)
-			write_channel_altera(chan_GA2PRNG_GG_uchar_active, true);
-				//mem_fence(CLK_CHANNEL_MEM_FENCE);
-			// get float genetic_generation prngs (mutation rate)
-			write_channel_altera(chan_GA2PRNG_GG_float_active, true);
-			mem_fence(CLK_CHANNEL_MEM_FENCE);
-*/
 			// get uchar genetic_generation prngs (gene index)
 			// get float genetic_generation prngs (mutation rate)
 			write_channel_altera(chan_GA2PRNG_GG_active, true);
@@ -571,6 +504,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 		eval_cnt += DockConst_pop_size;
 		*/
 
+/*
 		// choose all random entities
 		// without checking if it has already been subjected to LS in this cycle 
 		write_channel_altera(chan_GA2PRNG_LS_ushort_active, true);
@@ -583,6 +517,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			printf("LS entities idx: %u\n", entity_ls [i]);
 			#endif
 		}
+*/
 		
 		// ------------------------------------------------------------------
 		// LS: Local Search
@@ -596,6 +531,16 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 		//for (ushort ls_ent_cnt=0; ls_ent_cnt<DockConst_num_of_lsentities; ls_ent_cnt+=2) {
 		for (ushort ls_ent_cnt=0; ls_ent_cnt<DockConst_num_of_lsentities; ls_ent_cnt+=3) {
 
+			// choose all random entities
+			// without checking if it has already been subjected to LS in this cycle
+			write_channel_altera(chan_GA2PRNG_LS_ushort_active, true);
+			mem_fence(CLK_CHANNEL_MEM_FENCE);
+
+			ushort entity_ls1 = read_channel_altera(chan_PRNG2GA_LS_ushort_prng);
+			ushort entity_ls2 = read_channel_altera(chan_PRNG2GA_LS2_ushort_prng);
+			ushort entity_ls3 = read_channel_altera(chan_PRNG2GA_LS3_ushort_prng);
+			mem_fence(CLK_CHANNEL_MEM_FENCE);
+
 			// LS1
 			// LS2
 			// LS3
@@ -604,15 +549,25 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			write_channel_altera(chan_GA2LS_LS3_active, true);
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 
+/*
 			write_channel_altera(chan_GA2LS_LS1_energy, LocalEneNext[entity_ls[ls_ent_cnt]]);
 			write_channel_altera(chan_GA2LS_LS2_energy, LocalEneNext[entity_ls[ls_ent_cnt+1]]);
 			write_channel_altera(chan_GA2LS_LS3_energy, LocalEneNext[entity_ls[ls_ent_cnt+2]]);
+*/
+			write_channel_altera(chan_GA2LS_LS1_energy, LocalEneNext[entity_ls1]);
+			write_channel_altera(chan_GA2LS_LS2_energy, LocalEneNext[entity_ls2]);
+			write_channel_altera(chan_GA2LS_LS3_energy, LocalEneNext[entity_ls3]);
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 			for (uchar i=0; i<DockConst_num_of_genes; i++) {
+/*
 				write_channel_altera(chan_GA2LS_LS1_genotype, LocalPopNext[entity_ls[ls_ent_cnt]][i & 0x3F]);
 				write_channel_altera(chan_GA2LS_LS2_genotype, LocalPopNext[entity_ls[ls_ent_cnt+1]][i & 0x3F]);
 				write_channel_altera(chan_GA2LS_LS3_genotype, LocalPopNext[entity_ls[ls_ent_cnt+2]][i & 0x3F]);
+*/
+				write_channel_altera(chan_GA2LS_LS1_genotype, LocalPopNext[entity_ls1][i & 0x3F]);
+				write_channel_altera(chan_GA2LS_LS2_genotype, LocalPopNext[entity_ls2][i & 0x3F]);
+				write_channel_altera(chan_GA2LS_LS3_genotype, LocalPopNext[entity_ls3][i & 0x3F]);
 			}
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 
@@ -630,9 +585,14 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 
 			uint LS_eval = eval_tmp1 + eval_tmp2 + eval_tmp3;
 			
+/*
 			LocalEneNext[entity_ls[ls_ent_cnt]] = read_channel_altera(chan_LS2GA_LS1_energy);	
 			LocalEneNext[entity_ls[ls_ent_cnt+1]] = read_channel_altera(chan_LS2GA_LS2_energy);
 			LocalEneNext[entity_ls[ls_ent_cnt+2]] = read_channel_altera(chan_LS2GA_LS3_energy);
+*/
+			LocalEneNext[entity_ls1] = read_channel_altera(chan_LS2GA_LS1_energy);	
+			LocalEneNext[entity_ls2] = read_channel_altera(chan_LS2GA_LS2_energy);
+			LocalEneNext[entity_ls3] = read_channel_altera(chan_LS2GA_LS3_energy);
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 			#if defined (DEBUG_KRNL_LS)
@@ -641,9 +601,14 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 
 			#pragma ivdep
 			for (uchar i=0; i<DockConst_num_of_genes; i++) {
+/*
 				LocalPopNext[entity_ls[ls_ent_cnt]][i & 0x3F]   = read_channel_altera(chan_LS2GA_LS1_genotype);
 				LocalPopNext[entity_ls[ls_ent_cnt+1]][i & 0x3F] = read_channel_altera(chan_LS2GA_LS2_genotype);
 				LocalPopNext[entity_ls[ls_ent_cnt+2]][i & 0x3F] = read_channel_altera(chan_LS2GA_LS3_genotype);
+*/
+				LocalPopNext[entity_ls1][i & 0x3F] = read_channel_altera(chan_LS2GA_LS1_genotype);
+				LocalPopNext[entity_ls2][i & 0x3F] = read_channel_altera(chan_LS2GA_LS2_genotype);
+				LocalPopNext[entity_ls3][i & 0x3F] = read_channel_altera(chan_LS2GA_LS3_genotype);
 			}
 			tmp_eval_cnt += LS_eval;
 

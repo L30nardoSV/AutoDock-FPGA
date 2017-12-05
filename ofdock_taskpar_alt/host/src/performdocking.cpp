@@ -197,6 +197,17 @@ static cl_kernel kernel24  = NULL;
 static const char *name_k24 = "Krnl_Conf_Arbiter2";
 #endif
 
+#ifdef ENABLE_KERNEL25
+static cl_command_queue command_queue25 = NULL;
+static cl_kernel kernel25  = NULL;
+static const char *name_k25 = "Krnl_Prng_LS2_ushort";
+#endif
+
+#ifdef ENABLE_KERNEL26
+static cl_command_queue command_queue26 = NULL;
+static cl_kernel kernel26  = NULL;
+static const char *name_k26 = "Krnl_Prng_LS3_ushort";
+#endif
 
 static cl_program program = NULL;
 
@@ -403,7 +414,7 @@ filled with clock() */
 	size_prng_seeds = sizeof(unsigned int);
 */
 
-	size_prng_seeds = 8*sizeof(unsigned int);
+	size_prng_seeds = 10*sizeof(unsigned int);
 	cpu_prng_seeds = (unsigned int*) alignedMalloc(size_prng_seeds);
 
 	genseed(time(NULL));	//initializing seed generator
@@ -626,7 +637,9 @@ filled with clock() */
 
 #ifdef ENABLE_KERNEL9 // Krnl_PRNG_LS_ushort
 	setKernelArg(kernel9,1, sizeof(unsigned int),  &dockpars.pop_size);
+/*
 	setKernelArg(kernel9,2, sizeof(unsigned int),  &dockpars.num_of_lsentities);
+*/
 #endif // End of ENABLE_KERNEL9
 
 #ifdef ENABLE_KERNEL10 // Krnl_PRNG_uchar
@@ -749,6 +762,14 @@ filled with clock() */
 	setKernelArg(kernel24,0, sizeof(unsigned int),  &dockpars.num_of_genes);
 #endif // End of ENABLE_KERNEL24
 
+#ifdef ENABLE_KERNEL25 // Krnl_PRNG_LS2_ushort
+	setKernelArg(kernel25,1, sizeof(unsigned int),  &dockpars.pop_size);
+#endif // End of ENABLE_KERNEL25
+
+#ifdef ENABLE_KERNEL26 // Krnl_PRNG_LS3_ushort
+	setKernelArg(kernel26,1, sizeof(unsigned int),  &dockpars.pop_size);
+#endif // End of ENABLE_KERNEL26
+
 	for (unsigned int run_cnt = 0; run_cnt < mypars->num_of_runs; run_cnt++)
 	{
 
@@ -765,6 +786,15 @@ filled with clock() */
 
 		#if defined (REPRO)
 			cpu_prng_seeds[0] = 1u;
+			cpu_prng_seeds[1] = 1u;
+			cpu_prng_seeds[2] = 1u;
+			cpu_prng_seeds[3] = 1u;
+			cpu_prng_seeds[4] = 1u;
+			cpu_prng_seeds[5] = 1u;
+			cpu_prng_seeds[6] = 1u;
+			cpu_prng_seeds[7] = 1u;
+			cpu_prng_seeds[8] = 1u;
+			cpu_prng_seeds[9] = 1u;
 		#else
 
 			cpu_prng_seeds[0] = genseed(0u);
@@ -775,6 +805,8 @@ filled with clock() */
 			cpu_prng_seeds[5] = genseed(0u);
 			cpu_prng_seeds[6] = genseed(0u);
 			cpu_prng_seeds[7] = genseed(0u);
+			cpu_prng_seeds[8] = genseed(0u);
+			cpu_prng_seeds[9] = genseed(0u);
 		#endif
 
 
@@ -830,12 +862,17 @@ filled with clock() */
 		setKernelArg(kernel17,10, sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[3]);
 #endif // End of ENABLE_KERNEL2
 
-
 #ifdef ENABLE_KERNEL20 // Krnl_PRNG_LS3_float
 		setKernelArg(kernel20,0, sizeof(unsigned int),   &cpu_prng_seeds[7]);
 #endif // End of ENABLE_KERNEL20
 
+#ifdef ENABLE_KERNEL25 // Krnl_PRNG_LS2_ushort
+		setKernelArg(kernel25,0, sizeof(unsigned int),   &cpu_prng_seeds[8]);
+#endif // End of ENABLE_KERNEL25
 
+#ifdef ENABLE_KERNEL26 // Krnl_PRNG_LS3_ushort
+		setKernelArg(kernel26,0, sizeof(unsigned int),   &cpu_prng_seeds[9]);
+#endif // End of ENABLE_KERNEL26
 
 		#ifdef ENABLE_KERNEL1
 		runKernelTask(command_queue1,kernel1,NULL,NULL);
@@ -933,6 +970,14 @@ filled with clock() */
 		runKernelTask(command_queue24,kernel24,NULL,NULL);
 		#endif // ENABLE_KERNEL24
 
+		#ifdef ENABLE_KERNEL25
+		runKernelTask(command_queue25,kernel25,NULL,NULL);
+		#endif // ENABLE_KERNEL25
+
+		#ifdef ENABLE_KERNEL26
+		runKernelTask(command_queue26,kernel26,NULL,NULL);
+		#endif // ENABLE_KERNEL26
+
 
 
 		#ifdef ENABLE_KERNEL1 		
@@ -1029,6 +1074,14 @@ filled with clock() */
 
 		#ifdef ENABLE_KERNEL24
 		clFinish(command_queue24);
+		#endif
+
+		#ifdef ENABLE_KERNEL25
+		clFinish(command_queue25);
+		#endif
+
+		#ifdef ENABLE_KERNEL26
+		clFinish(command_queue26);
 		#endif
 
 		clock_stop_docking = clock();
@@ -1478,6 +1531,20 @@ bool init() {
   checkError(status, "Failed to create kernel");
 #endif
 
+#ifdef ENABLE_KERNEL25
+  command_queue25 = clCreateCommandQueue(context, device, 0, &status);
+  checkError(status, "Failed to create command queue25");
+  kernel25 = clCreateKernel(program, name_k25, &status);
+  checkError(status, "Failed to create kernel");
+#endif
+
+#ifdef ENABLE_KERNEL26
+  command_queue26 = clCreateCommandQueue(context, device, 0, &status);
+  checkError(status, "Failed to create command queue26");
+  kernel26 = clCreateKernel(program, name_k26, &status);
+  checkError(status, "Failed to create kernel");
+#endif
+
   return true;
 }
 
@@ -1601,6 +1668,16 @@ void cleanup() {
 #ifdef ENABLE_KERNEL24
   if(kernel24) {clReleaseKernel(kernel24);}
   if(command_queue24) {clReleaseCommandQueue(command_queue24);}
+#endif
+
+#ifdef ENABLE_KERNEL25
+  if(kernel25) {clReleaseKernel(kernel25);}
+  if(command_queue25) {clReleaseCommandQueue(command_queue25);}
+#endif
+
+#ifdef ENABLE_KERNEL26
+  if(kernel26) {clReleaseKernel(kernel26);}
+  if(command_queue26) {clReleaseCommandQueue(command_queue26);}
 #endif
 
   if(program) {clReleaseProgram(program);}

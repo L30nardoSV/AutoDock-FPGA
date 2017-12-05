@@ -168,6 +168,10 @@ ENABLE_K22 = YES
 ENABLE_K23 = YES
 ENABLE_K24 = YES
 
+# PRNGS in GA for LS2 and LS3
+ENABLE_K25 = YES
+ENABLE_K26 = YES
+
 ifeq ($(ENABLE_K1),YES)
 	K1 =-DENABLE_KERNEL1
 else
@@ -318,7 +322,19 @@ else
 	K24 =
 endif
 
-ENABLE_KERNELS = $(K1) $(K2) $(K3) $(K4) $(K5) $(K6) $(K7) $(K8) $(K9) $(K10) $(K11) $(K12) $(K13) $(K14) $(K15) $(K16) $(K17) $(K18) $(K19) $(K20) $(K21) $(K22) $(K23) $(K24)
+ifeq ($(ENABLE_K25),YES)
+	K25 =-DENABLE_KERNEL25
+else
+	K25 =
+endif
+
+ifeq ($(ENABLE_K26),YES)
+	K26 =-DENABLE_KERNEL26
+else
+	K26 =
+endif
+
+ENABLE_KERNELS = $(K1) $(K2) $(K3) $(K4) $(K5) $(K6) $(K7) $(K8) $(K9) $(K10) $(K11) $(K12) $(K13) $(K14) $(K15) $(K16) $(K17) $(K18) $(K19) $(K20) $(K21) $(K22) $(K23) $(K24) $(K25) $(K26)
 
 # =============================
 # Reproduce result (remove randomness)

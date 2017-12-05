@@ -59,4 +59,10 @@ freq: 196.9 MHz
 
 freq: 177.5 MHz
 
+38. `Krnl_GA`, `Krnl_PRNG`, `performdocking.cpp`: create `Krnl_Prng_LS2_ushort` and `Krnl_Prng_LS3_ushort` +
+						  `Krnl_GA`: choosing LS entity is moved into LS ls_ent_cnt for-loop instead of having a separate for-loop
+
+freq: 170.1 MHz
+
+
 
