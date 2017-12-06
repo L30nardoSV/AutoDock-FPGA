@@ -474,13 +474,18 @@ filled with clock() */
 	dockpars.qasp = mypars->qasp;
 
 	// these variables hold multiplications between kernel-constants
-	// better calculate them here and then pass them to Krnl_InterE and Krnl_InterE2
-	unsigned int mul_tmp2 = dockpars.num_of_atypes * dockpars.g3;
-	unsigned int mul_tmp3 = (dockpars.num_of_atypes + 1) * dockpars.g3;
+	// better calculate them here and then pass them to Krnl_GA
+	const float two_absmaxdmov = 2.0 * dockpars.abs_max_dmov;
+	const float two_absmaxdang = 2.0 * dockpars.abs_max_dang;
 
-	// this variable holds a multiplicationa between kernel-constants
-	// better calculate them here and then pass them to Krnl_IntraE and Krnl_IntraE2
-	unsigned int square_num_of_atypes = dockpars.num_of_atypes * dockpars.num_of_atypes;
+	// these variables hold multiplications between kernel-constants
+	// better calculate them here and then pass them to Krnl_InterE and Krnl_InterE2
+	const unsigned int mul_tmp2 = dockpars.num_of_atypes * dockpars.g3;
+	const unsigned int mul_tmp3 = (dockpars.num_of_atypes + 1) * dockpars.g3;
+
+	// this variable holds a multiplication between kernel-constants
+	// better calculate them it and then pass them to Krnl_IntraE and Krnl_IntraE2
+	const unsigned int square_num_of_atypes = dockpars.num_of_atypes * dockpars.num_of_atypes;
 
  	//allocating GPU memory for populations, floatgrids,
 	//energies, evaluation counters and random number generator states
@@ -545,17 +550,13 @@ filled with clock() */
 	setKernelArg(kernel1,5,  sizeof(unsigned int),                 		&dockpars.num_of_generations);
 	setKernelArg(kernel1,6,  sizeof(float),                          	&dockpars.tournament_rate);
 	setKernelArg(kernel1,7,  sizeof(float),                          	&dockpars.mutation_rate);
-	setKernelArg(kernel1,8, sizeof(float),                          	&dockpars.abs_max_dmov);
-	setKernelArg(kernel1,9, sizeof(float),                          	&dockpars.abs_max_dang);
-	setKernelArg(kernel1,10, sizeof(float),                          	&dockpars.crossover_rate);
-	setKernelArg(kernel1,11, sizeof(unsigned int),                          &dockpars.num_of_lsentities);
-	//setKernelArg(kernel1,12, sizeof(unsigned int),                          &dockpars.max_num_of_iters);
-	//setKernelArg(kernel1,13, sizeof(float),                          	&dockpars.rho_lower_bound);
-	//setKernelArg(kernel1,14, sizeof(float),                          	&dockpars.base_dmov_mul_sqrt3);
-	//setKernelArg(kernel1,15, sizeof(unsigned int),                          &dockpars.num_of_genes);
-	setKernelArg(kernel1,12, sizeof(unsigned int),                          &dockpars.num_of_genes);
-	//setKernelArg(kernel1,16, sizeof(float),                          	&dockpars.base_dang_mul_sqrt3);
-	//setKernelArg(kernel1,17, sizeof(unsigned int),                          &dockpars.cons_limit);
+	setKernelArg(kernel1,8,  sizeof(float),                          	&dockpars.abs_max_dmov);
+	setKernelArg(kernel1,9,  sizeof(float),                          	&dockpars.abs_max_dang);
+	setKernelArg(kernel1,10, sizeof(float),                                 &two_absmaxdmov);
+	setKernelArg(kernel1,11, sizeof(float),                                 &two_absmaxdang);
+	setKernelArg(kernel1,12, sizeof(float),                          	&dockpars.crossover_rate);
+	setKernelArg(kernel1,13, sizeof(unsigned int),                          &dockpars.num_of_lsentities);
+	setKernelArg(kernel1,14, sizeof(unsigned int),                          &dockpars.num_of_genes);
 #endif // End of ENABLE_KERNEL1
 
 #ifdef ENABLE_KERNEL2 // Krnl_Conform

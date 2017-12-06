@@ -62,57 +62,57 @@ channel float 	chan_Intrae2StoreLS_LS3_intrae __attribute__((depth(20)));	// it 
 
 // PRNG kernerls
 channel bool    chan_GA2PRNG_BT_active;
-channel ushort  chan_PRNG2GA_BT_ushort_prng __attribute__((depth(4)));
-channel float   chan_PRNG2GA_BT_float_prng __attribute__((depth(4)));
+channel ushort  chan_PRNG2GA_BT_ushort_prng    __attribute__((depth(4)));
+channel float   chan_PRNG2GA_BT_float_prng     __attribute__((depth(4)));
 
 channel bool  	chan_GA2PRNG_GG_active;
-channel uchar   chan_PRNG2GA_GG_uchar_prng __attribute__((depth(2)));
-channel float   chan_PRNG2GA_GG_float_prng __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
+channel uchar   chan_PRNG2GA_GG_uchar_prng     __attribute__((depth(2)));
+channel float   chan_PRNG2GA_GG_float_prng     __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
 
 channel bool  	chan_GA2PRNG_LS_ushort_active;
 channel ushort  chan_PRNG2GA_LS_ushort_prng;
-	channel ushort  chan_PRNG2GA_LS2_ushort_prng;
-	channel ushort  chan_PRNG2GA_LS3_ushort_prng;
+channel ushort  chan_PRNG2GA_LS2_ushort_prng;
+channel ushort  chan_PRNG2GA_LS3_ushort_prng;
 
 channel bool  	chan_GA2PRNG_LS_float_active;
-channel float   chan_PRNG2GA_LS_float_prng  __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
+channel float   chan_PRNG2GA_LS_float_prng     __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
 
 channel bool  	chan_GA2PRNG_LS2_float_active;
-channel float   chan_PRNG2GA_LS2_float_prng __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
+channel float   chan_PRNG2GA_LS2_float_prng    __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
 
 channel bool  	chan_GA2PRNG_LS3_float_active;
-channel float   chan_PRNG2GA_LS3_float_prng __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
+channel float   chan_PRNG2GA_LS3_float_prng    __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
 
 channel bool  	chan_GA2PRNG_Off_active;
 
 // LS1, LS2, LS3
 channel bool 	chan_GA2LS_LS1_active;
 channel float   chan_GA2LS_LS1_energy;
-channel float  	chan_GA2LS_LS1_genotype     __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
+channel float  	chan_GA2LS_LS1_genotype        __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
 
 channel bool 	chan_GA2LS_LS2_active;
 channel float   chan_GA2LS_LS2_energy;
-channel float  	chan_GA2LS_LS2_genotype     __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
+channel float  	chan_GA2LS_LS2_genotype        __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
 
 channel bool 	chan_GA2LS_LS3_active;
 channel float   chan_GA2LS_LS3_energy;
-channel float  	chan_GA2LS_LS3_genotype     __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
+channel float  	chan_GA2LS_LS3_genotype        __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
+
+channel uint 	chan_LS2GA_LS1_eval	       __attribute__((depth(8)));	// it requires 6% MAX_POPSIZE
+channel float   chan_LS2GA_LS1_energy	       __attribute__((depth(8)));	// it requires 6% MAX_POPSIZE
+channel float  	chan_LS2GA_LS1_genotype        __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
+
+channel uint 	chan_LS2GA_LS2_eval	       __attribute__((depth(8)));	// it requires 6% MAX_POPSIZE
+channel float   chan_LS2GA_LS2_energy	       __attribute__((depth(8)));	// it requires 6% MAX_POPSIZE
+channel float  	chan_LS2GA_LS2_genotype        __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
+
+channel uint 	chan_LS2GA_LS3_eval	       __attribute__((depth(8)));	// it requires 6% MAX_POPSIZE
+channel float   chan_LS2GA_LS3_energy          __attribute__((depth(8)));	// it requires 6% MAX_POPSIZE
+channel float  	chan_LS2GA_LS3_genotype        __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
 
 channel bool    chan_GA2LS_Off_active;
 channel bool    chan_GA2LS_Off2_active;
 channel bool    chan_GA2LS_Off3_active;
-
-channel uint 	chan_LS2GA_LS1_eval	    __attribute__((depth(8)));	// it requires 6% MAX_POPSIZE
-channel float   chan_LS2GA_LS1_energy	    __attribute__((depth(8)));	// it requires 6% MAX_POPSIZE
-channel float  	chan_LS2GA_LS1_genotype     __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
-
-channel uint 	chan_LS2GA_LS2_eval	    __attribute__((depth(8)));	// it requires 6% MAX_POPSIZE
-channel float   chan_LS2GA_LS2_energy	    __attribute__((depth(8)));	// it requires 6% MAX_POPSIZE
-channel float  	chan_LS2GA_LS2_genotype     __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
-
-channel uint 	chan_LS2GA_LS3_eval	    __attribute__((depth(8)));	// it requires 6% MAX_POPSIZE
-channel float   chan_LS2GA_LS3_energy       __attribute__((depth(8)));	// it requires 6% MAX_POPSIZE
-channel float  	chan_LS2GA_LS3_genotype     __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
 
 channel bool    chan_ConfArbiter_Off;
 
@@ -159,29 +159,14 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			    float                     DockConst_mutation_rate,
 		    	    float                     DockConst_abs_max_dmov,
 			    float                     DockConst_abs_max_dang,
+		    	    float                     Host_two_absmaxdmov,
+			    float                     Host_two_absmaxdang,
 			    float                     DockConst_crossover_rate,
 			    unsigned int              DockConst_num_of_lsentities,
-			    //unsigned int              DockConst_max_num_of_iters,
-	                    //float                     DockConst_rho_lower_bound,
-			    //float                     DockConst_base_dmov_mul_sqrt3,
-			    unsigned int              DockConst_num_of_genes //,
-   		            //float                     DockConst_base_dang_mul_sqrt3,
-			    //unsigned int              DockConst_cons_limit
-	     )
+			    unsigned int              DockConst_num_of_genes)
 {
 	#if defined (DEBUG_KRNL_GA)
 	printf("\n");
-	//printf("%-40s %u\n", "DockConst->num_of_atypes: ",        	DockConst_num_of_atypes);
-	//printf("%-40s %u\n", "DockConst->num_of_intraE_contributors: ",DockConst_num_of_intraE_contributors);
-	//printf("%-40s %u\n", "DockConst->gridsize_x: ",		DockConst_gridsize_x);
-	//printf("%-40s %u\n", "DockConst->gridsize_y: ",  		DockConst_gridsize_y);
-	//printf("%-40s %u\n", "DockConst->gridsize_z: ",   		DockConst_gridsize_z);
-	//printf("%-40s %u\n", "DockConst->g1: ",			DockConst_g1);
-	//printf("%-40s %u\n", "DockConst->g2: ",  			DockConst_g2);
-	//printf("%-40s %u\n", "DockConst->g3: ",  			DockConst_g3);
-	//printf("%-40s %f\n", "DockConst->grid_spacing: ", 		DockConst_grid_spacing);
-	//printf("%-40s %f\n", "DockConst->coeff_elecc: ", 		DockConst_coeff_elec);
-	//printf("%-40s %f\n", "DockConst->coeff_desolv: ", 		DockConst_coeff_desolv);
 	printf("%-40s %u\n", "DockConst_pop_size: ",        		DockConst_pop_size);
 	printf("%-40s %u\n", "DockConst_num_of_energy_evals: ",  	DockConst_num_of_energy_evals);
 	printf("%-40s %u\n", "DockConst_num_of_generations: ",  	DockConst_num_of_generations);
@@ -189,16 +174,11 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 	printf("%-40s %f\n", "DockConst_mutation_rate: ", 		DockConst_mutation_rate);
 	printf("%-40s +/-%fA\n", "DockConst_abs_max_dmov: ",		DockConst_abs_max_dmov);
 	printf("%-40s +/-%f°\n", "DockConst_abs_max_dang: ",  		DockConst_abs_max_dang);
+	printf("%-40s +/-%fA\n", "Host_two_absmaxdmov: ",		Host_two_absmaxdmov);
+	printf("%-40s +/-%f°\n", "Host_two_absmaxdang: ",  		Host_two_absmaxdang);
 	printf("%-40s %f\n", "DockConst_crossover_rate: ", 		DockConst_crossover_rate);
-	//printf("%-40s %f\n", "DockConst->lsearch_rate: ", 		DockConst_lsearch_rate);
 	printf("%-40s %u\n", "DockConst_num_of_lsentities: ",   	DockConst_num_of_lsentities);
-	//printf("%-40s %u\n", "DockConst_max_num_of_iters: ",    	DockConst_max_num_of_iters);
-	//printf("%-40s %f\n", "DockConst_rho_lower_bound: ",     	DockConst_rho_lower_bound);
-	//printf("%-40s %f\n", "DockConst_base_dmov_mul_sqrt3: ", 	DockConst_base_dmov_mul_sqrt3);
 	printf("%-40s %u\n", "DockConst_num_of_genes: ",        	DockConst_num_of_genes);
-	//printf("%-40s %f\n", "DockConst_base_dang_mul_sqrt3: ", 	DockConst_base_dang_mul_sqrt3);
-	//printf("%-40s %u\n", "DockConst_cons_limit: ",          	DockConst_cons_limit);
-	//printf("%-40s %f\n", "DockConst->qasp: ",    			DockConst_qasp);
 	#endif
 
 	uint eval_cnt = 0;
@@ -230,29 +210,16 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 		#endif
 	}
 	// ------------------------------------------------------------------
-
+/*
 	// Find_best 	
 	ushort best_entity_id;
+*/
 
+/*
 	// Binary tournament 	
 	ushort parent1, parent2; 
-
-/*
-	__local float genotype_deviate [ACTUAL_GENOTYPE_LENGTH];
-	__local float genotype_bias [ACTUAL_GENOTYPE_LENGTH];  
-	__local float entity_possible_new_genotype [ACTUAL_GENOTYPE_LENGTH];
 */
-
-/*
-	__local ushort entity_ls[20];
-*/
-
 	__local float LocalPopNext[MAX_POPSIZE][ACTUAL_GENOTYPE_LENGTH];
-/*
-	__local float __attribute__ ((numbanks(2),
-				      bankwidth(16)
-				    ))LocalPopNext[MAX_POPSIZE][ACTUAL_GENOTYPE_LENGTH];
-*/
 	__local float LocalEneNext[MAX_POPSIZE];
 
 	while ((eval_cnt < DockConst_num_of_energy_evals) && (generation_cnt < DockConst_num_of_generations)) {
@@ -266,9 +233,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 		// ------------------------------------------------------------------
 		// GG: Genetic Generation
 		// ------------------------------------------------------------------
-		/*
-		float loc_energies[MAX_POPSIZE]; 
-		*/
+
 		float __attribute__ ((
 				       memory,
 		   		       numbanks(1),
@@ -279,8 +244,8 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			              )) loc_energies[MAX_POPSIZE];
 
 		// copy energy to local memory
-		for (ushort i=0; i<DockConst_pop_size; i++) {
-			loc_energies[i] = LocalEneCurr[i];
+		for (ushort pop_cnt=0; pop_cnt<DockConst_pop_size; pop_cnt++) {
+			loc_energies[pop_cnt] = LocalEneCurr[pop_cnt];
 		}
 
 		// create shift register to reduce II (initially II=6) of best entity for-loop 
@@ -293,7 +258,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 
 		// identifying best entity
 		ushort best_entity = 0;
-		for (ushort i=1; i<DockConst_pop_size; i++) {
+		for (ushort pop_cnt=1; pop_cnt<DockConst_pop_size; pop_cnt++) {
 			shift_reg[6] = loc_energies[best_entity];
 
 			#pragma unroll
@@ -301,14 +266,14 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 				shift_reg[j] = shift_reg[j+1];
 			}
 				
-			if (loc_energies[i] < shift_reg[0]) {
-				best_entity = i;
+			if (loc_energies[pop_cnt] < shift_reg[0]) {
+				best_entity = pop_cnt;
 			}
 		}
 
 		// elitism - copying the best entity to new population 	
-		for (uchar i=0; i<DockConst_num_of_genes; i++) { 		
-			LocalPopNext[0][i & 0x3F] = LocalPopCurr[best_entity][i & 0x3F]; 	
+		for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) { 		
+			LocalPopNext[0][gene_cnt & 0x3F] = LocalPopCurr[best_entity][gene_cnt & 0x3F]; 	
 		} 		
 		LocalEneNext[0] = loc_energies[best_entity];
 
@@ -335,23 +300,10 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			}
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 
-			// first parent
-			/*
-			if (loc_energies[prng_BT_U.x] < loc_energies[prng_BT_U.y]) {
-				if (prng_BT_F.x < DockConst_tournament_rate) {parent1 = prng_BT_U.x;}
-				else				             {parent1 = prng_BT_U.y;}}
-			else {
-				if (prng_BT_F.y < DockConst_tournament_rate) {parent1 = prng_BT_U.y;}
-				else				             {parent1 = prng_BT_U.x;}}
+			ushort parent1;
+			ushort parent2; 
 
-			// the better will be the second parent
-			if (loc_energies[prng_BT_U.z] < loc_energies[prng_BT_U.w]) {
-				if (prng_BT_F.z < DockConst_tournament_rate) {parent2 = prng_BT_U.z;}
-				else		          	             {parent2 = prng_BT_U.w;}}
-			else {
-				if (prng_BT_F.w < DockConst_tournament_rate) {parent2 = prng_BT_U.w;}
-				else			                     {parent2 = prng_BT_U.z;}}
-			*/
+			// first parent
 			if (loc_energies[prng_BT_U[0]] < loc_energies[prng_BT_U[1]]) {
 				if (prng_BT_F[0] < DockConst_tournament_rate) {parent1 = prng_BT_U[0];}
 				else				             {parent1 = prng_BT_U[1];}}
@@ -368,14 +320,15 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 				else			                     {parent2 = prng_BT_U[2];}}
 
 			// local_entity_1 and local_entity_2 are population-parent1, population-parent2
-			for (uchar i=0; i<DockConst_num_of_genes; i++) {
-				local_entity_1[i] = LocalPopCurr[parent1][i & 0x3F];
-				local_entity_2[i] = LocalPopCurr[parent2][i & 0x3F];
+			for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
+				local_entity_1[gene_cnt] = LocalPopCurr[parent1][gene_cnt & 0x3F];
+				local_entity_2[gene_cnt] = LocalPopCurr[parent2][gene_cnt & 0x3F];
 			}
 
 			// ----------------------------------------
 			// genetic generation (mating parents)
 			// ----------------------------------------	
+
 			float __attribute__ ((
 					       memory,
 		   			       numbanks(1),
@@ -392,31 +345,18 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 
 			uchar prng_GG_C[2];
 
-			for (uchar i=0; i<DockConst_num_of_genes; i++) {
-				if (i < 2) {
-					prng_GG_C[i] = read_channel_altera(chan_PRNG2GA_GG_uchar_prng);
+			for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
+				if (gene_cnt < 2) {
+					prng_GG_C[gene_cnt] = read_channel_altera(chan_PRNG2GA_GG_uchar_prng);
 				}
-				prngGG[i] = read_channel_altera(chan_PRNG2GA_GG_float_prng);
+				prngGG[gene_cnt] = read_channel_altera(chan_PRNG2GA_GG_float_prng);
 			}
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 			uchar covr_point_low;
 			uchar covr_point_high;
 			bool twopoint_cross_yes = false;
-			/*
-			if (prng_GG_C.x == prng_GG_C.y) {covr_point_low = prng_GG_C.x;}
-			else {
-				twopoint_cross_yes = true;
-				if (prng_GG_C.x < prng_GG_C.y) {
-					covr_point_low  = prng_GG_C.x;
-					covr_point_high = prng_GG_C.y;
-				}
-				else {		    
-					covr_point_low  = prng_GG_C.y;
-					covr_point_high = prng_GG_C.x;
-				}
-			}
-			*/
+
 			if (prng_GG_C[0] == prng_GG_C[1]) {covr_point_low = prng_GG_C[0];}
 			else {
 				twopoint_cross_yes = true;
@@ -439,52 +379,117 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			                       numwriteports(1)
 			                    )) GGoffspring [ACTUAL_GENOTYPE_LENGTH]; 
 
-			// performing crossover
-			bool crossover_yes = (DockConst_crossover_rate > prngGG[ACTUAL_GENOTYPE_LENGTH-1]);
+			
 
-			for (uchar i=0; i<DockConst_num_of_genes; i++) {
+# if 0
+			// performing crossover
+
+/*
+			bool crossover_yes = (DockConst_crossover_rate > prngGG[ACTUAL_GENOTYPE_LENGTH-1]);
+*/
+			bool crossover_yes = (DockConst_crossover_rate > prngGG[0]);
+
+			for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
 				if (   	(
 					crossover_yes && (										// crossover
-					( (twopoint_cross_yes == true)  && ((i <= covr_point_low) || (i > covr_point_high)) )  ||	// two-point crossover 			 		
-					( (twopoint_cross_yes == false) && (i <= covr_point_low))  					// one-point crossover
+					( (twopoint_cross_yes == true)  && ((gene_cnt <= covr_point_low) || (gene_cnt > covr_point_high)) )  ||	// two-point crossover 			 		
+					( (twopoint_cross_yes == false) && (gene_cnt <= covr_point_low))  					// one-point crossover
 					)) || 
 					(!crossover_yes)	// no crossover
 				   ) {
-					GGoffspring[i] = local_entity_1[i];
+					GGoffspring[gene_cnt] = local_entity_1[gene_cnt];
 				}
 				else {
-					GGoffspring[i] = local_entity_2[i];
+					GGoffspring[gene_cnt] = local_entity_2[gene_cnt];
 				}
 			}
 
 			// performing mutation
+/*
 			const float two_absmaxdmov = 2.0f * DockConst_abs_max_dmov;
 			const float two_absmaxdang = 2.0f * DockConst_abs_max_dang;
-
-			for (uchar i=0; i<DockConst_num_of_genes; i++) {
+*/
+			for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
 				//float tmp_offspring;
-				if (DockConst_mutation_rate > prngGG[i]) {
-					if(i<3) {
-						GGoffspring[i]/*tmp_offspring*/ = GGoffspring[i] + two_absmaxdmov*prngGG[i]-DockConst_abs_max_dmov;
+				if (DockConst_mutation_rate > prngGG[gene_cnt]) {
+					if(gene_cnt<3) {
+						GGoffspring[gene_cnt]/*tmp_offspring*/ = GGoffspring[gene_cnt] + Host_two_absmaxdmov*prngGG[gene_cnt]-DockConst_abs_max_dmov;
 					}
 					else {
 						float tmp;
-						tmp = GGoffspring[i] + two_absmaxdang*prngGG[i]-DockConst_abs_max_dang;
-						if (i==4) {
-							GGoffspring[i] /*tmp_offspring*/ = map_angle_180(tmp);
+						tmp = GGoffspring[gene_cnt] + Host_two_absmaxdang*prngGG[gene_cnt]-DockConst_abs_max_dang;
+						if (gene_cnt==4) {
+							GGoffspring[gene_cnt] /*tmp_offspring*/ = map_angle_180(tmp);
 						}
 						else {
-							GGoffspring[i] /*tmp_offspring*/ = map_angle_360(tmp);
+							GGoffspring[gene_cnt] /*tmp_offspring*/ = map_angle_360(tmp);
 						}
 					}
 				}
 			}
 
+
+
 			// calculate energy
-			for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_genes; pipe_cnt++) {
-				LocalPopNext [new_pop_cnt][pipe_cnt & 0x3F] = GGoffspring [pipe_cnt];
-				write_channel_altera(chan_GG2Conf_genotype, GGoffspring[pipe_cnt]);
+			for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
+				LocalPopNext [new_pop_cnt][gene_cnt & 0x3F] = GGoffspring [gene_cnt];
+				write_channel_altera(chan_GG2Conf_genotype, GGoffspring[gene_cnt]);
 			}
+
+#endif
+
+			bool crossover_yes = (DockConst_crossover_rate > prngGG[0]);
+			
+
+			for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
+
+				// performing crossover
+				if (   	(
+					crossover_yes && (										// crossover
+					( (twopoint_cross_yes == true)  && ((gene_cnt <= covr_point_low) || (gene_cnt > covr_point_high)) )  ||	// two-point crossover 			 		
+					( (twopoint_cross_yes == false) && (gene_cnt <= covr_point_low))  					// one-point crossover
+					)) || 
+					(!crossover_yes)	// no crossover
+				   ) {
+					GGoffspring[gene_cnt] = local_entity_1[gene_cnt];
+				}
+				else {
+					GGoffspring[gene_cnt] = local_entity_2[gene_cnt];
+				}
+
+				// performing mutation
+					//float tmp_offspring;
+				if (DockConst_mutation_rate > prngGG[gene_cnt]) {
+					if(gene_cnt<3) {
+						GGoffspring[gene_cnt]/*tmp_offspring*/ = GGoffspring[gene_cnt] + Host_two_absmaxdmov*prngGG[gene_cnt]-DockConst_abs_max_dmov;
+					}
+					else {
+						float tmp;
+						tmp = GGoffspring[gene_cnt] + Host_two_absmaxdang*prngGG[gene_cnt]-DockConst_abs_max_dang;
+						if (gene_cnt==4) {
+							GGoffspring[gene_cnt] /*tmp_offspring*/ = map_angle_180(tmp);
+						}
+						else {
+							GGoffspring[gene_cnt] /*tmp_offspring*/ = map_angle_360(tmp);
+						}
+					}
+				}
+
+				// calculate energy
+				LocalPopNext [new_pop_cnt][gene_cnt & 0x3F] = GGoffspring [gene_cnt];
+				write_channel_altera(chan_GG2Conf_genotype, GGoffspring[gene_cnt]);
+			}
+
+
+
+
+
+
+
+
+
+
+
 			#if defined (DEBUG_KRNL_GG)
 			printf("GG - tx pop: %u", new_pop_cnt); 		
 			#endif	
@@ -499,36 +504,19 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			#endif
 		} 
 		// ------------------------------------------------------------------
-		/*
-		// update energy-evaluation count
-		eval_cnt += DockConst_pop_size;
-		*/
 
-/*
-		// choose all random entities
-		// without checking if it has already been subjected to LS in this cycle 
-		write_channel_altera(chan_GA2PRNG_LS_ushort_active, true);
-		mem_fence(CLK_CHANNEL_MEM_FENCE);
 
-		for(uchar i=0; i<DockConst_num_of_lsentities; i++) {
-			entity_ls [i] = read_channel_altera(chan_PRNG2GA_LS_ushort_prng);
-
-			#if defined (DEBUG_KRNL_LS)
-			printf("LS entities idx: %u\n", entity_ls [i]);
-			#endif
-		}
-*/
-		
 		// ------------------------------------------------------------------
 		// LS: Local Search
+		// subject num_of_entity_for_ls pieces of offsprings to LS 
+		// LS1
+		// LS2
+		// LS3	
 		// ------------------------------------------------------------------
 		tmp_eval_cnt = 0;
 
-		// subject num_of_entity_for_ls pieces of offsprings to LS 	
-
 		#pragma ivdep
 		//for (ushort ls_ent_cnt=0; ls_ent_cnt<DockConst_num_of_lsentities; ls_ent_cnt++) {
-		//for (ushort ls_ent_cnt=0; ls_ent_cnt<DockConst_num_of_lsentities; ls_ent_cnt+=2) {
 		for (ushort ls_ent_cnt=0; ls_ent_cnt<DockConst_num_of_lsentities; ls_ent_cnt+=3) {
 
 			// choose all random entities
@@ -541,39 +529,23 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			ushort entity_ls3 = read_channel_altera(chan_PRNG2GA_LS3_ushort_prng);
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 
-			// LS1
-			// LS2
-			// LS3
 			write_channel_altera(chan_GA2LS_LS1_active, true);
 			write_channel_altera(chan_GA2LS_LS2_active, true);
 			write_channel_altera(chan_GA2LS_LS3_active, true);
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 
-/*
-			write_channel_altera(chan_GA2LS_LS1_energy, LocalEneNext[entity_ls[ls_ent_cnt]]);
-			write_channel_altera(chan_GA2LS_LS2_energy, LocalEneNext[entity_ls[ls_ent_cnt+1]]);
-			write_channel_altera(chan_GA2LS_LS3_energy, LocalEneNext[entity_ls[ls_ent_cnt+2]]);
-*/
 			write_channel_altera(chan_GA2LS_LS1_energy, LocalEneNext[entity_ls1]);
 			write_channel_altera(chan_GA2LS_LS2_energy, LocalEneNext[entity_ls2]);
 			write_channel_altera(chan_GA2LS_LS3_energy, LocalEneNext[entity_ls3]);
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 
-			for (uchar i=0; i<DockConst_num_of_genes; i++) {
-/*
-				write_channel_altera(chan_GA2LS_LS1_genotype, LocalPopNext[entity_ls[ls_ent_cnt]][i & 0x3F]);
-				write_channel_altera(chan_GA2LS_LS2_genotype, LocalPopNext[entity_ls[ls_ent_cnt+1]][i & 0x3F]);
-				write_channel_altera(chan_GA2LS_LS3_genotype, LocalPopNext[entity_ls[ls_ent_cnt+2]][i & 0x3F]);
-*/
-				write_channel_altera(chan_GA2LS_LS1_genotype, LocalPopNext[entity_ls1][i & 0x3F]);
-				write_channel_altera(chan_GA2LS_LS2_genotype, LocalPopNext[entity_ls2][i & 0x3F]);
-				write_channel_altera(chan_GA2LS_LS3_genotype, LocalPopNext[entity_ls3][i & 0x3F]);
+			for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
+				write_channel_altera(chan_GA2LS_LS1_genotype, LocalPopNext[entity_ls1][gene_cnt & 0x3F]);
+				write_channel_altera(chan_GA2LS_LS2_genotype, LocalPopNext[entity_ls2][gene_cnt & 0x3F]);
+				write_channel_altera(chan_GA2LS_LS3_genotype, LocalPopNext[entity_ls3][gene_cnt & 0x3F]);
 			}
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 
-			// LS1
-			// LS2
-			// LS3
 			uint eval_tmp1 = read_channel_altera(chan_LS2GA_LS1_eval);
 			uint eval_tmp2 = read_channel_altera(chan_LS2GA_LS2_eval);
 			uint eval_tmp3 = read_channel_altera(chan_LS2GA_LS3_eval);
@@ -585,11 +557,6 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 
 			uint LS_eval = eval_tmp1 + eval_tmp2 + eval_tmp3;
 			
-/*
-			LocalEneNext[entity_ls[ls_ent_cnt]] = read_channel_altera(chan_LS2GA_LS1_energy);	
-			LocalEneNext[entity_ls[ls_ent_cnt+1]] = read_channel_altera(chan_LS2GA_LS2_energy);
-			LocalEneNext[entity_ls[ls_ent_cnt+2]] = read_channel_altera(chan_LS2GA_LS3_energy);
-*/
 			LocalEneNext[entity_ls1] = read_channel_altera(chan_LS2GA_LS1_energy);	
 			LocalEneNext[entity_ls2] = read_channel_altera(chan_LS2GA_LS2_energy);
 			LocalEneNext[entity_ls3] = read_channel_altera(chan_LS2GA_LS3_energy);
@@ -600,15 +567,10 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			#endif
 
 			#pragma ivdep
-			for (uchar i=0; i<DockConst_num_of_genes; i++) {
-/*
-				LocalPopNext[entity_ls[ls_ent_cnt]][i & 0x3F]   = read_channel_altera(chan_LS2GA_LS1_genotype);
-				LocalPopNext[entity_ls[ls_ent_cnt+1]][i & 0x3F] = read_channel_altera(chan_LS2GA_LS2_genotype);
-				LocalPopNext[entity_ls[ls_ent_cnt+2]][i & 0x3F] = read_channel_altera(chan_LS2GA_LS3_genotype);
-*/
-				LocalPopNext[entity_ls1][i & 0x3F] = read_channel_altera(chan_LS2GA_LS1_genotype);
-				LocalPopNext[entity_ls2][i & 0x3F] = read_channel_altera(chan_LS2GA_LS2_genotype);
-				LocalPopNext[entity_ls3][i & 0x3F] = read_channel_altera(chan_LS2GA_LS3_genotype);
+			for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
+				LocalPopNext[entity_ls1][gene_cnt & 0x3F] = read_channel_altera(chan_LS2GA_LS1_genotype);
+				LocalPopNext[entity_ls2][gene_cnt & 0x3F] = read_channel_altera(chan_LS2GA_LS2_genotype);
+				LocalPopNext[entity_ls3][gene_cnt & 0x3F] = read_channel_altera(chan_LS2GA_LS3_genotype);
 			}
 			tmp_eval_cnt += LS_eval;
 
@@ -619,9 +581,9 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 		// ------------------------------------------------------------------
 
 		// update current pops & energies
-		for (ushort pop_cnt=0;pop_cnt<DockConst_pop_size; pop_cnt++) { 	
-			for (uchar i=0; i<DockConst_num_of_genes; i++) {
-				LocalPopCurr[pop_cnt][i & 0x3F] = LocalPopNext[pop_cnt][i & 0x3F];
+		for (ushort pop_cnt=0; pop_cnt<DockConst_pop_size; pop_cnt++) { 	
+			for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
+				LocalPopCurr[pop_cnt][gene_cnt & 0x3F] = LocalPopNext[pop_cnt][gene_cnt & 0x3F];
 			}
 
 			LocalEneCurr[pop_cnt] = LocalEneNext[pop_cnt];
@@ -644,8 +606,8 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 	write_channel_altera(chan_ConfArbiter_Off,    false);   // turn off Krnl_Conf_Arbiter,Conform2, InterE2, IntraE2
 	
 	for (ushort pop_cnt=0;pop_cnt<DockConst_pop_size; pop_cnt++) { 	
-		for (uchar i=0; i<DockConst_num_of_genes; i++) {
-			GlobPopulationCurrent[pop_cnt*ACTUAL_GENOTYPE_LENGTH + i] = LocalPopCurr[pop_cnt][i & 0x3F];
+		for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
+			GlobPopulationCurrent[pop_cnt*ACTUAL_GENOTYPE_LENGTH + gene_cnt] = LocalPopCurr[pop_cnt][gene_cnt & 0x3F];
 		}
 		GlobEnergyCurrent[pop_cnt] = LocalEneCurr[pop_cnt];
 	}

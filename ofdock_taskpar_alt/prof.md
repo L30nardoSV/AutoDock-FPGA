@@ -64,5 +64,14 @@ freq: 177.5 MHz
 
 freq: 170.1 MHz
 
+39. `Krnl_GA`: clean up, rename loop index variables to more intuitive ones
+40. `Krnl_GA`: merge GG-loops (crossover, mutation, energy-calculation) so pipeline is deeper
+41. `Krnl_GA`, `performdocking.cpp`: move multiplication of `two_absmaxdmov` and `two_absmaxdang` to host
 
+
+Suggestions not tested yet
+
+`Krnl_LS`: move definitions (rho, iteration_cnt, etc) into  if (active == true){}
+
+`Krnl_Conform`: apply fixed-point arithmetic to reduce II=36
 
