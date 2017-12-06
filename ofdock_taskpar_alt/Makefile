@@ -376,13 +376,19 @@ $(TARGET_DIR)/$(TARGET) : Makefile $(SRCS) $(INCS) $(TARGET_DIR)
 # NEV was usually set to 100000
 PDB  := 3ptb
 NRUN := 10
-NEV  := 100000 
+NEV  := 50000 
+
+
+# Project name
+PROJECT_NAME := ofdock_taskpar_alt
 
 # Device folder
 # Device main kernel name
 # Device main kernel source
+# Target board
 DEV_DIRS := device
-DEV_SRC  := $(DEV_DIRS)/Krnl_GA.cl
+KRNL_NAME:= Krnl_GA
+DEV_SRC  := $(DEV_DIRS)/$(KRNL_NAME).cl
 BOARD    := Proc10A_X115
 
 ## Make it all: compilation (host & device) + run emulation
@@ -392,15 +398,15 @@ BOARD    := Proc10A_X115
 # Build kernel binary only for emulation
 # Add "-g" to support kernel debug
 # Creates under bin: 
-	# "docking" folder
-	# docking.aoco
-	# docking.aocx
+	# $(KRNL_NAME) folder
+	# $(KRNL_NAME).aoco
+	# $(KRNL_NAME).aocx
 keremu: $(DEV_SRC)
-	aoc -march=emulator -v --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR)/docking.aocx $(REP)
+	aoc -march=emulator -v --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR)/$(KRNL_NAME).aocx $(REP)
 	@echo " "
-	@echo "=========================================================="
-	@echo "INFO: emulation files are under: bin/docking(.aoco)(.aocx)"
-	@echo "=========================================================="
+	@echo "==============================================================="
+	@echo "INFO: emulation files are under: bin/$(KRNL_NAME)(.aoco)(.aocx)"
+	@echo "==============================================================="
 	@echo " "
 
 # Run emulation
@@ -420,51 +426,51 @@ emu: $(TARGET_DIR)/$(TARGET) keremu
 # Reports are generated
 # Could be used in multistep compilation
 # Creates under bin:
-	# "docking" folder -> /reports/report.html, to see details
-	# docking.aoco
+	# $(KRNL_NAME) folder -> /reports/report.html, to see details
+	# $(KRNL_NAME).aoco
 	# No actual hardware is built (NO .aocx)
 kerrpt: $(DEV_SRC)
-	aoc --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR)/docking.aoco $(REP) -c --report -g
+	aoc --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR)/$(KRNL_NAME).aoco $(REP) -c --report -g
 	@echo " "
-	@echo "============================================================="
-	@echo "INFO: report files are under: bin/docking/reports/report.html"
-	@echo "============================================================="
+	@echo "=================================================================="
+	@echo "INFO: report files are under: bin/$(KRNL_NAME)/reports/report.html"
+	@echo "=================================================================="
 	@echo " "
 
 # Build hw (FPGA bitstream)
 # NOT integrated yet in a multistep compilation
 # Creates under bin_hw:
-	# "docking" folder
-	# docking.aoco
-	# docking.aocx
+	# $(KRNL_NAME) folder
+	# $(KRNL_NAME).aoco
+	# $(KRNL_NAME).aocx
 hw: 	
-	aoc --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW)/docking.aocx
+	aoc --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW)/$(KRNL_NAME).aocx
 	@echo " "
-	@echo "==========================================================="
-	@echo "INFO: FPGA bitstream is under: bin_hw/docking(.aoco)(.aocx)"
-	@echo "==========================================================="
+	@echo "================================================================"
+	@echo "INFO: FPGA bitstream is under: bin_hw/$(KRNL_NAME)(.aoco)(.aocx)"
+	@echo "================================================================"
 	@echo " "
 
 hw-higheffort:
-	aoc --high-effort --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW)/docking.aocx
+	aoc --high-effort --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW)/$(KRNL_NAME).aocx
 	@echo " "
-	@echo "==========================================================="
-	@echo "INFO: FPGA bitstream is under: bin_hw/docking(.aoco)(.aocx)"
-	@echo "==========================================================="
+	@echo "================================================================"
+	@echo "INFO: FPGA bitstream is under: bin_hw/$(KRNL_NAME)(.aoco)(.aocx)"
+	@echo "================================================================"
 	@echo " "
 
 # Build hw (FPGA bitstream) instrumented with performance counters
 # NOT integrated yet in a multistep compilation
 # Creates under bin_hw_profile
-	# "docking" folder
-	# docking.aoco
-	# docking.aocx
+	# $(KRNL_NAME) folder
+	# $(KRNL_NAME).aoco
+	# $(KRNL_NAME).aocx
 hw-prof:
-	aoc --profile --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW_PROF)/docking.aocx
+	aoc --profile --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW_PROF)/$(KRNL_NAME).aocx
 	@echo " "
-	@echo "================================================================================"
-	@echo "INFO: instrumented FPGA bitstream is under: bin_hw_profile/docking(.aoco)(.aocx)"
-	@echo "================================================================================"
+	@echo "====================================================================================="
+	@echo "INFO: instrumented FPGA bitstream is under: bin_hw_profile/$(KRNL_NAME)(.aoco)(.aocx)"
+	@echo "====================================================================================="
 	@echo " "
 
 
@@ -499,8 +505,8 @@ exe-prof: $(TARGET_DIR)/$(TARGET)
 	@echo "==================================================="
 	@echo " "
 
-COPY_DIR := copy_taskpar
-COPY_DIR_DOCK := ofdock_taskpar_alt
+COPY_DIR := copy_$(PROJECT_NAME)
+COPY_DIR_DOCK := $(PROJECT_NAME)
 
 # Delete an existing folder if previously created
 # Create a folder $(COPY_DIR) in the parent directory
@@ -512,8 +518,8 @@ copy: clean-copy
 	mkdir ../$(COPY_DIR)/$(COPY_DIR_DOCK)
 	mkdir ../$(COPY_DIR)/$(COPY_DIR_DOCK)/$(TARGET_DIR_HW)
 	mkdir ../$(COPY_DIR)/$(COPY_DIR_DOCK)/$(TARGET_DIR_HW_PROF)
-	cp $(TARGET_DIR_HW)/docking.* ../$(COPY_DIR)/$(COPY_DIR_DOCK)/$(TARGET_DIR_HW)/
-	cp $(TARGET_DIR_HW_PROF)/docking.* ../$(COPY_DIR)/$(COPY_DIR_DOCK)/$(TARGET_DIR_HW_PROF)/
+	cp $(TARGET_DIR_HW)/$(KRNL_NAME).* ../$(COPY_DIR)/$(COPY_DIR_DOCK)/$(TARGET_DIR_HW)/
+	cp $(TARGET_DIR_HW_PROF)/$(KRNL_NAME).* ../$(COPY_DIR)/$(COPY_DIR_DOCK)/$(TARGET_DIR_HW_PROF)/
 	cp Makefile ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
 	cp defines.h ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
 	cp -r device/ ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
@@ -523,16 +529,19 @@ copy: clean-copy
 	cp -r ../common ../$(COPY_DIR)/
 	cp ../conf_aoc160_sauron.sh ../$(COPY_DIR)/
 	cd ../;	zip -r $(COPY_DIR).zip $(COPY_DIR)
-	@echo "================================================================================"
-	@echo "The next step is to transfer the .zip file to sauron server: "
-	@echo "> cd .."
-	@echo "> scp copy_taskpar.zip sauron:~/"
-	@echo "================================================================================"
+	@echo " "
+	@echo "Transfer the $(COPY_DIR).zip file to sauron server: "
+	@echo " "
+	cd ../ && scp $(COPY_DIR).zip sauron:~/
+	@echo " "
+	@echo "================="
+	@echo "Transfer finished"
+	@echo "================="
 	@echo " "
 
 clean-copy:
 	rm -rf ../$(COPY_DIR)
-
+	rm -f ../$(COPY_DIR).zip
 
 $(TARGET_DIR) :
 	$(ECHO)mkdir $(TARGET_DIR)

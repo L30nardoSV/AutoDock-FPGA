@@ -1,12 +1,15 @@
+# Ignore temp files
+*~
+**/*~
+
 # Ignore bin folders
 ofdock_taskpar_alt/bin/*
 ofdock_taskpar_alt/bin_hw/*
 ofdock_taskpar_alt/bin_hw_profile/*
 
 # Ignore copyharp2_taskpar
-copyharp2_taskpar/*
-copyharp2_taskpar.zip
-
+copy_ofdock_taskpar_alt/*
+copy_ofdock_taskpar_alt.zip
 
 # Ignore PDBs for a moment
 PDBs/*
