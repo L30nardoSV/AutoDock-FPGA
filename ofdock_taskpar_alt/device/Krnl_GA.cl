@@ -210,15 +210,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 		#endif
 	}
 	// ------------------------------------------------------------------
-/*
-	// Find_best 	
-	ushort best_entity_id;
-*/
 
-/*
-	// Binary tournament 	
-	ushort parent1, parent2; 
-*/
 	__local float LocalPopNext[MAX_POPSIZE][ACTUAL_GENOTYPE_LENGTH];
 	__local float LocalEneNext[MAX_POPSIZE];
 
@@ -370,78 +362,21 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 				}
 			}
 			
+/*
 			float __attribute__ ((
 			      		       memory,
 			                       numbanks(1),
 			                       bankwidth(16),
 			                       singlepump,
-			                       numreadports(2), //3
+			                       numreadports(2),
 			                       numwriteports(1)
 			                    )) GGoffspring [ACTUAL_GENOTYPE_LENGTH]; 
-
-			
-
-# if 0
-			// performing crossover
-
-/*
-			bool crossover_yes = (DockConst_crossover_rate > prngGG[ACTUAL_GENOTYPE_LENGTH-1]);
 */
-			bool crossover_yes = (DockConst_crossover_rate > prngGG[0]);
-
-			for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
-				if (   	(
-					crossover_yes && (										// crossover
-					( (twopoint_cross_yes == true)  && ((gene_cnt <= covr_point_low) || (gene_cnt > covr_point_high)) )  ||	// two-point crossover 			 		
-					( (twopoint_cross_yes == false) && (gene_cnt <= covr_point_low))  					// one-point crossover
-					)) || 
-					(!crossover_yes)	// no crossover
-				   ) {
-					GGoffspring[gene_cnt] = local_entity_1[gene_cnt];
-				}
-				else {
-					GGoffspring[gene_cnt] = local_entity_2[gene_cnt];
-				}
-			}
-
-			// performing mutation
-/*
-			const float two_absmaxdmov = 2.0f * DockConst_abs_max_dmov;
-			const float two_absmaxdang = 2.0f * DockConst_abs_max_dang;
-*/
-			for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
-				//float tmp_offspring;
-				if (DockConst_mutation_rate > prngGG[gene_cnt]) {
-					if(gene_cnt<3) {
-						GGoffspring[gene_cnt]/*tmp_offspring*/ = GGoffspring[gene_cnt] + Host_two_absmaxdmov*prngGG[gene_cnt]-DockConst_abs_max_dmov;
-					}
-					else {
-						float tmp;
-						tmp = GGoffspring[gene_cnt] + Host_two_absmaxdang*prngGG[gene_cnt]-DockConst_abs_max_dang;
-						if (gene_cnt==4) {
-							GGoffspring[gene_cnt] /*tmp_offspring*/ = map_angle_180(tmp);
-						}
-						else {
-							GGoffspring[gene_cnt] /*tmp_offspring*/ = map_angle_360(tmp);
-						}
-					}
-				}
-			}
-
-
-
-			// calculate energy
-			for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
-				LocalPopNext [new_pop_cnt][gene_cnt & 0x3F] = GGoffspring [gene_cnt];
-				write_channel_altera(chan_GG2Conf_genotype, GGoffspring[gene_cnt]);
-			}
-
-#endif
 
 			bool crossover_yes = (DockConst_crossover_rate > prngGG[0]);
 			
-
 			for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
+				float tmp_offspring;
 
 				// performing crossover
 				if (   	(
@@ -451,44 +386,33 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 					)) || 
 					(!crossover_yes)	// no crossover
 				   ) {
-					GGoffspring[gene_cnt] = local_entity_1[gene_cnt];
+					/*GGoffspring[gene_cnt]*/ tmp_offspring = local_entity_1[gene_cnt];
 				}
 				else {
-					GGoffspring[gene_cnt] = local_entity_2[gene_cnt];
+					/*GGoffspring[gene_cnt]*/ tmp_offspring = local_entity_2[gene_cnt];
 				}
 
 				// performing mutation
-					//float tmp_offspring;
 				if (DockConst_mutation_rate > prngGG[gene_cnt]) {
 					if(gene_cnt<3) {
-						GGoffspring[gene_cnt]/*tmp_offspring*/ = GGoffspring[gene_cnt] + Host_two_absmaxdmov*prngGG[gene_cnt]-DockConst_abs_max_dmov;
+						/*GGoffspring[gene_cnt]*/ tmp_offspring = /*GGoffspring[gene_cnt]*/ tmp_offspring + Host_two_absmaxdmov*prngGG[gene_cnt]-DockConst_abs_max_dmov;
 					}
 					else {
 						float tmp;
-						tmp = GGoffspring[gene_cnt] + Host_two_absmaxdang*prngGG[gene_cnt]-DockConst_abs_max_dang;
+						tmp = /*GGoffspring[gene_cnt]*/ tmp_offspring + Host_two_absmaxdang*prngGG[gene_cnt]-DockConst_abs_max_dang;
 						if (gene_cnt==4) {
-							GGoffspring[gene_cnt] /*tmp_offspring*/ = map_angle_180(tmp);
+							/*GGoffspring[gene_cnt]*/ tmp_offspring = map_angle_180(tmp);
 						}
 						else {
-							GGoffspring[gene_cnt] /*tmp_offspring*/ = map_angle_360(tmp);
+							/*GGoffspring[gene_cnt]*/ tmp_offspring = map_angle_360(tmp);
 						}
 					}
 				}
 
 				// calculate energy
-				LocalPopNext [new_pop_cnt][gene_cnt & 0x3F] = GGoffspring [gene_cnt];
-				write_channel_altera(chan_GG2Conf_genotype, GGoffspring[gene_cnt]);
+				LocalPopNext [new_pop_cnt][gene_cnt & 0x3F] = /*GGoffspring [gene_cnt]*/ tmp_offspring;
+				write_channel_altera(chan_GG2Conf_genotype, /*GGoffspring[gene_cnt]*/ tmp_offspring);
 			}
-
-
-
-
-
-
-
-
-
-
 
 			#if defined (DEBUG_KRNL_GG)
 			printf("GG - tx pop: %u", new_pop_cnt); 		

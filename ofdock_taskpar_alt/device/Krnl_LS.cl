@@ -8,9 +8,6 @@ __kernel __attribute__ ((max_global_work_dim(0)))
 void Krnl_LS_Arbiter(const unsigned int DockConst_num_of_genes){
 
 	bool active = true;
-	/*
-	__local float genotype [ACTUAL_GENOTYPE_LENGTH];
-	*/
 	
 while(active) {
 	bool LS1_valid = false;
@@ -25,22 +22,6 @@ while(active) {
 		LS1_active = read_channel_nb_altera(chan_GA2LS_LS1_active, &LS1_valid);
 		Off_active = read_channel_nb_altera(chan_GA2LS_Off_active, &Off_valid);
 	}
-
-	/*
-	active = (LS1_valid)? LS1_active : 
-		 (Off_valid)? Off_active :
-		 false; // last case should never occur, otherwise above while would be still running
-
-	float energy =  (LS1_valid)? read_channel_altera(chan_GA2LS_LS1_energy) : 
-		 	(Off_valid)? 0.0f :
-		 	0.0f; // last case should never occur, otherwise above while would be still running
-
-	for (uchar i=0; i<DockConst_num_of_genes; i++) {
-		genotype[i] = (LS1_valid)? read_channel_altera(chan_GA2LS_LS1_genotype) : 
-			      (Off_valid)? 0.0f :
-		 	      0.0f; // last case should never occur, otherwise above while would be still running
-	}
-	*/
 		
 	for (uchar i=0; i<DockConst_num_of_genes; i++) {
 		if (i == 0) {
@@ -60,17 +41,6 @@ while(active) {
 		write_channel_altera(chan_Arbiter_LS1_genotype, genotype);
 	}
 
-	/*
-	if ((LS1_valid == true) || (Off_valid == true)) {
-		write_channel_altera(chan_Arbiter_LS1_active, active);
-		mem_fence(CLK_CHANNEL_MEM_FENCE);
-		write_channel_altera(chan_Arbiter_LS1_energy, energy);
-		mem_fence(CLK_CHANNEL_MEM_FENCE);
-		for (uchar i=0; i<DockConst_num_of_genes; i++) {
-			write_channel_altera(chan_Arbiter_LS1_genotype, genotype[i]);
-		}
-	}
-	*/
 } // End of while(active)
 
 #if defined (DEBUG_ACTIVE_KERNEL)
@@ -98,8 +68,6 @@ void Krnl_LS(
 	__local float genotype_deviate [ACTUAL_GENOTYPE_LENGTH];
 	__local float genotype_bias [ACTUAL_GENOTYPE_LENGTH];  
 
-	//__local float tmp_prng [ACTUAL_GENOTYPE_LENGTH];
-
 	bool active = true;
 
 while(active) {
@@ -113,14 +81,23 @@ while(active) {
 		genotype[i] = read_channel_altera(chan_Arbiter_LS1_genotype);
 	}
 	
+/*
 	float rho = 1.0f;
 	ushort iteration_cnt = 0;
 	uchar  cons_succ     = 0;
 	uchar  cons_fail     = 0;
 	uint   LS_eval       = 0;
 	bool   positive_direction = true;
+*/
 
 if (active == true) {
+
+	float rho = 1.0f;
+	ushort iteration_cnt = 0;
+	uchar  cons_succ     = 0;
+	uchar  cons_fail     = 0;
+	uint   LS_eval       = 0;
+	bool   positive_direction = true;
 
 	// performing local search
 	while ((iteration_cnt < DockConst_max_num_of_iters) && (rho > DockConst_rho_lower_bound)) {
@@ -154,13 +131,7 @@ if (active == true) {
 		// new random deviate
 		// rho is the deviation of the uniform distribution
 		for (uchar i=0; i<DockConst_num_of_genes; i++) {
-			/*
-			write_channel_altera(chan_GA2PRNG_LS_float_active, true);
-			mem_fence(CLK_CHANNEL_MEM_FENCE);
-			float tmp_prng = read_channel_altera(chan_PRNG2GA_LS_float_prng);
-			mem_fence(CLK_CHANNEL_MEM_FENCE);
-			*/
-			//tmp_prng [i] = read_channel_altera(chan_PRNG2GA_LS_float_prng);
+
 			float tmp_prng = read_channel_altera(chan_PRNG2GA_LS_float_prng);
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 
@@ -258,17 +229,6 @@ if (active == true) {
 	#endif
 		
 	// write back data to GA
-	/*
-	write_channel_altera(chan_LS2GA_LS1_eval, LS_eval);
-	mem_fence(CLK_CHANNEL_MEM_FENCE);
-
-	write_channel_altera(chan_LS2GA_LS1_energy, current_energy);
-	mem_fence(CLK_CHANNEL_MEM_FENCE);
-	
-	for (uchar i=0; i<DockConst_num_of_genes; i++) {
-		write_channel_altera(chan_LS2GA_LS1_genotype, genotype[i]);
-	}
-	*/
 	for (uchar i=0; i<DockConst_num_of_genes; i++) {
 		if (i == 0) {
 			write_channel_altera(chan_LS2GA_LS1_eval, LS_eval);

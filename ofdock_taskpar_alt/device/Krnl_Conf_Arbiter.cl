@@ -63,11 +63,15 @@ while(active) {
 	*/
 	active = (Off_valid) ? Off_active : true; 
 
+	/*
 	mode = (IC_valid)  ? 0x01 :
 	       (GG_valid)  ? 0x02 :
 	       (LS_valid)  ? 0x03 :
 	       (Off_valid) ? 0x05 :
 	       0x05; // last case should never occur, otherwise above while would be still running
+	*/
+	mode = (Off_valid) ? 0x05 : (IC_valid) ? 0x01 : (GG_valid) ? 0x02 : 0x03 ; // last case is LS (0x03)
+	       
 	// --------------------------------------------------------------
 	//printf("AFTER In Conf_Arbiter CHANNEL\n");
 
