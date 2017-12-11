@@ -79,8 +79,21 @@ freq: 195 MHz
 
 freq: 179.1 MHz
 
+48. `defines_fixedpt.pt`: added
 
+49. `Krnl_Conform`   -> replaced by `Krnl_Conform_fixedpt` 
+    `Krnl_Conform2`  -> replaced by `Krnl_Conform2_fixedpt` 
+    `calcenergy.cpp`, `performdocking.cpp`: apply fixed-point 16.16 arithmetic to reduce II=36 in Conform kernels down to II=12
 
-Suggestions not tested yet
-`Krnl_Conform`: apply fixed-point arithmetic to reduce II=36
+freq: 169 MHz
+
+Suggested changes not applied yet:
+
+apply add and sub to Krnl_Conform
+
+apply saturated functions
+
+implement other relevant fixed point functions: sin , cos
+
+apply fixedpoint to other kernels too
 

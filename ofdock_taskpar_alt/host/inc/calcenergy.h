@@ -106,24 +106,25 @@ typedef struct
 
 typedef struct
 {
-       float atom_charges_const[MAX_NUM_OF_ATOMS] __attribute__ ((aligned (512)));
-       char  atom_types_const  [MAX_NUM_OF_ATOMS] __attribute__ ((aligned (128)));
-       char  intraE_contributors_const[3*MAX_INTRAE_CONTRIBUTORS] __attribute__ ((aligned (32768)));
+       float atom_charges_const[MAX_NUM_OF_ATOMS] 		     __attribute__ ((aligned (512)));
+       char  atom_types_const  [MAX_NUM_OF_ATOMS]                    __attribute__ ((aligned (128)));
+       char  intraE_contributors_const[3*MAX_INTRAE_CONTRIBUTORS]    __attribute__ ((aligned (32768)));
        float VWpars_AC_const   [MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES] __attribute__ ((aligned (1024)));
        float VWpars_BD_const   [MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES] __attribute__ ((aligned (1024)));
-       float dspars_S_const    [MAX_NUM_OF_ATYPES] __attribute__ ((aligned (64)));
-       float dspars_V_const    [MAX_NUM_OF_ATYPES] __attribute__ ((aligned (64)));
-       int   rotlist_const     [MAX_NUM_OF_ROTATIONS] __attribute__ ((aligned (4096)));
+       float dspars_S_const    [MAX_NUM_OF_ATYPES]                   __attribute__ ((aligned (64)));
+       float dspars_V_const    [MAX_NUM_OF_ATYPES]                   __attribute__ ((aligned (64)));
+       int   rotlist_const     [MAX_NUM_OF_ROTATIONS]                __attribute__ ((aligned (4096)));
 } kernelconstant_static;
 
-
 #include "CL/opencl.h"
+#include "defines_fixedpt.h"
 
 // As struct members are used as host buffers
 // they are aligned to multiples of 64 bytes (power of 2).
 // This is added for the sake of completion
 // cl_float3 is made of 4 floats, its size is 16 bytes
 
+/*
 typedef struct
 {
        cl_float3 ref_coords_const[MAX_NUM_OF_ATOMS] __attribute__ ((aligned (2048)));
@@ -131,6 +132,17 @@ typedef struct
        cl_float3 rotbonds_unit_vectors_const  [MAX_NUM_OF_ROTBONDS] __attribute__ ((aligned (512)));
        float     ref_orientation_quats_const  [4] __attribute__ ((aligned (64)));
 } kernelconstant_dynamic;
+*/
+
+// fixedpt version
+typedef struct
+{
+       cl_int3 ref_coords_const             [MAX_NUM_OF_ATOMS]    __attribute__ ((aligned (2048)));
+       cl_int3 rotbonds_moving_vectors_const[MAX_NUM_OF_ROTBONDS] __attribute__ ((aligned (512)));
+       cl_int3 rotbonds_unit_vectors_const  [MAX_NUM_OF_ROTBONDS] __attribute__ ((aligned (512)));
+       fixedpt ref_orientation_quats_const  [4]                   __attribute__ ((aligned (64)));
+} kernelconstant_dynamic;
+
 
 
 

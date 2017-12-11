@@ -376,7 +376,7 @@ $(TARGET_DIR)/$(TARGET) : Makefile $(SRCS) $(INCS) $(TARGET_DIR)
 # NEV was usually set to 100000
 PDB  := 3ptb
 NRUN := 10
-NEV  := 100000 
+NEV  := 200000 
 
 
 # Project name
@@ -402,7 +402,7 @@ BOARD    := Proc10A_X115
 	# $(KRNL_NAME).aoco
 	# $(KRNL_NAME).aocx
 keremu: $(DEV_SRC)
-	aoc -march=emulator -v --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR)/$(KRNL_NAME).aocx $(REP)
+	aoc -march=emulator -v --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR)/$(KRNL_NAME).aocx $(REP) -g
 	@echo " "
 	@echo "==============================================================="
 	@echo "INFO: emulation files are under: bin/$(KRNL_NAME)(.aoco)(.aocx)"
@@ -522,6 +522,7 @@ copy: clean-copy
 	cp $(TARGET_DIR_HW_PROF)/$(KRNL_NAME).* ../$(COPY_DIR)/$(COPY_DIR_DOCK)/$(TARGET_DIR_HW_PROF)/
 	cp Makefile ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
 	cp defines.h ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
+	cp defines_fixedpt.h ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
 	cp -r device/ ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
 	cp -r host/ ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
 	cp -r input/ ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
