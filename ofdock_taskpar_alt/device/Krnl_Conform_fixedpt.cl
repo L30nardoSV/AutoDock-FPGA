@@ -10,13 +10,14 @@ typedef int3          fixedpt3;
 __kernel __attribute__ ((max_global_work_dim(0)))
 void Krnl_Conform(
 	__constant int*                  restrict KerConstStatic_rotlist_const,			// must be formatted in host
-	__constant /*float3**/ fixedpt3* restrict KerConstDynamic_ref_coords_const,		// must be formatted in host
-	__constant /*float3**/ fixedpt3* restrict KerConstDynamic_rotbonds_moving_vectors_const,// must be formatted in host
-	__constant /*float3**/ fixedpt3* restrict KerConstDynamic_rotbonds_unit_vectors_const,	// must be formatted in host
+	__constant /*float3**/ fixedpt3* restrict KerConstStatic_ref_coords_const,		// must be formatted in host
+	__constant /*float3**/ fixedpt3* restrict KerConstStatic_rotbonds_moving_vectors_const,// must be formatted in host
+	__constant /*float3**/ fixedpt3* restrict KerConstStatic_rotbonds_unit_vectors_const,	// must be formatted in host
 	    
 			      unsigned int                     DockConst_rotbondlist_length,	// counter, leave it as int
 			      unsigned char                    DockConst_num_of_atoms,		// counter, leave it as int
 			      unsigned int                     DockConst_num_of_genes,		// counter, leave it as int
+			      unsigned char                    Host_num_of_rotbonds,		// counter, leave it as int
 
 			      /*float*/ fixedpt                ref_orientation_quats_const_0,	// must be formatted in host
 			      /*float*/ fixedpt                ref_orientation_quats_const_1,	// must be formatted in host
@@ -51,14 +52,14 @@ void Krnl_Conform(
 
 	__local /*float3*/ fixedpt3 ref_coords_localcache [MAX_NUM_OF_ATOMS];
 	for (uchar c = 0; c < DockConst_num_of_atoms; c++) {
-		ref_coords_localcache [c] = KerConstDynamic_ref_coords_const [c];
+		ref_coords_localcache [c] = KerConstStatic_ref_coords_const [c];
 	}
 
 	__local /*float3*/ fixedpt3 rotbonds_moving_vectors_localcache[MAX_NUM_OF_ROTBONDS];
 	__local /*float3*/ fixedpt3 rotbonds_unit_vectors_localcache[MAX_NUM_OF_ROTBONDS];
-	for (uchar c = 0; c < MAX_NUM_OF_ROTBONDS; c++) {
-		rotbonds_moving_vectors_localcache [c] = KerConstDynamic_rotbonds_moving_vectors_const[c];
-		rotbonds_unit_vectors_localcache   [c] = KerConstDynamic_rotbonds_unit_vectors_const [c];
+	for (uchar c = 0; c < /*MAX_NUM_OF_ROTBONDS*/ Host_num_of_rotbonds; c++) {
+		rotbonds_moving_vectors_localcache [c] = KerConstStatic_rotbonds_moving_vectors_const[c];
+		rotbonds_unit_vectors_localcache   [c] = KerConstStatic_rotbonds_unit_vectors_const [c];
 	}
 
 while(active) {
@@ -98,8 +99,8 @@ while(active) {
 	cos_theta = fixedpt_cos(theta);
 
 	fixedpt3 genrot_unitvec;
-	genrot_unitvec.x = fixedpt_mul(sin_theta, fixedpt_cos(phi));
-	genrot_unitvec.y = fixedpt_mul(sin_theta, fixedpt_sin(phi));
+	genrot_unitvec.x = /*fixedpt_mul*/ fixedpt_nomul(sin_theta, fixedpt_cos(phi));
+	genrot_unitvec.y = /*fixedpt_mul*/ fixedpt_nomul(sin_theta, fixedpt_sin(phi));
 	genrot_unitvec.z = cos_theta;
 	
 	fixedpt3 genotype_xyz = {genotype[0], genotype[1], genotype[2]};
@@ -151,21 +152,29 @@ while(active) {
 
 				//in addition performing the first movement 
 				//which is needed only if rotating around rotatable bond
-				atom_to_rotate -= rotation_movingvec;
+				//atom_to_rotate -= rotation_movingvec;
+				/*
+				atom_to_rotate = atom_to_rotate - rotation_movingvec;
+				*/
+				atom_to_rotate.x = fixedpt_ssub(atom_to_rotate.x, rotation_movingvec.x);
+				atom_to_rotate.y = fixedpt_ssub(atom_to_rotate.y, rotation_movingvec.y);
+				atom_to_rotate.z = fixedpt_ssub(atom_to_rotate.z, rotation_movingvec.z);
+				
 			}
 
 			//performing rotation
 			fixedpt quatrot_left_x, quatrot_left_y, quatrot_left_z, quatrot_left_q;
 			fixedpt quatrot_temp_x, quatrot_temp_y, quatrot_temp_z, quatrot_temp_q;
 
-			rotation_angle = fixedpt_mul(rotation_angle, fixedpt_fromfloat(0.5f));
+			//otation_angle = fixedpt_mul(rotation_angle, fixedpt_fromfloat(0.5f));
+			rotation_angle = rotation_angle >> 1;
 
 			fixedpt sin_angle, cos_angle;
 			sin_angle = fixedpt_sin(rotation_angle);
 			cos_angle = fixedpt_cos(rotation_angle);
-			quatrot_left_x = fixedpt_mul(sin_angle, rotation_unitvec.x);
-			quatrot_left_y = fixedpt_mul(sin_angle, rotation_unitvec.y);
-			quatrot_left_z = fixedpt_mul(sin_angle, rotation_unitvec.z);
+			quatrot_left_x = fixedpt_smul(sin_angle, rotation_unitvec.x);
+			quatrot_left_y = fixedpt_smul(sin_angle, rotation_unitvec.y);
+			quatrot_left_z = fixedpt_smul(sin_angle, rotation_unitvec.z);
 			quatrot_left_q = cos_angle;
 
 			if ((rotation_list_element & RLIST_GENROT_MASK) != 0)	//if general rotation, 
@@ -180,57 +189,32 @@ while(active) {
 				quatrot_temp_z = quatrot_left_z;
 
 				// L30nardoSV: taking the first element of ref_orientation_quats_const member
-				quatrot_left_q = fixedpt_mul(quatrot_temp_q, ref_orientation_quats_const_0) -
-						 fixedpt_mul(quatrot_temp_x, ref_orientation_quats_const_1) -
-						 fixedpt_mul(quatrot_temp_y, ref_orientation_quats_const_2) -
-						 fixedpt_mul(quatrot_temp_z, ref_orientation_quats_const_3);
+				quatrot_left_q = fixedpt_smul(quatrot_temp_q, ref_orientation_quats_const_0) - fixedpt_smul(quatrot_temp_x, ref_orientation_quats_const_1) -
+						 fixedpt_smul(quatrot_temp_y, ref_orientation_quats_const_2) - fixedpt_smul(quatrot_temp_z, ref_orientation_quats_const_3);
 
-				quatrot_left_x = fixedpt_mul(quatrot_temp_q, ref_orientation_quats_const_1) +
-						 fixedpt_mul(quatrot_temp_x, ref_orientation_quats_const_0) +
-						 fixedpt_mul(quatrot_temp_y, ref_orientation_quats_const_3) -
-						 fixedpt_mul(quatrot_temp_z, ref_orientation_quats_const_2);
+				quatrot_left_x = fixedpt_smul(quatrot_temp_q, ref_orientation_quats_const_1) + fixedpt_smul(quatrot_temp_x, ref_orientation_quats_const_0) +
+						 fixedpt_smul(quatrot_temp_y, ref_orientation_quats_const_3) - fixedpt_smul(quatrot_temp_z, ref_orientation_quats_const_2);
 
-				quatrot_left_y = fixedpt_mul(quatrot_temp_q, ref_orientation_quats_const_2) +
-						 fixedpt_mul(quatrot_temp_y, ref_orientation_quats_const_0) +
-						 fixedpt_mul(quatrot_temp_z, ref_orientation_quats_const_1) -
-						 fixedpt_mul(quatrot_temp_x, ref_orientation_quats_const_3);
+				quatrot_left_y = fixedpt_smul(quatrot_temp_q, ref_orientation_quats_const_2) + fixedpt_smul(quatrot_temp_y, ref_orientation_quats_const_0) +
+						 fixedpt_smul(quatrot_temp_z, ref_orientation_quats_const_1) - fixedpt_smul(quatrot_temp_x, ref_orientation_quats_const_3);
 
-				quatrot_left_z = fixedpt_mul(quatrot_temp_q, ref_orientation_quats_const_3) +
-						 fixedpt_mul(quatrot_temp_z, ref_orientation_quats_const_0) +
-						 fixedpt_mul(quatrot_temp_x, ref_orientation_quats_const_2) -
-						 fixedpt_mul(quatrot_temp_y, ref_orientation_quats_const_1);
+				quatrot_left_z = fixedpt_smul(quatrot_temp_q, ref_orientation_quats_const_3) + fixedpt_smul(quatrot_temp_z, ref_orientation_quats_const_0) +
+						 fixedpt_smul(quatrot_temp_x, ref_orientation_quats_const_2) - fixedpt_smul(quatrot_temp_y, ref_orientation_quats_const_1);
 			}
 
-			quatrot_temp_q = - fixedpt_mul(quatrot_left_x, atom_to_rotate.x) 
-					 - fixedpt_mul(quatrot_left_y, atom_to_rotate.y) 
-					 - fixedpt_mul(quatrot_left_z, atom_to_rotate.z);
+			quatrot_temp_q = - fixedpt_smul(quatrot_left_x, atom_to_rotate.x) - fixedpt_smul(quatrot_left_y, atom_to_rotate.y)  - fixedpt_smul(quatrot_left_z, atom_to_rotate.z);
 
-			quatrot_temp_x = fixedpt_mul(quatrot_left_q, atom_to_rotate.x) +
-					 fixedpt_mul(quatrot_left_y, atom_to_rotate.z) -
-					 fixedpt_mul(quatrot_left_z, atom_to_rotate.y);
+			quatrot_temp_x = fixedpt_smul(quatrot_left_q, atom_to_rotate.x) + fixedpt_smul(quatrot_left_y, atom_to_rotate.z) - fixedpt_smul(quatrot_left_z, atom_to_rotate.y);
 
-			quatrot_temp_y = fixedpt_mul(quatrot_left_q, atom_to_rotate.y) -
-					 fixedpt_mul(quatrot_left_x, atom_to_rotate.z) +
-					 fixedpt_mul(quatrot_left_z, atom_to_rotate.x);
+			quatrot_temp_y = fixedpt_smul(quatrot_left_q, atom_to_rotate.y) - fixedpt_smul(quatrot_left_x, atom_to_rotate.z) + fixedpt_smul(quatrot_left_z, atom_to_rotate.x);
 
-			quatrot_temp_z = fixedpt_mul(quatrot_left_q, atom_to_rotate.z) +
-					 fixedpt_mul(quatrot_left_x, atom_to_rotate.y) -
-					 fixedpt_mul(quatrot_left_y, atom_to_rotate.x);
+			quatrot_temp_z = fixedpt_smul(quatrot_left_q, atom_to_rotate.z) + fixedpt_smul(quatrot_left_x, atom_to_rotate.y) - fixedpt_smul(quatrot_left_y, atom_to_rotate.x);
 
-			atom_to_rotate.x = fixedpt_mul(quatrot_temp_x, quatrot_left_q) - 
-					   fixedpt_mul(quatrot_temp_q, quatrot_left_x) - 
-					   fixedpt_mul(quatrot_temp_y, quatrot_left_z) + 
-					   fixedpt_mul(quatrot_temp_z, quatrot_left_y);
+			atom_to_rotate.x = fixedpt_smul(quatrot_temp_x, quatrot_left_q) - fixedpt_smul(quatrot_temp_q, quatrot_left_x) - fixedpt_smul(quatrot_temp_y, quatrot_left_z) + fixedpt_smul(quatrot_temp_z, quatrot_left_y);
 
-			atom_to_rotate.y = fixedpt_mul(quatrot_temp_x, quatrot_left_z) + 
-					   fixedpt_mul(quatrot_temp_y, quatrot_left_q) - 
-					   fixedpt_mul(quatrot_temp_z, quatrot_left_x) - 
-					   fixedpt_mul(quatrot_temp_q, quatrot_left_y);
+			atom_to_rotate.y = fixedpt_smul(quatrot_temp_x, quatrot_left_z) + fixedpt_smul(quatrot_temp_y, quatrot_left_q) - fixedpt_smul(quatrot_temp_z, quatrot_left_x) - fixedpt_smul(quatrot_temp_q, quatrot_left_y);
 
-			atom_to_rotate.z = fixedpt_mul(quatrot_temp_y, quatrot_left_x) - 
-					   fixedpt_mul(quatrot_temp_x, quatrot_left_y) - 
-					   fixedpt_mul(quatrot_temp_q, quatrot_left_z) + 
-					   fixedpt_mul(quatrot_temp_z, quatrot_left_q);
+			atom_to_rotate.z = fixedpt_smul(quatrot_temp_y, quatrot_left_x) - fixedpt_smul(quatrot_temp_x, quatrot_left_y) - fixedpt_smul(quatrot_temp_q, quatrot_left_z) + fixedpt_smul(quatrot_temp_z, quatrot_left_q);
 
 			//performing final movement and storing values
 			loc_coords[atom_id] = atom_to_rotate + rotation_movingvec;

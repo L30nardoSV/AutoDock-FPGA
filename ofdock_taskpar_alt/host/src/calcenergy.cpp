@@ -251,7 +251,6 @@ int prepare_const_fields_for_gpu(Liganddata*     myligand_reference,
 
 int prepare_conststatic_fields_for_gpu(Liganddata* 	       myligand_reference,
 				 	Dockpars*   	       mypars,
-				 	//float*      	       cpu_ref_ori_angles,
 				 	kernelconstant_static* KerConstStatic)
 {
 	int i, j;
@@ -373,6 +372,49 @@ int prepare_conststatic_fields_for_gpu(Liganddata* 	       myligand_reference,
 	for (m=0;m<MAX_NUM_OF_ATYPES;m++)		   { KerConstStatic->dspars_S_const[m]    = dspars_S[m]; }
 	for (m=0;m<MAX_NUM_OF_ATYPES;m++)		   { KerConstStatic->dspars_V_const[m]    = dspars_V[m]; }
 	for (m=0;m<MAX_NUM_OF_ROTATIONS;m++)		   { KerConstStatic->rotlist_const[m]     = rotlist[m]; }
+
+
+
+
+	//coordinates of reference ligand
+	for (i=0; i < myligand_reference->num_of_atoms; i++) {
+		KerConstStatic->ref_coords_const[i].x = fixedpt_fromfloat(myligand_reference->atom_idxyzq[i][1]);
+		KerConstStatic->ref_coords_const[i].y = fixedpt_fromfloat(myligand_reference->atom_idxyzq[i][2]);
+		KerConstStatic->ref_coords_const[i].z = fixedpt_fromfloat(myligand_reference->atom_idxyzq[i][3]);
+#if 0
+	// VALUES DO NOT CHANGE ON EVERY ITERATION
+	// Verify float-to-fixedpt conversion: printf( % float % fixedpt )
+	printf("%f %f\n", myligand_reference->atom_idxyzq[i][1], fixedpt_tofloat(KerConstDynamic->ref_coords_const[i].x));
+	printf("%f %f\n", myligand_reference->atom_idxyzq[i][2], fixedpt_tofloat(KerConstDynamic->ref_coords_const[i].y));
+	printf("%f %f\n", myligand_reference->atom_idxyzq[i][3], fixedpt_tofloat(KerConstDynamic->ref_coords_const[i].z));
+#endif
+	}
+
+	//rotatable bond vectors
+	for (i=0; i < myligand_reference->num_of_rotbonds; i++) {
+		KerConstStatic->rotbonds_moving_vectors_const[i].x = fixedpt_fromfloat(myligand_reference->rotbonds_moving_vectors[i][0]);
+		KerConstStatic->rotbonds_moving_vectors_const[i].y = fixedpt_fromfloat(myligand_reference->rotbonds_moving_vectors[i][1]);
+		KerConstStatic->rotbonds_moving_vectors_const[i].z = fixedpt_fromfloat(myligand_reference->rotbonds_moving_vectors[i][2]);
+#if 0
+		// VALUES DO NOT CHANGE ON EVERY ITERATION
+		// Verify float-to-fixedpt conversion: printf( % float % fixedpt )
+		printf("%f %f\n", myligand_reference->rotbonds_moving_vectors[i][0], fixedpt_tofloat(KerConstDynamic->rotbonds_moving_vectors_const[i].x));
+		printf("%f %f\n", myligand_reference->rotbonds_moving_vectors[i][1], fixedpt_tofloat(KerConstDynamic->rotbonds_moving_vectors_const[i].y));
+		printf("%f %f\n", myligand_reference->rotbonds_moving_vectors[i][2], fixedpt_tofloat(KerConstDynamic->rotbonds_moving_vectors_const[i].z));
+#endif
+
+		KerConstStatic->rotbonds_unit_vectors_const[i].x = fixedpt_fromfloat(myligand_reference->rotbonds_unit_vectors[i][0]);
+		KerConstStatic->rotbonds_unit_vectors_const[i].y = fixedpt_fromfloat(myligand_reference->rotbonds_unit_vectors[i][1]);
+		KerConstStatic->rotbonds_unit_vectors_const[i].z = fixedpt_fromfloat(myligand_reference->rotbonds_unit_vectors[i][2]);
+#if 0
+		// VALUES DO NOT CHANGE ON EVERY ITERATION
+		// Verify float-to-fixedpt conversion: printf( % float % fixedpt )
+		printf("%f %f\n", myligand_reference->rotbonds_unit_vectors[i][0], fixedpt_tofloat(KerConstDynamic->rotbonds_unit_vectors_const[i].x));
+		printf("%f %f\n", myligand_reference->rotbonds_unit_vectors[i][1], fixedpt_tofloat(KerConstDynamic->rotbonds_unit_vectors_const[i].y));
+		printf("%f %f\n", myligand_reference->rotbonds_unit_vectors[i][2], fixedpt_tofloat(KerConstDynamic->rotbonds_unit_vectors_const[i].z));
+#endif
+	}
+
 	return 0;
 }
 
@@ -397,11 +439,15 @@ int prepare_constdynamic_fields_for_gpu(Liganddata* 	 	myligand_reference,
 				 	kernelconstant_dynamic* KerConstDynamic)
 {
 
+		#if 0
+
 	int i, j;
 	//int type_id1, type_id2;
 	//float* floatpoi;
 	//char* charpoi;
-	float phi, theta, genrotangle;
+	
+
+
 
 /*
 	// ------------------------------
@@ -484,6 +530,22 @@ int prepare_constdynamic_fields_for_gpu(Liganddata* 	 	myligand_reference,
 //		//printf("Precalculated quaternion for run %d: %f %f %f %f\n", i, ref_orientation_quats[4*i], ref_orientation_quats[4*i+1], ref_orientation_quats[4*i+2], ref_orientation_quats[4*i+3]);
 //	}
 
+
+
+		#endif
+
+
+
+
+
+
+
+
+
+
+
+
+	float phi, theta, genrotangle;
 	phi         = cpu_ref_ori_angles[0]*DEG_TO_RAD;
 	theta       = cpu_ref_ori_angles[1]*DEG_TO_RAD;
 	genrotangle = cpu_ref_ori_angles[2]*DEG_TO_RAD;
@@ -502,6 +564,28 @@ int prepare_constdynamic_fields_for_gpu(Liganddata* 	 	myligand_reference,
 	KerConstDynamic->ref_orientation_quats_const[3] = fixedpt_fromfloat(sinf(genrotangle/2.0f)*cosf(theta)); //z
 
 	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #if 0
 	// VALUES CHANGE ON EVERY ITERATION
@@ -525,6 +609,12 @@ int prepare_constdynamic_fields_for_gpu(Liganddata* 	 	myligand_reference,
 
 
 }
+
+
+
+
+
+
 
 
 

@@ -45,15 +45,22 @@ typedef	unsigned long fixedptud;
 #define FIXEDPT_MIN  	    0x80000000 /*!< the minimum value of fix16_t */
 #define FIXEDPT_OVERFLOW    0x80000000 /*!< the value used to indicate overflows when FIXMATH_NO_OVERFLOW is not specified */
 
+/*
 // #define fixedpt_rconst(R)   ((fixedpt)((R) * FIXEDPT_ONE + ((R) >= 0 ? 0.5 : -0.5)))
 inline const fixedpt
 fixedpt_rconst(float R) {
 	return ((fixedpt)((R) * FIXEDPT_ONE + ((R) >= 0 ? 0.5 : -0.5)));
 }
-
+*/
+/*
 #define FIXEDPT_PI	    fixedpt_rconst(3.14159265358979323846)
 #define FIXEDPT_HALF_PI fixedpt_rconst(3.14159265358979323846 / 2)
+*/
 
+#define FIXEDPT_PI      		0x3243F
+#define FIXEDPT_HALF_PI 		(FIXEDPT_PI >> 1)
+#define FIXEDPT_TWO_PI			(FIXEDPT_PI << 1)
+#define FIXEDPT_THREE_PI_DIV_TWO 	(FIXEDPT_PI + FIXEDPT_HALF_PI)
 
 // ---------------------------------------------------------------------
 // Fixed-point Functions
@@ -85,6 +92,7 @@ fixedpt_fromfloat(float F) {
 }
 
 // ---------------------------------------------------------------------
+/*
 inline fixedpt
 fixedpt_add(fixedpt A, fixedpt B) {
 	uint _A = A;
@@ -108,8 +116,27 @@ fixedpt_sadd(fixedpt A, fixedpt B) {
 
 	return result;
 }
+*/
+
+inline fixedpt
+fixedpt_sadd(fixedpt A, fixedpt B) {
+	uint _A = A;
+	uint _B = B;
+	uint sum = _A + _B;
+
+	// apply saturation when overflow
+	if (!((_A ^ _B) & 0x80000000) && ((_A ^ sum) & 0x80000000)) {
+		/*
+		sum = FIXEDPT_OVERFLOW;
+		*/
+		sum = (A >= 0) ? FIXEDPT_MAX : FIXEDPT_MIN;
+	}
+
+	return sum;
+}
 
 // ---------------------------------------------------------------------
+/*
 inline fixedpt
 fixedpt_sub(fixedpt A, fixedpt B) {
 	uint _A = A;
@@ -133,15 +160,34 @@ fixedpt_ssub(fixedpt A, fixedpt B) {
 
 	return result;
 }
+*/
+
+inline fixedpt
+fixedpt_ssub(fixedpt A, fixedpt B) {
+	uint _A = A;
+	uint _B = B;
+	uint diff = _A - _B;
+	   
+	// apply saturation when overflow
+	if (((_A ^ _B) & 0x80000000) && ((_A ^ diff) & 0x80000000)) {
+		/*
+		diff = FIXEDPT_OVERFLOW;
+		*/
+		diff = (A >= 0) ? FIXEDPT_MAX : FIXEDPT_MIN;
+	}
+
+	return diff;
+}
 
 // ---------------------------------------------------------------------
-/*
+
+// no overflow
 inline fixedpt
-fixedpt_mul(fixedpt A, fixedpt B)
+fixedpt_nomul(fixedpt A, fixedpt B)
 {
-	return (((fixedptd)A * (fixedptd)B) >> FIXEDPT_FBITS);
+	return ((fixedptd)A * B) >> FIXEDPT_FBITS;
 }
-*/
+/*
 inline fixedpt
 fixedpt_mul(fixedpt A, fixedpt B)
 {
@@ -181,6 +227,46 @@ fixedpt_smul(fixedpt A, fixedpt B)
 	
 	return result;
 }
+*/
+
+inline fixedpt
+fixedpt_smul(fixedpt A, fixedpt B)
+{
+	fixedptd product = (fixedptd)A * B;
+	
+	// The upper 17 bits should all be the same (the sign).
+	uint upper = product >> 47;
+
+	fixedpt r_tmp = product >> 16;
+
+	// apply saturation when overflow
+	if (product < 0) {
+		if (~upper)
+			/*
+			r_tmp = FIXEDPT_OVERFLOW;
+			*/		
+			if ((A >= 0) == (B >= 0)) {
+				r_tmp = FIXEDPT_MAX;
+			}
+			else {
+				r_tmp = FIXEDPT_MIN;
+			}	
+	}
+	else {
+		if (upper)
+			/*
+			r_tmp = FIXEDPT_OVERFLOW;
+			*/
+			if ((A >= 0) == (B >= 0)) {
+				r_tmp = FIXEDPT_MAX;
+			}
+			else {
+				r_tmp = FIXEDPT_MIN;
+			}	
+	}
+	
+	return r_tmp;
+}
 
 // ---------------------------------------------------------------------
 
@@ -190,32 +276,39 @@ fixedpt_smul(fixedpt A, fixedpt B)
 inline fixedpt
 fixedpt_sin(fixedpt fp)
 {
+/*
+ 	printf("%i\n" , fixedpt_rconst(3.14159265358979323846));
+	printf("%x\n" , fixedpt_rconst(3.14159265358979323846));
+	printf("coeff1 %x\n" , fixedpt_rconst(7.61e-03));
+	printf("coeff2 %x\n" , fixedpt_rconst(1.6605e-01));
+*/
+
 	int sign = 1;
 	fixedpt sqr, result;
 	const fixedpt SK[2] = {
-		fixedpt_rconst(7.61e-03),
-		fixedpt_rconst(1.6605e-01)
+		/*fixedpt_rconst(7.61e-03)*/ 0x1F3,
+		/*fixedpt_rconst(1.6605e-01)*/ 0x2A82
 	};
 
-	fp %= 2 * FIXEDPT_PI;
+	fp %= /*2 * FIXEDPT_PI*/FIXEDPT_TWO_PI;
 	if (fp < 0)
-		fp = FIXEDPT_PI * 2 + fp;
+		fp = /*FIXEDPT_PI * 2*/FIXEDPT_TWO_PI + fp;
 	if ((fp > FIXEDPT_HALF_PI) && (fp <= FIXEDPT_PI)) 
 		fp = FIXEDPT_PI - fp;
-	else if ((fp > FIXEDPT_PI) && (fp <= (FIXEDPT_PI + FIXEDPT_HALF_PI))) {
+	else if ((fp > FIXEDPT_PI) && (fp <= (/*FIXEDPT_PI + FIXEDPT_HALF_PI*/FIXEDPT_THREE_PI_DIV_TWO))) {
 		fp = fp - FIXEDPT_PI;
 		sign = -1;
-	} else if (fp > (FIXEDPT_PI + FIXEDPT_HALF_PI)) {
-		fp = (FIXEDPT_PI << 1) - fp;
+	} else if (fp > (/*FIXEDPT_PI + FIXEDPT_HALF_PI*/FIXEDPT_THREE_PI_DIV_TWO)) {
+		fp = (/*FIXEDPT_PI << 1*/FIXEDPT_TWO_PI) - fp;
 		sign = -1;
 	}
-	sqr = fixedpt_mul(fp, fp);
+	sqr = /*fixedpt_mul(fp, fp);*/ fixedpt_nomul(fp, fp);
 	result = SK[0];
-	result = fixedpt_mul(result, sqr);
+	result = /*fixedpt_mul(result, sqr);*/ fixedpt_nomul(result, sqr);
 	result -= SK[1];
-	result = fixedpt_mul(result, sqr);
+	result = /*fixedpt_mul(result, sqr);*/ fixedpt_nomul(result, sqr);
 	result += FIXEDPT_ONE;
-	result = fixedpt_mul(result, fp);
+	result = /*fixedpt_mul(result, fp);*/ fixedpt_nomul(result, fp);
 	return sign * result;
 }
 

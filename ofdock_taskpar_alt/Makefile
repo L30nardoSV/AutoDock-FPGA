@@ -376,7 +376,7 @@ $(TARGET_DIR)/$(TARGET) : Makefile $(SRCS) $(INCS) $(TARGET_DIR)
 # NEV was usually set to 100000
 PDB  := 3ptb
 NRUN := 10
-NEV  := 200000 
+NEV  := 100000 
 
 
 # Project name
