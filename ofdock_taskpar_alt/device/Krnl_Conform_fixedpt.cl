@@ -61,7 +61,10 @@ void Krnl_Conform(
 		rotbonds_moving_vectors_localcache [c] = KerConstStatic_rotbonds_moving_vectors_const[c];
 		rotbonds_unit_vectors_localcache   [c] = KerConstStatic_rotbonds_unit_vectors_const [c];
 	}
-
+/*
+	printf("Conform %f %f\n", fixedpt_tofloat(fixedpt_fromfloat(-2.2f)), fixedpt_tofloat(fixedpt_fromfloat(-5.45f)));
+	printf("Conform %f\n", fixedpt_tofloat(fixedpt_smul(fixedpt_fromfloat(-2.2f), fixedpt_fromfloat(-5.45f))));
+*/
 while(active) {
 
 	char mode;

@@ -1,8 +1,9 @@
-// The fixed-point representation has the 10.10 format
+// The fixed-point representation has the 16.16 format
 // Intended to be used in ofdock_taskpar_alt/Krnl_Conform.cl
 
-// Starting point:
+// Starting points:
 // https://sourceforge.net/p/fixedptc/code/ci/default/tree/fixedptc.h
+// https://code.google.com/archive/p/libfixmath/
 
 // ---------------------------------------------------------------------
 // Fixed-point Defines

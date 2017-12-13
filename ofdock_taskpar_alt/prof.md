@@ -96,7 +96,11 @@ freq: 169 MHz
 
 freq: 190 MHz
 
+56. `defines_fixedpt_64.pt`: added
+57. `Krnl_InterE`   -> replaced by `Krnl_InterE_fixedpt` (ONLY ONE OF INTERE)
+    `calcenergy.cpp`, `performdocking.cpp`: apply fixed-point 48.16 arithmetic 
 
+freq: 192 MHz
 
 Suggested changes not applied yet:
 

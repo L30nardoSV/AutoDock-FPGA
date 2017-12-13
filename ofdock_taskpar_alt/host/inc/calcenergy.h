@@ -108,7 +108,6 @@ typedef struct
 #include "CL/opencl.h"
 #include "defines_fixedpt.h"
 
-
 typedef struct
 {
        float atom_charges_const[MAX_NUM_OF_ATOMS] 		     __attribute__ ((aligned (512)));
@@ -151,7 +150,8 @@ typedef struct
        cl_int3 rotbonds_moving_vectors_const[MAX_NUM_OF_ROTBONDS] __attribute__ ((aligned (512)));
        cl_int3 rotbonds_unit_vectors_const  [MAX_NUM_OF_ROTBONDS] __attribute__ ((aligned (512)));
 */
-       fixedpt ref_orientation_quats_const  [MAX_NUM_OF_RUNS * 4] __attribute__ ((aligned (1024)));
+       //fixedpt ref_orientation_quats_const  [MAX_NUM_OF_RUNS * 4] __attribute__ ((aligned (1024)));
+       fixedpt ref_orientation_quats_const  [4] __attribute__ ((aligned (64)));
 } kernelconstant_dynamic;
 
 
