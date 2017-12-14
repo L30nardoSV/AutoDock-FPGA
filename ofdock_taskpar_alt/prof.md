@@ -79,38 +79,8 @@ freq: 195 MHz
 
 freq: 179.1 MHz
 
-48. `defines_fixedpt.pt`: added
-
-49. `Krnl_Conform`   -> replaced by `Krnl_Conform_fixedpt` 
-    `Krnl_Conform2`  -> replaced by `Krnl_Conform2_fixedpt` 
-    `calcenergy.cpp`, `performdocking.cpp`: apply fixed-point 16.16 arithmetic to reduce II=36 in Conform kernels down to II=12
-
-freq: 169 MHz
-
-50. `Krnl_Conform_fixedpt`, `Krnl_Conform2_fixedpt`: improve `rotation_angle` calculation with shift instead fixedpt_mul
-51. `defines_fixedpt.h`: clean up/simplify defines and functions including sin and cos
-52. `Krnl_Conform_fixedpt`, `Krnl_Conform2_fixedpt`: apply nomul and smul fixedpt functions
-53. `performdocking.cpp`,  `Krnl_Conform_fixedpt`, `Krnl_Conform2_fixedpt`: pass from host to kernels `Host_num_of_rotbonds`
-54. `calcenergy.cpp`, `performdocking.cpp`: simplify the for-loop in performdocking because not all kernel args change on every loop
-55. `performdocking.cpp`: calculate prng seeds outside main for-loop
-
-freq: 190 MHz
-
-56. `defines_fixedpt_64.pt`: added
-57. `Krnl_InterE`   -> replaced by `Krnl_InterE_fixedpt` (ONLY ONE OF INTERE)
-    `calcenergy.cpp`, `performdocking.cpp`: apply fixed-point 48.16 arithmetic 
-
-freq: 192 MHz
-
-Suggested changes not applied yet:
-
-`getparamters.cpp`, `performdocking.cpp`: calculate cpu_init_populations and ref_ori_angles outside main for-loop
-
-apply add and sub to Krnl_Conform
-
-apply saturated functions
-
-apply fixedpoint to other kernels too
 
 
+Suggestions not tested yet
+`Krnl_Conform`: apply fixed-point arithmetic to reduce II=36
 

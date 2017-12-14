@@ -402,7 +402,7 @@ BOARD    := Proc10A_X115
 	# $(KRNL_NAME).aoco
 	# $(KRNL_NAME).aocx
 keremu: $(DEV_SRC)
-	aoc -march=emulator -v --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR)/$(KRNL_NAME).aocx $(REP) -g
+	aoc -march=emulator -v --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR)/$(KRNL_NAME).aocx $(REP)
 	@echo " "
 	@echo "==============================================================="
 	@echo "INFO: emulation files are under: bin/$(KRNL_NAME)(.aoco)(.aocx)"
@@ -522,7 +522,6 @@ copy: clean-copy
 	cp $(TARGET_DIR_HW_PROF)/$(KRNL_NAME).* ../$(COPY_DIR)/$(COPY_DIR_DOCK)/$(TARGET_DIR_HW_PROF)/
 	cp Makefile ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
 	cp defines.h ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
-	cp defines_fixedpt.h ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
 	cp -r device/ ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
 	cp -r host/ ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
 	cp -r input/ ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
