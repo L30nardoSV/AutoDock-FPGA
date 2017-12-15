@@ -209,6 +209,12 @@ static cl_kernel kernel26  = NULL;
 static const char *name_k26 = "Krnl_Prng_LS3_ushort";
 #endif
 
+#ifdef ENABLE_KERNEL27
+static cl_command_queue command_queue27 = NULL;
+static cl_kernel kernel27  = NULL;
+static const char *name_k27 = "Krnl_IGL_Arbiter";
+#endif
+
 static cl_program program = NULL;
 
 // Function prototypes
@@ -771,6 +777,10 @@ filled with clock() */
 	setKernelArg(kernel26,1, sizeof(unsigned int),  &dockpars.pop_size);
 #endif // End of ENABLE_KERNEL26
 
+#ifdef ENABLE_KERNEL27 // Krnl_IGL_Arbiter
+	setKernelArg(kernel27,0, sizeof(unsigned int),  &dockpars.num_of_genes);
+#endif // End of ENABLE_KERNEL27
+
 	for (unsigned int run_cnt = 0; run_cnt < mypars->num_of_runs; run_cnt++)
 	{
 
@@ -979,6 +989,10 @@ filled with clock() */
 		runKernelTask(command_queue26,kernel26,NULL,NULL);
 		#endif // ENABLE_KERNEL26
 
+		#ifdef ENABLE_KERNEL27
+		runKernelTask(command_queue27,kernel27,NULL,NULL);
+		#endif // ENABLE_KERNEL27
+
 
 
 		#ifdef ENABLE_KERNEL1 		
@@ -1083,6 +1097,10 @@ filled with clock() */
 
 		#ifdef ENABLE_KERNEL26
 		clFinish(command_queue26);
+		#endif
+
+		#ifdef ENABLE_KERNEL27
+		clFinish(command_queue27);
 		#endif
 
 		clock_stop_docking = clock();
@@ -1549,6 +1567,14 @@ bool init() {
   checkError(status, "Failed to create kernel");
 #endif
 
+#ifdef ENABLE_KERNEL27
+  //command_queue23 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+  command_queue27 = clCreateCommandQueue(context, device, 0, &status);
+  checkError(status, "Failed to create command queue27");
+  kernel27 = clCreateKernel(program, name_k27, &status);
+  checkError(status, "Failed to create kernel");
+#endif
+
   return true;
 }
 
@@ -1682,6 +1708,11 @@ void cleanup() {
 #ifdef ENABLE_KERNEL26
   if(kernel26) {clReleaseKernel(kernel26);}
   if(command_queue26) {clReleaseCommandQueue(command_queue26);}
+#endif
+
+#ifdef ENABLE_KERNEL27
+  if(kernel27) {clReleaseKernel(kernel27);}
+  if(command_queue27) {clReleaseCommandQueue(command_queue27);}
 #endif
 
   if(program) {clReleaseProgram(program);}

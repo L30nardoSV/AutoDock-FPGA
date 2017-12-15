@@ -2,6 +2,8 @@ channel bool  chan_Arbiter_LS1_active;
 channel float chan_Arbiter_LS1_energy;
 channel float chan_Arbiter_LS1_genotype     __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
 
+channel bool chan_LS2Arbiter_LS1_end;
+
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------
 __kernel __attribute__ ((max_global_work_dim(0)))
@@ -20,7 +22,7 @@ while(active) {
 	      (Off_valid  == false) 
 	){
 		LS1_active = read_channel_nb_altera(chan_GA2LS_LS1_active, &LS1_valid);
-		Off_active = read_channel_nb_altera(chan_GA2LS_Off_active, &Off_valid);
+		Off_active = read_channel_nb_altera(chan_GA2LS_Off1_active, &Off_valid);
 	}
 		
 	for (uchar i=0; i<DockConst_num_of_genes; i++) {
@@ -125,6 +127,12 @@ if (active == true) {
 		#endif
 		// -----------------------------------------------
 
+		// Tell Krnl_Conf_Arbiter, LS1 is done
+		// Not completely strict as the (iteration_cnt < DockConst_max_num_of_iters) is ignored
+		// In practice, rho condition dominates most of the cases
+		write_channel_altera(chan_LS2Arbiter_LS1_end, (rho < DockConst_rho_lower_bound)?true:false);
+		//mem_fence(CLK_CHANNEL_MEM_FENCE);
+
 		write_channel_altera(chan_GA2PRNG_LS_float_active, true);
 		mem_fence(CLK_CHANNEL_MEM_FENCE);
 
@@ -167,7 +175,7 @@ if (active == true) {
 			}
 
 			entity_possible_new_genotype [i] = tmp3;
-			write_channel_altera(chan_LS2Conf_genotype, tmp3);
+			write_channel_altera(chan_LS2Conf_LS1_genotype, tmp3);
 
 			#if defined (DEBUG_KRNL_LS)
 			printf("LS1_genotype sent\n");
@@ -177,9 +185,9 @@ if (active == true) {
 //printf("Energy to calculate sent from LS ... ");
 
 		// calculate energy of genotype
-		float energyIA_LS_rx = read_channel_altera(chan_Intrae2StoreLS_intrae);
+		float energyIA_LS_rx = read_channel_altera(chan_Intrae2StoreLS_LS1_intrae);
 //printf("INTRAE received in LS1 ... ");
-		float energyIE_LS_rx = read_channel_altera(chan_Intere2StoreLS_intere);
+		float energyIE_LS_rx = read_channel_altera(chan_Intere2StoreLS_LS1_intere);
 //printf("INTERE received in LS1 ... ");
 		float candidate_energy = energyIA_LS_rx + energyIE_LS_rx;
 

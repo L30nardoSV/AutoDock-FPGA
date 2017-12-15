@@ -286,16 +286,24 @@ while(active) {
 	// Send intermolecular energy to chanel
 	// --------------------------------------------------------------
 	switch (mode) {
-		case 0x01:	// IC
+		case /*0x01*/ 'I':	// IC
 			write_channel_altera(chan_Intere2StoreIC_intere, interE);
 		break;
 
-		case 0x02:	// GG
+		case /*0x02*/ 'G':	// GG
 			write_channel_altera(chan_Intere2StoreGG_intere, interE);
 		break;
 
-		case 0x03:	// LS 1
-			write_channel_altera(chan_Intere2StoreLS_intere, interE);
+		case /*0x03*/ 0x01:	// LS 1
+			write_channel_altera(chan_Intere2StoreLS_LS1_intere, interE);
+		break;
+
+		case 0x02:	// LS 2
+			write_channel_altera(chan_Intere2StoreLS_LS2_intere, interE);
+		break;
+
+		case 0x03:	// LS 3
+			write_channel_altera(chan_Intere2StoreLS_LS3_intere, interE);
 		break;
 	}
 	// --------------------------------------------------------------

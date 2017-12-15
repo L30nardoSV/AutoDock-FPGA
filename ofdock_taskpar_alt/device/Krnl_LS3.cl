@@ -2,6 +2,8 @@ channel bool  chan_Arbiter_LS3_active;
 channel float chan_Arbiter_LS3_energy;
 channel float chan_Arbiter_LS3_genotype     __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
 
+channel bool chan_LS2Arbiter_LS3_end;
+
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------
 __kernel __attribute__ ((max_global_work_dim(0)))
@@ -271,11 +273,6 @@ if (active == true) {
 	}
 
 }
-/*
-else {
-	write_channel_altera(chan_LS2Conf_LS3_Off, false);
-}
-*/
 	
 } // End of while (active)		
 

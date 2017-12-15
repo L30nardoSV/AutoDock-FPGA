@@ -5,8 +5,8 @@ channel bool  chan_LS23_active;
 channel char  chan_LS23_mode;
 channel float chan_LS23_genotype     __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
 
-channel bool chan_LS2Arbiter_LS2_end;
-channel bool chan_LS2Arbiter_LS3_end;
+//channel bool chan_LS2Arbiter_LS2_end;
+//channel bool chan_LS2Arbiter_LS3_end;
 
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------
@@ -169,10 +169,17 @@ while(active) {
 		*/
 
 		for (uchar i=0; i<DockConst_num_of_genes; i++) {
+/*
 			float tmp;
 			
 			if (i > 2) {
 				tmp = ((bound==1)?genotype_if_bound_1[i]:genotype[j][i & 0x3F]) * DEG_TO_RAD;
+			}
+*/
+			float tmp = (bound==1)?genotype_if_bound_1[i]:genotype[j][i & 0x3F];
+			
+			if (i > 2) {
+				tmp =  tmp * DEG_TO_RAD;
 			}
 
 			write_channel_altera(chan_LS23_genotype, tmp);

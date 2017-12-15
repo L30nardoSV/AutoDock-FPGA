@@ -477,7 +477,7 @@ while(active) {
 
 		case 0x03:	// LS 1
 			//write_channel_altera(chan_Intere2StoreLS_intere, interE);
-			write_channel_altera(chan_Intere2StoreLS_intere, fixedpt64_tofloat(fixpt_interE));
+			write_channel_altera(chan_Intere2StoreLS_LS1_intere, fixedpt64_tofloat(fixpt_interE));
 		break;
 	}
 	// --------------------------------------------------------------

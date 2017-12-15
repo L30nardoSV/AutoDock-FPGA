@@ -4,31 +4,17 @@
 //IC: initial calculation of energy of populations
 //GG: genetic generation 
 //LS: local search
-//OFF: turn off IC, GG, LS
-
-// Define kernel file-scope channel variable
-// MAX_NUM_OF_ATOMS = 90
-// ACTUAL_GENOTYPE_LENGTH (MAX_NUM_OF_ROTBONDS+6) = 38
-
-// active 1: receiving kernel is active, 0 receiving Kernel is disabled
-// mode 1 for I: init calculation energy, 
-// 2 for G: genetic generation, 
-// 3 for L: local search - positive descent,
-// 4 for L: local search - negative descent, 
-// 5 for O: off
-// cnt: population count
-
+//OFF: turn off 
 
 #include "../defines.h"
+channel bool chan_GA2IGL_IC_active;
+channel bool chan_GA2IGL_GG_active;
+
 channel float  	chan_IC2Conf_genotype          __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
 channel float  	chan_GG2Conf_genotype          __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
-channel float  	chan_LS2Conf_genotype          __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
+channel float  	chan_LS2Conf_LS1_genotype      __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
 channel float  	chan_LS2Conf_LS2_genotype      __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
 channel float  	chan_LS2Conf_LS3_genotype      __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
-
-// To turn off Conform, InterE, IntraE
-channel bool 	chan_LS2Conf_LS2_active;
-channel bool  	chan_Off2Conf_active;
 
 // IC, GG, LS1
 channel float3  chan_Conf2Intere_xyz           __attribute__((depth(MAX_NUM_OF_ATOMS)));
@@ -39,24 +25,16 @@ channel float3 	chan_Conf2Intrae_xyz           __attribute__((depth(MAX_NUM_OF_A
 channel bool  	chan_Conf2Intrae_active;
 channel char  	chan_Conf2Intrae_mode;	
 
-// LS2 and LS3
-channel float3  chan_Conf2Intere_LS2_xyz       __attribute__((depth(MAX_NUM_OF_ATOMS)));
-channel bool  	chan_Conf2Intere_LS2_active;
-channel char    chan_Conf2Intere_LS2_mode;
-
-channel float3 	chan_Conf2Intrae_LS2_xyz       __attribute__((depth(MAX_NUM_OF_ATOMS)));
-channel bool  	chan_Conf2Intrae_LS2_active;
-channel char    chan_Conf2Intrae_LS2_mode;
-
+// Send data back to generators of genotypes
 channel float 	chan_Intere2StoreIC_intere     __attribute__((depth(MAX_POPSIZE)));
 channel float 	chan_Intere2StoreGG_intere     __attribute__((depth(MAX_POPSIZE)));
-channel float 	chan_Intere2StoreLS_intere     __attribute__((depth(20)));	// it requires 6% MAX_POPSIZE
+channel float 	chan_Intere2StoreLS_LS1_intere __attribute__((depth(20)));	// it requires 6% MAX_POPSIZE
 channel float 	chan_Intere2StoreLS_LS2_intere __attribute__((depth(20)));	// it requires 6% MAX_POPSIZE
 channel float 	chan_Intere2StoreLS_LS3_intere __attribute__((depth(20)));	// it requires 6% MAX_POPSIZE
 
 channel float 	chan_Intrae2StoreIC_intrae     __attribute__((depth(MAX_POPSIZE)));
 channel float 	chan_Intrae2StoreGG_intrae     __attribute__((depth(MAX_POPSIZE)));
-channel float 	chan_Intrae2StoreLS_intrae     __attribute__((depth(20)));	// it requires 6% MAX_POPSIZE
+channel float 	chan_Intrae2StoreLS_LS1_intrae __attribute__((depth(20)));	// it requires 6% MAX_POPSIZE
 channel float 	chan_Intrae2StoreLS_LS2_intrae __attribute__((depth(20)));	// it requires 6% MAX_POPSIZE
 channel float 	chan_Intrae2StoreLS_LS3_intrae __attribute__((depth(20)));	// it requires 6% MAX_POPSIZE
 
@@ -110,11 +88,11 @@ channel uint 	chan_LS2GA_LS3_eval	       __attribute__((depth(8)));	// it requir
 channel float   chan_LS2GA_LS3_energy          __attribute__((depth(8)));	// it requires 6% MAX_POPSIZE
 channel float  	chan_LS2GA_LS3_genotype        __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
 
-channel bool    chan_GA2LS_Off_active;
+channel bool    chan_GA2LS_Off1_active;
 channel bool    chan_GA2LS_Off2_active;
 channel bool    chan_GA2LS_Off3_active;
 
-channel bool    chan_ConfArbiter_Off;
+channel bool    chan_IGLArbiter_Off;
 
 // --------------------------------------------------------------------------
 // These functions map the argument into the interval 0 - 180, or 0 - 360
@@ -193,6 +171,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 	// ------------------------------------------------------------------
 	for (ushort pop_cnt = 0; pop_cnt < DockConst_pop_size; pop_cnt++) {
 		// calculate energy
+		write_channel_altera(chan_GA2IGL_IC_active, true);
 		for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_genes; pipe_cnt++) {
 			LocalPopCurr[pop_cnt][pipe_cnt & 0x3F] = GlobPopulationCurrent[pop_cnt*ACTUAL_GENOTYPE_LENGTH + pipe_cnt];
 			write_channel_altera(chan_IC2Conf_genotype, LocalPopCurr[pop_cnt][pipe_cnt & 0x3F]);	
@@ -375,6 +354,8 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 
 			bool crossover_yes = (DockConst_crossover_rate > prngGG[0]);
 			
+			write_channel_altera(chan_GA2IGL_GG_active, true);
+
 			for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
 				float tmp_offspring;
 
@@ -461,6 +442,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			write_channel_altera(chan_GA2LS_LS1_energy, LocalEneNext[entity_ls1]);
 			write_channel_altera(chan_GA2LS_LS2_energy, LocalEneNext[entity_ls2]);
 			write_channel_altera(chan_GA2LS_LS3_energy, LocalEneNext[entity_ls3]);
+
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 			for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
@@ -469,6 +451,10 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 				write_channel_altera(chan_GA2LS_LS3_genotype, LocalPopNext[entity_ls3][gene_cnt & 0x3F]);
 			}
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
+
+//			uint eval_tmp1 = 0;
+//			uint eval_tmp2 = 0;
+//			uint eval_tmp3 = 0;
 
 			uint eval_tmp1 = read_channel_altera(chan_LS2GA_LS1_eval);
 			uint eval_tmp2 = read_channel_altera(chan_LS2GA_LS2_eval);
@@ -480,7 +466,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			#endif
 
 			uint LS_eval = eval_tmp1 + eval_tmp2 + eval_tmp3;
-			
+		
 			LocalEneNext[entity_ls1] = read_channel_altera(chan_LS2GA_LS1_energy);	
 			LocalEneNext[entity_ls2] = read_channel_altera(chan_LS2GA_LS2_energy);
 			LocalEneNext[entity_ls3] = read_channel_altera(chan_LS2GA_LS3_energy);
@@ -522,12 +508,11 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 	// ------------------------------------------------------------------
 	// Off: turn off all other kernels
 	// ------------------------------------------------------------------
-	write_channel_altera(chan_GA2LS_Off_active,   false);	// turn off LS_Arbiter, LS
+	write_channel_altera(chan_GA2LS_Off1_active,  false);	// turn off LS_Arbiter, LS1
 	write_channel_altera(chan_GA2LS_Off2_active,  false);	// turn off LS2_Arbiter, LS2 
 	write_channel_altera(chan_GA2LS_Off3_active,  false);	// turn off LS3_Arbiter, LS3 
 	write_channel_altera(chan_GA2PRNG_Off_active, false);	// turn off all PRNGs kernels
-	write_channel_altera(chan_Off2Conf_active,    false);	// turn off Conform, InterE, IntraE
-	write_channel_altera(chan_ConfArbiter_Off,    false);   // turn off Krnl_Conf_Arbiter,Conform2, InterE2, IntraE2
+	write_channel_altera(chan_IGLArbiter_Off,     false);   // turn off IGL_Arbiter, Conform, InterE, IntraE
 	
 	for (ushort pop_cnt=0;pop_cnt<DockConst_pop_size; pop_cnt++) { 	
 		for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
@@ -552,16 +537,22 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 // --------------------------------------------------------------------------
 
 #include "Krnl_PRNG.cl"
-#include "Krnl_Conf_Arbiter.cl"
-#include "Krnl_Conf_Arbiter2.cl"
 
 #include "Krnl_LS.cl"
+#include "Krnl_LS2.cl"
+#include "Krnl_LS3.cl"
+
+/*
+	#include "Krnl_Conf_Arbiter.cl"
+	#include "Krnl_Conf_Arbiter2.cl"
+*/
+#include "Krnl_IGL_Arbiter.cl"
+
 #include "Krnl_Conform.cl"
 #include "Krnl_InterE.cl"
 #include "Krnl_IntraE.cl"
-
-#include "Krnl_LS2.cl"
-#include "Krnl_LS3.cl"
-#include "Krnl_Conform2.cl"
-#include "Krnl_InterE2.cl"
-#include "Krnl_IntraE2.cl"
+/*
+	#include "Krnl_Conform2.cl"
+	#include "Krnl_InterE2.cl"
+	#include "Krnl_IntraE2.cl"
+*/

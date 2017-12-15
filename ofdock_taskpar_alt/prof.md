@@ -79,7 +79,11 @@ freq: 195 MHz
 
 freq: 179.1 MHz
 
-
+48. replace `Krnl_Conf_Arbiter`, `Krnl_Conf_Arbiter2` by `Krnl_IGL_Arbiter`
+    remove `Krnl_Conform2`, `Krnl_InterE2`, `Krnl_IntraE2`
+    `Krnl_LS`, `Knrl_LS2`, `Krnl_LS3`: added channels in removed files, added channel calls in LS2
+    `Krnl_InterE`, `Krnl_IntraE`: redirect channels depending on new mode codes	
+    cleanup `Krnl_GA`
 
 Suggestions not tested yet
 `Krnl_Conform`: apply fixed-point arithmetic to reduce II=36

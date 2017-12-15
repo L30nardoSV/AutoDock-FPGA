@@ -158,19 +158,21 @@ ENABLE_K13 = YES
 ENABLE_K14 = YES
 ENABLE_K15 = YES
 ENABLE_K16 = YES
-ENABLE_K17 = YES
-ENABLE_K18 = YES
-ENABLE_K19 = YES
+#ENABLE_K17 = YES
+#ENABLE_K18 = YES
+#ENABLE_K19 = YES
 
 ENABLE_K20 = YES
 ENABLE_K21 = YES
 ENABLE_K22 = YES
-ENABLE_K23 = YES
-ENABLE_K24 = YES
+#ENABLE_K23 = YES
+#ENABLE_K24 = YES
 
 # PRNGS in GA for LS2 and LS3
 ENABLE_K25 = YES
 ENABLE_K26 = YES
+
+ENABLE_K27 = YES
 
 ifeq ($(ENABLE_K1),YES)
 	K1 =-DENABLE_KERNEL1
@@ -334,7 +336,13 @@ else
 	K26 =
 endif
 
-ENABLE_KERNELS = $(K1) $(K2) $(K3) $(K4) $(K5) $(K6) $(K7) $(K8) $(K9) $(K10) $(K11) $(K12) $(K13) $(K14) $(K15) $(K16) $(K17) $(K18) $(K19) $(K20) $(K21) $(K22) $(K23) $(K24) $(K25) $(K26)
+ifeq ($(ENABLE_K27),YES)
+	K27 =-DENABLE_KERNEL27
+else
+	K27 =
+endif
+
+ENABLE_KERNELS = $(K1) $(K2) $(K3) $(K4) $(K5) $(K6) $(K7) $(K8) $(K9) $(K10) $(K11) $(K12) $(K13) $(K14) $(K15) $(K16) $(K17) $(K18) $(K19) $(K20) $(K21) $(K22) $(K23) $(K24) $(K25) $(K26) $(K27)
 
 # =============================
 # Reproduce result (remove randomness)
@@ -376,7 +384,7 @@ $(TARGET_DIR)/$(TARGET) : Makefile $(SRCS) $(INCS) $(TARGET_DIR)
 # NEV was usually set to 100000
 PDB  := 3ptb
 NRUN := 10
-NEV  := 100000 
+NEV  := 50000 
 
 
 # Project name
