@@ -6,13 +6,19 @@
 __kernel __attribute__ ((max_global_work_dim(0)))
 void Krnl_Conform(
 	     __constant int*    restrict KerConstStatic_rotlist_const,
+/*
 	     __constant float3* restrict KerConstDynamic_ref_coords_const,
 	     __constant float3* restrict KerConstDynamic_rotbonds_moving_vectors_const,
 	     __constant float3* restrict KerConstDynamic_rotbonds_unit_vectors_const,
+*/
+	     __constant float3* restrict KerConstStatic_ref_coords_const,
+	     __constant float3* restrict KerConstStatic_rotbonds_moving_vectors_const,
+	     __constant float3* restrict KerConstStatic_rotbonds_unit_vectors_const,
 	    
 			      unsigned int                     DockConst_rotbondlist_length,
 			      unsigned char                    DockConst_num_of_atoms,
 			      unsigned int                     DockConst_num_of_genes,
+			      unsigned char                    Host_num_of_rotbonds,
 
 			      float                            ref_orientation_quats_const_0,
 			      float                            ref_orientation_quats_const_1,
@@ -47,14 +53,24 @@ void Krnl_Conform(
 
 	__local float3 ref_coords_localcache [MAX_NUM_OF_ATOMS];
 	for (uchar c = 0; c < DockConst_num_of_atoms; c++) {
+/*
 		ref_coords_localcache [c] = KerConstDynamic_ref_coords_const [c];
+*/
+		ref_coords_localcache [c] = KerConstStatic_ref_coords_const [c];
 	}
 
 	__local float3 rotbonds_moving_vectors_localcache[MAX_NUM_OF_ROTBONDS];
 	__local float3 rotbonds_unit_vectors_localcache[MAX_NUM_OF_ROTBONDS];
+/*	
 	for (uchar c = 0; c < MAX_NUM_OF_ROTBONDS; c++) {
+*/
+	for (uchar c = 0; c < Host_num_of_rotbonds; c++) {
+/*
 		rotbonds_moving_vectors_localcache [c] = KerConstDynamic_rotbonds_moving_vectors_const[c];
 		rotbonds_unit_vectors_localcache   [c] = KerConstDynamic_rotbonds_unit_vectors_const [c];
+*/
+		rotbonds_moving_vectors_localcache [c] = KerConstStatic_rotbonds_moving_vectors_const[c];
+		rotbonds_unit_vectors_localcache   [c] = KerConstStatic_rotbonds_unit_vectors_const [c];
 	}
 
 while(active) {

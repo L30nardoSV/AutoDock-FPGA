@@ -79,12 +79,28 @@ freq: 195 MHz
 
 freq: 179.1 MHz
 
+
+
+
+
+
+// This is when Gidel card was removed temporaly from sauron 
+// and installed locally to a Xelera student's system
+
+
 48. replace `Krnl_Conf_Arbiter`, `Krnl_Conf_Arbiter2` by `Krnl_IGL_Arbiter`
     remove `Krnl_Conform2`, `Krnl_InterE2`, `Krnl_IntraE2`
     `Krnl_LS`, `Knrl_LS2`, `Krnl_LS3`: added channels in removed files, added channel calls in LS2
     `Krnl_InterE`, `Krnl_IntraE`: redirect channels depending on new mode codes	
     cleanup `Krnl_GA`
 
-Suggestions not tested yet
-`Krnl_Conform`: apply fixed-point arithmetic to reduce II=36
+freq: 192 MHz (NOT TESTED IN HW)
+
+
+49. `calcenergy.cpp`, `performdocking.cpp`: simplify the for-loop in performdocking because not all kernel args change on every loop
+50. `performdocking.cpp`, `Krnl_Conform`, pass from host to kernels `Host_num_of_rotbonds`
+51. `performdocking.cpp`: calculate prng seeds outside main for-loop
+52. `performdocking.cpp`: cleanup unnecesary comments
+
+
 

@@ -100,6 +100,8 @@ typedef struct
 } kernelconstant;
 */
 
+#include "CL/opencl.h"
+
 // As struct members are used as host buffers
 // they are aligned to multiples of 64 bytes (power of 2).
 // This solves aligment problem
@@ -114,10 +116,11 @@ typedef struct
        float dspars_S_const    [MAX_NUM_OF_ATYPES] __attribute__ ((aligned (64)));
        float dspars_V_const    [MAX_NUM_OF_ATYPES] __attribute__ ((aligned (64)));
        int   rotlist_const     [MAX_NUM_OF_ROTATIONS] __attribute__ ((aligned (4096)));
+
+       cl_float3 ref_coords_const[MAX_NUM_OF_ATOMS] __attribute__ ((aligned (2048)));
+       cl_float3 rotbonds_moving_vectors_const[MAX_NUM_OF_ROTBONDS] __attribute__ ((aligned (512)));
+       cl_float3 rotbonds_unit_vectors_const  [MAX_NUM_OF_ROTBONDS] __attribute__ ((aligned (512)));
 } kernelconstant_static;
-
-
-#include "CL/opencl.h"
 
 // As struct members are used as host buffers
 // they are aligned to multiples of 64 bytes (power of 2).
@@ -126,9 +129,11 @@ typedef struct
 
 typedef struct
 {
+/*
        cl_float3 ref_coords_const[MAX_NUM_OF_ATOMS] __attribute__ ((aligned (2048)));
        cl_float3 rotbonds_moving_vectors_const[MAX_NUM_OF_ROTBONDS] __attribute__ ((aligned (512)));
        cl_float3 rotbonds_unit_vectors_const  [MAX_NUM_OF_ROTBONDS] __attribute__ ((aligned (512)));
+*/
        float     ref_orientation_quats_const  [4] __attribute__ ((aligned (64)));
 } kernelconstant_dynamic;
 

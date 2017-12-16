@@ -374,6 +374,35 @@ int prepare_conststatic_fields_for_gpu(Liganddata* 	       myligand_reference,
 	for (m=0;m<MAX_NUM_OF_ATYPES;m++)		   { KerConstStatic->dspars_V_const[m]    = dspars_V[m]; }
 	for (m=0;m<MAX_NUM_OF_ROTATIONS;m++)		   { KerConstStatic->rotlist_const[m]     = rotlist[m]; }
 
+
+
+	//coordinates of reference ligand
+	for (i=0; i < myligand_reference->num_of_atoms; i++)
+	{
+		KerConstStatic->ref_coords_const[i].x = myligand_reference->atom_idxyzq[i][1];
+		KerConstStatic->ref_coords_const[i].y = myligand_reference->atom_idxyzq[i][2];
+		KerConstStatic->ref_coords_const[i].z = myligand_reference->atom_idxyzq[i][3];
+	}
+
+
+	//rotatable bond vectors
+	for (i=0; i < myligand_reference->num_of_rotbonds; i++) {
+		KerConstStatic->rotbonds_moving_vectors_const[i].x = myligand_reference->rotbonds_moving_vectors[i][0];
+		KerConstStatic->rotbonds_moving_vectors_const[i].y = myligand_reference->rotbonds_moving_vectors[i][1];
+		KerConstStatic->rotbonds_moving_vectors_const[i].z = myligand_reference->rotbonds_moving_vectors[i][2];
+
+		KerConstStatic->rotbonds_unit_vectors_const[i].x = myligand_reference->rotbonds_unit_vectors[i][0];
+		KerConstStatic->rotbonds_unit_vectors_const[i].y = myligand_reference->rotbonds_unit_vectors[i][1];
+		KerConstStatic->rotbonds_unit_vectors_const[i].z = myligand_reference->rotbonds_unit_vectors[i][2];
+	}
+
+
+
+
+
+
+
+
 	return 0;
 }
 
@@ -413,6 +442,16 @@ int prepare_constdynamic_fields_for_gpu(Liganddata* 	 	myligand_reference,
 	// ------------------------------
 */
 
+
+
+
+
+
+
+
+
+#if 0
+
 	//coordinates of reference ligand
 	for (i=0; i < myligand_reference->num_of_atoms; i++)
 	{
@@ -445,6 +484,15 @@ int prepare_constdynamic_fields_for_gpu(Liganddata* 	 	myligand_reference,
 		KerConstDynamic->rotbonds_unit_vectors_const[i].y = myligand_reference->rotbonds_unit_vectors[i][1];
 		KerConstDynamic->rotbonds_unit_vectors_const[i].z = myligand_reference->rotbonds_unit_vectors[i][2];
 	}
+
+
+#endif
+
+
+
+
+
+
 
 	//reference orientation quaternions
 //	for (i=0; i<mypars->num_of_runs; i++)
