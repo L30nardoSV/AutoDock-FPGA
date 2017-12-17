@@ -356,6 +356,18 @@ else
 endif
 
 # =============================
+# Fixed-point
+# =============================
+# FIxed-POint COform flag (FIPOCO)
+FIXED_POINT_CONFORM=YES
+
+ifeq ($(FIXED_POINT_CONFORM), YES)
+	FIPOCO_FLAG=-DFIXED_POINT_CONFORM
+else	
+	FIPOCO_FLAG=
+endif
+
+# =============================
 
 # Make it all!
 all : $(TARGET_DIR)/$(TARGET)
@@ -373,7 +385,7 @@ $(TARGET_DIR)/$(TARGET) : Makefile $(SRCS) $(INCS) $(TARGET_DIR)
 			$(AOCL_COMPILE_CONFIG) $(SRCS) $(AOCL_LINK_CONFIG) \
 			$(foreach D,$(LIB_DIRS),-L$D) \
 			$(foreach L,$(LIBS),-l$L) \
-			-o $(TARGET_DIR)/$(TARGET) $(DOCK_DEBUG_FLAG) $(DEV) $(DOCK_PROG) $(ENABLE_KERNELS) $(REP)
+			-o $(TARGET_DIR)/$(TARGET) $(DOCK_DEBUG_FLAG) $(DEV) $(DOCK_PROG) $(ENABLE_KERNELS) $(REP) $(FIPOCO_FLAG)
 	@echo " "
 	@echo "================================"
 	@echo "INFO: host binary is under: bin/"
@@ -410,7 +422,7 @@ BOARD    := Proc10A_X115
 	# $(KRNL_NAME).aoco
 	# $(KRNL_NAME).aocx
 keremu: $(DEV_SRC)
-	aoc -march=emulator -v --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR)/$(KRNL_NAME).aocx $(REP)
+	aoc -march=emulator -v --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR)/$(KRNL_NAME).aocx $(REP) $(FIPOCO_FLAG) -g
 	@echo " "
 	@echo "==============================================================="
 	@echo "INFO: emulation files are under: bin/$(KRNL_NAME)(.aoco)(.aocx)"
@@ -438,7 +450,7 @@ emu: $(TARGET_DIR)/$(TARGET) keremu
 	# $(KRNL_NAME).aoco
 	# No actual hardware is built (NO .aocx)
 kerrpt: $(DEV_SRC)
-	aoc --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR)/$(KRNL_NAME).aoco $(REP) -c --report -g
+	aoc --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR)/$(KRNL_NAME).aoco $(REP) $(FIPOCO_FLAG) -c --report -g
 	@echo " "
 	@echo "=================================================================="
 	@echo "INFO: report files are under: bin/$(KRNL_NAME)/reports/report.html"
@@ -452,15 +464,15 @@ kerrpt: $(DEV_SRC)
 	# $(KRNL_NAME).aoco
 	# $(KRNL_NAME).aocx
 hw: 	
-	aoc --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW)/$(KRNL_NAME).aocx
+	aoc --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW)/$(KRNL_NAME).aocx $(FIPOCO_FLAG)
 	@echo " "
 	@echo "================================================================"
 	@echo "INFO: FPGA bitstream is under: bin_hw/$(KRNL_NAME)(.aoco)(.aocx)"
 	@echo "================================================================"
 	@echo " "
 
-hw-higheffort:
-	aoc --high-effort --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW)/$(KRNL_NAME).aocx
+hw-he:
+	aoc --high-effort --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW)/$(KRNL_NAME).aocx $(FIPOCO_FLAG)
 	@echo " "
 	@echo "================================================================"
 	@echo "INFO: FPGA bitstream is under: bin_hw/$(KRNL_NAME)(.aoco)(.aocx)"
@@ -474,7 +486,7 @@ hw-higheffort:
 	# $(KRNL_NAME).aoco
 	# $(KRNL_NAME).aocx
 hw-prof:
-	aoc --profile --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW_PROF)/$(KRNL_NAME).aocx
+	aoc --profile --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW_PROF)/$(KRNL_NAME).aocx $(FIPOCO_FLAG)
 	@echo " "
 	@echo "====================================================================================="
 	@echo "INFO: instrumented FPGA bitstream is under: bin_hw_profile/$(KRNL_NAME)(.aoco)(.aocx)"
@@ -556,7 +568,13 @@ $(TARGET_DIR) :
 	
 # Standard make targets
 clean :
-	$(ECHO)rm -f $(TARGET_DIR)/$(TARGET)
-	$(ECHO)rm -f $(TARGET_DIR)/initpop.txt
+	$(ECHO)rm -f  $(TARGET_DIR)/$(TARGET)
+	$(ECHO)rm -rf $(TARGET_DIR)/$(KRNL_NAME)
+	$(ECHO)rm -f  $(TARGET_DIR)/$(KRNL_NAME).aocx
+	$(ECHO)rm -f  $(TARGET_DIR)/$(KRNL_NAME).aoco
+	$(ECHO)rm -f  $(TARGET_DIR)/initpop.txt
+	$(ECHO)rm -f  $(TARGET_DIR)/docking.*
+	$(ECHO)rm -f  $(TARGET_DIR)/final_population_*
+	@echo " "
 
 .PHONY : all clean

@@ -496,10 +496,19 @@ filled with clock() */
 	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES*sizeof(float), &mem_KerConstStatic_VWpars_BD_const);
 	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ATYPES*sizeof(float), 			&mem_KerConstStatic_dspars_S_const);
 	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ATYPES*sizeof(float), 			&mem_KerConstStatic_dspars_V_const);
+	#if defined (FIXED_POINT_CONFORM)
+	// fixed-point
+	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ROTATIONS*sizeof(fixedpt), 		&mem_KerConstStatic_rotlist_const);
+	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ATOMS*sizeof(cl_int3), 		        &mem_KerConstStatic_ref_coords_const);
+	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ROTBONDS*sizeof(cl_int3), 		&mem_KerConstStatic_rotbonds_moving_vectors_const);
+	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ROTBONDS*sizeof(cl_int3), 		&mem_KerConstStatic_rotbonds_unit_vectors_const);
+	#else
+	// floating-point (original)
 	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ROTATIONS*sizeof(int), 			&mem_KerConstStatic_rotlist_const);
 	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ATOMS*sizeof(cl_float3), 		&mem_KerConstStatic_ref_coords_const);
 	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ROTBONDS*sizeof(cl_float3), 		&mem_KerConstStatic_rotbonds_moving_vectors_const);
 	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ROTBONDS*sizeof(cl_float3), 		&mem_KerConstStatic_rotbonds_unit_vectors_const);
+	#endif
 
 	mallocBufferObject(context,CL_MEM_READ_ONLY,size_floatgrids,   		&mem_dockpars_fgrids);
 	mallocBufferObject(context,CL_MEM_READ_WRITE,size_populations,  	&mem_dockpars_conformations_current);
@@ -516,10 +525,19 @@ filled with clock() */
 	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_VWpars_BD_const,               &KerConstStatic.VWpars_BD_const[0],               MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES*sizeof(float));
 	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_dspars_S_const,                &KerConstStatic.dspars_S_const[0], 	       MAX_NUM_OF_ATYPES*sizeof(float));
 	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_dspars_V_const,                &KerConstStatic.dspars_V_const[0], 	       MAX_NUM_OF_ATYPES*sizeof(float));
+	#if defined (FIXED_POINT_CONFORM)
+	// fixed-point
+	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_rotlist_const,                 &KerConstStatic.rotlist_const[0], 		       MAX_NUM_OF_ROTATIONS*sizeof(fixedpt));
+	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_ref_coords_const, 	     &KerConstStatic.ref_coords_const[0],              MAX_NUM_OF_ATOMS*sizeof(cl_int3));
+	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_rotbonds_moving_vectors_const, &KerConstStatic.rotbonds_moving_vectors_const[0], MAX_NUM_OF_ROTBONDS*sizeof(cl_int3));
+	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_rotbonds_unit_vectors_const,   &KerConstStatic.rotbonds_unit_vectors_const[0],   MAX_NUM_OF_ROTBONDS*sizeof(cl_int3));
+	#else
+	// floating-point (original)
 	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_rotlist_const,                 &KerConstStatic.rotlist_const[0], 		       MAX_NUM_OF_ROTATIONS*sizeof(int));
 	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_ref_coords_const, 	     &KerConstStatic.ref_coords_const[0],              MAX_NUM_OF_ATOMS*sizeof(cl_float3));
 	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_rotbonds_moving_vectors_const, &KerConstStatic.rotbonds_moving_vectors_const[0], MAX_NUM_OF_ROTBONDS*sizeof(cl_float3));
 	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_rotbonds_unit_vectors_const,   &KerConstStatic.rotbonds_unit_vectors_const[0],   MAX_NUM_OF_ROTBONDS*sizeof(cl_float3));
+	#endif
 
 	memcopyBufferObjectToDevice(command_queue1,mem_dockpars_fgrids, 	cpu_floatgrids,       size_floatgrids);
 
@@ -540,7 +558,7 @@ filled with clock() */
 	setKernelArg(kernel1,11, sizeof(float),                                 &two_absmaxdang);
 	setKernelArg(kernel1,12, sizeof(float),                          	&dockpars.crossover_rate);
 	setKernelArg(kernel1,13, sizeof(unsigned int),                          &dockpars.num_of_lsentities);
-	setKernelArg(kernel1,14, sizeof(unsigned int),                          &dockpars.num_of_genes);
+	setKernelArg(kernel1,14, sizeof(unsigned char),                         &dockpars.num_of_genes);
 #endif // End of ENABLE_KERNEL1
 
 #ifdef ENABLE_KERNEL2 // Krnl_Conform
@@ -548,15 +566,24 @@ filled with clock() */
 	setKernelArg(kernel2,1,  sizeof(mem_KerConstStatic_ref_coords_const),              &mem_KerConstStatic_ref_coords_const);
 	setKernelArg(kernel2,2,  sizeof(mem_KerConstStatic_rotbonds_moving_vectors_const), &mem_KerConstStatic_rotbonds_moving_vectors_const);
 	setKernelArg(kernel2,3,  sizeof(mem_KerConstStatic_rotbonds_unit_vectors_const),   &mem_KerConstStatic_rotbonds_unit_vectors_const);
-
 	setKernelArg(kernel2,4,  sizeof(unsigned int),       &dockpars.rotbondlist_length);
 	setKernelArg(kernel2,5,  sizeof(unsigned char),      &dockpars.num_of_atoms);
-	setKernelArg(kernel2,6,  sizeof(unsigned int),       &dockpars.num_of_genes);
+	setKernelArg(kernel2,6,  sizeof(unsigned char),      &dockpars.num_of_genes);
 	setKernelArg(kernel2,7,  sizeof(unsigned char),      &num_rotbonds);
+
+	#if defined (FIXED_POINT_CONFORM)
+	// fixed-point
+	setKernelArg(kernel2,8,  sizeof(fixedpt),            &KerConstDynamic.ref_orientation_quats_const[0]);
+	setKernelArg(kernel2,9,  sizeof(fixedpt),            &KerConstDynamic.ref_orientation_quats_const[1]);
+	setKernelArg(kernel2,10, sizeof(fixedpt),            &KerConstDynamic.ref_orientation_quats_const[2]);
+	setKernelArg(kernel2,11, sizeof(fixedpt),            &KerConstDynamic.ref_orientation_quats_const[3]);
+	#else
+	// floating-point (original)
 	setKernelArg(kernel2,8,  sizeof(float),              &KerConstDynamic.ref_orientation_quats_const[0]);
 	setKernelArg(kernel2,9,  sizeof(float),              &KerConstDynamic.ref_orientation_quats_const[1]);
 	setKernelArg(kernel2,10, sizeof(float),              &KerConstDynamic.ref_orientation_quats_const[2]);
 	setKernelArg(kernel2,11, sizeof(float),              &KerConstDynamic.ref_orientation_quats_const[3]);
+	#endif
 #endif // End of ENABLE_KERNEL2
 
 
@@ -599,12 +626,12 @@ filled with clock() */
 #endif // End of ENABLE_KERNEL4
 
 #ifdef ENABLE_KERNEL6 // Krnl_PRNG_GG_float
-	setKernelArg(kernel6,1, sizeof(unsigned int),  &dockpars.num_of_genes);
+	setKernelArg(kernel6,1, sizeof(unsigned char),  &dockpars.num_of_genes);
 #endif // End of ENABLE_KERNEL6
 
 
 #ifdef ENABLE_KERNEL7 // Krnl_PRNG_float
-	setKernelArg(kernel7,1, sizeof(unsigned int),  &dockpars.num_of_genes);
+	setKernelArg(kernel7,1, sizeof(unsigned char),  &dockpars.num_of_genes);
 #endif // End of ENABLE_KERNEL7
 
 #ifdef ENABLE_KERNEL8 // Krnl_PRNG_ushort
@@ -616,7 +643,7 @@ filled with clock() */
 #endif // End of ENABLE_KERNEL9
 
 #ifdef ENABLE_KERNEL10 // Krnl_PRNG_uchar
-	setKernelArg(kernel10,1, sizeof(unsigned int),  &dockpars.num_of_genes);
+	setKernelArg(kernel10,1, sizeof(unsigned char),  &dockpars.num_of_genes);
 #endif // End of ENABLE_KERNEL10
 
 // Kernel 11 has no args
@@ -625,30 +652,30 @@ filled with clock() */
 	setKernelArg(kernel12,0, sizeof(unsigned int),  &dockpars.max_num_of_iters);
 	setKernelArg(kernel12,1, sizeof(float),  	&dockpars.rho_lower_bound);
 	setKernelArg(kernel12,2, sizeof(float),  	&dockpars.base_dmov_mul_sqrt3);
-	setKernelArg(kernel12,3, sizeof(unsigned int),  &dockpars.num_of_genes);
+	setKernelArg(kernel12,3, sizeof(unsigned char), &dockpars.num_of_genes);
 	setKernelArg(kernel12,4, sizeof(float),  	&dockpars.base_dang_mul_sqrt3);
 	setKernelArg(kernel12,5, sizeof(unsigned int),  &dockpars.cons_limit);
 #endif // End of ENABLE_KERNEL12
 
 #ifdef ENABLE_KERNEL13 // Krnl_LS_Arbiter
-	setKernelArg(kernel13,0, sizeof(unsigned int),  &dockpars.num_of_genes);
+	setKernelArg(kernel13,0, sizeof(unsigned char),  &dockpars.num_of_genes);
 #endif // End of ENABLE_KERNEL12
 
 #ifdef ENABLE_KERNEL14 // Krnl_PRNG_LS2_float
-	setKernelArg(kernel14,1, sizeof(unsigned int),  &dockpars.num_of_genes);
+	setKernelArg(kernel14,1, sizeof(unsigned char),  &dockpars.num_of_genes);
 #endif // End of ENABLE_KERNEL14
 
 #ifdef ENABLE_KERNEL15 // Krnl_LS2
 	setKernelArg(kernel15,0, sizeof(unsigned int),  &dockpars.max_num_of_iters);
 	setKernelArg(kernel15,1, sizeof(float),  	&dockpars.rho_lower_bound);
 	setKernelArg(kernel15,2, sizeof(float),  	&dockpars.base_dmov_mul_sqrt3);
-	setKernelArg(kernel15,3, sizeof(unsigned int),  &dockpars.num_of_genes);
+	setKernelArg(kernel15,3, sizeof(unsigned char), &dockpars.num_of_genes);
 	setKernelArg(kernel15,4, sizeof(float),  	&dockpars.base_dang_mul_sqrt3);
 	setKernelArg(kernel15,5, sizeof(unsigned int),  &dockpars.cons_limit);
 #endif // End of ENABLE_KERNEL15
 
 #ifdef ENABLE_KERNEL16 // Krnl_LS2_Arbiter
-	setKernelArg(kernel16,0, sizeof(unsigned int),  &dockpars.num_of_genes);
+	setKernelArg(kernel16,0, sizeof(unsigned char),  &dockpars.num_of_genes);
 #endif // End of ENABLE_KERNEL12
 
 #ifdef ENABLE_KERNEL17 // Krnl_Conform2
@@ -658,12 +685,19 @@ filled with clock() */
 	setKernelArg(kernel17,3,  sizeof(mem_KerConstStatic_rotbonds_unit_vectors_const),   &mem_KerConstStatic_rotbonds_unit_vectors_const);
 	setKernelArg(kernel17,4,  sizeof(unsigned int),       &dockpars.rotbondlist_length);
 	setKernelArg(kernel17,5,  sizeof(unsigned char),      &dockpars.num_of_atoms);
-	setKernelArg(kernel17,6,  sizeof(unsigned int),       &dockpars.num_of_genes);
+	setKernelArg(kernel17,6,  sizeof(unsigned char),      &dockpars.num_of_genes);
+/*
 	setKernelArg(kernel17,7,  sizeof(float),              &KerConstDynamic.ref_orientation_quats_const[0]);
 	setKernelArg(kernel17,8,  sizeof(float),              &KerConstDynamic.ref_orientation_quats_const[1]);
 	setKernelArg(kernel17,9,  sizeof(float),              &KerConstDynamic.ref_orientation_quats_const[2]);
 	setKernelArg(kernel17,10, sizeof(float),              &KerConstDynamic.ref_orientation_quats_const[3]);
-#endif // End of ENABLE_KERNEL2
+*/
+	// fixed-point
+	setKernelArg(kernel17,7,  sizeof(fixedpt),            &KerConstDynamic.ref_orientation_quats_const[0]);
+	setKernelArg(kernel17,8,  sizeof(fixedpt),            &KerConstDynamic.ref_orientation_quats_const[1]);
+	setKernelArg(kernel17,9,  sizeof(fixedpt),            &KerConstDynamic.ref_orientation_quats_const[2]);
+	setKernelArg(kernel17,10, sizeof(fixedpt),            &KerConstDynamic.ref_orientation_quats_const[3]);
+#endif // End of ENABLE_KERNEL17
 
 #ifdef ENABLE_KERNEL18 // Krnl_InterE2
         setKernelArg(kernel18,0,  sizeof(mem_dockpars_fgrids),                    &mem_dockpars_fgrids);
@@ -699,28 +733,28 @@ filled with clock() */
 #endif // End of ENABLE_KERNEL19
 
 #ifdef ENABLE_KERNEL20 // Krnl_PRNG_LS3_float
-	setKernelArg(kernel20,1, sizeof(unsigned int),  &dockpars.num_of_genes);
+	setKernelArg(kernel20,1, sizeof(unsigned char),  &dockpars.num_of_genes);
 #endif // End of ENABLE_KERNEL20
 
 #ifdef ENABLE_KERNEL21 // Krnl_LS3
 	setKernelArg(kernel21,0, sizeof(unsigned int),  &dockpars.max_num_of_iters);
 	setKernelArg(kernel21,1, sizeof(float),  	&dockpars.rho_lower_bound);
 	setKernelArg(kernel21,2, sizeof(float),  	&dockpars.base_dmov_mul_sqrt3);
-	setKernelArg(kernel21,3, sizeof(unsigned int),  &dockpars.num_of_genes);
+	setKernelArg(kernel21,3, sizeof(unsigned char), &dockpars.num_of_genes);
 	setKernelArg(kernel21,4, sizeof(float),  	&dockpars.base_dang_mul_sqrt3);
 	setKernelArg(kernel21,5, sizeof(unsigned int),  &dockpars.cons_limit);
 #endif // End of ENABLE_KERNEL21
 
 #ifdef ENABLE_KERNEL22 // Krnl_LS3_Arbiter
-	setKernelArg(kernel22,0, sizeof(unsigned int),  &dockpars.num_of_genes);
+	setKernelArg(kernel22,0, sizeof(unsigned char),  &dockpars.num_of_genes);
 #endif // End of ENABLE_KERNEL22
 
 #ifdef ENABLE_KERNEL23 // Krnl_Conf_Arbiter
-	setKernelArg(kernel23,0, sizeof(unsigned int),  &dockpars.num_of_genes);
+	setKernelArg(kernel23,0, sizeof(unsigned char),  &dockpars.num_of_genes);
 #endif // End of ENABLE_KERNEL23
 
 #ifdef ENABLE_KERNEL24 // Krnl_Conf_Arbiter2
-	setKernelArg(kernel24,0, sizeof(unsigned int),  &dockpars.num_of_genes);
+	setKernelArg(kernel24,0, sizeof(unsigned char),  &dockpars.num_of_genes);
 #endif // End of ENABLE_KERNEL24
 
 #ifdef ENABLE_KERNEL25 // Krnl_PRNG_LS2_ushort
@@ -732,7 +766,7 @@ filled with clock() */
 #endif // End of ENABLE_KERNEL26
 
 #ifdef ENABLE_KERNEL27 // Krnl_IGL_Arbiter
-	setKernelArg(kernel27,0, sizeof(unsigned int),  &dockpars.num_of_genes);
+	setKernelArg(kernel27,0, sizeof(unsigned char),  &dockpars.num_of_genes);
 #endif // End of ENABLE_KERNEL27
 
 	for (unsigned int run_cnt = 0; run_cnt < mypars->num_of_runs; run_cnt++)
@@ -783,10 +817,18 @@ filled with clock() */
  		memcopyBufferObjectToDevice(command_queue1,mem_dockpars_conformations_current, 	cpu_init_populations, size_populations);
 
 #ifdef ENABLE_KERNEL2 // Krnl_Conform
+		#if defined (FIXED_POINT_CONFORM)
+		// fixed-point
+		setKernelArg(kernel2,8,  sizeof(fixedpt),        &KerConstDynamic.ref_orientation_quats_const[0]);
+		setKernelArg(kernel2,9,  sizeof(fixedpt),        &KerConstDynamic.ref_orientation_quats_const[1]);	
+		setKernelArg(kernel2,10, sizeof(fixedpt),        &KerConstDynamic.ref_orientation_quats_const[2]);	
+		setKernelArg(kernel2,11, sizeof(fixedpt),        &KerConstDynamic.ref_orientation_quats_const[3]);
+		#else
 		setKernelArg(kernel2,8,  sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[0]);
 		setKernelArg(kernel2,9,  sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[1]);	
 		setKernelArg(kernel2,10, sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[2]);	
 		setKernelArg(kernel2,11, sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[3]);
+		#endif
 #endif // End of ENABLE_KERNEL2
 
 
@@ -827,10 +869,17 @@ filled with clock() */
 #endif // End of ENABLE_KERNEL7
 
 #ifdef ENABLE_KERNEL17 // Krnl_Conform2
+/*
 		setKernelArg(kernel17,7,  sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[0]);
 		setKernelArg(kernel17,8,  sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[1]);	
 		setKernelArg(kernel17,9,  sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[2]);	
 		setKernelArg(kernel17,10, sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[3]);
+*/
+		// fixed-point
+		setKernelArg(kernel17,7,  sizeof(fixedpt),        &KerConstDynamic.ref_orientation_quats_const[0]);
+		setKernelArg(kernel17,8,  sizeof(fixedpt),        &KerConstDynamic.ref_orientation_quats_const[1]);	
+		setKernelArg(kernel17,9,  sizeof(fixedpt),        &KerConstDynamic.ref_orientation_quats_const[2]);	
+		setKernelArg(kernel17,10, sizeof(fixedpt),        &KerConstDynamic.ref_orientation_quats_const[3]);
 #endif // End of ENABLE_KERNEL2
 
 #ifdef ENABLE_KERNEL20 // Krnl_PRNG_LS3_float

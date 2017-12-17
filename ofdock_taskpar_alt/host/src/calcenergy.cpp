@@ -260,7 +260,7 @@ int prepare_conststatic_fields_for_gpu(Liganddata* 	       myligand_reference,
 	char* charpoi;
 	//float phi, theta, genrotangle;
 
-	// ------------------------------
+	// arrays to store intermmediate data
 	float atom_charges[MAX_NUM_OF_ATOMS];
 	char  atom_types[MAX_NUM_OF_ATOMS];
 	char  intraE_contributors[3*MAX_INTRAE_CONTRIBUTORS];
@@ -269,7 +269,6 @@ int prepare_conststatic_fields_for_gpu(Liganddata* 	       myligand_reference,
 	float dspars_S[MAX_NUM_OF_ATYPES];
 	float dspars_V[MAX_NUM_OF_ATYPES];
 	int   rotlist[MAX_NUM_OF_ROTATIONS];
-	// ------------------------------
 
 	//charges and type id-s
 	floatpoi = atom_charges;
@@ -365,28 +364,44 @@ int prepare_conststatic_fields_for_gpu(Liganddata* 	       myligand_reference,
 	}
 
 	int m;
-	for (m=0;m<MAX_NUM_OF_ATOMS;m++){ KerConstStatic->atom_charges_const[m] = atom_charges[m]; }
-	for (m=0;m<MAX_NUM_OF_ATOMS;m++){ KerConstStatic->atom_types_const[m]   = atom_types[m]; }
-	for (m=0;m<3*MAX_INTRAE_CONTRIBUTORS;m++){ KerConstStatic->intraE_contributors_const[m]   = intraE_contributors[m]; }
-	for (m=0;m<MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES;m++){ KerConstStatic->VWpars_AC_const[m]   = VWpars_AC[m]; }
-	for (m=0;m<MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES;m++){ KerConstStatic->VWpars_BD_const[m]   = VWpars_BD[m]; }
-	for (m=0;m<MAX_NUM_OF_ATYPES;m++)		   { KerConstStatic->dspars_S_const[m]    = dspars_S[m]; }
-	for (m=0;m<MAX_NUM_OF_ATYPES;m++)		   { KerConstStatic->dspars_V_const[m]    = dspars_V[m]; }
-	for (m=0;m<MAX_NUM_OF_ROTATIONS;m++)		   { KerConstStatic->rotlist_const[m]     = rotlist[m]; }
-
-
+	for (m=0;m<MAX_NUM_OF_ATOMS;m++)                   { KerConstStatic->atom_charges_const[m] = atom_charges[m]; }
+	for (m=0;m<MAX_NUM_OF_ATOMS;m++)                   { KerConstStatic->atom_types_const[m]   = atom_types[m];   }
+	for (m=0;m<3*MAX_INTRAE_CONTRIBUTORS;m++)          { KerConstStatic->intraE_contributors_const[m]   = intraE_contributors[m]; }
+	for (m=0;m<MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES;m++){ KerConstStatic->VWpars_AC_const[m]    = VWpars_AC[m];    }
+	for (m=0;m<MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES;m++){ KerConstStatic->VWpars_BD_const[m]    = VWpars_BD[m];    }
+	for (m=0;m<MAX_NUM_OF_ATYPES;m++)		   { KerConstStatic->dspars_S_const[m]     = dspars_S[m];     }
+	for (m=0;m<MAX_NUM_OF_ATYPES;m++)		   { KerConstStatic->dspars_V_const[m]     = dspars_V[m];     }
+	for (m=0;m<MAX_NUM_OF_ROTATIONS;m++)		   { KerConstStatic->rotlist_const[m]      = rotlist[m];      }
 
 	//coordinates of reference ligand
-	for (i=0; i < myligand_reference->num_of_atoms; i++)
-	{
+	for (i=0; i < myligand_reference->num_of_atoms; i++) {
+		#if defined (FIXED_POINT_CONFORM)
+		// fixed-point
+		KerConstStatic->ref_coords_const[i].x = fixedpt_fromfloat(myligand_reference->atom_idxyzq[i][1]);
+		KerConstStatic->ref_coords_const[i].y = fixedpt_fromfloat(myligand_reference->atom_idxyzq[i][2]);
+		KerConstStatic->ref_coords_const[i].z = fixedpt_fromfloat(myligand_reference->atom_idxyzq[i][3]);
+		#else
+		// floating-point (original)
 		KerConstStatic->ref_coords_const[i].x = myligand_reference->atom_idxyzq[i][1];
 		KerConstStatic->ref_coords_const[i].y = myligand_reference->atom_idxyzq[i][2];
 		KerConstStatic->ref_coords_const[i].z = myligand_reference->atom_idxyzq[i][3];
+		#endif
 	}
 
 
 	//rotatable bond vectors
 	for (i=0; i < myligand_reference->num_of_rotbonds; i++) {
+		#if defined (FIXED_POINT_CONFORM)
+		// fixed-point
+		KerConstStatic->rotbonds_moving_vectors_const[i].x = fixedpt_fromfloat(myligand_reference->rotbonds_moving_vectors[i][0]);
+		KerConstStatic->rotbonds_moving_vectors_const[i].y = fixedpt_fromfloat(myligand_reference->rotbonds_moving_vectors[i][1]);
+		KerConstStatic->rotbonds_moving_vectors_const[i].z = fixedpt_fromfloat(myligand_reference->rotbonds_moving_vectors[i][2]);
+
+		KerConstStatic->rotbonds_unit_vectors_const[i].x = fixedpt_fromfloat(myligand_reference->rotbonds_unit_vectors[i][0]);
+		KerConstStatic->rotbonds_unit_vectors_const[i].y = fixedpt_fromfloat(myligand_reference->rotbonds_unit_vectors[i][1]);
+		KerConstStatic->rotbonds_unit_vectors_const[i].z = fixedpt_fromfloat(myligand_reference->rotbonds_unit_vectors[i][2]);
+		#else
+		// floating-point (original)
 		KerConstStatic->rotbonds_moving_vectors_const[i].x = myligand_reference->rotbonds_moving_vectors[i][0];
 		KerConstStatic->rotbonds_moving_vectors_const[i].y = myligand_reference->rotbonds_moving_vectors[i][1];
 		KerConstStatic->rotbonds_moving_vectors_const[i].z = myligand_reference->rotbonds_moving_vectors[i][2];
@@ -394,14 +409,8 @@ int prepare_conststatic_fields_for_gpu(Liganddata* 	       myligand_reference,
 		KerConstStatic->rotbonds_unit_vectors_const[i].x = myligand_reference->rotbonds_unit_vectors[i][0];
 		KerConstStatic->rotbonds_unit_vectors_const[i].y = myligand_reference->rotbonds_unit_vectors[i][1];
 		KerConstStatic->rotbonds_unit_vectors_const[i].z = myligand_reference->rotbonds_unit_vectors[i][2];
+		#endif
 	}
-
-
-
-
-
-
-
 
 	return 0;
 }
@@ -520,10 +529,27 @@ int prepare_constdynamic_fields_for_gpu(Liganddata* 	 	myligand_reference,
 	ref_orientation_quats[3] = sinf(genrotangle/2.0f)*cosf(theta);			//z
 */
 
+
+
+
+
+	#if defined (FIXED_POINT_CONFORM)
+	// fixed-point
+	KerConstDynamic->ref_orientation_quats_const[0] = fixedpt_fromfloat(cosf(genrotangle/2.0f));				//q
+	KerConstDynamic->ref_orientation_quats_const[1] = fixedpt_fromfloat(sinf(genrotangle/2.0f)*sinf(theta)*cosf(phi));	//x
+	KerConstDynamic->ref_orientation_quats_const[2] = fixedpt_fromfloat(sinf(genrotangle/2.0f)*sinf(theta)*sinf(phi));	//y
+	KerConstDynamic->ref_orientation_quats_const[3] = fixedpt_fromfloat(sinf(genrotangle/2.0f)*cosf(theta)); 		//z
+	#else
+	// floating-point (original)
 	KerConstDynamic->ref_orientation_quats_const[0] = cosf(genrotangle/2.0f);			//q
 	KerConstDynamic->ref_orientation_quats_const[1] = sinf(genrotangle/2.0f)*sinf(theta)*cosf(phi);	//x
 	KerConstDynamic->ref_orientation_quats_const[2] = sinf(genrotangle/2.0f)*sinf(theta)*sinf(phi);	//y
 	KerConstDynamic->ref_orientation_quats_const[3] = sinf(genrotangle/2.0f)*cosf(theta);		//z
+	#endif
+
+
+
+
 
 /*
 	int m;

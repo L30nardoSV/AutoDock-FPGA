@@ -22,9 +22,6 @@ void Krnl_InterE(
 			    unsigned char                    DockConst_gridsize_x_minus1,
 			    unsigned char                    DockConst_gridsize_y_minus1,
 			    unsigned char                    DockConst_gridsize_z_minus1,
-			    /*
-			    unsigned char                    DockConst_num_of_atypes
-			    */
 			    unsigned int                     Host_mul_tmp2,
 			    unsigned int                     Host_mul_tmp3
 )

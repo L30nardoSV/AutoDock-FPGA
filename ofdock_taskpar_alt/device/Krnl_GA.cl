@@ -141,7 +141,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			    float                     Host_two_absmaxdang,
 			    float                     DockConst_crossover_rate,
 			    unsigned int              DockConst_num_of_lsentities,
-			    unsigned int              DockConst_num_of_genes)
+			    unsigned char             DockConst_num_of_genes)
 {
 	#if defined (DEBUG_KRNL_GA)
 	printf("\n");
@@ -542,17 +542,8 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 #include "Krnl_LS2.cl"
 #include "Krnl_LS3.cl"
 
-/*
-	#include "Krnl_Conf_Arbiter.cl"
-	#include "Krnl_Conf_Arbiter2.cl"
-*/
 #include "Krnl_IGL_Arbiter.cl"
-
 #include "Krnl_Conform.cl"
 #include "Krnl_InterE.cl"
 #include "Krnl_IntraE.cl"
-/*
-	#include "Krnl_Conform2.cl"
-	#include "Krnl_InterE2.cl"
-	#include "Krnl_IntraE2.cl"
-*/
+

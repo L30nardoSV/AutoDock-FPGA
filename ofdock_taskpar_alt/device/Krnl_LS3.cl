@@ -7,7 +7,7 @@ channel bool chan_LS2Arbiter_LS3_end;
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------
 __kernel __attribute__ ((max_global_work_dim(0)))
-void Krnl_LS3_Arbiter(const unsigned int DockConst_num_of_genes){
+void Krnl_LS3_Arbiter(unsigned char DockConst_num_of_genes){
 
 	bool active = true;
 
@@ -24,23 +24,6 @@ while(active) {
 		LS3_active = read_channel_nb_altera(chan_GA2LS_LS3_active, &LS3_valid);
 		Off_active = read_channel_nb_altera(chan_GA2LS_Off3_active, &Off_valid);
 	}
-
-	/*
-	active = (LS3_valid)? LS3_active : 
-		 (Off_valid)? Off_active :
-		 false; // last case should never occur, otherwise above while would be still running
-
-	float energy =  (LS3_valid)? read_channel_altera(chan_GA2LS_LS3_energy) : 
-
-		 	(Off_valid)? 0.0f :
-		 	0.0f; // last case should never occur, otherwise above while would be still running
-
-	for (uchar i=0; i<DockConst_num_of_genes; i++) {
-		genotype[i] = (LS3_valid)? read_channel_altera(chan_GA2LS_LS3_genotype) : 
-			      (Off_valid)? 0.0f :
-		 	      0.0f; // last case should never occur, otherwise above while would be still running
-	}
-	*/
 
 	for (uchar i=0; i<DockConst_num_of_genes; i++) {
 		if (i == 0) {
@@ -75,7 +58,7 @@ void Krnl_LS3(
 		unsigned int              DockConst_max_num_of_iters,
 		float                     DockConst_rho_lower_bound,
 		float                     DockConst_base_dmov_mul_sqrt3,
-		unsigned int              DockConst_num_of_genes,
+		unsigned char             DockConst_num_of_genes,
    		float                     DockConst_base_dang_mul_sqrt3,
 		unsigned int              DockConst_cons_limit
 )
@@ -98,15 +81,6 @@ while(active) {
 	for (uchar i=0; i<DockConst_num_of_genes; i++) {
 		genotype[i] = read_channel_altera(chan_Arbiter_LS3_genotype);
 	}
-
-/*
-	float rho = 1.0f;
-	ushort iteration_cnt = 0;
-	uchar  cons_succ     = 0;
-	uchar  cons_fail     = 0;
-	uint   LS_eval       = 0;
-	bool   positive_direction = true;
-*/
 
 if (active == true) {
 	

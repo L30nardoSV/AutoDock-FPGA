@@ -101,6 +101,7 @@ typedef struct
 */
 
 #include "CL/opencl.h"
+#include "defines_fixedpt.h"
 
 // As struct members are used as host buffers
 // they are aligned to multiples of 64 bytes (power of 2).
@@ -108,18 +109,27 @@ typedef struct
 
 typedef struct
 {
-       float atom_charges_const[MAX_NUM_OF_ATOMS] __attribute__ ((aligned (512)));
-       char  atom_types_const  [MAX_NUM_OF_ATOMS] __attribute__ ((aligned (128)));
-       char  intraE_contributors_const[3*MAX_INTRAE_CONTRIBUTORS] __attribute__ ((aligned (32768)));
-       float VWpars_AC_const   [MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES] __attribute__ ((aligned (1024)));
-       float VWpars_BD_const   [MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES] __attribute__ ((aligned (1024)));
-       float dspars_S_const    [MAX_NUM_OF_ATYPES] __attribute__ ((aligned (64)));
-       float dspars_V_const    [MAX_NUM_OF_ATYPES] __attribute__ ((aligned (64)));
-       int   rotlist_const     [MAX_NUM_OF_ROTATIONS] __attribute__ ((aligned (4096)));
+       	float atom_charges_const[MAX_NUM_OF_ATOMS]                    __attribute__ ((aligned (512)));
+       	char  atom_types_const  [MAX_NUM_OF_ATOMS]                    __attribute__ ((aligned (128)));
+       	char  intraE_contributors_const[3*MAX_INTRAE_CONTRIBUTORS]    __attribute__ ((aligned (32768)));
+       	float VWpars_AC_const   [MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES] __attribute__ ((aligned (1024)));
+       	float VWpars_BD_const   [MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES] __attribute__ ((aligned (1024)));
+      	float dspars_S_const    [MAX_NUM_OF_ATYPES]                   __attribute__ ((aligned (64)));
+       	float dspars_V_const    [MAX_NUM_OF_ATYPES]                   __attribute__ ((aligned (64)));
+       	int   rotlist_const     [MAX_NUM_OF_ROTATIONS]                __attribute__ ((aligned (4096)));
 
-       cl_float3 ref_coords_const[MAX_NUM_OF_ATOMS] __attribute__ ((aligned (2048)));
-       cl_float3 rotbonds_moving_vectors_const[MAX_NUM_OF_ROTBONDS] __attribute__ ((aligned (512)));
-       cl_float3 rotbonds_unit_vectors_const  [MAX_NUM_OF_ROTBONDS] __attribute__ ((aligned (512)));
+	#if defined (FIXED_POINT_CONFORM)
+	// fixed-point
+       	cl_int3 ref_coords_const[MAX_NUM_OF_ATOMS]                   __attribute__ ((aligned (2048)));
+       	cl_int3 rotbonds_moving_vectors_const[MAX_NUM_OF_ROTBONDS]   __attribute__ ((aligned (512)));
+       	cl_int3 rotbonds_unit_vectors_const  [MAX_NUM_OF_ROTBONDS]   __attribute__ ((aligned (512)));
+	#else
+ 	// floating-point (original)
+      	cl_float3 ref_coords_const[MAX_NUM_OF_ATOMS]                 __attribute__ ((aligned (2048)));
+       	cl_float3 rotbonds_moving_vectors_const[MAX_NUM_OF_ROTBONDS] __attribute__ ((aligned (512)));
+       	cl_float3 rotbonds_unit_vectors_const  [MAX_NUM_OF_ROTBONDS] __attribute__ ((aligned (512)));
+	#endif
+
 } kernelconstant_static;
 
 // As struct members are used as host buffers
@@ -129,12 +139,13 @@ typedef struct
 
 typedef struct
 {
-/*
-       cl_float3 ref_coords_const[MAX_NUM_OF_ATOMS] __attribute__ ((aligned (2048)));
-       cl_float3 rotbonds_moving_vectors_const[MAX_NUM_OF_ROTBONDS] __attribute__ ((aligned (512)));
-       cl_float3 rotbonds_unit_vectors_const  [MAX_NUM_OF_ROTBONDS] __attribute__ ((aligned (512)));
-*/
-       float     ref_orientation_quats_const  [4] __attribute__ ((aligned (64)));
+	#if defined (FIXED_POINT_CONFORM)
+	// fixed-point
+      	fixedpt   ref_orientation_quats_const  [4] __attribute__ ((aligned (64)));
+	#else
+	// floating-point (original)
+       	float     ref_orientation_quats_const  [4] __attribute__ ((aligned (64)));
+	#endif
 } kernelconstant_dynamic;
 
 

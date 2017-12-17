@@ -11,12 +11,12 @@ __kernel __attribute__ ((max_global_work_dim(0)))
 void Krnl_Conform(
 	__constant int*                  restrict KerConstStatic_rotlist_const,			// must be formatted in host
 	__constant /*float3**/ fixedpt3* restrict KerConstStatic_ref_coords_const,		// must be formatted in host
-	__constant /*float3**/ fixedpt3* restrict KerConstStatic_rotbonds_moving_vectors_const,// must be formatted in host
+	__constant /*float3**/ fixedpt3* restrict KerConstStatic_rotbonds_moving_vectors_const, // must be formatted in host
 	__constant /*float3**/ fixedpt3* restrict KerConstStatic_rotbonds_unit_vectors_const,	// must be formatted in host
 	    
 			      unsigned int                     DockConst_rotbondlist_length,	// counter, leave it as int
 			      unsigned char                    DockConst_num_of_atoms,		// counter, leave it as int
-			      unsigned int                     DockConst_num_of_genes,		// counter, leave it as int
+			      unsigned char                    DockConst_num_of_genes,		// counter, leave it as int
 			      unsigned char                    Host_num_of_rotbonds,		// counter, leave it as int
 
 			      /*float*/ fixedpt                ref_orientation_quats_const_0,	// must be formatted in host
@@ -44,7 +44,6 @@ void Krnl_Conform(
 
 	bool active = true;
 
-	// local mem to cache KerConstStatic->rotlist_const[], marked as bottleneck by profiler
 	__local int rotlist_localcache [MAX_NUM_OF_ROTATIONS];
 	for (ushort c = 0; c < DockConst_rotbondlist_length; c++) {
 		rotlist_localcache [c] = KerConstStatic_rotlist_const [c];
@@ -69,12 +68,12 @@ while(active) {
 
 	char mode;
 
-	active = read_channel_altera(chan_IGL_active);
+	active = read_channel_altera(/*chan_IGL_active*/ chan_IGL2Conform_active);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 	for (uchar i=0; i<DockConst_num_of_genes; i++) {
 		if (i == 0) {
-			mode = read_channel_altera(chan_IGL_mode);
+			mode = read_channel_altera(/*chan_IGL_mode*/ chan_IGL2Conform_mode);
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 		}
 
@@ -82,7 +81,7 @@ while(active) {
 		/*
 		genotype [i] = read_channel_altera(chan_IGL_genotype);
 		*/
-		float fl_tmp = read_channel_altera(chan_IGL_genotype);
+		float fl_tmp = read_channel_altera(/*chan_IGL_genotype*/ chan_IGL2Conform_genotype);
 		genotype [i] = fixedpt_fromfloat(fl_tmp);
 		
 	}
@@ -169,7 +168,7 @@ while(active) {
 			fixedpt quatrot_left_x, quatrot_left_y, quatrot_left_z, quatrot_left_q;
 			fixedpt quatrot_temp_x, quatrot_temp_y, quatrot_temp_z, quatrot_temp_q;
 
-			//otation_angle = fixedpt_mul(rotation_angle, fixedpt_fromfloat(0.5f));
+			//rotation_angle = fixedpt_mul(rotation_angle, fixedpt_fromfloat(0.5f));
 			rotation_angle = rotation_angle >> 1;
 
 			fixedpt sin_angle, cos_angle;
@@ -192,32 +191,57 @@ while(active) {
 				quatrot_temp_z = quatrot_left_z;
 
 				// L30nardoSV: taking the first element of ref_orientation_quats_const member
-				quatrot_left_q = fixedpt_smul(quatrot_temp_q, ref_orientation_quats_const_0) - fixedpt_smul(quatrot_temp_x, ref_orientation_quats_const_1) -
-						 fixedpt_smul(quatrot_temp_y, ref_orientation_quats_const_2) - fixedpt_smul(quatrot_temp_z, ref_orientation_quats_const_3);
+				quatrot_left_q =   fixedpt_smul(quatrot_temp_q, ref_orientation_quats_const_0) 
+						 - fixedpt_smul(quatrot_temp_x, ref_orientation_quats_const_1) 
+						 - fixedpt_smul(quatrot_temp_y, ref_orientation_quats_const_2) 
+						 - fixedpt_smul(quatrot_temp_z, ref_orientation_quats_const_3);
 
-				quatrot_left_x = fixedpt_smul(quatrot_temp_q, ref_orientation_quats_const_1) + fixedpt_smul(quatrot_temp_x, ref_orientation_quats_const_0) +
-						 fixedpt_smul(quatrot_temp_y, ref_orientation_quats_const_3) - fixedpt_smul(quatrot_temp_z, ref_orientation_quats_const_2);
+				quatrot_left_x =   fixedpt_smul(quatrot_temp_q, ref_orientation_quats_const_1) 
+						 + fixedpt_smul(quatrot_temp_x, ref_orientation_quats_const_0) 
+					         + fixedpt_smul(quatrot_temp_y, ref_orientation_quats_const_3) 
+						 - fixedpt_smul(quatrot_temp_z, ref_orientation_quats_const_2);
 
-				quatrot_left_y = fixedpt_smul(quatrot_temp_q, ref_orientation_quats_const_2) + fixedpt_smul(quatrot_temp_y, ref_orientation_quats_const_0) +
-						 fixedpt_smul(quatrot_temp_z, ref_orientation_quats_const_1) - fixedpt_smul(quatrot_temp_x, ref_orientation_quats_const_3);
+				quatrot_left_y =   fixedpt_smul(quatrot_temp_q, ref_orientation_quats_const_2)
+						 - fixedpt_smul(quatrot_temp_x, ref_orientation_quats_const_3) 
+  						 + fixedpt_smul(quatrot_temp_y, ref_orientation_quats_const_0) 
+						 + fixedpt_smul(quatrot_temp_z, ref_orientation_quats_const_1);
 
-				quatrot_left_z = fixedpt_smul(quatrot_temp_q, ref_orientation_quats_const_3) + fixedpt_smul(quatrot_temp_z, ref_orientation_quats_const_0) +
-						 fixedpt_smul(quatrot_temp_x, ref_orientation_quats_const_2) - fixedpt_smul(quatrot_temp_y, ref_orientation_quats_const_1);
+				quatrot_left_z =   fixedpt_smul(quatrot_temp_q, ref_orientation_quats_const_3)
+						 + fixedpt_smul(quatrot_temp_x, ref_orientation_quats_const_2) 
+						 - fixedpt_smul(quatrot_temp_y, ref_orientation_quats_const_1) 
+						 + fixedpt_smul(quatrot_temp_z, ref_orientation_quats_const_0);
 			}
 
-			quatrot_temp_q = - fixedpt_smul(quatrot_left_x, atom_to_rotate.x) - fixedpt_smul(quatrot_left_y, atom_to_rotate.y)  - fixedpt_smul(quatrot_left_z, atom_to_rotate.z);
+			quatrot_temp_q = - fixedpt_smul(quatrot_left_x, atom_to_rotate.x) 
+					 - fixedpt_smul(quatrot_left_y, atom_to_rotate.y)
+					 - fixedpt_smul(quatrot_left_z, atom_to_rotate.z);
 
-			quatrot_temp_x = fixedpt_smul(quatrot_left_q, atom_to_rotate.x) + fixedpt_smul(quatrot_left_y, atom_to_rotate.z) - fixedpt_smul(quatrot_left_z, atom_to_rotate.y);
+			quatrot_temp_x =   fixedpt_smul(quatrot_left_q, atom_to_rotate.x) 
+					 + fixedpt_smul(quatrot_left_y, atom_to_rotate.z)
+					 - fixedpt_smul(quatrot_left_z, atom_to_rotate.y);
 
-			quatrot_temp_y = fixedpt_smul(quatrot_left_q, atom_to_rotate.y) - fixedpt_smul(quatrot_left_x, atom_to_rotate.z) + fixedpt_smul(quatrot_left_z, atom_to_rotate.x);
+			quatrot_temp_y =   fixedpt_smul(quatrot_left_q, atom_to_rotate.y)
+					 - fixedpt_smul(quatrot_left_x, atom_to_rotate.z)
+					 + fixedpt_smul(quatrot_left_z, atom_to_rotate.x);
 
-			quatrot_temp_z = fixedpt_smul(quatrot_left_q, atom_to_rotate.z) + fixedpt_smul(quatrot_left_x, atom_to_rotate.y) - fixedpt_smul(quatrot_left_y, atom_to_rotate.x);
+			quatrot_temp_z =   fixedpt_smul(quatrot_left_q, atom_to_rotate.z)
+					 + fixedpt_smul(quatrot_left_x, atom_to_rotate.y)
+					 - fixedpt_smul(quatrot_left_y, atom_to_rotate.x);
 
-			atom_to_rotate.x = fixedpt_smul(quatrot_temp_x, quatrot_left_q) - fixedpt_smul(quatrot_temp_q, quatrot_left_x) - fixedpt_smul(quatrot_temp_y, quatrot_left_z) + fixedpt_smul(quatrot_temp_z, quatrot_left_y);
+			atom_to_rotate.x = - fixedpt_smul(quatrot_temp_q, quatrot_left_x)
+					   + fixedpt_smul(quatrot_temp_x, quatrot_left_q)
+					   - fixedpt_smul(quatrot_temp_y, quatrot_left_z)
+					   + fixedpt_smul(quatrot_temp_z, quatrot_left_y);
 
-			atom_to_rotate.y = fixedpt_smul(quatrot_temp_x, quatrot_left_z) + fixedpt_smul(quatrot_temp_y, quatrot_left_q) - fixedpt_smul(quatrot_temp_z, quatrot_left_x) - fixedpt_smul(quatrot_temp_q, quatrot_left_y);
+			atom_to_rotate.y = - fixedpt_smul(quatrot_temp_q, quatrot_left_y)
+					   + fixedpt_smul(quatrot_temp_x, quatrot_left_z)
+					   + fixedpt_smul(quatrot_temp_y, quatrot_left_q)
+					   - fixedpt_smul(quatrot_temp_z, quatrot_left_x);
 
-			atom_to_rotate.z = fixedpt_smul(quatrot_temp_y, quatrot_left_x) - fixedpt_smul(quatrot_temp_x, quatrot_left_y) - fixedpt_smul(quatrot_temp_q, quatrot_left_z) + fixedpt_smul(quatrot_temp_z, quatrot_left_q);
+			atom_to_rotate.z = - fixedpt_smul(quatrot_temp_q, quatrot_left_z)
+					   - fixedpt_smul(quatrot_temp_x, quatrot_left_y)
+					   + fixedpt_smul(quatrot_temp_y, quatrot_left_x)
+					   + fixedpt_smul(quatrot_temp_z, quatrot_left_q);
 
 			//performing final movement and storing values
 			loc_coords[atom_id] = atom_to_rotate + rotation_movingvec;

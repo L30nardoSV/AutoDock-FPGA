@@ -7,7 +7,7 @@ channel bool chan_LS2Arbiter_LS1_end;
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------
 __kernel __attribute__ ((max_global_work_dim(0)))
-void Krnl_LS_Arbiter(const unsigned int DockConst_num_of_genes){
+void Krnl_LS_Arbiter(unsigned char DockConst_num_of_genes){
 
 	bool active = true;
 	
@@ -59,7 +59,7 @@ void Krnl_LS(
 		unsigned int              DockConst_max_num_of_iters,
 		float                     DockConst_rho_lower_bound,
 		float                     DockConst_base_dmov_mul_sqrt3,
-		unsigned int              DockConst_num_of_genes,
+		unsigned char             DockConst_num_of_genes,
    		float                     DockConst_base_dang_mul_sqrt3,
 		unsigned int              DockConst_cons_limit
 )
@@ -83,15 +83,6 @@ while(active) {
 		genotype[i] = read_channel_altera(chan_Arbiter_LS1_genotype);
 	}
 	
-/*
-	float rho = 1.0f;
-	ushort iteration_cnt = 0;
-	uchar  cons_succ     = 0;
-	uchar  cons_fail     = 0;
-	uint   LS_eval       = 0;
-	bool   positive_direction = true;
-*/
-
 if (active == true) {
 
 	float rho = 1.0f;

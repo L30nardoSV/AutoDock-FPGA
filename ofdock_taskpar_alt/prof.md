@@ -104,4 +104,16 @@ freq: 192 MHz (NOT TESTED IN HW)
 
 freq: 195 MHz (NOT TESTED IN HW)
 
+53. `Krnl_PRNG.cl`: cleanup + rename arguments uniformly according to the convention used in other kernels
+54. `performdocking.cpp`,
+    `Krnl_GA`,
+    `PRNG_GG_uchar`, `PRNG_GG_float`, `PRNG_LS_float`, `PRNG_LS2_float`, `PRNG_LS3_float`,
+    `LS_Arbiter`, `LS`, `LS2_Arbiter`, `LS2`, `LS3_Arbiter`, `LS3`,
+    `IGL_Arbiter`, `Conform`
+			: pass data contained in dockpars.num_of_genes as unsigned char (instead of unsignes int, as max size of genotype is 38 genes)
+55. `Makefile`: expand `make clean` + add flag FIXED_POINT_CONFORM 
+56. `Krnl_Conform.cl`   -> replaced by `Krnl_Conform_fixedpt.cl` 
+    `calcenergy.cpp`, `performdocking.cpp`: apply fixed-point 16.16 arithmetic to reduce II=36 in Conform kernels down to II= 15
+57. `Krnl_Conform_fixedpt.cl` -> replaced by `Krnl_Conform.cl`: `Krnl_Conform` containes both fixed and floating point version controlled by FIXED_POINT_CONFORM flag
 
+>>> commit "added conform with pragma fixedpt"

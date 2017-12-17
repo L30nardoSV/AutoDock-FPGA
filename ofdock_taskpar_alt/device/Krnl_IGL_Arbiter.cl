@@ -5,7 +5,7 @@ channel float chan_IGL2Conform_genotype     __attribute__((depth(5*ACTUAL_GENOTY
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------
 __kernel __attribute__ ((max_global_work_dim(0)))
-void Krnl_IGL_Arbiter(unsigned int DockConst_num_of_genes) {
+void Krnl_IGL_Arbiter(unsigned char DockConst_num_of_genes) {
 
 	__local float genotypeIC  [ACTUAL_GENOTYPE_LENGTH]; 
 	__local float genotypeGG  [ACTUAL_GENOTYPE_LENGTH];
