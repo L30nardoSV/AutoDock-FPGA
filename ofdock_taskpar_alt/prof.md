@@ -102,5 +102,6 @@ freq: 192 MHz (NOT TESTED IN HW)
 51. `performdocking.cpp`: calculate prng seeds outside main for-loop
 52. `performdocking.cpp`: cleanup unnecesary comments
 
+freq: 195 MHz (NOT TESTED IN HW)
 
 
