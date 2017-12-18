@@ -46,9 +46,6 @@ void Krnl_IntraE(
 		atom_charges_localcache [i] = KerConstStatic_atom_charges_const [i];
 	}
 
-/*
-	for (uchar i=0; i<DockConst_num_of_atypes*DockConst_num_of_atypes; i++) {
-*/
 	for (uchar i=0; i<Host_square_num_of_atypes; i++) {
 		if (i < DockConst_num_of_atypes) {
 			dspars_S_localcache [i] = KerConstStatic_dspars_S_const [i];
@@ -59,6 +56,16 @@ void Krnl_IntraE(
 		VWpars_BD_localcache [i] = KerConstStatic_VWpars_BD_const [i];
 	}
 
+/*
+	printf("%i\n", fixedpt_toint(681391));
+	printf("%i\n", fixedpt_toint(-772243));
+
+	printf("%li\n", fixedpt64_fromint(18));
+	printf("%li\n", fixedpt64_fromint(-18));
+
+	printf("%f\n", fixedpt64_tofloat(178145));
+	printf("%f\n", fixedpt_tofloat(178145));
+*/
 while(active) {
 	char mode;
 

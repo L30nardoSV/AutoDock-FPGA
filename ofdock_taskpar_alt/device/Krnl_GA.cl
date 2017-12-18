@@ -545,5 +545,9 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 #include "Krnl_IGL_Arbiter.cl"
 #include "Krnl_Conform.cl"
 #include "Krnl_InterE.cl"
-#include "Krnl_IntraE.cl"
 
+#if defined (FIXED_POINT_INTRAE)
+#include "Krnl_IntraE_fixedpt.cl"
+#else
+#include "Krnl_IntraE.cl"
+#endif

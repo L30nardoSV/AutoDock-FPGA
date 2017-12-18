@@ -117,3 +117,14 @@ freq: 195 MHz (NOT TESTED IN HW)
 57. `Krnl_Conform_fixedpt.cl` -> replaced by `Krnl_Conform.cl`: `Krnl_Conform` containes both fixed and floating point version controlled by FIXED_POINT_CONFORM flag
 
 >>> commit "added conform with pragma fixedpt"
+
+58. `Krnl_InterE`: add fixedpt64 support with pragmas
+freq: 184 MHz
+
+59. `Makefile`: add defines_fixedpt headers in make `copy`
+
+>>> commit "added intere with pragma fixedpt64"
+
+planned not done successfully yet
+. `Krnl_IntraE`: add fixedpt64 support with pragmas
+

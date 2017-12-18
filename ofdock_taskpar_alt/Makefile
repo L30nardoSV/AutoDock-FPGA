@@ -360,12 +360,28 @@ endif
 # =============================
 # FIxed-POint COform flag (FIPOCO)
 FIXED_POINT_CONFORM=YES
+FIXED_POINT_INTERE=YES
+FIXED_POINT_INTRAE=NO
 
 ifeq ($(FIXED_POINT_CONFORM), YES)
 	FIPOCO_FLAG=-DFIXED_POINT_CONFORM
 else	
 	FIPOCO_FLAG=
 endif
+
+ifeq ($(FIXED_POINT_INTERE), YES)
+	FIPOIE_FLAG=-DFIXED_POINT_INTERE
+else	
+	FIPOIE_FLAG=
+endif
+
+ifeq ($(FIXED_POINT_INTRAE), YES)
+	FIPOIA_FLAG=-DFIXED_POINT_INTRAE
+else	
+	FIPOIA_FLAG=
+endif
+
+FIPO_FLAG = $(FIPOCO_FLAG) $(FIPOIE_FLAG) $(FIPOIA_FLAG)
 
 # =============================
 
@@ -385,7 +401,7 @@ $(TARGET_DIR)/$(TARGET) : Makefile $(SRCS) $(INCS) $(TARGET_DIR)
 			$(AOCL_COMPILE_CONFIG) $(SRCS) $(AOCL_LINK_CONFIG) \
 			$(foreach D,$(LIB_DIRS),-L$D) \
 			$(foreach L,$(LIBS),-l$L) \
-			-o $(TARGET_DIR)/$(TARGET) $(DOCK_DEBUG_FLAG) $(DEV) $(DOCK_PROG) $(ENABLE_KERNELS) $(REP) $(FIPOCO_FLAG)
+			-o $(TARGET_DIR)/$(TARGET) $(DOCK_DEBUG_FLAG) $(DEV) $(DOCK_PROG) $(ENABLE_KERNELS) $(REP) $(FIPO_FLAG)
 	@echo " "
 	@echo "================================"
 	@echo "INFO: host binary is under: bin/"
@@ -422,7 +438,7 @@ BOARD    := Proc10A_X115
 	# $(KRNL_NAME).aoco
 	# $(KRNL_NAME).aocx
 keremu: $(DEV_SRC)
-	aoc -march=emulator -v --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR)/$(KRNL_NAME).aocx $(REP) $(FIPOCO_FLAG) -g
+	aoc -march=emulator -v --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR)/$(KRNL_NAME).aocx $(REP) $(FIPO_FLAG) -g
 	@echo " "
 	@echo "==============================================================="
 	@echo "INFO: emulation files are under: bin/$(KRNL_NAME)(.aoco)(.aocx)"
@@ -450,7 +466,7 @@ emu: $(TARGET_DIR)/$(TARGET) keremu
 	# $(KRNL_NAME).aoco
 	# No actual hardware is built (NO .aocx)
 kerrpt: $(DEV_SRC)
-	aoc --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR)/$(KRNL_NAME).aoco $(REP) $(FIPOCO_FLAG) -c --report -g
+	aoc --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR)/$(KRNL_NAME).aoco $(REP) $(FIPO_FLAG) -c --report -g
 	@echo " "
 	@echo "=================================================================="
 	@echo "INFO: report files are under: bin/$(KRNL_NAME)/reports/report.html"
@@ -464,7 +480,7 @@ kerrpt: $(DEV_SRC)
 	# $(KRNL_NAME).aoco
 	# $(KRNL_NAME).aocx
 hw: 	
-	aoc --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW)/$(KRNL_NAME).aocx $(FIPOCO_FLAG)
+	aoc --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW)/$(KRNL_NAME).aocx $(FIPO_FLAG)
 	@echo " "
 	@echo "================================================================"
 	@echo "INFO: FPGA bitstream is under: bin_hw/$(KRNL_NAME)(.aoco)(.aocx)"
@@ -472,7 +488,7 @@ hw:
 	@echo " "
 
 hw-he:
-	aoc --high-effort --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW)/$(KRNL_NAME).aocx $(FIPOCO_FLAG)
+	aoc --high-effort --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW)/$(KRNL_NAME).aocx $(FIPO_FLAG)
 	@echo " "
 	@echo "================================================================"
 	@echo "INFO: FPGA bitstream is under: bin_hw/$(KRNL_NAME)(.aoco)(.aocx)"
@@ -486,7 +502,7 @@ hw-he:
 	# $(KRNL_NAME).aoco
 	# $(KRNL_NAME).aocx
 hw-prof:
-	aoc --profile --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW_PROF)/$(KRNL_NAME).aocx $(FIPOCO_FLAG)
+	aoc --profile --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW_PROF)/$(KRNL_NAME).aocx $(FIPO_FLAG)
 	@echo " "
 	@echo "====================================================================================="
 	@echo "INFO: instrumented FPGA bitstream is under: bin_hw_profile/$(KRNL_NAME)(.aoco)(.aocx)"
@@ -542,6 +558,8 @@ copy: clean-copy
 	cp $(TARGET_DIR_HW_PROF)/$(KRNL_NAME).* ../$(COPY_DIR)/$(COPY_DIR_DOCK)/$(TARGET_DIR_HW_PROF)/
 	cp Makefile ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
 	cp defines.h ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
+	cp defines_fixedpt.h ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
+	cp defines_fixedpt_64.h ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
 	cp -r device/ ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
 	cp -r host/ ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
 	cp -r input/ ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
