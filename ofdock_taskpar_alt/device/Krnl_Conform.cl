@@ -129,8 +129,8 @@ while(active) {
 	cos_theta = fixedpt_cos(theta);
 
 	fixedpt3 genrot_unitvec;
-	genrot_unitvec.x = /*fixedpt_mul*/ fixedpt_nomul(sin_theta, fixedpt_cos(phi));
-	genrot_unitvec.y = /*fixedpt_mul*/ fixedpt_nomul(sin_theta, fixedpt_sin(phi));
+	genrot_unitvec.x = /*fixedpt_mul*/ fixedpt_mul(sin_theta, fixedpt_cos(phi));
+	genrot_unitvec.y = /*fixedpt_mul*/ fixedpt_mul(sin_theta, fixedpt_sin(phi));
 	genrot_unitvec.z = cos_theta;
 	
 	fixedpt3 genotype_xyz = {genotype[0], genotype[1], genotype[2]};
@@ -207,9 +207,9 @@ while(active) {
 				//which is needed only if rotating around rotatable bond
 
 				#if defined (FIXED_POINT_CONFORM)
-				atom_to_rotate.x = fixedpt_ssub(atom_to_rotate.x, rotation_movingvec.x);
-				atom_to_rotate.y = fixedpt_ssub(atom_to_rotate.y, rotation_movingvec.y);
-				atom_to_rotate.z = fixedpt_ssub(atom_to_rotate.z, rotation_movingvec.z);
+				atom_to_rotate.x = fixedpt_sub(atom_to_rotate.x, rotation_movingvec.x);
+				atom_to_rotate.y = fixedpt_sub(atom_to_rotate.y, rotation_movingvec.y);
+				atom_to_rotate.z = fixedpt_sub(atom_to_rotate.z, rotation_movingvec.z);
 				#else
 				atom_to_rotate -= rotation_movingvec;
 				#endif
@@ -234,9 +234,9 @@ while(active) {
 			fixedpt sin_angle, cos_angle;
 			sin_angle      = fixedpt_sin(rotation_angle);
 			cos_angle      = fixedpt_cos(rotation_angle);
-			quatrot_left_x = fixedpt_smul(sin_angle, rotation_unitvec.x);
-			quatrot_left_y = fixedpt_smul(sin_angle, rotation_unitvec.y);
-			quatrot_left_z = fixedpt_smul(sin_angle, rotation_unitvec.z);
+			quatrot_left_x = fixedpt_mul(sin_angle, rotation_unitvec.x);
+			quatrot_left_y = fixedpt_mul(sin_angle, rotation_unitvec.y);
+			quatrot_left_z = fixedpt_mul(sin_angle, rotation_unitvec.z);
 			quatrot_left_q = cos_angle;
 			#else
 			float sin_angle, cos_angle;
@@ -261,25 +261,25 @@ while(active) {
 
 				// L30nardoSV: taking the first element of ref_orientation_quats_const member
 				#if defined (FIXED_POINT_CONFORM)
-				quatrot_left_q =   fixedpt_smul(quatrot_temp_q, ref_orientation_quats_const_0) 
-						 - fixedpt_smul(quatrot_temp_x, ref_orientation_quats_const_1) 
-						 - fixedpt_smul(quatrot_temp_y, ref_orientation_quats_const_2) 
-						 - fixedpt_smul(quatrot_temp_z, ref_orientation_quats_const_3);
+				quatrot_left_q =   fixedpt_mul(quatrot_temp_q, ref_orientation_quats_const_0) 
+						 - fixedpt_mul(quatrot_temp_x, ref_orientation_quats_const_1) 
+						 - fixedpt_mul(quatrot_temp_y, ref_orientation_quats_const_2) 
+						 - fixedpt_mul(quatrot_temp_z, ref_orientation_quats_const_3);
 
-				quatrot_left_x =   fixedpt_smul(quatrot_temp_q, ref_orientation_quats_const_1) 
-						 + fixedpt_smul(quatrot_temp_x, ref_orientation_quats_const_0) 
-					         + fixedpt_smul(quatrot_temp_y, ref_orientation_quats_const_3) 
-						 - fixedpt_smul(quatrot_temp_z, ref_orientation_quats_const_2);
+				quatrot_left_x =   fixedpt_mul(quatrot_temp_q, ref_orientation_quats_const_1) 
+						 + fixedpt_mul(quatrot_temp_x, ref_orientation_quats_const_0) 
+					         + fixedpt_mul(quatrot_temp_y, ref_orientation_quats_const_3) 
+						 - fixedpt_mul(quatrot_temp_z, ref_orientation_quats_const_2);
 
-				quatrot_left_y =   fixedpt_smul(quatrot_temp_q, ref_orientation_quats_const_2)
-						 - fixedpt_smul(quatrot_temp_x, ref_orientation_quats_const_3) 
-  						 + fixedpt_smul(quatrot_temp_y, ref_orientation_quats_const_0) 
-						 + fixedpt_smul(quatrot_temp_z, ref_orientation_quats_const_1);
+				quatrot_left_y =   fixedpt_mul(quatrot_temp_q, ref_orientation_quats_const_2)
+						 - fixedpt_mul(quatrot_temp_x, ref_orientation_quats_const_3) 
+  						 + fixedpt_mul(quatrot_temp_y, ref_orientation_quats_const_0) 
+						 + fixedpt_mul(quatrot_temp_z, ref_orientation_quats_const_1);
 
-				quatrot_left_z =   fixedpt_smul(quatrot_temp_q, ref_orientation_quats_const_3)
-						 + fixedpt_smul(quatrot_temp_x, ref_orientation_quats_const_2) 
-						 - fixedpt_smul(quatrot_temp_y, ref_orientation_quats_const_1) 
-						 + fixedpt_smul(quatrot_temp_z, ref_orientation_quats_const_0);
+				quatrot_left_z =   fixedpt_mul(quatrot_temp_q, ref_orientation_quats_const_3)
+						 + fixedpt_mul(quatrot_temp_x, ref_orientation_quats_const_2) 
+						 - fixedpt_mul(quatrot_temp_y, ref_orientation_quats_const_1) 
+						 + fixedpt_mul(quatrot_temp_z, ref_orientation_quats_const_0);
 				#else
 				quatrot_left_q =   quatrot_temp_q * ref_orientation_quats_const_0
 						 - quatrot_temp_x * ref_orientation_quats_const_1
@@ -304,36 +304,36 @@ while(active) {
 			}
 
 			#if defined (FIXED_POINT_CONFORM)
-			quatrot_temp_q = - fixedpt_smul(quatrot_left_x, atom_to_rotate.x) 
-					 - fixedpt_smul(quatrot_left_y, atom_to_rotate.y)
-					 - fixedpt_smul(quatrot_left_z, atom_to_rotate.z);
+			quatrot_temp_q = - fixedpt_mul(quatrot_left_x, atom_to_rotate.x) 
+					 - fixedpt_mul(quatrot_left_y, atom_to_rotate.y)
+					 - fixedpt_mul(quatrot_left_z, atom_to_rotate.z);
 
-			quatrot_temp_x =   fixedpt_smul(quatrot_left_q, atom_to_rotate.x) 
-					 + fixedpt_smul(quatrot_left_y, atom_to_rotate.z)
-					 - fixedpt_smul(quatrot_left_z, atom_to_rotate.y);
+			quatrot_temp_x =   fixedpt_mul(quatrot_left_q, atom_to_rotate.x) 
+					 + fixedpt_mul(quatrot_left_y, atom_to_rotate.z)
+					 - fixedpt_mul(quatrot_left_z, atom_to_rotate.y);
 
-			quatrot_temp_y =   fixedpt_smul(quatrot_left_q, atom_to_rotate.y)
-					 - fixedpt_smul(quatrot_left_x, atom_to_rotate.z)
-					 + fixedpt_smul(quatrot_left_z, atom_to_rotate.x);
+			quatrot_temp_y =   fixedpt_mul(quatrot_left_q, atom_to_rotate.y)
+					 - fixedpt_mul(quatrot_left_x, atom_to_rotate.z)
+					 + fixedpt_mul(quatrot_left_z, atom_to_rotate.x);
 
-			quatrot_temp_z =   fixedpt_smul(quatrot_left_q, atom_to_rotate.z)
-					 + fixedpt_smul(quatrot_left_x, atom_to_rotate.y)
-					 - fixedpt_smul(quatrot_left_y, atom_to_rotate.x);
+			quatrot_temp_z =   fixedpt_mul(quatrot_left_q, atom_to_rotate.z)
+					 + fixedpt_mul(quatrot_left_x, atom_to_rotate.y)
+					 - fixedpt_mul(quatrot_left_y, atom_to_rotate.x);
 
-			atom_to_rotate.x = - fixedpt_smul(quatrot_temp_q, quatrot_left_x)
-					   + fixedpt_smul(quatrot_temp_x, quatrot_left_q)
-					   - fixedpt_smul(quatrot_temp_y, quatrot_left_z)
-					   + fixedpt_smul(quatrot_temp_z, quatrot_left_y);
+			atom_to_rotate.x = - fixedpt_mul(quatrot_temp_q, quatrot_left_x)
+					   + fixedpt_mul(quatrot_temp_x, quatrot_left_q)
+					   - fixedpt_mul(quatrot_temp_y, quatrot_left_z)
+					   + fixedpt_mul(quatrot_temp_z, quatrot_left_y);
 
-			atom_to_rotate.y = - fixedpt_smul(quatrot_temp_q, quatrot_left_y)
-					   + fixedpt_smul(quatrot_temp_x, quatrot_left_z)
-					   + fixedpt_smul(quatrot_temp_y, quatrot_left_q)
-					   - fixedpt_smul(quatrot_temp_z, quatrot_left_x);
+			atom_to_rotate.y = - fixedpt_mul(quatrot_temp_q, quatrot_left_y)
+					   + fixedpt_mul(quatrot_temp_x, quatrot_left_z)
+					   + fixedpt_mul(quatrot_temp_y, quatrot_left_q)
+					   - fixedpt_mul(quatrot_temp_z, quatrot_left_x);
 
-			atom_to_rotate.z = - fixedpt_smul(quatrot_temp_q, quatrot_left_z)
-					   - fixedpt_smul(quatrot_temp_x, quatrot_left_y)
-					   + fixedpt_smul(quatrot_temp_y, quatrot_left_x)
-					   + fixedpt_smul(quatrot_temp_z, quatrot_left_q);
+			atom_to_rotate.z = - fixedpt_mul(quatrot_temp_q, quatrot_left_z)
+					   - fixedpt_mul(quatrot_temp_x, quatrot_left_y)
+					   + fixedpt_mul(quatrot_temp_y, quatrot_left_x)
+					   + fixedpt_mul(quatrot_temp_z, quatrot_left_q);
 			#else
 			quatrot_temp_q = - quatrot_left_x * atom_to_rotate.x 
 					 - quatrot_left_y * atom_to_rotate.y 

@@ -66,6 +66,10 @@ void Krnl_IntraE(
 	printf("%f\n", fixedpt64_tofloat(178145));
 	printf("%f\n", fixedpt_tofloat(178145));
 */
+/*
+// passed correctly
+printf("kernel intraE %i \n", DockConst_num_of_intraE_contributors);
+*/
 while(active) {
 	char mode;
 
@@ -116,6 +120,10 @@ while(active) {
 
 	//for each intramolecular atom contributor pair
 	for (ushort contributor_counter=0; contributor_counter<DockConst_num_of_intraE_contributors; contributor_counter++) {
+		/*
+		// passed correctly
+		printf("kernel intraE %i: %i \n", contributor_counter, DockConst_num_of_intraE_contributors);
+		*/
 
 		char ref_intraE_contributors_const[3];
 

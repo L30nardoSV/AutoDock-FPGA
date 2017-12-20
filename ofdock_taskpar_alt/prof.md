@@ -125,6 +125,47 @@ freq: 184 MHz
 
 >>> commit "added intere with pragma fixedpt64"
 
+60.
+IMPORTANT:
+- [X] check the number of ligandintraE_contributors passed from host to kernel, final_population show zero
+- [X] apply fixed point 32.32 to Krnl_Conform with NO overflow NO saturation logic (conform II = 10) -> #define OVERFLOW_AND_SATURATION
+
+freq: 176 MHz
+>>> commit "added conform no overf no sat fixedpt16.16"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+NOT DONE YET
+
+slowdown
+even worse: correct results on 3ptb, but  incorrect results on other pdbs  (1stp, 3ce3) when intere is in fixedpt, 
+porbably the multiplication is sitll wrong, switching intere back to floatpoint solved it
+
+
+
+checking the final_population_run files, it seems we dont need 48.12 format, probably with 32.32 for energies would be good enough -> the multiplication would be easier
+
+Check here https://de.mathworks.com/help/fixedpoint/ug/range-and-precision.html?requestedDomain=www.mathworks.com
+
+Add flag to switch between saturation or no saturation, overflow or no overflow
+
+Makefile: pass separetely all other PDBS
+
+for the 32.32 use no saturation, no overflow
+
+add to Makefile exe rule for the 3 compounds, otherwise errors maight be silent not caught, 
+
 planned not done successfully yet
 . `Krnl_IntraE`: add fixedpt64 support with pragmas
 

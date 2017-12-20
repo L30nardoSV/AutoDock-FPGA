@@ -8,6 +8,9 @@
 // ---------------------------------------------------------------------
 // Fixed-point Defines
 // ---------------------------------------------------------------------
+//#define OVERFLOW_AND_SATURATION
+
+
 
 // Enable the 64-bits data type (double, long) extension
 #pragma OPENCL EXTENSION cl_khr_fp64 : enable
@@ -93,102 +96,62 @@ fixedpt_fromfloat(float F) {
 }
 
 // ---------------------------------------------------------------------
-/*
+
+#if defined (OVERFLOW_AND_SATURATION)
 inline fixedpt
 fixedpt_add(fixedpt A, fixedpt B) {
 	uint _A = A;
 	uint _B = B;
 	uint sum = _A + _B;
 
-	if (!((_A ^ _B) & 0x80000000) && ((_A ^ sum) & 0x80000000)) {
-		sum = FIXEDPT_OVERFLOW;
-	}
-
-	return sum;
-}
-
-inline fixedpt 
-fixedpt_sadd(fixedpt A, fixedpt B) {
-	fixedpt result = fixedpt_add (A, B);
-
-	if (result == FIXEDPT_OVERFLOW) {
-		result = (A >= 0) ? FIXEDPT_MAX : FIXEDPT_MIN;
-	}
-
-	return result;
-}
-*/
-
-inline fixedpt
-fixedpt_sadd(fixedpt A, fixedpt B) {
-	uint _A = A;
-	uint _B = B;
-	uint sum = _A + _B;
-
 	// apply saturation when overflow
 	if (!((_A ^ _B) & 0x80000000) && ((_A ^ sum) & 0x80000000)) {
-		/*
-		sum = FIXEDPT_OVERFLOW;
-		*/
+		/*sum = FIXEDPT_OVERFLOW;*/
 		sum = (A >= 0) ? FIXEDPT_MAX : FIXEDPT_MIN;
 	}
 
 	return sum;
 }
+#else
+inline fixedpt
+fixedpt_add(fixedpt A, fixedpt B) {
+	uint _A = A;
+	uint _B = B;
+	uint sum = _A + _B;
+	return sum;
+}
+#endif
 
 // ---------------------------------------------------------------------
-/*
+
+#if defined (OVERFLOW_AND_SATURATION)
 inline fixedpt
 fixedpt_sub(fixedpt A, fixedpt B) {
 	uint _A = A;
 	uint _B = B;
 	uint diff = _A - _B;
 	   
-	if (((_A ^ _B) & 0x80000000) && ((_A ^ diff) & 0x80000000)) {
-		diff = FIXEDPT_OVERFLOW;
-	}
-
-	return diff;
-}
-
-inline fixedpt
-fixedpt_ssub(fixedpt A, fixedpt B) {
-	fixedpt result = fixedpt_sub(A, B);
-
-	if (result == FIXEDPT_OVERFLOW) {
-		result = (A >= 0) ? FIXEDPT_MAX : FIXEDPT_MIN;
-	}
-
-	return result;
-}
-*/
-
-inline fixedpt
-fixedpt_ssub(fixedpt A, fixedpt B) {
-	uint _A = A;
-	uint _B = B;
-	uint diff = _A - _B;
-	   
 	// apply saturation when overflow
 	if (((_A ^ _B) & 0x80000000) && ((_A ^ diff) & 0x80000000)) {
-		/*
-		diff = FIXEDPT_OVERFLOW;
-		*/
+		/*diff = FIXEDPT_OVERFLOW;*/
 		diff = (A >= 0) ? FIXEDPT_MAX : FIXEDPT_MIN;
 	}
 
 	return diff;
 }
+#else
+inline fixedpt
+fixedpt_sub(fixedpt A, fixedpt B) {
+	uint _A = A;
+	uint _B = B;
+	uint diff = _A - _B;
+	return diff;
+}
+#endif
 
 // ---------------------------------------------------------------------
 
-// no overflow
-inline fixedpt
-fixedpt_nomul(fixedpt A, fixedpt B)
-{
-	return ((fixedptd)A * B) >> FIXEDPT_FBITS;
-}
-/*
+#if defined (OVERFLOW_AND_SATURATION)
 inline fixedpt
 fixedpt_mul(fixedpt A, fixedpt B)
 {
@@ -199,53 +162,10 @@ fixedpt_mul(fixedpt A, fixedpt B)
 
 	fixedpt r_tmp = product >> 16;
 
-	if (product < 0) {
-		if (~upper)
-			r_tmp = FIXEDPT_OVERFLOW;	
-	}
-	else {
-		if (upper)
-			r_tmp = FIXEDPT_OVERFLOW;
-	}
-	
-	return r_tmp;
-}
-
-inline fixedpt
-fixedpt_smul(fixedpt A, fixedpt B)
-{
-	fixedpt result = fixedpt_mul(A, B);
-	
-	if (result == FIXEDPT_OVERFLOW)
-	{
-		if ((A >= 0) == (B >= 0)) {
-			result = FIXEDPT_MAX;
-		}
-		else {
-			result = FIXEDPT_MIN;
-		}
-	}
-	
-	return result;
-}
-*/
-
-inline fixedpt
-fixedpt_smul(fixedpt A, fixedpt B)
-{
-	fixedptd product = (fixedptd)A * B;
-	
-	// The upper 17 bits should all be the same (the sign).
-	uint upper = product >> 47;
-
-	fixedpt r_tmp = product >> 16;
-
 	// apply saturation when overflow
 	if (product < 0) {
 		if (~upper)
-			/*
-			r_tmp = FIXEDPT_OVERFLOW;
-			*/		
+			/*r_tmp = FIXEDPT_OVERFLOW;*/		
 			if ((A >= 0) == (B >= 0)) {
 				r_tmp = FIXEDPT_MAX;
 			}
@@ -255,9 +175,7 @@ fixedpt_smul(fixedpt A, fixedpt B)
 	}
 	else {
 		if (upper)
-			/*
-			r_tmp = FIXEDPT_OVERFLOW;
-			*/
+			/*r_tmp = FIXEDPT_OVERFLOW;*/
 			if ((A >= 0) == (B >= 0)) {
 				r_tmp = FIXEDPT_MAX;
 			}
@@ -268,7 +186,17 @@ fixedpt_smul(fixedpt A, fixedpt B)
 	
 	return r_tmp;
 }
+#else
+inline fixedpt
+fixedpt_mul(fixedpt A, fixedpt B) {
+	return ((fixedptd)A * B) >> FIXEDPT_FBITS;
+}
+#endif
 
+inline fixedpt
+fixedpt_nomul(fixedpt A, fixedpt B) {
+	return ((fixedptd)A * B) >> FIXEDPT_FBITS;
+}
 // ---------------------------------------------------------------------
 
 /* Returns the sine of the given fixedpt number. 

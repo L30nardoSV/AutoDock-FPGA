@@ -468,6 +468,11 @@ filled with clock() */
 	dockpars.max_num_of_iters  = (unsigned int) mypars->max_num_of_iters;
 	dockpars.qasp = mypars->qasp;
 
+/*
+// passed correctly
+printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of_intraE_contributors);
+*/
+
 	// these variables hold multiplications between kernel-constants
 	// better calculate them here and then pass them to Krnl_GA
 	const float two_absmaxdmov = 2.0 * dockpars.abs_max_dmov;
