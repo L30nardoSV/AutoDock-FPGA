@@ -14,7 +14,12 @@ float sqrt_custom(const float x)
 // --------------------------------------------------------------------------
 __kernel __attribute__ ((max_global_work_dim(0)))
 void Krnl_IntraE(
+#if defined (FIXED_POINT_INTERE)
+ 	     __constant fixedpt64* restrict KerConstStatic_atom_charges_const,
+#else
  	     __constant float* restrict KerConstStatic_atom_charges_const,
+#endif
+
  	     __constant char*  restrict KerConstStatic_atom_types_const,
 	     __constant char*  restrict KerConstStatic_intraE_contributors_const,
 	     __constant float* restrict KerConstStatic_VWpars_AC_const,
@@ -43,7 +48,11 @@ void Krnl_IntraE(
 
 	for (uchar i=0; i<DockConst_num_of_atoms; i++) {
 		atom_types_localcache   [i] = KerConstStatic_atom_types_const   [i];
-		atom_charges_localcache [i] = KerConstStatic_atom_charges_const [i];
+#if defined (FIXED_POINT_INTERE)
+		atom_charges_localcache [i] = fixedpt64_tofloat(KerConstStatic_atom_charges_const [i]);	
+#else
+		atom_charges_localcache [i] = KerConstStatic_atom_charges_const [i];	
+#endif
 	}
 
 	for (uchar i=0; i<Host_square_num_of_atypes; i++) {

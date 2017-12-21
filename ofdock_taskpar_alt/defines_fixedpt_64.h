@@ -8,6 +8,7 @@
 // ---------------------------------------------------------------------
 // Fixed-point Defines
 // ---------------------------------------------------------------------
+//#define OVERFLOW_AND_SATURATION_64
 
 // Enable the 64-bits data type (double, long) extension
 #pragma OPENCL EXTENSION cl_khr_fp64 : enable
@@ -16,8 +17,8 @@ typedef long           fixedpt64;
 //typedef	int4	       fixedptd64;
 
 #define FIXEDPT64_BITS	64
-#define FIXEDPT64_WBITS	48
-#define FIXEDPT64_FBITS	16
+#define FIXEDPT64_WBITS 32
+#define FIXEDPT64_FBITS	32
 #define FIXEDPT64_FMASK	(((fixedpt64)1 << FIXEDPT64_FBITS) - 1)
 
 //#define FIXEDPT64_FBITS	(FIXEDPT64_BITS - FIXEDPT64_WBITS)
@@ -70,13 +71,13 @@ fixedpt64_abs(fixedpt64 x) {
 // ---------------------------------------------------------------------
 inline fixedpt64
 fixedpt64_floor(fixedpt64 x) {
-	return (x & 0xFFFFFFFFFFFF0000UL);
+	return (x & 0xFFFFFFFF00000000UL);
 }
 
 // ---------------------------------------------------------------------
 inline fixedpt64
 fixedpt64_ceil(fixedpt64 x) { 
-	return (x & 0xFFFFFFFFFFFF0000UL) + ((x & 0x000000000000FFFFUL) ? FIXEDPT64_ONE : 0); 
+	return (x & 0xFFFFFFFF00000000UL) + ((x & 0x00000000FFFFFFFFUL) ? FIXEDPT64_ONE : 0); 
 }
 
 // ---------------------------------------------------------------------
@@ -105,135 +106,42 @@ fixedpt64_fromfloat(float F) {
 }
 
 // ---------------------------------------------------------------------
-/*
-inline fixedpt
-fixedpt_add(fixedpt A, fixedpt B) {
-	uint _A = A;
-	uint _B = B;
-	uint sum = _A + _B;
-
-	if (!((_A ^ _B) & 0x80000000) && ((_A ^ sum) & 0x80000000)) {
-		sum = FIXEDPT_OVERFLOW;
-	}
-
-	return sum;
-}
-
-inline fixedpt 
-fixedpt_sadd(fixedpt A, fixedpt B) {
-	fixedpt result = fixedpt_add (A, B);
-
-	if (result == FIXEDPT_OVERFLOW) {
-		result = (A >= 0) ? FIXEDPT_MAX : FIXEDPT_MIN;
-	}
-
-	return result;
-}
-*/
-
 inline fixedpt64
-fixedpt64_sadd(fixedpt64 A, fixedpt64 B) {
+fixedpt64_add(fixedpt64 A, fixedpt64 B) {
 	ulong _A = A;
 	ulong _B = B;
 	ulong sum = _A + _B;
 
+	#if defined (OVERFLOW_AND_SATURATION_64)
 	// apply saturation when overflow
 	if (!((_A ^ _B) & 0x8000000000000000) && ((_A ^ sum) & 0x8000000000000000)) {
 		sum = (A >= 0) ? FIXEDPT64_MAX : FIXEDPT64_MIN;
 	}
+	#endif	
 
 	return sum;
 }
 
 // ---------------------------------------------------------------------
-/*
-inline fixedpt
-fixedpt_sub(fixedpt A, fixedpt B) {
-	uint _A = A;
-	uint _B = B;
-	uint diff = _A - _B;
-	   
-	if (((_A ^ _B) & 0x80000000) && ((_A ^ diff) & 0x80000000)) {
-		diff = FIXEDPT_OVERFLOW;
-	}
-
-	return diff;
-}
-
-inline fixedpt
-fixedpt_ssub(fixedpt A, fixedpt B) {
-	fixedpt result = fixedpt_sub(A, B);
-
-	if (result == FIXEDPT_OVERFLOW) {
-		result = (A >= 0) ? FIXEDPT_MAX : FIXEDPT_MIN;
-	}
-
-	return result;
-}
-*/
-
 inline fixedpt64
-fixedpt64_ssub(fixedpt64 A, fixedpt64 B) {
+fixedpt64_sub(fixedpt64 A, fixedpt64 B) {
 	ulong _A = A;
 	ulong _B = B;
 	ulong diff = _A - _B;
-	   
+
+	#if defined (OVERFLOW_AND_SATURATION_64)
 	// apply saturation when overflow
 	if (((_A ^ _B) & 0x8000000000000000) && ((_A ^ diff) & 0x8000000000000000)) {
 		diff = (A >= 0) ? FIXEDPT64_MAX : FIXEDPT64_MIN;
 	}
+	#endif
 
 	return diff;
 }
 
 // ---------------------------------------------------------------------
-
-// no overflow
-inline fixedpt64
-fixedpt64_nomul(fixedpt64 inArg0, fixedpt64 inArg1)
-{
-		// Each argument is divided to 16-bit parts.
-	//					AB
-	//			*	 CD
-	// -----------
-	//					BD	16 * 16 -> 32 bit products
-	//				 CB
-	//				 AD
-	//				AC
-	//			 |----| 64 bit product
-
-	if (inArg0 < 0 && inArg1 < 0) {
-		inArg0 = -inArg0;
-		inArg1 = -inArg1;
-	}
-
-	long A = (inArg0 >> FIXEDPT64_FBITS); 
-	long C = (inArg1 >> FIXEDPT64_FBITS);
-	ulong B = (inArg0 & 0xFFFF);
-	ulong D = (inArg1 & 0xFFFF);
-	
-	long AC = A*C;
-	long AD_CB = A*D + C*B;
-	ulong BD = B*D;
-	
-	long product_hi = AC + (AD_CB >> FIXEDPT64_FBITS);
-	
-	// Handle carry from lower 32 bits to upper part of result.
-	ulong ad_cb_temp = AD_CB << FIXEDPT64_FBITS;
-	ulong product_lo = BD + ad_cb_temp;
-	if (product_lo < BD)
-		product_hi++;
-	
-	fixedpt64 r_tmp = (product_hi << FIXEDPT64_FBITS) | (product_lo >> FIXEDPT64_FBITS);
-
-	return r_tmp;
-}
-
-/* 64-bit implementation of fixedpt64_mul. 
- * This is a relatively good compromise for compilers that do not support
- * uint128_t. Uses 16*16->32bit multiplications.
- */
-fixedpt64 fixedpt64_smul(fixedpt64 inArg0, fixedpt64 inArg1)
+inline fixedpt64 
+fixedpt64_mul(fixedpt64 inArg0, fixedpt64 inArg1)
 {
 	// Each argument is divided to 16-bit parts.
 	//					AB
@@ -247,18 +155,20 @@ fixedpt64 fixedpt64_smul(fixedpt64 inArg0, fixedpt64 inArg1)
 
 	// two inputs negative
 	// this last case was missing
+/*
 	if (inArg0 < 0 && inArg1 < 0) {
 		inArg0 = -inArg0;
 		inArg1 = -inArg1;
 	}
+*/
 
-	long A = (inArg0 >> FIXEDPT64_FBITS); 
-	long C = (inArg1 >> FIXEDPT64_FBITS);
-	ulong B = (inArg0 & 0xFFFF);
-	ulong D = (inArg1 & 0xFFFF);
+	long  A = (inArg0 >> FIXEDPT64_FBITS); 
+	long  C = (inArg1 >> FIXEDPT64_FBITS);
+	ulong B = (inArg0 & 0xFFFFFFFF);
+	ulong D = (inArg1 & 0xFFFFFFFF);
 	
-	long AC = A*C;
-	long AD_CB = A*D + C*B;
+	long  AC = A*C;
+	long  AD_CB = A*D + C*B;
 	ulong BD = B*D;
 	
 	long product_hi = AC + (AD_CB >> FIXEDPT64_FBITS);
@@ -270,13 +180,11 @@ fixedpt64 fixedpt64_smul(fixedpt64 inArg0, fixedpt64 inArg1)
 		product_hi++;
 	
 	fixedpt64 r_tmp = (product_hi << FIXEDPT64_FBITS) | (product_lo >> FIXEDPT64_FBITS);
-	//fixedpt64 r_tmp = (product_hi << FIXEDPT64_FBITS) | (product_lo >> FIXEDPT64_WBITS);
 
-	// The upper 48 bits should all be the same (the sign).
-	if (product_hi >> 63 != product_hi >> 15) {
-		/*
-		return fix16_overflow;
-		*/
+	#if defined (OVERFLOW_AND_SATURATION_64)
+	// The upper 33 bits should all be the same (the sign).
+	if (product_hi >> 63 != product_hi >> 31) {
+		/*return fix16_overflow;*/
 		if ((inArg0 >= 0) == (inArg1 >= 0)) {
 			r_tmp = FIXEDPT64_MAX;
 		}
@@ -284,6 +192,8 @@ fixedpt64 fixedpt64_smul(fixedpt64 inArg0, fixedpt64 inArg1)
 			r_tmp = FIXEDPT64_MIN;
 		}	
 	}
+	
+	#endif
 
 	return r_tmp;
 }

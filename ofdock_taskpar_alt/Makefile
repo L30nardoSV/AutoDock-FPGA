@@ -360,7 +360,7 @@ endif
 # =============================
 # FIxed-POint COform flag (FIPOCO)
 FIXED_POINT_CONFORM=YES
-FIXED_POINT_INTERE=NO
+FIXED_POINT_INTERE=YES
 FIXED_POINT_INTRAE=NO
 
 ifeq ($(FIXED_POINT_CONFORM), YES)
@@ -410,7 +410,7 @@ $(TARGET_DIR)/$(TARGET) : Makefile $(SRCS) $(INCS) $(TARGET_DIR)
 
 # Docking parameters
 # NEV was usually set to 100000
-PDB  := 1stp
+PDB  := 3ptb
 NRUN := 10
 NEV  := 50000 
 

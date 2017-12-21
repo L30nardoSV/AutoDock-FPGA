@@ -134,6 +134,13 @@ freq: 176 MHz
 >>> commit "added conform no overf no sat fixedpt16.16"
 
 
+61. `defines_fixedpt64.h`: change format to 32.32
+62. `Krnl_InterE.cl`: use fixedpt64 with no overflow & no saturation
+63. `Krnl_InterE.cl` + `performdocking.cpp`: pass GlobFgrids as floats or fixedpt64 depending on the specified precision
+64. `Krnl_InterE.cl` + `performdocking.cpp` + `calcenergy.cpp`: pass KerConstStatic_atom_charges_const as floats or fixedpt64 depending on the specified precision
+
+freq: 170 MHz
+>>> commit "added intere no overf no sat fixedpt32.32"
 
 
 
@@ -158,11 +165,11 @@ checking the final_population_run files, it seems we dont need 48.12 format, pro
 
 Check here https://de.mathworks.com/help/fixedpoint/ug/range-and-precision.html?requestedDomain=www.mathworks.com
 
-Add flag to switch between saturation or no saturation, overflow or no overflow
+
 
 Makefile: pass separetely all other PDBS
 
-for the 32.32 use no saturation, no overflow
+
 
 add to Makefile exe rule for the 3 compounds, otherwise errors maight be silent not caught, 
 

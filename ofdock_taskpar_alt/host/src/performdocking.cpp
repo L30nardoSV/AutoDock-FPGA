@@ -326,16 +326,12 @@ cl_mem mem_evals_and_generations_performed;
 
 
 
+#if defined (FIXED_POINT_INTERE)
 
+//#include "defines_fixedpt_64.h"
+fixedpt64* cpu_fixedpt64grids;
 
-
-
-
-
-
-
-
-
+#endif
 
 
 
@@ -377,7 +373,14 @@ filled with clock() */
 
 	Liganddata myligand_reference;
 	//Dockparameters dockpars;
+	
+
+#if defined (FIXED_POINT_INTERE)
+	size_t size_fixedpt64grids;
+#else
 	size_t size_floatgrids;
+#endif
+
 	size_t size_populations;
 	size_t size_energies;
 	size_t size_prng_seeds;
@@ -492,9 +495,17 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 
  	//allocating GPU memory for populations, floatgrids,
 	//energies, evaluation counters and random number generator states
+#if defined (FIXED_POINT_INTERE)
+	size_fixedpt64grids = (sizeof(fixedpt64)) * (mygrid->num_of_atypes+2) * (mygrid->size_xyz[0]) * (mygrid->size_xyz[1]) * (mygrid->size_xyz[2]);
+#else
 	size_floatgrids = (sizeof(float)) * (mygrid->num_of_atypes+2) * (mygrid->size_xyz[0]) * (mygrid->size_xyz[1]) * (mygrid->size_xyz[2]);
+#endif
 
+#if defined (FIXED_POINT_INTERE)
+	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ATOMS*sizeof(fixedpt64),                &mem_KerConstStatic_atom_charges_const);
+#else
 	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ATOMS*sizeof(float),                    &mem_KerConstStatic_atom_charges_const);
+#endif
 	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ATOMS*sizeof(char),                     &mem_KerConstStatic_atom_types_const);
 	mallocBufferObject(context,CL_MEM_READ_ONLY, 3*MAX_INTRAE_CONTRIBUTORS*sizeof(char),            &mem_KerConstStatic_intraE_contributors_const);
 	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES*sizeof(float), &mem_KerConstStatic_VWpars_AC_const);
@@ -515,7 +526,12 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ROTBONDS*sizeof(cl_float3), 		&mem_KerConstStatic_rotbonds_unit_vectors_const);
 	#endif
 
+#if defined (FIXED_POINT_INTERE)
+	mallocBufferObject(context,CL_MEM_READ_ONLY,size_fixedpt64grids,   	&mem_dockpars_fgrids);
+#else
 	mallocBufferObject(context,CL_MEM_READ_ONLY,size_floatgrids,   		&mem_dockpars_fgrids);
+#endif
+
 	mallocBufferObject(context,CL_MEM_READ_WRITE,size_populations,  	&mem_dockpars_conformations_current);
 	mallocBufferObject(context,CL_MEM_READ_WRITE,size_energies,    		&mem_dockpars_energies_current);
 
@@ -523,7 +539,11 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 
 	unsigned int array_evals_and_generations_performed [2]; // [0]: evals, [1]: generations 
 
+#if defined (FIXED_POINT_INTERE)
+	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_atom_charges_const,            &KerConstStatic.atom_charges_const[0],            MAX_NUM_OF_ATOMS*sizeof(fixedpt64));
+#else
 	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_atom_charges_const,            &KerConstStatic.atom_charges_const[0],            MAX_NUM_OF_ATOMS*sizeof(float));
+#endif
 	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_atom_types_const,              &KerConstStatic.atom_types_const[0],              MAX_NUM_OF_ATOMS*sizeof(char));
 	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_intraE_contributors_const,     &KerConstStatic.intraE_contributors_const[0],     3*MAX_INTRAE_CONTRIBUTORS*sizeof(char));
 	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_VWpars_AC_const,               &KerConstStatic.VWpars_AC_const[0],               MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES*sizeof(float));
@@ -544,7 +564,39 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_rotbonds_unit_vectors_const,   &KerConstStatic.rotbonds_unit_vectors_const[0],   MAX_NUM_OF_ROTBONDS*sizeof(cl_float3));
 	#endif
 
+#if defined (FIXED_POINT_INTERE)
+/*
+	cpu_fixedpt64grids = (fixedpt64*) alignedMalloc((sizeof(fixedpt64))*(mygrid->num_of_atypes+2)*
+						  			    (mygrid->size_xyz[0])*
+			   					            (mygrid->size_xyz[1])*
+									    (mygrid->size_xyz[2]));
+*/
+	cpu_fixedpt64grids = (fixedpt64*) alignedMalloc(size_fixedpt64grids);
+
+	float* mypoi;
+	fixedpt64* myqoi;
+	mypoi = cpu_floatgrids;
+	myqoi = cpu_fixedpt64grids;
+
+	for (int t=0; t < mygrid->num_of_atypes+2; t++) {
+		//reading values
+		for (int z=0; z < mygrid->size_xyz[2]; z++)
+			for (int y=0; y < mygrid->size_xyz[1]; y++)
+				for (int x=0; x < mygrid->size_xyz[0]; x++)
+				{
+					//fscanf(fp, "%f", mypoi);
+					//mypoi++;
+					float tmp_grids = *mypoi;
+					mypoi++;
+					*myqoi = fixedpt64_fromfloat(tmp_grids);
+					myqoi++;
+				}
+	}
+
+	memcopyBufferObjectToDevice(command_queue1,mem_dockpars_fgrids, 	cpu_fixedpt64grids,       size_fixedpt64grids);
+#else
 	memcopyBufferObjectToDevice(command_queue1,mem_dockpars_fgrids, 	cpu_floatgrids,       size_floatgrids);
+#endif
 
 	clock_start_docking = clock();
 
@@ -1713,6 +1765,10 @@ void cleanup() {
   if(cpu_result_ligands)   {alignedFree(cpu_result_ligands);}
   if(cpu_prng_seeds)       {alignedFree(cpu_prng_seeds);}
   if(cpu_ref_ori_angles)   {alignedFree(cpu_ref_ori_angles);}
+
+#if defined (FIXED_POINT_INTERE)
+  if(cpu_fixedpt64grids)   {alignedFree(cpu_fixedpt64grids);}
+#endif
 
   if(mem_KerConstStatic_atom_charges_const)	  	  {clReleaseMemObject(mem_KerConstStatic_atom_charges_const);}
   if(mem_KerConstStatic_atom_types_const)	   	  {clReleaseMemObject(mem_KerConstStatic_atom_types_const);}

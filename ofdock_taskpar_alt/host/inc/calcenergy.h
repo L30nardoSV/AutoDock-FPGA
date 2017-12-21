@@ -101,7 +101,14 @@ typedef struct
 */
 
 #include "CL/opencl.h"
+
+#if defined (FIXED_POINT_CONFORM)
 #include "defines_fixedpt.h"
+#endif
+
+#if defined (FIXED_POINT_INTERE)
+#include "defines_fixedpt_64.h"
+#endif
 
 // As struct members are used as host buffers
 // they are aligned to multiples of 64 bytes (power of 2).
@@ -109,7 +116,11 @@ typedef struct
 
 typedef struct
 {
+#if defined (FIXED_POINT_INTERE)
+       	fixedpt64 atom_charges_const[MAX_NUM_OF_ATOMS]                __attribute__ ((aligned (1024)));
+#else
        	float atom_charges_const[MAX_NUM_OF_ATOMS]                    __attribute__ ((aligned (512)));
+#endif
        	char  atom_types_const  [MAX_NUM_OF_ATOMS]                    __attribute__ ((aligned (128)));
        	char  intraE_contributors_const[3*MAX_INTRAE_CONTRIBUTORS]    __attribute__ ((aligned (32768)));
        	float VWpars_AC_const   [MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES] __attribute__ ((aligned (1024)));

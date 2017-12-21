@@ -15,8 +15,18 @@
 // --------------------------------------------------------------------------
 __kernel __attribute__ ((max_global_work_dim(0)))
 void Krnl_InterE(
+#if defined (FIXED_POINT_INTERE)
+	     __constant fixedpt64* restrict GlobFgrids,
+#else
              __constant float* restrict GlobFgrids,
+#endif
+
+#if defined (FIXED_POINT_INTERE)
+ 	     __constant fixedpt64* restrict KerConstStatic_atom_charges_const,
+#else
  	     __constant float* restrict KerConstStatic_atom_charges_const,
+#endif
+
  	     __constant char*  restrict KerConstStatic_atom_types_const,
 
 			    unsigned char                    DockConst_g1,
@@ -37,7 +47,12 @@ void Krnl_InterE(
 	bool active = true;
 
 	__local char  atom_types_localcache   [MAX_NUM_OF_ATOMS];
+
+#if defined (FIXED_POINT_INTERE)
+	__local fixedpt64 atom_charges_localcache [MAX_NUM_OF_ATOMS];
+#else
 	__local float atom_charges_localcache [MAX_NUM_OF_ATOMS];
+#endif
 
 	for (uchar i=0; i<DockConst_num_of_atoms; i++) {
 		atom_types_localcache [i]   = KerConstStatic_atom_types_const   [i];
@@ -108,13 +123,19 @@ while(active) {
 		float x = loc_coords_atid1.x;
 		float y = loc_coords_atid1.y;
 		float z = loc_coords_atid1.z;
+
+#if defined (FIXED_POINT_INTERE)
+
+#else
 		float q = atom_charges_localcache [atom1_id];
+#endif
 
 		#if defined (FIXED_POINT_INTERE)
 		fixedpt64 fixpt_x = fixedpt64_fromfloat(loc_coords_atid1.x); 
 		fixedpt64 fixpt_y = fixedpt64_fromfloat(loc_coords_atid1.y); 
 		fixedpt64 fixpt_z = fixedpt64_fromfloat(loc_coords_atid1.z); 
-		fixedpt64 fixpt_q = fixedpt64_fromfloat(atom_charges_localcache [atom1_id]);
+//		fixedpt64 fixpt_q = fixedpt64_fromfloat(atom_charges_localcache [atom1_id]);
+		fixedpt64 fixpt_q = atom_charges_localcache [atom1_id];
 		#endif
 
 		#if defined (FIXED_POINT_INTERE)
@@ -143,7 +164,7 @@ while(active) {
 			interE += 16777216.0f; 
 			*/
 			#if defined (FIXED_POINT_INTERE)
-			fixpt_partialE1 = fixedpt64_fromfloat(16777216.0f);
+			fixpt_partialE1 = /*fixedpt64_fromfloat(16777216.0f)*/ 0x100000000000000;
 			fixpt_partialE2 = 0;
 			fixpt_partialE3 = 0;
 			#else
@@ -162,18 +183,18 @@ while(active) {
 			int z_high = convert_int(ceil(z));
 
 			#if defined (FIXED_POINT_INTERE)
-			fixedpt64 fixpt_x_low  = fixedpt64_floor(fixedpt64_fromfloat(x)); 
-			fixedpt64 fixpt_y_low  = fixedpt64_floor(fixedpt64_fromfloat(y));
-			fixedpt64 fixpt_z_low  = fixedpt64_floor(fixedpt64_fromfloat(z));
-			fixedpt64 fixpt_x_high = fixedpt64_ceil(fixedpt64_fromfloat(x));	 
-			fixedpt64 fixpt_y_high = fixedpt64_ceil(fixedpt64_fromfloat(y));
-			fixedpt64 fixpt_z_high = fixedpt64_ceil(fixedpt64_fromfloat(z));
+			fixedpt64 fixpt_x_low  = /*fixedpt64_floor(fixedpt64_fromfloat(x))*/ fixedpt64_floor(fixpt_x); 
+			fixedpt64 fixpt_y_low  = /*fixedpt64_floor(fixedpt64_fromfloat(y))*/ fixedpt64_floor(fixpt_y);
+			fixedpt64 fixpt_z_low  = /*fixedpt64_floor(fixedpt64_fromfloat(z))*/ fixedpt64_floor(fixpt_z);
+			fixedpt64 fixpt_x_high = /*fixedpt64_ceil(fixedpt64_fromfloat(x))*/  fixedpt64_ceil(fixpt_x);	 
+			fixedpt64 fixpt_y_high = /*fixedpt64_ceil(fixedpt64_fromfloat(y))*/  fixedpt64_ceil(fixpt_y);
+			fixedpt64 fixpt_z_high = /*fixedpt64_ceil(fixedpt64_fromfloat(z))*/  fixedpt64_ceil(fixpt_z);
 			#endif
 
 			#if defined (FIXED_POINT_INTERE)
-			fixedpt64 fixpt_dx = fixedpt64_ssub(fixpt_x, fixpt_x_low); 
-			fixedpt64 fixpt_dy = fixedpt64_ssub(fixpt_y, fixpt_y_low); 
-			fixedpt64 fixpt_dz = fixedpt64_ssub(fixpt_z, fixpt_z_low);
+			fixedpt64 fixpt_dx = fixedpt64_sub(fixpt_x, fixpt_x_low); 
+			fixedpt64 fixpt_dy = fixedpt64_sub(fixpt_y, fixpt_y_low); 
+			fixedpt64 fixpt_dz = fixedpt64_sub(fixpt_z, fixpt_z_low);
 			#else
 			float dx = x - x_low; 
 			float dy = y - y_low; 
@@ -184,14 +205,14 @@ while(active) {
 			// based on the location of the point inside
 			#if defined (FIXED_POINT_INTERE)
 			fixedpt64 fixpt_weights [2][2][2];
-			fixpt_weights [0][0][0] = fixedpt64_smul((FIXEDPT64_ONE-fixpt_dx), fixedpt64_smul((FIXEDPT64_ONE-fixpt_dy), (FIXEDPT64_ONE-fixpt_dz)));
-			fixpt_weights [1][0][0] = fixedpt64_smul(fixpt_dx, fixedpt64_smul((FIXEDPT64_ONE-fixpt_dy), (FIXEDPT64_ONE-fixpt_dz)));
-			fixpt_weights [0][1][0] = fixedpt64_smul((FIXEDPT64_ONE-fixpt_dx), fixedpt64_smul(fixpt_dy,(FIXEDPT64_ONE-fixpt_dz)));
-			fixpt_weights [1][1][0] = fixedpt64_smul(fixpt_dx, fixedpt64_smul(fixpt_dy, (FIXEDPT64_ONE-fixpt_dz)));
-			fixpt_weights [0][0][1] = fixedpt64_smul((FIXEDPT64_ONE-fixpt_dx), fixedpt64_smul((FIXEDPT64_ONE-fixpt_dy), fixpt_dz));
-			fixpt_weights [1][0][1] = fixedpt64_smul(fixpt_dx, fixedpt64_smul((FIXEDPT64_ONE-fixpt_dy), fixpt_dz));
-			fixpt_weights [0][1][1] = fixedpt64_smul((FIXEDPT64_ONE-fixpt_dx), fixedpt64_smul(fixpt_dy, fixpt_dz));
-			fixpt_weights [1][1][1] = fixedpt64_smul(fixpt_dx, fixedpt64_smul(fixpt_dy, fixpt_dz));
+			fixpt_weights [0][0][0] = fixedpt64_mul((FIXEDPT64_ONE-fixpt_dx), fixedpt64_mul((FIXEDPT64_ONE-fixpt_dy), (FIXEDPT64_ONE-fixpt_dz)));
+			fixpt_weights [1][0][0] = fixedpt64_mul(fixpt_dx, fixedpt64_mul((FIXEDPT64_ONE-fixpt_dy), (FIXEDPT64_ONE-fixpt_dz)));
+			fixpt_weights [0][1][0] = fixedpt64_mul((FIXEDPT64_ONE-fixpt_dx), fixedpt64_mul(fixpt_dy,(FIXEDPT64_ONE-fixpt_dz)));
+			fixpt_weights [1][1][0] = fixedpt64_mul(fixpt_dx, fixedpt64_mul(fixpt_dy, (FIXEDPT64_ONE-fixpt_dz)));
+			fixpt_weights [0][0][1] = fixedpt64_mul((FIXEDPT64_ONE-fixpt_dx), fixedpt64_mul((FIXEDPT64_ONE-fixpt_dy), fixpt_dz));
+			fixpt_weights [1][0][1] = fixedpt64_mul(fixpt_dx, fixedpt64_mul((FIXEDPT64_ONE-fixpt_dy), fixpt_dz));
+			fixpt_weights [0][1][1] = fixedpt64_mul((FIXEDPT64_ONE-fixpt_dx), fixedpt64_mul(fixpt_dy, fixpt_dz));
+			fixpt_weights [1][1][1] = fixedpt64_mul(fixpt_dx, fixedpt64_mul(fixpt_dy, fixpt_dz));
 			#else
 			float weights [2][2][2];
 			weights [0][0][0] = (1-dx)*(1-dy)*(1-dz);
@@ -241,6 +262,7 @@ while(active) {
 			//energy contribution of the current grid type
 			#if defined (FIXED_POINT_INTERE)
 			fixedpt64 fixpt_cube [2][2][2];
+/*
 	                fixpt_cube [0][0][0] = fixedpt64_fromfloat(GlobFgrids[cube_000 + mul_tmp]);
         	        fixpt_cube [1][0][0] = fixedpt64_fromfloat(GlobFgrids[cube_100 + mul_tmp]);
         	        fixpt_cube [0][1][0] = fixedpt64_fromfloat(GlobFgrids[cube_010 + mul_tmp]);
@@ -249,6 +271,15 @@ while(active) {
         	        fixpt_cube [1][0][1] = fixedpt64_fromfloat(GlobFgrids[cube_101 + mul_tmp]);
         	        fixpt_cube [0][1][1] = fixedpt64_fromfloat(GlobFgrids[cube_011 + mul_tmp]);
         	        fixpt_cube [1][1][1] = fixedpt64_fromfloat(GlobFgrids[cube_111 + mul_tmp]);
+*/
+	                fixpt_cube [0][0][0] = GlobFgrids[cube_000 + mul_tmp];
+        	        fixpt_cube [1][0][0] = GlobFgrids[cube_100 + mul_tmp];
+        	        fixpt_cube [0][1][0] = GlobFgrids[cube_010 + mul_tmp];
+        	        fixpt_cube [1][1][0] = GlobFgrids[cube_110 + mul_tmp];
+        	        fixpt_cube [0][0][1] = GlobFgrids[cube_001 + mul_tmp];
+        	        fixpt_cube [1][0][1] = GlobFgrids[cube_101 + mul_tmp];
+        	        fixpt_cube [0][1][1] = GlobFgrids[cube_011 + mul_tmp];
+        	        fixpt_cube [1][1][1] = GlobFgrids[cube_111 + mul_tmp];
 			#else
 			float cube [2][2][2];
 	                cube [0][0][0] = GlobFgrids[cube_000 + mul_tmp];
@@ -274,14 +305,14 @@ while(active) {
 			#endif
 
 			#if defined (FIXED_POINT_INTERE)
-			fixpt_partialE1 = fixedpt64_smul(fixpt_cube[0][0][0], fixpt_weights[0][0][0]) +
-				    	  fixedpt64_smul(fixpt_cube[1][0][0], fixpt_weights[1][0][0]) +
-				    	  fixedpt64_smul(fixpt_cube[0][1][0], fixpt_weights[0][1][0]) +
-				    	  fixedpt64_smul(fixpt_cube[1][1][0], fixpt_weights[1][1][0]) + 
-				    	  fixedpt64_smul(fixpt_cube[0][0][1], fixpt_weights[0][0][1]) +
-				     	  fixedpt64_smul(fixpt_cube[1][0][1], fixpt_weights[1][0][1]) + 
-				    	  fixedpt64_smul(fixpt_cube[0][1][1], fixpt_weights[0][1][1]) +
-				    	  fixedpt64_smul(fixpt_cube[1][1][1], fixpt_weights[1][1][1]);
+			fixpt_partialE1 = fixedpt64_mul(fixpt_cube[0][0][0], fixpt_weights[0][0][0]) +
+				    	  fixedpt64_mul(fixpt_cube[1][0][0], fixpt_weights[1][0][0]) +
+				    	  fixedpt64_mul(fixpt_cube[0][1][0], fixpt_weights[0][1][0]) +
+				    	  fixedpt64_mul(fixpt_cube[1][1][0], fixpt_weights[1][1][0]) + 
+				    	  fixedpt64_mul(fixpt_cube[0][0][1], fixpt_weights[0][0][1]) +
+				     	  fixedpt64_mul(fixpt_cube[1][0][1], fixpt_weights[1][0][1]) + 
+				    	  fixedpt64_mul(fixpt_cube[0][1][1], fixpt_weights[0][1][1]) +
+				    	  fixedpt64_mul(fixpt_cube[1][1][1], fixpt_weights[1][1][1]);
 			#else
 			/*partialE1 = TRILININTERPOL(cube, weights);*/
 			partialE1 = cube[0][0][0] * weights[0][0][0] +
@@ -309,6 +340,7 @@ while(active) {
 			uint mul_tmp2 = Host_mul_tmp2;
 
 			#if defined (FIXED_POINT_INTERE)
+/*
 			fixpt_cube [0][0][0] = fixedpt64_fromfloat(GlobFgrids[cube_000 + mul_tmp2]);
         	        fixpt_cube [1][0][0] = fixedpt64_fromfloat(GlobFgrids[cube_100 + mul_tmp2]);
         	        fixpt_cube [0][1][0] = fixedpt64_fromfloat(GlobFgrids[cube_010 + mul_tmp2]);
@@ -317,6 +349,15 @@ while(active) {
         	        fixpt_cube [1][0][1] = fixedpt64_fromfloat(GlobFgrids[cube_101 + mul_tmp2]);
         	        fixpt_cube [0][1][1] = fixedpt64_fromfloat(GlobFgrids[cube_011 + mul_tmp2]);
         	        fixpt_cube [1][1][1] = fixedpt64_fromfloat(GlobFgrids[cube_111 + mul_tmp2]);
+*/
+			fixpt_cube [0][0][0] = GlobFgrids[cube_000 + mul_tmp2];
+        	        fixpt_cube [1][0][0] = GlobFgrids[cube_100 + mul_tmp2];
+        	        fixpt_cube [0][1][0] = GlobFgrids[cube_010 + mul_tmp2];
+        	        fixpt_cube [1][1][0] = GlobFgrids[cube_110 + mul_tmp2];
+        	        fixpt_cube [0][0][1] = GlobFgrids[cube_001 + mul_tmp2];
+        	        fixpt_cube [1][0][1] = GlobFgrids[cube_101 + mul_tmp2];
+        	        fixpt_cube [0][1][1] = GlobFgrids[cube_011 + mul_tmp2];
+        	        fixpt_cube [1][1][1] = GlobFgrids[cube_111 + mul_tmp2];
 			#else
 			cube [0][0][0] = GlobFgrids[cube_000 + mul_tmp2];
         	        cube [1][0][0] = GlobFgrids[cube_100 + mul_tmp2];
@@ -341,16 +382,16 @@ while(active) {
 			#endif
 
 			#if defined (FIXED_POINT_INTERE)
-			fixpt_partialE2 = fixedpt64_smul(fixpt_q, 
+			fixpt_partialE2 = fixedpt64_mul(fixpt_q, 
 								(
-						         fixedpt64_smul(fixpt_cube[0][0][0], fixpt_weights[0][0][0]) +
-				    			 fixedpt64_smul(fixpt_cube[1][0][0], fixpt_weights[1][0][0]) +
-				    	 		 fixedpt64_smul(fixpt_cube[0][1][0], fixpt_weights[0][1][0]) +
-						    	 fixedpt64_smul(fixpt_cube[1][1][0], fixpt_weights[1][1][0]) + 
-						    	 fixedpt64_smul(fixpt_cube[0][0][1], fixpt_weights[0][0][1]) +
-						    	 fixedpt64_smul(fixpt_cube[1][0][1], fixpt_weights[1][0][1]) + 
-						    	 fixedpt64_smul(fixpt_cube[0][1][1], fixpt_weights[0][1][1]) +
-						    	 fixedpt64_smul(fixpt_cube[1][1][1], fixpt_weights[1][1][1])
+						         fixedpt64_mul(fixpt_cube[0][0][0], fixpt_weights[0][0][0]) +
+				    			 fixedpt64_mul(fixpt_cube[1][0][0], fixpt_weights[1][0][0]) +
+				    	 		 fixedpt64_mul(fixpt_cube[0][1][0], fixpt_weights[0][1][0]) +
+						    	 fixedpt64_mul(fixpt_cube[1][1][0], fixpt_weights[1][1][0]) + 
+						    	 fixedpt64_mul(fixpt_cube[0][0][1], fixpt_weights[0][0][1]) +
+						    	 fixedpt64_mul(fixpt_cube[1][0][1], fixpt_weights[1][0][1]) + 
+						    	 fixedpt64_mul(fixpt_cube[0][1][1], fixpt_weights[0][1][1]) +
+						    	 fixedpt64_mul(fixpt_cube[1][1][1], fixpt_weights[1][1][1])
 								)
 							);
 			#else
@@ -381,6 +422,7 @@ while(active) {
 			uint mul_tmp3 = Host_mul_tmp3;
 
 			#if defined (FIXED_POINT_INTERE)
+/*
 			fixpt_cube [0][0][0] = fixedpt64_fromfloat(GlobFgrids[cube_000 + mul_tmp3]);
         	        fixpt_cube [1][0][0] = fixedpt64_fromfloat(GlobFgrids[cube_100 + mul_tmp3]);
         	        fixpt_cube [0][1][0] = fixedpt64_fromfloat(GlobFgrids[cube_010 + mul_tmp3]);
@@ -389,6 +431,15 @@ while(active) {
         	        fixpt_cube [1][0][1] = fixedpt64_fromfloat(GlobFgrids[cube_101 + mul_tmp3]);
         	        fixpt_cube [0][1][1] = fixedpt64_fromfloat(GlobFgrids[cube_011 + mul_tmp3]);
         	        fixpt_cube [1][1][1] = fixedpt64_fromfloat(GlobFgrids[cube_111 + mul_tmp3]);
+*/
+			fixpt_cube [0][0][0] = GlobFgrids[cube_000 + mul_tmp3];
+        	        fixpt_cube [1][0][0] = GlobFgrids[cube_100 + mul_tmp3];
+        	        fixpt_cube [0][1][0] = GlobFgrids[cube_010 + mul_tmp3];
+        	        fixpt_cube [1][1][0] = GlobFgrids[cube_110 + mul_tmp3];
+        	        fixpt_cube [0][0][1] = GlobFgrids[cube_001 + mul_tmp3];
+        	        fixpt_cube [1][0][1] = GlobFgrids[cube_101 + mul_tmp3];
+        	        fixpt_cube [0][1][1] = GlobFgrids[cube_011 + mul_tmp3];
+        	        fixpt_cube [1][1][1] = GlobFgrids[cube_111 + mul_tmp3];
 			#else
 			cube [0][0][0] = GlobFgrids[cube_000 + mul_tmp3];
         	        cube [1][0][0] = GlobFgrids[cube_100 + mul_tmp3];
@@ -413,16 +464,16 @@ while(active) {
 			#endif
 
 			#if defined (FIXED_POINT_INTERE)
-			fixpt_partialE3 = fixedpt64_smul(fixedpt64_abs(fixpt_q), 
+			fixpt_partialE3 = fixedpt64_mul(fixedpt64_abs(fixpt_q), 
 								  	(
-					       			fixedpt64_smul(fixpt_cube[0][0][0], fixpt_weights[0][0][0]) +
-				    	       			fixedpt64_smul(fixpt_cube[1][0][0], fixpt_weights[1][0][0]) +
-				    	       			fixedpt64_smul(fixpt_cube[0][1][0], fixpt_weights[0][1][0]) +
-				    	       			fixedpt64_smul(fixpt_cube[1][1][0], fixpt_weights[1][1][0]) + 
-				    	       			fixedpt64_smul(fixpt_cube[0][0][1], fixpt_weights[0][0][1]) +
-				    	       			fixedpt64_smul(fixpt_cube[1][0][1], fixpt_weights[1][0][1]) + 
-				    	       			fixedpt64_smul(fixpt_cube[0][1][1], fixpt_weights[0][1][1]) +
-				    	       			fixedpt64_smul(fixpt_cube[1][1][1], fixpt_weights[1][1][1])
+					       			fixedpt64_mul(fixpt_cube[0][0][0], fixpt_weights[0][0][0]) +
+				    	       			fixedpt64_mul(fixpt_cube[1][0][0], fixpt_weights[1][0][0]) +
+				    	       			fixedpt64_mul(fixpt_cube[0][1][0], fixpt_weights[0][1][0]) +
+				    	       			fixedpt64_mul(fixpt_cube[1][1][0], fixpt_weights[1][1][0]) + 
+				    	       			fixedpt64_mul(fixpt_cube[0][0][1], fixpt_weights[0][0][1]) +
+				    	       			fixedpt64_mul(fixpt_cube[1][0][1], fixpt_weights[1][0][1]) + 
+				    	       			fixedpt64_mul(fixpt_cube[0][1][1], fixpt_weights[0][1][1]) +
+				    	       			fixedpt64_mul(fixpt_cube[1][1][1], fixpt_weights[1][1][1])
 					      		          	)
 						  	);
 			#else
@@ -490,3 +541,4 @@ while(active) {
 }
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------
+
