@@ -258,12 +258,18 @@ int prepare_conststatic_fields_for_gpu(Liganddata* 	       myligand_reference,
 	int type_id1, type_id2;
 	float* floatpoi;
 	char* charpoi;
+	cl_char3* charpoi3;
 	//float phi, theta, genrotangle;
 
 	// arrays to store intermmediate data
 	float atom_charges[MAX_NUM_OF_ATOMS];
 	char  atom_types[MAX_NUM_OF_ATOMS];
+/*
 	char  intraE_contributors[3*MAX_INTRAE_CONTRIBUTORS];
+*/
+
+	cl_char3  intraE_contributors[MAX_INTRAE_CONTRIBUTORS];
+
 	float VWpars_AC[MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES];
 	float VWpars_BD[MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES];
 	float dspars_S[MAX_NUM_OF_ATYPES];
@@ -298,12 +304,13 @@ int prepare_conststatic_fields_for_gpu(Liganddata* 	       myligand_reference,
 		return 1;
 	}
 
-	charpoi = intraE_contributors;
+	charpoi3 = intraE_contributors;
 	for (i=0; i<myligand_reference->num_of_atoms-1; i++)
 		for (j=i+1; j<myligand_reference->num_of_atoms; j++)
 		{
 			if (myligand_reference->intraE_contributors[i][j] == 1)
 			{
+/*
 				*charpoi = (char) i;
 				charpoi++;
 				*charpoi = (char) j;
@@ -316,6 +323,19 @@ int prepare_conststatic_fields_for_gpu(Liganddata* 	       myligand_reference,
 				else
 					*charpoi = (char) 0;
 				charpoi++;
+*/
+				(*charpoi3).x = (char) i;
+				//charpoi++;
+				(*charpoi3).y = (char) j;
+				//charpoi++;
+
+				type_id1 = (int) myligand_reference->atom_idxyzq [i][0];
+				type_id2 = (int) myligand_reference->atom_idxyzq [j][0];
+				if (is_H_bond(myligand_reference->atom_types[type_id1], myligand_reference->atom_types[type_id2]) != 0)
+					(*charpoi3).z = (char) 1;
+				else
+					(*charpoi3).z = (char) 0;
+				charpoi3++;
 			}
 		}
 
@@ -375,7 +395,12 @@ int prepare_conststatic_fields_for_gpu(Liganddata* 	       myligand_reference,
 
 
 	for (m=0;m<MAX_NUM_OF_ATOMS;m++)                   { KerConstStatic->atom_types_const[m]   = atom_types[m];   }
+/*
 	for (m=0;m<3*MAX_INTRAE_CONTRIBUTORS;m++)          { KerConstStatic->intraE_contributors_const[m]   = intraE_contributors[m]; }
+*/
+	for (m=0;m<MAX_INTRAE_CONTRIBUTORS;m++)          { KerConstStatic->intraE_contributors_const[m]   = intraE_contributors[m]; }
+
+
 	for (m=0;m<MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES;m++){ KerConstStatic->VWpars_AC_const[m]    = VWpars_AC[m];    }
 	for (m=0;m<MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES;m++){ KerConstStatic->VWpars_BD_const[m]    = VWpars_BD[m];    }
 	for (m=0;m<MAX_NUM_OF_ATYPES;m++)		   { KerConstStatic->dspars_S_const[m]     = dspars_S[m];     }

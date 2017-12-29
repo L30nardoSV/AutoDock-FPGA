@@ -122,7 +122,12 @@ typedef struct
        	float atom_charges_const[MAX_NUM_OF_ATOMS]                    __attribute__ ((aligned (512)));
 #endif
        	char  atom_types_const  [MAX_NUM_OF_ATOMS]                    __attribute__ ((aligned (128)));
+
+/*
        	char  intraE_contributors_const[3*MAX_INTRAE_CONTRIBUTORS]    __attribute__ ((aligned (32768)));
+*/
+	cl_char3  intraE_contributors_const[MAX_INTRAE_CONTRIBUTORS]    __attribute__ ((aligned (32768)));
+
        	float VWpars_AC_const   [MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES] __attribute__ ((aligned (1024)));
        	float VWpars_BD_const   [MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES] __attribute__ ((aligned (1024)));
       	float dspars_S_const    [MAX_NUM_OF_ATYPES]                   __attribute__ ((aligned (64)));

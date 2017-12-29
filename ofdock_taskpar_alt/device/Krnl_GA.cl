@@ -94,6 +94,19 @@ channel bool    chan_GA2LS_Off3_active;
 
 channel bool    chan_IGLArbiter_Off;
 
+/*
+// IA Pipeline
+channel bool   chan_Intrae2IA_active;
+channel float3 chan_Intrae2IA_fpipe __attribute__((depth(4)));
+channel float  chan_IA2Intrae_intraE;
+
+// P2
+channel bool   chan_Intrae2IA_P2_active;
+channel float3 chan_Intrae2IA_P2_fpipe __attribute__((depth(4)));
+channel float  chan_IA2Intrae_P2_intraE;
+*/
+
+
 // --------------------------------------------------------------------------
 // These functions map the argument into the interval 0 - 180, or 0 - 360
 // by adding/subtracting n*ang_max to/from it.
@@ -172,6 +185,8 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 	for (ushort pop_cnt = 0; pop_cnt < DockConst_pop_size; pop_cnt++) {
 		// calculate energy
 		write_channel_altera(chan_GA2IGL_IC_active, true);
+		mem_fence(CLK_CHANNEL_MEM_FENCE);
+
 		for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_genes; pipe_cnt++) {
 			LocalPopCurr[pop_cnt][pipe_cnt & 0x3F] = GlobPopulationCurrent[pop_cnt*ACTUAL_GENOTYPE_LENGTH + pipe_cnt];
 			write_channel_altera(chan_IC2Conf_genotype, LocalPopCurr[pop_cnt][pipe_cnt & 0x3F]);	
@@ -442,7 +457,6 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			write_channel_altera(chan_GA2LS_LS1_energy, LocalEneNext[entity_ls1]);
 			write_channel_altera(chan_GA2LS_LS2_energy, LocalEneNext[entity_ls2]);
 			write_channel_altera(chan_GA2LS_LS3_energy, LocalEneNext[entity_ls3]);
-
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 			for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
@@ -513,7 +527,9 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 	write_channel_altera(chan_GA2LS_Off3_active,  false);	// turn off LS3_Arbiter, LS3 
 	write_channel_altera(chan_GA2PRNG_Off_active, false);	// turn off all PRNGs kernels
 	write_channel_altera(chan_IGLArbiter_Off,     false);   // turn off IGL_Arbiter, Conform, InterE, IntraE
-	
+/*
+	write_channel_altera(chan_Intrae2IA_Off,      false);	// turn off IAPipeline
+*/	
 	for (ushort pop_cnt=0;pop_cnt<DockConst_pop_size; pop_cnt++) { 	
 		for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
 			GlobPopulationCurrent[pop_cnt*ACTUAL_GENOTYPE_LENGTH + gene_cnt] = LocalPopCurr[pop_cnt][gene_cnt & 0x3F];
@@ -546,8 +562,8 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 #include "Krnl_Conform.cl"
 #include "Krnl_InterE.cl"
 
-#if defined (FIXED_POINT_INTRAE)
-#include "Krnl_IntraE_fixedpt.cl"
-#else
 #include "Krnl_IntraE.cl"
-#endif
+/*
+#include "Krnl_IA_Pipeline.cl"
+#include "Krnl_IA_Pipeline2.cl"
+*/

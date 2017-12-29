@@ -14,6 +14,7 @@ float sqrt_custom(const float x)
 // --------------------------------------------------------------------------
 __kernel __attribute__ ((max_global_work_dim(0)))
 void Krnl_IntraE(
+
 #if defined (FIXED_POINT_INTERE)
  	     __constant fixedpt64* restrict KerConstStatic_atom_charges_const,
 #else
@@ -21,20 +22,26 @@ void Krnl_IntraE(
 #endif
 
  	     __constant char*  restrict KerConstStatic_atom_types_const,
+
+
+/*
 	     __constant char*  restrict KerConstStatic_intraE_contributors_const,
+*/
+	     __constant char3* restrict KerConstStatic_intraE_contributors_const,
 	     __constant float* restrict KerConstStatic_VWpars_AC_const,
 	     __constant float* restrict KerConstStatic_VWpars_BD_const,
 	     __constant float* restrict KerConstStatic_dspars_S_const,
  	     __constant float* restrict KerConstStatic_dspars_V_const,
 
-			    unsigned char                    DockConst_num_of_atoms,
-		   	    unsigned int                     DockConst_num_of_intraE_contributors,
-		  	    float                            DockConst_grid_spacing,
-			    unsigned char                    DockConst_num_of_atypes,
-			    float                            DockConst_coeff_elec,
-			    float                            DockConst_qasp,
-			    float                            DockConst_coeff_desolv,
-   			    unsigned int                     Host_square_num_of_atypes
+			unsigned char                    DockConst_num_of_atoms,
+		   	unsigned int                     DockConst_num_of_intraE_contributors,
+		  	float                            DockConst_grid_spacing,
+			unsigned char                    DockConst_num_of_atypes,
+			float                            DockConst_coeff_elec,
+			float                            DockConst_qasp,
+			float                            DockConst_coeff_desolv,
+   			unsigned int                     Host_square_num_of_atypes
+
 )
 {
 	bool active = true;
@@ -46,6 +53,7 @@ void Krnl_IntraE(
 	__local float dspars_S_localcache     [MAX_NUM_OF_ATYPES];
 	__local float dspars_V_localcache     [MAX_NUM_OF_ATYPES];
 
+
 	for (uchar i=0; i<DockConst_num_of_atoms; i++) {
 		atom_types_localcache   [i] = KerConstStatic_atom_types_const   [i];
 #if defined (FIXED_POINT_INTERE)
@@ -55,14 +63,16 @@ void Krnl_IntraE(
 #endif
 	}
 
+
 	for (uchar i=0; i<Host_square_num_of_atypes; i++) {
 		if (i < DockConst_num_of_atypes) {
 			dspars_S_localcache [i] = KerConstStatic_dspars_S_const [i];
 			dspars_V_localcache [i] = KerConstStatic_dspars_V_const [i];
 		}
-	
+		
 		VWpars_AC_localcache [i] = KerConstStatic_VWpars_AC_const [i];
 		VWpars_BD_localcache [i] = KerConstStatic_VWpars_BD_const [i];
+		
 	}
 
 /*
@@ -79,6 +89,21 @@ void Krnl_IntraE(
 // passed correctly
 printf("kernel intraE %i \n", DockConst_num_of_intraE_contributors);
 */
+
+/*
+	__local char  intraE_contributors_localcache   [3*MAX_INTRAE_CONTRIBUTORS];
+
+	for (ushort i=0; i<3*MAX_INTRAE_CONTRIBUTORS; i++) {
+		intraE_contributors_localcache [i] = KerConstStatic_intraE_contributors_const [i];	
+	}
+*/
+
+	__local char3  intraE_contributors_localcache   [MAX_INTRAE_CONTRIBUTORS];
+
+	for (ushort i=0; i<MAX_INTRAE_CONTRIBUTORS; i++) {
+		intraE_contributors_localcache [i] = KerConstStatic_intraE_contributors_const [i];	
+	}
+
 while(active) {
 	char mode;
 
@@ -125,24 +150,46 @@ while(active) {
 	if (active == 0) {printf("	%-20s: %s\n", "Krnl_IntraE", "must be disabled");}
 	#endif
 
+
+
+
+
+
 	float intraE = 0.0f;
 
+
+
+
+	// create shift register to reduce II (initially II=32, unroll-factor=8) 
+	// use fixedpt64 to reduce II=4 (after shift-register) downto II=1
+	//float shift_intraE[33];
+	fixedpt64 shift_intraE[33];
+
+	#pragma unroll
+	for (uchar i=0; i<33; i++) {
+		//shift_intraE[i] = 0.0f;
+		shift_intraE[i] = 0;
+	}
+
+
+
+
+
 	//for each intramolecular atom contributor pair
+
+	#pragma unroll	8
 	for (ushort contributor_counter=0; contributor_counter<DockConst_num_of_intraE_contributors; contributor_counter++) {
+
 		/*
 		// passed correctly
 		printf("kernel intraE %i: %i \n", contributor_counter, DockConst_num_of_intraE_contributors);
 		*/
 
-		char ref_intraE_contributors_const[3];
+		char3 ref_intraE_contributors_const;
+		ref_intraE_contributors_const = intraE_contributors_localcache[contributor_counter];
 
-		#pragma unroll
-		for (uchar i=0; i<3; i++) {
-			ref_intraE_contributors_const[i] = KerConstStatic_intraE_contributors_const[3*contributor_counter+i];
-		}
-
-		char atom1_id = ref_intraE_contributors_const[0];
-		char atom2_id = ref_intraE_contributors_const[1];
+		char atom1_id = ref_intraE_contributors_const.x;
+		char atom2_id = ref_intraE_contributors_const.y;
 
 		float3 loc_coords_atid1 = loc_coords[atom1_id];
 		float3 loc_coords_atid2 = loc_coords[atom2_id];
@@ -203,7 +250,10 @@ while(active) {
 
 			float tmp_pE2 = VWpars_BD_localcache [atom1_typeid*DockConst_num_of_atypes+atom2_typeid];
 
+			/*
 			if (ref_intraE_contributors_const[2] == 1)	//H-bond
+			*/
+			if (ref_intraE_contributors_const.z == 1)	//H-bond
 				/*
 				partialE2 = tmp_pE2 * inverse_distance_pow_10;
 				*/
@@ -228,9 +278,34 @@ while(active) {
 
 		} // End of if: if ((dist < dcutoff) && (dist < 20.48))	
 
-		intraE += partialE1 + partialE2 + partialE3 + partialE4;
 
+/*
+		intraE += partialE1 + partialE2 + partialE3 + partialE4;
+*/		
+
+		//shift_intraE[32] = shift_intraE[0] + partialE1 + partialE2 + partialE3 + partialE4;
+		shift_intraE[32] = shift_intraE[0] + fixedpt64_fromfloat(partialE1) + 
+						     fixedpt64_fromfloat(partialE2) + 
+						     fixedpt64_fromfloat(partialE3) + 
+						     fixedpt64_fromfloat(partialE4);
+
+		#pragma unroll
+		for (uchar j=0; j<32; j++) {
+			shift_intraE[j] = shift_intraE[j+1];
+		}
+
+		
 	} // End of contributor_counter for-loop
+
+	fixedpt64 fixpt_intraE = 0;
+
+	#pragma unroll
+	for (uchar j=0; j<32; j++) {
+		//intraE += shift_intraE[j];
+		fixpt_intraE += shift_intraE[j];
+	}
+	intraE = fixedpt64_tofloat(fixpt_intraE);
+
 
 	// --------------------------------------------------------------
 	// Send intramolecular energy to channel

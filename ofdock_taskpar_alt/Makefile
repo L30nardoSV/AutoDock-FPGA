@@ -174,6 +174,11 @@ ENABLE_K26 = YES
 
 ENABLE_K27 = YES
 
+# IA Pipeline
+ENABLE_K28 = NO
+ENABLE_K29 = NO
+ENABLE_K30 = NO
+
 ifeq ($(ENABLE_K1),YES)
 	K1 =-DENABLE_KERNEL1
 else
@@ -342,7 +347,25 @@ else
 	K27 =
 endif
 
-ENABLE_KERNELS = $(K1) $(K2) $(K3) $(K4) $(K5) $(K6) $(K7) $(K8) $(K9) $(K10) $(K11) $(K12) $(K13) $(K14) $(K15) $(K16) $(K17) $(K18) $(K19) $(K20) $(K21) $(K22) $(K23) $(K24) $(K25) $(K26) $(K27)
+ifeq ($(ENABLE_K28),YES)
+	K28 =-DENABLE_KERNEL28
+else
+	K28 =
+endif
+
+ifeq ($(ENABLE_K29),YES)
+	K29 =-DENABLE_KERNEL29
+else
+	K29 =
+endif
+
+ifeq ($(ENABLE_K30),YES)
+	K30 =-DENABLE_KERNEL30
+else
+	K30 =
+endif
+
+ENABLE_KERNELS = $(K1) $(K2) $(K3) $(K4) $(K5) $(K6) $(K7) $(K8) $(K9) $(K10) $(K11) $(K12) $(K13) $(K14) $(K15) $(K16) $(K17) $(K18) $(K19) $(K20) $(K21) $(K22) $(K23) $(K24) $(K25) $(K26) $(K27) $(K28) $(K29) $(K30)
 
 # =============================
 # Reproduce result (remove randomness)
@@ -410,7 +433,7 @@ $(TARGET_DIR)/$(TARGET) : Makefile $(SRCS) $(INCS) $(TARGET_DIR)
 
 # Docking parameters
 # NEV was usually set to 100000
-PDB  := 3ptb
+PDB  := 1stp
 NRUN := 10
 NEV  := 50000 
 

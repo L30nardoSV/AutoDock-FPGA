@@ -143,6 +143,30 @@ freq: 170 MHz
 >>> commit "added intere no overf no sat fixedpt32.32"
 
 
+	--------------------------------------------------------------
+	Changes not commited but tested, produces slowdown
+	Some of them are kept
+
+	X65: `Krnl_IntraE`: is divided into `Krnl_IntraE`, `Krnl_IA_pipeline`, `Krnl_IA_pipeline2` to make computation faster
+
+	X66. ref_intraE_contributors_const[] is created as local memory, too big? -> it fits! 
+	X67. contributors are passed from calcenergy.cpp to Krnl_IntraE as char3 instead of char
+
+	freq: 187 MHz, freq: 169 MHz
+	---------------------------------------------------------------
+
+
+
+65. ref_intraE_contributors_const[] is created as local memory
+66. contributors are passed from calcenergy.cpp to Krnl_IntraE as char3 instead of char
+67. `Krnl_InterE.cl` + `performdocking.cpp`: pass GlobFgrids as floats (just disable switch to pass them as fixedpt64)
+68. `Krnl_InterE.cl`: unroll big computation for-loop with unroll-factor = 8 + shift-register + internal fixedpt64, to make II = 1 (without shift & fixedpt, II = 32)
+
+(RECALL: estimated free energy of binding increased by 1 Kcal/mol in all runs)
+freq: 185 MHz
+>>> commit "unrolled intrae main loop with factor 8"
+
+
 
 
 
@@ -155,21 +179,9 @@ freq: 170 MHz
 
 NOT DONE YET
 
-slowdown
-even worse: correct results on 3ptb, but  incorrect results on other pdbs  (1stp, 3ce3) when intere is in fixedpt, 
-porbably the multiplication is sitll wrong, switching intere back to floatpoint solved it
-
-
-
-checking the final_population_run files, it seems we dont need 48.12 format, probably with 32.32 for energies would be good enough -> the multiplication would be easier
-
-Check here https://de.mathworks.com/help/fixedpoint/ug/range-and-precision.html?requestedDomain=www.mathworks.com
-
-
+LS -> apply fixedpt
 
 Makefile: pass separetely all other PDBS
-
-
 
 add to Makefile exe rule for the 3 compounds, otherwise errors maight be silent not caught, 
 

@@ -215,6 +215,24 @@ static cl_kernel kernel27  = NULL;
 static const char *name_k27 = "Krnl_IGL_Arbiter";
 #endif
 
+#ifdef ENABLE_KERNEL28
+static cl_command_queue command_queue28 = NULL;
+static cl_kernel kernel28  = NULL;
+static const char *name_k28 = "Krnl_IA_pipeline_Arbiter";
+#endif
+
+#ifdef ENABLE_KERNEL29
+static cl_command_queue command_queue29 = NULL;
+static cl_kernel kernel29  = NULL;
+static const char *name_k29 = "Krnl_IA_pipeline";
+#endif
+
+#ifdef ENABLE_KERNEL30
+static cl_command_queue command_queue30 = NULL;
+static cl_kernel kernel30  = NULL;
+static const char *name_k30 = "Krnl_IA_pipeline2";
+#endif
+
 static cl_program program = NULL;
 
 // Function prototypes
@@ -375,7 +393,8 @@ filled with clock() */
 	//Dockparameters dockpars;
 	
 
-#if defined (FIXED_POINT_INTERE)
+//#if defined (FIXED_POINT_INTERE)
+#if 0
 	size_t size_fixedpt64grids;
 #else
 	size_t size_floatgrids;
@@ -495,7 +514,8 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 
  	//allocating GPU memory for populations, floatgrids,
 	//energies, evaluation counters and random number generator states
-#if defined (FIXED_POINT_INTERE)
+//#if defined (FIXED_POINT_INTERE)
+#if 0
 	size_fixedpt64grids = (sizeof(fixedpt64)) * (mygrid->num_of_atypes+2) * (mygrid->size_xyz[0]) * (mygrid->size_xyz[1]) * (mygrid->size_xyz[2]);
 #else
 	size_floatgrids = (sizeof(float)) * (mygrid->num_of_atypes+2) * (mygrid->size_xyz[0]) * (mygrid->size_xyz[1]) * (mygrid->size_xyz[2]);
@@ -507,7 +527,13 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ATOMS*sizeof(float),                    &mem_KerConstStatic_atom_charges_const);
 #endif
 	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ATOMS*sizeof(char),                     &mem_KerConstStatic_atom_types_const);
+
+/*
 	mallocBufferObject(context,CL_MEM_READ_ONLY, 3*MAX_INTRAE_CONTRIBUTORS*sizeof(char),            &mem_KerConstStatic_intraE_contributors_const);
+*/
+	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_INTRAE_CONTRIBUTORS*sizeof(cl_char3),            &mem_KerConstStatic_intraE_contributors_const);
+
+
 	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES*sizeof(float), &mem_KerConstStatic_VWpars_AC_const);
 	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES*sizeof(float), &mem_KerConstStatic_VWpars_BD_const);
 	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ATYPES*sizeof(float), 			&mem_KerConstStatic_dspars_S_const);
@@ -526,7 +552,8 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ROTBONDS*sizeof(cl_float3), 		&mem_KerConstStatic_rotbonds_unit_vectors_const);
 	#endif
 
-#if defined (FIXED_POINT_INTERE)
+//#if defined (FIXED_POINT_INTERE)
+#if 0
 	mallocBufferObject(context,CL_MEM_READ_ONLY,size_fixedpt64grids,   	&mem_dockpars_fgrids);
 #else
 	mallocBufferObject(context,CL_MEM_READ_ONLY,size_floatgrids,   		&mem_dockpars_fgrids);
@@ -545,7 +572,12 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_atom_charges_const,            &KerConstStatic.atom_charges_const[0],            MAX_NUM_OF_ATOMS*sizeof(float));
 #endif
 	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_atom_types_const,              &KerConstStatic.atom_types_const[0],              MAX_NUM_OF_ATOMS*sizeof(char));
+
+/*
 	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_intraE_contributors_const,     &KerConstStatic.intraE_contributors_const[0],     3*MAX_INTRAE_CONTRIBUTORS*sizeof(char));
+*/
+	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_intraE_contributors_const,     &KerConstStatic.intraE_contributors_const[0],     MAX_INTRAE_CONTRIBUTORS*sizeof(cl_char3));
+
 	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_VWpars_AC_const,               &KerConstStatic.VWpars_AC_const[0],               MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES*sizeof(float));
 	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_VWpars_BD_const,               &KerConstStatic.VWpars_BD_const[0],               MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES*sizeof(float));
 	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_dspars_S_const,                &KerConstStatic.dspars_S_const[0], 	       MAX_NUM_OF_ATYPES*sizeof(float));
@@ -564,7 +596,8 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_rotbonds_unit_vectors_const,   &KerConstStatic.rotbonds_unit_vectors_const[0],   MAX_NUM_OF_ROTBONDS*sizeof(cl_float3));
 	#endif
 
-#if defined (FIXED_POINT_INTERE)
+//#if defined (FIXED_POINT_INTERE)
+#if 0
 /*
 	cpu_fixedpt64grids = (fixedpt64*) alignedMalloc((sizeof(fixedpt64))*(mygrid->num_of_atypes+2)*
 						  			    (mygrid->size_xyz[0])*
@@ -589,7 +622,15 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 					float tmp_grids = *mypoi;
 					mypoi++;
 					*myqoi = fixedpt64_fromfloat(tmp_grids);
+
+					// test to prove that it requires 32.32
+					// and 16.16 is not enough
+					//fixedpt myqoi16 = fixedpt_fromfloat(tmp_grids);
+					//printf("%-10f %-10f %-10f\n", tmp_grids, fixedpt64_tofloat(*myqoi), fixedpt_tofloat(myqoi16));
+					
 					myqoi++;
+
+					
 				}
 	}
 
@@ -665,21 +706,24 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 #endif // End of ENABLE_KERNEL3
 
 #ifdef ENABLE_KERNEL4 // Krnl_IntraE
+
 	setKernelArg(kernel4,0,  sizeof(mem_KerConstStatic_atom_charges_const),        &mem_KerConstStatic_atom_charges_const);
 	setKernelArg(kernel4,1,  sizeof(mem_KerConstStatic_atom_types_const),          &mem_KerConstStatic_atom_types_const);
-	setKernelArg(kernel4,2,  sizeof(mem_KerConstStatic_intraE_contributors_const), &mem_KerConstStatic_intraE_contributors_const);
+	setKernelArg(kernel4,2/*0*/,  sizeof(mem_KerConstStatic_intraE_contributors_const), &mem_KerConstStatic_intraE_contributors_const);
 	setKernelArg(kernel4,3,  sizeof(mem_KerConstStatic_VWpars_AC_const),           &mem_KerConstStatic_VWpars_AC_const);
 	setKernelArg(kernel4,4,  sizeof(mem_KerConstStatic_VWpars_BD_const),           &mem_KerConstStatic_VWpars_BD_const);
 	setKernelArg(kernel4,5,  sizeof(mem_KerConstStatic_dspars_S_const),            &mem_KerConstStatic_dspars_S_const);
 	setKernelArg(kernel4,6,  sizeof(mem_KerConstStatic_dspars_V_const),            &mem_KerConstStatic_dspars_V_const);
-	setKernelArg(kernel4,7,  sizeof(unsigned char),                         &dockpars.num_of_atoms);
-	setKernelArg(kernel4,8,  sizeof(unsigned int),                          &dockpars.num_of_intraE_contributors);
+
+	setKernelArg(kernel4,7 /*1*/, sizeof(unsigned char),                    &dockpars.num_of_atoms);
+	setKernelArg(kernel4,8 /*2*/, sizeof(unsigned int),                     &dockpars.num_of_intraE_contributors);
 	setKernelArg(kernel4,9,  sizeof(float),                          	&dockpars.grid_spacing);
-	setKernelArg(kernel4,10, sizeof(unsigned char),                         &dockpars.num_of_atypes);
+	setKernelArg(kernel4,10, sizeof(unsigned char),                    	&dockpars.num_of_atypes);
 	setKernelArg(kernel4,11, sizeof(float),                          	&dockpars.coeff_elec);
 	setKernelArg(kernel4,12, sizeof(float),                          	&dockpars.qasp);
 	setKernelArg(kernel4,13, sizeof(float),                          	&dockpars.coeff_desolv);
-	setKernelArg(kernel4,14, sizeof(unsigned int),                          &square_num_of_atypes);
+	setKernelArg(kernel4,14, sizeof(unsigned int),                     	&square_num_of_atypes);
+
 #endif // End of ENABLE_KERNEL4
 
 #ifdef ENABLE_KERNEL6 // Krnl_PRNG_GG_float
@@ -825,6 +869,55 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 #ifdef ENABLE_KERNEL27 // Krnl_IGL_Arbiter
 	setKernelArg(kernel27,0, sizeof(unsigned char),  &dockpars.num_of_genes);
 #endif // End of ENABLE_KERNEL27
+
+#ifdef ENABLE_KERNEL28 // 
+
+#endif // End of ENABLE_KERNEL28
+
+
+#ifdef ENABLE_KERNEL29 // 
+	setKernelArg(kernel29,0,  sizeof(mem_KerConstStatic_atom_charges_const),        &mem_KerConstStatic_atom_charges_const);
+	setKernelArg(kernel29,1,  sizeof(mem_KerConstStatic_atom_types_const),          &mem_KerConstStatic_atom_types_const);
+/*
+	setKernelArg(kernel4,2,  sizeof(mem_KerConstStatic_intraE_contributors_const), &mem_KerConstStatic_intraE_contributors_const);
+*/
+	setKernelArg(kernel29,2,  sizeof(mem_KerConstStatic_VWpars_AC_const),           &mem_KerConstStatic_VWpars_AC_const);
+	setKernelArg(kernel29,3,  sizeof(mem_KerConstStatic_VWpars_BD_const),           &mem_KerConstStatic_VWpars_BD_const);
+	setKernelArg(kernel29,4,  sizeof(mem_KerConstStatic_dspars_S_const),            &mem_KerConstStatic_dspars_S_const);
+	setKernelArg(kernel29,5,  sizeof(mem_KerConstStatic_dspars_V_const),            &mem_KerConstStatic_dspars_V_const);
+	setKernelArg(kernel29,6,  sizeof(unsigned char),                         &dockpars.num_of_atoms);
+/*
+	setKernelArg(kernel29,7,  sizeof(unsigned int),                          &dockpars.num_of_intraE_contributors);
+*/
+	setKernelArg(kernel29,7,  sizeof(float),                          	 &dockpars.grid_spacing);
+	setKernelArg(kernel29,8,  sizeof(unsigned char),                         &dockpars.num_of_atypes);
+	setKernelArg(kernel29,9, sizeof(float),                          	 &dockpars.coeff_elec);
+	setKernelArg(kernel29,10, sizeof(float),                          	 &dockpars.qasp);
+	setKernelArg(kernel29,11, sizeof(float),                          	 &dockpars.coeff_desolv);
+	setKernelArg(kernel29,12, sizeof(unsigned int),                          &square_num_of_atypes);
+#endif // 
+
+#ifdef ENABLE_KERNEL30 // 
+	setKernelArg(kernel30,0,  sizeof(mem_KerConstStatic_atom_charges_const),        &mem_KerConstStatic_atom_charges_const);
+	setKernelArg(kernel30,1,  sizeof(mem_KerConstStatic_atom_types_const),          &mem_KerConstStatic_atom_types_const);
+/*
+	setKernelArg(kernel4,2,  sizeof(mem_KerConstStatic_intraE_contributors_const), &mem_KerConstStatic_intraE_contributors_const);
+*/
+	setKernelArg(kernel30,2,  sizeof(mem_KerConstStatic_VWpars_AC_const),           &mem_KerConstStatic_VWpars_AC_const);
+	setKernelArg(kernel30,3,  sizeof(mem_KerConstStatic_VWpars_BD_const),           &mem_KerConstStatic_VWpars_BD_const);
+	setKernelArg(kernel30,4,  sizeof(mem_KerConstStatic_dspars_S_const),            &mem_KerConstStatic_dspars_S_const);
+	setKernelArg(kernel30,5,  sizeof(mem_KerConstStatic_dspars_V_const),            &mem_KerConstStatic_dspars_V_const);
+	setKernelArg(kernel30,6,  sizeof(unsigned char),                         &dockpars.num_of_atoms);
+/*
+	setKernelArg(kernel30,7,  sizeof(unsigned int),                          &dockpars.num_of_intraE_contributors);
+*/
+	setKernelArg(kernel30,7,  sizeof(float),                          	 &dockpars.grid_spacing);
+	setKernelArg(kernel30,8,  sizeof(unsigned char),                         &dockpars.num_of_atypes);
+	setKernelArg(kernel30,9, sizeof(float),                          	 &dockpars.coeff_elec);
+	setKernelArg(kernel30,10, sizeof(float),                          	 &dockpars.qasp);
+	setKernelArg(kernel30,11, sizeof(float),                          	 &dockpars.coeff_desolv);
+	setKernelArg(kernel30,12, sizeof(unsigned int),                          &square_num_of_atypes);
+#endif // 
 
 	for (unsigned int run_cnt = 0; run_cnt < mypars->num_of_runs; run_cnt++)
 	{
@@ -1062,6 +1155,18 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 		runKernelTask(command_queue27,kernel27,NULL,NULL);
 		#endif // ENABLE_KERNEL27
 
+		#ifdef ENABLE_KERNEL28
+		runKernelTask(command_queue28,kernel28,NULL,NULL);
+		#endif // ENABLE_KERNEL28
+
+		#ifdef ENABLE_KERNEL29
+		runKernelTask(command_queue29,kernel29,NULL,NULL);
+		#endif // ENABLE_KERNEL29
+
+		#ifdef ENABLE_KERNEL30
+		runKernelTask(command_queue30,kernel30,NULL,NULL);
+		#endif // ENABLE_KERNEL30
+
 		#ifdef ENABLE_KERNEL1 		
 		clFinish(command_queue1); 
 		#endif
@@ -1168,6 +1273,18 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 
 		#ifdef ENABLE_KERNEL27
 		clFinish(command_queue27);
+		#endif
+
+		#ifdef ENABLE_KERNEL28
+		clFinish(command_queue28);
+		#endif
+
+		#ifdef ENABLE_KERNEL29
+		clFinish(command_queue29);
+		#endif
+
+		#ifdef ENABLE_KERNEL30
+		clFinish(command_queue30);
 		#endif
 
 		clock_stop_docking = clock();
@@ -1616,6 +1733,27 @@ bool init() {
   checkError(status, "Failed to create kernel");
 #endif
 
+#ifdef ENABLE_KERNEL28
+  command_queue28 = clCreateCommandQueue(context, device, 0, &status);
+  checkError(status, "Failed to create command queue28");
+  kernel28 = clCreateKernel(program, name_k28, &status);
+  checkError(status, "Failed to create kernel");
+#endif
+
+#ifdef ENABLE_KERNEL29
+  command_queue29 = clCreateCommandQueue(context, device, 0, &status);
+  checkError(status, "Failed to create command queue29");
+  kernel29 = clCreateKernel(program, name_k29, &status);
+  checkError(status, "Failed to create kernel");
+#endif
+
+#ifdef ENABLE_KERNEL30
+  command_queue30 = clCreateCommandQueue(context, device, 0, &status);
+  checkError(status, "Failed to create command queue30");
+  kernel30 = clCreateKernel(program, name_k30, &status);
+  checkError(status, "Failed to create kernel");
+#endif
+
   return true;
 }
 
@@ -1754,6 +1892,21 @@ void cleanup() {
 #ifdef ENABLE_KERNEL27
   if(kernel27) {clReleaseKernel(kernel27);}
   if(command_queue27) {clReleaseCommandQueue(command_queue27);}
+#endif
+
+#ifdef ENABLE_KERNEL28
+  if(kernel28) {clReleaseKernel(kernel28);}
+  if(command_queue28) {clReleaseCommandQueue(command_queue28);}
+#endif
+
+#ifdef ENABLE_KERNEL29
+  if(kernel29) {clReleaseKernel(kernel29);}
+  if(command_queue29) {clReleaseCommandQueue(command_queue29);}
+#endif
+
+#ifdef ENABLE_KERNEL30
+  if(kernel30) {clReleaseKernel(kernel30);}
+  if(command_queue30) {clReleaseCommandQueue(command_queue30);}
 #endif
 
   if(program) {clReleaseProgram(program);}

@@ -15,7 +15,8 @@
 // --------------------------------------------------------------------------
 __kernel __attribute__ ((max_global_work_dim(0)))
 void Krnl_InterE(
-#if defined (FIXED_POINT_INTERE)
+//#if defined (FIXED_POINT_INTERE)
+#if 0
 	     __constant fixedpt64* restrict GlobFgrids,
 #else
              __constant float* restrict GlobFgrids,
@@ -262,7 +263,7 @@ while(active) {
 			//energy contribution of the current grid type
 			#if defined (FIXED_POINT_INTERE)
 			fixedpt64 fixpt_cube [2][2][2];
-/*
+
 	                fixpt_cube [0][0][0] = fixedpt64_fromfloat(GlobFgrids[cube_000 + mul_tmp]);
         	        fixpt_cube [1][0][0] = fixedpt64_fromfloat(GlobFgrids[cube_100 + mul_tmp]);
         	        fixpt_cube [0][1][0] = fixedpt64_fromfloat(GlobFgrids[cube_010 + mul_tmp]);
@@ -271,7 +272,7 @@ while(active) {
         	        fixpt_cube [1][0][1] = fixedpt64_fromfloat(GlobFgrids[cube_101 + mul_tmp]);
         	        fixpt_cube [0][1][1] = fixedpt64_fromfloat(GlobFgrids[cube_011 + mul_tmp]);
         	        fixpt_cube [1][1][1] = fixedpt64_fromfloat(GlobFgrids[cube_111 + mul_tmp]);
-*/
+/*
 	                fixpt_cube [0][0][0] = GlobFgrids[cube_000 + mul_tmp];
         	        fixpt_cube [1][0][0] = GlobFgrids[cube_100 + mul_tmp];
         	        fixpt_cube [0][1][0] = GlobFgrids[cube_010 + mul_tmp];
@@ -280,6 +281,7 @@ while(active) {
         	        fixpt_cube [1][0][1] = GlobFgrids[cube_101 + mul_tmp];
         	        fixpt_cube [0][1][1] = GlobFgrids[cube_011 + mul_tmp];
         	        fixpt_cube [1][1][1] = GlobFgrids[cube_111 + mul_tmp];
+*/
 			#else
 			float cube [2][2][2];
 	                cube [0][0][0] = GlobFgrids[cube_000 + mul_tmp];
@@ -340,7 +342,7 @@ while(active) {
 			uint mul_tmp2 = Host_mul_tmp2;
 
 			#if defined (FIXED_POINT_INTERE)
-/*
+
 			fixpt_cube [0][0][0] = fixedpt64_fromfloat(GlobFgrids[cube_000 + mul_tmp2]);
         	        fixpt_cube [1][0][0] = fixedpt64_fromfloat(GlobFgrids[cube_100 + mul_tmp2]);
         	        fixpt_cube [0][1][0] = fixedpt64_fromfloat(GlobFgrids[cube_010 + mul_tmp2]);
@@ -349,7 +351,7 @@ while(active) {
         	        fixpt_cube [1][0][1] = fixedpt64_fromfloat(GlobFgrids[cube_101 + mul_tmp2]);
         	        fixpt_cube [0][1][1] = fixedpt64_fromfloat(GlobFgrids[cube_011 + mul_tmp2]);
         	        fixpt_cube [1][1][1] = fixedpt64_fromfloat(GlobFgrids[cube_111 + mul_tmp2]);
-*/
+/*
 			fixpt_cube [0][0][0] = GlobFgrids[cube_000 + mul_tmp2];
         	        fixpt_cube [1][0][0] = GlobFgrids[cube_100 + mul_tmp2];
         	        fixpt_cube [0][1][0] = GlobFgrids[cube_010 + mul_tmp2];
@@ -358,6 +360,7 @@ while(active) {
         	        fixpt_cube [1][0][1] = GlobFgrids[cube_101 + mul_tmp2];
         	        fixpt_cube [0][1][1] = GlobFgrids[cube_011 + mul_tmp2];
         	        fixpt_cube [1][1][1] = GlobFgrids[cube_111 + mul_tmp2];
+*/
 			#else
 			cube [0][0][0] = GlobFgrids[cube_000 + mul_tmp2];
         	        cube [1][0][0] = GlobFgrids[cube_100 + mul_tmp2];
@@ -422,7 +425,7 @@ while(active) {
 			uint mul_tmp3 = Host_mul_tmp3;
 
 			#if defined (FIXED_POINT_INTERE)
-/*
+
 			fixpt_cube [0][0][0] = fixedpt64_fromfloat(GlobFgrids[cube_000 + mul_tmp3]);
         	        fixpt_cube [1][0][0] = fixedpt64_fromfloat(GlobFgrids[cube_100 + mul_tmp3]);
         	        fixpt_cube [0][1][0] = fixedpt64_fromfloat(GlobFgrids[cube_010 + mul_tmp3]);
@@ -431,7 +434,7 @@ while(active) {
         	        fixpt_cube [1][0][1] = fixedpt64_fromfloat(GlobFgrids[cube_101 + mul_tmp3]);
         	        fixpt_cube [0][1][1] = fixedpt64_fromfloat(GlobFgrids[cube_011 + mul_tmp3]);
         	        fixpt_cube [1][1][1] = fixedpt64_fromfloat(GlobFgrids[cube_111 + mul_tmp3]);
-*/
+/*
 			fixpt_cube [0][0][0] = GlobFgrids[cube_000 + mul_tmp3];
         	        fixpt_cube [1][0][0] = GlobFgrids[cube_100 + mul_tmp3];
         	        fixpt_cube [0][1][0] = GlobFgrids[cube_010 + mul_tmp3];
@@ -440,6 +443,7 @@ while(active) {
         	        fixpt_cube [1][0][1] = GlobFgrids[cube_101 + mul_tmp3];
         	        fixpt_cube [0][1][1] = GlobFgrids[cube_011 + mul_tmp3];
         	        fixpt_cube [1][1][1] = GlobFgrids[cube_111 + mul_tmp3];
+*/
 			#else
 			cube [0][0][0] = GlobFgrids[cube_000 + mul_tmp3];
         	        cube [1][0][0] = GlobFgrids[cube_100 + mul_tmp3];
