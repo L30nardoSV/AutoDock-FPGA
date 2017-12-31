@@ -168,8 +168,31 @@ freq: 185 MHz
 
 
 
+69. `Krnl_GA.cl`: unroll 8 inner for-loop "update current pops & energies"
+		  unroll 4 inner for-loop "local_entity_1 and local_entity_2 are population-parent1, population-parent2"
+		  unroll 4 inner for-loop "elitism - copying the best entity to new population"
+		  unroll 16 inner for-loop "copy energy to local memory"		
+
+70. `Krnl_LS1.cl`: apply fixedpt (16.16)
+    `Krnl_GA.cl` : move include fixedpt libraries from `Conform` and `InterE`
+		   define `fixedpt_map_angle_180()` and `fixedpt_map_angle_360()`
+    `performdocking.cpp`: pass `base_dmov_mul_sqrt3` and `base_dang_mul_sqrt3` as fixedpt
+
+71. `Krnl_LS2.cl`: apply fixedpt (16.16)
+72. `Krnl_LS3.cl`: apply fixedpt (16.16)
+73. Reduce data-type size of `max_num_of_iters` and `cons_limit` of LS arguments
+
+freq: 178 MHz, a bit slower
 
 
+74. `Krnl_GA.cl`: unroll 1 inner for-loop "update current pops & energies"
+		  unroll 1 inner for-loop "local_entity_1 and local_entity_2 are population-parent1, population-parent2"
+		  unroll 1 inner for-loop "elitism - copying the best entity to new population"
+		  unroll 10 inner for-loop "copy energy to local memory"
+    `Krnl_IntraE.cl`: unroll 10 main computation loop
+
+freq: 173 MHz
+>>> commit "all LS fixed1616 + unrolled intrae 10"
 
 
 

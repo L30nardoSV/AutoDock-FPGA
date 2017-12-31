@@ -177,7 +177,7 @@ while(active) {
 
 	//for each intramolecular atom contributor pair
 
-	#pragma unroll	8
+	#pragma unroll 10
 	for (ushort contributor_counter=0; contributor_counter<DockConst_num_of_intraE_contributors; contributor_counter++) {
 
 		/*

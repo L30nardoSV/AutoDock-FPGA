@@ -1,6 +1,8 @@
+/*
 #if defined (FIXED_POINT_INTERE)
 #include "../defines_fixedpt_64.h"
 #endif
+*/
 
 // --------------------------------------------------------------------------
 // The function calculates the intermolecular energy of a ligand given by 

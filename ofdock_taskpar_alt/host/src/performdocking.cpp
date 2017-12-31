@@ -749,13 +749,31 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 
 // Kernel 11 has no args
 
+
+fixedpt fixpt_base_dmov_mul_sqrt3 = fixedpt_fromfloat(dockpars.base_dmov_mul_sqrt3);
+fixedpt fixpt_base_dang_mul_sqrt3 = fixedpt_fromfloat(dockpars.base_dang_mul_sqrt3);
+unsigned short Host_max_num_of_iters = (unsigned short)dockpars.max_num_of_iters;
+unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
+
 #ifdef ENABLE_KERNEL12 // Krnl_LS
-	setKernelArg(kernel12,0, sizeof(unsigned int),  &dockpars.max_num_of_iters);
+	//setKernelArg(kernel12,0, sizeof(unsigned int),  &dockpars.max_num_of_iters);
+	setKernelArg(kernel12,0, sizeof(unsigned short),  &Host_max_num_of_iters);
+
 	setKernelArg(kernel12,1, sizeof(float),  	&dockpars.rho_lower_bound);
+	#if defined (FIXED_POINT_LS1)
+	setKernelArg(kernel12,2, sizeof(fixedpt),  	&fixpt_base_dmov_mul_sqrt3);
+	#else
 	setKernelArg(kernel12,2, sizeof(float),  	&dockpars.base_dmov_mul_sqrt3);
+	#endif
 	setKernelArg(kernel12,3, sizeof(unsigned char), &dockpars.num_of_genes);
+	#if defined (FIXED_POINT_LS1)
+	setKernelArg(kernel12,4, sizeof(fixedpt),  	&fixpt_base_dang_mul_sqrt3);
+	#else
 	setKernelArg(kernel12,4, sizeof(float),  	&dockpars.base_dang_mul_sqrt3);
-	setKernelArg(kernel12,5, sizeof(unsigned int),  &dockpars.cons_limit);
+	#endif
+
+	//setKernelArg(kernel12,5, sizeof(unsigned int),  &dockpars.cons_limit);
+	setKernelArg(kernel12,5, sizeof(unsigned char),   &Host_cons_limit);
 #endif // End of ENABLE_KERNEL12
 
 #ifdef ENABLE_KERNEL13 // Krnl_LS_Arbiter
@@ -767,12 +785,24 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 #endif // End of ENABLE_KERNEL14
 
 #ifdef ENABLE_KERNEL15 // Krnl_LS2
-	setKernelArg(kernel15,0, sizeof(unsigned int),  &dockpars.max_num_of_iters);
+	//setKernelArg(kernel15,0, sizeof(unsigned int),  &dockpars.max_num_of_iters);
+	setKernelArg(kernel15,0, sizeof(unsigned short),  &Host_max_num_of_iters);
+
 	setKernelArg(kernel15,1, sizeof(float),  	&dockpars.rho_lower_bound);
+	#if defined (FIXED_POINT_LS2)
+	setKernelArg(kernel15,2, sizeof(fixedpt),  	&fixpt_base_dmov_mul_sqrt3);
+	#else
 	setKernelArg(kernel15,2, sizeof(float),  	&dockpars.base_dmov_mul_sqrt3);
+	#endif
 	setKernelArg(kernel15,3, sizeof(unsigned char), &dockpars.num_of_genes);
+	#if defined (FIXED_POINT_LS2)
+	setKernelArg(kernel15,4, sizeof(fixedpt),  	&fixpt_base_dang_mul_sqrt3);
+	#else
 	setKernelArg(kernel15,4, sizeof(float),  	&dockpars.base_dang_mul_sqrt3);
-	setKernelArg(kernel15,5, sizeof(unsigned int),  &dockpars.cons_limit);
+	#endif
+
+	//setKernelArg(kernel15,5, sizeof(unsigned int),  &dockpars.cons_limit);
+	setKernelArg(kernel15,5, sizeof(unsigned char),   &Host_cons_limit);
 #endif // End of ENABLE_KERNEL15
 
 #ifdef ENABLE_KERNEL16 // Krnl_LS2_Arbiter
@@ -838,12 +868,24 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 #endif // End of ENABLE_KERNEL20
 
 #ifdef ENABLE_KERNEL21 // Krnl_LS3
-	setKernelArg(kernel21,0, sizeof(unsigned int),  &dockpars.max_num_of_iters);
+	//setKernelArg(kernel21,0, sizeof(unsigned int),  &dockpars.max_num_of_iters);
+	setKernelArg(kernel21,0, sizeof(unsigned short),  &Host_max_num_of_iters);
+
 	setKernelArg(kernel21,1, sizeof(float),  	&dockpars.rho_lower_bound);
+	#if defined (FIXED_POINT_LS3)
+	setKernelArg(kernel21,2, sizeof(fixedpt),  	&fixpt_base_dmov_mul_sqrt3);
+	#else
 	setKernelArg(kernel21,2, sizeof(float),  	&dockpars.base_dmov_mul_sqrt3);
+	#endif
 	setKernelArg(kernel21,3, sizeof(unsigned char), &dockpars.num_of_genes);
+	#if defined (FIXED_POINT_LS3)
+	setKernelArg(kernel21,4, sizeof(fixedpt),  	&fixpt_base_dang_mul_sqrt3);
+	#else
 	setKernelArg(kernel21,4, sizeof(float),  	&dockpars.base_dang_mul_sqrt3);
-	setKernelArg(kernel21,5, sizeof(unsigned int),  &dockpars.cons_limit);
+	#endif
+
+	//setKernelArg(kernel21,5, sizeof(unsigned int),  &dockpars.cons_limit);
+	setKernelArg(kernel21,5, sizeof(unsigned char),   &Host_cons_limit);
 #endif // End of ENABLE_KERNEL21
 
 #ifdef ENABLE_KERNEL22 // Krnl_LS3_Arbiter

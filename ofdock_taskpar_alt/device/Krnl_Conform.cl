@@ -1,8 +1,10 @@
+/*
 #if defined (FIXED_POINT_CONFORM)
 #include "../defines_fixedpt.h"
 
 typedef int3          fixedpt3;
 #endif
+*/
 
 // --------------------------------------------------------------------------
 // The function changes the conformation of myligand according to 

@@ -106,6 +106,16 @@ channel float3 chan_Intrae2IA_P2_fpipe __attribute__((depth(4)));
 channel float  chan_IA2Intrae_P2_intraE;
 */
 
+#if defined (FIXED_POINT_CONFORM)
+#include "../defines_fixedpt.h"
+
+typedef int3          fixedpt3;
+#endif
+
+#if defined (FIXED_POINT_INTERE)
+#include "../defines_fixedpt_64.h"
+#endif
+
 
 // --------------------------------------------------------------------------
 // These functions map the argument into the interval 0 - 180, or 0 - 360
@@ -132,6 +142,31 @@ float map_angle_360(float angle)
 	if (x > 360.0f) { x -= 360.0f;}
 	return x;
 }
+
+#if defined (FIXED_POINT_LS1) || defined (FIXED_POINT_LS2) || defined (FIXED_POINT_LS3)
+#define FIXEDPT_180	0xB40000
+#define FIXEDPT_360	0x1680000
+
+fixedpt fixedpt_map_angle_180(fixedpt angle)
+{
+	fixedpt x = angle;
+	//while (x < 0.0f) {
+	if (x < 0)   { x += FIXEDPT_180; }
+	//while (x > 180.0f) {
+	if (x > FIXEDPT_180) { x -= FIXEDPT_180; }
+	return x;
+}
+
+fixedpt fixedpt_map_angle_360(fixedpt angle)
+{
+	fixedpt x = angle;
+	//while (x < 0.0f) {
+	if (x < 0)   { x += FIXEDPT_360; }
+	//while (x > 360.0f) {
+	if (x > FIXEDPT_360) { x -= FIXEDPT_360;}
+	return x;
+}
+#endif
 
 
 // --------------------------------------------------------------------------
@@ -230,6 +265,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			              )) loc_energies[MAX_POPSIZE];
 
 		// copy energy to local memory
+		#pragma unroll 10
 		for (ushort pop_cnt=0; pop_cnt<DockConst_pop_size; pop_cnt++) {
 			loc_energies[pop_cnt] = LocalEneCurr[pop_cnt];
 		}
@@ -257,7 +293,8 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			}
 		}
 
-		// elitism - copying the best entity to new population 	
+		// elitism - copying the best entity to new population
+		#pragma unroll 1	
 		for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) { 		
 			LocalPopNext[0][gene_cnt & 0x3F] = LocalPopCurr[best_entity][gene_cnt & 0x3F]; 	
 		} 		
@@ -306,6 +343,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 				else			                     {parent2 = prng_BT_U[2];}}
 
 			// local_entity_1 and local_entity_2 are population-parent1, population-parent2
+			#pragma unroll 1
 			for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
 				local_entity_1[gene_cnt] = LocalPopCurr[parent1][gene_cnt & 0x3F];
 				local_entity_2[gene_cnt] = LocalPopCurr[parent2][gene_cnt & 0x3F];
@@ -505,7 +543,8 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 		// ------------------------------------------------------------------
 
 		// update current pops & energies
-		for (ushort pop_cnt=0; pop_cnt<DockConst_pop_size; pop_cnt++) { 	
+		for (ushort pop_cnt=0; pop_cnt<DockConst_pop_size; pop_cnt++) {
+			#pragma unroll 1	
 			for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
 				LocalPopCurr[pop_cnt][gene_cnt & 0x3F] = LocalPopNext[pop_cnt][gene_cnt & 0x3F];
 			}
@@ -552,6 +591,8 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------
 
+
+
 #include "Krnl_PRNG.cl"
 
 #include "Krnl_LS.cl"
@@ -563,6 +604,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 #include "Krnl_InterE.cl"
 
 #include "Krnl_IntraE.cl"
+
 /*
 #include "Krnl_IA_Pipeline.cl"
 #include "Krnl_IA_Pipeline2.cl"
