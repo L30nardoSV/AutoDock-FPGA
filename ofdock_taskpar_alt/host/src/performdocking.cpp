@@ -233,6 +233,30 @@ static cl_kernel kernel30  = NULL;
 static const char *name_k30 = "Krnl_IA_pipeline2";
 #endif
 
+#ifdef ENABLE_KERNEL31
+static cl_command_queue command_queue31 = NULL;
+static cl_kernel kernel31  = NULL;
+static const char *name_k31 = "Krnl_Prng_BT_Arbiter";
+#endif
+
+#ifdef ENABLE_KERNEL32
+static cl_command_queue command_queue32 = NULL;
+static cl_kernel kernel32  = NULL;
+static const char *name_k32 = "Krnl_Prng_GG_Arbiter";
+#endif
+
+#ifdef ENABLE_KERNEL33
+static cl_command_queue command_queue33 = NULL;
+static cl_kernel kernel33  = NULL;
+static const char *name_k33 = "Krnl_Prng_LS_ushort_Arbiter";
+#endif
+
+#ifdef ENABLE_KERNEL34
+static cl_command_queue command_queue34 = NULL;
+static cl_kernel kernel34  = NULL;
+static const char *name_k34 = "Krnl_Prng_LS_float_Arbiter";
+#endif
+
 static cl_program program = NULL;
 
 // Function prototypes
@@ -1209,6 +1233,22 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		runKernelTask(command_queue30,kernel30,NULL,NULL);
 		#endif // ENABLE_KERNEL30
 
+		#ifdef ENABLE_KERNEL31
+		runKernelTask(command_queue31,kernel31,NULL,NULL);
+		#endif // ENABLE_KERNEL31
+
+		#ifdef ENABLE_KERNEL32
+		runKernelTask(command_queue32,kernel32,NULL,NULL);
+		#endif // ENABLE_KERNEL32
+
+		#ifdef ENABLE_KERNEL33
+		runKernelTask(command_queue33,kernel33,NULL,NULL);
+		#endif // ENABLE_KERNEL33
+
+		#ifdef ENABLE_KERNEL34
+		runKernelTask(command_queue34,kernel34,NULL,NULL);
+		#endif // ENABLE_KERNEL34
+
 		#ifdef ENABLE_KERNEL1 		
 		clFinish(command_queue1); 
 		#endif
@@ -1327,6 +1367,22 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 
 		#ifdef ENABLE_KERNEL30
 		clFinish(command_queue30);
+		#endif
+
+		#ifdef ENABLE_KERNEL31
+		clFinish(command_queue31);
+		#endif
+
+		#ifdef ENABLE_KERNEL32
+		clFinish(command_queue32);
+		#endif
+
+		#ifdef ENABLE_KERNEL33
+		clFinish(command_queue33);
+		#endif
+
+		#ifdef ENABLE_KERNEL34
+		clFinish(command_queue34);
 		#endif
 
 		clock_stop_docking = clock();
@@ -1796,6 +1852,34 @@ bool init() {
   checkError(status, "Failed to create kernel");
 #endif
 
+#ifdef ENABLE_KERNEL31
+  command_queue31 = clCreateCommandQueue(context, device, 0, &status);
+  checkError(status, "Failed to create command queue31");
+  kernel31 = clCreateKernel(program, name_k31, &status);
+  checkError(status, "Failed to create kernel");
+#endif
+
+#ifdef ENABLE_KERNEL32
+  command_queue32 = clCreateCommandQueue(context, device, 0, &status);
+  checkError(status, "Failed to create command queue32");
+  kernel32 = clCreateKernel(program, name_k32, &status);
+  checkError(status, "Failed to create kernel");
+#endif
+
+#ifdef ENABLE_KERNEL33
+  command_queue33 = clCreateCommandQueue(context, device, 0, &status);
+  checkError(status, "Failed to create command queue33");
+  kernel33 = clCreateKernel(program, name_k33, &status);
+  checkError(status, "Failed to create kernel");
+#endif
+
+#ifdef ENABLE_KERNEL34
+  command_queue34 = clCreateCommandQueue(context, device, 0, &status);
+  checkError(status, "Failed to create command queue34");
+  kernel34 = clCreateKernel(program, name_k34, &status);
+  checkError(status, "Failed to create kernel");
+#endif
+
   return true;
 }
 
@@ -1949,6 +2033,26 @@ void cleanup() {
 #ifdef ENABLE_KERNEL30
   if(kernel30) {clReleaseKernel(kernel30);}
   if(command_queue30) {clReleaseCommandQueue(command_queue30);}
+#endif
+
+#ifdef ENABLE_KERNEL31
+  if(kernel31) {clReleaseKernel(kernel31);}
+  if(command_queue31) {clReleaseCommandQueue(command_queue31);}
+#endif
+
+#ifdef ENABLE_KERNEL32
+  if(kernel32) {clReleaseKernel(kernel32);}
+  if(command_queue32) {clReleaseCommandQueue(command_queue32);}
+#endif
+
+#ifdef ENABLE_KERNEL33
+  if(kernel33) {clReleaseKernel(kernel33);}
+  if(command_queue33) {clReleaseCommandQueue(command_queue33);}
+#endif
+
+#ifdef ENABLE_KERNEL34
+  if(kernel34) {clReleaseKernel(kernel34);}
+  if(command_queue34) {clReleaseCommandQueue(command_queue34);}
 #endif
 
   if(program) {clReleaseProgram(program);}

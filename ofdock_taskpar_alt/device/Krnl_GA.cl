@@ -61,7 +61,13 @@ channel float   chan_PRNG2GA_LS2_float_prng    __attribute__((depth(ACTUAL_GENOT
 channel bool  	chan_GA2PRNG_LS3_float_active;
 channel float   chan_PRNG2GA_LS3_float_prng    __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
 
+/*
 channel bool  	chan_GA2PRNG_Off_active;
+*/
+channel bool    chan_GA2PRNG_BT_Off;
+channel bool    chan_GA2PRNG_GG_Off;
+channel bool    chan_GA2PRNG_LS_ushort_Off;
+channel bool    chan_GA2PRNG_LS_float_Off;
 
 // LS1, LS2, LS3
 channel bool 	chan_GA2LS_LS1_active;
@@ -564,7 +570,14 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 	write_channel_altera(chan_GA2LS_Off1_active,  false);	// turn off LS_Arbiter, LS1
 	write_channel_altera(chan_GA2LS_Off2_active,  false);	// turn off LS2_Arbiter, LS2 
 	write_channel_altera(chan_GA2LS_Off3_active,  false);	// turn off LS3_Arbiter, LS3 
+/*
 	write_channel_altera(chan_GA2PRNG_Off_active, false);	// turn off all PRNGs kernels
+*/
+	write_channel_altera(chan_GA2PRNG_BT_Off,        false);// turn off BT PRNGs kernels
+	write_channel_altera(chan_GA2PRNG_GG_Off,        false);// turn off GG PRNGs kernels
+	write_channel_altera(chan_GA2PRNG_LS_ushort_Off, false);// turn off LS ushort kernels
+	write_channel_altera(chan_GA2PRNG_LS_float_Off,  false);// turn off LS float kernels
+
 	write_channel_altera(chan_IGLArbiter_Off,     false);   // turn off IGL_Arbiter, Conform, InterE, IntraE
 /*
 	write_channel_altera(chan_Intrae2IA_Off,      false);	// turn off IAPipeline

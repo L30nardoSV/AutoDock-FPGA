@@ -14,6 +14,7 @@ channel bool chan_Arbiter_LS3_float_active;
 
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------
+#if 0
 __kernel __attribute__ ((max_global_work_dim(0)))
 void Krnl_Prng_Arbiter(){
 
@@ -86,6 +87,130 @@ void Krnl_Prng_Arbiter(){
 
 	} // End of while(active)
 }
+#endif
+// --------------------------------------------------------------------------
+// --------------------------------------------------------------------------
+
+__kernel __attribute__ ((max_global_work_dim(0)))
+void Krnl_Prng_BT_Arbiter(){
+	bool active = true;
+	
+	while(active) {
+		bool BT_valid  = false;
+		bool Off_valid = false;
+		bool BT_active;
+		bool Off_active;
+
+		while( (BT_valid == false) && (Off_valid == false) ){
+			BT_active  = read_channel_nb_altera(chan_GA2PRNG_BT_active, &BT_valid);
+			Off_active = read_channel_nb_altera(chan_GA2PRNG_BT_Off,    &Off_valid);
+		}
+
+		active = (Off_valid) ? Off_active : true;
+	
+		if ((BT_valid == true) || (Off_valid == true)) {
+			write_channel_altera(chan_Arbiter_BT_ushort_active, active);
+			write_channel_altera(chan_Arbiter_BT_float_active,  active);
+		}
+	} // End of while(active)
+}
+
+__kernel __attribute__ ((max_global_work_dim(0)))
+void Krnl_Prng_GG_Arbiter(){
+	bool active = true;
+	
+	while(active) {
+		bool GG_valid  = false;
+		bool Off_valid = false;
+		bool GG_active;
+		bool Off_active;
+
+		while( (GG_valid == false) && (Off_valid == false) ){
+			GG_active  = read_channel_nb_altera(chan_GA2PRNG_GG_active, &GG_valid);
+			Off_active = read_channel_nb_altera(chan_GA2PRNG_GG_Off,    &Off_valid);
+		}
+
+		active = (Off_valid) ? Off_active : true;
+	
+		if ((GG_valid == true) || (Off_valid == true)) {
+			write_channel_altera(chan_Arbiter_GG_uchar_active, active);
+			write_channel_altera(chan_Arbiter_GG_float_active, active);
+		}
+	} // End of while(active)
+}
+
+__kernel __attribute__ ((max_global_work_dim(0)))
+void Krnl_Prng_LS_ushort_Arbiter(){
+
+	bool active = true;
+
+	while(active) {
+		bool LS_ushort_valid = false;
+		bool Off_valid       = false;	
+		bool LS_ushort_active;
+		bool Off_active;
+
+		while( (LS_ushort_valid == false) && (Off_valid == false) ){
+			LS_ushort_active = read_channel_nb_altera(chan_GA2PRNG_LS_ushort_active,  &LS_ushort_valid);
+			Off_active       = read_channel_nb_altera(chan_GA2PRNG_LS_ushort_Off,     &Off_valid);
+		}
+
+		active = (Off_valid) ? Off_active : true;
+	
+ 		if ((LS_ushort_valid == true) || (Off_valid == true)) {
+			write_channel_altera(chan_Arbiter_LS_ushort_active,  active);
+			write_channel_altera(chan_Arbiter_LS2_ushort_active, active);
+			write_channel_altera(chan_Arbiter_LS3_ushort_active, active);
+		}
+	} // End of while(active)
+}
+
+__kernel __attribute__ ((max_global_work_dim(0)))
+void Krnl_Prng_LS_float_Arbiter(){
+
+	bool active = true;
+
+	while(active) {
+		bool LS_float_valid  = false;
+		bool LS2_float_valid = false;
+		bool LS3_float_valid = false;
+		bool Off_valid       = false;	
+
+		bool LS_float_active;
+		bool LS2_float_active;
+		bool LS3_float_active;
+		bool Off_active;
+
+		while(
+		      (LS_float_valid  == false) &&
+		      (LS2_float_valid == false) &&
+		      (LS3_float_valid == false) &&
+		      (Off_valid       == false) 
+		){
+			LS_float_active  = read_channel_nb_altera(chan_GA2PRNG_LS_float_active,   &LS_float_valid);
+			LS2_float_active = read_channel_nb_altera(chan_GA2PRNG_LS2_float_active,  &LS2_float_valid);
+			LS3_float_active = read_channel_nb_altera(chan_GA2PRNG_LS3_float_active,  &LS3_float_valid);
+			Off_active       = read_channel_nb_altera(chan_GA2PRNG_LS_float_Off,      &Off_valid);
+		}
+
+		active = (Off_valid) ? Off_active : true;
+	
+		if ((LS_float_valid == true) || (Off_valid == true)) {
+			write_channel_altera(chan_Arbiter_LS_float_active, active);
+		}
+
+		if ((LS2_float_valid == true) || (Off_valid == true)) {
+			write_channel_altera(chan_Arbiter_LS2_float_active, active);
+		}
+
+		if ((LS3_float_valid == true) || (Off_valid == true)) {	
+			write_channel_altera(chan_Arbiter_LS3_float_active, active);
+		}
+	} // End of while(active)
+}
+
+
+
 
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------

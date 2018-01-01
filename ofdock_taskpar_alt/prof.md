@@ -194,6 +194,14 @@ freq: 178 MHz, a bit slower
 freq: 173 MHz
 >>> commit "all LS fixed1616 + unrolled intrae 10"
 
+75. `Krnl_Prng_Arbiter`: separate single arbiter into four independent prng arbiters: BT, GG, LS_ushort, LS_float
+			 (NOTE: merging BT & GG active signals and having therefore three independent prng arbiters, make GG for-loops execute serially and not pipelined as with current code. So better not do that!)
+
+freq: 185 MHz
+>>> commit "split prng arbiters"
+
+
+
 
 
 

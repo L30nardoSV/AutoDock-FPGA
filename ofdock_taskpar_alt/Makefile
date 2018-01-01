@@ -149,7 +149,10 @@ ENABLE_K7  = YES
 ENABLE_K8  = YES
 ENABLE_K9  = YES
 ENABLE_K10 = YES
-ENABLE_K11 = YES
+
+# Replace single Krnl_Prng_Arbiter
+# See kernels 31, 32, 33, 34
+ENABLE_K11 = NO
 
 # LS kernels
 ENABLE_K12 = YES
@@ -178,6 +181,12 @@ ENABLE_K27 = YES
 ENABLE_K28 = NO
 ENABLE_K29 = NO
 ENABLE_K30 = NO
+
+# BT, GG, LS_ushort, LS_float arbiters
+ENABLE_K31 = YES
+ENABLE_K32 = YES
+ENABLE_K33 = YES
+ENABLE_K34 = YES
 
 ifeq ($(ENABLE_K1),YES)
 	K1 =-DENABLE_KERNEL1
@@ -365,7 +374,31 @@ else
 	K30 =
 endif
 
-ENABLE_KERNELS = $(K1) $(K2) $(K3) $(K4) $(K5) $(K6) $(K7) $(K8) $(K9) $(K10) $(K11) $(K12) $(K13) $(K14) $(K15) $(K16) $(K17) $(K18) $(K19) $(K20) $(K21) $(K22) $(K23) $(K24) $(K25) $(K26) $(K27) $(K28) $(K29) $(K30)
+ifeq ($(ENABLE_K31),YES)
+	K31 =-DENABLE_KERNEL31
+else
+	K31 =
+endif
+
+ifeq ($(ENABLE_K32),YES)
+	K32 =-DENABLE_KERNEL32
+else
+	K32 =
+endif
+
+ifeq ($(ENABLE_K33),YES)
+	K33 =-DENABLE_KERNEL33
+else
+	K33 =
+endif
+
+ifeq ($(ENABLE_K34),YES)
+	K34 =-DENABLE_KERNEL34
+else
+	K34 =
+endif
+
+ENABLE_KERNELS = $(K1) $(K2) $(K3) $(K4) $(K5) $(K6) $(K7) $(K8) $(K9) $(K10) $(K11) $(K12) $(K13) $(K14) $(K15) $(K16) $(K17) $(K18) $(K19) $(K20) $(K21) $(K22) $(K23) $(K24) $(K25) $(K26) $(K27) $(K28) $(K29) $(K30) $(K31) $(K32) $(K33) $(K34)
 
 # =============================
 # Reproduce result (remove randomness)
