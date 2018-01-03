@@ -7,19 +7,17 @@ float sqrt_custom(const float x)
 	return as_float(i);	//return *(float*) &i; 
 }  
 
-
-
 // --------------------------------------------------------------------------
 // Originally from: processligand.c
 // --------------------------------------------------------------------------
 __kernel __attribute__ ((max_global_work_dim(0)))
 void Krnl_IntraE(
 
-#if defined (FIXED_POINT_INTERE)
- 	     __constant fixedpt64* restrict KerConstStatic_atom_charges_const,
-#else
+//#if defined (FIXED_POINT_INTERE)
+// 	     __constant fixedpt64* restrict KerConstStatic_atom_charges_const,
+//#else
  	     __constant float* restrict KerConstStatic_atom_charges_const,
-#endif
+//#endif
 
  	     __constant char*  restrict KerConstStatic_atom_types_const,
 
@@ -56,11 +54,11 @@ void Krnl_IntraE(
 
 	for (uchar i=0; i<DockConst_num_of_atoms; i++) {
 		atom_types_localcache   [i] = KerConstStatic_atom_types_const   [i];
-#if defined (FIXED_POINT_INTERE)
-		atom_charges_localcache [i] = fixedpt64_tofloat(KerConstStatic_atom_charges_const [i]);	
-#else
+//#if defined (FIXED_POINT_INTERE)
+//		atom_charges_localcache [i] = fixedpt64_tofloat(KerConstStatic_atom_charges_const [i]);	
+//#else
 		atom_charges_localcache [i] = KerConstStatic_atom_charges_const [i];	
-#endif
+//#endif
 	}
 
 
@@ -159,7 +157,7 @@ while(active) {
 
 
 
-
+#if defined (FIXED_POINT_INTRAE)
 	// create shift register to reduce II (initially II=32, unroll-factor=8) 
 	// use fixedpt64 to reduce II=4 (after shift-register) downto II=1
 	//float shift_intraE[33];
@@ -171,7 +169,7 @@ while(active) {
 		shift_intraE[i] = 0;
 	}
 
-
+#endif
 
 
 
@@ -277,12 +275,8 @@ while(active) {
 				 DockConst_coeff_desolv*native_exp(-0.0386f*distance_pow_2);
 
 		} // End of if: if ((dist < dcutoff) && (dist < 20.48))	
-
-
-/*
-		intraE += partialE1 + partialE2 + partialE3 + partialE4;
-*/		
-
+	
+#if defined (FIXED_POINT_INTRAE)
 		//shift_intraE[32] = shift_intraE[0] + partialE1 + partialE2 + partialE3 + partialE4;
 		shift_intraE[32] = shift_intraE[0] + fixedpt64_fromfloat(partialE1) + 
 						     fixedpt64_fromfloat(partialE2) + 
@@ -293,10 +287,13 @@ while(active) {
 		for (uchar j=0; j<32; j++) {
 			shift_intraE[j] = shift_intraE[j+1];
 		}
-
-		
+#else
+		intraE += partialE1 + partialE2 + partialE3 + partialE4;
+#endif
+	
 	} // End of contributor_counter for-loop
 
+#if defined (FIXED_POINT_INTRAE)
 	fixedpt64 fixpt_intraE = 0;
 
 	#pragma unroll
@@ -305,7 +302,7 @@ while(active) {
 		fixpt_intraE += shift_intraE[j];
 	}
 	intraE = fixedpt64_tofloat(fixpt_intraE);
-
+#endif
 
 	// --------------------------------------------------------------
 	// Send intramolecular energy to channel

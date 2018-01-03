@@ -58,11 +58,11 @@ __kernel __attribute__ ((max_global_work_dim(0)))
 void Krnl_LS(
 		//unsigned int              DockConst_max_num_of_iters,
 		unsigned short            DockConst_max_num_of_iters,
-
-		float                     DockConst_rho_lower_bound,
 		#if defined (FIXED_POINT_LS1)
+		fixedpt                   DockConst_rho_lower_bound,
 		fixedpt                   DockConst_base_dmov_mul_sqrt3,
 		#else
+		float                     DockConst_rho_lower_bound,
 		float                     DockConst_base_dmov_mul_sqrt3,
 		#endif
 		unsigned char             DockConst_num_of_genes,
@@ -137,7 +137,11 @@ while(active) {
 	
 if (active == true) {
 
+	#if defined (FIXED_POINT_LS1)
+	fixedpt fixpt_rho = FIXEDPT_ONE;
+	#else
 	float rho = 1.0f;
+	#endif
 	ushort iteration_cnt = 0;
 	uchar  cons_succ     = 0;
 	uchar  cons_fail     = 0;
@@ -145,19 +149,30 @@ if (active == true) {
 	bool   positive_direction = true;
 
 	// performing local search
+	#if defined (FIXED_POINT_LS1)
+	while ((iteration_cnt < DockConst_max_num_of_iters) && (fixpt_rho > DockConst_rho_lower_bound)) {
+	#else
 	while ((iteration_cnt < DockConst_max_num_of_iters) && (rho > DockConst_rho_lower_bound)) {
-
+	#endif
 		// -----------------------------------------------
 		// Exit condition is groups here. It allows pipelining
 		if (positive_direction == true) { 
 			if (cons_succ >= DockConst_cons_limit) {
+				#if defined (FIXED_POINT_LS1)
+				fixpt_rho = fixpt_rho << 1;
+				#else
 				rho = LS_EXP_FACTOR*rho;
+				#endif
 				cons_fail = 0;
 				cons_succ = 0;
 			}
 			else {
 				if (cons_fail >= DockConst_cons_limit) {
+					#if defined (FIXED_POINT_LS1)
+					fixpt_rho = fixpt_rho >> 1;
+					#else
 					rho = LS_CONT_FACTOR*rho;
+					#endif
 					cons_fail = 0;
 					cons_succ = 0;
 				}
@@ -173,7 +188,11 @@ if (active == true) {
 		// Tell Krnl_Conf_Arbiter, LS1 is done
 		// Not completely strict as the (iteration_cnt < DockConst_max_num_of_iters) is ignored
 		// In practice, rho condition dominates most of the cases
+		#if defined (FIXED_POINT_LS1)
+		write_channel_altera(chan_LS2Arbiter_LS1_end, (fixpt_rho < DockConst_rho_lower_bound)?true:false);
+		#else
 		write_channel_altera(chan_LS2Arbiter_LS1_end, (rho < DockConst_rho_lower_bound)?true:false);
+		#endif
 		//mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 		write_channel_altera(chan_GA2PRNG_LS_float_active, true);
@@ -201,7 +220,8 @@ if (active == true) {
 
 			#if defined (FIXED_POINT_LS1)
 			//fixedpt fixpt_tmp1 = fixedpt_fromfloat(rho) * ((fixpt_tmp_prng << 1) - FIXEDPT_ONE);
-			fixedpt fixpt_tmp1 = fixedpt_mul(fixedpt_fromfloat(rho), ((fixpt_tmp_prng << 1) - FIXEDPT_ONE));
+			//fixedpt fixpt_tmp1 = fixedpt_mul(fixedpt_fromfloat(rho), ((fixpt_tmp_prng << 1) - FIXEDPT_ONE));
+			fixedpt fixpt_tmp1 = fixedpt_mul(fixpt_rho, ((fixpt_tmp_prng << 1) - FIXEDPT_ONE));
 			#else
 			float tmp1 = rho * (2.0f*tmp_prng - 1.0f);
 			#endif

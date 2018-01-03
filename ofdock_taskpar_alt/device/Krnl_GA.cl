@@ -112,16 +112,15 @@ channel float3 chan_Intrae2IA_P2_fpipe __attribute__((depth(4)));
 channel float  chan_IA2Intrae_P2_intraE;
 */
 
-#if defined (FIXED_POINT_CONFORM)
+#if defined (FIXED_POINT_CONFORM) || (FIXED_POINT_LS1) || defined (FIXED_POINT_LS2) || defined (FIXED_POINT_LS3)
 #include "../defines_fixedpt.h"
 
 typedef int3          fixedpt3;
 #endif
 
-#if defined (FIXED_POINT_INTERE)
+#if defined (FIXED_POINT_INTERE) || defined (FIXED_POINT_INTRAE)
 #include "../defines_fixedpt_64.h"
 #endif
-
 
 // --------------------------------------------------------------------------
 // These functions map the argument into the interval 0 - 180, or 0 - 360

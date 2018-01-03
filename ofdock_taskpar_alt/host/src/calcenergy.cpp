@@ -386,10 +386,10 @@ int prepare_conststatic_fields_for_gpu(Liganddata* 	       myligand_reference,
 	int m;
 	for (m=0;m<MAX_NUM_OF_ATOMS;m++) {
 #if defined (FIXED_POINT_INTERE)
-		KerConstStatic->atom_charges_const[m] = fixedpt64_fromfloat(atom_charges[m]); 
-#else 
-		KerConstStatic->atom_charges_const[m] = atom_charges[m]; 
+		KerConstStatic->fixpt64_atom_charges_const[m] = fixedpt64_fromfloat(atom_charges[m]); 
 #endif
+		KerConstStatic->atom_charges_const[m] = atom_charges[m]; 
+
 	}
 
 

@@ -117,10 +117,10 @@ typedef struct
 typedef struct
 {
 #if defined (FIXED_POINT_INTERE)
-       	fixedpt64 atom_charges_const[MAX_NUM_OF_ATOMS]                __attribute__ ((aligned (1024)));
-#else
-       	float atom_charges_const[MAX_NUM_OF_ATOMS]                    __attribute__ ((aligned (512)));
+       	fixedpt64 fixpt64_atom_charges_const[MAX_NUM_OF_ATOMS]        __attribute__ ((aligned (1024)));
 #endif
+       	float atom_charges_const[MAX_NUM_OF_ATOMS]                    __attribute__ ((aligned (512)));
+
        	char  atom_types_const  [MAX_NUM_OF_ATOMS]                    __attribute__ ((aligned (128)));
 
 /*

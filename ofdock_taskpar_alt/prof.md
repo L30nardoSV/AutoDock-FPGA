@@ -200,17 +200,20 @@ freq: 173 MHz
 freq: 185 MHz
 >>> commit "split prng arbiters"
 
+76. `performdocking.cpp`, `Krnl_LS`, `Krnl_LS2`, `Krnl_LS3`: rho converted to fixedpt (reduces LS II, from II=7 down to II=2)
+freq: 185 MHz
 
+77. `performdocking.cpp`: corrected preprocessor directives that enable `FIXED_POINT_*` in conform, inter, intra, ls1, ls2, ls3
+78. `Krnl_IntraE`, `performdocking.cpp`: make Krnl_intraE independent of `FIXED_POINT_INTERE`
+79. `Krnl_IntraE`: added partially `FIXED_POINT_INTRAE` support
 
-
-
-
-
+freq: 170 MHz
+>>> commit "correct FIXEDPT_* directives"
 
 
 NOT DONE YET
 
-LS -> apply fixedpt
+
 
 Makefile: pass separetely all other PDBS
 

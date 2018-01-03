@@ -297,6 +297,9 @@ float* cpu_ref_ori_angles;
 // Created because structs containing array
 // are not supported as OpenCL kernel args
 
+#if defined (FIXED_POINT_INTERE)
+cl_mem mem_KerConstStatic_fixpt64_atom_charges_const;
+#endif
 cl_mem mem_KerConstStatic_atom_charges_const;
 cl_mem mem_KerConstStatic_atom_types_const;
 cl_mem mem_KerConstStatic_intraE_contributors_const;
@@ -546,10 +549,10 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 #endif
 
 #if defined (FIXED_POINT_INTERE)
-	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ATOMS*sizeof(fixedpt64),                &mem_KerConstStatic_atom_charges_const);
-#else
-	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ATOMS*sizeof(float),                    &mem_KerConstStatic_atom_charges_const);
+	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ATOMS*sizeof(fixedpt64),                &mem_KerConstStatic_fixpt64_atom_charges_const);
 #endif
+	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ATOMS*sizeof(float),                    &mem_KerConstStatic_atom_charges_const);
+
 	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ATOMS*sizeof(char),                     &mem_KerConstStatic_atom_types_const);
 
 /*
@@ -591,10 +594,10 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	unsigned int array_evals_and_generations_performed [2]; // [0]: evals, [1]: generations 
 
 #if defined (FIXED_POINT_INTERE)
-	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_atom_charges_const,            &KerConstStatic.atom_charges_const[0],            MAX_NUM_OF_ATOMS*sizeof(fixedpt64));
-#else
-	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_atom_charges_const,            &KerConstStatic.atom_charges_const[0],            MAX_NUM_OF_ATOMS*sizeof(float));
+	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_fixpt64_atom_charges_const,            &KerConstStatic.fixpt64_atom_charges_const[0],            MAX_NUM_OF_ATOMS*sizeof(fixedpt64));
 #endif
+	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_atom_charges_const,            &KerConstStatic.atom_charges_const[0],            MAX_NUM_OF_ATOMS*sizeof(float));
+
 	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_atom_types_const,              &KerConstStatic.atom_types_const[0],              MAX_NUM_OF_ATOMS*sizeof(char));
 
 /*
@@ -716,7 +719,11 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 
 #ifdef ENABLE_KERNEL3 // Krnl_InterE
         setKernelArg(kernel3,0,  sizeof(mem_dockpars_fgrids),                    &mem_dockpars_fgrids);
+	#if defined (FIXED_POINT_INTERE)
+	setKernelArg(kernel3,1,  sizeof(mem_KerConstStatic_fixpt64_atom_charges_const),  &mem_KerConstStatic_fixpt64_atom_charges_const);
+	#else
 	setKernelArg(kernel3,1,  sizeof(mem_KerConstStatic_atom_charges_const),  &mem_KerConstStatic_atom_charges_const);
+	#endif
 	setKernelArg(kernel3,2,  sizeof(mem_KerConstStatic_atom_types_const),    &mem_KerConstStatic_atom_types_const);
 	setKernelArg(kernel3,3,  sizeof(unsigned char),                          &dockpars.g1);
 	setKernelArg(kernel3,4,  sizeof(unsigned int),                           &dockpars.g2);
@@ -730,7 +737,6 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 #endif // End of ENABLE_KERNEL3
 
 #ifdef ENABLE_KERNEL4 // Krnl_IntraE
-
 	setKernelArg(kernel4,0,  sizeof(mem_KerConstStatic_atom_charges_const),        &mem_KerConstStatic_atom_charges_const);
 	setKernelArg(kernel4,1,  sizeof(mem_KerConstStatic_atom_types_const),          &mem_KerConstStatic_atom_types_const);
 	setKernelArg(kernel4,2/*0*/,  sizeof(mem_KerConstStatic_intraE_contributors_const), &mem_KerConstStatic_intraE_contributors_const);
@@ -773,9 +779,12 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 
 // Kernel 11 has no args
 
-
+#if defined (FIXED_POINT_LS1) || defined (FIXED_POINT_LS2) || defined (FIXED_POINT_LS3)
 fixedpt fixpt_base_dmov_mul_sqrt3 = fixedpt_fromfloat(dockpars.base_dmov_mul_sqrt3);
 fixedpt fixpt_base_dang_mul_sqrt3 = fixedpt_fromfloat(dockpars.base_dang_mul_sqrt3);
+fixedpt fixpt_rho_lower_bound = fixedpt_fromfloat(dockpars.rho_lower_bound);
+#endif
+
 unsigned short Host_max_num_of_iters = (unsigned short)dockpars.max_num_of_iters;
 unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 
@@ -783,10 +792,11 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 	//setKernelArg(kernel12,0, sizeof(unsigned int),  &dockpars.max_num_of_iters);
 	setKernelArg(kernel12,0, sizeof(unsigned short),  &Host_max_num_of_iters);
 
-	setKernelArg(kernel12,1, sizeof(float),  	&dockpars.rho_lower_bound);
 	#if defined (FIXED_POINT_LS1)
+	setKernelArg(kernel12,1, sizeof(fixedpt),  	&fixpt_rho_lower_bound);
 	setKernelArg(kernel12,2, sizeof(fixedpt),  	&fixpt_base_dmov_mul_sqrt3);
 	#else
+	setKernelArg(kernel12,1, sizeof(float),  	&dockpars.rho_lower_bound);
 	setKernelArg(kernel12,2, sizeof(float),  	&dockpars.base_dmov_mul_sqrt3);
 	#endif
 	setKernelArg(kernel12,3, sizeof(unsigned char), &dockpars.num_of_genes);
@@ -811,11 +821,11 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 #ifdef ENABLE_KERNEL15 // Krnl_LS2
 	//setKernelArg(kernel15,0, sizeof(unsigned int),  &dockpars.max_num_of_iters);
 	setKernelArg(kernel15,0, sizeof(unsigned short),  &Host_max_num_of_iters);
-
-	setKernelArg(kernel15,1, sizeof(float),  	&dockpars.rho_lower_bound);
 	#if defined (FIXED_POINT_LS2)
+	setKernelArg(kernel15,1, sizeof(fixedpt),  	&fixpt_rho_lower_bound);
 	setKernelArg(kernel15,2, sizeof(fixedpt),  	&fixpt_base_dmov_mul_sqrt3);
 	#else
+	setKernelArg(kernel15,1, sizeof(float),  	&dockpars.rho_lower_bound);
 	setKernelArg(kernel15,2, sizeof(float),  	&dockpars.base_dmov_mul_sqrt3);
 	#endif
 	setKernelArg(kernel15,3, sizeof(unsigned char), &dockpars.num_of_genes);
@@ -894,11 +904,11 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 #ifdef ENABLE_KERNEL21 // Krnl_LS3
 	//setKernelArg(kernel21,0, sizeof(unsigned int),  &dockpars.max_num_of_iters);
 	setKernelArg(kernel21,0, sizeof(unsigned short),  &Host_max_num_of_iters);
-
-	setKernelArg(kernel21,1, sizeof(float),  	&dockpars.rho_lower_bound);
 	#if defined (FIXED_POINT_LS3)
+	setKernelArg(kernel21,1, sizeof(fixedpt),  	&fixpt_rho_lower_bound);
 	setKernelArg(kernel21,2, sizeof(fixedpt),  	&fixpt_base_dmov_mul_sqrt3);
 	#else
+	setKernelArg(kernel21,1, sizeof(float),  	&dockpars.rho_lower_bound);
 	setKernelArg(kernel21,2, sizeof(float),  	&dockpars.base_dmov_mul_sqrt3);
 	#endif
 	setKernelArg(kernel21,3, sizeof(unsigned char), &dockpars.num_of_genes);
@@ -1399,6 +1409,7 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		mypars->num_of_generations  = array_evals_and_generations_performed [1];
 	
 		memcopyBufferObjectFromDevice(command_queue1,cpu_final_populations,mem_dockpars_conformations_current,size_populations);
+
 		memcopyBufferObjectFromDevice(command_queue1,cpu_energies,mem_dockpars_energies_current,size_energies);
 
 
@@ -2069,6 +2080,9 @@ void cleanup() {
   if(cpu_fixedpt64grids)   {alignedFree(cpu_fixedpt64grids);}
 #endif
 
+#if defined (FIXED_POINT_INTERE)
+  if(mem_KerConstStatic_fixpt64_atom_charges_const)	  {clReleaseMemObject(mem_KerConstStatic_fixpt64_atom_charges_const);}
+#endif
   if(mem_KerConstStatic_atom_charges_const)	  	  {clReleaseMemObject(mem_KerConstStatic_atom_charges_const);}
   if(mem_KerConstStatic_atom_types_const)	   	  {clReleaseMemObject(mem_KerConstStatic_atom_types_const);}
   if(mem_KerConstStatic_intraE_contributors_const) 	  {clReleaseMemObject(mem_KerConstStatic_intraE_contributors_const);}
