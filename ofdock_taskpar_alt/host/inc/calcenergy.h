@@ -106,7 +106,7 @@ typedef struct
 #include "defines_fixedpt.h"
 #endif
 
-#if defined (FIXED_POINT_INTERE)
+#if defined (FIXED_POINT_INTERE) || (FIXED_POINT_INTRAE)
 #include "defines_fixedpt_64.h"
 #endif
 

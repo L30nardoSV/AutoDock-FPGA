@@ -210,6 +210,16 @@ freq: 185 MHz
 freq: 170 MHz
 >>> commit "correct FIXEDPT_* directives"
 
+80. `calcenergy.h`: correct preprocessor directive that enables FIXED_POINT_INTRAE
+81. `Krnl_InterE`, `Makefile`: disable FIXED_POINT_INTERE
+82. `Krnl_IntraE`, `Makefile`: disable FIXED_POINT_INTRAE + 
+			       pipeline main for-loop (disable unroll 10)
+
+freq: 207 MHz
+
+-> 3ptb, 10runs took 64s, i.e. 64/59 = 1.08 slowdown
+-> 1stp, 10runs took 166s, i.e. 166/84 = 1.97 slowdown
+>>> commit "disabled fixedpt intere + intrae"
 
 NOT DONE YET
 
