@@ -238,7 +238,7 @@ freq: 185 MHz
 again without --fpc and without --fp-relaxed
 freq: 191 MHz
 
->>> commit "added flag to pass all pop and energy only once"
+>>> commit "added SINGLE_COPY_POP_ENE flag to pass all pop and energy only once"
 
 
 
