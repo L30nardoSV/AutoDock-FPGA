@@ -251,7 +251,9 @@ int prepare_const_fields_for_gpu(Liganddata*     myligand_reference,
 
 int prepare_conststatic_fields_for_gpu(Liganddata* 	       myligand_reference,
 				 	Dockpars*   	       mypars,
-				 	//float*      	       cpu_ref_ori_angles,
+					#if defined(SINGLE_COPY_POP_ENE)
+				 	float*      	       cpu_ref_ori_angles,
+					#endif
 				 	kernelconstant_static* KerConstStatic)
 {
 	int i, j;
@@ -446,6 +448,36 @@ int prepare_conststatic_fields_for_gpu(Liganddata* 	       myligand_reference,
 		#endif
 	}
 
+
+
+#if defined(SINGLE_COPY_POP_ENE)
+	float phi, theta, genrotangle;
+
+	//reference orientation quaternions
+	for (i=0; i<mypars->num_of_runs; i++)
+	{
+		//printf("Pregenerated angles for run %d: %f %f %f\n", i, cpu_ref_ori_angles[3*i], cpu_ref_ori_angles[3*i+1], cpu_ref_ori_angles[3*i+2]);
+		phi = cpu_ref_ori_angles[3*i]*DEG_TO_RAD;
+		theta = cpu_ref_ori_angles[3*i+1]*DEG_TO_RAD;
+		genrotangle = cpu_ref_ori_angles[3*i+2]*DEG_TO_RAD;
+
+		#if defined (FIXED_POINT_CONFORM)
+		// fixed-point
+		KerConstStatic->ref_orientation_quats_const[4*i]   = fixedpt_fromfloat(cosf(genrotangle/2.0f));			//q
+		KerConstStatic->ref_orientation_quats_const[4*i+1] = fixedpt_fromfloat(sinf(genrotangle/2.0f)*sinf(theta)*cosf(phi));	//x
+		KerConstStatic->ref_orientation_quats_const[4*i+2] = fixedpt_fromfloat(sinf(genrotangle/2.0f)*sinf(theta)*sinf(phi));	//y
+		KerConstStatic->ref_orientation_quats_const[4*i+3] = fixedpt_fromfloat(sinf(genrotangle/2.0f)*cosf(theta)); 		//z
+		#else
+		// floating-point (original)
+		KerConstStatic->ref_orientation_quats_const[4*i]   = cosf(genrotangle/2.0f);				//q
+		KerConstStatic->ref_orientation_quats_const[4*i+1] = sinf(genrotangle/2.0f)*sinf(theta)*cosf(phi);	//x
+		KerConstStatic->ref_orientation_quats_const[4*i+2] = sinf(genrotangle/2.0f)*sinf(theta)*sinf(phi);	//y
+		KerConstStatic->ref_orientation_quats_const[4*i+3] = sinf(genrotangle/2.0f)*cosf(theta);		//z
+		#endif
+	}
+#endif
+
+
 	return 0;
 }
 
@@ -458,11 +490,11 @@ int prepare_conststatic_fields_for_gpu(Liganddata* 	       myligand_reference,
 
 
 
+#if defined(SINGLE_COPY_POP_ENE)
 
 
 
-
-
+#else
 
 int prepare_constdynamic_fields_for_gpu(Liganddata* 	 	myligand_reference,
 				 	Dockpars*   	 	mypars,
@@ -599,7 +631,7 @@ int prepare_constdynamic_fields_for_gpu(Liganddata* 	 	myligand_reference,
 
 }
 
-
+#endif
 
 
 

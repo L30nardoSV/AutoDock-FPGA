@@ -221,6 +221,30 @@ freq: 207 MHz
 -> 1stp, 10runs took 166s, i.e. 166/84 = 1.97 slowdown
 >>> commit "disabled fixedpt intere + intrae"
 
+
+83. `Makefile`
+    `calcenergy.cpp`, 
+    `getparameters.cpp`,
+    `performdocking.cpp`
+    `Krnl_GA.cl`: SINGLE_COPY_POP_ENE: pass `cpu_init_populations` + `ref_orientation_quats` only once and not every docking GA cycle
+
+freq: 191 MHz
+
+84. `Makefile`: build using --fpc (reducing rounding operations) and
+                            --fp-relaxed (order of floating point)
+
+freq: 185 MHz
+
+again without --fpc and without --fp-relaxed
+freq: 191 MHz
+
+>>> commit "added flag to pass all pop and energy only once"
+
+
+
+
+
+
 NOT DONE YET
 
 

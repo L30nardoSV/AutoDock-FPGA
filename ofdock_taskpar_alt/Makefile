@@ -423,6 +423,8 @@ FIXED_POINT_LS1=YES
 FIXED_POINT_LS2=YES
 FIXED_POINT_LS3=YES
 
+SINGLE_COPY_POP_ENE=YES
+
 ifeq ($(FIXED_POINT_CONFORM), YES)
 	FIPOCO_FLAG=-DFIXED_POINT_CONFORM
 else	
@@ -459,7 +461,13 @@ else
 	FIPOLS3_FLAG=
 endif
 
-FIPO_FLAG = $(FIPOCO_FLAG) $(FIPOIE_FLAG) $(FIPOIA_FLAG) $(FIPOLS1_FLAG) $(FIPOLS2_FLAG) $(FIPOLS3_FLAG)
+ifeq ($(SINGLE_COPY_POP_ENE), YES)
+	COPYPOPENE_FLAG=-DSINGLE_COPY_POP_ENE
+else	
+	COPYPOPENE_FLAG=
+endif
+
+FIPO_FLAG = $(FIPOCO_FLAG) $(FIPOIE_FLAG) $(FIPOIA_FLAG) $(FIPOLS1_FLAG) $(FIPOLS2_FLAG) $(FIPOLS3_FLAG) $(COPYPOPENE_FLAG)
 
 # =============================
 
@@ -548,6 +556,10 @@ kerrpt: $(DEV_SRC)
 	@echo " "
 	@echo "=================================================================="
 	@echo "INFO: report files are under: bin/$(KRNL_NAME)/reports/report.html"
+	@echo "INFO: THIS WORKS ONLY FROM V16.1 ON                               "
+	@echo "                                                                  "
+	@echo "INFO: report file is under: bin/$(KRNL_NAME).log                  "
+	@echo "INFO: THIS WORKS IN V16.0 AND OLDER.                              "
 	@echo "=================================================================="
 	@echo " "
 

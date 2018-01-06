@@ -180,9 +180,16 @@ fixedpt fixedpt_map_angle_360(fixedpt angle)
 // Originally from: searchoptimum.c
 // --------------------------------------------------------------------------
 __kernel __attribute__ ((max_global_work_dim(0)))
+
+
 void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 	     __global       float*           restrict GlobEnergyCurrent,
+	     #if defined(SINGLE_COPY_POP_ENE)
+   	     __global       unsigned int*    restrict GlobEvals_performed,
+             __global       unsigned int*    restrict GlobGens_performed,
+	     #else
 	     __global       unsigned int*    restrict GlobEvalsGenerations_performed,
+	     #endif
 			    unsigned int              DockConst_pop_size,
 		     	    unsigned int              DockConst_num_of_energy_evals,
 			    unsigned int              DockConst_num_of_generations,
@@ -194,7 +201,14 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			    float                     Host_two_absmaxdang,
 			    float                     DockConst_crossover_rate,
 			    unsigned int              DockConst_num_of_lsentities,
-			    unsigned char             DockConst_num_of_genes)
+			    unsigned char             DockConst_num_of_genes
+	     #if defined(SINGLE_COPY_POP_ENE)
+	     					      ,
+	                    unsigned short            Host_RunId,
+			    unsigned int 	      Host_Offset_Pop,
+			    unsigned int	      Host_Offset_Ene
+	     #endif
+	     )
 {
 	#if defined (DEBUG_KRNL_GA)
 	printf("\n");
@@ -228,7 +242,14 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 		mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 		for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_genes; pipe_cnt++) {
+			#if defined(SINGLE_COPY_POP_ENE)
+			/*
+			LocalPopCurr[pop_cnt][pipe_cnt & 0x3F] = GlobPopulationCurrent[Host_RunId*DockConst_pop_size*ACTUAL_GENOTYPE_LENGTH + pop_cnt*ACTUAL_GENOTYPE_LENGTH + pipe_cnt];
+			*/
+			LocalPopCurr[pop_cnt][pipe_cnt & 0x3F] = GlobPopulationCurrent[Host_Offset_Pop + pop_cnt*ACTUAL_GENOTYPE_LENGTH + pipe_cnt];
+			#else
 			LocalPopCurr[pop_cnt][pipe_cnt & 0x3F] = GlobPopulationCurrent[pop_cnt*ACTUAL_GENOTYPE_LENGTH + pipe_cnt];
+			#endif
 			write_channel_altera(chan_IC2Conf_genotype, LocalPopCurr[pop_cnt][pipe_cnt & 0x3F]);	
 		}	
 		#if defined (DEBUG_KRNL_IC)
@@ -583,9 +604,24 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 */	
 	for (ushort pop_cnt=0;pop_cnt<DockConst_pop_size; pop_cnt++) { 	
 		for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
+			#if defined(SINGLE_COPY_POP_ENE)
+			/*
+			GlobPopulationCurrent[Host_RunId*DockConst_pop_size*ACTUAL_GENOTYPE_LENGTH + pop_cnt*ACTUAL_GENOTYPE_LENGTH + gene_cnt] = LocalPopCurr[pop_cnt][gene_cnt & 0x3F];
+			*/
+			GlobPopulationCurrent[Host_Offset_Pop + pop_cnt*ACTUAL_GENOTYPE_LENGTH + gene_cnt] = LocalPopCurr[pop_cnt][gene_cnt & 0x3F];
+			#else
 			GlobPopulationCurrent[pop_cnt*ACTUAL_GENOTYPE_LENGTH + gene_cnt] = LocalPopCurr[pop_cnt][gene_cnt & 0x3F];
+			#endif
 		}
+
+		#if defined(SINGLE_COPY_POP_ENE)
+		/*
+		GlobEnergyCurrent[Host_RunId*DockConst_pop_size + pop_cnt] = LocalEneCurr[pop_cnt];
+		*/
+		GlobEnergyCurrent[Host_Offset_Ene + pop_cnt] = LocalEneCurr[pop_cnt];
+		#else
 		GlobEnergyCurrent[pop_cnt] = LocalEneCurr[pop_cnt];
+		#endif
 	}
 
 	#if defined (DEBUG_KRNL_GA)
@@ -596,8 +632,13 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 	printf("	%-20s: %s\n", "Krnl_GA", "disabled");
 	#endif
 
+#if defined(SINGLE_COPY_POP_ENE)
+	GlobEvals_performed[Host_RunId] = eval_cnt;
+	GlobGens_performed [Host_RunId] = generation_cnt;
+#else
 	GlobEvalsGenerations_performed[0] = eval_cnt;
 	GlobEvalsGenerations_performed[1] = generation_cnt;
+#endif
 }
 
 // --------------------------------------------------------------------------

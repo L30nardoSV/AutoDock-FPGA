@@ -116,9 +116,9 @@ typedef struct
 
 typedef struct
 {
-#if defined (FIXED_POINT_INTERE)
+	#if defined (FIXED_POINT_INTERE)
        	fixedpt64 fixpt64_atom_charges_const[MAX_NUM_OF_ATOMS]        __attribute__ ((aligned (1024)));
-#endif
+	#endif
        	float atom_charges_const[MAX_NUM_OF_ATOMS]                    __attribute__ ((aligned (512)));
 
        	char  atom_types_const  [MAX_NUM_OF_ATOMS]                    __attribute__ ((aligned (128)));
@@ -146,6 +146,15 @@ typedef struct
        	cl_float3 rotbonds_unit_vectors_const  [MAX_NUM_OF_ROTBONDS] __attribute__ ((aligned (512)));
 	#endif
 
+#if defined(SINGLE_COPY_POP_ENE)
+	#if defined (FIXED_POINT_CONFORM)
+	// fixed-point
+      	fixedpt   ref_orientation_quats_const  [4*MAX_NUM_OF_RUNS] __attribute__ ((aligned (512)));
+	#else
+	// floating-point (original)
+       	float     ref_orientation_quats_const  [4*MAX_NUM_OF_RUNS] __attribute__ ((aligned (512)));
+	#endif
+#endif
 } kernelconstant_static;
 
 // As struct members are used as host buffers
@@ -153,6 +162,9 @@ typedef struct
 // This is added for the sake of completion
 // cl_float3 is made of 4 floats, its size is 16 bytes
 
+#if defined(SINGLE_COPY_POP_ENE)
+
+#else
 typedef struct
 {
 	#if defined (FIXED_POINT_CONFORM)
@@ -163,7 +175,7 @@ typedef struct
        	float     ref_orientation_quats_const  [4] __attribute__ ((aligned (64)));
 	#endif
 } kernelconstant_dynamic;
-
+#endif
 
 
 /*
@@ -174,13 +186,19 @@ int prepare_const_fields_for_gpu(Liganddata* 	 myligand_reference,
 */
 int prepare_conststatic_fields_for_gpu(Liganddata* 	       myligand_reference,
 				 	Dockpars*   	       mypars,
-				 	//float*      	       cpu_ref_ori_angles,
+					#if defined(SINGLE_COPY_POP_ENE)
+				 	float*      	       cpu_ref_ori_angles,
+					#endif
 				 	kernelconstant_static* KerConstStatic);
 
+#if defined(SINGLE_COPY_POP_ENE)
+
+#else
 int prepare_constdynamic_fields_for_gpu(Liganddata* 	 	myligand_reference,
 				 	Dockpars*   	 	mypars,
 				 	float*      	 	cpu_ref_ori_angles,
 				 	kernelconstant_dynamic* KerConstDynamic);
+#endif
 
 void make_reqrot_ordering(char number_of_req_rotations[MAX_NUM_OF_ATOMS],
 			  char atom_id_of_numrots[MAX_NUM_OF_ATOMS],

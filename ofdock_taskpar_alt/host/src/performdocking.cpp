@@ -277,7 +277,11 @@ static void display_device_info( cl_device_id device );
 //// --------------------------------
 Dockparameters dockpars;
 kernelconstant_static  KerConstStatic;
+#if defined(SINGLE_COPY_POP_ENE)
+
+#else
 kernelconstant_dynamic KerConstDynamic;
+#endif
 
 //// --------------------------------
 //// Host memory buffers
@@ -287,6 +291,10 @@ float* cpu_final_populations;
 float* cpu_energies;
 Ligandresult* cpu_result_ligands;
 unsigned int* cpu_prng_seeds;
+#if defined(SINGLE_COPY_POP_ENE)
+int *cpu_evals_of_runs;
+int *cpu_gens_of_runs;
+#endif
 float* cpu_ref_ori_angles;
 
 //// --------------------------------
@@ -334,8 +342,13 @@ cl_mem mem_dockpars_energies_current;
 /*
 cl_mem mem_dockpars_prng_states;
 */
-cl_mem mem_evals_and_generations_performed;
 
+#if defined(SINGLE_COPY_POP_ENE)
+cl_mem mem_evals_performed;
+cl_mem mem_gens_performed;
+#else
+cl_mem mem_evals_and_generations_performed;
+#endif
 
 
 
@@ -430,25 +443,40 @@ filled with clock() */
 	size_t size_populations;
 	size_t size_energies;
 	size_t size_prng_seeds;
+#if defined(SINGLE_COPY_POP_ENE)
+	size_t size_evals_of_runs;
+#endif
 
 	clock_t clock_start_docking;
 	clock_t	clock_stop_docking;
 	clock_t clock_stop_program_before_clustering;
 
 	//allocating CPU memory for initial populations
+#if defined(SINGLE_COPY_POP_ENE)
+	size_populations = mypars->num_of_runs * mypars->pop_size * ACTUAL_GENOTYPE_LENGTH * sizeof(float);
+#else
 	//size_populations = mypars->pop_size * GENOTYPE_LENGTH_IN_GLOBMEM * sizeof(float);
 	size_populations = mypars->pop_size * ACTUAL_GENOTYPE_LENGTH * sizeof(float);
+#endif
         cpu_init_populations = (float*) alignedMalloc(size_populations);
 	memset(cpu_init_populations, 0, size_populations);
 
 	//allocating CPU memory for results
+#if defined(SINGLE_COPY_POP_ENE)
+	size_energies = mypars->num_of_runs * mypars->pop_size * sizeof(float);
+#else
 	size_energies = mypars->pop_size * sizeof(float);
+#endif
 	cpu_energies = (float*) alignedMalloc(size_energies);		
 	cpu_result_ligands = (Ligandresult*) alignedMalloc(sizeof(Ligandresult)*(mypars->num_of_runs));	
 	cpu_final_populations = (float*) alignedMalloc(size_populations);
 
 	//allocating memory in CPU for reference orientation angles
+#if defined(SINGLE_COPY_POP_ENE)
+	cpu_ref_ori_angles = (float*) alignedMalloc(mypars->num_of_runs*3*sizeof(float));
+#else
 	cpu_ref_ori_angles = (float*) alignedMalloc(3*sizeof(float));
+#endif
 
 	//generating initial populations and random orientation angles of reference ligand
 	//(ligand will be moved to origo and scaled as well)
@@ -472,6 +500,17 @@ filled with clock() */
 
 	//srand(time(NULL));
 
+#if defined(SINGLE_COPY_POP_ENE)
+	// allocating memory in CPU for evaluation counters
+	size_evals_of_runs = mypars->num_of_runs*sizeof(int);
+	cpu_evals_of_runs = (int*) alignedMalloc(size_evals_of_runs);
+	memset(cpu_evals_of_runs, 0, size_evals_of_runs);
+
+	// allocating memory in CPU for generation counters
+	cpu_gens_of_runs = (int*) alignedMalloc(size_evals_of_runs);
+	memset(cpu_gens_of_runs, 0, size_evals_of_runs);
+#endif
+
 	//preparing the constant data fields for the GPU
 	// ----------------------------------------------------------------------
 	// The original function does CUDA calls initializing const Kernel data.
@@ -479,8 +518,11 @@ filled with clock() */
 	// and return them <here> (<here> = where prepare_const_fields_for_gpu() is called),
 	// so we can send them to Kernels from <here>, instead of from calcenergy.cpp as originally.
 	// ----------------------------------------------------------------------
-	//if (prepare_conststatic_fields_for_gpu(&myligand_reference, mypars, cpu_ref_ori_angles, &KerConstStatic) == 1)
+#if defined(SINGLE_COPY_POP_ENE)
+	if (prepare_conststatic_fields_for_gpu(&myligand_reference, mypars, cpu_ref_ori_angles, &KerConstStatic) == 1)
+#else
 	if (prepare_conststatic_fields_for_gpu(&myligand_reference, mypars, &KerConstStatic) == 1)
+#endif
 		return 1;
 
 	//preparing parameter struct
@@ -589,9 +631,18 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	mallocBufferObject(context,CL_MEM_READ_WRITE,size_populations,  	&mem_dockpars_conformations_current);
 	mallocBufferObject(context,CL_MEM_READ_WRITE,size_energies,    		&mem_dockpars_energies_current);
 
+#if defined(SINGLE_COPY_POP_ENE)
+	mallocBufferObject(context,CL_MEM_WRITE_ONLY,size_evals_of_runs,  	&mem_evals_performed);
+	mallocBufferObject(context,CL_MEM_WRITE_ONLY,size_evals_of_runs,  	&mem_gens_performed);
+#else
 	mallocBufferObject(context,CL_MEM_WRITE_ONLY,2*sizeof(unsigned int),  	&mem_evals_and_generations_performed);
+#endif
 
+#if defined(SINGLE_COPY_POP_ENE)
+
+#else
 	unsigned int array_evals_and_generations_performed [2]; // [0]: evals, [1]: generations 
+#endif
 
 #if defined (FIXED_POINT_INTERE)
 	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_fixpt64_atom_charges_const,            &KerConstStatic.fixpt64_atom_charges_const[0],            MAX_NUM_OF_ATOMS*sizeof(fixedpt64));
@@ -669,6 +720,27 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	clock_start_docking = clock();
 
 #ifdef ENABLE_KERNEL1 // Krnl_GA
+	#if defined(SINGLE_COPY_POP_ENE)
+        setKernelArg(kernel1,0,  sizeof(mem_dockpars_conformations_current),    &mem_dockpars_conformations_current);
+        setKernelArg(kernel1,1,  sizeof(mem_dockpars_energies_current),         &mem_dockpars_energies_current);
+	setKernelArg(kernel1,2,  sizeof(mem_evals_performed),   		&mem_evals_performed);
+	setKernelArg(kernel1,3,  sizeof(mem_gens_performed),    		&mem_gens_performed);
+	setKernelArg(kernel1,4,  sizeof(unsigned int),                  	&dockpars.pop_size);
+	setKernelArg(kernel1,5,  sizeof(unsigned int),                 		&dockpars.num_of_energy_evals);
+	setKernelArg(kernel1,6,  sizeof(unsigned int),                 		&dockpars.num_of_generations);
+	setKernelArg(kernel1,7,  sizeof(float),                          	&dockpars.tournament_rate);
+	setKernelArg(kernel1,8,  sizeof(float),                          	&dockpars.mutation_rate);
+	setKernelArg(kernel1,9,  sizeof(float),                          	&dockpars.abs_max_dmov);
+	setKernelArg(kernel1,10, sizeof(float),                          	&dockpars.abs_max_dang);
+	setKernelArg(kernel1,11, sizeof(float),                                 &two_absmaxdmov);
+	setKernelArg(kernel1,12, sizeof(float),                                 &two_absmaxdang);
+	setKernelArg(kernel1,13, sizeof(float),                          	&dockpars.crossover_rate);
+	setKernelArg(kernel1,14, sizeof(unsigned int),                          &dockpars.num_of_lsentities);
+	setKernelArg(kernel1,15, sizeof(unsigned char),                         &dockpars.num_of_genes);
+	//setKernelArg(kernel1,16, sizeof(unsigned short),                      run_cnt);
+	//setKernelArg(kernel1,17, sizeof(unsigned int),                        offset_pop);
+	//setKernelArg(kernel1,18, sizeof(unsigned int),                        offset_ene);
+	#else
         setKernelArg(kernel1,0,  sizeof(mem_dockpars_conformations_current),    &mem_dockpars_conformations_current);
         setKernelArg(kernel1,1,  sizeof(mem_dockpars_energies_current),         &mem_dockpars_energies_current);
 	setKernelArg(kernel1,2,  sizeof(mem_evals_and_generations_performed),   &mem_evals_and_generations_performed);
@@ -684,6 +756,7 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	setKernelArg(kernel1,12, sizeof(float),                          	&dockpars.crossover_rate);
 	setKernelArg(kernel1,13, sizeof(unsigned int),                          &dockpars.num_of_lsentities);
 	setKernelArg(kernel1,14, sizeof(unsigned char),                         &dockpars.num_of_genes);
+	#endif
 #endif // End of ENABLE_KERNEL1
 
 #ifdef ENABLE_KERNEL2 // Krnl_Conform
@@ -696,18 +769,22 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	setKernelArg(kernel2,6,  sizeof(unsigned char),      &dockpars.num_of_genes);
 	setKernelArg(kernel2,7,  sizeof(unsigned char),      &num_rotbonds);
 
-	#if defined (FIXED_POINT_CONFORM)
+	#if defined(SINGLE_COPY_POP_ENE)
+
+	#else
+		#if defined (FIXED_POINT_CONFORM)
 	// fixed-point
 	setKernelArg(kernel2,8,  sizeof(fixedpt),            &KerConstDynamic.ref_orientation_quats_const[0]);
 	setKernelArg(kernel2,9,  sizeof(fixedpt),            &KerConstDynamic.ref_orientation_quats_const[1]);
 	setKernelArg(kernel2,10, sizeof(fixedpt),            &KerConstDynamic.ref_orientation_quats_const[2]);
 	setKernelArg(kernel2,11, sizeof(fixedpt),            &KerConstDynamic.ref_orientation_quats_const[3]);
-	#else
+		#else
 	// floating-point (original)
 	setKernelArg(kernel2,8,  sizeof(float),              &KerConstDynamic.ref_orientation_quats_const[0]);
 	setKernelArg(kernel2,9,  sizeof(float),              &KerConstDynamic.ref_orientation_quats_const[1]);
 	setKernelArg(kernel2,10, sizeof(float),              &KerConstDynamic.ref_orientation_quats_const[2]);
 	setKernelArg(kernel2,11, sizeof(float),              &KerConstDynamic.ref_orientation_quats_const[3]);
+		#endif
 	#endif
 #endif // End of ENABLE_KERNEL2
 
@@ -1001,6 +1078,9 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		printf("Run %3u started ...     \n", run_cnt+1); 
 		fflush(stdout);
 
+#if defined(SINGLE_COPY_POP_ENE)
+
+#else
 		myligand_reference = *myligand_init;
 		gen_initpop_and_reflig(mypars, cpu_init_populations, cpu_ref_ori_angles, &myligand_reference, mygrid);
 
@@ -1041,8 +1121,33 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 */
 
  		memcopyBufferObjectToDevice(command_queue1,mem_dockpars_conformations_current, 	cpu_init_populations, size_populations);
+#endif
+
+#if defined(SINGLE_COPY_POP_ENE)
+	#ifdef ENABLE_KERNEL1
+		unsigned int Host_Offset_Pop = run_cnt * dockpars.pop_size * ACTUAL_GENOTYPE_LENGTH;
+		unsigned int Host_Offset_Ene = run_cnt * dockpars.pop_size;
+		setKernelArg(kernel1,16,  sizeof(unsigned short), &run_cnt);
+		setKernelArg(kernel1,17,  sizeof(unsigned int),   &Host_Offset_Pop);
+		setKernelArg(kernel1,18,  sizeof(unsigned int),   &Host_Offset_Ene);
+	#endif
+#endif
 
 #ifdef ENABLE_KERNEL2 // Krnl_Conform
+	#if defined(SINGLE_COPY_POP_ENE)
+		#if defined (FIXED_POINT_CONFORM)
+		// fixed-point
+		setKernelArg(kernel2,8,  sizeof(fixedpt),        &KerConstStatic.ref_orientation_quats_const[4*run_cnt]);
+		setKernelArg(kernel2,9,  sizeof(fixedpt),        &KerConstStatic.ref_orientation_quats_const[4*run_cnt + 1]);	
+		setKernelArg(kernel2,10, sizeof(fixedpt),        &KerConstStatic.ref_orientation_quats_const[4*run_cnt + 2]);	
+		setKernelArg(kernel2,11, sizeof(fixedpt),        &KerConstStatic.ref_orientation_quats_const[4*run_cnt + 3]);
+		#else
+		setKernelArg(kernel2,8,  sizeof(float),          &KerConstStatic.ref_orientation_quats_const[4*run_cnt]);
+		setKernelArg(kernel2,9,  sizeof(float),          &KerConstStatic.ref_orientation_quats_const[4*run_cnt + 1]);	
+		setKernelArg(kernel2,10, sizeof(float),          &KerConstStatic.ref_orientation_quats_const[4*run_cnt + 2]);	
+		setKernelArg(kernel2,11, sizeof(float),          &KerConstStatic.ref_orientation_quats_const[4*run_cnt + 3]);
+		#endif
+	#else
 		#if defined (FIXED_POINT_CONFORM)
 		// fixed-point
 		setKernelArg(kernel2,8,  sizeof(fixedpt),        &KerConstDynamic.ref_orientation_quats_const[0]);
@@ -1055,6 +1160,7 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		setKernelArg(kernel2,10, sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[2]);	
 		setKernelArg(kernel2,11, sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[3]);
 		#endif
+	#endif
 #endif // End of ENABLE_KERNEL2
 
 
@@ -1106,7 +1212,7 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		setKernelArg(kernel17,8,  sizeof(fixedpt),        &KerConstDynamic.ref_orientation_quats_const[1]);	
 		setKernelArg(kernel17,9,  sizeof(fixedpt),        &KerConstDynamic.ref_orientation_quats_const[2]);	
 		setKernelArg(kernel17,10, sizeof(fixedpt),        &KerConstDynamic.ref_orientation_quats_const[3]);
-#endif // End of ENABLE_KERNEL2
+#endif // End of ENABLE_KERNEL17
 
 #ifdef ENABLE_KERNEL20 // Krnl_PRNG_LS3_float
 		//setKernelArg(kernel20,0, sizeof(unsigned int),   &cpu_prng_seeds[7]);
@@ -1398,7 +1504,10 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		clock_stop_docking = clock();
 
 
+#if defined(SINGLE_COPY_POP_ENE)
 
+
+#else
 		/*
 		fflush(stdout);
 		*/
@@ -1515,14 +1624,47 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 			      &cpu_result_ligands[run_cnt]);
 
 
-
+#endif
 
 
 	} // End of for (run_cnt = 0; run_cnt < mypars->num_of_runs; run_cnt++)
 
 
 
+#if defined(SINGLE_COPY_POP_ENE)
 
+	//copy results from device
+	memcopyBufferObjectFromDevice(command_queue1, cpu_evals_of_runs, mem_evals_performed, size_evals_of_runs);
+	memcopyBufferObjectFromDevice(command_queue1, cpu_gens_of_runs,  mem_gens_performed,  size_evals_of_runs);
+
+	memcopyBufferObjectFromDevice(command_queue1,cpu_final_populations,mem_dockpars_conformations_current,size_populations);
+	memcopyBufferObjectFromDevice(command_queue1,cpu_energies,mem_dockpars_energies_current,size_energies);
+
+
+	for (unsigned int run_cnt = 0; run_cnt < mypars->num_of_runs; run_cnt++) {
+
+		arrange_result(cpu_final_populations+run_cnt*mypars->pop_size*ACTUAL_GENOTYPE_LENGTH, 
+			       cpu_energies+run_cnt*mypars->pop_size, 
+			       mypars->pop_size);
+
+		make_resfiles(cpu_final_populations+run_cnt*mypars->pop_size*ACTUAL_GENOTYPE_LENGTH, 
+			      cpu_energies+run_cnt*mypars->pop_size, 
+			      &myligand_reference,
+			      myligand_init, 
+			      mypars, 
+   			      cpu_evals_of_runs[run_cnt], 
+			      cpu_gens_of_runs[run_cnt], /*generation_cnt, */
+			      mygrid, 
+			      cpu_floatgrids, 
+			      cpu_ref_ori_angles+3*run_cnt, 
+			      argc, 
+			      argv, 
+			      0,
+			      run_cnt, 
+                              &(cpu_result_ligands [run_cnt]));
+	} // End of for (run_cnt = 0; run_cnt < mypars->num_of_runs; run_cnt++)
+
+#endif
 
 
 
@@ -2074,6 +2216,9 @@ void cleanup() {
   if(cpu_energies)         {alignedFree(cpu_energies);}
   if(cpu_result_ligands)   {alignedFree(cpu_result_ligands);}
   if(cpu_prng_seeds)       {alignedFree(cpu_prng_seeds);}
+#if defined(SINGLE_COPY_POP_ENE)
+  if(cpu_evals_of_runs)    {alignedFree(cpu_evals_of_runs);}
+#endif
   if(cpu_ref_ori_angles)   {alignedFree(cpu_ref_ori_angles);}
 
 #if defined (FIXED_POINT_INTERE)
@@ -2102,7 +2247,12 @@ void cleanup() {
 /*
   if(mem_dockpars_prng_states)            {clReleaseMemObject(mem_dockpars_prng_states);}
 */
+#if defined(SINGLE_COPY_POP_ENE)
+  if(mem_evals_performed) {clReleaseMemObject(mem_evals_performed);}
+  if(mem_gens_performed)  {clReleaseMemObject(mem_gens_performed);}
+#else
   if(mem_evals_and_generations_performed) {clReleaseMemObject(mem_evals_and_generations_performed);}
+#endif
 }
 
 // Helper functions to display parameters returned by OpenCL queries
