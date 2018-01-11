@@ -336,7 +336,14 @@ cl_mem mem_rotbonds_moving_vectors_const;// float [3*MAX_NUM_OF_ROTBONDS];		// 3
 cl_mem mem_rotbonds_unit_vectors_const;	// float [3*MAX_NUM_OF_ROTBONDS];		// 3*32  = 96   //384
 cl_mem mem_ref_orientation_quats_const;	// float [4*MAX_NUM_OF_RUNS];			// 4*100 = 400  //1600
 */
+
 cl_mem mem_dockpars_fgrids;
+
+#if defined(SEPARATE_FGRID_INTERE)
+cl_mem mem_dockpars_fgrids2;
+cl_mem mem_dockpars_fgrids3;
+#endif
+
 cl_mem mem_dockpars_conformations_current;
 cl_mem mem_dockpars_energies_current;
 /*
@@ -384,8 +391,8 @@ cl_mem mem_evals_and_generations_performed;
 
 
 
-#if defined (FIXED_POINT_INTERE)
-
+//#if defined (FIXED_POINT_INTERE)
+#if 0
 //#include "defines_fixedpt_64.h"
 fixedpt64* cpu_fixedpt64grids;
 
@@ -438,6 +445,12 @@ filled with clock() */
 	size_t size_fixedpt64grids;
 #else
 	size_t size_floatgrids;
+
+	#if defined(SEPARATE_FGRID_INTERE)
+	size_t size_floatgrids2;
+	size_t size_floatgrids3;
+	#endif
+
 #endif
 
 	size_t size_populations;
@@ -571,8 +584,12 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 
 	// these variables hold multiplications between kernel-constants
 	// better calculate them here and then pass them to Krnl_InterE and Krnl_InterE2
+	#if defined(SEPARATE_FGRID_INTERE)
+
+	#else
 	const unsigned int mul_tmp2 = dockpars.num_of_atypes * dockpars.g3;
 	const unsigned int mul_tmp3 = (dockpars.num_of_atypes + 1) * dockpars.g3;
+	#endif
 
 	// this variable holds a multiplication between kernel-constants
 	// better calculate them it and then pass them to Krnl_IntraE and Krnl_IntraE2
@@ -587,7 +604,13 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 #if 0
 	size_fixedpt64grids = (sizeof(fixedpt64)) * (mygrid->num_of_atypes+2) * (mygrid->size_xyz[0]) * (mygrid->size_xyz[1]) * (mygrid->size_xyz[2]);
 #else
+	#if defined(SEPARATE_FGRID_INTERE)
+	size_floatgrids = sizeof(float) * mygrid->num_of_atypes * mygrid->size_xyz[0]*mygrid->size_xyz[1]* mygrid->size_xyz[2];
+	size_floatgrids2= sizeof(float) * mygrid->size_xyz[0] * mygrid->size_xyz[1] * mygrid->size_xyz[2];
+	size_floatgrids3= sizeof(float) * mygrid->size_xyz[0] * mygrid->size_xyz[1] * mygrid->size_xyz[2];
+	#else
 	size_floatgrids = (sizeof(float)) * (mygrid->num_of_atypes+2) * (mygrid->size_xyz[0]) * (mygrid->size_xyz[1]) * (mygrid->size_xyz[2]);
+	#endif
 #endif
 
 #if defined (FIXED_POINT_INTERE)
@@ -626,6 +649,11 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	mallocBufferObject(context,CL_MEM_READ_ONLY,size_fixedpt64grids,   	&mem_dockpars_fgrids);
 #else
 	mallocBufferObject(context,CL_MEM_READ_ONLY,size_floatgrids,   		&mem_dockpars_fgrids);
+
+	#if defined(SEPARATE_FGRID_INTERE)
+	mallocBufferObject(context,CL_MEM_READ_ONLY,size_floatgrids2,   	&mem_dockpars_fgrids2);
+	mallocBufferObject(context,CL_MEM_READ_ONLY,size_floatgrids3,   	&mem_dockpars_fgrids3);
+	#endif
 #endif
 
 	mallocBufferObject(context,CL_MEM_READ_WRITE,size_populations,  	&mem_dockpars_conformations_current);
@@ -715,6 +743,11 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	memcopyBufferObjectToDevice(command_queue1,mem_dockpars_fgrids, 	cpu_fixedpt64grids,       size_fixedpt64grids);
 #else
 	memcopyBufferObjectToDevice(command_queue1,mem_dockpars_fgrids, 	cpu_floatgrids,       size_floatgrids);
+
+	#if defined(SEPARATE_FGRID_INTERE)
+	memcopyBufferObjectToDevice(command_queue1,mem_dockpars_fgrids2, 	cpu_floatgrids + mygrid->num_of_atypes     * mygrid->size_xyz[0]*mygrid->size_xyz[1]* mygrid->size_xyz[2],       size_floatgrids2);
+	memcopyBufferObjectToDevice(command_queue1,mem_dockpars_fgrids3, 	cpu_floatgrids + (mygrid->num_of_atypes+1) * mygrid->size_xyz[0]*mygrid->size_xyz[1]* mygrid->size_xyz[2],       size_floatgrids3);
+	#endif
 #endif
 
 	clock_start_docking = clock();
@@ -793,6 +826,15 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	unsigned char gridsizey_minus1 = dockpars.gridsize_y - 1;
 	unsigned char gridsizez_minus1 = dockpars.gridsize_z - 1;
 
+#if defined (FIXED_POINT_INTERE)
+
+#else
+	float fgridsizex_minus1 = (float) gridsizex_minus1;
+	float fgridsizey_minus1 = (float) gridsizey_minus1;
+	float fgridsizez_minus1 = (float) gridsizez_minus1;
+
+#endif
+
 
 #ifdef ENABLE_KERNEL3 // Krnl_InterE
         setKernelArg(kernel3,0,  sizeof(mem_dockpars_fgrids),                    &mem_dockpars_fgrids);
@@ -806,11 +848,24 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	setKernelArg(kernel3,4,  sizeof(unsigned int),                           &dockpars.g2);
 	setKernelArg(kernel3,5,  sizeof(unsigned int),                           &dockpars.g3);
 	setKernelArg(kernel3,6,  sizeof(unsigned char),                          &dockpars.num_of_atoms);
+
+	#if defined (FIXED_POINT_INTERE)
 	setKernelArg(kernel3,7,  sizeof(unsigned char),                          &gridsizex_minus1);
 	setKernelArg(kernel3,8,  sizeof(unsigned char),                          &gridsizey_minus1);
 	setKernelArg(kernel3,9,  sizeof(unsigned char),                          &gridsizez_minus1);
+	#else
+	setKernelArg(kernel3,7,  sizeof(float),                          	 &fgridsizex_minus1);
+	setKernelArg(kernel3,8,  sizeof(float),                          	 &fgridsizey_minus1);
+	setKernelArg(kernel3,9,  sizeof(float),                          	 &fgridsizez_minus1);
+	#endif
+
+	#if defined(SEPARATE_FGRID_INTERE)
+	setKernelArg(kernel3,10, sizeof(mem_dockpars_fgrids2),                   &mem_dockpars_fgrids2);
+	setKernelArg(kernel3,11, sizeof(mem_dockpars_fgrids3),                   &mem_dockpars_fgrids3);
+	#else
 	setKernelArg(kernel3,10, sizeof(unsigned int),                           &mul_tmp2);
 	setKernelArg(kernel3,11, sizeof(unsigned int),                           &mul_tmp3);
+	#endif
 #endif // End of ENABLE_KERNEL3
 
 #ifdef ENABLE_KERNEL4 // Krnl_IntraE
@@ -887,9 +942,11 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 	setKernelArg(kernel12,5, sizeof(unsigned char),   &Host_cons_limit);
 #endif // End of ENABLE_KERNEL12
 
+/*
 #ifdef ENABLE_KERNEL13 // Krnl_LS_Arbiter
 	setKernelArg(kernel13,0, sizeof(unsigned char),  &dockpars.num_of_genes);
 #endif // End of ENABLE_KERNEL12
+*/
 
 #ifdef ENABLE_KERNEL14 // Krnl_PRNG_LS2_float
 	setKernelArg(kernel14,1, sizeof(unsigned char),  &dockpars.num_of_genes);
@@ -916,62 +973,22 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 	setKernelArg(kernel15,5, sizeof(unsigned char),   &Host_cons_limit);
 #endif // End of ENABLE_KERNEL15
 
+/*
 #ifdef ENABLE_KERNEL16 // Krnl_LS2_Arbiter
 	setKernelArg(kernel16,0, sizeof(unsigned char),  &dockpars.num_of_genes);
 #endif // End of ENABLE_KERNEL12
+*/
 
 #ifdef ENABLE_KERNEL17 // Krnl_Conform2
-	setKernelArg(kernel17,0,  sizeof(mem_KerConstStatic_rotlist_const),     	    &mem_KerConstStatic_rotlist_const);
-	setKernelArg(kernel17,1,  sizeof(mem_KerConstStatic_ref_coords_const),              &mem_KerConstStatic_ref_coords_const);
-	setKernelArg(kernel17,2,  sizeof(mem_KerConstStatic_rotbonds_moving_vectors_const), &mem_KerConstStatic_rotbonds_moving_vectors_const);
-	setKernelArg(kernel17,3,  sizeof(mem_KerConstStatic_rotbonds_unit_vectors_const),   &mem_KerConstStatic_rotbonds_unit_vectors_const);
-	setKernelArg(kernel17,4,  sizeof(unsigned int),       &dockpars.rotbondlist_length);
-	setKernelArg(kernel17,5,  sizeof(unsigned char),      &dockpars.num_of_atoms);
-	setKernelArg(kernel17,6,  sizeof(unsigned char),      &dockpars.num_of_genes);
-/*
-	setKernelArg(kernel17,7,  sizeof(float),              &KerConstDynamic.ref_orientation_quats_const[0]);
-	setKernelArg(kernel17,8,  sizeof(float),              &KerConstDynamic.ref_orientation_quats_const[1]);
-	setKernelArg(kernel17,9,  sizeof(float),              &KerConstDynamic.ref_orientation_quats_const[2]);
-	setKernelArg(kernel17,10, sizeof(float),              &KerConstDynamic.ref_orientation_quats_const[3]);
-*/
-	// fixed-point
-	setKernelArg(kernel17,7,  sizeof(fixedpt),            &KerConstDynamic.ref_orientation_quats_const[0]);
-	setKernelArg(kernel17,8,  sizeof(fixedpt),            &KerConstDynamic.ref_orientation_quats_const[1]);
-	setKernelArg(kernel17,9,  sizeof(fixedpt),            &KerConstDynamic.ref_orientation_quats_const[2]);
-	setKernelArg(kernel17,10, sizeof(fixedpt),            &KerConstDynamic.ref_orientation_quats_const[3]);
+
 #endif // End of ENABLE_KERNEL17
 
 #ifdef ENABLE_KERNEL18 // Krnl_InterE2
-        setKernelArg(kernel18,0,  sizeof(mem_dockpars_fgrids),                    &mem_dockpars_fgrids);
-	setKernelArg(kernel18,1,  sizeof(mem_KerConstStatic_atom_charges_const),  &mem_KerConstStatic_atom_charges_const);
-	setKernelArg(kernel18,2,  sizeof(mem_KerConstStatic_atom_types_const),    &mem_KerConstStatic_atom_types_const);
-	setKernelArg(kernel18,3,  sizeof(unsigned char),                          &dockpars.g1);
-	setKernelArg(kernel18,4,  sizeof(unsigned int),                           &dockpars.g2);
-	setKernelArg(kernel18,5,  sizeof(unsigned int),                           &dockpars.g3);
-	setKernelArg(kernel18,6,  sizeof(unsigned char),                          &dockpars.num_of_atoms);
-	setKernelArg(kernel18,7,  sizeof(unsigned char),                          &gridsizex_minus1);
-	setKernelArg(kernel18,8,  sizeof(unsigned char),                          &gridsizey_minus1);
-	setKernelArg(kernel18,9,  sizeof(unsigned char),                          &gridsizez_minus1);
-	setKernelArg(kernel18,10, sizeof(unsigned int),                           &mul_tmp2);
-	setKernelArg(kernel18,11, sizeof(unsigned int),                           &mul_tmp3);
+
 #endif // End of ENABLE_KERNEL18
 
 #ifdef ENABLE_KERNEL19 // Krnl_IntraE2
-	setKernelArg(kernel19,0,  sizeof(mem_KerConstStatic_atom_charges_const),        &mem_KerConstStatic_atom_charges_const);
-	setKernelArg(kernel19,1,  sizeof(mem_KerConstStatic_atom_types_const),          &mem_KerConstStatic_atom_types_const);
-	setKernelArg(kernel19,2,  sizeof(mem_KerConstStatic_intraE_contributors_const), &mem_KerConstStatic_intraE_contributors_const);
-	setKernelArg(kernel19,3,  sizeof(mem_KerConstStatic_VWpars_AC_const),           &mem_KerConstStatic_VWpars_AC_const);
-	setKernelArg(kernel19,4,  sizeof(mem_KerConstStatic_VWpars_BD_const),           &mem_KerConstStatic_VWpars_BD_const);
-	setKernelArg(kernel19,5,  sizeof(mem_KerConstStatic_dspars_S_const),            &mem_KerConstStatic_dspars_S_const);
-	setKernelArg(kernel19,6,  sizeof(mem_KerConstStatic_dspars_V_const),            &mem_KerConstStatic_dspars_V_const);
-	setKernelArg(kernel19,7,  sizeof(unsigned char),                         &dockpars.num_of_atoms);
-	setKernelArg(kernel19,8,  sizeof(unsigned int),                          &dockpars.num_of_intraE_contributors);
-	setKernelArg(kernel19,9,  sizeof(float),                          	 &dockpars.grid_spacing);
-	setKernelArg(kernel19,10, sizeof(unsigned char),                         &dockpars.num_of_atypes);
-	setKernelArg(kernel19,11, sizeof(float),                          	 &dockpars.coeff_elec);
-	setKernelArg(kernel19,12, sizeof(float),                          	 &dockpars.qasp);
-	setKernelArg(kernel19,13, sizeof(float),                          	 &dockpars.coeff_desolv);
-	setKernelArg(kernel19,14, sizeof(unsigned int),                          &square_num_of_atypes);
+
 #endif // End of ENABLE_KERNEL19
 
 #ifdef ENABLE_KERNEL20 // Krnl_PRNG_LS3_float
@@ -999,9 +1016,11 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 	setKernelArg(kernel21,5, sizeof(unsigned char),   &Host_cons_limit);
 #endif // End of ENABLE_KERNEL21
 
+/*
 #ifdef ENABLE_KERNEL22 // Krnl_LS3_Arbiter
 	setKernelArg(kernel22,0, sizeof(unsigned char),  &dockpars.num_of_genes);
 #endif // End of ENABLE_KERNEL22
+*/
 
 #ifdef ENABLE_KERNEL23 // Krnl_Conf_Arbiter
 	setKernelArg(kernel23,0, sizeof(unsigned char),  &dockpars.num_of_genes);
@@ -1029,48 +1048,16 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 
 
 #ifdef ENABLE_KERNEL29 // 
-	setKernelArg(kernel29,0,  sizeof(mem_KerConstStatic_atom_charges_const),        &mem_KerConstStatic_atom_charges_const);
-	setKernelArg(kernel29,1,  sizeof(mem_KerConstStatic_atom_types_const),          &mem_KerConstStatic_atom_types_const);
-/*
-	setKernelArg(kernel4,2,  sizeof(mem_KerConstStatic_intraE_contributors_const), &mem_KerConstStatic_intraE_contributors_const);
-*/
-	setKernelArg(kernel29,2,  sizeof(mem_KerConstStatic_VWpars_AC_const),           &mem_KerConstStatic_VWpars_AC_const);
-	setKernelArg(kernel29,3,  sizeof(mem_KerConstStatic_VWpars_BD_const),           &mem_KerConstStatic_VWpars_BD_const);
-	setKernelArg(kernel29,4,  sizeof(mem_KerConstStatic_dspars_S_const),            &mem_KerConstStatic_dspars_S_const);
-	setKernelArg(kernel29,5,  sizeof(mem_KerConstStatic_dspars_V_const),            &mem_KerConstStatic_dspars_V_const);
-	setKernelArg(kernel29,6,  sizeof(unsigned char),                         &dockpars.num_of_atoms);
-/*
-	setKernelArg(kernel29,7,  sizeof(unsigned int),                          &dockpars.num_of_intraE_contributors);
-*/
-	setKernelArg(kernel29,7,  sizeof(float),                          	 &dockpars.grid_spacing);
-	setKernelArg(kernel29,8,  sizeof(unsigned char),                         &dockpars.num_of_atypes);
-	setKernelArg(kernel29,9, sizeof(float),                          	 &dockpars.coeff_elec);
-	setKernelArg(kernel29,10, sizeof(float),                          	 &dockpars.qasp);
-	setKernelArg(kernel29,11, sizeof(float),                          	 &dockpars.coeff_desolv);
-	setKernelArg(kernel29,12, sizeof(unsigned int),                          &square_num_of_atypes);
+
 #endif // 
 
 #ifdef ENABLE_KERNEL30 // 
-	setKernelArg(kernel30,0,  sizeof(mem_KerConstStatic_atom_charges_const),        &mem_KerConstStatic_atom_charges_const);
-	setKernelArg(kernel30,1,  sizeof(mem_KerConstStatic_atom_types_const),          &mem_KerConstStatic_atom_types_const);
-/*
-	setKernelArg(kernel4,2,  sizeof(mem_KerConstStatic_intraE_contributors_const), &mem_KerConstStatic_intraE_contributors_const);
-*/
-	setKernelArg(kernel30,2,  sizeof(mem_KerConstStatic_VWpars_AC_const),           &mem_KerConstStatic_VWpars_AC_const);
-	setKernelArg(kernel30,3,  sizeof(mem_KerConstStatic_VWpars_BD_const),           &mem_KerConstStatic_VWpars_BD_const);
-	setKernelArg(kernel30,4,  sizeof(mem_KerConstStatic_dspars_S_const),            &mem_KerConstStatic_dspars_S_const);
-	setKernelArg(kernel30,5,  sizeof(mem_KerConstStatic_dspars_V_const),            &mem_KerConstStatic_dspars_V_const);
-	setKernelArg(kernel30,6,  sizeof(unsigned char),                         &dockpars.num_of_atoms);
-/*
-	setKernelArg(kernel30,7,  sizeof(unsigned int),                          &dockpars.num_of_intraE_contributors);
-*/
-	setKernelArg(kernel30,7,  sizeof(float),                          	 &dockpars.grid_spacing);
-	setKernelArg(kernel30,8,  sizeof(unsigned char),                         &dockpars.num_of_atypes);
-	setKernelArg(kernel30,9, sizeof(float),                          	 &dockpars.coeff_elec);
-	setKernelArg(kernel30,10, sizeof(float),                          	 &dockpars.qasp);
-	setKernelArg(kernel30,11, sizeof(float),                          	 &dockpars.coeff_desolv);
-	setKernelArg(kernel30,12, sizeof(unsigned int),                          &square_num_of_atypes);
+
 #endif // 
+
+#if defined(SINGLE_COPY_POP_ENE)
+	memcopyBufferObjectToDevice(command_queue1,mem_dockpars_conformations_current, 	cpu_init_populations, size_populations);
+#endif
 
 	for (unsigned int run_cnt = 0; run_cnt < mypars->num_of_runs; run_cnt++)
 	{
@@ -1086,39 +1073,6 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 
 		if (prepare_constdynamic_fields_for_gpu(&myligand_reference, mypars, cpu_ref_ori_angles, &KerConstDynamic) == 1)
 			return 1;
-
-/*
-		#if defined (REPRO)
-			cpu_prng_seeds[0] = 1u;
-			cpu_prng_seeds[1] = 1u;
-			cpu_prng_seeds[2] = 1u;
-			cpu_prng_seeds[3] = 1u;
-			cpu_prng_seeds[4] = 1u;
-			cpu_prng_seeds[5] = 1u;
-			cpu_prng_seeds[6] = 1u;
-			cpu_prng_seeds[7] = 1u;
-			cpu_prng_seeds[8] = 1u;
-			cpu_prng_seeds[9] = 1u;
-		#else
-
-			cpu_prng_seeds[0] = genseed(0u);
-			cpu_prng_seeds[1] = genseed(0u);
-			cpu_prng_seeds[2] = genseed(0u);
-			cpu_prng_seeds[3] = genseed(0u);
-			cpu_prng_seeds[4] = genseed(0u);
-			cpu_prng_seeds[5] = genseed(0u);
-			cpu_prng_seeds[6] = genseed(0u);
-			cpu_prng_seeds[7] = genseed(0u);
-			cpu_prng_seeds[8] = genseed(0u);
-			cpu_prng_seeds[9] = genseed(0u);
-		#endif
-*/
-
-/*		
-		memcopyBufferObjectToDevice(command_queue1,mem_KerConstDynamic_ref_coords_const, 	      	&KerConstDynamic.ref_coords_const[0],            MAX_NUM_OF_ATOMS*sizeof(cl_float3));
-		memcopyBufferObjectToDevice(command_queue1,mem_KerConstDynamic_rotbonds_moving_vectors_const, &KerConstDynamic.rotbonds_moving_vectors_const[0], MAX_NUM_OF_ROTBONDS*sizeof(cl_float3));
-		memcopyBufferObjectToDevice(command_queue1,mem_KerConstDynamic_rotbonds_unit_vectors_const,   &KerConstDynamic.rotbonds_unit_vectors_const[0],   MAX_NUM_OF_ROTBONDS*sizeof(cl_float3));
-*/
 
  		memcopyBufferObjectToDevice(command_queue1,mem_dockpars_conformations_current, 	cpu_init_populations, size_populations);
 #endif
@@ -1165,67 +1119,47 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 
 
 #ifdef ENABLE_KERNEL5 // Krnl_PRNG_BT_float
-		//setKernelArg(kernel5,0, sizeof(unsigned int),  &cpu_prng_seeds[0]);
 		setKernelArg(kernel5,0, sizeof(unsigned int),  &cpu_prng_seeds[num_of_prng_blocks * run_cnt]);
 #endif // End of ENABLE_KERNEL5
 
 #ifdef ENABLE_KERNEL6 // Krnl_PRNG_GG_float
-		//setKernelArg(kernel6,0, sizeof(unsigned int),   &cpu_prng_seeds[1]);
 		setKernelArg(kernel6,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 1]);
 #endif // End of ENABLE_KERNEL6
 
 
 #ifdef ENABLE_KERNEL7 // Krnl_PRNG_float
-		//setKernelArg(kernel7,0, sizeof(unsigned int),   &cpu_prng_seeds[2]);
 		setKernelArg(kernel7,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 2]);
 #endif // End of ENABLE_KERNEL7
 
 #ifdef ENABLE_KERNEL8 // Krnl_PRNG_ushort
-		//setKernelArg(kernel8,0, sizeof(unsigned int),   &cpu_prng_seeds[3]);
 		setKernelArg(kernel8,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 3]);
 #endif // End of ENABLE_KERNEL8
 
 #ifdef ENABLE_KERNEL9 // Krnl_PRNG_LS_ushort
-		//setKernelArg(kernel9,0, sizeof(unsigned int),   &cpu_prng_seeds[4]);
 		setKernelArg(kernel9,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 4]);
 #endif // End of ENABLE_KERNEL9
 
 #ifdef ENABLE_KERNEL10 // Krnl_PRNG_uchar
-		//setKernelArg(kernel10,0, sizeof(unsigned int),   &cpu_prng_seeds[5]);
 		setKernelArg(kernel10,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 5]);
 #endif // End of ENABLE_KERNEL10
 
 #ifdef ENABLE_KERNEL14 // Krnl_PRNG_LS2_float
-		//setKernelArg(kernel14,0, sizeof(unsigned int),   &cpu_prng_seeds[6]);
 		setKernelArg(kernel14,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 6]);
 #endif // End of ENABLE_KERNEL7
 
 #ifdef ENABLE_KERNEL17 // Krnl_Conform2
-/*
-		setKernelArg(kernel17,7,  sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[0]);
-		setKernelArg(kernel17,8,  sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[1]);	
-		setKernelArg(kernel17,9,  sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[2]);	
-		setKernelArg(kernel17,10, sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[3]);
-*/
-		// fixed-point
-		setKernelArg(kernel17,7,  sizeof(fixedpt),        &KerConstDynamic.ref_orientation_quats_const[0]);
-		setKernelArg(kernel17,8,  sizeof(fixedpt),        &KerConstDynamic.ref_orientation_quats_const[1]);	
-		setKernelArg(kernel17,9,  sizeof(fixedpt),        &KerConstDynamic.ref_orientation_quats_const[2]);	
-		setKernelArg(kernel17,10, sizeof(fixedpt),        &KerConstDynamic.ref_orientation_quats_const[3]);
+
 #endif // End of ENABLE_KERNEL17
 
 #ifdef ENABLE_KERNEL20 // Krnl_PRNG_LS3_float
-		//setKernelArg(kernel20,0, sizeof(unsigned int),   &cpu_prng_seeds[7]);
 		setKernelArg(kernel20,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 7]);
 #endif // End of ENABLE_KERNEL20
 
 #ifdef ENABLE_KERNEL25 // Krnl_PRNG_LS2_ushort
-		//setKernelArg(kernel25,0, sizeof(unsigned int),   &cpu_prng_seeds[8]);
 		setKernelArg(kernel25,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 8]);
 #endif // End of ENABLE_KERNEL25
 
 #ifdef ENABLE_KERNEL26 // Krnl_PRNG_LS3_ushort
-		//setKernelArg(kernel26,0, sizeof(unsigned int),   &cpu_prng_seeds[9]);
 		setKernelArg(kernel26,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 9]);
 #endif // End of ENABLE_KERNEL26
 
@@ -1546,39 +1480,6 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 			
 		}
 */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /*
 		arrange_result(cpu_final_populations+run_cnt*mypars->pop_size*GENOTYPE_LENGTH_IN_GLOBMEM, 
@@ -2221,7 +2122,8 @@ void cleanup() {
 #endif
   if(cpu_ref_ori_angles)   {alignedFree(cpu_ref_ori_angles);}
 
-#if defined (FIXED_POINT_INTERE)
+//#if defined (FIXED_POINT_INTERE)
+#if 0
   if(cpu_fixedpt64grids)   {alignedFree(cpu_fixedpt64grids);}
 #endif
 
@@ -2241,6 +2143,11 @@ void cleanup() {
   if(mem_KerConstStatic_rotbonds_unit_vectors_const)	  {clReleaseMemObject(mem_KerConstStatic_rotbonds_unit_vectors_const);}
 
   if(mem_dockpars_fgrids) 		  {clReleaseMemObject(mem_dockpars_fgrids);}
+#if defined(SEPARATE_FGRID_INTERE)
+  if(mem_dockpars_fgrids2) 		  {clReleaseMemObject(mem_dockpars_fgrids2);}
+  if(mem_dockpars_fgrids3) 		  {clReleaseMemObject(mem_dockpars_fgrids3);}
+#endif
+
   if(mem_dockpars_conformations_current)  {clReleaseMemObject(mem_dockpars_conformations_current);}
   if(mem_dockpars_energies_current) 	  {clReleaseMemObject(mem_dockpars_energies_current);}
 

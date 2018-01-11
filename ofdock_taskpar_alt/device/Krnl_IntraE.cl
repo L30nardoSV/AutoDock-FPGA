@@ -211,23 +211,13 @@ while(active) {
 		printf("Distance: %f\n", distance_leo);
 		#endif
 
-		float distance_pow_2  = distance_leo*distance_leo; 	
-		float distance_pow_4  = distance_pow_2*distance_pow_2; 		
-		float distance_pow_6  = distance_pow_2*distance_pow_4; 		
-		float distance_pow_10 = distance_pow_4*distance_pow_6; 		
-		float distance_pow_12 = distance_pow_6*distance_pow_6;
-
-		/*
-		float inverse_distance_pow_12 = 1 / distance_pow_12;
-		float inverse_distance_pow_10 = inverse_distance_pow_12 * distance_pow_2;
-		float inverse_distance_pow_6  = inverse_distance_pow_10 * distance_pow_4;
-		*/
-		/*
-		float inverse_distance_pow_12 = native_divide(1.0f, distance_pow_12);
-		float inverse_distance_pow_10 = native_divide(1.0f, distance_pow_10);
-		float inverse_distance_pow_6  = native_divide(1.0f, distance_pow_6);
-		*/
-
+		float distance_pow_2  = distance_leo*distance_leo; 
+		float inverse_distance_pow_2  = native_divide(1.0f, distance_pow_2);
+		float inverse_distance_pow_4  = inverse_distance_pow_2 * inverse_distance_pow_2;
+		float inverse_distance_pow_6  = inverse_distance_pow_4 * inverse_distance_pow_2;
+		float inverse_distance_pow_10 = inverse_distance_pow_6 * inverse_distance_pow_4;
+		float inverse_distance_pow_12 = inverse_distance_pow_6 * inverse_distance_pow_6;
+		
 		float partialE1;
 		float partialE2;
 		float partialE3;
@@ -241,10 +231,11 @@ while(active) {
 			char atom2_typeid = atom_types_localcache [atom2_id];
 
 			//calculating van der Waals / hydrogen bond term
-			/*
+			
 			partialE1 = VWpars_AC_localcache [atom1_typeid*DockConst_num_of_atypes+atom2_typeid]*inverse_distance_pow_12;
-			*/
+			/*
 			partialE1 = native_divide(VWpars_AC_localcache [atom1_typeid*DockConst_num_of_atypes+atom2_typeid], distance_pow_12);
+			*/
 
 			float tmp_pE2 = VWpars_BD_localcache [atom1_typeid*DockConst_num_of_atypes+atom2_typeid];
 
@@ -252,16 +243,15 @@ while(active) {
 			if (ref_intraE_contributors_const[2] == 1)	//H-bond
 			*/
 			if (ref_intraE_contributors_const.z == 1)	//H-bond
-				/*
 				partialE2 = tmp_pE2 * inverse_distance_pow_10;
-				*/
-				partialE2 = native_divide(tmp_pE2, distance_pow_10);
-			else	//van der Waals
 				/*
-				partialE2 = tmp_pE2 * inverse_distance_pow_6;
+				partialE2 = native_divide(tmp_pE2, distance_pow_10);
 				*/
+			else	//van der Waals
+				partialE2 = tmp_pE2 * inverse_distance_pow_6;
+				/*
 				partialE2 = native_divide(tmp_pE2, distance_pow_6);
-
+				*/
 			//calculating electrostatic term
 			/*
 			partialE3 = DockConst_coeff_elec*atom_charges_localcache[atom1_id]*atom_charges_localcache[atom2_id]/(distance_leo*(-8.5525f + 86.9525f/(1.0f + 7.7839f*native_exp(-0.3154f*distance_leo))));

@@ -240,12 +240,55 @@ freq: 191 MHz
 
 >>> commit "added SINGLE_COPY_POP_ENE flag to pass all pop and energy only once"
 
+85. `Makefile`: Disable SINGLE_COPY_POP_ENE
+86. `Krnl_IGL_Arbiter`: reduce depth of channels 5x downto 3x
+87. `Krnl_GA`: reduce depth of chan_Intere2StoreIC_intere, chan_Intere2StoreGG_intere, 
+                               chan_Intrae2StoreIC_intrae, chan_Intrae2StoreGG_intrae channels MAX_POPSIZE downto 20
 
+freq: 167 MHz (but instrumented reached freq: 193 MHz)
+
+88. `performdocking.cpp`: clean up of replicated conform, intrae, intere kernels
+
+89. `performdocking.cpp`: add missing copy of `cpu_init_populations` (host) 
+                         to `mem_dockpars_conformations_current` (device) 
+		         when SINGLE_COPY_POP_ENE is enabled
+
+90. `performdocking.cpp`: cleanup code (with #if 0) for `cpu_fixedpt64grids` as Fgrids are passed as floats (not fixed-point)
+
+91. `Krnl_GA`: enable SINGLE_COPY_POP_ENE + create __global pointers GlobPopCurr and GlobEneCurr
+
+92. `performdocking.cpp` + `Krnl_InterE`: create create __global pointers GlobFgrids2 and GlobFgrids3
+
+93. `performdocking.cpp` + `Krnl_InterE`: pass `DockConst_gridsize_x_minus1` as float for the case of non-fixed-point
+					  to avoid conversion before comparison
+
+94. `Krnl_IntraE`: reduce number of floating-point division (inverse_distance_pow_*)
+
+95. `Krnl_PRNG.cl`, `Makefile`: remove `Krnl_Prng_BT_Arbiter` as not needed
+96. `Krnl_PRNG.cl`, `Makefile`: remove `Krnl_Prng_GG_Arbiter` as not needed
+97. `Krnl_PRNG.cl`, `Makefile`: remove `Krnl_Prng_LS_ushort_Arbiter` as not needed
+98. `Krnl_PRNG.cl`, `Makefile`: remove `Krnl_Prng_LS_float_Arbiter` as not needed
+99. `Krnl_GA`: separate channel reads of `chan_PRNG2GA_GG_uchar_prng` and `chan_PRNG2GA_GG_float_prng`
+	       so for-loops in GG are nicely pipelined (no serial regions in nested loops)
+100. `performdocking`
+     `Krnl_LS_Arbiter`, 
+     `Krnl_LS2_Arbiter`, 
+     `Krnl_LS3_Arbiter` : pass energy and genotype directly from GA to LS (skipping Arbiter)
+
+
+freq: 195 MHz
+
+>>> commit "removed PRNG arbiters"
 
 
 
 
 NOT DONE YET
+
+disable SINGLE_COPY_POP_ENE, disable SEPARATE_FGRIDS_INTER
+create internal __constant pointers to Fgrids2 and Fgrids3
+
+mask genotype indexing with MASK_GENOTYPE
 
 
 

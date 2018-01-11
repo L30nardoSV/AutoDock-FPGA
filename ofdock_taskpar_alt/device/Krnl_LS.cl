@@ -1,13 +1,14 @@
 channel bool  chan_Arbiter_LS1_active;
+/*
 channel float chan_Arbiter_LS1_energy;
 channel float chan_Arbiter_LS1_genotype     __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
-
+*/
 channel bool chan_LS2Arbiter_LS1_end;
 
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------
 __kernel __attribute__ ((max_global_work_dim(0)))
-void Krnl_LS_Arbiter(unsigned char DockConst_num_of_genes){
+void Krnl_LS_Arbiter(/*unsigned char DockConst_num_of_genes*/){
 
 	bool active = true;
 	
@@ -24,7 +25,8 @@ while(active) {
 		LS1_active = read_channel_nb_altera(chan_GA2LS_LS1_active, &LS1_valid);
 		Off_active = read_channel_nb_altera(chan_GA2LS_Off1_active, &Off_valid);
 	}
-		
+
+/*		
 	for (uchar i=0; i<DockConst_num_of_genes; i++) {
 		if (i == 0) {
 			active = (Off_valid)? Off_active : true; 
@@ -42,6 +44,9 @@ while(active) {
 		mem_fence(CLK_CHANNEL_MEM_FENCE);
 		write_channel_altera(chan_Arbiter_LS1_genotype, genotype);
 	}
+*/
+	active = (Off_valid)? Off_active : true; 
+	write_channel_altera(chan_Arbiter_LS1_active, active);
 
 } // End of while(active)
 
@@ -123,19 +128,25 @@ while(active) {
 	active = read_channel_altera(chan_Arbiter_LS1_active);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 
+if (active == true) {
+/*
 	float current_energy = read_channel_altera(chan_Arbiter_LS1_energy);
+*/
+	float current_energy = read_channel_altera(chan_GA2LS_LS1_energy);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 	
 	for (uchar i=0; i<DockConst_num_of_genes; i++) {
 		#if defined (FIXED_POINT_LS1)
-		float tmp_gene = read_channel_altera(chan_Arbiter_LS1_genotype);
+/*		float tmp_gene = read_channel_altera(chan_Arbiter_LS1_genotype);*/
+		float tmp_gene = read_channel_altera(chan_GA2LS_LS1_genotype);
 		genotype[i] = fixedpt_fromfloat(tmp_gene);
 		#else
-		genotype[i] = read_channel_altera(chan_Arbiter_LS1_genotype);
+/*		genotype[i] = read_channel_altera(chan_Arbiter_LS1_genotype);*/
+		genotype[i] = read_channel_altera(chan_GA2LS_LS1_genotype);
 		#endif
 	}
 	
-if (active == true) {
+/*if (active == true) {*/
 
 	#if defined (FIXED_POINT_LS1)
 	fixedpt fixpt_rho = FIXEDPT_ONE;
@@ -193,11 +204,12 @@ if (active == true) {
 		#else
 		write_channel_altera(chan_LS2Arbiter_LS1_end, (rho < DockConst_rho_lower_bound)?true:false);
 		#endif
-		//mem_fence(CLK_CHANNEL_MEM_FENCE);
-
-		write_channel_altera(chan_GA2PRNG_LS_float_active, true);
 		mem_fence(CLK_CHANNEL_MEM_FENCE);
 
+/*
+		write_channel_altera(chan_GA2PRNG_LS_float_active, true);
+		mem_fence(CLK_CHANNEL_MEM_FENCE);
+*/
 		// new random deviate
 		// rho is the deviation of the uniform distribution
 		for (uchar i=0; i<DockConst_num_of_genes; i++) {
