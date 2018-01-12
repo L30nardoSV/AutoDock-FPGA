@@ -281,6 +281,19 @@ freq: 195 MHz
 >>> commit "removed PRNG arbiters"
 
 
+101. `Krnl_Conform`: improve access to phi, theta, genrotangle, genotyoe_xyz
+102. `calcenergy.h`: corrected preprocessor defines for conform, ls1, ls2,ls3 when fixedpt
+
+	Cleanup  IGL_Arbiter, GA, LS1, LS2, LS3 and respective Arbiters
+
+103. `Krnl_IGL`: active & mode as char2 (bool active uses 8 bits as char, so wasted area)
+104. `Krnl_Conform`, `Krnl_IntraE`, `Krnl_InterE`: active & mode as char2 (bool active uses 8 bits as char, so wasted area)
+105. `Krnl_GA`, `Krnl_LS`, `Krnl_LS2`, `Krnl_LS3`: eval & energy as float2
+106. `Krnl_LS`, `Krnl_LS2`, `Krnl_LS3`: replace blocking read energies with non-blocking
+
+freq: 192.7 MHz
+>>> commit "merge channels"
+
 
 
 NOT DONE YET

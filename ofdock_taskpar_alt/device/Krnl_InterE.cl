@@ -62,7 +62,10 @@ void Krnl_InterE(
 	// however, they can be moved inside loops and still be local
 	// see how to do that here!
 
+/*
 	bool active = true;
+*/	
+	char active = 0x01;
 
 	__local char  atom_types_localcache   [MAX_NUM_OF_ATOMS];
 
@@ -97,27 +100,24 @@ while(active) {
 	// --------------------------------------------------------------
 	// Wait for ligand atomic coordinates in channel
 	// --------------------------------------------------------------
-	/*
+
+/*
 	active = read_channel_altera(chan_Conf2Intere_active);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
-
-	mode   = read_channel_altera(chan_Conf2Intere_mode);
+*/
+	char2 actmode = read_channel_altera(chan_Conf2Intere_actmode);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 
-	for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt++) {
-		loc_coords[pipe_cnt] = read_channel_altera(chan_Conf2Intere_xyz);
-	}
-	*/
-
-	active = read_channel_altera(chan_Conf2Intere_active);
-	mem_fence(CLK_CHANNEL_MEM_FENCE);
+	active = actmode.x;
+	mode   = actmode.y;
 
 	for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt++) {
+/*
 		if (pipe_cnt == 0) {
 			mode   = read_channel_altera(chan_Conf2Intere_mode);
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 		}
-
+*/
 		loc_coords[pipe_cnt] = read_channel_altera(chan_Conf2Intere_xyz);
 	}
 
@@ -125,7 +125,7 @@ while(active) {
 	//printf("AFTER In INTER CHANNEL\n");
 
 	#if defined (DEBUG_ACTIVE_KERNEL)
-	if (active == 0) {printf("	%-20s: %s\n", "Krnl_InterE", "must be disabled");}
+	if (active == 0x00) {printf("	%-20s: %s\n", "Krnl_InterE", "must be disabled");}
 	#endif
 
 	#if defined (FIXED_POINT_INTERE)

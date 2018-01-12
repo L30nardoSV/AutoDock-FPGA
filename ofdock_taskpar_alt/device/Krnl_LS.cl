@@ -1,8 +1,4 @@
 channel bool  chan_Arbiter_LS1_active;
-/*
-channel float chan_Arbiter_LS1_energy;
-channel float chan_Arbiter_LS1_genotype     __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
-*/
 channel bool chan_LS2Arbiter_LS1_end;
 
 // --------------------------------------------------------------------------
@@ -26,25 +22,6 @@ while(active) {
 		Off_active = read_channel_nb_altera(chan_GA2LS_Off1_active, &Off_valid);
 	}
 
-/*		
-	for (uchar i=0; i<DockConst_num_of_genes; i++) {
-		if (i == 0) {
-			active = (Off_valid)? Off_active : true; 
-			write_channel_altera(chan_Arbiter_LS1_active, active);
-			mem_fence(CLK_CHANNEL_MEM_FENCE);
-
-			float energy;
-			energy =  (LS1_valid)? read_channel_altera(chan_GA2LS_LS1_energy) : 0.0f;
-			write_channel_altera(chan_Arbiter_LS1_energy, energy);
-			mem_fence(CLK_CHANNEL_MEM_FENCE);
-		}
-
-		float genotype;
-		genotype = (LS1_valid)? read_channel_altera(chan_GA2LS_LS1_genotype) : 0.0f;
-		mem_fence(CLK_CHANNEL_MEM_FENCE);
-		write_channel_altera(chan_Arbiter_LS1_genotype, genotype);
-	}
-*/
 	active = (Off_valid)? Off_active : true; 
 	write_channel_altera(chan_Arbiter_LS1_active, active);
 
@@ -96,6 +73,7 @@ void Krnl_LS(
 	#endif
 
 	bool active = true;
+/*	char active = 0x01;*/
 
 	/*
 	// added to find out which fixed-point precision is needed
@@ -125,23 +103,26 @@ void Krnl_LS(
 	*/
 
 while(active) {
+
 	active = read_channel_altera(chan_Arbiter_LS1_active);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
-
-if (active == true) {
 /*
-	float current_energy = read_channel_altera(chan_Arbiter_LS1_energy);
-*/
+	float actenergy = read_channel_altera(chan_Arbiter_LS1_actenergy);
+	float act_tmp = actenergy.x;
+	active = *(uint*)&act_tmp;
+*/	
+if (active == true) {
+
 	float current_energy = read_channel_altera(chan_GA2LS_LS1_energy);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
-	
+/*
+	float current_energy = actenergy.y;
+*/
 	for (uchar i=0; i<DockConst_num_of_genes; i++) {
 		#if defined (FIXED_POINT_LS1)
-/*		float tmp_gene = read_channel_altera(chan_Arbiter_LS1_genotype);*/
 		float tmp_gene = read_channel_altera(chan_GA2LS_LS1_genotype);
 		genotype[i] = fixedpt_fromfloat(tmp_gene);
 		#else
-/*		genotype[i] = read_channel_altera(chan_Arbiter_LS1_genotype);*/
 		genotype[i] = read_channel_altera(chan_GA2LS_LS1_genotype);
 		#endif
 	}
@@ -318,11 +299,28 @@ if (active == true) {
 
 //printf("Energy to calculate sent from LS ... ");
 
+
+/*
+
 		// calculate energy of genotype
 		float energyIA_LS_rx = read_channel_altera(chan_Intrae2StoreLS_LS1_intrae);
 //printf("INTRAE received in LS1 ... ");
 		float energyIE_LS_rx = read_channel_altera(chan_Intere2StoreLS_LS1_intere);
 //printf("INTERE received in LS1 ... ");
+*/
+		float energyIA_LS_rx;
+		float energyIE_LS_rx;
+		bool intra_valid = false;
+		bool inter_valid = false;
+		while( (intra_valid == false) || (inter_valid == false)) {
+			if (intra_valid == false) {
+				energyIA_LS_rx = read_channel_nb_altera(chan_Intrae2StoreLS_LS1_intrae, &intra_valid);
+			}
+			if (inter_valid == false) {
+				energyIE_LS_rx = read_channel_nb_altera(chan_Intere2StoreLS_LS1_intere, &inter_valid);
+			}
+		}
+
 		float candidate_energy = energyIA_LS_rx + energyIE_LS_rx;
 
 		// update LS energy-evaluation count
@@ -396,12 +394,18 @@ if (active == true) {
 	// write back data to GA
 	for (uchar i=0; i<DockConst_num_of_genes; i++) {
 		if (i == 0) {
+/*
 			write_channel_altera(chan_LS2GA_LS1_eval, LS_eval);
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 			write_channel_altera(chan_LS2GA_LS1_energy, current_energy);
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
+*/
+			float2 evalenergy  = {*(float*)&LS_eval, current_energy};
+			write_channel_altera(chan_LS2GA_LS1_evalenergy, evalenergy);		
 		}
+		mem_fence(CLK_CHANNEL_MEM_FENCE);
+
 		#if defined (FIXED_POINT_LS1)
 		write_channel_altera(chan_LS2GA_LS1_genotype, fixedpt_tofloat(genotype[i]));
 		#else

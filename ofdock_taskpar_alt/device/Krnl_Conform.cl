@@ -1,11 +1,3 @@
-/*
-#if defined (FIXED_POINT_CONFORM)
-#include "../defines_fixedpt.h"
-
-typedef int3          fixedpt3;
-#endif
-*/
-
 // --------------------------------------------------------------------------
 // The function changes the conformation of myligand according to 
 // the genotype given by the second parameter.
@@ -62,7 +54,10 @@ void Krnl_Conform(
 	__local float   genotype[ACTUAL_GENOTYPE_LENGTH];
 	#endif
 
+/*
 	bool active = true;
+*/
+	char active = 0x01;	
 
 	__local int rotlist_localcache [MAX_NUM_OF_ROTATIONS];
 	for (ushort c = 0; c < DockConst_rotbondlist_length; c++) {
@@ -93,66 +88,86 @@ void Krnl_Conform(
 while(active) {
 	char mode;
 
-	active = read_channel_altera(/*chan_IGL_active*/ chan_IGL2Conform_active);
+	#if defined (FIXED_POINT_CONFORM)
+	fixedpt  phi;
+	fixedpt  theta;
+	fixedpt  genrotangle;
+	fixedpt  sin_theta, cos_theta;
+	fixedpt3 genrot_unitvec;
+	fixedpt3 genotype_xyz;
+	fixedpt3 loc_coords[MAX_NUM_OF_ATOMS];
+	#else
+	float  phi;
+	float  theta;
+	float  genrotangle;
+	float  sin_theta, cos_theta;
+	float3 genrot_unitvec;
+	float3 genotype_xyz;
+	float3 loc_coords[MAX_NUM_OF_ATOMS];
+	#endif
+
+/*
+	active = read_channel_altera(chan_IGL2Conform_active);
+	mem_fence(CLK_CHANNEL_MEM_FENCE);
+*/
+	char2 actmode = read_channel_altera(chan_IGL2Conform_actmode);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 
+	active = actmode.x;
+	mode   = actmode.y;	
+
 	for (uchar i=0; i<DockConst_num_of_genes; i++) {
+/*
 		if (i == 0) {
-			mode = read_channel_altera(/*chan_IGL_mode*/ chan_IGL2Conform_mode);
+			mode = read_channel_altera(chan_IGL2Conform_mode);
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 		}
+*/
 
+		float fl_tmp = read_channel_altera(chan_IGL2Conform_genotype);
 		#if defined (FIXED_POINT_CONFORM)
 		// convert float to fixedpt
-		float fl_tmp = read_channel_altera(/*chan_IGL_genotype*/ chan_IGL2Conform_genotype);
-		genotype [i] = fixedpt_fromfloat(fl_tmp);
+		fixedpt fx_tmp = fixedpt_fromfloat(fl_tmp);
+		switch (i) {
+			case 0: genotype_xyz.x = fx_tmp; break;
+			case 1: genotype_xyz.y = fx_tmp; break;
+			case 2: genotype_xyz.z = fx_tmp; break;
+			case 3: phi            = fx_tmp; break;
+			case 4: theta          = fx_tmp; break;
+			case 5: genrotangle    = fx_tmp; break;
+		}
+		genotype [i] = fx_tmp;
 		#else
-		genotype [i] = read_channel_altera(/*chan_IGL_genotype*/chan_IGL2Conform_genotype);
+		switch (i) {
+			case 0: genotype_xyz.x = fl_tmp; break;
+			case 1: genotype_xyz.y = fl_tmp; break;
+			case 2: genotype_xyz.z = fl_tmp; break;
+			case 3: phi            = fl_tmp; break;
+			case 4: theta          = fl_tmp; break;
+			case 5: genrotangle    = fl_tmp; break;
+		}
+		genotype [i] = fl_tmp;
 		#endif
 	}
 
-	#if defined (FIXED_POINT_CONFORM)
-	fixedpt3 loc_coords[MAX_NUM_OF_ATOMS];
-	#else
-	float3   loc_coords[MAX_NUM_OF_ATOMS];
-	#endif
-
 	#if defined (DEBUG_ACTIVE_KERNEL)
-	if (active == 0) {printf("	%-20s: %s\n", "Krnl_Conform", "must be disabled");}
+	if (active == 0x00) {printf("	%-20s: %s\n", "Krnl_Conform", "must be disabled");}
 	#endif
 
 	#if defined (FIXED_POINT_CONFORM)
-	fixedpt phi         = genotype [3];
-	fixedpt theta       = genotype [4];
-	fixedpt genrotangle = genotype [5];
-
-	fixedpt sin_theta, cos_theta;
 	sin_theta = fixedpt_sin(theta);
 	cos_theta = fixedpt_cos(theta);
-
-	fixedpt3 genrot_unitvec;
-	genrot_unitvec.x = /*fixedpt_mul*/ fixedpt_mul(sin_theta, fixedpt_cos(phi));
-	genrot_unitvec.y = /*fixedpt_mul*/ fixedpt_mul(sin_theta, fixedpt_sin(phi));
+	genrot_unitvec.x = fixedpt_mul(sin_theta, fixedpt_cos(phi));
+	genrot_unitvec.y = fixedpt_mul(sin_theta, fixedpt_sin(phi));
 	genrot_unitvec.z = cos_theta;
-	
-	fixedpt3 genotype_xyz = {genotype[0], genotype[1], genotype[2]};
 	#else
-	float phi         = genotype [3];
-	float theta       = genotype [4];
-	float genrotangle = genotype [5];
-
-	float sin_theta, cos_theta;
 	sin_theta = native_sin(theta);
 	cos_theta = native_cos(theta);
-
-	float3 genrot_unitvec;
 	genrot_unitvec.x = sin_theta*native_cos(phi);
 	genrot_unitvec.y = sin_theta*native_sin(phi);
 	genrot_unitvec.z = cos_theta;
-	
-	float3 genotype_xyz = {genotype[0], genotype[1], genotype[2]};
 	#endif
-	
+
 	for (ushort rotation_counter = 0; rotation_counter < DockConst_rotbondlist_length; rotation_counter++)
 	{
 		int rotation_list_element = rotlist_localcache [rotation_counter];
@@ -400,6 +415,7 @@ while(active) {
 
 	for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt++) {
 		if (pipe_cnt == 0) {
+			/*
 			write_channel_altera(chan_Conf2Intere_active, active);
 			write_channel_altera(chan_Conf2Intrae_active, active);
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
@@ -407,7 +423,15 @@ while(active) {
 			write_channel_altera(chan_Conf2Intere_mode,   mode);
 			write_channel_altera(chan_Conf2Intrae_mode,   mode);
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
+			*/
+			char  active_tmp = active;
+			char  mode_tmp   = mode;
+			char2 actmode    = {active_tmp, mode_tmp};
+
+			write_channel_altera(chan_Conf2Intere_actmode, actmode);
+			write_channel_altera(chan_Conf2Intrae_actmode, actmode);
 		}
+		mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 		#if defined (FIXED_POINT_CONFORM)
 		// convert fixedpt3 to float3

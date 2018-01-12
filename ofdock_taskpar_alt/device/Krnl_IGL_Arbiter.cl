@@ -1,11 +1,11 @@
 // Output channels IGL_Arbiter -> Conform
+
 /*
-channel bool  chan_IGL2Conform_active	    __attribute__((depth(5)));
-channel char  chan_IGL2Conform_mode	    __attribute__((depth(5)));
-channel float chan_IGL2Conform_genotype     __attribute__((depth(5*ACTUAL_GENOTYPE_LENGTH)));
-*/
 channel bool  chan_IGL2Conform_active	    __attribute__((depth(3)));
 channel char  chan_IGL2Conform_mode	    __attribute__((depth(3)));
+*/
+channel char2  chan_IGL2Conform_actmode	    __attribute__((depth(3))); // active, mode
+
 channel float chan_IGL2Conform_genotype     __attribute__((depth(3*ACTUAL_GENOTYPE_LENGTH)));
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------
@@ -163,6 +163,8 @@ while(active) {
 
 	// send data to Krnl_Conform
 	for (uchar j=0; j<bound; j++) {
+
+#if 0
 		write_channel_altera(chan_IGL2Conform_active, active);
 		mem_fence(CLK_CHANNEL_MEM_FENCE);
 
@@ -171,6 +173,14 @@ while(active) {
 		char mode_tmp = Off_valid? 0x00: IC_valid? 'I': GG_valid? 'G': /*0x01*/ mode[j];
 	
 		write_channel_altera(chan_IGL2Conform_mode, mode_tmp);
+		mem_fence(CLK_CHANNEL_MEM_FENCE);
+#endif
+
+		char active_tmp = active? 0x01: 0x00;
+		char mode_tmp = Off_valid? 0x00: IC_valid? 'I': GG_valid? 'G': /*0x01*/ mode[j];
+		char2 actmode = {active_tmp, mode_tmp};
+
+		write_channel_altera(chan_IGL2Conform_actmode, actmode);
 		mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 		for (uchar i=0; i<DockConst_num_of_genes; i++) {
