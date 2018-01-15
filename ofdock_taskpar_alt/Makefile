@@ -143,11 +143,19 @@ ENABLE_K3  = YES
 ENABLE_K4  = YES
 
 # Prng kernels
-ENABLE_K5  = YES
+
+# bt prng float
+ENABLE_K5  = NO
+
 ENABLE_K6  = YES
 ENABLE_K7  = YES
-ENABLE_K8  = YES
-ENABLE_K9  = YES
+
+# bt prng ushort (check kernel36)
+ENABLE_K8  = NO
+
+# ls1 prng
+ENABLE_K9  = NO
+
 ENABLE_K10 = YES
 
 # Replace single Krnl_Prng_Arbiter
@@ -172,8 +180,12 @@ ENABLE_K22 = YES
 #ENABLE_K24 = YES
 
 # PRNGS in GA for LS2 and LS3
-ENABLE_K25 = YES
-ENABLE_K26 = YES
+
+# ls2 & ls3 prng (ls1 is  K9)
+# replacement is K35
+ENABLE_K25 = NO
+ENABLE_K26 = NO
+
 ENABLE_K27 = YES
 
 # IA Pipeline
@@ -186,6 +198,13 @@ ENABLE_K31 = NO
 ENABLE_K32 = NO
 ENABLE_K33 = NO
 ENABLE_K34 = NO
+
+# ls123 prng
+ENABLE_K35 = YES
+
+# bt ushort_float
+ENABLE_K36 = YES
+
 
 ifeq ($(ENABLE_K1),YES)
 	K1 =-DENABLE_KERNEL1
@@ -397,7 +416,19 @@ else
 	K34 =
 endif
 
-ENABLE_KERNELS = $(K1) $(K2) $(K3) $(K4) $(K5) $(K6) $(K7) $(K8) $(K9) $(K10) $(K11) $(K12) $(K13) $(K14) $(K15) $(K16) $(K17) $(K18) $(K19) $(K20) $(K21) $(K22) $(K23) $(K24) $(K25) $(K26) $(K27) $(K28) $(K29) $(K30) $(K31) $(K32) $(K33) $(K34)
+ifeq ($(ENABLE_K35),YES)
+	K35 =-DENABLE_KERNEL35
+else
+	K35 =
+endif
+
+ifeq ($(ENABLE_K36),YES)
+	K36 =-DENABLE_KERNEL36
+else
+	K36 =
+endif
+
+ENABLE_KERNELS = $(K1) $(K2) $(K3) $(K4) $(K5) $(K6) $(K7) $(K8) $(K9) $(K10) $(K11) $(K12) $(K13) $(K14) $(K15) $(K16) $(K17) $(K18) $(K19) $(K20) $(K21) $(K22) $(K23) $(K24) $(K25) $(K26) $(K27) $(K28) $(K29) $(K30) $(K31) $(K32) $(K33) $(K34) $(K35) $(K36)
 
 # =============================
 # Reproduce result (remove randomness)

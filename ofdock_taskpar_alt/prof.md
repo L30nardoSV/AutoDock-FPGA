@@ -294,6 +294,24 @@ freq: 195 MHz
 freq: 192.7 MHz
 >>> commit "merge channels"
 
+107. `Krnl_GA`: code clean up
+108. `Krnl_GA`: mask `local_entity_1` and `local_entity_2` with MASK_GENOTYPE (to see reduced hw use report.html produced with aocl16.1)
+109. `Krnl_IGL_Arbiter`: exclude unneccesary channel reads + loop fusion
+110. `Krnl_PRNG`: code clean up + merge three `LS_ushort` into a single `Krnl_Prng_LS123_ushort`
+111. `Krnl_PRNG`: `Krnl_Prng_GG_uchar` passes data as char2, internally is fully unrolled
+112. `Krnl_PRNG`: `Krnl_Prng_BT_ushort_float` passes data as float8, internally is fully unrolled
+
+freq: 193.7 MHz
+>>> commit "IGL-loop fussioned + improved PRNGs"
+
+
+
+
+
+
+
+
+
 
 
 NOT DONE YET

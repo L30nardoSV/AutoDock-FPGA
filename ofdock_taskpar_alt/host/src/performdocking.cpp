@@ -257,6 +257,18 @@ static cl_kernel kernel34  = NULL;
 static const char *name_k34 = "Krnl_Prng_LS_float_Arbiter";
 #endif
 
+#ifdef ENABLE_KERNEL35
+static cl_command_queue command_queue35 = NULL;
+static cl_kernel kernel35  = NULL;
+static const char *name_k35 = "Krnl_Prng_LS123_ushort";
+#endif
+
+#ifdef ENABLE_KERNEL36
+static cl_command_queue command_queue36 = NULL;
+static cl_kernel kernel36  = NULL;
+static const char *name_k36 = "Krnl_Prng_BT_ushort_float";
+#endif
+
 static cl_program program = NULL;
 
 // Function prototypes
@@ -1055,6 +1067,15 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 
 #endif // 
 
+#ifdef ENABLE_KERNEL35 // Krnl_PRNG_LS123_ushort
+	setKernelArg(kernel35,3, sizeof(unsigned int),  &dockpars.pop_size);
+#endif // End of ENABLE_KERNEL35
+
+#ifdef ENABLE_KERNEL36 // Krnl_PRNG_ushort_float
+	setKernelArg(kernel36,2, sizeof(unsigned int),  &dockpars.pop_size);
+#endif // End of ENABLE_KERNEL36
+
+
 #if defined(SINGLE_COPY_POP_ENE)
 	memcopyBufferObjectToDevice(command_queue1,mem_dockpars_conformations_current, 	cpu_init_populations, size_populations);
 #endif
@@ -1162,6 +1183,17 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 #ifdef ENABLE_KERNEL26 // Krnl_PRNG_LS3_ushort
 		setKernelArg(kernel26,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 9]);
 #endif // End of ENABLE_KERNEL26
+
+#ifdef ENABLE_KERNEL35 // Krnl_PRNG_LS123_ushort
+		setKernelArg(kernel35,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 4]);
+		setKernelArg(kernel35,1, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 8]);
+		setKernelArg(kernel35,2, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 9]);
+#endif // End of ENABLE_KERNEL35
+
+#ifdef ENABLE_KERNEL36 // Krnl_PRNG_ushort_float
+		setKernelArg(kernel36,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 3]);
+		setKernelArg(kernel36,1, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt]);
+#endif // End of ENABLE_KERNEL36
 
 		#ifdef ENABLE_KERNEL1
 		runKernelTask(command_queue1,kernel1,NULL,NULL);
@@ -1299,6 +1331,14 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		runKernelTask(command_queue34,kernel34,NULL,NULL);
 		#endif // ENABLE_KERNEL34
 
+		#ifdef ENABLE_KERNEL35
+		runKernelTask(command_queue35,kernel35,NULL,NULL);
+		#endif // ENABLE_KERNEL35
+
+		#ifdef ENABLE_KERNEL36
+		runKernelTask(command_queue36,kernel36,NULL,NULL);
+		#endif // ENABLE_KERNEL36
+
 		#ifdef ENABLE_KERNEL1 		
 		clFinish(command_queue1); 
 		#endif
@@ -1433,6 +1473,14 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 
 		#ifdef ENABLE_KERNEL34
 		clFinish(command_queue34);
+		#endif
+
+		#ifdef ENABLE_KERNEL35
+		clFinish(command_queue35);
+		#endif
+
+		#ifdef ENABLE_KERNEL36
+		clFinish(command_queue36);
 		#endif
 
 		clock_stop_docking = clock();
@@ -1934,6 +1982,20 @@ bool init() {
   checkError(status, "Failed to create kernel");
 #endif
 
+#ifdef ENABLE_KERNEL35
+  command_queue35 = clCreateCommandQueue(context, device, 0, &status);
+  checkError(status, "Failed to create command queue26");
+  kernel35 = clCreateKernel(program, name_k35, &status);
+  checkError(status, "Failed to create kernel");
+#endif
+
+#ifdef ENABLE_KERNEL36
+  command_queue36 = clCreateCommandQueue(context, device, 0, &status);
+  checkError(status, "Failed to create command queue36");
+  kernel36 = clCreateKernel(program, name_k36, &status);
+  checkError(status, "Failed to create kernel");
+#endif
+
   return true;
 }
 
@@ -2107,6 +2169,16 @@ void cleanup() {
 #ifdef ENABLE_KERNEL34
   if(kernel34) {clReleaseKernel(kernel34);}
   if(command_queue34) {clReleaseCommandQueue(command_queue34);}
+#endif
+
+#ifdef ENABLE_KERNEL35
+  if(kernel35) {clReleaseKernel(kernel35);}
+  if(command_queue35) {clReleaseCommandQueue(command_queue35);}
+#endif
+
+#ifdef ENABLE_KERNEL36
+  if(kernel36) {clReleaseKernel(kernel36);}
+  if(command_queue36) {clReleaseCommandQueue(command_queue36);}
 #endif
 
   if(program) {clReleaseProgram(program);}
