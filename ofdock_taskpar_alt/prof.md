@@ -305,7 +305,20 @@ freq: 193.7 MHz
 >>> commit "IGL-loop fussioned + improved PRNGs"
 
 
+113: `Krnl_GA`: fusioned loops "copy energy to local memory" + "identify best entity"
+		redefined `shift_reg` with size SHIFT_REG_SIZE=10 to reach II=1 (if SHIFT_REG_SIZE<10, then aoc had to sacrifice circuit frequency (fmax) to achieve II=1)
 
+114. `Krnl_GA`: code clean up +  
+		moved eval_cnt & generation_cnt to terminate while-loop appropriatedly.
+		(this while loop is still serialize so shouldn't degrade performance)			
+115. `Krnl_PRNG`: code clean up
+116. `Krnl_IGL_Arbiter`: recoded including conditionals, redefined active as char instead of bool
+
+freq: 179.6 MHz
+>>> commit "pipelined deeper Krnl_GA"
+
+
+		
 
 
 

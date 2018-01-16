@@ -96,6 +96,7 @@ while(active) {
 	fixedpt3 genrot_unitvec;
 	fixedpt3 genotype_xyz;
 	fixedpt3 loc_coords[MAX_NUM_OF_ATOMS];
+
 	#else
 	float  phi;
 	float  theta;
@@ -216,7 +217,7 @@ while(active) {
 				uint rotbond_id = (rotation_list_element & RLIST_RBONDID_MASK) >> RLIST_RBONDID_SHIFT;
 				rotation_unitvec = rotbonds_unit_vectors_localcache [rotbond_id];
 				
-				rotation_angle = genotype[6+rotbond_id];
+				rotation_angle = genotype [6+rotbond_id];
 
 				rotation_movingvec = rotbonds_moving_vectors_localcache [rotbond_id];
 
