@@ -14,9 +14,11 @@ void Krnl_IGL_Arbiter(unsigned char DockConst_num_of_genes) {
 
 	__local float genotypeIC  [ACTUAL_GENOTYPE_LENGTH]; 
 	__local float genotypeGG  [ACTUAL_GENOTYPE_LENGTH];
+/*
 	__local float genotype1   [ACTUAL_GENOTYPE_LENGTH];
 	__local float genotype2   [ACTUAL_GENOTYPE_LENGTH];
 	__local float genotype3   [ACTUAL_GENOTYPE_LENGTH];
+*/
 	__local float genotype [3][ACTUAL_GENOTYPE_LENGTH];
 
 /*
@@ -90,61 +92,106 @@ while(active) {
 				genotypeGG [i] = read_channel_altera(chan_GG2Conf_genotype);
 			}	
 			else{
+				float genotype1;
+				float genotype2;
+				float genotype3;
+
 				if (LS1_end_valid == true) {
 					//printf("%-15s %5s\n",   "LS1_valid: ", "reading genotypes");
 					if (i == 0) {bound_tmp++; }
-					genotype1 [i] = read_channel_altera(chan_LS2Conf_LS1_genotype);
+					genotype1 /*[i]*/ = read_channel_altera(chan_LS2Conf_LS1_genotype);
 				}
 				if (LS2_end_valid == true) {
 					//printf("%-15s %5s\n",   "LS1_valid: ", "reading genotypes");
 					if (i == 0) {bound_tmp++; }
-					genotype2 [i] = read_channel_altera(chan_LS2Conf_LS2_genotype);
+					genotype2 /*[i]*/ = read_channel_altera(chan_LS2Conf_LS2_genotype);
 				}
 				if (LS3_end_valid == true) {
 					//printf("%-15s %5s\n",   "LS1_valid: ", "reading genotypes");
 					if (i == 0) {bound_tmp++; }
-					genotype3 [i] = read_channel_altera(chan_LS2Conf_LS3_genotype);
+					genotype3 /*[i]*/ = read_channel_altera(chan_LS2Conf_LS3_genotype);
 				}
-
+	
 				// Reorder the mode & genotype coming from LS
-
+#if 0
 				// only a single LS is sending genotypes to Conform
 				if ( LS1_end_valid && !LS2_end_valid && !LS3_end_valid) { 
 					if (i == 0) {mode[0] = 0x01;}
-					genotype[0][i & 0x3F] = genotype1[i]; 
+					genotype[0][i & 0x3F] = genotype1/*[i]*/; 
 				}
 				else if (!LS1_end_valid &&  LS2_end_valid && !LS3_end_valid) { 
 					if (i == 0) {mode[0] = 0x02;}
-					genotype[0][i & 0x3F] = genotype2[i]; 
+					genotype[0][i & 0x3F] = genotype2/*[i]*/; 
 				}
 				else if (!LS1_end_valid && !LS2_end_valid &&  LS3_end_valid) { 
 					if (i == 0) {mode[0] = 0x03;}
-					genotype[0][i & 0x3F] = genotype3[i]; }
+					genotype[0][i & 0x3F] = genotype3/*[i]*/; }
 
 				// two LS are sending genotypes to Conform
 				else if ( LS1_end_valid &&  LS2_end_valid && !LS3_end_valid) {
 					if (i == 0) {mode[0] = 0x01; mode[1] = 0x02;}
-					genotype[0][i & 0x3F] = genotype1[i];
-					genotype[1][i & 0x3F] = genotype2[i];
+					genotype[0][i & 0x3F] = genotype1/*[i]*/;
+					genotype[1][i & 0x3F] = genotype2/*[i]*/;
 				}
 				else if ( LS1_end_valid && !LS2_end_valid &&  LS3_end_valid) {
 					if (i == 0) {mode[0] = 0x01; mode[1] = 0x03;}
-					genotype[0][i & 0x3F] = genotype1[i];
-					genotype[1][i & 0x3F] = genotype3[i];
+					genotype[0][i & 0x3F] = genotype1/*[i]*/;
+					genotype[1][i & 0x3F] = genotype3/*[i]*/;
 				}
 				else if (!LS1_end_valid &&  LS2_end_valid &&  LS3_end_valid) {
 					if (i == 0) {mode[0] = 0x02; mode[1] = 0x03;}
-			   		genotype[0][i & 0x3F] = genotype2[i];
-					genotype[1][i & 0x3F] = genotype3[i];
+			   		genotype[0][i & 0x3F] = genotype2/*[i]*/;
+					genotype[1][i & 0x3F] = genotype3/*[i]*/;
 				}
 
 				// all three LS are sending genotypes to Conform
 				else if (LS1_end_valid && LS2_end_valid && LS3_end_valid) {
 					if (i == 0) {mode[0] = 0x01;  mode[1] = 0x02; mode[2] = 0x03;}
-					genotype[0][i & 0x3F] = genotype1[i];
-					genotype[1][i & 0x3F] = genotype2[i];
-					genotype[2][i & 0x3F] = genotype3[i];
+					genotype[0][i & 0x3F] = genotype1/*[i]*/;
+					genotype[1][i & 0x3F] = genotype2/*[i]*/;
+					genotype[2][i & 0x3F] = genotype3/*[i]*/;
 				}
+#endif
+
+
+				if (LS1_end_valid) { 
+					if (i == 0) {mode[0] = 0x01;}
+					genotype[0][i & MASK_GENOTYPE] = genotype1; 
+					
+					if (LS2_end_valid) {
+						if (i == 0) {mode[1] = 0x02;}
+						genotype[1][i & MASK_GENOTYPE] = genotype2;
+
+						if (LS3_end_valid) {
+							if (i == 0) {mode[2] = 0x03;}
+							genotype[2][i & MASK_GENOTYPE] = genotype3;
+						}
+					}
+					else {
+						if (LS3_end_valid) {
+							if (i == 0) {mode[1] = 0x03;}
+							genotype[1][i & MASK_GENOTYPE] = genotype3;
+						}
+					}
+				}
+				else {
+					if (LS2_end_valid) {
+						if (i == 0) {mode[0] = 0x02;}
+						genotype[0][i & MASK_GENOTYPE] = genotype2;
+
+						if (LS3_end_valid) {
+							if (i == 0) {mode[1] = 0x03;}
+							genotype[1][i & MASK_GENOTYPE] = genotype3;
+						}
+					}
+					else {
+						if (LS3_end_valid) {
+							if (i == 0) {mode[0] = 0x03;}
+							genotype[0][i & MASK_GENOTYPE] = genotype3;
+						}
+					}
+				}
+					
 			}
 		} // End of for-loop for (uchar i=0; i<DockConst_num_of_genes; i++) { }
 
@@ -174,7 +221,7 @@ while(active) {
 
 		for (uchar i=0; i<DockConst_num_of_genes; i++) {
 
-			float gene_tmp = IC_valid? genotypeIC[i]: GG_valid? genotypeGG[i]: genotype[j][i & 0x3F];
+			float gene_tmp = IC_valid? genotypeIC[i]: GG_valid? genotypeGG[i]: genotype[j][i & MASK_GENOTYPE];
 		
 			if (i > 2) {
 				gene_tmp = gene_tmp * DEG_TO_RAD;

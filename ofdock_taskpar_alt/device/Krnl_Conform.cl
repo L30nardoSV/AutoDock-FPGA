@@ -238,8 +238,8 @@ while(active) {
 			fixedpt quatrot_left_x, quatrot_left_y, quatrot_left_z, quatrot_left_q;
 			fixedpt quatrot_temp_x, quatrot_temp_y, quatrot_temp_z, quatrot_temp_q;
 			#else
-			float quatrot_left_x, quatrot_left_y, quatrot_left_z, quatrot_left_q;
-			float quatrot_temp_x, quatrot_temp_y, quatrot_temp_z, quatrot_temp_q;
+			float4 quatrot_left;
+			float4 quatrot_temp;
 			#endif
 
 			#if defined (FIXED_POINT_CONFORM)
@@ -260,10 +260,10 @@ while(active) {
 			float sin_angle, cos_angle;
 			sin_angle      = native_sin(rotation_angle);
 			cos_angle      = native_cos(rotation_angle);
-			quatrot_left_x = sin_angle*rotation_unitvec.x;
-			quatrot_left_y = sin_angle*rotation_unitvec.y;
-			quatrot_left_z = sin_angle*rotation_unitvec.z;
-			quatrot_left_q = cos_angle;
+			quatrot_left.x = sin_angle*rotation_unitvec.x;
+			quatrot_left.y = sin_angle*rotation_unitvec.y;
+			quatrot_left.z = sin_angle*rotation_unitvec.z;
+			quatrot_left.w = cos_angle;
 			#endif
 
 			if ((rotation_list_element & RLIST_GENROT_MASK) != 0)	//if general rotation, 
@@ -272,10 +272,14 @@ while(active) {
 			{
 				//calculating quatrot_left*ref_orientation_quats_const, 
 				//which means that reference orientation rotation is the first
+				#if defined (FIXED_POINT_CONFORM)
 				quatrot_temp_q = quatrot_left_q;
 				quatrot_temp_x = quatrot_left_x;
 				quatrot_temp_y = quatrot_left_y;
 				quatrot_temp_z = quatrot_left_z;
+				#else
+				quatrot_temp = quatrot_left;
+				#endif
 
 				// L30nardoSV: taking the first element of ref_orientation_quats_const member
 				#if defined (FIXED_POINT_CONFORM)
@@ -299,25 +303,15 @@ while(active) {
 						 - fixedpt_mul(quatrot_temp_y, ref_orientation_quats_const_1) 
 						 + fixedpt_mul(quatrot_temp_z, ref_orientation_quats_const_0);
 				#else
-				quatrot_left_q =   quatrot_temp_q * ref_orientation_quats_const_0
-						 - quatrot_temp_x * ref_orientation_quats_const_1
-						 - quatrot_temp_y * ref_orientation_quats_const_2
-						 - quatrot_temp_z * ref_orientation_quats_const_3;
+				float4 ref4x = {   ref_orientation_quats_const_0,   ref_orientation_quats_const_3, - ref_orientation_quats_const_2, ref_orientation_quats_const_1};
+				float4 ref4y = { - ref_orientation_quats_const_3,   ref_orientation_quats_const_0,   ref_orientation_quats_const_1, ref_orientation_quats_const_2};
+				float4 ref4z = {   ref_orientation_quats_const_2, - ref_orientation_quats_const_1,   ref_orientation_quats_const_0, ref_orientation_quats_const_3};
+				float4 ref4w = { - ref_orientation_quats_const_1, - ref_orientation_quats_const_2, - ref_orientation_quats_const_3, ref_orientation_quats_const_0};
 
-				quatrot_left_x =   quatrot_temp_q * ref_orientation_quats_const_1
-						 + quatrot_temp_x * ref_orientation_quats_const_0
-						 + quatrot_temp_y * ref_orientation_quats_const_3
-						 - quatrot_temp_z * ref_orientation_quats_const_2;
-
-				quatrot_left_y =   quatrot_temp_q * ref_orientation_quats_const_2 
-						 - quatrot_temp_x * ref_orientation_quats_const_3
-						 + quatrot_temp_y * ref_orientation_quats_const_0
-						 + quatrot_temp_z * ref_orientation_quats_const_1 ;
-
-				quatrot_left_z =   quatrot_temp_q * ref_orientation_quats_const_3
-						 + quatrot_temp_x * ref_orientation_quats_const_2 
-						 - quatrot_temp_y * ref_orientation_quats_const_1
-						 + quatrot_temp_z * ref_orientation_quats_const_0;
+				quatrot_left.x = dot(quatrot_temp, ref4x);
+				quatrot_left.y = dot(quatrot_temp, ref4y);
+				quatrot_left.z = dot(quatrot_temp, ref4z);
+				quatrot_left.w = dot(quatrot_temp, ref4w);
 				#endif
 			}
 
@@ -353,36 +347,23 @@ while(active) {
 					   + fixedpt_mul(quatrot_temp_y, quatrot_left_x)
 					   + fixedpt_mul(quatrot_temp_z, quatrot_left_q);
 			#else
-			quatrot_temp_q = - quatrot_left_x * atom_to_rotate.x 
-					 - quatrot_left_y * atom_to_rotate.y 
-					 - quatrot_left_z * atom_to_rotate.z;
+			float3 left3x = {  quatrot_left.w, - quatrot_left.z,   quatrot_left.y};
+			float3 left3y = {  quatrot_left.z,   quatrot_left.w, - quatrot_left.x};
+			float3 left3z = {- quatrot_left.y,   quatrot_left.x,   quatrot_left.w};
+			float3 left3w = {- quatrot_left.x, - quatrot_left.y, - quatrot_left.z};
 
-			quatrot_temp_x =   quatrot_left_q * atom_to_rotate.x 
-					 + quatrot_left_y * atom_to_rotate.z 
-					 - quatrot_left_z * atom_to_rotate.y;
+			quatrot_temp.x = dot(left3x, atom_to_rotate);
+			quatrot_temp.y = dot(left3y, atom_to_rotate);
+			quatrot_temp.z = dot(left3z, atom_to_rotate);
+			quatrot_temp.w = dot(left3w, atom_to_rotate);
 
-			quatrot_temp_y =   quatrot_left_q * atom_to_rotate.y 
-					 - quatrot_left_x * atom_to_rotate.z 
-					 + quatrot_left_z * atom_to_rotate.x;
+			float4 left4x = {  quatrot_left.w, - quatrot_left.z,   quatrot_left.y, - quatrot_left.x};
+			float4 left4y = {  quatrot_left.z,   quatrot_left.w, - quatrot_left.x, - quatrot_left.y};
+			float4 left4z = {- quatrot_left.y,   quatrot_left.x,   quatrot_left.w, - quatrot_left.z};
 
-			quatrot_temp_z =   quatrot_left_q * atom_to_rotate.z 
-					 + quatrot_left_x * atom_to_rotate.y 
-					 - quatrot_left_y * atom_to_rotate.x;
-			
-			atom_to_rotate.x = - quatrot_temp_q * quatrot_left_x 
-					   + quatrot_temp_x * quatrot_left_q
-					   - quatrot_temp_y * quatrot_left_z
-					   + quatrot_temp_z * quatrot_left_y;
-
-			atom_to_rotate.y = - quatrot_temp_q * quatrot_left_y
-					   + quatrot_temp_x * quatrot_left_z
-					   + quatrot_temp_y * quatrot_left_q
-					   - quatrot_temp_z * quatrot_left_x;
-
-			atom_to_rotate.z = - quatrot_temp_q * quatrot_left_z
-					   - quatrot_temp_x * quatrot_left_y
-					   + quatrot_temp_y * quatrot_left_x
-					   + quatrot_temp_z * quatrot_left_q;
+			atom_to_rotate.x = dot(quatrot_temp, left4x);
+			atom_to_rotate.y = dot(quatrot_temp, left4y);
+			atom_to_rotate.z = dot(quatrot_temp, left4z);
 			#endif
 
 			//performing final movement and storing values

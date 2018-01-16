@@ -317,11 +317,13 @@ freq: 193.7 MHz
 freq: 179.6 MHz
 >>> commit "pipelined deeper Krnl_GA"
 
+117. `Krnl_GA`: moved elistism loop into genetic-generation loop (deeper pipelined) +
+		IC and GG energy-receiving channel-reads are pipelined with a while-loop and nb-channels
+118. `Krnl_IGL_Arbiter`: removed unnecessary __local float genotype1 [ACTUAL_GENOTYPE_LENGTH], also genotype2 and genotype3
+119. `Krnl_Conform`: use simd for floating point version, reduces II=36 -> II=35		
 
-		
-
-
-
+NOT HW built
+>>> commit "deeper Krnl_GA + reduced local in IGL"
 
 
 
