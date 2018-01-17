@@ -336,16 +336,16 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			// it does not affect functionality as it performs 
 			// an unnecessary evaluation when pop_cnt=0 
 			//if (pop_cnt>0) {
-				shift_reg[SHIFT_REG_SIZE_MINUS_ONE] = loc_energies[best_entity];
+			shift_reg[SHIFT_REG_SIZE_MINUS_ONE] = loc_energies[best_entity];
 
-				#pragma unroll
-				for (uchar j=0; j<SHIFT_REG_SIZE_MINUS_ONE; j++) {
-					shift_reg[j] = shift_reg[j+1];
-				}
-				
-				if (loc_energies[pop_cnt] < shift_reg[0]) {
-					best_entity = pop_cnt;
-				}
+			#pragma unroll
+			for (uchar j=0; j<SHIFT_REG_SIZE_MINUS_ONE; j++) {
+				shift_reg[j] = shift_reg[j+1];
+			}
+			
+			if (loc_energies[pop_cnt] < shift_reg[0]) {
+				best_entity = pop_cnt;
+			}
 			//}
 		}
 
@@ -433,7 +433,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			// ---------------------------------------------------
 			// genetic generation (mating parents)
 			// ---------------------------------------------------	
-
+/*
 			float __attribute__ ((
 					       memory,
 		   			       numbanks(1),
@@ -441,7 +441,8 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			                       singlepump,
  			                       numreadports(2),//3
 			                       numwriteports(1)
-			                    )) prngGG [ACTUAL_GENOTYPE_LENGTH]; 		
+			                    )) prngGG [ACTUAL_GENOTYPE_LENGTH]; 
+*/	
 
 			// get uchar genetic_generation prngs (gene index)
 			// get float genetic_generation prngs (mutation rate)
@@ -468,11 +469,17 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			write_channel_altera(chan_GA2IGL_GG_active, true);
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 
-			for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
-				prngGG[gene_cnt] = read_channel_altera(chan_PRNG2GA_GG_float_prng);
-				mem_fence(CLK_CHANNEL_MEM_FENCE);
+			// reuse of bt prng float as crossover-rate
+			bool crossover_yes = (DockConst_crossover_rate > bt_tmp_f0);
 
+			for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
+				float prngGG;
+		
+				/*prngGG[gene_cnt]*/ prngGG = read_channel_altera(chan_PRNG2GA_GG_float_prng);
+				mem_fence(CLK_CHANNEL_MEM_FENCE);
+/*
 				bool crossover_yes = (DockConst_crossover_rate > prngGG[0]);
+*/
 
 				float tmp_offspring;
 
@@ -491,13 +498,13 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 				}
 
 				// performing mutation
-				if (DockConst_mutation_rate > prngGG[gene_cnt]) {
+				if (DockConst_mutation_rate > /*prngGG[gene_cnt]*/ prngGG) {
 					if(gene_cnt<3) {
-						tmp_offspring = tmp_offspring + Host_two_absmaxdmov*prngGG[gene_cnt]-DockConst_abs_max_dmov;
+						tmp_offspring = tmp_offspring + Host_two_absmaxdmov*/*prngGG[gene_cnt]*/prngGG-DockConst_abs_max_dmov;
 					}
 					else {
 						float tmp;
-						tmp = tmp_offspring + Host_two_absmaxdang*prngGG[gene_cnt]-DockConst_abs_max_dang;
+						tmp = tmp_offspring + Host_two_absmaxdang*/*prngGG[gene_cnt]*/prngGG-DockConst_abs_max_dang;
 						if (gene_cnt==4) {
 							tmp_offspring = map_angle_180(tmp);
 						}

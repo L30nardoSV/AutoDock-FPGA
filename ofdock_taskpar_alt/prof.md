@@ -325,8 +325,8 @@ freq: 179.6 MHz
 NOT HW built
 >>> commit "deeper Krnl_GA + reduced local in IGL"
 
-
-
+120. `Krnl_GA`: moved crossover_rate evaluation outside loop + converted array prngGG[] into internal private var
+>>> commit "optimized a bit Krnl_GA"
 
 
 NOT DONE YET
