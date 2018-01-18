@@ -326,7 +326,17 @@ NOT HW built
 >>> commit "deeper Krnl_GA + reduced local in IGL"
 
 120. `Krnl_GA`: moved crossover_rate evaluation outside loop + converted array prngGG[] into internal private var
+HW built hang during execution
 >>> commit "optimized a bit Krnl_GA"
+
+121. `Krnl_LS1`, `Krnl_LS2`, `Krnl_LS3`: unroll partly loop-after-channel-read to reduce exec time of logic after energy evaluation
+122. `Krnl_PRNG`: Krnl_Prng_LS"X"_float send fixedpt when needed, this is offloaded from LS"X"
+
+freq: 185 MHz (intrumented faster 66 sec vs 68 on 10runs 3ptb)
+>>> commit "unrolled LS partly"
+
+
+
 
 
 NOT DONE YET

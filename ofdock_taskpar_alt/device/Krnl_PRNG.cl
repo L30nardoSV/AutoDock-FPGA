@@ -178,11 +178,18 @@ void Krnl_Prng_LS_float(unsigned int  Host_seed,
 			lfsr >>= 1;
 			lfsr ^= (-lsb) & 0xA3000000u;
 			tmp = (0.999999f/MAX_UINT)*lfsr;
-	
 			bool success = false;
+
+			#if defined (FIXED_POINT_LS1)
+			fixedpt fixpt_tmp = fixedpt_fromfloat(tmp);
+			if(!valid) {
+				success = write_channel_nb_altera(chan_PRNG2GA_LS_float_prng, *(float*) &fixpt_tmp);
+			}
+			#else
 			if(!valid) {
 				success = write_channel_nb_altera(chan_PRNG2GA_LS_float_prng, tmp);
 			}
+			#endif
 		}
 	} // End of while(active)
 }
@@ -205,11 +212,18 @@ void Krnl_Prng_LS2_float(unsigned int  Host_seed,
 			lfsr >>= 1;
 			lfsr ^= (-lsb) & 0xA3000000u;
 			tmp = (0.999999f/MAX_UINT)*lfsr;
-	
 			bool success = false;
+
+			#if defined (FIXED_POINT_LS2)
+			fixedpt fixpt_tmp = fixedpt_fromfloat(tmp);
+			if(!valid) {
+				success = write_channel_nb_altera(chan_PRNG2GA_LS2_float_prng, *(float*) &fixpt_tmp);
+			}
+			#else
 			if(!valid) {
 				success = write_channel_nb_altera(chan_PRNG2GA_LS2_float_prng, tmp);
 			}
+			#endif
 		}
 	} // End of while(active)
 }
@@ -232,11 +246,19 @@ void Krnl_Prng_LS3_float(unsigned int  Host_seed,
 			lfsr >>= 1;
 			lfsr ^= (-lsb) & 0xA3000000u;
 			tmp = (0.999999f/MAX_UINT)*lfsr;
-	
 			bool success = false;
+
+			#if defined (FIXED_POINT_LS3)
+			fixedpt fixpt_tmp = fixedpt_fromfloat(tmp);
+			if(!valid) {
+				success = write_channel_nb_altera(chan_PRNG2GA_LS3_float_prng, *(float*) &fixpt_tmp);
+			}
+
+			#else
 			if(!valid) {
 				success = write_channel_nb_altera(chan_PRNG2GA_LS3_float_prng, tmp);
 			}
+			#endif
 		}
 	} // End of while(active)
 }

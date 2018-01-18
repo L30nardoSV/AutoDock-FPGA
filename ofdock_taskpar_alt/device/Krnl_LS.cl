@@ -60,16 +60,8 @@ void Krnl_LS(
 {	
 	#if defined (FIXED_POINT_LS1)
 	__local fixedpt genotype [ACTUAL_GENOTYPE_LENGTH];
-	__local fixedpt entity_possible_new_genotype [ACTUAL_GENOTYPE_LENGTH];
-	
-	__local fixedpt genotype_deviate [ACTUAL_GENOTYPE_LENGTH];
-	__local fixedpt genotype_bias [ACTUAL_GENOTYPE_LENGTH];
 	#else
 	__local float genotype [ACTUAL_GENOTYPE_LENGTH];
-	__local float entity_possible_new_genotype [ACTUAL_GENOTYPE_LENGTH];
-	
-	__local float genotype_deviate [ACTUAL_GENOTYPE_LENGTH];
-	__local float genotype_bias [ACTUAL_GENOTYPE_LENGTH];  
 	#endif
 
 	bool active = true;
@@ -121,9 +113,9 @@ if (active == true) {
 	for (uchar i=0; i<DockConst_num_of_genes; i++) {
 		#if defined (FIXED_POINT_LS1)
 		float tmp_gene = read_channel_altera(chan_GA2LS_LS1_genotype);
-		genotype[i] = fixedpt_fromfloat(tmp_gene);
+		genotype [i] = fixedpt_fromfloat(tmp_gene);
 		#else
-		genotype[i] = read_channel_altera(chan_GA2LS_LS1_genotype);
+		genotype [i] = read_channel_altera(chan_GA2LS_LS1_genotype);
 		#endif
 	}
 	
@@ -158,16 +150,14 @@ if (active == true) {
 				cons_fail = 0;
 				cons_succ = 0;
 			}
-			else {
-				if (cons_fail >= DockConst_cons_limit) {
-					#if defined (FIXED_POINT_LS1)
-					fixpt_rho = fixpt_rho >> 1;
-					#else
-					rho = LS_CONT_FACTOR*rho;
-					#endif
-					cons_fail = 0;
-					cons_succ = 0;
-				}
+			else if (cons_fail >= DockConst_cons_limit) {
+				#if defined (FIXED_POINT_LS1)
+				fixpt_rho = fixpt_rho >> 1;
+				#else
+				rho = LS_CONT_FACTOR*rho;
+				#endif
+				cons_fail = 0;
+				cons_succ = 0;
 			}
 			iteration_cnt++;
 		}
@@ -176,6 +166,18 @@ if (active == true) {
 		printf("positive?: %u, iteration_cnt: %u, rho: %f, limit rho: %f\n", positive_direction, iteration_cnt, rho, DockConst_rho_lower_bound);
 		#endif
 		// -----------------------------------------------
+
+		#if defined (FIXED_POINT_LS1)
+		fixedpt entity_possible_new_genotype [ACTUAL_GENOTYPE_LENGTH];
+		fixedpt genotype_bias                [ACTUAL_GENOTYPE_LENGTH];
+		fixedpt deviate_plus_bias            [ACTUAL_GENOTYPE_LENGTH];
+		fixedpt deviate_minus_bias           [ACTUAL_GENOTYPE_LENGTH];
+		#else
+		float entity_possible_new_genotype   [ACTUAL_GENOTYPE_LENGTH];
+		float genotype_bias                  [ACTUAL_GENOTYPE_LENGTH];
+		float deviate_plus_bias              [ACTUAL_GENOTYPE_LENGTH];
+		float deviate_minus_bias             [ACTUAL_GENOTYPE_LENGTH];
+		#endif
 
 		// Tell Krnl_Conf_Arbiter, LS1 is done
 		// Not completely strict as the (iteration_cnt < DockConst_max_num_of_iters) is ignored
@@ -187,107 +189,65 @@ if (active == true) {
 		#endif
 		mem_fence(CLK_CHANNEL_MEM_FENCE);
 
-/*
-		write_channel_altera(chan_GA2PRNG_LS_float_active, true);
-		mem_fence(CLK_CHANNEL_MEM_FENCE);
-*/
 		// new random deviate
 		// rho is the deviation of the uniform distribution
 		for (uchar i=0; i<DockConst_num_of_genes; i++) {
 
 			float tmp_prng = read_channel_altera(chan_PRNG2GA_LS_float_prng);
-
-			/*
-			// added to find out which fixed-point precision is needed
-			// 16.16 is enough
-			fixedpt   fix32_prng = fixedpt_fromfloat(tmp_prng);
-			fixedpt64 fix64_prng = fixedpt64_fromfloat(tmp_prng);
-			printf("%f %f %f\n", tmp_prng, fixedpt_tofloat(fix32_prng), fixedpt64_tofloat(fix64_prng));
-			*/
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 
+			#if defined (FIXED_POINT_LS1)
+			fixedpt fixpt_tmp_prng = *(fixedpt*) &tmp_prng;
+
 			// tmp1 is genotype_deviate
-			#if defined (FIXED_POINT_LS1)
-			fixedpt fixpt_tmp_prng = fixedpt_fromfloat(tmp_prng);
-			#endif
-
-			#if defined (FIXED_POINT_LS1)
-			//fixedpt fixpt_tmp1 = fixedpt_fromfloat(rho) * ((fixpt_tmp_prng << 1) - FIXEDPT_ONE);
-			//fixedpt fixpt_tmp1 = fixedpt_mul(fixedpt_fromfloat(rho), ((fixpt_tmp_prng << 1) - FIXEDPT_ONE));
 			fixedpt fixpt_tmp1 = fixedpt_mul(fixpt_rho, ((fixpt_tmp_prng << 1) - FIXEDPT_ONE));
-			#else
-			float tmp1 = rho * (2.0f*tmp_prng - 1.0f);
-			#endif
 
-			#if defined (FIXED_POINT_LS1)
-			if (i<3) {
-				//fixpt_tmp1 = fixpt_tmp1 * DockConst_base_dmov_mul_sqrt3;
-				fixpt_tmp1 = fixedpt_mul(fixpt_tmp1, DockConst_base_dmov_mul_sqrt3);
-			}
-			else {
-				//fixpt_tmp1 = fixpt_tmp1 * DockConst_base_dang_mul_sqrt3;
-				fixpt_tmp1 = fixedpt_mul(fixpt_tmp1, DockConst_base_dang_mul_sqrt3);
-			}
-			#else
-			if (i<3) {
-				tmp1 = tmp1 * DockConst_base_dmov_mul_sqrt3;
-			}
-			else {
-				tmp1 = tmp1 * DockConst_base_dang_mul_sqrt3;
-			}
-			#endif
+			if (i<3) { fixpt_tmp1 = fixedpt_mul(fixpt_tmp1, DockConst_base_dmov_mul_sqrt3); }
+			else     { fixpt_tmp1 = fixedpt_mul(fixpt_tmp1, DockConst_base_dang_mul_sqrt3); }
 
-			#if defined (FIXED_POINT_LS1)
-			//genotype_deviate [i] = 0x6666*fixpt_tmp1;
-			genotype_deviate [i] = fixedpt_mul(0x6666, fixpt_tmp1);
-			#else
-			genotype_deviate [i] = 0.4f*tmp1;
-			#endif
+			fixedpt deviate = fixedpt_mul(0x6666, fixpt_tmp1);
 
 			// tmp2 is the addition: genotype_deviate + genotype_bias
-			#if defined (FIXED_POINT_LS1)
-			fixedpt fixpt_tmp2 = fixpt_tmp1 + ((iteration_cnt == 1)? 0:genotype_bias[i]);
-			#else
-			float tmp2 = tmp1 + ((iteration_cnt == 1)? 0.0f:genotype_bias[i]);
-			#endif
-
 			// tmp3 is entity_possible_new_genotype
-			#if defined (FIXED_POINT_LS1)
-			fixedpt fixpt_tmp3; 
-			fixpt_tmp3 = (positive_direction == true)? 
-							     (genotype [i] + fixpt_tmp2): 
-						             (genotype [i] - fixpt_tmp2);
-			#else
-			float tmp3; 
-			tmp3 = (positive_direction == true)? 
-							     (genotype [i] + tmp2): 
-						             (genotype [i] - tmp2);
-			#endif
+			fixedpt tmp_bias = (iteration_cnt == 1)? 0:genotype_bias[i];
+			fixedpt bias = fixedpt_mul(0x9999, tmp_bias);
 
-			#if defined (FIXED_POINT_LS1)
-			if (i>3) {
-				if (i==4) {
-					fixpt_tmp3 = fixedpt_map_angle_180(fixpt_tmp3);
-				}
-				else {
-					fixpt_tmp3 = fixedpt_map_angle_360(fixpt_tmp3);
-				}
-			}
-			#else
-			if (i>3) {
-				if (i==4) {
-					tmp3 = map_angle_180(tmp3);
-				}
-				else {
-					tmp3 = map_angle_360(tmp3);
-				}
-			}
-			#endif
+			deviate_plus_bias  [i] = deviate + bias;
+			deviate_minus_bias [i] = deviate - bias;
+			
+			fixedpt fixpt_tmp2 = fixpt_tmp1 + tmp_bias;
+			fixedpt fixpt_tmp3 = (positive_direction == true)? (genotype [i] + fixpt_tmp2): 
+									   (genotype [i] - fixpt_tmp2);
 
-			#if defined (FIXED_POINT_LS1)
+			if (i>3) {if (i==4) { fixpt_tmp3 = fixedpt_map_angle_180(fixpt_tmp3); }
+				  else      { fixpt_tmp3 = fixedpt_map_angle_360(fixpt_tmp3); }}
+
 			entity_possible_new_genotype [i] = fixpt_tmp3;
 			write_channel_altera(chan_LS2Conf_LS1_genotype, fixedpt_tofloat(fixpt_tmp3));
+
 			#else
+			// tmp1 is genotype_deviate
+			float tmp1 = rho * (2.0f*tmp_prng - 1.0f);
+
+			if (i<3) { tmp1 = tmp1 * DockConst_base_dmov_mul_sqrt3; }
+			else     { tmp1 = tmp1 * DockConst_base_dang_mul_sqrt3; }
+
+			float deviate = 0.4f*tmp1;
+
+			// tmp2 is the addition: genotype_deviate + genotype_bias
+			// tmp3 is entity_possible_new_genotype
+			float tmp_bias = (iteration_cnt == 1)? 0.0f:genotype_bias[i];
+			float bias = 0.6 * tmp_bias;
+
+			deviate_plus_bias  [i] = deviate + bias;
+			deviate_minus_bias [i] = deviate - bias;
+
+			float tmp2 = tmp1 + tmp_bias;
+			float tmp3 = (positive_direction == true)? (genotype [i] + tmp2): (genotype [i] - tmp2);
+
+			if (i>3) {if (i==4) { tmp3 = map_angle_180(tmp3); }
+				  else      { tmp3 = map_angle_360(tmp3); }}
+
 			entity_possible_new_genotype [i] = tmp3;
 			write_channel_altera(chan_LS2Conf_LS1_genotype, tmp3);
 			#endif
@@ -297,16 +257,14 @@ if (active == true) {
 			#endif
 		}
 
-//printf("Energy to calculate sent from LS ... ");
-
+		//printf("Energy to calculate sent from LS ... ");
 
 /*
-
 		// calculate energy of genotype
 		float energyIA_LS_rx = read_channel_altera(chan_Intrae2StoreLS_LS1_intrae);
-//printf("INTRAE received in LS1 ... ");
+		//printf("INTRAE received in LS1 ... ");
 		float energyIE_LS_rx = read_channel_altera(chan_Intere2StoreLS_LS1_intere);
-//printf("INTERE received in LS1 ... ");
+		//printf("INTERE received in LS1 ... ");
 */
 		float energyIA_LS_rx;
 		float energyIE_LS_rx;
@@ -327,63 +285,88 @@ if (active == true) {
 		LS_eval++;
 
 		#if defined (FIXED_POINT_LS1)
-		for (uchar i=0; i<DockConst_num_of_genes; i++) {
+		if (candidate_energy < current_energy) {
 			// updating offspring_genotype
 			// updating genotype_bias
-			fixedpt fixpt_tmp;
-			fixedpt fixpt_a = ((iteration_cnt == 1)? 0:genotype_bias[i]);
-			fixedpt fixpt_b = genotype_deviate[i];
-
-			if (candidate_energy < current_energy) {
-				genotype [i] = entity_possible_new_genotype [i];
-				//fixedpt fixpt_c = 0x9999*fixpt_a;
-				fixedpt fixpt_c = fixedpt_mul(0x9999, fixpt_a);
-				fixpt_tmp = (positive_direction == true) ? (fixpt_c + fixpt_b): (fixpt_c - fixpt_b);
-			}
-			else {
-				// updating (halving) genotype_bias
-				fixpt_tmp = fixpt_a >> 1;
+	
+			#pragma unroll 16
+			for (uchar i=0; i<DockConst_num_of_genes; i++) {
+/*
+			#pragma unroll
+			for (uchar i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {
+*/
+				genotype_bias [i] = (positive_direction == true) ? deviate_plus_bias  [i] : 
+										   deviate_minus_bias [i] ;
+				genotype      [i] = entity_possible_new_genotype [i];
 			}
 
-			genotype_bias[i] = fixpt_tmp;
-		}
-		#else
-		for (uchar i=0; i<DockConst_num_of_genes; i++) {
-			// updating offspring_genotype
-			// updating genotype_bias
-			float tmp;
-			float a = ((iteration_cnt == 1)? 0.0f:genotype_bias[i]);
-			float b = genotype_deviate[i];
-
-			if (candidate_energy < current_energy) {
-				genotype [i] = entity_possible_new_genotype [i];
-				float c = 0.6f*a;
-				tmp = (positive_direction == true) ? (c + b): (c - b);
-			}
-			else {
-				// updating (halving) genotype_bias
-				tmp = 0.5f*a;
-			}
-
-			genotype_bias[i] = tmp;
-		}
-		#endif
-
-		// if the new entity is better
-		if (candidate_energy < current_energy)				
-		{
 			current_energy = candidate_energy;
 			cons_succ++;
 			cons_fail = 0;
 			positive_direction = true;
+
 		}
 		else {
+			// updating (halving) genotype_bias
+
+			#pragma unroll 16
+			for (uchar i=0; i<DockConst_num_of_genes; i++) {
+/*
+			#pragma unroll
+			for (uchar i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {
+*/
+				genotype_bias[i] = (iteration_cnt == 1)? 0: (genotype_bias[i] >> 1);
+			}
+
 			if (positive_direction == false) {
 				cons_fail++;
 				cons_succ = 0;
 			}
 			positive_direction = !positive_direction;
 		}
+
+		#else
+		if (candidate_energy < current_energy) {
+			// updating offspring_genotype
+			// updating genotype_bias
+
+			#pragma unroll 16
+			for (uchar i=0; i<DockConst_num_of_genes; i++) {
+/*
+			#pragma unroll
+			for (uchar i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {
+*/
+				genotype_bias [i] = (positive_direction == true) ? deviate_plus_bias  [i] : 
+										   deviate_minus_bias [i] ;
+				
+				genotype [i] = entity_possible_new_genotype [i];
+			}	
+
+			current_energy = candidate_energy;
+			cons_succ++;
+			cons_fail = 0;
+			positive_direction = true;				
+		}
+		else {
+			// updating (halving) genotype_bias
+
+			#pragma unroll 16
+			for (uchar i=0; i<DockConst_num_of_genes; i++) {
+
+/*
+			#pragma unroll
+			for (uchar i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {
+*/
+				genotype_bias[i] = (iteration_cnt == 1)? 0.0f: (0.5f*genotype_bias[i]);
+			}
+
+			if (positive_direction == false) {
+				cons_fail++;
+				cons_succ = 0;
+			}
+			positive_direction = !positive_direction;
+		}
+		#endif
 
 	} // end of while (iteration_cnt) && (rho)
 
