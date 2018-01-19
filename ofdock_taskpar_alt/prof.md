@@ -335,6 +335,10 @@ HW built hang during execution
 freq: 185 MHz (intrumented faster 66 sec vs 68 on 10runs 3ptb)
 >>> commit "unrolled LS partly"
 
+123. Eliminate unneccessary arbiter kernels: `Krnl_LS_Arbiter`, `Krnl_LS2_Arbiter`, `Krnl_LS3_Arbiter`
+
+HW built hang during execution
+>>> commit "removed LS arbiters"
 
 
 

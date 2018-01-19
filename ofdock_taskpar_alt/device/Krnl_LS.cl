@@ -1,8 +1,12 @@
+/*
 channel bool  chan_Arbiter_LS1_active;
+*/
 channel bool chan_LS2Arbiter_LS1_end;
 
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------
+
+#if 0
 __kernel __attribute__ ((max_global_work_dim(0)))
 void Krnl_LS_Arbiter(/*unsigned char DockConst_num_of_genes*/){
 
@@ -32,6 +36,7 @@ printf("	%-20s: %s\n", "Krnl_LS_Arbiter", "disabled");
 #endif
 
 }
+#endif
 
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------
@@ -64,9 +69,7 @@ void Krnl_LS(
 	__local float genotype [ACTUAL_GENOTYPE_LENGTH];
 	#endif
 
-	bool active = true;
-/*	char active = 0x01;*/
-
+	bool valid = true;
 	/*
 	// added to find out which fixed-point precision is needed
 	// 16.16 is enough
@@ -94,22 +97,22 @@ void Krnl_LS(
 	//0.6f: 0.600000 39321 9999
 	*/
 
-while(active) {
+while(valid) {
 
-	active = read_channel_altera(chan_Arbiter_LS1_active);
-	mem_fence(CLK_CHANNEL_MEM_FENCE);
-/*
-	float actenergy = read_channel_altera(chan_Arbiter_LS1_actenergy);
-	float act_tmp = actenergy.x;
-	active = *(uint*)&act_tmp;
-*/	
-if (active == true) {
+	bool active;
+	bool valid_active= false;
 
-	float current_energy = read_channel_altera(chan_GA2LS_LS1_energy);
-	mem_fence(CLK_CHANNEL_MEM_FENCE);
-/*
-	float current_energy = actenergy.y;
-*/
+	float current_energy;
+	bool valid_energy = false;
+
+	while( (valid_active == false) && (valid_energy == false)) {
+		active         = read_channel_nb_altera(chan_GA2LS_Off1_active, &valid_active);
+		current_energy = read_channel_nb_altera(chan_GA2LS_LS1_energy,  &valid_energy);
+	}
+	valid = active || valid_energy;
+
+if (valid) {
+
 	for (uchar i=0; i<DockConst_num_of_genes; i++) {
 		#if defined (FIXED_POINT_LS1)
 		float tmp_gene = read_channel_altera(chan_GA2LS_LS1_genotype);
@@ -119,8 +122,6 @@ if (active == true) {
 		#endif
 	}
 	
-/*if (active == true) {*/
-
 	#if defined (FIXED_POINT_LS1)
 	fixedpt fixpt_rho = FIXEDPT_ONE;
 	#else
@@ -396,8 +397,10 @@ if (active == true) {
 		#endif
 	}
 }
-	
-} // End of while (active)		
+
+
+} // End of while (valid)		
+
 
 #if defined (DEBUG_ACTIVE_KERNEL)
 printf("	%-20s: %s\n", "Krnl_LS", "disabled");		

@@ -61,19 +61,16 @@ channel bool chan_Arbiter_LS3_float_off;
 channel bool chan_GA2PRNG_LS_float_Off;
 
 // LS1, LS2, LS3
-channel bool 	chan_GA2LS_LS1_active;
+/*channel bool 	chan_GA2LS_LS1_active;*/
 channel float   chan_GA2LS_LS1_energy;
-/*channel float2  chan_GA2LS_LS1_actenergy;*/
 channel float  	chan_GA2LS_LS1_genotype        __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
 
-channel bool 	chan_GA2LS_LS2_active;
+/*channel bool 	chan_GA2LS_LS2_active;*/
 channel float   chan_GA2LS_LS2_energy;
-/*channel float2  chan_GA2LS_LS2_actenergy;*/
 channel float  	chan_GA2LS_LS2_genotype        __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
 
-channel bool 	chan_GA2LS_LS3_active;
+/*channel bool 	chan_GA2LS_LS3_active;*/
 channel float   chan_GA2LS_LS3_energy;
-/*channel float2  chan_GA2LS_LS3_actenergy;*/
 channel float  	chan_GA2LS_LS3_genotype        __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
 
 
@@ -259,10 +256,6 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 		#endif
 
 		// read energy
-/*
-		float energyIA_IC_rx = read_channel_altera(chan_Intrae2StoreIC_intrae);
-		float energyIE_IC_rx = read_channel_altera(chan_Intere2StoreIC_intere);
-*/
 		float energyIA_IC_rx;
 		float energyIE_IC_rx;
 		bool intra_valid = false;
@@ -491,10 +484,6 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			#endif	
 
 			// read energy
-/*
-			float energyIA_GG_rx = read_channel_altera(chan_Intrae2StoreGG_intrae);
-			float energyIE_GG_rx = read_channel_altera(chan_Intere2StoreGG_intere);
-*/
 			float energyIA_GG_rx;
 			float energyIE_GG_rx;
 			bool intra_valid = false;
@@ -536,31 +525,17 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			ushort entity_ls3 = entity_ls.z;
 
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
-
+/*
 			write_channel_altera(chan_GA2LS_LS1_active, true);
 			write_channel_altera(chan_GA2LS_LS2_active, true);
 			write_channel_altera(chan_GA2LS_LS3_active, true);
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
+*/
 
 			write_channel_altera(chan_GA2LS_LS1_energy, LocalEneNext[entity_ls1]);
 			write_channel_altera(chan_GA2LS_LS2_energy, LocalEneNext[entity_ls2]);
 			write_channel_altera(chan_GA2LS_LS3_energy, LocalEneNext[entity_ls3]);
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
-
-/*
-			uint act_tmp1 = 0x00000001;
-			uint act_tmp2 = 0x00000001;
-			uint act_tmp3 = 0x00000001;
-
-			float2 actenergy1 = {*(float*)&act_tmp1, LocalEneNext[entity_ls1]};
-			float2 actenergy2 = {*(float*)&act_tmp2, LocalEneNext[entity_ls2]};
-			float2 actenergy3 = {*(float*)&act_tmp3, LocalEneNext[entity_ls3]};
-
-			write_channel_altera(chan_GA2LS_LS1_actenergy, actenergy1);
-			write_channel_altera(chan_GA2LS_LS2_actenergy, actenergy2);
-			write_channel_altera(chan_GA2LS_LS3_actenergy, actenergy3);
-			mem_fence(CLK_CHANNEL_MEM_FENCE);
-*/
 
 			for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
 				write_channel_altera(chan_GA2LS_LS1_genotype, LocalPopNext[entity_ls1][gene_cnt & MASK_GENOTYPE]);
