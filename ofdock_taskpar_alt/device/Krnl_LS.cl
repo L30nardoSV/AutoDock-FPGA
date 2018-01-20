@@ -237,7 +237,7 @@ if (valid) {
 			if (intra_valid == false) {
 				energyIA_LS_rx = read_channel_nb_altera(chan_Intrae2StoreLS_LS1_intrae, &intra_valid);
 			}
-			if (inter_valid == false) {
+			else if (inter_valid == false) {
 				energyIE_LS_rx = read_channel_nb_altera(chan_Intere2StoreLS_LS1_intere, &inter_valid);
 			}
 		}

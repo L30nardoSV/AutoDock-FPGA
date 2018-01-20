@@ -348,10 +348,12 @@ freq: 195 MHz (64 sec non-instrumented on 10runs 3ptb)
 >>> commit "wider channel conform ie, ia"
 
 
+126. `Krnl_InterE`: cleaned up
+127. `Krnl_GA`: in ls-loop  use non-blocking read channels, reads are conditional and exclusive between them
+128. `Krnl_LS`, `Krnl_LS2`, `Krnl_LS3`: non-blocking read channels are made exclusive between them
 
-
-
-
+NOT HW built
+>>> commit "non blocking ls-channels in GA"
 
 
 

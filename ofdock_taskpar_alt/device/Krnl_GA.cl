@@ -537,6 +537,8 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			}
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 
+
+/*
 			float2 evalenergy_tmp1 = read_channel_altera(chan_LS2GA_LS1_evalenergy);
 			float2 evalenergy_tmp2 = read_channel_altera(chan_LS2GA_LS2_evalenergy);
 			float2 evalenergy_tmp3 = read_channel_altera(chan_LS2GA_LS3_evalenergy);
@@ -544,6 +546,26 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			#if defined (DEBUG_KRNL_LS)
 			printf("LS - got all eval & energies back\n");
 			#endif
+*/
+
+			float2 evalenergy_tmp1;
+			float2 evalenergy_tmp2;
+			float2 evalenergy_tmp3;
+			bool ls1_done = false;
+			bool ls2_done = false;
+			bool ls3_done = false; 
+			while( (ls1_done == false) || (ls2_done == false) || (ls3_done == false) ){
+				if (ls1_done == false) {
+					evalenergy_tmp1 = read_channel_nb_altera(chan_LS2GA_LS1_evalenergy, &ls1_done);
+				}
+				else if (ls2_done == false) {
+					evalenergy_tmp2 = read_channel_nb_altera(chan_LS2GA_LS2_evalenergy, &ls2_done);
+				}
+				else if (ls3_done == false) {
+					evalenergy_tmp3 = read_channel_nb_altera(chan_LS2GA_LS3_evalenergy, &ls3_done);
+				}
+			}
+
 
 			float eetmp1 = evalenergy_tmp1.x;
 			float eetmp2 = evalenergy_tmp2.x;
@@ -563,6 +585,12 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 				LocalPopNext[entity_ls2][gene_cnt & MASK_GENOTYPE] = read_channel_altera(chan_LS2GA_LS2_genotype);
 				LocalPopNext[entity_ls3][gene_cnt & MASK_GENOTYPE] = read_channel_altera(chan_LS2GA_LS3_genotype);
 			}
+
+
+
+
+
+
 
 			ls_eval_cnt += eval_tmp1 + eval_tmp2 + eval_tmp3;
 
