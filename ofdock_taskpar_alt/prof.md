@@ -341,6 +341,18 @@ HW built hang during execution
 >>> commit "removed LS arbiters"
 
 
+124. `Krnl_IGL_Arbiter`: cleaned up and group of logic under same conditional eval
+125. `Krnl_Conform`, `Krnl_InterE`, `Krnl_IntraE`: wider channel for communicating Conform->IE, IA as float8
+						   channel redefinition in `Krnl_GA` with depth/2
+freq: 195 MHz (64 sec non-instrumented on 10runs 3ptb)
+>>> commit "wider channel conform ie, ia"
+
+
+
+
+
+
+
 
 
 NOT DONE YET

@@ -1,42 +1,4 @@
-/*
-channel bool  chan_Arbiter_LS1_active;
-*/
 channel bool chan_LS2Arbiter_LS1_end;
-
-// --------------------------------------------------------------------------
-// --------------------------------------------------------------------------
-
-#if 0
-__kernel __attribute__ ((max_global_work_dim(0)))
-void Krnl_LS_Arbiter(/*unsigned char DockConst_num_of_genes*/){
-
-	bool active = true;
-	
-while(active) {
-	bool LS1_valid = false;
-	bool Off_valid = false;
-
-	bool LS1_active;
-	bool Off_active;
-
-	while((LS1_valid  == false) &&
-	      (Off_valid  == false) 
-	){
-		LS1_active = read_channel_nb_altera(chan_GA2LS_LS1_active, &LS1_valid);
-		Off_active = read_channel_nb_altera(chan_GA2LS_Off1_active, &Off_valid);
-	}
-
-	active = (Off_valid)? Off_active : true; 
-	write_channel_altera(chan_Arbiter_LS1_active, active);
-
-} // End of while(active)
-
-#if defined (DEBUG_ACTIVE_KERNEL)
-printf("	%-20s: %s\n", "Krnl_LS_Arbiter", "disabled");		
-#endif
-
-}
-#endif
 
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------

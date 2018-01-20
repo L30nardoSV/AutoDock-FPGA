@@ -1,11 +1,6 @@
 // Output channels IGL_Arbiter -> Conform
 
-/*
-channel bool  chan_IGL2Conform_active	    __attribute__((depth(3)));
-channel char  chan_IGL2Conform_mode	    __attribute__((depth(3)));
-*/
 channel char2  chan_IGL2Conform_actmode	    __attribute__((depth(3))); // active, mode
-
 channel float chan_IGL2Conform_genotype     __attribute__((depth(3*ACTUAL_GENOTYPE_LENGTH)));
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------
@@ -14,16 +9,8 @@ void Krnl_IGL_Arbiter(unsigned char DockConst_num_of_genes) {
 
 	__local float genotypeIC  [ACTUAL_GENOTYPE_LENGTH]; 
 	__local float genotypeGG  [ACTUAL_GENOTYPE_LENGTH];
-/*
-	__local float genotype1   [ACTUAL_GENOTYPE_LENGTH];
-	__local float genotype2   [ACTUAL_GENOTYPE_LENGTH];
-	__local float genotype3   [ACTUAL_GENOTYPE_LENGTH];
-*/
 	__local float genotype [3][ACTUAL_GENOTYPE_LENGTH];
 
-/*
-	bool active = true;
-*/
 	char active = 0x01;
 
 	// Only for debugging
@@ -65,19 +52,12 @@ while(active) {
 	}
 
 	uchar bound_tmp = 0;
-
-/*
-	active = Off_valid ? Off_active : true;
-*/
 	active = Off_valid ? 0x00 : 0x01;
 
 	// mode for all LS
 	char mode [3];
 
 	// get genotype from IC, GG, LS1, LS2, LS3
-/*
-	if (active == true) {
-*/
 	if (active == 0x01) {
 		#pragma ivdep
 		for (uchar i=0; i<DockConst_num_of_genes; i++) {
@@ -96,97 +76,58 @@ while(active) {
 				float genotype2;
 				float genotype3;
 
+#if 0
 				if (LS1_end_valid == true) {
 					//printf("%-15s %5s\n",   "LS1_valid: ", "reading genotypes");
 					if (i == 0) {bound_tmp++; }
 					genotype1 /*[i]*/ = read_channel_altera(chan_LS2Conf_LS1_genotype);
 				}
+#endif
 				if (LS2_end_valid == true) {
 					//printf("%-15s %5s\n",   "LS1_valid: ", "reading genotypes");
-					if (i == 0) {bound_tmp++; }
-					genotype2 /*[i]*/ = read_channel_altera(chan_LS2Conf_LS2_genotype);
+					genotype2 = read_channel_altera(chan_LS2Conf_LS2_genotype);
 				}
 				if (LS3_end_valid == true) {
 					//printf("%-15s %5s\n",   "LS1_valid: ", "reading genotypes");
-					if (i == 0) {bound_tmp++; }
-					genotype3 /*[i]*/ = read_channel_altera(chan_LS2Conf_LS3_genotype);
+					genotype3 = read_channel_altera(chan_LS2Conf_LS3_genotype);
 				}
 	
 				// Reorder the mode & genotype coming from LS
-#if 0
-				// only a single LS is sending genotypes to Conform
-				if ( LS1_end_valid && !LS2_end_valid && !LS3_end_valid) { 
-					if (i == 0) {mode[0] = 0x01;}
-					genotype[0][i & 0x3F] = genotype1/*[i]*/; 
-				}
-				else if (!LS1_end_valid &&  LS2_end_valid && !LS3_end_valid) { 
-					if (i == 0) {mode[0] = 0x02;}
-					genotype[0][i & 0x3F] = genotype2/*[i]*/; 
-				}
-				else if (!LS1_end_valid && !LS2_end_valid &&  LS3_end_valid) { 
-					if (i == 0) {mode[0] = 0x03;}
-					genotype[0][i & 0x3F] = genotype3/*[i]*/; }
-
-				// two LS are sending genotypes to Conform
-				else if ( LS1_end_valid &&  LS2_end_valid && !LS3_end_valid) {
-					if (i == 0) {mode[0] = 0x01; mode[1] = 0x02;}
-					genotype[0][i & 0x3F] = genotype1/*[i]*/;
-					genotype[1][i & 0x3F] = genotype2/*[i]*/;
-				}
-				else if ( LS1_end_valid && !LS2_end_valid &&  LS3_end_valid) {
-					if (i == 0) {mode[0] = 0x01; mode[1] = 0x03;}
-					genotype[0][i & 0x3F] = genotype1/*[i]*/;
-					genotype[1][i & 0x3F] = genotype3/*[i]*/;
-				}
-				else if (!LS1_end_valid &&  LS2_end_valid &&  LS3_end_valid) {
-					if (i == 0) {mode[0] = 0x02; mode[1] = 0x03;}
-			   		genotype[0][i & 0x3F] = genotype2/*[i]*/;
-					genotype[1][i & 0x3F] = genotype3/*[i]*/;
-				}
-
-				// all three LS are sending genotypes to Conform
-				else if (LS1_end_valid && LS2_end_valid && LS3_end_valid) {
-					if (i == 0) {mode[0] = 0x01;  mode[1] = 0x02; mode[2] = 0x03;}
-					genotype[0][i & 0x3F] = genotype1/*[i]*/;
-					genotype[1][i & 0x3F] = genotype2/*[i]*/;
-					genotype[2][i & 0x3F] = genotype3/*[i]*/;
-				}
-#endif
-
-
 				if (LS1_end_valid) { 
-					if (i == 0) {mode[0] = 0x01;}
+					genotype1 = read_channel_altera(chan_LS2Conf_LS1_genotype);
+
+					if (i == 0) {mode[0] = 0x01; bound_tmp++;}
 					genotype[0][i & MASK_GENOTYPE] = genotype1; 
 					
 					if (LS2_end_valid) {
-						if (i == 0) {mode[1] = 0x02;}
+						if (i == 0) {mode[1] = 0x02; bound_tmp++;}
 						genotype[1][i & MASK_GENOTYPE] = genotype2;
 
 						if (LS3_end_valid) {
-							if (i == 0) {mode[2] = 0x03;}
+							if (i == 0) {mode[2] = 0x03; bound_tmp++;} 
 							genotype[2][i & MASK_GENOTYPE] = genotype3;
 						}
 					}
 					else {
 						if (LS3_end_valid) {
-							if (i == 0) {mode[1] = 0x03;}
+							if (i == 0) {mode[1] = 0x03; bound_tmp++;}
 							genotype[1][i & MASK_GENOTYPE] = genotype3;
 						}
 					}
 				}
 				else {
 					if (LS2_end_valid) {
-						if (i == 0) {mode[0] = 0x02;}
+						if (i == 0) {mode[0] = 0x02; bound_tmp++;}
 						genotype[0][i & MASK_GENOTYPE] = genotype2;
 
 						if (LS3_end_valid) {
-							if (i == 0) {mode[1] = 0x03;}
+							if (i == 0) {mode[1] = 0x03; bound_tmp++;}
 							genotype[1][i & MASK_GENOTYPE] = genotype3;
 						}
 					}
 					else {
 						if (LS3_end_valid) {
-							if (i == 0) {mode[0] = 0x03;}
+							if (i == 0) {mode[0] = 0x03; bound_tmp++;}
 							genotype[0][i & MASK_GENOTYPE] = genotype3;
 						}
 					}
@@ -207,13 +148,9 @@ while(active) {
 
 	// send data to Krnl_Conform
 	for (uchar j=0; j<bound; j++) {
-/*
-		char active_tmp = active? 0x01: 0x00;
-*/
-		char mode_tmp = Off_valid? 0x00: IC_valid? 'I': GG_valid? 'G': /*0x01*/ mode[j];
-/*
-		char2 actmode = {active_tmp, mode_tmp};
-*/
+
+		char mode_tmp = Off_valid? 0x00: IC_valid? 'I': GG_valid? 'G': mode[j];
+
 		char2 actmode = {active, mode_tmp};
 
 		write_channel_altera(chan_IGL2Conform_actmode, actmode);

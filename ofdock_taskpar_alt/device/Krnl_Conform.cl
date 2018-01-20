@@ -95,8 +95,15 @@ while(active) {
 	fixedpt  sin_theta, cos_theta;
 	fixedpt3 genrot_unitvec;
 	fixedpt3 genotype_xyz;
-	fixedpt3 loc_coords[MAX_NUM_OF_ATOMS];
-
+	//fixedpt3 loc_coords[MAX_NUM_OF_ATOMS];
+	fixedpt3 __attribute__ ((
+			      memory,
+			      numbanks(1),
+			      bankwidth(16),
+			      singlepump,
+			      numreadports(3),
+			      numwriteports(1)
+			    )) loc_coords[MAX_NUM_OF_ATOMS];
 	#else
 	float  phi;
 	float  theta;
@@ -104,7 +111,15 @@ while(active) {
 	float  sin_theta, cos_theta;
 	float3 genrot_unitvec;
 	float3 genotype_xyz;
-	float3 loc_coords[MAX_NUM_OF_ATOMS];
+	//float3 loc_coords[MAX_NUM_OF_ATOMS];
+	float3 __attribute__ ((
+			      memory,
+			      numbanks(1),
+			      bankwidth(16),
+			      singlepump,
+			      numreadports(3),
+			      numwriteports(1)
+			    )) loc_coords[MAX_NUM_OF_ATOMS];
 	#endif
 
 /*
@@ -395,17 +410,9 @@ while(active) {
 	}*/
 
 
+/*
 	for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt++) {
 		if (pipe_cnt == 0) {
-			/*
-			write_channel_altera(chan_Conf2Intere_active, active);
-			write_channel_altera(chan_Conf2Intrae_active, active);
-			mem_fence(CLK_CHANNEL_MEM_FENCE);
-
-			write_channel_altera(chan_Conf2Intere_mode,   mode);
-			write_channel_altera(chan_Conf2Intrae_mode,   mode);
-			mem_fence(CLK_CHANNEL_MEM_FENCE);
-			*/
 			char  active_tmp = active;
 			char  mode_tmp   = mode;
 			char2 actmode    = {active_tmp, mode_tmp};
@@ -423,6 +430,52 @@ while(active) {
 		float3 tmp = {tmp_x, tmp_y, tmp_z};
 		#else
 		float3 tmp = loc_coords[pipe_cnt];
+		#endif
+
+		write_channel_altera(chan_Conf2Intere_xyz, tmp);
+		write_channel_altera(chan_Conf2Intrae_xyz, tmp);
+	}
+*/
+
+
+
+	for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt+=2) {
+		if (pipe_cnt == 0) {
+			char  active_tmp = active;
+			char  mode_tmp   = mode;
+			char2 actmode    = {active_tmp, mode_tmp};
+
+			write_channel_altera(chan_Conf2Intere_actmode, actmode);
+			write_channel_altera(chan_Conf2Intrae_actmode, actmode);
+		}
+		mem_fence(CLK_CHANNEL_MEM_FENCE);
+
+		#if defined (FIXED_POINT_CONFORM)
+		fixedpt3 tmp_coords[2];
+		#else
+		float3 tmp_coords[2];
+		#endif
+
+		#pragma unroll
+		for (uchar i=0; i<2; i++) {
+			tmp_coords[i] = loc_coords[pipe_cnt+i];
+		}
+
+		float8 tmp;
+
+		#if defined (FIXED_POINT_CONFORM)
+		// convert fixedpt3 to float3
+		float tmp_x1 = fixedpt_tofloat(tmp_coords[0].x);
+		float tmp_y1 = fixedpt_tofloat(tmp_coords[0].y);
+		float tmp_z1 = fixedpt_tofloat(tmp_coords[0].z);
+		float tmp_x2 = fixedpt_tofloat(tmp_coords[1].x);
+		float tmp_y2 = fixedpt_tofloat(tmp_coords[1].y);
+		float tmp_z2 = fixedpt_tofloat(tmp_coords[1].z);
+		tmp.s0 = tmp_x1; tmp.s1 = tmp_y1; tmp.s2 = tmp_z1; //tmp.s3
+		tmp.s4 = tmp_x2; tmp.s5 = tmp_y2; tmp.s6 = tmp_z2; //tmp.s7
+		#else
+		tmp.s0 = tmp_coords[0].x; tmp.s1 = tmp_coords[0].y; tmp.s2 = tmp_coords[0].z; //tmp.s3
+		tmp.s4 = tmp_coords[1].x; tmp.s5 = tmp_coords[1].y; tmp.s6 = tmp_coords[1].z; //tmp.s7
 		#endif
 
 		write_channel_altera(chan_Conf2Intere_xyz, tmp);

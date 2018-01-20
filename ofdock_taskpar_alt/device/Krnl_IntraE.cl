@@ -122,25 +122,26 @@ while(active) {
 	// Wait for ligand atomic coordinates in channel
 	// --------------------------------------------------------------
 
-/*
-	active = read_channel_altera(chan_Conf2Intrae_active);
-	mem_fence(CLK_CHANNEL_MEM_FENCE);
-*/
 	char2 actmode = read_channel_altera(chan_Conf2Intrae_actmode);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 	active = actmode.x;
 	mode   = actmode.y;
 
-	for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt++) {
 /*
-		if (pipe_cnt == 0) {
-			mode   = read_channel_altera(chan_Conf2Intrae_mode);
-			mem_fence(CLK_CHANNEL_MEM_FENCE);
-		}
-*/
+	for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt++) {
 		loc_coords[pipe_cnt] = read_channel_altera(chan_Conf2Intrae_xyz);
 	}
+*/
+
+	for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt+=2) {
+		float8 tmp = read_channel_altera(chan_Conf2Intrae_xyz);
+		float3 tmp1 = {tmp.s0, tmp.s1, tmp.s2};
+		float3 tmp2 = {tmp.s4, tmp.s5, tmp.s6};
+		loc_coords[pipe_cnt] = tmp1;
+		loc_coords[pipe_cnt+1] = tmp2;
+	}
+
 
 	// --------------------------------------------------------------
 	//printf("AFTER In INTRA CHANNEL\n");

@@ -17,11 +17,13 @@ channel float  	chan_LS2Conf_LS2_genotype      __attribute__((depth(ACTUAL_GENOT
 channel float  	chan_LS2Conf_LS3_genotype      __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
 
 // IC, GG, LS1
-channel float3  chan_Conf2Intere_xyz           __attribute__((depth(MAX_NUM_OF_ATOMS)));
+
+/*channel float3  chan_Conf2Intere_xyz           __attribute__((depth(MAX_NUM_OF_ATOMS)));*/
+channel float8  chan_Conf2Intere_xyz           __attribute__((depth(MAX_NUM_OF_ATOMS/2)));
 channel char2  	chan_Conf2Intere_actmode;
 
-
-channel float3 	chan_Conf2Intrae_xyz           __attribute__((depth(MAX_NUM_OF_ATOMS)));
+/*channel float3 	chan_Conf2Intrae_xyz           __attribute__((depth(MAX_NUM_OF_ATOMS)));*/
+channel float8	chan_Conf2Intrae_xyz           __attribute__((depth(MAX_NUM_OF_ATOMS/2)));
 channel char2  	chan_Conf2Intrae_actmode;	
 
 // Send data back to generators of genotypes
@@ -61,15 +63,12 @@ channel bool chan_Arbiter_LS3_float_off;
 channel bool chan_GA2PRNG_LS_float_Off;
 
 // LS1, LS2, LS3
-/*channel bool 	chan_GA2LS_LS1_active;*/
 channel float   chan_GA2LS_LS1_energy;
 channel float  	chan_GA2LS_LS1_genotype        __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
 
-/*channel bool 	chan_GA2LS_LS2_active;*/
 channel float   chan_GA2LS_LS2_energy;
 channel float  	chan_GA2LS_LS2_genotype        __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
 
-/*channel bool 	chan_GA2LS_LS3_active;*/
 channel float   chan_GA2LS_LS3_energy;
 channel float  	chan_GA2LS_LS3_genotype        __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
 
@@ -520,17 +519,11 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			// choose all random entities
 			// without checking if it has already been subjected to LS in this cycle
 			ushort3 entity_ls = read_channel_altera(chan_PRNG2GA_LS123_ushort_prng);
+			mem_fence(CLK_CHANNEL_MEM_FENCE);
+
 			ushort entity_ls1 = entity_ls.x;
 			ushort entity_ls2 = entity_ls.y;
 			ushort entity_ls3 = entity_ls.z;
-
-			mem_fence(CLK_CHANNEL_MEM_FENCE);
-/*
-			write_channel_altera(chan_GA2LS_LS1_active, true);
-			write_channel_altera(chan_GA2LS_LS2_active, true);
-			write_channel_altera(chan_GA2LS_LS3_active, true);
-			mem_fence(CLK_CHANNEL_MEM_FENCE);
-*/
 
 			write_channel_altera(chan_GA2LS_LS1_energy, LocalEneNext[entity_ls1]);
 			write_channel_altera(chan_GA2LS_LS2_energy, LocalEneNext[entity_ls2]);
