@@ -27,17 +27,17 @@ channel float8	chan_Conf2Intrae_xyz           __attribute__((depth(MAX_NUM_OF_AT
 channel char2  	chan_Conf2Intrae_actmode;	
 
 // Send data back to generators of genotypes
-channel float 	chan_Intere2StoreIC_intere     __attribute__((depth(20)));
-channel float 	chan_Intere2StoreGG_intere     __attribute__((depth(20)));
-channel float 	chan_Intere2StoreLS_LS1_intere __attribute__((depth(20)));	// it requires 6% MAX_POPSIZE
-channel float 	chan_Intere2StoreLS_LS2_intere __attribute__((depth(20)));	// it requires 6% MAX_POPSIZE
-channel float 	chan_Intere2StoreLS_LS3_intere __attribute__((depth(20)));	// it requires 6% MAX_POPSIZE
+channel float 	chan_Intere2StoreIC_intere     __attribute__((depth(/*20*/2)));
+channel float 	chan_Intere2StoreGG_intere     __attribute__((depth(/*20*/2)));
+channel float 	chan_Intere2StoreLS_LS1_intere __attribute__((depth(/*20*/2)));	// it requires 6% MAX_POPSIZE
+channel float 	chan_Intere2StoreLS_LS2_intere __attribute__((depth(/*20*/2)));	// it requires 6% MAX_POPSIZE
+channel float 	chan_Intere2StoreLS_LS3_intere __attribute__((depth(/*20*/2)));	// it requires 6% MAX_POPSIZE
 
-channel float 	chan_Intrae2StoreIC_intrae     __attribute__((depth(20)));
-channel float 	chan_Intrae2StoreGG_intrae     __attribute__((depth(20)));
-channel float 	chan_Intrae2StoreLS_LS1_intrae __attribute__((depth(20)));	// it requires 6% MAX_POPSIZE
-channel float 	chan_Intrae2StoreLS_LS2_intrae __attribute__((depth(20)));	// it requires 6% MAX_POPSIZE
-channel float 	chan_Intrae2StoreLS_LS3_intrae __attribute__((depth(20)));	// it requires 6% MAX_POPSIZE
+channel float 	chan_Intrae2StoreIC_intrae     __attribute__((depth(/*20*/2)));
+channel float 	chan_Intrae2StoreGG_intrae     __attribute__((depth(/*20*/2)));
+channel float 	chan_Intrae2StoreLS_LS1_intrae __attribute__((depth(/*20*/2)));	// it requires 6% MAX_POPSIZE
+channel float 	chan_Intrae2StoreLS_LS2_intrae __attribute__((depth(/*20*/2)));	// it requires 6% MAX_POPSIZE
+channel float 	chan_Intrae2StoreLS_LS3_intrae __attribute__((depth(/*20*/2)));	// it requires 6% MAX_POPSIZE
 
 // PRNG kernerls
 channel float8  chan_PRNG2GA_BT_ushort_float_prng;
@@ -73,13 +73,13 @@ channel float   chan_GA2LS_LS3_energy;
 channel float  	chan_GA2LS_LS3_genotype        __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
 
 
-channel float2  chan_LS2GA_LS1_evalenergy      __attribute__((depth(8)));	
+channel float2  chan_LS2GA_LS1_evalenergy      __attribute__((depth(/*8*/2)));	
 channel float  	chan_LS2GA_LS1_genotype        __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
 
-channel float2  chan_LS2GA_LS2_evalenergy      __attribute__((depth(8)));
+channel float2  chan_LS2GA_LS2_evalenergy      __attribute__((depth(/*8*/2)));
 channel float  	chan_LS2GA_LS2_genotype        __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
 
-channel float2  chan_LS2GA_LS3_evalenergy      __attribute__((depth(8)));
+channel float2  chan_LS2GA_LS3_evalenergy      __attribute__((depth(/*8*/2)));
 channel float  	chan_LS2GA_LS3_genotype        __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
 
 channel bool    chan_GA2LS_Off1_active;
@@ -263,7 +263,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			if (intra_valid == false) {
 				energyIA_IC_rx = read_channel_nb_altera(chan_Intrae2StoreIC_intrae, &intra_valid);
 			}
-			if (inter_valid == false) {
+			else if (inter_valid == false) {
 				energyIE_IC_rx = read_channel_nb_altera(chan_Intere2StoreIC_intere, &inter_valid);
 			}
 		}
@@ -491,7 +491,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 				if (intra_valid == false) {
 					energyIA_GG_rx = read_channel_nb_altera(chan_Intrae2StoreGG_intrae, &intra_valid);
 				}
-				if (inter_valid == false) {
+				else if (inter_valid == false) {
 					energyIE_GG_rx = read_channel_nb_altera(chan_Intere2StoreGG_intere, &inter_valid);
 				}
 			}

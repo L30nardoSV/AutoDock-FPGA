@@ -355,6 +355,14 @@ freq: 195 MHz (64 sec non-instrumented on 10runs 3ptb)
 NOT HW built
 >>> commit "non blocking ls-channels in GA"
 
+129. "Krnl_GA": reduce the depth of intere and intrae channels from 20  downto 2
+130. "Krnl_GA": reduce the depth of ls energy channels from 8  downto 2
+131. "Krnl_GA": IC and GG non-blocking read channels are made exclusive between them
+
+freq: 200 MHz (63 sec non-instrumented on 10runs 3ptb)
+>>> commit "reduced depth channels"
+
+
 
 
 NOT DONE YET
