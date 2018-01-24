@@ -362,6 +362,66 @@ NOT HW built
 freq: 200 MHz (63 sec non-instrumented on 10runs 3ptb)
 >>> commit "reduced depth channels"
 
+132. `Krnl_Confom`, `Krnl_InterE`, `Krnl_IntraE`: redefine memory address space for args storing large data
+						  The default size for onchip __constant mem is 16kB.
+						  If data doesnt fit in __constant mem then, cache misses happen
+					          which have a strong penalty for those misses. 
+						  In cases were misses are likely to happen, better use __global const
+     `Krnl_Conform`: rotlist as __global const
+     `Krnl_InterE`: GlobFrids as __ global const
+     `Krnl_IntraE`: intracontribE as __global const
+     Note that "estimated" RAM utilization raises from 78% to 112%
+
+134. `LS`, `LS2`, `LS3`: loops unrolled partly (16 factor) are pipelined to reduce RAM utilization (from 112% down to 102%)
+135. A PRAGMA LEARN FROM REPORT.HTML OF V16.1 (not found in documentation): 
+     `Krnl_Conform`, `Krnl_InterE`, `Krnl_IntraE`: applied #pragma max_concurrency 32 added on while(active)
+						   to increase (from default 16 up to 32) the limit of maximum 
+						   number of simultaneous iterations on the loop in question
+136. `Krnl_LS`, `Krnl_LS2`, `Krnl_LS3`: partial unroll was replaced by pipeline to save RAM (estimated: 106%, real: 66%)
+
+freq: 185 MHz (65 sec non-instrumented on 10runs 3ptb, 144 sec on 1stp (from 166))
+
+
+	`Krnl_LS`, `Krnl_LS2`, `Krnl_LS3`: 
+	partial unroll switched on AGAIN (estimation shows 106%)(RAM estimated: 116%, real: %) 
+	-> switched back to pipelined (as done  in 134)
+
+137. `Krnl_IGL`: reduced scope of __local genotypeIC, genotypeGG, genotype[3][] + 
+		 fusion of genotypeIC and genotypeGG into genotypeICGG
+
+        `Krnl_GA` : add volatile qualifier to all __global args that can be modified during execution 
+	(__constant dont need it, also because these are on-chip mem) (other kernels do not need as args are either __global const or __constant)
+freq: 169 MHz  (exe slower with wrong results)
+
+138. `Krnl_GA`: remove volatile from it
+
+freq: 185 MHz (67 sec non-instrumented on 10runs 3ptb, 144 sec on 1stp (from 166))
+>>> commit "redefined constant args + reduced scope genos in IGLkrnl"
+
+
+
+
+
+
+
+
+XXX, Between Conform and InterE, IntraE create a wider channel: 
+https://www.alteraforum.com/forum/showthread.php?t=55979
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

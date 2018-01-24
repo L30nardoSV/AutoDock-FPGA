@@ -182,8 +182,8 @@ fixedpt fixedpt_map_angle_360(fixedpt angle)
 __kernel __attribute__ ((max_global_work_dim(0)))
 
 
-void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
-	     __global       float*           restrict GlobEnergyCurrent,
+void Krnl_GA(__global       float*  restrict GlobPopulationCurrent,
+	     __global       float*  restrict GlobEnergyCurrent,
 	     #if defined(SINGLE_COPY_POP_ENE)
    	     __global       unsigned int*    restrict GlobEvals_performed,
              __global       unsigned int*    restrict GlobGens_performed,
@@ -229,6 +229,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 	__local float LocalPopCurr[MAX_POPSIZE][ACTUAL_GENOTYPE_LENGTH];
 	__local float LocalEneCurr[MAX_POPSIZE];
 
+
 	#if defined(SINGLE_COPY_POP_ENE)
 	__global float* GlobPopCurr = & GlobPopulationCurrent [Host_Offset_Pop];
 	__global float* GlobEneCurr = & GlobEnergyCurrent     [Host_Offset_Ene];
@@ -245,6 +246,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 		for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_genes; pipe_cnt++) {
 			#if defined(SINGLE_COPY_POP_ENE)
 			LocalPopCurr[pop_cnt][pipe_cnt & MASK_GENOTYPE] = GlobPopCurr[pop_cnt*ACTUAL_GENOTYPE_LENGTH + pipe_cnt];
+			//LocalPopCurr[pop_cnt][pipe_cnt & MASK_GENOTYPE] = GlobPopulationCurrent[Host_Offset_Pop + pop_cnt*ACTUAL_GENOTYPE_LENGTH + pipe_cnt];
 			#else
 			LocalPopCurr[pop_cnt][pipe_cnt & MASK_GENOTYPE] = GlobPopulationCurrent[pop_cnt*ACTUAL_GENOTYPE_LENGTH + pipe_cnt];
 			#endif
@@ -645,6 +647,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 		for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
 			#if defined(SINGLE_COPY_POP_ENE)
 			GlobPopCurr[pop_cnt*ACTUAL_GENOTYPE_LENGTH + gene_cnt] = LocalPopCurr[pop_cnt][gene_cnt & MASK_GENOTYPE];
+			//GlobPopulationCurrent[Host_Offset_Pop + pop_cnt*ACTUAL_GENOTYPE_LENGTH + gene_cnt] = LocalPopCurr[pop_cnt][gene_cnt & MASK_GENOTYPE];
 			#else
 			GlobPopulationCurrent[pop_cnt*ACTUAL_GENOTYPE_LENGTH + gene_cnt] = LocalPopCurr[pop_cnt][gene_cnt & MASK_GENOTYPE];
 			#endif
@@ -652,6 +655,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 
 		#if defined(SINGLE_COPY_POP_ENE)
 		GlobEneCurr[pop_cnt] = LocalEneCurr[pop_cnt];
+		//GlobEnergyCurrent[pop_cnt] = LocalEneCurr[Host_Offset_Ene + pop_cnt];
 		#else
 		GlobEnergyCurrent[pop_cnt] = LocalEneCurr[pop_cnt];
 		#endif

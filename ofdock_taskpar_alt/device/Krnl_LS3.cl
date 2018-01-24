@@ -226,7 +226,7 @@ if (valid) {
 			// updating offspring_genotype
 			// updating genotype_bias	
 
-			#pragma unroll 16
+			//#pragma unroll 16
 			for (uchar i=0; i<DockConst_num_of_genes; i++) {
 
 /*
@@ -247,7 +247,7 @@ if (valid) {
 		else {
 			// updating (halving) genotype_bias
 
-			#pragma unroll 16
+			//#pragma unroll 16
 			for (uchar i=0; i<DockConst_num_of_genes; i++) {
 
 /*
@@ -269,7 +269,7 @@ if (valid) {
 			// updating offspring_genotype
 			// updating genotype_bias
 
-			#pragma unroll 16
+			//#pragma unroll 16
 			for (uchar i=0; i<DockConst_num_of_genes; i++) {
 
 /*
@@ -290,7 +290,7 @@ if (valid) {
 		else {
 			// updating (halving) genotype_bias
 
-			#pragma unroll 16
+			//#pragma unroll 16
 			for (uchar i=0; i<DockConst_num_of_genes; i++) {
 
 /*

@@ -21,7 +21,7 @@ void Krnl_InterE(
 #if 0
 	     __constant fixedpt64* restrict GlobFgrids,
 #else
-             __constant float* restrict GlobFgrids,
+             /*__constant*/ __global const float* restrict GlobFgrids,
 #endif
 
 #if defined (FIXED_POINT_INTERE)
@@ -80,9 +80,10 @@ void Krnl_InterE(
 		atom_charges_localcache [i] = KerConstStatic_atom_charges_const [i];
 	}
 
- __constant float* GlobFgrids2 = & GlobFgrids [Host_mul_tmp2];
- __constant float* GlobFgrids3 = & GlobFgrids [Host_mul_tmp3];
- 
+	/*__constant*/ __global const float* GlobFgrids2 = & GlobFgrids [Host_mul_tmp2];
+	/*__constant*/ __global const float* GlobFgrids3 = & GlobFgrids [Host_mul_tmp3];
+
+#pragma max_concurrency 32
 while(active) {
 
 	char mode;
@@ -359,14 +360,14 @@ while(active) {
         	        fixpt_cube [0][1][1] = fixedpt64_fromfloat(GlobFgrids[cube_011 + mul_tmp2]);
         	        fixpt_cube [1][1][1] = fixedpt64_fromfloat(GlobFgrids[cube_111 + mul_tmp2]);
 			#else
-			cube [0][0][0] = GlobFgrids2[cube_000];
-                        cube [1][0][0] = GlobFgrids2[cube_100];
-                        cube [0][1][0] = GlobFgrids2[cube_010];
-                        cube [1][1][0] = GlobFgrids2[cube_110];
-                        cube [0][0][1] = GlobFgrids2[cube_001];
-                        cube [1][0][1] = GlobFgrids2[cube_101];
-                        cube [0][1][1] = GlobFgrids2[cube_011];
-                        cube [1][1][1] = GlobFgrids2[cube_111];
+			cube [0][0][0] = GlobFgrids2[cube_000] /*GlobFgrids [Host_mul_tmp2 + cube_000]*/;
+                        cube [1][0][0] = GlobFgrids2[cube_100] /*GlobFgrids [Host_mul_tmp2 + cube_100]*/;
+                        cube [0][1][0] = GlobFgrids2[cube_010] /*GlobFgrids [Host_mul_tmp2 + cube_010]*/;
+                        cube [1][1][0] = GlobFgrids2[cube_110] /*GlobFgrids [Host_mul_tmp2 + cube_110]*/;
+                        cube [0][0][1] = GlobFgrids2[cube_001] /*GlobFgrids [Host_mul_tmp2 + cube_001]*/;
+                        cube [1][0][1] = GlobFgrids2[cube_101] /*GlobFgrids [Host_mul_tmp2 + cube_101]*/;
+                        cube [0][1][1] = GlobFgrids2[cube_011] /*GlobFgrids [Host_mul_tmp2 + cube_011]*/;
+                        cube [1][1][1] = GlobFgrids2[cube_111] /*GlobFgrids [Host_mul_tmp2 + cube_111]*/;
 			#endif
 
 			#if defined (DEBUG_KRNL_INTERE)
@@ -428,14 +429,14 @@ while(active) {
         	        fixpt_cube [0][1][1] = fixedpt64_fromfloat(GlobFgrids[cube_011 + mul_tmp3]);
         	        fixpt_cube [1][1][1] = fixedpt64_fromfloat(GlobFgrids[cube_111 + mul_tmp3]);
 			#else
-			cube [0][0][0] = GlobFgrids3[cube_000];
-                        cube [1][0][0] = GlobFgrids3[cube_100];
-                        cube [0][1][0] = GlobFgrids3[cube_010];
-                        cube [1][1][0] = GlobFgrids3[cube_110];
-                        cube [0][0][1] = GlobFgrids3[cube_001];
-                        cube [1][0][1] = GlobFgrids3[cube_101];
-                        cube [0][1][1] = GlobFgrids3[cube_011];
-                        cube [1][1][1] = GlobFgrids3[cube_111];
+			cube [0][0][0] = GlobFgrids3[cube_000] /*GlobFgrids [Host_mul_tmp3 + cube_000]*/;
+                        cube [1][0][0] = GlobFgrids3[cube_100] /*GlobFgrids [Host_mul_tmp3 + cube_100]*/;
+                        cube [0][1][0] = GlobFgrids3[cube_010] /*GlobFgrids [Host_mul_tmp3 + cube_010]*/;
+                        cube [1][1][0] = GlobFgrids3[cube_110] /*GlobFgrids [Host_mul_tmp3 + cube_110]*/;
+                        cube [0][0][1] = GlobFgrids3[cube_001] /*GlobFgrids [Host_mul_tmp3 + cube_001]*/;
+                        cube [1][0][1] = GlobFgrids3[cube_101] /*GlobFgrids [Host_mul_tmp3 + cube_101]*/;
+                        cube [0][1][1] = GlobFgrids3[cube_011] /*GlobFgrids [Host_mul_tmp3 + cube_011]*/;
+                        cube [1][1][1] = GlobFgrids3[cube_111] /*GlobFgrids [Host_mul_tmp3 + cube_111]*/;
 			#endif
 
 			#if defined (DEBUG_KRNL_INTERE)

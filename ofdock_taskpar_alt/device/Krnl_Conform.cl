@@ -5,7 +5,7 @@
 // --------------------------------------------------------------------------
 __kernel __attribute__ ((max_global_work_dim(0)))
 void Krnl_Conform(
-	     __constant int*    restrict KerConstStatic_rotlist_const,
+	     /*__constant*/ __global const int*    restrict KerConstStatic_rotlist_const,
 	     #if defined (FIXED_POINT_CONFORM)
 	     __constant fixedpt3* restrict KerConstStatic_ref_coords_const,		 // must be formatted in host
 	     __constant fixedpt3* restrict KerConstStatic_rotbonds_moving_vectors_const, // must be formatted in host
@@ -85,6 +85,7 @@ void Krnl_Conform(
 		rotbonds_unit_vectors_localcache   [c] = KerConstStatic_rotbonds_unit_vectors_const [c];
 	}
 
+#pragma max_concurrency 32
 while(active) {
 	char mode;
 

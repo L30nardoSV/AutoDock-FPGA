@@ -25,7 +25,7 @@ void Krnl_IntraE(
 /*
 	     __constant char*  restrict KerConstStatic_intraE_contributors_const,
 */
-	     __constant char3* restrict KerConstStatic_intraE_contributors_const,
+	     /*__constant*/ __global const  char3* restrict KerConstStatic_intraE_contributors_const,
 	     __constant float* restrict KerConstStatic_VWpars_AC_const,
 	     __constant float* restrict KerConstStatic_VWpars_BD_const,
 	     __constant float* restrict KerConstStatic_dspars_S_const,
@@ -105,6 +105,7 @@ printf("kernel intraE %i \n", DockConst_num_of_intraE_contributors);
 		intraE_contributors_localcache [i] = KerConstStatic_intraE_contributors_const [i];	
 	}
 
+#pragma max_concurrency 32
 while(active) {
 	char mode;
 
