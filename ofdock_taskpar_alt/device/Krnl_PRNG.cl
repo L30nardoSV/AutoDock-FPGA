@@ -150,6 +150,12 @@ void Krnl_Prng_LS123_ushort(unsigned int Host_seed1,
 		tmp.y = (DockConst_pop_size/MAX_UINT)*lfsr.y;
 		tmp.z = (DockConst_pop_size/MAX_UINT)*lfsr.z;
 
+		// to avoid having same entities undergoing LS simultaneously
+		if ((tmp.x == tmp.y) || (tmp.x == tmp.z) || (tmp.y == tmp.z)) {
+			tmp.y = tmp.x + 1;
+			tmp.z = tmp.y + 2;
+		}
+
 		bool success = false;
 		if(!valid) {
 			success = write_channel_nb_altera(chan_PRNG2GA_LS123_ushort_prng, tmp);

@@ -1105,6 +1105,7 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		setKernelArg(kernel1,16,  sizeof(unsigned short), &run_cnt);
 		setKernelArg(kernel1,17,  sizeof(unsigned int),   &Host_Offset_Pop);
 		setKernelArg(kernel1,18,  sizeof(unsigned int),   &Host_Offset_Ene);
+
 	#endif
 #endif
 

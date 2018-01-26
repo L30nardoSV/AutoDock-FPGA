@@ -226,9 +226,10 @@ void Krnl_GA(__global       float*  restrict GlobPopulationCurrent,
 	printf("%-40s %u\n", "DockConst_num_of_genes: ",        	DockConst_num_of_genes);
 	#endif
 
+	// other banking configuration (see PopNext, eneNext) might reduce logic
+	// but makes PopCurr stallable
 	__local float LocalPopCurr[MAX_POPSIZE][ACTUAL_GENOTYPE_LENGTH];
 	__local float LocalEneCurr[MAX_POPSIZE];
-
 
 	#if defined(SINGLE_COPY_POP_ENE)
 	__global float* GlobPopCurr = & GlobPopulationCurrent [Host_Offset_Pop];
@@ -246,7 +247,6 @@ void Krnl_GA(__global       float*  restrict GlobPopulationCurrent,
 		for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_genes; pipe_cnt++) {
 			#if defined(SINGLE_COPY_POP_ENE)
 			LocalPopCurr[pop_cnt][pipe_cnt & MASK_GENOTYPE] = GlobPopCurr[pop_cnt*ACTUAL_GENOTYPE_LENGTH + pipe_cnt];
-			//LocalPopCurr[pop_cnt][pipe_cnt & MASK_GENOTYPE] = GlobPopulationCurrent[Host_Offset_Pop + pop_cnt*ACTUAL_GENOTYPE_LENGTH + pipe_cnt];
 			#else
 			LocalPopCurr[pop_cnt][pipe_cnt & MASK_GENOTYPE] = GlobPopulationCurrent[pop_cnt*ACTUAL_GENOTYPE_LENGTH + pipe_cnt];
 			#endif
@@ -276,15 +276,32 @@ void Krnl_GA(__global       float*  restrict GlobPopulationCurrent,
 		#endif
 	}
 	// ------------------------------------------------------------------
-
+/*
 	__local float LocalPopNext[MAX_POPSIZE][ACTUAL_GENOTYPE_LENGTH];
 	__local float LocalEneNext[MAX_POPSIZE];
+*/
 
 	uint eval_cnt = DockConst_pop_size; // takes into account the IC evals
 	uint ls_eval_cnt = 0;
 	uint generation_cnt = 0;
 
 	while ((eval_cnt < DockConst_num_of_energy_evals) && (generation_cnt < DockConst_num_of_generations)) {
+
+		//float LocalPopNext[MAX_POPSIZE][ACTUAL_GENOTYPE_LENGTH];
+		//float LocalEneNext[MAX_POPSIZE];
+
+		// this configuration reduces logic and does not increase block RAM usage
+		float __attribute__ ((
+				       memory,
+		   		       numbanks(4),
+			               bankwidth(32),
+			              )) LocalPopNext[MAX_POPSIZE][ACTUAL_GENOTYPE_LENGTH];
+
+		float __attribute__ ((
+				       memory,
+		   		       numbanks(4),
+			               bankwidth(4),
+			              )) LocalEneNext[MAX_POPSIZE];
 
 		// ------------------------------------------------------------------
 		// GG: Genetic Generation
@@ -647,7 +664,6 @@ void Krnl_GA(__global       float*  restrict GlobPopulationCurrent,
 		for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
 			#if defined(SINGLE_COPY_POP_ENE)
 			GlobPopCurr[pop_cnt*ACTUAL_GENOTYPE_LENGTH + gene_cnt] = LocalPopCurr[pop_cnt][gene_cnt & MASK_GENOTYPE];
-			//GlobPopulationCurrent[Host_Offset_Pop + pop_cnt*ACTUAL_GENOTYPE_LENGTH + gene_cnt] = LocalPopCurr[pop_cnt][gene_cnt & MASK_GENOTYPE];
 			#else
 			GlobPopulationCurrent[pop_cnt*ACTUAL_GENOTYPE_LENGTH + gene_cnt] = LocalPopCurr[pop_cnt][gene_cnt & MASK_GENOTYPE];
 			#endif
@@ -655,7 +671,6 @@ void Krnl_GA(__global       float*  restrict GlobPopulationCurrent,
 
 		#if defined(SINGLE_COPY_POP_ENE)
 		GlobEneCurr[pop_cnt] = LocalEneCurr[pop_cnt];
-		//GlobEnergyCurrent[pop_cnt] = LocalEneCurr[Host_Offset_Ene + pop_cnt];
 		#else
 		GlobEnergyCurrent[pop_cnt] = LocalEneCurr[pop_cnt];
 		#endif
@@ -681,8 +696,6 @@ void Krnl_GA(__global       float*  restrict GlobPopulationCurrent,
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------
 
-
-
 #include "Krnl_PRNG.cl"
 
 #include "Krnl_LS.cl"
@@ -692,10 +705,5 @@ void Krnl_GA(__global       float*  restrict GlobPopulationCurrent,
 #include "Krnl_IGL_Arbiter.cl"
 #include "Krnl_Conform.cl"
 #include "Krnl_InterE.cl"
-
 #include "Krnl_IntraE.cl"
 
-/*
-#include "Krnl_IA_Pipeline.cl"
-#include "Krnl_IA_Pipeline2.cl"
-*/
