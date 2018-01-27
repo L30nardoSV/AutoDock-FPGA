@@ -398,13 +398,27 @@ freq: 169 MHz  (exe slower with wrong results)
 freq: 185 MHz (67 sec non-instrumented on 10runs 3ptb, 144 sec on 1stp (from 166))
 >>> commit "redefined constant args + reduced scope genos in IGLkrnl"
 
-139. `Krnl_Prng_LS123_ushort`: added code to generate 3 different entitid id for LS for-loop
+139. `Krnl_Prng_LS123_ushort`: added code to generate 3 different entity id for LS for-loop
 			       (it was initially producing same entity id causing overwriting)
 
 140. `Krnl_GA`: code cleaned up + reduced scope of LocalPopNext and LocalEneNext (reduces logic usage)
 
 NO HW BUILT
 >>> commit "reduced scope of Next Pop and Ene"
+
+141. `performdocking.cpp`
+     `Krnl_Conform`:  pass ref_orientation_quats_const as fixedpt4 or float4 to __constant only once before performdocking main-loop
+		      rather than passing 4 elements on every main-loop performdocking iteration
+
+freq: 190 MHz (64 sec non-instrumented on 10runs 3ptb, 141 sec on 1stp)(instrumented freq: 197 MHz)
+>>> commit "qualified conform orientations as __constant"
+
+
+
+
+
+
+
 
 
 XXX, Between Conform and InterE, IntraE create a wider channel: 

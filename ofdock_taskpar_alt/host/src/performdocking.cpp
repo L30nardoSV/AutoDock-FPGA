@@ -331,6 +331,7 @@ cl_mem mem_KerConstStatic_rotlist_const;
 cl_mem mem_KerConstStatic_ref_coords_const;
 cl_mem mem_KerConstStatic_rotbonds_moving_vectors_const;
 cl_mem mem_KerConstStatic_rotbonds_unit_vectors_const;
+cl_mem mem_KerConstStatic_ref_orientation_quats_const;
 
 /*								                  // Nr elements	// Nr bytes
 cl_mem mem_atom_charges_const;		// float [MAX_NUM_OF_ATOMS];			// 90	 = 90	//360
@@ -648,12 +649,14 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ATOMS*sizeof(cl_int3), 		        &mem_KerConstStatic_ref_coords_const);
 	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ROTBONDS*sizeof(cl_int3), 		&mem_KerConstStatic_rotbonds_moving_vectors_const);
 	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ROTBONDS*sizeof(cl_int3), 		&mem_KerConstStatic_rotbonds_unit_vectors_const);
+	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_RUNS*sizeof(cl_int4),			&mem_KerConstStatic_ref_orientation_quats_const);
 	#else
 	// floating-point (original)
 	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ROTATIONS*sizeof(int), 			&mem_KerConstStatic_rotlist_const);
 	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ATOMS*sizeof(cl_float3), 		&mem_KerConstStatic_ref_coords_const);
 	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ROTBONDS*sizeof(cl_float3), 		&mem_KerConstStatic_rotbonds_moving_vectors_const);
 	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ROTBONDS*sizeof(cl_float3), 		&mem_KerConstStatic_rotbonds_unit_vectors_const);
+	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_RUNS*sizeof(cl_float4),			&mem_KerConstStatic_ref_orientation_quats_const);
 	#endif
 
 //#if defined (FIXED_POINT_INTERE)
@@ -706,12 +709,14 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_ref_coords_const, 	     &KerConstStatic.ref_coords_const[0],              MAX_NUM_OF_ATOMS*sizeof(cl_int3));
 	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_rotbonds_moving_vectors_const, &KerConstStatic.rotbonds_moving_vectors_const[0], MAX_NUM_OF_ROTBONDS*sizeof(cl_int3));
 	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_rotbonds_unit_vectors_const,   &KerConstStatic.rotbonds_unit_vectors_const[0],   MAX_NUM_OF_ROTBONDS*sizeof(cl_int3));
+	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_ref_orientation_quats_const,   &KerConstStatic.ref_orientation_quats_const[0],   MAX_NUM_OF_RUNS*sizeof(cl_int4));
 	#else
 	// floating-point (original)
 	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_rotlist_const,                 &KerConstStatic.rotlist_const[0], 		       MAX_NUM_OF_ROTATIONS*sizeof(int));
 	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_ref_coords_const, 	     &KerConstStatic.ref_coords_const[0],              MAX_NUM_OF_ATOMS*sizeof(cl_float3));
 	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_rotbonds_moving_vectors_const, &KerConstStatic.rotbonds_moving_vectors_const[0], MAX_NUM_OF_ROTBONDS*sizeof(cl_float3));
 	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_rotbonds_unit_vectors_const,   &KerConstStatic.rotbonds_unit_vectors_const[0],   MAX_NUM_OF_ROTBONDS*sizeof(cl_float3));
+	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_ref_orientation_quats_const,   &KerConstStatic.ref_orientation_quats_const[0],   MAX_NUM_OF_RUNS*sizeof(cl_float4));
 	#endif
 
 //#if defined (FIXED_POINT_INTERE)
@@ -813,7 +818,7 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	setKernelArg(kernel2,5,  sizeof(unsigned char),      &dockpars.num_of_atoms);
 	setKernelArg(kernel2,6,  sizeof(unsigned char),      &dockpars.num_of_genes);
 	setKernelArg(kernel2,7,  sizeof(unsigned char),      &num_rotbonds);
-
+	setKernelArg(kernel2,8,  sizeof(mem_KerConstStatic_ref_orientation_quats_const),   &mem_KerConstStatic_ref_orientation_quats_const);
 	#if defined(SINGLE_COPY_POP_ENE)
 
 	#else
@@ -1110,9 +1115,9 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 #endif
 
 #ifdef ENABLE_KERNEL2 // Krnl_Conform
+	/*
 	#if defined(SINGLE_COPY_POP_ENE)
 		#if defined (FIXED_POINT_CONFORM)
-		// fixed-point
 		setKernelArg(kernel2,8,  sizeof(fixedpt),        &KerConstStatic.ref_orientation_quats_const[4*run_cnt]);
 		setKernelArg(kernel2,9,  sizeof(fixedpt),        &KerConstStatic.ref_orientation_quats_const[4*run_cnt + 1]);	
 		setKernelArg(kernel2,10, sizeof(fixedpt),        &KerConstStatic.ref_orientation_quats_const[4*run_cnt + 2]);	
@@ -1125,7 +1130,6 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		#endif
 	#else
 		#if defined (FIXED_POINT_CONFORM)
-		// fixed-point
 		setKernelArg(kernel2,8,  sizeof(fixedpt),        &KerConstDynamic.ref_orientation_quats_const[0]);
 		setKernelArg(kernel2,9,  sizeof(fixedpt),        &KerConstDynamic.ref_orientation_quats_const[1]);	
 		setKernelArg(kernel2,10, sizeof(fixedpt),        &KerConstDynamic.ref_orientation_quats_const[2]);	
@@ -1137,6 +1141,8 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		setKernelArg(kernel2,11, sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[3]);
 		#endif
 	#endif
+	*/
+	setKernelArg(kernel2,9,  sizeof(unsigned short), &run_cnt);
 #endif // End of ENABLE_KERNEL2
 
 
@@ -2214,6 +2220,7 @@ void cleanup() {
   if(mem_KerConstStatic_ref_coords_const)		  {clReleaseMemObject(mem_KerConstStatic_ref_coords_const);}
   if(mem_KerConstStatic_rotbonds_moving_vectors_const)    {clReleaseMemObject(mem_KerConstStatic_rotbonds_moving_vectors_const);}
   if(mem_KerConstStatic_rotbonds_unit_vectors_const)	  {clReleaseMemObject(mem_KerConstStatic_rotbonds_unit_vectors_const);}
+  if(mem_KerConstStatic_ref_orientation_quats_const)	  {clReleaseMemObject(mem_KerConstStatic_ref_orientation_quats_const);}
 
   if(mem_dockpars_fgrids) 		  {clReleaseMemObject(mem_dockpars_fgrids);}
 #if defined(SEPARATE_FGRID_INTERE)

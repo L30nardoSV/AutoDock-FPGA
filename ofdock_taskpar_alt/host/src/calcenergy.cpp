@@ -463,16 +463,28 @@ int prepare_conststatic_fields_for_gpu(Liganddata* 	       myligand_reference,
 
 		#if defined (FIXED_POINT_CONFORM)
 		// fixed-point
+		/*
 		KerConstStatic->ref_orientation_quats_const[4*i]   = fixedpt_fromfloat(cosf(genrotangle/2.0f));			//q
 		KerConstStatic->ref_orientation_quats_const[4*i+1] = fixedpt_fromfloat(sinf(genrotangle/2.0f)*sinf(theta)*cosf(phi));	//x
 		KerConstStatic->ref_orientation_quats_const[4*i+2] = fixedpt_fromfloat(sinf(genrotangle/2.0f)*sinf(theta)*sinf(phi));	//y
 		KerConstStatic->ref_orientation_quats_const[4*i+3] = fixedpt_fromfloat(sinf(genrotangle/2.0f)*cosf(theta)); 		//z
+		*/
+		KerConstStatic->ref_orientation_quats_const[i].x = fixedpt_fromfloat(cosf(genrotangle/2.0f));			//q
+		KerConstStatic->ref_orientation_quats_const[i].y = fixedpt_fromfloat(sinf(genrotangle/2.0f)*sinf(theta)*cosf(phi));	//x
+		KerConstStatic->ref_orientation_quats_const[i].z = fixedpt_fromfloat(sinf(genrotangle/2.0f)*sinf(theta)*sinf(phi));	//y
+		KerConstStatic->ref_orientation_quats_const[i].w = fixedpt_fromfloat(sinf(genrotangle/2.0f)*cosf(theta)); 		//z
 		#else
 		// floating-point (original)
+		/*
 		KerConstStatic->ref_orientation_quats_const[4*i]   = cosf(genrotangle/2.0f);				//q
 		KerConstStatic->ref_orientation_quats_const[4*i+1] = sinf(genrotangle/2.0f)*sinf(theta)*cosf(phi);	//x
 		KerConstStatic->ref_orientation_quats_const[4*i+2] = sinf(genrotangle/2.0f)*sinf(theta)*sinf(phi);	//y
 		KerConstStatic->ref_orientation_quats_const[4*i+3] = sinf(genrotangle/2.0f)*cosf(theta);		//z
+		*/
+		KerConstStatic->ref_orientation_quats_const[i].x = cosf(genrotangle/2.0f);				//q
+		KerConstStatic->ref_orientation_quats_const[i].y = sinf(genrotangle/2.0f)*sinf(theta)*cosf(phi);	//x
+		KerConstStatic->ref_orientation_quats_const[i].z = sinf(genrotangle/2.0f)*sinf(theta)*sinf(phi);	//y
+		KerConstStatic->ref_orientation_quats_const[i].w = sinf(genrotangle/2.0f)*cosf(theta);		//z
 		#endif
 	}
 #endif

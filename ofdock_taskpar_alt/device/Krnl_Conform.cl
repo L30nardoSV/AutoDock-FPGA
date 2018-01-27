@@ -21,16 +21,23 @@ void Krnl_Conform(
 			      unsigned char         Host_num_of_rotbonds,
 
 	     #if defined (FIXED_POINT_CONFORM)
+			      /*
 			      fixedpt               ref_orientation_quats_const_0,	// must be formatted in host
 			      fixedpt               ref_orientation_quats_const_1,	// must be formatted in host
 			      fixedpt               ref_orientation_quats_const_2,	// must be formatted in host
 			      fixedpt               ref_orientation_quats_const_3	// must be formatted in host
+			      */
+	     __constant fixedpt4* restrict KerConstStatic_ref_orientation_quats_const,
 	     #else
+			      /*
 			      float                 ref_orientation_quats_const_0,
 			      float                 ref_orientation_quats_const_1,
 			      float                 ref_orientation_quats_const_2,
 			      float                 ref_orientation_quats_const_3
+			      */
+	      __constant float4* restrict KerConstStatic_ref_orientation_quats_const,
 	     #endif
+			      unsigned short        Host_RunId
 )
 {
 	#if defined (DEBUG_KRNL_Conform) 
@@ -84,6 +91,20 @@ void Krnl_Conform(
 		rotbonds_moving_vectors_localcache [c] = KerConstStatic_rotbonds_moving_vectors_const[c];
 		rotbonds_unit_vectors_localcache   [c] = KerConstStatic_rotbonds_unit_vectors_const [c];
 	}
+
+	 #if defined (FIXED_POINT_CONFORM)
+	fixedpt4 ref_orientation_quats_const = KerConstStatic_ref_orientation_quats_const[Host_RunId];
+	fixedpt ref_orientation_quats_const_0 = ref_orientation_quats_const.x;
+	fixedpt ref_orientation_quats_const_1 = ref_orientation_quats_const.y;
+	fixedpt ref_orientation_quats_const_2 = ref_orientation_quats_const.z;
+	fixedpt ref_orientation_quats_const_3 = ref_orientation_quats_const.w;
+	#else
+	float4 ref_orientation_quats_const = KerConstStatic_ref_orientation_quats_const[Host_RunId];
+	float ref_orientation_quats_const_0 = ref_orientation_quats_const.x;
+	float ref_orientation_quats_const_1 = ref_orientation_quats_const.y;
+	float ref_orientation_quats_const_2 = ref_orientation_quats_const.z;
+	float ref_orientation_quats_const_3 = ref_orientation_quats_const.w;
+	#endif
 
 #pragma max_concurrency 32
 while(active) {

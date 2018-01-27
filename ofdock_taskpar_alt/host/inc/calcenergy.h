@@ -149,10 +149,12 @@ typedef struct
 #if defined(SINGLE_COPY_POP_ENE)
 	#if defined (FIXED_POINT_CONFORM)
 	// fixed-point
-      	fixedpt   ref_orientation_quats_const  [4*MAX_NUM_OF_RUNS] __attribute__ ((aligned (512)));
+      	//fixedpt   ref_orientation_quats_const  [4*MAX_NUM_OF_RUNS] __attribute__ ((aligned (512)));
+	cl_int4    ref_orientation_quats_const  [MAX_NUM_OF_RUNS] __attribute__ ((aligned (512)));
 	#else
 	// floating-point (original)
-       	float     ref_orientation_quats_const  [4*MAX_NUM_OF_RUNS] __attribute__ ((aligned (512)));
+       	//float     ref_orientation_quats_const  [4*MAX_NUM_OF_RUNS] __attribute__ ((aligned (512)));
+	cl_float4  ref_orientation_quats_const  [MAX_NUM_OF_RUNS] __attribute__ ((aligned (512)));
 	#endif
 #endif
 } kernelconstant_static;
