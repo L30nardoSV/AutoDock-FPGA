@@ -413,11 +413,39 @@ NO HW BUILT
 freq: 190 MHz (64 sec non-instrumented on 10runs 3ptb, 141 sec on 1stp)(instrumented freq: 197 MHz)
 >>> commit "qualified conform orientations as __constant"
 
+142. All kernel sources were cleanup
+143. `Krnl_LS`, `Krnl_LS2`, `Krnl_LS3`: reduced declaration scope of genotype[] 
+					(according to aoc v16.1 no hw reduction is achieved)
+144. `Krnl_Conform`: reduced declaration scope of genotype[] 
+		     (according to aoc v16.1 it increases hw from 1RAM to 4RAM bcause it is replicated)
+
+145. `Krnl_Conform`: remove __local cache for data already in __constant: ref_coords_localcache []
+146. `Krnl_Conform`: remove __local cache for data already in __constant: 
+			rotbonds_moving_vectors_localcache [], rotbonds_unit_vectors_localcache []
+		     + remove Host_num_of_rotbonds arg
+147. `Krnl_Conform`: reduced scope of ref_orientation_quats_const and ref_orientation_quats_const_X +
+		     both declared as const
+
+148. `Krnl_InterE`: remove __local cache for data already in __constant: atom_types_localcache []
+		    remove __local cache for data already in __constant: atom_charges_localcache []
+		    (decreased hw usage)
+
+149, `Krnl_IntraE`: remove __local cache for data already in __constant:
+		    atom_types_localcache []
+		    atom_charges_localcache []
+		    VWpars_AC_localcache    []
+		    VWpars_BD_localcache    []
+		    dspars_S_localcache     []
+		    dspars_V_localcache     []
+	     	   (increase hw usage: logic and RAM +1%, but the overall result is a decrease)
+
+150. `Krnl_IntraE`: reduced declaration scope of distance_pow_2 & inverse_distance_pow_2,4,6,10,12 (moved inside closest if)
+		    removed arg: square_num_of_atypes
 
 
-
-
-
+freq: 171 MHz (45 sec non-instrumented on 10runs 3ptb, 85 sec on 1stp)(instrumented freq: 168 MHz)
+First achieving speedup vs i5 cpu core: 3ptb: 59/45 = 1.3x, 1stp: 84/85 = 0.98x
+>>> commit "SPEEDUP: reduced scope+removed __local caches"
 
 
 

@@ -9,7 +9,6 @@ void Krnl_Prng_BT_ushort_float(unsigned int Host_seed1,
 	uint2 lfsr;
 	lfsr.x = Host_seed1;
 	lfsr.y = Host_seed2;
-
 	bool valid  = false;
 	
 	while(!valid) {	
@@ -124,7 +123,6 @@ void Krnl_Prng_LS123_ushort(unsigned int Host_seed1,
  	lfsr.x = Host_seed1;
 	lfsr.y = Host_seed2;
 	lfsr.z = Host_seed3;
-
 	bool valid = false;
 
 	while(!valid) {

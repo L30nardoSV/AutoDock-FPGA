@@ -817,8 +817,11 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	setKernelArg(kernel2,4,  sizeof(unsigned int),       &dockpars.rotbondlist_length);
 	setKernelArg(kernel2,5,  sizeof(unsigned char),      &dockpars.num_of_atoms);
 	setKernelArg(kernel2,6,  sizeof(unsigned char),      &dockpars.num_of_genes);
+/*
 	setKernelArg(kernel2,7,  sizeof(unsigned char),      &num_rotbonds);
 	setKernelArg(kernel2,8,  sizeof(mem_KerConstStatic_ref_orientation_quats_const),   &mem_KerConstStatic_ref_orientation_quats_const);
+*/
+	setKernelArg(kernel2,7,  sizeof(mem_KerConstStatic_ref_orientation_quats_const),   &mem_KerConstStatic_ref_orientation_quats_const);
 	#if defined(SINGLE_COPY_POP_ENE)
 
 	#else
@@ -901,8 +904,9 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	setKernelArg(kernel4,11, sizeof(float),                          	&dockpars.coeff_elec);
 	setKernelArg(kernel4,12, sizeof(float),                          	&dockpars.qasp);
 	setKernelArg(kernel4,13, sizeof(float),                          	&dockpars.coeff_desolv);
+/*
 	setKernelArg(kernel4,14, sizeof(unsigned int),                     	&square_num_of_atypes);
-
+*/
 #endif // End of ENABLE_KERNEL4
 
 #ifdef ENABLE_KERNEL6 // Krnl_PRNG_GG_float
@@ -1142,7 +1146,10 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		#endif
 	#endif
 	*/
+	/*
 	setKernelArg(kernel2,9,  sizeof(unsigned short), &run_cnt);
+	*/
+	setKernelArg(kernel2,8,  sizeof(unsigned short), &run_cnt);
 #endif // End of ENABLE_KERNEL2
 
 

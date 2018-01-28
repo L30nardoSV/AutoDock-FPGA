@@ -6,11 +6,7 @@ channel float chan_IGL2Conform_genotype     __attribute__((depth(3*ACTUAL_GENOTY
 // --------------------------------------------------------------------------
 __kernel __attribute__ ((max_global_work_dim(0)))
 void Krnl_IGL_Arbiter(unsigned char DockConst_num_of_genes) {
-/*
-	__local float genotypeIC  [ACTUAL_GENOTYPE_LENGTH]; 
-	__local float genotypeGG  [ACTUAL_GENOTYPE_LENGTH];
-	__local float genotype [3][ACTUAL_GENOTYPE_LENGTH];
-*/
+
 	char active = 0x01;
 
 	// Only for debugging
@@ -54,10 +50,7 @@ while(active) {
 	uchar bound_tmp = 0;
 	active = Off_valid ? 0x00 : 0x01;
 	char mode [3];	// mode for all LS
-/*
-	float genotypeIC  [ACTUAL_GENOTYPE_LENGTH]; 
-	float genotypeGG  [ACTUAL_GENOTYPE_LENGTH];
-*/
+
 	float genotypeICGG  [ACTUAL_GENOTYPE_LENGTH]; 
 	float genotype   [3][ACTUAL_GENOTYPE_LENGTH];
 
@@ -66,14 +59,11 @@ while(active) {
 		//#pragma ivdep
 		for (uchar i=0; i<DockConst_num_of_genes; i++) {
 			if (IC_valid == true) {
-				//printf("%-15s %5s\n",   "IC_valid: ", "reading genotypes");
 				if (i == 0) {bound_tmp++; }
-				//genotypeIC [i] = read_channel_altera(chan_IC2Conf_genotype);
 				genotypeICGG [i] = read_channel_altera(chan_IC2Conf_genotype);
 			}
 			else if (GG_valid == true) {
 				if (i == 0) {bound_tmp++; }
-				//genotypeGG [i] = read_channel_altera(chan_GG2Conf_genotype);
 				genotypeICGG [i] = read_channel_altera(chan_GG2Conf_genotype);
 			}	
 			else{
@@ -159,7 +149,6 @@ while(active) {
 
 		for (uchar i=0; i<DockConst_num_of_genes; i++) {
 
-			//float gene_tmp = IC_valid? genotypeIC[i]: GG_valid? genotypeGG[i]: genotype[j][i & MASK_GENOTYPE];
 			float gene_tmp = (IC_valid || GG_valid)? genotypeICGG[i]: genotype[j][i & MASK_GENOTYPE];
 		
 			if (i > 2) {

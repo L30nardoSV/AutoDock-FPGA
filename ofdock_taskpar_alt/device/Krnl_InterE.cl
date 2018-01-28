@@ -1,9 +1,3 @@
-/*
-#if defined (FIXED_POINT_INTERE)
-#include "../defines_fixedpt_64.h"
-#endif
-*/
-
 // --------------------------------------------------------------------------
 // The function calculates the intermolecular energy of a ligand given by 
 // myligand parameter, and a receptor represented as a grid. 
@@ -17,20 +11,15 @@
 // --------------------------------------------------------------------------
 __kernel __attribute__ ((max_global_work_dim(0)))
 void Krnl_InterE(
-//#if defined (FIXED_POINT_INTERE)
-#if 0
-	     __constant fixedpt64* restrict GlobFgrids,
-#else
-             /*__constant*/ __global const float* restrict GlobFgrids,
-#endif
+             __global const float* restrict GlobFgrids,
 
 #if defined (FIXED_POINT_INTERE)
  	     __constant fixedpt64* restrict KerConstStatic_atom_charges_const,
 #else
- 	     __constant float* restrict KerConstStatic_atom_charges_const,
+ 	     __constant float*     restrict KerConstStatic_atom_charges_const,
 #endif
 
- 	     __constant char*  restrict KerConstStatic_atom_types_const,
+ 	     __constant char*      restrict KerConstStatic_atom_types_const,
 
 			    unsigned char                    DockConst_g1,
   			    unsigned int                     DockConst_g2,
@@ -58,30 +47,32 @@ void Krnl_InterE(
 */
 )
 {
-	// local vars are allowed only at kernel scope
-	// however, they can be moved inside loops and still be local
-	// see how to do that here!
-
 /*
 	bool active = true;
 */	
 	char active = 0x01;
 
+/*
 	__local char  atom_types_localcache   [MAX_NUM_OF_ATOMS];
+*/
 
+/*
 #if defined (FIXED_POINT_INTERE)
 	__local fixedpt64 atom_charges_localcache [MAX_NUM_OF_ATOMS];
 #else
 	__local float atom_charges_localcache [MAX_NUM_OF_ATOMS];
 #endif
+*/
 
+/*
 	for (uchar i=0; i<DockConst_num_of_atoms; i++) {
 		atom_types_localcache [i]   = KerConstStatic_atom_types_const   [i];
 		atom_charges_localcache [i] = KerConstStatic_atom_charges_const [i];
 	}
+*/
 
-	/*__constant*/ __global const float* GlobFgrids2 = & GlobFgrids [Host_mul_tmp2];
-	/*__constant*/ __global const float* GlobFgrids3 = & GlobFgrids [Host_mul_tmp3];
+	__global const float* GlobFgrids2 = & GlobFgrids [Host_mul_tmp2];
+	__global const float* GlobFgrids3 = & GlobFgrids [Host_mul_tmp3];
 
 #pragma max_concurrency 32
 while(active) {
@@ -139,7 +130,10 @@ while(active) {
 	// for each atom
 	for (uchar atom1_id=0; atom1_id<DockConst_num_of_atoms; atom1_id++)
 	{
+		/*
 		char atom1_typeid = atom_types_localcache [atom1_id];
+		*/
+		char atom1_typeid = KerConstStatic_atom_types_const [atom1_id];
 
 		float3 loc_coords_atid1 = loc_coords[atom1_id];
 
@@ -150,7 +144,10 @@ while(active) {
 #if defined (FIXED_POINT_INTERE)
 
 #else
+/*
 		float q = atom_charges_localcache [atom1_id];
+*/
+		float q = KerConstStatic_atom_charges_const [atom1_id];
 #endif
 
 		#if defined (FIXED_POINT_INTERE)
@@ -158,7 +155,10 @@ while(active) {
 		fixedpt64 fixpt_y = fixedpt64_fromfloat(loc_coords_atid1.y); 
 		fixedpt64 fixpt_z = fixedpt64_fromfloat(loc_coords_atid1.z); 
 //		fixedpt64 fixpt_q = fixedpt64_fromfloat(atom_charges_localcache [atom1_id]);
+/*
 		fixedpt64 fixpt_q = atom_charges_localcache [atom1_id];
+*/
+		fixedpt64 fixpt_q = KerConstStatic_atom_charges_const [atom1_id];
 		#endif
 
 		#if defined (FIXED_POINT_INTERE)
@@ -499,25 +499,20 @@ while(active) {
 	#endif
 
 	switch (mode) {
-		case /*0x01*/ 'I':	// IC
-			write_channel_altera(chan_Intere2StoreIC_intere, /*interE*/final_interE);
-		break;
+		// IC
+		case 'I': write_channel_altera(chan_Intere2StoreIC_intere, final_interE); break;
 
-		case /*0x02*/ 'G':	// GG
-			write_channel_altera(chan_Intere2StoreGG_intere, /*interE*/final_interE);
-		break;
+		// GG
+		case 'G': write_channel_altera(chan_Intere2StoreGG_intere, final_interE); break;
 
-		case /*0x03*/ 0x01:	// LS 1
-			write_channel_altera(chan_Intere2StoreLS_LS1_intere, /*interE*/final_interE);
-		break;
+		// LS 1
+		case 0x01: write_channel_altera(chan_Intere2StoreLS_LS1_intere, final_interE); break;
 
-		case 0x02:	// LS 2
-			write_channel_altera(chan_Intere2StoreLS_LS2_intere, /*interE*/final_interE);
-		break;
+		// LS 2
+		case 0x02: write_channel_altera(chan_Intere2StoreLS_LS2_intere, final_interE); break;
 
-		case 0x03:	// LS 3
-			write_channel_altera(chan_Intere2StoreLS_LS3_intere, /*interE*/final_interE);
-		break;
+		// LS 3
+		case 0x03: write_channel_altera(chan_Intere2StoreLS_LS3_intere, final_interE); break;
 	}
 	// --------------------------------------------------------------
  	

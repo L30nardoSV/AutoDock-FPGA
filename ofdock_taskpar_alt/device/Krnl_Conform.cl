@@ -5,7 +5,7 @@
 // --------------------------------------------------------------------------
 __kernel __attribute__ ((max_global_work_dim(0)))
 void Krnl_Conform(
-	     /*__constant*/ __global const int*    restrict KerConstStatic_rotlist_const,
+	     __global const int*  restrict KerConstStatic_rotlist_const,
 	     #if defined (FIXED_POINT_CONFORM)
 	     __constant fixedpt3* restrict KerConstStatic_ref_coords_const,		 // must be formatted in host
 	     __constant fixedpt3* restrict KerConstStatic_rotbonds_moving_vectors_const, // must be formatted in host
@@ -18,23 +18,12 @@ void Krnl_Conform(
 			      unsigned int          DockConst_rotbondlist_length,
 			      unsigned char         DockConst_num_of_atoms,
 			      unsigned char         DockConst_num_of_genes,
+/*
 			      unsigned char         Host_num_of_rotbonds,
-
+*/
 	     #if defined (FIXED_POINT_CONFORM)
-			      /*
-			      fixedpt               ref_orientation_quats_const_0,	// must be formatted in host
-			      fixedpt               ref_orientation_quats_const_1,	// must be formatted in host
-			      fixedpt               ref_orientation_quats_const_2,	// must be formatted in host
-			      fixedpt               ref_orientation_quats_const_3	// must be formatted in host
-			      */
 	     __constant fixedpt4* restrict KerConstStatic_ref_orientation_quats_const,
 	     #else
-			      /*
-			      float                 ref_orientation_quats_const_0,
-			      float                 ref_orientation_quats_const_1,
-			      float                 ref_orientation_quats_const_2,
-			      float                 ref_orientation_quats_const_3
-			      */
 	      __constant float4* restrict KerConstStatic_ref_orientation_quats_const,
 	     #endif
 			      unsigned short        Host_RunId
@@ -55,11 +44,13 @@ void Krnl_Conform(
 	__local float  __attribute__((numbanks(8), bankwidth(16))) loc_coords[MAX_NUM_OF_ATOMS][4];
 */
 
+/*
 	#if defined (FIXED_POINT_CONFORM)
-	__local fixedpt genotype[ACTUAL_GENOTYPE_LENGTH];
+	__local fixedpt genotype [ACTUAL_GENOTYPE_LENGTH];
 	#else
-	__local float   genotype[ACTUAL_GENOTYPE_LENGTH];
+	__local float   genotype [ACTUAL_GENOTYPE_LENGTH];
 	#endif
+*/
 
 /*
 	bool active = true;
@@ -71,6 +62,7 @@ void Krnl_Conform(
 		rotlist_localcache [c] = KerConstStatic_rotlist_const [c];
 	}
 
+/*
 	#if defined (FIXED_POINT_CONFORM)
 	__local fixedpt3 ref_coords_localcache [MAX_NUM_OF_ATOMS];
 	#else
@@ -79,20 +71,24 @@ void Krnl_Conform(
 	for (uchar c = 0; c < DockConst_num_of_atoms; c++) {
 		ref_coords_localcache [c] = KerConstStatic_ref_coords_const [c];
 	}
+*/
 
+/*
 	#if defined (FIXED_POINT_CONFORM)
-	__local fixedpt3 rotbonds_moving_vectors_localcache[MAX_NUM_OF_ROTBONDS];
-	__local fixedpt3 rotbonds_unit_vectors_localcache[MAX_NUM_OF_ROTBONDS];
+	__local fixedpt3 rotbonds_moving_vectors_localcache [MAX_NUM_OF_ROTBONDS];
+	__local fixedpt3 rotbonds_unit_vectors_localcache   [MAX_NUM_OF_ROTBONDS];
 	#else
-	__local float3   rotbonds_moving_vectors_localcache[MAX_NUM_OF_ROTBONDS];
-	__local float3   rotbonds_unit_vectors_localcache[MAX_NUM_OF_ROTBONDS];
+	__local float3   rotbonds_moving_vectors_localcache [MAX_NUM_OF_ROTBONDS];
+	__local float3   rotbonds_unit_vectors_localcache   [MAX_NUM_OF_ROTBONDS];
 	#endif
 	for (uchar c = 0; c < Host_num_of_rotbonds; c++) {
 		rotbonds_moving_vectors_localcache [c] = KerConstStatic_rotbonds_moving_vectors_const[c];
 		rotbonds_unit_vectors_localcache   [c] = KerConstStatic_rotbonds_unit_vectors_const [c];
 	}
+*/
 
-	 #if defined (FIXED_POINT_CONFORM)
+/*
+	#if defined (FIXED_POINT_CONFORM)
 	fixedpt4 ref_orientation_quats_const = KerConstStatic_ref_orientation_quats_const[Host_RunId];
 	fixedpt ref_orientation_quats_const_0 = ref_orientation_quats_const.x;
 	fixedpt ref_orientation_quats_const_1 = ref_orientation_quats_const.y;
@@ -105,6 +101,7 @@ void Krnl_Conform(
 	float ref_orientation_quats_const_2 = ref_orientation_quats_const.z;
 	float ref_orientation_quats_const_3 = ref_orientation_quats_const.w;
 	#endif
+*/
 
 #pragma max_concurrency 32
 while(active) {
@@ -125,7 +122,7 @@ while(active) {
 			      singlepump,
 			      numreadports(3),
 			      numwriteports(1)
-			    )) loc_coords[MAX_NUM_OF_ATOMS];
+			    )) loc_coords [MAX_NUM_OF_ATOMS];
 	#else
 	float  phi;
 	float  theta;
@@ -141,7 +138,7 @@ while(active) {
 			      singlepump,
 			      numreadports(3),
 			      numwriteports(1)
-			    )) loc_coords[MAX_NUM_OF_ATOMS];
+			    )) loc_coords [MAX_NUM_OF_ATOMS];
 	#endif
 
 /*
@@ -152,16 +149,15 @@ while(active) {
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 	active = actmode.x;
-	mode   = actmode.y;	
+	mode   = actmode.y;
+
+	#if defined (FIXED_POINT_CONFORM)
+	fixedpt genotype [ACTUAL_GENOTYPE_LENGTH];
+	#else
+	float   genotype [ACTUAL_GENOTYPE_LENGTH];
+	#endif
 
 	for (uchar i=0; i<DockConst_num_of_genes; i++) {
-/*
-		if (i == 0) {
-			mode = read_channel_altera(chan_IGL2Conform_mode);
-			mem_fence(CLK_CHANNEL_MEM_FENCE);
-		}
-*/
-
 		float fl_tmp = read_channel_altera(chan_IGL2Conform_genotype);
 		#if defined (FIXED_POINT_CONFORM)
 		// convert float to fixedpt
@@ -223,7 +219,10 @@ while(active) {
 
 			if ((rotation_list_element & RLIST_FIRSTROT_MASK) != 0)	//if first rotation of this atom
 			{	
+				/*
 				atom_to_rotate = ref_coords_localcache [atom_id];
+				*/
+				atom_to_rotate = KerConstStatic_ref_coords_const [atom_id];
 			}
 			else
 			{	
@@ -252,11 +251,17 @@ while(active) {
 			else	//if rotating around rotatable bond
 			{
 				uint rotbond_id = (rotation_list_element & RLIST_RBONDID_MASK) >> RLIST_RBONDID_SHIFT;
+				/*
 				rotation_unitvec = rotbonds_unit_vectors_localcache [rotbond_id];
+				*/
+				rotation_unitvec = KerConstStatic_rotbonds_unit_vectors_const [rotbond_id];
 				
 				rotation_angle = genotype [6+rotbond_id];
 
+				/*
 				rotation_movingvec = rotbonds_moving_vectors_localcache [rotbond_id];
+				*/
+				rotation_movingvec = KerConstStatic_rotbonds_moving_vectors_const [rotbond_id];
 
 				//in addition performing the first movement 
 				//which is needed only if rotating around rotatable bond
@@ -307,6 +312,21 @@ while(active) {
 										//two rotations should be performed 
 										//(multiplying the quaternions)
 			{
+
+				#if defined (FIXED_POINT_CONFORM)
+				const fixedpt4 ref_orientation_quats_const = KerConstStatic_ref_orientation_quats_const[Host_RunId];
+				const fixedpt ref_orientation_quats_const_0 = ref_orientation_quats_const.x;
+				const fixedpt ref_orientation_quats_const_1 = ref_orientation_quats_const.y;
+				const fixedpt ref_orientation_quats_const_2 = ref_orientation_quats_const.z;
+				const fixedpt ref_orientation_quats_const_3 = ref_orientation_quats_const.w;
+				#else
+				const float4 ref_orientation_quats_const = KerConstStatic_ref_orientation_quats_const[Host_RunId];
+				const float ref_orientation_quats_const_0 = ref_orientation_quats_const.x;
+				const float ref_orientation_quats_const_1 = ref_orientation_quats_const.y;
+				const float ref_orientation_quats_const_2 = ref_orientation_quats_const.z;
+				const float ref_orientation_quats_const_3 = ref_orientation_quats_const.w;
+				#endif
+
 				//calculating quatrot_left*ref_orientation_quats_const, 
 				//which means that reference orientation rotation is the first
 				#if defined (FIXED_POINT_CONFORM)
@@ -318,7 +338,7 @@ while(active) {
 				quatrot_temp = quatrot_left;
 				#endif
 
-				// L30nardoSV: taking the first element of ref_orientation_quats_const member
+				//taking the first element of ref_orientation_quats_const member
 				#if defined (FIXED_POINT_CONFORM)
 				quatrot_left_q =   fixedpt_mul(quatrot_temp_q, ref_orientation_quats_const_0) 
 						 - fixedpt_mul(quatrot_temp_x, ref_orientation_quats_const_1) 
