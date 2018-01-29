@@ -517,7 +517,35 @@ else
 	SEP_FGRID_FLAG=
 endif
 
-FIPO_FLAG = $(FIPOCO_FLAG) $(FIPOIE_FLAG) $(FIPOIA_FLAG) $(FIPOLS1_FLAG) $(FIPOLS2_FLAG) $(FIPOLS3_FLAG) $(COPYPOPENE_FLAG) $(SEP_FGRID_FLAG)
+FIPO_FLAG = $(FIPOCO_FLAG) $(FIPOIE_FLAG) $(FIPOIA_FLAG) $(FIPOLS1_FLAG) $(FIPOLS2_FLAG) $(FIPOLS3_FLAG) $(COPYPOPENE_FLAG) $(SEP_FGRID_FLAG) 
+
+# =============================
+# AOC flags
+# =============================
+
+# customized __constant memory size
+# default: 16 KB
+# custom: 12KB = 12288 Bytes
+CUSTOMSIZE_CONSTMEM = YES
+
+# relax the order of fp operations: --fp-relaxed
+# reduce fp rounding operations: --fpc
+RELAXED_REDUCED_FLOATINGPOINT = YES
+
+ifeq ($(CUSTOMSIZE_CONSTMEM), YES)
+	CUSTOMSIZE_CONSTMEM_FLAG=--const-cache-bytes 12288
+else	
+	CUSTOMSIZE_CONSTMEM_FLAG=
+endif
+
+ifeq ($(RELAXED_REDUCED_FLOATINGPOINT), YES)
+	RELAXED_REDUCED_FLOATINGPOINT_FLAG=--fp-relaxed --fpc
+else	
+	RELAXED_REDUCED_FLOATINGPOINT_FLAG=
+endif
+
+
+AOC_FLAG = $(CUSTOMSIZE_CONSTMEM_FLAG) $(RELAXED_REDUCED_FLOATINGPOINT_FLAG)
 
 # =============================
 
@@ -574,7 +602,7 @@ BOARD    := Proc10A_X115
 	# $(KRNL_NAME).aoco
 	# $(KRNL_NAME).aocx
 keremu: $(DEV_SRC)
-	aoc -march=emulator -v --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR)/$(KRNL_NAME).aocx $(REP) $(FIPO_FLAG) -g
+	aoc -march=emulator -v --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR)/$(KRNL_NAME).aocx $(REP) $(FIPO_FLAG) $(AOC_FLAG) -g
 	@echo " "
 	@echo "==============================================================="
 	@echo "INFO: emulation files are under: bin/$(KRNL_NAME)(.aoco)(.aocx)"
@@ -602,7 +630,7 @@ emu: $(TARGET_DIR)/$(TARGET) keremu
 	# $(KRNL_NAME).aoco
 	# No actual hardware is built (NO .aocx)
 kerrpt: $(DEV_SRC)
-	aoc --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR)/$(KRNL_NAME).aoco $(REP) $(FIPO_FLAG) -c --report -g
+	aoc --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR)/$(KRNL_NAME).aoco $(REP) $(FIPO_FLAG) $(AOC_FLAG) -c --report -g
 	@echo " "
 	@echo "=================================================================="
 	@echo "INFO: report files are under: bin/$(KRNL_NAME)/reports/report.html"
@@ -620,7 +648,7 @@ kerrpt: $(DEV_SRC)
 	# $(KRNL_NAME).aoco
 	# $(KRNL_NAME).aocx
 hw: 	
-	aoc --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW)/$(KRNL_NAME).aocx $(FIPO_FLAG)
+	aoc --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW)/$(KRNL_NAME).aocx $(FIPO_FLAG) $(AOC_FLAG)
 	@echo " "
 	@echo "================================================================"
 	@echo "INFO: FPGA bitstream is under: bin_hw/$(KRNL_NAME)(.aoco)(.aocx)"
@@ -628,7 +656,7 @@ hw:
 	@echo " "
 
 hw-he:
-	aoc --high-effort --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW)/$(KRNL_NAME).aocx $(FIPO_FLAG)
+	aoc --high-effort --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW)/$(KRNL_NAME).aocx $(FIPO_FLAG) $(AOC_FLAG)
 	@echo " "
 	@echo "================================================================"
 	@echo "INFO: FPGA bitstream is under: bin_hw/$(KRNL_NAME)(.aoco)(.aocx)"
@@ -642,7 +670,7 @@ hw-he:
 	# $(KRNL_NAME).aoco
 	# $(KRNL_NAME).aocx
 hw-prof:
-	aoc --profile --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW_PROF)/$(KRNL_NAME).aocx $(FIPO_FLAG)
+	aoc --profile --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW_PROF)/$(KRNL_NAME).aocx $(FIPO_FLAG) $(AOC_FLAG)
 	@echo " "
 	@echo "====================================================================================="
 	@echo "INFO: instrumented FPGA bitstream is under: bin_hw_profile/$(KRNL_NAME)(.aoco)(.aocx)"

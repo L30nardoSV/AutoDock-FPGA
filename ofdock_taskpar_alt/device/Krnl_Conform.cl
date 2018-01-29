@@ -7,9 +7,9 @@ __kernel __attribute__ ((max_global_work_dim(0)))
 void Krnl_Conform(
 	     __global const int*  restrict KerConstStatic_rotlist_const,
 	     #if defined (FIXED_POINT_CONFORM)
-	     __constant fixedpt3* restrict KerConstStatic_ref_coords_const,		 // must be formatted in host
-	     __constant fixedpt3* restrict KerConstStatic_rotbonds_moving_vectors_const, // must be formatted in host
-	     __constant fixedpt3* restrict KerConstStatic_rotbonds_unit_vectors_const,	 // must be formatted in host
+	     __constant fixedpt3* restrict KerConstStatic_ref_coords_const,
+	     __constant fixedpt3* restrict KerConstStatic_rotbonds_moving_vectors_const,
+	     __constant fixedpt3* restrict KerConstStatic_rotbonds_unit_vectors_const,
 	     #else
 	     __constant float3*   restrict KerConstStatic_ref_coords_const,
 	     __constant float3*   restrict KerConstStatic_rotbonds_moving_vectors_const,
@@ -24,7 +24,7 @@ void Krnl_Conform(
 	     #if defined (FIXED_POINT_CONFORM)
 	     __constant fixedpt4* restrict KerConstStatic_ref_orientation_quats_const,
 	     #else
-	      __constant float4* restrict KerConstStatic_ref_orientation_quats_const,
+	     __constant float4*   restrict KerConstStatic_ref_orientation_quats_const,
 	     #endif
 			      unsigned short        Host_RunId
 )
@@ -45,14 +45,6 @@ void Krnl_Conform(
 */
 
 /*
-	#if defined (FIXED_POINT_CONFORM)
-	__local fixedpt genotype [ACTUAL_GENOTYPE_LENGTH];
-	#else
-	__local float   genotype [ACTUAL_GENOTYPE_LENGTH];
-	#endif
-*/
-
-/*
 	bool active = true;
 */
 	char active = 0x01;	
@@ -61,47 +53,6 @@ void Krnl_Conform(
 	for (ushort c = 0; c < DockConst_rotbondlist_length; c++) {
 		rotlist_localcache [c] = KerConstStatic_rotlist_const [c];
 	}
-
-/*
-	#if defined (FIXED_POINT_CONFORM)
-	__local fixedpt3 ref_coords_localcache [MAX_NUM_OF_ATOMS];
-	#else
-	__local float3   ref_coords_localcache [MAX_NUM_OF_ATOMS];
-	#endif
-	for (uchar c = 0; c < DockConst_num_of_atoms; c++) {
-		ref_coords_localcache [c] = KerConstStatic_ref_coords_const [c];
-	}
-*/
-
-/*
-	#if defined (FIXED_POINT_CONFORM)
-	__local fixedpt3 rotbonds_moving_vectors_localcache [MAX_NUM_OF_ROTBONDS];
-	__local fixedpt3 rotbonds_unit_vectors_localcache   [MAX_NUM_OF_ROTBONDS];
-	#else
-	__local float3   rotbonds_moving_vectors_localcache [MAX_NUM_OF_ROTBONDS];
-	__local float3   rotbonds_unit_vectors_localcache   [MAX_NUM_OF_ROTBONDS];
-	#endif
-	for (uchar c = 0; c < Host_num_of_rotbonds; c++) {
-		rotbonds_moving_vectors_localcache [c] = KerConstStatic_rotbonds_moving_vectors_const[c];
-		rotbonds_unit_vectors_localcache   [c] = KerConstStatic_rotbonds_unit_vectors_const [c];
-	}
-*/
-
-/*
-	#if defined (FIXED_POINT_CONFORM)
-	fixedpt4 ref_orientation_quats_const = KerConstStatic_ref_orientation_quats_const[Host_RunId];
-	fixedpt ref_orientation_quats_const_0 = ref_orientation_quats_const.x;
-	fixedpt ref_orientation_quats_const_1 = ref_orientation_quats_const.y;
-	fixedpt ref_orientation_quats_const_2 = ref_orientation_quats_const.z;
-	fixedpt ref_orientation_quats_const_3 = ref_orientation_quats_const.w;
-	#else
-	float4 ref_orientation_quats_const = KerConstStatic_ref_orientation_quats_const[Host_RunId];
-	float ref_orientation_quats_const_0 = ref_orientation_quats_const.x;
-	float ref_orientation_quats_const_1 = ref_orientation_quats_const.y;
-	float ref_orientation_quats_const_2 = ref_orientation_quats_const.z;
-	float ref_orientation_quats_const_3 = ref_orientation_quats_const.w;
-	#endif
-*/
 
 #pragma max_concurrency 32
 while(active) {
@@ -114,7 +65,6 @@ while(active) {
 	fixedpt  sin_theta, cos_theta;
 	fixedpt3 genrot_unitvec;
 	fixedpt3 genotype_xyz;
-	//fixedpt3 loc_coords[MAX_NUM_OF_ATOMS];
 	fixedpt3 __attribute__ ((
 			      memory,
 			      numbanks(1),
@@ -130,7 +80,6 @@ while(active) {
 	float  sin_theta, cos_theta;
 	float3 genrot_unitvec;
 	float3 genotype_xyz;
-	//float3 loc_coords[MAX_NUM_OF_ATOMS];
 	float3 __attribute__ ((
 			      memory,
 			      numbanks(1),
@@ -219,9 +168,7 @@ while(active) {
 
 			if ((rotation_list_element & RLIST_FIRSTROT_MASK) != 0)	//if first rotation of this atom
 			{	
-				/*
-				atom_to_rotate = ref_coords_localcache [atom_id];
-				*/
+				/*atom_to_rotate = ref_coords_localcache [atom_id];*/
 				atom_to_rotate = KerConstStatic_ref_coords_const [atom_id];
 			}
 			else
@@ -251,16 +198,13 @@ while(active) {
 			else	//if rotating around rotatable bond
 			{
 				uint rotbond_id = (rotation_list_element & RLIST_RBONDID_MASK) >> RLIST_RBONDID_SHIFT;
-				/*
-				rotation_unitvec = rotbonds_unit_vectors_localcache [rotbond_id];
-				*/
+
+				/*rotation_unitvec = rotbonds_unit_vectors_localcache [rotbond_id];*/
 				rotation_unitvec = KerConstStatic_rotbonds_unit_vectors_const [rotbond_id];
 				
 				rotation_angle = genotype [6+rotbond_id];
 
-				/*
-				rotation_movingvec = rotbonds_moving_vectors_localcache [rotbond_id];
-				*/
+				/*rotation_movingvec = rotbonds_moving_vectors_localcache [rotbond_id];*/
 				rotation_movingvec = KerConstStatic_rotbonds_moving_vectors_const [rotbond_id];
 
 				//in addition performing the first movement 
@@ -312,19 +256,18 @@ while(active) {
 										//two rotations should be performed 
 										//(multiplying the quaternions)
 			{
-
 				#if defined (FIXED_POINT_CONFORM)
 				const fixedpt4 ref_orientation_quats_const = KerConstStatic_ref_orientation_quats_const[Host_RunId];
-				const fixedpt ref_orientation_quats_const_0 = ref_orientation_quats_const.x;
-				const fixedpt ref_orientation_quats_const_1 = ref_orientation_quats_const.y;
-				const fixedpt ref_orientation_quats_const_2 = ref_orientation_quats_const.z;
-				const fixedpt ref_orientation_quats_const_3 = ref_orientation_quats_const.w;
+				const fixedpt  ref_orientation_quats_const_0 = ref_orientation_quats_const.x;
+				const fixedpt  ref_orientation_quats_const_1 = ref_orientation_quats_const.y;
+				const fixedpt  ref_orientation_quats_const_2 = ref_orientation_quats_const.z;
+				const fixedpt  ref_orientation_quats_const_3 = ref_orientation_quats_const.w;
 				#else
 				const float4 ref_orientation_quats_const = KerConstStatic_ref_orientation_quats_const[Host_RunId];
-				const float ref_orientation_quats_const_0 = ref_orientation_quats_const.x;
-				const float ref_orientation_quats_const_1 = ref_orientation_quats_const.y;
-				const float ref_orientation_quats_const_2 = ref_orientation_quats_const.z;
-				const float ref_orientation_quats_const_3 = ref_orientation_quats_const.w;
+				const float  ref_orientation_quats_const_0 = ref_orientation_quats_const.x;
+				const float  ref_orientation_quats_const_1 = ref_orientation_quats_const.y;
+				const float  ref_orientation_quats_const_2 = ref_orientation_quats_const.z;
+				const float  ref_orientation_quats_const_3 = ref_orientation_quats_const.w;
 				#endif
 
 				//calculating quatrot_left*ref_orientation_quats_const, 

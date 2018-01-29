@@ -52,25 +52,6 @@ void Krnl_InterE(
 */	
 	char active = 0x01;
 
-/*
-	__local char  atom_types_localcache   [MAX_NUM_OF_ATOMS];
-*/
-
-/*
-#if defined (FIXED_POINT_INTERE)
-	__local fixedpt64 atom_charges_localcache [MAX_NUM_OF_ATOMS];
-#else
-	__local float atom_charges_localcache [MAX_NUM_OF_ATOMS];
-#endif
-*/
-
-/*
-	for (uchar i=0; i<DockConst_num_of_atoms; i++) {
-		atom_types_localcache [i]   = KerConstStatic_atom_types_const   [i];
-		atom_charges_localcache [i] = KerConstStatic_atom_charges_const [i];
-	}
-*/
-
 	__global const float* GlobFgrids2 = & GlobFgrids [Host_mul_tmp2];
 	__global const float* GlobFgrids3 = & GlobFgrids [Host_mul_tmp3];
 
@@ -130,9 +111,6 @@ while(active) {
 	// for each atom
 	for (uchar atom1_id=0; atom1_id<DockConst_num_of_atoms; atom1_id++)
 	{
-		/*
-		char atom1_typeid = atom_types_localcache [atom1_id];
-		*/
 		char atom1_typeid = KerConstStatic_atom_types_const [atom1_id];
 
 		float3 loc_coords_atid1 = loc_coords[atom1_id];
@@ -144,9 +122,6 @@ while(active) {
 #if defined (FIXED_POINT_INTERE)
 
 #else
-/*
-		float q = atom_charges_localcache [atom1_id];
-*/
 		float q = KerConstStatic_atom_charges_const [atom1_id];
 #endif
 
@@ -155,9 +130,6 @@ while(active) {
 		fixedpt64 fixpt_y = fixedpt64_fromfloat(loc_coords_atid1.y); 
 		fixedpt64 fixpt_z = fixedpt64_fromfloat(loc_coords_atid1.z); 
 //		fixedpt64 fixpt_q = fixedpt64_fromfloat(atom_charges_localcache [atom1_id]);
-/*
-		fixedpt64 fixpt_q = atom_charges_localcache [atom1_id];
-*/
 		fixedpt64 fixpt_q = KerConstStatic_atom_charges_const [atom1_id];
 		#endif
 

@@ -448,6 +448,17 @@ First achieving speedup vs i5 cpu core: 3ptb: 59/45 = 1.3x, 1stp: 84/85 = 0.98x
 >>> commit "SPEEDUP: reduced scope+removed __local caches"
 
 
+151. `Krnl_Conform`: cleaned up
+152. `Krnl_IntraE`: cleaned up
+153. `Krnl_InterE`: cleaned up
+154. `Makefile`: added AOC flag for reducing the size of __constant (onchip mem) from 16KB (default) downto to 12KB
+		 careful calculation was done to set this 12KB size
+		 added AOC flags related to floating point: --fp-relaxed --fpc
+
+freq: 178 MHz (43 sec non-instrumented on 10runs 3ptb, 81 sec on 1stp)(instrumented freq: 174 MHz)
+First achieving speedup vs i5 cpu core: 3ptb: 59/43 = 1.37x, 1stp: 84/81 = 1.03x
+>>> commit "set __constant to 12KB + aoc fp flags"
+
 
 XXX, Between Conform and InterE, IntraE create a wider channel: 
 https://www.alteraforum.com/forum/showthread.php?t=55979
