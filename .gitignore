@@ -25,6 +25,9 @@ ofdock_taskpar_alt/docking.aocx
 *~
 final_population_run*
 
+# Ignore initial dynamic profile results
+ofdock_taskpar_alt/dyn_profile/*_run*
+
 # ===================
 # C gitignore
 # https://github.com/github/gitignore/blob/master/C.gitignore

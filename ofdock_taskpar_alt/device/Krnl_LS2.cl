@@ -1,10 +1,7 @@
-channel bool chan_LS2Arbiter_LS2_end;
-
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------
 __kernel __attribute__ ((max_global_work_dim(0)))
 void Krnl_LS2(
-		//unsigned int              DockConst_max_num_of_iters,
 		unsigned short              DockConst_max_num_of_iters,		
 		#if defined (FIXED_POINT_LS2)
 		fixedpt                   DockConst_rho_lower_bound,
@@ -20,18 +17,9 @@ void Krnl_LS2(
    		float                     DockConst_base_dang_mul_sqrt3,
 		#endif
 
-		//unsigned int              DockConst_cons_limit
-		unsigned char              DockConst_cons_limit
+		unsigned char             DockConst_cons_limit
 )
 {
-/*
-	#if defined (FIXED_POINT_LS2)
-	__local fixedpt genotype [ACTUAL_GENOTYPE_LENGTH];
-	#else
-	__local float genotype [ACTUAL_GENOTYPE_LENGTH];
-	#endif
-*/
-
 	bool valid = true;
 
 while(valid) {
@@ -53,7 +41,7 @@ while(valid) {
 		#if defined (FIXED_POINT_LS2)
 		fixedpt genotype [ACTUAL_GENOTYPE_LENGTH];
 		#else
-		float genotype [ACTUAL_GENOTYPE_LENGTH];
+		float   genotype [ACTUAL_GENOTYPE_LENGTH];
 		#endif
 
 		for (uchar i=0; i<DockConst_num_of_genes; i++) {
@@ -236,11 +224,6 @@ while(valid) {
 
 				//#pragma unroll 16
 				for (uchar i=0; i<DockConst_num_of_genes; i++) {
-
-	/*
-				#pragma unroll
-				for (uchar i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {
-	*/
 					genotype_bias [i] = (positive_direction == true) ? deviate_plus_bias  [i]: 
 											   deviate_minus_bias [i]; 
 
@@ -258,11 +241,6 @@ while(valid) {
 
 				//#pragma unroll 16
 				for (uchar i=0; i<DockConst_num_of_genes; i++) {
-
-	/*
-				#pragma unroll
-				for (uchar i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {
-	*/
 					genotype_bias [i] = (iteration_cnt == 1)? 0: (genotype_bias [i] >> 1);
 				}
 
@@ -279,15 +257,8 @@ while(valid) {
 
 				//#pragma unroll 16
 				for (uchar i=0; i<DockConst_num_of_genes; i++) {
-
-	/*
-				#pragma unroll
-				for (uchar i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {
-	*/
-
 					genotype_bias [i] = (positive_direction == true) ?  deviate_plus_bias  [i] : 
 											    deviate_minus_bias [i] ;
-				
 					genotype [i] = entity_possible_new_genotype [i];
 				}	
 
@@ -301,11 +272,6 @@ while(valid) {
 
 				//#pragma unroll 16
 				for (uchar i=0; i<DockConst_num_of_genes; i++) {
-
-	/*
-				#pragma unroll
-				for (uchar i=0; i<ACTUAL_GENOTYPE_LENGTH; i++) {
-	*/
 					genotype_bias [i] = (iteration_cnt == 1)? 0.0f: (0.5f*genotype_bias [i]);
 				}
 
@@ -326,13 +292,6 @@ while(valid) {
 		// write back data to GA
 		for (uchar i=0; i<DockConst_num_of_genes; i++) {
 			if (i == 0) {
-	/*
-				write_channel_altera(chan_LS2GA_LS2_eval, LS_eval);
-				mem_fence(CLK_CHANNEL_MEM_FENCE);
-
-				write_channel_altera(chan_LS2GA_LS2_energy, current_energy);
-				mem_fence(CLK_CHANNEL_MEM_FENCE);
-	*/
 				float2 evalenergy  = {*(float*)&LS_eval, current_energy};
 				write_channel_altera(chan_LS2GA_LS2_evalenergy, evalenergy);	
 			}

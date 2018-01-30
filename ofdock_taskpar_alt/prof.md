@@ -460,24 +460,25 @@ First achieving speedup vs i5 cpu core: 3ptb: 59/43 = 1.37x, 1stp: 84/81 = 1.03x
 >>> commit "set __constant to 12KB + aoc fp flags"
 
 
+155. `Krnl_LS`, `Krnl_LS2`,`Krnl_LS3`: cleaned up + moved `chan_LS2Arbiter_LSX_end` channels to `Krnl_GA`
+156. `Krnl_IGL_Arbiter`: moved channels to `Krnl_GA`
+157. `Krnl_GA`: create #defines for channel depths: CHAN_DEPTH_ATOMXYZ and CHAN_DEPTH_GENOTYPE
+
+
+	. `Krnl_GA`: reduce CHAN_DEPTH_GENOTYPE depth for PRNG channels from ACTUAL_GENOTYPE_LENGTH to 4
+	. `Krnl_GA`: reduce CHAN_DEPTH_GENOTYPE depth for GA2LS genotype channels from ACTUAL_GENOTYPE_LENGTH to 2
+	-> switched back to original depth as performance is reduced (48 (3ptb) and 87 (1stp) for 10 runs)
+
+158. `Krnl_GA`: reduce scope of ls_eval_cnt
+
+freq: 178 MHz (43 sec non-instrumented on 10runs 3ptb, 81 sec on 1stp)(instrumented freq: 174 MHz)
+Same speedup as previous commit
+>>> commit "reduced scope ls_eval_cnt"
+
+
+
 XXX, Between Conform and InterE, IntraE create a wider channel: 
 https://www.alteraforum.com/forum/showthread.php?t=55979
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 NOT DONE YET

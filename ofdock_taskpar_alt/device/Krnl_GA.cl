@@ -7,20 +7,24 @@
 //OFF: turn off 
 
 #include "../defines.h"
+
+#define CHAN_DEPTH_ATOMXYZ   (MAX_NUM_OF_ATOMS/2)
+#define CHAN_DEPTH_GENOTYPE  ACTUAL_GENOTYPE_LENGTH
+
 channel bool chan_GA2IGL_IC_active;
 channel bool chan_GA2IGL_GG_active;
 
-channel float  	chan_IC2Conf_genotype          __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
-channel float  	chan_GG2Conf_genotype          __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
-channel float  	chan_LS2Conf_LS1_genotype      __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
-channel float  	chan_LS2Conf_LS2_genotype      __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
-channel float  	chan_LS2Conf_LS3_genotype      __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
+channel float  	chan_IC2Conf_genotype          __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
+channel float  	chan_GG2Conf_genotype          __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
+channel float  	chan_LS2Conf_LS1_genotype      __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
+channel float  	chan_LS2Conf_LS2_genotype      __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
+channel float  	chan_LS2Conf_LS3_genotype      __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
 
-// IC, GG, LS1
-channel float8  chan_Conf2Intere_xyz           __attribute__((depth(MAX_NUM_OF_ATOMS/2)));
+// Conform to IE, IA
+channel float8  chan_Conf2Intere_xyz           __attribute__((depth(CHAN_DEPTH_ATOMXYZ)));
 channel char2  	chan_Conf2Intere_actmode;
 
-channel float8	chan_Conf2Intrae_xyz           __attribute__((depth(MAX_NUM_OF_ATOMS/2)));
+channel float8	chan_Conf2Intrae_xyz           __attribute__((depth(CHAN_DEPTH_ATOMXYZ)));
 channel char2  	chan_Conf2Intrae_actmode;	
 
 // Send data back to generators of genotypes
@@ -40,13 +44,13 @@ channel float 	chan_Intrae2StoreLS_LS3_intrae __attribute__((depth(2)));
 channel float8  chan_PRNG2GA_BT_ushort_float_prng;
 
 channel uchar2  chan_PRNG2GA_GG_uchar_prng;
-channel float   chan_PRNG2GA_GG_float_prng     __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
+channel float   chan_PRNG2GA_GG_float_prng     __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
 
 channel ushort3 chan_PRNG2GA_LS123_ushort_prng;
 
-channel float   chan_PRNG2GA_LS_float_prng     __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
-channel float   chan_PRNG2GA_LS2_float_prng    __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
-channel float   chan_PRNG2GA_LS3_float_prng    __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
+channel float   chan_PRNG2GA_LS_float_prng     __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
+channel float   chan_PRNG2GA_LS2_float_prng    __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
+channel float   chan_PRNG2GA_LS3_float_prng    __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
 
 channel bool 	chan_Arbiter_BT_ushort_float_off;
 channel bool    chan_Arbiter_GG_uchar_off;
@@ -62,22 +66,29 @@ channel bool    chan_GA2PRNG_LS_float_Off;
 channel float   chan_GA2LS_LS1_energy;
 channel float   chan_GA2LS_LS2_energy;
 channel float   chan_GA2LS_LS3_energy;
-channel float  	chan_GA2LS_LS1_genotype        __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
-channel float  	chan_GA2LS_LS2_genotype        __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
-channel float  	chan_GA2LS_LS3_genotype        __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
+channel float  	chan_GA2LS_LS1_genotype        __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
+channel float  	chan_GA2LS_LS2_genotype        __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
+channel float  	chan_GA2LS_LS3_genotype        __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
 
+channel bool    chan_LS2Arbiter_LS1_end;
+channel bool    chan_LS2Arbiter_LS2_end;
+channel bool    chan_LS2Arbiter_LS3_end;
 channel float2  chan_LS2GA_LS1_evalenergy      __attribute__((depth(2)));
 channel float2  chan_LS2GA_LS2_evalenergy      __attribute__((depth(2)));
 channel float2  chan_LS2GA_LS3_evalenergy      __attribute__((depth(2)));	
-channel float  	chan_LS2GA_LS1_genotype        __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
-channel float  	chan_LS2GA_LS2_genotype        __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
-channel float  	chan_LS2GA_LS3_genotype        __attribute__((depth(ACTUAL_GENOTYPE_LENGTH)));
+channel float  	chan_LS2GA_LS1_genotype        __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
+channel float  	chan_LS2GA_LS2_genotype        __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
+channel float  	chan_LS2GA_LS3_genotype        __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
 
 channel bool    chan_GA2LS_Off1_active;
 channel bool    chan_GA2LS_Off2_active;
 channel bool    chan_GA2LS_Off3_active;
 
-channel bool    chan_IGLArbiter_Off;
+// IGL_Arbiter -> Conform
+channel char2  chan_IGL2Conform_actmode	       __attribute__((depth(3))); // active, mode
+channel float  chan_IGL2Conform_genotype       __attribute__((depth(3*CHAN_DEPTH_GENOTYPE	)));
+
+channel bool   chan_IGLArbiter_Off;
 
 #if defined (FIXED_POINT_CONFORM) || (FIXED_POINT_LS1) || defined (FIXED_POINT_LS2) || defined (FIXED_POINT_LS3)
 #include "../defines_fixedpt.h"
@@ -255,7 +266,9 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 	// ------------------------------------------------------------------
 
 	uint eval_cnt = DockConst_pop_size; // takes into account the IC evals
+/*	
 	uint ls_eval_cnt = 0;
+*/
 	uint generation_cnt = 0;
 
 	while ((eval_cnt < DockConst_num_of_energy_evals) && (generation_cnt < DockConst_num_of_generations)) {
@@ -493,7 +506,10 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 		// LS2
 		// LS3	
 		// ------------------------------------------------------------------
+/*
 		ls_eval_cnt = 0;
+*/
+		uint ls_eval_cnt = 0;
 
 		#pragma ivdep
 		//for (ushort ls_ent_cnt=0; ls_ent_cnt<DockConst_num_of_lsentities; ls_ent_cnt++) {

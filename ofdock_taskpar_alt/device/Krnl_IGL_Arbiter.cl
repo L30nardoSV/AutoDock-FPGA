@@ -1,7 +1,3 @@
-// Output channels IGL_Arbiter -> Conform
-
-channel char2  chan_IGL2Conform_actmode	    __attribute__((depth(3))); // active, mode
-channel float chan_IGL2Conform_genotype     __attribute__((depth(3*ACTUAL_GENOTYPE_LENGTH)));
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------
 __kernel __attribute__ ((max_global_work_dim(0)))
