@@ -1060,7 +1060,9 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 #endif // End of ENABLE_KERNEL26
 
 #ifdef ENABLE_KERNEL27 // Krnl_IGL_Arbiter
+/*	
 	setKernelArg(kernel27,0, sizeof(unsigned char),  &dockpars.num_of_genes);
+*/
 #endif // End of ENABLE_KERNEL27
 
 #ifdef ENABLE_KERNEL28 // 

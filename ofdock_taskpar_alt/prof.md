@@ -475,6 +475,23 @@ freq: 178 MHz (43 sec non-instrumented on 10runs 3ptb, 81 sec on 1stp)(instrumen
 Same speedup as previous commit
 >>> commit "reduced scope ls_eval_cnt"
 
+159. `Krnl_IGL`, `Krnl_Conform`: rewrite IGL so it only controls the active and mode signals
+				 and send it to Conform.
+			         genotypes channels are directly connected to Conform using a mux whose
+				 selector is the `mode` value received from IGL
+				 IGL arg (DockConst_num_of_genes) is not needed and therefore removed.
+
+freq: 175 MHz (instrumented freq: 183 MHz)(40 sec INSTRUMENTED on 10runs 3ptb, 77 sec on 1stp)
+Non-instrumented hang on Sauron
+Speedup vs i5 cpu core: 3ptb: 59/40 = 1.47x, 1stp: 84/77 = 1.09x
+>>> commit "simplified IGL: handles only active&mode, but not data"
+
+
+
+
+
+
+
 
 
 XXX, Between Conform and InterE, IntraE create a wider channel: 

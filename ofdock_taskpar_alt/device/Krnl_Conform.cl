@@ -100,6 +100,8 @@ while(active) {
 	active = actmode.x;
 	mode   = actmode.y;
 
+//printf("Conform: %u\n", mode);
+
 	#if defined (FIXED_POINT_CONFORM)
 	fixedpt genotype [ACTUAL_GENOTYPE_LENGTH];
 	#else
@@ -107,7 +109,36 @@ while(active) {
 	#endif
 
 	for (uchar i=0; i<DockConst_num_of_genes; i++) {
-		float fl_tmp = read_channel_altera(chan_IGL2Conform_genotype);
+		/*float fl_tmp = read_channel_altera(chan_IGL2Conform_genotype);*/
+		float fl_tmp;
+		switch (mode) {
+			case 'I':
+				fl_tmp = read_channel_altera(chan_IC2Conf_genotype);
+			break;
+
+			case 'G':
+				fl_tmp = read_channel_altera(chan_GG2Conf_genotype);
+			break;
+
+			case 0x01:
+				fl_tmp = read_channel_altera(chan_LS2Conf_LS1_genotype);
+			break;
+
+			case 0x02:
+				fl_tmp = read_channel_altera(chan_LS2Conf_LS2_genotype);
+			break;
+
+			case 0x03:
+				fl_tmp = read_channel_altera(chan_LS2Conf_LS3_genotype);
+			break;
+		}
+		
+		if (i > 2) {
+			fl_tmp = fl_tmp * DEG_TO_RAD;
+		}
+
+//printf("Conform: %u %u\n", mode, i);
+
 		#if defined (FIXED_POINT_CONFORM)
 		// convert float to fixedpt
 		fixedpt fx_tmp = fixedpt_fromfloat(fl_tmp);

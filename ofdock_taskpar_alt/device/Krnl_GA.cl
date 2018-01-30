@@ -86,7 +86,7 @@ channel bool    chan_GA2LS_Off3_active;
 
 // IGL_Arbiter -> Conform
 channel char2  chan_IGL2Conform_actmode	       __attribute__((depth(3))); // active, mode
-channel float  chan_IGL2Conform_genotype       __attribute__((depth(3*CHAN_DEPTH_GENOTYPE	)));
+channel float  chan_IGL2Conform_genotype       __attribute__((depth(3*CHAN_DEPTH_GENOTYPE)));
 
 channel bool   chan_IGLArbiter_Off;
 
