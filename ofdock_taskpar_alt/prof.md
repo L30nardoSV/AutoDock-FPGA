@@ -486,7 +486,20 @@ Non-instrumented hang on Sauron
 Speedup vs i5 cpu core: 3ptb: 59/40 = 1.47x, 1stp: 84/77 = 1.09x
 >>> commit "simplified IGL: handles only active&mode, but not data"
 
+160. `Krnl_Conform`: reduced scope of sin_theta, cos_theta, genrot_unitvec (keeps II=10, and reduces estimated hw usage)
 
+freq: 187.5 MHz (instrumented freq: 175 MHz)( 43 sec INSTRUMENTED on 10runs 3ptb, 81 sec on 1stp)
+Non-instrumented hang on Sauron
+Speedup vs i5 cpu core: 3ptb: 59/43 = 1.37x, 1stp: 84/81 = 1.03x
+>>> NO COMMIT
+
+161. `Krnl_GA`: added fences between final write channels that turn off the rest of kernels
+162. `Krnl_GA`: improved number of executed-runs messages
+
+freq: 187 MHz (instrumented freq: 174 MHz)(40 sec INSTRUMENTED on 10runs 3ptb, 76 sec on 1stp)
+Both run in Sauron
+Speedup vs i5 cpu core: 3ptb: 59/40 = 1.47x, 1stp: 84/76 = 1.1x
+>>> commit "added fences between turn-off write GA channels"
 
 
 

@@ -1091,10 +1091,17 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 	memcopyBufferObjectToDevice(command_queue1,mem_dockpars_conformations_current, 	cpu_init_populations, size_populations);
 #endif
 
+
+	printf("Docking runs to be executed: %u\n", mypars->num_of_runs); 
+	printf("Execution run: ");
+
 	for (unsigned int run_cnt = 0; run_cnt < mypars->num_of_runs; run_cnt++)
 	{
-
+/*
 		printf("Run %3u started ...     \n", run_cnt+1); 
+		fflush(stdout);
+*/
+		printf(" %u", run_cnt+1); 
 		fflush(stdout);
 
 #if defined(SINGLE_COPY_POP_ENE)
@@ -1595,6 +1602,7 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 	} // End of for (run_cnt = 0; run_cnt < mypars->num_of_runs; run_cnt++)
 
 
+	printf("\n"); 
 
 #if defined(SINGLE_COPY_POP_ENE)
 

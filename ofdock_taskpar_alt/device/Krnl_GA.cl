@@ -609,6 +609,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 	// ------------------------------------------------------------------
 	// Off: turn off all other kernels
 	// ------------------------------------------------------------------
+/*
 	write_channel_altera(chan_GA2LS_Off1_active,  		false);	// turn off LS_Arbiter, LS1
 	write_channel_altera(chan_GA2LS_Off2_active,  		false);	// turn off LS2_Arbiter, LS2 
 	write_channel_altera(chan_GA2LS_Off3_active,  		false);	// turn off LS3_Arbiter, LS3 
@@ -623,7 +624,29 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 	write_channel_altera(chan_Arbiter_LS3_float_off, 	false);
 
 	write_channel_altera(chan_IGLArbiter_Off,     		false);  // turn off IGL_Arbiter, Conform, InterE, IntraE
+*/
 
+	// turn off PRNG kernels
+	write_channel_altera(chan_Arbiter_BT_ushort_float_off,  false);
+	write_channel_altera(chan_Arbiter_GG_uchar_off, 	false);
+	write_channel_altera(chan_Arbiter_GG_float_off, 	false);
+	write_channel_altera(chan_Arbiter_LS123_ushort_off,  	false);
+	write_channel_altera(chan_Arbiter_LS_float_off, 	false);
+	write_channel_altera(chan_Arbiter_LS2_float_off, 	false);
+	write_channel_altera(chan_Arbiter_LS3_float_off, 	false);
+	mem_fence(CLK_CHANNEL_MEM_FENCE);
+
+	// turn off LS kernels
+	write_channel_altera(chan_GA2LS_Off1_active,  		false);
+	write_channel_altera(chan_GA2LS_Off2_active,  		false);
+	write_channel_altera(chan_GA2LS_Off3_active,  		false);
+	mem_fence(CLK_CHANNEL_MEM_FENCE);
+
+	// turn off IGL, Conform, IE, IA
+	write_channel_altera(chan_IGLArbiter_Off,     		false);
+	mem_fence(CLK_CHANNEL_MEM_FENCE);
+
+	// write final pop & energies back to FPGA-board DDRs
 	for (ushort pop_cnt=0;pop_cnt<DockConst_pop_size; pop_cnt++) { 	
 
 		for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
@@ -649,6 +672,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 	printf("	%-20s: %s\n", "Krnl_GA", "disabled");
 	#endif
 
+	// write final evaluation and generation counts to FPGA-board DDRs
 #if defined(SINGLE_COPY_POP_ENE)
 	GlobEvals_performed[Host_RunId] = eval_cnt;
 	GlobGens_performed [Host_RunId] = generation_cnt;

@@ -62,8 +62,10 @@ while(active) {
 	fixedpt  phi;
 	fixedpt  theta;
 	fixedpt  genrotangle;
+/*
 	fixedpt  sin_theta, cos_theta;
 	fixedpt3 genrot_unitvec;
+*/
 	fixedpt3 genotype_xyz;
 	fixedpt3 __attribute__ ((
 			      memory,
@@ -77,8 +79,10 @@ while(active) {
 	float  phi;
 	float  theta;
 	float  genrotangle;
+/*
 	float  sin_theta, cos_theta;
 	float3 genrot_unitvec;
+*/
 	float3 genotype_xyz;
 	float3 __attribute__ ((
 			      memory,
@@ -168,6 +172,7 @@ while(active) {
 	if (active == 0x00) {printf("	%-20s: %s\n", "Krnl_Conform", "must be disabled");}
 	#endif
 
+/*
 	#if defined (FIXED_POINT_CONFORM)
 	sin_theta = fixedpt_sin(theta);
 	cos_theta = fixedpt_cos(theta);
@@ -181,6 +186,7 @@ while(active) {
 	genrot_unitvec.y = sin_theta*native_sin(phi);
 	genrot_unitvec.z = cos_theta;
 	#endif
+*/
 
 	for (ushort rotation_counter = 0; rotation_counter < DockConst_rotbondlist_length; rotation_counter++)
 	{
@@ -220,6 +226,24 @@ while(active) {
 
 			if ((rotation_list_element & RLIST_GENROT_MASK) != 0)	//if general rotation
 			{
+				#if defined (FIXED_POINT_CONFORM)
+				fixedpt  sin_theta, cos_theta;
+				fixedpt3 genrot_unitvec;
+				sin_theta = fixedpt_sin(theta);
+				cos_theta = fixedpt_cos(theta);
+				genrot_unitvec.x = fixedpt_mul(sin_theta, fixedpt_cos(phi));
+				genrot_unitvec.y = fixedpt_mul(sin_theta, fixedpt_sin(phi));
+				genrot_unitvec.z = cos_theta;
+				#else
+				float  sin_theta, cos_theta;
+				float3 genrot_unitvec;
+				sin_theta = native_sin(theta);
+				cos_theta = native_cos(theta);
+				genrot_unitvec.x = sin_theta*native_cos(phi);
+				genrot_unitvec.y = sin_theta*native_sin(phi);
+				genrot_unitvec.z = cos_theta;
+				#endif
+
 				rotation_unitvec = genrot_unitvec;
 
 				rotation_angle = genrotangle;
