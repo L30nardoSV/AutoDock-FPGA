@@ -1,0 +1,15 @@
+npts 22 30 24                        # num.grid points in xyz
+gridfld 1ulb_protein.maps.fld        # grid_data_file
+spacing 0.375                        # spacing(A)
+receptor_types A C H HD N OA SA      # receptor atom types
+ligand_types A OA HD N               # ligand atom types
+receptor 1ulb_protein.pdbqt          # macromolecule
+gridcenter 1.679 17.317 26.585       # xyz-coordinates or auto
+smooth 0.5                           # store minimum energy w/in rad(A)
+map 1ulb_protein.A.map               # atom-specific affinity map
+map 1ulb_protein.OA.map              # atom-specific affinity map
+map 1ulb_protein.HD.map              # atom-specific affinity map
+map 1ulb_protein.N.map               # atom-specific affinity map
+elecmap 1ulb_protein.e.map           # electrostatic potential map
+dsolvmap 1ulb_protein.d.map              # desolvation potential map
+dielectric -0.1465                   # <0, AD4 distance-dep.diel;>0, constant

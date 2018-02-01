@@ -1,0 +1,63 @@
+REMARK  10 active torsions:
+REMARK  status: ('A' for Active; 'I' for Inactive)
+REMARK    1  A    between atoms: C1_1  and  C2_2 
+REMARK    2  A    between atoms: C2_2  and  O2_16 
+REMARK    3  A    between atoms: C4_4  and  O4_18 
+REMARK    4  A    between atoms: C5_5  and  N5_12 
+REMARK    5  A    between atoms: C6_6  and  C7_7 
+REMARK    6  A    between atoms: C7_7  and  O7_21 
+REMARK    7  A    between atoms: C7_7  and  C8_8 
+REMARK    8  A    between atoms: C8_8  and  O8_23 
+REMARK    9  A    between atoms: C8_8  and  C9_9 
+REMARK   10  A    between atoms: C9_9  and  O9_25 
+REMARK       I    between atoms: C10_10  and  N5_12 
+ROOT
+HETATM    1  C1  SIA A 329      -7.798  71.904  28.217  0.50 35.67     0.238 C 
+HETATM    2  O1A SIA A 329      -6.761  71.345  27.879  0.50 35.43    -0.644 OA
+HETATM    3  O1B SIA A 329      -8.516  71.352  29.043  0.50 35.37    -0.644 OA
+ENDROOT
+BRANCH   1   4
+HETATM    4  C2  SIA A 329      -8.233  73.286  27.663  0.50 36.14     0.256 C 
+HETATM    5  O6  SIA A 329      -7.614  73.612  26.413  0.50 36.30    -0.336 OA
+HETATM    6  C6  SIA A 329      -6.237  74.033  26.371  0.50 36.21     0.182 C 
+HETATM    7  C5  SIA A 329      -6.038  75.234  27.315  0.50 36.49     0.145 C 
+HETATM    8  C4  SIA A 329      -6.437  74.748  28.715  0.50 36.55     0.149 C 
+HETATM    9  C3  SIA A 329      -7.918  74.378  28.701  0.50 36.34     0.114 C 
+BRANCH   6  10
+HETATM   10  C7  SIA A 329      -5.905  74.238  24.884  0.50 36.00     0.180 C 
+BRANCH  10  11
+HETATM   11  O7  SIA A 329      -6.748  75.251  24.373  0.50 35.64    -0.390 OA
+HETATM   12  H7  SIA A 329      -6.543  75.378  23.454  1.00  0.00     0.210 HD
+ENDBRANCH  10  11
+BRANCH  10  13
+HETATM   13  C8  SIA A 329      -6.130  72.904  24.120  0.50 35.82     0.173 C 
+BRANCH  13  14
+HETATM   14  O8  SIA A 329      -5.347  71.854  24.657  0.50 35.30    -0.391 OA
+HETATM   15  H8  SIA A 329      -5.485  71.038  24.190  1.00  0.00     0.210 HD
+ENDBRANCH  13  14
+BRANCH  13  16
+HETATM   16  C9  SIA A 329      -5.787  73.017  22.627  0.50 35.85     0.198 C 
+BRANCH  16  17
+HETATM   17  O9  SIA A 329      -5.613  71.704  22.130  0.50 36.23    -0.398 OA
+HETATM   18  H9  SIA A 329      -5.401  71.774  21.207  1.00  0.00     0.209 HD
+ENDBRANCH  16  17
+ENDBRANCH  13  16
+ENDBRANCH  10  13
+ENDBRANCH   6  10
+BRANCH   7  19
+HETATM   19  N5  SIA A 329      -4.662  75.685  27.443  0.50 36.47    -0.352 N 
+HETATM   20  C10 SIA A 329      -4.107  76.588  26.644  0.50 36.54     0.214 C 
+HETATM   21  O10 SIA A 329      -4.719  77.028  25.674  0.50 36.62    -0.274 OA
+HETATM   22  C11 SIA A 329      -2.682  77.022  26.938  0.50 36.53     0.117 C 
+HETATM   23  H5  SIA A 329      -4.091  75.285  28.188  1.00  0.00     0.163 HD
+ENDBRANCH   7  19
+BRANCH   8  24
+HETATM   24  O4  SIA A 329      -6.126  75.735  29.692  0.50 37.16    -0.393 OA
+HETATM   25  H4  SIA A 329      -5.204  75.965  29.701  1.00  0.00     0.210 HD
+ENDBRANCH   8  24
+BRANCH   4  26
+HETATM   26  O2  SIA A 329      -9.618  73.208  27.419  0.50 36.07    -0.357 OA
+HETATM   27  H2  SIA A 329      -9.884  74.054  27.080  1.00  0.00     0.213 HD
+ENDBRANCH   4  26
+ENDBRANCH   1   4
+TORSDOF 10

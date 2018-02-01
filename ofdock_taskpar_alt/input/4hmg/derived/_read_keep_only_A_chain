@@ -1,0 +1,10 @@
+This ligand SIA (O-SIALIC ACID) contains three chains: A, C, E.
+Inspecting visually reveals that these three chains are the same in terms 
+of bonds and number of atoms. Their position is different.
+
+In adt4, chains C and E were removed and only chain A is kept for further analysis.
+In adt4, use the dashboard to select the chains to be deleted.
+
+The original ligand (.pdb) contains three chains, while the modified one (.pdbqt) has only one.
+
+THE REMOVAL PROCESS WAS	PERFORMED BEFORE ADDING	HYDROGENS.

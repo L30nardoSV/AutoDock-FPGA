@@ -1,0 +1,34 @@
+# AVS field file
+#
+# AutoDock Atomic Affinity and Electrostatic Grids
+#
+# Created by /home/wimi/lvs/ESA_Projects/bioinfo/docking_src/autodock/Run_Experiments/bin/autogrid_link.
+#
+#SPACING 0.375
+#NELEMENTS 44 44 44
+#CENTER -48.963 70.150 -10.916
+#MACROMOLECULE 1lif_protein.pdbqt
+#GRID_PARAMETER_FILE ./1lif.gpf
+#
+ndim=3			# number of dimensions in the field
+dim1=45			# number of x-elements
+dim2=45			# number of y-elements
+dim3=45			# number of z-elements
+nspace=3		# number of physical coordinates per point
+veclen=4		# number of affinity values at each point
+data=float		# data type (byte, integer, float, double)
+field=uniform		# field type (uniform, rectilinear, irregular)
+coord 1 file=1lif_protein.maps.xyz filetype=ascii offset=0
+coord 2 file=1lif_protein.maps.xyz filetype=ascii offset=2
+coord 3 file=1lif_protein.maps.xyz filetype=ascii offset=4
+label=C-affinity	# component label for variable 1
+label=OA-affinity	# component label for variable 2
+label=Electrostatics	# component label for variable 2
+label=Desolvation	# component label for variable 3
+#
+# location of affinity grid files and how to read them
+#
+variable 1 file=1lif_protein.C.map filetype=ascii skip=6
+variable 2 file=1lif_protein.OA.map filetype=ascii skip=6
+variable 3 file=1lif_protein.e.map filetype=ascii skip=6
+variable 4 file=1lif_protein.d.map filetype=ascii skip=6

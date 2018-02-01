@@ -1,0 +1,73 @@
+REMARK  16 active torsions:
+REMARK  status: ('A' for Active; 'I' for Inactive)
+REMARK    1  A    between atoms: C1_1  and  C2_4 
+REMARK    2  A    between atoms: C2_4  and  C3_5 
+REMARK    3  A    between atoms: C3_5  and  C4_6 
+REMARK    4  A    between atoms: C4_6  and  C5_7 
+REMARK    5  A    between atoms: C5_7  and  C6_8 
+REMARK    6  A    between atoms: C6_8  and  C7_9 
+REMARK    7  A    between atoms: C7_9  and  C8_10 
+REMARK    8  A    between atoms: C8_10  and  C9_11 
+REMARK    9  A    between atoms: C9_11  and  C10_12 
+REMARK   10  A    between atoms: C10_12  and  C11_13 
+REMARK   11  A    between atoms: C11_13  and  C12_14 
+REMARK   12  A    between atoms: C12_14  and  C13_15 
+REMARK   13  A    between atoms: C13_15  and  C14_16 
+REMARK   14  A    between atoms: C14_16  and  C15_17 
+REMARK   15  A    between atoms: C15_17  and  C16_18 
+REMARK   16  A    between atoms: C16_18  and  C17_19 
+ROOT
+HETATM    1  C1  STE A 132     -45.226  66.904  -6.460  1.00 38.19     0.172 C 
+HETATM    2  O1  STE A 132     -45.784  65.882  -6.113  1.00 34.57    -0.648 OA
+HETATM    3  O2  STE A 132     -44.099  66.887  -6.947  1.00 38.59    -0.648 OA
+ENDROOT
+BRANCH   1   4
+HETATM    4  C2  STE A 132     -45.973  68.218  -6.327  1.00 38.27     0.113 C 
+BRANCH   4   5
+HETATM    5  C3  STE A 132     -45.285  69.157  -5.357  1.00 39.62     0.010 C 
+BRANCH   5   6
+HETATM    6  C4  STE A 132     -46.006  70.477  -5.283  1.00 39.60     0.001 C 
+BRANCH   6   7
+HETATM    7  C5  STE A 132     -45.911  71.153  -6.632  1.00 40.33     0.000 C 
+BRANCH   7   8
+HETATM    8  C6  STE A 132     -46.357  72.579  -6.472  1.00 39.99     0.000 C 
+BRANCH   8   9
+HETATM    9  C7  STE A 132     -47.842  72.708  -6.277  1.00 39.87     0.000 C 
+BRANCH   9  10
+HETATM   10  C8  STE A 132     -48.527  72.723  -7.609  1.00 40.00     0.000 C 
+BRANCH  10  11
+HETATM   11  C9  STE A 132     -49.980  72.891  -7.270  1.00 40.72     0.000 C 
+BRANCH  11  12
+HETATM   12  C10 STE A 132     -50.813  72.680  -8.506  1.00 42.14     0.000 C 
+BRANCH  12  13
+HETATM   13  C11 STE A 132     -50.607  71.304  -9.106  1.00 42.91     0.000 C 
+BRANCH  13  14
+HETATM   14  C12 STE A 132     -51.476  71.283 -10.347  1.00 45.10     0.000 C 
+BRANCH  14  15
+HETATM   15  C13 STE A 132     -51.135  70.117 -11.278  1.00 46.67     0.000 C 
+BRANCH  15  16
+HETATM   16  C14 STE A 132     -52.114  70.238 -12.425  1.00 47.15     0.000 C 
+BRANCH  16  17
+HETATM   17  C15 STE A 132     -51.825  69.324 -13.601  1.00 47.36     0.000 C 
+BRANCH  17  18
+HETATM   18  C16 STE A 132     -52.931  69.505 -14.644  1.00 47.03    -0.000 C 
+BRANCH  18  19
+HETATM   19  C17 STE A 132     -53.090  70.942 -15.131  1.00 46.57    -0.005 C 
+HETATM   20  C18 STE A 132     -54.266  71.010 -16.107  1.00 45.76     0.005 C 
+ENDBRANCH  18  19
+ENDBRANCH  17  18
+ENDBRANCH  16  17
+ENDBRANCH  15  16
+ENDBRANCH  14  15
+ENDBRANCH  13  14
+ENDBRANCH  12  13
+ENDBRANCH  11  12
+ENDBRANCH  10  11
+ENDBRANCH   9  10
+ENDBRANCH   8   9
+ENDBRANCH   7   8
+ENDBRANCH   6   7
+ENDBRANCH   5   6
+ENDBRANCH   4   5
+ENDBRANCH   1   4
+TORSDOF 16

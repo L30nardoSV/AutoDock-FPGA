@@ -464,7 +464,6 @@ First achieving speedup vs i5 cpu core: 3ptb: 59/43 = 1.37x, 1stp: 84/81 = 1.03x
 156. `Krnl_IGL_Arbiter`: moved channels to `Krnl_GA`
 157. `Krnl_GA`: create #defines for channel depths: CHAN_DEPTH_ATOMXYZ and CHAN_DEPTH_GENOTYPE
 
-
 	. `Krnl_GA`: reduce CHAN_DEPTH_GENOTYPE depth for PRNG channels from ACTUAL_GENOTYPE_LENGTH to 4
 	. `Krnl_GA`: reduce CHAN_DEPTH_GENOTYPE depth for GA2LS genotype channels from ACTUAL_GENOTYPE_LENGTH to 2
 	-> switched back to original depth as performance is reduced (48 (3ptb) and 87 (1stp) for 10 runs)
@@ -501,6 +500,8 @@ Both run in Sauron
 Speedup vs i5 cpu core: 3ptb: 59/40 = 1.47x, 1stp: 84/76 = 1.1x
 >>> commit "added fences between turn-off write GA channels"
 
+163. Added all PDB complexes (git@gitlab:lvs/pdbs.git) into ./input
+>>> commit "added pdbs for testing"
 
 
 

@@ -1,0 +1,41 @@
+REMARK  4 active torsions:
+REMARK  status: ('A' for Active; 'I' for Inactive)
+REMARK       I    between atoms: C22_2  and  N21_15 
+REMARK    1  A    between atoms: C22_2  and  C31_3 
+REMARK    2  A    between atoms: C34_6  and  C41_9 
+REMARK    3  A    between atoms: C41_9  and  N43_11 
+REMARK    4  A    between atoms: N21_15  and  C14_17 
+ROOT
+HETATM    1  O23 Y27 A 930       7.567   9.649   1.659  1.00 40.69    -0.273 OA
+HETATM    2  C22 Y27 A 930       7.985   9.482   2.808  1.00 38.49     0.226 C 
+HETATM    3  N21 Y27 A 930       7.175   9.668   3.963  1.00 34.80    -0.327 N 
+HETATM    4  H21 Y27 A 930       7.665   9.759   4.853  1.00  0.00     0.169 HD
+ENDROOT
+BRANCH   2   5
+HETATM    5  C31 Y27 A 930       9.390   9.033   3.122  1.00 37.38     0.078 C 
+HETATM    6  C32 Y27 A 930      10.410  10.189   3.138  1.00 42.13     0.014 C 
+HETATM    7  C33 Y27 A 930      11.885   9.672   3.277  1.00 41.71     0.007 C 
+HETATM    8  C34 Y27 A 930      12.191   8.500   2.307  1.00 40.96     0.016 C 
+HETATM    9  C35 Y27 A 930      11.177   7.372   2.533  1.00 40.85     0.007 C 
+HETATM   10  C36 Y27 A 930       9.802   7.926   2.147  1.00 40.63     0.014 C 
+BRANCH   8  11
+HETATM   11  C41 Y27 A 930      13.635   7.916   2.377  1.00 43.23     0.183 C 
+HETATM   12  C42 Y27 A 930      14.009   7.234   1.048  1.00 40.90     0.040 C 
+BRANCH  11  13
+HETATM   13  N43 Y27 A 930      14.651   8.984   2.688  1.00 44.74    -0.075 N 
+HETATM   14 3H43 Y27 A 930      15.605   8.622   2.693  1.00  0.00     0.274 HD
+HETATM   15 2H43 Y27 A 930      14.756   9.653   1.925  1.00  0.00     0.274 HD
+HETATM   16 1H43 Y27 A 930      14.403   9.436   3.568  1.00  0.00     0.274 HD
+ENDBRANCH  11  13
+ENDBRANCH   8  11
+ENDBRANCH   2   5
+BRANCH   3  17
+HETATM   17  C14 Y27 A 930       5.735   9.742   4.010  1.00 33.61     0.037 A 
+HETATM   18  C13 Y27 A 930       4.918   9.844   2.847  1.00 31.33     0.046 A 
+HETATM   19  C12 Y27 A 930       3.541   9.901   3.006  1.00 33.37     0.090 A 
+HETATM   20  N11 Y27 A 930       3.010   9.854   4.238  1.00 27.32    -0.375 N 
+HETATM   21  C16 Y27 A 930       3.770   9.746   5.348  1.00 31.03     0.090 A 
+HETATM   22  H11 Y27 A 930       1.996   9.902   4.339  1.00  0.00     0.164 HD
+HETATM   23  C15 Y27 A 930       5.165   9.693   5.293  1.00 30.98     0.046 A 
+ENDBRANCH   3  17
+TORSDOF 4

@@ -1,0 +1,2176 @@
+          AutoDock 4.2 Release 4.2.5.1 
+         (C) 1989-2012 The Scripps Research Institute
+        AutoDock comes with ABSOLUTELY NO WARRANTY.
+        AutoDock is free software, and you are welcome
+        to redistribute it under certain conditions;
+        for details type 'autodock4 -C'
+
+                     main.cc  $Revision: 1.194 $
+
+                   Compiled on Aug 15 2016 at 15:53:24
+
+
+This file was created at:			6:34 13" p.m., 09/08/2016
+                   using:			"eredmithrim.esa.informatik.tu-darmstadt.dei"
+
+      ________________________________________________________________
+
+                   SETTING UP DEFAULT PARAMETER LIBRARY
+      ________________________________________________________________
+
+
+Sizeof FourByteLong = 8, not 4.
+Random number generator was seeded with values 14579, 1473352453.
+Docking parameter file (DPF) used for this docking:		./6cpa.dpf
+DPF> autodock_parameter_version 4.2       # used by autodock to validate parameter set
+
+	Autodock parameter version 4.2.
+DPF> outlev 1                             # diagnostic output level
+
+Output Level = 1  ADT-COMPATIBLE OUTPUT DURING DOCKING.
+DPF> intelec                              # calculate internal electrostatics
+
+Electrostatic energies will be calculated for all non-bonds between moving atoms.
+DPF> seed pid time                        # seeds for random generator
+
+Random number generator was seeded with values 14579, 1473352453.
+DPF> ligand_types A C OA N P HD           # atoms types in ligand
+
+DPF> fld 6cpa_protein.maps.fld            # grid_data_file
+
+Opening Grid Map Dimensions file:		6cpa_protein.maps.fld
+Grid Point Spacing =				0.375 Angstroms
+
+Even Number of User-specified Grid Points =	40 x-points
+						46 y-points
+						50 z-points
+
+Coordinates of Central Grid Point of Maps =	(47.165, 19.907, 36.481)
+Macromolecule file used to create Grid Maps =	6cpa_protein.pdbqt
+Grid Parameter file used to create Grid Maps =	./6cpa.gpf
+Minimum coordinates in grid = (39.665, 11.282, 27.106)
+Maximum coordinates in grid = (54.665, 28.532, 45.856)
+
+DPF> map 6cpa_protein.A.map               # atom-specific affinity map
+
+DPF> map 6cpa_protein.C.map               # atom-specific affinity map
+
+DPF> map 6cpa_protein.OA.map              # atom-specific affinity map
+
+DPF> map 6cpa_protein.N.map               # atom-specific affinity map
+
+DPF> map 6cpa_protein.P.map               # atom-specific affinity map
+
+DPF> map 6cpa_protein.HD.map              # atom-specific affinity map
+
+DPF> elecmap 6cpa_protein.e.map           # electrostatics map
+
+DPF> desolvmap 6cpa_protein.d.map         # desolvation map
+
+DPF> move 6cpa_ligand.pdbqt               # small molecule
+
+1,4-interactions will be _ignored_ in the non-bonded internal energy calculation.
+
+Ligand PDBQT file = "6cpa_ligand.pdbqt"
+
+INPUT LIGAND PDBQT FILE:
+________________________
+
+INPUT-LIGAND-PDBQT: REMARK  12 active torsions:
+INPUT-LIGAND-PDBQT: REMARK  status: ('A' for Active; 'I' for Inactive)
+INPUT-LIGAND-PDBQT: REMARK    1  A    between atoms: C1_1  and  C2_5 
+INPUT-LIGAND-PDBQT: REMARK    2  A    between atoms: C2A_4  and  CP1_6 
+INPUT-LIGAND-PDBQT: REMARK    3  A    between atoms: C2A_4  and  C2_5 
+INPUT-LIGAND-PDBQT: REMARK    4  A    between atoms: C2_5  and  O3_12 
+INPUT-LIGAND-PDBQT: REMARK    5  A    between atoms: O3_12  and  P3_13 
+INPUT-LIGAND-PDBQT: REMARK    6  A    between atoms: P3_13  and  C4_16 
+INPUT-LIGAND-PDBQT: REMARK    7  A    between atoms: C4_16  and  N5_18 
+INPUT-LIGAND-PDBQT: REMARK       I    between atoms: N5_18  and  C6_20 
+INPUT-LIGAND-PDBQT: REMARK    8  A    between atoms: C6_20  and  C7_22 
+INPUT-LIGAND-PDBQT: REMARK    9  A    between atoms: C7_22  and  N8_24 
+INPUT-LIGAND-PDBQT: REMARK       I    between atoms: N8_24  and  C9_26 
+INPUT-LIGAND-PDBQT: REMARK   10  A    between atoms: C9_26  and  O10_28 
+INPUT-LIGAND-PDBQT: REMARK   11  A    between atoms: O10_28  and  C11_29 
+INPUT-LIGAND-PDBQT: REMARK   12  A    between atoms: C11_29  and  C1X_30 
+INPUT-LIGAND-PDBQT: ROOT
+INPUT-LIGAND-PDBQT: HETATM    1  C1  ZAF A 309      44.381  21.762  33.787  1.00 12.55     0.204 C 
+INPUT-LIGAND-PDBQT: HETATM    2  O1A ZAF A 309      43.353  21.981  33.006  1.00 10.65    -0.646 OA
+INPUT-LIGAND-PDBQT: HETATM    3  O1B ZAF A 309      44.933  20.708  33.791  1.00 27.40    -0.646 OA
+INPUT-LIGAND-PDBQT: ENDROOT
+INPUT-LIGAND-PDBQT: BRANCH   1   4
+INPUT-LIGAND-PDBQT: HETATM    4  C2  ZAF A 309      44.786  22.860  34.625  1.00 22.10     0.237 C 
+INPUT-LIGAND-PDBQT: BRANCH   4   5
+INPUT-LIGAND-PDBQT: HETATM    5  O3  ZAF A 309      45.362  22.152  35.750  1.00 24.70    -0.294 OA
+INPUT-LIGAND-PDBQT: BRANCH   5   6
+INPUT-LIGAND-PDBQT: HETATM    6  P3  ZAF A 309      44.357  21.613  37.005  1.00 28.55     0.273 P 
+INPUT-LIGAND-PDBQT: HETATM    7  O3A ZAF A 309      43.195  20.768  36.420  1.00 17.70    -0.645 OA
+INPUT-LIGAND-PDBQT: HETATM    8  O3B ZAF A 309      43.957  22.825  37.875  1.00 22.00    -0.645 OA
+INPUT-LIGAND-PDBQT: BRANCH   6   9
+INPUT-LIGAND-PDBQT: HETATM    9  C4  ZAF A 309      45.316  20.607  38.043  1.00 13.35     0.201 C 
+INPUT-LIGAND-PDBQT: HETATM   10  C4A ZAF A 309      46.585  21.244  38.659  1.00 17.05     0.046 C 
+INPUT-LIGAND-PDBQT: BRANCH   9  11
+INPUT-LIGAND-PDBQT: HETATM   11  N5  ZAF A 309      45.796  19.498  37.293  1.00 22.80    -0.343 N 
+INPUT-LIGAND-PDBQT: HETATM   12  C6  ZAF A 309      45.357  18.241  37.432  1.00 27.05     0.241 C 
+INPUT-LIGAND-PDBQT: HETATM   13  O6  ZAF A 309      44.341  18.008  38.012  1.00 18.70    -0.271 OA
+INPUT-LIGAND-PDBQT: HETATM   14  H5  ZAF A 309      46.525  19.672  36.601  1.00  0.00     0.163 HD
+INPUT-LIGAND-PDBQT: BRANCH  12  15
+INPUT-LIGAND-PDBQT: HETATM   15  C7  ZAF A 309      46.197  17.237  36.846  1.00 24.25     0.174 C 
+INPUT-LIGAND-PDBQT: HETATM   16  C7A ZAF A 309      45.530  16.762  35.539  1.00  7.30     0.042 C 
+INPUT-LIGAND-PDBQT: BRANCH  15  17
+INPUT-LIGAND-PDBQT: HETATM   17  N8  ZAF A 309      46.515  16.143  37.699  1.00 27.75    -0.324 N 
+INPUT-LIGAND-PDBQT: HETATM   18  C9  ZAF A 309      47.236  16.168  38.822  1.00 21.50     0.365 C 
+INPUT-LIGAND-PDBQT: HETATM   19  O9  ZAF A 309      47.366  15.131  39.408  1.00 37.05    -0.238 OA
+INPUT-LIGAND-PDBQT: HETATM   20  H8  ZAF A 309      46.149  15.233  37.419  1.00  0.00     0.165 HD
+INPUT-LIGAND-PDBQT: BRANCH  18  21
+INPUT-LIGAND-PDBQT: HETATM   21  O10 ZAF A 309      47.782  17.310  39.216  1.00 30.55    -0.273 OA
+INPUT-LIGAND-PDBQT: BRANCH  21  22
+INPUT-LIGAND-PDBQT: HETATM   22  C11 ZAF A 309      48.962  17.233  39.976  1.00 22.30     0.159 C 
+INPUT-LIGAND-PDBQT: BRANCH  22  23
+INPUT-LIGAND-PDBQT: HETATM   23  C1X ZAF A 309      49.775  18.409  40.104  1.00 25.85    -0.014 A 
+INPUT-LIGAND-PDBQT: HETATM   24  C2X ZAF A 309      50.263  18.996  38.992  1.00  5.00     0.013 A 
+INPUT-LIGAND-PDBQT: HETATM   25  C3X ZAF A 309      51.030  20.100  39.089  1.00 21.65     0.001 A 
+INPUT-LIGAND-PDBQT: HETATM   26  C4X ZAF A 309      51.345  20.595  40.301  1.00 31.85     0.000 A 
+INPUT-LIGAND-PDBQT: HETATM   27  C5X ZAF A 309      50.860  20.008  41.411  1.00 16.40     0.001 A 
+INPUT-LIGAND-PDBQT: HETATM   28  C6X ZAF A 309      50.088  18.906  41.320  1.00 27.50     0.013 A 
+INPUT-LIGAND-PDBQT: ENDBRANCH  22  23
+INPUT-LIGAND-PDBQT: ENDBRANCH  21  22
+INPUT-LIGAND-PDBQT: ENDBRANCH  18  21
+INPUT-LIGAND-PDBQT: ENDBRANCH  15  17
+INPUT-LIGAND-PDBQT: ENDBRANCH  12  15
+INPUT-LIGAND-PDBQT: ENDBRANCH   9  11
+INPUT-LIGAND-PDBQT: ENDBRANCH   6   9
+INPUT-LIGAND-PDBQT: ENDBRANCH   5   6
+INPUT-LIGAND-PDBQT: ENDBRANCH   4   5
+INPUT-LIGAND-PDBQT: BRANCH   4  29
+INPUT-LIGAND-PDBQT: HETATM   29  C2A ZAF A 309      45.801  23.720  33.863  1.00 19.00     0.082 C 
+INPUT-LIGAND-PDBQT: BRANCH  29  30
+INPUT-LIGAND-PDBQT: HETATM   30  CP1 ZAF A 309      45.453  24.324  32.612  1.00 11.15    -0.055 A 
+INPUT-LIGAND-PDBQT: HETATM   31  CP6 ZAF A 309      45.673  23.649  31.463  1.00 34.95     0.007 A 
+INPUT-LIGAND-PDBQT: HETATM   32  CP5 ZAF A 309      45.380  24.210  30.269  1.00 30.40     0.001 A 
+INPUT-LIGAND-PDBQT: HETATM   33  CP4 ZAF A 309      44.827  25.443  30.222  1.00 16.85     0.000 A 
+INPUT-LIGAND-PDBQT: HETATM   34  CP3 ZAF A 309      44.594  26.114  31.370  1.00 40.75     0.001 A 
+INPUT-LIGAND-PDBQT: HETATM   35  CP2 ZAF A 309      44.930  25.572  32.561  1.00 19.95     0.007 A 
+INPUT-LIGAND-PDBQT: ENDBRANCH  29  30
+INPUT-LIGAND-PDBQT: ENDBRANCH   4  29
+INPUT-LIGAND-PDBQT: ENDBRANCH   1   4
+INPUT-LIGAND-PDBQT: TORSDOF 12
+________________________________________________________________________________
+
+Total charge on ligand                               =	-1.998 e
+REMARK  12 active torsions:
+REMARK  status: ('A' for Active; 'I' for Inactive)
+REMARK    1  A    between atoms: C1_1  and  C2_5 
+REMARK    2  A    between atoms: C2A_4  and  CP1_6 
+REMARK    3  A    between atoms: C2A_4  and  C2_5 
+REMARK    4  A    between atoms: C2_5  and  O3_12 
+REMARK    5  A    between atoms: O3_12  and  P3_13 
+REMARK    6  A    between atoms: P3_13  and  C4_16 
+REMARK    7  A    between atoms: C4_16  and  N5_18 
+REMARK       I    between atoms: N5_18  and  C6_20 
+REMARK    8  A    between atoms: C6_20  and  C7_22 
+REMARK    9  A    between atoms: C7_22  and  N8_24 
+REMARK       I    between atoms: N8_24  and  C9_26 
+REMARK   10  A    between atoms: C9_26  and  O10_28 
+REMARK   11  A    between atoms: O10_28  and  C11_29 
+REMARK   12  A    between atoms: C11_29  and  C1X_30 
+
+
+Number of Rotatable Bonds in Small Molecule =	12 torsions
+Number of atoms in ligand:  35
+
+Number of non-hydrogen atoms in ligand:  33
+
+Number of vibrational degrees of freedom of ligand:  99
+
+
+Number of torsional degrees of freedom = 12
+Estimated loss of torsional free energy upon binding = +3.5796 kcal/mol
+
+
+DPF> about 46.4 20.3772 36.48             # small molecule center
+
+Small molecule center of rotation =	(+46.400, +20.377, +36.480)
+
+DPF> tran0 random                         # initial coordinates/A or random
+
+Initial translation =			(42.228, 23.609, 29.794) Angstroms
+DPF> quaternion0 random                   # initial orientation
+
+Each run will begin with a new, random initial orientation.
+Initial quaternion,  (x,y,z,w) =	( 0.238, 0.253, 0.663, 0.664 ),
+DPF> dihe0 random                         # initial dihedrals (relative) or random
+
+DPF> torsdof 12                            # torsional degrees of freedom
+
+Number of torsional degrees of freedom = 12
+Free energy coefficient for torsional degrees of freedom = 0.2983, the factory default value.
+
+Estimated loss of torsional free energy upon binding = +3.5796 kcal/mol
+
+DPF> rmstol 2.0                           # cluster_tolerance/A
+
+Maximum RMS tolerance for conformational cluster analysis = 2.00 Angstroms
+DPF> extnrg 1000.0                        # external grid energy
+
+External grid energy (beyond grid map walls) = 1000.00
+
+DPF> e0max 0.0 10000                      # max initial energy; max number of retries
+
+Using user-specified maximum number of retries for simanneal initialization, 10000 retries.
+If the simanneal initial energy is greater than e0max, 0.000,
+then a new, random initial state will be created.
+
+DPF> ga_pop_size 150                      # number of individuals in population
+
+A population of 150 individuals will be used
+DPF> ga_num_evals 2500000                 # maximum number of energy evaluations
+
+There will be at most 2500000 function evaluations used.
+DPF> ga_num_generations 27000             # maximum number of generations
+
+The GA will run for at most 27000 generations.
+DPF> ga_elitism 1                         # number of top individuals to survive to next generation
+
+The 1 best will be preserved each GA generation.
+DPF> ga_mutation_rate 0.02                # rate of gene mutation
+
+The mutation rate is 0.020000.
+DPF> ga_crossover_rate 0.8                # rate of crossover
+
+The crossover rate is 0.800000.
+DPF> ga_window_size 10                    # 
+
+The GA's selection window is 10 generations.
+DPF> ga_cauchy_alpha 0.0                  # Alpha parameter of Cauchy distribution
+
+The alpha parameter (for the Cauchy distribution) is being set to 0.000000.
+DPF> ga_cauchy_beta 1.0                   # Beta parameter Cauchy distribution
+
+The beta parameter (for the Cauchy distribution) is being set to 1.000000.
+DPF> set_ga                               # set the above parameters for GA or LGA
+
+DPF> sw_max_its 300                       # iterations of Solis & Wets local search
+
+Solis & Wets algorithms will perform at most 300 iterations.
+DPF> sw_max_succ 4                        # consecutive successes before changing rho
+
+Solis & Wets algorithms expand rho every 4 in a row successes.
+DPF> sw_max_fail 4                        # consecutive failures before changing rho
+
+Solis & Wets algorithms contract rho every 4 in a row failures.
+DPF> sw_rho 1.0                           # size of local search space to sample
+
+rho is set to 1.000000.
+DPF> sw_lb_rho 0.01                       # lower bound on rho
+
+rho will never get smaller than 0.010000.
+DPF> ls_search_freq 0.06                  # probability of performing local search on individual
+
+Local search will be performed with frequency 0.060000.
+DPF> set_psw1                             # set the above pseudo-Solis & Wets parameters
+
+Creating a new Local Search object using the pseudo-Solis-Wets algorithm (pSW1) with the current settings.
+
+DPF> unbound_model bound                  # state of unbound ligand
+
+DPF> ga_run 10                            # do this many hybrid GA-LS runs
+
+centering ligand on specified point: 46.400 20.377 36.480
+Furthest true ligand atom from "about" center is 8.204 Angstroms (maxrad).
+Number of requested GA dockings = 10 runs
+Unbound model to be used is 'same as bound' [AutoDock 4.2 default].
+
+	BEGINNING GENETIC ALGORITHM DOCKING
+Run:	1 / 10
+Date:	Thu Sep  8 18:34:14 2016
+Beginning LAMARCKIAN GENETIC ALGORITHM (LGA), with a maximum of 2500000 energy evaluations.
+
+Final-Value: -10.920
+Real= 22.65s,  CPU= 22.62s,  System= 0.00s
+
+
+	FINAL GENETIC ALGORITHM ALGORITHM DOCKED STATE
+	_______________________________________________
+
+
+Detailed state:  trans 50.246 19.910 37.161 quatxyzw -0.826549 -0.188396 -0.521942 0.094342 center 46.400 20.377 36.480 ntor 12 -91.8310 156.4862 76.9312 -151.1473 -17.0607 22.5455 -38.2173 -93.0963 46.0828 -55.4883 -38.5504 58.0268
+State:	 50.246  19.910  37.161  -0.830 -0.189 -0.524 169.173    -91.83  156.49   76.93 -151.15  -17.06   22.55  -38.22  -93.10   46.08  -55.49  -38.55   58.03
+
+DOCKED: MODEL        1
+DOCKED: USER    Run = 1
+DOCKED: USER    DPF = ./6cpa.dpf
+DOCKED: USER  
+DOCKED: USER    Estimated Free Energy of Binding    =   -3.04 kcal/mol  [=(1)+(2)+(3)-(4)]
+DOCKED: USER    Estimated Inhibition Constant, Ki   =    5.95 mM (millimolar)  [Temperature = 298.15 K]
+DOCKED: USER    
+DOCKED: USER    (1) Final Intermolecular Energy     =   -6.62 kcal/mol
+DOCKED: USER        vdW + Hbond + desolv Energy     =   -6.20 kcal/mol
+DOCKED: USER        Electrostatic Energy            =   -0.42 kcal/mol
+DOCKED: USER    (2) Final Total Internal Energy     =   -4.30 kcal/mol
+DOCKED: USER    (3) Torsional Free Energy           =   +3.58 kcal/mol
+DOCKED: USER    (4) Unbound System's Energy  [=(2)] =   -4.30 kcal/mol
+DOCKED: USER    
+DOCKED: USER    
+DOCKED: USER    NEWDPF move 6cpa_ligand.pdbqt
+DOCKED: USER    NEWDPF about 46.400002 20.377199 36.480000
+DOCKED: USER    NEWDPF tran0 50.245734 19.909713 37.160897
+DOCKED: USER    NEWDPF quaternion0 -0.826549 -0.188396 -0.521942 0.094342
+DOCKED: USER    NEWDPF axisangle0 -0.830252 -0.189240 -0.524280 169.173073
+DOCKED: USER    NEWDPF quat0 -0.830252 -0.189240 -0.524280 169.173073
+DOCKED: USER    NEWDPF dihe0 -91.83 156.49 76.93 -151.15 -17.06 22.55 -38.22 -93.10 46.08 -55.49 -38.55 58.03 
+DOCKED: USER  keepresnum = 1 
+DOCKED: USER  
+DOCKED: REMARK  12 active torsions:
+DOCKED: REMARK  status: ('A' for Active; 'I' for Inactive)
+DOCKED: REMARK    1  A    between atoms: C1_1  and  C2_5 
+DOCKED: REMARK    2  A    between atoms: C2A_4  and  CP1_6 
+DOCKED: REMARK    3  A    between atoms: C2A_4  and  C2_5 
+DOCKED: REMARK    4  A    between atoms: C2_5  and  O3_12 
+DOCKED: REMARK    5  A    between atoms: O3_12  and  P3_13 
+DOCKED: REMARK    6  A    between atoms: P3_13  and  C4_16 
+DOCKED: REMARK    7  A    between atoms: C4_16  and  N5_18 
+DOCKED: REMARK       I    between atoms: N5_18  and  C6_20 
+DOCKED: REMARK    8  A    between atoms: C6_20  and  C7_22 
+DOCKED: REMARK    9  A    between atoms: C7_22  and  N8_24 
+DOCKED: REMARK       I    between atoms: N8_24  and  C9_26 
+DOCKED: REMARK   10  A    between atoms: C9_26  and  O10_28 
+DOCKED: REMARK   11  A    between atoms: O10_28  and  C11_29 
+DOCKED: REMARK   12  A    between atoms: C11_29  and  C1X_30 
+DOCKED: USER                              x       y       z     vdW  Elec       q    Type
+DOCKED: USER                           _______ _______ _______ _____ _____    ______ ____
+DOCKED: ROOT
+DOCKED: ATOM      1  C1  ZAF A 309      47.346  17.711  37.157 -0.07 +0.03    +0.204 C 
+DOCKED: ATOM      2  O1A ZAF A 309      46.296  17.058  36.725 +0.01 -0.03    -0.646 OA
+DOCKED: ATOM      3  O1B ZAF A 309      47.337  18.897  37.240 -0.46 -0.23    -0.646 OA
+DOCKED: ENDROOT
+DOCKED: BRANCH   1   4
+DOCKED: ATOM      4  C2  ZAF A 309      48.488  16.910  37.512 -0.07 -0.00    +0.237 C 
+DOCKED: BRANCH   4   5
+DOCKED: ATOM      5  O3  ZAF A 309      49.095  17.734  38.538 -0.05 +0.00    -0.294 OA
+DOCKED: BRANCH   5   6
+DOCKED: ATOM      6  P3  ZAF A 309      50.707  18.230  38.370 -0.10 +0.00    +0.273 P 
+DOCKED: ATOM      7  O3A ZAF A 309      51.311  17.622  37.077 -0.02 -0.02    -0.645 OA
+DOCKED: ATOM      8  O3B ZAF A 309      51.458  17.932  39.687 +0.03 +0.00    -0.645 OA
+DOCKED: BRANCH   6   9
+DOCKED: ATOM      9  C4  ZAF A 309      50.707  19.959  38.230 -0.17 +0.00    +0.201 C 
+DOCKED: ATOM     10  C4A ZAF A 309      51.134  20.764  39.482 -0.22 -0.00    +0.046 C 
+DOCKED: BRANCH   9  11
+DOCKED: ATOM     11  N5  ZAF A 309      49.382  20.398  37.954 -0.12 +0.01    -0.343 N 
+DOCKED: ATOM     12  C6  ZAF A 309      48.931  21.638  38.178 -0.29 -0.04    +0.241 C 
+DOCKED: ATOM     13  O6  ZAF A 309      49.688  22.538  38.381 -0.43 -0.00    -0.271 OA
+DOCKED: ATOM     14  H5  ZAF A 309      48.730  19.721  37.557 +0.06 +0.02    +0.163 HD
+DOCKED: BRANCH  12  15
+DOCKED: ATOM     15  C7  ZAF A 309      47.504  21.777  38.161 -0.33 -0.08    +0.174 C 
+DOCKED: ATOM     16  C7A ZAF A 309      47.165  23.129  37.500 -0.37 -0.04    +0.042 C 
+DOCKED: BRANCH  15  17
+DOCKED: ATOM     17  N8  ZAF A 309      46.869  21.639  39.427 -0.21 +0.23    -0.324 N 
+DOCKED: ATOM     18  C9  ZAF A 309      47.128  20.736  40.375 -0.24 -0.15    +0.365 C 
+DOCKED: ATOM     19  O9  ZAF A 309      46.489  20.810  41.386 -0.94 +0.08    -0.238 OA
+DOCKED: ATOM     20  H8  ZAF A 309      46.128  22.309  39.634 -0.20 -0.20    +0.165 HD
+DOCKED: BRANCH  18  21
+DOCKED: ATOM     21  O10 ZAF A 309      48.045  19.806  40.150 -0.18 +0.05    -0.273 OA
+DOCKED: BRANCH  21  22
+DOCKED: ATOM     22  C11 ZAF A 309      48.121  18.739  41.063 -0.22 -0.02    +0.159 C 
+DOCKED: BRANCH  22  23
+DOCKED: ATOM     23  C1X ZAF A 309      49.349  18.529  41.774 -0.17 +0.00    -0.014 A 
+DOCKED: ATOM     24  C2X ZAF A 309      49.683  17.279  42.156 -0.13 -0.00    +0.013 A 
+DOCKED: ATOM     25  C3X ZAF A 309      50.831  17.059  42.826 -0.11 +0.00    +0.001 A 
+DOCKED: ATOM     26  C4X ZAF A 309      51.628  18.094  43.154 -0.11 +0.00    +0.000 A 
+DOCKED: ATOM     27  C5X ZAF A 309      51.294  19.342  42.775 -0.17 +0.00    +0.001 A 
+DOCKED: ATOM     28  C6X ZAF A 309      50.149  19.568  42.099 -0.21 -0.00    +0.013 A 
+DOCKED: ENDBRANCH  22  23
+DOCKED: ENDBRANCH  21  22
+DOCKED: ENDBRANCH  18  21
+DOCKED: ENDBRANCH  15  17
+DOCKED: ENDBRANCH  12  15
+DOCKED: ENDBRANCH   9  11
+DOCKED: ENDBRANCH   6   9
+DOCKED: ENDBRANCH   5   6
+DOCKED: ENDBRANCH   4   5
+DOCKED: BRANCH   4  29
+DOCKED: ATOM     29  C2A ZAF A 309      48.002  15.552  38.031 -0.08 -0.01    +0.082 C 
+DOCKED: BRANCH  29  30
+DOCKED: ATOM     30  CP1 ZAF A 309      47.777  15.342  39.430 -0.08 +0.01    -0.055 A 
+DOCKED: ATOM     31  CP6 ZAF A 309      46.779  16.007  40.050 -0.19 +0.00    +0.007 A 
+DOCKED: ATOM     32  CP5 ZAF A 309      46.566  15.848  41.375 -0.10 +0.00    +0.001 A 
+DOCKED: ATOM     33  CP4 ZAF A 309      47.334  14.988  42.082 -0.17 -0.00    +0.000 A 
+DOCKED: ATOM     34  CP3 ZAF A 309      48.324  14.312  41.461 -0.05 -0.00    +0.001 A 
+DOCKED: ATOM     35  CP2 ZAF A 309      48.566  14.507  40.146 -0.03 -0.00    +0.007 A 
+DOCKED: ENDBRANCH  29  30
+DOCKED: ENDBRANCH   4  29
+DOCKED: ENDBRANCH   1   4
+DOCKED: TORSDOF 12
+DOCKED: TER
+DOCKED: ENDMDL
+________________________________________________________________________________
+
+
+	BEGINNING GENETIC ALGORITHM DOCKING
+Run:	2 / 10
+Date:	Thu Sep  8 18:34:36 2016
+Beginning LAMARCKIAN GENETIC ALGORITHM (LGA), with a maximum of 2500000 energy evaluations.
+
+Final-Value: -9.761
+Real= 22.64s,  CPU= 22.62s,  System= 0.00s
+
+
+	FINAL GENETIC ALGORITHM ALGORITHM DOCKED STATE
+	_______________________________________________
+
+
+Detailed state:  trans 47.252 23.116 32.555 quatxyzw 0.373599 0.541121 0.375114 -0.653376 center 46.400 20.377 36.480 ntor 12 -96.5719 147.6149 39.9397 -9.5402 52.2045 -1.8091 80.2236 -66.7234 -23.0606 63.4859 6.2604 -89.8637
+State:	 47.252  23.116  32.555   0.494  0.715  0.496 -98.407    -96.57  147.61   39.94   -9.54   52.20   -1.81   80.22  -66.72  -23.06   63.49    6.26  -89.86
+
+DOCKED: MODEL        2
+DOCKED: USER    Run = 2
+DOCKED: USER    DPF = ./6cpa.dpf
+DOCKED: USER  
+DOCKED: USER    Estimated Free Energy of Binding    =   -5.80 kcal/mol  [=(1)+(2)+(3)-(4)]
+DOCKED: USER    Estimated Inhibition Constant, Ki   =   56.46 uM (micromolar)  [Temperature = 298.15 K]
+DOCKED: USER    
+DOCKED: USER    (1) Final Intermolecular Energy     =   -9.38 kcal/mol
+DOCKED: USER        vdW + Hbond + desolv Energy     =   -9.18 kcal/mol
+DOCKED: USER        Electrostatic Energy            =   -0.19 kcal/mol
+DOCKED: USER    (2) Final Total Internal Energy     =   -0.39 kcal/mol
+DOCKED: USER    (3) Torsional Free Energy           =   +3.58 kcal/mol
+DOCKED: USER    (4) Unbound System's Energy  [=(2)] =   -0.39 kcal/mol
+DOCKED: USER    
+DOCKED: USER    
+DOCKED: USER    NEWDPF move 6cpa_ligand.pdbqt
+DOCKED: USER    NEWDPF about 46.400002 20.377199 36.480000
+DOCKED: USER    NEWDPF tran0 47.252227 23.115584 32.555378
+DOCKED: USER    NEWDPF quaternion0 0.373599 0.541121 0.375114 -0.653376
+DOCKED: USER    NEWDPF axisangle0 0.493505 0.714792 0.495505 -98.406700
+DOCKED: USER    NEWDPF quat0 0.493505 0.714792 0.495505 -98.406700
+DOCKED: USER    NEWDPF dihe0 -96.57 147.61 39.94 -9.54 52.20 -1.81 80.22 -66.72 -23.06 63.49 6.26 -89.86 
+DOCKED: USER  keepresnum = 1 
+DOCKED: USER  
+DOCKED: REMARK  12 active torsions:
+DOCKED: REMARK  status: ('A' for Active; 'I' for Inactive)
+DOCKED: REMARK    1  A    between atoms: C1_1  and  C2_5 
+DOCKED: REMARK    2  A    between atoms: C2A_4  and  CP1_6 
+DOCKED: REMARK    3  A    between atoms: C2A_4  and  C2_5 
+DOCKED: REMARK    4  A    between atoms: C2_5  and  O3_12 
+DOCKED: REMARK    5  A    between atoms: O3_12  and  P3_13 
+DOCKED: REMARK    6  A    between atoms: P3_13  and  C4_16 
+DOCKED: REMARK    7  A    between atoms: C4_16  and  N5_18 
+DOCKED: REMARK       I    between atoms: N5_18  and  C6_20 
+DOCKED: REMARK    8  A    between atoms: C6_20  and  C7_22 
+DOCKED: REMARK    9  A    between atoms: C7_22  and  N8_24 
+DOCKED: REMARK       I    between atoms: N8_24  and  C9_26 
+DOCKED: REMARK   10  A    between atoms: C9_26  and  O10_28 
+DOCKED: REMARK   11  A    between atoms: O10_28  and  C11_29 
+DOCKED: REMARK   12  A    between atoms: C11_29  and  C1X_30 
+DOCKED: USER                              x       y       z     vdW  Elec       q    Type
+DOCKED: USER                           _______ _______ _______ _____ _____    ______ ____
+DOCKED: ROOT
+DOCKED: ATOM      1  C1  ZAF A 309      44.206  22.140  34.291 -0.36 +0.02    +0.204 C 
+DOCKED: ATOM      2  O1A ZAF A 309      43.279  21.380  34.820 -0.33 -0.16    -0.646 OA
+DOCKED: ATOM      3  O1B ZAF A 309      44.374  22.170  33.114 -0.25 -0.55    -0.646 OA
+DOCKED: ENDROOT
+DOCKED: BRANCH   1   4
+DOCKED: ATOM      4  C2  ZAF A 309      44.993  22.915  35.213 -0.27 -0.18    +0.237 C 
+DOCKED: BRANCH   4   5
+DOCKED: ATOM      5  O3  ZAF A 309      45.610  21.867  36.001 -0.19 +0.16    -0.294 OA
+DOCKED: BRANCH   5   6
+DOCKED: ATOM      6  P3  ZAF A 309      44.718  21.100  37.221 -0.34 -0.17    +0.273 P 
+DOCKED: ATOM      7  O3A ZAF A 309      44.545  19.597  36.877 -0.24 -0.16    -0.645 OA
+DOCKED: ATOM      8  O3B ZAF A 309      43.422  21.903  37.468 -0.42 +0.98    -0.645 OA
+DOCKED: BRANCH   6   9
+DOCKED: ATOM      9  C4  ZAF A 309      45.625  21.238  38.693 -0.32 -0.16    +0.201 C 
+DOCKED: ATOM     10  C4A ZAF A 309      46.445  22.536  38.891 -0.27 -0.06    +0.046 C 
+DOCKED: BRANCH   9  11
+DOCKED: ATOM     11  N5  ZAF A 309      46.587  20.192  38.741 -0.07 +0.09    -0.343 N 
+DOCKED: ATOM     12  C6  ZAF A 309      47.387  19.944  39.785 -0.23 -0.05    +0.241 C 
+DOCKED: ATOM     13  O6  ZAF A 309      47.163  20.422  40.855 -0.43 +0.09    -0.271 OA
+DOCKED: ATOM     14  H5  ZAF A 309      46.673  19.588  37.923 +0.09 -0.00    +0.163 HD
+DOCKED: BRANCH  12  15
+DOCKED: ATOM     15  C7  ZAF A 309      48.502  19.087  39.504 -0.14 -0.01    +0.174 C 
+DOCKED: ATOM     16  C7A ZAF A 309      48.143  18.225  38.276 -0.16 +0.00    +0.042 C 
+DOCKED: BRANCH  15  17
+DOCKED: ATOM     17  N8  ZAF A 309      48.937  18.285  40.597 -0.07 +0.02    -0.324 N 
+DOCKED: ATOM     18  C9  ZAF A 309      49.505  18.695  41.733 -0.09 -0.02    +0.365 C 
+DOCKED: ATOM     19  O9  ZAF A 309      49.776  17.852  42.541 -0.14 -0.00    -0.238 OA
+DOCKED: ATOM     20  H8  ZAF A 309      48.800  17.279  40.500 +0.05 -0.01    +0.165 HD
+DOCKED: BRANCH  18  21
+DOCKED: ATOM     21  O10 ZAF A 309      49.757  19.986  41.903 -0.20 +0.03    -0.273 OA
+DOCKED: BRANCH  21  22
+DOCKED: ATOM     22  C11 ZAF A 309      51.073  20.422  41.672 -0.17 -0.01    +0.159 C 
+DOCKED: BRANCH  22  23
+DOCKED: ATOM     23  C1X ZAF A 309      51.513  21.638  42.295 -0.18 +0.00    -0.014 A 
+DOCKED: ATOM     24  C2X ZAF A 309      52.521  22.337  41.735 -0.18 +0.00    +0.013 A 
+DOCKED: ATOM     25  C3X ZAF A 309      52.952  23.480  42.304 -0.23 +0.00    +0.001 A 
+DOCKED: ATOM     26  C4X ZAF A 309      52.403  23.905  43.458 -0.37 +0.00    +0.000 A 
+DOCKED: ATOM     27  C5X ZAF A 309      51.398  23.206  44.019 -0.41 +0.00    +0.001 A 
+DOCKED: ATOM     28  C6X ZAF A 309      50.960  22.064  43.451 -0.38 -0.00    +0.013 A 
+DOCKED: ENDBRANCH  22  23
+DOCKED: ENDBRANCH  21  22
+DOCKED: ENDBRANCH  18  21
+DOCKED: ENDBRANCH  15  17
+DOCKED: ENDBRANCH  12  15
+DOCKED: ENDBRANCH   9  11
+DOCKED: ENDBRANCH   6   9
+DOCKED: ENDBRANCH   5   6
+DOCKED: ENDBRANCH   4   5
+DOCKED: BRANCH   4  29
+DOCKED: ATOM     29  C2A ZAF A 309      46.001  23.757  34.422 -0.41 -0.05    +0.082 C 
+DOCKED: BRANCH  29  30
+DOCKED: ATOM     30  CP1 ZAF A 309      45.577  24.546  33.305 -0.37 +0.02    -0.055 A 
+DOCKED: ATOM     31  CP6 ZAF A 309      44.623  25.486  33.479 -0.46 -0.00    +0.007 A 
+DOCKED: ATOM     32  CP5 ZAF A 309      44.186  26.223  32.434 -0.45 -0.00    +0.001 A 
+DOCKED: ATOM     33  CP4 ZAF A 309      44.732  26.046  31.210 -0.42 -0.00    +0.000 A 
+DOCKED: ATOM     34  CP3 ZAF A 309      45.695  25.115  31.037 -0.37 +0.00    +0.001 A 
+DOCKED: ATOM     35  CP2 ZAF A 309      46.099  24.347  32.072 -0.41 +0.00    +0.007 A 
+DOCKED: ENDBRANCH  29  30
+DOCKED: ENDBRANCH   4  29
+DOCKED: ENDBRANCH   1   4
+DOCKED: TORSDOF 12
+DOCKED: TER
+DOCKED: ENDMDL
+________________________________________________________________________________
+
+
+	BEGINNING GENETIC ALGORITHM DOCKING
+Run:	3 / 10
+Date:	Thu Sep  8 18:34:59 2016
+Beginning LAMARCKIAN GENETIC ALGORITHM (LGA), with a maximum of 2500000 energy evaluations.
+
+Final-Value: -9.212
+Real= 22.65s,  CPU= 22.62s,  System= 0.00s
+
+
+	FINAL GENETIC ALGORITHM ALGORITHM DOCKED STATE
+	_______________________________________________
+
+
+Detailed state:  trans 49.225 17.232 40.527 quatxyzw -0.014908 -0.961834 0.252605 0.104132 center 46.400 20.377 36.480 ntor 12 164.8525 146.5820 -38.1765 75.9289 4.5247 -12.1055 -75.2249 -49.4075 -56.7343 -65.0461 161.3331 -78.2844
+State:	 49.225  17.232  40.527  -0.015 -0.967  0.254 168.046    164.85  146.58  -38.18   75.93    4.52  -12.11  -75.22  -49.41  -56.73  -65.05  161.33  -78.28
+
+DOCKED: MODEL        3
+DOCKED: USER    Run = 3
+DOCKED: USER    DPF = ./6cpa.dpf
+DOCKED: USER  
+DOCKED: USER    Estimated Free Energy of Binding    =   -2.30 kcal/mol  [=(1)+(2)+(3)-(4)]
+DOCKED: USER    Estimated Inhibition Constant, Ki   =   20.47 mM (millimolar)  [Temperature = 298.15 K]
+DOCKED: USER    
+DOCKED: USER    (1) Final Intermolecular Energy     =   -5.88 kcal/mol
+DOCKED: USER        vdW + Hbond + desolv Energy     =   -5.82 kcal/mol
+DOCKED: USER        Electrostatic Energy            =   -0.06 kcal/mol
+DOCKED: USER    (2) Final Total Internal Energy     =   -3.33 kcal/mol
+DOCKED: USER    (3) Torsional Free Energy           =   +3.58 kcal/mol
+DOCKED: USER    (4) Unbound System's Energy  [=(2)] =   -3.33 kcal/mol
+DOCKED: USER    
+DOCKED: USER    
+DOCKED: USER    NEWDPF move 6cpa_ligand.pdbqt
+DOCKED: USER    NEWDPF about 46.400002 20.377199 36.480000
+DOCKED: USER    NEWDPF tran0 49.225245 17.232031 40.527469
+DOCKED: USER    NEWDPF quaternion0 -0.014908 -0.961834 0.252605 0.104132
+DOCKED: USER    NEWDPF axisangle0 -0.014990 -0.967092 0.253986 168.045718
+DOCKED: USER    NEWDPF quat0 -0.014990 -0.967092 0.253986 168.045718
+DOCKED: USER    NEWDPF dihe0 164.85 146.58 -38.18 75.93 4.52 -12.11 -75.22 -49.41 -56.73 -65.05 161.33 -78.28 
+DOCKED: USER  keepresnum = 1 
+DOCKED: USER  
+DOCKED: REMARK  12 active torsions:
+DOCKED: REMARK  status: ('A' for Active; 'I' for Inactive)
+DOCKED: REMARK    1  A    between atoms: C1_1  and  C2_5 
+DOCKED: REMARK    2  A    between atoms: C2A_4  and  CP1_6 
+DOCKED: REMARK    3  A    between atoms: C2A_4  and  C2_5 
+DOCKED: REMARK    4  A    between atoms: C2_5  and  O3_12 
+DOCKED: REMARK    5  A    between atoms: O3_12  and  P3_13 
+DOCKED: REMARK    6  A    between atoms: P3_13  and  C4_16 
+DOCKED: REMARK    7  A    between atoms: C4_16  and  N5_18 
+DOCKED: REMARK       I    between atoms: N5_18  and  C6_20 
+DOCKED: REMARK    8  A    between atoms: C6_20  and  C7_22 
+DOCKED: REMARK    9  A    between atoms: C7_22  and  N8_24 
+DOCKED: REMARK       I    between atoms: N8_24  and  C9_26 
+DOCKED: REMARK   10  A    between atoms: C9_26  and  O10_28 
+DOCKED: REMARK   11  A    between atoms: O10_28  and  C11_29 
+DOCKED: REMARK   12  A    between atoms: C11_29  and  C1X_30 
+DOCKED: USER                              x       y       z     vdW  Elec       q    Type
+DOCKED: USER                           _______ _______ _______ _____ _____    ______ ____
+DOCKED: ROOT
+DOCKED: ATOM      1  C1  ZAF A 309      50.793  19.805  42.569 -0.16 -0.01    +0.204 C 
+DOCKED: ATOM      2  O1A ZAF A 309      51.665  20.402  43.342 -0.00 +0.01    -0.646 OA
+DOCKED: ATOM      3  O1B ZAF A 309      50.168  18.871  42.960 +0.01 -0.02    -0.646 OA
+DOCKED: ENDROOT
+DOCKED: BRANCH   1   4
+DOCKED: ATOM      4  C2  ZAF A 309      50.648  20.343  41.242 -0.16 -0.02    +0.237 C 
+DOCKED: BRANCH   4   5
+DOCKED: ATOM      5  O3  ZAF A 309      51.879  19.893  40.625 -0.04 +0.00    -0.294 OA
+DOCKED: BRANCH   5   6
+DOCKED: ATOM      6  P3  ZAF A 309      52.036  18.273  40.151 -0.02 +0.00    +0.273 P 
+DOCKED: ATOM      7  O3A ZAF A 309      50.875  17.436  40.750 +0.03 +0.01    -0.645 OA
+DOCKED: ATOM      8  O3B ZAF A 309      53.469  17.797  40.478 +0.02 -0.01    -0.645 OA
+DOCKED: BRANCH   6   9
+DOCKED: ATOM      9  C4  ZAF A 309      51.928  18.225  38.420 -0.08 +0.00    +0.201 C 
+DOCKED: ATOM     10  C4A ZAF A 309      51.740  19.578  37.692 -0.20 +0.00    +0.046 C 
+DOCKED: BRANCH   9  11
+DOCKED: ATOM     11  N5  ZAF A 309      50.790  17.455  38.052 -0.04 -0.00    -0.343 N 
+DOCKED: ATOM     12  C6  ZAF A 309      50.632  16.855  36.866 -0.08 +0.00    +0.241 C 
+DOCKED: ATOM     13  O6  ZAF A 309      51.557  16.704  36.128 -0.10 -0.01    -0.271 OA
+DOCKED: ATOM     14  H5  ZAF A 309      50.042  17.353  38.738 +0.03 -0.00    +0.163 HD
+DOCKED: BRANCH  12  15
+DOCKED: ATOM     15  C7  ZAF A 309      49.292  16.433  36.573 -0.10 -0.00    +0.174 C 
+DOCKED: ATOM     16  C7A ZAF A 309      49.298  15.757  35.187 -0.14 -0.00    +0.042 C 
+DOCKED: BRANCH  15  17
+DOCKED: ATOM     17  N8  ZAF A 309      48.307  17.457  36.652 -0.06 -0.03    -0.324 N 
+DOCKED: ATOM     18  C9  ZAF A 309      47.756  17.975  37.752 -0.04 +0.03    +0.365 C 
+DOCKED: ATOM     19  O9  ZAF A 309      46.956  18.853  37.598 -0.68 -0.04    -0.238 OA
+DOCKED: ATOM     20  H8  ZAF A 309      47.983  17.839  35.764 +0.05 +0.03    +0.165 HD
+DOCKED: BRANCH  18  21
+DOCKED: ATOM     21  O10 ZAF A 309      48.097  17.489  38.938 -0.05 +0.00    -0.273 OA
+DOCKED: BRANCH  21  22
+DOCKED: ATOM     22  C11 ZAF A 309      47.113  17.487  39.941 -0.17 -0.00    +0.159 C 
+DOCKED: BRANCH  22  23
+DOCKED: ATOM     23  C1X ZAF A 309      46.797  16.246  40.591 -0.21 -0.00    -0.014 A 
+DOCKED: ATOM     24  C2X ZAF A 309      47.222  16.038  41.854 -0.21 -0.00    +0.013 A 
+DOCKED: ATOM     25  C3X ZAF A 309      46.938  14.879  42.482 -0.19 -0.00    +0.001 A 
+DOCKED: ATOM     26  C4X ZAF A 309      46.265  13.910  41.833 -0.17 +0.00    +0.000 A 
+DOCKED: ATOM     27  C5X ZAF A 309      45.843  14.117  40.572 -0.24 +0.00    +0.001 A 
+DOCKED: ATOM     28  C6X ZAF A 309      46.119  15.276  39.940 -0.22 +0.00    +0.013 A 
+DOCKED: ENDBRANCH  22  23
+DOCKED: ENDBRANCH  21  22
+DOCKED: ENDBRANCH  18  21
+DOCKED: ENDBRANCH  15  17
+DOCKED: ENDBRANCH  12  15
+DOCKED: ENDBRANCH   9  11
+DOCKED: ENDBRANCH   6   9
+DOCKED: ENDBRANCH   5   6
+DOCKED: ENDBRANCH   4   5
+DOCKED: BRANCH   4  29
+DOCKED: ATOM     29  C2A ZAF A 309      49.391  19.746  40.598 -0.25 -0.01    +0.082 C 
+DOCKED: BRANCH  29  30
+DOCKED: ATOM     30  CP1 ZAF A 309      48.467  20.581  39.890 -0.29 +0.01    -0.055 A 
+DOCKED: ATOM     31  CP6 ZAF A 309      48.906  21.330  38.855 -0.33 -0.00    +0.007 A 
+DOCKED: ATOM     32  CP5 ZAF A 309      48.059  22.147  38.191 -0.44 -0.00    +0.001 A 
+DOCKED: ATOM     33  CP4 ZAF A 309      46.753  22.189  38.538 -0.42 -0.00    +0.000 A 
+DOCKED: ATOM     34  CP3 ZAF A 309      46.310  21.431  39.563 -0.43 -0.00    +0.001 A 
+DOCKED: ATOM     35  CP2 ZAF A 309      47.166  20.649  40.257 -0.44 -0.00    +0.007 A 
+DOCKED: ENDBRANCH  29  30
+DOCKED: ENDBRANCH   4  29
+DOCKED: ENDBRANCH   1   4
+DOCKED: TORSDOF 12
+DOCKED: TER
+DOCKED: ENDMDL
+________________________________________________________________________________
+
+
+	BEGINNING GENETIC ALGORITHM DOCKING
+Run:	4 / 10
+Date:	Thu Sep  8 18:35:22 2016
+Beginning LAMARCKIAN GENETIC ALGORITHM (LGA), with a maximum of 2500000 energy evaluations.
+
+Final-Value: -9.942
+Real= 22.63s,  CPU= 22.62s,  System= 0.00s
+
+
+	FINAL GENETIC ALGORITHM ALGORITHM DOCKED STATE
+	_______________________________________________
+
+
+Detailed state:  trans 46.567 20.917 39.025 quatxyzw 0.546628 0.031649 -0.751421 0.368189 center 46.400 20.377 36.480 ntor 12 165.3851 -169.6806 12.3500 -164.0502 -38.6109 -80.0234 -41.5478 -179.9479 89.4209 -55.3190 -73.2601 41.5501
+State:	 46.567  20.917  39.025   0.588  0.034 -0.808 136.792    165.39 -169.68   12.35 -164.05  -38.61  -80.02  -41.55 -179.95   89.42  -55.32  -73.26   41.55
+
+DOCKED: MODEL        4
+DOCKED: USER    Run = 4
+DOCKED: USER    DPF = ./6cpa.dpf
+DOCKED: USER  
+DOCKED: USER    Estimated Free Energy of Binding    =   -4.93 kcal/mol  [=(1)+(2)+(3)-(4)]
+DOCKED: USER    Estimated Inhibition Constant, Ki   =  242.08 uM (micromolar)  [Temperature = 298.15 K]
+DOCKED: USER    
+DOCKED: USER    (1) Final Intermolecular Energy     =   -8.51 kcal/mol
+DOCKED: USER        vdW + Hbond + desolv Energy     =   -7.79 kcal/mol
+DOCKED: USER        Electrostatic Energy            =   -0.72 kcal/mol
+DOCKED: USER    (2) Final Total Internal Energy     =   -1.43 kcal/mol
+DOCKED: USER    (3) Torsional Free Energy           =   +3.58 kcal/mol
+DOCKED: USER    (4) Unbound System's Energy  [=(2)] =   -1.43 kcal/mol
+DOCKED: USER    
+DOCKED: USER    
+DOCKED: USER    NEWDPF move 6cpa_ligand.pdbqt
+DOCKED: USER    NEWDPF about 46.400002 20.377199 36.480000
+DOCKED: USER    NEWDPF tran0 46.566626 20.917104 39.024872
+DOCKED: USER    NEWDPF quaternion0 0.546628 0.031649 -0.751421 0.368189
+DOCKED: USER    NEWDPF axisangle0 0.587930 0.034040 -0.808196 136.792092
+DOCKED: USER    NEWDPF quat0 0.587930 0.034040 -0.808196 136.792092
+DOCKED: USER    NEWDPF dihe0 165.39 -169.68 12.35 -164.05 -38.61 -80.02 -41.55 -179.95 89.42 -55.32 -73.26 41.55 
+DOCKED: USER  keepresnum = 1 
+DOCKED: USER  
+DOCKED: REMARK  12 active torsions:
+DOCKED: REMARK  status: ('A' for Active; 'I' for Inactive)
+DOCKED: REMARK    1  A    between atoms: C1_1  and  C2_5 
+DOCKED: REMARK    2  A    between atoms: C2A_4  and  CP1_6 
+DOCKED: REMARK    3  A    between atoms: C2A_4  and  C2_5 
+DOCKED: REMARK    4  A    between atoms: C2_5  and  O3_12 
+DOCKED: REMARK    5  A    between atoms: O3_12  and  P3_13 
+DOCKED: REMARK    6  A    between atoms: P3_13  and  C4_16 
+DOCKED: REMARK    7  A    between atoms: C4_16  and  N5_18 
+DOCKED: REMARK       I    between atoms: N5_18  and  C6_20 
+DOCKED: REMARK    8  A    between atoms: C6_20  and  C7_22 
+DOCKED: REMARK    9  A    between atoms: C7_22  and  N8_24 
+DOCKED: REMARK       I    between atoms: N8_24  and  C9_26 
+DOCKED: REMARK   10  A    between atoms: C9_26  and  O10_28 
+DOCKED: REMARK   11  A    between atoms: O10_28  and  C11_29 
+DOCKED: REMARK   12  A    between atoms: C11_29  and  C1X_30 
+DOCKED: USER                              x       y       z     vdW  Elec       q    Type
+DOCKED: USER                           _______ _______ _______ _____ _____    ______ ____
+DOCKED: ROOT
+DOCKED: ATOM      1  C1  ZAF A 309      48.388  17.768  38.935 -0.07 -0.00    +0.204 C 
+DOCKED: ATOM      2  O1A ZAF A 309      49.069  16.727  39.344 +0.05 +0.02    -0.646 OA
+DOCKED: ATOM      3  O1B ZAF A 309      48.859  18.860  38.970 +0.05 +0.02    -0.646 OA
+DOCKED: ENDROOT
+DOCKED: BRANCH   1   4
+DOCKED: ATOM      4  C2  ZAF A 309      47.058  17.505  38.453 -0.10 +0.01    +0.237 C 
+DOCKED: BRANCH   4   5
+DOCKED: ATOM      5  O3  ZAF A 309      46.741  18.766  37.813 -0.45 -0.03    -0.294 OA
+DOCKED: BRANCH   5   6
+DOCKED: ATOM      6  P3  ZAF A 309      45.120  19.194  37.561 -0.23 +0.03    +0.273 P 
+DOCKED: ATOM      7  O3A ZAF A 309      44.193  18.050  38.050 -0.52 -0.39    -0.645 OA
+DOCKED: ATOM      8  O3B ZAF A 309      44.948  19.640  36.093 -0.23 -0.26    -0.645 OA
+DOCKED: BRANCH   6   9
+DOCKED: ATOM      9  C4  ZAF A 309      44.805  20.614  38.506 -0.31 -0.14    +0.201 C 
+DOCKED: ATOM     10  C4A ZAF A 309      43.790  21.630  37.928 -0.48 -0.07    +0.046 C 
+DOCKED: BRANCH   9  11
+DOCKED: ATOM     11  N5  ZAF A 309      46.013  21.351  38.647 -0.15 +0.25    -0.343 N 
+DOCKED: ATOM     12  C6  ZAF A 309      46.600  22.041  37.661 -0.25 -0.19    +0.241 C 
+DOCKED: ATOM     13  O6  ZAF A 309      46.006  22.304  36.661 -0.23 +0.24    -0.271 OA
+DOCKED: ATOM     14  H5  ZAF A 309      46.465  21.353  39.561 +0.06 -0.11    +0.163 HD
+DOCKED: BRANCH  12  15
+DOCKED: ATOM     15  C7  ZAF A 309      47.962  22.414  37.909 -0.40 -0.08    +0.174 C 
+DOCKED: ATOM     16  C7A ZAF A 309      48.208  23.786  37.250 -0.50 -0.02    +0.042 C 
+DOCKED: BRANCH  15  17
+DOCKED: ATOM     17  N8  ZAF A 309      48.934  21.457  37.503 -0.19 +0.04    -0.324 N 
+DOCKED: ATOM     18  C9  ZAF A 309      50.096  21.173  38.095 -0.14 -0.01    +0.365 C 
+DOCKED: ATOM     19  O9  ZAF A 309      50.762  20.309  37.600 -0.18 -0.00    -0.238 OA
+DOCKED: ATOM     20  H8  ZAF A 309      48.716  20.924  36.660 +0.08 -0.00    +0.165 HD
+DOCKED: BRANCH  18  21
+DOCKED: ATOM     21  O10 ZAF A 309      50.462  21.863  39.166 -0.36 -0.02    -0.273 OA
+DOCKED: BRANCH  21  22
+DOCKED: ATOM     22  C11 ZAF A 309      51.573  21.392  39.888 -0.18 -0.00    +0.159 C 
+DOCKED: BRANCH  22  23
+DOCKED: ATOM     23  C1X ZAF A 309      52.056  22.172  40.992 -0.11 +0.00    -0.014 A 
+DOCKED: ATOM     24  C2X ZAF A 309      51.832  21.741  42.250 -0.20 -0.00    +0.013 A 
+DOCKED: ATOM     25  C3X ZAF A 309      52.276  22.459  43.301 -0.29 +0.00    +0.001 A 
+DOCKED: ATOM     26  C4X ZAF A 309      52.907  23.630  43.097 -0.28 +0.00    +0.000 A 
+DOCKED: ATOM     27  C5X ZAF A 309      53.128  24.062  41.841 -0.26 +0.00    +0.001 A 
+DOCKED: ATOM     28  C6X ZAF A 309      52.691  23.346  40.785 -0.22 +0.00    +0.013 A 
+DOCKED: ENDBRANCH  22  23
+DOCKED: ENDBRANCH  21  22
+DOCKED: ENDBRANCH  18  21
+DOCKED: ENDBRANCH  15  17
+DOCKED: ENDBRANCH  12  15
+DOCKED: ENDBRANCH   9  11
+DOCKED: ENDBRANCH   6   9
+DOCKED: ENDBRANCH   5   6
+DOCKED: ENDBRANCH   4   5
+DOCKED: BRANCH   4  29
+DOCKED: ATOM     29  C2A ZAF A 309      47.105  16.323  37.478 -0.16 -0.01    +0.082 C 
+DOCKED: BRANCH  29  30
+DOCKED: ATOM     30  CP1 ZAF A 309      46.988  16.536  36.066 -0.18 +0.01    -0.055 A 
+DOCKED: ATOM     31  CP6 ZAF A 309      48.099  16.537  35.299 -0.18 -0.00    +0.007 A 
+DOCKED: ATOM     32  CP5 ZAF A 309      48.016  16.765  33.969 -0.23 +0.00    +0.001 A 
+DOCKED: ATOM     33  CP4 ZAF A 309      46.807  16.956  33.393 -0.34 +0.00    +0.000 A 
+DOCKED: ATOM     34  CP3 ZAF A 309      45.694  16.941  34.157 -0.33 +0.00    +0.001 A 
+DOCKED: ATOM     35  CP2 ZAF A 309      45.782  16.760  35.493 -0.31 +0.00    +0.007 A 
+DOCKED: ENDBRANCH  29  30
+DOCKED: ENDBRANCH   4  29
+DOCKED: ENDBRANCH   1   4
+DOCKED: TORSDOF 12
+DOCKED: TER
+DOCKED: ENDMDL
+________________________________________________________________________________
+
+
+	BEGINNING GENETIC ALGORITHM DOCKING
+Run:	5 / 10
+Date:	Thu Sep  8 18:35:44 2016
+Beginning LAMARCKIAN GENETIC ALGORITHM (LGA), with a maximum of 2500000 energy evaluations.
+
+Final-Value: -10.443
+Real= 22.66s,  CPU= 22.64s,  System= 0.00s
+
+
+	FINAL GENETIC ALGORITHM ALGORITHM DOCKED STATE
+	_______________________________________________
+
+
+Detailed state:  trans 46.131 19.844 36.979 quatxyzw -0.336274 -0.399477 -0.834450 -0.176157 center 46.400 20.377 36.480 ntor 12 -26.6989 -18.0331 -166.6223 151.8288 26.9822 150.4615 -174.3520 175.0234 122.0143 -22.4498 -64.1973 3.6590
+State:	 46.131  19.844  36.979  -0.342 -0.406 -0.848 -159.708    -26.70  -18.03 -166.62  151.83   26.98  150.46 -174.35  175.02  122.01  -22.45  -64.20    3.66
+
+DOCKED: MODEL        5
+DOCKED: USER    Run = 5
+DOCKED: USER    DPF = ./6cpa.dpf
+DOCKED: USER  
+DOCKED: USER    Estimated Free Energy of Binding    =   -4.66 kcal/mol  [=(1)+(2)+(3)-(4)]
+DOCKED: USER    Estimated Inhibition Constant, Ki   =  383.08 uM (micromolar)  [Temperature = 298.15 K]
+DOCKED: USER    
+DOCKED: USER    (1) Final Intermolecular Energy     =   -8.24 kcal/mol
+DOCKED: USER        vdW + Hbond + desolv Energy     =   -7.93 kcal/mol
+DOCKED: USER        Electrostatic Energy            =   -0.31 kcal/mol
+DOCKED: USER    (2) Final Total Internal Energy     =   -2.20 kcal/mol
+DOCKED: USER    (3) Torsional Free Energy           =   +3.58 kcal/mol
+DOCKED: USER    (4) Unbound System's Energy  [=(2)] =   -2.20 kcal/mol
+DOCKED: USER    
+DOCKED: USER    
+DOCKED: USER    NEWDPF move 6cpa_ligand.pdbqt
+DOCKED: USER    NEWDPF about 46.400002 20.377199 36.480000
+DOCKED: USER    NEWDPF tran0 46.131036 19.844109 36.979035
+DOCKED: USER    NEWDPF quaternion0 -0.336274 -0.399477 -0.834450 -0.176157
+DOCKED: USER    NEWDPF axisangle0 -0.341616 -0.405824 -0.847706 -159.707961
+DOCKED: USER    NEWDPF quat0 -0.341616 -0.405824 -0.847706 -159.707961
+DOCKED: USER    NEWDPF dihe0 -26.70 -18.03 -166.62 151.83 26.98 150.46 -174.35 175.02 122.01 -22.45 -64.20 3.66 
+DOCKED: USER  keepresnum = 1 
+DOCKED: USER  
+DOCKED: REMARK  12 active torsions:
+DOCKED: REMARK  status: ('A' for Active; 'I' for Inactive)
+DOCKED: REMARK    1  A    between atoms: C1_1  and  C2_5 
+DOCKED: REMARK    2  A    between atoms: C2A_4  and  CP1_6 
+DOCKED: REMARK    3  A    between atoms: C2A_4  and  C2_5 
+DOCKED: REMARK    4  A    between atoms: C2_5  and  O3_12 
+DOCKED: REMARK    5  A    between atoms: O3_12  and  P3_13 
+DOCKED: REMARK    6  A    between atoms: P3_13  and  C4_16 
+DOCKED: REMARK    7  A    between atoms: C4_16  and  N5_18 
+DOCKED: REMARK       I    between atoms: N5_18  and  C6_20 
+DOCKED: REMARK    8  A    between atoms: C6_20  and  C7_22 
+DOCKED: REMARK    9  A    between atoms: C7_22  and  N8_24 
+DOCKED: REMARK       I    between atoms: N8_24  and  C9_26 
+DOCKED: REMARK   10  A    between atoms: C9_26  and  O10_28 
+DOCKED: REMARK   11  A    between atoms: O10_28  and  C11_29 
+DOCKED: REMARK   12  A    between atoms: C11_29  and  C1X_30 
+DOCKED: USER                              x       y       z     vdW  Elec       q    Type
+DOCKED: USER                           _______ _______ _______ _____ _____    ______ ____
+DOCKED: ROOT
+DOCKED: ATOM      1  C1  ZAF A 309      47.215  16.924  35.097 -0.16 +0.00    +0.204 C 
+DOCKED: ATOM      2  O1A ZAF A 309      47.742  16.201  34.140 +0.00 -0.00    -0.646 OA
+DOCKED: ATOM      3  O1B ZAF A 309      46.231  17.565  34.908 +0.01 -0.14    -0.646 OA
+DOCKED: ENDROOT
+DOCKED: BRANCH   1   4
+DOCKED: ATOM      4  C2  ZAF A 309      47.897  16.892  36.364 -0.10 -0.00    +0.237 C 
+DOCKED: BRANCH   4   5
+DOCKED: ATOM      5  O3  ZAF A 309      47.488  18.162  36.930 -0.44 -0.08    -0.294 OA
+DOCKED: BRANCH   5   6
+DOCKED: ATOM      6  P3  ZAF A 309      48.531  18.984  37.984 -0.10 +0.02    +0.273 P 
+DOCKED: ATOM      7  O3A ZAF A 309      50.005  18.674  37.612 +0.02 -0.03    -0.645 OA
+DOCKED: ATOM      8  O3B ZAF A 309      48.109  18.677  39.438 +0.06 +0.04    -0.645 OA
+DOCKED: BRANCH   6   9
+DOCKED: ATOM      9  C4  ZAF A 309      48.245  20.682  37.778 -0.16 -0.02    +0.201 C 
+DOCKED: ATOM     10  C4A ZAF A 309      49.082  21.645  38.655 -0.38 -0.01    +0.046 C 
+DOCKED: BRANCH   9  11
+DOCKED: ATOM     11  N5  ZAF A 309      46.894  20.966  38.119 -0.09 +0.12    -0.343 N 
+DOCKED: ATOM     12  C6  ZAF A 309      46.384  20.862  39.352 -0.29 -0.12    +0.241 C 
+DOCKED: ATOM     13  O6  ZAF A 309      47.098  20.779  40.304 -0.40 +0.11    -0.271 OA
+DOCKED: ATOM     14  H5  ZAF A 309      46.269  21.269  37.371 +0.09 -0.08    +0.163 HD
+DOCKED: BRANCH  12  15
+DOCKED: ATOM     15  C7  ZAF A 309      44.951  20.853  39.418 -0.33 -0.14    +0.174 C 
+DOCKED: ATOM     16  C7A ZAF A 309      44.470  19.422  39.101 -0.32 -0.01    +0.042 C 
+DOCKED: BRANCH  15  17
+DOCKED: ATOM     17  N8  ZAF A 309      44.303  21.818  38.596 -0.18 +0.51    -0.324 N 
+DOCKED: ATOM     18  C9  ZAF A 309      43.980  21.704  37.306 -0.24 -0.42    +0.365 C 
+DOCKED: ATOM     19  O9  ZAF A 309      43.413  22.632  36.804 -0.65 +0.32    -0.238 OA
+DOCKED: ATOM     20  H8  ZAF A 309      44.057  22.699  39.046 -0.32 -0.40    +0.165 HD
+DOCKED: BRANCH  18  21
+DOCKED: ATOM     21  O10 ZAF A 309      44.316  20.603  36.649 -0.71 +0.05    -0.273 OA
+DOCKED: BRANCH  21  22
+DOCKED: ATOM     22  C11 ZAF A 309      45.075  20.758  35.475 -0.05 +0.01    +0.159 C 
+DOCKED: BRANCH  22  23
+DOCKED: ATOM     23  C1X ZAF A 309      45.371  22.086  35.018 -0.34 +0.00    -0.014 A 
+DOCKED: ATOM     24  C2X ZAF A 309      44.472  22.731  34.247 -0.42 -0.00    +0.013 A 
+DOCKED: ATOM     25  C3X ZAF A 309      44.730  23.978  33.805 -0.41 -0.00    +0.001 A 
+DOCKED: ATOM     26  C4X ZAF A 309      45.905  24.566  34.099 -0.40 -0.00    +0.000 A 
+DOCKED: ATOM     27  C5X ZAF A 309      46.803  23.921  34.867 -0.44 -0.00    +0.001 A 
+DOCKED: ATOM     28  C6X ZAF A 309      46.549  22.675  35.316 -0.33 -0.01    +0.013 A 
+DOCKED: ENDBRANCH  22  23
+DOCKED: ENDBRANCH  21  22
+DOCKED: ENDBRANCH  18  21
+DOCKED: ENDBRANCH  15  17
+DOCKED: ENDBRANCH  12  15
+DOCKED: ENDBRANCH   9  11
+DOCKED: ENDBRANCH   6   9
+DOCKED: ENDBRANCH   5   6
+DOCKED: ENDBRANCH   4   5
+DOCKED: BRANCH   4  29
+DOCKED: ATOM     29  C2A ZAF A 309      47.403  15.682  37.165 -0.13 -0.02    +0.082 C 
+DOCKED: BRANCH  29  30
+DOCKED: ATOM     30  CP1 ZAF A 309      47.362  15.721  38.596 -0.11 +0.01    -0.055 A 
+DOCKED: ATOM     31  CP6 ZAF A 309      48.257  15.002  39.307 -0.05 -0.00    +0.007 A 
+DOCKED: ATOM     32  CP5 ZAF A 309      48.219  15.000  40.658 -0.07 -0.00    +0.001 A 
+DOCKED: ATOM     33  CP4 ZAF A 309      47.301  15.752  41.307 -0.19 -0.00    +0.000 A 
+DOCKED: ATOM     34  CP3 ZAF A 309      46.414  16.482  40.598 -0.09 +0.00    +0.001 A 
+DOCKED: ATOM     35  CP2 ZAF A 309      46.423  16.447  39.247 -0.21 +0.00    +0.007 A 
+DOCKED: ENDBRANCH  29  30
+DOCKED: ENDBRANCH   4  29
+DOCKED: ENDBRANCH   1   4
+DOCKED: TORSDOF 12
+DOCKED: TER
+DOCKED: ENDMDL
+________________________________________________________________________________
+
+
+	BEGINNING GENETIC ALGORITHM DOCKING
+Run:	6 / 10
+Date:	Thu Sep  8 18:36:07 2016
+Beginning LAMARCKIAN GENETIC ALGORITHM (LGA), with a maximum of 2500000 energy evaluations.
+
+Final-Value: -10.340
+Real= 22.38s,  CPU= 22.35s,  System= 0.00s
+
+
+	FINAL GENETIC ALGORITHM ALGORITHM DOCKED STATE
+	_______________________________________________
+
+
+Detailed state:  trans 50.473 15.305 43.684 quatxyzw 0.125396 -0.871669 0.439299 0.177443 center 46.400 20.377 36.480 ntor 12 -180.0000 -167.4105 101.1180 121.0958 -87.3735 -141.6409 49.7781 -16.7299 28.7689 88.8327 -26.0423 55.2761
+State:	 50.473  15.305  43.684   0.127 -0.886  0.446 159.558   -180.00 -167.41  101.12  121.10  -87.37 -141.64   49.78  -16.73   28.77   88.83  -26.04   55.28
+
+DOCKED: MODEL        6
+DOCKED: USER    Run = 6
+DOCKED: USER    DPF = ./6cpa.dpf
+DOCKED: USER  
+DOCKED: USER    Estimated Free Energy of Binding    =   -4.10 kcal/mol  [=(1)+(2)+(3)-(4)]
+DOCKED: USER    Estimated Inhibition Constant, Ki   =  982.42 uM (micromolar)  [Temperature = 298.15 K]
+DOCKED: USER    
+DOCKED: USER    (1) Final Intermolecular Energy     =   -7.68 kcal/mol
+DOCKED: USER        vdW + Hbond + desolv Energy     =   -7.40 kcal/mol
+DOCKED: USER        Electrostatic Energy            =   -0.28 kcal/mol
+DOCKED: USER    (2) Final Total Internal Energy     =   -2.66 kcal/mol
+DOCKED: USER    (3) Torsional Free Energy           =   +3.58 kcal/mol
+DOCKED: USER    (4) Unbound System's Energy  [=(2)] =   -2.66 kcal/mol
+DOCKED: USER    
+DOCKED: USER    
+DOCKED: USER    NEWDPF move 6cpa_ligand.pdbqt
+DOCKED: USER    NEWDPF about 46.400002 20.377199 36.480000
+DOCKED: USER    NEWDPF tran0 50.473301 15.304763 43.683640
+DOCKED: USER    NEWDPF quaternion0 0.125396 -0.871669 0.439299 0.177443
+DOCKED: USER    NEWDPF axisangle0 0.127418 -0.885724 0.446383 159.558243
+DOCKED: USER    NEWDPF quat0 0.127418 -0.885724 0.446383 159.558243
+DOCKED: USER    NEWDPF dihe0 180.00 -167.41 101.12 121.10 -87.37 -141.64 49.78 -16.73 28.77 88.83 -26.04 55.28 
+DOCKED: USER  keepresnum = 1 
+DOCKED: USER  
+DOCKED: REMARK  12 active torsions:
+DOCKED: REMARK  status: ('A' for Active; 'I' for Inactive)
+DOCKED: REMARK    1  A    between atoms: C1_1  and  C2_5 
+DOCKED: REMARK    2  A    between atoms: C2A_4  and  CP1_6 
+DOCKED: REMARK    3  A    between atoms: C2A_4  and  C2_5 
+DOCKED: REMARK    4  A    between atoms: C2_5  and  O3_12 
+DOCKED: REMARK    5  A    between atoms: O3_12  and  P3_13 
+DOCKED: REMARK    6  A    between atoms: P3_13  and  C4_16 
+DOCKED: REMARK    7  A    between atoms: C4_16  and  N5_18 
+DOCKED: REMARK       I    between atoms: N5_18  and  C6_20 
+DOCKED: REMARK    8  A    between atoms: C6_20  and  C7_22 
+DOCKED: REMARK    9  A    between atoms: C7_22  and  N8_24 
+DOCKED: REMARK       I    between atoms: N8_24  and  C9_26 
+DOCKED: REMARK   10  A    between atoms: C9_26  and  O10_28 
+DOCKED: REMARK   11  A    between atoms: O10_28  and  C11_29 
+DOCKED: REMARK   12  A    between atoms: C11_29  and  C1X_30 
+DOCKED: USER                              x       y       z     vdW  Elec       q    Type
+DOCKED: USER                           _______ _______ _______ _____ _____    ______ ____
+DOCKED: ROOT
+DOCKED: ATOM      1  C1  ZAF A 309      51.085  18.810  44.448 -0.16 +0.02    +0.204 C 
+DOCKED: ATOM      2  O1A ZAF A 309      51.675  19.886  44.905 -0.05 -0.01    -0.646 OA
+DOCKED: ATOM      3  O1B ZAF A 309      50.653  17.987  45.190 -0.50 -0.14    -0.646 OA
+DOCKED: ENDROOT
+DOCKED: BRANCH   1   4
+DOCKED: ATOM      4  C2  ZAF A 309      51.001  18.694  43.015 -0.12 +0.01    +0.237 C 
+DOCKED: BRANCH   4   5
+DOCKED: ATOM      5  O3  ZAF A 309      49.824  17.861  42.874 -0.12 -0.02    -0.294 OA
+DOCKED: BRANCH   5   6
+DOCKED: ATOM      6  P3  ZAF A 309      49.986  16.270  42.308 -0.09 -0.00    +0.273 P 
+DOCKED: ATOM      7  O3A ZAF A 309      49.004  15.341  43.069 +0.00 +0.02    -0.645 OA
+DOCKED: ATOM      8  O3B ZAF A 309      51.480  15.878  42.352 +0.01 -0.01    -0.645 OA
+DOCKED: BRANCH   6   9
+DOCKED: ATOM      9  C4  ZAF A 309      49.568  16.272  40.625 -0.04 -0.01    +0.201 C 
+DOCKED: ATOM     10  C4A ZAF A 309      50.697  16.613  39.622 -0.03 -0.00    +0.046 C 
+DOCKED: BRANCH   9  11
+DOCKED: ATOM     11  N5  ZAF A 309      48.574  17.264  40.399 -0.04 +0.02    -0.343 N 
+DOCKED: ATOM     12  C6  ZAF A 309      47.386  17.032  39.827 -0.11 -0.00    +0.241 C 
+DOCKED: ATOM     13  O6  ZAF A 309      46.972  15.919  39.706 -0.10 +0.00    -0.271 OA
+DOCKED: ATOM     14  H5  ZAF A 309      48.779  18.219  40.694 +0.06 -0.01    +0.163 HD
+DOCKED: BRANCH  12  15
+DOCKED: ATOM     15  C7  ZAF A 309      46.688  18.203  39.382 -0.17 -0.00    +0.174 C 
+DOCKED: ATOM     16  C7A ZAF A 309      46.565  19.167  40.580 -0.37 -0.01    +0.042 C 
+DOCKED: BRANCH  15  17
+DOCKED: ATOM     17  N8  ZAF A 309      45.423  17.957  38.777 -0.11 -0.06    -0.324 N 
+DOCKED: ATOM     18  C9  ZAF A 309      44.372  18.778  38.723 -0.10 +0.02    +0.365 C 
+DOCKED: ATOM     19  O9  ZAF A 309      43.403  18.384  38.139 -0.86 -0.12    -0.238 OA
+DOCKED: ATOM     20  H8  ZAF A 309      45.307  17.047  38.331 +0.07 +0.06    +0.165 HD
+DOCKED: BRANCH  18  21
+DOCKED: ATOM     21  O10 ZAF A 309      44.440  19.958  39.325 -0.30 +0.16    -0.273 OA
+DOCKED: BRANCH  21  22
+DOCKED: ATOM     22  C11 ZAF A 309      44.264  21.101  38.527 -0.35 -0.18    +0.159 C 
+DOCKED: BRANCH  22  23
+DOCKED: ATOM     23  C1X ZAF A 309      45.428  21.775  38.025 -0.37 +0.01    -0.014 A 
+DOCKED: ATOM     24  C2X ZAF A 309      45.582  21.918  36.693 -0.32 -0.01    +0.013 A 
+DOCKED: ATOM     25  C3X ZAF A 309      46.668  22.546  36.200 -0.37 -0.00    +0.001 A 
+DOCKED: ATOM     26  C4X ZAF A 309      47.622  22.995  37.036 -0.47 -0.00    +0.000 A 
+DOCKED: ATOM     27  C5X ZAF A 309      47.470  22.850  38.366 -0.47 -0.00    +0.001 A 
+DOCKED: ATOM     28  C6X ZAF A 309      46.383  22.227  38.866 -0.37 -0.01    +0.013 A 
+DOCKED: ENDBRANCH  22  23
+DOCKED: ENDBRANCH  21  22
+DOCKED: ENDBRANCH  18  21
+DOCKED: ENDBRANCH  15  17
+DOCKED: ENDBRANCH  12  15
+DOCKED: ENDBRANCH   9  11
+DOCKED: ENDBRANCH   6   9
+DOCKED: ENDBRANCH   5   6
+DOCKED: ENDBRANCH   4   5
+DOCKED: BRANCH   4  29
+DOCKED: ATOM     29  C2A ZAF A 309      50.832  20.093  42.411 -0.22 -0.00    +0.082 C 
+DOCKED: BRANCH  29  30
+DOCKED: ATOM     30  CP1 ZAF A 309      50.724  20.267  40.994 -0.18 +0.00    -0.055 A 
+DOCKED: ATOM     31  CP6 ZAF A 309      49.512  20.498  40.443 -0.28 -0.00    +0.007 A 
+DOCKED: ATOM     32  CP5 ZAF A 309      49.381  20.637  39.105 -0.27 -0.00    +0.001 A 
+DOCKED: ATOM     33  CP4 ZAF A 309      50.474  20.583  38.312 -0.27 -0.00    +0.000 A 
+DOCKED: ATOM     34  CP3 ZAF A 309      51.688  20.366  38.862 -0.20 -0.00    +0.001 A 
+DOCKED: ATOM     35  CP2 ZAF A 309      51.813  20.180  40.194 -0.12 -0.00    +0.007 A 
+DOCKED: ENDBRANCH  29  30
+DOCKED: ENDBRANCH   4  29
+DOCKED: ENDBRANCH   1   4
+DOCKED: TORSDOF 12
+DOCKED: TER
+DOCKED: ENDMDL
+________________________________________________________________________________
+
+
+	BEGINNING GENETIC ALGORITHM DOCKING
+Run:	7 / 10
+Date:	Thu Sep  8 18:36:29 2016
+Beginning LAMARCKIAN GENETIC ALGORITHM (LGA), with a maximum of 2500000 energy evaluations.
+
+Final-Value: -9.638
+Real= 22.34s,  CPU= 22.33s,  System= 0.00s
+
+
+	FINAL GENETIC ALGORITHM ALGORITHM DOCKED STATE
+	_______________________________________________
+
+
+Detailed state:  trans 51.774 17.559 39.834 quatxyzw -0.144540 0.526363 -0.008561 0.837841 center 46.400 20.377 36.480 ntor 12 -2.6607 165.8447 -16.7652 179.8788 -65.8807 63.6107 151.1743 -175.8500 -169.8181 -34.0119 -83.8400 -65.3688
+State:	 51.774  17.559  39.834  -0.265  0.964 -0.016 66.174     -2.66  165.84  -16.77  179.88  -65.88   63.61  151.17 -175.85 -169.82  -34.01  -83.84  -65.37
+
+DOCKED: MODEL        7
+DOCKED: USER    Run = 7
+DOCKED: USER    DPF = ./6cpa.dpf
+DOCKED: USER  
+DOCKED: USER    Estimated Free Energy of Binding    =   -4.93 kcal/mol  [=(1)+(2)+(3)-(4)]
+DOCKED: USER    Estimated Inhibition Constant, Ki   =  243.15 uM (micromolar)  [Temperature = 298.15 K]
+DOCKED: USER    
+DOCKED: USER    (1) Final Intermolecular Energy     =   -8.51 kcal/mol
+DOCKED: USER        vdW + Hbond + desolv Energy     =   -8.72 kcal/mol
+DOCKED: USER        Electrostatic Energy            =   +0.21 kcal/mol
+DOCKED: USER    (2) Final Total Internal Energy     =   -1.13 kcal/mol
+DOCKED: USER    (3) Torsional Free Energy           =   +3.58 kcal/mol
+DOCKED: USER    (4) Unbound System's Energy  [=(2)] =   -1.13 kcal/mol
+DOCKED: USER    
+DOCKED: USER    
+DOCKED: USER    NEWDPF move 6cpa_ligand.pdbqt
+DOCKED: USER    NEWDPF about 46.400002 20.377199 36.480000
+DOCKED: USER    NEWDPF tran0 51.774297 17.558523 39.834426
+DOCKED: USER    NEWDPF quaternion0 -0.144540 0.526363 -0.008561 0.837841
+DOCKED: USER    NEWDPF axisangle0 -0.264766 0.964185 -0.015683 66.174372
+DOCKED: USER    NEWDPF quat0 -0.264766 0.964185 -0.015683 66.174372
+DOCKED: USER    NEWDPF dihe0 -2.66 165.84 -16.77 179.88 -65.88 63.61 151.17 -175.85 -169.82 -34.01 -83.84 -65.37 
+DOCKED: USER  keepresnum = 1 
+DOCKED: USER  
+DOCKED: REMARK  12 active torsions:
+DOCKED: REMARK  status: ('A' for Active; 'I' for Inactive)
+DOCKED: REMARK    1  A    between atoms: C1_1  and  C2_5 
+DOCKED: REMARK    2  A    between atoms: C2A_4  and  CP1_6 
+DOCKED: REMARK    3  A    between atoms: C2A_4  and  C2_5 
+DOCKED: REMARK    4  A    between atoms: C2_5  and  O3_12 
+DOCKED: REMARK    5  A    between atoms: O3_12  and  P3_13 
+DOCKED: REMARK    6  A    between atoms: P3_13  and  C4_16 
+DOCKED: REMARK    7  A    between atoms: C4_16  and  N5_18 
+DOCKED: REMARK       I    between atoms: N5_18  and  C6_20 
+DOCKED: REMARK    8  A    between atoms: C6_20  and  C7_22 
+DOCKED: REMARK    9  A    between atoms: C7_22  and  N8_24 
+DOCKED: REMARK       I    between atoms: N8_24  and  C9_26 
+DOCKED: REMARK   10  A    between atoms: C9_26  and  O10_28 
+DOCKED: REMARK   11  A    between atoms: O10_28  and  C11_29 
+DOCKED: REMARK   12  A    between atoms: C11_29  and  C1X_30 
+DOCKED: USER                              x       y       z     vdW  Elec       q    Type
+DOCKED: USER                           _______ _______ _______ _____ _____    ______ ____
+DOCKED: ROOT
+DOCKED: ATOM      1  C1  ZAF A 309      53.012  19.840  37.283 -0.21 -0.00    +0.204 C 
+DOCKED: ATOM      2  O1A ZAF A 309      53.205  20.388  36.110 +0.03 +0.10    -0.646 OA
+DOCKED: ATOM      3  O1B ZAF A 309      53.430  18.753  37.527 -0.00 -0.00    -0.646 OA
+DOCKED: ENDROOT
+DOCKED: BRANCH   1   4
+DOCKED: ATOM      4  C2  ZAF A 309      52.273  20.626  38.236 -0.19 +0.00    +0.237 C 
+DOCKED: BRANCH   4   5
+DOCKED: ATOM      5  O3  ZAF A 309      50.911  20.277  37.885 -0.18 -0.00    -0.294 OA
+DOCKED: BRANCH   5   6
+DOCKED: ATOM      6  P3  ZAF A 309      49.623  21.163  38.543 -0.28 -0.02    +0.273 P 
+DOCKED: ATOM      7  O3A ZAF A 309      50.139  22.529  39.066 -0.08 -0.17    -0.645 OA
+DOCKED: ATOM      8  O3B ZAF A 309      48.879  20.272  39.562 +0.03 +0.10    -0.645 OA
+DOCKED: BRANCH   6   9
+DOCKED: ATOM      9  C4  ZAF A 309      48.482  21.444  37.267 -0.21 -0.03    +0.201 C 
+DOCKED: ATOM     10  C4A ZAF A 309      48.308  22.907  36.792 -0.49 -0.02    +0.046 C 
+DOCKED: BRANCH   9  11
+DOCKED: ATOM     11  N5  ZAF A 309      47.189  21.054  37.713 -0.09 +0.10    -0.343 N 
+DOCKED: ATOM     12  C6  ZAF A 309      46.431  21.764  38.557 -0.29 -0.20    +0.241 C 
+DOCKED: ATOM     13  O6  ZAF A 309      46.678  22.908  38.788 -0.29 +0.37    -0.271 OA
+DOCKED: ATOM     14  H5  ZAF A 309      46.813  20.171  37.366 +0.09 +0.01    +0.163 HD
+DOCKED: BRANCH  12  15
+DOCKED: ATOM     15  C7  ZAF A 309      45.337  21.044  39.143 -0.37 -0.14    +0.174 C 
+DOCKED: ATOM     16  C7A ZAF A 309      45.874  19.688  39.645 -0.39 -0.01    +0.042 C 
+DOCKED: BRANCH  15  17
+DOCKED: ATOM     17  N8  ZAF A 309      44.203  20.878  38.299 -0.20 +0.33    -0.324 N 
+DOCKED: ATOM     18  C9  ZAF A 309      44.037  21.338  37.057 -0.23 -0.30    +0.365 C 
+DOCKED: ATOM     19  O9  ZAF A 309      43.008  21.064  36.508 -1.38 +0.13    -0.238 OA
+DOCKED: ATOM     20  H8  ZAF A 309      43.426  20.345  38.689 -0.22 -0.23    +0.165 HD
+DOCKED: BRANCH  18  21
+DOCKED: ATOM     21  O10 ZAF A 309      44.989  22.080  36.508 -0.26 +0.24    -0.273 OA
+DOCKED: BRANCH  21  22
+DOCKED: ATOM     22  C11 ZAF A 309      45.245  21.892  35.139 -0.30 -0.04    +0.159 C 
+DOCKED: BRANCH  22  23
+DOCKED: ATOM     23  C1X ZAF A 309      45.645  23.025  34.353 -0.38 +0.00    -0.014 A 
+DOCKED: ATOM     24  C2X ZAF A 309      44.806  24.076  34.239 -0.39 -0.01    +0.013 A 
+DOCKED: ATOM     25  C3X ZAF A 309      45.160  25.149  33.505 -0.44 -0.00    +0.001 A 
+DOCKED: ATOM     26  C4X ZAF A 309      46.336  25.156  32.848 -0.43 -0.00    +0.000 A 
+DOCKED: ATOM     27  C5X ZAF A 309      47.172  24.107  32.959 -0.34 -0.00    +0.001 A 
+DOCKED: ATOM     28  C6X ZAF A 309      46.825  23.032  33.697 -0.39 -0.00    +0.013 A 
+DOCKED: ENDBRANCH  22  23
+DOCKED: ENDBRANCH  21  22
+DOCKED: ENDBRANCH  18  21
+DOCKED: ENDBRANCH  15  17
+DOCKED: ENDBRANCH  12  15
+DOCKED: ENDBRANCH   9  11
+DOCKED: ENDBRANCH   6   9
+DOCKED: ENDBRANCH   5   6
+DOCKED: ENDBRANCH   4   5
+DOCKED: BRANCH   4  29
+DOCKED: ATOM     29  C2A ZAF A 309      52.667  20.191  39.653 -0.11 +0.00    +0.082 C 
+DOCKED: BRANCH  29  30
+DOCKED: ATOM     30  CP1 ZAF A 309      51.680  19.697  40.566 -0.08 +0.00    -0.055 A 
+DOCKED: ATOM     31  CP6 ZAF A 309      51.201  18.443  40.415 -0.06 -0.00    +0.007 A 
+DOCKED: ATOM     32  CP5 ZAF A 309      50.249  17.966  41.246 -0.12 -0.00    +0.001 A 
+DOCKED: ATOM     33  CP4 ZAF A 309      49.795  18.734  42.262 -0.12 -0.00    +0.000 A 
+DOCKED: ATOM     34  CP3 ZAF A 309      50.282  19.983  42.423 -0.15 -0.00    +0.001 A 
+DOCKED: ATOM     35  CP2 ZAF A 309      51.200  20.477  41.563 -0.19 -0.00    +0.007 A 
+DOCKED: ENDBRANCH  29  30
+DOCKED: ENDBRANCH   4  29
+DOCKED: ENDBRANCH   1   4
+DOCKED: TORSDOF 12
+DOCKED: TER
+DOCKED: ENDMDL
+________________________________________________________________________________
+
+
+	BEGINNING GENETIC ALGORITHM DOCKING
+Run:	8 / 10
+Date:	Thu Sep  8 18:36:52 2016
+Beginning LAMARCKIAN GENETIC ALGORITHM (LGA), with a maximum of 2500000 energy evaluations.
+
+Final-Value: -11.070
+Real= 22.42s,  CPU= 22.39s,  System= 0.00s
+
+
+	FINAL GENETIC ALGORITHM ALGORITHM DOCKED STATE
+	_______________________________________________
+
+
+Detailed state:  trans 47.194 20.484 36.641 quatxyzw 0.647155 -0.106369 -0.728129 0.199259 center 46.400 20.377 36.480 ntor 12 174.6506 -168.7848 56.6036 -164.0219 29.9819 76.7666 155.3757 -76.6181 91.4633 -54.7590 -58.2795 8.9387
+State:	 47.194  20.484  36.641   0.660 -0.109 -0.743 157.013    174.65 -168.78   56.60 -164.02   29.98   76.77  155.38  -76.62   91.46  -54.76  -58.28    8.94
+
+DOCKED: MODEL        8
+DOCKED: USER    Run = 8
+DOCKED: USER    DPF = ./6cpa.dpf
+DOCKED: USER  
+DOCKED: USER    Estimated Free Energy of Binding    =   -4.17 kcal/mol  [=(1)+(2)+(3)-(4)]
+DOCKED: USER    Estimated Inhibition Constant, Ki   =  870.85 uM (micromolar)  [Temperature = 298.15 K]
+DOCKED: USER    
+DOCKED: USER    (1) Final Intermolecular Energy     =   -7.75 kcal/mol
+DOCKED: USER        vdW + Hbond + desolv Energy     =   -7.03 kcal/mol
+DOCKED: USER        Electrostatic Energy            =   -0.72 kcal/mol
+DOCKED: USER    (2) Final Total Internal Energy     =   -3.32 kcal/mol
+DOCKED: USER    (3) Torsional Free Energy           =   +3.58 kcal/mol
+DOCKED: USER    (4) Unbound System's Energy  [=(2)] =   -3.32 kcal/mol
+DOCKED: USER    
+DOCKED: USER    
+DOCKED: USER    NEWDPF move 6cpa_ligand.pdbqt
+DOCKED: USER    NEWDPF about 46.400002 20.377199 36.480000
+DOCKED: USER    NEWDPF tran0 47.193973 20.483999 36.641107
+DOCKED: USER    NEWDPF quaternion0 0.647155 -0.106369 -0.728129 0.199259
+DOCKED: USER    NEWDPF axisangle0 0.660398 -0.108546 -0.743029 157.012688
+DOCKED: USER    NEWDPF quat0 0.660398 -0.108546 -0.743029 157.012688
+DOCKED: USER    NEWDPF dihe0 174.65 -168.78 56.60 -164.02 29.98 76.77 155.38 -76.62 91.46 -54.76 -58.28 8.94 
+DOCKED: USER  keepresnum = 1 
+DOCKED: USER  
+DOCKED: REMARK  12 active torsions:
+DOCKED: REMARK  status: ('A' for Active; 'I' for Inactive)
+DOCKED: REMARK    1  A    between atoms: C1_1  and  C2_5 
+DOCKED: REMARK    2  A    between atoms: C2A_4  and  CP1_6 
+DOCKED: REMARK    3  A    between atoms: C2A_4  and  C2_5 
+DOCKED: REMARK    4  A    between atoms: C2_5  and  O3_12 
+DOCKED: REMARK    5  A    between atoms: O3_12  and  P3_13 
+DOCKED: REMARK    6  A    between atoms: P3_13  and  C4_16 
+DOCKED: REMARK    7  A    between atoms: C4_16  and  N5_18 
+DOCKED: REMARK       I    between atoms: N5_18  and  C6_20 
+DOCKED: REMARK    8  A    between atoms: C6_20  and  C7_22 
+DOCKED: REMARK    9  A    between atoms: C7_22  and  N8_24 
+DOCKED: REMARK       I    between atoms: N8_24  and  C9_26 
+DOCKED: REMARK   10  A    between atoms: C9_26  and  O10_28 
+DOCKED: REMARK   11  A    between atoms: O10_28  and  C11_29 
+DOCKED: REMARK   12  A    between atoms: C11_29  and  C1X_30 
+DOCKED: USER                              x       y       z     vdW  Elec       q    Type
+DOCKED: USER                           _______ _______ _______ _____ _____    ______ ____
+DOCKED: ROOT
+DOCKED: ATOM      1  C1  ZAF A 309      49.193  17.821  38.110 -0.09 +0.00    +0.204 C 
+DOCKED: ATOM      2  O1A ZAF A 309      49.887  17.145  38.991 +0.04 +0.01    -0.646 OA
+DOCKED: ATOM      3  O1B ZAF A 309      49.594  18.853  37.676 +0.02 -0.03    -0.646 OA
+DOCKED: ENDROOT
+DOCKED: BRANCH   1   4
+DOCKED: ATOM      4  C2  ZAF A 309      47.935  17.243  37.716 -0.08 +0.00    +0.237 C 
+DOCKED: BRANCH   4   5
+DOCKED: ATOM      5  O3  ZAF A 309      47.256  18.401  37.173 -0.58 -0.08    -0.294 OA
+DOCKED: BRANCH   5   6
+DOCKED: ATOM      6  P3  ZAF A 309      45.586  18.581  37.410 -0.20 +0.06    +0.273 P 
+DOCKED: ATOM      7  O3A ZAF A 309      45.033  17.361  38.191 -0.23 -0.31    -0.645 OA
+DOCKED: ATOM      8  O3B ZAF A 309      44.923  18.886  36.049 +0.03 -0.41    -0.645 OA
+DOCKED: BRANCH   6   9
+DOCKED: ATOM      9  C4  ZAF A 309      45.347  20.012  38.361 -0.24 -0.06    +0.201 C 
+DOCKED: ATOM     10  C4A ZAF A 309      44.040  20.805  38.119 -0.40 -0.05    +0.046 C 
+DOCKED: BRANCH   9  11
+DOCKED: ATOM     11  N5  ZAF A 309      46.389  20.936  38.071 -0.09 +0.15    -0.343 N 
+DOCKED: ATOM     12  C6  ZAF A 309      46.459  22.179  38.563 -0.28 -0.25    +0.241 C 
+DOCKED: ATOM     13  O6  ZAF A 309      45.789  22.508  39.493 -0.38 +0.41    -0.271 OA
+DOCKED: ATOM     14  H5  ZAF A 309      47.134  20.631  37.445 +0.09 -0.02    +0.163 HD
+DOCKED: BRANCH  12  15
+DOCKED: ATOM     15  C7  ZAF A 309      47.378  23.048  37.887 -0.34 -0.15    +0.174 C 
+DOCKED: ATOM     16  C7A ZAF A 309      47.072  22.981  36.377 -0.45 -0.03    +0.042 C 
+DOCKED: BRANCH  15  17
+DOCKED: ATOM     17  N8  ZAF A 309      48.754  22.798  38.154 -0.23 +0.08    -0.324 N 
+DOCKED: ATOM     18  C9  ZAF A 309      49.284  21.743  38.776 -0.16 -0.04    +0.365 C 
+DOCKED: ATOM     19  O9  ZAF A 309      50.478  21.715  38.877 -0.36 -0.01    -0.238 OA
+DOCKED: ATOM     20  H8  ZAF A 309      49.411  23.509  37.832 +0.13 -0.01    +0.165 HD
+DOCKED: BRANCH  18  21
+DOCKED: ATOM     21  O10 ZAF A 309      48.482  20.806  39.262 -0.18 +0.06    -0.273 OA
+DOCKED: BRANCH  21  22
+DOCKED: ATOM     22  C11 ZAF A 309      48.566  20.535  40.639 -0.33 -0.04    +0.159 C 
+DOCKED: BRANCH  22  23
+DOCKED: ATOM     23  C1X ZAF A 309      48.477  19.171  41.077 -0.26 +0.00    -0.014 A 
+DOCKED: ATOM     24  C2X ZAF A 309      49.539  18.605  41.686 -0.20 -0.00    +0.013 A 
+DOCKED: ATOM     25  C3X ZAF A 309      49.477  17.325  42.104 -0.14 -0.00    +0.001 A 
+DOCKED: ATOM     26  C4X ZAF A 309      48.368  16.596  41.877 -0.13 -0.00    +0.000 A 
+DOCKED: ATOM     27  C5X ZAF A 309      47.309  17.161  41.267 -0.25 -0.00    +0.001 A 
+DOCKED: ATOM     28  C6X ZAF A 309      47.363  18.442  40.851 -0.28 -0.00    +0.013 A 
+DOCKED: ENDBRANCH  22  23
+DOCKED: ENDBRANCH  21  22
+DOCKED: ENDBRANCH  18  21
+DOCKED: ENDBRANCH  15  17
+DOCKED: ENDBRANCH  12  15
+DOCKED: ENDBRANCH   9  11
+DOCKED: ENDBRANCH   6   9
+DOCKED: ENDBRANCH   5   6
+DOCKED: ENDBRANCH   4   5
+DOCKED: BRANCH   4  29
+DOCKED: ATOM     29  C2A ZAF A 309      48.196  16.147  36.675 -0.13 -0.01    +0.082 C 
+DOCKED: BRANCH  29  30
+DOCKED: ATOM     30  CP1 ZAF A 309      47.907  16.372  35.290 -0.16 +0.00    -0.055 A 
+DOCKED: ATOM     31  CP6 ZAF A 309      48.913  16.668  34.440 -0.12 +0.00    +0.007 A 
+DOCKED: ATOM     32  CP5 ZAF A 309      48.661  16.913  33.135 -0.26 +0.00    +0.001 A 
+DOCKED: ATOM     33  CP4 ZAF A 309      47.396  16.825  32.665 -0.23 +0.00    +0.000 A 
+DOCKED: ATOM     34  CP3 ZAF A 309      46.390  16.517  33.511 -0.28 +0.00    +0.001 A 
+DOCKED: ATOM     35  CP2 ZAF A 309      46.636  16.318  34.825 -0.29 -0.00    +0.007 A 
+DOCKED: ENDBRANCH  29  30
+DOCKED: ENDBRANCH   4  29
+DOCKED: ENDBRANCH   1   4
+DOCKED: TORSDOF 12
+DOCKED: TER
+DOCKED: ENDMDL
+________________________________________________________________________________
+
+
+	BEGINNING GENETIC ALGORITHM DOCKING
+Run:	9 / 10
+Date:	Thu Sep  8 18:37:14 2016
+Beginning LAMARCKIAN GENETIC ALGORITHM (LGA), with a maximum of 2500000 energy evaluations.
+
+Final-Value: -11.805
+Real= 22.39s,  CPU= 22.37s,  System= 0.00s
+
+
+	FINAL GENETIC ALGORITHM ALGORITHM DOCKED STATE
+	_______________________________________________
+
+
+Detailed state:  trans 46.320 19.567 40.067 quatxyzw 0.631344 0.191842 0.575387 0.483252 center 46.400 20.377 36.480 ntor 12 178.1283 -47.5598 -78.4319 28.2658 -124.1633 -70.3708 136.4980 -13.9605 22.5584 -79.4929 -48.5892 42.2408
+State:	 46.320  19.567  40.067   0.721  0.219  0.657 122.204    178.13  -47.56  -78.43   28.27 -124.16  -70.37  136.50  -13.96   22.56  -79.49  -48.59   42.24
+
+DOCKED: MODEL        9
+DOCKED: USER    Run = 9
+DOCKED: USER    DPF = ./6cpa.dpf
+DOCKED: USER  
+DOCKED: USER    Estimated Free Energy of Binding    =   -5.58 kcal/mol  [=(1)+(2)+(3)-(4)]
+DOCKED: USER    Estimated Inhibition Constant, Ki   =   81.37 uM (micromolar)  [Temperature = 298.15 K]
+DOCKED: USER    
+DOCKED: USER    (1) Final Intermolecular Energy     =   -9.16 kcal/mol
+DOCKED: USER        vdW + Hbond + desolv Energy     =   -8.36 kcal/mol
+DOCKED: USER        Electrostatic Energy            =   -0.80 kcal/mol
+DOCKED: USER    (2) Final Total Internal Energy     =   -2.65 kcal/mol
+DOCKED: USER    (3) Torsional Free Energy           =   +3.58 kcal/mol
+DOCKED: USER    (4) Unbound System's Energy  [=(2)] =   -2.65 kcal/mol
+DOCKED: USER    
+DOCKED: USER    
+DOCKED: USER    NEWDPF move 6cpa_ligand.pdbqt
+DOCKED: USER    NEWDPF about 46.400002 20.377199 36.480000
+DOCKED: USER    NEWDPF tran0 46.319853 19.566880 40.067099
+DOCKED: USER    NEWDPF quaternion0 0.631344 0.191842 0.575387 0.483252
+DOCKED: USER    NEWDPF axisangle0 0.721139 0.219128 0.657223 122.204035
+DOCKED: USER    NEWDPF quat0 0.721139 0.219128 0.657223 122.204035
+DOCKED: USER    NEWDPF dihe0 178.13 -47.56 -78.43 28.27 -124.16 -70.37 136.50 -13.96 22.56 -79.49 -48.59 42.24 
+DOCKED: USER  keepresnum = 1 
+DOCKED: USER  
+DOCKED: REMARK  12 active torsions:
+DOCKED: REMARK  status: ('A' for Active; 'I' for Inactive)
+DOCKED: REMARK    1  A    between atoms: C1_1  and  C2_5 
+DOCKED: REMARK    2  A    between atoms: C2A_4  and  CP1_6 
+DOCKED: REMARK    3  A    between atoms: C2A_4  and  C2_5 
+DOCKED: REMARK    4  A    between atoms: C2_5  and  O3_12 
+DOCKED: REMARK    5  A    between atoms: O3_12  and  P3_13 
+DOCKED: REMARK    6  A    between atoms: P3_13  and  C4_16 
+DOCKED: REMARK    7  A    between atoms: C4_16  and  N5_18 
+DOCKED: REMARK       I    between atoms: N5_18  and  C6_20 
+DOCKED: REMARK    8  A    between atoms: C6_20  and  C7_22 
+DOCKED: REMARK    9  A    between atoms: C7_22  and  N8_24 
+DOCKED: REMARK       I    between atoms: N8_24  and  C9_26 
+DOCKED: REMARK   10  A    between atoms: C9_26  and  O10_28 
+DOCKED: REMARK   11  A    between atoms: O10_28  and  C11_29 
+DOCKED: REMARK   12  A    between atoms: C11_29  and  C1X_30 
+DOCKED: USER                              x       y       z     vdW  Elec       q    Type
+DOCKED: USER                           _______ _______ _______ _____ _____    ______ ____
+DOCKED: ROOT
+DOCKED: ATOM      1  C1  ZAF A 309      45.435  17.327  37.339 -0.22 +0.06    +0.204 C 
+DOCKED: ATOM      2  O1A ZAF A 309      44.915  16.900  36.215 -0.00 -0.21    -0.646 OA
+DOCKED: ATOM      3  O1B ZAF A 309      44.741  17.641  38.253 -0.37 -0.36    -0.646 OA
+DOCKED: ENDROOT
+DOCKED: BRANCH   1   4
+DOCKED: ATOM      4  C2  ZAF A 309      46.872  17.392  37.389 -0.11 +0.02    +0.237 C 
+DOCKED: BRANCH   4   5
+DOCKED: ATOM      5  O3  ZAF A 309      47.092  17.563  38.810 -0.08 -0.00    -0.294 OA
+DOCKED: BRANCH   5   6
+DOCKED: ATOM      6  P3  ZAF A 309      48.181  18.744  39.353 -0.14 -0.02    +0.273 P 
+DOCKED: ATOM      7  O3A ZAF A 309      49.250  19.014  38.261 +0.00 -0.01    -0.645 OA
+DOCKED: ATOM      8  O3B ZAF A 309      48.708  18.329  40.745 +0.01 +0.05    -0.645 OA
+DOCKED: BRANCH   6   9
+DOCKED: ATOM      9  C4  ZAF A 309      47.277  20.199  39.626 -0.26 -0.05    +0.201 C 
+DOCKED: ATOM     10  C4A ZAF A 309      46.485  20.293  40.952 -0.47 -0.01    +0.046 C 
+DOCKED: BRANCH   9  11
+DOCKED: ATOM     11  N5  ZAF A 309      46.293  20.327  38.607 -0.08 +0.11    -0.343 N 
+DOCKED: ATOM     12  C6  ZAF A 309      46.191  21.372  37.778 -0.21 -0.15    +0.241 C 
+DOCKED: ATOM     13  O6  ZAF A 309      47.087  22.151  37.662 -0.25 +0.18    -0.271 OA
+DOCKED: ATOM     14  H5  ZAF A 309      45.618  19.569  38.501 +0.11 -0.03    +0.163 HD
+DOCKED: BRANCH  12  15
+DOCKED: ATOM     15  C7  ZAF A 309      44.946  21.468  37.072 -0.31 -0.13    +0.174 C 
+DOCKED: ATOM     16  C7A ZAF A 309      43.838  20.901  37.983 -0.36 -0.05    +0.042 C 
+DOCKED: BRANCH  15  17
+DOCKED: ATOM     17  N8  ZAF A 309      44.932  20.855  35.788 -0.14 +0.01    -0.324 N 
+DOCKED: ATOM     18  C9  ZAF A 309      44.423  21.347  34.656 -0.21 +0.10    +0.365 C 
+DOCKED: ATOM     19  O9  ZAF A 309      44.537  20.675  33.671 -0.90 -0.29    -0.238 OA
+DOCKED: ATOM     20  H8  ZAF A 309      45.360  19.932  35.725 -0.09 +0.04    +0.165 HD
+DOCKED: BRANCH  18  21
+DOCKED: ATOM     21  O10 ZAF A 309      43.809  22.522  34.679 -0.37 +0.07    -0.273 OA
+DOCKED: BRANCH  21  22
+DOCKED: ATOM     22  C11 ZAF A 309      44.611  23.672  34.580 -0.33 -0.13    +0.159 C 
+DOCKED: BRANCH  22  23
+DOCKED: ATOM     23  C1X ZAF A 309      44.993  24.133  33.275 -0.39 +0.00    -0.014 A 
+DOCKED: ATOM     24  C2X ZAF A 309      44.620  25.367  32.878 -0.43 -0.00    +0.013 A 
+DOCKED: ATOM     25  C3X ZAF A 309      44.967  25.820  31.657 -0.42 -0.00    +0.001 A 
+DOCKED: ATOM     26  C4X ZAF A 309      45.651  25.023  30.814 -0.38 +0.00    +0.000 A 
+DOCKED: ATOM     27  C5X ZAF A 309      46.021  23.791  31.209 -0.41 +0.00    +0.001 A 
+DOCKED: ATOM     28  C6X ZAF A 309      45.682  23.334  32.432 -0.37 +0.00    +0.013 A 
+DOCKED: ENDBRANCH  22  23
+DOCKED: ENDBRANCH  21  22
+DOCKED: ENDBRANCH  18  21
+DOCKED: ENDBRANCH  15  17
+DOCKED: ENDBRANCH  12  15
+DOCKED: ENDBRANCH   9  11
+DOCKED: ENDBRANCH   6   9
+DOCKED: ENDBRANCH   5   6
+DOCKED: ENDBRANCH   4   5
+DOCKED: BRANCH   4  29
+DOCKED: ATOM     29  C2A ZAF A 309      47.449  16.083  36.837 -0.14 -0.02    +0.082 C 
+DOCKED: BRANCH  29  30
+DOCKED: ATOM     30  CP1 ZAF A 309      47.684  15.922  35.434 -0.15 +0.01    -0.055 A 
+DOCKED: ATOM     31  CP6 ZAF A 309      47.353  14.759  34.832 -0.10 -0.00    +0.007 A 
+DOCKED: ATOM     32  CP5 ZAF A 309      47.592  14.574  33.515 -0.20 -0.00    +0.001 A 
+DOCKED: ATOM     33  CP4 ZAF A 309      48.133  15.573  32.782 -0.19 +0.00    +0.000 A 
+DOCKED: ATOM     34  CP3 ZAF A 309      48.453  16.741  33.379 -0.25 +0.00    +0.001 A 
+DOCKED: ATOM     35  CP2 ZAF A 309      48.256  16.909  34.705 -0.12 +0.00    +0.007 A 
+DOCKED: ENDBRANCH  29  30
+DOCKED: ENDBRANCH   4  29
+DOCKED: ENDBRANCH   1   4
+DOCKED: TORSDOF 12
+DOCKED: TER
+DOCKED: ENDMDL
+________________________________________________________________________________
+
+
+	BEGINNING GENETIC ALGORITHM DOCKING
+Run:	10 / 10
+Date:	Thu Sep  8 18:37:36 2016
+Beginning LAMARCKIAN GENETIC ALGORITHM (LGA), with a maximum of 2500000 energy evaluations.
+
+Final-Value: -9.981
+Real= 21.94s,  CPU= 21.92s,  System= 0.00s
+
+
+	FINAL GENETIC ALGORITHM ALGORITHM DOCKED STATE
+	_______________________________________________
+
+
+Detailed state:  trans 47.675 17.420 38.624 quatxyzw 0.534321 -0.409924 -0.377858 -0.635364 center 46.400 20.377 36.480 ntor 12 168.5949 176.7071 58.8820 -5.0725 -93.6649 10.8400 157.7213 -81.6216 113.1407 -177.6610 -23.6071 152.9677
+State:	 47.675  17.420  38.624   0.692 -0.531 -0.489 -101.106    168.59  176.71   58.88   -5.07  -93.66   10.84  157.72  -81.62  113.14 -177.66  -23.61  152.97
+
+DOCKED: MODEL       10
+DOCKED: USER    Run = 10
+DOCKED: USER    DPF = ./6cpa.dpf
+DOCKED: USER  
+DOCKED: USER    Estimated Free Energy of Binding    =   -2.33 kcal/mol  [=(1)+(2)+(3)-(4)]
+DOCKED: USER    Estimated Inhibition Constant, Ki   =   19.58 mM (millimolar)  [Temperature = 298.15 K]
+DOCKED: USER    
+DOCKED: USER    (1) Final Intermolecular Energy     =   -5.91 kcal/mol
+DOCKED: USER        vdW + Hbond + desolv Energy     =   -5.82 kcal/mol
+DOCKED: USER        Electrostatic Energy            =   -0.09 kcal/mol
+DOCKED: USER    (2) Final Total Internal Energy     =   -4.07 kcal/mol
+DOCKED: USER    (3) Torsional Free Energy           =   +3.58 kcal/mol
+DOCKED: USER    (4) Unbound System's Energy  [=(2)] =   -4.07 kcal/mol
+DOCKED: USER    
+DOCKED: USER    
+DOCKED: USER    NEWDPF move 6cpa_ligand.pdbqt
+DOCKED: USER    NEWDPF about 46.400002 20.377199 36.480000
+DOCKED: USER    NEWDPF tran0 47.675365 17.419664 38.624440
+DOCKED: USER    NEWDPF quaternion0 0.534321 -0.409924 -0.377858 -0.635364
+DOCKED: USER    NEWDPF axisangle0 0.691935 -0.530843 -0.489318 -101.106083
+DOCKED: USER    NEWDPF quat0 0.691935 -0.530843 -0.489318 -101.106083
+DOCKED: USER    NEWDPF dihe0 168.59 176.71 58.88 -5.07 -93.66 10.84 157.72 -81.62 113.14 -177.66 -23.61 152.97 
+DOCKED: USER  keepresnum = 1 
+DOCKED: USER  
+DOCKED: REMARK  12 active torsions:
+DOCKED: REMARK  status: ('A' for Active; 'I' for Inactive)
+DOCKED: REMARK    1  A    between atoms: C1_1  and  C2_5 
+DOCKED: REMARK    2  A    between atoms: C2A_4  and  CP1_6 
+DOCKED: REMARK    3  A    between atoms: C2A_4  and  C2_5 
+DOCKED: REMARK    4  A    between atoms: C2_5  and  O3_12 
+DOCKED: REMARK    5  A    between atoms: O3_12  and  P3_13 
+DOCKED: REMARK    6  A    between atoms: P3_13  and  C4_16 
+DOCKED: REMARK    7  A    between atoms: C4_16  and  N5_18 
+DOCKED: REMARK       I    between atoms: N5_18  and  C6_20 
+DOCKED: REMARK    8  A    between atoms: C6_20  and  C7_22 
+DOCKED: REMARK    9  A    between atoms: C7_22  and  N8_24 
+DOCKED: REMARK       I    between atoms: N8_24  and  C9_26 
+DOCKED: REMARK   10  A    between atoms: C9_26  and  O10_28 
+DOCKED: REMARK   11  A    between atoms: O10_28  and  C11_29 
+DOCKED: REMARK   12  A    between atoms: C11_29  and  C1X_30 
+DOCKED: USER                              x       y       z     vdW  Elec       q    Type
+DOCKED: USER                           _______ _______ _______ _____ _____    ______ ____
+DOCKED: ROOT
+DOCKED: ATOM      1  C1  ZAF A 309      49.460  20.466  39.507 -0.20 -0.02    +0.204 C 
+DOCKED: ATOM      2  O1A ZAF A 309      49.802  21.730  39.531 +0.02 +0.02    -0.646 OA
+DOCKED: ATOM      3  O1B ZAF A 309      49.621  19.807  38.530 +0.02 +0.02    -0.646 OA
+DOCKED: ENDROOT
+DOCKED: BRANCH   1   4
+DOCKED: ATOM      4  C2  ZAF A 309      48.884  19.943  40.718 -0.23 -0.04    +0.237 C 
+DOCKED: BRANCH   4   5
+DOCKED: ATOM      5  O3  ZAF A 309      49.921  20.262  41.678 -0.20 +0.04    -0.294 OA
+DOCKED: BRANCH   5   6
+DOCKED: ATOM      6  P3  ZAF A 309      50.870  19.018  42.333 -0.15 -0.00    +0.273 P 
+DOCKED: ATOM      7  O3A ZAF A 309      50.792  19.059  43.881 -0.05 -0.05    -0.645 OA
+DOCKED: ATOM      8  O3B ZAF A 309      52.282  19.092  41.712 +0.04 -0.00    -0.645 OA
+DOCKED: BRANCH   6   9
+DOCKED: ATOM      9  C4  ZAF A 309      50.209  17.513  41.777 -0.10 -0.00    +0.201 C 
+DOCKED: ATOM     10  C4A ZAF A 309      51.038  16.237  42.059 -0.05 +0.00    +0.046 C 
+DOCKED: BRANCH   9  11
+DOCKED: ATOM     11  N5  ZAF A 309      50.088  17.560  40.360 -0.01 +0.01    -0.343 N 
+DOCKED: ATOM     12  C6  ZAF A 309      49.790  16.507  39.589 -0.01 -0.01    +0.241 C 
+DOCKED: ATOM     13  O6  ZAF A 309      49.342  15.508  40.064 -0.01 +0.01    -0.271 OA
+DOCKED: ATOM     14  H5  ZAF A 309      50.239  18.457  39.900 +0.04 -0.00    +0.163 HD
+DOCKED: BRANCH  12  15
+DOCKED: ATOM     15  C7  ZAF A 309      50.056  16.684  38.191 -0.05 -0.00    +0.174 C 
+DOCKED: ATOM     16  C7A ZAF A 309      51.525  17.129  38.040 -0.08 +0.00    +0.042 C 
+DOCKED: BRANCH  15  17
+DOCKED: ATOM     17  N8  ZAF A 309      49.169  17.567  37.515 -0.06 -0.01    -0.324 N 
+DOCKED: ATOM     18  C9  ZAF A 309      47.836  17.506  37.469 -0.04 +0.02    +0.365 C 
+DOCKED: ATOM     19  O9  ZAF A 309      47.273  18.369  36.858 -0.47 -0.09    -0.238 OA
+DOCKED: ATOM     20  H8  ZAF A 309      49.602  18.337  37.005 +0.04 +0.02    +0.165 HD
+DOCKED: BRANCH  18  21
+DOCKED: ATOM     21  O10 ZAF A 309      47.213  16.502  38.069 -0.07 +0.02    -0.273 OA
+DOCKED: BRANCH  21  22
+DOCKED: ATOM     22  C11 ZAF A 309      46.391  16.816  39.166 -0.18 +0.01    +0.159 C 
+DOCKED: BRANCH  22  23
+DOCKED: ATOM     23  C1X ZAF A 309      46.431  15.964  40.321 -0.20 -0.00    -0.014 A 
+DOCKED: ATOM     24  C2X ZAF A 309      46.984  16.426  41.461 -0.20 -0.00    +0.013 A 
+DOCKED: ATOM     25  C3X ZAF A 309      47.033  15.643  42.556 -0.18 -0.00    +0.001 A 
+DOCKED: ATOM     26  C4X ZAF A 309      46.567  14.381  42.501 -0.18 +0.00    +0.000 A 
+DOCKED: ATOM     27  C5X ZAF A 309      46.017  13.919  41.363 -0.20 +0.00    +0.001 A 
+DOCKED: ATOM     28  C6X ZAF A 309      45.960  14.700  40.265 -0.23 +0.00    +0.013 A 
+DOCKED: ENDBRANCH  22  23
+DOCKED: ENDBRANCH  21  22
+DOCKED: ENDBRANCH  18  21
+DOCKED: ENDBRANCH  15  17
+DOCKED: ENDBRANCH  12  15
+DOCKED: ENDBRANCH   9  11
+DOCKED: ENDBRANCH   6   9
+DOCKED: ENDBRANCH   5   6
+DOCKED: ENDBRANCH   4   5
+DOCKED: BRANCH   4  29
+DOCKED: ATOM     29  C2A ZAF A 309      47.559  20.663  40.992 -0.43 -0.03    +0.082 C 
+DOCKED: BRANCH  29  30
+DOCKED: ATOM     30  CP1 ZAF A 309      46.536  20.714  39.991 -0.42 +0.02    -0.055 A 
+DOCKED: ATOM     31  CP6 ZAF A 309      45.642  19.706  39.901 -0.36 -0.00    +0.007 A 
+DOCKED: ATOM     32  CP5 ZAF A 309      44.686  19.718  38.946 -0.37 -0.00    +0.001 A 
+DOCKED: ATOM     33  CP4 ZAF A 309      44.596  20.766  38.096 -0.41 -0.00    +0.000 A 
+DOCKED: ATOM     34  CP3 ZAF A 309      45.480  21.781  38.193 -0.39 -0.00    +0.001 A 
+DOCKED: ATOM     35  CP2 ZAF A 309      46.465  21.747  39.117 -0.43 -0.01    +0.007 A 
+DOCKED: ENDBRANCH  29  30
+DOCKED: ENDBRANCH   4  29
+DOCKED: ENDBRANCH   1   4
+DOCKED: TORSDOF 12
+DOCKED: TER
+DOCKED: ENDMDL
+________________________________________________________________________________
+
+DPF> analysis                             # perform a ranked cluster analysis
+
+
+		CLUSTER ANALYSIS OF CONFORMATIONS
+		_________________________________
+
+Number of conformations = 10
+
+RMSD cluster analysis will be performed using the ligand atoms only (35 / 35 total atoms).
+
+Outputting structurally similar clusters, ranked in order of increasing energy.
+
+
+________________________________________________________________________________
+
+Number of distinct conformational clusters found = 8,  out of 10 runs,
+Using an rmsd-tolerance of 2.0 A
+
+
+	CLUSTERING HISTOGRAM
+	____________________
+
+________________________________________________________________________________
+     |           |     |           |     |                                    
+Clus | Lowest    | Run | Mean      | Num | Histogram                          
+-ter | Binding   |     | Binding   | in  |                                    
+Rank | Energy    |     | Energy    | Clus|    5    10   15   20   25   30   35
+_____|___________|_____|___________|_____|____:____|____:____|____:____|____:___
+   1 |     -5.80 |   2 |     -5.80 |   1 |#
+   2 |     -5.58 |   9 |     -5.58 |   1 |#
+   3 |     -4.93 |   4 |     -4.93 |   1 |#
+   4 |     -4.93 |   7 |     -4.93 |   1 |#
+   5 |     -4.66 |   5 |     -4.66 |   1 |#
+   6 |     -4.17 |   8 |     -3.61 |   2 |##
+   7 |     -4.10 |   6 |     -4.10 |   1 |#
+   8 |     -2.33 |  10 |     -2.32 |   2 |##
+_____|___________|_____|___________|_____|______________________________________
+
+
+Number of multi-member conformational clusters found = 2, out of 10 runs.
+
+	RMSD TABLE
+	__________
+
+_____________________________________________________________________
+     |      |      |           |         |                 |
+Rank | Sub- | Run  | Binding   | Cluster | Reference       | Grep
+     | Rank |      | Energy    | RMSD    | RMSD            | Pattern
+_____|______|______|___________|_________|_________________|___________
+   1      1      2       -5.80      0.00      2.49           RANKING
+   2      1      9       -5.58      0.00      3.13           RANKING
+   3      1      4       -4.93      0.00      3.61           RANKING
+   4      1      7       -4.93      0.00      3.13           RANKING
+   5      1      5       -4.66      0.00      2.93           RANKING
+   6      1      8       -4.17      0.00      3.55           RANKING
+   6      2      1       -3.04      1.98      3.31           RANKING
+   7      1      6       -4.10      0.00      3.91           RANKING
+   8      1     10       -2.33      0.00      4.27           RANKING
+   8      2      3       -2.30      1.77      4.28           RANKING
+_______________________________________________________________________
+
+
+
+	INFORMATION ENTROPY ANALYSIS FOR THIS CLUSTERING
+	________________________________________________
+
+
+Information entropy for this clustering = 0.88  (rmstol = 2.00 Angstrom)
+
+_______________________________________________________________________
+
+
+	STATISTICAL MECHANICAL ANALYSIS
+	_______________________________
+
+
+Partition function, Q =    10.07            at Temperature, T = 298.15 K
+Free energy,        A ~ -1368.42 kcal/mol   at Temperature, T = 298.15 K
+Internal energy,    U =    -4.19 kcal/mol   at Temperature, T = 298.15 K
+Entropy,            S =     4.58 kcal/mol/K at Temperature, T = 298.15 K
+
+_______________________________________________________________________
+
+
+	LOWEST ENERGY DOCKED CONFORMATION from EACH CLUSTER
+	___________________________________________________
+
+
+
+Keeping original residue number (specified in the input PDBQ file) for outputting.
+
+MODEL        2
+USER    Run = 2
+USER    Cluster Rank = 1
+USER    Number of conformations in this cluster = 1
+USER  
+USER    RMSD from reference structure       = 2.488 A
+USER  
+USER    Estimated Free Energy of Binding    =   -5.80 kcal/mol  [=(1)+(2)+(3)-(4)]
+USER    Estimated Inhibition Constant, Ki   =   56.46 uM (micromolar)  [Temperature = 298.15 K]
+USER    
+USER    (1) Final Intermolecular Energy     =   -9.38 kcal/mol
+USER        vdW + Hbond + desolv Energy     =   -9.18 kcal/mol
+USER        Electrostatic Energy            =   -0.19 kcal/mol
+USER    (2) Final Total Internal Energy     =   -0.39 kcal/mol
+USER    (3) Torsional Free Energy           =   +3.58 kcal/mol
+USER    (4) Unbound System's Energy  [=(2)] =   -0.39 kcal/mol
+USER    
+USER    
+USER  
+USER    DPF = ./6cpa.dpf
+USER    NEWDPF move	6cpa_ligand.pdbqt
+USER    NEWDPF about	46.400002 20.377199 36.480000
+USER    NEWDPF tran0	47.252227 23.115584 32.555378
+USER    NEWDPF axisangle0	0.493505 0.714792 0.495505 -98.406700
+USER    NEWDPF quaternion0	0.373599 0.541121 0.375114 -0.653376
+USER    NEWDPF dihe0	-96.57 147.61 39.94 -9.54 52.20 -1.81 80.22 -66.72 -23.06 63.49 6.26 -89.86 
+USER  
+USER                              x       y       z    vdW   Elec        q     RMS 
+ATOM      1  C1  ZAF A 309      44.206  22.140  34.291 -0.36 +0.02    +0.204     2.488
+ATOM      2  O1A ZAF A 309      43.279  21.380  34.820 -0.33 -0.16    -0.646     2.488
+ATOM      3  O1B ZAF A 309      44.374  22.170  33.114 -0.25 -0.55    -0.646     2.488
+ATOM      4  C2  ZAF A 309      44.993  22.915  35.213 -0.27 -0.18    +0.237     2.488
+ATOM      5  O3  ZAF A 309      45.610  21.867  36.001 -0.19 +0.16    -0.294     2.488
+ATOM      6  P3  ZAF A 309      44.718  21.100  37.221 -0.34 -0.17    +0.273     2.488
+ATOM      7  O3A ZAF A 309      44.545  19.597  36.877 -0.24 -0.16    -0.645     2.488
+ATOM      8  O3B ZAF A 309      43.422  21.903  37.468 -0.42 +0.98    -0.645     2.488
+ATOM      9  C4  ZAF A 309      45.625  21.238  38.693 -0.32 -0.16    +0.201     2.488
+ATOM     10  C4A ZAF A 309      46.445  22.536  38.891 -0.27 -0.06    +0.046     2.488
+ATOM     11  N5  ZAF A 309      46.587  20.192  38.741 -0.07 +0.09    -0.343     2.488
+ATOM     12  C6  ZAF A 309      47.387  19.944  39.785 -0.23 -0.05    +0.241     2.488
+ATOM     13  O6  ZAF A 309      47.163  20.422  40.855 -0.43 +0.09    -0.271     2.488
+ATOM     14  H5  ZAF A 309      46.673  19.588  37.923 +0.09 -0.00    +0.163     2.488
+ATOM     15  C7  ZAF A 309      48.502  19.087  39.504 -0.14 -0.01    +0.174     2.488
+ATOM     16  C7A ZAF A 309      48.143  18.225  38.276 -0.16 +0.00    +0.042     2.488
+ATOM     17  N8  ZAF A 309      48.937  18.285  40.597 -0.07 +0.02    -0.324     2.488
+ATOM     18  C9  ZAF A 309      49.505  18.695  41.733 -0.09 -0.02    +0.365     2.488
+ATOM     19  O9  ZAF A 309      49.776  17.852  42.541 -0.14 -0.00    -0.238     2.488
+ATOM     20  H8  ZAF A 309      48.800  17.279  40.500 +0.05 -0.01    +0.165     2.488
+ATOM     21  O10 ZAF A 309      49.757  19.986  41.903 -0.20 +0.03    -0.273     2.488
+ATOM     22  C11 ZAF A 309      51.073  20.422  41.672 -0.17 -0.01    +0.159     2.488
+ATOM     23  C1X ZAF A 309      51.513  21.638  42.295 -0.18 +0.00    -0.014     2.488
+ATOM     24  C2X ZAF A 309      52.521  22.337  41.735 -0.18 +0.00    +0.013     2.488
+ATOM     25  C3X ZAF A 309      52.952  23.480  42.304 -0.23 +0.00    +0.001     2.488
+ATOM     26  C4X ZAF A 309      52.403  23.905  43.458 -0.37 +0.00    +0.000     2.488
+ATOM     27  C5X ZAF A 309      51.398  23.206  44.019 -0.41 +0.00    +0.001     2.488
+ATOM     28  C6X ZAF A 309      50.960  22.064  43.451 -0.38 -0.00    +0.013     2.488
+ATOM     29  C2A ZAF A 309      46.001  23.757  34.422 -0.41 -0.05    +0.082     2.488
+ATOM     30  CP1 ZAF A 309      45.577  24.546  33.305 -0.37 +0.02    -0.055     2.488
+ATOM     31  CP6 ZAF A 309      44.623  25.486  33.479 -0.46 -0.00    +0.007     2.488
+ATOM     32  CP5 ZAF A 309      44.186  26.223  32.434 -0.45 -0.00    +0.001     2.488
+ATOM     33  CP4 ZAF A 309      44.732  26.046  31.210 -0.42 -0.00    +0.000     2.488
+ATOM     34  CP3 ZAF A 309      45.695  25.115  31.037 -0.37 +0.00    +0.001     2.488
+ATOM     35  CP2 ZAF A 309      46.099  24.347  32.072 -0.41 +0.00    +0.007     2.488
+TER
+ENDMDL
+MODEL        9
+USER    Run = 9
+USER    Cluster Rank = 2
+USER    Number of conformations in this cluster = 1
+USER  
+USER    RMSD from reference structure       = 3.129 A
+USER  
+USER    Estimated Free Energy of Binding    =   -5.58 kcal/mol  [=(1)+(2)+(3)-(4)]
+USER    Estimated Inhibition Constant, Ki   =   81.37 uM (micromolar)  [Temperature = 298.15 K]
+USER    
+USER    (1) Final Intermolecular Energy     =   -9.16 kcal/mol
+USER        vdW + Hbond + desolv Energy     =   -8.36 kcal/mol
+USER        Electrostatic Energy            =   -0.80 kcal/mol
+USER    (2) Final Total Internal Energy     =   -2.65 kcal/mol
+USER    (3) Torsional Free Energy           =   +3.58 kcal/mol
+USER    (4) Unbound System's Energy  [=(2)] =   -2.65 kcal/mol
+USER    
+USER    
+USER  
+USER    DPF = ./6cpa.dpf
+USER    NEWDPF move	6cpa_ligand.pdbqt
+USER    NEWDPF about	46.400002 20.377199 36.480000
+USER    NEWDPF tran0	46.319853 19.566880 40.067099
+USER    NEWDPF axisangle0	0.721139 0.219128 0.657223 122.204035
+USER    NEWDPF quaternion0	0.631344 0.191842 0.575387 0.483252
+USER    NEWDPF dihe0	178.13 -47.56 -78.43 28.27 -124.16 -70.37 136.50 -13.96 22.56 -79.49 -48.59 42.24 
+USER  
+USER                              x       y       z    vdW   Elec        q     RMS 
+ATOM      1  C1  ZAF A 309      45.435  17.327  37.339 -0.22 +0.06    +0.204     3.129
+ATOM      2  O1A ZAF A 309      44.915  16.900  36.215 -0.00 -0.21    -0.646     3.129
+ATOM      3  O1B ZAF A 309      44.741  17.641  38.253 -0.37 -0.36    -0.646     3.129
+ATOM      4  C2  ZAF A 309      46.872  17.392  37.389 -0.11 +0.02    +0.237     3.129
+ATOM      5  O3  ZAF A 309      47.092  17.563  38.810 -0.08 -0.00    -0.294     3.129
+ATOM      6  P3  ZAF A 309      48.181  18.744  39.353 -0.14 -0.02    +0.273     3.129
+ATOM      7  O3A ZAF A 309      49.250  19.014  38.261 +0.00 -0.01    -0.645     3.129
+ATOM      8  O3B ZAF A 309      48.708  18.329  40.745 +0.01 +0.05    -0.645     3.129
+ATOM      9  C4  ZAF A 309      47.277  20.199  39.626 -0.26 -0.05    +0.201     3.129
+ATOM     10  C4A ZAF A 309      46.485  20.293  40.952 -0.47 -0.01    +0.046     3.129
+ATOM     11  N5  ZAF A 309      46.293  20.327  38.607 -0.08 +0.11    -0.343     3.129
+ATOM     12  C6  ZAF A 309      46.191  21.372  37.778 -0.21 -0.15    +0.241     3.129
+ATOM     13  O6  ZAF A 309      47.087  22.151  37.662 -0.25 +0.18    -0.271     3.129
+ATOM     14  H5  ZAF A 309      45.618  19.569  38.501 +0.11 -0.03    +0.163     3.129
+ATOM     15  C7  ZAF A 309      44.946  21.468  37.072 -0.31 -0.13    +0.174     3.129
+ATOM     16  C7A ZAF A 309      43.838  20.901  37.983 -0.36 -0.05    +0.042     3.129
+ATOM     17  N8  ZAF A 309      44.932  20.855  35.788 -0.14 +0.01    -0.324     3.129
+ATOM     18  C9  ZAF A 309      44.423  21.347  34.656 -0.21 +0.10    +0.365     3.129
+ATOM     19  O9  ZAF A 309      44.537  20.675  33.671 -0.90 -0.29    -0.238     3.129
+ATOM     20  H8  ZAF A 309      45.360  19.932  35.725 -0.09 +0.04    +0.165     3.129
+ATOM     21  O10 ZAF A 309      43.809  22.522  34.679 -0.37 +0.07    -0.273     3.129
+ATOM     22  C11 ZAF A 309      44.611  23.672  34.580 -0.33 -0.13    +0.159     3.129
+ATOM     23  C1X ZAF A 309      44.993  24.133  33.275 -0.39 +0.00    -0.014     3.129
+ATOM     24  C2X ZAF A 309      44.620  25.367  32.878 -0.43 -0.00    +0.013     3.129
+ATOM     25  C3X ZAF A 309      44.967  25.820  31.657 -0.42 -0.00    +0.001     3.129
+ATOM     26  C4X ZAF A 309      45.651  25.023  30.814 -0.38 +0.00    +0.000     3.129
+ATOM     27  C5X ZAF A 309      46.021  23.791  31.209 -0.41 +0.00    +0.001     3.129
+ATOM     28  C6X ZAF A 309      45.682  23.334  32.432 -0.37 +0.00    +0.013     3.129
+ATOM     29  C2A ZAF A 309      47.449  16.083  36.837 -0.14 -0.02    +0.082     3.129
+ATOM     30  CP1 ZAF A 309      47.684  15.922  35.434 -0.15 +0.01    -0.055     3.129
+ATOM     31  CP6 ZAF A 309      47.353  14.759  34.832 -0.10 -0.00    +0.007     3.129
+ATOM     32  CP5 ZAF A 309      47.592  14.574  33.515 -0.20 -0.00    +0.001     3.129
+ATOM     33  CP4 ZAF A 309      48.133  15.573  32.782 -0.19 +0.00    +0.000     3.129
+ATOM     34  CP3 ZAF A 309      48.453  16.741  33.379 -0.25 +0.00    +0.001     3.129
+ATOM     35  CP2 ZAF A 309      48.256  16.909  34.705 -0.12 +0.00    +0.007     3.129
+TER
+ENDMDL
+MODEL        4
+USER    Run = 4
+USER    Cluster Rank = 3
+USER    Number of conformations in this cluster = 1
+USER  
+USER    RMSD from reference structure       = 3.609 A
+USER  
+USER    Estimated Free Energy of Binding    =   -4.93 kcal/mol  [=(1)+(2)+(3)-(4)]
+USER    Estimated Inhibition Constant, Ki   =  242.08 uM (micromolar)  [Temperature = 298.15 K]
+USER    
+USER    (1) Final Intermolecular Energy     =   -8.51 kcal/mol
+USER        vdW + Hbond + desolv Energy     =   -7.79 kcal/mol
+USER        Electrostatic Energy            =   -0.72 kcal/mol
+USER    (2) Final Total Internal Energy     =   -1.43 kcal/mol
+USER    (3) Torsional Free Energy           =   +3.58 kcal/mol
+USER    (4) Unbound System's Energy  [=(2)] =   -1.43 kcal/mol
+USER    
+USER    
+USER  
+USER    DPF = ./6cpa.dpf
+USER    NEWDPF move	6cpa_ligand.pdbqt
+USER    NEWDPF about	46.400002 20.377199 36.480000
+USER    NEWDPF tran0	46.566626 20.917104 39.024872
+USER    NEWDPF axisangle0	0.587930 0.034040 -0.808196 136.792092
+USER    NEWDPF quaternion0	0.546628 0.031649 -0.751421 0.368189
+USER    NEWDPF dihe0	165.39 -169.68 12.35 -164.05 -38.61 -80.02 -41.55 -179.95 89.42 -55.32 -73.26 41.55 
+USER  
+USER                              x       y       z    vdW   Elec        q     RMS 
+ATOM      1  C1  ZAF A 309      48.388  17.768  38.935 -0.07 -0.00    +0.204     3.609
+ATOM      2  O1A ZAF A 309      49.069  16.727  39.344 +0.05 +0.02    -0.646     3.609
+ATOM      3  O1B ZAF A 309      48.859  18.860  38.970 +0.05 +0.02    -0.646     3.609
+ATOM      4  C2  ZAF A 309      47.058  17.505  38.453 -0.10 +0.01    +0.237     3.609
+ATOM      5  O3  ZAF A 309      46.741  18.766  37.813 -0.45 -0.03    -0.294     3.609
+ATOM      6  P3  ZAF A 309      45.120  19.194  37.561 -0.23 +0.03    +0.273     3.609
+ATOM      7  O3A ZAF A 309      44.193  18.050  38.050 -0.52 -0.39    -0.645     3.609
+ATOM      8  O3B ZAF A 309      44.948  19.640  36.093 -0.23 -0.26    -0.645     3.609
+ATOM      9  C4  ZAF A 309      44.805  20.614  38.506 -0.31 -0.14    +0.201     3.609
+ATOM     10  C4A ZAF A 309      43.790  21.630  37.928 -0.48 -0.07    +0.046     3.609
+ATOM     11  N5  ZAF A 309      46.013  21.351  38.647 -0.15 +0.25    -0.343     3.609
+ATOM     12  C6  ZAF A 309      46.600  22.041  37.661 -0.25 -0.19    +0.241     3.609
+ATOM     13  O6  ZAF A 309      46.006  22.304  36.661 -0.23 +0.24    -0.271     3.609
+ATOM     14  H5  ZAF A 309      46.465  21.353  39.561 +0.06 -0.11    +0.163     3.609
+ATOM     15  C7  ZAF A 309      47.962  22.414  37.909 -0.40 -0.08    +0.174     3.609
+ATOM     16  C7A ZAF A 309      48.208  23.786  37.250 -0.50 -0.02    +0.042     3.609
+ATOM     17  N8  ZAF A 309      48.934  21.457  37.503 -0.19 +0.04    -0.324     3.609
+ATOM     18  C9  ZAF A 309      50.096  21.173  38.095 -0.14 -0.01    +0.365     3.609
+ATOM     19  O9  ZAF A 309      50.762  20.309  37.600 -0.18 -0.00    -0.238     3.609
+ATOM     20  H8  ZAF A 309      48.716  20.924  36.660 +0.08 -0.00    +0.165     3.609
+ATOM     21  O10 ZAF A 309      50.462  21.863  39.166 -0.36 -0.02    -0.273     3.609
+ATOM     22  C11 ZAF A 309      51.573  21.392  39.888 -0.18 -0.00    +0.159     3.609
+ATOM     23  C1X ZAF A 309      52.056  22.172  40.992 -0.11 +0.00    -0.014     3.609
+ATOM     24  C2X ZAF A 309      51.832  21.741  42.250 -0.20 -0.00    +0.013     3.609
+ATOM     25  C3X ZAF A 309      52.276  22.459  43.301 -0.29 +0.00    +0.001     3.609
+ATOM     26  C4X ZAF A 309      52.907  23.630  43.097 -0.28 +0.00    +0.000     3.609
+ATOM     27  C5X ZAF A 309      53.128  24.062  41.841 -0.26 +0.00    +0.001     3.609
+ATOM     28  C6X ZAF A 309      52.691  23.346  40.785 -0.22 +0.00    +0.013     3.609
+ATOM     29  C2A ZAF A 309      47.105  16.323  37.478 -0.16 -0.01    +0.082     3.609
+ATOM     30  CP1 ZAF A 309      46.988  16.536  36.066 -0.18 +0.01    -0.055     3.609
+ATOM     31  CP6 ZAF A 309      48.099  16.537  35.299 -0.18 -0.00    +0.007     3.609
+ATOM     32  CP5 ZAF A 309      48.016  16.765  33.969 -0.23 +0.00    +0.001     3.609
+ATOM     33  CP4 ZAF A 309      46.807  16.956  33.393 -0.34 +0.00    +0.000     3.609
+ATOM     34  CP3 ZAF A 309      45.694  16.941  34.157 -0.33 +0.00    +0.001     3.609
+ATOM     35  CP2 ZAF A 309      45.782  16.760  35.493 -0.31 +0.00    +0.007     3.609
+TER
+ENDMDL
+MODEL        7
+USER    Run = 7
+USER    Cluster Rank = 4
+USER    Number of conformations in this cluster = 1
+USER  
+USER    RMSD from reference structure       = 3.125 A
+USER  
+USER    Estimated Free Energy of Binding    =   -4.93 kcal/mol  [=(1)+(2)+(3)-(4)]
+USER    Estimated Inhibition Constant, Ki   =  243.15 uM (micromolar)  [Temperature = 298.15 K]
+USER    
+USER    (1) Final Intermolecular Energy     =   -8.51 kcal/mol
+USER        vdW + Hbond + desolv Energy     =   -8.72 kcal/mol
+USER        Electrostatic Energy            =   +0.21 kcal/mol
+USER    (2) Final Total Internal Energy     =   -1.13 kcal/mol
+USER    (3) Torsional Free Energy           =   +3.58 kcal/mol
+USER    (4) Unbound System's Energy  [=(2)] =   -1.13 kcal/mol
+USER    
+USER    
+USER  
+USER    DPF = ./6cpa.dpf
+USER    NEWDPF move	6cpa_ligand.pdbqt
+USER    NEWDPF about	46.400002 20.377199 36.480000
+USER    NEWDPF tran0	51.774297 17.558523 39.834426
+USER    NEWDPF axisangle0	-0.264766 0.964185 -0.015683 66.174372
+USER    NEWDPF quaternion0	-0.144540 0.526363 -0.008561 0.837841
+USER    NEWDPF dihe0	-2.66 165.84 -16.77 179.88 -65.88 63.61 151.17 -175.85 -169.82 -34.01 -83.84 -65.37 
+USER  
+USER                              x       y       z    vdW   Elec        q     RMS 
+ATOM      1  C1  ZAF A 309      53.012  19.840  37.283 -0.21 -0.00    +0.204     3.125
+ATOM      2  O1A ZAF A 309      53.205  20.388  36.110 +0.03 +0.10    -0.646     3.125
+ATOM      3  O1B ZAF A 309      53.430  18.753  37.527 -0.00 -0.00    -0.646     3.125
+ATOM      4  C2  ZAF A 309      52.273  20.626  38.236 -0.19 +0.00    +0.237     3.125
+ATOM      5  O3  ZAF A 309      50.911  20.277  37.885 -0.18 -0.00    -0.294     3.125
+ATOM      6  P3  ZAF A 309      49.623  21.163  38.543 -0.28 -0.02    +0.273     3.125
+ATOM      7  O3A ZAF A 309      50.139  22.529  39.066 -0.08 -0.17    -0.645     3.125
+ATOM      8  O3B ZAF A 309      48.879  20.272  39.562 +0.03 +0.10    -0.645     3.125
+ATOM      9  C4  ZAF A 309      48.482  21.444  37.267 -0.21 -0.03    +0.201     3.125
+ATOM     10  C4A ZAF A 309      48.308  22.907  36.792 -0.49 -0.02    +0.046     3.125
+ATOM     11  N5  ZAF A 309      47.189  21.054  37.713 -0.09 +0.10    -0.343     3.125
+ATOM     12  C6  ZAF A 309      46.431  21.764  38.557 -0.29 -0.20    +0.241     3.125
+ATOM     13  O6  ZAF A 309      46.678  22.908  38.788 -0.29 +0.37    -0.271     3.125
+ATOM     14  H5  ZAF A 309      46.813  20.171  37.366 +0.09 +0.01    +0.163     3.125
+ATOM     15  C7  ZAF A 309      45.337  21.044  39.143 -0.37 -0.14    +0.174     3.125
+ATOM     16  C7A ZAF A 309      45.874  19.688  39.645 -0.39 -0.01    +0.042     3.125
+ATOM     17  N8  ZAF A 309      44.203  20.878  38.299 -0.20 +0.33    -0.324     3.125
+ATOM     18  C9  ZAF A 309      44.037  21.338  37.057 -0.23 -0.30    +0.365     3.125
+ATOM     19  O9  ZAF A 309      43.008  21.064  36.508 -1.38 +0.13    -0.238     3.125
+ATOM     20  H8  ZAF A 309      43.426  20.345  38.689 -0.22 -0.23    +0.165     3.125
+ATOM     21  O10 ZAF A 309      44.989  22.080  36.508 -0.26 +0.24    -0.273     3.125
+ATOM     22  C11 ZAF A 309      45.245  21.892  35.139 -0.30 -0.04    +0.159     3.125
+ATOM     23  C1X ZAF A 309      45.645  23.025  34.353 -0.38 +0.00    -0.014     3.125
+ATOM     24  C2X ZAF A 309      44.806  24.076  34.239 -0.39 -0.01    +0.013     3.125
+ATOM     25  C3X ZAF A 309      45.160  25.149  33.505 -0.44 -0.00    +0.001     3.125
+ATOM     26  C4X ZAF A 309      46.336  25.156  32.848 -0.43 -0.00    +0.000     3.125
+ATOM     27  C5X ZAF A 309      47.172  24.107  32.959 -0.34 -0.00    +0.001     3.125
+ATOM     28  C6X ZAF A 309      46.825  23.032  33.697 -0.39 -0.00    +0.013     3.125
+ATOM     29  C2A ZAF A 309      52.667  20.191  39.653 -0.11 +0.00    +0.082     3.125
+ATOM     30  CP1 ZAF A 309      51.680  19.697  40.566 -0.08 +0.00    -0.055     3.125
+ATOM     31  CP6 ZAF A 309      51.201  18.443  40.415 -0.06 -0.00    +0.007     3.125
+ATOM     32  CP5 ZAF A 309      50.249  17.966  41.246 -0.12 -0.00    +0.001     3.125
+ATOM     33  CP4 ZAF A 309      49.795  18.734  42.262 -0.12 -0.00    +0.000     3.125
+ATOM     34  CP3 ZAF A 309      50.282  19.983  42.423 -0.15 -0.00    +0.001     3.125
+ATOM     35  CP2 ZAF A 309      51.200  20.477  41.563 -0.19 -0.00    +0.007     3.125
+TER
+ENDMDL
+MODEL        5
+USER    Run = 5
+USER    Cluster Rank = 5
+USER    Number of conformations in this cluster = 1
+USER  
+USER    RMSD from reference structure       = 2.928 A
+USER  
+USER    Estimated Free Energy of Binding    =   -4.66 kcal/mol  [=(1)+(2)+(3)-(4)]
+USER    Estimated Inhibition Constant, Ki   =  383.08 uM (micromolar)  [Temperature = 298.15 K]
+USER    
+USER    (1) Final Intermolecular Energy     =   -8.24 kcal/mol
+USER        vdW + Hbond + desolv Energy     =   -7.93 kcal/mol
+USER        Electrostatic Energy            =   -0.31 kcal/mol
+USER    (2) Final Total Internal Energy     =   -2.20 kcal/mol
+USER    (3) Torsional Free Energy           =   +3.58 kcal/mol
+USER    (4) Unbound System's Energy  [=(2)] =   -2.20 kcal/mol
+USER    
+USER    
+USER  
+USER    DPF = ./6cpa.dpf
+USER    NEWDPF move	6cpa_ligand.pdbqt
+USER    NEWDPF about	46.400002 20.377199 36.480000
+USER    NEWDPF tran0	46.131036 19.844109 36.979035
+USER    NEWDPF axisangle0	-0.341616 -0.405824 -0.847706 -159.707961
+USER    NEWDPF quaternion0	-0.336274 -0.399477 -0.834450 -0.176157
+USER    NEWDPF dihe0	-26.70 -18.03 -166.62 151.83 26.98 150.46 -174.35 175.02 122.01 -22.45 -64.20 3.66 
+USER  
+USER                              x       y       z    vdW   Elec        q     RMS 
+ATOM      1  C1  ZAF A 309      47.215  16.924  35.097 -0.16 +0.00    +0.204     2.928
+ATOM      2  O1A ZAF A 309      47.742  16.201  34.140 +0.00 -0.00    -0.646     2.928
+ATOM      3  O1B ZAF A 309      46.231  17.565  34.908 +0.01 -0.14    -0.646     2.928
+ATOM      4  C2  ZAF A 309      47.897  16.892  36.364 -0.10 -0.00    +0.237     2.928
+ATOM      5  O3  ZAF A 309      47.488  18.162  36.930 -0.44 -0.08    -0.294     2.928
+ATOM      6  P3  ZAF A 309      48.531  18.984  37.984 -0.10 +0.02    +0.273     2.928
+ATOM      7  O3A ZAF A 309      50.005  18.674  37.612 +0.02 -0.03    -0.645     2.928
+ATOM      8  O3B ZAF A 309      48.109  18.677  39.438 +0.06 +0.04    -0.645     2.928
+ATOM      9  C4  ZAF A 309      48.245  20.682  37.778 -0.16 -0.02    +0.201     2.928
+ATOM     10  C4A ZAF A 309      49.082  21.645  38.655 -0.38 -0.01    +0.046     2.928
+ATOM     11  N5  ZAF A 309      46.894  20.966  38.119 -0.09 +0.12    -0.343     2.928
+ATOM     12  C6  ZAF A 309      46.384  20.862  39.352 -0.29 -0.12    +0.241     2.928
+ATOM     13  O6  ZAF A 309      47.098  20.779  40.304 -0.40 +0.11    -0.271     2.928
+ATOM     14  H5  ZAF A 309      46.269  21.269  37.371 +0.09 -0.08    +0.163     2.928
+ATOM     15  C7  ZAF A 309      44.951  20.853  39.418 -0.33 -0.14    +0.174     2.928
+ATOM     16  C7A ZAF A 309      44.470  19.422  39.101 -0.32 -0.01    +0.042     2.928
+ATOM     17  N8  ZAF A 309      44.303  21.818  38.596 -0.18 +0.51    -0.324     2.928
+ATOM     18  C9  ZAF A 309      43.980  21.704  37.306 -0.24 -0.42    +0.365     2.928
+ATOM     19  O9  ZAF A 309      43.413  22.632  36.804 -0.65 +0.32    -0.238     2.928
+ATOM     20  H8  ZAF A 309      44.057  22.699  39.046 -0.32 -0.40    +0.165     2.928
+ATOM     21  O10 ZAF A 309      44.316  20.603  36.649 -0.71 +0.05    -0.273     2.928
+ATOM     22  C11 ZAF A 309      45.075  20.758  35.475 -0.05 +0.01    +0.159     2.928
+ATOM     23  C1X ZAF A 309      45.371  22.086  35.018 -0.34 +0.00    -0.014     2.928
+ATOM     24  C2X ZAF A 309      44.472  22.731  34.247 -0.42 -0.00    +0.013     2.928
+ATOM     25  C3X ZAF A 309      44.730  23.978  33.805 -0.41 -0.00    +0.001     2.928
+ATOM     26  C4X ZAF A 309      45.905  24.566  34.099 -0.40 -0.00    +0.000     2.928
+ATOM     27  C5X ZAF A 309      46.803  23.921  34.867 -0.44 -0.00    +0.001     2.928
+ATOM     28  C6X ZAF A 309      46.549  22.675  35.316 -0.33 -0.01    +0.013     2.928
+ATOM     29  C2A ZAF A 309      47.403  15.682  37.165 -0.13 -0.02    +0.082     2.928
+ATOM     30  CP1 ZAF A 309      47.362  15.721  38.596 -0.11 +0.01    -0.055     2.928
+ATOM     31  CP6 ZAF A 309      48.257  15.002  39.307 -0.05 -0.00    +0.007     2.928
+ATOM     32  CP5 ZAF A 309      48.219  15.000  40.658 -0.07 -0.00    +0.001     2.928
+ATOM     33  CP4 ZAF A 309      47.301  15.752  41.307 -0.19 -0.00    +0.000     2.928
+ATOM     34  CP3 ZAF A 309      46.414  16.482  40.598 -0.09 +0.00    +0.001     2.928
+ATOM     35  CP2 ZAF A 309      46.423  16.447  39.247 -0.21 +0.00    +0.007     2.928
+TER
+ENDMDL
+MODEL        8
+USER    Run = 8
+USER    Cluster Rank = 6
+USER    Number of conformations in this cluster = 2
+USER  
+USER    RMSD from reference structure       = 3.545 A
+USER  
+USER    Estimated Free Energy of Binding    =   -4.17 kcal/mol  [=(1)+(2)+(3)-(4)]
+USER    Estimated Inhibition Constant, Ki   =  870.85 uM (micromolar)  [Temperature = 298.15 K]
+USER    
+USER    (1) Final Intermolecular Energy     =   -7.75 kcal/mol
+USER        vdW + Hbond + desolv Energy     =   -7.03 kcal/mol
+USER        Electrostatic Energy            =   -0.72 kcal/mol
+USER    (2) Final Total Internal Energy     =   -3.32 kcal/mol
+USER    (3) Torsional Free Energy           =   +3.58 kcal/mol
+USER    (4) Unbound System's Energy  [=(2)] =   -3.32 kcal/mol
+USER    
+USER    
+USER  
+USER    DPF = ./6cpa.dpf
+USER    NEWDPF move	6cpa_ligand.pdbqt
+USER    NEWDPF about	46.400002 20.377199 36.480000
+USER    NEWDPF tran0	47.193973 20.483999 36.641107
+USER    NEWDPF axisangle0	0.660398 -0.108546 -0.743029 157.012688
+USER    NEWDPF quaternion0	0.647155 -0.106369 -0.728129 0.199259
+USER    NEWDPF dihe0	174.65 -168.78 56.60 -164.02 29.98 76.77 155.38 -76.62 91.46 -54.76 -58.28 8.94 
+USER  
+USER                              x       y       z    vdW   Elec        q     RMS 
+ATOM      1  C1  ZAF A 309      49.193  17.821  38.110 -0.09 +0.00    +0.204     3.545
+ATOM      2  O1A ZAF A 309      49.887  17.145  38.991 +0.04 +0.01    -0.646     3.545
+ATOM      3  O1B ZAF A 309      49.594  18.853  37.676 +0.02 -0.03    -0.646     3.545
+ATOM      4  C2  ZAF A 309      47.935  17.243  37.716 -0.08 +0.00    +0.237     3.545
+ATOM      5  O3  ZAF A 309      47.256  18.401  37.173 -0.58 -0.08    -0.294     3.545
+ATOM      6  P3  ZAF A 309      45.586  18.581  37.410 -0.20 +0.06    +0.273     3.545
+ATOM      7  O3A ZAF A 309      45.033  17.361  38.191 -0.23 -0.31    -0.645     3.545
+ATOM      8  O3B ZAF A 309      44.923  18.886  36.049 +0.03 -0.41    -0.645     3.545
+ATOM      9  C4  ZAF A 309      45.347  20.012  38.361 -0.24 -0.06    +0.201     3.545
+ATOM     10  C4A ZAF A 309      44.040  20.805  38.119 -0.40 -0.05    +0.046     3.545
+ATOM     11  N5  ZAF A 309      46.389  20.936  38.071 -0.09 +0.15    -0.343     3.545
+ATOM     12  C6  ZAF A 309      46.459  22.179  38.563 -0.28 -0.25    +0.241     3.545
+ATOM     13  O6  ZAF A 309      45.789  22.508  39.493 -0.38 +0.41    -0.271     3.545
+ATOM     14  H5  ZAF A 309      47.134  20.631  37.445 +0.09 -0.02    +0.163     3.545
+ATOM     15  C7  ZAF A 309      47.378  23.048  37.887 -0.34 -0.15    +0.174     3.545
+ATOM     16  C7A ZAF A 309      47.072  22.981  36.377 -0.45 -0.03    +0.042     3.545
+ATOM     17  N8  ZAF A 309      48.754  22.798  38.154 -0.23 +0.08    -0.324     3.545
+ATOM     18  C9  ZAF A 309      49.284  21.743  38.776 -0.16 -0.04    +0.365     3.545
+ATOM     19  O9  ZAF A 309      50.478  21.715  38.877 -0.36 -0.01    -0.238     3.545
+ATOM     20  H8  ZAF A 309      49.411  23.509  37.832 +0.13 -0.01    +0.165     3.545
+ATOM     21  O10 ZAF A 309      48.482  20.806  39.262 -0.18 +0.06    -0.273     3.545
+ATOM     22  C11 ZAF A 309      48.566  20.535  40.639 -0.33 -0.04    +0.159     3.545
+ATOM     23  C1X ZAF A 309      48.477  19.171  41.077 -0.26 +0.00    -0.014     3.545
+ATOM     24  C2X ZAF A 309      49.539  18.605  41.686 -0.20 -0.00    +0.013     3.545
+ATOM     25  C3X ZAF A 309      49.477  17.325  42.104 -0.14 -0.00    +0.001     3.545
+ATOM     26  C4X ZAF A 309      48.368  16.596  41.877 -0.13 -0.00    +0.000     3.545
+ATOM     27  C5X ZAF A 309      47.309  17.161  41.267 -0.25 -0.00    +0.001     3.545
+ATOM     28  C6X ZAF A 309      47.363  18.442  40.851 -0.28 -0.00    +0.013     3.545
+ATOM     29  C2A ZAF A 309      48.196  16.147  36.675 -0.13 -0.01    +0.082     3.545
+ATOM     30  CP1 ZAF A 309      47.907  16.372  35.290 -0.16 +0.00    -0.055     3.545
+ATOM     31  CP6 ZAF A 309      48.913  16.668  34.440 -0.12 +0.00    +0.007     3.545
+ATOM     32  CP5 ZAF A 309      48.661  16.913  33.135 -0.26 +0.00    +0.001     3.545
+ATOM     33  CP4 ZAF A 309      47.396  16.825  32.665 -0.23 +0.00    +0.000     3.545
+ATOM     34  CP3 ZAF A 309      46.390  16.517  33.511 -0.28 +0.00    +0.001     3.545
+ATOM     35  CP2 ZAF A 309      46.636  16.318  34.825 -0.29 -0.00    +0.007     3.545
+TER
+ENDMDL
+MODEL        6
+USER    Run = 6
+USER    Cluster Rank = 7
+USER    Number of conformations in this cluster = 1
+USER  
+USER    RMSD from reference structure       = 3.911 A
+USER  
+USER    Estimated Free Energy of Binding    =   -4.10 kcal/mol  [=(1)+(2)+(3)-(4)]
+USER    Estimated Inhibition Constant, Ki   =  982.42 uM (micromolar)  [Temperature = 298.15 K]
+USER    
+USER    (1) Final Intermolecular Energy     =   -7.68 kcal/mol
+USER        vdW + Hbond + desolv Energy     =   -7.40 kcal/mol
+USER        Electrostatic Energy            =   -0.28 kcal/mol
+USER    (2) Final Total Internal Energy     =   -2.66 kcal/mol
+USER    (3) Torsional Free Energy           =   +3.58 kcal/mol
+USER    (4) Unbound System's Energy  [=(2)] =   -2.66 kcal/mol
+USER    
+USER    
+USER  
+USER    DPF = ./6cpa.dpf
+USER    NEWDPF move	6cpa_ligand.pdbqt
+USER    NEWDPF about	46.400002 20.377199 36.480000
+USER    NEWDPF tran0	50.473301 15.304763 43.683640
+USER    NEWDPF axisangle0	0.127418 -0.885724 0.446383 159.558243
+USER    NEWDPF quaternion0	0.125396 -0.871669 0.439299 0.177443
+USER    NEWDPF dihe0	180.00 -167.41 101.12 121.10 -87.37 -141.64 49.78 -16.73 28.77 88.83 -26.04 55.28 
+USER  
+USER                              x       y       z    vdW   Elec        q     RMS 
+ATOM      1  C1  ZAF A 309      51.085  18.810  44.448 -0.16 +0.02    +0.204     3.911
+ATOM      2  O1A ZAF A 309      51.675  19.886  44.905 -0.05 -0.01    -0.646     3.911
+ATOM      3  O1B ZAF A 309      50.653  17.987  45.190 -0.50 -0.14    -0.646     3.911
+ATOM      4  C2  ZAF A 309      51.001  18.694  43.015 -0.12 +0.01    +0.237     3.911
+ATOM      5  O3  ZAF A 309      49.824  17.861  42.874 -0.12 -0.02    -0.294     3.911
+ATOM      6  P3  ZAF A 309      49.986  16.270  42.308 -0.09 -0.00    +0.273     3.911
+ATOM      7  O3A ZAF A 309      49.004  15.341  43.069 +0.00 +0.02    -0.645     3.911
+ATOM      8  O3B ZAF A 309      51.480  15.878  42.352 +0.01 -0.01    -0.645     3.911
+ATOM      9  C4  ZAF A 309      49.568  16.272  40.625 -0.04 -0.01    +0.201     3.911
+ATOM     10  C4A ZAF A 309      50.697  16.613  39.622 -0.03 -0.00    +0.046     3.911
+ATOM     11  N5  ZAF A 309      48.574  17.264  40.399 -0.04 +0.02    -0.343     3.911
+ATOM     12  C6  ZAF A 309      47.386  17.032  39.827 -0.11 -0.00    +0.241     3.911
+ATOM     13  O6  ZAF A 309      46.972  15.919  39.706 -0.10 +0.00    -0.271     3.911
+ATOM     14  H5  ZAF A 309      48.779  18.219  40.694 +0.06 -0.01    +0.163     3.911
+ATOM     15  C7  ZAF A 309      46.688  18.203  39.382 -0.17 -0.00    +0.174     3.911
+ATOM     16  C7A ZAF A 309      46.565  19.167  40.580 -0.37 -0.01    +0.042     3.911
+ATOM     17  N8  ZAF A 309      45.423  17.957  38.777 -0.11 -0.06    -0.324     3.911
+ATOM     18  C9  ZAF A 309      44.372  18.778  38.723 -0.10 +0.02    +0.365     3.911
+ATOM     19  O9  ZAF A 309      43.403  18.384  38.139 -0.86 -0.12    -0.238     3.911
+ATOM     20  H8  ZAF A 309      45.307  17.047  38.331 +0.07 +0.06    +0.165     3.911
+ATOM     21  O10 ZAF A 309      44.440  19.958  39.325 -0.30 +0.16    -0.273     3.911
+ATOM     22  C11 ZAF A 309      44.264  21.101  38.527 -0.35 -0.18    +0.159     3.911
+ATOM     23  C1X ZAF A 309      45.428  21.775  38.025 -0.37 +0.01    -0.014     3.911
+ATOM     24  C2X ZAF A 309      45.582  21.918  36.693 -0.32 -0.01    +0.013     3.911
+ATOM     25  C3X ZAF A 309      46.668  22.546  36.200 -0.37 -0.00    +0.001     3.911
+ATOM     26  C4X ZAF A 309      47.622  22.995  37.036 -0.47 -0.00    +0.000     3.911
+ATOM     27  C5X ZAF A 309      47.470  22.850  38.366 -0.47 -0.00    +0.001     3.911
+ATOM     28  C6X ZAF A 309      46.383  22.227  38.866 -0.37 -0.01    +0.013     3.911
+ATOM     29  C2A ZAF A 309      50.832  20.093  42.411 -0.22 -0.00    +0.082     3.911
+ATOM     30  CP1 ZAF A 309      50.724  20.267  40.994 -0.18 +0.00    -0.055     3.911
+ATOM     31  CP6 ZAF A 309      49.512  20.498  40.443 -0.28 -0.00    +0.007     3.911
+ATOM     32  CP5 ZAF A 309      49.381  20.637  39.105 -0.27 -0.00    +0.001     3.911
+ATOM     33  CP4 ZAF A 309      50.474  20.583  38.312 -0.27 -0.00    +0.000     3.911
+ATOM     34  CP3 ZAF A 309      51.688  20.366  38.862 -0.20 -0.00    +0.001     3.911
+ATOM     35  CP2 ZAF A 309      51.813  20.180  40.194 -0.12 -0.00    +0.007     3.911
+TER
+ENDMDL
+MODEL       10
+USER    Run = 10
+USER    Cluster Rank = 8
+USER    Number of conformations in this cluster = 2
+USER  
+USER    RMSD from reference structure       = 4.267 A
+USER  
+USER    Estimated Free Energy of Binding    =   -2.33 kcal/mol  [=(1)+(2)+(3)-(4)]
+USER    Estimated Inhibition Constant, Ki   =   19.58 mM (millimolar)  [Temperature = 298.15 K]
+USER    
+USER    (1) Final Intermolecular Energy     =   -5.91 kcal/mol
+USER        vdW + Hbond + desolv Energy     =   -5.82 kcal/mol
+USER        Electrostatic Energy            =   -0.09 kcal/mol
+USER    (2) Final Total Internal Energy     =   -4.07 kcal/mol
+USER    (3) Torsional Free Energy           =   +3.58 kcal/mol
+USER    (4) Unbound System's Energy  [=(2)] =   -4.07 kcal/mol
+USER    
+USER    
+USER  
+USER    DPF = ./6cpa.dpf
+USER    NEWDPF move	6cpa_ligand.pdbqt
+USER    NEWDPF about	46.400002 20.377199 36.480000
+USER    NEWDPF tran0	47.675365 17.419664 38.624440
+USER    NEWDPF axisangle0	0.691935 -0.530843 -0.489318 -101.106083
+USER    NEWDPF quaternion0	0.534321 -0.409924 -0.377858 -0.635364
+USER    NEWDPF dihe0	168.59 176.71 58.88 -5.07 -93.66 10.84 157.72 -81.62 113.14 -177.66 -23.61 152.97 
+USER  
+USER                              x       y       z    vdW   Elec        q     RMS 
+ATOM      1  C1  ZAF A 309      49.460  20.466  39.507 -0.20 -0.02    +0.204     4.267
+ATOM      2  O1A ZAF A 309      49.802  21.730  39.531 +0.02 +0.02    -0.646     4.267
+ATOM      3  O1B ZAF A 309      49.621  19.807  38.530 +0.02 +0.02    -0.646     4.267
+ATOM      4  C2  ZAF A 309      48.884  19.943  40.718 -0.23 -0.04    +0.237     4.267
+ATOM      5  O3  ZAF A 309      49.921  20.262  41.678 -0.20 +0.04    -0.294     4.267
+ATOM      6  P3  ZAF A 309      50.870  19.018  42.333 -0.15 -0.00    +0.273     4.267
+ATOM      7  O3A ZAF A 309      50.792  19.059  43.881 -0.05 -0.05    -0.645     4.267
+ATOM      8  O3B ZAF A 309      52.282  19.092  41.712 +0.04 -0.00    -0.645     4.267
+ATOM      9  C4  ZAF A 309      50.209  17.513  41.777 -0.10 -0.00    +0.201     4.267
+ATOM     10  C4A ZAF A 309      51.038  16.237  42.059 -0.05 +0.00    +0.046     4.267
+ATOM     11  N5  ZAF A 309      50.088  17.560  40.360 -0.01 +0.01    -0.343     4.267
+ATOM     12  C6  ZAF A 309      49.790  16.507  39.589 -0.01 -0.01    +0.241     4.267
+ATOM     13  O6  ZAF A 309      49.342  15.508  40.064 -0.01 +0.01    -0.271     4.267
+ATOM     14  H5  ZAF A 309      50.239  18.457  39.900 +0.04 -0.00    +0.163     4.267
+ATOM     15  C7  ZAF A 309      50.056  16.684  38.191 -0.05 -0.00    +0.174     4.267
+ATOM     16  C7A ZAF A 309      51.525  17.129  38.040 -0.08 +0.00    +0.042     4.267
+ATOM     17  N8  ZAF A 309      49.169  17.567  37.515 -0.06 -0.01    -0.324     4.267
+ATOM     18  C9  ZAF A 309      47.836  17.506  37.469 -0.04 +0.02    +0.365     4.267
+ATOM     19  O9  ZAF A 309      47.273  18.369  36.858 -0.47 -0.09    -0.238     4.267
+ATOM     20  H8  ZAF A 309      49.602  18.337  37.005 +0.04 +0.02    +0.165     4.267
+ATOM     21  O10 ZAF A 309      47.213  16.502  38.069 -0.07 +0.02    -0.273     4.267
+ATOM     22  C11 ZAF A 309      46.391  16.816  39.166 -0.18 +0.01    +0.159     4.267
+ATOM     23  C1X ZAF A 309      46.431  15.964  40.321 -0.20 -0.00    -0.014     4.267
+ATOM     24  C2X ZAF A 309      46.984  16.426  41.461 -0.20 -0.00    +0.013     4.267
+ATOM     25  C3X ZAF A 309      47.033  15.643  42.556 -0.18 -0.00    +0.001     4.267
+ATOM     26  C4X ZAF A 309      46.567  14.381  42.501 -0.18 +0.00    +0.000     4.267
+ATOM     27  C5X ZAF A 309      46.017  13.919  41.363 -0.20 +0.00    +0.001     4.267
+ATOM     28  C6X ZAF A 309      45.960  14.700  40.265 -0.23 +0.00    +0.013     4.267
+ATOM     29  C2A ZAF A 309      47.559  20.663  40.992 -0.43 -0.03    +0.082     4.267
+ATOM     30  CP1 ZAF A 309      46.536  20.714  39.991 -0.42 +0.02    -0.055     4.267
+ATOM     31  CP6 ZAF A 309      45.642  19.706  39.901 -0.36 -0.00    +0.007     4.267
+ATOM     32  CP5 ZAF A 309      44.686  19.718  38.946 -0.37 -0.00    +0.001     4.267
+ATOM     33  CP4 ZAF A 309      44.596  20.766  38.096 -0.41 -0.00    +0.000     4.267
+ATOM     34  CP3 ZAF A 309      45.480  21.781  38.193 -0.39 -0.00    +0.001     4.267
+ATOM     35  CP2 ZAF A 309      46.465  21.747  39.117 -0.43 -0.01    +0.007     4.267
+TER
+ENDMDL
+
+
+AVSFLD: # AVS field file
+AVSFLD: #
+AVSFLD: # Created by AutoDock
+AVSFLD: #
+AVSFLD: ndim=2           # number of dimensions in the field
+AVSFLD: nspace=1         # number of physical coordinates
+AVSFLD: veclen=7         # vector size
+AVSFLD: dim1=35          # atoms
+AVSFLD: dim2=8           # conformations
+AVSFLD: data=Real       # data type (byte,integer,Real,double)
+AVSFLD: field=uniform    # field coordinate layout
+AVSFLD: label= x y z vdW Elec q RMS
+AVSFLD: variable 1 file = ./6cpa.dlg.pdb filetype = ascii offset = 5 stride = 12
+AVSFLD: variable 2 file = ./6cpa.dlg.pdb filetype = ascii offset = 6 stride = 12
+AVSFLD: variable 3 file = ./6cpa.dlg.pdb filetype = ascii offset = 7 stride = 12
+AVSFLD: variable 4 file = ./6cpa.dlg.pdb filetype = ascii offset = 8 stride = 12
+AVSFLD: variable 5 file = ./6cpa.dlg.pdb filetype = ascii offset = 9 stride = 12
+AVSFLD: variable 6 file = ./6cpa.dlg.pdb filetype = ascii offset = 10 stride = 12
+AVSFLD: variable 7 file = ./6cpa.dlg.pdb filetype = ascii offset = 11 stride = 12
+AVSFLD: # end of file
+
+>>> Closing the docking parameter file (DPF)...
+This docking finished at:			6:37 58" p.m., 09/08/2016
+
+
+________________________________________________________________________________
+
+/home/wimi/lvs/ESA_Projects/bioinfo/docking_src/autodock/Run_Experiments/bin/autodock_link: Successful Completion on "eredmithrim.esa.informatik.tu-darmstadt.dei"
+
+Real= 3m 44.92s,  CPU= 3m 44.69s,  System= 0.00s
+________________________________________________________________________________
+
