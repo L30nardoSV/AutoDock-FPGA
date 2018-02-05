@@ -521,6 +521,13 @@ Speedup vs i5 cpu core: 3ptb: 59/40 = 1.47x, 1stp: 84/76 = 1.1x
 NO CHANGES, SAVED comments in PRNG for next commit
 >>> commit "potential unroll in prng_ls123"
 
+164. Delete kernel files that are not used anymore
+NO HW TEST, THIS IS A CLEANUP COMMIT
+>>> commit "removed unneeded kernels files"
+
+
+. Expand from 3LS to 5LS blocks
+
 
 XXX, Between Conform and InterE, IntraE create a wider channel: 
 https://www.alteraforum.com/forum/showthread.php?t=55979
