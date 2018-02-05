@@ -504,8 +504,22 @@ Speedup vs i5 cpu core: 3ptb: 59/40 = 1.47x, 1stp: 84/76 = 1.1x
 >>> commit "added pdbs for testing"
 
 
+	 BEGIN: THESE CHANGES WERE TESTED IN HW BUT PERFORMANCE REDUCED 1 SEC
+	. `Krnl_GA`: to <TRY TO> infer coalesced accesses to glob mem 
+	       redefine GlobPopCurr and GlobEneCurr pointers in the deepest possible scope
+		(unrolling correspoding for-loops provides no performance benefits: NOT DONE)
+	. `Krnl_GA`: for SINGLE_COPY_POP_ENE, pass `eval_cnt` and `generation_cnt` as x and y components 
+	        of the same global int2 variable, in order to increase coalescing
+	END: THESE CHANGES WERE TESTED IN HW BUT PERFORMANCE REDUCED 1 SEC
 
 
+	BEGIN: THESE CHANGES WERE TESTED IN HW BUT PERFORMANCE REDUCED 2 & 4 SEC (3ptb & 1stp)
+	`Krnl_PRNG.cl`: in Krnl_Prng_LS123_ushort, unroll internal logic converting vectors into arrays, 
+		     as it seems that vectorization increase performance only in NDRAnge kernels
+	END: THESE CHANGES WERE TESTED IN HW BUT PERFORMANCE REDUCED 2 & 4 SEC (3ptb & 1stp)
+
+NO CHANGES, SAVED comments in PRNG for next commit
+>>> commit "potential unroll in prng_ls123"
 
 
 XXX, Between Conform and InterE, IntraE create a wider channel: 

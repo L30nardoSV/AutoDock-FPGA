@@ -123,6 +123,14 @@ void Krnl_Prng_LS123_ushort(unsigned int Host_seed1,
  	lfsr.x = Host_seed1;
 	lfsr.y = Host_seed2;
 	lfsr.z = Host_seed3;
+
+/*
+	uint lfsr[3];
+	lfsr[0] = Host_seed1;
+	lfsr[1] = Host_seed2;
+	lfsr[2] = Host_seed3;
+*/
+
 	bool valid = false;
 
 	while(!valid) {
@@ -158,6 +166,35 @@ void Krnl_Prng_LS123_ushort(unsigned int Host_seed1,
 		if(!valid) {
 			success = write_channel_nb_altera(chan_PRNG2GA_LS123_ushort_prng, tmp);
 		}
+
+/*
+		ushort tmp[3];
+		
+		#pragma unroll
+		for (uint i=0; i<3; i++){
+			uchar  lsb[3];
+			lsb [i] = lfsr[i] & 0x01u;
+			lfsr[i] >>= 1;
+			lfsr[i] ^= (-lsb[i]) & 0xA3000000u;
+			tmp [i] = (DockConst_pop_size/MAX_UINT)*lfsr[i];
+		}
+
+		// to avoid having same entities undergoing LS simultaneously
+		if ((tmp[0] == tmp[1]) || (tmp[0] == tmp[2]) || (tmp[1] == tmp[2])) {
+			tmp[1] = tmp[0] + 1;
+			tmp[2] = tmp[1] + 2;
+		}
+
+		bool success = false;
+		ushort3 tmp123;
+		tmp123.x = tmp[0];
+		tmp123.y = tmp[1];
+		tmp123.z = tmp[2];
+
+		if(!valid) {
+			success = write_channel_nb_altera(chan_PRNG2GA_LS123_ushort_prng, tmp123);
+		}
+*/
 	} // End of while(active)
 }
 
