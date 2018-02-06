@@ -135,6 +135,14 @@ while(active) {
 			case 0x03:
 				fl_tmp = read_channel_altera(chan_LS2Conf_LS3_genotype);
 			break;
+
+			case 0x04:
+				fl_tmp = read_channel_altera(chan_LS2Conf_LS4_genotype);
+			break;
+
+			case 0x05:
+				fl_tmp = read_channel_altera(chan_LS2Conf_LS5_genotype);
+			break;
 		}
 		
 		if (i > 2) {

@@ -212,6 +212,14 @@ ENABLE_K35 = YES
 # bt ushort_float
 ENABLE_K36 = YES
 
+# prng ls4, ls5
+ENABLE_K37 = YES
+ENABLE_K38 = YES
+
+# krnl_ls4, Krnl_ls5
+ENABLE_K39 = YES
+ENABLE_K40 = YES
+
 
 ifeq ($(ENABLE_K1),YES)
 	K1 =-DENABLE_KERNEL1
@@ -435,7 +443,31 @@ else
 	K36 =
 endif
 
-ENABLE_KERNELS = $(K1) $(K2) $(K3) $(K4) $(K5) $(K6) $(K7) $(K8) $(K9) $(K10) $(K11) $(K12) $(K13) $(K14) $(K15) $(K16) $(K17) $(K18) $(K19) $(K20) $(K21) $(K22) $(K23) $(K24) $(K25) $(K26) $(K27) $(K28) $(K29) $(K30) $(K31) $(K32) $(K33) $(K34) $(K35) $(K36)
+ifeq ($(ENABLE_K37),YES)
+	K37 =-DENABLE_KERNEL37
+else
+	K37 =
+endif
+
+ifeq ($(ENABLE_K38),YES)
+	K38 =-DENABLE_KERNEL38
+else
+	K38 =
+endif
+
+ifeq ($(ENABLE_K39),YES)
+	K39 =-DENABLE_KERNEL39
+else
+	K39 =
+endif
+
+ifeq ($(ENABLE_K40),YES)
+	K40 =-DENABLE_KERNEL40
+else
+	K40 =
+endif
+
+ENABLE_KERNELS = $(K1) $(K2) $(K3) $(K4) $(K5) $(K6) $(K7) $(K8) $(K9) $(K10) $(K11) $(K12) $(K13) $(K14) $(K15) $(K16) $(K17) $(K18) $(K19) $(K20) $(K21) $(K22) $(K23) $(K24) $(K25) $(K26) $(K27) $(K28) $(K29) $(K30) $(K31) $(K32) $(K33) $(K34) $(K35) $(K36) $(K37) $(K38) $(K39) $(K40)
 
 # =============================
 # Reproduce result (remove randomness)
@@ -461,9 +493,13 @@ FIXED_POINT_INTRAE=NO
 FIXED_POINT_LS1=YES
 FIXED_POINT_LS2=YES
 FIXED_POINT_LS3=YES
+FIXED_POINT_LS4=YES
+FIXED_POINT_LS5=YES
 #FIXED_POINT_LS1=NO
 #FIXED_POINT_LS2=NO
 #FIXED_POINT_LS3=NO
+#FIXED_POINT_LS4=NO
+#FIXED_POINT_LS5=NO
 
 SINGLE_COPY_POP_ENE=YES
 
@@ -505,6 +541,18 @@ else
 	FIPOLS3_FLAG=
 endif
 
+ifeq ($(FIXED_POINT_LS4), YES)
+	FIPOLS4_FLAG=-DFIXED_POINT_LS4
+else	
+	FIPOLS4_FLAG=
+endif
+
+ifeq ($(FIXED_POINT_LS5), YES)
+	FIPOLS5_FLAG=-DFIXED_POINT_LS5
+else	
+	FIPOLS5_FLAG=
+endif
+
 ifeq ($(SINGLE_COPY_POP_ENE), YES)
 	COPYPOPENE_FLAG=-DSINGLE_COPY_POP_ENE
 else	
@@ -517,7 +565,7 @@ else
 	SEP_FGRID_FLAG=
 endif
 
-FIPO_FLAG = $(FIPOCO_FLAG) $(FIPOIE_FLAG) $(FIPOIA_FLAG) $(FIPOLS1_FLAG) $(FIPOLS2_FLAG) $(FIPOLS3_FLAG) $(COPYPOPENE_FLAG) $(SEP_FGRID_FLAG) 
+FIPO_FLAG = $(FIPOCO_FLAG) $(FIPOIE_FLAG) $(FIPOIA_FLAG) $(FIPOLS1_FLAG) $(FIPOLS2_FLAG) $(FIPOLS3_FLAG) $(FIPOLS4_FLAG) $(FIPOLS5_FLAG) $(COPYPOPENE_FLAG) $(SEP_FGRID_FLAG) 
 
 # =============================
 # AOC flags

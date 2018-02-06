@@ -225,6 +225,12 @@ while(active) {
 
 		// LS 3
 		case 0x03: write_channel_altera(chan_Intrae2StoreLS_LS3_intrae, intraE); break;
+
+		// LS 4
+		case 0x04: write_channel_altera(chan_Intrae2StoreLS_LS4_intrae, intraE); break;
+
+		// LS 5
+		case 0x05: write_channel_altera(chan_Intrae2StoreLS_LS5_intrae, intraE); break;
 	}
 	// --------------------------------------------------------------
 

@@ -526,7 +526,12 @@ NO HW TEST, THIS IS A CLEANUP COMMIT
 >>> commit "removed unneeded kernels files"
 
 
-. Expand from 3LS to 5LS blocks
+165. Expand from 3LS to 5LS blocks: `Conform`, `GA`, `IGL_Arbiter`, `InterE`, `IntraE`, `PRNG`, `performdocking`
+
+Both run in Sauron (non-instrumented freq=172MHz , intrumented freq=179 MHz)
+Speedup vs i5 cpu core: 3ptb: 59/34 = 1.73x, 1stp: 84/58 = 1.44x 
+(instrumented version runs faster: 59/32 = 1.84x, 84/56=1.5x)
+>>> commit "LS replicated 5 times"
 
 
 XXX, Between Conform and InterE, IntraE create a wider channel: 
