@@ -143,6 +143,22 @@ while(active) {
 			case 0x05:
 				fl_tmp = read_channel_altera(chan_LS2Conf_LS5_genotype);
 			break;
+
+			case 0x06:
+				fl_tmp = read_channel_altera(chan_LS2Conf_LS6_genotype);
+			break;
+
+			case 0x07:
+				fl_tmp = read_channel_altera(chan_LS2Conf_LS7_genotype);
+			break;
+
+			case 0x08:
+				fl_tmp = read_channel_altera(chan_LS2Conf_LS8_genotype);
+			break;
+
+			case 0x09:
+				fl_tmp = read_channel_altera(chan_LS2Conf_LS9_genotype);
+			break;
 		}
 		
 		if (i > 2) {

@@ -206,15 +206,23 @@ void Krnl_Prng_LS123_ushort(unsigned int Host_seed1,
 			    unsigned int Host_seed3,
 			    unsigned int Host_seed4,
 			    unsigned int Host_seed5, 
+			    unsigned int Host_seed6, 
+			    unsigned int Host_seed7,
+			    unsigned int Host_seed8,
+			    unsigned int Host_seed9, 
 		            unsigned int DockConst_pop_size){
 
 
-	uint lfsr[5];
+	uint lfsr[9];
 	lfsr[0] = Host_seed1;
 	lfsr[1] = Host_seed2;
 	lfsr[2] = Host_seed3;
 	lfsr[3] = Host_seed4;
 	lfsr[4] = Host_seed5;
+	lfsr[5] = Host_seed6;
+	lfsr[6] = Host_seed7;
+	lfsr[7] = Host_seed8;
+	lfsr[8] = Host_seed9;
 
 	bool valid = false;
 
@@ -222,11 +230,11 @@ void Krnl_Prng_LS123_ushort(unsigned int Host_seed1,
 		bool active = true;
 		active  = read_channel_nb_altera(chan_Arbiter_LS123_ushort_off, &valid);
 
-		ushort tmp[5];
+		ushort tmp[9];
 		
 		#pragma unroll
-		for (uint i=0; i<5; i++){
-			uchar  lsb[5];
+		for (uint i=0; i<9; i++){
+			uchar  lsb[9];
 			lsb [i] = lfsr[i] & 0x01u;
 			lfsr[i] >>= 1;
 			lfsr[i] ^= (-lsb[i]) & 0xA3000000u;
@@ -235,24 +243,36 @@ void Krnl_Prng_LS123_ushort(unsigned int Host_seed1,
 
 		// to avoid having same entities undergoing LS simultaneously
 		if (
-			(tmp[0] == tmp[1]) || (tmp[0] == tmp[2]) || (tmp[0] == tmp[3]) || (tmp[0] == tmp[4]) ||
-			(tmp[1] == tmp[2]) || (tmp[1] == tmp[3]) || (tmp[1] == tmp[4]) ||
-			(tmp[2] == tmp[3]) || (tmp[2] == tmp[4]) ||
-			(tmp[3] == tmp[4])
+			(tmp[0] == tmp[1]) || (tmp[0] == tmp[2]) || (tmp[0] == tmp[3]) || (tmp[0] == tmp[4]) || (tmp[0] == tmp[5]) || (tmp[0] == tmp[6]) || (tmp[0] == tmp[7]) || (tmp[0] == tmp[8]) ||
+ 			(tmp[1] == tmp[2]) || (tmp[1] == tmp[3]) || (tmp[1] == tmp[4]) || (tmp[1] == tmp[5]) || (tmp[1] == tmp[6]) || (tmp[1] == tmp[7]) || (tmp[1] == tmp[8]) ||
+			(tmp[2] == tmp[3]) || (tmp[2] == tmp[4]) || (tmp[2] == tmp[5]) || (tmp[2] == tmp[6]) || (tmp[2] == tmp[7]) || (tmp[2] == tmp[8]) ||
+			(tmp[3] == tmp[4]) || (tmp[3] == tmp[5]) || (tmp[3] == tmp[6]) || (tmp[3] == tmp[7]) || (tmp[3] == tmp[8]) ||
+			(tmp[4] == tmp[5]) || (tmp[4] == tmp[6]) || (tmp[4] == tmp[7]) || (tmp[4] == tmp[8]) ||
+			(tmp[5] == tmp[6]) || (tmp[5] == tmp[7]) || (tmp[5] == tmp[8]) ||
+			(tmp[6] == tmp[7]) || (tmp[6] == tmp[8]) ||
+			(tmp[7] == tmp[8])
 		) {
 			tmp[1] = tmp[0] + 1;
 			tmp[2] = tmp[1] + 2;
 			tmp[3] = tmp[2] + 3;
 			tmp[4] = tmp[3] + 4;
+			tmp[5] = tmp[4] + 5;
+			tmp[6] = tmp[5] + 6;
+			tmp[7] = tmp[6] + 7;
+			tmp[8] = tmp[7] + 8;
 		}
 
 		bool success = false;
-		ushort8 tmp123;
+		ushort16 tmp123;
 		tmp123.s0 = tmp[0];
 		tmp123.s1 = tmp[1];
 		tmp123.s2 = tmp[2];
 		tmp123.s3 = tmp[3];
 		tmp123.s4 = tmp[4];
+		tmp123.s5 = tmp[5];
+		tmp123.s6 = tmp[6];
+		tmp123.s7 = tmp[7];
+		tmp123.s8 = tmp[8];
 
 		if(!valid) {
 			success = write_channel_nb_altera(chan_PRNG2GA_LS123_ushort_prng, tmp123);
@@ -387,7 +407,7 @@ void Krnl_Prng_LS4_float(unsigned int  Host_seed,
 			tmp = (0.999999f/MAX_UINT)*lfsr;
 			bool success = false;
 
-			#if defined (FIXED_POINT_LS2)
+			#if defined (FIXED_POINT_LS4)
 			fixedpt fixpt_tmp = fixedpt_fromfloat(tmp);
 			if(!valid) {
 				success = write_channel_nb_altera(chan_PRNG2GA_LS4_float_prng, *(float*) &fixpt_tmp);
@@ -421,7 +441,7 @@ void Krnl_Prng_LS5_float(unsigned int  Host_seed,
 			tmp = (0.999999f/MAX_UINT)*lfsr;
 			bool success = false;
 
-			#if defined (FIXED_POINT_LS2)
+			#if defined (FIXED_POINT_LS5)
 			fixedpt fixpt_tmp = fixedpt_fromfloat(tmp);
 			if(!valid) {
 				success = write_channel_nb_altera(chan_PRNG2GA_LS5_float_prng, *(float*) &fixpt_tmp);
@@ -429,6 +449,142 @@ void Krnl_Prng_LS5_float(unsigned int  Host_seed,
 			#else
 			if(!valid) {
 				success = write_channel_nb_altera(chan_PRNG2GA_LS5_float_prng, tmp);
+			}
+			#endif
+		}
+	} // End of while(active)
+}
+
+__kernel __attribute__ ((max_global_work_dim(0)))
+void Krnl_Prng_LS6_float(unsigned int  Host_seed,
+			 unsigned char DockConst_num_of_genes){
+
+	uint lfsr = Host_seed;
+	bool valid = false;
+
+	while(!valid) {
+		bool active = true;
+		active  = read_channel_nb_altera(chan_Arbiter_LS6_float_off, &valid);
+	
+		for(uchar i=0; i<DockConst_num_of_genes; i++) {
+			float tmp;
+			uchar lsb;
+			lsb = lfsr & 0x01u;
+			lfsr >>= 1;
+			lfsr ^= (-lsb) & 0xA3000000u;
+			tmp = (0.999999f/MAX_UINT)*lfsr;
+			bool success = false;
+
+			#if defined (FIXED_POINT_LS6)
+			fixedpt fixpt_tmp = fixedpt_fromfloat(tmp);
+			if(!valid) {
+				success = write_channel_nb_altera(chan_PRNG2GA_LS6_float_prng, *(float*) &fixpt_tmp);
+			}
+			#else
+			if(!valid) {
+				success = write_channel_nb_altera(chan_PRNG2GA_LS6_float_prng, tmp);
+			}
+			#endif
+		}
+	} // End of while(active)
+}
+
+__kernel __attribute__ ((max_global_work_dim(0)))
+void Krnl_Prng_LS7_float(unsigned int  Host_seed,
+			 unsigned char DockConst_num_of_genes){
+
+	uint lfsr = Host_seed;
+	bool valid = false;
+
+	while(!valid) {
+		bool active = true;
+		active  = read_channel_nb_altera(chan_Arbiter_LS7_float_off, &valid);
+	
+		for(uchar i=0; i<DockConst_num_of_genes; i++) {
+			float tmp;
+			uchar lsb;
+			lsb = lfsr & 0x01u;
+			lfsr >>= 1;
+			lfsr ^= (-lsb) & 0xA3000000u;
+			tmp = (0.999999f/MAX_UINT)*lfsr;
+			bool success = false;
+
+			#if defined (FIXED_POINT_LS7)
+			fixedpt fixpt_tmp = fixedpt_fromfloat(tmp);
+			if(!valid) {
+				success = write_channel_nb_altera(chan_PRNG2GA_LS7_float_prng, *(float*) &fixpt_tmp);
+			}
+			#else
+			if(!valid) {
+				success = write_channel_nb_altera(chan_PRNG2GA_LS7_float_prng, tmp);
+			}
+			#endif
+		}
+	} // End of while(active)
+}
+
+__kernel __attribute__ ((max_global_work_dim(0)))
+void Krnl_Prng_LS8_float(unsigned int  Host_seed,
+			 unsigned char DockConst_num_of_genes){
+
+	uint lfsr = Host_seed;
+	bool valid = false;
+
+	while(!valid) {
+		bool active = true;
+		active  = read_channel_nb_altera(chan_Arbiter_LS8_float_off, &valid);
+	
+		for(uchar i=0; i<DockConst_num_of_genes; i++) {
+			float tmp;
+			uchar lsb;
+			lsb = lfsr & 0x01u;
+			lfsr >>= 1;
+			lfsr ^= (-lsb) & 0xA3000000u;
+			tmp = (0.999999f/MAX_UINT)*lfsr;
+			bool success = false;
+
+			#if defined (FIXED_POINT_LS8)
+			fixedpt fixpt_tmp = fixedpt_fromfloat(tmp);
+			if(!valid) {
+				success = write_channel_nb_altera(chan_PRNG2GA_LS8_float_prng, *(float*) &fixpt_tmp);
+			}
+			#else
+			if(!valid) {
+				success = write_channel_nb_altera(chan_PRNG2GA_LS8_float_prng, tmp);
+			}
+			#endif
+		}
+	} // End of while(active)
+}
+
+__kernel __attribute__ ((max_global_work_dim(0)))
+void Krnl_Prng_LS9_float(unsigned int  Host_seed,
+			 unsigned char DockConst_num_of_genes){
+
+	uint lfsr = Host_seed;
+	bool valid = false;
+
+	while(!valid) {
+		bool active = true;
+		active  = read_channel_nb_altera(chan_Arbiter_LS9_float_off, &valid);
+	
+		for(uchar i=0; i<DockConst_num_of_genes; i++) {
+			float tmp;
+			uchar lsb;
+			lsb = lfsr & 0x01u;
+			lfsr >>= 1;
+			lfsr ^= (-lsb) & 0xA3000000u;
+			tmp = (0.999999f/MAX_UINT)*lfsr;
+			bool success = false;
+
+			#if defined (FIXED_POINT_LS9)
+			fixedpt fixpt_tmp = fixedpt_fromfloat(tmp);
+			if(!valid) {
+				success = write_channel_nb_altera(chan_PRNG2GA_LS9_float_prng, *(float*) &fixpt_tmp);
+			}
+			#else
+			if(!valid) {
+				success = write_channel_nb_altera(chan_PRNG2GA_LS9_float_prng, tmp);
 			}
 			#endif
 		}

@@ -534,6 +534,21 @@ Speedup vs i5 cpu core: 3ptb: 59/34 = 1.73x, 1stp: 84/58 = 1.44x
 >>> commit "LS replicated 5 times"
 
 
+166. Expand from 5LS to 9 LS blocks
+167. `Krnl_GA`: cleaned up code of disabled kernels
+		added mem_fence(CLK_CHANNEL_MEM_FENCE) to enforce order in channel ops
+
+Only non-instrumented passes placement phase: 
+freq=166MHz
+Speedup vs i5 cpu core: 3ptb: 59/25 = 2.36x, 1stp: 84/45 = 1.86x 
+>>> commit "LS replicated 9 times + added fences"
+
+
+
+
+
+
+
 XXX, Between Conform and InterE, IntraE create a wider channel: 
 https://www.alteraforum.com/forum/showthread.php?t=55979
 

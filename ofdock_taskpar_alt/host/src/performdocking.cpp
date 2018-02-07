@@ -63,18 +63,20 @@ static const char *name_k4 = "Krnl_IntraE";
 
 
 
-
+#if 0
 #ifdef ENABLE_KERNEL8
 static cl_command_queue command_queue8 = NULL;
 static cl_kernel kernel8  = NULL;
 static const char *name_k8 = "Krnl_Prng_BT_ushort";
 #endif
+#endif
 
-
+#if 0
 #ifdef ENABLE_KERNEL5
 static cl_command_queue command_queue5 = NULL;
 static cl_kernel kernel5  = NULL;
 static const char *name_k5 = "Krnl_Prng_BT_float";
+#endif
 #endif
 
 #ifdef ENABLE_KERNEL10
@@ -89,10 +91,12 @@ static cl_kernel kernel6  = NULL;
 static const char *name_k6 = "Krnl_Prng_GG_float";
 #endif
 
+#if 0
 #ifdef ENABLE_KERNEL9
 static cl_command_queue command_queue9 = NULL;
 static cl_kernel kernel9  = NULL;
 static const char *name_k9 = "Krnl_Prng_LS_ushort";
+#endif
 #endif
 
 #ifdef ENABLE_KERNEL7
@@ -101,10 +105,12 @@ static cl_kernel kernel7  = NULL;
 static const char *name_k7 = "Krnl_Prng_LS_float";
 #endif
 
+#if 0
 #ifdef ENABLE_KERNEL11
 static cl_command_queue command_queue11 = NULL;
 static cl_kernel kernel11  = NULL;
 static const char *name_k11 = "Krnl_Prng_Arbiter";
+#endif
 #endif
 
 #ifdef ENABLE_KERNEL12
@@ -113,12 +119,13 @@ static cl_kernel kernel12  = NULL;
 static const char *name_k12 = "Krnl_LS";
 #endif
 
+#if 0
 #ifdef ENABLE_KERNEL13
 static cl_command_queue command_queue13 = NULL;
 static cl_kernel kernel13  = NULL;
 static const char *name_k13 = "Krnl_LS_Arbiter";
 #endif
-
+#endif
 
 
 
@@ -135,10 +142,12 @@ static cl_kernel kernel15  = NULL;
 static const char *name_k15 = "Krnl_LS2";
 #endif
 
+#if 0
 #ifdef ENABLE_KERNEL16
 static cl_command_queue command_queue16 = NULL;
 static cl_kernel kernel16  = NULL;
 static const char *name_k16 = "Krnl_LS2_Arbiter";
+#endif
 #endif
 
 #ifdef ENABLE_KERNEL17
@@ -179,10 +188,12 @@ static cl_kernel kernel21  = NULL;
 static const char *name_k21 = "Krnl_LS3";
 #endif
 
+#if 0
 #ifdef ENABLE_KERNEL22
 static cl_command_queue command_queue22 = NULL;
 static cl_kernel kernel22  = NULL;
 static const char *name_k22 = "Krnl_LS3_Arbiter";
+#endif
 #endif
 
 #ifdef ENABLE_KERNEL23
@@ -197,16 +208,20 @@ static cl_kernel kernel24  = NULL;
 static const char *name_k24 = "Krnl_Conf_Arbiter2";
 #endif
 
+#if 0
 #ifdef ENABLE_KERNEL25
 static cl_command_queue command_queue25 = NULL;
 static cl_kernel kernel25  = NULL;
 static const char *name_k25 = "Krnl_Prng_LS2_ushort";
 #endif
+#endif
 
+#if 0
 #ifdef ENABLE_KERNEL26
 static cl_command_queue command_queue26 = NULL;
 static cl_kernel kernel26  = NULL;
 static const char *name_k26 = "Krnl_Prng_LS3_ushort";
+#endif
 #endif
 
 #ifdef ENABLE_KERNEL27
@@ -215,46 +230,60 @@ static cl_kernel kernel27  = NULL;
 static const char *name_k27 = "Krnl_IGL_Arbiter";
 #endif
 
+#if 0
 #ifdef ENABLE_KERNEL28
 static cl_command_queue command_queue28 = NULL;
 static cl_kernel kernel28  = NULL;
 static const char *name_k28 = "Krnl_IA_pipeline_Arbiter";
 #endif
+#endif
 
+#if 0
 #ifdef ENABLE_KERNEL29
 static cl_command_queue command_queue29 = NULL;
 static cl_kernel kernel29  = NULL;
 static const char *name_k29 = "Krnl_IA_pipeline";
 #endif
+#endif
 
+#if 0
 #ifdef ENABLE_KERNEL30
 static cl_command_queue command_queue30 = NULL;
 static cl_kernel kernel30  = NULL;
 static const char *name_k30 = "Krnl_IA_pipeline2";
 #endif
+#endif
 
+#if 0
 #ifdef ENABLE_KERNEL31
 static cl_command_queue command_queue31 = NULL;
 static cl_kernel kernel31  = NULL;
 static const char *name_k31 = "Krnl_Prng_BT_Arbiter";
 #endif
+#endif
 
+#if 0
 #ifdef ENABLE_KERNEL32
 static cl_command_queue command_queue32 = NULL;
 static cl_kernel kernel32  = NULL;
 static const char *name_k32 = "Krnl_Prng_GG_Arbiter";
 #endif
+#endif
 
+#if 0
 #ifdef ENABLE_KERNEL33
 static cl_command_queue command_queue33 = NULL;
 static cl_kernel kernel33  = NULL;
 static const char *name_k33 = "Krnl_Prng_LS_ushort_Arbiter";
 #endif
+#endif
 
+#if 0
 #ifdef ENABLE_KERNEL34
 static cl_command_queue command_queue34 = NULL;
 static cl_kernel kernel34  = NULL;
 static const char *name_k34 = "Krnl_Prng_LS_float_Arbiter";
+#endif
 #endif
 
 #ifdef ENABLE_KERNEL35
@@ -297,6 +326,64 @@ static cl_command_queue command_queue40 = NULL;
 static cl_kernel kernel40  = NULL;
 static const char *name_k40 = "Krnl_LS5";
 #endif
+
+
+
+
+
+
+#ifdef ENABLE_KERNEL41
+static cl_command_queue command_queue41 = NULL;
+static cl_kernel kernel41  = NULL;
+static const char *name_k41 = "Krnl_Prng_LS6_float";
+#endif
+
+#ifdef ENABLE_KERNEL42
+static cl_command_queue command_queue42 = NULL;
+static cl_kernel kernel42  = NULL;
+static const char *name_k42 = "Krnl_Prng_LS7_float";
+#endif
+
+#ifdef ENABLE_KERNEL43
+static cl_command_queue command_queue43 = NULL;
+static cl_kernel kernel43  = NULL;
+static const char *name_k43 = "Krnl_Prng_LS8_float";
+#endif
+
+#ifdef ENABLE_KERNEL44
+static cl_command_queue command_queue44 = NULL;
+static cl_kernel kernel44  = NULL;
+static const char *name_k44 = "Krnl_Prng_LS9_float";
+#endif
+
+
+
+#ifdef ENABLE_KERNEL45
+static cl_command_queue command_queue45 = NULL;
+static cl_kernel kernel45  = NULL;
+static const char *name_k45 = "Krnl_LS6";
+#endif
+
+#ifdef ENABLE_KERNEL46
+static cl_command_queue command_queue46 = NULL;
+static cl_kernel kernel46  = NULL;
+static const char *name_k46 = "Krnl_LS7";
+#endif
+
+#ifdef ENABLE_KERNEL47
+static cl_command_queue command_queue47 = NULL;
+static cl_kernel kernel47  = NULL;
+static const char *name_k47 = "Krnl_LS8";
+#endif
+
+#ifdef ENABLE_KERNEL48
+static cl_command_queue command_queue48 = NULL;
+static cl_kernel kernel48  = NULL;
+static const char *name_k48 = "Krnl_LS9";
+#endif
+
+
+
 
 static cl_program program = NULL;
 
@@ -540,7 +627,7 @@ filled with clock() */
 
 	//allocating memory in CPU for pseudorandom number generator seeds and
 	//generating them (seed for each thread during GA)
-	unsigned int num_of_prng_blocks = 15;
+	unsigned int num_of_prng_blocks = 25;
 	size_prng_seeds = num_of_prng_blocks * mypars->num_of_runs * sizeof(unsigned int);
 	cpu_prng_seeds = (unsigned int*) alignedMalloc(size_prng_seeds);
 	genseed(time(NULL));	//initializing seed generator
@@ -947,13 +1034,17 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	setKernelArg(kernel7,1, sizeof(unsigned char),  &dockpars.num_of_genes);
 #endif // End of ENABLE_KERNEL7
 
+#if 0
 #ifdef ENABLE_KERNEL8 // Krnl_PRNG_ushort
 	setKernelArg(kernel8,1, sizeof(unsigned int),  &dockpars.pop_size);
 #endif // End of ENABLE_KERNEL8
+#endif
 
+#if 0
 #ifdef ENABLE_KERNEL9 // Krnl_PRNG_LS_ushort
 	setKernelArg(kernel9,1, sizeof(unsigned int),  &dockpars.pop_size);
 #endif // End of ENABLE_KERNEL9
+#endif
 
 #ifdef ENABLE_KERNEL10 // Krnl_PRNG_uchar
 	setKernelArg(kernel10,1, sizeof(unsigned char),  &dockpars.num_of_genes);
@@ -1080,13 +1171,17 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 	setKernelArg(kernel24,0, sizeof(unsigned char),  &dockpars.num_of_genes);
 #endif // End of ENABLE_KERNEL24
 
+#if 0
 #ifdef ENABLE_KERNEL25 // Krnl_PRNG_LS2_ushort
 	setKernelArg(kernel25,1, sizeof(unsigned int),  &dockpars.pop_size);
 #endif // End of ENABLE_KERNEL25
+#endif
 
+#if 0
 #ifdef ENABLE_KERNEL26 // Krnl_PRNG_LS3_ushort
 	setKernelArg(kernel26,1, sizeof(unsigned int),  &dockpars.pop_size);
 #endif // End of ENABLE_KERNEL26
+#endif
 
 #ifdef ENABLE_KERNEL27 // Krnl_IGL_Arbiter
 /*	
@@ -1094,21 +1189,26 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 */
 #endif // End of ENABLE_KERNEL27
 
+#if 0
 #ifdef ENABLE_KERNEL28 // 
 
 #endif // End of ENABLE_KERNEL28
+#endif
 
-
+#if 0
 #ifdef ENABLE_KERNEL29 // 
 
 #endif // 
+#endif
 
+#if 0
 #ifdef ENABLE_KERNEL30 // 
 
 #endif // 
+#endif
 
 #ifdef ENABLE_KERNEL35 // Krnl_PRNG_LS123_ushort
-	setKernelArg(kernel35,5, sizeof(unsigned int),  &dockpars.pop_size);
+	setKernelArg(kernel35,9, sizeof(unsigned int),  &dockpars.pop_size);
 #endif // End of ENABLE_KERNEL35
 
 #ifdef ENABLE_KERNEL36 // Krnl_PRNG_ushort_float
@@ -1158,6 +1258,94 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 	#endif
 	setKernelArg(kernel40,5, sizeof(unsigned char),   &Host_cons_limit);
 #endif // End of ENABLE_KERNEL40
+
+#ifdef ENABLE_KERNEL41 // Krnl_PRNG_LS6_float
+	setKernelArg(kernel41,1, sizeof(unsigned char),  &dockpars.num_of_genes);
+#endif // End of ENABLE_KERNEL41
+
+#ifdef ENABLE_KERNEL42 // Krnl_PRNG_LS7_float
+	setKernelArg(kernel42,1, sizeof(unsigned char),  &dockpars.num_of_genes);
+#endif // End of ENABLE_KERNEL42
+
+#ifdef ENABLE_KERNEL43 // Krnl_PRNG_LS8_float
+	setKernelArg(kernel43,1, sizeof(unsigned char),  &dockpars.num_of_genes);
+#endif // End of ENABLE_KERNEL43
+
+#ifdef ENABLE_KERNEL44 // Krnl_PRNG_LS9_float
+	setKernelArg(kernel44,1, sizeof(unsigned char),  &dockpars.num_of_genes);
+#endif // End of ENABLE_KERNEL44
+
+#ifdef ENABLE_KERNEL45 // Krnl_LS6
+	setKernelArg(kernel45,0, sizeof(unsigned short),  &Host_max_num_of_iters);
+	#if defined (FIXED_POINT_LS6)
+	setKernelArg(kernel45,1, sizeof(fixedpt),  	  &fixpt_rho_lower_bound);
+	setKernelArg(kernel45,2, sizeof(fixedpt),  	  &fixpt_base_dmov_mul_sqrt3);
+	#else
+	setKernelArg(kernel45,1, sizeof(float),  	  &dockpars.rho_lower_bound);
+	setKernelArg(kernel45,2, sizeof(float),  	  &dockpars.base_dmov_mul_sqrt3);
+	#endif
+	setKernelArg(kernel45,3, sizeof(unsigned char),   &dockpars.num_of_genes);
+	#if defined (FIXED_POINT_LS6)
+	setKernelArg(kernel45,4, sizeof(fixedpt),  	  &fixpt_base_dang_mul_sqrt3);
+	#else
+	setKernelArg(kernel45,4, sizeof(float),  	  &dockpars.base_dang_mul_sqrt3);
+	#endif
+	setKernelArg(kernel45,5, sizeof(unsigned char),   &Host_cons_limit);
+#endif // End of ENABLE_KERNEL45
+
+#ifdef ENABLE_KERNEL46 // Krnl_LS7
+	setKernelArg(kernel46,0, sizeof(unsigned short),  &Host_max_num_of_iters);
+	#if defined (FIXED_POINT_LS7)
+	setKernelArg(kernel46,1, sizeof(fixedpt),  	  &fixpt_rho_lower_bound);
+	setKernelArg(kernel46,2, sizeof(fixedpt),  	  &fixpt_base_dmov_mul_sqrt3);
+	#else
+	setKernelArg(kernel46,1, sizeof(float),  	  &dockpars.rho_lower_bound);
+	setKernelArg(kernel46,2, sizeof(float),  	  &dockpars.base_dmov_mul_sqrt3);
+	#endif
+	setKernelArg(kernel46,3, sizeof(unsigned char),   &dockpars.num_of_genes);
+	#if defined (FIXED_POINT_LS7)
+	setKernelArg(kernel46,4, sizeof(fixedpt),  	  &fixpt_base_dang_mul_sqrt3);
+	#else
+	setKernelArg(kernel46,4, sizeof(float),  	  &dockpars.base_dang_mul_sqrt3);
+	#endif
+	setKernelArg(kernel46,5, sizeof(unsigned char),   &Host_cons_limit);
+#endif // End of ENABLE_KERNEL46
+
+#ifdef ENABLE_KERNEL47 // Krnl_LS8
+	setKernelArg(kernel47,0, sizeof(unsigned short),  &Host_max_num_of_iters);
+	#if defined (FIXED_POINT_LS8)
+	setKernelArg(kernel47,1, sizeof(fixedpt),  	  &fixpt_rho_lower_bound);
+	setKernelArg(kernel47,2, sizeof(fixedpt),  	  &fixpt_base_dmov_mul_sqrt3);
+	#else
+	setKernelArg(kernel47,1, sizeof(float),  	  &dockpars.rho_lower_bound);
+	setKernelArg(kernel47,2, sizeof(float),  	  &dockpars.base_dmov_mul_sqrt3);
+	#endif
+	setKernelArg(kernel47,3, sizeof(unsigned char),   &dockpars.num_of_genes);
+	#if defined (FIXED_POINT_LS8)
+	setKernelArg(kernel47,4, sizeof(fixedpt),  	  &fixpt_base_dang_mul_sqrt3);
+	#else
+	setKernelArg(kernel47,4, sizeof(float),  	  &dockpars.base_dang_mul_sqrt3);
+	#endif
+	setKernelArg(kernel47,5, sizeof(unsigned char),   &Host_cons_limit);
+#endif // End of ENABLE_KERNEL47
+
+#ifdef ENABLE_KERNEL48 // Krnl_LS9
+	setKernelArg(kernel48,0, sizeof(unsigned short),  &Host_max_num_of_iters);
+	#if defined (FIXED_POINT_LS9)
+	setKernelArg(kernel48,1, sizeof(fixedpt),  	  &fixpt_rho_lower_bound);
+	setKernelArg(kernel48,2, sizeof(fixedpt),  	  &fixpt_base_dmov_mul_sqrt3);
+	#else
+	setKernelArg(kernel48,1, sizeof(float),  	  &dockpars.rho_lower_bound);
+	setKernelArg(kernel48,2, sizeof(float),  	  &dockpars.base_dmov_mul_sqrt3);
+	#endif
+	setKernelArg(kernel48,3, sizeof(unsigned char),   &dockpars.num_of_genes);
+	#if defined (FIXED_POINT_LS9)
+	setKernelArg(kernel48,4, sizeof(fixedpt),  	  &fixpt_base_dang_mul_sqrt3);
+	#else
+	setKernelArg(kernel48,4, sizeof(float),  	  &dockpars.base_dang_mul_sqrt3);
+	#endif
+	setKernelArg(kernel48,5, sizeof(unsigned char),   &Host_cons_limit);
+#endif // End of ENABLE_KERNEL48
 
 
 #if defined(SINGLE_COPY_POP_ENE)
@@ -1241,12 +1429,12 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 #endif
 
 #ifdef ENABLE_KERNEL6 // Krnl_PRNG_GG_float
-		setKernelArg(kernel6,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 1]);
+		setKernelArg(kernel6,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt]);
 #endif // End of ENABLE_KERNEL6
 
 
-#ifdef ENABLE_KERNEL7 // Krnl_PRNG_float
-		setKernelArg(kernel7,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 2]);
+#ifdef ENABLE_KERNEL7 // Krnl_PRNG_LS_float
+		setKernelArg(kernel7,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 1]);
 #endif // End of ENABLE_KERNEL7
 
 #if 0
@@ -1261,12 +1449,12 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 	#endif // End of ENABLE_KERNEL9
 #endif
 
-#ifdef ENABLE_KERNEL10 // Krnl_PRNG_uchar
-		setKernelArg(kernel10,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 5]);
+#ifdef ENABLE_KERNEL10 // Krnl_Prng_GG_uchar
+		setKernelArg(kernel10,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 2]);
 #endif // End of ENABLE_KERNEL10
 
 #ifdef ENABLE_KERNEL14 // Krnl_PRNG_LS2_float
-		setKernelArg(kernel14,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 6]);
+		setKernelArg(kernel14,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 3]);
 #endif // End of ENABLE_KERNEL7
 
 #ifdef ENABLE_KERNEL17 // Krnl_Conform2
@@ -1274,37 +1462,61 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 #endif // End of ENABLE_KERNEL17
 
 #ifdef ENABLE_KERNEL20 // Krnl_PRNG_LS3_float
-		setKernelArg(kernel20,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 7]);
+		setKernelArg(kernel20,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 4]);
 #endif // End of ENABLE_KERNEL20
 
+#if 0
 #ifdef ENABLE_KERNEL25 // Krnl_PRNG_LS2_ushort
 		setKernelArg(kernel25,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 8]);
 #endif // End of ENABLE_KERNEL25
+#endif
 
+#if 0
 #ifdef ENABLE_KERNEL26 // Krnl_PRNG_LS3_ushort
 		setKernelArg(kernel26,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 9]);
 #endif // End of ENABLE_KERNEL26
+#endif
 
 #ifdef ENABLE_KERNEL35 // Krnl_PRNG_LS123_ushort
-		setKernelArg(kernel35,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 4]);
-		setKernelArg(kernel35,1, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 8]);
-		setKernelArg(kernel35,2, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 9]);
-		setKernelArg(kernel35,3, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 10]);
-		setKernelArg(kernel35,4, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 11]);
+		setKernelArg(kernel35,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 5]);
+		setKernelArg(kernel35,1, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 6]);
+		setKernelArg(kernel35,2, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 7]);
+		setKernelArg(kernel35,3, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 8]);
+		setKernelArg(kernel35,4, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 9]);
+		setKernelArg(kernel35,5, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 10]);
+		setKernelArg(kernel35,6, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 11]);
+		setKernelArg(kernel35,7, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 12]);
+		setKernelArg(kernel35,8, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 13]);
 #endif // End of ENABLE_KERNEL35
 
-#ifdef ENABLE_KERNEL36 // Krnl_PRNG_ushort_float
-		setKernelArg(kernel36,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 3]);
-		setKernelArg(kernel36,1, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 12]);
+#ifdef ENABLE_KERNEL36 // Krnl_Prng_BT_ushort_float
+		setKernelArg(kernel36,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 14]);
+		setKernelArg(kernel36,1, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 15]);
 #endif // End of ENABLE_KERNEL36
 
 #ifdef ENABLE_KERNEL37 // Krnl_PRNG_LS4_float
-		setKernelArg(kernel37,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 13]);
+		setKernelArg(kernel37,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 16]);
 #endif // End of ENABLE_KERNEL37
 
 #ifdef ENABLE_KERNEL38 // Krnl_PRNG_LS5_float
-		setKernelArg(kernel38,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 14]);
+		setKernelArg(kernel38,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 17]);
 #endif // End of ENABLE_KERNEL38
+
+#ifdef ENABLE_KERNEL41 // Krnl_PRNG_LS6_float
+		setKernelArg(kernel41,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 18]);
+#endif // End of ENABLE_KERNEL41
+
+#ifdef ENABLE_KERNEL42 // Krnl_PRNG_LS7_float
+		setKernelArg(kernel42,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 19]);
+#endif // End of ENABLE_KERNEL42
+
+#ifdef ENABLE_KERNEL43 // Krnl_PRNG_LS8_float
+		setKernelArg(kernel43,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 20]);
+#endif // End of ENABLE_KERNEL43
+
+#ifdef ENABLE_KERNEL44 // Krnl_PRNG_LS9_float
+		setKernelArg(kernel44,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 21]);
+#endif // End of ENABLE_KERNEL44
 
 		#ifdef ENABLE_KERNEL1
 		runKernelTask(command_queue1,kernel1,NULL,NULL);
@@ -1322,9 +1534,11 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		runKernelTask(command_queue4,kernel4,NULL,NULL);
 		#endif // ENABLE_KERNEL4
 
+#if 0
 		#ifdef ENABLE_KERNEL5
 		runKernelTask(command_queue5,kernel5,NULL,NULL);
 		#endif // ENABLE_KERNEL5
+#endif
 
 		#ifdef ENABLE_KERNEL6
 		runKernelTask(command_queue6,kernel6,NULL,NULL);
@@ -1334,29 +1548,37 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		runKernelTask(command_queue7,kernel7,NULL,NULL);
 		#endif // ENABLE_KERNEL7
 
+#if 0
 		#ifdef ENABLE_KERNEL8
 		runKernelTask(command_queue8,kernel8,NULL,NULL);
 		#endif // ENABLE_KERNEL8
+#endif
 
+#if 0
 		#ifdef ENABLE_KERNEL9
 		runKernelTask(command_queue9,kernel9,NULL,NULL);
 		#endif // ENABLE_KERNEL9
+#endif
 
 		#ifdef ENABLE_KERNEL10
 		runKernelTask(command_queue10,kernel10,NULL,NULL);
 		#endif // ENABLE_KERNEL10
 
+#if 0
 		#ifdef ENABLE_KERNEL11
 		runKernelTask(command_queue11,kernel11,NULL,NULL);
 		#endif // ENABLE_KERNEL10
+#endif
 
 		#ifdef ENABLE_KERNEL12
 		runKernelTask(command_queue12,kernel12,NULL,NULL);
 		#endif // ENABLE_KERNEL12
 
+#if 0
 		#ifdef ENABLE_KERNEL13
 		runKernelTask(command_queue13,kernel13,NULL,NULL);
 		#endif // ENABLE_KERNEL13
+#endif
 
 		#ifdef ENABLE_KERNEL14
 		runKernelTask(command_queue14,kernel14,NULL,NULL);
@@ -1366,9 +1588,11 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		runKernelTask(command_queue15,kernel15,NULL,NULL);
 		#endif // ENABLE_KERNEL14
 
+#if 0
 		#ifdef ENABLE_KERNEL16
 		runKernelTask(command_queue16,kernel16,NULL,NULL);
 		#endif // ENABLE_KERNEL16
+#endif
 
 		#ifdef ENABLE_KERNEL17
 		runKernelTask(command_queue17,kernel17,NULL,NULL);
@@ -1390,9 +1614,11 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		runKernelTask(command_queue21,kernel21,NULL,NULL);
 		#endif // ENABLE_KERNEL21
 
+#if 0
 		#ifdef ENABLE_KERNEL22
 		runKernelTask(command_queue22,kernel22,NULL,NULL);
 		#endif // ENABLE_KERNEL22
+#endif
 
 		#ifdef ENABLE_KERNEL23
 		runKernelTask(command_queue23,kernel23,NULL,NULL);
@@ -1402,45 +1628,63 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		runKernelTask(command_queue24,kernel24,NULL,NULL);
 		#endif // ENABLE_KERNEL24
 
+#if 0
 		#ifdef ENABLE_KERNEL25
 		runKernelTask(command_queue25,kernel25,NULL,NULL);
 		#endif // ENABLE_KERNEL25
+#endif
 
+#if 0
 		#ifdef ENABLE_KERNEL26
 		runKernelTask(command_queue26,kernel26,NULL,NULL);
 		#endif // ENABLE_KERNEL26
+#endif
 
 		#ifdef ENABLE_KERNEL27
 		runKernelTask(command_queue27,kernel27,NULL,NULL);
 		#endif // ENABLE_KERNEL27
 
+#if 0
 		#ifdef ENABLE_KERNEL28
 		runKernelTask(command_queue28,kernel28,NULL,NULL);
 		#endif // ENABLE_KERNEL28
+#endif
 
+#if 0
 		#ifdef ENABLE_KERNEL29
 		runKernelTask(command_queue29,kernel29,NULL,NULL);
 		#endif // ENABLE_KERNEL29
+#endif
 
+#if 0
 		#ifdef ENABLE_KERNEL30
 		runKernelTask(command_queue30,kernel30,NULL,NULL);
 		#endif // ENABLE_KERNEL30
+#endif
 
+#if 0
 		#ifdef ENABLE_KERNEL31
 		runKernelTask(command_queue31,kernel31,NULL,NULL);
 		#endif // ENABLE_KERNEL31
+#endif
 
+#if 0
 		#ifdef ENABLE_KERNEL32
 		runKernelTask(command_queue32,kernel32,NULL,NULL);
 		#endif // ENABLE_KERNEL32
+#endif
 
+#if 0
 		#ifdef ENABLE_KERNEL33
 		runKernelTask(command_queue33,kernel33,NULL,NULL);
 		#endif // ENABLE_KERNEL33
+#endif
 
+#if 0
 		#ifdef ENABLE_KERNEL34
 		runKernelTask(command_queue34,kernel34,NULL,NULL);
 		#endif // ENABLE_KERNEL34
+#endif
 
 		#ifdef ENABLE_KERNEL35
 		runKernelTask(command_queue35,kernel35,NULL,NULL);
@@ -1466,6 +1710,42 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		runKernelTask(command_queue40,kernel40,NULL,NULL);
 		#endif // ENABLE_KERNEL40
 
+
+		#ifdef ENABLE_KERNEL41
+		runKernelTask(command_queue41,kernel41,NULL,NULL);
+		#endif // ENABLE_KERNEL41
+
+		#ifdef ENABLE_KERNEL42
+		runKernelTask(command_queue42,kernel42,NULL,NULL);
+		#endif // ENABLE_KERNEL42
+
+		#ifdef ENABLE_KERNEL43
+		runKernelTask(command_queue43,kernel43,NULL,NULL);
+		#endif // ENABLE_KERNEL43
+
+		#ifdef ENABLE_KERNEL44
+		runKernelTask(command_queue44,kernel44,NULL,NULL);
+		#endif // ENABLE_KERNEL44
+
+		#ifdef ENABLE_KERNEL45
+		runKernelTask(command_queue45,kernel45,NULL,NULL);
+		#endif // ENABLE_KERNEL45
+
+		#ifdef ENABLE_KERNEL46
+		runKernelTask(command_queue46,kernel46,NULL,NULL);
+		#endif // ENABLE_KERNEL46
+
+		#ifdef ENABLE_KERNEL47
+		runKernelTask(command_queue47,kernel47,NULL,NULL);
+		#endif // ENABLE_KERNEL47
+
+		#ifdef ENABLE_KERNEL48
+		runKernelTask(command_queue48,kernel48,NULL,NULL);
+		#endif // ENABLE_KERNEL48
+
+
+
+
 		#ifdef ENABLE_KERNEL1 		
 		clFinish(command_queue1); 
 		#endif
@@ -1482,9 +1762,11 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		clFinish(command_queue4); 
 		#endif
 
+#if 0
 		#ifdef ENABLE_KERNEL5
 		clFinish(command_queue5); 
 		#endif
+#endif
 
 		#ifdef ENABLE_KERNEL6
 		clFinish(command_queue6); 
@@ -1494,29 +1776,37 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		clFinish(command_queue7);
 		#endif
 
+#if 0
 		#ifdef ENABLE_KERNEL8
 		clFinish(command_queue8);
 		#endif
+#endif
 
+#if 0
 		#ifdef ENABLE_KERNEL9
 		clFinish(command_queue9);
 		#endif
+#endif
 
 		#ifdef ENABLE_KERNEL10
 		clFinish(command_queue10);
 		#endif
 
+#if 0
 		#ifdef ENABLE_KERNEL11
 		clFinish(command_queue11);
 		#endif
+#endif
 
 		#ifdef ENABLE_KERNEL12
 		clFinish(command_queue12);
 		#endif
 
+#if 0
 		#ifdef ENABLE_KERNEL13
 		clFinish(command_queue13);
 		#endif
+#endif
 
 		#ifdef ENABLE_KERNEL14
 		clFinish(command_queue14);
@@ -1526,9 +1816,11 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		clFinish(command_queue15);
 		#endif
 
+#if 0
 		#ifdef ENABLE_KERNEL16
 		clFinish(command_queue16);
 		#endif
+#endif
 
 		#ifdef ENABLE_KERNEL17
 		clFinish(command_queue17);
@@ -1550,9 +1842,11 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		clFinish(command_queue21);
 		#endif
 
+#if 0
 		#ifdef ENABLE_KERNEL22
 		clFinish(command_queue22);
 		#endif
+#endif
 
 		#ifdef ENABLE_KERNEL23
 		clFinish(command_queue23);
@@ -1562,45 +1856,63 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		clFinish(command_queue24);
 		#endif
 
+#if 0
 		#ifdef ENABLE_KERNEL25
 		clFinish(command_queue25);
 		#endif
+#endif
 
+#if 0
 		#ifdef ENABLE_KERNEL26
 		clFinish(command_queue26);
 		#endif
+#endif
 
 		#ifdef ENABLE_KERNEL27
 		clFinish(command_queue27);
 		#endif
 
+#if 0
 		#ifdef ENABLE_KERNEL28
 		clFinish(command_queue28);
 		#endif
+#endif
 
+#if 0
 		#ifdef ENABLE_KERNEL29
 		clFinish(command_queue29);
 		#endif
+#endif
 
+#if 0
 		#ifdef ENABLE_KERNEL30
 		clFinish(command_queue30);
 		#endif
+#endif
 
+#if 0
 		#ifdef ENABLE_KERNEL31
 		clFinish(command_queue31);
 		#endif
+#endif
 
+#if 0
 		#ifdef ENABLE_KERNEL32
 		clFinish(command_queue32);
 		#endif
+#endif
 
+#if 0
 		#ifdef ENABLE_KERNEL33
 		clFinish(command_queue33);
 		#endif
+#endif
 
+#if 0
 		#ifdef ENABLE_KERNEL34
 		clFinish(command_queue34);
 		#endif
+#endif
 
 		#ifdef ENABLE_KERNEL35
 		clFinish(command_queue35);
@@ -1624,6 +1936,38 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 
 		#ifdef ENABLE_KERNEL40
 		clFinish(command_queue40);
+		#endif
+
+		#ifdef ENABLE_KERNEL41
+		clFinish(command_queue41);
+		#endif
+
+		#ifdef ENABLE_KERNEL42
+		clFinish(command_queue42);
+		#endif
+
+		#ifdef ENABLE_KERNEL43
+		clFinish(command_queue43);
+		#endif
+
+		#ifdef ENABLE_KERNEL44
+		clFinish(command_queue44);
+		#endif
+
+		#ifdef ENABLE_KERNEL45
+		clFinish(command_queue45);
+		#endif
+
+		#ifdef ENABLE_KERNEL46
+		clFinish(command_queue46);
+		#endif
+
+		#ifdef ENABLE_KERNEL47
+		clFinish(command_queue47);
+		#endif
+
+		#ifdef ENABLE_KERNEL48
+		clFinish(command_queue48);
 		#endif
 
 		clock_stop_docking = clock();
@@ -1916,11 +2260,13 @@ bool init() {
   checkError(status, "Failed to create kernel");
 #endif
 
+#if 0
 #ifdef ENABLE_KERNEL5
   command_queue5 = clCreateCommandQueue(context, device, 0, &status);
   checkError(status, "Failed to create command queue5");
   kernel5 = clCreateKernel(program, name_k5, &status);
   checkError(status, "Failed to create kernel");
+#endif
 #endif
 
 #ifdef ENABLE_KERNEL6
@@ -1937,18 +2283,22 @@ bool init() {
   checkError(status, "Failed to create kernel");
 #endif
 
+#if 0
 #ifdef ENABLE_KERNEL8
   command_queue8 = clCreateCommandQueue(context, device, 0, &status);
   checkError(status, "Failed to create command queue8");
   kernel8 = clCreateKernel(program, name_k8, &status);
   checkError(status, "Failed to create kernel");
 #endif
+#endif
 
+#if 0
 #ifdef ENABLE_KERNEL9
   command_queue9 = clCreateCommandQueue(context, device, 0, &status);
   checkError(status, "Failed to create command queue9");
   kernel9 = clCreateKernel(program, name_k9, &status);
   checkError(status, "Failed to create kernel");
+#endif
 #endif
 
 #ifdef ENABLE_KERNEL10
@@ -1958,11 +2308,13 @@ bool init() {
   checkError(status, "Failed to create kernel");
 #endif
 
+#if 0
 #ifdef ENABLE_KERNEL11
   command_queue11 = clCreateCommandQueue(context, device, 0, &status);
   checkError(status, "Failed to create command queue10");
   kernel11 = clCreateKernel(program, name_k11, &status);
   checkError(status, "Failed to create kernel");
+#endif
 #endif
 
 #ifdef ENABLE_KERNEL12
@@ -1972,11 +2324,13 @@ bool init() {
   checkError(status, "Failed to create kernel");
 #endif
 
+#if 0
 #ifdef ENABLE_KERNEL13
   command_queue13 = clCreateCommandQueue(context, device, 0, &status);
   checkError(status, "Failed to create command queue13");
   kernel13 = clCreateKernel(program, name_k13, &status);
   checkError(status, "Failed to create kernel");
+#endif
 #endif
 
 #ifdef ENABLE_KERNEL14
@@ -1993,11 +2347,13 @@ bool init() {
   checkError(status, "Failed to create kernel");
 #endif
 
+#if 0
 #ifdef ENABLE_KERNEL16
   command_queue16 = clCreateCommandQueue(context, device, 0, &status);
   checkError(status, "Failed to create command queue13");
   kernel16 = clCreateKernel(program, name_k16, &status);
   checkError(status, "Failed to create kernel");
+#endif
 #endif
 
 #ifdef ENABLE_KERNEL17
@@ -2035,11 +2391,13 @@ bool init() {
   checkError(status, "Failed to create kernel");
 #endif
 
+#if 0
 #ifdef ENABLE_KERNEL22
   command_queue22 = clCreateCommandQueue(context, device, 0, &status);
   checkError(status, "Failed to create command queue22");
   kernel22 = clCreateKernel(program, name_k22, &status);
   checkError(status, "Failed to create kernel");
+#endif
 #endif
 
 #ifdef ENABLE_KERNEL23
@@ -2056,18 +2414,22 @@ bool init() {
   checkError(status, "Failed to create kernel");
 #endif
 
+#if 0
 #ifdef ENABLE_KERNEL25
   command_queue25 = clCreateCommandQueue(context, device, 0, &status);
   checkError(status, "Failed to create command queue25");
   kernel25 = clCreateKernel(program, name_k25, &status);
   checkError(status, "Failed to create kernel");
 #endif
+#endif
 
+#if 0
 #ifdef ENABLE_KERNEL26
   command_queue26 = clCreateCommandQueue(context, device, 0, &status);
   checkError(status, "Failed to create command queue26");
   kernel26 = clCreateKernel(program, name_k26, &status);
   checkError(status, "Failed to create kernel");
+#endif
 #endif
 
 #ifdef ENABLE_KERNEL27
@@ -2077,53 +2439,67 @@ bool init() {
   checkError(status, "Failed to create kernel");
 #endif
 
+#if 0
 #ifdef ENABLE_KERNEL28
   command_queue28 = clCreateCommandQueue(context, device, 0, &status);
   checkError(status, "Failed to create command queue28");
   kernel28 = clCreateKernel(program, name_k28, &status);
   checkError(status, "Failed to create kernel");
 #endif
+#endif
 
+#if 0
 #ifdef ENABLE_KERNEL29
   command_queue29 = clCreateCommandQueue(context, device, 0, &status);
   checkError(status, "Failed to create command queue29");
   kernel29 = clCreateKernel(program, name_k29, &status);
   checkError(status, "Failed to create kernel");
 #endif
+#endif
 
+#if 0
 #ifdef ENABLE_KERNEL30
   command_queue30 = clCreateCommandQueue(context, device, 0, &status);
   checkError(status, "Failed to create command queue30");
   kernel30 = clCreateKernel(program, name_k30, &status);
   checkError(status, "Failed to create kernel");
 #endif
+#endif
 
+#if 0
 #ifdef ENABLE_KERNEL31
   command_queue31 = clCreateCommandQueue(context, device, 0, &status);
   checkError(status, "Failed to create command queue31");
   kernel31 = clCreateKernel(program, name_k31, &status);
   checkError(status, "Failed to create kernel");
 #endif
+#endif
 
+#if 0
 #ifdef ENABLE_KERNEL32
   command_queue32 = clCreateCommandQueue(context, device, 0, &status);
   checkError(status, "Failed to create command queue32");
   kernel32 = clCreateKernel(program, name_k32, &status);
   checkError(status, "Failed to create kernel");
 #endif
+#endif
 
+#if 0
 #ifdef ENABLE_KERNEL33
   command_queue33 = clCreateCommandQueue(context, device, 0, &status);
   checkError(status, "Failed to create command queue33");
   kernel33 = clCreateKernel(program, name_k33, &status);
   checkError(status, "Failed to create kernel");
 #endif
+#endif
 
+#if 0
 #ifdef ENABLE_KERNEL34
   command_queue34 = clCreateCommandQueue(context, device, 0, &status);
   checkError(status, "Failed to create command queue34");
   kernel34 = clCreateKernel(program, name_k34, &status);
   checkError(status, "Failed to create kernel");
+#endif
 #endif
 
 #ifdef ENABLE_KERNEL35
@@ -2168,6 +2544,64 @@ bool init() {
   checkError(status, "Failed to create kernel");
 #endif
 
+#ifdef ENABLE_KERNEL41
+  command_queue41 = clCreateCommandQueue(context, device, 0, &status);
+  checkError(status, "Failed to create command queue41");
+  kernel41 = clCreateKernel(program, name_k41, &status);
+  checkError(status, "Failed to create kernel");
+#endif
+
+#ifdef ENABLE_KERNEL42
+  command_queue42 = clCreateCommandQueue(context, device, 0, &status);
+  checkError(status, "Failed to create command queue42");
+  kernel42 = clCreateKernel(program, name_k42, &status);
+  checkError(status, "Failed to create kernel");
+#endif
+
+#ifdef ENABLE_KERNEL43
+  command_queue43 = clCreateCommandQueue(context, device, 0, &status);
+  checkError(status, "Failed to create command queue43");
+  kernel43 = clCreateKernel(program, name_k43, &status);
+  checkError(status, "Failed to create kernel");
+#endif
+
+#ifdef ENABLE_KERNEL44
+  command_queue44 = clCreateCommandQueue(context, device, 0, &status);
+  checkError(status, "Failed to create command queue44");
+  kernel44 = clCreateKernel(program, name_k44, &status);
+  checkError(status, "Failed to create kernel");
+#endif
+
+
+
+#ifdef ENABLE_KERNEL45
+  command_queue45 = clCreateCommandQueue(context, device, 0, &status);
+  checkError(status, "Failed to create command queue45");
+  kernel45 = clCreateKernel(program, name_k45, &status);
+  checkError(status, "Failed to create kernel");
+#endif
+
+#ifdef ENABLE_KERNEL46
+  command_queue46 = clCreateCommandQueue(context, device, 0, &status);
+  checkError(status, "Failed to create command queue46");
+  kernel46 = clCreateKernel(program, name_k46, &status);
+  checkError(status, "Failed to create kernel");
+#endif
+
+#ifdef ENABLE_KERNEL47
+  command_queue47 = clCreateCommandQueue(context, device, 0, &status);
+  checkError(status, "Failed to create command queue47");
+  kernel47 = clCreateKernel(program, name_k47, &status);
+  checkError(status, "Failed to create kernel");
+#endif
+
+#ifdef ENABLE_KERNEL48
+  command_queue48 = clCreateCommandQueue(context, device, 0, &status);
+  checkError(status, "Failed to create command queue48");
+  kernel48 = clCreateKernel(program, name_k48, &status);
+  checkError(status, "Failed to create kernel");
+#endif
+
   return true;
 }
 
@@ -2193,9 +2627,11 @@ void cleanup() {
   if(command_queue4) {clReleaseCommandQueue(command_queue4);}
 #endif
 
+#if 0
 #ifdef ENABLE_KERNEL5
   if(kernel5) {clReleaseKernel(kernel5);}
   if(command_queue5) {clReleaseCommandQueue(command_queue5);}
+#endif
 #endif
 
 #ifdef ENABLE_KERNEL6
@@ -2208,14 +2644,18 @@ void cleanup() {
   if(command_queue7) {clReleaseCommandQueue(command_queue7);}
 #endif
 
+#if 0
 #ifdef ENABLE_KERNEL8
   if(kernel8) {clReleaseKernel(kernel8);}
   if(command_queue8) {clReleaseCommandQueue(command_queue8);}
 #endif
+#endif
 
+#if 0
 #ifdef ENABLE_KERNEL9
   if(kernel9) {clReleaseKernel(kernel9);}
   if(command_queue9) {clReleaseCommandQueue(command_queue9);}
+#endif
 #endif
 
 #ifdef ENABLE_KERNEL10
@@ -2223,9 +2663,11 @@ void cleanup() {
   if(command_queue10) {clReleaseCommandQueue(command_queue10);}
 #endif
 
+#if 0
 #ifdef ENABLE_KERNEL11
   if(kernel11) {clReleaseKernel(kernel11);}
   if(command_queue11) {clReleaseCommandQueue(command_queue11);}
+#endif
 #endif
 
 #ifdef ENABLE_KERNEL12
@@ -2233,9 +2675,11 @@ void cleanup() {
   if(command_queue12) {clReleaseCommandQueue(command_queue12);}
 #endif
 
+#if 0
 #ifdef ENABLE_KERNEL13
   if(kernel13) {clReleaseKernel(kernel13);}
   if(command_queue13) {clReleaseCommandQueue(command_queue13);}
+#endif
 #endif
 
 #ifdef ENABLE_KERNEL14
@@ -2248,9 +2692,11 @@ void cleanup() {
   if(command_queue15) {clReleaseCommandQueue(command_queue15);}
 #endif
 
+#if 0
 #ifdef ENABLE_KERNEL16
   if(kernel16) {clReleaseKernel(kernel16);}
   if(command_queue16) {clReleaseCommandQueue(command_queue16);}
+#endif
 #endif
 
 #ifdef ENABLE_KERNEL17
@@ -2278,9 +2724,11 @@ void cleanup() {
   if(command_queue21) {clReleaseCommandQueue(command_queue21);}
 #endif
 
+#if 0
 #ifdef ENABLE_KERNEL22
   if(kernel22) {clReleaseKernel(kernel22);}
   if(command_queue22) {clReleaseCommandQueue(command_queue22);}
+#endif
 #endif
 
 #ifdef ENABLE_KERNEL23
@@ -2293,14 +2741,18 @@ void cleanup() {
   if(command_queue24) {clReleaseCommandQueue(command_queue24);}
 #endif
 
+#if 0
 #ifdef ENABLE_KERNEL25
   if(kernel25) {clReleaseKernel(kernel25);}
   if(command_queue25) {clReleaseCommandQueue(command_queue25);}
 #endif
+#endif
 
+#if 0
 #ifdef ENABLE_KERNEL26
   if(kernel26) {clReleaseKernel(kernel26);}
   if(command_queue26) {clReleaseCommandQueue(command_queue26);}
+#endif
 #endif
 
 #ifdef ENABLE_KERNEL27
@@ -2308,39 +2760,53 @@ void cleanup() {
   if(command_queue27) {clReleaseCommandQueue(command_queue27);}
 #endif
 
+#if 0
 #ifdef ENABLE_KERNEL28
   if(kernel28) {clReleaseKernel(kernel28);}
   if(command_queue28) {clReleaseCommandQueue(command_queue28);}
 #endif
+#endif
 
+#if 0
 #ifdef ENABLE_KERNEL29
   if(kernel29) {clReleaseKernel(kernel29);}
   if(command_queue29) {clReleaseCommandQueue(command_queue29);}
 #endif
+#endif
 
+#if 0
 #ifdef ENABLE_KERNEL30
   if(kernel30) {clReleaseKernel(kernel30);}
   if(command_queue30) {clReleaseCommandQueue(command_queue30);}
 #endif
+#endif
 
+#if 0
 #ifdef ENABLE_KERNEL31
   if(kernel31) {clReleaseKernel(kernel31);}
   if(command_queue31) {clReleaseCommandQueue(command_queue31);}
 #endif
+#endif
 
+#if 0
 #ifdef ENABLE_KERNEL32
   if(kernel32) {clReleaseKernel(kernel32);}
   if(command_queue32) {clReleaseCommandQueue(command_queue32);}
 #endif
+#endif
 
+#if 0
 #ifdef ENABLE_KERNEL33
   if(kernel33) {clReleaseKernel(kernel33);}
   if(command_queue33) {clReleaseCommandQueue(command_queue33);}
 #endif
+#endif
 
+#if 0
 #ifdef ENABLE_KERNEL34
   if(kernel34) {clReleaseKernel(kernel34);}
   if(command_queue34) {clReleaseCommandQueue(command_queue34);}
+#endif
 #endif
 
 #ifdef ENABLE_KERNEL35
@@ -2371,6 +2837,46 @@ void cleanup() {
 #ifdef ENABLE_KERNEL40
   if(kernel40) {clReleaseKernel(kernel40);}
   if(command_queue40) {clReleaseCommandQueue(command_queue40);}
+#endif
+
+#ifdef ENABLE_KERNEL41
+  if(kernel41) {clReleaseKernel(kernel41);}
+  if(command_queue41) {clReleaseCommandQueue(command_queue41);}
+#endif
+
+#ifdef ENABLE_KERNEL42
+  if(kernel42) {clReleaseKernel(kernel42);}
+  if(command_queue42) {clReleaseCommandQueue(command_queue42);}
+#endif
+
+#ifdef ENABLE_KERNEL43
+  if(kernel43) {clReleaseKernel(kernel43);}
+  if(command_queue43) {clReleaseCommandQueue(command_queue43);}
+#endif
+
+#ifdef ENABLE_KERNEL44
+  if(kernel44) {clReleaseKernel(kernel44);}
+  if(command_queue44) {clReleaseCommandQueue(command_queue44);}
+#endif
+
+#ifdef ENABLE_KERNEL45
+  if(kernel45) {clReleaseKernel(kernel45);}
+  if(command_queue45) {clReleaseCommandQueue(command_queue45);}
+#endif
+
+#ifdef ENABLE_KERNEL46
+  if(kernel46) {clReleaseKernel(kernel46);}
+  if(command_queue46) {clReleaseCommandQueue(command_queue46);}
+#endif
+
+#ifdef ENABLE_KERNEL47
+  if(kernel47) {clReleaseKernel(kernel47);}
+  if(command_queue47) {clReleaseCommandQueue(command_queue47);}
+#endif
+
+#ifdef ENABLE_KERNEL48
+  if(kernel48) {clReleaseKernel(kernel48);}
+  if(command_queue48) {clReleaseCommandQueue(command_queue48);}
 #endif
 
   if(program) {clReleaseProgram(program);}

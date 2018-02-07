@@ -491,6 +491,18 @@ while(active) {
 
 		// LS 5
 		case 0x05: write_channel_altera(chan_Intere2StoreLS_LS5_intere, final_interE); break;
+
+		// LS 6
+		case 0x06: write_channel_altera(chan_Intere2StoreLS_LS6_intere, final_interE); break;
+
+		// LS 7
+		case 0x07: write_channel_altera(chan_Intere2StoreLS_LS7_intere, final_interE); break;
+
+		// LS 8
+		case 0x08: write_channel_altera(chan_Intere2StoreLS_LS8_intere, final_interE); break;
+
+		// LS 9
+		case 0x09: write_channel_altera(chan_Intere2StoreLS_LS9_intere, final_interE); break;
 	}
 	// --------------------------------------------------------------
  	
