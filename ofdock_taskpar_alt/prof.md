@@ -544,6 +544,24 @@ Speedup vs i5 cpu core: 3ptb: 59/25 = 2.36x, 1stp: 84/45 = 1.86x
 >>> commit "LS replicated 9 times + added fences"
 
 
+168. `Krnl_GA`: removed unnecessary mem_fences added in step 167
+
+Only non-instrumented passes placement phase: 
+freq=187.5MHz
+Speedup vs i5 cpu core: 3ptb: 59/23.19 = 2.54x, 1stp: 84/40.91 = 2.05x 
+>>> commit "LS replicated 9 times + removed fences"
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

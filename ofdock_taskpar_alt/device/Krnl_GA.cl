@@ -309,7 +309,11 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			#endif
 			write_channel_altera(chan_IC2Conf_genotype, LocalPopCurr[pop_cnt][pipe_cnt & MASK_GENOTYPE]);	
 		}
+
+/*
+		// Maybe this is not needed?
 		mem_fence(CLK_CHANNEL_MEM_FENCE);
+*/
 		#if defined (DEBUG_KRNL_IC)
 		printf("\nIC - tx pop: %u", pop_cnt); 		
 		#endif
@@ -543,7 +547,11 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 				LocalPopNext [new_pop_cnt][gene_cnt & MASK_GENOTYPE] = tmp_offspring;
 				write_channel_altera(chan_GG2Conf_genotype, tmp_offspring);
 			}
+
+/*
+			// Maybe this is not needed?
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
+*/
 
 			#if defined (DEBUG_KRNL_GG)
 			printf("GG - tx pop: %u", new_pop_cnt); 		
@@ -682,8 +690,10 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 				}
 			}
 		
+/*
 			// Maybe this is not needed?
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
+*/
 
 			#if defined (DEBUG_KRNL_LS)
 			printf("LS - got all eval & energies back\n");
