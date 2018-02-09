@@ -1,9 +1,9 @@
 // Enable the channels extension
 #pragma OPENCL EXTENSION cl_altera_channels : enable
 
-//IC: initial calculation of energy of populations
-//GG: genetic generation 
-//LS: local search
+//IC:  initial calculation of energy of populations
+//GG:  genetic generation 
+//LS:  local search
 //OFF: turn off 
 
 #include "../defines.h"
@@ -11,9 +11,11 @@
 #define CHAN_DEPTH_ATOMXYZ   (MAX_NUM_OF_ATOMS/2)
 #define CHAN_DEPTH_GENOTYPE  ACTUAL_GENOTYPE_LENGTH
 
-channel bool chan_GA2IGL_IC_active;
-channel bool chan_GA2IGL_GG_active;
+// Send active signal to IGL_Arbiter
+channel bool    chan_GA2IGL_IC_active;
+channel bool    chan_GA2IGL_GG_active;
 
+// Send genotypes from producers (IC, GG, LSs) to Conform
 channel float  	chan_IC2Conf_genotype          __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
 channel float  	chan_GG2Conf_genotype          __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
 channel float  	chan_LS2Conf_LS1_genotype      __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
@@ -26,14 +28,13 @@ channel float  	chan_LS2Conf_LS7_genotype      __attribute__((depth(CHAN_DEPTH_G
 channel float  	chan_LS2Conf_LS8_genotype      __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
 channel float  	chan_LS2Conf_LS9_genotype      __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
 
-// Conform to IE, IA
+// Send ligand-atom positions from Conform to InterE & IntraE
 channel float8  chan_Conf2Intere_xyz           __attribute__((depth(CHAN_DEPTH_ATOMXYZ)));
 channel char2  	chan_Conf2Intere_actmode;
-
 channel float8	chan_Conf2Intrae_xyz           __attribute__((depth(CHAN_DEPTH_ATOMXYZ)));
 channel char2  	chan_Conf2Intrae_actmode;	
 
-// Send data back to generators of genotypes
+// Send energy values from InterE & IntraE to genotype-senders (IC, GG, LSs)
 channel float 	chan_Intere2StoreIC_intere     __attribute__((depth(2)));
 channel float 	chan_Intere2StoreGG_intere     __attribute__((depth(2)));
 channel float 	chan_Intere2StoreLS_LS1_intere __attribute__((depth(2)));
@@ -45,7 +46,6 @@ channel float 	chan_Intere2StoreLS_LS6_intere __attribute__((depth(2)));
 channel float 	chan_Intere2StoreLS_LS7_intere __attribute__((depth(2)));
 channel float 	chan_Intere2StoreLS_LS8_intere __attribute__((depth(2)));
 channel float 	chan_Intere2StoreLS_LS9_intere __attribute__((depth(2)));
-
 channel float 	chan_Intrae2StoreIC_intrae     __attribute__((depth(2)));
 channel float 	chan_Intrae2StoreGG_intrae     __attribute__((depth(2)));
 channel float 	chan_Intrae2StoreLS_LS1_intrae __attribute__((depth(2)));
@@ -58,27 +58,27 @@ channel float 	chan_Intrae2StoreLS_LS7_intrae __attribute__((depth(2)));
 channel float 	chan_Intrae2StoreLS_LS8_intrae __attribute__((depth(2)));
 channel float 	chan_Intrae2StoreLS_LS9_intrae __attribute__((depth(2)));
 
-// PRNG kernerls
-channel float8  chan_PRNG2GA_BT_ushort_float_prng;
-
-channel uchar2  chan_PRNG2GA_GG_uchar_prng;
-channel float   chan_PRNG2GA_GG_float_prng     __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-
-/*
-channel ushort8 chan_PRNG2GA_LS123_ushort_prng;
-*/
+// Send PRNG outputs from generators to consumers
+channel float8   chan_PRNG2GA_BT_ushort_float_prng;
+channel uchar2   chan_PRNG2GA_GG_uchar_prng;
+channel float    chan_PRNG2GA_GG_float_prng     __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
 channel ushort16 chan_PRNG2GA_LS123_ushort_prng;
+channel float    chan_PRNG2GA_LS_float_prng     __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
+channel float    chan_PRNG2GA_LS2_float_prng    __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
+channel float    chan_PRNG2GA_LS3_float_prng    __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
+channel float    chan_PRNG2GA_LS4_float_prng    __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
+channel float    chan_PRNG2GA_LS5_float_prng    __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
+channel float    chan_PRNG2GA_LS6_float_prng    __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
+channel float    chan_PRNG2GA_LS7_float_prng    __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
+channel float    chan_PRNG2GA_LS8_float_prng    __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
+channel float    chan_PRNG2GA_LS9_float_prng    __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
 
-channel float   chan_PRNG2GA_LS_float_prng     __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float   chan_PRNG2GA_LS2_float_prng    __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float   chan_PRNG2GA_LS3_float_prng    __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float   chan_PRNG2GA_LS4_float_prng    __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float   chan_PRNG2GA_LS5_float_prng    __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float   chan_PRNG2GA_LS6_float_prng    __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float   chan_PRNG2GA_LS7_float_prng    __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float   chan_PRNG2GA_LS8_float_prng    __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float   chan_PRNG2GA_LS9_float_prng    __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
+// Turn-off signals to PRNG generators
 
+// FIXME: these channels don't go anymore through IGL_Arbiter.
+// That was initially the case, but was fixed.
+// Name should be changed accordingly (GA instead of Arbiter)
+// to avoid misleading data-flow information
 channel bool 	chan_Arbiter_BT_ushort_float_off;
 channel bool    chan_Arbiter_GG_uchar_off;
 channel bool    chan_Arbiter_GG_float_off;
@@ -92,10 +92,8 @@ channel bool    chan_Arbiter_LS6_float_off;
 channel bool    chan_Arbiter_LS7_float_off;
 channel bool    chan_Arbiter_LS8_float_off;
 channel bool    chan_Arbiter_LS9_float_off;
-/*
-channel bool    chan_GA2PRNG_LS_float_Off;
-*/
-// LS1, LS2, LS3
+
+// Send energy values and genotypes to LSs
 channel float   chan_GA2LS_LS1_energy;
 channel float   chan_GA2LS_LS2_energy;
 channel float   chan_GA2LS_LS3_energy;
@@ -115,6 +113,7 @@ channel float  	chan_GA2LS_LS7_genotype        __attribute__((depth(CHAN_DEPTH_G
 channel float  	chan_GA2LS_LS8_genotype        __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
 channel float  	chan_GA2LS_LS9_genotype        __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
 
+// Send LS status from LSs to IGL_Arbiter
 channel bool    chan_LS2Arbiter_LS1_end;
 channel bool    chan_LS2Arbiter_LS2_end;
 channel bool    chan_LS2Arbiter_LS3_end;
@@ -124,6 +123,8 @@ channel bool    chan_LS2Arbiter_LS6_end;
 channel bool    chan_LS2Arbiter_LS7_end;
 channel bool    chan_LS2Arbiter_LS8_end;
 channel bool    chan_LS2Arbiter_LS9_end;
+
+// Get LS-eval-count, new energy, new genotype from LSs
 channel float2  chan_LS2GA_LS1_evalenergy      __attribute__((depth(2)));
 channel float2  chan_LS2GA_LS2_evalenergy      __attribute__((depth(2)));
 channel float2  chan_LS2GA_LS3_evalenergy      __attribute__((depth(2)));
@@ -143,6 +144,7 @@ channel float  	chan_LS2GA_LS7_genotype        __attribute__((depth(CHAN_DEPTH_G
 channel float  	chan_LS2GA_LS8_genotype        __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
 channel float  	chan_LS2GA_LS9_genotype        __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
 
+// Turn-off signals to LSs
 channel bool    chan_GA2LS_Off1_active;
 channel bool    chan_GA2LS_Off2_active;
 channel bool    chan_GA2LS_Off3_active;
@@ -153,13 +155,24 @@ channel bool    chan_GA2LS_Off7_active;
 channel bool    chan_GA2LS_Off8_active;
 channel bool    chan_GA2LS_Off9_active;
 
-// IGL_Arbiter -> Conform
+// Send genotype-producer-channel selector and genotype 
+// from IGL_Arbiter to Conform
 channel char2  chan_IGL2Conform_actmode	       __attribute__((depth(9))); // active, mode
 channel float  chan_IGL2Conform_genotype       __attribute__((depth(9*CHAN_DEPTH_GENOTYPE)));
 
+// Turn-off signal to IGL_Arbiter, Conform, InterE, IntraE
 channel bool   chan_IGLArbiter_Off;
 
-#if defined (FIXED_POINT_CONFORM) || (FIXED_POINT_LS1) || defined (FIXED_POINT_LS2) || defined (FIXED_POINT_LS3)
+#if defined (FIXED_POINT_CONFORM) || \
+    defined (FIXED_POINT_LS1)     || \
+    defined (FIXED_POINT_LS2)     || \
+    defined (FIXED_POINT_LS3)     || \
+    defined (FIXED_POINT_LS4)     || \
+    defined (FIXED_POINT_LS5)     || \
+    defined (FIXED_POINT_LS6)     || \
+    defined (FIXED_POINT_LS7)     || \
+    defined (FIXED_POINT_LS8)     || \
+    defined (FIXED_POINT_LS9)
 #include "../defines_fixedpt.h"
 
 typedef int3          fixedpt3;
@@ -171,7 +184,7 @@ typedef int4	      fixedpt4;
 #endif
 
 // --------------------------------------------------------------------------
-// These functions map the argument into the interval 0 - 180, or 0 - 360
+// Map the argument into the interval 0 - 180, or 0 - 360
 // by adding/subtracting n*ang_max to/from it.
 // Originally from: searchoptimum.c
 // --------------------------------------------------------------------------
@@ -200,7 +213,15 @@ float map_angle_360(float angle)
 	return x;
 }
 
-#if defined (FIXED_POINT_LS1) || defined (FIXED_POINT_LS2) || defined (FIXED_POINT_LS3)
+#if defined (FIXED_POINT_LS1) || \
+    defined (FIXED_POINT_LS2) || \
+    defined (FIXED_POINT_LS3) || \
+    defined (FIXED_POINT_LS4) || \
+    defined (FIXED_POINT_LS5) || \
+    defined (FIXED_POINT_LS6) || \
+    defined (FIXED_POINT_LS7) || \
+    defined (FIXED_POINT_LS8) || \
+    defined (FIXED_POINT_LS9)
 #define FIXEDPT_180	0xB40000
 #define FIXEDPT_360	0x1680000
 
@@ -229,13 +250,13 @@ fixedpt fixedpt_map_angle_360(fixedpt angle)
 }
 #endif
 
-
+// Shift register sizes
+// Such registers are used to reduce Initiation Interval (II)
 #define SHIFT_REG_SIZE 10
 #define SHIFT_REG_SIZE_MINUS_ONE (SHIFT_REG_SIZE-1)
 
 // --------------------------------------------------------------------------
-// The function performs a generational genetic algorithm based search 
-// on the search space.
+// Lamarckian Genetic-Algorithm (GA): GA + LS (Local Search) 
 // Originally from: searchoptimum.c
 // --------------------------------------------------------------------------
 __kernel __attribute__ ((max_global_work_dim(0)))
@@ -283,7 +304,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 	printf("%-40s %u\n", "DockConst_num_of_genes: ",        	DockConst_num_of_genes);
 	#endif
 
-	// other banking configuration (see PopNext, eneNext) might reduce logic
+	// Other banking configuration (see PopNext, eneNext) might reduce logic
 	// but makes PopCurr stallable
 	__local float LocalPopCurr[MAX_POPSIZE][ACTUAL_GENOTYPE_LENGTH];
 	__local float LocalEneCurr[MAX_POPSIZE];
@@ -294,10 +315,10 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 	#endif
 
 	// ------------------------------------------------------------------
-	// IC: Init Calculation
+	// Initial Calculation (IC) of scores
 	// ------------------------------------------------------------------
 	for (ushort pop_cnt = 0; pop_cnt < DockConst_pop_size; pop_cnt++) {
-		// calculate energy
+		// Calculate energy
 		write_channel_altera(chan_GA2IGL_IC_active, true);
 		mem_fence(CLK_CHANNEL_MEM_FENCE);
 
@@ -310,15 +331,11 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			write_channel_altera(chan_IC2Conf_genotype, LocalPopCurr[pop_cnt][pipe_cnt & MASK_GENOTYPE]);	
 		}
 
-/*
-		// Maybe this is not needed?
-		mem_fence(CLK_CHANNEL_MEM_FENCE);
-*/
 		#if defined (DEBUG_KRNL_IC)
 		printf("\nIC - tx pop: %u", pop_cnt); 		
 		#endif
 
-		// read energy
+		// Read energy
 		float energyIA_IC_rx;
 		float energyIE_IC_rx;
 		bool intra_valid = false;
@@ -333,6 +350,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 		}
 
 		LocalEneCurr[pop_cnt] = energyIA_IC_rx + energyIE_IC_rx;
+
 		#if defined (DEBUG_KRNL_IC)
 		printf(", IC - rx pop: %u\n", pop_cnt); 		
 		#endif
@@ -340,9 +358,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 	// ------------------------------------------------------------------
 
 	uint eval_cnt = DockConst_pop_size; // takes into account the IC evals
-/*	
-	uint ls_eval_cnt = 0;
-*/
+
 	uint generation_cnt = 0;
 
 	while ((eval_cnt < DockConst_num_of_energy_evals) && (generation_cnt < DockConst_num_of_generations)) {
@@ -350,7 +366,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 		//float LocalPopNext[MAX_POPSIZE][ACTUAL_GENOTYPE_LENGTH];
 		//float LocalEneNext[MAX_POPSIZE];
 
-		// this configuration reduces logic and does not increase block RAM usage
+		// This configuration reduces logic and does not increase block RAM usage
 		float __attribute__ ((
 				       memory,
 		   		       numbanks(4),
@@ -364,7 +380,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			              )) LocalEneNext[MAX_POPSIZE];
 
 		// ------------------------------------------------------------------
-		// GG: Genetic Generation
+		// Genetic Generation (GG)
 		// ------------------------------------------------------------------
 		float __attribute__ ((
 				       memory,
@@ -375,7 +391,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			               numwriteports(1)
 			              )) loc_energies[MAX_POPSIZE];
 
-		// create shift register to reduce II (initially II=6) of best entity for-loop 
+		// Shift register to reduce II (initially II=6) of best entity for-loop 
 		float shift_reg[SHIFT_REG_SIZE];
 
 		#pragma unroll
@@ -390,10 +406,10 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			// copy energy to local memory
 			loc_energies[pop_cnt] = LocalEneCurr[pop_cnt];
 
-			// identifying best entity
-			// the enclosing "if (pop_cnt>0) {}" should not be commented
-			// but it is removed in order to improve performance
-			// it does not affect functionality as it performs 
+			// Identifying best entity
+			// The enclosing "if (pop_cnt>0) {}" should not be commented
+			// but it is removed in order to improve performance.
+			// It does not affect functionality as it performs 
 			// an unnecessary evaluation when pop_cnt=0 
 			//if (pop_cnt>0) {
 			shift_reg[SHIFT_REG_SIZE_MINUS_ONE] = loc_energies[best_entity];
@@ -414,7 +430,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 		for (ushort new_pop_cnt = 1; new_pop_cnt < DockConst_pop_size; new_pop_cnt++) {
 
 			// ---------------------------------------------------
-			// elitism: copying the best entity to new population
+			// Elitism: copying the best entity to new population
 			// ---------------------------------------------------
 			if (new_pop_cnt == 1) {
 				#pragma unroll
@@ -424,21 +440,23 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 				LocalEneNext[0] = loc_energies[best_entity];
 			}
 
-			//printf("Krnl_GA: %u\n", new_pop_cnt);
+			#if defined (DEBUG_KRNL_GA)
+			printf("Krnl_GA: %u\n", new_pop_cnt);
+			#endif
 
 			float local_entity_1 [ACTUAL_GENOTYPE_LENGTH];
 			float local_entity_2 [ACTUAL_GENOTYPE_LENGTH]; 
 		
 			// ---------------------------------------------------
-			// binary-tournament_selection
+			// Binary-Tournament (BT) selection
 			// ---------------------------------------------------
 
-			// get ushort binary_tournament selection prngs (parent index)
-			// get float binary_tournament selection prngs (tournament rate)
+			// Get ushort binary_tournament selection prngs (parent index)
+			// Get float binary_tournament selection prngs (tournament rate)
 			float8 bt_tmp = read_channel_altera(chan_PRNG2GA_BT_ushort_float_prng);
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 
-			// float prng that must be still converted to short
+			// Convert: float prng that must be still converted to short
 			float bt_tmp_uf0 = bt_tmp.s0;
 			float bt_tmp_uf1 = bt_tmp.s2;
 			float bt_tmp_uf2 = bt_tmp.s4;
@@ -459,7 +477,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			ushort parent1;
 			ushort parent2; 
 
-			// first parent
+			// First parent
 			if (loc_energies[bt_tmp_u0] < loc_energies[bt_tmp_u1]) {
 				if (bt_tmp_f0 < DockConst_tournament_rate) {parent1 = bt_tmp_u0;}
 				else				           {parent1 = bt_tmp_u1;}}
@@ -467,7 +485,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 				if (bt_tmp_f1 < DockConst_tournament_rate) {parent1 = bt_tmp_u1;}
 				else				           {parent1 = bt_tmp_u0;}}
 
-			// the better will be the second parent
+			// The better will be the second parent
 			if (loc_energies[bt_tmp_u2] < loc_energies[bt_tmp_u3]) {
 				if (bt_tmp_f2 < DockConst_tournament_rate) {parent2 = bt_tmp_u2;}
 				else		          	           {parent2 = bt_tmp_u3;}}
@@ -482,7 +500,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			}
 
 			// ---------------------------------------------------
-			// genetic generation (mating parents)
+			// Mating parents
 			// ---------------------------------------------------	
 
 			// get uchar genetic_generation prngs (gene index)
@@ -503,7 +521,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
    								 covr_point_high = prng_GG_C.x; }
 			}
 			
-			// reuse of bt prng float as crossover-rate
+			// Reuse of bt prng float as crossover-rate
 			bool crossover_yes = (DockConst_crossover_rate > bt_tmp_f0);
 
 			write_channel_altera(chan_GA2IGL_GG_active, true);
@@ -516,7 +534,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 
 				float tmp_offspring;
 
-				// performing crossover
+				// Performing crossover
 				if (   	(
 					crossover_yes && (										// crossover
 					( (twopoint_cross_yes == true)  && ((gene_cnt <= covr_point_low) || (gene_cnt > covr_point_high)) )  ||	// two-point crossover 			 		
@@ -530,7 +548,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 					tmp_offspring = local_entity_2[gene_cnt & MASK_GENOTYPE];
 				}
 
-				// performing mutation
+				// Performing mutation
 				if (DockConst_mutation_rate > prngGG) {
 					if(gene_cnt<3) {
 						tmp_offspring = tmp_offspring + Host_two_absmaxdmov*prngGG-DockConst_abs_max_dmov;
@@ -543,21 +561,16 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 					}
 				}
 
-				// calculate energy
+				// Calculate energy
 				LocalPopNext [new_pop_cnt][gene_cnt & MASK_GENOTYPE] = tmp_offspring;
 				write_channel_altera(chan_GG2Conf_genotype, tmp_offspring);
 			}
-
-/*
-			// Maybe this is not needed?
-			mem_fence(CLK_CHANNEL_MEM_FENCE);
-*/
 
 			#if defined (DEBUG_KRNL_GG)
 			printf("GG - tx pop: %u", new_pop_cnt); 		
 			#endif	
 
-			// read energy
+			// Read energy
 			float energyIA_GG_rx;
 			float energyIE_GG_rx;
 			bool intra_valid = false;
@@ -579,21 +592,15 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 		} 
 		// ------------------------------------------------------------------
 		// LS: Local Search
+		// Subject num_of_entity_for_ls pieces of offsprings to LS 
 		// ------------------------------------------------------------------
-		// subject num_of_entity_for_ls pieces of offsprings to LS 
-		// LS1
-		// LS2
-		// LS3	
-		// ------------------------------------------------------------------
-/*
-		ls_eval_cnt = 0;
-*/
+
 		uint ls_eval_cnt = 0;
 
 		#pragma ivdep
 		for (ushort ls_ent_cnt=0; ls_ent_cnt<DockConst_num_of_lsentities; ls_ent_cnt+=9) {
 
-			// choose random & different entities on every iteration
+			// Choose random & different entities on every iteration
 			ushort16 entity_ls = read_channel_altera(chan_PRNG2GA_LS123_ushort_prng);
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 
@@ -690,11 +697,6 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 				}
 			}
 		
-/*
-			// Maybe this is not needed?
-			mem_fence(CLK_CHANNEL_MEM_FENCE);
-*/
-
 			#if defined (DEBUG_KRNL_LS)
 			printf("LS - got all eval & energies back\n");
 			#endif
@@ -751,7 +753,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 		} // End of for-loop ls_ent_cnt
 		// ------------------------------------------------------------------
 
-		// update current pops & energies
+		// Update current pops & energies
 		for (ushort pop_cnt=0; pop_cnt<DockConst_pop_size; pop_cnt++) {
 			for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
 				LocalPopCurr[pop_cnt][gene_cnt & MASK_GENOTYPE] = LocalPopNext[pop_cnt][gene_cnt & MASK_GENOTYPE];
@@ -760,11 +762,10 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			LocalEneCurr[pop_cnt] = LocalEneNext[pop_cnt];
 		}
 
-		// update energy evaluations
-		// count LS and GG evals
+		// Update energy evaluations count: count LS and GG evals
 		eval_cnt += ls_eval_cnt + DockConst_pop_size; 
 
-		// update generations
+		// Update generation count
 		generation_cnt++;
 
 		#if defined (DEBUG_KRNL_GA)
@@ -775,24 +776,8 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 	// ------------------------------------------------------------------
 	// Off: turn off all other kernels
 	// ------------------------------------------------------------------
-/*
-	write_channel_altera(chan_GA2LS_Off1_active,  		false);	// turn off LS_Arbiter, LS1
-	write_channel_altera(chan_GA2LS_Off2_active,  		false);	// turn off LS2_Arbiter, LS2 
-	write_channel_altera(chan_GA2LS_Off3_active,  		false);	// turn off LS3_Arbiter, LS3 
-	write_channel_altera(chan_Arbiter_BT_ushort_float_off,  false);
 
-	write_channel_altera(chan_Arbiter_GG_uchar_off, 	false);
-	write_channel_altera(chan_Arbiter_GG_float_off, 	false);
-	write_channel_altera(chan_Arbiter_LS123_ushort_off,  	false);
-
-	write_channel_altera(chan_Arbiter_LS_float_off, 	false);
-	write_channel_altera(chan_Arbiter_LS2_float_off, 	false);
-	write_channel_altera(chan_Arbiter_LS3_float_off, 	false);
-
-	write_channel_altera(chan_IGLArbiter_Off,     		false);  // turn off IGL_Arbiter, Conform, InterE, IntraE
-*/
-
-	// turn off PRNG kernels
+	// Turn off PRNG kernels
 	write_channel_altera(chan_Arbiter_BT_ushort_float_off,  false);
 	write_channel_altera(chan_Arbiter_GG_uchar_off, 	false);
 	write_channel_altera(chan_Arbiter_GG_float_off, 	false);
@@ -808,7 +793,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 	write_channel_altera(chan_Arbiter_LS9_float_off, 	false);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 
-	// turn off LS kernels
+	// Turn off LS kernels
 	write_channel_altera(chan_GA2LS_Off1_active,  		false);
 	write_channel_altera(chan_GA2LS_Off2_active,  		false);
 	write_channel_altera(chan_GA2LS_Off3_active,  		false);
@@ -820,11 +805,11 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 	write_channel_altera(chan_GA2LS_Off9_active,  		false);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 
-	// turn off IGL, Conform, IE, IA
+	// Turn off IGL_Arbiter, Conform, InterE, IntraE kernerls
 	write_channel_altera(chan_IGLArbiter_Off,     		false);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 
-	// write final pop & energies back to FPGA-board DDRs
+	// Write final pop & energies back to FPGA-board DDRs
 	for (ushort pop_cnt=0;pop_cnt<DockConst_pop_size; pop_cnt++) { 	
 
 		for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
@@ -850,14 +835,14 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 	printf("	%-20s: %s\n", "Krnl_GA", "disabled");
 	#endif
 
-	// write final evaluation and generation counts to FPGA-board DDRs
-#if defined(SINGLE_COPY_POP_ENE)
+	// Write final evals & generation counts to FPGA-board DDRs
+	#if defined(SINGLE_COPY_POP_ENE)
 	GlobEvals_performed[Host_RunId] = eval_cnt;
 	GlobGens_performed [Host_RunId] = generation_cnt;
-#else
+	#else
 	GlobEvalsGenerations_performed[0] = eval_cnt;
 	GlobEvalsGenerations_performed[1] = generation_cnt;
-#endif
+	#endif
 }
 
 // --------------------------------------------------------------------------

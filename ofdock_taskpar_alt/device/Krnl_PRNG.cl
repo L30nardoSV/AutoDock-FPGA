@@ -1,4 +1,6 @@
 // --------------------------------------------------------------------------
+// PRNG generators are implemented as Linear Feedback Shift Registers (LFSR)
+// All are 32-bit LFRS, feedback taps: 30, 20, 26, 25
 // --------------------------------------------------------------------------
 
 __kernel __attribute__ ((max_global_work_dim(0)))
@@ -113,93 +115,6 @@ void Krnl_Prng_GG_float(unsigned int  Host_seed,
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------
 
-#if 0
-__kernel __attribute__ ((max_global_work_dim(0)))
-void Krnl_Prng_LS123_ushort(unsigned int Host_seed1,
-			    unsigned int Host_seed2, 
-			    unsigned int Host_seed3, 
-		            unsigned int DockConst_pop_size){
-
-	uint3 lfsr;
- 	lfsr.x = Host_seed1;
-	lfsr.y = Host_seed2;
-	lfsr.z = Host_seed3;
-
-/*
-	uint lfsr[3];
-	lfsr[0] = Host_seed1;
-	lfsr[1] = Host_seed2;
-	lfsr[2] = Host_seed3;
-*/
-
-	bool valid = false;
-
-	while(!valid) {
-		bool active = true;
-		active  = read_channel_nb_altera(chan_Arbiter_LS123_ushort_off, &valid);
-
-		ushort3 tmp;
-		uchar3 lsb;
-	
-		lsb.x = lfsr.x & 0x01u;
-		lsb.y = lfsr.y & 0x01u;
-		lsb.z = lfsr.z & 0x01u;
-
-		lfsr.x >>= 1;
-		lfsr.y >>= 1;
-		lfsr.z >>= 1;
-
-		lfsr.x ^= (-lsb.x) & 0xA3000000u;
-		lfsr.y ^= (-lsb.y) & 0xA3000000u;
-		lfsr.z ^= (-lsb.z) & 0xA3000000u;
-
-		tmp.x = (DockConst_pop_size/MAX_UINT)*lfsr.x;
-		tmp.y = (DockConst_pop_size/MAX_UINT)*lfsr.y;
-		tmp.z = (DockConst_pop_size/MAX_UINT)*lfsr.z;
-
-		// to avoid having same entities undergoing LS simultaneously
-		if ((tmp.x == tmp.y) || (tmp.x == tmp.z) || (tmp.y == tmp.z)) {
-			tmp.y = tmp.x + 1;
-			tmp.z = tmp.y + 2;
-		}
-
-		bool success = false;
-		if(!valid) {
-			success = write_channel_nb_altera(chan_PRNG2GA_LS123_ushort_prng, tmp);
-		}
-
-/*
-		ushort tmp[3];
-		
-		#pragma unroll
-		for (uint i=0; i<3; i++){
-			uchar  lsb[3];
-			lsb [i] = lfsr[i] & 0x01u;
-			lfsr[i] >>= 1;
-			lfsr[i] ^= (-lsb[i]) & 0xA3000000u;
-			tmp [i] = (DockConst_pop_size/MAX_UINT)*lfsr[i];
-		}
-
-		// to avoid having same entities undergoing LS simultaneously
-		if ((tmp[0] == tmp[1]) || (tmp[0] == tmp[2]) || (tmp[1] == tmp[2])) {
-			tmp[1] = tmp[0] + 1;
-			tmp[2] = tmp[1] + 2;
-		}
-
-		bool success = false;
-		ushort3 tmp123;
-		tmp123.x = tmp[0];
-		tmp123.y = tmp[1];
-		tmp123.z = tmp[2];
-
-		if(!valid) {
-			success = write_channel_nb_altera(chan_PRNG2GA_LS123_ushort_prng, tmp123);
-		}
-*/
-	} // End of while(active)
-}
-#endif
-
 __kernel __attribute__ ((max_global_work_dim(0)))
 void Krnl_Prng_LS123_ushort(unsigned int Host_seed1,
 			    unsigned int Host_seed2, 
@@ -241,7 +156,7 @@ void Krnl_Prng_LS123_ushort(unsigned int Host_seed1,
 			tmp [i] = (DockConst_pop_size/MAX_UINT)*lfsr[i];
 		}
 
-		// to avoid having same entities undergoing LS simultaneously
+		// To avoid having same entities undergoing LS simultaneously
 		if (
 			(tmp[0] == tmp[1]) || (tmp[0] == tmp[2]) || (tmp[0] == tmp[3]) || (tmp[0] == tmp[4]) || (tmp[0] == tmp[5]) || (tmp[0] == tmp[6]) || (tmp[0] == tmp[7]) || (tmp[0] == tmp[8]) ||
  			(tmp[1] == tmp[2]) || (tmp[1] == tmp[3]) || (tmp[1] == tmp[4]) || (tmp[1] == tmp[5]) || (tmp[1] == tmp[6]) || (tmp[1] == tmp[7]) || (tmp[1] == tmp[8]) ||

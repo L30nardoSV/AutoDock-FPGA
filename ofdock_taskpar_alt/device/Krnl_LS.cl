@@ -22,32 +22,6 @@ void Krnl_LS(
 )
 {	
 	bool valid = true;
-	/*
-	// added to find out which fixed-point precision is needed
-	// 16.16 is enough
-	fixedpt fp1 = fixedpt_fromfloat(DockConst_rho_lower_bound);
-	fixedpt fp2 = fixedpt_fromfloat(DockConst_base_dmov_mul_sqrt3);
-	fixedpt fp3 = fixedpt_fromfloat(DockConst_base_dang_mul_sqrt3);
-	printf("DockConst_rho_lower_bound: %f %f\n", DockConst_rho_lower_bound, fixedpt_tofloat(fp1));
-	printf("DockConst_base_dmov_mul_sqrt3: %f %f\n", DockConst_base_dmov_mul_sqrt3, fixedpt_tofloat(fp2));
-	printf("DockConst_base_dang_mul_sqrt3: %f %f\n", DockConst_base_dang_mul_sqrt3, fixedpt_tofloat(fp3));
-	*/
-	
-	/*
-	// print fixedpt representation of 180.0f and 360.0f
-	printf("180f: %f %i %x\n", 180.0f, fixedpt_fromfloat(180.0f), fixedpt_fromfloat(180.0f)); 
-	printf("360f: %f %i %x\n", 360.0f, fixedpt_fromfloat(360.0f), fixedpt_fromfloat(360.0f)); 
-	// 180f: 180.000000 11796480 b40000
-	// 360f: 360.000000 23592960 1680000
-	*/
-	
-	/*
-	// print fixedpt representation of 0.4f and 0.6f
-	printf("0.4f: %f %i %x\n", 0.4f, fixedpt_fromfloat(0.4f), fixedpt_fromfloat(0.4f));
-	printf("0.6f: %f %i %x\n", 0.6f, fixedpt_fromfloat(0.6f), fixedpt_fromfloat(0.6f)); 
-	//0.4f: 0.400000 26214 6666
-	//0.6f: 0.600000 39321 9999
-	*/
 
 while(valid) {
 
@@ -121,8 +95,8 @@ while(valid) {
 				iteration_cnt++;
 			}
 
-			#if defined (DEBUG_KRNL_LS)
-			printf("positive?: %u, iteration_cnt: %u, rho: %f, limit rho: %f\n", positive_direction, iteration_cnt, rho, DockConst_rho_lower_bound);
+			#if defined (DEBUG_KRNL_LS1)
+			printf("LS1 positive?: %u, iteration_cnt: %u, rho: %f, limit rho: %f\n", positive_direction, iteration_cnt, rho, DockConst_rho_lower_bound);
 			#endif
 			// -----------------------------------------------
 
@@ -211,7 +185,7 @@ while(valid) {
 				write_channel_altera(chan_LS2Conf_LS1_genotype, tmp3);
 				#endif
 
-				#if defined (DEBUG_KRNL_LS)
+				#if defined (DEBUG_KRNL_LS1)
 				printf("LS1_genotype sent\n");
 				#endif
 			}
@@ -304,8 +278,8 @@ while(valid) {
 
 		} // end of while (iteration_cnt) && (rho)
 
-		#if defined (DEBUG_KRNL_LS)
-		printf("Out of while iter LS\n");
+		#if defined (DEBUG_KRNL_LS1)
+		printf("Out of while iter LS1\n");
 		#endif
 		
 		// write back data to GA
@@ -329,7 +303,7 @@ while(valid) {
 
 
 #if defined (DEBUG_ACTIVE_KERNEL)
-printf("	%-20s: %s\n", "Krnl_LS", "disabled");		
+printf("	%-20s: %s\n", "Krnl_LS1", "disabled");		
 #endif
 	
 }

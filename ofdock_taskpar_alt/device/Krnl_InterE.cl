@@ -1,12 +1,9 @@
 // --------------------------------------------------------------------------
-// The function calculates the intermolecular energy of a ligand given by 
-// myligand parameter, and a receptor represented as a grid. 
-// The grid point values must be stored at the location which starts at GlobFgrids, 
-// the memory content can be generated with get_gridvalues function.
-// The mygrid parameter must be the corresponding grid informtaion. 
-// If an atom is outside the grid, the coordinates will be changed with 
-// the value of outofgrid_tolerance, 
-// if it remains outside, a very high value will be added to the current energy as a penalty. 
+// InterE calculates the intermolecular energy of a ligand given by 
+// ligand xyz-positions, and a receptor represented as a grid. 
+// The grid point values must be stored at the location which starts at GlobFgrids. 
+// If an atom is remains outside the grid, 
+// a very high value will be added to the current energy as a penalty. 
 // Originally from: processligand.c
 // --------------------------------------------------------------------------
 __kernel __attribute__ ((max_global_work_dim(0)))
@@ -47,9 +44,6 @@ void Krnl_InterE(
 */
 )
 {
-/*
-	bool active = true;
-*/	
 	char active = 0x01;
 
 	__global const float* GlobFgrids2 = & GlobFgrids [Host_mul_tmp2];
@@ -80,12 +74,6 @@ while(active) {
 	active = actmode.x;
 	mode   = actmode.y;
 
-/*
-	for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt++) {
-		loc_coords[pipe_cnt] = read_channel_altera(chan_Conf2Intere_xyz);
-	}
-*/
-
 	for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt+=2) {
 		float8 tmp = read_channel_altera(chan_Conf2Intere_xyz);
 		float3 tmp1 = {tmp.s0, tmp.s1, tmp.s2};
@@ -93,7 +81,6 @@ while(active) {
 		loc_coords[pipe_cnt] = tmp1;
 		loc_coords[pipe_cnt+1] = tmp2;
 	}
-
 
 	// --------------------------------------------------------------
 	//printf("AFTER In INTER CHANNEL\n");
@@ -108,7 +95,7 @@ while(active) {
 	float interE = 0.0f;
 	#endif
 
-	// for each atom
+	// For each ligand atom
 	for (uchar atom1_id=0; atom1_id<DockConst_num_of_atoms; atom1_id++)
 	{
 		char atom1_typeid = KerConstStatic_atom_types_const [atom1_id];
@@ -119,11 +106,11 @@ while(active) {
 		float y = loc_coords_atid1.y;
 		float z = loc_coords_atid1.z;
 
-#if defined (FIXED_POINT_INTERE)
+		#if defined (FIXED_POINT_INTERE)
 
-#else
+		#else
 		float q = KerConstStatic_atom_charges_const [atom1_id];
-#endif
+		#endif
 
 		#if defined (FIXED_POINT_INTERE)
 		fixedpt64 fixpt_x = fixedpt64_fromfloat(loc_coords_atid1.x); 
@@ -143,7 +130,7 @@ while(active) {
 		float partialE3;
 		#endif
 
-		// if the atom is outside of the grid
+		// If the atom is outside of the grid
 		#if defined (FIXED_POINT_INTERE)
 		if ((fixpt_x < 0) || (fixpt_x >= fixedpt64_fromint(DockConst_gridsize_x_minus1)) || 
 		    (fixpt_y < 0) || (fixpt_y >= fixedpt64_fromint(DockConst_gridsize_y_minus1)) ||
@@ -154,7 +141,7 @@ while(active) {
 		    (z < 0.0f) || (z >= DockConst_gridsize_z_minus1))	{
 		#endif
 
-			//penalty is 2^24 for each atom outside the grid
+			// Penalty is 2^24 for each atom outside the grid
 			/*
 			interE += 16777216.0f; 
 			*/
@@ -235,7 +222,7 @@ while(active) {
 			printf("coeff(1,1,1) = %f\n", weights [1][1][1]);
 			#endif
 
-			// lvs added temporal variables
+			// Added temporal variables
 			uint cube_000, cube_100, cube_010, cube_110, cube_001, cube_101, cube_011, cube_111;
 
 			uint ylow_times_g1  = y_low  * DockConst_g1;	
@@ -254,7 +241,7 @@ while(active) {
 
 			uint mul_tmp = atom1_typeid * DockConst_g3;
 
-			//energy contribution of the current grid type
+			// Energy contribution of the current grid type
 			#if defined (FIXED_POINT_INTERE)
 			fixedpt64 fixpt_cube [2][2][2];
 	                fixpt_cube [0][0][0] = fixedpt64_fromfloat(GlobFgrids[cube_000 + mul_tmp]);
@@ -314,7 +301,7 @@ while(active) {
 			printf("interpolated value = %f\n\n", TRILININTERPOL(cube, weights));
 			#endif
 
-			//energy contribution of the electrostatic grid
+			// Energy contribution of the electrostatic grid
 			/*
 			#if defined(SEPARATE_FGRID_INTERE)
 			#else
@@ -383,7 +370,7 @@ while(active) {
 			printf("interpolated value = %f, multiplied by q = %f\n\n", TRILININTERPOL(cube, weights), q*TRILININTERPOL(cube, weights));
 			#endif
 
-			//energy contribution of the desolvation grid
+			// Energy contribution of the desolvation grid
 			/*
 			#if defined(SEPARATE_FGRID_INTERE)
 			#else
@@ -471,42 +458,21 @@ while(active) {
 	#endif
 
 	switch (mode) {
-		// IC
-		case 'I': write_channel_altera(chan_Intere2StoreIC_intere, final_interE); break;
-
-		// GG
-		case 'G': write_channel_altera(chan_Intere2StoreGG_intere, final_interE); break;
-
-		// LS 1
+		case 'I':  write_channel_altera(chan_Intere2StoreIC_intere, final_interE);     break;
+		case 'G':  write_channel_altera(chan_Intere2StoreGG_intere, final_interE);     break;
 		case 0x01: write_channel_altera(chan_Intere2StoreLS_LS1_intere, final_interE); break;
-
-		// LS 2
 		case 0x02: write_channel_altera(chan_Intere2StoreLS_LS2_intere, final_interE); break;
-
-		// LS 3
 		case 0x03: write_channel_altera(chan_Intere2StoreLS_LS3_intere, final_interE); break;
-
-		// LS 4
 		case 0x04: write_channel_altera(chan_Intere2StoreLS_LS4_intere, final_interE); break;
-
-		// LS 5
 		case 0x05: write_channel_altera(chan_Intere2StoreLS_LS5_intere, final_interE); break;
-
-		// LS 6
 		case 0x06: write_channel_altera(chan_Intere2StoreLS_LS6_intere, final_interE); break;
-
-		// LS 7
 		case 0x07: write_channel_altera(chan_Intere2StoreLS_LS7_intere, final_interE); break;
-
-		// LS 8
 		case 0x08: write_channel_altera(chan_Intere2StoreLS_LS8_intere, final_interE); break;
-
-		// LS 9
 		case 0x09: write_channel_altera(chan_Intere2StoreLS_LS9_intere, final_interE); break;
 	}
 	// --------------------------------------------------------------
  	
-} // End of while(1)
+} // End of while(active)
 
 	#if defined (DEBUG_ACTIVE_KERNEL)
 	printf("	%-20s: %s\n", "Krnl_InterE", "disabled");

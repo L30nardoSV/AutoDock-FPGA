@@ -542,6 +542,7 @@ Only non-instrumented passes placement phase:
 freq=166MHz
 Speedup vs i5 cpu core: 3ptb: 59/25 = 2.36x, 1stp: 84/45 = 1.86x 
 >>> commit "LS replicated 9 times + added fences"
+-> stored under ./bin_hw_LS9_first
 
 
 168. `Krnl_GA`: removed unnecessary mem_fences added in step 167
@@ -550,8 +551,21 @@ Only non-instrumented passes placement phase:
 freq=187.5MHz
 Speedup vs i5 cpu core: 3ptb: 59/23.19 = 2.54x, 1stp: 84/40.91 = 2.05x 
 >>> commit "LS replicated 9 times + removed fences"
+-> stored under ./bin_hw_LS9_second
 
 
+169. `Krnl_GA`: cleaned up, small #define correction, improved comments
+170. `Krnl_PRNG`: cleaned up, added comments
+171. Some minor corrections in LSs, added comments/clean in IGL, Conform, InterE, IntraE
+180. `Makefile`: added variables to improve scalability/portability of Makefile
+181: `performdocking`: commented code-lines enclosed by non-valid ENABLED_KERNELXX
+
+Only non-instrumented passes placement phase: 
+freq=187.5MHz
+Speedup vs i5 cpu core: similar to previous values
+>>> commit "LS9 blocks + added comments + corrections"
+-> stored under ./bin_hw_LS9_third 
+(Fixedpt: Conform, all 9 LS)(check Makefile for more details)
 
 
 

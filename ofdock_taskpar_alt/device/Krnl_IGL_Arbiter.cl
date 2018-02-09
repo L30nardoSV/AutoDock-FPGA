@@ -1,4 +1,19 @@
 // --------------------------------------------------------------------------
+// IGL_Arbiter keeps checking whether any kernel (GA or any LSs) 
+// is sending genotypes to Conform, as well as whether 
+// GA sent the "turn-off" signal.
+// Its name references the logic that is producing genotypes: 
+// IC, GG and any LS.
+// IC and GG are two logic blocks inside the GA kernel,
+// while any LS logic is a kernel itself.
+
+// It uses the valid signals to determine the "mode" value,
+// used as a mux selector signal (of genotype logic-producers) in Conform.
+
+// Initially genotypes passed through this kernel getting reordered and 
+// synchronized with "mode".
+// This has been later optimized, so now genotypes go directly 
+// from producer logic/kernel (IC, GG, LSs) to the consumer (Conform) kernel.
 // --------------------------------------------------------------------------
 __kernel __attribute__ ((max_global_work_dim(0)))
 void Krnl_IGL_Arbiter(/*unsigned char DockConst_num_of_genes*/) {
@@ -71,12 +86,11 @@ while(active) {
 	active = Off_valid ? 0x00 : 0x01;
 	char mode [9];	// mode for all LS
 
-/*
-	float genotypeICGG  [ACTUAL_GENOTYPE_LENGTH]; 
-	float genotype   [3][ACTUAL_GENOTYPE_LENGTH];
-*/
-
-	// get genotype from IC, GG, LS1, LS2, LS3
+	// Determine "mode" value
+	// This considers all possible cases as all LS could be 
+	// potentially producing genotypes simultaneously.
+	// Be careful modifying the nested conditional-statements below,
+	// as even a litle mistake may be undetectable in emulation.
 	if (active == 0x01) {
 
 		if (IC_valid == true) {
@@ -86,7 +100,7 @@ while(active) {
 			bound_tmp++;
 		}	
 		else{
-			// Reorder the mode & genotype coming from LS
+			// Reorder the mode & from LS
 
 			// **************************************************************************************
 			// LS1: yes
@@ -1292,45 +1306,20 @@ while(active) {
 
 	uchar bound = active ? bound_tmp : 1;
 
-/*
-	if ((LS1_end_valid || LS2_end_valid || LS3_end_valid)) {
-		printf("bound_tmp: %-5u, LS1: %-5s, LS2: %-5s, LS3: %-5s\n", bound_tmp, LS1_end_valid?"yes":"no", LS2_end_valid?"yes":"no", LS3_end_valid?"yes":"no");
-	}
-*/
-
-	// send data to Krnl_Conform
+	// Send "mode" to Conform
 	for (uchar j=0; j<bound; j++) {
 
 		char mode_tmp = Off_valid? 0x00: IC_valid? 'I': GG_valid? 'G': mode[j];
-
-//printf("IGL: %u\n", mode_tmp);
-
 		char2 actmode = {active, mode_tmp};
-
 		write_channel_altera(chan_IGL2Conform_actmode, actmode);
-/*
-		mem_fence(CLK_CHANNEL_MEM_FENCE);
-*/
 
-/*
-		for (uchar i=0; i<DockConst_num_of_genes; i++) {
-
-			float gene_tmp = (IC_valid || GG_valid)? genotypeICGG[i]: genotype[j][i & MASK_GENOTYPE];
-		
-			if (i > 2) {
-				gene_tmp = gene_tmp * DEG_TO_RAD;
-			}
-
-			write_channel_altera(chan_IGL2Conform_genotype, gene_tmp);
-		}
-*/
-		#if defined (DEBUG_KRNL_CONF_ARBITER)
+		#if defined (DEBUG_KRNL_IGL_ARBITER)
 		printf("bound: %u, mode: %u\n", bound, mode_tmp);
 		#endif
 	}
 
-// Only for debugging
-/*
+	// Only for debugging
+	/*
 	if (LS1_end_active == true) {
 		LS1_eval = 0;
 	}
@@ -1342,9 +1331,8 @@ while(active) {
 	if (LS3_end_active == true) {
 		LS3_eval = 0;
 	}
-*/
+	*/
 	
-
 } // End of while (active)
 
 }

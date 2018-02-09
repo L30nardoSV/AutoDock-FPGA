@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------
-// The function changes the conformation of myligand according to 
-// the genotype given by the second parameter.
+// Conform changes the conformation of the ligand according to 
+// the genotype fed by any producer logic/kernel (IC, GG, LSs).
 // Originally from: processligand.c
 // --------------------------------------------------------------------------
 __kernel __attribute__ ((max_global_work_dim(0)))
@@ -18,9 +18,7 @@ void Krnl_Conform(
 			      unsigned int          DockConst_rotbondlist_length,
 			      unsigned char         DockConst_num_of_atoms,
 			      unsigned char         DockConst_num_of_genes,
-/*
-			      unsigned char         Host_num_of_rotbonds,
-*/
+
 	     #if defined (FIXED_POINT_CONFORM)
 	     __constant fixedpt4* restrict KerConstStatic_ref_orientation_quats_const,
 	     #else
@@ -36,17 +34,13 @@ void Krnl_Conform(
 	printf("%-40s %u\n", "DockConst_num_of_genes: ",        DockConst_num_of_genes);	
 	#endif
 
-/*
-	// check best practices guide
+	// Check best practices guide
 	// Table 11. Effects of numbanks and bankwidth on the Bank Geometry ...
-	// only first three indexes of the lower array are used
-	// however size of lower array was declared as 4, just to keep sizes equal to power of 2
-	__local float  __attribute__((numbanks(8), bankwidth(16))) loc_coords[MAX_NUM_OF_ATOMS][4];
-*/
+	// Only first three indexes of the lower array are used
+	// however size of lower array was declared as 4, 
+	// just to keep sizes equal to power of 2
+	// __local float  __attribute__((numbanks(8), bankwidth(16))) loc_coords[MAX_NUM_OF_ATOMS][4];
 
-/*
-	bool active = true;
-*/
 	char active = 0x01;	
 
 	__local int rotlist_localcache [MAX_NUM_OF_ROTATIONS];
@@ -62,10 +56,6 @@ while(active) {
 	fixedpt  phi;
 	fixedpt  theta;
 	fixedpt  genrotangle;
-/*
-	fixedpt  sin_theta, cos_theta;
-	fixedpt3 genrot_unitvec;
-*/
 	fixedpt3 genotype_xyz;
 	fixedpt3 __attribute__ ((
 			      memory,
@@ -79,10 +69,6 @@ while(active) {
 	float  phi;
 	float  theta;
 	float  genrotangle;
-/*
-	float  sin_theta, cos_theta;
-	float3 genrot_unitvec;
-*/
 	float3 genotype_xyz;
 	float3 __attribute__ ((
 			      memory,
@@ -94,10 +80,6 @@ while(active) {
 			    )) loc_coords [MAX_NUM_OF_ATOMS];
 	#endif
 
-/*
-	active = read_channel_altera(chan_IGL2Conform_active);
-	mem_fence(CLK_CHANNEL_MEM_FENCE);
-*/
 	char2 actmode = read_channel_altera(chan_IGL2Conform_actmode);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 
@@ -113,52 +95,19 @@ while(active) {
 	#endif
 
 	for (uchar i=0; i<DockConst_num_of_genes; i++) {
-		/*float fl_tmp = read_channel_altera(chan_IGL2Conform_genotype);*/
 		float fl_tmp;
 		switch (mode) {
-			case 'I':
-				fl_tmp = read_channel_altera(chan_IC2Conf_genotype);
-			break;
-
-			case 'G':
-				fl_tmp = read_channel_altera(chan_GG2Conf_genotype);
-			break;
-
-			case 0x01:
-				fl_tmp = read_channel_altera(chan_LS2Conf_LS1_genotype);
-			break;
-
-			case 0x02:
-				fl_tmp = read_channel_altera(chan_LS2Conf_LS2_genotype);
-			break;
-
-			case 0x03:
-				fl_tmp = read_channel_altera(chan_LS2Conf_LS3_genotype);
-			break;
-
-			case 0x04:
-				fl_tmp = read_channel_altera(chan_LS2Conf_LS4_genotype);
-			break;
-
-			case 0x05:
-				fl_tmp = read_channel_altera(chan_LS2Conf_LS5_genotype);
-			break;
-
-			case 0x06:
-				fl_tmp = read_channel_altera(chan_LS2Conf_LS6_genotype);
-			break;
-
-			case 0x07:
-				fl_tmp = read_channel_altera(chan_LS2Conf_LS7_genotype);
-			break;
-
-			case 0x08:
-				fl_tmp = read_channel_altera(chan_LS2Conf_LS8_genotype);
-			break;
-
-			case 0x09:
-				fl_tmp = read_channel_altera(chan_LS2Conf_LS9_genotype);
-			break;
+			case 'I':  fl_tmp = read_channel_altera(chan_IC2Conf_genotype);     break;
+			case 'G':  fl_tmp = read_channel_altera(chan_GG2Conf_genotype);     break;
+			case 0x01: fl_tmp = read_channel_altera(chan_LS2Conf_LS1_genotype); break;
+			case 0x02: fl_tmp = read_channel_altera(chan_LS2Conf_LS2_genotype); break;
+			case 0x03: fl_tmp = read_channel_altera(chan_LS2Conf_LS3_genotype); break;
+			case 0x04: fl_tmp = read_channel_altera(chan_LS2Conf_LS4_genotype); break;
+			case 0x05: fl_tmp = read_channel_altera(chan_LS2Conf_LS5_genotype); break;
+			case 0x06: fl_tmp = read_channel_altera(chan_LS2Conf_LS6_genotype); break;
+			case 0x07: fl_tmp = read_channel_altera(chan_LS2Conf_LS7_genotype); break;
+			case 0x08: fl_tmp = read_channel_altera(chan_LS2Conf_LS8_genotype); break;
+			case 0x09: fl_tmp = read_channel_altera(chan_LS2Conf_LS9_genotype); break;
 		}
 		
 		if (i > 2) {
@@ -168,7 +117,7 @@ while(active) {
 //printf("Conform: %u %u\n", mode, i);
 
 		#if defined (FIXED_POINT_CONFORM)
-		// convert float to fixedpt
+		// Convert float to fixedpt
 		fixedpt fx_tmp = fixedpt_fromfloat(fl_tmp);
 		switch (i) {
 			case 0: genotype_xyz.x = fx_tmp; break;
@@ -196,40 +145,23 @@ while(active) {
 	if (active == 0x00) {printf("	%-20s: %s\n", "Krnl_Conform", "must be disabled");}
 	#endif
 
-/*
-	#if defined (FIXED_POINT_CONFORM)
-	sin_theta = fixedpt_sin(theta);
-	cos_theta = fixedpt_cos(theta);
-	genrot_unitvec.x = fixedpt_mul(sin_theta, fixedpt_cos(phi));
-	genrot_unitvec.y = fixedpt_mul(sin_theta, fixedpt_sin(phi));
-	genrot_unitvec.z = cos_theta;
-	#else
-	sin_theta = native_sin(theta);
-	cos_theta = native_cos(theta);
-	genrot_unitvec.x = sin_theta*native_cos(phi);
-	genrot_unitvec.y = sin_theta*native_sin(phi);
-	genrot_unitvec.z = cos_theta;
-	#endif
-*/
-
 	for (ushort rotation_counter = 0; rotation_counter < DockConst_rotbondlist_length; rotation_counter++)
 	{
 		int rotation_list_element = rotlist_localcache [rotation_counter];
 
-		if ((rotation_list_element & RLIST_DUMMY_MASK) == 0)	//if not dummy rotation
+		if ((rotation_list_element & RLIST_DUMMY_MASK) == 0)	// If not dummy rotation
 		{
 			uint atom_id = rotation_list_element & RLIST_ATOMID_MASK;
 
-			//capturing atom coordinates
+			// Capturing atom coordinates
 			#if defined (FIXED_POINT_CONFORM)
 			fixedpt3 atom_to_rotate;
 			#else
 			float3 atom_to_rotate;
 			#endif
 
-			if ((rotation_list_element & RLIST_FIRSTROT_MASK) != 0)	//if first rotation of this atom
+			if ((rotation_list_element & RLIST_FIRSTROT_MASK) != 0)	// If first rotation of this atom
 			{	
-				/*atom_to_rotate = ref_coords_localcache [atom_id];*/
 				atom_to_rotate = KerConstStatic_ref_coords_const [atom_id];
 			}
 			else
@@ -237,7 +169,7 @@ while(active) {
 				atom_to_rotate = loc_coords[atom_id];
 			}
 
-			//capturing rotation vectors and angle
+			// Capturing rotation vectors and angle
 			#if defined (FIXED_POINT_CONFORM)
 			fixedpt3 rotation_unitvec;
 			fixedpt3 rotation_movingvec;
@@ -248,7 +180,7 @@ while(active) {
 			float    rotation_angle;
 			#endif
 
-			if ((rotation_list_element & RLIST_GENROT_MASK) != 0)	//if general rotation
+			if ((rotation_list_element & RLIST_GENROT_MASK) != 0)	// If general rotation
 			{
 				#if defined (FIXED_POINT_CONFORM)
 				fixedpt  sin_theta, cos_theta;
@@ -274,20 +206,18 @@ while(active) {
 
 				rotation_movingvec = genotype_xyz;
 			}
-			else	//if rotating around rotatable bond
+			else	// If rotating around rotatable bond
 			{
 				uint rotbond_id = (rotation_list_element & RLIST_RBONDID_MASK) >> RLIST_RBONDID_SHIFT;
 
-				/*rotation_unitvec = rotbonds_unit_vectors_localcache [rotbond_id];*/
 				rotation_unitvec = KerConstStatic_rotbonds_unit_vectors_const [rotbond_id];
 				
 				rotation_angle = genotype [6+rotbond_id];
 
-				/*rotation_movingvec = rotbonds_moving_vectors_localcache [rotbond_id];*/
 				rotation_movingvec = KerConstStatic_rotbonds_moving_vectors_const [rotbond_id];
 
-				//in addition performing the first movement 
-				//which is needed only if rotating around rotatable bond
+				// In addition performing the first movement 
+				// which is needed only if rotating around rotatable bond
 
 				#if defined (FIXED_POINT_CONFORM)
 				atom_to_rotate.x = fixedpt_sub(atom_to_rotate.x, rotation_movingvec.x);
@@ -298,7 +228,7 @@ while(active) {
 				#endif
 			}
 
-			//performing rotation
+			// Performing rotation
 			#if defined (FIXED_POINT_CONFORM)
 			fixedpt quatrot_left_x, quatrot_left_y, quatrot_left_z, quatrot_left_q;
 			fixedpt quatrot_temp_x, quatrot_temp_y, quatrot_temp_z, quatrot_temp_q;
@@ -331,9 +261,9 @@ while(active) {
 			quatrot_left.w = cos_angle;
 			#endif
 
-			if ((rotation_list_element & RLIST_GENROT_MASK) != 0)	//if general rotation, 
-										//two rotations should be performed 
-										//(multiplying the quaternions)
+			if ((rotation_list_element & RLIST_GENROT_MASK) != 0)	// If general rotation, 
+										// two rotations should be performed 
+										// (multiplying the quaternions)
 			{
 				#if defined (FIXED_POINT_CONFORM)
 				const fixedpt4 ref_orientation_quats_const = KerConstStatic_ref_orientation_quats_const[Host_RunId];
@@ -349,8 +279,8 @@ while(active) {
 				const float  ref_orientation_quats_const_3 = ref_orientation_quats_const.w;
 				#endif
 
-				//calculating quatrot_left*ref_orientation_quats_const, 
-				//which means that reference orientation rotation is the first
+				// Calculating quatrot_left*ref_orientation_quats_const, 
+				// which means that reference orientation rotation is the first
 				#if defined (FIXED_POINT_CONFORM)
 				quatrot_temp_q = quatrot_left_q;
 				quatrot_temp_x = quatrot_left_x;
@@ -360,7 +290,7 @@ while(active) {
 				quatrot_temp = quatrot_left;
 				#endif
 
-				//taking the first element of ref_orientation_quats_const member
+				// Taking the first element of ref_orientation_quats_const member
 				#if defined (FIXED_POINT_CONFORM)
 				quatrot_left_q =   fixedpt_mul(quatrot_temp_q, ref_orientation_quats_const_0) 
 						 - fixedpt_mul(quatrot_temp_x, ref_orientation_quats_const_1) 
@@ -445,7 +375,7 @@ while(active) {
 			atom_to_rotate.z = dot(quatrot_temp, left4z);
 			#endif
 
-			//performing final movement and storing values
+			// Performing final movement and storing values
 			loc_coords[atom_id] = atom_to_rotate + rotation_movingvec;
 
 		} // End if-statement not dummy rotation
@@ -474,7 +404,7 @@ while(active) {
 	}*/
 
 
-/*
+	/*
 	for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt++) {
 		if (pipe_cnt == 0) {
 			char  active_tmp = active;
@@ -499,9 +429,7 @@ while(active) {
 		write_channel_altera(chan_Conf2Intere_xyz, tmp);
 		write_channel_altera(chan_Conf2Intrae_xyz, tmp);
 	}
-*/
-
-
+	*/
 
 	for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt+=2) {
 		if (pipe_cnt == 0) {
@@ -528,7 +456,7 @@ while(active) {
 		float8 tmp;
 
 		#if defined (FIXED_POINT_CONFORM)
-		// convert fixedpt3 to float3
+		// Convert fixedpt3 to float3
 		float tmp_x1 = fixedpt_tofloat(tmp_coords[0].x);
 		float tmp_y1 = fixedpt_tofloat(tmp_coords[0].y);
 		float tmp_z1 = fixedpt_tofloat(tmp_coords[0].z);
@@ -551,7 +479,7 @@ while(active) {
 	printf("AFTER Out CONFORM CHANNEL\n");
 	#endif
 
-} // End of while(1)
+} // End of while(active)
 
 #if defined (DEBUG_ACTIVE_KERNEL)
 printf("	%-20s: %s\n", "Krnl_Conform", "disabled");

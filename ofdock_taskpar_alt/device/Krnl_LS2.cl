@@ -2,7 +2,7 @@
 // --------------------------------------------------------------------------
 __kernel __attribute__ ((max_global_work_dim(0)))
 void Krnl_LS2(
-		unsigned short              DockConst_max_num_of_iters,		
+		unsigned short            DockConst_max_num_of_iters,		
 		#if defined (FIXED_POINT_LS2)
 		fixedpt                   DockConst_rho_lower_bound,
 		fixedpt                   DockConst_base_dmov_mul_sqrt3,

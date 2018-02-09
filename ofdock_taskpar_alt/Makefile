@@ -532,7 +532,11 @@ else
 endif
 
 
-ENABLE_KERNELS = $(K1) $(K2) $(K3) $(K4) $(K5) $(K6) $(K7) $(K8) $(K9) $(K10) $(K11) $(K12) $(K13) $(K14) $(K15) $(K16) $(K17) $(K18) $(K19) $(K20) $(K21) $(K22) $(K23) $(K24) $(K25) $(K26) $(K27) $(K28) $(K29) $(K30) $(K31) $(K32) $(K33) $(K34) $(K35) $(K36) $(K37) $(K38) $(K39) $(K40) $(K41) $(K42) $(K43) $(K44) $(K45) $(K46) $(K47) $(K48)
+ENABLE_KERNELS = $(K1)  $(K2)  $(K3)  $(K4)  $(K5)  $(K6)  $(K7)  $(K8)  $(K9)  $(K10) \
+		 $(K11) $(K12) $(K13) $(K14) $(K15) $(K16) $(K17) $(K18) $(K19) $(K20) \
+		 $(K21) $(K22) $(K23) $(K24) $(K25) $(K26) $(K27) $(K28) $(K29) $(K30) \
+		 $(K31) $(K32) $(K33) $(K34) $(K35) $(K36) $(K37) $(K38) $(K39) $(K40) \
+		 $(K41) $(K42) $(K43) $(K44) $(K45) $(K46) $(K47) $(K48)
 
 # =============================
 # Reproduce result (remove randomness)
@@ -666,7 +670,18 @@ else
 	SEP_FGRID_FLAG=
 endif
 
-FIPO_FLAG = $(FIPOCO_FLAG) $(FIPOIE_FLAG) $(FIPOIA_FLAG) $(FIPOLS1_FLAG) $(FIPOLS2_FLAG) $(FIPOLS3_FLAG) $(FIPOLS4_FLAG) $(FIPOLS5_FLAG) $(FIPOLS6_FLAG) $(FIPOLS7_FLAG) $(FIPOLS8_FLAG) $(FIPOLS9_FLAG) $(COPYPOPENE_FLAG) $(SEP_FGRID_FLAG) 
+FIPO_FLAG = $(FIPOCO_FLAG) \
+	    $(FIPOIE_FLAG) $(FIPOIA_FLAG) \
+	    $(FIPOLS1_FLAG) \
+	    $(FIPOLS2_FLAG) \
+	    $(FIPOLS3_FLAG) \
+	    $(FIPOLS4_FLAG) \
+	    $(FIPOLS5_FLAG) \
+	    $(FIPOLS6_FLAG) \
+	    $(FIPOLS7_FLAG) \
+	    $(FIPOLS8_FLAG) \
+	    $(FIPOLS9_FLAG) \
+	    $(COPYPOPENE_FLAG) $(SEP_FGRID_FLAG) 
 
 # =============================
 # AOC flags
@@ -716,17 +731,18 @@ $(TARGET_DIR)/$(TARGET) : Makefile $(SRCS) $(INCS) $(TARGET_DIR)
 			$(foreach L,$(LIBS),-l$L) \
 			-o $(TARGET_DIR)/$(TARGET) $(DOCK_DEBUG_FLAG) $(DEV) $(DOCK_PROG) $(ENABLE_KERNELS) $(REP) $(FIPO_FLAG)
 	@echo " "
-	@echo "================================"
-	@echo "INFO: host binary is under: bin/"
-	@echo "================================"
+	@echo "==================================================="
+	@echo "INFO: host binary is under: $(TARGET_DIR)/$(TARGET)"
+	@echo "==================================================="
 	@echo " "
 
-# Docking parameters
-# NEV was usually set to 100000
+# Docking parameters 
+# that directly determine the execution time
+# Following values are used only for emulation
+# to have a short but still a representative test
 PDB  := 1stp
 NRUN := 10
 NEV  := 50000 
-
 
 # Project name
 PROJECT_NAME := ofdock_taskpar_alt
@@ -753,9 +769,9 @@ BOARD    := Proc10A_X115
 keremu: $(DEV_SRC)
 	aoc -march=emulator -v --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR)/$(KRNL_NAME).aocx $(REP) $(FIPO_FLAG) $(AOC_FLAG) -g
 	@echo " "
-	@echo "==============================================================="
-	@echo "INFO: emulation files are under: bin/$(KRNL_NAME)(.aoco)(.aocx)"
-	@echo "==============================================================="
+	@echo "========================================================================="
+	@echo "INFO: emulation files are under: $(TARGET_DIR)/$(KRNL_NAME)(.aoco)(.aocx)"
+	@echo "========================================================================="
 	@echo " "
 
 # Run emulation
@@ -766,9 +782,9 @@ emu: $(TARGET_DIR)/$(TARGET) keremu
 	cd $(TARGET_DIR) && \
 	CL_CONTEXT_EMULATOR_DEVICE_ALTERA=1 ./$(TARGET) -ffile ../input/$(PDB)/derived/$(PDB)_protein.maps.fld -lfile ../input/$(PDB)/derived/$(PDB)_ligand.pdbqt -nev $(NEV) -nrun $(NRUN) -gfpop 1
 	@echo " "
-	@echo "========================================"
-	@echo "INFO: log file is under: bin/docking.dlg"
-	@echo "========================================"
+	@echo "=================================================="
+	@echo "INFO: log file is under: $(TARGET_DIR)/docking.dlg"
+	@echo "=================================================="
 	@echo " "
 
 
@@ -781,13 +797,13 @@ emu: $(TARGET_DIR)/$(TARGET) keremu
 kerrpt: $(DEV_SRC)
 	aoc --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR)/$(KRNL_NAME).aoco $(REP) $(FIPO_FLAG) $(AOC_FLAG) -c --report -g
 	@echo " "
-	@echo "=================================================================="
-	@echo "INFO: report files are under: bin/$(KRNL_NAME)/reports/report.html"
-	@echo "INFO: THIS WORKS ONLY FROM V16.1 ON                               "
-	@echo "                                                                  "
-	@echo "INFO: report file is under: bin/$(KRNL_NAME).log                  "
-	@echo "INFO: THIS WORKS IN V16.0 AND OLDER.                              "
-	@echo "=================================================================="
+	@echo "============================================================================"
+	@echo "INFO: report files are under: $(TARGET_DIR)/$(KRNL_NAME)/reports/report.html"
+	@echo "INFO: THIS WORKS ONLY FROM V16.1 ON                                         "
+	@echo "                                        		                           "
+	@echo "INFO: report file is under: $(TARGET_DIR)/$(KRNL_NAME).log                  "
+	@echo "INFO: THIS WORKS IN V16.0 AND OLDER.                                        "
+	@echo "============================================================================"
 	@echo " "
 
 # Build hw (FPGA bitstream)
@@ -799,17 +815,17 @@ kerrpt: $(DEV_SRC)
 hw: 	
 	aoc --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW)/$(KRNL_NAME).aocx $(FIPO_FLAG) $(AOC_FLAG)
 	@echo " "
-	@echo "================================================================"
-	@echo "INFO: FPGA bitstream is under: bin_hw/$(KRNL_NAME)(.aoco)(.aocx)"
-	@echo "================================================================"
+	@echo "=========================================================================="
+	@echo "INFO: FPGA bitstream is under: $(TARGET_DIR_HW)/$(KRNL_NAME)(.aoco)(.aocx)"
+	@echo "=========================================================================="
 	@echo " "
 
 hw-he:
 	aoc --high-effort --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW)/$(KRNL_NAME).aocx $(FIPO_FLAG) $(AOC_FLAG)
 	@echo " "
-	@echo "================================================================"
-	@echo "INFO: FPGA bitstream is under: bin_hw/$(KRNL_NAME)(.aoco)(.aocx)"
-	@echo "================================================================"
+	@echo "=========================================================================="
+	@echo "INFO: FPGA bitstream is under: $(TARGET_DIR_HW)/$(KRNL_NAME)(.aoco)(.aocx)"
+	@echo "=========================================================================="
 	@echo " "
 
 # Build hw (FPGA bitstream) instrumented with performance counters
@@ -821,13 +837,13 @@ hw-he:
 hw-prof:
 	aoc --profile --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW_PROF)/$(KRNL_NAME).aocx $(FIPO_FLAG) $(AOC_FLAG)
 	@echo " "
-	@echo "====================================================================================="
-	@echo "INFO: instrumented FPGA bitstream is under: bin_hw_profile/$(KRNL_NAME)(.aoco)(.aocx)"
-	@echo "====================================================================================="
+	@echo "============================================================================================"
+	@echo "INFO: instrumented FPGA bitstream is under: $(TARGET_DIR_HW_PROF)/$(KRNL_NAME)(.aoco)(.aocx)"
+	@echo "============================================================================================"
 	@echo " "
 
 
-# Execute on sauron server
+# Execute on remote server
 # Host-recompilation
 # Copy of host to $(TARGET_DIR_HW)
 # The working directory is changed
@@ -835,15 +851,15 @@ hw-prof:
 exe: $(TARGET_DIR)/$(TARGET)
 	cp $(TARGET_DIR)/$(TARGET) $(TARGET_DIR_HW)/ && \
 	cd $(TARGET_DIR_HW) && \
-	./$(TARGET) -ffile ../input/$(PDB)/derived/$(PDB)_protein.maps.fld -lfile ../input/$(PDB)/derived/$(PDB)_ligand.pdbqt -nrun 10
+	./$(TARGET) -ffile ../input/$(PDB)/derived/$(PDB)_protein.maps.fld -lfile ../input/$(PDB)/derived/$(PDB)_ligand.pdbqt -nrun $(NRUN) -resnam docking_$(PDB)_$(NRUN)
 	@echo " "
-	@echo "==========================================="
-	@echo "INFO: log file is under: bin_hw/docking.dlg"
-	@echo "==========================================="
+	@echo "===================================================================="
+	@echo "INFO: log file is under: $(TARGET_DIR_HW)/docking_$(PDB)_$(NRUN).dlg"
+	@echo "===================================================================="
 	@echo " "
 
 
-# Execute and profile on sauron server
+# Execute and profile on remote server
 # Host-recompilation
 # Copy of host to $(TARGET_DIR_HW_PROF)
 # The working directory is changed
@@ -851,20 +867,23 @@ exe: $(TARGET_DIR)/$(TARGET)
 exe-prof: $(TARGET_DIR)/$(TARGET)
 	cp $(TARGET_DIR)/$(TARGET) $(TARGET_DIR_HW_PROF)/ && \
 	cd $(TARGET_DIR_HW_PROF) && \
-	./$(TARGET) -ffile ../input/$(PDB)/derived/$(PDB)_protein.maps.fld -lfile ../input/$(PDB)/derived/$(PDB)_ligand.pdbqt -nrun 10
+	./$(TARGET) -ffile ../input/$(PDB)/derived/$(PDB)_protein.maps.fld -lfile ../input/$(PDB)/derived/$(PDB)_ligand.pdbqt -nrun $(NRUN) -resnam docking_$(PDB)_$(NRUN)
 	@echo " "
-	@echo "==================================================="
-	@echo "INFO: log file is under: bin_hw_profile/docking.dlg"
-	@echo "==================================================="
+	@echo "========================================================================="
+	@echo "INFO: log file is under: $(TARGET_DIR_HW_PROF)/docking_$(PDB)_$(NRUN).dlg"
+	@echo "========================================================================="
 	@echo " "
 
 COPY_DIR := copy_$(PROJECT_NAME)
 COPY_DIR_DOCK := $(PROJECT_NAME)
 
+# Make sure this remote-server alias exists (in ~/.ssh/config)
+SERVER := sauron
+
 # Delete an existing folder if previously created
 # Create a folder $(COPY_DIR) in the parent directory
 # Copy binaries into $(COPY_DIR) folder, avoiding the (innecesary) compilation intermediate files
-# Copy source files into $(COPY_DIR) as host is built in the HARP2 front-end
+# Copy source files into $(COPY_DIR) as host is built in the remote $(SERVER)
 # Create a zip file out of the $(COPY_DIR) folder
 copy: clean-copy
 	mkdir ../$(COPY_DIR)
@@ -882,16 +901,16 @@ copy: clean-copy
 	cp -r input/ ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
 	cp -r wrapcl/ ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
 	cp -r ../common ../$(COPY_DIR)/
-	cp ../conf_aoc160_sauron.sh ../$(COPY_DIR)/
+	cp ../conf_aoc160_$(SERVER).sh ../$(COPY_DIR)/
 	cd ../;	zip -r $(COPY_DIR).zip $(COPY_DIR)
 	@echo " "
-	@echo "Transfer the $(COPY_DIR).zip file to sauron server: "
+	@echo "Transfer the $(COPY_DIR).zip file to $(SERVER) server: "
 	@echo " "
-	cd ../ && scp $(COPY_DIR).zip sauron:~/
+	cd ../ && scp $(COPY_DIR).zip $(SERVER):~/
 	@echo " "
-	@echo "================="
-	@echo "Transfer finished"
-	@echo "================="
+	@echo "=========================================="
+	@echo "Files listed were transferred to $(SERVER)"
+	@echo "=========================================="
 	@echo " "
 
 clean-copy:
