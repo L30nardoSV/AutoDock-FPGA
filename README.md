@@ -1,14 +1,12 @@
 # Description
 
-Version compiled with Intel `Altera OpenCL Compiler 16.0` (Quartus upgraded and patched) targeting the Arria10 reference board `a10gx`.
+OpenCL task-parallel version of AutoDock4 for Intel FPGAs.
 
-Source first: 
+## Development tool
+Intel Quatus Prime Pro Edition v17.1 (17.1.0.240).
+
+## Must
 
 ```zsh
-% source init_170.sh
+% source init_aoc171_nalla510t.sh
 ```
-
-# Parallel versions
-
-* [ofdock_datapar_alt](./ofdock_datapar_alt): data-parallel
-* [ofdock_taskpar_alt](./ofdock_taskpar_alt): task-parallel
