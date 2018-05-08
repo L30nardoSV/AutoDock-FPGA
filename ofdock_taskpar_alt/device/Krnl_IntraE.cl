@@ -57,14 +57,14 @@ while(active) {
 	// Wait for ligand atomic coordinates in channel
 	// --------------------------------------------------------------
 
-	char2 actmode = read_channel_altera(chan_Conf2Intrae_actmode);
+	char2 actmode = read_channel_intel(chan_Conf2Intrae_actmode);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 	active = actmode.x;
 	mode   = actmode.y;
 
 	for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt+=2) {
-		float8 tmp = read_channel_altera(chan_Conf2Intrae_xyz);
+		float8 tmp = read_channel_intel(chan_Conf2Intrae_xyz);
 		float3 tmp1 = {tmp.s0, tmp.s1, tmp.s2};
 		float3 tmp2 = {tmp.s4, tmp.s5, tmp.s6};
 		loc_coords[pipe_cnt] = tmp1;
@@ -200,17 +200,17 @@ while(active) {
 	// Send intramolecular energy to channel
 	// --------------------------------------------------------------
 	switch (mode) {
-		case 'I':  write_channel_altera(chan_Intrae2StoreIC_intrae, intraE);     break;
-		case 'G':  write_channel_altera(chan_Intrae2StoreGG_intrae, intraE);     break;
-		case 0x01: write_channel_altera(chan_Intrae2StoreLS_LS1_intrae, intraE); break;
-		case 0x02: write_channel_altera(chan_Intrae2StoreLS_LS2_intrae, intraE); break;
-		case 0x03: write_channel_altera(chan_Intrae2StoreLS_LS3_intrae, intraE); break;
-		case 0x04: write_channel_altera(chan_Intrae2StoreLS_LS4_intrae, intraE); break;
-		case 0x05: write_channel_altera(chan_Intrae2StoreLS_LS5_intrae, intraE); break;
-		case 0x06: write_channel_altera(chan_Intrae2StoreLS_LS6_intrae, intraE); break;
-		case 0x07: write_channel_altera(chan_Intrae2StoreLS_LS7_intrae, intraE); break;
-		case 0x08: write_channel_altera(chan_Intrae2StoreLS_LS8_intrae, intraE); break;
-		case 0x09: write_channel_altera(chan_Intrae2StoreLS_LS9_intrae, intraE); break;
+		case 'I':  write_channel_intel(chan_Intrae2StoreIC_intrae, intraE);     break;
+		case 'G':  write_channel_intel(chan_Intrae2StoreGG_intrae, intraE);     break;
+		case 0x01: write_channel_intel(chan_Intrae2StoreLS_LS1_intrae, intraE); break;
+		case 0x02: write_channel_intel(chan_Intrae2StoreLS_LS2_intrae, intraE); break;
+		case 0x03: write_channel_intel(chan_Intrae2StoreLS_LS3_intrae, intraE); break;
+		case 0x04: write_channel_intel(chan_Intrae2StoreLS_LS4_intrae, intraE); break;
+		case 0x05: write_channel_intel(chan_Intrae2StoreLS_LS5_intrae, intraE); break;
+		case 0x06: write_channel_intel(chan_Intrae2StoreLS_LS6_intrae, intraE); break;
+		case 0x07: write_channel_intel(chan_Intrae2StoreLS_LS7_intrae, intraE); break;
+		case 0x08: write_channel_intel(chan_Intrae2StoreLS_LS8_intrae, intraE); break;
+		case 0x09: write_channel_intel(chan_Intrae2StoreLS_LS9_intrae, intraE); break;
 	}
 	// --------------------------------------------------------------
 

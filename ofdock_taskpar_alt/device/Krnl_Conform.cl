@@ -80,7 +80,7 @@ while(active) {
 			    )) loc_coords [MAX_NUM_OF_ATOMS];
 	#endif
 
-	char2 actmode = read_channel_altera(chan_IGL2Conform_actmode);
+	char2 actmode = read_channel_intel(chan_IGL2Conform_actmode);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 	active = actmode.x;
@@ -97,17 +97,17 @@ while(active) {
 	for (uchar i=0; i<DockConst_num_of_genes; i++) {
 		float fl_tmp;
 		switch (mode) {
-			case 'I':  fl_tmp = read_channel_altera(chan_IC2Conf_genotype);     break;
-			case 'G':  fl_tmp = read_channel_altera(chan_GG2Conf_genotype);     break;
-			case 0x01: fl_tmp = read_channel_altera(chan_LS2Conf_LS1_genotype); break;
-			case 0x02: fl_tmp = read_channel_altera(chan_LS2Conf_LS2_genotype); break;
-			case 0x03: fl_tmp = read_channel_altera(chan_LS2Conf_LS3_genotype); break;
-			case 0x04: fl_tmp = read_channel_altera(chan_LS2Conf_LS4_genotype); break;
-			case 0x05: fl_tmp = read_channel_altera(chan_LS2Conf_LS5_genotype); break;
-			case 0x06: fl_tmp = read_channel_altera(chan_LS2Conf_LS6_genotype); break;
-			case 0x07: fl_tmp = read_channel_altera(chan_LS2Conf_LS7_genotype); break;
-			case 0x08: fl_tmp = read_channel_altera(chan_LS2Conf_LS8_genotype); break;
-			case 0x09: fl_tmp = read_channel_altera(chan_LS2Conf_LS9_genotype); break;
+			case 'I':  fl_tmp = read_channel_intel(chan_IC2Conf_genotype);     break;
+			case 'G':  fl_tmp = read_channel_intel(chan_GG2Conf_genotype);     break;
+			case 0x01: fl_tmp = read_channel_intel(chan_LS2Conf_LS1_genotype); break;
+			case 0x02: fl_tmp = read_channel_intel(chan_LS2Conf_LS2_genotype); break;
+			case 0x03: fl_tmp = read_channel_intel(chan_LS2Conf_LS3_genotype); break;
+			case 0x04: fl_tmp = read_channel_intel(chan_LS2Conf_LS4_genotype); break;
+			case 0x05: fl_tmp = read_channel_intel(chan_LS2Conf_LS5_genotype); break;
+			case 0x06: fl_tmp = read_channel_intel(chan_LS2Conf_LS6_genotype); break;
+			case 0x07: fl_tmp = read_channel_intel(chan_LS2Conf_LS7_genotype); break;
+			case 0x08: fl_tmp = read_channel_intel(chan_LS2Conf_LS8_genotype); break;
+			case 0x09: fl_tmp = read_channel_intel(chan_LS2Conf_LS9_genotype); break;
 		}
 		
 		if (i > 2) {
@@ -389,18 +389,18 @@ while(active) {
 	// Send ligand atomic coordinates to channel 
 	// --------------------------------------------------------------
 	/*
-	write_channel_altera(chan_Conf2Intere_active, active);
-	write_channel_altera(chan_Conf2Intrae_active, active);
+	write_channel_intel(chan_Conf2Intere_active, active);
+	write_channel_intel(chan_Conf2Intrae_active, active);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 
-	write_channel_altera(chan_Conf2Intere_mode,   mode);
-	write_channel_altera(chan_Conf2Intrae_mode,   mode);
+	write_channel_intel(chan_Conf2Intere_mode,   mode);
+	write_channel_intel(chan_Conf2Intrae_mode,   mode);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 	//float3 position_xyz;
 	for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt++) {
-		write_channel_altera(chan_Conf2Intere_xyz, loc_coords[pipe_cnt]);
-		write_channel_altera(chan_Conf2Intrae_xyz, loc_coords[pipe_cnt]);
+		write_channel_intel(chan_Conf2Intere_xyz, loc_coords[pipe_cnt]);
+		write_channel_intel(chan_Conf2Intrae_xyz, loc_coords[pipe_cnt]);
 	}*/
 
 
@@ -411,8 +411,8 @@ while(active) {
 			char  mode_tmp   = mode;
 			char2 actmode    = {active_tmp, mode_tmp};
 
-			write_channel_altera(chan_Conf2Intere_actmode, actmode);
-			write_channel_altera(chan_Conf2Intrae_actmode, actmode);
+			write_channel_intel(chan_Conf2Intere_actmode, actmode);
+			write_channel_intel(chan_Conf2Intrae_actmode, actmode);
 		}
 		mem_fence(CLK_CHANNEL_MEM_FENCE);
 
@@ -426,8 +426,8 @@ while(active) {
 		float3 tmp = loc_coords[pipe_cnt];
 		#endif
 
-		write_channel_altera(chan_Conf2Intere_xyz, tmp);
-		write_channel_altera(chan_Conf2Intrae_xyz, tmp);
+		write_channel_intel(chan_Conf2Intere_xyz, tmp);
+		write_channel_intel(chan_Conf2Intrae_xyz, tmp);
 	}
 	*/
 
@@ -437,8 +437,8 @@ while(active) {
 			char  mode_tmp   = mode;
 			char2 actmode    = {active_tmp, mode_tmp};
 
-			write_channel_altera(chan_Conf2Intere_actmode, actmode);
-			write_channel_altera(chan_Conf2Intrae_actmode, actmode);
+			write_channel_intel(chan_Conf2Intere_actmode, actmode);
+			write_channel_intel(chan_Conf2Intrae_actmode, actmode);
 		}
 		mem_fence(CLK_CHANNEL_MEM_FENCE);
 
@@ -470,8 +470,8 @@ while(active) {
 		tmp.s4 = tmp_coords[1].x; tmp.s5 = tmp_coords[1].y; tmp.s6 = tmp_coords[1].z; //tmp.s7
 		#endif
 
-		write_channel_altera(chan_Conf2Intere_xyz, tmp);
-		write_channel_altera(chan_Conf2Intrae_xyz, tmp);
+		write_channel_intel(chan_Conf2Intere_xyz, tmp);
+		write_channel_intel(chan_Conf2Intrae_xyz, tmp);
 	}
 
 	// --------------------------------------------------------------

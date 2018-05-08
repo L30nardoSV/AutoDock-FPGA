@@ -692,18 +692,18 @@ FIPO_FLAG = $(FIPOCO_FLAG) \
 # custom: 12KB = 12288 Bytes
 CUSTOMSIZE_CONSTMEM = YES
 
-# relax the order of fp operations: --fp-relaxed
-# reduce fp rounding operations: --fpc
+# relax the order of fp operations: -fp-relaxed
+# reduce fp rounding operations: -fpc
 RELAXED_REDUCED_FLOATINGPOINT = YES
 
 ifeq ($(CUSTOMSIZE_CONSTMEM), YES)
-	CUSTOMSIZE_CONSTMEM_FLAG=--const-cache-bytes 12288
+	CUSTOMSIZE_CONSTMEM_FLAG=-const-cache-bytes=12288
 else	
 	CUSTOMSIZE_CONSTMEM_FLAG=
 endif
 
 ifeq ($(RELAXED_REDUCED_FLOATINGPOINT), YES)
-	RELAXED_REDUCED_FLOATINGPOINT_FLAG=--fp-relaxed --fpc
+	RELAXED_REDUCED_FLOATINGPOINT_FLAG=-fp-relaxed -fpc
 else	
 	RELAXED_REDUCED_FLOATINGPOINT_FLAG=
 endif
@@ -754,7 +754,8 @@ PROJECT_NAME := ofdock_taskpar_alt
 DEV_DIRS := device
 KRNL_NAME:= Krnl_GA
 DEV_SRC  := $(DEV_DIRS)/$(KRNL_NAME).cl
-BOARD    := Proc10A_X115
+#BOARD    := Proc10A_X115
+BOARD    := p510t_sch_ax115
 
 ## Make it all: compilation (host & device) + run emulation
 ## Notice, it switches automatically to /bin folder
@@ -767,7 +768,7 @@ BOARD    := Proc10A_X115
 	# $(KRNL_NAME).aoco
 	# $(KRNL_NAME).aocx
 keremu: $(DEV_SRC)
-	aoc -march=emulator -v --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR)/$(KRNL_NAME).aocx $(REP) $(FIPO_FLAG) $(AOC_FLAG) -g
+	aoc -march=emulator -v -board=$(BOARD) $(DEV_SRC) -o $(TARGET_DIR)/$(KRNL_NAME).aocx $(REP) $(FIPO_FLAG) $(AOC_FLAG) -g
 	@echo " "
 	@echo "========================================================================="
 	@echo "INFO: emulation files are under: $(TARGET_DIR)/$(KRNL_NAME)(.aoco)(.aocx)"
@@ -780,7 +781,7 @@ keremu: $(DEV_SRC)
 # So .dlg file is written in $(TARGET_DIR)
 emu: $(TARGET_DIR)/$(TARGET) keremu
 	cd $(TARGET_DIR) && \
-	CL_CONTEXT_EMULATOR_DEVICE_ALTERA=1 ./$(TARGET) -ffile ../input/$(PDB)/derived/$(PDB)_protein.maps.fld -lfile ../input/$(PDB)/derived/$(PDB)_ligand.pdbqt -nev $(NEV) -nrun $(NRUN) -gfpop 1
+	CL_CONTEXT_EMULATOR_DEVICE_INTELFPGA=1 ./$(TARGET) -ffile ../input/$(PDB)/derived/$(PDB)_protein.maps.fld -lfile ../input/$(PDB)/derived/$(PDB)_ligand.pdbqt -nev $(NEV) -nrun $(NRUN) -gfpop 1
 	@echo " "
 	@echo "=================================================="
 	@echo "INFO: log file is under: $(TARGET_DIR)/docking.dlg"
@@ -795,7 +796,7 @@ emu: $(TARGET_DIR)/$(TARGET) keremu
 	# $(KRNL_NAME).aoco
 	# No actual hardware is built (NO .aocx)
 kerrpt: $(DEV_SRC)
-	aoc --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR)/$(KRNL_NAME).aoco $(REP) $(FIPO_FLAG) $(AOC_FLAG) -c --report -g
+	aoc -board=$(BOARD) $(DEV_SRC) -o $(TARGET_DIR)/$(KRNL_NAME).aoco $(REP) $(FIPO_FLAG) $(AOC_FLAG) -c --report -g
 	@echo " "
 	@echo "============================================================================"
 	@echo "INFO: report files are under: $(TARGET_DIR)/$(KRNL_NAME)/reports/report.html"
@@ -813,7 +814,7 @@ kerrpt: $(DEV_SRC)
 	# $(KRNL_NAME).aoco
 	# $(KRNL_NAME).aocx
 hw: 	
-	aoc --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW)/$(KRNL_NAME).aocx $(FIPO_FLAG) $(AOC_FLAG)
+	aoc -board=$(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW)/$(KRNL_NAME).aocx $(FIPO_FLAG) $(AOC_FLAG)
 	@echo " "
 	@echo "=========================================================================="
 	@echo "INFO: FPGA bitstream is under: $(TARGET_DIR_HW)/$(KRNL_NAME)(.aoco)(.aocx)"
@@ -821,7 +822,7 @@ hw:
 	@echo " "
 
 hw-he:
-	aoc --high-effort --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW)/$(KRNL_NAME).aocx $(FIPO_FLAG) $(AOC_FLAG)
+	aoc --high-effort -board=$(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW)/$(KRNL_NAME).aocx $(FIPO_FLAG) $(AOC_FLAG)
 	@echo " "
 	@echo "=========================================================================="
 	@echo "INFO: FPGA bitstream is under: $(TARGET_DIR_HW)/$(KRNL_NAME)(.aoco)(.aocx)"
@@ -835,7 +836,7 @@ hw-he:
 	# $(KRNL_NAME).aoco
 	# $(KRNL_NAME).aocx
 hw-prof:
-	aoc --profile --board $(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW_PROF)/$(KRNL_NAME).aocx $(FIPO_FLAG) $(AOC_FLAG)
+	aoc --profile -board=$(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW_PROF)/$(KRNL_NAME).aocx $(FIPO_FLAG) $(AOC_FLAG)
 	@echo " "
 	@echo "============================================================================================"
 	@echo "INFO: instrumented FPGA bitstream is under: $(TARGET_DIR_HW_PROF)/$(KRNL_NAME)(.aoco)(.aocx)"

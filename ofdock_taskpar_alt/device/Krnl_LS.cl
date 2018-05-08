@@ -32,8 +32,8 @@ while(valid) {
 	bool valid_energy = false;
 
 	while( (valid_active == false) && (valid_energy == false)) {
-		active         = read_channel_nb_altera(chan_GA2LS_Off1_active, &valid_active);
-		current_energy = read_channel_nb_altera(chan_GA2LS_LS1_energy,  &valid_energy);
+		active         = read_channel_nb_intel(chan_GA2LS_Off1_active, &valid_active);
+		current_energy = read_channel_nb_intel(chan_GA2LS_LS1_energy,  &valid_energy);
 	}
 	valid = active || valid_energy;
 
@@ -47,10 +47,10 @@ while(valid) {
 
 		for (uchar i=0; i<DockConst_num_of_genes; i++) {
 			#if defined (FIXED_POINT_LS1)
-			float tmp_gene = read_channel_altera(chan_GA2LS_LS1_genotype);
+			float tmp_gene = read_channel_intel(chan_GA2LS_LS1_genotype);
 			genotype [i] = fixedpt_fromfloat(tmp_gene);
 			#else
-			genotype [i] = read_channel_altera(chan_GA2LS_LS1_genotype);
+			genotype [i] = read_channel_intel(chan_GA2LS_LS1_genotype);
 			#endif
 		}
 	
@@ -116,9 +116,9 @@ while(valid) {
 			// Not completely strict as the (iteration_cnt < DockConst_max_num_of_iters) is ignored
 			// In practice, rho condition dominates most of the cases
 			#if defined (FIXED_POINT_LS1)
-			write_channel_altera(chan_LS2Arbiter_LS1_end, (fixpt_rho < DockConst_rho_lower_bound)?true:false);
+			write_channel_intel(chan_LS2Arbiter_LS1_end, (fixpt_rho < DockConst_rho_lower_bound)?true:false);
 			#else
-			write_channel_altera(chan_LS2Arbiter_LS1_end, (rho < DockConst_rho_lower_bound)?true:false);
+			write_channel_intel(chan_LS2Arbiter_LS1_end, (rho < DockConst_rho_lower_bound)?true:false);
 			#endif
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 
@@ -126,7 +126,7 @@ while(valid) {
 			// rho is the deviation of the uniform distribution
 			for (uchar i=0; i<DockConst_num_of_genes; i++) {
 
-				float tmp_prng = read_channel_altera(chan_PRNG2GA_LS_float_prng);
+				float tmp_prng = read_channel_intel(chan_PRNG2GA_LS_float_prng);
 				mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 				#if defined (FIXED_POINT_LS1)
@@ -156,7 +156,7 @@ while(valid) {
 					  else      { fixpt_tmp3 = fixedpt_map_angle_360(fixpt_tmp3); }}
 
 				entity_possible_new_genotype [i] = fixpt_tmp3;
-				write_channel_altera(chan_LS2Conf_LS1_genotype, fixedpt_tofloat(fixpt_tmp3));
+				write_channel_intel(chan_LS2Conf_LS1_genotype, fixedpt_tofloat(fixpt_tmp3));
 
 				#else
 				// tmp1 is genotype_deviate
@@ -182,7 +182,7 @@ while(valid) {
 					  else      { tmp3 = map_angle_360(tmp3); }}
 
 				entity_possible_new_genotype [i] = tmp3;
-				write_channel_altera(chan_LS2Conf_LS1_genotype, tmp3);
+				write_channel_intel(chan_LS2Conf_LS1_genotype, tmp3);
 				#endif
 
 				#if defined (DEBUG_KRNL_LS1)
@@ -198,10 +198,10 @@ while(valid) {
 			bool inter_valid = false;
 			while( (intra_valid == false) || (inter_valid == false)) {
 				if (intra_valid == false) {
-					energyIA_LS_rx = read_channel_nb_altera(chan_Intrae2StoreLS_LS1_intrae, &intra_valid);
+					energyIA_LS_rx = read_channel_nb_intel(chan_Intrae2StoreLS_LS1_intrae, &intra_valid);
 				}
 				else if (inter_valid == false) {
-					energyIE_LS_rx = read_channel_nb_altera(chan_Intere2StoreLS_LS1_intere, &inter_valid);
+					energyIE_LS_rx = read_channel_nb_intel(chan_Intere2StoreLS_LS1_intere, &inter_valid);
 				}
 			}
 
@@ -286,14 +286,14 @@ while(valid) {
 		for (uchar i=0; i<DockConst_num_of_genes; i++) {
 			if (i == 0) {
 				float2 evalenergy  = {*(float*)&LS_eval, current_energy};
-				write_channel_altera(chan_LS2GA_LS1_evalenergy, evalenergy);		
+				write_channel_intel(chan_LS2GA_LS1_evalenergy, evalenergy);		
 			}
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 			#if defined (FIXED_POINT_LS1)
-			write_channel_altera(chan_LS2GA_LS1_genotype, fixedpt_tofloat(genotype [i]));
+			write_channel_intel(chan_LS2GA_LS1_genotype, fixedpt_tofloat(genotype [i]));
 			#else
-			write_channel_altera(chan_LS2GA_LS1_genotype, genotype [i]);
+			write_channel_intel(chan_LS2GA_LS1_genotype, genotype [i]);
 			#endif
 		}
 

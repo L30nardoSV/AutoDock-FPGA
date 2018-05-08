@@ -319,7 +319,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 	// ------------------------------------------------------------------
 	for (ushort pop_cnt = 0; pop_cnt < DockConst_pop_size; pop_cnt++) {
 		// Calculate energy
-		write_channel_altera(chan_GA2IGL_IC_active, true);
+		write_channel_intel(chan_GA2IGL_IC_active, true);
 		mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 		for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_genes; pipe_cnt++) {
@@ -328,7 +328,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			#else
 			LocalPopCurr[pop_cnt][pipe_cnt & MASK_GENOTYPE] = GlobPopulationCurrent[pop_cnt*ACTUAL_GENOTYPE_LENGTH + pipe_cnt];
 			#endif
-			write_channel_altera(chan_IC2Conf_genotype, LocalPopCurr[pop_cnt][pipe_cnt & MASK_GENOTYPE]);	
+			write_channel_intel(chan_IC2Conf_genotype, LocalPopCurr[pop_cnt][pipe_cnt & MASK_GENOTYPE]);	
 		}
 
 		#if defined (DEBUG_KRNL_IC)
@@ -342,10 +342,10 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 		bool inter_valid = false;
 		while( (intra_valid == false) || (inter_valid == false)) {
 			if (intra_valid == false) {
-				energyIA_IC_rx = read_channel_nb_altera(chan_Intrae2StoreIC_intrae, &intra_valid);
+				energyIA_IC_rx = read_channel_nb_intel(chan_Intrae2StoreIC_intrae, &intra_valid);
 			}
 			else if (inter_valid == false) {
-				energyIE_IC_rx = read_channel_nb_altera(chan_Intere2StoreIC_intere, &inter_valid);
+				energyIE_IC_rx = read_channel_nb_intel(chan_Intere2StoreIC_intere, &inter_valid);
 			}
 		}
 
@@ -453,7 +453,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 
 			// Get ushort binary_tournament selection prngs (parent index)
 			// Get float binary_tournament selection prngs (tournament rate)
-			float8 bt_tmp = read_channel_altera(chan_PRNG2GA_BT_ushort_float_prng);
+			float8 bt_tmp = read_channel_intel(chan_PRNG2GA_BT_ushort_float_prng);
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 			// Convert: float prng that must be still converted to short
@@ -505,7 +505,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 
 			// get uchar genetic_generation prngs (gene index)
 			// get float genetic_generation prngs (mutation rate)
-			uchar2 prng_GG_C = read_channel_altera(chan_PRNG2GA_GG_uchar_prng);
+			uchar2 prng_GG_C = read_channel_intel(chan_PRNG2GA_GG_uchar_prng);
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 			uchar covr_point_low;
@@ -524,12 +524,12 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			// Reuse of bt prng float as crossover-rate
 			bool crossover_yes = (DockConst_crossover_rate > bt_tmp_f0);
 
-			write_channel_altera(chan_GA2IGL_GG_active, true);
+			write_channel_intel(chan_GA2IGL_GG_active, true);
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 			for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
 
-				float prngGG = read_channel_altera(chan_PRNG2GA_GG_float_prng);
+				float prngGG = read_channel_intel(chan_PRNG2GA_GG_float_prng);
 				mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 				float tmp_offspring;
@@ -563,7 +563,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 
 				// Calculate energy
 				LocalPopNext [new_pop_cnt][gene_cnt & MASK_GENOTYPE] = tmp_offspring;
-				write_channel_altera(chan_GG2Conf_genotype, tmp_offspring);
+				write_channel_intel(chan_GG2Conf_genotype, tmp_offspring);
 			}
 
 			#if defined (DEBUG_KRNL_GG)
@@ -577,10 +577,10 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			bool inter_valid = false;
 			while( (intra_valid == false) || (inter_valid == false)) {
 				if (intra_valid == false) {
-					energyIA_GG_rx = read_channel_nb_altera(chan_Intrae2StoreGG_intrae, &intra_valid);
+					energyIA_GG_rx = read_channel_nb_intel(chan_Intrae2StoreGG_intrae, &intra_valid);
 				}
 				else if (inter_valid == false) {
-					energyIE_GG_rx = read_channel_nb_altera(chan_Intere2StoreGG_intere, &inter_valid);
+					energyIE_GG_rx = read_channel_nb_intel(chan_Intere2StoreGG_intere, &inter_valid);
 				}
 			}
 			
@@ -601,7 +601,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 		for (ushort ls_ent_cnt=0; ls_ent_cnt<DockConst_num_of_lsentities; ls_ent_cnt+=9) {
 
 			// Choose random & different entities on every iteration
-			ushort16 entity_ls = read_channel_altera(chan_PRNG2GA_LS123_ushort_prng);
+			ushort16 entity_ls = read_channel_intel(chan_PRNG2GA_LS123_ushort_prng);
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 			ushort entity_ls1 = entity_ls.s0;
@@ -614,27 +614,27 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			ushort entity_ls8 = entity_ls.s7;
 			ushort entity_ls9 = entity_ls.s8;
 
-			write_channel_altera(chan_GA2LS_LS1_energy, LocalEneNext[entity_ls1]);
-			write_channel_altera(chan_GA2LS_LS2_energy, LocalEneNext[entity_ls2]);
-			write_channel_altera(chan_GA2LS_LS3_energy, LocalEneNext[entity_ls3]);
-			write_channel_altera(chan_GA2LS_LS4_energy, LocalEneNext[entity_ls4]);
-			write_channel_altera(chan_GA2LS_LS5_energy, LocalEneNext[entity_ls5]);
-			write_channel_altera(chan_GA2LS_LS6_energy, LocalEneNext[entity_ls6]);
-			write_channel_altera(chan_GA2LS_LS7_energy, LocalEneNext[entity_ls7]);
-			write_channel_altera(chan_GA2LS_LS8_energy, LocalEneNext[entity_ls8]);
-			write_channel_altera(chan_GA2LS_LS9_energy, LocalEneNext[entity_ls9]);
+			write_channel_intel(chan_GA2LS_LS1_energy, LocalEneNext[entity_ls1]);
+			write_channel_intel(chan_GA2LS_LS2_energy, LocalEneNext[entity_ls2]);
+			write_channel_intel(chan_GA2LS_LS3_energy, LocalEneNext[entity_ls3]);
+			write_channel_intel(chan_GA2LS_LS4_energy, LocalEneNext[entity_ls4]);
+			write_channel_intel(chan_GA2LS_LS5_energy, LocalEneNext[entity_ls5]);
+			write_channel_intel(chan_GA2LS_LS6_energy, LocalEneNext[entity_ls6]);
+			write_channel_intel(chan_GA2LS_LS7_energy, LocalEneNext[entity_ls7]);
+			write_channel_intel(chan_GA2LS_LS8_energy, LocalEneNext[entity_ls8]);
+			write_channel_intel(chan_GA2LS_LS9_energy, LocalEneNext[entity_ls9]);
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 			for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
-				write_channel_altera(chan_GA2LS_LS1_genotype, LocalPopNext[entity_ls1][gene_cnt & MASK_GENOTYPE]);
-				write_channel_altera(chan_GA2LS_LS2_genotype, LocalPopNext[entity_ls2][gene_cnt & MASK_GENOTYPE]);
-				write_channel_altera(chan_GA2LS_LS3_genotype, LocalPopNext[entity_ls3][gene_cnt & MASK_GENOTYPE]);
-				write_channel_altera(chan_GA2LS_LS4_genotype, LocalPopNext[entity_ls4][gene_cnt & MASK_GENOTYPE]);
-				write_channel_altera(chan_GA2LS_LS5_genotype, LocalPopNext[entity_ls5][gene_cnt & MASK_GENOTYPE]);
-				write_channel_altera(chan_GA2LS_LS6_genotype, LocalPopNext[entity_ls6][gene_cnt & MASK_GENOTYPE]);
-				write_channel_altera(chan_GA2LS_LS7_genotype, LocalPopNext[entity_ls7][gene_cnt & MASK_GENOTYPE]);
-				write_channel_altera(chan_GA2LS_LS8_genotype, LocalPopNext[entity_ls8][gene_cnt & MASK_GENOTYPE]);
-				write_channel_altera(chan_GA2LS_LS9_genotype, LocalPopNext[entity_ls9][gene_cnt & MASK_GENOTYPE]);
+				write_channel_intel(chan_GA2LS_LS1_genotype, LocalPopNext[entity_ls1][gene_cnt & MASK_GENOTYPE]);
+				write_channel_intel(chan_GA2LS_LS2_genotype, LocalPopNext[entity_ls2][gene_cnt & MASK_GENOTYPE]);
+				write_channel_intel(chan_GA2LS_LS3_genotype, LocalPopNext[entity_ls3][gene_cnt & MASK_GENOTYPE]);
+				write_channel_intel(chan_GA2LS_LS4_genotype, LocalPopNext[entity_ls4][gene_cnt & MASK_GENOTYPE]);
+				write_channel_intel(chan_GA2LS_LS5_genotype, LocalPopNext[entity_ls5][gene_cnt & MASK_GENOTYPE]);
+				write_channel_intel(chan_GA2LS_LS6_genotype, LocalPopNext[entity_ls6][gene_cnt & MASK_GENOTYPE]);
+				write_channel_intel(chan_GA2LS_LS7_genotype, LocalPopNext[entity_ls7][gene_cnt & MASK_GENOTYPE]);
+				write_channel_intel(chan_GA2LS_LS8_genotype, LocalPopNext[entity_ls8][gene_cnt & MASK_GENOTYPE]);
+				write_channel_intel(chan_GA2LS_LS9_genotype, LocalPopNext[entity_ls9][gene_cnt & MASK_GENOTYPE]);
 			}
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 
@@ -669,31 +669,31 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			)
 			{
 				if (ls1_done == false) {
-					evalenergy_tmp1 = read_channel_nb_altera(chan_LS2GA_LS1_evalenergy, &ls1_done);
+					evalenergy_tmp1 = read_channel_nb_intel(chan_LS2GA_LS1_evalenergy, &ls1_done);
 				}
 				else if (ls2_done == false) {
-					evalenergy_tmp2 = read_channel_nb_altera(chan_LS2GA_LS2_evalenergy, &ls2_done);
+					evalenergy_tmp2 = read_channel_nb_intel(chan_LS2GA_LS2_evalenergy, &ls2_done);
 				}
 				else if (ls3_done == false) {
-					evalenergy_tmp3 = read_channel_nb_altera(chan_LS2GA_LS3_evalenergy, &ls3_done);
+					evalenergy_tmp3 = read_channel_nb_intel(chan_LS2GA_LS3_evalenergy, &ls3_done);
 				}
 				else if (ls4_done == false) {
-					evalenergy_tmp4 = read_channel_nb_altera(chan_LS2GA_LS4_evalenergy, &ls4_done);
+					evalenergy_tmp4 = read_channel_nb_intel(chan_LS2GA_LS4_evalenergy, &ls4_done);
 				}
 				else if (ls5_done == false) {
-					evalenergy_tmp5 = read_channel_nb_altera(chan_LS2GA_LS5_evalenergy, &ls5_done);
+					evalenergy_tmp5 = read_channel_nb_intel(chan_LS2GA_LS5_evalenergy, &ls5_done);
 				}
 				else if (ls6_done == false) {
-					evalenergy_tmp6 = read_channel_nb_altera(chan_LS2GA_LS6_evalenergy, &ls6_done);
+					evalenergy_tmp6 = read_channel_nb_intel(chan_LS2GA_LS6_evalenergy, &ls6_done);
 				}
 				else if (ls7_done == false) {
-					evalenergy_tmp7 = read_channel_nb_altera(chan_LS2GA_LS7_evalenergy, &ls7_done);
+					evalenergy_tmp7 = read_channel_nb_intel(chan_LS2GA_LS7_evalenergy, &ls7_done);
 				}
 				else if (ls8_done == false) {
-					evalenergy_tmp8 = read_channel_nb_altera(chan_LS2GA_LS8_evalenergy, &ls8_done);
+					evalenergy_tmp8 = read_channel_nb_intel(chan_LS2GA_LS8_evalenergy, &ls8_done);
 				}
 				else if (ls9_done == false) {
-					evalenergy_tmp9 = read_channel_nb_altera(chan_LS2GA_LS9_evalenergy, &ls9_done);
+					evalenergy_tmp9 = read_channel_nb_intel(chan_LS2GA_LS9_evalenergy, &ls9_done);
 				}
 			}
 		
@@ -733,15 +733,15 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 
 			#pragma ivdep
 			for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
-				LocalPopNext[entity_ls1][gene_cnt & MASK_GENOTYPE] = read_channel_altera(chan_LS2GA_LS1_genotype);
-				LocalPopNext[entity_ls2][gene_cnt & MASK_GENOTYPE] = read_channel_altera(chan_LS2GA_LS2_genotype);
-				LocalPopNext[entity_ls3][gene_cnt & MASK_GENOTYPE] = read_channel_altera(chan_LS2GA_LS3_genotype);
-				LocalPopNext[entity_ls4][gene_cnt & MASK_GENOTYPE] = read_channel_altera(chan_LS2GA_LS4_genotype);
-				LocalPopNext[entity_ls5][gene_cnt & MASK_GENOTYPE] = read_channel_altera(chan_LS2GA_LS5_genotype);
-				LocalPopNext[entity_ls6][gene_cnt & MASK_GENOTYPE] = read_channel_altera(chan_LS2GA_LS6_genotype);
-				LocalPopNext[entity_ls7][gene_cnt & MASK_GENOTYPE] = read_channel_altera(chan_LS2GA_LS7_genotype);
-				LocalPopNext[entity_ls8][gene_cnt & MASK_GENOTYPE] = read_channel_altera(chan_LS2GA_LS8_genotype);
-				LocalPopNext[entity_ls9][gene_cnt & MASK_GENOTYPE] = read_channel_altera(chan_LS2GA_LS9_genotype);
+				LocalPopNext[entity_ls1][gene_cnt & MASK_GENOTYPE] = read_channel_intel(chan_LS2GA_LS1_genotype);
+				LocalPopNext[entity_ls2][gene_cnt & MASK_GENOTYPE] = read_channel_intel(chan_LS2GA_LS2_genotype);
+				LocalPopNext[entity_ls3][gene_cnt & MASK_GENOTYPE] = read_channel_intel(chan_LS2GA_LS3_genotype);
+				LocalPopNext[entity_ls4][gene_cnt & MASK_GENOTYPE] = read_channel_intel(chan_LS2GA_LS4_genotype);
+				LocalPopNext[entity_ls5][gene_cnt & MASK_GENOTYPE] = read_channel_intel(chan_LS2GA_LS5_genotype);
+				LocalPopNext[entity_ls6][gene_cnt & MASK_GENOTYPE] = read_channel_intel(chan_LS2GA_LS6_genotype);
+				LocalPopNext[entity_ls7][gene_cnt & MASK_GENOTYPE] = read_channel_intel(chan_LS2GA_LS7_genotype);
+				LocalPopNext[entity_ls8][gene_cnt & MASK_GENOTYPE] = read_channel_intel(chan_LS2GA_LS8_genotype);
+				LocalPopNext[entity_ls9][gene_cnt & MASK_GENOTYPE] = read_channel_intel(chan_LS2GA_LS9_genotype);
 			}
 
 			ls_eval_cnt += eval_tmp1 + eval_tmp2 + eval_tmp3 + eval_tmp4 + eval_tmp5 + eval_tmp6 + eval_tmp7 + eval_tmp8 + eval_tmp9;
@@ -778,35 +778,35 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 	// ------------------------------------------------------------------
 
 	// Turn off PRNG kernels
-	write_channel_altera(chan_Arbiter_BT_ushort_float_off,  false);
-	write_channel_altera(chan_Arbiter_GG_uchar_off, 	false);
-	write_channel_altera(chan_Arbiter_GG_float_off, 	false);
-	write_channel_altera(chan_Arbiter_LS123_ushort_off,  	false);
-	write_channel_altera(chan_Arbiter_LS_float_off, 	false);
-	write_channel_altera(chan_Arbiter_LS2_float_off, 	false);
-	write_channel_altera(chan_Arbiter_LS3_float_off, 	false);
-	write_channel_altera(chan_Arbiter_LS4_float_off, 	false);
-	write_channel_altera(chan_Arbiter_LS5_float_off, 	false);
-	write_channel_altera(chan_Arbiter_LS6_float_off, 	false);
-	write_channel_altera(chan_Arbiter_LS7_float_off, 	false);
-	write_channel_altera(chan_Arbiter_LS8_float_off, 	false);
-	write_channel_altera(chan_Arbiter_LS9_float_off, 	false);
+	write_channel_intel(chan_Arbiter_BT_ushort_float_off,   false);
+	write_channel_intel(chan_Arbiter_GG_uchar_off, 		false);
+	write_channel_intel(chan_Arbiter_GG_float_off, 		false);
+	write_channel_intel(chan_Arbiter_LS123_ushort_off,  	false);
+	write_channel_intel(chan_Arbiter_LS_float_off, 		false);
+	write_channel_intel(chan_Arbiter_LS2_float_off, 	false);
+	write_channel_intel(chan_Arbiter_LS3_float_off, 	false);
+	write_channel_intel(chan_Arbiter_LS4_float_off, 	false);
+	write_channel_intel(chan_Arbiter_LS5_float_off, 	false);
+	write_channel_intel(chan_Arbiter_LS6_float_off, 	false);
+	write_channel_intel(chan_Arbiter_LS7_float_off, 	false);
+	write_channel_intel(chan_Arbiter_LS8_float_off, 	false);
+	write_channel_intel(chan_Arbiter_LS9_float_off, 	false);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 	// Turn off LS kernels
-	write_channel_altera(chan_GA2LS_Off1_active,  		false);
-	write_channel_altera(chan_GA2LS_Off2_active,  		false);
-	write_channel_altera(chan_GA2LS_Off3_active,  		false);
-	write_channel_altera(chan_GA2LS_Off4_active,  		false);
-	write_channel_altera(chan_GA2LS_Off5_active,  		false);
-	write_channel_altera(chan_GA2LS_Off6_active,  		false);
-	write_channel_altera(chan_GA2LS_Off7_active,  		false);
-	write_channel_altera(chan_GA2LS_Off8_active,  		false);
-	write_channel_altera(chan_GA2LS_Off9_active,  		false);
+	write_channel_intel(chan_GA2LS_Off1_active,  		false);
+	write_channel_intel(chan_GA2LS_Off2_active,  		false);
+	write_channel_intel(chan_GA2LS_Off3_active,  		false);
+	write_channel_intel(chan_GA2LS_Off4_active,  		false);
+	write_channel_intel(chan_GA2LS_Off5_active,  		false);
+	write_channel_intel(chan_GA2LS_Off6_active,  		false);
+	write_channel_intel(chan_GA2LS_Off7_active,  		false);
+	write_channel_intel(chan_GA2LS_Off8_active,  		false);
+	write_channel_intel(chan_GA2LS_Off9_active,  		false);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 	// Turn off IGL_Arbiter, Conform, InterE, IntraE kernerls
-	write_channel_altera(chan_IGLArbiter_Off,     		false);
+	write_channel_intel(chan_IGLArbiter_Off,     		false);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 	// Write final pop & energies back to FPGA-board DDRs
