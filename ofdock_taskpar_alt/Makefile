@@ -768,7 +768,7 @@ BOARD    := p510t_sch_ax115
 	# $(KRNL_NAME).aoco
 	# $(KRNL_NAME).aocx
 keremu: $(DEV_SRC)
-	aoc -march=emulator -v -board=$(BOARD) $(DEV_SRC) -o $(TARGET_DIR)/$(KRNL_NAME).aocx $(REP) $(FIPO_FLAG) $(AOC_FLAG) -g
+	aoc -march=emulator -emulator-channel-depth-model=strict -v -board=$(BOARD) $(DEV_SRC) -o $(TARGET_DIR)/$(KRNL_NAME).aocx $(REP) $(FIPO_FLAG) $(AOC_FLAG) -g
 	@echo " "
 	@echo "========================================================================="
 	@echo "INFO: emulation files are under: $(TARGET_DIR)/$(KRNL_NAME)(.aoco)(.aocx)"
