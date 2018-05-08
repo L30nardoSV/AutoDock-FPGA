@@ -1,1 +1,0 @@
-Compiler Command: aoc -march=emulator -v device/jpeg_decoder.cl -o bin/jpeg.aocx

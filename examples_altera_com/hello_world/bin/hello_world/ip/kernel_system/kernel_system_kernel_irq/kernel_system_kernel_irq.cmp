@@ -1,9 +1,0 @@
-	component kernel_system_kernel_irq is
-		port (
-			clk          : in  std_logic                    := 'X';             -- clk
-			reset        : in  std_logic                    := 'X';             -- reset
-			receiver_irq : in  std_logic_vector(0 downto 0) := (others => 'X'); -- irq
-			sender0_irq  : out std_logic                                        -- irq
-		);
-	end component kernel_system_kernel_irq;
-
