@@ -6,9 +6,12 @@
 # >source init_aoc_esa.sh
 
 echo ""
-echo "======================================="
+echo "==============================================="
 echo "Setting up Altera OpenCL SDK & Compiler"
-echo "======================================="
+echo ""
+echo "Run:          $ source init_aoc171_nalla510t.sh"
+echo "or if Ubuntu: $ bash   init_aoc171_nalla510t.sh"
+echo "==============================================="
 echo ""
 
 export LM_LICENSE_FILE=/opt/cad/keys/altera
