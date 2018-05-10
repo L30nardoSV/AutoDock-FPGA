@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # This is created to automate the boring 
 # process of setting AOC in celebdil
 # DO NOT FORGET to run it using:
