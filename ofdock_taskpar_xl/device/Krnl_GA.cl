@@ -12,66 +12,66 @@
 #define CHAN_DEPTH_GENOTYPE  ACTUAL_GENOTYPE_LENGTH
 
 // Send active signal to IGL_Arbiter
-channel bool    chan_GA2IGL_IC_active;
-channel bool    chan_GA2IGL_GG_active;
+/*channel*/ pipe bool    chan_GA2IGL_IC_active;
+/*channel*/ pipe bool    chan_GA2IGL_GG_active;
 
 // Send genotypes from producers (IC, GG, LSs) to Conform
-channel float  	chan_IC2Conf_genotype          __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float  	chan_GG2Conf_genotype          __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float  	chan_LS2Conf_LS1_genotype      __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float  	chan_LS2Conf_LS2_genotype      __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float  	chan_LS2Conf_LS3_genotype      __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float  	chan_LS2Conf_LS4_genotype      __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float  	chan_LS2Conf_LS5_genotype      __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float  	chan_LS2Conf_LS6_genotype      __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float  	chan_LS2Conf_LS7_genotype      __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float  	chan_LS2Conf_LS8_genotype      __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float  	chan_LS2Conf_LS9_genotype      __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
+pipe float  chan_IC2Conf_genotype          __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
+pipe float  chan_GG2Conf_genotype          __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
+pipe float  chan_LS2Conf_LS1_genotype      __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
+pipe float  chan_LS2Conf_LS2_genotype      __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
+pipe float  chan_LS2Conf_LS3_genotype      __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
+pipe float  chan_LS2Conf_LS4_genotype      __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
+pipe float  chan_LS2Conf_LS5_genotype      __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
+pipe float  chan_LS2Conf_LS6_genotype      __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
+pipe float  chan_LS2Conf_LS7_genotype      __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
+pipe float  chan_LS2Conf_LS8_genotype      __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
+pipe float  chan_LS2Conf_LS9_genotype      __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
 
 // Send ligand-atom positions from Conform to InterE & IntraE
-channel float8  chan_Conf2Intere_xyz           __attribute__((depth(CHAN_DEPTH_ATOMXYZ)));
-channel char2  	chan_Conf2Intere_actmode;
-channel float8	chan_Conf2Intrae_xyz           __attribute__((depth(CHAN_DEPTH_ATOMXYZ)));
-channel char2  	chan_Conf2Intrae_actmode;	
+pipe float8  chan_Conf2Intere_xyz           __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_ATOMXYZ)));
+pipe char2   chan_Conf2Intere_actmode;
+pipe float8  chan_Conf2Intrae_xyz           __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_ATOMXYZ)));
+pipe char2   chan_Conf2Intrae_actmode;	
 
 // Send energy values from InterE & IntraE to genotype-senders (IC, GG, LSs)
-channel float 	chan_Intere2StoreIC_intere     __attribute__((depth(2)));
-channel float 	chan_Intere2StoreGG_intere     __attribute__((depth(2)));
-channel float 	chan_Intere2StoreLS_LS1_intere __attribute__((depth(2)));
-channel float 	chan_Intere2StoreLS_LS2_intere __attribute__((depth(2)));
-channel float 	chan_Intere2StoreLS_LS3_intere __attribute__((depth(2)));
-channel float 	chan_Intere2StoreLS_LS4_intere __attribute__((depth(2)));
-channel float 	chan_Intere2StoreLS_LS5_intere __attribute__((depth(2)));
-channel float 	chan_Intere2StoreLS_LS6_intere __attribute__((depth(2)));
-channel float 	chan_Intere2StoreLS_LS7_intere __attribute__((depth(2)));
-channel float 	chan_Intere2StoreLS_LS8_intere __attribute__((depth(2)));
-channel float 	chan_Intere2StoreLS_LS9_intere __attribute__((depth(2)));
-channel float 	chan_Intrae2StoreIC_intrae     __attribute__((depth(2)));
-channel float 	chan_Intrae2StoreGG_intrae     __attribute__((depth(2)));
-channel float 	chan_Intrae2StoreLS_LS1_intrae __attribute__((depth(2)));
-channel float 	chan_Intrae2StoreLS_LS2_intrae __attribute__((depth(2)));
-channel float 	chan_Intrae2StoreLS_LS3_intrae __attribute__((depth(2)));
-channel float 	chan_Intrae2StoreLS_LS4_intrae __attribute__((depth(2)));
-channel float 	chan_Intrae2StoreLS_LS5_intrae __attribute__((depth(2)));
-channel float 	chan_Intrae2StoreLS_LS6_intrae __attribute__((depth(2)));
-channel float 	chan_Intrae2StoreLS_LS7_intrae __attribute__((depth(2)));
-channel float 	chan_Intrae2StoreLS_LS8_intrae __attribute__((depth(2)));
-channel float 	chan_Intrae2StoreLS_LS9_intrae __attribute__((depth(2)));
+pipe float  chan_Intere2StoreIC_intere     __attribute__((xcl_reqd_pipe_depth(2)));
+pipe float  chan_Intere2StoreGG_intere     __attribute__((xcl_reqd_pipe_depth(2)));
+pipe float  chan_Intere2StoreLS_LS1_intere __attribute__((xcl_reqd_pipe_depth(2)));
+pipe float  chan_Intere2StoreLS_LS2_intere __attribute__((xcl_reqd_pipe_depth(2)));
+pipe float  chan_Intere2StoreLS_LS3_intere __attribute__((xcl_reqd_pipe_depth(2)));
+pipe float  chan_Intere2StoreLS_LS4_intere __attribute__((xcl_reqd_pipe_depth(2)));
+pipe float  chan_Intere2StoreLS_LS5_intere __attribute__((xcl_reqd_pipe_depth(2)));
+pipe float  chan_Intere2StoreLS_LS6_intere __attribute__((xcl_reqd_pipe_depth(2)));
+pipe float  chan_Intere2StoreLS_LS7_intere __attribute__((xcl_reqd_pipe_depth(2)));
+pipe float  chan_Intere2StoreLS_LS8_intere __attribute__((xcl_reqd_pipe_depth(2)));
+pipe float  chan_Intere2StoreLS_LS9_intere __attribute__((xcl_reqd_pipe_depth(2)));
+pipe float  chan_Intrae2StoreIC_intrae     __attribute__((xcl_reqd_pipe_depth(2)));
+pipe float  chan_Intrae2StoreGG_intrae     __attribute__((xcl_reqd_pipe_depth(2)));
+pipe float  chan_Intrae2StoreLS_LS1_intrae __attribute__((xcl_reqd_pipe_depth(2)));
+pipe float  chan_Intrae2StoreLS_LS2_intrae __attribute__((xcl_reqd_pipe_depth(2)));
+pipe float  chan_Intrae2StoreLS_LS3_intrae __attribute__((xcl_reqd_pipe_depth(2)));
+pipe float  chan_Intrae2StoreLS_LS4_intrae __attribute__((xcl_reqd_pipe_depth(2)));
+pipe float  chan_Intrae2StoreLS_LS5_intrae __attribute__((xcl_reqd_pipe_depth(2)));
+pipe float  chan_Intrae2StoreLS_LS6_intrae __attribute__((xcl_reqd_pipe_depth(2)));
+pipe float  chan_Intrae2StoreLS_LS7_intrae __attribute__((xcl_reqd_pipe_depth(2)));
+pipe float  chan_Intrae2StoreLS_LS8_intrae __attribute__((xcl_reqd_pipe_depth(2)));
+pipe float  chan_Intrae2StoreLS_LS9_intrae __attribute__((xcl_reqd_pipe_depth(2)));
 
 // Send PRNG outputs from generators to consumers
-channel float8   chan_PRNG2GA_BT_ushort_float_prng;
-channel uchar2   chan_PRNG2GA_GG_uchar_prng;
-channel float    chan_PRNG2GA_GG_float_prng     __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel ushort16 chan_PRNG2GA_LS123_ushort_prng;
-channel float    chan_PRNG2GA_LS_float_prng     __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float    chan_PRNG2GA_LS2_float_prng    __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float    chan_PRNG2GA_LS3_float_prng    __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float    chan_PRNG2GA_LS4_float_prng    __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float    chan_PRNG2GA_LS5_float_prng    __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float    chan_PRNG2GA_LS6_float_prng    __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float    chan_PRNG2GA_LS7_float_prng    __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float    chan_PRNG2GA_LS8_float_prng    __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float    chan_PRNG2GA_LS9_float_prng    __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
+pipe float8   chan_PRNG2GA_BT_ushort_float_prng;
+pipe uchar2   chan_PRNG2GA_GG_uchar_prng;
+pipe float    chan_PRNG2GA_GG_float_prng     __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
+pipe ushort16 chan_PRNG2GA_LS123_ushort_prng;
+pipe float    chan_PRNG2GA_LS_float_prng     __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
+pipe float    chan_PRNG2GA_LS2_float_prng    __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
+pipe float    chan_PRNG2GA_LS3_float_prng    __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
+pipe float    chan_PRNG2GA_LS4_float_prng    __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
+pipe float    chan_PRNG2GA_LS5_float_prng    __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
+pipe float    chan_PRNG2GA_LS6_float_prng    __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
+pipe float    chan_PRNG2GA_LS7_float_prng    __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
+pipe float    chan_PRNG2GA_LS8_float_prng    __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
+pipe float    chan_PRNG2GA_LS9_float_prng    __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
 
 // Turn-off signals to PRNG generators
 
@@ -79,89 +79,89 @@ channel float    chan_PRNG2GA_LS9_float_prng    __attribute__((depth(CHAN_DEPTH_
 // That was initially the case, but was fixed.
 // Name should be changed accordingly (GA instead of Arbiter)
 // to avoid misleading data-flow information
-channel bool 	chan_Arbiter_BT_ushort_float_off;
-channel bool    chan_Arbiter_GG_uchar_off;
-channel bool    chan_Arbiter_GG_float_off;
-channel bool    chan_Arbiter_LS123_ushort_off;
-channel bool    chan_Arbiter_LS_float_off;
-channel bool    chan_Arbiter_LS2_float_off;
-channel bool    chan_Arbiter_LS3_float_off;
-channel bool    chan_Arbiter_LS4_float_off;
-channel bool    chan_Arbiter_LS5_float_off;
-channel bool    chan_Arbiter_LS6_float_off;
-channel bool    chan_Arbiter_LS7_float_off;
-channel bool    chan_Arbiter_LS8_float_off;
-channel bool    chan_Arbiter_LS9_float_off;
+pipe bool    chan_Arbiter_BT_ushort_float_off;
+pipe bool    chan_Arbiter_GG_uchar_off;
+pipe bool    chan_Arbiter_GG_float_off;
+pipe bool    chan_Arbiter_LS123_ushort_off;
+pipe bool    chan_Arbiter_LS_float_off;
+pipe bool    chan_Arbiter_LS2_float_off;
+pipe bool    chan_Arbiter_LS3_float_off;
+pipe bool    chan_Arbiter_LS4_float_off;
+pipe bool    chan_Arbiter_LS5_float_off;
+pipe bool    chan_Arbiter_LS6_float_off;
+pipe bool    chan_Arbiter_LS7_float_off;
+pipe bool    chan_Arbiter_LS8_float_off;
+pipe bool    chan_Arbiter_LS9_float_off;
 
 // Send energy values and genotypes to LSs
-channel float   chan_GA2LS_LS1_energy;
-channel float   chan_GA2LS_LS2_energy;
-channel float   chan_GA2LS_LS3_energy;
-channel float   chan_GA2LS_LS4_energy;
-channel float   chan_GA2LS_LS5_energy;
-channel float   chan_GA2LS_LS6_energy;
-channel float   chan_GA2LS_LS7_energy;
-channel float   chan_GA2LS_LS8_energy;
-channel float   chan_GA2LS_LS9_energy;
-channel float  	chan_GA2LS_LS1_genotype        __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float  	chan_GA2LS_LS2_genotype        __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float  	chan_GA2LS_LS3_genotype        __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float  	chan_GA2LS_LS4_genotype        __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float  	chan_GA2LS_LS5_genotype        __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float  	chan_GA2LS_LS6_genotype        __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float  	chan_GA2LS_LS7_genotype        __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float  	chan_GA2LS_LS8_genotype        __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float  	chan_GA2LS_LS9_genotype        __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
+pipe float   chan_GA2LS_LS1_energy;
+pipe float   chan_GA2LS_LS2_energy;
+pipe float   chan_GA2LS_LS3_energy;
+pipe float   chan_GA2LS_LS4_energy;
+pipe float   chan_GA2LS_LS5_energy;
+pipe float   chan_GA2LS_LS6_energy;
+pipe float   chan_GA2LS_LS7_energy;
+pipe float   chan_GA2LS_LS8_energy;
+pipe float   chan_GA2LS_LS9_energy;
+pipe float   chan_GA2LS_LS1_genotype        __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
+pipe float   chan_GA2LS_LS2_genotype        __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
+pipe float   chan_GA2LS_LS3_genotype        __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
+pipe float   chan_GA2LS_LS4_genotype        __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
+pipe float   chan_GA2LS_LS5_genotype        __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
+pipe float   chan_GA2LS_LS6_genotype        __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
+pipe float   chan_GA2LS_LS7_genotype        __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
+pipe float   chan_GA2LS_LS8_genotype        __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
+pipe float   chan_GA2LS_LS9_genotype        __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
 
 // Send LS status from LSs to IGL_Arbiter
-channel bool    chan_LS2Arbiter_LS1_end;
-channel bool    chan_LS2Arbiter_LS2_end;
-channel bool    chan_LS2Arbiter_LS3_end;
-channel bool    chan_LS2Arbiter_LS4_end;
-channel bool    chan_LS2Arbiter_LS5_end;
-channel bool    chan_LS2Arbiter_LS6_end;
-channel bool    chan_LS2Arbiter_LS7_end;
-channel bool    chan_LS2Arbiter_LS8_end;
-channel bool    chan_LS2Arbiter_LS9_end;
+pipe bool    chan_LS2Arbiter_LS1_end;
+pipe bool    chan_LS2Arbiter_LS2_end;
+pipe bool    chan_LS2Arbiter_LS3_end;
+pipe bool    chan_LS2Arbiter_LS4_end;
+pipe bool    chan_LS2Arbiter_LS5_end;
+pipe bool    chan_LS2Arbiter_LS6_end;
+pipe bool    chan_LS2Arbiter_LS7_end;
+pipe bool    chan_LS2Arbiter_LS8_end;
+pipe bool    chan_LS2Arbiter_LS9_end;
 
 // Get LS-eval-count, new energy, new genotype from LSs
-channel float2  chan_LS2GA_LS1_evalenergy      __attribute__((depth(2)));
-channel float2  chan_LS2GA_LS2_evalenergy      __attribute__((depth(2)));
-channel float2  chan_LS2GA_LS3_evalenergy      __attribute__((depth(2)));
-channel float2  chan_LS2GA_LS4_evalenergy      __attribute__((depth(2)));
-channel float2  chan_LS2GA_LS5_evalenergy      __attribute__((depth(2)));
-channel float2  chan_LS2GA_LS6_evalenergy      __attribute__((depth(2)));
-channel float2  chan_LS2GA_LS7_evalenergy      __attribute__((depth(2)));
-channel float2  chan_LS2GA_LS8_evalenergy      __attribute__((depth(2)));
-channel float2  chan_LS2GA_LS9_evalenergy      __attribute__((depth(2)));
-channel float  	chan_LS2GA_LS1_genotype        __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float  	chan_LS2GA_LS2_genotype        __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float  	chan_LS2GA_LS3_genotype        __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float  	chan_LS2GA_LS4_genotype        __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float  	chan_LS2GA_LS5_genotype        __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float  	chan_LS2GA_LS6_genotype        __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float  	chan_LS2GA_LS7_genotype        __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float  	chan_LS2GA_LS8_genotype        __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float  	chan_LS2GA_LS9_genotype        __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
+pipe float2  chan_LS2GA_LS1_evalenergy      __attribute__((xcl_reqd_pipe_depth(2)));
+pipe float2  chan_LS2GA_LS2_evalenergy      __attribute__((xcl_reqd_pipe_depth(2)));
+pipe float2  chan_LS2GA_LS3_evalenergy      __attribute__((xcl_reqd_pipe_depth(2)));
+pipe float2  chan_LS2GA_LS4_evalenergy      __attribute__((xcl_reqd_pipe_depth(2)));
+pipe float2  chan_LS2GA_LS5_evalenergy      __attribute__((xcl_reqd_pipe_depth(2)));
+pipe float2  chan_LS2GA_LS6_evalenergy      __attribute__((xcl_reqd_pipe_depth(2)));
+pipe float2  chan_LS2GA_LS7_evalenergy      __attribute__((xcl_reqd_pipe_depth(2)));
+pipe float2  chan_LS2GA_LS8_evalenergy      __attribute__((xcl_reqd_pipe_depth(2)));
+pipe float2  chan_LS2GA_LS9_evalenergy      __attribute__((xcl_reqd_pipe_depth(2)));
+pipe float   chan_LS2GA_LS1_genotype        __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
+pipe float   chan_LS2GA_LS2_genotype        __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
+pipe float   chan_LS2GA_LS3_genotype        __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
+pipe float   chan_LS2GA_LS4_genotype        __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
+pipe float   chan_LS2GA_LS5_genotype        __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
+pipe float   chan_LS2GA_LS6_genotype        __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
+pipe float   chan_LS2GA_LS7_genotype        __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
+pipe float   chan_LS2GA_LS8_genotype        __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
+pipe float   chan_LS2GA_LS9_genotype        __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
 
 // Turn-off signals to LSs
-channel bool    chan_GA2LS_Off1_active;
-channel bool    chan_GA2LS_Off2_active;
-channel bool    chan_GA2LS_Off3_active;
-channel bool    chan_GA2LS_Off4_active;
-channel bool    chan_GA2LS_Off5_active;
-channel bool    chan_GA2LS_Off6_active;
-channel bool    chan_GA2LS_Off7_active;
-channel bool    chan_GA2LS_Off8_active;
-channel bool    chan_GA2LS_Off9_active;
+pipe bool    chan_GA2LS_Off1_active;
+pipe bool    chan_GA2LS_Off2_active;
+pipe bool    chan_GA2LS_Off3_active;
+pipe bool    chan_GA2LS_Off4_active;
+pipe bool    chan_GA2LS_Off5_active;
+pipe bool    chan_GA2LS_Off6_active;
+pipe bool    chan_GA2LS_Off7_active;
+pipe bool    chan_GA2LS_Off8_active;
+pipe bool    chan_GA2LS_Off9_active;
 
-// Send genotype-producer-channel selector and genotype 
+// Send genotype-producer-pipe selector and genotype 
 // from IGL_Arbiter to Conform
-channel char2  chan_IGL2Conform_actmode	       __attribute__((depth(9))); // active, mode
-channel float  chan_IGL2Conform_genotype       __attribute__((depth(9*CHAN_DEPTH_GENOTYPE)));
+pipe char2  chan_IGL2Conform_actmode	    __attribute__((xcl_reqd_pipe_depth(9))); // active, mode
+pipe float  chan_IGL2Conform_genotype       __attribute__((xcl_reqd_pipe_depth(9*CHAN_DEPTH_GENOTYPE)));
 
 // Turn-off signal to IGL_Arbiter, Conform, InterE, IntraE
-channel bool   chan_IGLArbiter_Off;
+pipe bool   chan_IGLArbiter_Off;
 
 #if defined (FIXED_POINT_CONFORM) || \
     defined (FIXED_POINT_LS1)     || \
@@ -319,16 +319,25 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 	// ------------------------------------------------------------------
 	for (ushort pop_cnt = 0; pop_cnt < DockConst_pop_size; pop_cnt++) {
 		// Calculate energy
+/*
 		write_channel_altera(chan_GA2IGL_IC_active, true);
-		mem_fence(CLK_CHANNEL_MEM_FENCE);
+*/
+		const bool tmp_bool_true = true;
+		write_pipe_block(chan_GA2IGL_IC_active, &tmp_bool_true);
 
+/*
+		mem_fence(CLK_CHANNEL_MEM_FENCE);
+*/
 		for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_genes; pipe_cnt++) {
 			#if defined(SINGLE_COPY_POP_ENE)
 			LocalPopCurr[pop_cnt][pipe_cnt & MASK_GENOTYPE] = GlobPopCurr[pop_cnt*ACTUAL_GENOTYPE_LENGTH + pipe_cnt];
 			#else
 			LocalPopCurr[pop_cnt][pipe_cnt & MASK_GENOTYPE] = GlobPopulationCurrent[pop_cnt*ACTUAL_GENOTYPE_LENGTH + pipe_cnt];
 			#endif
+/*
 			write_channel_altera(chan_IC2Conf_genotype, LocalPopCurr[pop_cnt][pipe_cnt & MASK_GENOTYPE]);	
+*/
+			write_pipe_block(chan_IC2Conf_genotype, &LocalPopCurr[pop_cnt][pipe_cnt & MASK_GENOTYPE]);	
 		}
 
 		#if defined (DEBUG_KRNL_IC)
@@ -342,10 +351,16 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 		bool inter_valid = false;
 		while( (intra_valid == false) || (inter_valid == false)) {
 			if (intra_valid == false) {
+/*
 				energyIA_IC_rx = read_channel_nb_altera(chan_Intrae2StoreIC_intrae, &intra_valid);
+*/
+				intra_valid = read_pipe(chan_Intrae2StoreIC_intrae, &energyIA_IC_rx);
 			}
 			else if (inter_valid == false) {
+/*
 				energyIE_IC_rx = read_channel_nb_altera(chan_Intere2StoreIC_intere, &inter_valid);
+*/
+				inter_valid = read_pipe(chan_Intere2StoreIC_intere, &energyIE_IC_rx);
 			}
 		}
 
@@ -453,8 +468,14 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 
 			// Get ushort binary_tournament selection prngs (parent index)
 			// Get float binary_tournament selection prngs (tournament rate)
+/*
 			float8 bt_tmp = read_channel_altera(chan_PRNG2GA_BT_ushort_float_prng);
+*/
+			float8 bt_tmp;
+			read_pipe_block(chan_PRNG2GA_BT_ushort_float_prng, &bt_tmp);
+/*
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
+*/
 
 			// Convert: float prng that must be still converted to short
 			float bt_tmp_uf0 = bt_tmp.s0;
@@ -505,8 +526,14 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 
 			// get uchar genetic_generation prngs (gene index)
 			// get float genetic_generation prngs (mutation rate)
+/*
 			uchar2 prng_GG_C = read_channel_altera(chan_PRNG2GA_GG_uchar_prng);
+*/
+			uchar2 prng_GG_C;
+			read_pipe_block(chan_PRNG2GA_GG_uchar_prng, &prng_GG_C);
+/*
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
+*/
 
 			uchar covr_point_low;
 			uchar covr_point_high;
@@ -523,14 +550,24 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			
 			// Reuse of bt prng float as crossover-rate
 			bool crossover_yes = (DockConst_crossover_rate > bt_tmp_f0);
-
+/*
 			write_channel_altera(chan_GA2IGL_GG_active, true);
+*/
+			const bool tmp_bool_true = true;
+			write_pipe_block(chan_GA2IGL_GG_active, &tmp_bool_true);
+/*
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
+*/
 
 			for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
-
+/*
 				float prngGG = read_channel_altera(chan_PRNG2GA_GG_float_prng);
+*/
+				float prngGG;
+				read_pipe_block(chan_PRNG2GA_GG_float_prng, &prngGG);
+/*
 				mem_fence(CLK_CHANNEL_MEM_FENCE);
+*/
 
 				float tmp_offspring;
 
@@ -563,7 +600,10 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 
 				// Calculate energy
 				LocalPopNext [new_pop_cnt][gene_cnt & MASK_GENOTYPE] = tmp_offspring;
+/*
 				write_channel_altera(chan_GG2Conf_genotype, tmp_offspring);
+*/
+				write_pipe_block(chan_GG2Conf_genotype, &tmp_offspring);
 			}
 
 			#if defined (DEBUG_KRNL_GG)
@@ -577,10 +617,16 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			bool inter_valid = false;
 			while( (intra_valid == false) || (inter_valid == false)) {
 				if (intra_valid == false) {
+/*
 					energyIA_GG_rx = read_channel_nb_altera(chan_Intrae2StoreGG_intrae, &intra_valid);
+*/
+					intra_valid = read_pipe(chan_Intrae2StoreGG_intrae, &energyIA_GG_rx);
 				}
 				else if (inter_valid == false) {
+/*
 					energyIE_GG_rx = read_channel_nb_altera(chan_Intere2StoreGG_intere, &inter_valid);
+*/
+					inter_valid = read_pipe(chan_Intere2StoreGG_intere, &energyIE_GG_rx);
 				}
 			}
 			
@@ -601,8 +647,14 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 		for (ushort ls_ent_cnt=0; ls_ent_cnt<DockConst_num_of_lsentities; ls_ent_cnt+=9) {
 
 			// Choose random & different entities on every iteration
+/*
 			ushort16 entity_ls = read_channel_altera(chan_PRNG2GA_LS123_ushort_prng);
+*/
+			ushort16 entity_ls;
+			read_pipe_block(chan_PRNG2GA_LS123_ushort_prng, &entity_ls);
+/*
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
+*/
 
 			ushort entity_ls1 = entity_ls.s0;
 			ushort entity_ls2 = entity_ls.s1;
@@ -614,6 +666,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			ushort entity_ls8 = entity_ls.s7;
 			ushort entity_ls9 = entity_ls.s8;
 
+/*
 			write_channel_altera(chan_GA2LS_LS1_energy, LocalEneNext[entity_ls1]);
 			write_channel_altera(chan_GA2LS_LS2_energy, LocalEneNext[entity_ls2]);
 			write_channel_altera(chan_GA2LS_LS3_energy, LocalEneNext[entity_ls3]);
@@ -623,9 +676,21 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			write_channel_altera(chan_GA2LS_LS7_energy, LocalEneNext[entity_ls7]);
 			write_channel_altera(chan_GA2LS_LS8_energy, LocalEneNext[entity_ls8]);
 			write_channel_altera(chan_GA2LS_LS9_energy, LocalEneNext[entity_ls9]);
+*/
+			write_pipe_block(chan_GA2LS_LS1_energy, &LocalEneNext[entity_ls1]);
+			write_pipe_block(chan_GA2LS_LS2_energy, &LocalEneNext[entity_ls2]);
+			write_pipe_block(chan_GA2LS_LS3_energy, &LocalEneNext[entity_ls3]);
+			write_pipe_block(chan_GA2LS_LS4_energy, &LocalEneNext[entity_ls4]);
+			write_pipe_block(chan_GA2LS_LS5_energy, &LocalEneNext[entity_ls5]);
+			write_pipe_block(chan_GA2LS_LS6_energy, &LocalEneNext[entity_ls6]);
+			write_pipe_block(chan_GA2LS_LS7_energy, &LocalEneNext[entity_ls7]);
+			write_pipe_block(chan_GA2LS_LS8_energy, &LocalEneNext[entity_ls8]);
+			write_pipe_block(chan_GA2LS_LS9_energy, &LocalEneNext[entity_ls9]);
+/*
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
-
+*/
 			for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
+/*
 				write_channel_altera(chan_GA2LS_LS1_genotype, LocalPopNext[entity_ls1][gene_cnt & MASK_GENOTYPE]);
 				write_channel_altera(chan_GA2LS_LS2_genotype, LocalPopNext[entity_ls2][gene_cnt & MASK_GENOTYPE]);
 				write_channel_altera(chan_GA2LS_LS3_genotype, LocalPopNext[entity_ls3][gene_cnt & MASK_GENOTYPE]);
@@ -635,8 +700,20 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 				write_channel_altera(chan_GA2LS_LS7_genotype, LocalPopNext[entity_ls7][gene_cnt & MASK_GENOTYPE]);
 				write_channel_altera(chan_GA2LS_LS8_genotype, LocalPopNext[entity_ls8][gene_cnt & MASK_GENOTYPE]);
 				write_channel_altera(chan_GA2LS_LS9_genotype, LocalPopNext[entity_ls9][gene_cnt & MASK_GENOTYPE]);
+*/
+				write_pipe_block(chan_GA2LS_LS1_genotype, &LocalPopNext[entity_ls1][gene_cnt & MASK_GENOTYPE]);
+				write_pipe_block(chan_GA2LS_LS2_genotype, &LocalPopNext[entity_ls2][gene_cnt & MASK_GENOTYPE]);
+				write_pipe_block(chan_GA2LS_LS3_genotype, &LocalPopNext[entity_ls3][gene_cnt & MASK_GENOTYPE]);
+				write_pipe_block(chan_GA2LS_LS4_genotype, &LocalPopNext[entity_ls4][gene_cnt & MASK_GENOTYPE]);
+				write_pipe_block(chan_GA2LS_LS5_genotype, &LocalPopNext[entity_ls5][gene_cnt & MASK_GENOTYPE]);
+				write_pipe_block(chan_GA2LS_LS6_genotype, &LocalPopNext[entity_ls6][gene_cnt & MASK_GENOTYPE]);
+				write_pipe_block(chan_GA2LS_LS7_genotype, &LocalPopNext[entity_ls7][gene_cnt & MASK_GENOTYPE]);
+				write_pipe_block(chan_GA2LS_LS8_genotype, &LocalPopNext[entity_ls8][gene_cnt & MASK_GENOTYPE]);
+				write_pipe_block(chan_GA2LS_LS9_genotype, &LocalPopNext[entity_ls9][gene_cnt & MASK_GENOTYPE]);
 			}
+/*
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
+*/
 
 			float2 evalenergy_tmp1;
 			float2 evalenergy_tmp2;
@@ -669,31 +746,58 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			)
 			{
 				if (ls1_done == false) {
+/*
 					evalenergy_tmp1 = read_channel_nb_altera(chan_LS2GA_LS1_evalenergy, &ls1_done);
+*/
+					ls1_done = read_pipe(chan_LS2GA_LS1_evalenergy, &evalenergy_tmp1);
 				}
 				else if (ls2_done == false) {
+/*
 					evalenergy_tmp2 = read_channel_nb_altera(chan_LS2GA_LS2_evalenergy, &ls2_done);
+*/
+					ls2_done = read_pipe(chan_LS2GA_LS2_evalenergy, &evalenergy_tmp2);
 				}
 				else if (ls3_done == false) {
+/*
 					evalenergy_tmp3 = read_channel_nb_altera(chan_LS2GA_LS3_evalenergy, &ls3_done);
+*/
+					ls3_done = read_pipe(chan_LS2GA_LS3_evalenergy, &evalenergy_tmp3);
 				}
 				else if (ls4_done == false) {
+/*
 					evalenergy_tmp4 = read_channel_nb_altera(chan_LS2GA_LS4_evalenergy, &ls4_done);
+*/
+					ls4_done = read_pipe(chan_LS2GA_LS4_evalenergy, &evalenergy_tmp4);
 				}
 				else if (ls5_done == false) {
+/*
 					evalenergy_tmp5 = read_channel_nb_altera(chan_LS2GA_LS5_evalenergy, &ls5_done);
+*/
+					ls5_done = read_pipe(chan_LS2GA_LS5_evalenergy, &evalenergy_tmp5);
 				}
 				else if (ls6_done == false) {
+/*
 					evalenergy_tmp6 = read_channel_nb_altera(chan_LS2GA_LS6_evalenergy, &ls6_done);
+*/
+					ls6_done = read_pipe(chan_LS2GA_LS6_evalenergy, &evalenergy_tmp6);
 				}
 				else if (ls7_done == false) {
+/*
 					evalenergy_tmp7 = read_channel_nb_altera(chan_LS2GA_LS7_evalenergy, &ls7_done);
+*/
+					ls7_done = read_pipe(chan_LS2GA_LS7_evalenergy, &evalenergy_tmp7);
 				}
 				else if (ls8_done == false) {
+/*
 					evalenergy_tmp8 = read_channel_nb_altera(chan_LS2GA_LS8_evalenergy, &ls8_done);
+*/
+					ls8_done = read_pipe(chan_LS2GA_LS8_evalenergy, &evalenergy_tmp8);
 				}
 				else if (ls9_done == false) {
+/*
 					evalenergy_tmp9 = read_channel_nb_altera(chan_LS2GA_LS9_evalenergy, &ls9_done);
+*/
+					ls9_done = read_pipe(chan_LS2GA_LS9_evalenergy, &evalenergy_tmp9);
 				}
 			}
 		
@@ -733,6 +837,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 
 			#pragma ivdep
 			for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
+/*
 				LocalPopNext[entity_ls1][gene_cnt & MASK_GENOTYPE] = read_channel_altera(chan_LS2GA_LS1_genotype);
 				LocalPopNext[entity_ls2][gene_cnt & MASK_GENOTYPE] = read_channel_altera(chan_LS2GA_LS2_genotype);
 				LocalPopNext[entity_ls3][gene_cnt & MASK_GENOTYPE] = read_channel_altera(chan_LS2GA_LS3_genotype);
@@ -742,6 +847,16 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 				LocalPopNext[entity_ls7][gene_cnt & MASK_GENOTYPE] = read_channel_altera(chan_LS2GA_LS7_genotype);
 				LocalPopNext[entity_ls8][gene_cnt & MASK_GENOTYPE] = read_channel_altera(chan_LS2GA_LS8_genotype);
 				LocalPopNext[entity_ls9][gene_cnt & MASK_GENOTYPE] = read_channel_altera(chan_LS2GA_LS9_genotype);
+*/
+				read_pipe_block(chan_LS2GA_LS1_genotype, &LocalPopNext[entity_ls1][gene_cnt & MASK_GENOTYPE]);
+				read_pipe_block(chan_LS2GA_LS2_genotype, &LocalPopNext[entity_ls2][gene_cnt & MASK_GENOTYPE]);
+				read_pipe_block(chan_LS2GA_LS3_genotype, &LocalPopNext[entity_ls3][gene_cnt & MASK_GENOTYPE]);
+				read_pipe_block(chan_LS2GA_LS4_genotype, &LocalPopNext[entity_ls4][gene_cnt & MASK_GENOTYPE]);
+				read_pipe_block(chan_LS2GA_LS5_genotype, &LocalPopNext[entity_ls5][gene_cnt & MASK_GENOTYPE]);
+				read_pipe_block(chan_LS2GA_LS6_genotype, &LocalPopNext[entity_ls6][gene_cnt & MASK_GENOTYPE]);
+				read_pipe_block(chan_LS2GA_LS7_genotype, &LocalPopNext[entity_ls7][gene_cnt & MASK_GENOTYPE]);
+				read_pipe_block(chan_LS2GA_LS8_genotype, &LocalPopNext[entity_ls8][gene_cnt & MASK_GENOTYPE]);
+				read_pipe_block(chan_LS2GA_LS9_genotype, &LocalPopNext[entity_ls9][gene_cnt & MASK_GENOTYPE]);
 			}
 
 			ls_eval_cnt += eval_tmp1 + eval_tmp2 + eval_tmp3 + eval_tmp4 + eval_tmp5 + eval_tmp6 + eval_tmp7 + eval_tmp8 + eval_tmp9;
@@ -778,6 +893,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 	// ------------------------------------------------------------------
 
 	// Turn off PRNG kernels
+/*	
 	write_channel_altera(chan_Arbiter_BT_ushort_float_off,  false);
 	write_channel_altera(chan_Arbiter_GG_uchar_off, 	false);
 	write_channel_altera(chan_Arbiter_GG_float_off, 	false);
@@ -791,9 +907,27 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 	write_channel_altera(chan_Arbiter_LS7_float_off, 	false);
 	write_channel_altera(chan_Arbiter_LS8_float_off, 	false);
 	write_channel_altera(chan_Arbiter_LS9_float_off, 	false);
+*/
+	const bool tmp_bool_false = false;
+	write_pipe_block(chan_Arbiter_BT_ushort_float_off,  	&tmp_bool_false);
+	write_pipe_block(chan_Arbiter_GG_uchar_off, 		&tmp_bool_false);
+	write_pipe_block(chan_Arbiter_GG_float_off, 		&tmp_bool_false);
+	write_pipe_block(chan_Arbiter_LS123_ushort_off,  	&tmp_bool_false);
+	write_pipe_block(chan_Arbiter_LS_float_off, 		&tmp_bool_false);
+	write_pipe_block(chan_Arbiter_LS2_float_off, 		&tmp_bool_false);
+	write_pipe_block(chan_Arbiter_LS3_float_off, 		&tmp_bool_false);
+	write_pipe_block(chan_Arbiter_LS4_float_off, 		&tmp_bool_false);
+	write_pipe_block(chan_Arbiter_LS5_float_off, 		&tmp_bool_false);
+	write_pipe_block(chan_Arbiter_LS6_float_off, 		&tmp_bool_false);
+	write_pipe_block(chan_Arbiter_LS7_float_off, 		&tmp_bool_false);
+	write_pipe_block(chan_Arbiter_LS8_float_off, 		&tmp_bool_false);
+	write_pipe_block(chan_Arbiter_LS9_float_off, 		&tmp_bool_false);
+/*
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
+*/
 
 	// Turn off LS kernels
+/*
 	write_channel_altera(chan_GA2LS_Off1_active,  		false);
 	write_channel_altera(chan_GA2LS_Off2_active,  		false);
 	write_channel_altera(chan_GA2LS_Off3_active,  		false);
@@ -803,11 +937,28 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 	write_channel_altera(chan_GA2LS_Off7_active,  		false);
 	write_channel_altera(chan_GA2LS_Off8_active,  		false);
 	write_channel_altera(chan_GA2LS_Off9_active,  		false);
+*/
+	write_pipe_block(chan_GA2LS_Off1_active,  		&tmp_bool_false);
+	write_pipe_block(chan_GA2LS_Off2_active,  		&tmp_bool_false);
+	write_pipe_block(chan_GA2LS_Off3_active,  		&tmp_bool_false);
+	write_pipe_block(chan_GA2LS_Off4_active,  		&tmp_bool_false);
+	write_pipe_block(chan_GA2LS_Off5_active,  		&tmp_bool_false);
+	write_pipe_block(chan_GA2LS_Off6_active,  		&tmp_bool_false);
+	write_pipe_block(chan_GA2LS_Off7_active,  		&tmp_bool_false);
+	write_pipe_block(chan_GA2LS_Off8_active,  		&tmp_bool_false);
+	write_pipe_block(chan_GA2LS_Off9_active,  		&tmp_bool_false);
+/*
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
+*/
 
 	// Turn off IGL_Arbiter, Conform, InterE, IntraE kernerls
+/*
 	write_channel_altera(chan_IGLArbiter_Off,     		false);
+*/
+	write_pipe_block(chan_IGLArbiter_Off,     		&tmp_bool_false);
+/*
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
+*/
 
 	// Write final pop & energies back to FPGA-board DDRs
 	for (ushort pop_cnt=0;pop_cnt<DockConst_pop_size; pop_cnt++) { 	
@@ -848,6 +999,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------
 
+/*
 #include "Krnl_PRNG.cl"
 
 #include "Krnl_LS.cl"
@@ -864,4 +1016,4 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 #include "Krnl_Conform.cl"
 #include "Krnl_InterE.cl"
 #include "Krnl_IntraE.cl"
-
+*/
