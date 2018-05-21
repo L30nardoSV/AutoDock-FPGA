@@ -31,8 +31,12 @@ while(valid) {
 	bool valid_energy = false;
 
 	while( (valid_active == false) && (valid_energy == false)) {
+/*
 		active 	       = read_channel_nb_altera(chan_GA2LS_Off3_active, &valid_active);
 		current_energy = read_channel_nb_altera(chan_GA2LS_LS3_energy,  &valid_energy);
+*/
+		valid_active = read_pipe(chan_GA2LS_Off3_active, &active);
+		valid_energy = read_pipe(chan_GA2LS_LS3_energy,  &current_energy);
 	}
 	valid = active || valid_energy;
 
@@ -46,10 +50,18 @@ while(valid) {
 
 		for (uchar i=0; i<DockConst_num_of_genes; i++) {
 			#if defined (FIXED_POINT_LS3)
+/*
 			float tmp_gene = read_channel_altera(chan_GA2LS_LS3_genotype);
+*/
+			float tmp_gene;
+			read_pipe_block(chan_GA2LS_LS3_genotype, &tmp_gene);
+
 			genotype [i] = fixedpt_fromfloat(tmp_gene);
 			#else
+/*
 			genotype [i] = read_channel_altera(chan_GA2LS_LS3_genotype);
+*/
+			read_pipe_block(chan_GA2LS_LS3_genotype, &genotype [i]);
 			#endif
 		}
 
@@ -119,18 +131,33 @@ while(valid) {
 			// Not completely strict as the (iteration_cnt < DockConst_max_num_of_iters) is ignored
 			// In practice, rho condition dominates most of the cases
 			#if defined (FIXED_POINT_LS3)
+/*
 			write_channel_altera(chan_LS2Arbiter_LS3_end, (fixpt_rho < DockConst_rho_lower_bound)?true:false);
+*/
+			bool tmp_bool = (fixpt_rho < DockConst_rho_lower_bound)?true:false;
+			write_pipe_block(chan_LS2Arbiter_LS3_end, &tmp_bool);
 			#else
+/*
 			write_channel_altera(chan_LS2Arbiter_LS3_end, (rho < DockConst_rho_lower_bound)?true:false);
+*/
+			bool tmp_bool =  (rho < DockConst_rho_lower_bound)?true:false;
+			write_pipe_block(chan_LS2Arbiter_LS3_end, &tmp_bool);
 			#endif
+/*
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
+*/
 
 			// new random deviate
 			// rho is the deviation of the uniform distribution
 			for (uchar i=0; i<DockConst_num_of_genes; i++) {
-	
+/*	
 				float tmp_prng = read_channel_altera(chan_PRNG2GA_LS3_float_prng);
+*/
+				float tmp_prng;
+				read_pipe_block(chan_PRNG2GA_LS3_float_prng, &tmp_prng);
+/*
 				mem_fence(CLK_CHANNEL_MEM_FENCE);
+*/
 
 				#if defined (FIXED_POINT_LS3)
 				fixedpt fixpt_tmp_prng = *(fixedpt*) &tmp_prng;
@@ -159,7 +186,10 @@ while(valid) {
 					  else      { fixpt_tmp3 = fixedpt_map_angle_360(fixpt_tmp3); }}
 
 				entity_possible_new_genotype [i] = fixpt_tmp3;
+/*
 				write_channel_altera(chan_LS2Conf_LS3_genotype, fixedpt_tofloat(fixpt_tmp3));
+*/
+				write_pipe_block(chan_LS2Conf_LS3_genotype, &fixedpt_tofloat(fixpt_tmp3));
 
 				#else
 				// tmp1 is genotype_deviate
@@ -185,7 +215,10 @@ while(valid) {
 					  else      { tmp3 = map_angle_360(tmp3);}}
 
 				entity_possible_new_genotype [i] = tmp3;
+/*
 				write_channel_altera(chan_LS2Conf_LS3_genotype, tmp3);
+*/
+				write_pipe_block(chan_LS2Conf_LS3_genotype, &tmp3);
 				#endif
 
 				#if defined (DEBUG_KRNL_LS3)
@@ -201,10 +234,16 @@ while(valid) {
 			bool inter_valid = false;
 			while( (intra_valid == false) || (inter_valid == false)) {
 				if (intra_valid == false) {
+/*
 					energyIA_LS_rx = read_channel_nb_altera(chan_Intrae2StoreLS_LS3_intrae, &intra_valid);
+*/
+					intra_valid = read_pipe(chan_Intrae2StoreLS_LS3_intrae, &energyIA_LS_rx);
 				}
 				else if (inter_valid == false) {
+/*
 					energyIE_LS_rx = read_channel_nb_altera(chan_Intere2StoreLS_LS3_intere, &inter_valid);
+*/
+					inter_valid = read_pipe(chan_Intere2StoreLS_LS3_intere, &energyIE_LS_rx);
 				}
 			}
 
@@ -293,14 +332,25 @@ while(valid) {
 		for (uchar i=0; i<DockConst_num_of_genes; i++) {
 			if (i == 0) {
 				float2 evalenergy  = {*(float*)&LS_eval, current_energy};
+/*
 				write_channel_altera(chan_LS2GA_LS3_evalenergy, evalenergy);
+*/
+				write_pipe_block(chan_LS2GA_LS3_evalenergy, &evalenergy);
 			}
+/*
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
+*/
 
 			#if defined (FIXED_POINT_LS3)
+/*
 			write_channel_altera(chan_LS2GA_LS3_genotype, fixedpt_tofloat(genotype [i]));
+*/
+			write_pipe_block(chan_LS2GA_LS3_genotype, &fixedpt_tofloat(genotype [i]));
 			#else
+/*
 			write_channel_altera(chan_LS2GA_LS3_genotype, genotype [i]);
+*/
+			write_pipe_block(chan_LS2GA_LS3_genotype, &genotype [i]);
 			#endif
 		}
 

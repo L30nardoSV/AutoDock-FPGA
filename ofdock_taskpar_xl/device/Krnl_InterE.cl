@@ -68,14 +68,25 @@ while(active) {
 	// Wait for ligand atomic coordinates in channel
 	// --------------------------------------------------------------
 
+/*
 	char2 actmode = read_channel_altera(chan_Conf2Intere_actmode);
+*/
+	char2 actmode;
+	read_pipe_block(chan_Conf2Intere_actmode, &actmode);
+/*
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
+*/
 
 	active = actmode.x;
 	mode   = actmode.y;
 
 	for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt+=2) {
+/*
 		float8 tmp = read_channel_altera(chan_Conf2Intere_xyz);
+*/
+		float8 tmp;
+		read_pipe_block(chan_Conf2Intere_xyz, &tmp);
+
 		float3 tmp1 = {tmp.s0, tmp.s1, tmp.s2};
 		float3 tmp2 = {tmp.s4, tmp.s5, tmp.s6};
 		loc_coords[pipe_cnt] = tmp1;
@@ -458,6 +469,7 @@ while(active) {
 	#endif
 
 	switch (mode) {
+/*
 		case 'I':  write_channel_altera(chan_Intere2StoreIC_intere, final_interE);     break;
 		case 'G':  write_channel_altera(chan_Intere2StoreGG_intere, final_interE);     break;
 		case 0x01: write_channel_altera(chan_Intere2StoreLS_LS1_intere, final_interE); break;
@@ -469,6 +481,18 @@ while(active) {
 		case 0x07: write_channel_altera(chan_Intere2StoreLS_LS7_intere, final_interE); break;
 		case 0x08: write_channel_altera(chan_Intere2StoreLS_LS8_intere, final_interE); break;
 		case 0x09: write_channel_altera(chan_Intere2StoreLS_LS9_intere, final_interE); break;
+*/
+		case 'I':  write_pipe_block(chan_Intere2StoreIC_intere, &final_interE);     break;
+		case 'G':  write_pipe_block(chan_Intere2StoreGG_intere, &final_interE);     break;
+		case 0x01: write_pipe_block(chan_Intere2StoreLS_LS1_intere, &final_interE); break;
+		case 0x02: write_pipe_block(chan_Intere2StoreLS_LS2_intere, &final_interE); break;
+		case 0x03: write_pipe_block(chan_Intere2StoreLS_LS3_intere, &final_interE); break;
+		case 0x04: write_pipe_block(chan_Intere2StoreLS_LS4_intere, &final_interE); break;
+		case 0x05: write_pipe_block(chan_Intere2StoreLS_LS5_intere, &final_interE); break;
+		case 0x06: write_pipe_block(chan_Intere2StoreLS_LS6_intere, &final_interE); break;
+		case 0x07: write_pipe_block(chan_Intere2StoreLS_LS7_intere, &final_interE); break;
+		case 0x08: write_pipe_block(chan_Intere2StoreLS_LS8_intere, &final_interE); break;
+		case 0x09: write_pipe_block(chan_Intere2StoreLS_LS9_intere, &final_interE); break;
 	}
 	// --------------------------------------------------------------
  	

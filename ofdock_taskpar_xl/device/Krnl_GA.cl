@@ -999,7 +999,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------
 
-/*
+
 #include "Krnl_PRNG.cl"
 
 #include "Krnl_LS.cl"
@@ -1016,4 +1016,3 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 #include "Krnl_Conform.cl"
 #include "Krnl_InterE.cl"
 #include "Krnl_IntraE.cl"
-*/
