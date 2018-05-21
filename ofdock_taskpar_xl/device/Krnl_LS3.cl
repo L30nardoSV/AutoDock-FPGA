@@ -25,12 +25,21 @@ void Krnl_LS3(
 while(valid) {
 
 	bool active;
+/*
 	bool valid_active = false;
+*/
+	int valid_active= 1;
 
 	float current_energy;
+/*
 	bool valid_energy = false;
+*/
+	int valid_energy = 1;	
 
+/*
 	while( (valid_active == false) && (valid_energy == false)) {
+*/
+	while( (valid_active != 0) && (valid_energy != 0)) {
 /*
 		active 	       = read_channel_nb_altera(chan_GA2LS_Off3_active, &valid_active);
 		current_energy = read_channel_nb_altera(chan_GA2LS_LS3_energy,  &valid_energy);
@@ -38,7 +47,10 @@ while(valid) {
 		valid_active = read_pipe(chan_GA2LS_Off3_active, &active);
 		valid_energy = read_pipe(chan_GA2LS_LS3_energy,  &current_energy);
 	}
+/*
 	valid = active || valid_energy;
+*/
+	valid = active || (valid_energy == 0);
 
 	if (valid) {
 
@@ -230,16 +242,30 @@ while(valid) {
 
 			float energyIA_LS_rx;
 			float energyIE_LS_rx;
+/*
 			bool intra_valid = false;
 			bool inter_valid = false;
+*/
+			int intra_valid = 1;
+			int inter_valid = 1;
+
+/*
 			while( (intra_valid == false) || (inter_valid == false)) {
+*/
+			while( (intra_valid != 0) || (inter_valid != 0)) {
+/*
 				if (intra_valid == false) {
+*/
+				if (intra_valid != 0) {
 /*
 					energyIA_LS_rx = read_channel_nb_altera(chan_Intrae2StoreLS_LS3_intrae, &intra_valid);
 */
 					intra_valid = read_pipe(chan_Intrae2StoreLS_LS3_intrae, &energyIA_LS_rx);
 				}
+/*
 				else if (inter_valid == false) {
+*/
+				else if (inter_valid != 0) {
 /*
 					energyIE_LS_rx = read_channel_nb_altera(chan_Intere2StoreLS_LS3_intere, &inter_valid);
 */

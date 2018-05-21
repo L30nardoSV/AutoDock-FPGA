@@ -28,6 +28,7 @@ void Krnl_IGL_Arbiter(/*unsigned char DockConst_num_of_genes*/) {
 	*/
 
 while(active) {
+/*
 	bool Off_valid     = false;
 	bool IC_valid	   = false;
 	bool GG_valid	   = false;
@@ -40,6 +41,19 @@ while(active) {
 	bool LS7_end_valid = false;
 	bool LS8_end_valid = false;
 	bool LS9_end_valid = false;
+*/
+	int Off_valid     = 1;
+	int IC_valid	  = 1;
+	int GG_valid	  = 1;
+	int LS1_end_valid = 1;
+	int LS2_end_valid = 1;
+	int LS3_end_valid = 1;
+	int LS4_end_valid = 1;
+	int LS5_end_valid = 1;
+	int LS6_end_valid = 1;
+	int LS7_end_valid = 1;
+	int LS8_end_valid = 1;
+	int LS9_end_valid = 1;
 
 	bool Off_active;
 	bool IC_active;
@@ -54,6 +68,7 @@ while(active) {
 	bool LS8_end_active;
 	bool LS9_end_active;
 
+/*
 	while (
 		(Off_valid     == false) &&
 		(IC_valid      == false) &&  
@@ -67,6 +82,20 @@ while(active) {
 		(LS7_end_valid == false) &&
 		(LS8_end_valid == false) &&
 		(LS9_end_valid == false) 
+*/
+	while (
+		(Off_valid     != 0) &&
+		(IC_valid      != 0) &&  
+		(GG_valid      != 0) && 
+		(LS1_end_valid != 0) &&
+		(LS2_end_valid != 0) &&
+		(LS3_end_valid != 0) &&
+		(LS4_end_valid != 0) &&
+		(LS5_end_valid != 0) &&
+		(LS6_end_valid != 0) &&
+		(LS7_end_valid != 0) &&
+		(LS8_end_valid != 0) &&
+		(LS9_end_valid != 0) 
 	){
 /*
 		Off_active     = read_channel_nb_altera(chan_IGLArbiter_Off,     &Off_valid);
@@ -97,7 +126,11 @@ while(active) {
 	}
 
 	uchar bound_tmp = 0;
+/*
 	active = Off_valid ? 0x00 : 0x01;
+*/
+	active = (Off_valid == 0)? 0x00 : 0x01;
+
 	char mode [9];	// mode for all LS
 
 	// Determine "mode" value
@@ -1322,8 +1355,11 @@ while(active) {
 
 	// Send "mode" to Conform
 	for (uchar j=0; j<bound; j++) {
-
+/*
 		char mode_tmp = Off_valid? 0x00: IC_valid? 'I': GG_valid? 'G': mode[j];
+*/
+		char mode_tmp = (Off_valid == 0)? 0x00: (IC_valid == 0)? 'I': (GG_valid == 0)? 'G': mode[j];
+
 		char2 actmode = {active, mode_tmp};
 /*
 		write_channel_altera(chan_IGL2Conform_actmode, actmode);

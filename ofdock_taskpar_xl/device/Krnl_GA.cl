@@ -347,16 +347,31 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 		// Read energy
 		float energyIA_IC_rx;
 		float energyIE_IC_rx;
+/*
 		bool intra_valid = false;
 		bool inter_valid = false;
+*/
+		int intra_valid = 1;
+		int inter_valid = 1;	
+/*
 		while( (intra_valid == false) || (inter_valid == false)) {
+*/
+		while( (intra_valid != 0) || (inter_valid != 0)) {
+
+/*
 			if (intra_valid == false) {
+*/
+			if (intra_valid != 0) {
+
 /*
 				energyIA_IC_rx = read_channel_nb_altera(chan_Intrae2StoreIC_intrae, &intra_valid);
 */
 				intra_valid = read_pipe(chan_Intrae2StoreIC_intrae, &energyIA_IC_rx);
 			}
+/*
 			else if (inter_valid == false) {
+*/
+			else if (inter_valid != 0) {
 /*
 				energyIE_IC_rx = read_channel_nb_altera(chan_Intere2StoreIC_intere, &inter_valid);
 */
@@ -613,16 +628,30 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			// Read energy
 			float energyIA_GG_rx;
 			float energyIE_GG_rx;
+/*
 			bool intra_valid = false;
 			bool inter_valid = false;
+*/
+			int intra_valid = 1;
+			int inter_valid = 1;
+
+/*
 			while( (intra_valid == false) || (inter_valid == false)) {
+*/
+			while( (intra_valid != 0) || (inter_valid != 0)) {
+/*
 				if (intra_valid == false) {
+*/
+				if (intra_valid != 0) {
 /*
 					energyIA_GG_rx = read_channel_nb_altera(chan_Intrae2StoreGG_intrae, &intra_valid);
 */
 					intra_valid = read_pipe(chan_Intrae2StoreGG_intrae, &energyIA_GG_rx);
 				}
+/*
 				else if (inter_valid == false) {
+*/
+				else if (inter_valid != 0) {
 /*
 					energyIE_GG_rx = read_channel_nb_altera(chan_Intere2StoreGG_intere, &inter_valid);
 */
@@ -724,6 +753,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			float2 evalenergy_tmp7;
 			float2 evalenergy_tmp8;
 			float2 evalenergy_tmp9;
+/*
 			bool ls1_done = false;
 			bool ls2_done = false;
 			bool ls3_done = false;
@@ -733,7 +763,18 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			bool ls7_done = false;
 			bool ls8_done = false;
 			bool ls9_done = false;  
-  
+*/
+			int ls1_done = 1;
+			int ls2_done = 1;
+			int ls3_done = 1;
+		 	int ls4_done = 1;
+			int ls5_done = 1;
+			int ls6_done = 1;
+			int ls7_done = 1;
+			int ls8_done = 1;
+			int ls9_done = 1;  
+
+/*
 			while( (ls1_done == false) || 
 			       (ls2_done == false) || 
 			       (ls3_done == false) || 
@@ -743,57 +784,94 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			       (ls7_done == false) || 
 			       (ls8_done == false) || 
 			       (ls9_done == false) 
+*/
+			while( (ls1_done != 0) || 
+			       (ls2_done != 0) || 
+			       (ls3_done != 0) || 
+			       (ls4_done != 0) || 
+			       (ls5_done != 0) ||
+			       (ls6_done != 0) || 
+			       (ls7_done != 0) || 
+			       (ls8_done != 0) || 
+			       (ls9_done != 0) 
 			)
 			{
+/*
 				if (ls1_done == false) {
+*/
+				if (ls1_done != 0) {
 /*
 					evalenergy_tmp1 = read_channel_nb_altera(chan_LS2GA_LS1_evalenergy, &ls1_done);
 */
 					ls1_done = read_pipe(chan_LS2GA_LS1_evalenergy, &evalenergy_tmp1);
 				}
+/*
 				else if (ls2_done == false) {
+*/
+				else if (ls2_done != 0) {
 /*
 					evalenergy_tmp2 = read_channel_nb_altera(chan_LS2GA_LS2_evalenergy, &ls2_done);
 */
 					ls2_done = read_pipe(chan_LS2GA_LS2_evalenergy, &evalenergy_tmp2);
 				}
+/*
 				else if (ls3_done == false) {
+*/
+				else if (ls3_done != 0) {
 /*
 					evalenergy_tmp3 = read_channel_nb_altera(chan_LS2GA_LS3_evalenergy, &ls3_done);
 */
 					ls3_done = read_pipe(chan_LS2GA_LS3_evalenergy, &evalenergy_tmp3);
 				}
+/*
 				else if (ls4_done == false) {
+*/
+				else if (ls4_done != 0) {
 /*
 					evalenergy_tmp4 = read_channel_nb_altera(chan_LS2GA_LS4_evalenergy, &ls4_done);
 */
 					ls4_done = read_pipe(chan_LS2GA_LS4_evalenergy, &evalenergy_tmp4);
 				}
+/*
 				else if (ls5_done == false) {
+*/
+				else if (ls5_done != 0) {
 /*
 					evalenergy_tmp5 = read_channel_nb_altera(chan_LS2GA_LS5_evalenergy, &ls5_done);
 */
 					ls5_done = read_pipe(chan_LS2GA_LS5_evalenergy, &evalenergy_tmp5);
 				}
+/*
 				else if (ls6_done == false) {
+*/
+				else if (ls6_done != 0) {
 /*
 					evalenergy_tmp6 = read_channel_nb_altera(chan_LS2GA_LS6_evalenergy, &ls6_done);
 */
 					ls6_done = read_pipe(chan_LS2GA_LS6_evalenergy, &evalenergy_tmp6);
 				}
+/*
 				else if (ls7_done == false) {
+*/
+				else if (ls7_done != 0) {
 /*
 					evalenergy_tmp7 = read_channel_nb_altera(chan_LS2GA_LS7_evalenergy, &ls7_done);
 */
 					ls7_done = read_pipe(chan_LS2GA_LS7_evalenergy, &evalenergy_tmp7);
 				}
+/*
 				else if (ls8_done == false) {
+*/
+				else if (ls8_done != 0) {
 /*
 					evalenergy_tmp8 = read_channel_nb_altera(chan_LS2GA_LS8_evalenergy, &ls8_done);
 */
 					ls8_done = read_pipe(chan_LS2GA_LS8_evalenergy, &evalenergy_tmp8);
 				}
+/*
 				else if (ls9_done == false) {
+*/
+				else if (ls9_done != 0) {
 /*
 					evalenergy_tmp9 = read_channel_nb_altera(chan_LS2GA_LS9_evalenergy, &ls9_done);
 */
