@@ -1,1 +1,0 @@
-14 a10gx 0 0 1 0 2147483648 0 1 hello_world 0 128 0 0 1 1 0 3 0 0 4 2 1 8 0 0 4 1 0 Thread\40#%u:\40Hello\40from\40Altera's\40OpenCL\40Compiler!\15 0 0 0 0 2147483647 3                                                                                000000A9
