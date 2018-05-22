@@ -12,7 +12,10 @@ float sqrt_custom(const float x)
 // contributor-pairs.
 // Originally from: processligand.c
 // --------------------------------------------------------------------------
+/*
 __kernel __attribute__ ((max_global_work_dim(0)))
+*/
+__kernel __attribute__ ((reqd_work_group_size(1,1,1)))
 void Krnl_IntraE(
  	     __constant     float* restrict KerConstStatic_atom_charges_const,
  	     __constant     char*  restrict KerConstStatic_atom_types_const,

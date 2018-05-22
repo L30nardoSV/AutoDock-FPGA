@@ -1,6 +1,9 @@
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------
+/*
 __kernel __attribute__ ((max_global_work_dim(0)))
+*/
+__kernel __attribute__ ((reqd_work_group_size(1,1,1)))
 void Krnl_LS3(
 		unsigned short            DockConst_max_num_of_iters,
 		#if defined (FIXED_POINT_LS3)

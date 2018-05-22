@@ -6,7 +6,10 @@
 // a very high value will be added to the current energy as a penalty. 
 // Originally from: processligand.c
 // --------------------------------------------------------------------------
+/*
 __kernel __attribute__ ((max_global_work_dim(0)))
+*/
+__kernel __attribute__ ((reqd_work_group_size(1,1,1)))
 void Krnl_InterE(
              __global const float* restrict GlobFgrids,
 
