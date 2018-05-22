@@ -46,6 +46,7 @@ void Krnl_IntraE(
 while(active) {
 	char mode;
 
+/*
 	float3 __attribute__ ((
 			      memory,
 			      numbanks(2),
@@ -54,6 +55,8 @@ while(active) {
 			      numreadports(2),
 			      numwriteports(1)
 			    )) loc_coords[MAX_NUM_OF_ATOMS];
+*/
+	float3 loc_coords[MAX_NUM_OF_ATOMS];
 
 	//printf("BEFORE In INTRA CHANNEL\n");
 	// --------------------------------------------------------------

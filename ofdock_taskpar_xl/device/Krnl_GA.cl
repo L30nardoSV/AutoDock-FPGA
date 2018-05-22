@@ -265,7 +265,8 @@ fixedpt fixedpt_map_angle_360(fixedpt angle)
 __kernel __attribute__ ((max_global_work_dim(0)))
 */
 __kernel __attribute__ ((reqd_work_group_size(1,1,1)))
-void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
+void Krnl_GA(
+	     __global       float*           restrict GlobPopulationCurrent,
 	     __global       float*           restrict GlobEnergyCurrent,
 	     #if defined(SINGLE_COPY_POP_ENE)
    	     __global       unsigned int*    restrict GlobEvals_performed,
@@ -402,21 +403,28 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 		//float LocalEneNext[MAX_POPSIZE];
 
 		// This configuration reduces logic and does not increase block RAM usage
+/*
 		float __attribute__ ((
 				       memory,
 		   		       numbanks(4),
 			               bankwidth(32),
 			              )) LocalPopNext[MAX_POPSIZE][ACTUAL_GENOTYPE_LENGTH];
+*/
+		float LocalPopNext[MAX_POPSIZE][ACTUAL_GENOTYPE_LENGTH];
 
+/*
 		float __attribute__ ((
 				       memory,
 		   		       numbanks(4),
 			               bankwidth(4),
 			              )) LocalEneNext[MAX_POPSIZE];
+*/
+		float LocalEneNext[MAX_POPSIZE];
 
 		// ------------------------------------------------------------------
 		// Genetic Generation (GG)
 		// ------------------------------------------------------------------
+/*
 		float __attribute__ ((
 				       memory,
 		   		       numbanks(1),
@@ -425,6 +433,8 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
  			               numreadports(6),
 			               numwriteports(1)
 			              )) loc_energies[MAX_POPSIZE];
+*/
+		float loc_energies[MAX_POPSIZE];
 
 		// Shift register to reduce II (initially II=6) of best entity for-loop 
 		float shift_reg[SHIFT_REG_SIZE];
@@ -1081,7 +1091,6 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------
-
 
 #include "Krnl_PRNG.cl"
 

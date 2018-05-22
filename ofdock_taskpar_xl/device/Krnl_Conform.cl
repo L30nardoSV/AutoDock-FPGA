@@ -60,6 +60,7 @@ while(active) {
 	fixedpt  theta;
 	fixedpt  genrotangle;
 	fixedpt3 genotype_xyz;
+/*
 	fixedpt3 __attribute__ ((
 			      memory,
 			      numbanks(1),
@@ -68,11 +69,14 @@ while(active) {
 			      numreadports(3),
 			      numwriteports(1)
 			    )) loc_coords [MAX_NUM_OF_ATOMS];
+*/
+	fixedpt3 loc_coords [MAX_NUM_OF_ATOMS];
 	#else
 	float  phi;
 	float  theta;
 	float  genrotangle;
 	float3 genotype_xyz;
+/*
 	float3 __attribute__ ((
 			      memory,
 			      numbanks(1),
@@ -81,6 +85,8 @@ while(active) {
 			      numreadports(3),
 			      numwriteports(1)
 			    )) loc_coords [MAX_NUM_OF_ATOMS];
+*/
+	float3 loc_coords [MAX_NUM_OF_ATOMS];
 	#endif
 
 /*
