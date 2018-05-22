@@ -587,30 +587,6 @@ helloworld_LDFLAGS=$(opencl_LDFLAGS)
 
 EXES=helloworld
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # Kernel
 #vector_addition_SRCS=./src/vector_addition.cl
 vector_addition_SRCS=./device/Krnl_GA.cl
@@ -629,3 +605,9 @@ check_XCLBINS=vector_addition
 CHECKS=check
 
 include $(COMMON_REPO)/utility/rules.mk
+
+# Automate test
+# "exe" and "xclbin" are rules from "rules.mk"
+test: 
+	XCL_EMULATION_MODE=sw_emu ./helloworld -ffile input/1stp/derived/1stp_protein.maps.fld -lfile input/1stp/derived/1stp_ligand.pdbqt
+	

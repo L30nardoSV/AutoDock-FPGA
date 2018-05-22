@@ -2215,10 +2215,12 @@ bool init() {
   }
 
   // Get the OpenCL platform.
-  //platform = findPlatform("Intel(R) FPGA"); // use it from aoc v16.1
-  platform = findPlatform("Altera SDK");      // works for harp2, i.e. v16.0 patched
+  //platform = findPlatform("Intel(R) FPGA"); 	// use it from aoc v16.1
+  //platform = findPlatform("Altera SDK");      // works for harp2, i.e. v16.0 patched
+  platform = findPlatform("Xilinx");      	// 
   if(platform == NULL) {
-    printf("ERROR: Unable to find Intel(R) FPGA OpenCL platform.\n");
+    //printf("ERROR: Unable to find Intel(R) FPGA OpenCL platform.\n");
+    printf("ERROR: Unable to find Xilinx - OpenCL platform.\n");
     return false;
   }
 
