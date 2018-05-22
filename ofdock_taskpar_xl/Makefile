@@ -614,7 +614,7 @@ EXES=helloworld
 # Kernel
 #vector_addition_SRCS=./src/vector_addition.cl
 vector_addition_SRCS=./device/Krnl_GA.cl
-
+#vector_addition_SRCS=$(wildcard ./device/*.cl)
 
 XOS=vector_addition
 

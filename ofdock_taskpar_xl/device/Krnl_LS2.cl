@@ -155,7 +155,7 @@ while(valid) {
 			write_channel_altera(chan_LS2Arbiter_LS2_end, (rho < DockConst_rho_lower_bound)?true:false);
 */
 			bool tmp_bool = (rho < DockConst_rho_lower_bound)?true:false;
-			write_pipe_block(chan_LS2Arbiter_LS2_end, tmp_bool);
+			write_pipe_block(chan_LS2Arbiter_LS2_end, &tmp_bool);
 			#endif
 /*
 			mem_fence(CLK_CHANNEL_MEM_FENCE);

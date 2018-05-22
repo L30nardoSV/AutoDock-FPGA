@@ -9,7 +9,9 @@ CXXFLAGS:=-Wall -O0 -g -std=c++14
 
 #https://www.xilinx.com/html_docs/xilinx2018_1/sdsoc_doc/nts1517252127891.html
 #CLFLAGS:= --xp "param:compiler.preserveHlsOutput=1" --xp "param:compiler.generateExtraRunData=true" -s
-CLFLAGS:= --xp "param:compiler.version=31" --xp "param:compiler.preserveHlsOutput=1" --xp "param:compiler.generateExtraRunData=true" -s
+#CLFLAGS:= --xp "param:compiler.version=31" --xp "param:compiler.preserveHlsOutput=1" --xp "param:compiler.generateExtraRunData=true" -s 
+CLFLAGS:= --xp "param:compiler.version=31" --xp "param:compiler.preserveHlsOutput=1" --xp "param:compiler.generateExtraRunData=true" -s -I./ -I../ -I./device
+
 
 ifneq ($(REPORT),none)
 CLFLAGS += --report $(REPORT)
