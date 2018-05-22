@@ -542,7 +542,8 @@ else
 endif
 
 FIPO_FLAG = $(FIPOCO_FLAG) \
-	    $(FIPOIE_FLAG) $(FIPOIA_FLAG) \
+	    $(FIPOIE_FLAG) \
+	    $(FIPOIA_FLAG) \
 	    $(FIPOLS1_FLAG) \
 	    $(FIPOLS2_FLAG) \
 	    $(FIPOLS3_FLAG) \
@@ -632,5 +633,5 @@ include $(COMMON_REPO)/utility/rules.mk
 # Automate test
 # "exe" and "xclbin" are rules from "rules.mk"
 emu: 
-	XCL_EMULATION_MODE=sw_emu ./hostbin -ffile input/1stp/derived/1stp_protein.maps.fld -lfile input/1stp/derived/1stp_ligand.pdbqt
+	XCL_EMULATION_MODE=sw_emu ./hostbin -ffile input/1stp/derived/1stp_protein.maps.fld -lfile input/1stp/derived/1stp_ligand.pdbqt -nrun 1 -nev 100 -lsit 10
 	

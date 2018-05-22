@@ -203,7 +203,8 @@ while(valid) {
 /*
 				write_channel_altera(chan_LS2Conf_LS2_genotype, fixedpt_tofloat(fixpt_tmp3));
 */
-				write_pipe_block(chan_LS2Conf_LS2_genotype, &fixedpt_tofloat(fixpt_tmp3));
+				float tmp_float = fixedpt_tofloat(fixpt_tmp3);
+				write_pipe_block(chan_LS2Conf_LS2_genotype, &tmp_float);
 
 				#else
 				// tmp1 is genotype_deviate
@@ -373,7 +374,8 @@ while(valid) {
 /*
 			write_channel_altera(chan_LS2GA_LS2_genotype, fixedpt_tofloat(genotype [i]));
 */
-			write_pipe_block(chan_LS2GA_LS2_genotype, &fixedpt_tofloat(genotype [i]));
+			float tmp_float = fixedpt_tofloat(genotype [i]);
+			write_pipe_block(chan_LS2GA_LS2_genotype, &tmp_float);
 			#else
 /*
 			write_channel_altera(chan_LS2GA_LS2_genotype, genotype [i]);

@@ -7,10 +7,162 @@ PROFILE ?= no
 # Default C++ Compiler Flags and xocc compiler flags
 CXXFLAGS:=-Wall -O0 -g -std=c++14
 
+# =============================
+# Reproduce result (remove randomness)
+# =============================
+REPRO=NO
+
+ifeq ($(REPRO), YES)
+	REP=-DREPRO
+else	
+	REP=
+endif
+ENABLE_KERNELS = $(K1)  $(K2)  $(K3)  $(K4)  $(K5)  $(K6)  $(K7)  $(K8)  $(K9)  $(K10) \
+		 $(K11) $(K12) $(K13) $(K14) $(K15) $(K16) $(K17) $(K18) $(K19) $(K20) \
+		 $(K21) $(K22) $(K23) $(K24) $(K25) $(K26) $(K27) $(K28) $(K29) $(K30) \
+		 $(K31) $(K32) $(K33) $(K34) $(K35) $(K36) $(K37) $(K38) $(K39) $(K40) \
+		 $(K41) $(K42) $(K43) $(K44) $(K45) $(K46) $(K47) $(K48)
+
+# =============================
+# Fixed-point
+# =============================
+# FIxed-POint COform flag (FIPOCO)
+FIXED_POINT_CONFORM=YES
+#FIXED_POINT_CONFORM=NO
+
+FIXED_POINT_INTERE=NO
+FIXED_POINT_INTRAE=NO
+
+FIXED_POINT_LS1=YES
+FIXED_POINT_LS2=YES
+FIXED_POINT_LS3=YES
+FIXED_POINT_LS4=YES
+FIXED_POINT_LS5=YES
+FIXED_POINT_LS6=YES
+FIXED_POINT_LS7=YES
+FIXED_POINT_LS8=YES
+FIXED_POINT_LS9=YES
+#FIXED_POINT_LS1=NO
+#FIXED_POINT_LS2=NO
+#FIXED_POINT_LS3=NO
+#FIXED_POINT_LS4=NO
+#FIXED_POINT_LS5=NO
+#FIXED_POINT_LS6=NO
+#FIXED_POINT_LS7=NO
+#FIXED_POINT_LS8=NO
+#FIXED_POINT_LS9=NO
+
+SINGLE_COPY_POP_ENE=YES
+
+SEPARATE_FGRID_INTERE=NO
+
+ifeq ($(FIXED_POINT_CONFORM), YES)
+	FIPOCO_FLAG=-DFIXED_POINT_CONFORM
+else	
+	FIPOCO_FLAG=
+endif
+
+ifeq ($(FIXED_POINT_INTERE), YES)
+	FIPOIE_FLAG=-DFIXED_POINT_INTERE
+else	
+	FIPOIE_FLAG=
+endif
+
+ifeq ($(FIXED_POINT_INTRAE), YES)
+	FIPOIA_FLAG=-DFIXED_POINT_INTRAE
+else	
+	FIPOIA_FLAG=
+endif
+
+ifeq ($(FIXED_POINT_LS1), YES)
+	FIPOLS1_FLAG=-DFIXED_POINT_LS1
+else	
+	FIPOLS1_FLAG=
+endif
+
+ifeq ($(FIXED_POINT_LS2), YES)
+	FIPOLS2_FLAG=-DFIXED_POINT_LS2
+else	
+	FIPOLS2_FLAG=
+endif
+
+ifeq ($(FIXED_POINT_LS3), YES)
+	FIPOLS3_FLAG=-DFIXED_POINT_LS3
+else	
+	FIPOLS3_FLAG=
+endif
+
+ifeq ($(FIXED_POINT_LS4), YES)
+	FIPOLS4_FLAG=-DFIXED_POINT_LS4
+else	
+	FIPOLS4_FLAG=
+endif
+
+ifeq ($(FIXED_POINT_LS5), YES)
+	FIPOLS5_FLAG=-DFIXED_POINT_LS5
+else	
+	FIPOLS5_FLAG=
+endif
+
+
+
+ifeq ($(FIXED_POINT_LS6), YES)
+	FIPOLS6_FLAG=-DFIXED_POINT_LS6
+else	
+	FIPOLS6_FLAG=
+endif
+
+ifeq ($(FIXED_POINT_LS7), YES)
+	FIPOLS7_FLAG=-DFIXED_POINT_LS7
+else	
+	FIPOLS7_FLAG=
+endif
+
+ifeq ($(FIXED_POINT_LS8), YES)
+	FIPOLS8_FLAG=-DFIXED_POINT_LS8
+else	
+	FIPOLS8_FLAG=
+endif
+
+ifeq ($(FIXED_POINT_LS9), YES)
+	FIPOLS9_FLAG=-DFIXED_POINT_LS9
+else	
+	FIPOLS9_FLAG=
+endif
+
+
+
+ifeq ($(SINGLE_COPY_POP_ENE), YES)
+	COPYPOPENE_FLAG=-DSINGLE_COPY_POP_ENE
+else	
+	COPYPOPENE_FLAG=
+endif
+
+ifeq ($(SEPARATE_FGRID_INTERE), YES)
+	SEP_FGRID_FLAG=-DSEPARATE_FGRID_INTERE
+else	
+	SEP_FGRID_FLAG=
+endif
+
+FIPO_FLAG = $(FIPOCO_FLAG) \
+	    $(FIPOIE_FLAG) \
+	    $(FIPOIA_FLAG) \
+	    $(FIPOLS1_FLAG) \
+	    $(FIPOLS2_FLAG) \
+	    $(FIPOLS3_FLAG) \
+	    $(FIPOLS4_FLAG) \
+	    $(FIPOLS5_FLAG) \
+	    $(FIPOLS6_FLAG) \
+	    $(FIPOLS7_FLAG) \
+	    $(FIPOLS8_FLAG) \
+	    $(FIPOLS9_FLAG) \
+	    $(COPYPOPENE_FLAG) $(SEP_FGRID_FLAG) 
+
 #https://www.xilinx.com/html_docs/xilinx2018_1/sdsoc_doc/nts1517252127891.html
 #CLFLAGS:= --xp "param:compiler.preserveHlsOutput=1" --xp "param:compiler.generateExtraRunData=true" -s
 #CLFLAGS:= --xp "param:compiler.version=31" --xp "param:compiler.preserveHlsOutput=1" --xp "param:compiler.generateExtraRunData=true" -s 
-CLFLAGS:= --xp "param:compiler.version=31" --xp "param:compiler.preserveHlsOutput=1" --xp "param:compiler.generateExtraRunData=true" -s -I./ -I../ -I./device
+#CLFLAGS:= --xp "param:compiler.version=31" --xp "param:compiler.preserveHlsOutput=1" --xp "param:compiler.generateExtraRunData=true" -s -I./ -I../ -I./device
+CLFLAGS:= --xp "param:compiler.version=31" --xp "param:compiler.preserveHlsOutput=1" --xp "param:compiler.generateExtraRunData=true" -s -I./ -I../ -I./device $(REP) $(FIPO_FLAG)
 
 
 ifneq ($(REPORT),none)
