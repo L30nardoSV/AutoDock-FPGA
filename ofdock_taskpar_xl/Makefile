@@ -601,7 +601,8 @@ hostbin_CXXFLAGS=-I../common/inc/ \
 		    $(FIPO_FLAG)
 		    
 #helloworld_LDFLAGS=$(opencl_LDFLAGS)
-hostbin_LDFLAGS=$(opencl_LDFLAGS)
+#hostbin_LDFLAGS=$(opencl_LDFLAGS)
+hostbin_LDFLAGS=$(opencl_LDFLAGS) -lrt
 
 #EXES=helloworld
 EXES=hostbin
