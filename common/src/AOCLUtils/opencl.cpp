@@ -443,7 +443,10 @@ bool fileExists(const char *file_name) {
 
 std::string getBoardBinaryFile(const char *prefix, cl_device_id device) {
   // First check if <prefix>.aocx exists. Use it if it does.
+/*  
   std::string file_name = std::string(prefix) + ".aocx";
+*/
+  std::string file_name = std::string(prefix) + ".xclbin";
   if(fileExists(file_name.c_str())) {
     return file_name;
   }
@@ -459,7 +462,10 @@ std::string getBoardBinaryFile(const char *prefix, cl_device_id device) {
     std::string board_name(device_name, 0, end);
 
     // Look for a AOCX with the name <prefix>_<board_name>_<version>.aocx.
+/*
     file_name = std::string(prefix) + "_" + board_name + "_" + VERSION_STR + ".aocx";
+*/
+    file_name = std::string(prefix) + "_" + board_name + "_" + VERSION_STR + ".xclbin";
     if(fileExists(file_name.c_str())) {
       return file_name;
     }
@@ -467,7 +473,10 @@ std::string getBoardBinaryFile(const char *prefix, cl_device_id device) {
 
   // At this point just use <prefix>.aocx. This file doesn't exist
   // and this should trigger an error later.
+/*
   return std::string(prefix) + ".aocx";
+*/
+  return std::string(prefix) + ".xclbin";
 }
 
 // High-resolution timer.
