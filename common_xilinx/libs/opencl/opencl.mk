@@ -11,5 +11,6 @@ OPENCL_LIB:=$(XILINX_SDX)/runtime/lib/ppc64le
 opencl_LDFLAGS=-L$(OPENCL_LIB) -lxilinxopencl -llmx6.0
 else
 OPENCL_LIB:=$(XILINX_SDX)/runtime/lib/x86_64
-opencl_LDFLAGS=-L$(OPENCL_LIB) -L$(SDA_LIB) -lOpenCL -pthread
+#opencl_LDFLAGS=-L$(OPENCL_LIB) -L$(SDA_LIB) -lOpenCL -pthread
+opencl_LDFLAGS=-L$(OPENCL_LIB) -L$(SDA_LIB) -lxilinxopencl -pthread
 endif
