@@ -14,10 +14,16 @@
 #define CHAN_DEPTH_GENOTYPE  ACTUAL_GENOTYPE_LENGTH
 
 // Send active signal to IGL_Arbiter
-/*channel*/ pipe bool    chan_GA2IGL_IC_active;
-/*channel*/ pipe bool    chan_GA2IGL_GG_active;
+// Resized to valid SDAccel depths: 16, 32, ...
+/*
+pipe bool    chan_GA2IGL_IC_active;
+pipe bool    chan_GA2IGL_GG_active;
+*/
+pipe bool    chan_GA2IGL_IC_active	__attribute__((xcl_reqd_pipe_depth(16)));
+pipe bool    chan_GA2IGL_GG_active	__attribute__((xcl_reqd_pipe_depth(16)));
 
 // Send genotypes from producers (IC, GG, LSs) to Conform
+/*
 pipe float  chan_IC2Conf_genotype          __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
 pipe float  chan_GG2Conf_genotype          __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
 pipe float  chan_LS2Conf_LS1_genotype      __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
@@ -29,14 +35,35 @@ pipe float  chan_LS2Conf_LS6_genotype      __attribute__((xcl_reqd_pipe_depth(CH
 pipe float  chan_LS2Conf_LS7_genotype      __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
 pipe float  chan_LS2Conf_LS8_genotype      __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
 pipe float  chan_LS2Conf_LS9_genotype      __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
+*/
+pipe float  chan_IC2Conf_genotype          __attribute__((xcl_reqd_pipe_depth(64)));
+pipe float  chan_GG2Conf_genotype          __attribute__((xcl_reqd_pipe_depth(64)));
+pipe float  chan_LS2Conf_LS1_genotype      __attribute__((xcl_reqd_pipe_depth(64)));
+pipe float  chan_LS2Conf_LS2_genotype      __attribute__((xcl_reqd_pipe_depth(64)));
+pipe float  chan_LS2Conf_LS3_genotype      __attribute__((xcl_reqd_pipe_depth(64)));
+pipe float  chan_LS2Conf_LS4_genotype      __attribute__((xcl_reqd_pipe_depth(64)));
+pipe float  chan_LS2Conf_LS5_genotype      __attribute__((xcl_reqd_pipe_depth(64)));
+pipe float  chan_LS2Conf_LS6_genotype      __attribute__((xcl_reqd_pipe_depth(64)));
+pipe float  chan_LS2Conf_LS7_genotype      __attribute__((xcl_reqd_pipe_depth(64)));
+pipe float  chan_LS2Conf_LS8_genotype      __attribute__((xcl_reqd_pipe_depth(64)));
+pipe float  chan_LS2Conf_LS9_genotype      __attribute__((xcl_reqd_pipe_depth(64)));
 
 // Send ligand-atom positions from Conform to InterE & IntraE
+// Resized to valid SDAccel depths: 16, 32, ...
+/*
 pipe float8  chan_Conf2Intere_xyz           __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_ATOMXYZ)));
 pipe char2   chan_Conf2Intere_actmode;
 pipe float8  chan_Conf2Intrae_xyz           __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_ATOMXYZ)));
 pipe char2   chan_Conf2Intrae_actmode;	
+*/
+pipe float8  chan_Conf2Intere_xyz           __attribute__((xcl_reqd_pipe_depth(64)));
+pipe char2   chan_Conf2Intere_actmode	    __attribute__((xcl_reqd_pipe_depth(16)));
+pipe float8  chan_Conf2Intrae_xyz           __attribute__((xcl_reqd_pipe_depth(64)));
+pipe char2   chan_Conf2Intrae_actmode       __attribute__((xcl_reqd_pipe_depth(16)));
 
 // Send energy values from InterE & IntraE to genotype-senders (IC, GG, LSs)
+// Resized to valid SDAccel depths: 16, 32, ...
+/*
 pipe float  chan_Intere2StoreIC_intere     __attribute__((xcl_reqd_pipe_depth(2)));
 pipe float  chan_Intere2StoreGG_intere     __attribute__((xcl_reqd_pipe_depth(2)));
 pipe float  chan_Intere2StoreLS_LS1_intere __attribute__((xcl_reqd_pipe_depth(2)));
@@ -59,12 +86,53 @@ pipe float  chan_Intrae2StoreLS_LS6_intrae __attribute__((xcl_reqd_pipe_depth(2)
 pipe float  chan_Intrae2StoreLS_LS7_intrae __attribute__((xcl_reqd_pipe_depth(2)));
 pipe float  chan_Intrae2StoreLS_LS8_intrae __attribute__((xcl_reqd_pipe_depth(2)));
 pipe float  chan_Intrae2StoreLS_LS9_intrae __attribute__((xcl_reqd_pipe_depth(2)));
+*/
+pipe float  chan_Intere2StoreIC_intere     __attribute__((xcl_reqd_pipe_depth(16)));
+pipe float  chan_Intere2StoreGG_intere     __attribute__((xcl_reqd_pipe_depth(16)));
+pipe float  chan_Intere2StoreLS_LS1_intere __attribute__((xcl_reqd_pipe_depth(16)));
+pipe float  chan_Intere2StoreLS_LS2_intere __attribute__((xcl_reqd_pipe_depth(16)));
+pipe float  chan_Intere2StoreLS_LS3_intere __attribute__((xcl_reqd_pipe_depth(16)));
+pipe float  chan_Intere2StoreLS_LS4_intere __attribute__((xcl_reqd_pipe_depth(16)));
+pipe float  chan_Intere2StoreLS_LS5_intere __attribute__((xcl_reqd_pipe_depth(16)));
+pipe float  chan_Intere2StoreLS_LS6_intere __attribute__((xcl_reqd_pipe_depth(16)));
+pipe float  chan_Intere2StoreLS_LS7_intere __attribute__((xcl_reqd_pipe_depth(16)));
+pipe float  chan_Intere2StoreLS_LS8_intere __attribute__((xcl_reqd_pipe_depth(16)));
+pipe float  chan_Intere2StoreLS_LS9_intere __attribute__((xcl_reqd_pipe_depth(16)));
+pipe float  chan_Intrae2StoreIC_intrae     __attribute__((xcl_reqd_pipe_depth(16)));
+pipe float  chan_Intrae2StoreGG_intrae     __attribute__((xcl_reqd_pipe_depth(16)));
+pipe float  chan_Intrae2StoreLS_LS1_intrae __attribute__((xcl_reqd_pipe_depth(16)));
+pipe float  chan_Intrae2StoreLS_LS2_intrae __attribute__((xcl_reqd_pipe_depth(16)));
+pipe float  chan_Intrae2StoreLS_LS3_intrae __attribute__((xcl_reqd_pipe_depth(16)));
+pipe float  chan_Intrae2StoreLS_LS4_intrae __attribute__((xcl_reqd_pipe_depth(16)));
+pipe float  chan_Intrae2StoreLS_LS5_intrae __attribute__((xcl_reqd_pipe_depth(16)));
+pipe float  chan_Intrae2StoreLS_LS6_intrae __attribute__((xcl_reqd_pipe_depth(16)));
+pipe float  chan_Intrae2StoreLS_LS7_intrae __attribute__((xcl_reqd_pipe_depth(16)));
+pipe float  chan_Intrae2StoreLS_LS8_intrae __attribute__((xcl_reqd_pipe_depth(16)));
+pipe float  chan_Intrae2StoreLS_LS9_intrae __attribute__((xcl_reqd_pipe_depth(16)));
 
 // Send PRNG outputs from generators to consumers
+// Resized to valid SDAccel depths: 16, 32, ...
+/*
 pipe float8   chan_PRNG2GA_BT_ushort_float_prng;
+*/
+pipe float8   chan_PRNG2GA_BT_ushort_float_prng	__attribute__((xcl_reqd_pipe_depth(16)));
+
+/*
 pipe uchar2   chan_PRNG2GA_GG_uchar_prng;
+*/
+pipe uchar2   chan_PRNG2GA_GG_uchar_prng	__attribute__((xcl_reqd_pipe_depth(16)));
+
+/*
 pipe float    chan_PRNG2GA_GG_float_prng     __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
+*/
+pipe float    chan_PRNG2GA_GG_float_prng     __attribute__((xcl_reqd_pipe_depth(64)));
+
+/*
 pipe ushort16 chan_PRNG2GA_LS123_ushort_prng;
+*/
+pipe ushort16 chan_PRNG2GA_LS123_ushort_prng	__attribute__((xcl_reqd_pipe_depth(16)));
+
+/*
 pipe float    chan_PRNG2GA_LS_float_prng     __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
 pipe float    chan_PRNG2GA_LS2_float_prng    __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
 pipe float    chan_PRNG2GA_LS3_float_prng    __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
@@ -74,6 +142,16 @@ pipe float    chan_PRNG2GA_LS6_float_prng    __attribute__((xcl_reqd_pipe_depth(
 pipe float    chan_PRNG2GA_LS7_float_prng    __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
 pipe float    chan_PRNG2GA_LS8_float_prng    __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
 pipe float    chan_PRNG2GA_LS9_float_prng    __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
+*/
+pipe float    chan_PRNG2GA_LS_float_prng     __attribute__((xcl_reqd_pipe_depth(64)));
+pipe float    chan_PRNG2GA_LS2_float_prng    __attribute__((xcl_reqd_pipe_depth(64)));
+pipe float    chan_PRNG2GA_LS3_float_prng    __attribute__((xcl_reqd_pipe_depth(64)));
+pipe float    chan_PRNG2GA_LS4_float_prng    __attribute__((xcl_reqd_pipe_depth(64)));
+pipe float    chan_PRNG2GA_LS5_float_prng    __attribute__((xcl_reqd_pipe_depth(64)));
+pipe float    chan_PRNG2GA_LS6_float_prng    __attribute__((xcl_reqd_pipe_depth(64)));
+pipe float    chan_PRNG2GA_LS7_float_prng    __attribute__((xcl_reqd_pipe_depth(64)));
+pipe float    chan_PRNG2GA_LS8_float_prng    __attribute__((xcl_reqd_pipe_depth(64)));
+pipe float    chan_PRNG2GA_LS9_float_prng    __attribute__((xcl_reqd_pipe_depth(64)));
 
 // Turn-off signals to PRNG generators
 
@@ -81,6 +159,9 @@ pipe float    chan_PRNG2GA_LS9_float_prng    __attribute__((xcl_reqd_pipe_depth(
 // That was initially the case, but was fixed.
 // Name should be changed accordingly (GA instead of Arbiter)
 // to avoid misleading data-flow information
+
+// Resized to valid SDAccel depths: 16, 32, ...
+/*
 pipe bool    chan_Arbiter_BT_ushort_float_off;
 pipe bool    chan_Arbiter_GG_uchar_off;
 pipe bool    chan_Arbiter_GG_float_off;
@@ -94,8 +175,24 @@ pipe bool    chan_Arbiter_LS6_float_off;
 pipe bool    chan_Arbiter_LS7_float_off;
 pipe bool    chan_Arbiter_LS8_float_off;
 pipe bool    chan_Arbiter_LS9_float_off;
+*/
+pipe bool    chan_Arbiter_BT_ushort_float_off	__attribute__((xcl_reqd_pipe_depth(16)));
+pipe bool    chan_Arbiter_GG_uchar_off		__attribute__((xcl_reqd_pipe_depth(16)));
+pipe bool    chan_Arbiter_GG_float_off		__attribute__((xcl_reqd_pipe_depth(16)));
+pipe bool    chan_Arbiter_LS123_ushort_off	__attribute__((xcl_reqd_pipe_depth(16)));
+pipe bool    chan_Arbiter_LS_float_off		__attribute__((xcl_reqd_pipe_depth(16)));
+pipe bool    chan_Arbiter_LS2_float_off		__attribute__((xcl_reqd_pipe_depth(16)));
+pipe bool    chan_Arbiter_LS3_float_off		__attribute__((xcl_reqd_pipe_depth(16)));
+pipe bool    chan_Arbiter_LS4_float_off		__attribute__((xcl_reqd_pipe_depth(16)));
+pipe bool    chan_Arbiter_LS5_float_off		__attribute__((xcl_reqd_pipe_depth(16)));
+pipe bool    chan_Arbiter_LS6_float_off		__attribute__((xcl_reqd_pipe_depth(16)));
+pipe bool    chan_Arbiter_LS7_float_off		__attribute__((xcl_reqd_pipe_depth(16)));
+pipe bool    chan_Arbiter_LS8_float_off		__attribute__((xcl_reqd_pipe_depth(16)));
+pipe bool    chan_Arbiter_LS9_float_off		__attribute__((xcl_reqd_pipe_depth(16)));
 
 // Send energy values and genotypes to LSs
+// Resized to valid SDAccel depths: 16, 32, ...
+/*
 pipe float   chan_GA2LS_LS1_energy;
 pipe float   chan_GA2LS_LS2_energy;
 pipe float   chan_GA2LS_LS3_energy;
@@ -105,6 +202,19 @@ pipe float   chan_GA2LS_LS6_energy;
 pipe float   chan_GA2LS_LS7_energy;
 pipe float   chan_GA2LS_LS8_energy;
 pipe float   chan_GA2LS_LS9_energy;
+*/
+pipe float   chan_GA2LS_LS1_energy	__attribute__((xcl_reqd_pipe_depth(16)));
+pipe float   chan_GA2LS_LS2_energy	__attribute__((xcl_reqd_pipe_depth(16)));
+pipe float   chan_GA2LS_LS3_energy	__attribute__((xcl_reqd_pipe_depth(16)));
+pipe float   chan_GA2LS_LS4_energy	__attribute__((xcl_reqd_pipe_depth(16)));
+pipe float   chan_GA2LS_LS5_energy	__attribute__((xcl_reqd_pipe_depth(16)));
+pipe float   chan_GA2LS_LS6_energy	__attribute__((xcl_reqd_pipe_depth(16)));
+pipe float   chan_GA2LS_LS7_energy	__attribute__((xcl_reqd_pipe_depth(16)));
+pipe float   chan_GA2LS_LS8_energy	__attribute__((xcl_reqd_pipe_depth(16)));
+pipe float   chan_GA2LS_LS9_energy	__attribute__((xcl_reqd_pipe_depth(16)));
+
+// Resized to valid SDAccel depths: 16, 32, ...
+/*
 pipe float   chan_GA2LS_LS1_genotype        __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
 pipe float   chan_GA2LS_LS2_genotype        __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
 pipe float   chan_GA2LS_LS3_genotype        __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
@@ -114,8 +224,19 @@ pipe float   chan_GA2LS_LS6_genotype        __attribute__((xcl_reqd_pipe_depth(C
 pipe float   chan_GA2LS_LS7_genotype        __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
 pipe float   chan_GA2LS_LS8_genotype        __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
 pipe float   chan_GA2LS_LS9_genotype        __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
+*/
+pipe float   chan_GA2LS_LS1_genotype        __attribute__((xcl_reqd_pipe_depth(64)));
+pipe float   chan_GA2LS_LS2_genotype        __attribute__((xcl_reqd_pipe_depth(64)));
+pipe float   chan_GA2LS_LS3_genotype        __attribute__((xcl_reqd_pipe_depth(64)));
+pipe float   chan_GA2LS_LS4_genotype        __attribute__((xcl_reqd_pipe_depth(64)));
+pipe float   chan_GA2LS_LS5_genotype        __attribute__((xcl_reqd_pipe_depth(64)));
+pipe float   chan_GA2LS_LS6_genotype        __attribute__((xcl_reqd_pipe_depth(64)));
+pipe float   chan_GA2LS_LS7_genotype        __attribute__((xcl_reqd_pipe_depth(64)));
+pipe float   chan_GA2LS_LS8_genotype        __attribute__((xcl_reqd_pipe_depth(64)));
+pipe float   chan_GA2LS_LS9_genotype        __attribute__((xcl_reqd_pipe_depth(64)));
 
 // Send LS status from LSs to IGL_Arbiter
+/*
 pipe bool    chan_LS2Arbiter_LS1_end;
 pipe bool    chan_LS2Arbiter_LS2_end;
 pipe bool    chan_LS2Arbiter_LS3_end;
@@ -125,8 +246,20 @@ pipe bool    chan_LS2Arbiter_LS6_end;
 pipe bool    chan_LS2Arbiter_LS7_end;
 pipe bool    chan_LS2Arbiter_LS8_end;
 pipe bool    chan_LS2Arbiter_LS9_end;
+*/
+pipe bool    chan_LS2Arbiter_LS1_end	__attribute__((xcl_reqd_pipe_depth(16)));
+pipe bool    chan_LS2Arbiter_LS2_end	__attribute__((xcl_reqd_pipe_depth(16)));
+pipe bool    chan_LS2Arbiter_LS3_end	__attribute__((xcl_reqd_pipe_depth(16)));
+pipe bool    chan_LS2Arbiter_LS4_end	__attribute__((xcl_reqd_pipe_depth(16)));
+pipe bool    chan_LS2Arbiter_LS5_end	__attribute__((xcl_reqd_pipe_depth(16)));
+pipe bool    chan_LS2Arbiter_LS6_end	__attribute__((xcl_reqd_pipe_depth(16)));
+pipe bool    chan_LS2Arbiter_LS7_end	__attribute__((xcl_reqd_pipe_depth(16)));
+pipe bool    chan_LS2Arbiter_LS8_end	__attribute__((xcl_reqd_pipe_depth(16)));
+pipe bool    chan_LS2Arbiter_LS9_end	__attribute__((xcl_reqd_pipe_depth(16)));
 
 // Get LS-eval-count, new energy, new genotype from LSs
+// Resized to valid SDAccel depths: 16, 32, ...
+/*
 pipe float2  chan_LS2GA_LS1_evalenergy      __attribute__((xcl_reqd_pipe_depth(2)));
 pipe float2  chan_LS2GA_LS2_evalenergy      __attribute__((xcl_reqd_pipe_depth(2)));
 pipe float2  chan_LS2GA_LS3_evalenergy      __attribute__((xcl_reqd_pipe_depth(2)));
@@ -136,6 +269,19 @@ pipe float2  chan_LS2GA_LS6_evalenergy      __attribute__((xcl_reqd_pipe_depth(2
 pipe float2  chan_LS2GA_LS7_evalenergy      __attribute__((xcl_reqd_pipe_depth(2)));
 pipe float2  chan_LS2GA_LS8_evalenergy      __attribute__((xcl_reqd_pipe_depth(2)));
 pipe float2  chan_LS2GA_LS9_evalenergy      __attribute__((xcl_reqd_pipe_depth(2)));
+*/
+pipe float2  chan_LS2GA_LS1_evalenergy      __attribute__((xcl_reqd_pipe_depth(16)));
+pipe float2  chan_LS2GA_LS2_evalenergy      __attribute__((xcl_reqd_pipe_depth(16)));
+pipe float2  chan_LS2GA_LS3_evalenergy      __attribute__((xcl_reqd_pipe_depth(16)));
+pipe float2  chan_LS2GA_LS4_evalenergy      __attribute__((xcl_reqd_pipe_depth(16)));
+pipe float2  chan_LS2GA_LS5_evalenergy      __attribute__((xcl_reqd_pipe_depth(16)));
+pipe float2  chan_LS2GA_LS6_evalenergy      __attribute__((xcl_reqd_pipe_depth(16)));
+pipe float2  chan_LS2GA_LS7_evalenergy      __attribute__((xcl_reqd_pipe_depth(16)));
+pipe float2  chan_LS2GA_LS8_evalenergy      __attribute__((xcl_reqd_pipe_depth(16)));
+pipe float2  chan_LS2GA_LS9_evalenergy      __attribute__((xcl_reqd_pipe_depth(16)));
+
+// Resized to valid SDAccel depths: 16, 32, ...
+/*
 pipe float   chan_LS2GA_LS1_genotype        __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
 pipe float   chan_LS2GA_LS2_genotype        __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
 pipe float   chan_LS2GA_LS3_genotype        __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
@@ -145,8 +291,20 @@ pipe float   chan_LS2GA_LS6_genotype        __attribute__((xcl_reqd_pipe_depth(C
 pipe float   chan_LS2GA_LS7_genotype        __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
 pipe float   chan_LS2GA_LS8_genotype        __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
 pipe float   chan_LS2GA_LS9_genotype        __attribute__((xcl_reqd_pipe_depth(CHAN_DEPTH_GENOTYPE)));
+*/
+pipe float   chan_LS2GA_LS1_genotype        __attribute__((xcl_reqd_pipe_depth(64)));
+pipe float   chan_LS2GA_LS2_genotype        __attribute__((xcl_reqd_pipe_depth(64)));
+pipe float   chan_LS2GA_LS3_genotype        __attribute__((xcl_reqd_pipe_depth(64)));
+pipe float   chan_LS2GA_LS4_genotype        __attribute__((xcl_reqd_pipe_depth(64)));
+pipe float   chan_LS2GA_LS5_genotype        __attribute__((xcl_reqd_pipe_depth(64)));
+pipe float   chan_LS2GA_LS6_genotype        __attribute__((xcl_reqd_pipe_depth(64)));
+pipe float   chan_LS2GA_LS7_genotype        __attribute__((xcl_reqd_pipe_depth(64)));
+pipe float   chan_LS2GA_LS8_genotype        __attribute__((xcl_reqd_pipe_depth(64)));
+pipe float   chan_LS2GA_LS9_genotype        __attribute__((xcl_reqd_pipe_depth(64)));
 
 // Turn-off signals to LSs
+// Resized to valid SDAccel depths: 16, 32, ...
+/*
 pipe bool    chan_GA2LS_Off1_active;
 pipe bool    chan_GA2LS_Off2_active;
 pipe bool    chan_GA2LS_Off3_active;
@@ -156,14 +314,33 @@ pipe bool    chan_GA2LS_Off6_active;
 pipe bool    chan_GA2LS_Off7_active;
 pipe bool    chan_GA2LS_Off8_active;
 pipe bool    chan_GA2LS_Off9_active;
+*/
+pipe bool    chan_GA2LS_Off1_active	__attribute__((xcl_reqd_pipe_depth(16)));
+pipe bool    chan_GA2LS_Off2_active	__attribute__((xcl_reqd_pipe_depth(16)));
+pipe bool    chan_GA2LS_Off3_active	__attribute__((xcl_reqd_pipe_depth(16)));
+pipe bool    chan_GA2LS_Off4_active	__attribute__((xcl_reqd_pipe_depth(16)));
+pipe bool    chan_GA2LS_Off5_active	__attribute__((xcl_reqd_pipe_depth(16)));
+pipe bool    chan_GA2LS_Off6_active	__attribute__((xcl_reqd_pipe_depth(16)));
+pipe bool    chan_GA2LS_Off7_active	__attribute__((xcl_reqd_pipe_depth(16)));
+pipe bool    chan_GA2LS_Off8_active	__attribute__((xcl_reqd_pipe_depth(16)));
+pipe bool    chan_GA2LS_Off9_active	__attribute__((xcl_reqd_pipe_depth(16)));
 
 // Send genotype-producer-pipe selector and genotype 
 // from IGL_Arbiter to Conform
+// Resized to valid SDAccel depths: 16, 32, ...
+/*
 pipe char2  chan_IGL2Conform_actmode	    __attribute__((xcl_reqd_pipe_depth(9))); // active, mode
 pipe float  chan_IGL2Conform_genotype       __attribute__((xcl_reqd_pipe_depth(9*CHAN_DEPTH_GENOTYPE)));
+*/
+pipe char2  chan_IGL2Conform_actmode	    __attribute__((xcl_reqd_pipe_depth(16))); // active, mode
+pipe float  chan_IGL2Conform_genotype       __attribute__((xcl_reqd_pipe_depth(512)));
 
 // Turn-off signal to IGL_Arbiter, Conform, InterE, IntraE
+// Resized to valid SDAccel depths: 16, 32, ...
+/*
 pipe bool   chan_IGLArbiter_Off;
+*/
+pipe bool   chan_IGLArbiter_Off		__attribute__((xcl_reqd_pipe_depth(16)));
 
 #if defined (FIXED_POINT_CONFORM) || \
     defined (FIXED_POINT_LS1)     || \
@@ -1108,3 +1285,4 @@ void Krnl_GA(
 #include "Krnl_Conform.cl"
 #include "Krnl_InterE.cl"
 #include "Krnl_IntraE.cl"
+
