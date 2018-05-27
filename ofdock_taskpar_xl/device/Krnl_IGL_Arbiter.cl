@@ -142,12 +142,19 @@ while(active) {
 	// Be careful modifying the nested conditional-statements below,
 	// as even a litle mistake may be undetectable in emulation.
 	if (active == 0x01) {
-
+/*
 		if (IC_valid == true) {
+*/
+		if (IC_valid == 0) {
 			bound_tmp++;
+//printf("IGL - IC: bound_tmp: %u\n", bound_tmp);
 		}
+/*		
 		else if (GG_valid == true) {
+*/
+		else if (GG_valid == 0) {
 			bound_tmp++;
+//printf("IGL - GG: bound_tmp: %u\n", bound_tmp);
 		}	
 		else{
 			// Reorder the mode & from LS
@@ -155,84 +162,84 @@ while(active) {
 			// **************************************************************************************
 			// LS1: yes
 			// **************************************************************************************
-			if (LS1_end_valid) {mode[0] = 0x01; bound_tmp++;
+			if (LS1_end_valid == 0) {mode[0] = 0x01; bound_tmp++;
 				
 				// ======================================================================================
 				// LS1: yes
 				// LS2: yes 
 				// ======================================================================================
-				if (LS2_end_valid) {mode[1] = 0x02; bound_tmp++;
+				if (LS2_end_valid == 0) {mode[1] = 0x02; bound_tmp++;
 
 					// --------------------------------------------------------------------------------------
 					// LS1: yes
 					// LS2: yes 
 					// LS3: yes
 					// --------------------------------------------------------------------------------------
-					if (LS3_end_valid) {mode[2] = 0x03; bound_tmp++;
+					if (LS3_end_valid == 0) {mode[2] = 0x03; bound_tmp++;
 
 						// LS1: yes
 						// LS2: yes 
 						// LS3: yes
 						// LS4: yes
-						if (LS4_end_valid) {mode[3] = 0x04; bound_tmp++;
+						if (LS4_end_valid == 0) {mode[3] = 0x04; bound_tmp++;
 
-							if (LS5_end_valid) {mode[4] = 0x05; bound_tmp++;
-								if (LS6_end_valid) {mode[5] = 0x06; bound_tmp++;
-									if (LS7_end_valid) {mode[6] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[7] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[8] = 0x09; bound_tmp++;}
+							if (LS5_end_valid == 0) {mode[4] = 0x05; bound_tmp++;
+								if (LS6_end_valid == 0) {mode[5] = 0x06; bound_tmp++;
+									if (LS7_end_valid == 0) {mode[6] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[7] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[8] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[7] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[7] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[6] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[7] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[6] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[7] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[6] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[6] = 0x09; bound_tmp++;}
 										}
 									}
 								} else {
-									if (LS7_end_valid) {mode[5] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[6] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[7] = 0x09; bound_tmp++;}
+									if (LS7_end_valid == 0) {mode[5] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[6] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[7] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[6] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[6] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[5] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[6] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[5] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[6] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										}
 									}
 								}
 							} else { // LS5: no
-								if (LS6_end_valid) {mode[4] = 0x06; bound_tmp++;
-									if (LS7_end_valid) {mode[5] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[6] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[7] = 0x09; bound_tmp++;}
+								if (LS6_end_valid == 0) {mode[4] = 0x06; bound_tmp++;
+									if (LS7_end_valid == 0) {mode[5] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[6] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[7] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[6] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[6] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[5] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[6] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[5] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[6] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										}
 									}
 								} else {
-									if (LS7_end_valid) {mode[4] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[5] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[6] = 0x09; bound_tmp++;}
+									if (LS7_end_valid == 0) {mode[4] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[5] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[6] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[4] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[4] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										}
 									}
 								}
@@ -244,63 +251,63 @@ while(active) {
 						// LS3: yes
 						// LS4: no
 						else {
-							if (LS5_end_valid) {mode[3] = 0x05; bound_tmp++;
-								if (LS6_end_valid) {mode[4] = 0x06; bound_tmp++;
-									if (LS7_end_valid) {mode[5] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[6] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[7] = 0x09; bound_tmp++;}
+							if (LS5_end_valid == 0) {mode[3] = 0x05; bound_tmp++;
+								if (LS6_end_valid == 0) {mode[4] = 0x06; bound_tmp++;
+									if (LS7_end_valid == 0) {mode[5] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[6] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[7] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[6] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[6] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[5] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[6] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[5] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[6] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										}
 									}
 								} else {
-									if (LS7_end_valid) {mode[4] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[5] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[6] = 0x09; bound_tmp++;}
+									if (LS7_end_valid == 0) {mode[4] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[5] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[6] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[4] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[4] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										}
 									}
 								}
 							} else { // LS5: no
-								if (LS6_end_valid) {mode[3] = 0x06; bound_tmp++;
-									if (LS7_end_valid) {mode[4] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[5] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[6] = 0x09; bound_tmp++;}
+								if (LS6_end_valid == 0) {mode[3] = 0x06; bound_tmp++;
+									if (LS7_end_valid == 0) {mode[4] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[5] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[6] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[4] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[4] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										}
 									}
 								} else {
-									if (LS7_end_valid) {mode[3] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[4] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+									if (LS7_end_valid == 0) {mode[3] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[4] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[3] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[3] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										}
 									}
 								}
@@ -317,66 +324,66 @@ while(active) {
 						// LS2: yes 
 						// LS3: no
 						// LS4: yes
-						if (LS4_end_valid) {mode[2] = 0x04; bound_tmp++;
+						if (LS4_end_valid == 0) {mode[2] = 0x04; bound_tmp++;
 
-							if (LS5_end_valid) {mode[3] = 0x05; bound_tmp++;
-								if (LS6_end_valid) {mode[4] = 0x06; bound_tmp++;
-									if (LS7_end_valid) {mode[5] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[6] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[7] = 0x09; bound_tmp++;}
+							if (LS5_end_valid == 0) {mode[3] = 0x05; bound_tmp++;
+								if (LS6_end_valid == 0) {mode[4] = 0x06; bound_tmp++;
+									if (LS7_end_valid == 0) {mode[5] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[6] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[7] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[6] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[6] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[5] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[6] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[5] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[6] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										}
 									}
 								} else {
-									if (LS7_end_valid) {mode[4] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[5] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[6] = 0x09; bound_tmp++;}
+									if (LS7_end_valid == 0) {mode[4] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[5] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[6] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[4] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[4] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										}
 									}
 								}
 							} else { // LS5: no
-								if (LS6_end_valid) {mode[3] = 0x06; bound_tmp++;
-									if (LS7_end_valid) {mode[4] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[5] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[6] = 0x09; bound_tmp++;}
+								if (LS6_end_valid == 0) {mode[3] = 0x06; bound_tmp++;
+									if (LS7_end_valid == 0) {mode[4] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[5] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[6] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[4] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[4] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										}
 									}
 								} else {
-									if (LS7_end_valid) {mode[3] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[4] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+									if (LS7_end_valid == 0) {mode[3] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[4] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[3] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[3] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										}
 										else {
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										}
 									}
 								}
@@ -387,63 +394,63 @@ while(active) {
 						// LS3: no
 						// LS4: no
 						} else { 
-							if (LS5_end_valid) {mode[2] = 0x05; bound_tmp++;
-								if (LS6_end_valid) {mode[3] = 0x06; bound_tmp++;
-									if (LS7_end_valid) {mode[4] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[5] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[6] = 0x09; bound_tmp++;}
+							if (LS5_end_valid == 0) {mode[2] = 0x05; bound_tmp++;
+								if (LS6_end_valid == 0) {mode[3] = 0x06; bound_tmp++;
+									if (LS7_end_valid == 0) {mode[4] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[5] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[6] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[4] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[4] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										}
 									}
 								} else {
-									if (LS7_end_valid) {mode[3] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[4] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+									if (LS7_end_valid == 0) {mode[3] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[4] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[3] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[3] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										}
 									}
 								}
 							} else { // LS5: no
-								if (LS6_end_valid) {mode[2] = 0x06; bound_tmp++;
-									if (LS7_end_valid) {mode[3] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[4] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+								if (LS6_end_valid == 0) {mode[2] = 0x06; bound_tmp++;
+									if (LS7_end_valid == 0) {mode[3] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[4] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[3] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[3] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										}
 									}
 								} else {
-									if (LS7_end_valid) {mode[2] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[3] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+									if (LS7_end_valid == 0) {mode[2] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[3] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[2] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[2] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[2] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[2] = 0x09; bound_tmp++;}
 										}
 									}
 								}
@@ -464,71 +471,71 @@ while(active) {
 					// LS2: no 
 					// LS3: yes
 					// --------------------------------------------------------------------------------------
-					if (LS3_end_valid) {mode[1] = 0x03; bound_tmp++;
+					if (LS3_end_valid == 0) {mode[1] = 0x03; bound_tmp++;
 
 						// LS1: yes
 						// LS2: no 
 						// LS3: yes
 						// LS4: yes
-						if (LS4_end_valid) {mode[2] = 0x04; bound_tmp++;
+						if (LS4_end_valid == 0) {mode[2] = 0x04; bound_tmp++;
 
-							if (LS5_end_valid) {mode[3] = 0x05; bound_tmp++;
-								if (LS6_end_valid) {mode[4] = 0x06; bound_tmp++;
-									if (LS7_end_valid) {mode[5] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[6] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[7] = 0x09; bound_tmp++;}
+							if (LS5_end_valid == 0) {mode[3] = 0x05; bound_tmp++;
+								if (LS6_end_valid == 0) {mode[4] = 0x06; bound_tmp++;
+									if (LS7_end_valid == 0) {mode[5] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[6] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[7] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[6] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[6] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[5] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[6] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[5] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[6] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										}
 									}
 								} else {
-									if (LS7_end_valid) {mode[4] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[5] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[6] = 0x09; bound_tmp++;}
+									if (LS7_end_valid == 0) {mode[4] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[5] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[6] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[4] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[4] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										}
 									}
 								}
 							} else { // LS5: no
-								if (LS6_end_valid) {mode[3] = 0x06; bound_tmp++;
-									if (LS7_end_valid) {mode[4] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[5] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[6] = 0x09; bound_tmp++;}
+								if (LS6_end_valid == 0) {mode[3] = 0x06; bound_tmp++;
+									if (LS7_end_valid == 0) {mode[4] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[5] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[6] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[4] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[4] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										}
 									}
 								} else {
-									if (LS7_end_valid) {mode[3] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[4] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+									if (LS7_end_valid == 0) {mode[3] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[4] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[3] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[3] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										}
 									}
 								}
@@ -540,63 +547,63 @@ while(active) {
 						// LS3: yes
 						// LS4: no
 						else {
-							if (LS5_end_valid) {mode[2] = 0x05; bound_tmp++;
-								if (LS6_end_valid) {mode[3] = 0x06; bound_tmp++;
-									if (LS7_end_valid) {mode[4] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[5] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[6] = 0x09; bound_tmp++;}
+							if (LS5_end_valid == 0) {mode[2] = 0x05; bound_tmp++;
+								if (LS6_end_valid == 0) {mode[3] = 0x06; bound_tmp++;
+									if (LS7_end_valid == 0) {mode[4] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[5] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[6] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[4] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[4] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										}
 									}
 								} else {
-									if (LS7_end_valid) {mode[3] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[4] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+									if (LS7_end_valid == 0) {mode[3] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[4] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[3] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[3] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										}
 									}
 								}
 							} else { // LS5: no
-								if (LS6_end_valid) {mode[2] = 0x06; bound_tmp++;
-									if (LS7_end_valid) {mode[3] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[4] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+								if (LS6_end_valid == 0) {mode[2] = 0x06; bound_tmp++;
+									if (LS7_end_valid == 0) {mode[3] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[4] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[3] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[3] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										}
 									}
 								} else {
-									if (LS7_end_valid) {mode[2] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[3] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+									if (LS7_end_valid == 0) {mode[2] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[3] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[2] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[2] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[2] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[2] = 0x09; bound_tmp++;}
 										}
 									}
 								}
@@ -613,66 +620,66 @@ while(active) {
 						// LS2: no 
 						// LS3: no
 						// LS4: yes
-						if (LS4_end_valid) {mode[1] = 0x04; bound_tmp++;
+						if (LS4_end_valid == 0) {mode[1] = 0x04; bound_tmp++;
 
-							if (LS5_end_valid) {mode[2] = 0x05; bound_tmp++;
-								if (LS6_end_valid) {mode[3] = 0x06; bound_tmp++;
-									if (LS7_end_valid) {mode[4] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[5] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[6] = 0x09; bound_tmp++;}
+							if (LS5_end_valid == 0) {mode[2] = 0x05; bound_tmp++;
+								if (LS6_end_valid == 0) {mode[3] = 0x06; bound_tmp++;
+									if (LS7_end_valid == 0) {mode[4] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[5] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[6] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[4] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[4] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										}
 									}
 								} else {
-									if (LS7_end_valid) {mode[3] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[4] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+									if (LS7_end_valid == 0) {mode[3] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[4] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[3] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[3] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										}
 									}
 								}
 							} else { // LS5: no
-								if (LS6_end_valid) {mode[2] = 0x06; bound_tmp++;
-									if (LS7_end_valid) {mode[3] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[4] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+								if (LS6_end_valid == 0) {mode[2] = 0x06; bound_tmp++;
+									if (LS7_end_valid == 0) {mode[3] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[4] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[3] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[3] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										}
 									}
 								} else {
-									if (LS7_end_valid) {mode[2] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[3] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+									if (LS7_end_valid == 0) {mode[2] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[3] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[2] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[2] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										}
 										else {
-											if (LS9_end_valid) {mode[2] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[2] = 0x09; bound_tmp++;}
 										}
 									}
 								}
@@ -683,63 +690,63 @@ while(active) {
 						// LS3: no
 						// LS4: no
 						} else { 
-							if (LS5_end_valid) {mode[1] = 0x05; bound_tmp++;
-								if (LS6_end_valid) {mode[2] = 0x06; bound_tmp++;
-									if (LS7_end_valid) {mode[3] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[4] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+							if (LS5_end_valid == 0) {mode[1] = 0x05; bound_tmp++;
+								if (LS6_end_valid == 0) {mode[2] = 0x06; bound_tmp++;
+									if (LS7_end_valid == 0) {mode[3] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[4] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[3] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[3] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										}
 									}
 								} else {
-									if (LS7_end_valid) {mode[2] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[3] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+									if (LS7_end_valid == 0) {mode[2] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[3] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[2] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[2] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[2] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[2] = 0x09; bound_tmp++;}
 										}
 									}
 								}
 							} else { // LS5: no
-								if (LS6_end_valid) {mode[1] = 0x06; bound_tmp++;
-									if (LS7_end_valid) {mode[2] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[3] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+								if (LS6_end_valid == 0) {mode[1] = 0x06; bound_tmp++;
+									if (LS7_end_valid == 0) {mode[2] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[3] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[2] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[2] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[2] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[2] = 0x09; bound_tmp++;}
 										}
 									}
 								} else {
-									if (LS7_end_valid) {mode[1] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[2] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+									if (LS7_end_valid == 0) {mode[1] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[2] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[2] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[2] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[1] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[2] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[1] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[2] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[1] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[1] = 0x09; bound_tmp++;}
 										}
 									}
 								}
@@ -760,78 +767,78 @@ while(active) {
 				// LS1: no
 				// LS2: yes 
 				// ======================================================================================
-				if (LS2_end_valid) {mode[0] = 0x02; bound_tmp++;
+				if (LS2_end_valid == 0) {mode[0] = 0x02; bound_tmp++;
 
 					// --------------------------------------------------------------------------------------
 					// LS1: no
 					// LS2: yes 
 					// LS3: yes
 					// --------------------------------------------------------------------------------------
-					if (LS3_end_valid) {mode[1] = 0x03; bound_tmp++;
+					if (LS3_end_valid == 0) {mode[1] = 0x03; bound_tmp++;
 
 						// LS1: no
 						// LS2: yes 
 						// LS3: yes
 						// LS4: yes
-						if (LS4_end_valid) {mode[2] = 0x04; bound_tmp++;
+						if (LS4_end_valid == 0) {mode[2] = 0x04; bound_tmp++;
 
-							if (LS5_end_valid) {mode[3] = 0x05; bound_tmp++;
-								if (LS6_end_valid) {mode[4] = 0x06; bound_tmp++;
-									if (LS7_end_valid) {mode[5] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[6] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[7] = 0x09; bound_tmp++;}
+							if (LS5_end_valid == 0) {mode[3] = 0x05; bound_tmp++;
+								if (LS6_end_valid == 0) {mode[4] = 0x06; bound_tmp++;
+									if (LS7_end_valid == 0) {mode[5] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[6] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[7] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[6] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[6] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[5] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[6] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[5] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[6] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										}
 									}
 								} else {
-									if (LS7_end_valid) {mode[4] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[5] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[6] = 0x09; bound_tmp++;}
+									if (LS7_end_valid == 0) {mode[4] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[5] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[6] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[4] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[4] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										}
 									}
 								}
 							} else { // LS5: no
-								if (LS6_end_valid) {mode[3] = 0x06; bound_tmp++;
-									if (LS7_end_valid) {mode[4] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[5] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[6] = 0x09; bound_tmp++;}
+								if (LS6_end_valid == 0) {mode[3] = 0x06; bound_tmp++;
+									if (LS7_end_valid == 0) {mode[4] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[5] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[6] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[4] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[4] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										}
 									}
 								} else {
-									if (LS7_end_valid) {mode[3] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[4] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+									if (LS7_end_valid == 0) {mode[3] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[4] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[3] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[3] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										}
 									}
 								}
@@ -843,63 +850,63 @@ while(active) {
 						// LS3: yes
 						// LS4: no
 						else {
-							if (LS5_end_valid) {mode[2] = 0x05; bound_tmp++;
-								if (LS6_end_valid) {mode[3] = 0x06; bound_tmp++;
-									if (LS7_end_valid) {mode[4] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[5] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[6] = 0x09; bound_tmp++;}
+							if (LS5_end_valid == 0) {mode[2] = 0x05; bound_tmp++;
+								if (LS6_end_valid == 0) {mode[3] = 0x06; bound_tmp++;
+									if (LS7_end_valid == 0) {mode[4] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[5] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[6] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[4] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[4] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										}
 									}
 								} else {
-									if (LS7_end_valid) {mode[3] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[4] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+									if (LS7_end_valid == 0) {mode[3] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[4] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[3] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[3] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										}
 									}
 								}
 							} else { // LS5: no
-								if (LS6_end_valid) {mode[2] = 0x06; bound_tmp++;
-									if (LS7_end_valid) {mode[3] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[4] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+								if (LS6_end_valid == 0) {mode[2] = 0x06; bound_tmp++;
+									if (LS7_end_valid == 0) {mode[3] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[4] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[3] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[3] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										}
 									}
 								} else {
-									if (LS7_end_valid) {mode[2] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[3] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+									if (LS7_end_valid == 0) {mode[2] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[3] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[2] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[2] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[2] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[2] = 0x09; bound_tmp++;}
 										}
 									}
 								}
@@ -916,66 +923,66 @@ while(active) {
 						// LS2: yes 
 						// LS3: no
 						// LS4: yes
-						if (LS4_end_valid) {mode[1] = 0x04; bound_tmp++;
+						if (LS4_end_valid == 0) {mode[1] = 0x04; bound_tmp++;
 
-							if (LS5_end_valid) {mode[2] = 0x05; bound_tmp++;
-								if (LS6_end_valid) {mode[3] = 0x06; bound_tmp++;
-									if (LS7_end_valid) {mode[4] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[5] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[6] = 0x09; bound_tmp++;}
+							if (LS5_end_valid == 0) {mode[2] = 0x05; bound_tmp++;
+								if (LS6_end_valid == 0) {mode[3] = 0x06; bound_tmp++;
+									if (LS7_end_valid == 0) {mode[4] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[5] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[6] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[4] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[4] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										}
 									}
 								} else {
-									if (LS7_end_valid) {mode[3] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[4] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+									if (LS7_end_valid == 0) {mode[3] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[4] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[3] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[3] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										}
 									}
 								}
 							} else { // LS5: no
-								if (LS6_end_valid) {mode[2] = 0x06; bound_tmp++;
-									if (LS7_end_valid) {mode[3] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[4] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+								if (LS6_end_valid == 0) {mode[2] = 0x06; bound_tmp++;
+									if (LS7_end_valid == 0) {mode[3] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[4] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[3] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[3] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										}
 									}
 								} else {
-									if (LS7_end_valid) {mode[2] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[3] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+									if (LS7_end_valid == 0) {mode[2] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[3] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[2] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[2] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										}
 										else {
-											if (LS9_end_valid) {mode[2] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[2] = 0x09; bound_tmp++;}
 										}
 									}
 								}
@@ -986,63 +993,63 @@ while(active) {
 						// LS3: no
 						// LS4: no
 						} else { 
-							if (LS5_end_valid) {mode[1] = 0x05; bound_tmp++;
-								if (LS6_end_valid) {mode[2] = 0x06; bound_tmp++;
-									if (LS7_end_valid) {mode[3] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[4] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+							if (LS5_end_valid == 0) {mode[1] = 0x05; bound_tmp++;
+								if (LS6_end_valid == 0) {mode[2] = 0x06; bound_tmp++;
+									if (LS7_end_valid == 0) {mode[3] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[4] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[3] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[3] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										}
 									}
 								} else {
-									if (LS7_end_valid) {mode[2] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[3] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+									if (LS7_end_valid == 0) {mode[2] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[3] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[2] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[2] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[2] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[2] = 0x09; bound_tmp++;}
 										}
 									}
 								}
 							} else { // LS5: no
-								if (LS6_end_valid) {mode[1] = 0x06; bound_tmp++;
-									if (LS7_end_valid) {mode[2] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[3] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+								if (LS6_end_valid == 0) {mode[1] = 0x06; bound_tmp++;
+									if (LS7_end_valid == 0) {mode[2] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[3] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[2] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[2] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[2] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[2] = 0x09; bound_tmp++;}
 										}
 									}
 								} else {
-									if (LS7_end_valid) {mode[1] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[2] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+									if (LS7_end_valid == 0) {mode[1] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[2] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[2] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[2] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[1] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[2] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[1] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[2] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[1] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[1] = 0x09; bound_tmp++;}
 										}
 									}
 								}
@@ -1063,71 +1070,71 @@ while(active) {
 					// LS2: no 
 					// LS3: yes
 					// --------------------------------------------------------------------------------------
-					if (LS3_end_valid) {mode[0] = 0x03; bound_tmp++;
+					if (LS3_end_valid == 0) {mode[0] = 0x03; bound_tmp++;
 
 						// LS1: no
 						// LS2: no 
 						// LS3: yes
 						// LS4: yes
-						if (LS4_end_valid) {mode[1] = 0x04; bound_tmp++;
+						if (LS4_end_valid == 0) {mode[1] = 0x04; bound_tmp++;
 
-							if (LS5_end_valid) {mode[2] = 0x05; bound_tmp++;
-								if (LS6_end_valid) {mode[3] = 0x06; bound_tmp++;
-									if (LS7_end_valid) {mode[4] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[5] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[6] = 0x09; bound_tmp++;}
+							if (LS5_end_valid == 0) {mode[2] = 0x05; bound_tmp++;
+								if (LS6_end_valid == 0) {mode[3] = 0x06; bound_tmp++;
+									if (LS7_end_valid == 0) {mode[4] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[5] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[6] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[4] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[4] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										}
 									}
 								} else {
-									if (LS7_end_valid) {mode[3] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[4] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+									if (LS7_end_valid == 0) {mode[3] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[4] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[3] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[3] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										}
 									}
 								}
 							} else { // LS5: no
-								if (LS6_end_valid) {mode[2] = 0x06; bound_tmp++;
-									if (LS7_end_valid) {mode[3] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[4] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+								if (LS6_end_valid == 0) {mode[2] = 0x06; bound_tmp++;
+									if (LS7_end_valid == 0) {mode[3] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[4] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[3] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[3] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										}
 									}
 								} else {
-									if (LS7_end_valid) {mode[2] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[3] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+									if (LS7_end_valid == 0) {mode[2] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[3] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[2] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[2] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[2] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[2] = 0x09; bound_tmp++;}
 										}
 									}
 								}
@@ -1139,63 +1146,63 @@ while(active) {
 						// LS3: yes
 						// LS4: no
 						else {
-							if (LS5_end_valid) {mode[1] = 0x05; bound_tmp++;
-								if (LS6_end_valid) {mode[2] = 0x06; bound_tmp++;
-									if (LS7_end_valid) {mode[3] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[4] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+							if (LS5_end_valid == 0) {mode[1] = 0x05; bound_tmp++;
+								if (LS6_end_valid == 0) {mode[2] = 0x06; bound_tmp++;
+									if (LS7_end_valid == 0) {mode[3] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[4] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[3] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[3] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										}
 									}
 								} else {
-									if (LS7_end_valid) {mode[2] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[3] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+									if (LS7_end_valid == 0) {mode[2] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[3] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[2] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[2] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[2] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[2] = 0x09; bound_tmp++;}
 										}
 									}
 								}
 							} else { // LS5: no
-								if (LS6_end_valid) {mode[1] = 0x06; bound_tmp++;
-									if (LS7_end_valid) {mode[2] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[3] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+								if (LS6_end_valid == 0) {mode[1] = 0x06; bound_tmp++;
+									if (LS7_end_valid == 0) {mode[2] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[3] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[2] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[2] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[2] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[2] = 0x09; bound_tmp++;}
 										}
 									}
 								} else {
-									if (LS7_end_valid) {mode[1] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[2] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+									if (LS7_end_valid == 0) {mode[1] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[2] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[2] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[2] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[1] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[2] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[1] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[2] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[1] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[1] = 0x09; bound_tmp++;}
 										}
 									}
 								}
@@ -1212,66 +1219,66 @@ while(active) {
 						// LS2: no 
 						// LS3: no
 						// LS4: yes
-						if (LS4_end_valid) {mode[0] = 0x04; bound_tmp++;
+						if (LS4_end_valid == 0) {mode[0] = 0x04; bound_tmp++;
 
-							if (LS5_end_valid) {mode[1] = 0x05; bound_tmp++;
-								if (LS6_end_valid) {mode[2] = 0x06; bound_tmp++;
-									if (LS7_end_valid) {mode[3] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[4] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[5] = 0x09; bound_tmp++;}
+							if (LS5_end_valid == 0) {mode[1] = 0x05; bound_tmp++;
+								if (LS6_end_valid == 0) {mode[2] = 0x06; bound_tmp++;
+									if (LS7_end_valid == 0) {mode[3] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[4] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[5] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[3] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[3] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										}
 									}
 								} else {
-									if (LS7_end_valid) {mode[2] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[3] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+									if (LS7_end_valid == 0) {mode[2] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[3] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[2] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[2] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[2] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[2] = 0x09; bound_tmp++;}
 										}
 									}
 								}
 							} else { // LS5: no
-								if (LS6_end_valid) {mode[1] = 0x06; bound_tmp++;
-									if (LS7_end_valid) {mode[2] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[3] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+								if (LS6_end_valid == 0) {mode[1] = 0x06; bound_tmp++;
+									if (LS7_end_valid == 0) {mode[2] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[3] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[2] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[2] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[2] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[2] = 0x09; bound_tmp++;}
 										}
 									}
 								} else {
-									if (LS7_end_valid) {mode[1] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[2] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+									if (LS7_end_valid == 0) {mode[1] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[2] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[2] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[2] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[1] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[2] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[1] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[2] = 0x09; bound_tmp++;}
 										}
 										else {
-											if (LS9_end_valid) {mode[1] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[1] = 0x09; bound_tmp++;}
 										}
 									}
 								}
@@ -1282,63 +1289,63 @@ while(active) {
 						// LS3: no
 						// LS4: no
 						} else { 
-							if (LS5_end_valid) {mode[0] = 0x05; bound_tmp++;
-								if (LS6_end_valid) {mode[1] = 0x06; bound_tmp++;
-									if (LS7_end_valid) {mode[2] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[3] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[4] = 0x09; bound_tmp++;}
+							if (LS5_end_valid == 0) {mode[0] = 0x05; bound_tmp++;
+								if (LS6_end_valid == 0) {mode[1] = 0x06; bound_tmp++;
+									if (LS7_end_valid == 0) {mode[2] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[3] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[4] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[2] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[2] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[2] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[2] = 0x09; bound_tmp++;}
 										}
 									}
 								} else {
-									if (LS7_end_valid) {mode[1] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[2] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+									if (LS7_end_valid == 0) {mode[1] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[2] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[2] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[2] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[1] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[2] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[1] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[2] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[1] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[1] = 0x09; bound_tmp++;}
 										}
 									}
 								}
 							} else { // LS5: no
-								if (LS6_end_valid) {mode[0] = 0x06; bound_tmp++;
-									if (LS7_end_valid) {mode[1] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[2] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[3] = 0x09; bound_tmp++;}
+								if (LS6_end_valid == 0) {mode[0] = 0x06; bound_tmp++;
+									if (LS7_end_valid == 0) {mode[1] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[2] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[3] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[2] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[2] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[1] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[2] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[1] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[2] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[1] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[1] = 0x09; bound_tmp++;}
 										}
 									}
 								} else {
-									if (LS7_end_valid) {mode[0] = 0x07; bound_tmp++;
-										if (LS8_end_valid) {mode[1] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[2] = 0x09; bound_tmp++;}
+									if (LS7_end_valid == 0) {mode[0] = 0x07; bound_tmp++;
+										if (LS8_end_valid == 0) {mode[1] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[2] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[1] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[1] = 0x09; bound_tmp++;}
 										}
 									} else {
-										if (LS8_end_valid) {mode[0] = 0x08; bound_tmp++;
-											if (LS9_end_valid) {mode[1] = 0x09; bound_tmp++;}
+										if (LS8_end_valid == 0) {mode[0] = 0x08; bound_tmp++;
+											if (LS9_end_valid == 0) {mode[1] = 0x09; bound_tmp++;}
 										} else {
-											if (LS9_end_valid) {mode[0] = 0x09; bound_tmp++;}
+											if (LS9_end_valid == 0) {mode[0] = 0x09; bound_tmp++;}
 										}
 									}
 								}

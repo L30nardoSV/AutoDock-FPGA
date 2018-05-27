@@ -243,6 +243,10 @@ while(active) {
 	}
 	// --------------------------------------------------------------
 
+	#if defined (DEBUG_KRNL_INTRAE)
+	printf("AFTER Out INTRAE CHANNEL\n");
+	#endif
+
 } // End of while(active)
 
 	#if defined (DEBUG_ACTIVE_KERNEL)

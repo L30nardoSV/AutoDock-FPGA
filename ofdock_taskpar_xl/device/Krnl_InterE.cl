@@ -501,6 +501,10 @@ while(active) {
 		case 0x09: write_pipe_block(chan_Intere2StoreLS_LS9_intere, &final_interE); break;
 	}
 	// --------------------------------------------------------------
+
+	#if defined (DEBUG_KRNL_INTERE)
+	printf("AFTER Out INTERE CHANNEL\n");
+	#endif
  	
 } // End of while(active)
 

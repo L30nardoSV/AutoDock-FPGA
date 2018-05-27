@@ -564,9 +564,9 @@ void Krnl_GA(
 
 		LocalEneCurr[pop_cnt] = energyIA_IC_rx + energyIE_IC_rx;
 
-		#if defined (DEBUG_KRNL_IC)
+//		#if defined (DEBUG_KRNL_IC)
 		printf(", IC - rx pop: %u\n", pop_cnt); 		
-		#endif
+//		#endif
 	}
 	// ------------------------------------------------------------------
 
@@ -662,9 +662,9 @@ void Krnl_GA(
 				LocalEneNext[0] = loc_energies[best_entity];
 			}
 
-			#if defined (DEBUG_KRNL_GA)
+//			#if defined (DEBUG_KRNL_GA)
 			printf("Krnl_GA: %u\n", new_pop_cnt);
-			#endif
+//			#endif
 
 			float local_entity_1 [ACTUAL_GENOTYPE_LENGTH];
 			float local_entity_2 [ACTUAL_GENOTYPE_LENGTH]; 
@@ -683,7 +683,7 @@ void Krnl_GA(
 /*
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 */
-
+//printf("test point 1\n");
 			// Convert: float prng that must be still converted to short
 			float bt_tmp_uf0 = bt_tmp.s0;
 			float bt_tmp_uf1 = bt_tmp.s2;
@@ -741,6 +741,7 @@ void Krnl_GA(
 /*
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 */
+//printf("test point 2\n");
 
 			uchar covr_point_low;
 			uchar covr_point_high;
@@ -765,6 +766,7 @@ void Krnl_GA(
 /*
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 */
+//printf("test point 3\n");
 
 			for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
 /*
@@ -775,6 +777,7 @@ void Krnl_GA(
 /*
 				mem_fence(CLK_CHANNEL_MEM_FENCE);
 */
+//printf("test point 4\n");
 
 				float tmp_offspring;
 
@@ -811,11 +814,12 @@ void Krnl_GA(
 				write_channel_altera(chan_GG2Conf_genotype, tmp_offspring);
 */
 				write_pipe_block(chan_GG2Conf_genotype, &tmp_offspring);
+//printf("test point 5\n");
 			}
 
-			#if defined (DEBUG_KRNL_GG)
+//			#if defined (DEBUG_KRNL_GG)
 			printf("GG - tx pop: %u", new_pop_cnt); 		
-			#endif	
+//			#endif	
 
 			// Read energy
 			float energyIA_GG_rx;
@@ -849,13 +853,14 @@ void Krnl_GA(
 */
 					inter_valid = read_pipe(chan_Intere2StoreGG_intere, &energyIE_GG_rx);
 				}
+//printf("intra_valid: %i, inter_valid: %i\n", intra_valid, inter_valid);
 			}
-			
+//printf("test point 5\n");			
 			LocalEneNext[new_pop_cnt] = energyIA_GG_rx + energyIE_GG_rx;
 
-			#if defined (DEBUG_KRNL_GG)
+//			#if defined (DEBUG_KRNL_GG)
 			printf(", GG - rx pop: %u\n", new_pop_cnt); 		
-			#endif
+//			#endif
 		} 
 		// ------------------------------------------------------------------
 		// LS: Local Search
@@ -876,6 +881,7 @@ void Krnl_GA(
 /*
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 */
+printf("test point LS 1\n");
 
 			ushort entity_ls1 = entity_ls.s0;
 			ushort entity_ls2 = entity_ls.s1;

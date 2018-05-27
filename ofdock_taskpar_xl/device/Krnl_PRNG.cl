@@ -21,7 +21,8 @@ void Krnl_Prng_BT_ushort_float(unsigned int Host_seed1,
 /*
 	while(!valid) {	
 */
-	while(valid == 0) {	
+	while(valid != 0) {	
+
 		bool active = true;
 /*
 		active = read_channel_nb_altera(chan_Arbiter_BT_ushort_float_off, &valid);
@@ -54,14 +55,16 @@ void Krnl_Prng_BT_ushort_float(unsigned int Host_seed1,
 /*
 		if(!valid) {
 */
-		if(valid == 0) {
+		if(valid != 0) {
 			float8 tmp = {*(float*)&u_tmp[0], f_tmp[0],
 				      *(float*)&u_tmp[1], f_tmp[1],
 				      *(float*)&u_tmp[2], f_tmp[2],
 				      *(float*)&u_tmp[3], f_tmp[3]};
+
 /*
 			success = write_channel_nb_altera(chan_PRNG2GA_BT_ushort_float_prng, tmp);
 */
+
 			success = write_pipe(chan_PRNG2GA_BT_ushort_float_prng, &tmp);
 		}
 	} /*// End of while(!valid)*/
@@ -86,7 +89,7 @@ void Krnl_Prng_GG_uchar(unsigned int  Host_seed,
 /*
 	while(!valid) {
 */
-	while(valid == 0) {
+	while(valid != 0) {
 		bool active = true;
 /*
 		active = read_channel_nb_altera(chan_Arbiter_GG_uchar_off, &valid);
@@ -116,7 +119,7 @@ void Krnl_Prng_GG_uchar(unsigned int  Host_seed,
 /*
 		if(!valid) {
 */
-		if(valid == 0) {
+		if(valid != 0) {
 /*
 			success = write_channel_nb_altera(chan_PRNG2GA_GG_uchar_prng, utmp);
 */
@@ -141,7 +144,7 @@ void Krnl_Prng_GG_float(unsigned int  Host_seed,
 /*
 	while(!valid) {
 */
-	while(valid == 0) {
+	while(valid != 0) {
 
 		bool active = true;
 /*
@@ -164,7 +167,7 @@ void Krnl_Prng_GG_float(unsigned int  Host_seed,
 /*
 			if(!valid) {
 */
-			if(valid == 0) {
+			if(valid != 0) {
 /*
 				success = write_channel_nb_altera(chan_PRNG2GA_GG_float_prng, tmp);
 */
@@ -211,7 +214,7 @@ void Krnl_Prng_LS123_ushort(unsigned int Host_seed1,
 /*
 	while(!valid) {
 */
-	while(valid == 0) {
+	while(valid != 0) {
 		bool active = true;
 /*
 		active  = read_channel_nb_altera(chan_Arbiter_LS123_ushort_off, &valid);
@@ -269,7 +272,7 @@ void Krnl_Prng_LS123_ushort(unsigned int Host_seed1,
 /*
 		if(!valid) {
 */
-		if(valid == 0) {
+		if(valid != 0) {
 /*
 			success = write_channel_nb_altera(chan_PRNG2GA_LS123_ushort_prng, tmp123);
 */
@@ -297,7 +300,7 @@ void Krnl_Prng_LS_float(unsigned int  Host_seed,
 /*
 	while(!valid) {
 */
-	while(valid == 0) {
+	while(valid != 0) {
 		bool active = true;
 /*
 		active  = read_channel_nb_altera(chan_Arbiter_LS_float_off, &valid);
@@ -321,7 +324,7 @@ void Krnl_Prng_LS_float(unsigned int  Host_seed,
 /*
 			if(!valid) {
 */
-			if(valid == 0) {
+			if(valid == 1) {
 /*
 				success = write_channel_nb_altera(chan_PRNG2GA_LS_float_prng, *(float*) &fixpt_tmp);
 */
@@ -331,7 +334,7 @@ void Krnl_Prng_LS_float(unsigned int  Host_seed,
 /*
 			if(!valid) {
 */
-			if(valid == 0) {
+			if(valid != 0) {
 /*
 				success = write_channel_nb_altera(chan_PRNG2GA_LS_float_prng, tmp);
 */
@@ -358,7 +361,7 @@ void Krnl_Prng_LS2_float(unsigned int  Host_seed,
 /*
 	while(!valid) {
 */
-	while(valid == 0) {
+	while(valid != 0) {
 		bool active = true;
 /*
 		active  = read_channel_nb_altera(chan_Arbiter_LS2_float_off, &valid);
@@ -382,7 +385,7 @@ void Krnl_Prng_LS2_float(unsigned int  Host_seed,
 /*
 			if(!valid) {
 */
-			if(valid == 0) {
+			if(valid != 0) {
 /*
 				success = write_channel_nb_altera(chan_PRNG2GA_LS2_float_prng, *(float*) &fixpt_tmp);
 */
@@ -392,7 +395,7 @@ void Krnl_Prng_LS2_float(unsigned int  Host_seed,
 /*
 			if(!valid) {
 */
-			if(valid == 0) {
+			if(valid != 0) {
 /*
 				success = write_channel_nb_altera(chan_PRNG2GA_LS2_float_prng, tmp);
 */
@@ -419,7 +422,7 @@ void Krnl_Prng_LS3_float(unsigned int  Host_seed,
 /*
 	while(!valid) {
 */
-	while(valid == 0) {
+	while(valid != 0) {
 		bool active = true;
 /*
 		active  = read_channel_nb_altera(chan_Arbiter_LS3_float_off, &valid);
@@ -443,7 +446,7 @@ void Krnl_Prng_LS3_float(unsigned int  Host_seed,
 /*
 			if(!valid) {
 */
-			if(valid == 0) {
+			if(valid != 0) {
 /*
 				success = write_channel_nb_altera(chan_PRNG2GA_LS3_float_prng, *(float*) &fixpt_tmp);
 */
@@ -454,7 +457,7 @@ void Krnl_Prng_LS3_float(unsigned int  Host_seed,
 /*
 			if(!valid) {
 */
-			if(valid == 0) {
+			if(valid != 0) {
 /*
 				success = write_channel_nb_altera(chan_PRNG2GA_LS3_float_prng, tmp);
 */
@@ -481,7 +484,7 @@ void Krnl_Prng_LS4_float(unsigned int  Host_seed,
 /*
 	while(!valid) {
 */
-	while(valid == 0) {
+	while(valid != 0) {
 		bool active = true;
 /*
 		active  = read_channel_nb_altera(chan_Arbiter_LS4_float_off, &valid);
@@ -505,7 +508,7 @@ void Krnl_Prng_LS4_float(unsigned int  Host_seed,
 /*
 			if(!valid) {
 */
-			if(valid == 0) {
+			if(valid != 0) {
 /*
 				success = write_channel_nb_altera(chan_PRNG2GA_LS4_float_prng, *(float*) &fixpt_tmp);
 */
@@ -515,7 +518,7 @@ void Krnl_Prng_LS4_float(unsigned int  Host_seed,
 /*
 			if(!valid) {
 */
-			if(valid == 0) {
+			if(valid != 0) {
 /*
 				success = write_channel_nb_altera(chan_PRNG2GA_LS4_float_prng, tmp);
 */
@@ -542,7 +545,7 @@ void Krnl_Prng_LS5_float(unsigned int  Host_seed,
 /*
 	while(!valid) {
 */
-	while(valid == 0) {
+	while(valid != 0) {
 		bool active = true;
 /*
 		active  = read_channel_nb_altera(chan_Arbiter_LS5_float_off, &valid);
@@ -566,7 +569,7 @@ void Krnl_Prng_LS5_float(unsigned int  Host_seed,
 /*
 			if(!valid) {
 */
-			if(valid == 0) {
+			if(valid != 0) {
 /*
 				success = write_channel_nb_altera(chan_PRNG2GA_LS5_float_prng, *(float*) &fixpt_tmp);
 */
@@ -576,7 +579,7 @@ void Krnl_Prng_LS5_float(unsigned int  Host_seed,
 /*
 			if(!valid) {
 */
-			if(valid == 0) {
+			if(valid != 0) {
 /*
 				success = write_channel_nb_altera(chan_PRNG2GA_LS5_float_prng, tmp);
 */
@@ -603,7 +606,7 @@ void Krnl_Prng_LS6_float(unsigned int  Host_seed,
 /*
 	while(!valid) {
 */
-	while(valid == 0) {
+	while(valid != 0) {
 		bool active = true;
 /*
 		active  = read_channel_nb_altera(chan_Arbiter_LS6_float_off, &valid);
@@ -627,7 +630,7 @@ void Krnl_Prng_LS6_float(unsigned int  Host_seed,
 /*
 			if(!valid) {
 */
-			if(valid == 0) {
+			if(valid != 0) {
 /*
 				success = write_channel_nb_altera(chan_PRNG2GA_LS6_float_prng, *(float*) &fixpt_tmp);
 */
@@ -637,7 +640,7 @@ void Krnl_Prng_LS6_float(unsigned int  Host_seed,
 /*
 			if(!valid) {
 */
-			if(valid == 0) {
+			if(valid != 0) {
 /*
 				success = write_channel_nb_altera(chan_PRNG2GA_LS6_float_prng, tmp);
 */
@@ -664,7 +667,7 @@ void Krnl_Prng_LS7_float(unsigned int  Host_seed,
 /*
 	while(!valid) {
 */
-	while(valid == 0) {
+	while(valid != 0) {
 		bool active = true;
 /*
 		active  = read_channel_nb_altera(chan_Arbiter_LS7_float_off, &valid);
@@ -688,7 +691,7 @@ void Krnl_Prng_LS7_float(unsigned int  Host_seed,
 /*
 			if(!valid) {
 */
-			if(valid == 0) {
+			if(valid != 0) {
 /*
 				success = write_channel_nb_altera(chan_PRNG2GA_LS7_float_prng, *(float*) &fixpt_tmp);
 */
@@ -698,7 +701,7 @@ void Krnl_Prng_LS7_float(unsigned int  Host_seed,
 /*
 			if(!valid) {
 */
-			if(valid == 0) {
+			if(valid != 0) {
 /*
 				success = write_channel_nb_altera(chan_PRNG2GA_LS7_float_prng, tmp);
 */
@@ -725,7 +728,7 @@ void Krnl_Prng_LS8_float(unsigned int  Host_seed,
 /*
 	while(!valid) {
 */
-	while(valid == 0) {
+	while(valid != 0) {
 		bool active = true;
 /*
 		active  = read_channel_nb_altera(chan_Arbiter_LS8_float_off, &valid);
@@ -749,7 +752,7 @@ void Krnl_Prng_LS8_float(unsigned int  Host_seed,
 /*
 			if(!valid) {
 */
-			if(valid == 0) {
+			if(valid != 0) {
 /*
 				success = write_channel_nb_altera(chan_PRNG2GA_LS8_float_prng, *(float*) &fixpt_tmp);
 */
@@ -759,7 +762,7 @@ void Krnl_Prng_LS8_float(unsigned int  Host_seed,
 /*
 			if(!valid) {
 */
-			if(valid == 0) {
+			if(valid != 0) {
 /*
 				success = write_channel_nb_altera(chan_PRNG2GA_LS8_float_prng, tmp);
 */
@@ -786,7 +789,7 @@ void Krnl_Prng_LS9_float(unsigned int  Host_seed,
 /*
 	while(!valid) {
 */
-	while(valid == 0) {
+	while(valid != 0) {
 		bool active = true;
 /*
 		active  = read_channel_nb_altera(chan_Arbiter_LS9_float_off, &valid);
@@ -810,7 +813,7 @@ void Krnl_Prng_LS9_float(unsigned int  Host_seed,
 /*
 			if(!valid) {
 */
-			if(valid == 0) {
+			if(valid != 0) {
 /*
 				success = write_channel_nb_altera(chan_PRNG2GA_LS9_float_prng, *(float*) &fixpt_tmp);
 */
@@ -820,7 +823,7 @@ void Krnl_Prng_LS9_float(unsigned int  Host_seed,
 /*
 			if(!valid) {
 */
-			if(valid == 0) {
+			if(valid != 0) {
 /*
 				success = write_channel_nb_altera(chan_PRNG2GA_LS9_float_prng, tmp);
 */
