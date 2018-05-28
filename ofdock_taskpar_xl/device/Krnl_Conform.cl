@@ -169,9 +169,9 @@ while(active) {
 		#endif
 	}
 
-//	#if defined (DEBUG_ACTIVE_KERNEL)
+	#if defined (DEBUG_ACTIVE_KERNEL)
 	if (active == 0x00) {printf("	%-20s: %s\n", "Krnl_Conform", "must be disabled");}
-//	#endif
+	#endif
 
 	for (ushort rotation_counter = 0; rotation_counter < DockConst_rotbondlist_length; rotation_counter++)
 	{
@@ -517,9 +517,9 @@ while(active) {
 
 } // End of while(active)
 
-//#if defined (DEBUG_ACTIVE_KERNEL)
+#if defined (DEBUG_ACTIVE_KERNEL)
 printf("	%-20s: %s\n", "Krnl_Conform", "disabled");
-//#endif
+#endif
 
 }
 // --------------------------------------------------------------------------

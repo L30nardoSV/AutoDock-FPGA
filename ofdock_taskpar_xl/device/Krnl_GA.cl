@@ -564,9 +564,9 @@ void Krnl_GA(
 
 		LocalEneCurr[pop_cnt] = energyIA_IC_rx + energyIE_IC_rx;
 
-//		#if defined (DEBUG_KRNL_IC)
+		#if defined (DEBUG_KRNL_IC)
 		printf(", IC - rx pop: %u\n", pop_cnt); 		
-//		#endif
+		#endif
 	}
 	// ------------------------------------------------------------------
 
@@ -662,9 +662,9 @@ void Krnl_GA(
 				LocalEneNext[0] = loc_energies[best_entity];
 			}
 
-//			#if defined (DEBUG_KRNL_GA)
+			#if defined (DEBUG_KRNL_GA)
 			printf("Krnl_GA: %u\n", new_pop_cnt);
-//			#endif
+			#endif
 
 			float local_entity_1 [ACTUAL_GENOTYPE_LENGTH];
 			float local_entity_2 [ACTUAL_GENOTYPE_LENGTH]; 
@@ -817,9 +817,9 @@ void Krnl_GA(
 //printf("test point 5\n");
 			}
 
-//			#if defined (DEBUG_KRNL_GG)
+			#if defined (DEBUG_KRNL_GG)
 			printf("GG - tx pop: %u", new_pop_cnt); 		
-//			#endif	
+			#endif	
 
 			// Read energy
 			float energyIA_GG_rx;
@@ -853,14 +853,15 @@ void Krnl_GA(
 */
 					inter_valid = read_pipe(chan_Intere2StoreGG_intere, &energyIE_GG_rx);
 				}
+
 //printf("intra_valid: %i, inter_valid: %i\n", intra_valid, inter_valid);
 			}
 //printf("test point 5\n");			
 			LocalEneNext[new_pop_cnt] = energyIA_GG_rx + energyIE_GG_rx;
 
-//			#if defined (DEBUG_KRNL_GG)
+			#if defined (DEBUG_KRNL_GG)
 			printf(", GG - rx pop: %u\n", new_pop_cnt); 		
-//			#endif
+			#endif
 		} 
 		// ------------------------------------------------------------------
 		// LS: Local Search
@@ -881,7 +882,7 @@ void Krnl_GA(
 /*
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 */
-printf("test point LS 1\n");
+//printf("test point LS 1\n");
 
 			ushort entity_ls1 = entity_ls.s0;
 			ushort entity_ls2 = entity_ls.s1;
@@ -913,6 +914,8 @@ printf("test point LS 1\n");
 			write_pipe_block(chan_GA2LS_LS7_energy, &LocalEneNext[entity_ls7]);
 			write_pipe_block(chan_GA2LS_LS8_energy, &LocalEneNext[entity_ls8]);
 			write_pipe_block(chan_GA2LS_LS9_energy, &LocalEneNext[entity_ls9]);
+
+//printf("test point LS 2\n");
 /*
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 */
@@ -941,6 +944,7 @@ printf("test point LS 1\n");
 /*
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 */
+//printf("test point LS 3\n");
 
 			float2 evalenergy_tmp1;
 			float2 evalenergy_tmp2;

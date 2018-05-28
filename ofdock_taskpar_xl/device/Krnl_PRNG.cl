@@ -324,7 +324,7 @@ void Krnl_Prng_LS_float(unsigned int  Host_seed,
 /*
 			if(!valid) {
 */
-			if(valid == 1) {
+			if(valid != 0) {
 /*
 				success = write_channel_nb_altera(chan_PRNG2GA_LS_float_prng, *(float*) &fixpt_tmp);
 */
