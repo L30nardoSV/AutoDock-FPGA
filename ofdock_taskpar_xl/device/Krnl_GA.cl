@@ -616,7 +616,11 @@ void Krnl_GA(
 		// Shift register to reduce II (initially II=6) of best entity for-loop 
 		float shift_reg[SHIFT_REG_SIZE];
 
+/*
 		#pragma unroll
+*/
+		__attribute__((opencl_unroll_hint))
+		LOOP_GA_SHIFT: 
 		for (uchar i=0; i<SHIFT_REG_SIZE; i++) {
 			shift_reg[i] = 0.0f;
 		}
@@ -636,7 +640,11 @@ void Krnl_GA(
 			//if (pop_cnt>0) {
 			shift_reg[SHIFT_REG_SIZE_MINUS_ONE] = loc_energies[best_entity];
 
+/*
 			#pragma unroll
+*/
+			__attribute__((opencl_unroll_hint))
+			LOOP_GA_SHIFT_MINUS_ONE:
 			for (uchar j=0; j<SHIFT_REG_SIZE_MINUS_ONE; j++) {
 				shift_reg[j] = shift_reg[j+1];
 			}
@@ -655,7 +663,11 @@ void Krnl_GA(
 			// Elitism: copying the best entity to new population
 			// ---------------------------------------------------
 			if (new_pop_cnt == 1) {
+/*
 				#pragma unroll
+*/
+				__attribute__((opencl_unroll_hint))
+				LOOP_GA_ELITISM:
 				for (uchar gene_cnt=0; gene_cnt<ACTUAL_GENOTYPE_LENGTH; gene_cnt++) { 		
 					LocalPopNext[0][gene_cnt & MASK_GENOTYPE] = LocalPopCurr[best_entity][gene_cnt & MASK_GENOTYPE]; 	
 				} 		

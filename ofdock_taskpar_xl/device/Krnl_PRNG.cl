@@ -32,7 +32,11 @@ void Krnl_Prng_BT_ushort_float(unsigned int Host_seed1,
 		uint   u_tmp[4]; // used as short in GA
 		float  f_tmp[4];	
 
+/*
 		#pragma unroll
+*/
+		__attribute__((opencl_unroll_hint))
+		LOOP_PRNG_BT_USHORT_FLOAT:
 		for(uchar i=0; i<4; i++) {
 			uchar2 lsb;
 
@@ -98,7 +102,11 @@ void Krnl_Prng_GG_uchar(unsigned int  Host_seed,
 
 		uchar tmp[2];
 
+/*
 		#pragma unroll
+*/
+		__attribute__((opencl_unroll_hint))
+		LOOP_PRNG_GG_UCHAR:
 		for(uchar i=0; i<2; i++) {
 			uchar lsb;
 			lsb = lfsr & 0x01u;
@@ -223,7 +231,11 @@ void Krnl_Prng_LS123_ushort(unsigned int Host_seed1,
 
 		ushort tmp[9];
 		
+/*
 		#pragma unroll
+*/
+		__attribute__((opencl_unroll_hint))
+		LOOP_PRNG_LS123_USHORT:
 		for (uint i=0; i<9; i++){
 			uchar  lsb[9];
 			lsb [i] = lfsr[i] & 0x01u;

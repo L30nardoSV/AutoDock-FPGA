@@ -481,7 +481,11 @@ while(active) {
 		float3 tmp_coords[2];
 		#endif
 
+/*
 		#pragma unroll
+*/
+		__attribute__((opencl_unroll_hint))
+		LOOP_CONFORM_OUT:
 		for (uchar i=0; i<2; i++) {
 			tmp_coords[i] = loc_coords[pipe_cnt+i];
 		}

@@ -103,7 +103,11 @@ while(active) {
 	//float shift_intraE[33];
 	fixedpt64 shift_intraE[33];
 
+/*
 	#pragma unroll
+*/
+	__attribute__((opencl_unroll_hint))
+	LOOP_INTRAE_SHIFT_INIT:
 	for (uchar i=0; i<33; i++) {
 		//shift_intraE[i] = 0.0f;
 		shift_intraE[i] = 0;
@@ -191,7 +195,11 @@ while(active) {
 						     fixedpt64_fromfloat(partialE3) + 
 						     fixedpt64_fromfloat(partialE4);
 
+/*
 		#pragma unroll
+*/
+		__attribute__((opencl_unroll_hint))
+		LOOP_INTRAE_SHIFT:
 		for (uchar j=0; j<32; j++) {
 			shift_intraE[j] = shift_intraE[j+1];
 		}
@@ -204,7 +212,11 @@ while(active) {
 	#if defined (FIXED_POINT_INTRAE)
 	fixedpt64 fixpt_intraE = 0;
 
+/*
 	#pragma unroll
+*/
+	__attribute__((opencl_unroll_hint))
+	LOOP_INTRAE_SHIFT_RED:
 	for (uchar j=0; j<32; j++) {
 		//intraE += shift_intraE[j];
 		fixpt_intraE += shift_intraE[j];
