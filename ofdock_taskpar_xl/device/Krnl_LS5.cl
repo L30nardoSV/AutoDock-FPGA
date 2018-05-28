@@ -26,8 +26,10 @@ void Krnl_LS5(
 	bool valid = true;
 
 while(valid) {
-
+/*
 	bool active;
+*/
+	int active;
 /*
 	bool valid_active = false;
 */
@@ -53,7 +55,11 @@ while(valid) {
 /*
 	valid = active || valid_energy;
 */
+/*
 	valid = active || (valid_energy == 0);
+*/
+	// (active == 1) means stop LS
+	valid = (active != 1) || (valid_energy == 0);
 
 	if (valid) {
 
@@ -149,16 +155,22 @@ while(valid) {
 /*
 			write_channel_altera(chan_LS2Arbiter_LS5_end, (fixpt_rho < DockConst_rho_lower_bound)?true:false);
 */
-		
+/*		
 			bool tmp_bool = (fixpt_rho < DockConst_rho_lower_bound)?true:false;
 			write_pipe_block(chan_LS2Arbiter_LS5_end, &tmp_bool);
-
+*/
+			int tmp_int = (fixpt_rho < DockConst_rho_lower_bound)?0:1;
+			write_pipe_block(chan_LS2Arbiter_LS5_end, &tmp_int);
 			#else
 /*
 			write_channel_altera(chan_LS2Arbiter_LS5_end, (rho < DockConst_rho_lower_bound)?true:false);
 */
+/*
 			bool tmp_bool= (rho < DockConst_rho_lower_bound)?true:false;
 			write_pipe_block(chan_LS2Arbiter_LS5_end, &tmp_bool);
+*/
+			int tmp_int = (rho < DockConst_rho_lower_bound)?0:1;
+			write_pipe_block(chan_LS2Arbiter_LS5_end, &tmp_int);
 			#endif
 /*
 			mem_fence(CLK_CHANNEL_MEM_FENCE);

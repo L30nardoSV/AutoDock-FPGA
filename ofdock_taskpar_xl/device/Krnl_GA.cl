@@ -19,8 +19,14 @@
 pipe bool    chan_GA2IGL_IC_active;
 pipe bool    chan_GA2IGL_GG_active;
 */
+/*
 pipe bool    chan_GA2IGL_IC_active	__attribute__((xcl_reqd_pipe_depth(16)));
 pipe bool    chan_GA2IGL_GG_active	__attribute__((xcl_reqd_pipe_depth(16)));
+*/
+pipe int    chan_GA2IGL_IC_active	__attribute__((xcl_reqd_pipe_depth(16)));
+pipe int    chan_GA2IGL_GG_active	__attribute__((xcl_reqd_pipe_depth(16)));
+
+
 
 // Send genotypes from producers (IC, GG, LSs) to Conform
 /*
@@ -176,6 +182,7 @@ pipe bool    chan_Arbiter_LS7_float_off;
 pipe bool    chan_Arbiter_LS8_float_off;
 pipe bool    chan_Arbiter_LS9_float_off;
 */
+/*
 pipe bool    chan_Arbiter_BT_ushort_float_off	__attribute__((xcl_reqd_pipe_depth(16)));
 pipe bool    chan_Arbiter_GG_uchar_off		__attribute__((xcl_reqd_pipe_depth(16)));
 pipe bool    chan_Arbiter_GG_float_off		__attribute__((xcl_reqd_pipe_depth(16)));
@@ -189,6 +196,20 @@ pipe bool    chan_Arbiter_LS6_float_off		__attribute__((xcl_reqd_pipe_depth(16))
 pipe bool    chan_Arbiter_LS7_float_off		__attribute__((xcl_reqd_pipe_depth(16)));
 pipe bool    chan_Arbiter_LS8_float_off		__attribute__((xcl_reqd_pipe_depth(16)));
 pipe bool    chan_Arbiter_LS9_float_off		__attribute__((xcl_reqd_pipe_depth(16)));
+*/
+pipe int    chan_Arbiter_BT_ushort_float_off	__attribute__((xcl_reqd_pipe_depth(16)));
+pipe int    chan_Arbiter_GG_uchar_off		__attribute__((xcl_reqd_pipe_depth(16)));
+pipe int    chan_Arbiter_GG_float_off		__attribute__((xcl_reqd_pipe_depth(16)));
+pipe int    chan_Arbiter_LS123_ushort_off	__attribute__((xcl_reqd_pipe_depth(16)));
+pipe int    chan_Arbiter_LS_float_off		__attribute__((xcl_reqd_pipe_depth(16)));
+pipe int    chan_Arbiter_LS2_float_off		__attribute__((xcl_reqd_pipe_depth(16)));
+pipe int    chan_Arbiter_LS3_float_off		__attribute__((xcl_reqd_pipe_depth(16)));
+pipe int    chan_Arbiter_LS4_float_off		__attribute__((xcl_reqd_pipe_depth(16)));
+pipe int    chan_Arbiter_LS5_float_off		__attribute__((xcl_reqd_pipe_depth(16)));
+pipe int    chan_Arbiter_LS6_float_off		__attribute__((xcl_reqd_pipe_depth(16)));
+pipe int    chan_Arbiter_LS7_float_off		__attribute__((xcl_reqd_pipe_depth(16)));
+pipe int    chan_Arbiter_LS8_float_off		__attribute__((xcl_reqd_pipe_depth(16)));
+pipe int    chan_Arbiter_LS9_float_off		__attribute__((xcl_reqd_pipe_depth(16)));
 
 // Send energy values and genotypes to LSs
 // Resized to valid SDAccel depths: 16, 32, ...
@@ -247,6 +268,7 @@ pipe bool    chan_LS2Arbiter_LS7_end;
 pipe bool    chan_LS2Arbiter_LS8_end;
 pipe bool    chan_LS2Arbiter_LS9_end;
 */
+/*
 pipe bool    chan_LS2Arbiter_LS1_end	__attribute__((xcl_reqd_pipe_depth(16)));
 pipe bool    chan_LS2Arbiter_LS2_end	__attribute__((xcl_reqd_pipe_depth(16)));
 pipe bool    chan_LS2Arbiter_LS3_end	__attribute__((xcl_reqd_pipe_depth(16)));
@@ -256,7 +278,16 @@ pipe bool    chan_LS2Arbiter_LS6_end	__attribute__((xcl_reqd_pipe_depth(16)));
 pipe bool    chan_LS2Arbiter_LS7_end	__attribute__((xcl_reqd_pipe_depth(16)));
 pipe bool    chan_LS2Arbiter_LS8_end	__attribute__((xcl_reqd_pipe_depth(16)));
 pipe bool    chan_LS2Arbiter_LS9_end	__attribute__((xcl_reqd_pipe_depth(16)));
-
+*/
+pipe int    chan_LS2Arbiter_LS1_end	__attribute__((xcl_reqd_pipe_depth(16)));
+pipe int    chan_LS2Arbiter_LS2_end	__attribute__((xcl_reqd_pipe_depth(16)));
+pipe int    chan_LS2Arbiter_LS3_end	__attribute__((xcl_reqd_pipe_depth(16)));
+pipe int    chan_LS2Arbiter_LS4_end	__attribute__((xcl_reqd_pipe_depth(16)));
+pipe int    chan_LS2Arbiter_LS5_end	__attribute__((xcl_reqd_pipe_depth(16)));
+pipe int    chan_LS2Arbiter_LS6_end	__attribute__((xcl_reqd_pipe_depth(16)));
+pipe int    chan_LS2Arbiter_LS7_end	__attribute__((xcl_reqd_pipe_depth(16)));
+pipe int    chan_LS2Arbiter_LS8_end	__attribute__((xcl_reqd_pipe_depth(16)));
+pipe int    chan_LS2Arbiter_LS9_end	__attribute__((xcl_reqd_pipe_depth(16)));
 // Get LS-eval-count, new energy, new genotype from LSs
 // Resized to valid SDAccel depths: 16, 32, ...
 /*
@@ -315,6 +346,7 @@ pipe bool    chan_GA2LS_Off7_active;
 pipe bool    chan_GA2LS_Off8_active;
 pipe bool    chan_GA2LS_Off9_active;
 */
+/*
 pipe bool    chan_GA2LS_Off1_active	__attribute__((xcl_reqd_pipe_depth(16)));
 pipe bool    chan_GA2LS_Off2_active	__attribute__((xcl_reqd_pipe_depth(16)));
 pipe bool    chan_GA2LS_Off3_active	__attribute__((xcl_reqd_pipe_depth(16)));
@@ -324,6 +356,16 @@ pipe bool    chan_GA2LS_Off6_active	__attribute__((xcl_reqd_pipe_depth(16)));
 pipe bool    chan_GA2LS_Off7_active	__attribute__((xcl_reqd_pipe_depth(16)));
 pipe bool    chan_GA2LS_Off8_active	__attribute__((xcl_reqd_pipe_depth(16)));
 pipe bool    chan_GA2LS_Off9_active	__attribute__((xcl_reqd_pipe_depth(16)));
+*/
+pipe int    chan_GA2LS_Off1_active	__attribute__((xcl_reqd_pipe_depth(16)));
+pipe int    chan_GA2LS_Off2_active	__attribute__((xcl_reqd_pipe_depth(16)));
+pipe int    chan_GA2LS_Off3_active	__attribute__((xcl_reqd_pipe_depth(16)));
+pipe int    chan_GA2LS_Off4_active	__attribute__((xcl_reqd_pipe_depth(16)));
+pipe int    chan_GA2LS_Off5_active	__attribute__((xcl_reqd_pipe_depth(16)));
+pipe int    chan_GA2LS_Off6_active	__attribute__((xcl_reqd_pipe_depth(16)));
+pipe int    chan_GA2LS_Off7_active	__attribute__((xcl_reqd_pipe_depth(16)));
+pipe int    chan_GA2LS_Off8_active	__attribute__((xcl_reqd_pipe_depth(16)));
+pipe int    chan_GA2LS_Off9_active	__attribute__((xcl_reqd_pipe_depth(16)));
 
 // Send genotype-producer-pipe selector and genotype 
 // from IGL_Arbiter to Conform
@@ -340,7 +382,10 @@ pipe float  chan_IGL2Conform_genotype       __attribute__((xcl_reqd_pipe_depth(5
 /*
 pipe bool   chan_IGLArbiter_Off;
 */
+/*
 pipe bool   chan_IGLArbiter_Off		__attribute__((xcl_reqd_pipe_depth(16)));
+*/
+pipe int   chan_IGLArbiter_Off		__attribute__((xcl_reqd_pipe_depth(16)));
 
 #if defined (FIXED_POINT_CONFORM) || \
     defined (FIXED_POINT_LS1)     || \
@@ -500,17 +545,25 @@ void Krnl_GA(
 	// ------------------------------------------------------------------
 	// Initial Calculation (IC) of scores
 	// ------------------------------------------------------------------
+	__attribute__((xcl_pipeline_loop))
+	LOOP_GA_IC:
 	for (ushort pop_cnt = 0; pop_cnt < DockConst_pop_size; pop_cnt++) {
 		// Calculate energy
 /*
 		write_channel_altera(chan_GA2IGL_IC_active, true);
 */
+/*
 		const bool tmp_bool_true = true;
 		write_pipe_block(chan_GA2IGL_IC_active, &tmp_bool_true);
+*/
+		const int tmp_int_zero = 0;
+		write_pipe_block(chan_GA2IGL_IC_active, &tmp_int_zero);
 
 /*
 		mem_fence(CLK_CHANNEL_MEM_FENCE);
 */
+		__attribute__((xcl_pipeline_loop))
+		LOOP_GA_IC_WRITE_GENOTYPE:
 		for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_genes; pipe_cnt++) {
 			#if defined(SINGLE_COPY_POP_ENE)
 			LocalPopCurr[pop_cnt][pipe_cnt & MASK_GENOTYPE] = GlobPopCurr[pop_cnt*ACTUAL_GENOTYPE_LENGTH + pipe_cnt];
@@ -539,6 +592,8 @@ void Krnl_GA(
 /*
 		while( (intra_valid == false) || (inter_valid == false)) {
 */
+		__attribute__((xcl_pipeline_loop))
+		LOOP_GA_IC_READ_ENERGY:
 		while( (intra_valid != 0) || (inter_valid != 0)) {
 
 /*
@@ -773,8 +828,12 @@ void Krnl_GA(
 /*
 			write_channel_altera(chan_GA2IGL_GG_active, true);
 */
+/*
 			const bool tmp_bool_true = true;
 			write_pipe_block(chan_GA2IGL_GG_active, &tmp_bool_true);
+*/
+			const int tmp_int_zero = 0;
+			write_pipe_block(chan_GA2IGL_GG_active, &tmp_int_zero);
 /*
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 */
@@ -1200,6 +1259,7 @@ void Krnl_GA(
 	write_channel_altera(chan_Arbiter_LS8_float_off, 	false);
 	write_channel_altera(chan_Arbiter_LS9_float_off, 	false);
 */
+/*
 	const bool tmp_bool_false = false;
 	write_pipe_block(chan_Arbiter_BT_ushort_float_off,  	&tmp_bool_false);
 	write_pipe_block(chan_Arbiter_GG_uchar_off, 		&tmp_bool_false);
@@ -1214,6 +1274,21 @@ void Krnl_GA(
 	write_pipe_block(chan_Arbiter_LS7_float_off, 		&tmp_bool_false);
 	write_pipe_block(chan_Arbiter_LS8_float_off, 		&tmp_bool_false);
 	write_pipe_block(chan_Arbiter_LS9_float_off, 		&tmp_bool_false);
+*/
+	const int tmp_int_one = 1;
+	write_pipe_block(chan_Arbiter_BT_ushort_float_off,  	&tmp_int_one);
+	write_pipe_block(chan_Arbiter_GG_uchar_off, 		&tmp_int_one);
+	write_pipe_block(chan_Arbiter_GG_float_off, 		&tmp_int_one);
+	write_pipe_block(chan_Arbiter_LS123_ushort_off,  	&tmp_int_one);
+	write_pipe_block(chan_Arbiter_LS_float_off, 		&tmp_int_one);
+	write_pipe_block(chan_Arbiter_LS2_float_off, 		&tmp_int_one);
+	write_pipe_block(chan_Arbiter_LS3_float_off, 		&tmp_int_one);
+	write_pipe_block(chan_Arbiter_LS4_float_off, 		&tmp_int_one);
+	write_pipe_block(chan_Arbiter_LS5_float_off, 		&tmp_int_one);
+	write_pipe_block(chan_Arbiter_LS6_float_off, 		&tmp_int_one);
+	write_pipe_block(chan_Arbiter_LS7_float_off, 		&tmp_int_one);
+	write_pipe_block(chan_Arbiter_LS8_float_off, 		&tmp_int_one);
+	write_pipe_block(chan_Arbiter_LS9_float_off, 		&tmp_int_one);
 /*
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 */
@@ -1230,6 +1305,7 @@ void Krnl_GA(
 	write_channel_altera(chan_GA2LS_Off8_active,  		false);
 	write_channel_altera(chan_GA2LS_Off9_active,  		false);
 */
+/*
 	write_pipe_block(chan_GA2LS_Off1_active,  		&tmp_bool_false);
 	write_pipe_block(chan_GA2LS_Off2_active,  		&tmp_bool_false);
 	write_pipe_block(chan_GA2LS_Off3_active,  		&tmp_bool_false);
@@ -1239,6 +1315,16 @@ void Krnl_GA(
 	write_pipe_block(chan_GA2LS_Off7_active,  		&tmp_bool_false);
 	write_pipe_block(chan_GA2LS_Off8_active,  		&tmp_bool_false);
 	write_pipe_block(chan_GA2LS_Off9_active,  		&tmp_bool_false);
+*/
+	write_pipe_block(chan_GA2LS_Off1_active,  		&tmp_int_one);
+	write_pipe_block(chan_GA2LS_Off2_active,  		&tmp_int_one);
+	write_pipe_block(chan_GA2LS_Off3_active,  		&tmp_int_one);
+	write_pipe_block(chan_GA2LS_Off4_active,  		&tmp_int_one);
+	write_pipe_block(chan_GA2LS_Off5_active,  		&tmp_int_one);
+	write_pipe_block(chan_GA2LS_Off6_active,  		&tmp_int_one);
+	write_pipe_block(chan_GA2LS_Off7_active,  		&tmp_int_one);
+	write_pipe_block(chan_GA2LS_Off8_active,  		&tmp_int_one);
+	write_pipe_block(chan_GA2LS_Off9_active,  		&tmp_int_one);
 /*
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 */
@@ -1247,7 +1333,10 @@ void Krnl_GA(
 /*
 	write_channel_altera(chan_IGLArbiter_Off,     		false);
 */
+/*
 	write_pipe_block(chan_IGLArbiter_Off,     		&tmp_bool_false);
+*/
+	write_pipe_block(chan_IGLArbiter_Off,     		&tmp_int_one);
 /*
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 */

@@ -22,8 +22,10 @@ void Krnl_Prng_BT_ushort_float(unsigned int Host_seed1,
 	while(!valid) {	
 */
 	while(valid != 0) {	
-
+/*
 		bool active = true;
+*/
+		int active;
 /*
 		active = read_channel_nb_altera(chan_Arbiter_BT_ushort_float_off, &valid);
 */
@@ -94,7 +96,10 @@ void Krnl_Prng_GG_uchar(unsigned int  Host_seed,
 	while(!valid) {
 */
 	while(valid != 0) {
+/*
 		bool active = true;
+*/
+		int active;
 /*
 		active = read_channel_nb_altera(chan_Arbiter_GG_uchar_off, &valid);
 */
@@ -153,8 +158,10 @@ void Krnl_Prng_GG_float(unsigned int  Host_seed,
 	while(!valid) {
 */
 	while(valid != 0) {
-
+/*
 		bool active = true;
+*/
+		int active;
 /*
 		active = read_channel_nb_altera(chan_Arbiter_GG_float_off, &valid);
 */
@@ -223,7 +230,10 @@ void Krnl_Prng_LS123_ushort(unsigned int Host_seed1,
 	while(!valid) {
 */
 	while(valid != 0) {
+/*
 		bool active = true;
+*/
+		int active;
 /*
 		active  = read_channel_nb_altera(chan_Arbiter_LS123_ushort_off, &valid);
 */
@@ -313,7 +323,10 @@ void Krnl_Prng_LS_float(unsigned int  Host_seed,
 	while(!valid) {
 */
 	while(valid != 0) {
+/*
 		bool active = true;
+*/
+		int active;
 /*
 		active  = read_channel_nb_altera(chan_Arbiter_LS_float_off, &valid);
 */
@@ -374,7 +387,10 @@ void Krnl_Prng_LS2_float(unsigned int  Host_seed,
 	while(!valid) {
 */
 	while(valid != 0) {
+/*
 		bool active = true;
+*/
+		int active;
 /*
 		active  = read_channel_nb_altera(chan_Arbiter_LS2_float_off, &valid);
 */
@@ -435,7 +451,10 @@ void Krnl_Prng_LS3_float(unsigned int  Host_seed,
 	while(!valid) {
 */
 	while(valid != 0) {
+/*
 		bool active = true;
+*/
+		int active;
 /*
 		active  = read_channel_nb_altera(chan_Arbiter_LS3_float_off, &valid);
 */
@@ -497,7 +516,10 @@ void Krnl_Prng_LS4_float(unsigned int  Host_seed,
 	while(!valid) {
 */
 	while(valid != 0) {
+/*
 		bool active = true;
+*/
+		int active;
 /*
 		active  = read_channel_nb_altera(chan_Arbiter_LS4_float_off, &valid);
 */
@@ -558,7 +580,10 @@ void Krnl_Prng_LS5_float(unsigned int  Host_seed,
 	while(!valid) {
 */
 	while(valid != 0) {
+/*
 		bool active = true;
+*/
+		int active;
 /*
 		active  = read_channel_nb_altera(chan_Arbiter_LS5_float_off, &valid);
 */
@@ -619,7 +644,10 @@ void Krnl_Prng_LS6_float(unsigned int  Host_seed,
 	while(!valid) {
 */
 	while(valid != 0) {
+/*
 		bool active = true;
+*/
+		int active;
 /*
 		active  = read_channel_nb_altera(chan_Arbiter_LS6_float_off, &valid);
 */
@@ -680,7 +708,10 @@ void Krnl_Prng_LS7_float(unsigned int  Host_seed,
 	while(!valid) {
 */
 	while(valid != 0) {
+/*
 		bool active = true;
+*/
+		int active;
 /*
 		active  = read_channel_nb_altera(chan_Arbiter_LS7_float_off, &valid);
 */
@@ -741,7 +772,10 @@ void Krnl_Prng_LS8_float(unsigned int  Host_seed,
 	while(!valid) {
 */
 	while(valid != 0) {
+/*
 		bool active = true;
+*/
+		int active;
 /*
 		active  = read_channel_nb_altera(chan_Arbiter_LS8_float_off, &valid);
 */
@@ -802,7 +836,10 @@ void Krnl_Prng_LS9_float(unsigned int  Host_seed,
 	while(!valid) {
 */
 	while(valid != 0) {
+/*
 		bool active = true;
+*/
+		int active;
 /*
 		active  = read_channel_nb_altera(chan_Arbiter_LS9_float_off, &valid);
 */

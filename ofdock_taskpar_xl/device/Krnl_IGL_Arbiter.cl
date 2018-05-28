@@ -58,18 +58,18 @@ while(active) {
 	int LS8_end_valid = 1;
 	int LS9_end_valid = 1;
 
-	bool Off_active;
-	bool IC_active;
-	bool GG_active;
-	bool LS1_end_active;
-	bool LS2_end_active;
-	bool LS3_end_active;
-	bool LS4_end_active;
-	bool LS5_end_active;
-	bool LS6_end_active;
-	bool LS7_end_active;
-	bool LS8_end_active;
-	bool LS9_end_active;
+/*bool Off_active;*/ 	 int Off_active;
+/*bool IC_active;*/  	 int IC_active;
+/*bool GG_active;*/  	 int GG_active;
+/*bool LS1_end_active;*/ int LS1_end_active;
+/*bool LS2_end_active;*/ int LS2_end_active;
+/*bool LS3_end_active;*/ int LS3_end_active;
+/*bool LS4_end_active;*/ int LS4_end_active;
+/*bool LS5_end_active;*/ int LS5_end_active;
+/*bool LS6_end_active;*/ int LS6_end_active;
+/*bool LS7_end_active;*/ int LS7_end_active;
+/*bool LS8_end_active;*/ int LS8_end_active;
+/*bool LS9_end_active;*/ int LS9_end_active;
 
 /*
 	while (
