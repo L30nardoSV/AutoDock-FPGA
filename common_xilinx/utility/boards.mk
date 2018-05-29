@@ -554,12 +554,22 @@ FIPO_FLAG = $(FIPOCO_FLAG) \
 	    $(FIPOLS9_FLAG) \
 	    $(COPYPOPENE_FLAG) $(SEP_FGRID_FLAG) 
 
+
+
+ifeq ($(TARGETS), sw_emu)
+	OTHER_FLAGS=-DSW_EMU
+else	
+	OTHER_FLAGS=
+endif
+
+
+
 #https://www.xilinx.com/html_docs/xilinx2018_1/sdsoc_doc/nts1517252127891.html
 #CLFLAGS:= --xp "param:compiler.preserveHlsOutput=1" --xp "param:compiler.generateExtraRunData=true" -s
 #CLFLAGS:= --xp "param:compiler.version=31" --xp "param:compiler.preserveHlsOutput=1" --xp "param:compiler.generateExtraRunData=true" -s 
 #CLFLAGS:= --xp "param:compiler.version=31" --xp "param:compiler.preserveHlsOutput=1" --xp "param:compiler.generateExtraRunData=true" -s -I./ -I../ -I./device
 #CLFLAGS:= --xp "param:compiler.version=31" --xp "param:compiler.preserveHlsOutput=1" --xp "param:compiler.generateExtraRunData=true" -s -I./ -I../ -I./device $(REP) $(FIPO_FLAG)
-CLFLAGS:= --xp "param:compiler.version=31" --xp "param:compiler.preserveHlsOutput=1" --xp "param:compiler.generateExtraRunData=true" -s -g -I./ -I../ -I./device $(REP) $(FIPO_FLAG)
+CLFLAGS:= --xp "param:compiler.version=31" --xp "param:compiler.preserveHlsOutput=1" --xp "param:compiler.generateExtraRunData=true" -s -g -I./ -I../ -I./device $(REP) $(FIPO_FLAG) $(OTHER_FLAGS)
 
 
 ifneq ($(REPORT),none)

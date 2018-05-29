@@ -546,7 +546,7 @@ void Krnl_GA(
 	// Initial Calculation (IC) of scores
 	// ------------------------------------------------------------------
 	__attribute__((xcl_pipeline_loop))
-	LOOP_GA_IC:
+	LOOP_FOR_GA_IC_OUTER:
 	for (ushort pop_cnt = 0; pop_cnt < DockConst_pop_size; pop_cnt++) {
 		// Calculate energy
 /*
@@ -563,7 +563,7 @@ void Krnl_GA(
 		mem_fence(CLK_CHANNEL_MEM_FENCE);
 */
 		__attribute__((xcl_pipeline_loop))
-		LOOP_GA_IC_WRITE_GENOTYPE:
+		LOOP_FOR_GA_IC_INNER_WRITE_GENOTYPE:
 		for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_genes; pipe_cnt++) {
 			#if defined(SINGLE_COPY_POP_ENE)
 			LocalPopCurr[pop_cnt][pipe_cnt & MASK_GENOTYPE] = GlobPopCurr[pop_cnt*ACTUAL_GENOTYPE_LENGTH + pipe_cnt];
@@ -593,7 +593,7 @@ void Krnl_GA(
 		while( (intra_valid == false) || (inter_valid == false)) {
 */
 		__attribute__((xcl_pipeline_loop))
-		LOOP_GA_IC_READ_ENERGY:
+		LOOP_WHILE_GA_IC_INNER_READ_ENERGY:
 		while( (intra_valid != 0) || (inter_valid != 0)) {
 
 /*
@@ -629,6 +629,8 @@ void Krnl_GA(
 
 	uint generation_cnt = 0;
 
+	__attribute__((xcl_pipeline_loop))
+	LOOP_WHILE_GA_MAIN:
 	while ((eval_cnt < DockConst_num_of_energy_evals) && (generation_cnt < DockConst_num_of_generations)) {
 
 		//float LocalPopNext[MAX_POPSIZE][ACTUAL_GENOTYPE_LENGTH];
@@ -675,13 +677,15 @@ void Krnl_GA(
 		#pragma unroll
 */
 		__attribute__((opencl_unroll_hint))
-		LOOP_GA_SHIFT: 
+		LOOP_FOR_GA_SHIFT_INIT: 
 		for (uchar i=0; i<SHIFT_REG_SIZE; i++) {
 			shift_reg[i] = 0.0f;
 		}
 
 		ushort best_entity = 0;
 
+		__attribute__((xcl_pipeline_loop))
+		LOOP_FOR_GA_SHIFT: 
 //		for (ushort pop_cnt=1; pop_cnt<DockConst_pop_size; pop_cnt++) {
 		for (ushort pop_cnt=0; pop_cnt<DockConst_pop_size; pop_cnt++) {
 			// copy energy to local memory
@@ -699,7 +703,7 @@ void Krnl_GA(
 			#pragma unroll
 */
 			__attribute__((opencl_unroll_hint))
-			LOOP_GA_SHIFT_MINUS_ONE:
+			LOOP_FOR_GA_SHIFT_MINUS_ONE:
 			for (uchar j=0; j<SHIFT_REG_SIZE_MINUS_ONE; j++) {
 				shift_reg[j] = shift_reg[j+1];
 			}
@@ -712,6 +716,8 @@ void Krnl_GA(
 
 		#pragma ivdep array (LocalPopNext)
 		#pragma ivdep array (LocalEneNext)
+		__attribute__((xcl_pipeline_loop))
+		LOOP_FOR_GA_OUTER_GLOBAL: 
 		for (ushort new_pop_cnt = 1; new_pop_cnt < DockConst_pop_size; new_pop_cnt++) {
 
 			// ---------------------------------------------------
@@ -722,7 +728,7 @@ void Krnl_GA(
 				#pragma unroll
 */
 				__attribute__((opencl_unroll_hint))
-				LOOP_GA_ELITISM:
+				LOOP_FOR_GA_INNER_ELITISM:
 				for (uchar gene_cnt=0; gene_cnt<ACTUAL_GENOTYPE_LENGTH; gene_cnt++) { 		
 					LocalPopNext[0][gene_cnt & MASK_GENOTYPE] = LocalPopCurr[best_entity][gene_cnt & MASK_GENOTYPE]; 	
 				} 		
@@ -758,10 +764,18 @@ void Krnl_GA(
 			float bt_tmp_uf3 = bt_tmp.s6;
 
 			// short prng ready to be used, replace ushort prng_BT_U[4];
+/*
 			ushort bt_tmp_u0 = *(uint*)&bt_tmp_uf0;
 			ushort bt_tmp_u1 = *(uint*)&bt_tmp_uf1;
 			ushort bt_tmp_u2 = *(uint*)&bt_tmp_uf2;
 			ushort bt_tmp_u3 = *(uint*)&bt_tmp_uf3;
+*/
+			// Check "Krnl_Prng_BT_ushort_float"
+			// To surpass error in hw_emu		
+			ushort bt_tmp_u0 = bt_tmp_uf0;
+			ushort bt_tmp_u1 = bt_tmp_uf1;
+			ushort bt_tmp_u2 = bt_tmp_uf2;
+			ushort bt_tmp_u3 = bt_tmp_uf3;
 
 			// float prng ready to used, replace float prng_BT_F[4];
 			float bt_tmp_f0 = bt_tmp.s1;
@@ -788,6 +802,8 @@ void Krnl_GA(
 				if (bt_tmp_f3 < DockConst_tournament_rate) {parent2 = bt_tmp_u3;}
 				else			                   {parent2 = bt_tmp_u2;}}
 
+			__attribute__((xcl_pipeline_loop))
+			LOOP_FOR_GA_INNER_BT:
 			// local_entity_1 and local_entity_2 are population-parent1, population-parent2
 			for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
 				local_entity_1[gene_cnt & MASK_GENOTYPE] = LocalPopCurr[parent1][gene_cnt & MASK_GENOTYPE];
@@ -839,6 +855,8 @@ void Krnl_GA(
 */
 //printf("test point 3\n");
 
+			__attribute__((xcl_pipeline_loop))
+			LOOP_FOR_GA_INNER_CROSS_MUT:
 			for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
 /*
 				float prngGG = read_channel_altera(chan_PRNG2GA_GG_float_prng);
@@ -905,6 +923,8 @@ void Krnl_GA(
 /*
 			while( (intra_valid == false) || (inter_valid == false)) {
 */
+			__attribute__((xcl_pipeline_loop))
+			LOOP_WHILE_GA_INNER_READ_ENERGIES:
 			while( (intra_valid != 0) || (inter_valid != 0)) {
 /*
 				if (intra_valid == false) {
@@ -942,6 +962,8 @@ void Krnl_GA(
 		uint ls_eval_cnt = 0;
 
 		#pragma ivdep
+		__attribute__((xcl_pipeline_loop))
+		LOOP_FOR_GA_LS_OUTER:
 		for (ushort ls_ent_cnt=0; ls_ent_cnt<DockConst_num_of_lsentities; ls_ent_cnt+=9) {
 
 			// Choose random & different entities on every iteration
@@ -990,6 +1012,8 @@ void Krnl_GA(
 /*
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 */
+			__attribute__((xcl_pipeline_loop))
+			LOOP_GA_LS_INNER_WRITE_GENOTYPE:
 			for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
 /*
 				write_channel_altera(chan_GA2LS_LS1_genotype, LocalPopNext[entity_ls1][gene_cnt & MASK_GENOTYPE]);
@@ -1058,6 +1082,8 @@ void Krnl_GA(
 			       (ls8_done == false) || 
 			       (ls9_done == false) 
 */
+			__attribute__((xcl_pipeline_loop))
+			LOOP_WHILE_GA_LS_INNER_READ_ENERGIES:
 			while( (ls1_done != 0) || 
 			       (ls2_done != 0) || 
 			       (ls3_done != 0) || 
@@ -1187,6 +1213,8 @@ void Krnl_GA(
 			LocalEneNext[entity_ls9] = evalenergy_tmp9.y;
 
 			#pragma ivdep
+			__attribute__((xcl_pipeline_loop))
+			LOOP_FOR_GA_LS_INNER_READ_GENOTYPE:
 			for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
 /*
 				LocalPopNext[entity_ls1][gene_cnt & MASK_GENOTYPE] = read_channel_altera(chan_LS2GA_LS1_genotype);
@@ -1220,7 +1248,12 @@ void Krnl_GA(
 		// ------------------------------------------------------------------
 
 		// Update current pops & energies
+		__attribute__((xcl_pipeline_loop))
+		LOOP_FOR_GA_UPDATEPOP_OUTER:
 		for (ushort pop_cnt=0; pop_cnt<DockConst_pop_size; pop_cnt++) {
+
+			__attribute__((xcl_pipeline_loop))
+			LOOP_GA_UPDATEPOP_INNER:
 			for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
 				LocalPopCurr[pop_cnt][gene_cnt & MASK_GENOTYPE] = LocalPopNext[pop_cnt][gene_cnt & MASK_GENOTYPE];
 			}
@@ -1342,8 +1375,12 @@ void Krnl_GA(
 */
 
 	// Write final pop & energies back to FPGA-board DDRs
+	__attribute__((xcl_pipeline_loop))
+	LOOP_GA_WRITEPOP2DDR_OUTER:
 	for (ushort pop_cnt=0;pop_cnt<DockConst_pop_size; pop_cnt++) { 	
 
+		__attribute__((xcl_pipeline_loop))
+		LOOP_GA_WRITEPOP2DDR_INNER:
 		for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
 			#if defined(SINGLE_COPY_POP_ENE)
 			GlobPopCurr[pop_cnt*ACTUAL_GENOTYPE_LENGTH + gene_cnt] = LocalPopCurr[pop_cnt][gene_cnt & MASK_GENOTYPE];

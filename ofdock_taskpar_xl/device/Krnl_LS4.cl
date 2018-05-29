@@ -21,6 +21,12 @@ void Krnl_LS4(
 		#endif
 
 		unsigned char             DockConst_cons_limit
+
+#if !defined(SW_EMU)
+		// https://forums.xilinx.com/t5/SDAccel/ERROR-KernelCheck-83-114-in-sdx-2017-4/td-p/818135
+		,
+		__global int *dummy
+#endif
 )
 {
 	bool valid = true;

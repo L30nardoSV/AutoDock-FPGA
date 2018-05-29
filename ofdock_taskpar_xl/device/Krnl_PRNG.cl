@@ -6,9 +6,17 @@
 __kernel __attribute__ ((max_global_work_dim(0)))
 */
 __kernel __attribute__ ((reqd_work_group_size(1,1,1)))
-void Krnl_Prng_BT_ushort_float(unsigned int Host_seed1,
+void Krnl_Prng_BT_ushort_float(
+			       unsigned int Host_seed1,
 			       unsigned int Host_seed2,
-			       unsigned int DockConst_pop_size){
+			       unsigned int DockConst_pop_size
+
+#if !defined(SW_EMU)
+			      // https://forums.xilinx.com/t5/SDAccel/ERROR-KernelCheck-83-114-in-sdx-2017-4/td-p/818135
+			      ,
+			      __global int *dummy
+#endif
+){
 
 	uint2 lfsr;
 	lfsr.x = Host_seed1;
@@ -62,10 +70,23 @@ void Krnl_Prng_BT_ushort_float(unsigned int Host_seed1,
 		if(!valid) {
 */
 		if(valid != 0) {
+/*
 			float8 tmp = {*(float*)&u_tmp[0], f_tmp[0],
 				      *(float*)&u_tmp[1], f_tmp[1],
 				      *(float*)&u_tmp[2], f_tmp[2],
 				      *(float*)&u_tmp[3], f_tmp[3]};
+*/
+			// Check "Krnl_GA"
+			// To surpass error in hw_emu
+			float u_tmp_float_0 = u_tmp[0];
+			float u_tmp_float_1 = u_tmp[1];
+			float u_tmp_float_2 = u_tmp[2];
+			float u_tmp_float_3 = u_tmp[3];
+
+			float8 tmp = {u_tmp_float_0, f_tmp[0],
+				      u_tmp_float_1, f_tmp[1],
+				      u_tmp_float_2, f_tmp[2],
+				      u_tmp_float_3, f_tmp[3]};
 
 /*
 			success = write_channel_nb_altera(chan_PRNG2GA_BT_ushort_float_prng, tmp);
@@ -83,8 +104,16 @@ void Krnl_Prng_BT_ushort_float(unsigned int Host_seed1,
 __kernel __attribute__ ((max_global_work_dim(0)))
 */
 __kernel __attribute__ ((reqd_work_group_size(1,1,1)))
-void Krnl_Prng_GG_uchar(unsigned int  Host_seed, 
-		        unsigned char DockConst_num_of_genes){
+void Krnl_Prng_GG_uchar(
+			unsigned int  Host_seed, 
+		        unsigned char DockConst_num_of_genes
+
+#if !defined(SW_EMU)
+		        // https://forums.xilinx.com/t5/SDAccel/ERROR-KernelCheck-83-114-in-sdx-2017-4/td-p/818135
+			,
+			__global int *dummy
+#endif
+){
 
 	uint lfsr = Host_seed;
 /*
@@ -145,8 +174,16 @@ void Krnl_Prng_GG_uchar(unsigned int  Host_seed,
 __kernel __attribute__ ((max_global_work_dim(0)))
 */
 __kernel __attribute__ ((reqd_work_group_size(1,1,1)))
-void Krnl_Prng_GG_float(unsigned int  Host_seed,
-		        unsigned char DockConst_num_of_genes){
+void Krnl_Prng_GG_float(
+			unsigned int  Host_seed,
+		        unsigned char DockConst_num_of_genes
+
+#if !defined(SW_EMU)
+		        // https://forums.xilinx.com/t5/SDAccel/ERROR-KernelCheck-83-114-in-sdx-2017-4/td-p/818135
+		        ,
+		        __global int *dummy
+#endif
+){
 
 	uint lfsr = Host_seed;
 /*
@@ -198,7 +235,8 @@ void Krnl_Prng_GG_float(unsigned int  Host_seed,
 __kernel __attribute__ ((max_global_work_dim(0)))
 */
 __kernel __attribute__ ((reqd_work_group_size(1,1,1)))
-void Krnl_Prng_LS123_ushort(unsigned int Host_seed1,
+void Krnl_Prng_LS123_ushort(
+			    unsigned int Host_seed1,
 			    unsigned int Host_seed2, 
 			    unsigned int Host_seed3,
 			    unsigned int Host_seed4,
@@ -207,7 +245,14 @@ void Krnl_Prng_LS123_ushort(unsigned int Host_seed1,
 			    unsigned int Host_seed7,
 			    unsigned int Host_seed8,
 			    unsigned int Host_seed9, 
-		            unsigned int DockConst_pop_size){
+		            unsigned int DockConst_pop_size
+
+#if !defined(SW_EMU)
+		            // https://forums.xilinx.com/t5/SDAccel/ERROR-KernelCheck-83-114-in-sdx-2017-4/td-p/818135
+			    ,
+			    __global int *dummy
+#endif
+){
 
 
 	uint lfsr[9];
@@ -310,8 +355,16 @@ void Krnl_Prng_LS123_ushort(unsigned int Host_seed1,
 __kernel __attribute__ ((max_global_work_dim(0)))
 */
 __kernel __attribute__ ((reqd_work_group_size(1,1,1)))
-void Krnl_Prng_LS_float(unsigned int  Host_seed,
-		        unsigned char DockConst_num_of_genes){
+void Krnl_Prng_LS_float(
+			unsigned int  Host_seed,
+		        unsigned char DockConst_num_of_genes
+
+#if !defined(SW_EMU)
+ 		        // https://forums.xilinx.com/t5/SDAccel/ERROR-KernelCheck-83-114-in-sdx-2017-4/td-p/818135
+			,
+			__global int *dummy
+#endif
+){
 
 	uint lfsr = Host_seed;
 /*
@@ -374,8 +427,16 @@ void Krnl_Prng_LS_float(unsigned int  Host_seed,
 __kernel __attribute__ ((max_global_work_dim(0)))
 */
 __kernel __attribute__ ((reqd_work_group_size(1,1,1)))
-void Krnl_Prng_LS2_float(unsigned int  Host_seed,
-			 unsigned char DockConst_num_of_genes){
+void Krnl_Prng_LS2_float(
+			 unsigned int  Host_seed,
+			 unsigned char DockConst_num_of_genes
+
+#if !defined(SW_EMU)
+ 		         // https://forums.xilinx.com/t5/SDAccel/ERROR-KernelCheck-83-114-in-sdx-2017-4/td-p/818135
+		         , 
+         		 __global int *dummy
+#endif
+){
 
 	uint lfsr = Host_seed;
 /*
@@ -438,8 +499,16 @@ void Krnl_Prng_LS2_float(unsigned int  Host_seed,
 __kernel __attribute__ ((max_global_work_dim(0)))
 */
 __kernel __attribute__ ((reqd_work_group_size(1,1,1)))
-void Krnl_Prng_LS3_float(unsigned int  Host_seed,
-			 unsigned char DockConst_num_of_genes){
+void Krnl_Prng_LS3_float(
+			 unsigned int  Host_seed,
+			 unsigned char DockConst_num_of_genes
+
+#if !defined(SW_EMU)
+ 		         // https://forums.xilinx.com/t5/SDAccel/ERROR-KernelCheck-83-114-in-sdx-2017-4/td-p/818135
+		         , 
+         		 __global int *dummy
+#endif
+){
 
 	uint lfsr = Host_seed;
 /*
@@ -503,8 +572,16 @@ void Krnl_Prng_LS3_float(unsigned int  Host_seed,
 __kernel __attribute__ ((max_global_work_dim(0)))
 */
 __kernel __attribute__ ((reqd_work_group_size(1,1,1)))
-void Krnl_Prng_LS4_float(unsigned int  Host_seed,
-			 unsigned char DockConst_num_of_genes){
+void Krnl_Prng_LS4_float(
+			 unsigned int  Host_seed,
+			 unsigned char DockConst_num_of_genes
+
+#if !defined(SW_EMU)
+ 		         // https://forums.xilinx.com/t5/SDAccel/ERROR-KernelCheck-83-114-in-sdx-2017-4/td-p/818135
+		         , 
+         		 __global int *dummy
+#endif
+){
 
 	uint lfsr = Host_seed;
 /*
@@ -567,8 +644,16 @@ void Krnl_Prng_LS4_float(unsigned int  Host_seed,
 __kernel __attribute__ ((max_global_work_dim(0)))
 */
 __kernel __attribute__ ((reqd_work_group_size(1,1,1)))
-void Krnl_Prng_LS5_float(unsigned int  Host_seed,
-			 unsigned char DockConst_num_of_genes){
+void Krnl_Prng_LS5_float(
+			 unsigned int  Host_seed,
+			 unsigned char DockConst_num_of_genes
+
+#if !defined(SW_EMU)
+ 		         // https://forums.xilinx.com/t5/SDAccel/ERROR-KernelCheck-83-114-in-sdx-2017-4/td-p/818135
+		         , 
+         		 __global int *dummy
+#endif
+){
 
 	uint lfsr = Host_seed;
 /*
@@ -631,8 +716,16 @@ void Krnl_Prng_LS5_float(unsigned int  Host_seed,
 __kernel __attribute__ ((max_global_work_dim(0)))
 */
 __kernel __attribute__ ((reqd_work_group_size(1,1,1)))
-void Krnl_Prng_LS6_float(unsigned int  Host_seed,
-			 unsigned char DockConst_num_of_genes){
+void Krnl_Prng_LS6_float(
+			 unsigned int  Host_seed,
+			 unsigned char DockConst_num_of_genes
+
+#if !defined(SW_EMU)
+ 		         // https://forums.xilinx.com/t5/SDAccel/ERROR-KernelCheck-83-114-in-sdx-2017-4/td-p/818135
+		         , 
+         		 __global int *dummy
+#endif
+){
 
 	uint lfsr = Host_seed;
 /*
@@ -695,8 +788,16 @@ void Krnl_Prng_LS6_float(unsigned int  Host_seed,
 __kernel __attribute__ ((max_global_work_dim(0)))
 */
 __kernel __attribute__ ((reqd_work_group_size(1,1,1)))
-void Krnl_Prng_LS7_float(unsigned int  Host_seed,
-			 unsigned char DockConst_num_of_genes){
+void Krnl_Prng_LS7_float(
+			 unsigned int  Host_seed,
+			 unsigned char DockConst_num_of_genes
+
+#if !defined(SW_EMU)
+ 		         // https://forums.xilinx.com/t5/SDAccel/ERROR-KernelCheck-83-114-in-sdx-2017-4/td-p/818135
+		         , 
+         		 __global int *dummy
+#endif
+){
 
 	uint lfsr = Host_seed;
 /*
@@ -759,8 +860,16 @@ void Krnl_Prng_LS7_float(unsigned int  Host_seed,
 __kernel __attribute__ ((max_global_work_dim(0)))
 */
 __kernel __attribute__ ((reqd_work_group_size(1,1,1)))
-void Krnl_Prng_LS8_float(unsigned int  Host_seed,
-			 unsigned char DockConst_num_of_genes){
+void Krnl_Prng_LS8_float(
+			 unsigned int  Host_seed,
+			 unsigned char DockConst_num_of_genes
+
+#if !defined(SW_EMU)
+ 		         // https://forums.xilinx.com/t5/SDAccel/ERROR-KernelCheck-83-114-in-sdx-2017-4/td-p/818135
+		         , 
+         		 __global int *dummy
+#endif
+){
 
 	uint lfsr = Host_seed;
 /*
@@ -823,8 +932,16 @@ void Krnl_Prng_LS8_float(unsigned int  Host_seed,
 __kernel __attribute__ ((max_global_work_dim(0)))
 */
 __kernel __attribute__ ((reqd_work_group_size(1,1,1)))
-void Krnl_Prng_LS9_float(unsigned int  Host_seed,
-			 unsigned char DockConst_num_of_genes){
+void Krnl_Prng_LS9_float(
+			 unsigned int  Host_seed,
+			 unsigned char DockConst_num_of_genes
+
+#if !defined(SW_EMU)
+ 		         // https://forums.xilinx.com/t5/SDAccel/ERROR-KernelCheck-83-114-in-sdx-2017-4/td-p/818135
+		         , 
+         		 __global int *dummy
+#endif
+){
 
 	uint lfsr = Host_seed;
 /*
