@@ -16,8 +16,14 @@ __kernel __attribute__ ((max_global_work_dim(0)))
 void Krnl_IntraE(
  	     __constant     float* restrict KerConstStatic_atom_charges_const,
  	     __constant     char*  restrict KerConstStatic_atom_types_const,
-
 	     __global const char3* restrict KerConstStatic_intraE_contributors_const,
+
+			float 				 DockConst_smooth,
+	     __constant     float* restrict KerConstStatic_reqm,
+	     __constant     float* restrict KerConstStatic_reqm_hbond,    
+	     __constant     uint*  restrict KerConstStatic_atom1_types_reqm,
+	     __constant     uint*  restrict KerConstStatic_atom2_types_reqm,  
+
 	     __constant     float* restrict KerConstStatic_VWpars_AC_const,
 	     __constant     float* restrict KerConstStatic_VWpars_BD_const,
 	     __constant     float* restrict KerConstStatic_dspars_S_const,
@@ -112,9 +118,10 @@ while(active) {
 		float suby = loc_coords_atid1.y - loc_coords_atid2.y;
 		float subz = loc_coords_atid1.z - loc_coords_atid2.z;
 
-		//distance_leo = sqrt(subx*subx + suby*suby + subz*subz)*DockConst_grid_spacing;
-		float distance_leo = sqrt_custom(subx*subx + suby*suby + subz*subz)*DockConst_grid_spacing;
+		//atomic_distance = sqrt(subx*subx + suby*suby + subz*subz)*DockConst_grid_spacing;
+		float atomic_distance = sqrt_custom(subx*subx + suby*suby + subz*subz)*DockConst_grid_spacing;
 
+/*
 		if (distance_leo < 1.0f) {
 			#if defined (DEBUG_KRNL_INTRAE)
 			printf("\n\nToo low distance (%f) between atoms %u and %u\n", distance_leo, atom1_id, atom2_id);
@@ -122,51 +129,97 @@ while(active) {
 			//return HIGHEST_ENERGY;	// Returning maximal value
 			distance_leo = 1.0f;
 		}
+*/
 
 		#if defined (DEBUG_KRNL_INTRAE)
 		printf("\n\nCalculating energy contribution of atoms %u and %u\n", atom1_id+1, atom2_id+1);
 		printf("Distance: %f\n", distance_leo);
 		#endif
 
+/*
 		float partialE1;
 		float partialE2;
 		float partialE3;
 		float partialE4;
+*/
+
+		float partialE1 = 0.0f;
+		float partialE2 = 0.0f;
+		float partialE3 = 0.0f;
+		float partialE4 = 0.0f;
+
+ 		// Getting types ids
+		char atom1_typeid = KerConstStatic_atom_types_const [atom1_id];
+		char atom2_typeid = KerConstStatic_atom_types_const [atom2_id];
+
+		// Getting optimum pair distance (opt_distance) from reqm and reqm_hbond
+		// reqm: equilibrium internuclear separation 
+		//       (sum of the vdW radii of two like atoms (A)) in the case of vdW
+		// reqm_hbond: equilibrium internuclear separation
+		// 	 (sum of the vdW radii of two like atoms (A)) in the case of hbond 
+		float opt_distance;
+
+		uint atom1_type_vdw_hb = KerConstStatic_atom1_types_reqm [atom1_typeid];
+     	        uint atom2_type_vdw_hb = KerConstStatic_atom2_types_reqm [atom2_typeid];
+
+		if (ref_intraE_contributors_const.z == 1)	// H-bond
+		{
+			opt_distance = KerConstStatic_reqm_hbond [atom1_type_vdw_hb] + KerConstStatic_reqm_hbond [atom2_type_vdw_hb];
+		}
+		else	// Van der Waals
+		{
+			opt_distance = 0.5f*(KerConstStatic_reqm [atom1_type_vdw_hb] + KerConstStatic_reqm [atom2_type_vdw_hb]);
+		}
+
+		// Getting smoothed distance
+		// smoothed_distance = function(atomic_distance, opt_distance)
+		float smoothed_distance;
+		float delta_distance = 0.5f*DockConst_smooth;
+
+		/*printf("delta_distance: %f\n", delta_distance);*/
+
+		if (atomic_distance <= (opt_distance - delta_distance)) {
+			smoothed_distance = atomic_distance + delta_distance;
+		}
+		else if (atomic_distance < (opt_distance + delta_distance)) {
+			smoothed_distance = opt_distance;
+		}
+		else { // else if (atomic_distance >= (opt_distance + delta_distance))
+			smoothed_distance = atomic_distance - delta_distance;
+		}
+
+		float distance_pow_2  = atomic_distance*atomic_distance; 
+
+		float smoothed_distance_pow_2 = smoothed_distance*smoothed_distance; 
+		float inverse_smoothed_distance_pow_2  = native_divide(1.0f, smoothed_distance_pow_2);
+		float inverse_smoothed_distance_pow_4  = inverse_smoothed_distance_pow_2 * inverse_smoothed_distance_pow_2;
+		float inverse_smoothed_distance_pow_6  = inverse_smoothed_distance_pow_4 * inverse_smoothed_distance_pow_2;
+		float inverse_smoothed_distance_pow_10 = inverse_smoothed_distance_pow_6 * inverse_smoothed_distance_pow_4;
+		float inverse_smoothed_distance_pow_12 = inverse_smoothed_distance_pow_6 * inverse_smoothed_distance_pow_6;
 
 		// But only if the distance is less than distance cutoff value and 20.48A (because of the tables)
 		//if ((distance_leo < 8.0f) && (distance_leo < 20.48f))
-		if (distance_leo < 8.0f) 
+		if (atomic_distance < 8.0f) 
 		{
-			float distance_pow_2  = distance_leo*distance_leo; 
-			float inverse_distance_pow_2  = native_divide(1.0f, distance_pow_2);
-			float inverse_distance_pow_4  = inverse_distance_pow_2 * inverse_distance_pow_2;
-			float inverse_distance_pow_6  = inverse_distance_pow_4 * inverse_distance_pow_2;
-			float inverse_distance_pow_10 = inverse_distance_pow_6 * inverse_distance_pow_4;
-			float inverse_distance_pow_12 = inverse_distance_pow_6 * inverse_distance_pow_6;
-
-			char atom1_typeid = KerConstStatic_atom_types_const [atom1_id];
-			char atom2_typeid = KerConstStatic_atom_types_const [atom2_id];
-
 			// Calculating van der Waals / hydrogen bond term
-			partialE1 = KerConstStatic_VWpars_AC_const [atom1_typeid*DockConst_num_of_atypes+atom2_typeid]*inverse_distance_pow_12;
+			partialE1 = KerConstStatic_VWpars_AC_const [atom1_typeid*DockConst_num_of_atypes+atom2_typeid]*inverse_smoothed_distance_pow_12;
 
 			float tmp_pE2 = KerConstStatic_VWpars_BD_const [atom1_typeid*DockConst_num_of_atypes+atom2_typeid];
 
 			if (ref_intraE_contributors_const.z == 1)	// H-bond
-				partialE2 = tmp_pE2 * inverse_distance_pow_10;
+				partialE2 = tmp_pE2 * inverse_smoothed_distance_pow_10;
 			else	// Van der Waals
-				partialE2 = tmp_pE2 * inverse_distance_pow_6;
+				partialE2 = tmp_pE2 * inverse_smoothed_distance_pow_6;
+		} // End of if: if (dist < dcutoff)	
 
-			// Calculating electrostatic term
-			partialE3 = native_divide(  (DockConst_coeff_elec*KerConstStatic_atom_charges_const[atom1_id]*KerConstStatic_atom_charges_const[atom2_id]) , (distance_leo*(-8.5525f + native_divide(86.9525f, (1.0f + 7.7839f*native_exp(-0.3154f*distance_leo)))))       );
+		// Calculating electrostatic term
+		partialE3 = native_divide(  (DockConst_coeff_elec*KerConstStatic_atom_charges_const[atom1_id]*KerConstStatic_atom_charges_const[atom2_id]) , (atomic_distance*(-8.5525f + native_divide(86.9525f, (1.0f + 7.7839f*native_exp(-0.3154f*atomic_distance)))))       );
 
-			// Calculating desolvation term
-			partialE4 = (
-				  (KerConstStatic_dspars_S_const [atom1_typeid] + DockConst_qasp*fabs(KerConstStatic_atom_charges_const[atom1_id])) * KerConstStatic_dspars_V_const [atom2_typeid] + 
-				  (KerConstStatic_dspars_S_const [atom2_typeid] + DockConst_qasp*fabs(KerConstStatic_atom_charges_const[atom2_id])) * KerConstStatic_dspars_V_const [atom1_typeid]) * 
-				 DockConst_coeff_desolv*native_exp(-0.0386f*distance_pow_2);
-
-		} // End of if: if ((dist < dcutoff) && (dist < 20.48))	
+		// Calculating desolvation term
+		partialE4 = (
+			  (KerConstStatic_dspars_S_const [atom1_typeid] + DockConst_qasp*fabs(KerConstStatic_atom_charges_const[atom1_id])) * KerConstStatic_dspars_V_const [atom2_typeid] + 
+			  (KerConstStatic_dspars_S_const [atom2_typeid] + DockConst_qasp*fabs(KerConstStatic_atom_charges_const[atom2_id])) * KerConstStatic_dspars_V_const [atom1_typeid]) * 
+			 DockConst_coeff_desolv*native_exp(-0.0386f*distance_pow_2);
 	
 		#if defined (FIXED_POINT_INTRAE)
 		//shift_intraE[32] = shift_intraE[0] + partialE1 + partialE2 + partialE3 + partialE4;
