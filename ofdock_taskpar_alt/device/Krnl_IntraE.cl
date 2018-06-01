@@ -122,18 +122,18 @@ while(active) {
 		float atomic_distance = sqrt_custom(subx*subx + suby*suby + subz*subz)*DockConst_grid_spacing;
 
 /*
-		if (distance_leo < 1.0f) {
+		if (atomic_distance < 1.0f) {
 			#if defined (DEBUG_KRNL_INTRAE)
-			printf("\n\nToo low distance (%f) between atoms %u and %u\n", distance_leo, atom1_id, atom2_id);
+			printf("\n\nToo low distance (%f) between atoms %u and %u\n", atomic_distance, atom1_id, atom2_id);
 			#endif
 			//return HIGHEST_ENERGY;	// Returning maximal value
-			distance_leo = 1.0f;
+			atomic_distance = 1.0f;
 		}
 */
 
 		#if defined (DEBUG_KRNL_INTRAE)
 		printf("\n\nCalculating energy contribution of atoms %u and %u\n", atom1_id+1, atom2_id+1);
-		printf("Distance: %f\n", distance_leo);
+		printf("Distance: %f\n", atomic_distance);
 		#endif
 
 /*
