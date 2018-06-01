@@ -272,6 +272,11 @@ int prepare_conststatic_fields_for_gpu(Liganddata* 	       myligand_reference,
 
 	cl_char3  intraE_contributors[MAX_INTRAE_CONTRIBUTORS];
 
+	float reqm [ATYPE_NUM];
+        float reqm_hbond [ATYPE_NUM];
+	unsigned int atom1_types_reqm [ATYPE_NUM];
+        unsigned int atom2_types_reqm [ATYPE_NUM];
+
 	float VWpars_AC[MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES];
 	float VWpars_BD[MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES];
 	float dspars_S[MAX_NUM_OF_ATYPES];
@@ -341,6 +346,19 @@ int prepare_conststatic_fields_for_gpu(Liganddata* 	       myligand_reference,
 			}
 		}
 
+        // -------------------------------------------
+        // Smoothed pairwise potentials
+        // -------------------------------------------
+	// reqm, reqm_hbond: equilibrium internuclear separation for vdW and hbond
+	for (i= 0; i<ATYPE_NUM/*myligand_reference->num_of_atypes*/; i++) {
+		reqm[i]       = myligand_reference->reqm[i];
+		reqm_hbond[i] = myligand_reference->reqm_hbond[i];
+
+		atom1_types_reqm [i] = myligand_reference->atom1_types_reqm[i];
+        	atom2_types_reqm [i] = myligand_reference->atom2_types_reqm[i];
+	}
+	// -------------------------------------------
+
 	//van der Waals parameters
 	for (i=0; i<myligand_reference->num_of_atypes; i++)
 		for (j=0; j<myligand_reference->num_of_atypes; j++)
@@ -402,6 +420,14 @@ int prepare_conststatic_fields_for_gpu(Liganddata* 	       myligand_reference,
 */
 	for (m=0;m<MAX_INTRAE_CONTRIBUTORS;m++)          { KerConstStatic->intraE_contributors_const[m]   = intraE_contributors[m]; }
 
+	// -------------------------------------------
+        // Smoothed pairwise potentials
+        // -------------------------------------------
+	for (m=0;m<ATYPE_NUM;m++)			   { KerConstStatic->reqm_const[m]             = reqm[m]; }
+	for (m=0;m<ATYPE_NUM;m++)			   { KerConstStatic->reqm_hbond_const[m]       = reqm_hbond[m]; }
+	for (m=0;m<ATYPE_NUM;m++)			   { KerConstStatic->atom1_types_reqm_const[m] = atom1_types_reqm[m]; }
+	for (m=0;m<ATYPE_NUM;m++)                          { KerConstStatic->atom2_types_reqm_const[m] = atom2_types_reqm[m]; }
+	// -------------------------------------------
 
 	for (m=0;m<MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES;m++){ KerConstStatic->VWpars_AC_const[m]    = VWpars_AC[m];    }
 	for (m=0;m<MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES;m++){ KerConstStatic->VWpars_BD_const[m]    = VWpars_BD[m];    }

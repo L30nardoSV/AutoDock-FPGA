@@ -77,6 +77,15 @@ typedef struct
 	int 	atom_rigid_structures [256];
 	char 	bonds [256][256];
 	char 	intraE_contributors [256][256];
+
+	// Sizes are hardcoded, ATYPE_NUM=22 float elements as in
+	// https://git.esa.informatik.tu-darmstadt.de/docking/ocladock/blob/master/host/src/processligand.cpp#L456
+	// See "User Guide AutoDock 4.2" (page 34)
+	double  reqm [ATYPE_NUM];
+	double  reqm_hbond [ATYPE_NUM];
+	unsigned int  atom1_types_reqm [ATYPE_NUM];
+	unsigned int  atom2_types_reqm [ATYPE_NUM];
+
 	double 	VWpars_A [14][14];
 	double	VWpars_B [14][14];
 	double 	VWpars_C [14][14];

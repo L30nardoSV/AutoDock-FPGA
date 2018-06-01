@@ -60,6 +60,9 @@ typedef struct
 	float  		abs_max_dmov;
 	float  		abs_max_dang;
 	float  		lsearch_rate;
+
+	float 		smooth;
+
 	unsigned int 	num_of_lsentities;
 	float  		rho_lower_bound;
 	float  		base_dmov_mul_sqrt3;
@@ -127,6 +130,11 @@ typedef struct
        	char  intraE_contributors_const[3*MAX_INTRAE_CONTRIBUTORS]    __attribute__ ((aligned (32768)));
 */
 	cl_char3  intraE_contributors_const[MAX_INTRAE_CONTRIBUTORS]    __attribute__ ((aligned (32768)));
+
+        float reqm_const [ATYPE_NUM]				      __attribute__ ((aligned (64)));
+        float reqm_hbond_const [ATYPE_NUM]			      __attribute__ ((aligned (64)));
+        unsigned int  atom1_types_reqm_const [ATYPE_NUM]	      __attribute__ ((aligned (64)));
+        unsigned int  atom2_types_reqm_const [ATYPE_NUM]	      __attribute__ ((aligned (64)));
 
        	float VWpars_AC_const   [MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES] __attribute__ ((aligned (1024)));
        	float VWpars_BD_const   [MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES] __attribute__ ((aligned (1024)));

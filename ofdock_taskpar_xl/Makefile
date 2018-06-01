@@ -94,6 +94,7 @@ kerhwemu:
 
 # Automate test
 # "exe" and "xclbin" are rules from "rules.mk"
+# Don't forget to copy and rename ./xclbin/*.xclbin file into ./Krnl_GA.xclbin
 emu: 
 	XCL_EMULATION_MODE=sw_emu ./hostbin -ffile input/1stp/derived/1stp_protein.maps.fld -lfile input/1stp/derived/1stp_ligand.pdbqt -nrun 2 -nev 2500000
 	

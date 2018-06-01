@@ -38,6 +38,9 @@ typedef struct
 		float mutation_rate;
 		float crossover_rate;
 		float lsearch_rate;
+
+		float smooth;
+
 	unsigned long num_of_ls;
 		float tournament_rate;
 		float rho_lower_bound;

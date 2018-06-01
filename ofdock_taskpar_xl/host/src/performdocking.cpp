@@ -545,6 +545,12 @@ cl_mem mem_KerConstStatic_fixpt64_atom_charges_const;
 cl_mem mem_KerConstStatic_atom_charges_const;
 cl_mem mem_KerConstStatic_atom_types_const;
 cl_mem mem_KerConstStatic_intraE_contributors_const;
+
+cl_mem mem_KerConstStatic_reqm_const;
+cl_mem mem_KerConstStatic_reqm_hbond_const;
+cl_mem mem_KerConstStatic_atom1_types_reqm_const;
+cl_mem mem_KerConstStatic_atom2_types_reqm_const;
+
 cl_mem mem_KerConstStatic_VWpars_AC_const;
 cl_mem mem_KerConstStatic_VWpars_BD_const;
 cl_mem mem_KerConstStatic_dspars_S_const;
@@ -806,6 +812,7 @@ filled with clock() */
 	dockpars.cons_limit        = (unsigned int) mypars->cons_limit;
 	dockpars.max_num_of_iters  = (unsigned int) mypars->max_num_of_iters;
 	dockpars.qasp = mypars->qasp;
+	dockpars.smooth = mypars->smooth;
 
 /*
 // passed correctly
@@ -858,8 +865,12 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 /*
 	mallocBufferObject(context,CL_MEM_READ_ONLY, 3*MAX_INTRAE_CONTRIBUTORS*sizeof(char),            &mem_KerConstStatic_intraE_contributors_const);
 */
-	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_INTRAE_CONTRIBUTORS*sizeof(cl_char3),            &mem_KerConstStatic_intraE_contributors_const);
+	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_INTRAE_CONTRIBUTORS*sizeof(cl_char3),          &mem_KerConstStatic_intraE_contributors_const);
 
+        mallocBufferObject(context,CL_MEM_READ_ONLY, ATYPE_NUM*sizeof(float),				&mem_KerConstStatic_reqm_const);
+	mallocBufferObject(context,CL_MEM_READ_ONLY, ATYPE_NUM*sizeof(float),				&mem_KerConstStatic_reqm_hbond_const);
+  	mallocBufferObject(context,CL_MEM_READ_ONLY, ATYPE_NUM*sizeof(unsigned int),			&mem_KerConstStatic_atom1_types_reqm_const);
+  	mallocBufferObject(context,CL_MEM_READ_ONLY, ATYPE_NUM*sizeof(unsigned int),                    &mem_KerConstStatic_atom2_types_reqm_const);
 
 	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES*sizeof(float), &mem_KerConstStatic_VWpars_AC_const);
 	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES*sizeof(float), &mem_KerConstStatic_VWpars_BD_const);
@@ -920,6 +931,11 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_intraE_contributors_const,     &KerConstStatic.intraE_contributors_const[0],     3*MAX_INTRAE_CONTRIBUTORS*sizeof(char));
 */
 	memcopyBufferObjectToDevice(command_queue/*1*/,mem_KerConstStatic_intraE_contributors_const,     &KerConstStatic.intraE_contributors_const[0],     MAX_INTRAE_CONTRIBUTORS*sizeof(cl_char3));
+
+	memcopyBufferObjectToDevice(command_queue,mem_KerConstStatic_reqm_const,         	     	 &KerConstStatic.reqm_const,           	           ATYPE_NUM*sizeof(float));
+  	memcopyBufferObjectToDevice(command_queue,mem_KerConstStatic_reqm_hbond_const,             	 &KerConstStatic.reqm_hbond_const,                 ATYPE_NUM*sizeof(float));
+  	memcopyBufferObjectToDevice(command_queue,mem_KerConstStatic_atom1_types_reqm_const,        	 &KerConstStatic.atom1_types_reqm_const,           ATYPE_NUM*sizeof(unsigned int));
+  	memcopyBufferObjectToDevice(command_queue,mem_KerConstStatic_atom2_types_reqm_const,        	 &KerConstStatic.atom2_types_reqm_const,           ATYPE_NUM*sizeof(unsigned int));
 
 	memcopyBufferObjectToDevice(command_queue/*1*/,mem_KerConstStatic_VWpars_AC_const,               &KerConstStatic.VWpars_AC_const[0],               MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES*sizeof(float));
 	memcopyBufferObjectToDevice(command_queue/*1*/,mem_KerConstStatic_VWpars_BD_const,               &KerConstStatic.VWpars_BD_const[0],               MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES*sizeof(float));
@@ -1113,19 +1129,27 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 #ifdef ENABLE_KERNEL4 // Krnl_IntraE
 	setKernelArg(kernel4,0,  sizeof(mem_KerConstStatic_atom_charges_const),        &mem_KerConstStatic_atom_charges_const);
 	setKernelArg(kernel4,1,  sizeof(mem_KerConstStatic_atom_types_const),          &mem_KerConstStatic_atom_types_const);
-	setKernelArg(kernel4,2/*0*/,  sizeof(mem_KerConstStatic_intraE_contributors_const), &mem_KerConstStatic_intraE_contributors_const);
-	setKernelArg(kernel4,3,  sizeof(mem_KerConstStatic_VWpars_AC_const),           &mem_KerConstStatic_VWpars_AC_const);
-	setKernelArg(kernel4,4,  sizeof(mem_KerConstStatic_VWpars_BD_const),           &mem_KerConstStatic_VWpars_BD_const);
-	setKernelArg(kernel4,5,  sizeof(mem_KerConstStatic_dspars_S_const),            &mem_KerConstStatic_dspars_S_const);
-	setKernelArg(kernel4,6,  sizeof(mem_KerConstStatic_dspars_V_const),            &mem_KerConstStatic_dspars_V_const);
+	setKernelArg(kernel4,2,  sizeof(mem_KerConstStatic_intraE_contributors_const), &mem_KerConstStatic_intraE_contributors_const);
 
-	setKernelArg(kernel4,7 /*1*/, sizeof(unsigned char),                    &dockpars.num_of_atoms);
-	setKernelArg(kernel4,8 /*2*/, sizeof(unsigned int),                     &dockpars.num_of_intraE_contributors);
-	setKernelArg(kernel4,9,  sizeof(float),                          	&dockpars.grid_spacing);
-	setKernelArg(kernel4,10, sizeof(unsigned char),                    	&dockpars.num_of_atypes);
-	setKernelArg(kernel4,11, sizeof(float),                          	&dockpars.coeff_elec);
-	setKernelArg(kernel4,12, sizeof(float),                          	&dockpars.qasp);
-	setKernelArg(kernel4,13, sizeof(float),                          	&dockpars.coeff_desolv);
+  	setKernelArg(kernel4,3,  sizeof(dockpars.smooth),                              &dockpars.smooth);
+  	setKernelArg(kernel4,4,  sizeof(mem_KerConstStatic_reqm_const),                &mem_KerConstStatic_reqm_const);
+  	setKernelArg(kernel4,5,  sizeof(mem_KerConstStatic_reqm_hbond_const),          &mem_KerConstStatic_reqm_hbond_const);
+  	setKernelArg(kernel4,6,  sizeof(mem_KerConstStatic_atom1_types_reqm_const),    &mem_KerConstStatic_atom1_types_reqm_const);
+  	setKernelArg(kernel4,7,  sizeof(mem_KerConstStatic_atom2_types_reqm_const),    &mem_KerConstStatic_atom2_types_reqm_const);
+
+	setKernelArg(kernel4,8,  sizeof(mem_KerConstStatic_VWpars_AC_const),           &mem_KerConstStatic_VWpars_AC_const);
+	setKernelArg(kernel4,9,  sizeof(mem_KerConstStatic_VWpars_BD_const),           &mem_KerConstStatic_VWpars_BD_const);
+	setKernelArg(kernel4,10, sizeof(mem_KerConstStatic_dspars_S_const),            &mem_KerConstStatic_dspars_S_const);
+	setKernelArg(kernel4,11, sizeof(mem_KerConstStatic_dspars_V_const),            &mem_KerConstStatic_dspars_V_const);
+
+	setKernelArg(kernel4,12, sizeof(unsigned char),                    	       &dockpars.num_of_atoms);
+	setKernelArg(kernel4,13, sizeof(unsigned int),                     	       &dockpars.num_of_intraE_contributors);
+	setKernelArg(kernel4,14, sizeof(float),                          	       &dockpars.grid_spacing);
+	setKernelArg(kernel4,15, sizeof(unsigned char),                    	       &dockpars.num_of_atypes);
+	setKernelArg(kernel4,16, sizeof(float),                          	       &dockpars.coeff_elec);
+	setKernelArg(kernel4,17, sizeof(float),                          	       &dockpars.qasp);
+	setKernelArg(kernel4,18, sizeof(float),                          	       &dockpars.coeff_desolv);
+
 /*
 	setKernelArg(kernel4,14, sizeof(unsigned int),                     	&square_num_of_atypes);
 */
@@ -3355,6 +3379,12 @@ void cleanup() {
   if(mem_KerConstStatic_atom_charges_const)	  	  {clReleaseMemObject(mem_KerConstStatic_atom_charges_const);}
   if(mem_KerConstStatic_atom_types_const)	   	  {clReleaseMemObject(mem_KerConstStatic_atom_types_const);}
   if(mem_KerConstStatic_intraE_contributors_const) 	  {clReleaseMemObject(mem_KerConstStatic_intraE_contributors_const);}
+
+  if(mem_KerConstStatic_reqm_const) 	  		  {clReleaseMemObject(mem_KerConstStatic_reqm_const);}
+  if(mem_KerConstStatic_reqm_hbond_const) 	  	  {clReleaseMemObject(mem_KerConstStatic_reqm_hbond_const);}
+  if(mem_KerConstStatic_atom1_types_reqm_const) 	  {clReleaseMemObject(mem_KerConstStatic_atom1_types_reqm_const);}
+  if(mem_KerConstStatic_atom2_types_reqm_const)	  	  {clReleaseMemObject(mem_KerConstStatic_atom2_types_reqm_const);}
+
   if(mem_KerConstStatic_VWpars_AC_const)	   	  {clReleaseMemObject(mem_KerConstStatic_VWpars_AC_const);}
   if(mem_KerConstStatic_VWpars_BD_const)	   	  {clReleaseMemObject(mem_KerConstStatic_VWpars_BD_const);}
   if(mem_KerConstStatic_dspars_S_const)		   	  {clReleaseMemObject(mem_KerConstStatic_dspars_S_const);}

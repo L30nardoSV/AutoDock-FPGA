@@ -527,16 +527,28 @@ int get_VWpars(Liganddata* myligand, const double AD4_coeff_vdW, const double AD
 
 			//identifying atom types
 			for (i=0; i<ATYPE_NUM; i++)
-				//L30nardoSV
+/*
+				// OCLADock
 				if (stricmp(atom_names [i], myligand->atom_types [atom_typeid1]) == 0)
 				//if (_stricmp(atom_names[i], myligand->atom_types[atom_typeid1]) == 0)
 					VWid_atype1 = i;
+*/
+				if (stricmp(atom_names [i], myligand->atom_types [atom_typeid1]) == 0) {
+					VWid_atype1 = i;
+					myligand->atom1_types_reqm [atom_typeid1] = VWid_atype1;
+				}
 
 			for (i=0; i<ATYPE_NUM; i++)
-				// L30nardoSV
+/*
+				// OCLADock
 				if (stricmp(atom_names[i], myligand->atom_types[atom_typeid2]) == 0)
 				//if (_stricmp(atom_names[i], myligand->atom_types[atom_typeid2]) == 0)
 					VWid_atype2 = i;
+*/
+				if (stricmp(atom_names[i], myligand->atom_types[atom_typeid2]) == 0) {
+					VWid_atype2 = i;
+					myligand->atom2_types_reqm [atom_typeid2] = VWid_atype2;
+				}
 
 			if (VWid_atype1 == ATYPE_NUM)
 			{
@@ -570,6 +582,11 @@ int get_VWpars(Liganddata* myligand, const double AD4_coeff_vdW, const double AD
 				myligand->VWpars_D [atom_typeid1][atom_typeid2] = 0;
 			}
 		}
+
+	for (atom_typeid1 = 0; atom_typeid1 < ATYPE_NUM/*myligand->num_of_atypes*/; atom_typeid1++) {
+		myligand->reqm[atom_typeid1]       = reqm[atom_typeid1];
+		myligand->reqm_hbond[atom_typeid1] = reqm_hbond[atom_typeid1];
+	}
 
 	for (atom_typeid1 = 0; atom_typeid1 < myligand->num_of_atypes; atom_typeid1++)
 	{
