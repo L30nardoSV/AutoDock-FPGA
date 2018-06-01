@@ -173,7 +173,7 @@ while(valid) {
 				// tmp2 is the addition: genotype_deviate + genotype_bias
 				// tmp3 is entity_possible_new_genotype
 				float tmp_bias = (iteration_cnt == 1)? 0.0f:genotype_bias [i];
-				float bias = 0.6 * tmp_bias;
+				float bias = 0.6f * tmp_bias;
 
 				deviate_plus_bias  [i] = deviate + bias;
 				deviate_minus_bias [i] = deviate - bias;
