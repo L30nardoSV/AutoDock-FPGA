@@ -1061,7 +1061,7 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 
 // Kernel 11 has no args
 
-#if defined (FIXED_POINT_LS1) || defined (FIXED_POINT_LS2) || defined (FIXED_POINT_LS3)
+#if defined (FIXED_POINT_LS1) || defined (FIXED_POINT_LS2) || defined (FIXED_POINT_LS3) || defined (FIXED_POINT_LS4) || defined (FIXED_POINT_LS5) || defined (FIXED_POINT_LS6) || defined (FIXED_POINT_LS7) || defined (FIXED_POINT_LS8) || defined (FIXED_POINT_LS9)
 fixedpt fixpt_base_dmov_mul_sqrt3 = fixedpt_fromfloat(dockpars.base_dmov_mul_sqrt3);
 fixedpt fixpt_base_dang_mul_sqrt3 = fixedpt_fromfloat(dockpars.base_dang_mul_sqrt3);
 fixedpt fixpt_rho_lower_bound = fixedpt_fromfloat(dockpars.rho_lower_bound);
