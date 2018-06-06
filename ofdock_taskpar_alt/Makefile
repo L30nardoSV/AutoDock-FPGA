@@ -73,7 +73,9 @@ TARGET_DIR_HW_PROF := bin_hw_profile
 
 # Directories
 #INC_DIRS := ../common/inc
-INC_DIRS := ../common/inc wrapcl/inc host/inc ./
+#INC_DIRS := ../common/inc wrapcl/inc host/inc ./
+# Power Nallatech 510T (saruman server)
+INC_DIRS := ../common/inc wrapcl/inc host/inc ./ $(AOCL_BOARD_PACKAGE_ROOT)/software/include/
 LIB_DIRS := 
 
 # Files
@@ -849,10 +851,17 @@ hw-prof:
 # Copy of host to $(TARGET_DIR_HW)
 # The working directory is changed
 # So .dlg file is written in $(TARGET_DIR_HW)
+MEASURE_POWER := NO
+ifeq ($(MEASURE_POWER), YES)
+	POWER_FLAG=1
+else	
+	POWER_FLAG=0
+endif
+
 exe: $(TARGET_DIR)/$(TARGET)
 	cp $(TARGET_DIR)/$(TARGET) $(TARGET_DIR_HW)/ && \
 	cd $(TARGET_DIR_HW) && \
-	./$(TARGET) -ffile ../input/$(PDB)/derived/$(PDB)_protein.maps.fld -lfile ../input/$(PDB)/derived/$(PDB)_ligand.pdbqt -nrun $(NRUN) -resnam docking_$(PDB)_$(NRUN)
+	./$(TARGET) -ffile ../input/$(PDB)/derived/$(PDB)_protein.maps.fld -lfile ../input/$(PDB)/derived/$(PDB)_ligand.pdbqt -nrun $(NRUN) -resnam docking_$(PDB)_$(NRUN) -power $(POWER_FLAG)
 	@echo " "
 	@echo "===================================================================="
 	@echo "INFO: log file is under: $(TARGET_DIR_HW)/docking_$(PDB)_$(NRUN).dlg"

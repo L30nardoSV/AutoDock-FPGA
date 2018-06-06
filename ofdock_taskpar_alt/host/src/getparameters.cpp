@@ -154,6 +154,12 @@ void get_commandpars(const int* argc,
 	strcpy(mypars->resname, "docking");
 	mypars->qasp 		    = 0.01097f;
 	mypars->rmsd_tolerance      = 2.0;		//2 Angström
+
+        // **********************************************
+       	// Power Nallatech 510T (saruman server)
+	// **********************************************
+	mypars->power		    = 0;		// No power measurement performed (emulation)
+							// This can be enabled for hardware evaluation
 	// ------------------------------------------
 
 	//overwriting values which were defined as a command line argument
@@ -522,6 +528,27 @@ void get_commandpars(const int* argc,
 			else
 				printf("Warning: value of -rmstol argument ignored. Value must be a double greater than 0.\n");
 		}
+
+        	// **********************************************
+       		// Power Nallatech 510T (saruman server)
+		// **********************************************
+		//Argument: enable power measurement
+		if (strcmp("-power", argv [i]) == 0)
+		{
+			arg_recognized = 1;
+			sscanf(argv [i+1], "%u", &tempint);
+
+			if (tempint == 0) { 		// No power measurement
+				mypars->power = tempint;
+			}
+			else if (tempint == 1) {	// Measure power!
+				mypars->power = tempint;
+			}
+			else {
+				printf("Warning: value of -power argument ignored. Value must an integer: either 0 (disable, emulation only) or 1 (enable, hardware only).\n");
+			}
+		}
+
 		if (arg_recognized != 1)
 			printf("Warning: unknown argument '%s'.\n", argv [i]);
 
