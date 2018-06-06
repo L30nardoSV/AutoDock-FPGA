@@ -879,7 +879,8 @@ COPY_DIR := copy_$(PROJECT_NAME)
 COPY_DIR_DOCK := $(PROJECT_NAME)
 
 # Make sure this remote-server alias exists (in ~/.ssh/config)
-SERVER := sauron
+SERVER_BRIDGE := erebor:/scratch/
+SERVER_EXEC   := saruman:~/ocladock_intelfpga17_1
 
 # Delete an existing folder if previously created
 # Create a folder $(COPY_DIR) in the parent directory
@@ -902,16 +903,19 @@ copy: clean-copy
 	cp -r input/ ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
 	cp -r wrapcl/ ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
 	cp -r ../common ../$(COPY_DIR)/
-	cp ../conf_aoc160_$(SERVER).sh ../$(COPY_DIR)/
+	cp ../conf_aoc171_saruman.sh ../$(COPY_DIR)/
 	cd ../;	zip -r $(COPY_DIR).zip $(COPY_DIR)
 	@echo " "
-	@echo "Transfer the $(COPY_DIR).zip file to $(SERVER) server: "
+	@echo "Transfer the $(COPY_DIR).zip file to $(SERVER_BRIDGE) server: "
 	@echo " "
-	cd ../ && scp $(COPY_DIR).zip $(SERVER):~/
+	cd ../ && scp $(COPY_DIR).zip $(SERVER_BRIDGE)
 	@echo " "
-	@echo "=========================================="
-	@echo "Files listed were transferred to $(SERVER)"
-	@echo "=========================================="
+	@echo "================================================="
+	@echo "Files listed were transferred to $(SERVER_BRIDGE)"
+	@echo " "
+	@echo "Then, transfer files manually                    "
+	@echo "from $(SERVER_BRIDGE) to $(SERVER_EXEC)          "
+	@echo "================================================="
 	@echo " "
 
 clean-copy:
