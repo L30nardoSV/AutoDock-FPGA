@@ -80,11 +80,18 @@ while(active) {
 			    )) loc_coords [MAX_NUM_OF_ATOMS];
 	#endif
 
+#if 0
 	char2 actmode = read_channel_intel(chan_IGL2Conform_actmode);
+#endif
+	char actmode = read_channel_intel(chan_IGL2Conform_actmode);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 
+#if 0
 	active = actmode.x;
 	mode   = actmode.y;
+#endif
+	active = actmode;
+	mode   = actmode;
 
 //printf("Conform: %u\n", mode);
 
@@ -433,12 +440,16 @@ while(active) {
 
 	for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt+=2) {
 		if (pipe_cnt == 0) {
+#if 0
 			char  active_tmp = active;
 			char  mode_tmp   = mode;
 			char2 actmode    = {active_tmp, mode_tmp};
 
 			write_channel_intel(chan_Conf2Intere_actmode, actmode);
 			write_channel_intel(chan_Conf2Intrae_actmode, actmode);
+#endif
+			write_channel_intel(chan_Conf2Intere_actmode, mode);
+			write_channel_intel(chan_Conf2Intrae_actmode, mode);
 		}
 		mem_fence(CLK_CHANNEL_MEM_FENCE);
 

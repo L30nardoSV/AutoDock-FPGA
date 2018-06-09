@@ -30,9 +30,16 @@ channel float  	chan_LS2Conf_LS9_genotype      __attribute__((depth(CHAN_DEPTH_G
 
 // Send ligand-atom positions from Conform to InterE & IntraE
 channel float8  chan_Conf2Intere_xyz           __attribute__((depth(CHAN_DEPTH_ATOMXYZ)));
+#if 0
 channel char2  	chan_Conf2Intere_actmode;
+#endif
+channel char  	chan_Conf2Intere_actmode;
+
 channel float8	chan_Conf2Intrae_xyz           __attribute__((depth(CHAN_DEPTH_ATOMXYZ)));
+#if 0
 channel char2  	chan_Conf2Intrae_actmode;	
+#endif
+channel char  	chan_Conf2Intrae_actmode;
 
 // Send energy values from InterE & IntraE to genotype-senders (IC, GG, LSs)
 channel float 	chan_Intere2StoreIC_intere     __attribute__((depth(2)));
@@ -157,7 +164,11 @@ channel bool    chan_GA2LS_Off9_active;
 
 // Send genotype-producer-channel selector and genotype 
 // from IGL_Arbiter to Conform
+#if 0
 channel char2  chan_IGL2Conform_actmode	       __attribute__((depth(9))); // active, mode
+#endif
+channel char   chan_IGL2Conform_actmode	       __attribute__((depth(9))); // active, mode
+
 channel float  chan_IGL2Conform_genotype       __attribute__((depth(9*CHAN_DEPTH_GENOTYPE)));
 
 // Turn-off signal to IGL_Arbiter, Conform, InterE, IntraE
@@ -556,6 +567,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 					else {
 						float tmp;
 						tmp = tmp_offspring + Host_two_absmaxdang*prngGG-DockConst_abs_max_dang;
+
 						if (gene_cnt==4) { tmp_offspring = map_angle_180(tmp); }
 						else             { tmp_offspring = map_angle_360(tmp); }
 					}

@@ -798,7 +798,7 @@ emu: $(TARGET_DIR)/$(TARGET) keremu
 	# $(KRNL_NAME).aoco
 	# No actual hardware is built (NO .aocx)
 kerrpt: $(DEV_SRC)
-	aoc -board=$(BOARD) $(DEV_SRC) -o $(TARGET_DIR)/$(KRNL_NAME).aoco $(REP) $(FIPO_FLAG) $(AOC_FLAG) -c --report -g
+	aoc -board=$(BOARD) $(DEV_SRC) -o $(TARGET_DIR)/$(KRNL_NAME).aoco $(REP) $(FIPO_FLAG) $(AOC_FLAG) -c -report -g
 	@echo " "
 	@echo "============================================================================"
 	@echo "INFO: report files are under: $(TARGET_DIR)/$(KRNL_NAME)/reports/report.html"

@@ -1308,10 +1308,13 @@ while(active) {
 
 	// Send "mode" to Conform
 	for (uchar j=0; j<bound; j++) {
-
+#if 0
 		char mode_tmp = Off_valid? 0x00: IC_valid? 'I': GG_valid? 'G': mode[j];
 		char2 actmode = {active, mode_tmp};
 		write_channel_intel(chan_IGL2Conform_actmode, actmode);
+#endif
+		char mode_tmp = Off_valid? 0x00: IC_valid? 'I': GG_valid? 'G': mode[j];
+		write_channel_intel(chan_IGL2Conform_actmode, mode_tmp);
 
 		#if defined (DEBUG_KRNL_IGL_ARBITER)
 		printf("bound: %u, mode: %u\n", bound, mode_tmp);
