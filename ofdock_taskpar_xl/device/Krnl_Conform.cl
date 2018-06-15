@@ -92,14 +92,21 @@ while(active) {
 /*
 	char2 actmode = read_channel_altera(chan_IGL2Conform_actmode);
 */
+#if 0
 	char2 actmode;
-	read_pipe_block(chan_IGL2Conform_actmode, &actmode);	
+#endif
+	char actmode;
+	read_pipe_block(chan_IGL2Conform_actmode, &actmode);
 /*
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 */
-
+#if 0
 	active = actmode.x;
 	mode   = actmode.y;
+#endif
+	active = actmode;
+	mode   = actmode;
+
 
 //printf("Conform: %u\n", mode);
 
@@ -461,6 +468,7 @@ while(active) {
 
 	for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt+=2) {
 		if (pipe_cnt == 0) {
+#if 0
 			char  active_tmp = active;
 			char  mode_tmp   = mode;
 			char2 actmode    = {active_tmp, mode_tmp};
@@ -470,6 +478,9 @@ while(active) {
 */
 			write_pipe_block(chan_Conf2Intere_actmode, &actmode);
 			write_pipe_block(chan_Conf2Intrae_actmode, &actmode);
+#endif
+			write_pipe_block(chan_Conf2Intere_actmode, &mode);
+			write_pipe_block(chan_Conf2Intrae_actmode, &mode);
 		}
 /*
 		mem_fence(CLK_CHANNEL_MEM_FENCE);

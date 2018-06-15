@@ -72,14 +72,20 @@ while(active) {
 /*
 	char2 actmode = read_channel_altera(chan_Conf2Intrae_actmode);
 */
+#if 0
 	char2 actmode;
+#endif
+	char actmode;
 	read_pipe_block(chan_Conf2Intrae_actmode, &actmode);
 /*
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 */
-
+#if 0
 	active = actmode.x;
 	mode   = actmode.y;
+#endif
+	active = actmode;
+	mode   = actmode;
 
 	for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt+=2) {
 /*

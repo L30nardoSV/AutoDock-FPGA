@@ -63,9 +63,16 @@ pipe float8  chan_Conf2Intrae_xyz           __attribute__((xcl_reqd_pipe_depth(C
 pipe char2   chan_Conf2Intrae_actmode;	
 */
 pipe float8  chan_Conf2Intere_xyz           __attribute__((xcl_reqd_pipe_depth(64)));
+#if 0
 pipe char2   chan_Conf2Intere_actmode	    __attribute__((xcl_reqd_pipe_depth(16)));
+#endif
+pipe char    chan_Conf2Intere_actmode	    __attribute__((xcl_reqd_pipe_depth(16)));
+
 pipe float8  chan_Conf2Intrae_xyz           __attribute__((xcl_reqd_pipe_depth(64)));
+#if 0
 pipe char2   chan_Conf2Intrae_actmode       __attribute__((xcl_reqd_pipe_depth(16)));
+#endif
+pipe char    chan_Conf2Intrae_actmode       __attribute__((xcl_reqd_pipe_depth(16)));
 
 // Send energy values from InterE & IntraE to genotype-senders (IC, GG, LSs)
 // Resized to valid SDAccel depths: 16, 32, ...
