@@ -91,7 +91,7 @@ include $(COMMON_REPO)/utility/rules.mk
 # to have a short but still a representative test
 PDB  := 1stp
 NRUN := 5
-NEV  := 100000 
+NEV  := 800000 
 
 kerswemu:
 	make TARGETS=sw_emu all
