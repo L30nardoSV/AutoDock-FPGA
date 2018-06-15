@@ -29,6 +29,15 @@ void Krnl_LS7(
 #endif
 )
 {
+	#if 0
+	printf("\nLS7: DockConst_max_num_of_iters: %u\n",   DockConst_max_num_of_iters);
+	printf("LS7: DockConst_rho_lower_bound: %f\n",      DockConst_rho_lower_bound);
+	printf("LS7: DockConst_base_dmov_mul_sqrt3: %f\n",  DockConst_base_dmov_mul_sqrt3);
+	printf("LS7: DockConst_num_of_genes: %u\n",  	    DockConst_num_of_genes);
+	printf("LS7: DockConst_base_dang_mul_sqrt3: %f\n",  DockConst_base_dang_mul_sqrt3);
+	printf("LS7: DockConst_cons_limit: %u\n",           DockConst_cons_limit);
+	#endif
+
 	bool valid = true;
 
 while(valid) {
