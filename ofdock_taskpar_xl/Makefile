@@ -85,18 +85,52 @@ CHECKS=check
 
 include $(COMMON_REPO)/utility/rules.mk
 
+# Docking parameters 
+# that directly determine the execution time
+# Following values are used only for emulation
+# to have a short but still a representative test
+PDB  := 1stp
+NRUN := 5
+NEV  := 100000 
+
 kerswemu:
 	make TARGETS=sw_emu all
+	cp ./xclbin/$(XCLBINS).sw_emu.*.xclbin .
+	mv ./$(XCLBINS).sw_emu.*.xclbin ./$(XCLBINS).xclbin
+	@echo " "
+	@echo "========================================================================"
+	@echo "INFO: emulation file created under: ./xclbin/$(XCLBINS).sw_emu.*.xclbin "
+	@echo "INFO: ... was copied and renamed as ./$(XCLBINS).xclbin    	       "
+	@echo "========================================================================"
+	@echo " "
 
 kerhwemu:
 	make TARGETS=hw_emu all	
 
 
-# Automate test
+# Run emulation
+# Compilation (host & device) if not done previously
+# The .dlg file is written in ./
 # "exe" and "xclbin" are rules from "rules.mk"
-# Don't forget to copy and rename ./xclbin/*.xclbin file into ./Krnl_GA.xclbin
-emu: 
-	XCL_EMULATION_MODE=sw_emu ./hostbin -ffile input/1stp/derived/1stp_protein.maps.fld -lfile input/1stp/derived/1stp_ligand.pdbqt -nrun 2 -nev 2500000
+swemu: kerswemu
+	XCL_EMULATION_MODE=sw_emu ./$(EXES) -ffile input/$(PDB)/derived/$(PDB)_protein.maps.fld -lfile input/$(PDB)/derived/$(PDB)_ligand.pdbqt -nev $(NEV) -nrun $(NRUN)  -gfpop 1
+	@echo " "
+	@echo "======================================="
+	@echo "INFO: log file is under: ./docking.dlg "
+	@echo "======================================="
+	@echo " "
+
+# Build hw (FPGA bitstream)
+# NOT integrated yet in a multistep compilation
+hw: 	
+	make TARGETS=hw all	
+	@echo " "
+	@echo "=========================================================================="
+	@echo "INFO: FPGA bitstream is under: $(TARGET_DIR_HW)/$(KRNL_NAME)(.aoco)(.aocx)"
+	@echo "=========================================================================="
+	@echo " "
+
+
 	
 debug:
-	XCL_EMULATION_MODE=sw_emu xgdb -args ./hostbin -ffile input/1stp/derived/1stp_protein.maps.fld -lfile input/1stp/derived/1stp_ligand.pdbqt -nrun 1 -nev 100 -lsit 10 -psize 10
+	XCL_EMULATION_MODE=sw_emu xgdb -args ./$(EXES) -ffile input/1stp/derived/1stp_protein.maps.fld -lfile input/1stp/derived/1stp_ligand.pdbqt -nrun 1 -nev 100 -lsit 10 -psize 10
