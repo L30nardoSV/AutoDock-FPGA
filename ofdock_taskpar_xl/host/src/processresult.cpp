@@ -324,8 +324,10 @@ void make_resfiles(float* final_population,
 		//if (i==127)
 		//	accurate_intraE [i] = calc_intraE(&temp_docked, 8, 0, mypars->coeffs.scaled_AD4_coeff_elec, mypars->coeffs.AD4_coeff_desolv, 1);				//calculating the intramolecular energy
 		//else
+			#if 0
 			accurate_intraE[i] = calc_intraE_f(&temp_docked, 8, 0, mypars->coeffs.scaled_AD4_coeff_elec, mypars->coeffs.AD4_coeff_desolv, mypars->qasp, debug);
-
+			#endif
+			accurate_intraE[i] = calc_intraE_f(&temp_docked, 8, mypars->smooth, 0, mypars->coeffs.scaled_AD4_coeff_elec, mypars->coeffs.AD4_coeff_desolv, mypars->qasp, debug);
 
 		move_ligand(&temp_docked, mygrid->origo_real_xyz);				//moving it according to grid location
 		entity_rmsds [i] = calc_rmsd(ligand_from_pdb, &temp_docked, mypars->handle_symmetry);	//calculating rmds compared to original pdb file
