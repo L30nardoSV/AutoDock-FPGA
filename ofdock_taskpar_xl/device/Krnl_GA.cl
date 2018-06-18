@@ -381,7 +381,7 @@ pipe int    chan_GA2LS_Off9_active	__attribute__((xcl_reqd_pipe_depth(16)));
 pipe char2  chan_IGL2Conform_actmode	    __attribute__((xcl_reqd_pipe_depth(9))); // active, mode
 pipe float  chan_IGL2Conform_genotype       __attribute__((xcl_reqd_pipe_depth(9*CHAN_DEPTH_GENOTYPE)));
 */
-pipe char2  chan_IGL2Conform_actmode	    __attribute__((xcl_reqd_pipe_depth(16))); // active, mode
+pipe char   chan_IGL2Conform_actmode	    __attribute__((xcl_reqd_pipe_depth(16))); // active, mode
 pipe float  chan_IGL2Conform_genotype       __attribute__((xcl_reqd_pipe_depth(512)));
 
 // Turn-off signal to IGL_Arbiter, Conform, InterE, IntraE
