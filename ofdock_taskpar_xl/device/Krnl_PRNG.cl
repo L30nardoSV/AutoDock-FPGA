@@ -12,6 +12,8 @@ void Krnl_Prng_BT_ushort_float(
 			       unsigned int DockConst_pop_size
 
 #if !defined(SW_EMU)
+			      // IMPORTANT: enable this dummy global argument only for "hw" build.
+			      // Check ../common_xilinx/utility/boards.mk
 			      // https://forums.xilinx.com/t5/SDAccel/ERROR-KernelCheck-83-114-in-sdx-2017-4/td-p/818135
 			      ,
 			      __global int *dummy
@@ -109,6 +111,8 @@ void Krnl_Prng_GG_uchar(
 		        unsigned char DockConst_num_of_genes
 
 #if !defined(SW_EMU)
+			// IMPORTANT: enable this dummy global argument only for "hw" build.
+			// Check ../common_xilinx/utility/boards.mk
 		        // https://forums.xilinx.com/t5/SDAccel/ERROR-KernelCheck-83-114-in-sdx-2017-4/td-p/818135
 			,
 			__global int *dummy
@@ -179,6 +183,8 @@ void Krnl_Prng_GG_float(
 		        unsigned char DockConst_num_of_genes
 
 #if !defined(SW_EMU)
+			// IMPORTANT: enable this dummy global argument only for "hw" build.
+			// Check ../common_xilinx/utility/boards.mk
 		        // https://forums.xilinx.com/t5/SDAccel/ERROR-KernelCheck-83-114-in-sdx-2017-4/td-p/818135
 		        ,
 		        __global int *dummy
@@ -248,6 +254,8 @@ void Krnl_Prng_LS123_ushort(
 		            unsigned int DockConst_pop_size
 
 #if !defined(SW_EMU)
+			    // IMPORTANT: enable this dummy global argument only for "hw" build.
+			    // Check ../common_xilinx/utility/boards.mk
 		            // https://forums.xilinx.com/t5/SDAccel/ERROR-KernelCheck-83-114-in-sdx-2017-4/td-p/818135
 			    ,
 			    __global int *dummy
@@ -360,6 +368,8 @@ void Krnl_Prng_LS_float(
 		        unsigned char DockConst_num_of_genes
 
 #if !defined(SW_EMU)
+			// IMPORTANT: enable this dummy global argument only for "hw" build.
+			// Check ../common_xilinx/utility/boards.mk
  		        // https://forums.xilinx.com/t5/SDAccel/ERROR-KernelCheck-83-114-in-sdx-2017-4/td-p/818135
 			,
 			__global int *dummy
@@ -432,6 +442,8 @@ void Krnl_Prng_LS2_float(
 			 unsigned char DockConst_num_of_genes
 
 #if !defined(SW_EMU)
+			 // IMPORTANT: enable this dummy global argument only for "hw" build.
+			 // Check ../common_xilinx/utility/boards.mk
  		         // https://forums.xilinx.com/t5/SDAccel/ERROR-KernelCheck-83-114-in-sdx-2017-4/td-p/818135
 		         , 
          		 __global int *dummy
@@ -504,6 +516,8 @@ void Krnl_Prng_LS3_float(
 			 unsigned char DockConst_num_of_genes
 
 #if !defined(SW_EMU)
+			 // IMPORTANT: enable this dummy global argument only for "hw" build.
+			 // Check ../common_xilinx/utility/boards.mk
  		         // https://forums.xilinx.com/t5/SDAccel/ERROR-KernelCheck-83-114-in-sdx-2017-4/td-p/818135
 		         , 
          		 __global int *dummy
@@ -577,6 +591,8 @@ void Krnl_Prng_LS4_float(
 			 unsigned char DockConst_num_of_genes
 
 #if !defined(SW_EMU)
+			 // IMPORTANT: enable this dummy global argument only for "hw" build.
+			 // Check ../common_xilinx/utility/boards.mk
  		         // https://forums.xilinx.com/t5/SDAccel/ERROR-KernelCheck-83-114-in-sdx-2017-4/td-p/818135
 		         , 
          		 __global int *dummy
@@ -649,6 +665,8 @@ void Krnl_Prng_LS5_float(
 			 unsigned char DockConst_num_of_genes
 
 #if !defined(SW_EMU)
+			 // IMPORTANT: enable this dummy global argument only for "hw" build.
+			 // Check ../common_xilinx/utility/boards.mk
  		         // https://forums.xilinx.com/t5/SDAccel/ERROR-KernelCheck-83-114-in-sdx-2017-4/td-p/818135
 		         , 
          		 __global int *dummy
@@ -721,6 +739,8 @@ void Krnl_Prng_LS6_float(
 			 unsigned char DockConst_num_of_genes
 
 #if !defined(SW_EMU)
+			 // IMPORTANT: enable this dummy global argument only for "hw" build.
+			 // Check ../common_xilinx/utility/boards.mk
  		         // https://forums.xilinx.com/t5/SDAccel/ERROR-KernelCheck-83-114-in-sdx-2017-4/td-p/818135
 		         , 
          		 __global int *dummy
@@ -793,6 +813,8 @@ void Krnl_Prng_LS7_float(
 			 unsigned char DockConst_num_of_genes
 
 #if !defined(SW_EMU)
+			 // IMPORTANT: enable this dummy global argument only for "hw" build.
+			 // Check ../common_xilinx/utility/boards.mk
  		         // https://forums.xilinx.com/t5/SDAccel/ERROR-KernelCheck-83-114-in-sdx-2017-4/td-p/818135
 		         , 
          		 __global int *dummy
@@ -865,6 +887,8 @@ void Krnl_Prng_LS8_float(
 			 unsigned char DockConst_num_of_genes
 
 #if !defined(SW_EMU)
+			 // IMPORTANT: enable this dummy global argument only for "hw" build.
+			 // Check ../common_xilinx/utility/boards.mk
  		         // https://forums.xilinx.com/t5/SDAccel/ERROR-KernelCheck-83-114-in-sdx-2017-4/td-p/818135
 		         , 
          		 __global int *dummy
@@ -937,6 +961,8 @@ void Krnl_Prng_LS9_float(
 			 unsigned char DockConst_num_of_genes
 
 #if !defined(SW_EMU)
+			 // IMPORTANT: enable this dummy global argument only for "hw" build.
+			 // Check ../common_xilinx/utility/boards.mk
  		         // https://forums.xilinx.com/t5/SDAccel/ERROR-KernelCheck-83-114-in-sdx-2017-4/td-p/818135
 		         , 
          		 __global int *dummy

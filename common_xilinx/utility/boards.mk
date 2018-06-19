@@ -555,14 +555,15 @@ FIPO_FLAG = $(FIPOCO_FLAG) \
 	    $(COPYPOPENE_FLAG) $(SEP_FGRID_FLAG) 
 
 
+OTHER_FLAGS=
 
 ifeq ($(TARGETS), sw_emu)
 	OTHER_FLAGS=-DSW_EMU
-else	
-	OTHER_FLAGS=
 endif
 
-
+ifeq ($(TARGETS), hw_emu)
+	OTHER_FLAGS=-DSW_EMU
+endif
 
 #https://www.xilinx.com/html_docs/xilinx2018_1/sdsoc_doc/nts1517252127891.html
 #CLFLAGS:= --xp "param:compiler.preserveHlsOutput=1" --xp "param:compiler.generateExtraRunData=true" -s
