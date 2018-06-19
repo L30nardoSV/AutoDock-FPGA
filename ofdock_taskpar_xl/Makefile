@@ -101,11 +101,18 @@ PDB  := 1stp
 NRUN := 5
 NEV  := 800000 
 
+# Switching to the other SDAccel 2017.4 default platform
+# As it is available in Xelera "saruman" server
+#DEVICES:= xilinx:kcu1500:dynamic (in ../common_xilinx/utility/boards.mk)
+#BOARD:= xilinx:kcu1500:dynamic
+BOARD:= xilinx:vcu1525:dynamic
+NDEVICES_EMU:=1
+
 # Compile and generate report
 kerrpt-sw:
 	make clean
 	@echo $(newline)
-	make all REPORT=estimate TARGETS=sw_emu
+	make all REPORT=estimate TARGETS=sw_emu DEVICES=$(BOARD)
 	@echo $(newline)
 	cp ./xclbin/$(XCLBINS).sw_emu.*.xclbin .
 	@echo $(newline)
@@ -121,7 +128,7 @@ kerrpt-sw:
 
 # Compile for sw and hw emulation
 kerswemu:
-	make all TARGETS=sw_emu
+	make all TARGETS=sw_emu DEVICES=$(BOARD)
 	cp ./xclbin/$(XCLBINS).sw_emu.*.xclbin .
 	mv ./$(XCLBINS).sw_emu.*.xclbin ./$(XCLBINS).xclbin
 	@echo $(newline)
@@ -132,7 +139,7 @@ kerswemu:
 	@echo $(newline)
 
 kerhwemu:
-	make all TARGETS=hw_emu	
+	make all TARGETS=hw_emu	DEVICES=$(BOARD)
 	cp ./xclbin/$(XCLBINS).hw_emu.*.xclbin .
 	mv ./$(XCLBINS).hw_emu.*.xclbin ./$(XCLBINS).xclbin
 	@echo $(newline)
@@ -146,7 +153,10 @@ kerhwemu:
 # Compilation (host & device) if not done previously
 # The .dlg file is written in ./
 # "exe" and "xclbin" are rules from "rules.mk"
+# SDAccel 2017.4: User Guide UG1023, "Running Software and Hardware Emulation in XOCC Flow"
+#emconfigutil --platform xilinx_vcu1525_dynamic_5_0 --nd 1
 swemu: kerswemu
+	emconfigutil --platform $(BOARD) --nd $(NDEVICES_EMU)
 	XCL_EMULATION_MODE=sw_emu ./$(EXES) -ffile input/$(PDB)/derived/$(PDB)_protein.maps.fld -lfile input/$(PDB)/derived/$(PDB)_ligand.pdbqt -nev $(NEV) -nrun $(NRUN)  -gfpop 1
 	@echo $(newline)
 	@echo "========================================================================="
@@ -162,6 +172,7 @@ swemu: kerswemu
 	@echo $(newline)
 
 hwemu: kerhwemu
+	emconfigutil --platform $(BOARD) --nd $(NDEVICES_EMU)
 	XCL_EMULATION_MODE=hw_emu ./$(EXES) -ffile input/$(PDB)/derived/$(PDB)_protein.maps.fld -lfile input/$(PDB)/derived/$(PDB)_ligand.pdbqt -nev $(NEV) -nrun $(NRUN)  -gfpop 1
 	@echo $(newline)
 	@echo "========================================================================="
@@ -179,7 +190,7 @@ hwemu: kerhwemu
 # Build hw (FPGA bitstream)
 # NOT integrated yet in a multistep compilation
 hw: 	
-	make TARGETS=hw all	
+	make all TARGETS=hw DEVICES=$(BOARD)
 	@echo $(newline)
 	@echo "======================================================================="
 	@echo "INFO: FPGA bitstream is under: ./xclbin/$(XCLBINS).hw.*.xclbin"

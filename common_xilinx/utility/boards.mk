@@ -565,6 +565,11 @@ ifeq ($(TARGETS), hw_emu)
 	OTHER_FLAGS=-DSW_EMU
 endif
 
+# Set manually the frequency to 200 MHz
+# TODO: make it configurable from Makefile
+# https://forums.xilinx.com/t5/SDAccel/SDAccel-asks-to-set-lower-frequency-by-specifying-kernel/td-p/799137
+#OTHER_FLAGS+=--kernel_frequency 200
+
 #https://www.xilinx.com/html_docs/xilinx2018_1/sdsoc_doc/nts1517252127891.html
 #CLFLAGS:= --xp "param:compiler.preserveHlsOutput=1" --xp "param:compiler.generateExtraRunData=true" -s
 #CLFLAGS:= --xp "param:compiler.version=31" --xp "param:compiler.preserveHlsOutput=1" --xp "param:compiler.generateExtraRunData=true" -s 
