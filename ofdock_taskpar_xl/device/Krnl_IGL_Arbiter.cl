@@ -37,6 +37,7 @@ void Krnl_IGL_Arbiter(/*unsigned char DockConst_num_of_genes*/
 	uint LS3_eval = 0;
 	*/
 
+LOOP_WHILE_IGL_MAIN:
 while(active) {
 /*
 	bool Off_valid     = false;
@@ -1371,6 +1372,7 @@ while(active) {
 	uchar bound = active ? bound_tmp : 1;
 
 	// Send "mode" to Conform
+	LOOP_FOR_IGL_WRITE_MODE:
 	for (uchar j=0; j<bound; j++) {
 #if 0
 /*

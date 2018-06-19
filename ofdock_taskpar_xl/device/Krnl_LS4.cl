@@ -42,6 +42,7 @@ void Krnl_LS4(
 
 	bool valid = true;
 
+	LOOP_WHILE_LS4_MAIN:
 while(valid) {
 /*
 	bool active;
@@ -61,6 +62,7 @@ while(valid) {
 /*
 	while( (valid_active == false) && (valid_energy == false)) {
 */
+	LOOP_WHILE_LS4_ACTIVE:
 	while( (valid_active != 0) && (valid_energy != 0)) {
 /*
 		active         = read_channel_nb_altera(chan_GA2LS_Off4_active, &valid_active);
@@ -86,6 +88,7 @@ while(valid) {
 		float   genotype [ACTUAL_GENOTYPE_LENGTH];
 		#endif
 
+		LOOP_FOR_LS4_READ_INPUT_GENOTYPE:
 		for (uchar i=0; i<DockConst_num_of_genes; i++) {
 			#if defined (FIXED_POINT_LS4)
 /*
@@ -119,6 +122,7 @@ while(valid) {
 		bool   positive_direction = true;
 
 		// performing local search
+		LOOP_WHILE_LS4_ITERATION_RHO:
 		#if defined (FIXED_POINT_LS4)
 		while ((iteration_cnt < DockConst_max_num_of_iters) && (fixpt_rho > DockConst_rho_lower_bound)) {
 		#else
@@ -195,6 +199,7 @@ while(valid) {
 		
 			// new random deviate
 			// rho is the deviation of the uniform distribution
+			LOOP_FOR_LS4_WRITE_GENOTYPE:
 			for (uchar i=0; i<DockConst_num_of_genes; i++) {
 /*
 				float tmp_prng = read_channel_altera(chan_PRNG2GA_LS4_float_prng);
@@ -287,6 +292,7 @@ while(valid) {
 /*
 			while( (intra_valid == false) || (inter_valid == false)) {
 */
+			LOOP_WHILE_LS4_READ_ENERGIES:
 			while( (intra_valid != 0) || (inter_valid != 0)) {
 /*
 				if (intra_valid == false) {
@@ -320,6 +326,7 @@ while(valid) {
 				// updating genotype_bias
 
 				//#pragma unroll 16
+				LOOP_FOR_LS4_FIXEDPT_UPDATE_POS_GENOTYPE:
 				for (uchar i=0; i<DockConst_num_of_genes; i++) {
 					genotype_bias [i] = (positive_direction == true) ? deviate_plus_bias  [i]: 
 											   deviate_minus_bias [i]; 
@@ -337,6 +344,7 @@ while(valid) {
 				// updating (halving) genotype_bias
 
 				//#pragma unroll 16
+				LOOP_FOR_LS4_FIXEDPT_UPDATE_NEG_GENOTYPE:
 				for (uchar i=0; i<DockConst_num_of_genes; i++) {
 					genotype_bias [i] = (iteration_cnt == 1)? 0: (genotype_bias [i] >> 1);
 				}
@@ -353,6 +361,7 @@ while(valid) {
 				// updating genotype_bias
 
 				//#pragma unroll 16
+				LOOP_FOR_LS4_FLOATPT_UPDATE_POS_GENOTYPE:
 				for (uchar i=0; i<DockConst_num_of_genes; i++) {
 					genotype_bias [i] = (positive_direction == true) ?  deviate_plus_bias  [i] : 
 											    deviate_minus_bias [i] ;
@@ -368,6 +377,7 @@ while(valid) {
 				// updating (halving) genotype_bias
 
 				//#pragma unroll 16
+				LOOP_FOR_LS4_FLOATPT_UPDATE_NEG_GENOTYPE:
 				for (uchar i=0; i<DockConst_num_of_genes; i++) {
 					genotype_bias [i] = (iteration_cnt == 1)? 0.0f: (0.5f*genotype_bias [i]);
 				}
@@ -387,6 +397,7 @@ while(valid) {
 		#endif
 
 		// write back data to GA
+		LOOP_FOR_LS4_WRITEBACK2GA:
 		for (uchar i=0; i<DockConst_num_of_genes; i++) {
 			if (i == 0) {
 				float2 evalenergy  = {*(float*)&LS_eval, current_energy};

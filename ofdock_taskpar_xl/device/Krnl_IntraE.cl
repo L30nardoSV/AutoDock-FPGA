@@ -45,11 +45,13 @@ void Krnl_IntraE(
 	char active = 0x01;
 
 	__local char3  intraE_contributors_localcache   [MAX_INTRAE_CONTRIBUTORS];
+	LOOP_FOR_INTRAE_CONTRIBUTORS:
 	for (ushort i=0; i<MAX_INTRAE_CONTRIBUTORS; i++) {
 		intraE_contributors_localcache [i] = KerConstStatic_intraE_contributors_const [i];	
 	}
 
 #pragma max_concurrency 32
+LOOP_WHILE_INTRAE_MAIN:
 while(active) {
 	char mode;
 
@@ -87,6 +89,7 @@ while(active) {
 	active = actmode;
 	mode   = actmode;
 
+	LOOP_FOR_INTRAE_READ_XYZ:
 	for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt+=2) {
 /*
 		float8 tmp = read_channel_altera(chan_Conf2Intrae_xyz);
@@ -131,6 +134,7 @@ while(active) {
 	// For each intramolecular atom contributor pair
 
 	//#pragma unroll 10
+	LOOP_FOR_INTRAE_MAIN:
 	for (ushort contributor_counter=0; contributor_counter<DockConst_num_of_intraE_contributors; contributor_counter++) {
 
 		char3 ref_intraE_contributors_const;

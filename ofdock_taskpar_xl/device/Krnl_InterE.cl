@@ -53,6 +53,7 @@ void Krnl_InterE(
 	__global const float* GlobFgrids3 = & GlobFgrids [Host_mul_tmp3];
 
 #pragma max_concurrency 32
+LOOP_WHILE_INTERE_MAIN:
 while(active) {
 
 	char mode;
@@ -92,6 +93,7 @@ while(active) {
 	active = actmode;
 	mode   = actmode;
 
+	LOOP_FOR_INTERE_READ_XYZ:
 	for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt+=2) {
 /*
 		float8 tmp = read_channel_altera(chan_Conf2Intere_xyz);
@@ -119,6 +121,7 @@ while(active) {
 	#endif
 
 	// For each ligand atom
+	LOOP_FOR_INTER_MAIN:
 	for (uchar atom1_id=0; atom1_id<DockConst_num_of_atoms; atom1_id++)
 	{
 		char atom1_typeid = KerConstStatic_atom_types_const [atom1_id];
