@@ -94,6 +94,7 @@ while(active) {
 		(LS8_end_valid == false) &&
 		(LS9_end_valid == false) 
 */
+	LOOP_WHILE_IGL_INNER:
 	while (
 		(Off_valid     != 0) &&
 		(IC_valid      != 0) &&  
