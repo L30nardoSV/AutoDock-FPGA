@@ -2,34 +2,25 @@
 *~
 **/*~
 
-# Ignore bin folders
-ofdock_taskpar_alt/bin/*
-ofdock_taskpar_alt/bin_hw/*
-ofdock_taskpar_alt/bin_hw_profile/*
-
 # Ignore copyharp2_taskpar
-copy_ofdock_taskpar_alt/*
-copy_ofdock_taskpar_alt.zip
-
-# Ignore PDBs for a moment
-PDBs/*
-ofdock_taskpar_alt/Krnl_GA/*
-ofdock_taskpar_alt/device/docking_fpga_leo/*
-
-# Ignore FPGA binaries
-ofdock_taskpar_alt/docking/*
-ofdock_taskpar_alt/docking.aoco
-ofdock_taskpar_alt/docking.aocx
+copy_ofdock_taskpar_xl/*
+copy_ofdock_taskpar_xl.zip
 
 # Ignore docking debug/tmp output
 *~
 final_population_run*
-
-# Ignore initial dynamic profile results
-ofdock_taskpar_alt/dyn_profile/*_run*
+docking.dlg
+docking.xml
+initpop.txt
 
 # Ignore files inside pdbs
-ofdock_taskpar_alt/input/*/derived/*_nrun*
+ofdock_taskpar_xl/input/*/derived/*_nrun*
+
+# Ignore SDAccel binaries / temporal
+xclbin*/
+_xocc_*
+.Xil/
+_sds/
 
 # ===================
 # C gitignore
