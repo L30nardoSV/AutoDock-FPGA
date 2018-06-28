@@ -49,3 +49,13 @@ make kerrpt-sw
 ```
 
 In order to generate additional reports, a [`sdaccel_ini`](./ofdock_taskpar_xl/sdaccel.ini) was created.
+
+## FPGA evaluation on remote server
+
+```zsh
+make eva
+```
+
+Contrary to the other Altera-based branches, this rule is not set as `make exe`
+
+This is because another `exe` rule is already used internally by the scripts provided by SDAccel.
