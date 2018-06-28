@@ -105,6 +105,7 @@ NEV  := 800000
 #DEVICES:= xilinx:kcu1500:dynamic (in ../common_xilinx/utility/boards.mk)
 #BOARD:= xilinx:kcu1500:dynamic
 BOARD:= xilinx:vcu1525:dynamic
+#BOARD:= /opt/cad/xilinx/SDx/2017.1/platforms/xilinx_adm-pcie-7v3_1ddr_3_0/xilinx_adm-pcie-7v3_1ddr_3_0.xpfm
 NDEVICES_EMU:=1
 
 
