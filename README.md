@@ -6,14 +6,9 @@ source /opt/cad/xilinx/sdx/SDx/2017.4/settings64.sh
 
 # Documentation
 
-## Tool used in this branch
-A detailed explanation can be found in:
+* For tool used in this branch: [SDAccel Environment Tutorial: Introduction (UG1021)](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2017_4/ug1021-sdaccel-intro-tutorial.pdf) -> Chapter 2 (_Flow Overview_) -> Lab 2 (_Introduction to the SDAccel Makefile_)
 
-[SDAccel Environment Tutorial: Introduction (UG1021)](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2017_4/ug1021-sdaccel-intro-tutorial.pdf) -> Chapter 2 (_Flow Overview_) -> Lab 2 (_Introduction to the SDAccel Makefile_)
-
-## Latest tool available (online)
-
-[SDAccel Development Environment Help](https://www.xilinx.com/html_docs/xilinx2018_2/sdaccel_doc/zrq1526323398130.html)
+* For the latest tool available: [SDAccel Development Environment Help](https://www.xilinx.com/html_docs/xilinx2018_2/sdaccel_doc/zrq1526323398130.html)
 
 
 # Important commands
@@ -47,10 +42,7 @@ make kerrpt-sw
 ```
 
 * A [`sdaccel_ini`](./ofdock_taskpar_xl/sdaccel.ini) was created to generate additional reports
-
-* The `sdaccel.ini` has a specific format which is documented in:
-
-[SDAccel Environment User Guide (UG1023)](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2017_4/ug1023-sdaccel-user-guide.pdf) -> Appendix H (_Using the Runtime Initialization File_)
+* The `sdaccel.ini` has a specific format documented in: [SDAccel Environment User Guide (UG1023)](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2017_4/ug1023-sdaccel-user-guide.pdf) -> Appendix H (_Using the Runtime Initialization File_)
 
 ## FPGA evaluation on remote server
 
@@ -58,6 +50,6 @@ make kerrpt-sw
 make eva
 ```
 
-Contrary to the other Altera-based branches, this rule is not set as `make exe`
+Contrary to the other Altera-based branches, this rule is not set as `make exe`. This is because another `exe` rule is already used internally by the scripts provided by SDAccel.
 
-This is because another `exe` rule is already used internally by the scripts provided by SDAccel.
+* Information on how to setup the system for evaluation: [SDAccel Environment Tutorial: Introduction (UG1021)](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2017_4/ug1021-sdaccel-intro-tutorial.pdf) -> Chapter 2 (_Flow Overview_) -> Lab 2 (_Introduction to the SDAccel Makefile_) -> Step 5: Running System Run
