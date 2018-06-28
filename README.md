@@ -9,9 +9,7 @@ source /opt/cad/xilinx/sdx/SDx/2017.4/settings64.sh
 ## Tool used in this branch
 A detailed explanation can be found in:
 
-["SDAccel Environment Tutorial: Introduction (UG1021)"](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2017_4/ug1021-sdaccel-intro-tutorial.pdf)
-
-Chapter 2 (_Flow Overview_) -> Lab 2 (_Introduction to the SDAccel Makefile_)
+[SDAccel Environment Tutorial: Introduction (UG1021)](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2017_4/ug1021-sdaccel-intro-tutorial.pdf) -> Chapter 2 (_Flow Overview_) -> Lab 2 (_Introduction to the SDAccel Makefile_)
 
 ## Latest tool available (online)
 
@@ -48,13 +46,11 @@ A Makefile flow is used. A system estimate can be generated this way:
 make kerrpt-sw
 ```
 
-In order to generate additional reports, a [`sdaccel_ini`](./ofdock_taskpar_xl/sdaccel.ini) was created.
+* A [`sdaccel_ini`](./ofdock_taskpar_xl/sdaccel.ini) was created to generate additional reports
 
-The `sdaccel.ini` has a specific format which is documented in:
+* The `sdaccel.ini` has a specific format which is documented in:
 
-["SDAccel Environment User Guide (UG1023)"](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2017_4/ug1023-sdaccel-user-guide.pdf)
-
-Appendix H (_Using the Runtime Initialization File_)
+[SDAccel Environment User Guide (UG1023)](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2017_4/ug1023-sdaccel-user-guide.pdf) -> Appendix H (_Using the Runtime Initialization File_)
 
 ## FPGA evaluation on remote server
 
