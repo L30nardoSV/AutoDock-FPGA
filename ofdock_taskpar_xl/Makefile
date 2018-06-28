@@ -92,7 +92,6 @@ define newline
 
 endef
 
-
 # Docking parameters 
 # that directly determine the execution time
 # Following values are used only for emulation
@@ -108,6 +107,7 @@ NEV  := 800000
 BOARD:= xilinx:vcu1525:dynamic
 NDEVICES_EMU:=1
 
+
 # Compile and generate report
 kerrpt-sw:
 	make clean
@@ -118,13 +118,14 @@ kerrpt-sw:
 	@echo $(newline)
 	mv ./$(XCLBINS).sw_emu.*.xclbin ./$(XCLBINS).xclbin
 	@echo $(newline)
-	@echo "==========================================================================="
-	@echo "INFO: sw emulation file created under: ./xclbin/$(XCLBINS).sw_emu.*.xclbin "
-	@echo "INFO: ... was copied and renamed as ./$(XCLBINS).xclbin                    "
+	@echo "==============================================================================="
+	@echo "INFO: sw emulation file created under: \"./xclbin/$(XCLBINS).sw_emu.*.xclbin\" "
+	@echo "INFO: ... was copied and renamed as \"./$(XCLBINS).xclbin\"                    "
 	@echo $(newline)
-	@echo "INFO: a ./system_estimate.xtxt report was generated!                       "
-	@echo "==========================================================================="
+	@echo "INFO: a \"./system_estimate.xtxt\" report was generated!                       "
+	@echo "==============================================================================="
 	@echo $(newline)
+
 
 # Compile for sw and hw emulation
 kerswemu:
@@ -132,22 +133,24 @@ kerswemu:
 	cp ./xclbin/$(XCLBINS).sw_emu.*.xclbin .
 	mv ./$(XCLBINS).sw_emu.*.xclbin ./$(XCLBINS).xclbin
 	@echo $(newline)
-	@echo "==========================================================================="
-	@echo "INFO: sw emulation file created under: ./xclbin/$(XCLBINS).sw_emu.*.xclbin "
-	@echo "INFO: ... was copied and renamed as ./$(XCLBINS).xclbin    	          "
-	@echo "==========================================================================="
+	@echo "==============================================================================="
+	@echo "INFO: sw emulation file created under: \"./xclbin/$(XCLBINS).sw_emu.*.xclbin\" "
+	@echo "INFO: ... was copied and renamed as \"./$(XCLBINS).xclbin\"    	              "
+	@echo "==============================================================================="
 	@echo $(newline)
+
 
 kerhwemu:
 	make all TARGETS=hw_emu	DEVICES=$(BOARD)
 	cp ./xclbin/$(XCLBINS).hw_emu.*.xclbin .
 	mv ./$(XCLBINS).hw_emu.*.xclbin ./$(XCLBINS).xclbin
 	@echo $(newline)
-	@echo "==========================================================================="
-	@echo "INFO: hw emulation file created under: ./xclbin/$(XCLBINS).hw_emu.*.xclbin "
-	@echo "INFO: ... was copied and renamed as ./$(XCLBINS).xclbin    	          "
-	@echo "==========================================================================="
+	@echo "==============================================================================="
+	@echo "INFO: hw emulation file created under: \"./xclbin/$(XCLBINS).hw_emu.*.xclbin\" "
+	@echo "INFO: ... was copied and renamed as \"./$(XCLBINS).xclbin\"                    "
+	@echo "==============================================================================="
 	@echo $(newline)
+
 
 # Run emulation
 # Compilation (host & device) if not done previously
@@ -159,43 +162,129 @@ swemu: kerswemu
 	emconfigutil --platform $(BOARD) --nd $(NDEVICES_EMU)
 	XCL_EMULATION_MODE=sw_emu ./$(EXES) -ffile input/$(PDB)/derived/$(PDB)_protein.maps.fld -lfile input/$(PDB)/derived/$(PDB)_ligand.pdbqt -nev $(NEV) -nrun $(NRUN)  -gfpop 1
 	@echo $(newline)
-	@echo "========================================================================="
-	@echo "INFO: swemu log file is under: ./docking.dlg "
+	@echo "==========================================================================="
+	@echo "INFO: swemu log file is under: \"./docking.dlg\"                           "
 	@echo $(newline)
-	@echo "INFO: profile and timeline trace report files are formatted for SDx GUI "
-	@echo "INFO: ... if reports not generated, verify that sdaccel.ini exists!"
+	@echo "INFO: profile and timeline trace report files are formatted for SDx GUI    "
+	@echo "INFO: ... if reports not generated, verify that \"sdaccel.ini\" exists!    "
 	@echo $(newline)
 	sdx_analyze profile sdaccel_profile_summary.csv
 	@echo $(newline)
 	sdx_analyze trace sdaccel_timeline_trace.csv
-	@echo "========================================================================="
+	@echo "==========================================================================="
 	@echo $(newline)
+
 
 hwemu: kerhwemu
 	emconfigutil --platform $(BOARD) --nd $(NDEVICES_EMU)
 	XCL_EMULATION_MODE=hw_emu ./$(EXES) -ffile input/$(PDB)/derived/$(PDB)_protein.maps.fld -lfile input/$(PDB)/derived/$(PDB)_ligand.pdbqt -nev $(NEV) -nrun $(NRUN)  -gfpop 1
 	@echo $(newline)
-	@echo "========================================================================="
-	@echo "INFO: hwemu log file is under: ./docking.dlg "
+	@echo "==========================================================================="
+	@echo "INFO: hwemu log file is under: \"./docking.dlg\"                           "
 	@echo $(newline)
-	@echo "INFO: profile and timeline trace report files are formatted for SDx GUI "
-	@echo "INFO: ... if reports not generated, verify that sdaccel.ini exists!"
+	@echo "INFO: profile and timeline trace report files are formatted for SDx GUI    "
+	@echo "INFO: ... if reports not generated, verify that \"sdaccel.ini\" exists!    "
 	@echo $(newline)
 	sdx_analyze profile sdaccel_profile_summary.csv
 	@echo $(newline)
 	sdx_analyze trace sdaccel_timeline_trace.csv
-	@echo "========================================================================="
+	@echo "==========================================================================="
 	@echo $(newline)
+
 
 # Build hw (FPGA bitstream)
 # NOT integrated yet in a multistep compilation
 hw: 	
 	make all TARGETS=hw DEVICES=$(BOARD)
 	@echo $(newline)
-	@echo "======================================================================="
-	@echo "INFO: FPGA bitstream is under: ./xclbin/$(XCLBINS).hw.*.xclbin"
-	@echo "======================================================================="
+	@echo "========================================================================="
+	@echo "INFO: FPGA bitstream is under: \"./xclbin/$(XCLBINS).hw.*.xclbin\"       " 
+	@echo "========================================================================="
 	@echo $(newline)
+
 
 sw-debug:
 	XCL_EMULATION_MODE=sw_emu xgdb -args ./$(EXES) -ffile input/1stp/derived/1stp_protein.maps.fld -lfile input/1stp/derived/1stp_ligand.pdbqt -nrun 1 -nev 100 -lsit 10 -psize 10
+
+
+# Execute on remote server
+# Host-recompilation
+# Copy of host to $(TARGET_DIR_HW)
+# The working directory is changed
+# So .dlg file is written in $(TARGET_DIR_HW)
+eva: exe
+	./$(EXES) -ffile input/$(PDB)/derived/$(PDB)_protein.maps.fld -lfile input/$(PDB)/derived/$(PDB)_ligand.pdbqt -nev $(NEV) -nrun $(NRUN)  -gfpop 1
+	@echo $(newline)
+	@echo "==========================================================================="
+	@echo "INFO: evaluation log file is under: \"./docking.dlg\"                      "
+	@echo $(newline)
+	@echo "INFO: profile and timeline trace report files are formatted for SDx GUI    "
+	@echo "INFO: ... if reports not generated, verify that \"sdaccel.ini\" exists!    "
+	@echo $(newline)
+	sdx_analyze profile sdaccel_profile_summary.csv
+	@echo $(newline)
+	sdx_analyze trace sdaccel_timeline_trace.csv
+	@echo "==========================================================================="
+	@echo $(newline)
+
+
+# Project name
+PROJECT_NAME := ofdock_taskpar_xl
+
+COPY_DIR := copy_$(PROJECT_NAME)
+COPY_DIR_DOCK := $(PROJECT_NAME)
+
+# Make sure this remote-server alias exists (in ~/.ssh/config)
+SERVER_BRIDGE := erebor:/scratch/
+SERVER_EXEC   := saruman:~/ocladock_sdx17_4
+
+
+# Delete an existing folder if previously created
+# Create a folder $(COPY_DIR) in the parent directory
+# Copy binaries into $(COPY_DIR) folder, avoiding the (innecesary) compilation intermediate files
+# Copy source files into $(COPY_DIR) as host is built in the remote $(SERVER)
+# Create a zip file out of the $(COPY_DIR) folder
+copy: clean-copy
+	mkdir ../$(COPY_DIR)
+	mkdir ../$(COPY_DIR)/$(COPY_DIR_DOCK)
+	mkdir ../$(COPY_DIR)/$(COPY_DIR_DOCK)/xclbin
+	cp ./xclbin/$(XCLBINS).hw.*.xclbin ../$(COPY_DIR)/$(COPY_DIR_DOCK)/xclbin/
+	cp ./xclbin/$(XCLBINS).hw.*.xo ../$(COPY_DIR)/$(COPY_DIR_DOCK)/xclbin/
+	cp ./xclbin/$(XCLBINS).hw.*.xclbin ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
+	mv ../$(COPY_DIR)/$(COPY_DIR_DOCK)/$(XCLBINS).hw.*.xclbin ../$(COPY_DIR)/$(COPY_DIR_DOCK)/$(XCLBINS).xclbin
+	cp Makefile ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
+	cp defines.h ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
+	cp defines_fixedpt.h ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
+	cp defines_fixedpt_64.h ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
+	cp -r device/ ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
+	cp -r host/ ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
+	cp -r input/ ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
+	cp -r wrapcl/ ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
+	cp -r ../common ../$(COPY_DIR)/
+	cp -r ../common_xilinx ../$(COPY_DIR)/
+	cp ../conf_sdx174_saruman.sh ../$(COPY_DIR)/
+	cd ../;	zip -r $(COPY_DIR).zip $(COPY_DIR)
+	@echo $(newline)
+	@echo "Transfer the \"$(COPY_DIR).zip\" file to $(SERVER_BRIDGE) server: "
+	@echo " "
+	cd ../ && scp $(COPY_DIR).zip $(SERVER_BRIDGE)
+	@echo $(newline)
+	@echo "===================================================="
+	@echo "Files listed were transferred to $(SERVER_BRIDGE)   "
+	@echo $(newline)
+	@echo "Then, transfer files manually                       "
+	@echo "from $(SERVER_BRIDGE) to $(SERVER_EXEC)             "
+	@echo "===================================================="
+	@echo $(newline)
+
+
+clean-copy:
+	rm -rf ../$(COPY_DIR)
+	rm -f ../$(COPY_DIR).zip
+	@echo $(newline)
+	@echo "=================================================================="
+	@echo "Previous \"$(COPY_DIR).zip\" and its folder were deleted          "
+	@echo "=================================================================="
+	@echo $(newline)
+
+
