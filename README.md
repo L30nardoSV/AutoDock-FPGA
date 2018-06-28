@@ -50,6 +50,12 @@ make kerrpt-sw
 
 In order to generate additional reports, a [`sdaccel_ini`](./ofdock_taskpar_xl/sdaccel.ini) was created.
 
+The `sdaccel.ini` has a specific format which is documented in:
+
+["SDAccel Environment User Guide (UG1023)"](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2017_4/ug1023-sdaccel-user-guide.pdf)
+
+Appendix H (_Using the Runtime Initialization File_)
+
 ## FPGA evaluation on remote server
 
 ```zsh
