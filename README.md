@@ -6,11 +6,17 @@ source /opt/cad/xilinx/sdx/SDx/2017.4/settings64.sh
 
 # Documentation
 
+## Tool used in this branch
 A detailed explanation can be found in:
 
-_"SDAccel Environment Tutorial: Introduction (UG1021)"_
+["SDAccel Environment Tutorial: Introduction (UG1021)"](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2017_4/ug1021-sdaccel-intro-tutorial.pdf)
 
 Chapter 2 (_Flow Overview_) -> Lab 2 (_Introduction to the SDAccel Makefile_)
+
+## Latest tool available (online)
+
+[SDAccel Development Environment Help](https://www.xilinx.com/html_docs/xilinx2018_2/sdaccel_doc/zrq1526323398130.html)
+
 
 # Important commands
 
