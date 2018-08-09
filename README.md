@@ -1,10 +1,18 @@
-# Set SDAccel up
+# Description
+
+OpenCL task-parallel version of AutoDock4 for Xilinx FPGAs.
+
+## Development tool
+
+SDAccel v17.4.
+
+## Must
 
 ```zsh
 source /opt/cad/xilinx/sdx/SDx/2017.4/settings64.sh
 ```
 
-# Documentation
+### Documentation
 
 * For the tool used in this branch: 
 	* [SDAccel Environment Tutorial: Introduction (UG1021)](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2017_4/ug1021-sdaccel-intro-tutorial.pdf) -> Chapter 2 (_Flow Overview_) -> Lab 2 (_Introduction to the SDAccel Makefile_)
