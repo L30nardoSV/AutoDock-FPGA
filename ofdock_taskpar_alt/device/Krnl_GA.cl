@@ -1,5 +1,6 @@
-// Enable the channels extension
-#pragma OPENCL EXTENSION cl_altera_channels : enable
+// Enable the Intel channels extension
+// Programming Guide v17.1 / 5.4.5
+#pragma OPENCL EXTENSION cl_intel_channels : enable
 
 //IC:  initial calculation of energy of populations
 //GG:  genetic generation 
