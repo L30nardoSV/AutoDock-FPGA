@@ -753,9 +753,11 @@ $(TARGET_DIR)/$(TARGET) : Makefile $(SRCS) $(INCS) $(TARGET_DIR)
 # Following values are used only for emulation
 # to have a short but still a representative test
 PDB  := 1stp
+PSIZE:= 150
 NRUN := 10
 NEV  := 50000
 NGEN := 27000
+GFPOP:= 0
 
 # Project name
 PROJECT_NAME := ofdock_taskpar_alt
@@ -794,7 +796,10 @@ keremu: $(DEV_SRC)
 # So .dlg file is written in $(TARGET_DIR)
 emu: $(TARGET_DIR)/$(TARGET) keremu
 	cd $(TARGET_DIR) && \
-	CL_CONTEXT_EMULATOR_DEVICE_INTELFPGA=1 ./$(TARGET) -ffile ../input/$(PDB)/derived/$(PDB)_protein.maps.fld -lfile ../input/$(PDB)/derived/$(PDB)_ligand.pdbqt -nrun $(NRUN) -nev $(NEV) -ngen $(NGEN) -gfpop 1
+	CL_CONTEXT_EMULATOR_DEVICE_INTELFPGA=1 ./$(TARGET) \
+	-ffile ../input/$(PDB)/derived/$(PDB)_protein.maps.fld \
+	-lfile ../input/$(PDB)/derived/$(PDB)_ligand.pdbqt \
+	-psize $(PSIZE) -nrun $(NRUN) -nev $(NEV) -ngen $(NGEN) -gfpop 1
 	@echo $(newline)
 	@echo "======================================================="
 	@echo "INFO: log file is under: \"$(TARGET_DIR)/docking.dlg\" "
@@ -871,7 +876,12 @@ endif
 exe: $(TARGET_DIR)/$(TARGET)
 	cp $(TARGET_DIR)/$(TARGET) $(TARGET_DIR_HW)/ && \
 	cd $(TARGET_DIR_HW) && \
-	./$(TARGET) -ffile ../input/$(PDB)/derived/$(PDB)_protein.maps.fld -lfile ../input/$(PDB)/derived/$(PDB)_ligand.pdbqt -nrun $(NRUN) -resnam docking_$(PDB)_$(NRUN) -power $(POWER_FLAG)
+	./$(TARGET) \
+	-ffile ../input/$(PDB)/derived/$(PDB)_protein.maps.fld \
+	-lfile ../input/$(PDB)/derived/$(PDB)_ligand.pdbqt \
+	-resnam docking_$(PDB)_$(NRUN) \
+	-nrun $(NRUN) -gfpop $(GFPOP) \
+	-power $(POWER_FLAG)
 	@echo $(newline)
 	@echo "========================================================================="
 	@echo "INFO: log file is under: \"$(TARGET_DIR_HW)/docking_$(PDB)_$(NRUN).dlg\" "
@@ -887,7 +897,11 @@ exe: $(TARGET_DIR)/$(TARGET)
 exe-prof: $(TARGET_DIR)/$(TARGET)
 	cp $(TARGET_DIR)/$(TARGET) $(TARGET_DIR_HW_PROF)/ && \
 	cd $(TARGET_DIR_HW_PROF) && \
-	./$(TARGET) -ffile ../input/$(PDB)/derived/$(PDB)_protein.maps.fld -lfile ../input/$(PDB)/derived/$(PDB)_ligand.pdbqt -nrun $(NRUN) -resnam docking_$(PDB)_$(NRUN)
+	./$(TARGET) \
+	-ffile ../input/$(PDB)/derived/$(PDB)_protein.maps.fld \
+	-lfile ../input/$(PDB)/derived/$(PDB)_ligand.pdbqt \
+	-resnam docking_$(PDB)_$(NRUN) \
+	-nrun $(NRUN) -gfpop $(GFPOP)
 	@echo $(newline)
 	@echo "=============================================================================="
 	@echo "INFO: log file is under: \"$(TARGET_DIR_HW_PROF)/docking_$(PDB)_$(NRUN).dlg\" "
