@@ -204,29 +204,34 @@ while(active) {
 		float inverse_smoothed_distance_pow_10 = inverse_smoothed_distance_pow_6 * inverse_smoothed_distance_pow_4;
 		float inverse_smoothed_distance_pow_12 = inverse_smoothed_distance_pow_6 * inverse_smoothed_distance_pow_6;
 
-		// But only if the distance is less than distance cutoff value and 20.48A (because of the tables)
-		//if ((distance_leo < 8.0f) && (distance_leo < 20.48f))
+		// Calculating energy contributions
+		// Cuttoff1: internuclear-distance at 8A only for vdw and hbond.
 		if (atomic_distance < 8.0f) 
 		{
 			// Calculating van der Waals / hydrogen bond term
-			partialE1 = KerConstStatic_VWpars_AC_const [atom1_typeid*DockConst_num_of_atypes+atom2_typeid]*inverse_smoothed_distance_pow_12;
+			partialE1 += KerConstStatic_VWpars_AC_const [atom1_typeid*DockConst_num_of_atypes+atom2_typeid]*inverse_smoothed_distance_pow_12;
 
 			float tmp_pE2 = KerConstStatic_VWpars_BD_const [atom1_typeid*DockConst_num_of_atypes+atom2_typeid];
 
 			if (ref_intraE_contributors_const.z == 1)	// H-bond
-				partialE2 = tmp_pE2 * inverse_smoothed_distance_pow_10;
+				partialE2 -= tmp_pE2 * inverse_smoothed_distance_pow_10;
 			else	// Van der Waals
-				partialE2 = tmp_pE2 * inverse_smoothed_distance_pow_6;
-		} // End of if: if (dist < dcutoff)	
+				partialE2 -= tmp_pE2 * inverse_smoothed_distance_pow_6;
+		} // if cuttoff1 - internuclear-distance at 8A
 
-		// Calculating electrostatic term
-		partialE3 = native_divide(  (DockConst_coeff_elec*KerConstStatic_atom_charges_const[atom1_id]*KerConstStatic_atom_charges_const[atom2_id]) , (atomic_distance*(-8.5525f + native_divide(86.9525f, (1.0f + 7.7839f*native_exp(-0.3154f*atomic_distance)))))       );
+		// Calculating energy contributions
+		// Cuttoff2: internuclear-distance at 20.48A only for el and sol.
+		if (atomic_distance < 20.48f)
+		{
+			// Calculating electrostatic term
+			partialE3 += native_divide(  (DockConst_coeff_elec*KerConstStatic_atom_charges_const[atom1_id]*KerConstStatic_atom_charges_const[atom2_id]) , (atomic_distance*(-8.5525f + native_divide(86.9525f, (1.0f + 7.7839f*native_exp(-0.3154f*atomic_distance)))))       );
 
-		// Calculating desolvation term
-		partialE4 = (
-			  (KerConstStatic_dspars_S_const [atom1_typeid] + DockConst_qasp*fabs(KerConstStatic_atom_charges_const[atom1_id])) * KerConstStatic_dspars_V_const [atom2_typeid] + 
-			  (KerConstStatic_dspars_S_const [atom2_typeid] + DockConst_qasp*fabs(KerConstStatic_atom_charges_const[atom2_id])) * KerConstStatic_dspars_V_const [atom1_typeid]) * 
-			 DockConst_coeff_desolv*native_exp(-0.0386f*distance_pow_2);
+			// Calculating desolvation term
+			partialE4 += (
+				  (KerConstStatic_dspars_S_const [atom1_typeid] + DockConst_qasp*fabs(KerConstStatic_atom_charges_const[atom1_id])) * KerConstStatic_dspars_V_const [atom2_typeid] + 
+				  (KerConstStatic_dspars_S_const [atom2_typeid] + DockConst_qasp*fabs(KerConstStatic_atom_charges_const[atom2_id])) * KerConstStatic_dspars_V_const [atom1_typeid]) * 
+				 DockConst_coeff_desolv*native_exp(-0.0386f*distance_pow_2);
+		} // if cuttoff2 - internuclear-distance at 20.48A
 	
 		#if defined (FIXED_POINT_INTRAE)
 		//shift_intraE[32] = shift_intraE[0] + partialE1 + partialE2 + partialE3 + partialE4;
