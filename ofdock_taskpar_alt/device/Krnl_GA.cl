@@ -855,6 +855,8 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 #include "Krnl_LS9.cl"
 
 #include "Krnl_IGL_Arbiter.cl"
+//#include "Krnl_IGL_SimplifArbiter.cl"
+
 #include "Krnl_Conform.cl"
 #include "Krnl_InterE.cl"
 #include "Krnl_IntraE.cl"
