@@ -261,10 +261,12 @@ fixedpt fixedpt_map_angle_360(fixedpt angle)
 }
 #endif
 
+#if 0
 // Shift register sizes
 // Such registers are used to reduce Initiation Interval (II)
 #define SHIFT_REG_SIZE 10
 #define SHIFT_REG_SIZE_MINUS_ONE (SHIFT_REG_SIZE-1)
+#endif
 
 // --------------------------------------------------------------------------
 // Lamarckian Genetic-Algorithm (GA): GA + LS (Local Search) 
@@ -402,6 +404,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			               numwriteports(1)
 			              )) loc_energies[MAX_POPSIZE];
 
+#if 0
 		// Shift register to reduce II (initially II=6) of best entity for-loop 
 		float shift_reg[SHIFT_REG_SIZE];
 
@@ -409,6 +412,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 		for (uchar i=0; i<SHIFT_REG_SIZE; i++) {
 			shift_reg[i] = 0.0f;
 		}
+#endif
 
 		ushort best_entity = 0;
 
@@ -417,6 +421,12 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			// copy energy to local memory
 			loc_energies[pop_cnt] = LocalEneCurr[pop_cnt];
 
+			#if defined (DEBUG_KRNL_GA)
+			if (pop_cnt==0) {printf("\n");}
+			printf("%3u %20.6f\n", pop_cnt, loc_energies[pop_cnt]);
+			#endif
+
+#if 0
 			// Identifying best entity
 			// The enclosing "if (pop_cnt>0) {}" should not be commented
 			// but it is removed in order to improve performance.
@@ -434,7 +444,16 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 				best_entity = pop_cnt;
 			}
 			//}
+#endif
+
+			if (loc_energies[pop_cnt] < loc_energies[best_entity]) {
+				best_entity = pop_cnt;
+			}
 		}
+
+		#if defined (DEBUG_KRNL_GA)
+		printf("best_entity: %3u, energy: %20.6f\n", best_entity, loc_energies[best_entity]);
+		#endif
 
 		#pragma ivdep array (LocalPopNext)
 		#pragma ivdep array (LocalEneNext)
