@@ -6,6 +6,7 @@
 ofdock_taskpar_alt/bin/*
 ofdock_taskpar_alt/bin_hw/*
 ofdock_taskpar_alt/bin_hw_profile/*
+ofdock_taskpar_alt/bin_rpt/*
 
 # Ignore copyharp2_taskpar
 copy_ofdock_taskpar_alt/*
