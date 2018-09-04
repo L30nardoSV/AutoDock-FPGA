@@ -754,7 +754,8 @@ $(TARGET_DIR)/$(TARGET) : Makefile $(SRCS) $(INCS) $(TARGET_DIR)
 # to have a short but still a representative test
 PDB  := 1stp
 NRUN := 10
-NEV  := 50000 
+NEV  := 50000
+NGEN := 27000
 
 # Project name
 PROJECT_NAME := ofdock_taskpar_alt
@@ -793,7 +794,7 @@ keremu: $(DEV_SRC)
 # So .dlg file is written in $(TARGET_DIR)
 emu: $(TARGET_DIR)/$(TARGET) keremu
 	cd $(TARGET_DIR) && \
-	CL_CONTEXT_EMULATOR_DEVICE_INTELFPGA=1 ./$(TARGET) -ffile ../input/$(PDB)/derived/$(PDB)_protein.maps.fld -lfile ../input/$(PDB)/derived/$(PDB)_ligand.pdbqt -nev $(NEV) -nrun $(NRUN) -gfpop 1
+	CL_CONTEXT_EMULATOR_DEVICE_INTELFPGA=1 ./$(TARGET) -ffile ../input/$(PDB)/derived/$(PDB)_protein.maps.fld -lfile ../input/$(PDB)/derived/$(PDB)_ligand.pdbqt -nrun $(NRUN) -nev $(NEV) -ngen $(NGEN) -gfpop 1
 	@echo $(newline)
 	@echo "======================================================="
 	@echo "INFO: log file is under: \"$(TARGET_DIR)/docking.dlg\" "
