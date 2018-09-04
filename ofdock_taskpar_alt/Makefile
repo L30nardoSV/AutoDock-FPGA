@@ -718,6 +718,13 @@ AOC_FLAG = $(CUSTOMSIZE_CONSTMEM_FLAG) $(RELAXED_REDUCED_FLOATINGPOINT_FLAG)
 
 # =============================
 
+# Note that the definition of "newline" contains two blank lines.
+# Using $(newline) will expand into only one newline.
+define newline
+
+
+endef
+
 # Make it all!
 all : $(TARGET_DIR)/$(TARGET)
 
@@ -735,11 +742,11 @@ $(TARGET_DIR)/$(TARGET) : Makefile $(SRCS) $(INCS) $(TARGET_DIR)
 			$(foreach D,$(LIB_DIRS),-L$D) \
 			$(foreach L,$(LIBS),-l$L) \
 			-o $(TARGET_DIR)/$(TARGET) $(DOCK_DEBUG_FLAG) $(DEV) $(DOCK_PROG) $(ENABLE_KERNELS) $(REP) $(FIPO_FLAG)
-	@echo " "
-	@echo "==================================================="
-	@echo "INFO: host binary is under: $(TARGET_DIR)/$(TARGET)"
-	@echo "==================================================="
-	@echo " "
+	@echo $(newline)
+	@echo "========================================================"
+	@echo "INFO: host binary is under: \"$(TARGET_DIR)/$(TARGET)\" "
+	@echo "========================================================"
+	@echo $(newline)
 
 # Docking parameters 
 # that directly determine the execution time
@@ -774,11 +781,11 @@ BOARD    := p510t_sch_ax115
 # $(KRNL_NAME).aocx
 keremu: $(DEV_SRC)
 	aoc -march=emulator -emulator-channel-depth-model=strict -v -board=$(BOARD) $(DEV_SRC) -o $(TARGET_DIR)/$(KRNL_NAME).aocx $(REP) $(FIPO_FLAG) $(AOC_FLAG) -g
-	@echo " "
-	@echo "========================================================================="
-	@echo "INFO: emulation files are under: $(TARGET_DIR)/$(KRNL_NAME)(.aoco)(.aocx)"
-	@echo "========================================================================="
-	@echo " "
+	@echo $(newline)
+	@echo "=============================================================================="
+	@echo "INFO: emulation files are under: \"$(TARGET_DIR)/$(KRNL_NAME)(.aoco)(.aocx)\" "
+	@echo "=============================================================================="
+	@echo $(newline)
 
 # Run emulation
 # Compilation (host & device) if not done previously
@@ -787,11 +794,11 @@ keremu: $(DEV_SRC)
 emu: $(TARGET_DIR)/$(TARGET) keremu
 	cd $(TARGET_DIR) && \
 	CL_CONTEXT_EMULATOR_DEVICE_INTELFPGA=1 ./$(TARGET) -ffile ../input/$(PDB)/derived/$(PDB)_protein.maps.fld -lfile ../input/$(PDB)/derived/$(PDB)_ligand.pdbqt -nev $(NEV) -nrun $(NRUN) -gfpop 1
-	@echo " "
-	@echo "=================================================="
-	@echo "INFO: log file is under: $(TARGET_DIR)/docking.dlg"
-	@echo "=================================================="
-	@echo " "
+	@echo $(newline)
+	@echo "======================================================="
+	@echo "INFO: log file is under: \"$(TARGET_DIR)/docking.dlg\" "
+	@echo "======================================================="
+	@echo $(newline)
 
 
 # Reports are generated
@@ -802,15 +809,15 @@ emu: $(TARGET_DIR)/$(TARGET) keremu
 # No actual hardware is built (NO .aocx)
 kerrpt: $(DEV_SRC)
 	aoc -board=$(BOARD) $(DEV_SRC) -o $(TARGET_DIR_RPT)/$(KRNL_NAME).aoco $(REP) $(FIPO_FLAG) $(AOC_FLAG) -c -report -g
-	@echo " "
-	@echo "================================================================================"
-	@echo "INFO: THIS WORKS ONLY FROM V16.1 ON:					       "
-	@echo "INFO: report files are under: $(TARGET_DIR_RPT)/$(KRNL_NAME)/reports/report.html"
-	@echo "                                        		                               "
-	@echo "INFO: THIS WORKS IN V16.0 AND OLDER:                                            "
-	@echo "INFO: report file is under: $(TARGET_DIR_RPT)/$(KRNL_NAME)/$(KRNL_NAME).log     "
-	@echo "================================================================================"
-	@echo " "
+	@echo $(newline)
+	@echo "====================================================================================="
+	@echo "INFO: THIS WORKS ONLY FROM V16.1 ON:					            "
+	@echo "INFO: report files are under: \"$(TARGET_DIR_RPT)/$(KRNL_NAME)/reports/report.html\" "
+	@echo $(newline)
+	@echo "INFO: THIS WORKS IN V16.0 AND OLDER:                                                 "
+	@echo "INFO: report file is under: \"$(TARGET_DIR_RPT)/$(KRNL_NAME)/$(KRNL_NAME).log\"      "
+	@echo "====================================================================================="
+	@echo $(newline)
 
 # Build hw (FPGA bitstream)
 # NOT integrated yet in a multistep compilation
@@ -820,19 +827,19 @@ kerrpt: $(DEV_SRC)
 # $(KRNL_NAME).aocx
 hw: 	
 	aoc -board=$(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW)/$(KRNL_NAME).aocx $(FIPO_FLAG) $(AOC_FLAG)
-	@echo " "
-	@echo "=========================================================================="
-	@echo "INFO: FPGA bitstream is under: $(TARGET_DIR_HW)/$(KRNL_NAME)(.aoco)(.aocx)"
-	@echo "=========================================================================="
-	@echo " "
+	@echo $(newline)
+	@echo "==============================================================================="
+	@echo "INFO: FPGA bitstream is under: \"$(TARGET_DIR_HW)/$(KRNL_NAME)(.aoco)(.aocx)\" "
+	@echo "==============================================================================="
+	@echo $(newline)
 
 hw-he:
 	aoc --high-effort -board=$(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW)/$(KRNL_NAME).aocx $(FIPO_FLAG) $(AOC_FLAG)
-	@echo " "
-	@echo "=========================================================================="
-	@echo "INFO: FPGA bitstream is under: $(TARGET_DIR_HW)/$(KRNL_NAME)(.aoco)(.aocx)"
-	@echo "=========================================================================="
-	@echo " "
+	@echo $(newline)
+	@echo "==============================================================================="
+	@echo "INFO: FPGA bitstream is under: \"$(TARGET_DIR_HW)/$(KRNL_NAME)(.aoco)(.aocx)\" "
+	@echo "==============================================================================="
+	@echo $(newline)
 
 # Build hw (FPGA bitstream) instrumented with performance counters
 # NOT integrated yet in a multistep compilation
@@ -842,11 +849,11 @@ hw-he:
 # $(KRNL_NAME).aocx
 hw-prof:
 	aoc --profile -board=$(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW_PROF)/$(KRNL_NAME).aocx $(FIPO_FLAG) $(AOC_FLAG)
-	@echo " "
-	@echo "============================================================================================"
-	@echo "INFO: instrumented FPGA bitstream is under: $(TARGET_DIR_HW_PROF)/$(KRNL_NAME)(.aoco)(.aocx)"
-	@echo "============================================================================================"
-	@echo " "
+	@echo $(newline)
+	@echo "================================================================================================="
+	@echo "INFO: instrumented FPGA bitstream is under: \"$(TARGET_DIR_HW_PROF)/$(KRNL_NAME)(.aoco)(.aocx)\" "
+	@echo "================================================================================================="
+	@echo $(newline)
 
 # Execute on remote server
 # Host-recompilation
@@ -864,11 +871,11 @@ exe: $(TARGET_DIR)/$(TARGET)
 	cp $(TARGET_DIR)/$(TARGET) $(TARGET_DIR_HW)/ && \
 	cd $(TARGET_DIR_HW) && \
 	./$(TARGET) -ffile ../input/$(PDB)/derived/$(PDB)_protein.maps.fld -lfile ../input/$(PDB)/derived/$(PDB)_ligand.pdbqt -nrun $(NRUN) -resnam docking_$(PDB)_$(NRUN) -power $(POWER_FLAG)
-	@echo " "
-	@echo "===================================================================="
-	@echo "INFO: log file is under: $(TARGET_DIR_HW)/docking_$(PDB)_$(NRUN).dlg"
-	@echo "===================================================================="
-	@echo " "
+	@echo $(newline)
+	@echo "========================================================================="
+	@echo "INFO: log file is under: \"$(TARGET_DIR_HW)/docking_$(PDB)_$(NRUN).dlg\" "
+	@echo "========================================================================="
+	@echo $(newline)
 
 
 # Execute and profile on remote server
@@ -880,11 +887,11 @@ exe-prof: $(TARGET_DIR)/$(TARGET)
 	cp $(TARGET_DIR)/$(TARGET) $(TARGET_DIR_HW_PROF)/ && \
 	cd $(TARGET_DIR_HW_PROF) && \
 	./$(TARGET) -ffile ../input/$(PDB)/derived/$(PDB)_protein.maps.fld -lfile ../input/$(PDB)/derived/$(PDB)_ligand.pdbqt -nrun $(NRUN) -resnam docking_$(PDB)_$(NRUN)
-	@echo " "
-	@echo "========================================================================="
-	@echo "INFO: log file is under: $(TARGET_DIR_HW_PROF)/docking_$(PDB)_$(NRUN).dlg"
-	@echo "========================================================================="
-	@echo " "
+	@echo $(newline)
+	@echo "=============================================================================="
+	@echo "INFO: log file is under: \"$(TARGET_DIR_HW_PROF)/docking_$(PDB)_$(NRUN).dlg\" "
+	@echo "=============================================================================="
+	@echo $(newline)
 
 COPY_DIR := copy_$(PROJECT_NAME)
 COPY_DIR_DOCK := $(PROJECT_NAME)
@@ -916,18 +923,18 @@ copy: clean-copy
 	cp -r ../common ../$(COPY_DIR)/
 	cp ../conf_aoc171_saruman.sh ../$(COPY_DIR)/
 	cd ../;	zip -r $(COPY_DIR).zip $(COPY_DIR)
-	@echo " "
+	@echo $(newline)
 	@echo "Transfer the $(COPY_DIR).zip file to $(SERVER_BRIDGE) server: "
-	@echo " "
+	@echo $(newline)
 	cd ../ && scp $(COPY_DIR).zip $(SERVER_BRIDGE)
-	@echo " "
+	@echo $(newline)
 	@echo "================================================="
 	@echo "Files listed were transferred to $(SERVER_BRIDGE)"
-	@echo " "
+	@echo $(newline)
 	@echo "Then, transfer files manually                    "
 	@echo "from $(SERVER_BRIDGE) to $(SERVER_EXEC)          "
 	@echo "================================================="
-	@echo " "
+	@echo $(newline)
 
 clean-copy:
 	rm -rf ../$(COPY_DIR)
@@ -945,6 +952,6 @@ clean :
 	$(ECHO)rm -f  $(TARGET_DIR)/initpop.txt
 	$(ECHO)rm -f  $(TARGET_DIR)/docking.*
 	$(ECHO)rm -f  $(TARGET_DIR)/final_population_*
-	@echo " "
+	@echo $(newline)
 
 .PHONY : all clean
