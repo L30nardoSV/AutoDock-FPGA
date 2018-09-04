@@ -65,6 +65,9 @@ TARGET := host
 # Target folder for host & emulation binaries
 TARGET_DIR := bin
 
+# Target folder only for kernel report
+TARGET_DIR_RPT := bin_rpt
+
 # Target folder for FPGA binary
 TARGET_DIR_HW := bin_hw
 
@@ -766,9 +769,9 @@ BOARD    := p510t_sch_ax115
 # Build kernel binary only for emulation
 # Add "-g" to support kernel debug
 # Creates under bin: 
-	# $(KRNL_NAME) folder
-	# $(KRNL_NAME).aoco
-	# $(KRNL_NAME).aocx
+# $(KRNL_NAME) folder
+# $(KRNL_NAME).aoco
+# $(KRNL_NAME).aocx
 keremu: $(DEV_SRC)
 	aoc -march=emulator -emulator-channel-depth-model=strict -v -board=$(BOARD) $(DEV_SRC) -o $(TARGET_DIR)/$(KRNL_NAME).aocx $(REP) $(FIPO_FLAG) $(AOC_FLAG) -g
 	@echo " "
@@ -794,27 +797,27 @@ emu: $(TARGET_DIR)/$(TARGET) keremu
 # Reports are generated
 # Could be used in multistep compilation
 # Creates under bin:
-	# $(KRNL_NAME) folder -> /reports/report.html, to see details
-	# $(KRNL_NAME).aoco
-	# No actual hardware is built (NO .aocx)
+# $(KRNL_NAME) folder -> /reports/report.html, to see details
+# $(KRNL_NAME).aoco
+# No actual hardware is built (NO .aocx)
 kerrpt: $(DEV_SRC)
-	aoc -board=$(BOARD) $(DEV_SRC) -o $(TARGET_DIR)/$(KRNL_NAME).aoco $(REP) $(FIPO_FLAG) $(AOC_FLAG) -c -report -g
+	aoc -board=$(BOARD) $(DEV_SRC) -o $(TARGET_DIR_RPT)/$(KRNL_NAME).aoco $(REP) $(FIPO_FLAG) $(AOC_FLAG) -c -report -g
 	@echo " "
-	@echo "============================================================================"
-	@echo "INFO: report files are under: $(TARGET_DIR)/$(KRNL_NAME)/reports/report.html"
-	@echo "INFO: THIS WORKS ONLY FROM V16.1 ON                                         "
-	@echo "                                        		                           "
-	@echo "INFO: report file is under: $(TARGET_DIR)/$(KRNL_NAME).log                  "
-	@echo "INFO: THIS WORKS IN V16.0 AND OLDER.                                        "
-	@echo "============================================================================"
+	@echo "================================================================================"
+	@echo "INFO: THIS WORKS ONLY FROM V16.1 ON:					       "
+	@echo "INFO: report files are under: $(TARGET_DIR_RPT)/$(KRNL_NAME)/reports/report.html"
+	@echo "                                        		                               "
+	@echo "INFO: THIS WORKS IN V16.0 AND OLDER:                                            "
+	@echo "INFO: report file is under: $(TARGET_DIR_RPT)/$(KRNL_NAME)/$(KRNL_NAME).log     "
+	@echo "================================================================================"
 	@echo " "
 
 # Build hw (FPGA bitstream)
 # NOT integrated yet in a multistep compilation
 # Creates under bin_hw:
-	# $(KRNL_NAME) folder
-	# $(KRNL_NAME).aoco
-	# $(KRNL_NAME).aocx
+# $(KRNL_NAME) folder
+# $(KRNL_NAME).aoco
+# $(KRNL_NAME).aocx
 hw: 	
 	aoc -board=$(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW)/$(KRNL_NAME).aocx $(FIPO_FLAG) $(AOC_FLAG)
 	@echo " "
@@ -834,9 +837,9 @@ hw-he:
 # Build hw (FPGA bitstream) instrumented with performance counters
 # NOT integrated yet in a multistep compilation
 # Creates under bin_hw_profile
-	# $(KRNL_NAME) folder
-	# $(KRNL_NAME).aoco
-	# $(KRNL_NAME).aocx
+# $(KRNL_NAME) folder
+# $(KRNL_NAME).aoco
+# $(KRNL_NAME).aocx
 hw-prof:
 	aoc --profile -board=$(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW_PROF)/$(KRNL_NAME).aocx $(FIPO_FLAG) $(AOC_FLAG)
 	@echo " "
@@ -844,7 +847,6 @@ hw-prof:
 	@echo "INFO: instrumented FPGA bitstream is under: $(TARGET_DIR_HW_PROF)/$(KRNL_NAME)(.aoco)(.aocx)"
 	@echo "============================================================================================"
 	@echo " "
-
 
 # Execute on remote server
 # Host-recompilation
