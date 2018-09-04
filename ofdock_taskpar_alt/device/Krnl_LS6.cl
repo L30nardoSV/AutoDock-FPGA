@@ -154,10 +154,7 @@ while(valid) {
 				fixedpt fixpt_tmp2 = fixpt_tmp1 + tmp_bias;
 				fixedpt fixpt_tmp3 = (positive_direction == true)? (genotype [i] + fixpt_tmp2): 
 								                   (genotype [i] - fixpt_tmp2);
-				/*
-				if (i>3) {if (i==4) { fixpt_tmp3 = fixedpt_map_angle_180(fixpt_tmp3);}
-					  else      { fixpt_tmp3 = fixedpt_map_angle_360(fixpt_tmp3);}}
-				*/
+
 				if (i>2) {if (i==4) { fixpt_tmp3 = fixedpt_map_angle_180(fixpt_tmp3);}
 					  else      { fixpt_tmp3 = fixedpt_map_angle_360(fixpt_tmp3);}}
 
@@ -183,10 +180,7 @@ while(valid) {
 
 				float tmp2 = tmp1 + tmp_bias;
 				float tmp3 = (positive_direction == true)? (genotype [i] + tmp2): (genotype [i] - tmp2);
-				/*
-				if (i>3) {if (i==4) { tmp3 = map_angle_180(tmp3);}
-					  else      { tmp3 = map_angle_360(tmp3);}}
-				*/
+
 				if (i>2) {if (i==4) { tmp3 = map_angle_180(tmp3);}
 					  else      { tmp3 = map_angle_360(tmp3);}}
 
