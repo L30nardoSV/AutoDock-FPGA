@@ -102,6 +102,7 @@ channel bool    chan_Arbiter_LS8_float_off;
 channel bool    chan_Arbiter_LS9_float_off;
 
 // Send energy values and genotypes to LSs
+/*
 channel float   chan_GA2LS_LS1_energy;
 channel float   chan_GA2LS_LS2_energy;
 channel float   chan_GA2LS_LS3_energy;
@@ -111,6 +112,10 @@ channel float   chan_GA2LS_LS6_energy;
 channel float   chan_GA2LS_LS7_energy;
 channel float   chan_GA2LS_LS8_energy;
 channel float   chan_GA2LS_LS9_energy;
+*/
+channel float   chan_GA2LS_energy[9];
+
+/*
 channel float  	chan_GA2LS_LS1_genotype        __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
 channel float  	chan_GA2LS_LS2_genotype        __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
 channel float  	chan_GA2LS_LS3_genotype        __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
@@ -120,6 +125,8 @@ channel float  	chan_GA2LS_LS6_genotype        __attribute__((depth(CHAN_DEPTH_G
 channel float  	chan_GA2LS_LS7_genotype        __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
 channel float  	chan_GA2LS_LS8_genotype        __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
 channel float  	chan_GA2LS_LS9_genotype        __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
+*/
+channel float  	chan_GA2LS_genotype[9]        __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
 
 // Send LS status from LSs to IGL_Arbiter
 channel bool    chan_LS2Arbiter_LS1_end;
@@ -142,6 +149,8 @@ channel float2  chan_LS2GA_LS6_evalenergy      __attribute__((depth(2)));
 channel float2  chan_LS2GA_LS7_evalenergy      __attribute__((depth(2)));
 channel float2  chan_LS2GA_LS8_evalenergy      __attribute__((depth(2)));
 channel float2  chan_LS2GA_LS9_evalenergy      __attribute__((depth(2)));
+
+/*
 channel float  	chan_LS2GA_LS1_genotype        __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
 channel float  	chan_LS2GA_LS2_genotype        __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
 channel float  	chan_LS2GA_LS3_genotype        __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
@@ -151,6 +160,8 @@ channel float  	chan_LS2GA_LS6_genotype        __attribute__((depth(CHAN_DEPTH_G
 channel float  	chan_LS2GA_LS7_genotype        __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
 channel float  	chan_LS2GA_LS8_genotype        __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
 channel float  	chan_LS2GA_LS9_genotype        __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
+*/
+channel float  	chan_LS2GA_genotype[9]        __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
 
 // Turn-off signals to LSs
 channel bool    chan_GA2LS_Off1_active;
@@ -622,7 +633,8 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			// Choose random & different entities on every iteration
 			ushort16 entity_ls = read_channel_intel(chan_PRNG2GA_LS123_ushort_prng);
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
-
+			
+			/*
 			ushort entity_ls1 = entity_ls.s0;
 			ushort entity_ls2 = entity_ls.s1;
 			ushort entity_ls3 = entity_ls.s2;
@@ -632,7 +644,22 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			ushort entity_ls7 = entity_ls.s6;
 			ushort entity_ls8 = entity_ls.s7;
 			ushort entity_ls9 = entity_ls.s8;
+			*/
 
+			// https://forums.khronos.org/showthread.php/7397-How-to-read-elements-from-a-float16-(or-other)-using-index
+			union
+			{
+				ushort   arr[16];
+				ushort16 vec;
+			}
+			u_entity_ls;
+
+			u_entity_ls.vec = entity_ls;
+
+			// Here you can (in theory) read from u_entity_ls.arr[i] safely thanks to sec 6.2.4.1
+			// A nice property of OpenCL C that does not exist in C99
+
+			/*
 			write_channel_intel(chan_GA2LS_LS1_energy, LocalEneNext[entity_ls1]);
 			write_channel_intel(chan_GA2LS_LS2_energy, LocalEneNext[entity_ls2]);
 			write_channel_intel(chan_GA2LS_LS3_energy, LocalEneNext[entity_ls3]);
@@ -642,9 +669,38 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			write_channel_intel(chan_GA2LS_LS7_energy, LocalEneNext[entity_ls7]);
 			write_channel_intel(chan_GA2LS_LS8_energy, LocalEneNext[entity_ls8]);
 			write_channel_intel(chan_GA2LS_LS9_energy, LocalEneNext[entity_ls9]);
+			*/
+			/*
+			write_channel_intel(chan_GA2LS_LS1_energy, LocalEneNext[u_entity_ls.arr[0]]);
+			write_channel_intel(chan_GA2LS_LS2_energy, LocalEneNext[u_entity_ls.arr[1]]);
+			write_channel_intel(chan_GA2LS_LS3_energy, LocalEneNext[u_entity_ls.arr[2]]);
+			write_channel_intel(chan_GA2LS_LS4_energy, LocalEneNext[u_entity_ls.arr[3]]);
+			write_channel_intel(chan_GA2LS_LS5_energy, LocalEneNext[u_entity_ls.arr[4]]);
+			write_channel_intel(chan_GA2LS_LS6_energy, LocalEneNext[u_entity_ls.arr[5]]);
+			write_channel_intel(chan_GA2LS_LS7_energy, LocalEneNext[u_entity_ls.arr[6]]);
+			write_channel_intel(chan_GA2LS_LS8_energy, LocalEneNext[u_entity_ls.arr[7]]);
+			write_channel_intel(chan_GA2LS_LS9_energy, LocalEneNext[u_entity_ls.arr[8]]);
+			*/
+			/*
+			write_channel_intel(chan_GA2LS_energy[0], LocalEneNext[u_entity_ls.arr[0]]);
+			write_channel_intel(chan_GA2LS_energy[1], LocalEneNext[u_entity_ls.arr[1]]);
+			write_channel_intel(chan_GA2LS_energy[2], LocalEneNext[u_entity_ls.arr[2]]);
+			write_channel_intel(chan_GA2LS_energy[3], LocalEneNext[u_entity_ls.arr[3]]);
+			write_channel_intel(chan_GA2LS_energy[4], LocalEneNext[u_entity_ls.arr[4]]);
+			write_channel_intel(chan_GA2LS_energy[5], LocalEneNext[u_entity_ls.arr[5]]);
+			write_channel_intel(chan_GA2LS_energy[6], LocalEneNext[u_entity_ls.arr[6]]);
+			write_channel_intel(chan_GA2LS_energy[7], LocalEneNext[u_entity_ls.arr[7]]);
+			write_channel_intel(chan_GA2LS_energy[8], LocalEneNext[u_entity_ls.arr[8]]);
+			*/
+
+			#pragma unroll
+			for (uchar j=0; j<9; j++) {
+				write_channel_intel(chan_GA2LS_energy[j], LocalEneNext[u_entity_ls.arr[j]]);
+			}
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 			for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
+				/*
 				write_channel_intel(chan_GA2LS_LS1_genotype, LocalPopNext[entity_ls1][gene_cnt & MASK_GENOTYPE]);
 				write_channel_intel(chan_GA2LS_LS2_genotype, LocalPopNext[entity_ls2][gene_cnt & MASK_GENOTYPE]);
 				write_channel_intel(chan_GA2LS_LS3_genotype, LocalPopNext[entity_ls3][gene_cnt & MASK_GENOTYPE]);
@@ -654,9 +710,37 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 				write_channel_intel(chan_GA2LS_LS7_genotype, LocalPopNext[entity_ls7][gene_cnt & MASK_GENOTYPE]);
 				write_channel_intel(chan_GA2LS_LS8_genotype, LocalPopNext[entity_ls8][gene_cnt & MASK_GENOTYPE]);
 				write_channel_intel(chan_GA2LS_LS9_genotype, LocalPopNext[entity_ls9][gene_cnt & MASK_GENOTYPE]);
+				*/
+				/*
+				write_channel_intel(chan_GA2LS_LS1_genotype, LocalPopNext[u_entity_ls.arr[0]][gene_cnt & MASK_GENOTYPE]);
+				write_channel_intel(chan_GA2LS_LS2_genotype, LocalPopNext[u_entity_ls.arr[1]][gene_cnt & MASK_GENOTYPE]);
+				write_channel_intel(chan_GA2LS_LS3_genotype, LocalPopNext[u_entity_ls.arr[2]][gene_cnt & MASK_GENOTYPE]);
+				write_channel_intel(chan_GA2LS_LS4_genotype, LocalPopNext[u_entity_ls.arr[3]][gene_cnt & MASK_GENOTYPE]);
+				write_channel_intel(chan_GA2LS_LS5_genotype, LocalPopNext[u_entity_ls.arr[4]][gene_cnt & MASK_GENOTYPE]);
+				write_channel_intel(chan_GA2LS_LS6_genotype, LocalPopNext[u_entity_ls.arr[5]][gene_cnt & MASK_GENOTYPE]);
+				write_channel_intel(chan_GA2LS_LS7_genotype, LocalPopNext[u_entity_ls.arr[6]][gene_cnt & MASK_GENOTYPE]);
+				write_channel_intel(chan_GA2LS_LS8_genotype, LocalPopNext[u_entity_ls.arr[7]][gene_cnt & MASK_GENOTYPE]);
+				write_channel_intel(chan_GA2LS_LS9_genotype, LocalPopNext[u_entity_ls.arr[8]][gene_cnt & MASK_GENOTYPE]);
+				*/
+				/*
+				write_channel_intel(chan_GA2LS_genotype[0], LocalPopNext[u_entity_ls.arr[0]][gene_cnt & MASK_GENOTYPE]);
+				write_channel_intel(chan_GA2LS_genotype[1], LocalPopNext[u_entity_ls.arr[1]][gene_cnt & MASK_GENOTYPE]);
+				write_channel_intel(chan_GA2LS_genotype[2], LocalPopNext[u_entity_ls.arr[2]][gene_cnt & MASK_GENOTYPE]);
+				write_channel_intel(chan_GA2LS_genotype[3], LocalPopNext[u_entity_ls.arr[3]][gene_cnt & MASK_GENOTYPE]);
+				write_channel_intel(chan_GA2LS_genotype[4], LocalPopNext[u_entity_ls.arr[4]][gene_cnt & MASK_GENOTYPE]);
+				write_channel_intel(chan_GA2LS_genotype[5], LocalPopNext[u_entity_ls.arr[5]][gene_cnt & MASK_GENOTYPE]);
+				write_channel_intel(chan_GA2LS_genotype[6], LocalPopNext[u_entity_ls.arr[6]][gene_cnt & MASK_GENOTYPE]);
+				write_channel_intel(chan_GA2LS_genotype[7], LocalPopNext[u_entity_ls.arr[7]][gene_cnt & MASK_GENOTYPE]);
+				write_channel_intel(chan_GA2LS_genotype[8], LocalPopNext[u_entity_ls.arr[8]][gene_cnt & MASK_GENOTYPE]);
+				*/
+				#pragma unroll
+				for (uchar j=0; j<9; j++) {
+					write_channel_intel(chan_GA2LS_genotype[j], LocalPopNext[u_entity_ls.arr[j]][gene_cnt & MASK_GENOTYPE]);
+				}
 			}
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 
+			/*
 			float2 evalenergy_tmp1;
 			float2 evalenergy_tmp2;
 			float2 evalenergy_tmp3;
@@ -666,6 +750,9 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			float2 evalenergy_tmp7;
 			float2 evalenergy_tmp8;
 			float2 evalenergy_tmp9;
+			*/
+			float2 evalenergy_tmp[9];
+
 			bool ls1_done = false;
 			bool ls2_done = false;
 			bool ls3_done = false;
@@ -687,6 +774,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			       (ls9_done == false) 
 			)
 			{
+				/*
 				if (ls1_done == false) {
 					evalenergy_tmp1 = read_channel_nb_intel(chan_LS2GA_LS1_evalenergy, &ls1_done);
 				}
@@ -714,12 +802,41 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 				else if (ls9_done == false) {
 					evalenergy_tmp9 = read_channel_nb_intel(chan_LS2GA_LS9_evalenergy, &ls9_done);
 				}
+				*/
+				if (ls1_done == false) {
+					evalenergy_tmp[0] = read_channel_nb_intel(chan_LS2GA_LS1_evalenergy, &ls1_done);
+				}
+				else if (ls2_done == false) {
+					evalenergy_tmp[1] = read_channel_nb_intel(chan_LS2GA_LS2_evalenergy, &ls2_done);
+				}
+				else if (ls3_done == false) {
+					evalenergy_tmp[2] = read_channel_nb_intel(chan_LS2GA_LS3_evalenergy, &ls3_done);
+				}
+				else if (ls4_done == false) {
+					evalenergy_tmp[3] = read_channel_nb_intel(chan_LS2GA_LS4_evalenergy, &ls4_done);
+				}
+				else if (ls5_done == false) {
+					evalenergy_tmp[4] = read_channel_nb_intel(chan_LS2GA_LS5_evalenergy, &ls5_done);
+				}
+				else if (ls6_done == false) {
+					evalenergy_tmp[5] = read_channel_nb_intel(chan_LS2GA_LS6_evalenergy, &ls6_done);
+				}
+				else if (ls7_done == false) {
+					evalenergy_tmp[6] = read_channel_nb_intel(chan_LS2GA_LS7_evalenergy, &ls7_done);
+				}
+				else if (ls8_done == false) {
+					evalenergy_tmp[7] = read_channel_nb_intel(chan_LS2GA_LS8_evalenergy, &ls8_done);
+				}
+				else if (ls9_done == false) {
+					evalenergy_tmp[8] = read_channel_nb_intel(chan_LS2GA_LS9_evalenergy, &ls9_done);
+				}
 			}
 		
 			#if defined (DEBUG_KRNL_LS)
 			printf("LS - got all eval & energies back\n");
 			#endif
 
+			/*
 			float eetmp1 = evalenergy_tmp1.x;
 			float eetmp2 = evalenergy_tmp2.x;
 			float eetmp3 = evalenergy_tmp3.x;
@@ -729,6 +846,16 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			float eetmp7 = evalenergy_tmp7.x;
 			float eetmp8 = evalenergy_tmp8.x;
 			float eetmp9 = evalenergy_tmp9.x;
+			*/
+			float eetmp1 = evalenergy_tmp[0].x;
+			float eetmp2 = evalenergy_tmp[1].x;
+			float eetmp3 = evalenergy_tmp[2].x;
+			float eetmp4 = evalenergy_tmp[3].x;
+			float eetmp5 = evalenergy_tmp[4].x;
+			float eetmp6 = evalenergy_tmp[5].x;
+			float eetmp7 = evalenergy_tmp[6].x;
+			float eetmp8 = evalenergy_tmp[7].x;
+			float eetmp9 = evalenergy_tmp[8].x;
 
 			uint eval_tmp1 = *(uint*)&eetmp1;
 			uint eval_tmp2 = *(uint*)&eetmp2;
@@ -740,6 +867,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			uint eval_tmp8 = *(uint*)&eetmp8;
 			uint eval_tmp9 = *(uint*)&eetmp9;
 
+			/*
 			LocalEneNext[entity_ls1] = evalenergy_tmp1.y;
 			LocalEneNext[entity_ls2] = evalenergy_tmp2.y;
 			LocalEneNext[entity_ls3] = evalenergy_tmp3.y;
@@ -749,9 +877,38 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			LocalEneNext[entity_ls7] = evalenergy_tmp7.y;
 			LocalEneNext[entity_ls8] = evalenergy_tmp8.y;
 			LocalEneNext[entity_ls9] = evalenergy_tmp9.y;
+			*/
+			/*
+			LocalEneNext[u_entity_ls.arr[0]] = evalenergy_tmp1.y;
+			LocalEneNext[u_entity_ls.arr[1]] = evalenergy_tmp2.y;
+			LocalEneNext[u_entity_ls.arr[2]] = evalenergy_tmp3.y;
+			LocalEneNext[u_entity_ls.arr[3]] = evalenergy_tmp4.y;
+			LocalEneNext[u_entity_ls.arr[4]] = evalenergy_tmp5.y;
+			LocalEneNext[u_entity_ls.arr[5]] = evalenergy_tmp6.y;
+			LocalEneNext[u_entity_ls.arr[6]] = evalenergy_tmp7.y;
+			LocalEneNext[u_entity_ls.arr[7]] = evalenergy_tmp8.y;
+			LocalEneNext[u_entity_ls.arr[8]] = evalenergy_tmp9.y;
+			*/
+			/*
+			LocalEneNext[u_entity_ls.arr[0]] = evalenergy_tmp[0].y;
+			LocalEneNext[u_entity_ls.arr[1]] = evalenergy_tmp[1].y;
+			LocalEneNext[u_entity_ls.arr[2]] = evalenergy_tmp[2].y;
+			LocalEneNext[u_entity_ls.arr[3]] = evalenergy_tmp[3].y;
+			LocalEneNext[u_entity_ls.arr[4]] = evalenergy_tmp[4].y;
+			LocalEneNext[u_entity_ls.arr[5]] = evalenergy_tmp[5].y;
+			LocalEneNext[u_entity_ls.arr[6]] = evalenergy_tmp[6].y;
+			LocalEneNext[u_entity_ls.arr[7]] = evalenergy_tmp[7].y;
+			LocalEneNext[u_entity_ls.arr[8]] = evalenergy_tmp[8].y;
+			*/
+
+			#pragma unroll
+			for (uchar j=0; j<9; j++) {
+				LocalEneNext[u_entity_ls.arr[j]] = evalenergy_tmp[j].y;
+			}
 
 			#pragma ivdep
 			for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
+				/*
 				LocalPopNext[entity_ls1][gene_cnt & MASK_GENOTYPE] = read_channel_intel(chan_LS2GA_LS1_genotype);
 				LocalPopNext[entity_ls2][gene_cnt & MASK_GENOTYPE] = read_channel_intel(chan_LS2GA_LS2_genotype);
 				LocalPopNext[entity_ls3][gene_cnt & MASK_GENOTYPE] = read_channel_intel(chan_LS2GA_LS3_genotype);
@@ -761,6 +918,33 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 				LocalPopNext[entity_ls7][gene_cnt & MASK_GENOTYPE] = read_channel_intel(chan_LS2GA_LS7_genotype);
 				LocalPopNext[entity_ls8][gene_cnt & MASK_GENOTYPE] = read_channel_intel(chan_LS2GA_LS8_genotype);
 				LocalPopNext[entity_ls9][gene_cnt & MASK_GENOTYPE] = read_channel_intel(chan_LS2GA_LS9_genotype);
+				*/
+				/*
+				LocalPopNext[u_entity_ls.arr[0]][gene_cnt & MASK_GENOTYPE] = read_channel_intel(chan_LS2GA_LS1_genotype);
+				LocalPopNext[u_entity_ls.arr[1]][gene_cnt & MASK_GENOTYPE] = read_channel_intel(chan_LS2GA_LS2_genotype);
+				LocalPopNext[u_entity_ls.arr[2]][gene_cnt & MASK_GENOTYPE] = read_channel_intel(chan_LS2GA_LS3_genotype);
+				LocalPopNext[u_entity_ls.arr[3]][gene_cnt & MASK_GENOTYPE] = read_channel_intel(chan_LS2GA_LS4_genotype);
+				LocalPopNext[u_entity_ls.arr[4]][gene_cnt & MASK_GENOTYPE] = read_channel_intel(chan_LS2GA_LS5_genotype);
+				LocalPopNext[u_entity_ls.arr[5]][gene_cnt & MASK_GENOTYPE] = read_channel_intel(chan_LS2GA_LS6_genotype);
+				LocalPopNext[u_entity_ls.arr[6]][gene_cnt & MASK_GENOTYPE] = read_channel_intel(chan_LS2GA_LS7_genotype);
+				LocalPopNext[u_entity_ls.arr[7]][gene_cnt & MASK_GENOTYPE] = read_channel_intel(chan_LS2GA_LS8_genotype);
+				LocalPopNext[u_entity_ls.arr[8]][gene_cnt & MASK_GENOTYPE] = read_channel_intel(chan_LS2GA_LS9_genotype);
+				*/
+				/*
+				LocalPopNext[u_entity_ls.arr[0]][gene_cnt & MASK_GENOTYPE] = read_channel_intel(chan_LS2GA_genotype[0]);
+				LocalPopNext[u_entity_ls.arr[1]][gene_cnt & MASK_GENOTYPE] = read_channel_intel(chan_LS2GA_genotype[1]);
+				LocalPopNext[u_entity_ls.arr[2]][gene_cnt & MASK_GENOTYPE] = read_channel_intel(chan_LS2GA_genotype[2]);
+				LocalPopNext[u_entity_ls.arr[3]][gene_cnt & MASK_GENOTYPE] = read_channel_intel(chan_LS2GA_genotype[3]);
+				LocalPopNext[u_entity_ls.arr[4]][gene_cnt & MASK_GENOTYPE] = read_channel_intel(chan_LS2GA_genotype[4]);
+				LocalPopNext[u_entity_ls.arr[5]][gene_cnt & MASK_GENOTYPE] = read_channel_intel(chan_LS2GA_genotype[5]);
+				LocalPopNext[u_entity_ls.arr[6]][gene_cnt & MASK_GENOTYPE] = read_channel_intel(chan_LS2GA_genotype[6]);
+				LocalPopNext[u_entity_ls.arr[7]][gene_cnt & MASK_GENOTYPE] = read_channel_intel(chan_LS2GA_genotype[7]);
+				LocalPopNext[u_entity_ls.arr[8]][gene_cnt & MASK_GENOTYPE] = read_channel_intel(chan_LS2GA_genotype[8]);
+				*/
+				#pragma unroll
+				for (uchar j=0; j<9; j++) {
+					LocalPopNext[u_entity_ls.arr[j]][gene_cnt & MASK_GENOTYPE] = read_channel_intel(chan_LS2GA_genotype[j]);
+				}
 			}
 
 			ls_eval_cnt += eval_tmp1 + eval_tmp2 + eval_tmp3 + eval_tmp4 + eval_tmp5 + eval_tmp6 + eval_tmp7 + eval_tmp8 + eval_tmp9;
