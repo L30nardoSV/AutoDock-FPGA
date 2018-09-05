@@ -377,16 +377,38 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 		//float LocalEneNext[MAX_POPSIZE];
 
 		// This configuration reduces logic and does not increase block RAM usage
+/*
 		float __attribute__ ((
 				       memory,
 		   		       numbanks(4),
 			               bankwidth(32),
 			              )) LocalPopNext[MAX_POPSIZE][ACTUAL_GENOTYPE_LENGTH];
+*/
 
 		float __attribute__ ((
 				       memory,
 		   		       numbanks(4),
+			               bankwidth(32),
+				       singlepump,
+				       numreadports(10),
+			               numwriteports(1) 
+			              )) LocalPopNext[MAX_POPSIZE][ACTUAL_GENOTYPE_LENGTH];
+
+/*
+		float __attribute__ ((
+				       memory,
+		   		       numbanks(4),
 			               bankwidth(4),
+			              )) LocalEneNext[MAX_POPSIZE];
+*/
+
+		float __attribute__ ((
+				       memory,
+		   		       numbanks(1),
+			               bankwidth(4),
+				       singlepump,
+				       numreadports(10),
+			               numwriteports(1)  
 			              )) LocalEneNext[MAX_POPSIZE];
 
 		// ------------------------------------------------------------------
