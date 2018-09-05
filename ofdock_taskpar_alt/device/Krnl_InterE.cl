@@ -68,16 +68,9 @@ while(active) {
 	// Wait for ligand atomic coordinates in channel
 	// --------------------------------------------------------------
 
-#if 0
-	char2 actmode = read_channel_intel(chan_Conf2Intere_actmode);
-#endif
 	char actmode = read_channel_intel(chan_Conf2Intere_actmode);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 
-#if 0
-	active = actmode.x;
-	mode   = actmode.y;
-#endif
 	active = actmode;
 	mode   = actmode;
 
