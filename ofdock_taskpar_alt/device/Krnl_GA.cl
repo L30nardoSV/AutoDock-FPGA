@@ -330,12 +330,15 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 		mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 		for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_genes; pipe_cnt++) {
+			float tmp_ic;
 			#if defined(SINGLE_COPY_POP_ENE)
-			LocalPopCurr[pop_cnt][pipe_cnt & MASK_GENOTYPE] = GlobPopCurr[pop_cnt*ACTUAL_GENOTYPE_LENGTH + pipe_cnt];
+			tmp_ic = GlobPopCurr[pop_cnt*ACTUAL_GENOTYPE_LENGTH + pipe_cnt];
 			#else
-			LocalPopCurr[pop_cnt][pipe_cnt & MASK_GENOTYPE] = GlobPopulationCurrent[pop_cnt*ACTUAL_GENOTYPE_LENGTH + pipe_cnt];
+			tmp_ic = GlobPopulationCurrent[pop_cnt*ACTUAL_GENOTYPE_LENGTH + pipe_cnt];
 			#endif
-			write_channel_intel(chan_IC2Conf_genotype, LocalPopCurr[pop_cnt][pipe_cnt & MASK_GENOTYPE]);	
+		
+			LocalPopCurr[pop_cnt][pipe_cnt & MASK_GENOTYPE] = tmp_ic;
+			write_channel_intel(chan_IC2Conf_genotype, tmp_ic);
 		}
 
 		#if defined (DEBUG_KRNL_IC)
