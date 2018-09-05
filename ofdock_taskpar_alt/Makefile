@@ -840,7 +840,7 @@ hw:
 	@echo $(newline)
 
 hw-he:
-	aoc --high-effort -board=$(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW)/$(KRNL_NAME).aocx $(FIPO_FLAG) $(AOC_FLAG)
+	aoc -high-effort -board=$(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW)/$(KRNL_NAME).aocx $(FIPO_FLAG) $(AOC_FLAG)
 	@echo $(newline)
 	@echo "==============================================================================="
 	@echo "INFO: FPGA bitstream is under: \"$(TARGET_DIR_HW)/$(KRNL_NAME)(.aoco)(.aocx)\" "
@@ -854,7 +854,7 @@ hw-he:
 # $(KRNL_NAME).aoco
 # $(KRNL_NAME).aocx
 hw-prof:
-	aoc --profile -board=$(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW_PROF)/$(KRNL_NAME).aocx $(FIPO_FLAG) $(AOC_FLAG)
+	aoc -profile -board=$(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW_PROF)/$(KRNL_NAME).aocx $(FIPO_FLAG) $(AOC_FLAG)
 	@echo $(newline)
 	@echo "================================================================================================="
 	@echo "INFO: instrumented FPGA bitstream is under: \"$(TARGET_DIR_HW_PROF)/$(KRNL_NAME)(.aoco)(.aocx)\" "
