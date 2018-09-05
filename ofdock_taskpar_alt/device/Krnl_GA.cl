@@ -429,9 +429,8 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			// ---------------------------------------------------
 			// Elitism: copying the best entity to new population
 			// ---------------------------------------------------
-			if (new_pop_cnt == 1) {
-				#pragma unroll
-				for (uchar gene_cnt=0; gene_cnt<ACTUAL_GENOTYPE_LENGTH; gene_cnt++) { 		
+			if (new_pop_cnt == 1) { 
+				for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) { 		
 					LocalPopNext[0][gene_cnt & MASK_GENOTYPE] = LocalPopCurr[best_entity][gene_cnt & MASK_GENOTYPE]; 	
 				} 		
 				LocalEneNext[0] = loc_energies[best_entity];
