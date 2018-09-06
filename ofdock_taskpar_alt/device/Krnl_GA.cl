@@ -355,10 +355,19 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 		printf("best_entity: %3u, energy: %20.6f\n", best_entity, loc_energies[best_entity]);
 		#endif
 
+		// ---------------------------------------------------
+		// Elitism: copying the best entity to new population
+		// ---------------------------------------------------
+		for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) { 		
+			LocalPopNext[0][gene_cnt & MASK_GENOTYPE] = LocalPopCurr[best_entity][gene_cnt & MASK_GENOTYPE]; 	
+		} 		
+		LocalEneNext[0] = loc_energies[best_entity];
+
 		#pragma ivdep array (LocalPopNext)
 		#pragma ivdep array (LocalEneNext)
 		for (ushort new_pop_cnt = 1; new_pop_cnt < DockConst_pop_size; new_pop_cnt++) {
 
+			/*
 			// ---------------------------------------------------
 			// Elitism: copying the best entity to new population
 			// ---------------------------------------------------
@@ -368,6 +377,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 				} 		
 				LocalEneNext[0] = loc_energies[best_entity];
 			}
+			*/
 
 			#if defined (DEBUG_KRNL_GA)
 			printf("Krnl_GA: %u\n", new_pop_cnt);
