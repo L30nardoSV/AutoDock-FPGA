@@ -40,7 +40,14 @@ void Krnl_IntraE(
 {
 	char active = 0x01;
 
+	/*
 	__local char3  intraE_contributors_localcache   [MAX_INTRAE_CONTRIBUTORS];
+	*/
+	__local char3 __attribute__ ((
+					memory,
+			        	bankwidth(16),
+			    	    )) intraE_contributors_localcache[MAX_INTRAE_CONTRIBUTORS];
+
 	for (ushort i=0; i<MAX_INTRAE_CONTRIBUTORS; i++) {
 		intraE_contributors_localcache [i] = KerConstStatic_intraE_contributors_const [i];	
 	}
