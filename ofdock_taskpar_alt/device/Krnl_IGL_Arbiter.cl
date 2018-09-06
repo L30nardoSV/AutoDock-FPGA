@@ -68,18 +68,18 @@ while(active) {
 		(LS8_end_valid == false) &&
 		(LS9_end_valid == false) 
 	){
-		Off_active     = read_channel_nb_intel(chan_IGLArbiter_Off,     &Off_valid);
-		IC_active      = read_channel_nb_intel(chan_GA2IGL_IC_active,   &IC_valid);
-		GG_active      = read_channel_nb_intel(chan_GA2IGL_GG_active, 	&GG_valid);
-		LS1_end_active = read_channel_nb_intel(chan_LS2Arbiter_LS1_end, &LS1_end_valid);
-		LS2_end_active = read_channel_nb_intel(chan_LS2Arbiter_LS2_end, &LS2_end_valid);
-		LS3_end_active = read_channel_nb_intel(chan_LS2Arbiter_LS3_end, &LS3_end_valid);
-		LS4_end_active = read_channel_nb_intel(chan_LS2Arbiter_LS4_end, &LS4_end_valid);
-		LS5_end_active = read_channel_nb_intel(chan_LS2Arbiter_LS5_end, &LS5_end_valid);
-		LS6_end_active = read_channel_nb_intel(chan_LS2Arbiter_LS6_end, &LS6_end_valid);
-		LS7_end_active = read_channel_nb_intel(chan_LS2Arbiter_LS7_end, &LS7_end_valid);
-		LS8_end_active = read_channel_nb_intel(chan_LS2Arbiter_LS8_end, &LS8_end_valid);
-		LS9_end_active = read_channel_nb_intel(chan_LS2Arbiter_LS9_end, &LS9_end_valid);
+		Off_active     = read_channel_nb_intel(chan_IGLArbiter_Off,    &Off_valid);
+		IC_active      = read_channel_nb_intel(chan_GA2IGL_IC_active,  &IC_valid);
+		GG_active      = read_channel_nb_intel(chan_GA2IGL_GG_active,  &GG_valid);
+		LS1_end_active = read_channel_nb_intel(chan_LS2Arbiter_end[0], &LS1_end_valid);
+		LS2_end_active = read_channel_nb_intel(chan_LS2Arbiter_end[1], &LS2_end_valid);
+		LS3_end_active = read_channel_nb_intel(chan_LS2Arbiter_end[2], &LS3_end_valid);
+		LS4_end_active = read_channel_nb_intel(chan_LS2Arbiter_end[3], &LS4_end_valid);
+		LS5_end_active = read_channel_nb_intel(chan_LS2Arbiter_end[4], &LS5_end_valid);
+		LS6_end_active = read_channel_nb_intel(chan_LS2Arbiter_end[5], &LS6_end_valid);
+		LS7_end_active = read_channel_nb_intel(chan_LS2Arbiter_end[6], &LS7_end_valid);
+		LS8_end_active = read_channel_nb_intel(chan_LS2Arbiter_end[7], &LS8_end_valid);
+		LS9_end_active = read_channel_nb_intel(chan_LS2Arbiter_end[8], &LS9_end_valid);
 	}
 
 	uchar bound_tmp = 0;

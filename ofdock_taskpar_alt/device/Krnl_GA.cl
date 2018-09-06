@@ -19,52 +19,23 @@ channel bool    chan_GA2IGL_GG_active;
 // Send genotypes from producers (IC, GG, LSs) to Conform
 channel float  	chan_IC2Conf_genotype          __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
 channel float  	chan_GG2Conf_genotype          __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float  	chan_LS2Conf_LS1_genotype      __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float  	chan_LS2Conf_LS2_genotype      __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float  	chan_LS2Conf_LS3_genotype      __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float  	chan_LS2Conf_LS4_genotype      __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float  	chan_LS2Conf_LS5_genotype      __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float  	chan_LS2Conf_LS6_genotype      __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float  	chan_LS2Conf_LS7_genotype      __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float  	chan_LS2Conf_LS8_genotype      __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float  	chan_LS2Conf_LS9_genotype      __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
+channel float  	chan_LS2Conf_genotype[9]       __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
 
 // Send ligand-atom positions from Conform to InterE & IntraE
 channel float8  chan_Conf2Intere_xyz           __attribute__((depth(CHAN_DEPTH_ATOMXYZ)));
-#if 0
-channel char2  	chan_Conf2Intere_actmode;
-#endif
 channel char  	chan_Conf2Intere_actmode;
 
 channel float8	chan_Conf2Intrae_xyz           __attribute__((depth(CHAN_DEPTH_ATOMXYZ)));
-#if 0
-channel char2  	chan_Conf2Intrae_actmode;	
-#endif
 channel char  	chan_Conf2Intrae_actmode;
 
 // Send energy values from InterE & IntraE to genotype-senders (IC, GG, LSs)
 channel float 	chan_Intere2StoreIC_intere     __attribute__((depth(2)));
 channel float 	chan_Intere2StoreGG_intere     __attribute__((depth(2)));
-channel float 	chan_Intere2StoreLS_LS1_intere __attribute__((depth(2)));
-channel float 	chan_Intere2StoreLS_LS2_intere __attribute__((depth(2)));
-channel float 	chan_Intere2StoreLS_LS3_intere __attribute__((depth(2)));
-channel float 	chan_Intere2StoreLS_LS4_intere __attribute__((depth(2)));
-channel float 	chan_Intere2StoreLS_LS5_intere __attribute__((depth(2)));
-channel float 	chan_Intere2StoreLS_LS6_intere __attribute__((depth(2)));
-channel float 	chan_Intere2StoreLS_LS7_intere __attribute__((depth(2)));
-channel float 	chan_Intere2StoreLS_LS8_intere __attribute__((depth(2)));
-channel float 	chan_Intere2StoreLS_LS9_intere __attribute__((depth(2)));
+channel float 	chan_Intere2StoreLS_intere[9]  __attribute__((depth(2)));
+
 channel float 	chan_Intrae2StoreIC_intrae     __attribute__((depth(2)));
 channel float 	chan_Intrae2StoreGG_intrae     __attribute__((depth(2)));
-channel float 	chan_Intrae2StoreLS_LS1_intrae __attribute__((depth(2)));
-channel float 	chan_Intrae2StoreLS_LS2_intrae __attribute__((depth(2)));
-channel float 	chan_Intrae2StoreLS_LS3_intrae __attribute__((depth(2)));
-channel float 	chan_Intrae2StoreLS_LS4_intrae __attribute__((depth(2)));
-channel float 	chan_Intrae2StoreLS_LS5_intrae __attribute__((depth(2)));
-channel float 	chan_Intrae2StoreLS_LS6_intrae __attribute__((depth(2)));
-channel float 	chan_Intrae2StoreLS_LS7_intrae __attribute__((depth(2)));
-channel float 	chan_Intrae2StoreLS_LS8_intrae __attribute__((depth(2)));
-channel float 	chan_Intrae2StoreLS_LS9_intrae __attribute__((depth(2)));
+channel float 	chan_Intrae2StoreLS_intrae[9]  __attribute__((depth(2)));
 
 // Send PRNG outputs from generators to consumers
 channel float8   chan_PRNG2GA_BT_ushort_float_prng;
@@ -106,38 +77,18 @@ channel float   chan_GA2LS_energy[9];
 channel float  	chan_GA2LS_genotype[9]        __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
 
 // Send LS status from LSs to IGL_Arbiter
-channel bool    chan_LS2Arbiter_LS1_end;
-channel bool    chan_LS2Arbiter_LS2_end;
-channel bool    chan_LS2Arbiter_LS3_end;
-channel bool    chan_LS2Arbiter_LS4_end;
-channel bool    chan_LS2Arbiter_LS5_end;
-channel bool    chan_LS2Arbiter_LS6_end;
-channel bool    chan_LS2Arbiter_LS7_end;
-channel bool    chan_LS2Arbiter_LS8_end;
-channel bool    chan_LS2Arbiter_LS9_end;
+channel bool    chan_LS2Arbiter_end[9];
 
 // Get LS-eval-count, new energy, new genotype from LSs
 channel float2  chan_LS2GA_evalenergy[9]      __attribute__((depth(2)));
 channel float  	chan_LS2GA_genotype[9]        __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
 
 // Turn-off signals to LSs
-channel bool    chan_GA2LS_Off1_active;
-channel bool    chan_GA2LS_Off2_active;
-channel bool    chan_GA2LS_Off3_active;
-channel bool    chan_GA2LS_Off4_active;
-channel bool    chan_GA2LS_Off5_active;
-channel bool    chan_GA2LS_Off6_active;
-channel bool    chan_GA2LS_Off7_active;
-channel bool    chan_GA2LS_Off8_active;
-channel bool    chan_GA2LS_Off9_active;
+channel bool    chan_GA2LS_Off_active[9];
 
 // Send genotype-producer-channel selector and genotype 
 // from IGL_Arbiter to Conform
-#if 0
-channel char2  chan_IGL2Conform_actmode	       __attribute__((depth(9))); // active, mode
-#endif
 channel char   chan_IGL2Conform_actmode	       __attribute__((depth(9))); // active, mode
-
 channel float  chan_IGL2Conform_genotype       __attribute__((depth(9*CHAN_DEPTH_GENOTYPE)));
 
 // Turn-off signal to IGL_Arbiter, Conform, InterE, IntraE
@@ -745,19 +696,14 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 	// Turn off LS kernels
-	write_channel_intel(chan_GA2LS_Off1_active,  		false);
-	write_channel_intel(chan_GA2LS_Off2_active,  		false);
-	write_channel_intel(chan_GA2LS_Off3_active,  		false);
-	write_channel_intel(chan_GA2LS_Off4_active,  		false);
-	write_channel_intel(chan_GA2LS_Off5_active,  		false);
-	write_channel_intel(chan_GA2LS_Off6_active,  		false);
-	write_channel_intel(chan_GA2LS_Off7_active,  		false);
-	write_channel_intel(chan_GA2LS_Off8_active,  		false);
-	write_channel_intel(chan_GA2LS_Off9_active,  		false);
+	#pragma unroll
+	for (uchar j=0; j<9; j++) {
+		write_channel_intel(chan_GA2LS_Off_active[j], false);
+	}
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 	// Turn off IGL_Arbiter, Conform, InterE, IntraE kernerls
-	write_channel_intel(chan_IGLArbiter_Off,     		false);
+	write_channel_intel(chan_IGLArbiter_Off, false);
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 	// Write final pop & energies back to FPGA-board DDRs

@@ -31,7 +31,7 @@ while(valid) {
 	bool valid_energy = false;
 
 	while( (valid_active == false) && (valid_energy == false)) {
-		active         = read_channel_nb_intel(chan_GA2LS_Off2_active, &valid_active);
+		active         = read_channel_nb_intel(chan_GA2LS_Off_active[1], &valid_active);
 		current_energy = read_channel_nb_intel(chan_GA2LS_energy[1],  &valid_energy);
 	}
 	valid = active || valid_energy;
@@ -119,9 +119,9 @@ while(valid) {
 			// Not completely strict as the (iteration_cnt < DockConst_max_num_of_iters) is ignored
 			// In practice, rho condition dominates most of the cases
 			#if defined (FIXED_POINT_LS2)
-			write_channel_intel(chan_LS2Arbiter_LS2_end, (fixpt_rho < DockConst_rho_lower_bound)?true:false);
+			write_channel_intel(chan_LS2Arbiter_end[1], (fixpt_rho < DockConst_rho_lower_bound)?true:false);
 			#else
-			write_channel_intel(chan_LS2Arbiter_LS2_end, (rho < DockConst_rho_lower_bound)?true:false);
+			write_channel_intel(chan_LS2Arbiter_end[1], (rho < DockConst_rho_lower_bound)?true:false);
 			#endif
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 		
@@ -159,7 +159,7 @@ while(valid) {
 					  else      { fixpt_tmp3 = fixedpt_map_angle_360(fixpt_tmp3);}}
 
 				entity_possible_new_genotype [i] = fixpt_tmp3;
-				write_channel_intel(chan_LS2Conf_LS2_genotype, fixedpt_tofloat(fixpt_tmp3));
+				write_channel_intel(chan_LS2Conf_genotype[1], fixedpt_tofloat(fixpt_tmp3));
 
 				#else
 				// tmp1 is genotype_deviate
@@ -185,7 +185,7 @@ while(valid) {
 					  else      { tmp3 = map_angle_360(tmp3);}}
 
 				entity_possible_new_genotype [i] = tmp3;
-				write_channel_intel(chan_LS2Conf_LS2_genotype, tmp3);
+				write_channel_intel(chan_LS2Conf_genotype[1], tmp3);
 				#endif
 
 				#if defined (DEBUG_KRNL_LS2)
@@ -201,10 +201,10 @@ while(valid) {
 			bool inter_valid = false;
 			while( (intra_valid == false) || (inter_valid == false)) {
 				if (intra_valid == false) {
-					energyIA_LS_rx = read_channel_nb_intel(chan_Intrae2StoreLS_LS2_intrae, &intra_valid);
+					energyIA_LS_rx = read_channel_nb_intel(chan_Intrae2StoreLS_intrae[1], &intra_valid);
 				}
 				else if (inter_valid == false) {
-					energyIE_LS_rx = read_channel_nb_intel(chan_Intere2StoreLS_LS2_intere, &inter_valid);
+					energyIE_LS_rx = read_channel_nb_intel(chan_Intere2StoreLS_intere[1], &inter_valid);
 				}
 			}
 

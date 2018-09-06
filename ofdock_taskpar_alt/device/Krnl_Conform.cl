@@ -97,17 +97,17 @@ while(active) {
 	for (uchar i=0; i<DockConst_num_of_genes; i++) {
 		float fl_tmp;
 		switch (mode) {
-			case 'I':  fl_tmp = read_channel_intel(chan_IC2Conf_genotype);     break;
-			case 'G':  fl_tmp = read_channel_intel(chan_GG2Conf_genotype);     break;
-			case 0x01: fl_tmp = read_channel_intel(chan_LS2Conf_LS1_genotype); break;
-			case 0x02: fl_tmp = read_channel_intel(chan_LS2Conf_LS2_genotype); break;
-			case 0x03: fl_tmp = read_channel_intel(chan_LS2Conf_LS3_genotype); break;
-			case 0x04: fl_tmp = read_channel_intel(chan_LS2Conf_LS4_genotype); break;
-			case 0x05: fl_tmp = read_channel_intel(chan_LS2Conf_LS5_genotype); break;
-			case 0x06: fl_tmp = read_channel_intel(chan_LS2Conf_LS6_genotype); break;
-			case 0x07: fl_tmp = read_channel_intel(chan_LS2Conf_LS7_genotype); break;
-			case 0x08: fl_tmp = read_channel_intel(chan_LS2Conf_LS8_genotype); break;
-			case 0x09: fl_tmp = read_channel_intel(chan_LS2Conf_LS9_genotype); break;
+			case 'I':  fl_tmp = read_channel_intel(chan_IC2Conf_genotype);    break;
+			case 'G':  fl_tmp = read_channel_intel(chan_GG2Conf_genotype);    break;
+			case 0x01: fl_tmp = read_channel_intel(chan_LS2Conf_genotype[0]); break;
+			case 0x02: fl_tmp = read_channel_intel(chan_LS2Conf_genotype[1]); break;
+			case 0x03: fl_tmp = read_channel_intel(chan_LS2Conf_genotype[2]); break;
+			case 0x04: fl_tmp = read_channel_intel(chan_LS2Conf_genotype[3]); break;
+			case 0x05: fl_tmp = read_channel_intel(chan_LS2Conf_genotype[4]); break;
+			case 0x06: fl_tmp = read_channel_intel(chan_LS2Conf_genotype[5]); break;
+			case 0x07: fl_tmp = read_channel_intel(chan_LS2Conf_genotype[6]); break;
+			case 0x08: fl_tmp = read_channel_intel(chan_LS2Conf_genotype[7]); break;
+			case 0x09: fl_tmp = read_channel_intel(chan_LS2Conf_genotype[8]); break;
 		}
 		
 		if (i > 2) {

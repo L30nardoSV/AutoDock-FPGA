@@ -458,17 +458,17 @@ while(active) {
 	#endif
 
 	switch (mode) {
-		case 'I':  write_channel_intel(chan_Intere2StoreIC_intere, final_interE);     break;
-		case 'G':  write_channel_intel(chan_Intere2StoreGG_intere, final_interE);     break;
-		case 0x01: write_channel_intel(chan_Intere2StoreLS_LS1_intere, final_interE); break;
-		case 0x02: write_channel_intel(chan_Intere2StoreLS_LS2_intere, final_interE); break;
-		case 0x03: write_channel_intel(chan_Intere2StoreLS_LS3_intere, final_interE); break;
-		case 0x04: write_channel_intel(chan_Intere2StoreLS_LS4_intere, final_interE); break;
-		case 0x05: write_channel_intel(chan_Intere2StoreLS_LS5_intere, final_interE); break;
-		case 0x06: write_channel_intel(chan_Intere2StoreLS_LS6_intere, final_interE); break;
-		case 0x07: write_channel_intel(chan_Intere2StoreLS_LS7_intere, final_interE); break;
-		case 0x08: write_channel_intel(chan_Intere2StoreLS_LS8_intere, final_interE); break;
-		case 0x09: write_channel_intel(chan_Intere2StoreLS_LS9_intere, final_interE); break;
+		case 'I':  write_channel_intel(chan_Intere2StoreIC_intere, final_interE);    break;
+		case 'G':  write_channel_intel(chan_Intere2StoreGG_intere, final_interE);    break;
+		case 0x01: write_channel_intel(chan_Intere2StoreLS_intere[0], final_interE); break;
+		case 0x02: write_channel_intel(chan_Intere2StoreLS_intere[1], final_interE); break;
+		case 0x03: write_channel_intel(chan_Intere2StoreLS_intere[2], final_interE); break;
+		case 0x04: write_channel_intel(chan_Intere2StoreLS_intere[3], final_interE); break;
+		case 0x05: write_channel_intel(chan_Intere2StoreLS_intere[4], final_interE); break;
+		case 0x06: write_channel_intel(chan_Intere2StoreLS_intere[5], final_interE); break;
+		case 0x07: write_channel_intel(chan_Intere2StoreLS_intere[6], final_interE); break;
+		case 0x08: write_channel_intel(chan_Intere2StoreLS_intere[7], final_interE); break;
+		case 0x09: write_channel_intel(chan_Intere2StoreLS_intere[8], final_interE); break;
 	}
 	// --------------------------------------------------------------
  	
