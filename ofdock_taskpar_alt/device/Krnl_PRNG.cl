@@ -208,7 +208,7 @@ void Krnl_Prng_LS_float(unsigned int  Host_seed,
 
 	while(!valid) {
 		bool active = true;
-		active  = read_channel_nb_intel(chan_Arbiter_LS_float_off, &valid);
+		active  = read_channel_nb_intel(chan_GA2PRNG_LS_float_off[0], &valid);
 	
 		for(uchar i=0; i<DockConst_num_of_genes; i++) {
 			float tmp;
@@ -242,7 +242,7 @@ void Krnl_Prng_LS2_float(unsigned int  Host_seed,
 
 	while(!valid) {
 		bool active = true;
-		active  = read_channel_nb_intel(chan_Arbiter_LS2_float_off, &valid);
+		active  = read_channel_nb_intel(chan_GA2PRNG_LS_float_off[1], &valid);
 	
 		for(uchar i=0; i<DockConst_num_of_genes; i++) {
 			float tmp;
@@ -276,7 +276,7 @@ void Krnl_Prng_LS3_float(unsigned int  Host_seed,
 
 	while(!valid) {
 		bool active = true;
-		active  = read_channel_nb_intel(chan_Arbiter_LS3_float_off, &valid);
+		active  = read_channel_nb_intel(chan_GA2PRNG_LS_float_off[2], &valid);
 	
 		for(uchar i=0; i<DockConst_num_of_genes; i++) {
 			float tmp;
@@ -311,7 +311,7 @@ void Krnl_Prng_LS4_float(unsigned int  Host_seed,
 
 	while(!valid) {
 		bool active = true;
-		active  = read_channel_nb_intel(chan_Arbiter_LS4_float_off, &valid);
+		active  = read_channel_nb_intel(chan_GA2PRNG_LS_float_off[3], &valid);
 	
 		for(uchar i=0; i<DockConst_num_of_genes; i++) {
 			float tmp;
@@ -345,7 +345,7 @@ void Krnl_Prng_LS5_float(unsigned int  Host_seed,
 
 	while(!valid) {
 		bool active = true;
-		active  = read_channel_nb_intel(chan_Arbiter_LS5_float_off, &valid);
+		active  = read_channel_nb_intel(chan_GA2PRNG_LS_float_off[4], &valid);
 	
 		for(uchar i=0; i<DockConst_num_of_genes; i++) {
 			float tmp;
@@ -379,7 +379,7 @@ void Krnl_Prng_LS6_float(unsigned int  Host_seed,
 
 	while(!valid) {
 		bool active = true;
-		active  = read_channel_nb_intel(chan_Arbiter_LS6_float_off, &valid);
+		active  = read_channel_nb_intel(chan_GA2PRNG_LS_float_off[5], &valid);
 	
 		for(uchar i=0; i<DockConst_num_of_genes; i++) {
 			float tmp;
@@ -413,7 +413,7 @@ void Krnl_Prng_LS7_float(unsigned int  Host_seed,
 
 	while(!valid) {
 		bool active = true;
-		active  = read_channel_nb_intel(chan_Arbiter_LS7_float_off, &valid);
+		active  = read_channel_nb_intel(chan_GA2PRNG_LS_float_off[6], &valid);
 	
 		for(uchar i=0; i<DockConst_num_of_genes; i++) {
 			float tmp;
@@ -447,7 +447,7 @@ void Krnl_Prng_LS8_float(unsigned int  Host_seed,
 
 	while(!valid) {
 		bool active = true;
-		active  = read_channel_nb_intel(chan_Arbiter_LS8_float_off, &valid);
+		active  = read_channel_nb_intel(chan_GA2PRNG_LS_float_off[7], &valid);
 	
 		for(uchar i=0; i<DockConst_num_of_genes; i++) {
 			float tmp;
@@ -481,7 +481,7 @@ void Krnl_Prng_LS9_float(unsigned int  Host_seed,
 
 	while(!valid) {
 		bool active = true;
-		active  = read_channel_nb_intel(chan_Arbiter_LS9_float_off, &valid);
+		active  = read_channel_nb_intel(chan_GA2PRNG_LS_float_off[8], &valid);
 	
 		for(uchar i=0; i<DockConst_num_of_genes; i++) {
 			float tmp;

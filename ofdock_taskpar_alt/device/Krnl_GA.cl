@@ -54,15 +54,7 @@ channel bool 	chan_Arbiter_BT_ushort_float_off;
 channel bool    chan_Arbiter_GG_uchar_off;
 channel bool    chan_Arbiter_GG_float_off;
 channel bool    chan_Arbiter_LS123_ushort_off;
-channel bool    chan_Arbiter_LS_float_off;
-channel bool    chan_Arbiter_LS2_float_off;
-channel bool    chan_Arbiter_LS3_float_off;
-channel bool    chan_Arbiter_LS4_float_off;
-channel bool    chan_Arbiter_LS5_float_off;
-channel bool    chan_Arbiter_LS6_float_off;
-channel bool    chan_Arbiter_LS7_float_off;
-channel bool    chan_Arbiter_LS8_float_off;
-channel bool    chan_Arbiter_LS9_float_off;
+channel bool    chan_GA2PRNG_LS_float_off[9];
 
 // Send energy values and genotypes to LSs
 channel float   chan_GA2LS_energy[9];
@@ -686,15 +678,11 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 	write_channel_intel(chan_Arbiter_GG_uchar_off, 		false);
 	write_channel_intel(chan_Arbiter_GG_float_off, 		false);
 	write_channel_intel(chan_Arbiter_LS123_ushort_off,  	false);
-	write_channel_intel(chan_Arbiter_LS_float_off, 		false);
-	write_channel_intel(chan_Arbiter_LS2_float_off, 	false);
-	write_channel_intel(chan_Arbiter_LS3_float_off, 	false);
-	write_channel_intel(chan_Arbiter_LS4_float_off, 	false);
-	write_channel_intel(chan_Arbiter_LS5_float_off, 	false);
-	write_channel_intel(chan_Arbiter_LS6_float_off, 	false);
-	write_channel_intel(chan_Arbiter_LS7_float_off, 	false);
-	write_channel_intel(chan_Arbiter_LS8_float_off, 	false);
-	write_channel_intel(chan_Arbiter_LS9_float_off, 	false);
+
+	#pragma unroll
+	for (uchar j=0; j<9; j++) {
+		write_channel_intel(chan_GA2PRNG_LS_float_off[j], false);
+	}
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 	// Turn off LS kernels
