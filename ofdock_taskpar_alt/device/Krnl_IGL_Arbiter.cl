@@ -84,7 +84,7 @@ while(active) {
 
 	uchar bound_tmp = 0;
 	active = Off_valid ? 0x00 : 0x01;
-	char mode [9];	// mode for all LS
+	char mode [LS_REPLICATION_FACTOR];	// mode for all LS
 
 	// Determine "mode" value
 	// This considers all possible cases as all LS could be 

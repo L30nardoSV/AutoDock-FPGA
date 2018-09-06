@@ -128,7 +128,7 @@ void Krnl_Prng_LS123_ushort(unsigned int Host_seed1,
 		            unsigned int DockConst_pop_size){
 
 
-	uint lfsr[9];
+	uint lfsr[LS_REPLICATION_FACTOR];
 	lfsr[0] = Host_seed1;
 	lfsr[1] = Host_seed2;
 	lfsr[2] = Host_seed3;
@@ -145,11 +145,11 @@ void Krnl_Prng_LS123_ushort(unsigned int Host_seed1,
 		bool active = true;
 		active  = read_channel_nb_intel(chan_GA2PRNG_LS123_ushort_off, &valid);
 
-		ushort tmp[9];
+		ushort tmp[LS_REPLICATION_FACTOR];
 		
 		#pragma unroll
-		for (uint i=0; i<9; i++){
-			uchar  lsb[9];
+		for (uint i=0; i<LS_REPLICATION_FACTOR; i++){
+			uchar  lsb[LS_REPLICATION_FACTOR];
 			lsb [i] = lfsr[i] & 0x01u;
 			lfsr[i] >>= 1;
 			lfsr[i] ^= (-lsb[i]) & 0xA3000000u;

@@ -12,14 +12,16 @@
 #define CHAN_DEPTH_ATOMXYZ   (MAX_NUM_OF_ATOMS/2)
 #define CHAN_DEPTH_GENOTYPE  ACTUAL_GENOTYPE_LENGTH
 
+#define LS_REPLICATION_FACTOR 9
+
 // Send active signal to IGL_Arbiter
 channel bool    chan_GA2IGL_IC_active;
 channel bool    chan_GA2IGL_GG_active;
 
 // Send genotypes from producers (IC, GG, LSs) to Conform
-channel float  	chan_IC2Conf_genotype          __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float  	chan_GG2Conf_genotype          __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float  	chan_LS2Conf_genotype[9]       __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
+channel float  	chan_IC2Conf_genotype          			__attribute__((depth(CHAN_DEPTH_GENOTYPE)));
+channel float  	chan_GG2Conf_genotype          			__attribute__((depth(CHAN_DEPTH_GENOTYPE)));
+channel float  	chan_LS2Conf_genotype[LS_REPLICATION_FACTOR]    __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
 
 // Send ligand-atom positions from Conform to InterE & IntraE
 channel float8  chan_Conf2Intere_xyz           __attribute__((depth(CHAN_DEPTH_ATOMXYZ)));
@@ -29,46 +31,46 @@ channel float8	chan_Conf2Intrae_xyz           __attribute__((depth(CHAN_DEPTH_AT
 channel char  	chan_Conf2Intrae_actmode;
 
 // Send energy values from InterE & IntraE to genotype-senders (IC, GG, LSs)
-channel float 	chan_Intere2StoreIC_intere     __attribute__((depth(2)));
-channel float 	chan_Intere2StoreGG_intere     __attribute__((depth(2)));
-channel float 	chan_Intere2StoreLS_intere[9]  __attribute__((depth(2)));
+channel float 	chan_Intere2StoreIC_intere     				__attribute__((depth(2)));
+channel float 	chan_Intere2StoreGG_intere     				__attribute__((depth(2)));
+channel float 	chan_Intere2StoreLS_intere[LS_REPLICATION_FACTOR]  	__attribute__((depth(2)));
 
-channel float 	chan_Intrae2StoreIC_intrae     __attribute__((depth(2)));
-channel float 	chan_Intrae2StoreGG_intrae     __attribute__((depth(2)));
-channel float 	chan_Intrae2StoreLS_intrae[9]  __attribute__((depth(2)));
+channel float 	chan_Intrae2StoreIC_intrae     				__attribute__((depth(2)));
+channel float 	chan_Intrae2StoreGG_intrae     				__attribute__((depth(2)));
+channel float 	chan_Intrae2StoreLS_intrae[LS_REPLICATION_FACTOR]  	__attribute__((depth(2)));
 
 // Send PRNG outputs from generators to consumers
 channel float8   chan_PRNG2GA_BT_ushort_float_prng;
 channel uchar2   chan_PRNG2GA_GG_uchar_prng;
 channel float    chan_PRNG2GA_GG_float_prng     __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
 channel ushort16 chan_PRNG2GA_LS123_ushort_prng;
-channel float    chan_PRNG2LS_float_prng[9]     __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
+channel float    chan_PRNG2LS_float_prng[LS_REPLICATION_FACTOR]		__attribute__((depth(CHAN_DEPTH_GENOTYPE)));
 
 // Turn-off signals to PRNG generators
 channel bool 	chan_GA2PRNG_BT_ushort_float_off;
 channel bool    chan_GA2PRNG_GG_uchar_off;
 channel bool    chan_GA2PRNG_GG_float_off;
 channel bool    chan_GA2PRNG_LS123_ushort_off;
-channel bool    chan_GA2PRNG_LS_float_off[9];
+channel bool    chan_GA2PRNG_LS_float_off[LS_REPLICATION_FACTOR];
 
 // Send energy values and genotypes to LSs
-channel float   chan_GA2LS_energy[9];
-channel float  	chan_GA2LS_genotype[9]        __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
+channel float   chan_GA2LS_energy[LS_REPLICATION_FACTOR];
+channel float  	chan_GA2LS_genotype[LS_REPLICATION_FACTOR]        __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
 
 // Send LS status from LSs to IGL_Arbiter
-channel bool    chan_LS2Arbiter_end[9];
+channel bool    chan_LS2Arbiter_end[LS_REPLICATION_FACTOR];
 
 // Get LS-eval-count, new energy, new genotype from LSs
-channel float2  chan_LS2GA_evalenergy[9]      __attribute__((depth(2)));
-channel float  	chan_LS2GA_genotype[9]        __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
+channel float2  chan_LS2GA_evalenergy[LS_REPLICATION_FACTOR]      __attribute__((depth(2)));
+channel float  	chan_LS2GA_genotype[LS_REPLICATION_FACTOR]        __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
 
 // Turn-off signals to LSs
-channel bool    chan_GA2LS_Off_active[9];
+channel bool    chan_GA2LS_Off_active[LS_REPLICATION_FACTOR];
 
 // Send genotype-producer-channel selector and genotype 
 // from IGL_Arbiter to Conform
-channel char   chan_IGL2Conform_actmode	       __attribute__((depth(9))); // active, mode
-channel float  chan_IGL2Conform_genotype       __attribute__((depth(9*CHAN_DEPTH_GENOTYPE)));
+channel char   chan_IGL2Conform_actmode	       __attribute__((depth(LS_REPLICATION_FACTOR))); // active, mode
+channel float  chan_IGL2Conform_genotype       __attribute__((depth(LS_REPLICATION_FACTOR*CHAN_DEPTH_GENOTYPE)));
 
 // Turn-off signal to IGL_Arbiter, Conform, InterE, IntraE
 channel bool   chan_IGLArbiter_Off;
@@ -354,18 +356,6 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 		#pragma ivdep array (LocalEneNext)
 		for (ushort new_pop_cnt = 1; new_pop_cnt < DockConst_pop_size; new_pop_cnt++) {
 
-			/*
-			// ---------------------------------------------------
-			// Elitism: copying the best entity to new population
-			// ---------------------------------------------------
-			if (new_pop_cnt == 1) { 
-				for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) { 		
-					LocalPopNext[0][gene_cnt & MASK_GENOTYPE] = LocalPopCurr[best_entity][gene_cnt & MASK_GENOTYPE]; 	
-				} 		
-				LocalEneNext[0] = loc_energies[best_entity];
-			}
-			*/
-
 			#if defined (DEBUG_KRNL_GA)
 			printf("Krnl_GA: %u\n", new_pop_cnt);
 			#endif
@@ -525,7 +515,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 		uint ls_eval_cnt = 0;
 
 		#pragma ivdep
-		for (ushort ls_ent_cnt=0; ls_ent_cnt<DockConst_num_of_lsentities; ls_ent_cnt+=9) {
+		for (ushort ls_ent_cnt=0; ls_ent_cnt<DockConst_num_of_lsentities; ls_ent_cnt+=LS_REPLICATION_FACTOR) {
 
 			// Choose random & different entities on every iteration
 			ushort16 entity_ls = read_channel_intel(chan_PRNG2GA_LS123_ushort_prng);
@@ -544,24 +534,24 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			// Here you can (in theory) read from u_entity_ls.arr[i] safely thanks to sec 6.2.4.1
 			// A nice property of OpenCL C that does not exist in C99
 			#pragma unroll
-			for (uchar j=0; j<9; j++) {
+			for (uchar j=0; j<LS_REPLICATION_FACTOR; j++) {
 				write_channel_intel(chan_GA2LS_energy[j], LocalEneNext[u_entity_ls.arr[j]]);
 			}
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 			for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
 				#pragma unroll
-				for (uchar j=0; j<9; j++) {
+				for (uchar j=0; j<LS_REPLICATION_FACTOR; j++) {
 					write_channel_intel(chan_GA2LS_genotype[j], LocalPopNext[u_entity_ls.arr[j]][gene_cnt & MASK_GENOTYPE]);
 				}
 			}
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 
-			float2 evalenergy_tmp[9];
+			float2 evalenergy_tmp[LS_REPLICATION_FACTOR];
 
-			bool ls_done[9];
+			bool ls_done[LS_REPLICATION_FACTOR];
 			#pragma unroll
-			for (uchar j=0; j<9; j++) {
+			for (uchar j=0; j<LS_REPLICATION_FACTOR; j++) {
 				ls_done[j] = false;
 			}
   
@@ -611,10 +601,10 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 
 			// Temporal number of energy evals: evalenergy_tmp[j].x
 			// Energy values: evalenergy_tmp[j].y
-			float eetmp[9];
-			uint eval_tmp[9];
+			float eetmp[LS_REPLICATION_FACTOR];
+			uint eval_tmp[LS_REPLICATION_FACTOR];
 			#pragma unroll
-			for (uchar j=0; j<9; j++) {
+			for (uchar j=0; j<LS_REPLICATION_FACTOR; j++) {
 				eetmp[j]    = evalenergy_tmp[j].x;
 				eval_tmp[j] = *(uint*)&eetmp[j];
 				LocalEneNext[u_entity_ls.arr[j]] = evalenergy_tmp[j].y;
@@ -624,7 +614,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			#pragma ivdep
 			for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
 				#pragma unroll
-				for (uchar j=0; j<9; j++) {
+				for (uchar j=0; j<LS_REPLICATION_FACTOR; j++) {
 					LocalPopNext[u_entity_ls.arr[j]][gene_cnt & MASK_GENOTYPE] = read_channel_intel(chan_LS2GA_genotype[j]);
 				}
 			}
@@ -632,7 +622,7 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 			// Accumulating number of energy evals
 			uint tmp_eval_cnt = 0;
 			#pragma unroll
-			for (uchar j=0; j<9; j++) {
+			for (uchar j=0; j<LS_REPLICATION_FACTOR; j++) {
 				tmp_eval_cnt += eval_tmp[j];
 			}
 			ls_eval_cnt += tmp_eval_cnt;
@@ -675,14 +665,14 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 	write_channel_intel(chan_GA2PRNG_LS123_ushort_off,  	false);
 
 	#pragma unroll
-	for (uchar j=0; j<9; j++) {
+	for (uchar j=0; j<LS_REPLICATION_FACTOR; j++) {
 		write_channel_intel(chan_GA2PRNG_LS_float_off[j], false);
 	}
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 	// Turn off LS kernels
 	#pragma unroll
-	for (uchar j=0; j<9; j++) {
+	for (uchar j=0; j<LS_REPLICATION_FACTOR; j++) {
 		write_channel_intel(chan_GA2LS_Off_active[j], false);
 	}
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
