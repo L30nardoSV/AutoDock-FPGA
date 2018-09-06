@@ -42,15 +42,7 @@ channel float8   chan_PRNG2GA_BT_ushort_float_prng;
 channel uchar2   chan_PRNG2GA_GG_uchar_prng;
 channel float    chan_PRNG2GA_GG_float_prng     __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
 channel ushort16 chan_PRNG2GA_LS123_ushort_prng;
-channel float    chan_PRNG2GA_LS_float_prng     __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float    chan_PRNG2GA_LS2_float_prng    __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float    chan_PRNG2GA_LS3_float_prng    __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float    chan_PRNG2GA_LS4_float_prng    __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float    chan_PRNG2GA_LS5_float_prng    __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float    chan_PRNG2GA_LS6_float_prng    __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float    chan_PRNG2GA_LS7_float_prng    __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float    chan_PRNG2GA_LS8_float_prng    __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float    chan_PRNG2GA_LS9_float_prng    __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
+channel float    chan_PRNG2LS_float_prng[9]     __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
 
 // Turn-off signals to PRNG generators
 

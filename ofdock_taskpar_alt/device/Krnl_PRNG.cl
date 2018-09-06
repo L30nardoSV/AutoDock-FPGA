@@ -222,11 +222,11 @@ void Krnl_Prng_LS_float(unsigned int  Host_seed,
 			#if defined (FIXED_POINT_LS1)
 			fixedpt fixpt_tmp = fixedpt_fromfloat(tmp);
 			if(!valid) {
-				success = write_channel_nb_intel(chan_PRNG2GA_LS_float_prng, *(float*) &fixpt_tmp);
+				success = write_channel_nb_intel(chan_PRNG2LS_float_prng[0], *(float*) &fixpt_tmp);
 			}
 			#else
 			if(!valid) {
-				success = write_channel_nb_intel(chan_PRNG2GA_LS_float_prng, tmp);
+				success = write_channel_nb_intel(chan_PRNG2LS_float_prng[0], tmp);
 			}
 			#endif
 		}
@@ -256,11 +256,11 @@ void Krnl_Prng_LS2_float(unsigned int  Host_seed,
 			#if defined (FIXED_POINT_LS2)
 			fixedpt fixpt_tmp = fixedpt_fromfloat(tmp);
 			if(!valid) {
-				success = write_channel_nb_intel(chan_PRNG2GA_LS2_float_prng, *(float*) &fixpt_tmp);
+				success = write_channel_nb_intel(chan_PRNG2LS_float_prng[1], *(float*) &fixpt_tmp);
 			}
 			#else
 			if(!valid) {
-				success = write_channel_nb_intel(chan_PRNG2GA_LS2_float_prng, tmp);
+				success = write_channel_nb_intel(chan_PRNG2LS_float_prng[1], tmp);
 			}
 			#endif
 		}
@@ -290,12 +290,12 @@ void Krnl_Prng_LS3_float(unsigned int  Host_seed,
 			#if defined (FIXED_POINT_LS3)
 			fixedpt fixpt_tmp = fixedpt_fromfloat(tmp);
 			if(!valid) {
-				success = write_channel_nb_intel(chan_PRNG2GA_LS3_float_prng, *(float*) &fixpt_tmp);
+				success = write_channel_nb_intel(chan_PRNG2LS_float_prng[2], *(float*) &fixpt_tmp);
 			}
 
 			#else
 			if(!valid) {
-				success = write_channel_nb_intel(chan_PRNG2GA_LS3_float_prng, tmp);
+				success = write_channel_nb_intel(chan_PRNG2LS_float_prng[2], tmp);
 			}
 			#endif
 		}
@@ -325,11 +325,11 @@ void Krnl_Prng_LS4_float(unsigned int  Host_seed,
 			#if defined (FIXED_POINT_LS4)
 			fixedpt fixpt_tmp = fixedpt_fromfloat(tmp);
 			if(!valid) {
-				success = write_channel_nb_intel(chan_PRNG2GA_LS4_float_prng, *(float*) &fixpt_tmp);
+				success = write_channel_nb_intel(chan_PRNG2LS_float_prng[3], *(float*) &fixpt_tmp);
 			}
 			#else
 			if(!valid) {
-				success = write_channel_nb_intel(chan_PRNG2GA_LS4_float_prng, tmp);
+				success = write_channel_nb_intel(chan_PRNG2LS_float_prng[3], tmp);
 			}
 			#endif
 		}
@@ -359,11 +359,11 @@ void Krnl_Prng_LS5_float(unsigned int  Host_seed,
 			#if defined (FIXED_POINT_LS5)
 			fixedpt fixpt_tmp = fixedpt_fromfloat(tmp);
 			if(!valid) {
-				success = write_channel_nb_intel(chan_PRNG2GA_LS5_float_prng, *(float*) &fixpt_tmp);
+				success = write_channel_nb_intel(chan_PRNG2LS_float_prng[4], *(float*) &fixpt_tmp);
 			}
 			#else
 			if(!valid) {
-				success = write_channel_nb_intel(chan_PRNG2GA_LS5_float_prng, tmp);
+				success = write_channel_nb_intel(chan_PRNG2LS_float_prng[4], tmp);
 			}
 			#endif
 		}
@@ -393,11 +393,11 @@ void Krnl_Prng_LS6_float(unsigned int  Host_seed,
 			#if defined (FIXED_POINT_LS6)
 			fixedpt fixpt_tmp = fixedpt_fromfloat(tmp);
 			if(!valid) {
-				success = write_channel_nb_intel(chan_PRNG2GA_LS6_float_prng, *(float*) &fixpt_tmp);
+				success = write_channel_nb_intel(chan_PRNG2LS_float_prng[5], *(float*) &fixpt_tmp);
 			}
 			#else
 			if(!valid) {
-				success = write_channel_nb_intel(chan_PRNG2GA_LS6_float_prng, tmp);
+				success = write_channel_nb_intel(chan_PRNG2LS_float_prng[5], tmp);
 			}
 			#endif
 		}
@@ -427,11 +427,11 @@ void Krnl_Prng_LS7_float(unsigned int  Host_seed,
 			#if defined (FIXED_POINT_LS7)
 			fixedpt fixpt_tmp = fixedpt_fromfloat(tmp);
 			if(!valid) {
-				success = write_channel_nb_intel(chan_PRNG2GA_LS7_float_prng, *(float*) &fixpt_tmp);
+				success = write_channel_nb_intel(chan_PRNG2LS_float_prng[6], *(float*) &fixpt_tmp);
 			}
 			#else
 			if(!valid) {
-				success = write_channel_nb_intel(chan_PRNG2GA_LS7_float_prng, tmp);
+				success = write_channel_nb_intel(chan_PRNG2LS_float_prng[6], tmp);
 			}
 			#endif
 		}
@@ -461,11 +461,11 @@ void Krnl_Prng_LS8_float(unsigned int  Host_seed,
 			#if defined (FIXED_POINT_LS8)
 			fixedpt fixpt_tmp = fixedpt_fromfloat(tmp);
 			if(!valid) {
-				success = write_channel_nb_intel(chan_PRNG2GA_LS8_float_prng, *(float*) &fixpt_tmp);
+				success = write_channel_nb_intel(chan_PRNG2LS_float_prng[7], *(float*) &fixpt_tmp);
 			}
 			#else
 			if(!valid) {
-				success = write_channel_nb_intel(chan_PRNG2GA_LS8_float_prng, tmp);
+				success = write_channel_nb_intel(chan_PRNG2LS_float_prng[7], tmp);
 			}
 			#endif
 		}
@@ -495,11 +495,11 @@ void Krnl_Prng_LS9_float(unsigned int  Host_seed,
 			#if defined (FIXED_POINT_LS9)
 			fixedpt fixpt_tmp = fixedpt_fromfloat(tmp);
 			if(!valid) {
-				success = write_channel_nb_intel(chan_PRNG2GA_LS9_float_prng, *(float*) &fixpt_tmp);
+				success = write_channel_nb_intel(chan_PRNG2LS_float_prng[8], *(float*) &fixpt_tmp);
 			}
 			#else
 			if(!valid) {
-				success = write_channel_nb_intel(chan_PRNG2GA_LS9_float_prng, tmp);
+				success = write_channel_nb_intel(chan_PRNG2LS_float_prng[8], tmp);
 			}
 			#endif
 		}

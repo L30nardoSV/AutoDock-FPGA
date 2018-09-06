@@ -128,8 +128,7 @@ while(valid) {
 			// new random deviate
 			// rho is the deviation of the uniform distribution
 			for (uchar i=0; i<DockConst_num_of_genes; i++) {
-	
-				float tmp_prng = read_channel_intel(chan_PRNG2GA_LS3_float_prng);
+				float tmp_prng = read_channel_intel(chan_PRNG2LS_float_prng[2]);
 				mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 				#if defined (FIXED_POINT_LS3)
