@@ -15,7 +15,7 @@ void Krnl_Prng_BT_ushort_float(unsigned int Host_seed1,
 	
 	while(!valid) {	
 		bool active = true;
-		active = read_channel_nb_intel(chan_Arbiter_BT_ushort_float_off, &valid);
+		active = read_channel_nb_intel(chan_GA2PRNG_BT_ushort_float_off, &valid);
 
 		uint   u_tmp[4]; // used as short in GA
 		float  f_tmp[4];	
@@ -60,7 +60,7 @@ void Krnl_Prng_GG_uchar(unsigned int  Host_seed,
 
 	while(!valid) {
 		bool active = true;
-		active = read_channel_nb_intel(chan_Arbiter_GG_uchar_off, &valid);
+		active = read_channel_nb_intel(chan_GA2PRNG_GG_uchar_off, &valid);
 		
 		uchar tmp[2];
 
@@ -94,7 +94,7 @@ void Krnl_Prng_GG_float(unsigned int  Host_seed,
 
 	while(!valid) {
 		bool active = true;
-		active = read_channel_nb_intel(chan_Arbiter_GG_float_off, &valid);
+		active = read_channel_nb_intel(chan_GA2PRNG_GG_float_off, &valid);
 
 		for(uchar i=0; i<DockConst_num_of_genes; i++) {
 			float tmp;
@@ -143,7 +143,7 @@ void Krnl_Prng_LS123_ushort(unsigned int Host_seed1,
 
 	while(!valid) {
 		bool active = true;
-		active  = read_channel_nb_intel(chan_Arbiter_LS123_ushort_off, &valid);
+		active  = read_channel_nb_intel(chan_GA2PRNG_LS123_ushort_off, &valid);
 
 		ushort tmp[9];
 		

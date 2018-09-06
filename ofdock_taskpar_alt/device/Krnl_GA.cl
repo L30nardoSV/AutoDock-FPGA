@@ -45,15 +45,10 @@ channel ushort16 chan_PRNG2GA_LS123_ushort_prng;
 channel float    chan_PRNG2LS_float_prng[9]     __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
 
 // Turn-off signals to PRNG generators
-
-// FIXME: these channels don't go anymore through IGL_Arbiter.
-// That was initially the case, but was fixed.
-// Name should be changed accordingly (GA instead of Arbiter)
-// to avoid misleading data-flow information
-channel bool 	chan_Arbiter_BT_ushort_float_off;
-channel bool    chan_Arbiter_GG_uchar_off;
-channel bool    chan_Arbiter_GG_float_off;
-channel bool    chan_Arbiter_LS123_ushort_off;
+channel bool 	chan_GA2PRNG_BT_ushort_float_off;
+channel bool    chan_GA2PRNG_GG_uchar_off;
+channel bool    chan_GA2PRNG_GG_float_off;
+channel bool    chan_GA2PRNG_LS123_ushort_off;
 channel bool    chan_GA2PRNG_LS_float_off[9];
 
 // Send energy values and genotypes to LSs
@@ -674,10 +669,10 @@ void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
 	// ------------------------------------------------------------------
 
 	// Turn off PRNG kernels
-	write_channel_intel(chan_Arbiter_BT_ushort_float_off,   false);
-	write_channel_intel(chan_Arbiter_GG_uchar_off, 		false);
-	write_channel_intel(chan_Arbiter_GG_float_off, 		false);
-	write_channel_intel(chan_Arbiter_LS123_ushort_off,  	false);
+	write_channel_intel(chan_GA2PRNG_BT_ushort_float_off,   false);
+	write_channel_intel(chan_GA2PRNG_GG_uchar_off, 		false);
+	write_channel_intel(chan_GA2PRNG_GG_float_off, 		false);
+	write_channel_intel(chan_GA2PRNG_LS123_ushort_off,  	false);
 
 	#pragma unroll
 	for (uchar j=0; j<9; j++) {
