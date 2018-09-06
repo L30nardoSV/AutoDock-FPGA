@@ -32,9 +32,6 @@ while(valid) {
 
 	while( (valid_active == false) && (valid_energy == false)) {
 		active         = read_channel_nb_intel(chan_GA2LS_Off6_active, &valid_active);
-		/*
-		current_energy = read_channel_nb_intel(chan_GA2LS_LS6_energy,  &valid_energy);
-		*/
 		current_energy = read_channel_nb_intel(chan_GA2LS_energy[5],  &valid_energy);
 	}
 	valid = active || valid_energy;
@@ -49,15 +46,9 @@ while(valid) {
 
 		for (uchar i=0; i<DockConst_num_of_genes; i++) {
 			#if defined (FIXED_POINT_LS6)
-			/*
-			float tmp_gene = read_channel_intel(chan_GA2LS_LS6_genotype);
-			*/
 			float tmp_gene = read_channel_intel(chan_GA2LS_genotype[5]);
 			genotype [i] = fixedpt_fromfloat(tmp_gene);
 			#else
-			/*
-			genotype [i] = read_channel_intel(chan_GA2LS_LS6_genotype);
-			*/
 			genotype [i] = read_channel_intel(chan_GA2LS_genotype[5]);
 			#endif
 		}
@@ -302,19 +293,16 @@ while(valid) {
 		for (uchar i=0; i<DockConst_num_of_genes; i++) {
 			if (i == 0) {
 				float2 evalenergy  = {*(float*)&LS_eval, current_energy};
-				write_channel_intel(chan_LS2GA_LS6_evalenergy, evalenergy);	
+				/*
+				write_channel_intel(chan_LS2GA_LS6_evalenergy, evalenergy);
+				*/
+				write_channel_intel(chan_LS2GA_evalenergy[5], evalenergy);
 			}
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 			#if defined (FIXED_POINT_LS6)
-			/*
-			write_channel_intel(chan_LS2GA_LS6_genotype, fixedpt_tofloat(genotype [i]));
-			*/
 			write_channel_intel(chan_LS2GA_genotype[5], fixedpt_tofloat(genotype [i]));
 			#else
-			/*
-			write_channel_intel(chan_LS2GA_LS6_genotype, genotype [i]);
-			*/
 			write_channel_intel(chan_LS2GA_genotype[5], genotype [i]);
 			#endif
 		}
