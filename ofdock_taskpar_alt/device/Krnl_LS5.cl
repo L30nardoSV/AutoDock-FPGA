@@ -124,12 +124,26 @@ while(valid) {
 			write_channel_intel(chan_LS2Arbiter_end[4], (rho < DockConst_rho_lower_bound)?true:false);
 			#endif
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
+
+			// read pnrgs from prng_kernel using channels.
+			// these and following loop were initially merged for deeper pipelining.
+			// however the prng channel-read created a bottleneck II=15.
+			// splitted loops have each II=1.
+			float float_prng [ACTUAL_GENOTYPE_LENGTH];
+
+			for (uchar i=0; i<DockConst_num_of_genes; i++) {
+				float_prng [i] = read_channel_intel(chan_PRNG2LS_float_prng[4]);
+			}
+			mem_fence(CLK_CHANNEL_MEM_FENCE);
 		
 			// new random deviate
 			// rho is the deviation of the uniform distribution
 			for (uchar i=0; i<DockConst_num_of_genes; i++) {
+				/*
 				float tmp_prng = read_channel_intel(chan_PRNG2LS_float_prng[4]);
 				mem_fence(CLK_CHANNEL_MEM_FENCE);
+				*/
+				float tmp_prng = float_prng[i];
 
 				#if defined (FIXED_POINT_LS5)
 				fixedpt fixpt_tmp_prng = *(fixedpt*) &tmp_prng;
@@ -292,9 +306,6 @@ while(valid) {
 		for (uchar i=0; i<DockConst_num_of_genes; i++) {
 			if (i == 0) {
 				float2 evalenergy  = {*(float*)&LS_eval, current_energy};
-				/*
-				write_channel_intel(chan_LS2GA_LS5_evalenergy, evalenergy);
-				*/
 				write_channel_intel(chan_LS2GA_evalenergy[4], evalenergy);
 			}
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
