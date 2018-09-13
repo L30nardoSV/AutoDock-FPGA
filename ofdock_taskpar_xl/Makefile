@@ -97,8 +97,9 @@ endef
 # Following values are used only for emulation
 # to have a short but still a representative test
 PDB  := 1stp
-NRUN := 5
-NEV  := 800000 
+NRUN := 10
+NEV  := 800000
+NGEN := 27000
 
 # Switching to the other SDAccel 2017.4 default platform
 # As it is available in Xelera "saruman" server
@@ -161,7 +162,7 @@ kerhwemu:
 #emconfigutil --platform xilinx_vcu1525_dynamic_5_0 --nd 1
 swemu: kerswemu
 	emconfigutil --platform $(BOARD) --nd $(NDEVICES_EMU)
-	XCL_EMULATION_MODE=sw_emu ./$(EXES) -ffile input/$(PDB)/derived/$(PDB)_protein.maps.fld -lfile input/$(PDB)/derived/$(PDB)_ligand.pdbqt -nev $(NEV) -nrun $(NRUN)  -gfpop 1
+	XCL_EMULATION_MODE=sw_emu ./$(EXES) -ffile input/$(PDB)/derived/$(PDB)_protein.maps.fld -lfile input/$(PDB)/derived/$(PDB)_ligand.pdbqt -nrun $(NRUN) -nev $(NEV) -ngen $(NGEN) -gfpop 1
 	@echo $(newline)
 	@echo "==========================================================================="
 	@echo "INFO: swemu log file is under: \"./docking.dlg\"                           "
@@ -178,7 +179,7 @@ swemu: kerswemu
 
 hwemu: kerhwemu
 	emconfigutil --platform $(BOARD) --nd $(NDEVICES_EMU)
-	XCL_EMULATION_MODE=hw_emu ./$(EXES) -ffile input/$(PDB)/derived/$(PDB)_protein.maps.fld -lfile input/$(PDB)/derived/$(PDB)_ligand.pdbqt -nev $(NEV) -nrun $(NRUN)  -gfpop 1
+	XCL_EMULATION_MODE=hw_emu ./$(EXES) -ffile input/$(PDB)/derived/$(PDB)_protein.maps.fld -lfile input/$(PDB)/derived/$(PDB)_ligand.pdbqt -nrun $(NRUN) -nev $(NEV) -ngen $(NGEN) -gfpop 1
 	@echo $(newline)
 	@echo "==========================================================================="
 	@echo "INFO: hwemu log file is under: \"./docking.dlg\"                           "
