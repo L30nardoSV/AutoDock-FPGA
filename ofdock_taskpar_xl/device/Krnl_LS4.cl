@@ -325,7 +325,6 @@ while(valid) {
 				// updating offspring_genotype
 				// updating genotype_bias
 
-				//#pragma unroll 16
 				LOOP_FOR_LS4_FIXEDPT_UPDATE_POS_GENOTYPE:
 				for (uchar i=0; i<DockConst_num_of_genes; i++) {
 					genotype_bias [i] = (positive_direction == true) ? deviate_plus_bias  [i]: 
@@ -343,7 +342,6 @@ while(valid) {
 			else {
 				// updating (halving) genotype_bias
 
-				//#pragma unroll 16
 				LOOP_FOR_LS4_FIXEDPT_UPDATE_NEG_GENOTYPE:
 				for (uchar i=0; i<DockConst_num_of_genes; i++) {
 					genotype_bias [i] = (iteration_cnt == 1)? 0: (genotype_bias [i] >> 1);
@@ -360,7 +358,6 @@ while(valid) {
 				// updating offspring_genotype
 				// updating genotype_bias
 
-				//#pragma unroll 16
 				LOOP_FOR_LS4_FLOATPT_UPDATE_POS_GENOTYPE:
 				for (uchar i=0; i<DockConst_num_of_genes; i++) {
 					genotype_bias [i] = (positive_direction == true) ?  deviate_plus_bias  [i] : 
@@ -376,7 +373,6 @@ while(valid) {
 			else {
 				// updating (halving) genotype_bias
 
-				//#pragma unroll 16
 				LOOP_FOR_LS4_FLOATPT_UPDATE_NEG_GENOTYPE:
 				for (uchar i=0; i<DockConst_num_of_genes; i++) {
 					genotype_bias [i] = (iteration_cnt == 1)? 0.0f: (0.5f*genotype_bias [i]);

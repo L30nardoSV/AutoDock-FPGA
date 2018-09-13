@@ -692,8 +692,10 @@ void Krnl_GA(
 		printf("best_entity: %3u, energy: %20.6f\n", best_entity, loc_energies[best_entity]);
 		#endif
 
+		/*
 		#pragma ivdep array (LocalPopNext)
 		#pragma ivdep array (LocalEneNext)
+		*/
 		__attribute__((xcl_pipeline_loop))
 		LOOP_FOR_GA_OUTER_GLOBAL: 
 		for (ushort new_pop_cnt = 1; new_pop_cnt < DockConst_pop_size; new_pop_cnt++) {
@@ -702,12 +704,9 @@ void Krnl_GA(
 			// Elitism: copying the best entity to new population
 			// ---------------------------------------------------
 			if (new_pop_cnt == 1) {
-/*
-				#pragma unroll
-*/
-				__attribute__((opencl_unroll_hint))
+				__attribute__((xcl_pipeline_loop))
 				LOOP_FOR_GA_INNER_ELITISM:
-				for (uchar gene_cnt=0; gene_cnt<ACTUAL_GENOTYPE_LENGTH; gene_cnt++) { 		
+				for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
 					LocalPopNext[0][gene_cnt & MASK_GENOTYPE] = LocalPopCurr[best_entity][gene_cnt & MASK_GENOTYPE]; 	
 				} 		
 				LocalEneNext[0] = loc_energies[best_entity];
@@ -939,7 +938,9 @@ void Krnl_GA(
 
 		uint ls_eval_cnt = 0;
 
+		/*
 		#pragma ivdep
+		*/
 		__attribute__((xcl_pipeline_loop))
 		LOOP_FOR_GA_LS_OUTER:
 		for (ushort ls_ent_cnt=0; ls_ent_cnt<DockConst_num_of_lsentities; ls_ent_cnt+=9) {
@@ -1190,7 +1191,9 @@ void Krnl_GA(
 			LocalEneNext[entity_ls8] = evalenergy_tmp8.y;
 			LocalEneNext[entity_ls9] = evalenergy_tmp9.y;
 
+			/*
 			#pragma ivdep
+			*/
 			__attribute__((xcl_pipeline_loop))
 			LOOP_FOR_GA_LS_INNER_READ_GENOTYPE:
 			for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {

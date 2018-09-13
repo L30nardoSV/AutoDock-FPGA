@@ -142,7 +142,6 @@ void Krnl_IGL_Arbiter(/*unsigned char DockConst_num_of_genes*/
 
 		bool mode_LS_bool [9];
 
-		//#pragma unroll
 		__attribute__((opencl_unroll_hint))
 		LOOP_FOR_IGL_INIT_MODE_LS_BOOL:
 		for(uchar i=0; i<9; i++) {

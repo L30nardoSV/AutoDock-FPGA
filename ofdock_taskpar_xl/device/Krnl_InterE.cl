@@ -52,7 +52,6 @@ void Krnl_InterE(
 	__global const float* GlobFgrids2 = & GlobFgrids [Host_mul_tmp2];
 	__global const float* GlobFgrids3 = & GlobFgrids [Host_mul_tmp3];
 
-#pragma max_concurrency 32
 LOOP_WHILE_INTERE_MAIN:
 while(active) {
 
@@ -114,6 +113,7 @@ while(active) {
 	#endif
 
 	// For each ligand atom
+	__attribute__((xcl_pipeline_loop))
 	LOOP_FOR_INTER_MAIN:
 	for (uchar atom1_id=0; atom1_id<DockConst_num_of_atoms; atom1_id++)
 	{

@@ -321,7 +321,7 @@ while(valid) {
 				// updating offspring_genotype
 				// updating genotype_bias
 	
-				//#pragma unroll 16
+				__attribute__((xcl_pipeline_loop))
 				LOOP_FOR_LS_FIXEDPT_UPDATE_POS_GENOTYPE:
 				for (uchar i=0; i<DockConst_num_of_genes; i++) {
 					genotype_bias [i] = (positive_direction == true) ? deviate_plus_bias  [i] : 
@@ -338,7 +338,7 @@ while(valid) {
 			else {
 				// updating (halving) genotype_bias
 
-				//#pragma unroll 16
+				__attribute__((xcl_pipeline_loop))
 				LOOP_FOR_LS_FIXEDPT_UPDATE_NEG_GENOTYPE:
 				for (uchar i=0; i<DockConst_num_of_genes; i++) {
 					genotype_bias [i] = (iteration_cnt == 1)? 0: (genotype_bias [i] >> 1);
@@ -356,7 +356,7 @@ while(valid) {
 				// updating offspring_genotype
 				// updating genotype_bias
 
-				//#pragma unroll 16
+				__attribute__((xcl_pipeline_loop))
 				LOOP_FOR_LS_FLOATPT_UPDATE_POS_GENOTYPE:
 				for (uchar i=0; i<DockConst_num_of_genes; i++) {
 					genotype_bias [i] = (positive_direction == true) ? deviate_plus_bias  [i] : 
@@ -372,7 +372,7 @@ while(valid) {
 			else {
 				// updating (halving) genotype_bias
 
-				//#pragma unroll 16
+				__attribute__((xcl_pipeline_loop))
 				LOOP_FOR_LS_FLOATPT_UPDATE_NEG_GENOTYPE:
 				for (uchar i=0; i<DockConst_num_of_genes; i++) {
 					genotype_bias [i] = (iteration_cnt == 1)? 0.0f: (0.5f*genotype_bias [i]);

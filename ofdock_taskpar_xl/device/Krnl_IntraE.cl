@@ -50,7 +50,6 @@ void Krnl_IntraE(
 		intraE_contributors_localcache [i] = KerConstStatic_intraE_contributors_const [i];	
 	}
 
-#pragma max_concurrency 32
 LOOP_WHILE_INTRAE_MAIN:
 while(active) {
 	char mode;
@@ -112,21 +111,17 @@ while(active) {
 	//float shift_intraE[33];
 	fixedpt64 shift_intraE[33];
 
-/*
-	#pragma unroll
-*/
 	__attribute__((opencl_unroll_hint))
 	LOOP_INTRAE_SHIFT_INIT:
 	for (uchar i=0; i<33; i++) {
 		//shift_intraE[i] = 0.0f;
 		shift_intraE[i] = 0;
 	}
-
 	#endif
 
 	// For each intramolecular atom contributor pair
 
-	//#pragma unroll 10
+	__attribute__((xcl_pipeline_loop))
 	LOOP_FOR_INTRAE_MAIN:
 	for (ushort contributor_counter=0; contributor_counter<DockConst_num_of_intraE_contributors; contributor_counter++) {
 
@@ -258,9 +253,6 @@ while(active) {
 						     fixedpt64_fromfloat(partialE3) + 
 						     fixedpt64_fromfloat(partialE4);
 
-/*
-		#pragma unroll
-*/
 		__attribute__((opencl_unroll_hint))
 		LOOP_INTRAE_SHIFT:
 		for (uchar j=0; j<32; j++) {
@@ -275,9 +267,6 @@ while(active) {
 	#if defined (FIXED_POINT_INTRAE)
 	fixedpt64 fixpt_intraE = 0;
 
-/*
-	#pragma unroll
-*/
 	__attribute__((opencl_unroll_hint))
 	LOOP_INTRAE_SHIFT_RED:
 	for (uchar j=0; j<32; j++) {
