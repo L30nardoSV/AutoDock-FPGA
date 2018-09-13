@@ -1,8 +1,3 @@
-/*
-// Enable the channels extension
-#pragma OPENCL EXTENSION cl_altera_channels : enable
-*/
-
 //IC:  initial calculation of energy of populations
 //GG:  genetic generation 
 //LS:  local search
