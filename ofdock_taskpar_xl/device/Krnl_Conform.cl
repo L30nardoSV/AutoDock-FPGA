@@ -419,6 +419,9 @@ while(active) {
 			loc_coords[atom_id] = atom_to_rotate + rotation_movingvec;
 
 		} // End if-statement not dummy rotation
+
+		mem_fence(CLK_LOCAL_MEM_FENCE);
+
 	} // End rotation_counter for-loop
 
 	#if defined (DEBUG_KRNL_CONFORM)
