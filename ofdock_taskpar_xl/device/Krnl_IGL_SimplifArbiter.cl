@@ -40,75 +40,47 @@ void Krnl_IGL_Arbiter(/*unsigned char DockConst_num_of_genes*/
 	__attribute__((xcl_pipeline_loop))
 	LOOP_WHILE_IGL_MAIN:
 	while(active) {
-/*
-		bool Off_valid     = false;
-		bool IC_valid	   = false;
-		bool GG_valid	   = false;
-		bool LS1_end_valid = false;
-		bool LS2_end_valid = false;
-		bool LS3_end_valid = false;
-		bool LS4_end_valid = false;
-		bool LS5_end_valid = false;
-		bool LS6_end_valid = false;
-		bool LS7_end_valid = false;
-		bool LS8_end_valid = false;
-		bool LS9_end_valid = false;
-*/
-		int Off_valid     = 1;
-		int IC_valid	  = 1;
-		int GG_valid	  = 1;
-		int LS1_end_valid = 1;
-		int LS2_end_valid = 1;
-		int LS3_end_valid = 1;
-		int LS4_end_valid = 1;
-		int LS5_end_valid = 1;
-		int LS6_end_valid = 1;
-		int LS7_end_valid = 1;
-		int LS8_end_valid = 1;
-		int LS9_end_valid = 1;
+		nb_pipe_status Off_valid     = PIPE_STATUS_FAILURE;
+		nb_pipe_status IC_valid	     = PIPE_STATUS_FAILURE;
+		nb_pipe_status GG_valid	     = PIPE_STATUS_FAILURE;
+		nb_pipe_status LS1_end_valid = PIPE_STATUS_FAILURE;
+		nb_pipe_status LS2_end_valid = PIPE_STATUS_FAILURE;
+		nb_pipe_status LS3_end_valid = PIPE_STATUS_FAILURE;
+		nb_pipe_status LS4_end_valid = PIPE_STATUS_FAILURE;
+		nb_pipe_status LS5_end_valid = PIPE_STATUS_FAILURE;
+		nb_pipe_status LS6_end_valid = PIPE_STATUS_FAILURE;
+		nb_pipe_status LS7_end_valid = PIPE_STATUS_FAILURE;
+		nb_pipe_status LS8_end_valid = PIPE_STATUS_FAILURE;
+		nb_pipe_status LS9_end_valid = PIPE_STATUS_FAILURE;
 
-		/*bool Off_active;	*/	int Off_active;
-		/*bool IC_active;	*/	int IC_active;
-		/*bool GG_active;	*/	int GG_active;
-		/*bool LS1_end_active;	*/	int LS1_end_active;
-		/*bool LS2_end_active;	*/	int LS2_end_active;
-		/*bool LS3_end_active;	*/	int LS3_end_active;
-		/*bool LS4_end_active;	*/	int LS4_end_active;
-		/*bool LS5_end_active;	*/	int LS5_end_active;
-		/*bool LS6_end_active;	*/	int LS6_end_active;
-		/*bool LS7_end_active;	*/	int LS7_end_active;
-		/*bool LS8_end_active;	*/	int LS8_end_active;
-		/*bool LS9_end_active;	*/	int LS9_end_active;
-/*
-		while (
-			(Off_valid     == false) &&
-			(IC_valid      == false) &&  
-			(GG_valid      == false) && 
-			(LS1_end_valid == false) &&
-			(LS2_end_valid == false) &&
-			(LS3_end_valid == false) &&
-			(LS4_end_valid == false) &&
-			(LS5_end_valid == false) &&
-			(LS6_end_valid == false) &&
-			(LS7_end_valid == false) &&
-			(LS8_end_valid == false) &&
-			(LS9_end_valid == false) 
-*/
+		int Off_active;
+		int IC_active;
+		int GG_active;
+		int LS1_end_active;
+		int LS2_end_active;
+		int LS3_end_active;
+		int LS4_end_active;
+		int LS5_end_active;
+		int LS6_end_active;
+		int LS7_end_active;
+		int LS8_end_active;
+		int LS9_end_active;
+
 		__attribute__((xcl_pipeline_loop))
 		LOOP_WHILE_IGL_INNER:
 		while (
-			(Off_valid     != 0) &&
-			(IC_valid      != 0) &&  
-			(GG_valid      != 0) && 
-			(LS1_end_valid != 0) &&
-			(LS2_end_valid != 0) &&
-			(LS3_end_valid != 0) &&
-			(LS4_end_valid != 0) &&
-			(LS5_end_valid != 0) &&
-			(LS6_end_valid != 0) &&
-			(LS7_end_valid != 0) &&
-			(LS8_end_valid != 0) &&
-			(LS9_end_valid != 0) 
+			(Off_valid     != PIPE_STATUS_SUCCESS) &&
+			(IC_valid      != PIPE_STATUS_SUCCESS) &&  
+			(GG_valid      != PIPE_STATUS_SUCCESS) && 
+			(LS1_end_valid != PIPE_STATUS_SUCCESS) &&
+			(LS2_end_valid != PIPE_STATUS_SUCCESS) &&
+			(LS3_end_valid != PIPE_STATUS_SUCCESS) &&
+			(LS4_end_valid != PIPE_STATUS_SUCCESS) &&
+			(LS5_end_valid != PIPE_STATUS_SUCCESS) &&
+			(LS6_end_valid != PIPE_STATUS_SUCCESS) &&
+			(LS7_end_valid != PIPE_STATUS_SUCCESS) &&
+			(LS8_end_valid != PIPE_STATUS_SUCCESS) &&
+			(LS9_end_valid != PIPE_STATUS_SUCCESS) 
 		){
 			Off_valid     = read_pipe(chan_IGLArbiter_Off,     &Off_active);
 			IC_valid      = read_pipe(chan_GA2IGL_IC_active,   &IC_active);
@@ -123,10 +95,8 @@ void Krnl_IGL_Arbiter(/*unsigned char DockConst_num_of_genes*/
 			LS8_end_valid = read_pipe(chan_LS2Arbiter_LS8_end, &LS8_end_active);
 			LS9_end_valid = read_pipe(chan_LS2Arbiter_LS9_end, &LS9_end_active);
 		}
-/*
-		active = Off_valid ? 0x00 : 0x01;
-*/
-		active = (Off_valid == 0)? 0x00 : 0x01;
+
+		active = (Off_valid == PIPE_STATUS_SUCCESS)? 0x00 : 0x01;
 
 		bool mode_LS_bool [9];
 
@@ -140,16 +110,16 @@ void Krnl_IGL_Arbiter(/*unsigned char DockConst_num_of_genes*/
 		// This considers all possible cases as all LS could be 
 		// potentially producing genotypes simultaneously.
 		if (active == 0x01) {
-			if ((IC_valid != 0) && (GG_valid != 0)) {
-				if (LS1_end_valid == 0) {mode_LS_bool [0] = true; /*printf("LS1 valid!\n");*/}
-				if (LS2_end_valid == 0) {mode_LS_bool [1] = true; /*printf("LS2 valid!\n");*/}
-				if (LS3_end_valid == 0) {mode_LS_bool [2] = true; /*printf("LS3 valid!\n");*/}
-				if (LS4_end_valid == 0) {mode_LS_bool [3] = true; /*printf("LS4 valid!\n");*/}
-				if (LS5_end_valid == 0) {mode_LS_bool [4] = true; /*printf("LS5 valid!\n");*/}
-				if (LS6_end_valid == 0) {mode_LS_bool [5] = true; /*printf("LS6 valid!\n");*/}
-				if (LS7_end_valid == 0) {mode_LS_bool [6] = true; /*printf("LS7 valid!\n");*/}
-				if (LS8_end_valid == 0) {mode_LS_bool [7] = true; /*printf("LS8 valid!\n");*/}
-				if (LS9_end_valid == 0) {mode_LS_bool [8] = true; /*printf("LS9 valid!\n");*/}
+			if ((IC_valid != PIPE_STATUS_SUCCESS) && (GG_valid != PIPE_STATUS_SUCCESS)) {
+				if (LS1_end_valid == PIPE_STATUS_SUCCESS) {mode_LS_bool [0] = true; /*printf("LS1 valid!\n");*/}
+				if (LS2_end_valid == PIPE_STATUS_SUCCESS) {mode_LS_bool [1] = true; /*printf("LS2 valid!\n");*/}
+				if (LS3_end_valid == PIPE_STATUS_SUCCESS) {mode_LS_bool [2] = true; /*printf("LS3 valid!\n");*/}
+				if (LS4_end_valid == PIPE_STATUS_SUCCESS) {mode_LS_bool [3] = true; /*printf("LS4 valid!\n");*/}
+				if (LS5_end_valid == PIPE_STATUS_SUCCESS) {mode_LS_bool [4] = true; /*printf("LS5 valid!\n");*/}
+				if (LS6_end_valid == PIPE_STATUS_SUCCESS) {mode_LS_bool [5] = true; /*printf("LS6 valid!\n");*/}
+				if (LS7_end_valid == PIPE_STATUS_SUCCESS) {mode_LS_bool [6] = true; /*printf("LS7 valid!\n");*/}
+				if (LS8_end_valid == PIPE_STATUS_SUCCESS) {mode_LS_bool [7] = true; /*printf("LS8 valid!\n");*/}
+				if (LS9_end_valid == PIPE_STATUS_SUCCESS) {mode_LS_bool [8] = true; /*printf("LS9 valid!\n");*/}
 			}
 		} // End if (active == 0x01)
 
@@ -165,15 +135,15 @@ void Krnl_IGL_Arbiter(/*unsigned char DockConst_num_of_genes*/
 			const char mode_GG   = 'G';
 			const char mode_LS [9]  = {0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09};
 
-			if (Off_valid == 0) {
+			if (Off_valid == PIPE_STATUS_SUCCESS) {
 				enable_write_channel = (j==0)? true:false;
 				mode_tmp = mode_Off;
 			}
-			else if (IC_valid == 0) {
+			else if (IC_valid == PIPE_STATUS_SUCCESS) {
 				enable_write_channel = (j==0)? true:false;
 				mode_tmp = mode_IC;
 			}
-			else if (GG_valid == 0) {
+			else if (GG_valid == PIPE_STATUS_SUCCESS) {
 				enable_write_channel = (j==0)? true:false;
 				mode_tmp = mode_GG;
 			}

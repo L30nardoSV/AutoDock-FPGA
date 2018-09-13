@@ -45,38 +45,22 @@ void Krnl_LS6(
 __attribute__((xcl_pipeline_loop))
 LOOP_WHILE_LS6_MAIN:
 while(valid) {
-/*
-	bool active;
-*/
+
 	int active;
-/*
-	bool valid_active = false;
-*/
-	int valid_active= 1;
+	nb_pipe_status valid_active = PIPE_STATUS_FAILURE;
 
 	float current_energy;
-/*
-	bool valid_energy = false;
-*/
-	int valid_energy = 1;
+	nb_pipe_status valid_energy = PIPE_STATUS_FAILURE;
 
-/*
-	while( (valid_active == false) && (valid_energy == false)) {
-*/
 	__attribute__((xcl_pipeline_loop))
 	LOOP_WHILE_LS6_ACTIVE:
-	while( (valid_active != 0) && (valid_energy != 0)) {
+	while( (valid_active != PIPE_STATUS_SUCCESS) && (valid_energy != PIPE_STATUS_SUCCESS)) {
 		valid_active = read_pipe(chan_GA2LS_Off6_active, &active);
 		valid_energy = read_pipe(chan_GA2LS_LS6_energy,  &current_energy);
 	}
-/*
-	valid = active || valid_energy;
-*/
-/*
-	valid = active || (valid_energy == 0);
-*/
+
 	// (active == 1) means stop LS
-	valid = (active != 1) || (valid_energy == 0);
+	valid = (active != 1) || (valid_energy == PIPE_STATUS_SUCCESS);
 
 	if (valid) {
 
@@ -253,29 +237,18 @@ while(valid) {
 
 			float energyIA_LS_rx;
 			float energyIE_LS_rx;
-/*
-			bool intra_valid = false;
-			bool inter_valid = false;
-*/
-			int intra_valid = 1;
-			int inter_valid = 1;
 
-/*
-			while( (intra_valid == false) || (inter_valid == false)) {
-*/
+			nb_pipe_status intra_valid = PIPE_STATUS_FAILURE;
+			nb_pipe_status inter_valid = PIPE_STATUS_FAILURE;
+
 			__attribute__((xcl_pipeline_loop))
 			LOOP_WHILE_LS6_READ_ENERGIES:
-			while( (intra_valid != 0) || (inter_valid != 0)) {
-/*
-				if (intra_valid == false) {
-*/
-				if (intra_valid != 0) {
+			while( (intra_valid != PIPE_STATUS_SUCCESS) || (inter_valid != PIPE_STATUS_SUCCESS)) {
+
+				if (intra_valid != PIPE_STATUS_SUCCESS) {
 					intra_valid = read_pipe(chan_Intrae2StoreLS_LS6_intrae, &energyIA_LS_rx);
 				}
-/*
-				else if (inter_valid == false) {
-*/
-				else if (inter_valid != 0) {
+				else if (inter_valid != PIPE_STATUS_SUCCESS) {
 					inter_valid = read_pipe(chan_Intere2StoreLS_LS6_intere, &energyIE_LS_rx);
 				}
 			}

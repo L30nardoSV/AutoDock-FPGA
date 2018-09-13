@@ -19,21 +19,15 @@ void Krnl_Prng_BT_ushort_float(
 			      __global int *dummy
 #endif
 ){
-
 	uint2 lfsr;
 	lfsr.x = Host_seed1;
 	lfsr.y = Host_seed2;
-/*
-	bool valid  = false;
-*/
-	int valid = 1;
+
+	nb_pipe_status valid = PIPE_STATUS_FAILURE;
 	
-/*
-	while(!valid) {	
-*/
 	__attribute__((xcl_pipeline_loop))
 	LOOP_WHILE_PRNG_BT_USHOT_FLOAT:
-	while(valid != 0) {	
+	while(valid != PIPE_STATUS_SUCCESS) {	
 /*
 		bool active = true;
 */
@@ -60,20 +54,10 @@ void Krnl_Prng_BT_ushort_float(
 			u_tmp[i] = (lfsr.x/MAX_UINT)*DockConst_pop_size;
 			f_tmp[i] = (0.999999f/MAX_UINT)*lfsr.y;
 		}
-/*
-		bool success = false;
-*/
-		int success = 1;
-/*
-		if(!valid) {
-*/
-		if(valid != 0) {
-/*
-			float8 tmp = {*(float*)&u_tmp[0], f_tmp[0],
-				      *(float*)&u_tmp[1], f_tmp[1],
-				      *(float*)&u_tmp[2], f_tmp[2],
-				      *(float*)&u_tmp[3], f_tmp[3]};
-*/
+
+		nb_pipe_status success = PIPE_STATUS_FAILURE;
+
+		if(valid != PIPE_STATUS_SUCCESS) {
 			// Check "Krnl_GA"
 			// To surpass error in hw_emu
 			float u_tmp_float_0 = u_tmp[0];
@@ -88,8 +72,7 @@ void Krnl_Prng_BT_ushort_float(
 
 			success = write_pipe(chan_PRNG2GA_BT_ushort_float_prng, &tmp);
 		}
-	} /*// End of while(!valid)*/
-	// End of while(valid == 0)
+	} // End of while(valid != PIPE_STATUS_SUCCESS)
 }
 
 // --------------------------------------------------------------------------
@@ -110,19 +93,13 @@ void Krnl_Prng_GG_uchar(
 			__global int *dummy
 #endif
 ){
-
 	uint lfsr = Host_seed;
-/*
-	bool valid = false;
-*/
-	int valid = 1;
 
-/*
-	while(!valid) {
-*/
+	nb_pipe_status valid = PIPE_STATUS_FAILURE;
+
 	__attribute__((xcl_pipeline_loop))
 	LOOP_WHILE_PRNG_GG_UCHAR:
-	while(valid != 0) {
+	while(valid != PIPE_STATUS_SUCCESS) {
 /*
 		bool active = true;
 */
@@ -141,22 +118,17 @@ void Krnl_Prng_GG_uchar(
 			tmp[i] = (lfsr/MAX_UINT)*DockConst_num_of_genes;
 
 		}
-/*
-		bool success = false;
-*/
-		int success = 1;
+
+		nb_pipe_status success = PIPE_STATUS_FAILURE;
 
 		uchar2 utmp;
 		utmp.x = tmp[0];
 		utmp.y = tmp[1];
 
-/*
-		if(!valid) {
-*/
-		if(valid != 0) {
+		if(valid != PIPE_STATUS_SUCCESS) {
 			success = write_pipe(chan_PRNG2GA_GG_uchar_prng, &utmp);
 		}
-	} // End of while(active)
+	} // while(valid != PIPE_STATUS_SUCCESS)
 }
 
 /*
@@ -175,19 +147,13 @@ void Krnl_Prng_GG_float(
 		        __global int *dummy
 #endif
 ){
-
 	uint lfsr = Host_seed;
-/*
-	bool valid = false;
-*/
-	int valid = 1;
 
-/*
-	while(!valid) {
-*/
+	nb_pipe_status valid = PIPE_STATUS_FAILURE;
+
 	__attribute__((xcl_pipeline_loop))
 	LOOP_WHILE_PRNG_GG_FLOAT:
-	while(valid != 0) {
+	while(valid != PIPE_STATUS_SUCCESS) {
 /*
 		bool active = true;
 */
@@ -204,18 +170,13 @@ void Krnl_Prng_GG_float(
 			lfsr ^= (-lsb) & 0xA3000000u;
 			tmp = (0.999999f/MAX_UINT)*lfsr;
 
-/*
-			bool success = false;
-*/
-			int success = 1;
-/*
-			if(!valid) {
-*/
-			if(valid != 0) {
+			nb_pipe_status success = PIPE_STATUS_FAILURE;
+
+			if(valid != PIPE_STATUS_SUCCESS) {
 				success = write_pipe(chan_PRNG2GA_GG_float_prng, &tmp);
 			}
 		}
-	} // End of while(active)
+	} // End of while(valid != PIPE_STATUS_SUCCESS)
 }
 
 // --------------------------------------------------------------------------
@@ -244,8 +205,6 @@ void Krnl_Prng_LS123_ushort(
 			    __global int *dummy
 #endif
 ){
-
-
 	uint lfsr[9];
 	lfsr[0] = Host_seed1;
 	lfsr[1] = Host_seed2;
@@ -257,17 +216,11 @@ void Krnl_Prng_LS123_ushort(
 	lfsr[7] = Host_seed8;
 	lfsr[8] = Host_seed9;
 
-/*
-	bool valid = false;
-*/
-	int valid = 1;
+	nb_pipe_status valid = PIPE_STATUS_FAILURE;
 
-/*
-	while(!valid) {
-*/
 	__attribute__((xcl_pipeline_loop))
 	LOOP_WHILE_PRNG_LS123_USHORT:
-	while(valid != 0) {
+	while(valid != PIPE_STATUS_SUCCESS) {
 /*
 		bool active = true;
 */
@@ -307,10 +260,7 @@ void Krnl_Prng_LS123_ushort(
 			tmp[8] = tmp[7] + 8;
 		}
 
-/*
-		bool success = false;
-*/
-		int success = 1;
+		nb_pipe_status success = PIPE_STATUS_FAILURE;
 
 		ushort16 tmp123;
 		tmp123.s0 = tmp[0];
@@ -323,14 +273,11 @@ void Krnl_Prng_LS123_ushort(
 		tmp123.s7 = tmp[7];
 		tmp123.s8 = tmp[8];
 
-/*
-		if(!valid) {
-*/
-		if(valid != 0) {
+		if(valid != PIPE_STATUS_SUCCESS) {
 			success = write_pipe(chan_PRNG2GA_LS123_ushort_prng, &tmp123);
 		}
 
-	} // End of while(active)
+	} // End of while(valid != PIPE_STATUS_SUCCESS)
 }
 
 // --------------------------------------------------------------------------
@@ -351,19 +298,13 @@ void Krnl_Prng_LS_float(
 			__global int *dummy
 #endif
 ){
-
 	uint lfsr = Host_seed;
-/*
-	bool valid = false;
-*/
-	int valid = 1;
 
-/*
-	while(!valid) {
-*/
+	nb_pipe_status valid = PIPE_STATUS_FAILURE;
+
 	__attribute__((xcl_pipeline_loop))
 	LOOP_WHILE_PRNG_LS_FLOAT:
-	while(valid != 0) {
+	while(valid != PIPE_STATUS_SUCCESS) {
 /*
 		bool active = true;
 */
@@ -379,29 +320,21 @@ void Krnl_Prng_LS_float(
 			lfsr >>= 1;
 			lfsr ^= (-lsb) & 0xA3000000u;
 			tmp = (0.999999f/MAX_UINT)*lfsr;
-/*
-			bool success = false;
-*/
-			int success = 1;
+
+			nb_pipe_status success = PIPE_STATUS_FAILURE;
 
 			#if defined (FIXED_POINT_LS1)
 			fixedpt fixpt_tmp = fixedpt_fromfloat(tmp);
-/*
-			if(!valid) {
-*/
-			if(valid != 0) {
+			if(valid != PIPE_STATUS_SUCCESS) {
 				success = write_pipe(chan_PRNG2GA_LS_float_prng, (float*) &fixpt_tmp);
 			}
 			#else
-/*
-			if(!valid) {
-*/
-			if(valid != 0) {
+			if(valid != PIPE_STATUS_SUCCESS) {
 				success = write_pipe(chan_PRNG2GA_LS_float_prng, &tmp);
 			}
 			#endif
 		}
-	} // End of while(active)
+	} // End of while(valid != PIPE_STATUS_SUCCESS)
 }
 
 /*
@@ -420,19 +353,13 @@ void Krnl_Prng_LS2_float(
          		 __global int *dummy
 #endif
 ){
-
 	uint lfsr = Host_seed;
-/*
-	bool valid = false;
-*/
-	int valid = 1;
 
-/*
-	while(!valid) {
-*/
+	nb_pipe_status valid = PIPE_STATUS_FAILURE;
+
 	__attribute__((xcl_pipeline_loop))
 	LOOP_WHILE_PRNG_LS2_FLOAT:
-	while(valid != 0) {
+	while(valid != PIPE_STATUS_SUCCESS) {
 /*
 		bool active = true;
 */
@@ -448,29 +375,21 @@ void Krnl_Prng_LS2_float(
 			lfsr >>= 1;
 			lfsr ^= (-lsb) & 0xA3000000u;
 			tmp = (0.999999f/MAX_UINT)*lfsr;
-/*
-			bool success = false;
-*/
-			int success = 1;
+
+			nb_pipe_status success = PIPE_STATUS_FAILURE;
 
 			#if defined (FIXED_POINT_LS2)
 			fixedpt fixpt_tmp = fixedpt_fromfloat(tmp);
-/*
-			if(!valid) {
-*/
-			if(valid != 0) {
+			if(valid != PIPE_STATUS_SUCCESS) {
 				success = write_pipe(chan_PRNG2GA_LS2_float_prng, (float*) &fixpt_tmp);
 			}
 			#else
-/*
-			if(!valid) {
-*/
-			if(valid != 0) {
+			if(valid != PIPE_STATUS_SUCCESS) {
 				success = write_pipe(chan_PRNG2GA_LS2_float_prng, &tmp);
 			}
 			#endif
 		}
-	} // End of while(active)
+	} // End of while(valid != PIPE_STATUS_SUCCESS)
 }
 
 /*
@@ -489,19 +408,13 @@ void Krnl_Prng_LS3_float(
          		 __global int *dummy
 #endif
 ){
-
 	uint lfsr = Host_seed;
-/*
-	bool valid = false;
-*/
-	int valid = 1;
 
-/*
-	while(!valid) {
-*/
+	nb_pipe_status valid = PIPE_STATUS_FAILURE;
+
 	__attribute__((xcl_pipeline_loop))
 	LOOP_WHILE_PRNG_LS3_FLOAT:
-	while(valid != 0) {
+	while(valid != PIPE_STATUS_SUCCESS) {
 /*
 		bool active = true;
 */
@@ -517,30 +430,22 @@ void Krnl_Prng_LS3_float(
 			lfsr >>= 1;
 			lfsr ^= (-lsb) & 0xA3000000u;
 			tmp = (0.999999f/MAX_UINT)*lfsr;
-/*
-			bool success = false;
-*/
-			int success = 1;
+
+			nb_pipe_status success = PIPE_STATUS_FAILURE;
 
 			#if defined (FIXED_POINT_LS3)
 			fixedpt fixpt_tmp = fixedpt_fromfloat(tmp);
-/*
-			if(!valid) {
-*/
-			if(valid != 0) {
+			if(valid != PIPE_STATUS_SUCCESS) {
 				success = write_pipe(chan_PRNG2GA_LS3_float_prng, (float*) &fixpt_tmp);
 			}
 
 			#else
-/*
-			if(!valid) {
-*/
-			if(valid != 0) {
+			if(valid != PIPE_STATUS_SUCCESS) {
 				success = write_pipe(chan_PRNG2GA_LS3_float_prng, &tmp);
 			}
 			#endif
 		}
-	} // End of while(active)
+	} // End of while(valid != PIPE_STATUS_SUCCESS)
 }
 
 /*
@@ -559,19 +464,13 @@ void Krnl_Prng_LS4_float(
          		 __global int *dummy
 #endif
 ){
-
 	uint lfsr = Host_seed;
-/*
-	bool valid = false;
-*/
-	int valid = 1;
 
-/*
-	while(!valid) {
-*/
+	nb_pipe_status valid = PIPE_STATUS_FAILURE;
+
 	__attribute__((xcl_pipeline_loop))
 	LOOP_WHILE_PRNG_LS4_FLOAT:
-	while(valid != 0) {
+	while(valid != PIPE_STATUS_SUCCESS) {
 /*
 		bool active = true;
 */
@@ -587,29 +486,21 @@ void Krnl_Prng_LS4_float(
 			lfsr >>= 1;
 			lfsr ^= (-lsb) & 0xA3000000u;
 			tmp = (0.999999f/MAX_UINT)*lfsr;
-/*
-			bool success = false;
-*/
-			int success = 1;
+
+			nb_pipe_status success = PIPE_STATUS_FAILURE;
 
 			#if defined (FIXED_POINT_LS4)
 			fixedpt fixpt_tmp = fixedpt_fromfloat(tmp);
-/*
-			if(!valid) {
-*/
-			if(valid != 0) {
+			if(valid != PIPE_STATUS_SUCCESS) {
 				success = write_pipe(chan_PRNG2GA_LS4_float_prng, (float*) &fixpt_tmp);
 			}
 			#else
-/*
-			if(!valid) {
-*/
-			if(valid != 0) {
+			if(valid != PIPE_STATUS_SUCCESS) {
 				success = write_pipe(chan_PRNG2GA_LS4_float_prng, &tmp);
 			}
 			#endif
 		}
-	} // End of while(active)
+	} // End of while(valid != PIPE_STATUS_SUCCESS)
 }
 
 /*
@@ -628,19 +519,13 @@ void Krnl_Prng_LS5_float(
          		 __global int *dummy
 #endif
 ){
-
 	uint lfsr = Host_seed;
-/*
-	bool valid = false;
-*/
-	int valid = 1;
 
-/*
-	while(!valid) {
-*/
+	nb_pipe_status valid = PIPE_STATUS_FAILURE;
+
 	__attribute__((xcl_pipeline_loop))
 	LOOP_WHILE_PRNG_LS5_FLOAT:
-	while(valid != 0) {
+	while(valid != PIPE_STATUS_SUCCESS) {
 /*
 		bool active = true;
 */
@@ -656,29 +541,21 @@ void Krnl_Prng_LS5_float(
 			lfsr >>= 1;
 			lfsr ^= (-lsb) & 0xA3000000u;
 			tmp = (0.999999f/MAX_UINT)*lfsr;
-/*
-			bool success = false;
-*/
-			int success = 1;
+
+			nb_pipe_status success = PIPE_STATUS_FAILURE;
 
 			#if defined (FIXED_POINT_LS5)
 			fixedpt fixpt_tmp = fixedpt_fromfloat(tmp);
-/*
-			if(!valid) {
-*/
-			if(valid != 0) {
+			if(valid != PIPE_STATUS_SUCCESS) {
 				success = write_pipe(chan_PRNG2GA_LS5_float_prng, (float*) &fixpt_tmp);
 			}
 			#else
-/*
-			if(!valid) {
-*/
-			if(valid != 0) {
+			if(valid != PIPE_STATUS_SUCCESS) {
 				success = write_pipe(chan_PRNG2GA_LS5_float_prng, &tmp);
 			}
 			#endif
 		}
-	} // End of while(active)
+	} // End of while(valid != PIPE_STATUS_SUCCESS)
 }
 
 /*
@@ -697,19 +574,13 @@ void Krnl_Prng_LS6_float(
          		 __global int *dummy
 #endif
 ){
-
 	uint lfsr = Host_seed;
-/*
-	bool valid = false;
-*/
-	int valid = 1;
 
-/*
-	while(!valid) {
-*/
+	nb_pipe_status valid = PIPE_STATUS_FAILURE;
+
 	__attribute__((xcl_pipeline_loop))
 	LOOP_WHILE_PRNG_LS6_FLOAT:
-	while(valid != 0) {
+	while(valid != PIPE_STATUS_SUCCESS) {
 /*
 		bool active = true;
 */
@@ -725,24 +596,17 @@ void Krnl_Prng_LS6_float(
 			lfsr >>= 1;
 			lfsr ^= (-lsb) & 0xA3000000u;
 			tmp = (0.999999f/MAX_UINT)*lfsr;
-/*
-			bool success = false;
-*/
-			int success = 1;
+
+			nb_pipe_status success = PIPE_STATUS_FAILURE;
 
 			#if defined (FIXED_POINT_LS6)
 			fixedpt fixpt_tmp = fixedpt_fromfloat(tmp);
-/*
-			if(!valid) {
-*/
-			if(valid != 0) {
+
+			if(valid != PIPE_STATUS_SUCCESS) {
 				success = write_pipe(chan_PRNG2GA_LS6_float_prng, (float*) &fixpt_tmp);
 			}
 			#else
-/*
-			if(!valid) {
-*/
-			if(valid != 0) {
+			if(valid != PIPE_STATUS_SUCCESS) {
 				success = write_pipe(chan_PRNG2GA_LS6_float_prng, &tmp);
 			}
 			#endif
@@ -766,19 +630,13 @@ void Krnl_Prng_LS7_float(
          		 __global int *dummy
 #endif
 ){
-
 	uint lfsr = Host_seed;
-/*
-	bool valid = false;
-*/
-	int valid = 1;
 
-/*
-	while(!valid) {
-*/
+	nb_pipe_status valid = PIPE_STATUS_FAILURE;
+
 	__attribute__((xcl_pipeline_loop))
 	LOOP_WHILE_PRNG_LS7_FLOAT:
-	while(valid != 0) {
+	while(valid != PIPE_STATUS_SUCCESS) {
 /*
 		bool active = true;
 */
@@ -794,29 +652,21 @@ void Krnl_Prng_LS7_float(
 			lfsr >>= 1;
 			lfsr ^= (-lsb) & 0xA3000000u;
 			tmp = (0.999999f/MAX_UINT)*lfsr;
-/*
-			bool success = false;
-*/
-			int success = 1;
+
+			nb_pipe_status success = PIPE_STATUS_FAILURE;
 
 			#if defined (FIXED_POINT_LS7)
 			fixedpt fixpt_tmp = fixedpt_fromfloat(tmp);
-/*
-			if(!valid) {
-*/
-			if(valid != 0) {
+			if(valid != PIPE_STATUS_SUCCESS) {
 				success = write_pipe(chan_PRNG2GA_LS7_float_prng, (float*) &fixpt_tmp);
 			}
 			#else
-/*
-			if(!valid) {
-*/
-			if(valid != 0) {
+			if(valid != PIPE_STATUS_SUCCESS) {
 				success = write_pipe(chan_PRNG2GA_LS7_float_prng, &tmp);
 			}
 			#endif
 		}
-	} // End of while(active)
+	} // End of while(valid != PIPE_STATUS_SUCCESS)
 }
 
 /*
@@ -835,19 +685,13 @@ void Krnl_Prng_LS8_float(
          		 __global int *dummy
 #endif
 ){
-
 	uint lfsr = Host_seed;
-/*
-	bool valid = false;
-*/
-	int valid = 1;
 
-/*
-	while(!valid) {
-*/
+	nb_pipe_status valid = PIPE_STATUS_FAILURE;
+
 	__attribute__((xcl_pipeline_loop))
 	LOOP_WHILE_PRNG_LS8_FLOAT:
-	while(valid != 0) {
+	while(valid != PIPE_STATUS_SUCCESS) {
 /*
 		bool active = true;
 */
@@ -863,29 +707,21 @@ void Krnl_Prng_LS8_float(
 			lfsr >>= 1;
 			lfsr ^= (-lsb) & 0xA3000000u;
 			tmp = (0.999999f/MAX_UINT)*lfsr;
-/*
-			bool success = false;
-*/
-			int success = 1;
+
+			nb_pipe_status success = PIPE_STATUS_FAILURE;
 
 			#if defined (FIXED_POINT_LS8)
 			fixedpt fixpt_tmp = fixedpt_fromfloat(tmp);
-/*
-			if(!valid) {
-*/
-			if(valid != 0) {
+			if(valid != PIPE_STATUS_SUCCESS) {
 				success = write_pipe(chan_PRNG2GA_LS8_float_prng, (float*) &fixpt_tmp);
 			}
 			#else
-/*
-			if(!valid) {
-*/
-			if(valid != 0) {
+			if(valid != PIPE_STATUS_SUCCESS) {
 				success = write_pipe(chan_PRNG2GA_LS8_float_prng, &tmp);
 			}
 			#endif
 		}
-	} // End of while(active)
+	} // End of while(valid != PIPE_STATUS_SUCCESS)
 }
 
 /*
@@ -904,19 +740,13 @@ void Krnl_Prng_LS9_float(
          		 __global int *dummy
 #endif
 ){
-
 	uint lfsr = Host_seed;
-/*
-	bool valid = false;
-*/
-	int valid = 1;
 
-/*
-	while(!valid) {
-*/
+	nb_pipe_status valid = PIPE_STATUS_FAILURE;
+
 	__attribute__((xcl_pipeline_loop))
 	LOOP_WHILE_PRNG_LS9_FLOAT:
-	while(valid != 0) {
+	while(valid != PIPE_STATUS_SUCCESS) {
 /*
 		bool active = true;
 */
@@ -932,29 +762,21 @@ void Krnl_Prng_LS9_float(
 			lfsr >>= 1;
 			lfsr ^= (-lsb) & 0xA3000000u;
 			tmp = (0.999999f/MAX_UINT)*lfsr;
-/*
-			bool success = false;
-*/
-			int success = 1;
+
+			nb_pipe_status success = PIPE_STATUS_FAILURE;
 
 			#if defined (FIXED_POINT_LS9)
 			fixedpt fixpt_tmp = fixedpt_fromfloat(tmp);
-/*
-			if(!valid) {
-*/
-			if(valid != 0) {
+			if(valid != PIPE_STATUS_SUCCESS) {
 				success = write_pipe(chan_PRNG2GA_LS9_float_prng, (float*) &fixpt_tmp);
 			}
 			#else
-/*
-			if(!valid) {
-*/
-			if(valid != 0) {
+			if(valid != PIPE_STATUS_SUCCESS) {
 				success = write_pipe(chan_PRNG2GA_LS9_float_prng, &tmp);
 			}
 			#endif
 		}
-	} // End of while(active)
+	} // End of while(valid != PIPE_STATUS_SUCCESS)
 }
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------     

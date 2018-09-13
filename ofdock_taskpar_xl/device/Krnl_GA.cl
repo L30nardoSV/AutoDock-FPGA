@@ -9,6 +9,17 @@
 #define PIPE_DEPTH_64  64
 #define PIPE_DEPTH_512 512
 
+// Status of pipe operation
+// Success: 0
+// Failure: negative value, e.g.: -1, -2, etc
+
+// Important: the evaluation of failure of "pipe-expr" 
+// must be done: (pipe-expr != PIPE_STATUS_SUCCESS),
+// as a failure is characterize by any negative integer number.
+typedef int nb_pipe_status;
+#define PIPE_STATUS_SUCCESS      0
+#define PIPE_STATUS_FAILURE	-1
+
 // Send active signal to IGL_Arbiter
 // Resized to valid SDAccel depths: 16, 32, ...
 pipe int    chan_GA2IGL_IC_active	__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_16)));
@@ -359,29 +370,18 @@ void Krnl_GA(
 		// Read energy
 		float energyIA_IC_rx;
 		float energyIE_IC_rx;
-/*
-		bool intra_valid = false;
-		bool inter_valid = false;
-*/
-		int intra_valid = 1;
-		int inter_valid = 1;	
-/*
-		while( (intra_valid == false) || (inter_valid == false)) {
-*/
+
+		nb_pipe_status intra_valid = PIPE_STATUS_FAILURE;
+		nb_pipe_status inter_valid = PIPE_STATUS_FAILURE;	
+
 		__attribute__((xcl_pipeline_loop))
 		LOOP_WHILE_GA_IC_INNER_READ_ENERGY:
-		while( (intra_valid != 0) || (inter_valid != 0)) {
+		while( (intra_valid != PIPE_STATUS_SUCCESS) || (inter_valid != PIPE_STATUS_SUCCESS)) {
 
-/*
-			if (intra_valid == false) {
-*/
-			if (intra_valid != 0) {
+			if (intra_valid != PIPE_STATUS_SUCCESS) {
 				intra_valid = read_pipe(chan_Intrae2StoreIC_intrae, &energyIA_IC_rx);
 			}
-/*
-			else if (inter_valid == false) {
-*/
-			else if (inter_valid != 0) {
+			else if (inter_valid != PIPE_STATUS_SUCCESS) {
 				inter_valid = read_pipe(chan_Intere2StoreIC_intere, &energyIE_IC_rx);
 			}
 		}
@@ -642,29 +642,18 @@ void Krnl_GA(
 			// Read energy
 			float energyIA_GG_rx;
 			float energyIE_GG_rx;
-/*
-			bool intra_valid = false;
-			bool inter_valid = false;
-*/
-			int intra_valid = 1;
-			int inter_valid = 1;
 
-/*
-			while( (intra_valid == false) || (inter_valid == false)) {
-*/
+			nb_pipe_status intra_valid = PIPE_STATUS_FAILURE;
+			nb_pipe_status inter_valid = PIPE_STATUS_FAILURE;
+
 			__attribute__((xcl_pipeline_loop))
 			LOOP_WHILE_GA_INNER_READ_ENERGIES:
-			while( (intra_valid != 0) || (inter_valid != 0)) {
-/*
-				if (intra_valid == false) {
-*/
-				if (intra_valid != 0) {
+			while( (intra_valid != PIPE_STATUS_SUCCESS) || (inter_valid != PIPE_STATUS_SUCCESS)) {
+
+				if (intra_valid != PIPE_STATUS_SUCCESS) {
 					intra_valid = read_pipe(chan_Intrae2StoreGG_intrae, &energyIA_GG_rx);
 				}
-/*
-				else if (inter_valid == false) {
-*/
-				else if (inter_valid != 0) {
+				else if (inter_valid != PIPE_STATUS_SUCCESS) {
 					inter_valid = read_pipe(chan_Intere2StoreGG_intere, &energyIE_GG_rx);
 				}
 
@@ -750,103 +739,55 @@ void Krnl_GA(
 			float2 evalenergy_tmp7;
 			float2 evalenergy_tmp8;
 			float2 evalenergy_tmp9;
-/*
-			bool ls1_done = false;
-			bool ls2_done = false;
-			bool ls3_done = false;
-			bool ls4_done = false;
-			bool ls5_done = false;
-			bool ls6_done = false;
-			bool ls7_done = false;
-			bool ls8_done = false;
-			bool ls9_done = false;  
-*/
-			int ls1_done = 1;
-			int ls2_done = 1;
-			int ls3_done = 1;
-		 	int ls4_done = 1;
-			int ls5_done = 1;
-			int ls6_done = 1;
-			int ls7_done = 1;
-			int ls8_done = 1;
-			int ls9_done = 1;  
 
-/*
-			while( (ls1_done == false) || 
-			       (ls2_done == false) || 
-			       (ls3_done == false) || 
-			       (ls4_done == false) || 
-			       (ls5_done == false) ||
-			       (ls6_done == false) || 
-			       (ls7_done == false) || 
-			       (ls8_done == false) || 
-			       (ls9_done == false) 
-*/
+			nb_pipe_status ls1_done = PIPE_STATUS_FAILURE;
+			nb_pipe_status ls2_done = PIPE_STATUS_FAILURE;
+			nb_pipe_status ls3_done = PIPE_STATUS_FAILURE;
+		 	nb_pipe_status ls4_done = PIPE_STATUS_FAILURE;
+			nb_pipe_status ls5_done = PIPE_STATUS_FAILURE;
+			nb_pipe_status ls6_done = PIPE_STATUS_FAILURE;
+			nb_pipe_status ls7_done = PIPE_STATUS_FAILURE;
+			nb_pipe_status ls8_done = PIPE_STATUS_FAILURE;
+			nb_pipe_status ls9_done = PIPE_STATUS_FAILURE;  
+
 			__attribute__((xcl_pipeline_loop))
 			LOOP_WHILE_GA_LS_INNER_READ_ENERGIES:
-			while( (ls1_done != 0) || 
-			       (ls2_done != 0) || 
-			       (ls3_done != 0) || 
-			       (ls4_done != 0) || 
-			       (ls5_done != 0) ||
-			       (ls6_done != 0) || 
-			       (ls7_done != 0) || 
-			       (ls8_done != 0) || 
-			       (ls9_done != 0) 
+			while( (ls1_done != PIPE_STATUS_SUCCESS) || 
+			       (ls2_done != PIPE_STATUS_SUCCESS) || 
+			       (ls3_done != PIPE_STATUS_SUCCESS) || 
+			       (ls4_done != PIPE_STATUS_SUCCESS) || 
+			       (ls5_done != PIPE_STATUS_SUCCESS) ||
+			       (ls6_done != PIPE_STATUS_SUCCESS) || 
+			       (ls7_done != PIPE_STATUS_SUCCESS) || 
+			       (ls8_done != PIPE_STATUS_SUCCESS) || 
+			       (ls9_done != PIPE_STATUS_SUCCESS) 
 			)
 			{
-/*
-				if (ls1_done == false) {
-*/
-				if (ls1_done != 0) {
+				if (ls1_done != PIPE_STATUS_SUCCESS) {
 					ls1_done = read_pipe(chan_LS2GA_LS1_evalenergy, &evalenergy_tmp1);
 				}
-/*
-				else if (ls2_done == false) {
-*/
-				else if (ls2_done != 0) {
+				else if (ls2_done != PIPE_STATUS_SUCCESS) {
 					ls2_done = read_pipe(chan_LS2GA_LS2_evalenergy, &evalenergy_tmp2);
 				}
-/*
-				else if (ls3_done == false) {
-*/
-				else if (ls3_done != 0) {
+				else if (ls3_done != PIPE_STATUS_SUCCESS) {
 					ls3_done = read_pipe(chan_LS2GA_LS3_evalenergy, &evalenergy_tmp3);
 				}
-/*
-				else if (ls4_done == false) {
-*/
-				else if (ls4_done != 0) {
+				else if (ls4_done != PIPE_STATUS_SUCCESS) {
 					ls4_done = read_pipe(chan_LS2GA_LS4_evalenergy, &evalenergy_tmp4);
 				}
-/*
-				else if (ls5_done == false) {
-*/
-				else if (ls5_done != 0) {
+				else if (ls5_done != PIPE_STATUS_SUCCESS) {
 					ls5_done = read_pipe(chan_LS2GA_LS5_evalenergy, &evalenergy_tmp5);
 				}
-/*
-				else if (ls6_done == false) {
-*/
-				else if (ls6_done != 0) {
+				else if (ls6_done != PIPE_STATUS_SUCCESS) {
 					ls6_done = read_pipe(chan_LS2GA_LS6_evalenergy, &evalenergy_tmp6);
 				}
-/*
-				else if (ls7_done == false) {
-*/
-				else if (ls7_done != 0) {
+				else if (ls7_done != PIPE_STATUS_SUCCESS) {
 					ls7_done = read_pipe(chan_LS2GA_LS7_evalenergy, &evalenergy_tmp7);
 				}
-/*
-				else if (ls8_done == false) {
-*/
-				else if (ls8_done != 0) {
+				else if (ls8_done != PIPE_STATUS_SUCCESS) {
 					ls8_done = read_pipe(chan_LS2GA_LS8_evalenergy, &evalenergy_tmp8);
 				}
-/*
-				else if (ls9_done == false) {
-*/
-				else if (ls9_done != 0) {
+				else if (ls9_done != PIPE_STATUS_SUCCESS) {
 					ls9_done = read_pipe(chan_LS2GA_LS9_evalenergy, &evalenergy_tmp9);
 				}
 			}
