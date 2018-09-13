@@ -110,6 +110,7 @@ pipe int    chan_Arbiter_BT_ushort_float_off	__attribute__((xcl_reqd_pipe_depth(
 pipe int    chan_Arbiter_GG_uchar_off		__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_16)));
 pipe int    chan_Arbiter_GG_float_off		__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_16)));
 pipe int    chan_Arbiter_LS123_ushort_off	__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_16)));
+/*
 pipe int    chan_Arbiter_LS_float_off		__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_16)));
 pipe int    chan_Arbiter_LS2_float_off		__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_16)));
 pipe int    chan_Arbiter_LS3_float_off		__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_16)));
@@ -119,6 +120,16 @@ pipe int    chan_Arbiter_LS6_float_off		__attribute__((xcl_reqd_pipe_depth(PIPE_
 pipe int    chan_Arbiter_LS7_float_off		__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_16)));
 pipe int    chan_Arbiter_LS8_float_off		__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_16)));
 pipe int    chan_Arbiter_LS9_float_off		__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_16)));
+*/
+pipe int    chan_GA2PRNG_LS_float_off		__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_16)));
+pipe int    chan_GA2PRNG_LS2_float_off		__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_16)));
+pipe int    chan_GA2PRNG_LS3_float_off		__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_16)));
+pipe int    chan_GA2PRNG_LS4_float_off		__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_16)));
+pipe int    chan_GA2PRNG_LS5_float_off		__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_16)));
+pipe int    chan_GA2PRNG_LS6_float_off		__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_16)));
+pipe int    chan_GA2PRNG_LS7_float_off		__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_16)));
+pipe int    chan_GA2PRNG_LS8_float_off		__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_16)));
+pipe int    chan_GA2PRNG_LS9_float_off		__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_16)));
 
 // Send energy values and genotypes to LSs
 // Resized to valid SDAccel depths: 16, 32, ...
@@ -899,15 +910,15 @@ void Krnl_GA(
 	write_pipe_block(chan_Arbiter_GG_uchar_off, 		&tmp_int_one);
 	write_pipe_block(chan_Arbiter_GG_float_off, 		&tmp_int_one);
 	write_pipe_block(chan_Arbiter_LS123_ushort_off,  	&tmp_int_one);
-	write_pipe_block(chan_Arbiter_LS_float_off, 		&tmp_int_one);
-	write_pipe_block(chan_Arbiter_LS2_float_off, 		&tmp_int_one);
-	write_pipe_block(chan_Arbiter_LS3_float_off, 		&tmp_int_one);
-	write_pipe_block(chan_Arbiter_LS4_float_off, 		&tmp_int_one);
-	write_pipe_block(chan_Arbiter_LS5_float_off, 		&tmp_int_one);
-	write_pipe_block(chan_Arbiter_LS6_float_off, 		&tmp_int_one);
-	write_pipe_block(chan_Arbiter_LS7_float_off, 		&tmp_int_one);
-	write_pipe_block(chan_Arbiter_LS8_float_off, 		&tmp_int_one);
-	write_pipe_block(chan_Arbiter_LS9_float_off, 		&tmp_int_one);
+	write_pipe_block(chan_GA2PRNG_LS_float_off, 		&tmp_int_one);
+	write_pipe_block(chan_GA2PRNG_LS2_float_off, 		&tmp_int_one);
+	write_pipe_block(chan_GA2PRNG_LS3_float_off, 		&tmp_int_one);
+	write_pipe_block(chan_GA2PRNG_LS4_float_off, 		&tmp_int_one);
+	write_pipe_block(chan_GA2PRNG_LS5_float_off, 		&tmp_int_one);
+	write_pipe_block(chan_GA2PRNG_LS6_float_off, 		&tmp_int_one);
+	write_pipe_block(chan_GA2PRNG_LS7_float_off, 		&tmp_int_one);
+	write_pipe_block(chan_GA2PRNG_LS8_float_off, 		&tmp_int_one);
+	write_pipe_block(chan_GA2PRNG_LS9_float_off, 		&tmp_int_one);
 /*
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 */

@@ -309,7 +309,7 @@ void Krnl_Prng_LS_float(
 		bool active = true;
 */
 		int active;
-		valid  = read_pipe(chan_Arbiter_LS_float_off, &active);
+		valid  = read_pipe(chan_GA2PRNG_LS_float_off, &active);
 	
 		__attribute__((xcl_pipeline_loop))
 		LOOP_FOR_PRNG_LS_FLOAT:
@@ -364,7 +364,7 @@ void Krnl_Prng_LS2_float(
 		bool active = true;
 */
 		int active;
-		valid  = read_pipe(chan_Arbiter_LS2_float_off, &active);
+		valid  = read_pipe(chan_GA2PRNG_LS2_float_off, &active);
 	
 		__attribute__((xcl_pipeline_loop))
 		LOOP_FOR_PRNG_LS2_FLOAT:
@@ -419,7 +419,7 @@ void Krnl_Prng_LS3_float(
 		bool active = true;
 */
 		int active;
-		valid  = read_pipe(chan_Arbiter_LS3_float_off, &active);
+		valid  = read_pipe(chan_GA2PRNG_LS3_float_off, &active);
 	
 		__attribute__((xcl_pipeline_loop))
 		LOOP_FOR_PRNG_LS3_FLOAT:
@@ -475,7 +475,7 @@ void Krnl_Prng_LS4_float(
 		bool active = true;
 */
 		int active;
-		valid  = read_pipe(chan_Arbiter_LS4_float_off, &active);
+		valid  = read_pipe(chan_GA2PRNG_LS4_float_off, &active);
 	
 		__attribute__((xcl_pipeline_loop))
 		LOOP_FOR_PRNG_LS4_FLOAT:
@@ -530,7 +530,7 @@ void Krnl_Prng_LS5_float(
 		bool active = true;
 */
 		int active;
-		valid  = read_pipe(chan_Arbiter_LS5_float_off, &active);
+		valid  = read_pipe(chan_GA2PRNG_LS5_float_off, &active);
 	
 		__attribute__((xcl_pipeline_loop))
 		LOOP_FOR_PRNG_LS5_FLOAT:
@@ -585,7 +585,7 @@ void Krnl_Prng_LS6_float(
 		bool active = true;
 */
 		int active;
-		valid  = read_pipe(chan_Arbiter_LS6_float_off, &active);
+		valid  = read_pipe(chan_GA2PRNG_LS6_float_off, &active);
 	
 		__attribute__((xcl_pipeline_loop))
 		LOOP_FOR_PRNG_LS6_FLOAT:
@@ -641,7 +641,7 @@ void Krnl_Prng_LS7_float(
 		bool active = true;
 */
 		int active;
-		valid  = read_pipe(chan_Arbiter_LS7_float_off, &active);
+		valid  = read_pipe(chan_GA2PRNG_LS7_float_off, &active);
 	
 		__attribute__((xcl_pipeline_loop))
 		LOOP_FOR_PRNG_LS7_FLOAT:
@@ -696,7 +696,7 @@ void Krnl_Prng_LS8_float(
 		bool active = true;
 */
 		int active;
-		valid  = read_pipe(chan_Arbiter_LS8_float_off, &active);
+		valid  = read_pipe(chan_GA2PRNG_LS8_float_off, &active);
 	
 		__attribute__((xcl_pipeline_loop))
 		LOOP_FOR_PRNG_LS8_FLOAT:
@@ -751,7 +751,7 @@ void Krnl_Prng_LS9_float(
 		bool active = true;
 */
 		int active;
-		valid  = read_pipe(chan_Arbiter_LS9_float_off, &active);
+		valid  = read_pipe(chan_GA2PRNG_LS9_float_off, &active);
 	
 		__attribute__((xcl_pipeline_loop))
 		LOOP_FOR_PRNG_LS9_FLOAT:
