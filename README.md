@@ -9,7 +9,7 @@ SDAccel v17.4.
 ## Must
 
 ```zsh
-source /opt/cad/xilinx/sdx/SDx/2017.4/settings64.sh
+source init_sdx174_vcu1525.sh
 ```
 
 ### Documentation
