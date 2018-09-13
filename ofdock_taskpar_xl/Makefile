@@ -97,9 +97,11 @@ endef
 # Following values are used only for emulation
 # to have a short but still a representative test
 PDB  := 1stp
+PSIZE:= 150
 NRUN := 10
 NEV  := 800000
 NGEN := 27000
+GFPOP:= 0
 
 # Switching to the other SDAccel 2017.4 default platform
 # As it is available in Xelera "saruman" server
@@ -162,7 +164,10 @@ kerhwemu:
 #emconfigutil --platform xilinx_vcu1525_dynamic_5_0 --nd 1
 swemu: kerswemu
 	emconfigutil --platform $(BOARD) --nd $(NDEVICES_EMU)
-	XCL_EMULATION_MODE=sw_emu ./$(EXES) -ffile input/$(PDB)/derived/$(PDB)_protein.maps.fld -lfile input/$(PDB)/derived/$(PDB)_ligand.pdbqt -nrun $(NRUN) -nev $(NEV) -ngen $(NGEN) -gfpop 1
+	XCL_EMULATION_MODE=sw_emu ./$(EXES) \
+	-ffile input/$(PDB)/derived/$(PDB)_protein.maps.fld \
+	-lfile input/$(PDB)/derived/$(PDB)_ligand.pdbqt \
+	-psize $(PSIZE) -nrun $(NRUN) -nev $(NEV) -ngen $(NGEN) -gfpop 1
 	@echo $(newline)
 	@echo "==========================================================================="
 	@echo "INFO: swemu log file is under: \"./docking.dlg\"                           "
@@ -179,7 +184,10 @@ swemu: kerswemu
 
 hwemu: kerhwemu
 	emconfigutil --platform $(BOARD) --nd $(NDEVICES_EMU)
-	XCL_EMULATION_MODE=hw_emu ./$(EXES) -ffile input/$(PDB)/derived/$(PDB)_protein.maps.fld -lfile input/$(PDB)/derived/$(PDB)_ligand.pdbqt -nrun $(NRUN) -nev $(NEV) -ngen $(NGEN) -gfpop 1
+	XCL_EMULATION_MODE=hw_emu ./$(EXES) \
+	-ffile input/$(PDB)/derived/$(PDB)_protein.maps.fld \
+	-lfile input/$(PDB)/derived/$(PDB)_ligand.pdbqt \
+	-psize $(PSIZE) -nrun $(NRUN) -nev $(NEV) -ngen $(NGEN) -gfpop 1
 	@echo $(newline)
 	@echo "==========================================================================="
 	@echo "INFO: hwemu log file is under: \"./docking.dlg\"                           "
@@ -206,7 +214,11 @@ hw:
 
 
 sw-debug:
-	XCL_EMULATION_MODE=sw_emu xgdb -args ./$(EXES) -ffile input/1stp/derived/1stp_protein.maps.fld -lfile input/1stp/derived/1stp_ligand.pdbqt -nrun 1 -nev 100 -lsit 10 -psize 10
+	XCL_EMULATION_MODE=sw_emu \
+	xgdb -args ./$(EXES) \
+	-ffile input/1stp/derived/1stp_protein.maps.fld \
+	-lfile input/1stp/derived/1stp_ligand.pdbqt \
+	-nrun 1 -nev 100 -lsit 10 -psize 10
 
 
 # Execute on remote server
@@ -215,7 +227,11 @@ sw-debug:
 # The working directory is changed
 # So .dlg file is written in $(TARGET_DIR_HW)
 eva: exe
-	./$(EXES) -ffile input/$(PDB)/derived/$(PDB)_protein.maps.fld -lfile input/$(PDB)/derived/$(PDB)_ligand.pdbqt -nev $(NEV) -nrun $(NRUN)  -gfpop 1
+	./$(EXES) \
+	-ffile input/$(PDB)/derived/$(PDB)_protein.maps.fld \
+	-lfile input/$(PDB)/derived/$(PDB)_ligand.pdbqt \
+	-resnam docking_$(PDB)_$(NRUN) \
+	-nrun $(NRUN) -gfpop $(GFPOP)
 	@echo $(newline)
 	@echo "==========================================================================="
 	@echo "INFO: evaluation log file is under: \"./docking.dlg\"                      "
