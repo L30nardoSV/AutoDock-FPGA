@@ -77,17 +77,7 @@ pipe float8   chan_PRNG2GA_BT_ushort_float_prng	__attribute__((xcl_reqd_pipe_dep
 pipe uchar2   chan_PRNG2GA_GG_uchar_prng	__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_16)));
 pipe float    chan_PRNG2GA_GG_float_prng     	__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_64)));
 pipe ushort16 chan_PRNG2GA_LS123_ushort_prng	__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_16)));
-/*
-pipe float    chan_PRNG2GA_LS_float_prng     	__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_64)));
-pipe float    chan_PRNG2GA_LS2_float_prng    	__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_64)));
-pipe float    chan_PRNG2GA_LS3_float_prng    	__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_64)));
-pipe float    chan_PRNG2GA_LS4_float_prng   	__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_64)));
-pipe float    chan_PRNG2GA_LS5_float_prng    	__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_64)));
-pipe float    chan_PRNG2GA_LS6_float_prng    	__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_64)));
-pipe float    chan_PRNG2GA_LS7_float_prng    	__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_64)));
-pipe float    chan_PRNG2GA_LS8_float_prng    	__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_64)));
-pipe float    chan_PRNG2GA_LS9_float_prng    	__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_64)));
-*/
+
 pipe float    chan_PRNG2LS_float_prng     	__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_64)));
 pipe float    chan_PRNG2LS2_float_prng    	__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_64)));
 pipe float    chan_PRNG2LS3_float_prng    	__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_64)));
@@ -99,28 +89,12 @@ pipe float    chan_PRNG2LS8_float_prng    	__attribute__((xcl_reqd_pipe_depth(PI
 pipe float    chan_PRNG2LS9_float_prng    	__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_64)));
 
 // Turn-off signals to PRNG generators
-
-// FIXME: these channels don't go anymore through IGL_Arbiter.
-// That was initially the case, but was fixed.
-// Name should be changed accordingly (GA instead of Arbiter)
-// to avoid misleading data-flow information
-
 // Resized to valid SDAccel depths: 16, 32, ...
-pipe int    chan_Arbiter_BT_ushort_float_off	__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_16)));
-pipe int    chan_Arbiter_GG_uchar_off		__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_16)));
-pipe int    chan_Arbiter_GG_float_off		__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_16)));
-pipe int    chan_Arbiter_LS123_ushort_off	__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_16)));
-/*
-pipe int    chan_Arbiter_LS_float_off		__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_16)));
-pipe int    chan_Arbiter_LS2_float_off		__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_16)));
-pipe int    chan_Arbiter_LS3_float_off		__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_16)));
-pipe int    chan_Arbiter_LS4_float_off		__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_16)));
-pipe int    chan_Arbiter_LS5_float_off		__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_16)));
-pipe int    chan_Arbiter_LS6_float_off		__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_16)));
-pipe int    chan_Arbiter_LS7_float_off		__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_16)));
-pipe int    chan_Arbiter_LS8_float_off		__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_16)));
-pipe int    chan_Arbiter_LS9_float_off		__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_16)));
-*/
+pipe int    chan_GA2PRNG_BT_ushort_float_off	__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_16)));
+pipe int    chan_GA2PRNG_GG_uchar_off		__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_16)));
+pipe int    chan_GA2PRNG_GG_float_off		__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_16)));
+pipe int    chan_GA2PRNG_LS123_ushort_off	__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_16)));
+
 pipe int    chan_GA2PRNG_LS_float_off		__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_16)));
 pipe int    chan_GA2PRNG_LS2_float_off		__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_16)));
 pipe int    chan_GA2PRNG_LS3_float_off		__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_16)));
@@ -373,15 +347,15 @@ void Krnl_GA(
 */
 		__attribute__((xcl_pipeline_loop))
 		LOOP_FOR_GA_IC_INNER_WRITE_GENOTYPE:
-		for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_genes; pipe_cnt++) {
+		for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
 			float tmp_ic;
 			#if defined(SINGLE_COPY_POP_ENE)
-			tmp_ic = GlobPopCurr[pop_cnt*ACTUAL_GENOTYPE_LENGTH + pipe_cnt];
+			tmp_ic = GlobPopCurr[pop_cnt*ACTUAL_GENOTYPE_LENGTH + gene_cnt];
 			#else
-			tmp_ic = GlobPopulationCurrent[pop_cnt*ACTUAL_GENOTYPE_LENGTH + pipe_cnt];
+			tmp_ic = GlobPopulationCurrent[pop_cnt*ACTUAL_GENOTYPE_LENGTH + gene_cnt];
 			#endif
 
-			LocalPopCurr[pop_cnt][pipe_cnt & MASK_GENOTYPE] = tmp_ic;
+			LocalPopCurr[pop_cnt][gene_cnt & MASK_GENOTYPE] = tmp_ic;
 			write_pipe_block(chan_IC2Conf_genotype, &tmp_ic);	
 		}
 
@@ -906,10 +880,11 @@ void Krnl_GA(
 
 	// Turn off PRNG kernels
 	const int tmp_int_one = 1;
-	write_pipe_block(chan_Arbiter_BT_ushort_float_off,  	&tmp_int_one);
-	write_pipe_block(chan_Arbiter_GG_uchar_off, 		&tmp_int_one);
-	write_pipe_block(chan_Arbiter_GG_float_off, 		&tmp_int_one);
-	write_pipe_block(chan_Arbiter_LS123_ushort_off,  	&tmp_int_one);
+	write_pipe_block(chan_GA2PRNG_BT_ushort_float_off,  	&tmp_int_one);
+	write_pipe_block(chan_GA2PRNG_GG_uchar_off, 		&tmp_int_one);
+	write_pipe_block(chan_GA2PRNG_GG_float_off, 		&tmp_int_one);
+	write_pipe_block(chan_GA2PRNG_LS123_ushort_off,  	&tmp_int_one);
+
 	write_pipe_block(chan_GA2PRNG_LS_float_off, 		&tmp_int_one);
 	write_pipe_block(chan_GA2PRNG_LS2_float_off, 		&tmp_int_one);
 	write_pipe_block(chan_GA2PRNG_LS3_float_off, 		&tmp_int_one);

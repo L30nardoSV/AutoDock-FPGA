@@ -32,7 +32,7 @@ void Krnl_Prng_BT_ushort_float(
 		bool active = true;
 */
 		int active;
-		valid = read_pipe(chan_Arbiter_BT_ushort_float_off, &active);
+		valid = read_pipe(chan_GA2PRNG_BT_ushort_float_off, &active);
 
 		uint   u_tmp[4]; // used as short in GA
 		float  f_tmp[4];	
@@ -104,7 +104,7 @@ void Krnl_Prng_GG_uchar(
 		bool active = true;
 */
 		int active;
-		valid = read_pipe(chan_Arbiter_GG_uchar_off, &active);		
+		valid = read_pipe(chan_GA2PRNG_GG_uchar_off, &active);		
 
 		uchar tmp[2];
 
@@ -158,7 +158,7 @@ void Krnl_Prng_GG_float(
 		bool active = true;
 */
 		int active;
-		valid = read_pipe(chan_Arbiter_GG_float_off, &active);
+		valid = read_pipe(chan_GA2PRNG_GG_float_off, &active);
 
 		__attribute__((xcl_pipeline_loop))
 		LOOP_FOR_PRNG_GG_FLOAT:
@@ -225,7 +225,7 @@ void Krnl_Prng_LS123_ushort(
 		bool active = true;
 */
 		int active;
-		valid  = read_pipe(chan_Arbiter_LS123_ushort_off, &active);
+		valid  = read_pipe(chan_GA2PRNG_LS123_ushort_off, &active);
 
 		ushort tmp[9];
 		
