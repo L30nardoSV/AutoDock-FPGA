@@ -111,20 +111,6 @@ while(active) {
 		(LS8_end_valid != 0) &&
 		(LS9_end_valid != 0) 
 	){
-/*
-		Off_active     = read_channel_nb_altera(chan_IGLArbiter_Off,     &Off_valid);
-		IC_active      = read_channel_nb_altera(chan_GA2IGL_IC_active,   &IC_valid);
-		GG_active      = read_channel_nb_altera(chan_GA2IGL_GG_active, 	 &GG_valid);
-		LS1_end_active = read_channel_nb_altera(chan_LS2Arbiter_LS1_end, &LS1_end_valid);
-		LS2_end_active = read_channel_nb_altera(chan_LS2Arbiter_LS2_end, &LS2_end_valid);
-		LS3_end_active = read_channel_nb_altera(chan_LS2Arbiter_LS3_end, &LS3_end_valid);
-		LS4_end_active = read_channel_nb_altera(chan_LS2Arbiter_LS4_end, &LS4_end_valid);
-		LS5_end_active = read_channel_nb_altera(chan_LS2Arbiter_LS5_end, &LS5_end_valid);
-		LS6_end_active = read_channel_nb_altera(chan_LS2Arbiter_LS6_end, &LS6_end_valid);
-		LS7_end_active = read_channel_nb_altera(chan_LS2Arbiter_LS7_end, &LS7_end_valid);
-		LS8_end_active = read_channel_nb_altera(chan_LS2Arbiter_LS8_end, &LS8_end_valid);
-		LS9_end_active = read_channel_nb_altera(chan_LS2Arbiter_LS9_end, &LS9_end_valid);
-*/
 		Off_valid     = read_pipe(chan_IGLArbiter_Off,     &Off_active);
 		IC_valid      = read_pipe(chan_GA2IGL_IC_active,   &IC_active);
 		GG_valid      = read_pipe(chan_GA2IGL_GG_active,   &GG_active);

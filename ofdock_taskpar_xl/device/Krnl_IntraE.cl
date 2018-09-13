@@ -73,9 +73,7 @@ while(active) {
 	// --------------------------------------------------------------
 	// Wait for ligand atomic coordinates in channel
 	// --------------------------------------------------------------
-/*
-	char2 actmode = read_channel_altera(chan_Conf2Intrae_actmode);
-*/
+
 	char actmode;
 	read_pipe_block(chan_Conf2Intrae_actmode, &actmode);
 /*
@@ -87,9 +85,6 @@ while(active) {
 	__attribute__((xcl_pipeline_loop))
 	LOOP_FOR_INTRAE_READ_XYZ:
 	for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt+=2) {
-/*
-		float8 tmp = read_channel_altera(chan_Conf2Intrae_xyz);
-*/
 		float8 tmp;
 		read_pipe_block(chan_Conf2Intrae_xyz, &tmp);
 
@@ -283,8 +278,8 @@ while(active) {
 	// Send intramolecular energy to channel
 	// --------------------------------------------------------------
 	switch (mode) {
-		case 'I':  write_pipe_block(chan_Intrae2StoreIC_intrae, &intraE);     break;
-		case 'G':  write_pipe_block(chan_Intrae2StoreGG_intrae, &intraE);     break;
+		case 'I':  write_pipe_block(chan_Intrae2StoreIC_intrae,     &intraE); break;
+		case 'G':  write_pipe_block(chan_Intrae2StoreGG_intrae,     &intraE); break;
 		case 0x01: write_pipe_block(chan_Intrae2StoreLS_LS1_intrae, &intraE); break;
 		case 0x02: write_pipe_block(chan_Intrae2StoreLS_LS2_intrae, &intraE); break;
 		case 0x03: write_pipe_block(chan_Intrae2StoreLS_LS3_intrae, &intraE); break;

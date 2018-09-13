@@ -38,9 +38,6 @@ void Krnl_Prng_BT_ushort_float(
 		bool active = true;
 */
 		int active;
-/*
-		active = read_channel_nb_altera(chan_Arbiter_BT_ushort_float_off, &valid);
-*/
 		valid = read_pipe(chan_Arbiter_BT_ushort_float_off, &active);
 
 		uint   u_tmp[4]; // used as short in GA
@@ -130,9 +127,6 @@ void Krnl_Prng_GG_uchar(
 		bool active = true;
 */
 		int active;
-/*
-		active = read_channel_nb_altera(chan_Arbiter_GG_uchar_off, &valid);
-*/
 		valid = read_pipe(chan_Arbiter_GG_uchar_off, &active);		
 
 		uchar tmp[2];
@@ -198,9 +192,6 @@ void Krnl_Prng_GG_float(
 		bool active = true;
 */
 		int active;
-/*
-		active = read_channel_nb_altera(chan_Arbiter_GG_float_off, &valid);
-*/
 		valid = read_pipe(chan_Arbiter_GG_float_off, &active);
 
 		__attribute__((xcl_pipeline_loop))
@@ -281,9 +272,6 @@ void Krnl_Prng_LS123_ushort(
 		bool active = true;
 */
 		int active;
-/*
-		active  = read_channel_nb_altera(chan_Arbiter_LS123_ushort_off, &valid);
-*/
 		valid  = read_pipe(chan_Arbiter_LS123_ushort_off, &active);
 
 		ushort tmp[9];
@@ -380,9 +368,6 @@ void Krnl_Prng_LS_float(
 		bool active = true;
 */
 		int active;
-/*
-		active  = read_channel_nb_altera(chan_Arbiter_LS_float_off, &valid);
-*/
 		valid  = read_pipe(chan_Arbiter_LS_float_off, &active);
 	
 		__attribute__((xcl_pipeline_loop))
@@ -452,9 +437,6 @@ void Krnl_Prng_LS2_float(
 		bool active = true;
 */
 		int active;
-/*
-		active  = read_channel_nb_altera(chan_Arbiter_LS2_float_off, &valid);
-*/
 		valid  = read_pipe(chan_Arbiter_LS2_float_off, &active);
 	
 		__attribute__((xcl_pipeline_loop))
@@ -524,9 +506,6 @@ void Krnl_Prng_LS3_float(
 		bool active = true;
 */
 		int active;
-/*
-		active  = read_channel_nb_altera(chan_Arbiter_LS3_float_off, &valid);
-*/
 		valid  = read_pipe(chan_Arbiter_LS3_float_off, &active);
 	
 		__attribute__((xcl_pipeline_loop))
@@ -597,9 +576,6 @@ void Krnl_Prng_LS4_float(
 		bool active = true;
 */
 		int active;
-/*
-		active  = read_channel_nb_altera(chan_Arbiter_LS4_float_off, &valid);
-*/
 		valid  = read_pipe(chan_Arbiter_LS4_float_off, &active);
 	
 		__attribute__((xcl_pipeline_loop))
@@ -669,9 +645,6 @@ void Krnl_Prng_LS5_float(
 		bool active = true;
 */
 		int active;
-/*
-		active  = read_channel_nb_altera(chan_Arbiter_LS5_float_off, &valid);
-*/
 		valid  = read_pipe(chan_Arbiter_LS5_float_off, &active);
 	
 		__attribute__((xcl_pipeline_loop))
@@ -741,9 +714,6 @@ void Krnl_Prng_LS6_float(
 		bool active = true;
 */
 		int active;
-/*
-		active  = read_channel_nb_altera(chan_Arbiter_LS6_float_off, &valid);
-*/
 		valid  = read_pipe(chan_Arbiter_LS6_float_off, &active);
 	
 		__attribute__((xcl_pipeline_loop))
@@ -813,9 +783,6 @@ void Krnl_Prng_LS7_float(
 		bool active = true;
 */
 		int active;
-/*
-		active  = read_channel_nb_altera(chan_Arbiter_LS7_float_off, &valid);
-*/
 		valid  = read_pipe(chan_Arbiter_LS7_float_off, &active);
 	
 		__attribute__((xcl_pipeline_loop))
@@ -885,9 +852,6 @@ void Krnl_Prng_LS8_float(
 		bool active = true;
 */
 		int active;
-/*
-		active  = read_channel_nb_altera(chan_Arbiter_LS8_float_off, &valid);
-*/
 		valid  = read_pipe(chan_Arbiter_LS8_float_off, &active);
 	
 		__attribute__((xcl_pipeline_loop))
@@ -957,9 +921,6 @@ void Krnl_Prng_LS9_float(
 		bool active = true;
 */
 		int active;
-/*
-		active  = read_channel_nb_altera(chan_Arbiter_LS9_float_off, &valid);
-*/
 		valid  = read_pipe(chan_Arbiter_LS9_float_off, &active);
 	
 		__attribute__((xcl_pipeline_loop))

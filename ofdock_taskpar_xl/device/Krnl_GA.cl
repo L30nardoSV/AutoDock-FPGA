@@ -590,19 +590,12 @@ void Krnl_GA(
 			if (intra_valid == false) {
 */
 			if (intra_valid != 0) {
-
-/*
-				energyIA_IC_rx = read_channel_nb_altera(chan_Intrae2StoreIC_intrae, &intra_valid);
-*/
 				intra_valid = read_pipe(chan_Intrae2StoreIC_intrae, &energyIA_IC_rx);
 			}
 /*
 			else if (inter_valid == false) {
 */
 			else if (inter_valid != 0) {
-/*
-				energyIE_IC_rx = read_channel_nb_altera(chan_Intere2StoreIC_intere, &inter_valid);
-*/
 				inter_valid = read_pipe(chan_Intere2StoreIC_intere, &energyIE_IC_rx);
 			}
 		}
@@ -716,9 +709,6 @@ void Krnl_GA(
 
 			// Get ushort binary_tournament selection prngs (parent index)
 			// Get float binary_tournament selection prngs (tournament rate)
-/*
-			float8 bt_tmp = read_channel_altera(chan_PRNG2GA_BT_ushort_float_prng);
-*/
 			float8 bt_tmp;
 			read_pipe_block(chan_PRNG2GA_BT_ushort_float_prng, &bt_tmp);
 /*
@@ -784,9 +774,6 @@ void Krnl_GA(
 
 			// get uchar genetic_generation prngs (gene index)
 			// get float genetic_generation prngs (mutation rate)
-/*
-			uchar2 prng_GG_C = read_channel_altera(chan_PRNG2GA_GG_uchar_prng);
-*/
 			uchar2 prng_GG_C;
 			read_pipe_block(chan_PRNG2GA_GG_uchar_prng, &prng_GG_C);
 /*
@@ -820,9 +807,6 @@ void Krnl_GA(
 			__attribute__((xcl_pipeline_loop))
 			LOOP_FOR_GA_INNER_CROSS_MUT:
 			for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
-/*
-				float prngGG = read_channel_altera(chan_PRNG2GA_GG_float_prng);
-*/
 				float prngGG;
 				read_pipe_block(chan_PRNG2GA_GG_float_prng, &prngGG);
 /*
@@ -889,18 +873,12 @@ void Krnl_GA(
 				if (intra_valid == false) {
 */
 				if (intra_valid != 0) {
-/*
-					energyIA_GG_rx = read_channel_nb_altera(chan_Intrae2StoreGG_intrae, &intra_valid);
-*/
 					intra_valid = read_pipe(chan_Intrae2StoreGG_intrae, &energyIA_GG_rx);
 				}
 /*
 				else if (inter_valid == false) {
 */
 				else if (inter_valid != 0) {
-/*
-					energyIE_GG_rx = read_channel_nb_altera(chan_Intere2StoreGG_intere, &inter_valid);
-*/
 					inter_valid = read_pipe(chan_Intere2StoreGG_intere, &energyIE_GG_rx);
 				}
 
@@ -928,9 +906,6 @@ void Krnl_GA(
 		for (ushort ls_ent_cnt=0; ls_ent_cnt<DockConst_num_of_lsentities; ls_ent_cnt+=9) {
 
 			// Choose random & different entities on every iteration
-/*
-			ushort16 entity_ls = read_channel_altera(chan_PRNG2GA_LS123_ushort_prng);
-*/
 			ushort16 entity_ls;
 			read_pipe_block(chan_PRNG2GA_LS123_ushort_prng, &entity_ls);
 /*
@@ -1038,81 +1013,54 @@ void Krnl_GA(
 				if (ls1_done == false) {
 */
 				if (ls1_done != 0) {
-/*
-					evalenergy_tmp1 = read_channel_nb_altera(chan_LS2GA_LS1_evalenergy, &ls1_done);
-*/
 					ls1_done = read_pipe(chan_LS2GA_LS1_evalenergy, &evalenergy_tmp1);
 				}
 /*
 				else if (ls2_done == false) {
 */
 				else if (ls2_done != 0) {
-/*
-					evalenergy_tmp2 = read_channel_nb_altera(chan_LS2GA_LS2_evalenergy, &ls2_done);
-*/
 					ls2_done = read_pipe(chan_LS2GA_LS2_evalenergy, &evalenergy_tmp2);
 				}
 /*
 				else if (ls3_done == false) {
 */
 				else if (ls3_done != 0) {
-/*
-					evalenergy_tmp3 = read_channel_nb_altera(chan_LS2GA_LS3_evalenergy, &ls3_done);
-*/
 					ls3_done = read_pipe(chan_LS2GA_LS3_evalenergy, &evalenergy_tmp3);
 				}
 /*
 				else if (ls4_done == false) {
 */
 				else if (ls4_done != 0) {
-/*
-					evalenergy_tmp4 = read_channel_nb_altera(chan_LS2GA_LS4_evalenergy, &ls4_done);
-*/
 					ls4_done = read_pipe(chan_LS2GA_LS4_evalenergy, &evalenergy_tmp4);
 				}
 /*
 				else if (ls5_done == false) {
 */
 				else if (ls5_done != 0) {
-/*
-					evalenergy_tmp5 = read_channel_nb_altera(chan_LS2GA_LS5_evalenergy, &ls5_done);
-*/
 					ls5_done = read_pipe(chan_LS2GA_LS5_evalenergy, &evalenergy_tmp5);
 				}
 /*
 				else if (ls6_done == false) {
 */
 				else if (ls6_done != 0) {
-/*
-					evalenergy_tmp6 = read_channel_nb_altera(chan_LS2GA_LS6_evalenergy, &ls6_done);
-*/
 					ls6_done = read_pipe(chan_LS2GA_LS6_evalenergy, &evalenergy_tmp6);
 				}
 /*
 				else if (ls7_done == false) {
 */
 				else if (ls7_done != 0) {
-/*
-					evalenergy_tmp7 = read_channel_nb_altera(chan_LS2GA_LS7_evalenergy, &ls7_done);
-*/
 					ls7_done = read_pipe(chan_LS2GA_LS7_evalenergy, &evalenergy_tmp7);
 				}
 /*
 				else if (ls8_done == false) {
 */
 				else if (ls8_done != 0) {
-/*
-					evalenergy_tmp8 = read_channel_nb_altera(chan_LS2GA_LS8_evalenergy, &ls8_done);
-*/
 					ls8_done = read_pipe(chan_LS2GA_LS8_evalenergy, &evalenergy_tmp8);
 				}
 /*
 				else if (ls9_done == false) {
 */
 				else if (ls9_done != 0) {
-/*
-					evalenergy_tmp9 = read_channel_nb_altera(chan_LS2GA_LS9_evalenergy, &ls9_done);
-*/
 					ls9_done = read_pipe(chan_LS2GA_LS9_evalenergy, &evalenergy_tmp9);
 				}
 			}
@@ -1157,17 +1105,7 @@ void Krnl_GA(
 			__attribute__((xcl_pipeline_loop))
 			LOOP_FOR_GA_LS_INNER_READ_GENOTYPE:
 			for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
-/*
-				LocalPopNext[entity_ls1][gene_cnt & MASK_GENOTYPE] = read_channel_altera(chan_LS2GA_LS1_genotype);
-				LocalPopNext[entity_ls2][gene_cnt & MASK_GENOTYPE] = read_channel_altera(chan_LS2GA_LS2_genotype);
-				LocalPopNext[entity_ls3][gene_cnt & MASK_GENOTYPE] = read_channel_altera(chan_LS2GA_LS3_genotype);
-				LocalPopNext[entity_ls4][gene_cnt & MASK_GENOTYPE] = read_channel_altera(chan_LS2GA_LS4_genotype);
-				LocalPopNext[entity_ls5][gene_cnt & MASK_GENOTYPE] = read_channel_altera(chan_LS2GA_LS5_genotype);
-				LocalPopNext[entity_ls6][gene_cnt & MASK_GENOTYPE] = read_channel_altera(chan_LS2GA_LS6_genotype);
-				LocalPopNext[entity_ls7][gene_cnt & MASK_GENOTYPE] = read_channel_altera(chan_LS2GA_LS7_genotype);
-				LocalPopNext[entity_ls8][gene_cnt & MASK_GENOTYPE] = read_channel_altera(chan_LS2GA_LS8_genotype);
-				LocalPopNext[entity_ls9][gene_cnt & MASK_GENOTYPE] = read_channel_altera(chan_LS2GA_LS9_genotype);
-*/
+
 				read_pipe_block(chan_LS2GA_LS1_genotype, &LocalPopNext[entity_ls1][gene_cnt & MASK_GENOTYPE]);
 				read_pipe_block(chan_LS2GA_LS2_genotype, &LocalPopNext[entity_ls2][gene_cnt & MASK_GENOTYPE]);
 				read_pipe_block(chan_LS2GA_LS3_genotype, &LocalPopNext[entity_ls3][gene_cnt & MASK_GENOTYPE]);

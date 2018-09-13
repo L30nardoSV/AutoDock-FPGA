@@ -66,10 +66,6 @@ while(valid) {
 	__attribute__((xcl_pipeline_loop))
 	LOOP_WHILE_LS9_ACTIVE:
 	while( (valid_active != 0) && (valid_energy != 0)) {
-/*
-		active         = read_channel_nb_altera(chan_GA2LS_Off9_active, &valid_active);
-		current_energy = read_channel_nb_altera(chan_GA2LS_LS9_energy,  &valid_energy);
-*/
 		valid_active = read_pipe(chan_GA2LS_Off9_active, &active);
 		valid_energy = read_pipe(chan_GA2LS_LS9_energy,  &current_energy);
 	}
@@ -94,17 +90,10 @@ while(valid) {
 		LOOP_FOR_LS9_READ_INPUT_GENOTYPE:
 		for (uchar i=0; i<DockConst_num_of_genes; i++) {
 			#if defined (FIXED_POINT_LS9)
-/*
-			float tmp_gene = read_channel_altera(chan_GA2LS_LS9_genotype);
-*/
 			float tmp_gene;
 			read_pipe_block(chan_GA2LS_LS9_genotype, &tmp_gene);
-
 			genotype [i] = fixedpt_fromfloat(tmp_gene);
 			#else
-/*
-			genotype [i] = read_channel_altera(chan_GA2LS_LS9_genotype);
-*/
 			read_pipe_block(chan_GA2LS_LS9_genotype, &genotype [i]);
 			#endif
 		}
@@ -192,15 +181,11 @@ while(valid) {
 			__attribute__((xcl_pipeline_loop))
 			LOOP_FOR_LS9_WRITE_GENOTYPE:
 			for (uchar i=0; i<DockConst_num_of_genes; i++) {
-/*
-				float tmp_prng = read_channel_altera(chan_PRNG2GA_LS9_float_prng);
-*/
 				float tmp_prng;
 				read_pipe_block(chan_PRNG2GA_LS9_float_prng, &tmp_prng);
 /*
 				mem_fence(CLK_CHANNEL_MEM_FENCE);
 */
-
 				#if defined (FIXED_POINT_LS9)
 				fixedpt fixpt_tmp_prng = *(fixedpt*) &tmp_prng;
 
@@ -284,18 +269,12 @@ while(valid) {
 				if (intra_valid == false) {
 */
 				if (intra_valid != 0) {
-/*
-					energyIA_LS_rx = read_channel_nb_altera(chan_Intrae2StoreLS_LS9_intrae, &intra_valid);
-*/
 					intra_valid = read_pipe(chan_Intrae2StoreLS_LS9_intrae, &energyIA_LS_rx);
 				}
 /*
 				else if (inter_valid == false) {
 */
 				else if (inter_valid != 0) {
-/*
-					energyIE_LS_rx = read_channel_nb_altera(chan_Intere2StoreLS_LS9_intere, &inter_valid);
-*/
 					inter_valid = read_pipe(chan_Intere2StoreLS_LS9_intere, &energyIE_LS_rx);
 				}
 			}

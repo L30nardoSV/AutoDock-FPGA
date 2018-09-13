@@ -93,9 +93,6 @@ while(active) {
 	float3 loc_coords [MAX_NUM_OF_ATOMS];
 	#endif
 
-/*
-	char2 actmode = read_channel_altera(chan_IGL2Conform_actmode);
-*/
 	char actmode;
 	read_pipe_block(chan_IGL2Conform_actmode, &actmode);
 /*
@@ -117,21 +114,8 @@ while(active) {
 	for (uchar i=0; i<DockConst_num_of_genes; i++) {
 		float fl_tmp;
 		switch (mode) {
-/*
-			case 'I':  fl_tmp = read_channel_altera(chan_IC2Conf_genotype);     break;
-			case 'G':  fl_tmp = read_channel_altera(chan_GG2Conf_genotype);     break;
-			case 0x01: fl_tmp = read_channel_altera(chan_LS2Conf_LS1_genotype); break;
-			case 0x02: fl_tmp = read_channel_altera(chan_LS2Conf_LS2_genotype); break;
-			case 0x03: fl_tmp = read_channel_altera(chan_LS2Conf_LS3_genotype); break;
-			case 0x04: fl_tmp = read_channel_altera(chan_LS2Conf_LS4_genotype); break;
-			case 0x05: fl_tmp = read_channel_altera(chan_LS2Conf_LS5_genotype); break;
-			case 0x06: fl_tmp = read_channel_altera(chan_LS2Conf_LS6_genotype); break;
-			case 0x07: fl_tmp = read_channel_altera(chan_LS2Conf_LS7_genotype); break;
-			case 0x08: fl_tmp = read_channel_altera(chan_LS2Conf_LS8_genotype); break;
-			case 0x09: fl_tmp = read_channel_altera(chan_LS2Conf_LS9_genotype); break;
-*/
-			case 'I':  read_pipe_block(chan_IC2Conf_genotype, &fl_tmp);     break;
-			case 'G':  read_pipe_block(chan_GG2Conf_genotype, &fl_tmp);     break;
+			case 'I':  read_pipe_block(chan_IC2Conf_genotype,     &fl_tmp); break;
+			case 'G':  read_pipe_block(chan_GG2Conf_genotype,     &fl_tmp); break;
 			case 0x01: read_pipe_block(chan_LS2Conf_LS1_genotype, &fl_tmp); break;
 			case 0x02: read_pipe_block(chan_LS2Conf_LS2_genotype, &fl_tmp); break;
 			case 0x03: read_pipe_block(chan_LS2Conf_LS3_genotype, &fl_tmp); break;
