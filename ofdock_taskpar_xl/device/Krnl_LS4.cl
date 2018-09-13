@@ -42,7 +42,8 @@ void Krnl_LS4(
 
 	bool valid = true;
 
-	LOOP_WHILE_LS4_MAIN:
+__attribute__((xcl_pipeline_loop))
+LOOP_WHILE_LS4_MAIN:
 while(valid) {
 /*
 	bool active;
@@ -62,6 +63,7 @@ while(valid) {
 /*
 	while( (valid_active == false) && (valid_energy == false)) {
 */
+	__attribute__((xcl_pipeline_loop))
 	LOOP_WHILE_LS4_ACTIVE:
 	while( (valid_active != 0) && (valid_energy != 0)) {
 /*
@@ -88,6 +90,7 @@ while(valid) {
 		float   genotype [ACTUAL_GENOTYPE_LENGTH];
 		#endif
 
+		__attribute__((xcl_pipeline_loop))
 		LOOP_FOR_LS4_READ_INPUT_GENOTYPE:
 		for (uchar i=0; i<DockConst_num_of_genes; i++) {
 			#if defined (FIXED_POINT_LS4)
@@ -122,6 +125,7 @@ while(valid) {
 		bool   positive_direction = true;
 
 		// performing local search
+		__attribute__((xcl_pipeline_loop))
 		LOOP_WHILE_LS4_ITERATION_RHO:
 		#if defined (FIXED_POINT_LS4)
 		while ((iteration_cnt < DockConst_max_num_of_iters) && (fixpt_rho > DockConst_rho_lower_bound)) {
@@ -199,6 +203,7 @@ while(valid) {
 		
 			// new random deviate
 			// rho is the deviation of the uniform distribution
+			__attribute__((xcl_pipeline_loop))
 			LOOP_FOR_LS4_WRITE_GENOTYPE:
 			for (uchar i=0; i<DockConst_num_of_genes; i++) {
 /*
@@ -292,6 +297,7 @@ while(valid) {
 /*
 			while( (intra_valid == false) || (inter_valid == false)) {
 */
+			__attribute__((xcl_pipeline_loop))
 			LOOP_WHILE_LS4_READ_ENERGIES:
 			while( (intra_valid != 0) || (inter_valid != 0)) {
 /*
@@ -322,9 +328,10 @@ while(valid) {
 
 			#if defined (FIXED_POINT_LS4)
 			if (candidate_energy < current_energy) {
+
 				// updating offspring_genotype
 				// updating genotype_bias
-
+				__attribute__((xcl_pipeline_loop))
 				LOOP_FOR_LS4_FIXEDPT_UPDATE_POS_GENOTYPE:
 				for (uchar i=0; i<DockConst_num_of_genes; i++) {
 					genotype_bias [i] = (positive_direction == true) ? deviate_plus_bias  [i]: 
@@ -341,7 +348,7 @@ while(valid) {
 			}
 			else {
 				// updating (halving) genotype_bias
-
+				__attribute__((xcl_pipeline_loop))
 				LOOP_FOR_LS4_FIXEDPT_UPDATE_NEG_GENOTYPE:
 				for (uchar i=0; i<DockConst_num_of_genes; i++) {
 					genotype_bias [i] = (iteration_cnt == 1)? 0: (genotype_bias [i] >> 1);
@@ -355,9 +362,10 @@ while(valid) {
 			}
 			#else
 			if (candidate_energy < current_energy) {
+
 				// updating offspring_genotype
 				// updating genotype_bias
-
+				__attribute__((xcl_pipeline_loop))
 				LOOP_FOR_LS4_FLOATPT_UPDATE_POS_GENOTYPE:
 				for (uchar i=0; i<DockConst_num_of_genes; i++) {
 					genotype_bias [i] = (positive_direction == true) ?  deviate_plus_bias  [i] : 
@@ -372,7 +380,7 @@ while(valid) {
 			}
 			else {
 				// updating (halving) genotype_bias
-
+				__attribute__((xcl_pipeline_loop))
 				LOOP_FOR_LS4_FLOATPT_UPDATE_NEG_GENOTYPE:
 				for (uchar i=0; i<DockConst_num_of_genes; i++) {
 					genotype_bias [i] = (iteration_cnt == 1)? 0.0f: (0.5f*genotype_bias [i]);
@@ -393,6 +401,7 @@ while(valid) {
 		#endif
 
 		// write back data to GA
+		__attribute__((xcl_pipeline_loop))
 		LOOP_FOR_LS4_WRITEBACK2GA:
 		for (uchar i=0; i<DockConst_num_of_genes; i++) {
 			if (i == 0) {

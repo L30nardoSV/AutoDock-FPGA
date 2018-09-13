@@ -42,7 +42,8 @@ void Krnl_LS(
 
 	bool valid = true;
 
-	LOOP_WHILE_LS_MAIN:
+__attribute__((xcl_pipeline_loop))	
+LOOP_WHILE_LS_MAIN:
 while(valid) {
 /*
 	bool active;
@@ -62,6 +63,7 @@ while(valid) {
 /*
 	while( (valid_active == false) && (valid_energy == false)) {
 */
+	__attribute__((xcl_pipeline_loop))
 	LOOP_WHILE_LS_ACTIVE:
 	while( (valid_active != 0) && (valid_energy != 0)) {
 /*
@@ -89,6 +91,7 @@ while(valid) {
 		float   genotype [ACTUAL_GENOTYPE_LENGTH];
 		#endif
 
+		__attribute__((xcl_pipeline_loop))
 		LOOP_FOR_LS_READ_INPUT_GENOTYPE:
 		for (uchar i=0; i<DockConst_num_of_genes; i++) {
 			#if defined (FIXED_POINT_LS1)
@@ -119,6 +122,7 @@ while(valid) {
 		bool   positive_direction = true;
 
 		// performing local search
+		__attribute__((xcl_pipeline_loop))
 		LOOP_WHILE_LS_ITERATION_RHO:
 		#if defined (FIXED_POINT_LS1)
 		while ((iteration_cnt < DockConst_max_num_of_iters) && (fixpt_rho > DockConst_rho_lower_bound)) {
@@ -196,6 +200,7 @@ while(valid) {
 
 			// new random deviate
 			// rho is the deviation of the uniform distribution
+			__attribute__((xcl_pipeline_loop))
 			LOOP_FOR_LS_WRITE_GENOTYPE:
 			for (uchar i=0; i<DockConst_num_of_genes; i++) {
 /*
@@ -289,6 +294,7 @@ while(valid) {
 /*
 			while( (intra_valid == false) || (inter_valid == false)) {
 */
+			__attribute__((xcl_pipeline_loop))
 			LOOP_WHILE_LS_READ_ENERGIES:
 			while( (intra_valid != 0) || (inter_valid != 0)) {
 /*
@@ -393,6 +399,7 @@ while(valid) {
 		#endif
 		
 		// write back data to GA
+		__attribute__((xcl_pipeline_loop))
 		LOOP_FOR_LS_WRITEBACK2GA:
 		for (uchar i=0; i<DockConst_num_of_genes; i++) {
 			if (i == 0) {

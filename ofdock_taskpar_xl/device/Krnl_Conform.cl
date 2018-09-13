@@ -48,11 +48,13 @@ void Krnl_Conform(
 
 	__local int rotlist_localcache [MAX_NUM_OF_ROTATIONS];
 
+	__attribute__((xcl_pipeline_loop))
 	LOOP_FOR_CONFORM_ROTBONDLIST:
 	for (ushort c = 0; c < DockConst_rotbondlist_length; c++) {
 		rotlist_localcache [c] = KerConstStatic_rotlist_const [c];
 	}
 
+__attribute__((xcl_pipeline_loop))
 LOOP_WHILE_CONFORM_MAIN:
 while(active) {
 	char mode;
@@ -110,6 +112,7 @@ while(active) {
 	float   genotype [ACTUAL_GENOTYPE_LENGTH];
 	#endif
 
+	__attribute__((xcl_pipeline_loop))
 	LOOP_FOR_CONFORM_READ_GENOTYPE:
 	for (uchar i=0; i<DockConst_num_of_genes; i++) {
 		float fl_tmp;
@@ -175,6 +178,7 @@ while(active) {
 	if (active == 0x00) {printf("	%-20s: %s\n", "Krnl_Conform", "must be disabled");}
 	#endif
 
+	__attribute__((xcl_pipeline_loop))
 	LOOP_FOR_CONFORM_MAIN:
 	for (ushort rotation_counter = 0; rotation_counter < DockConst_rotbondlist_length; rotation_counter++)
 	{
@@ -465,6 +469,7 @@ while(active) {
 	}
 	*/
 
+	__attribute__((xcl_pipeline_loop))
 	LOOP_FOR_CONFORM_WRITE_XYZ:
 	for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt+=2) {
 		if (pipe_cnt == 0) {

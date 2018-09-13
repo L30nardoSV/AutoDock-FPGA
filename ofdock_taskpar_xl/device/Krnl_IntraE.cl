@@ -45,11 +45,14 @@ void Krnl_IntraE(
 	char active = 0x01;
 
 	__local char3  intraE_contributors_localcache   [MAX_INTRAE_CONTRIBUTORS];
+
+	__attribute__((xcl_pipeline_loop))
 	LOOP_FOR_INTRAE_CONTRIBUTORS:
 	for (ushort i=0; i<MAX_INTRAE_CONTRIBUTORS; i++) {
 		intraE_contributors_localcache [i] = KerConstStatic_intraE_contributors_const [i];	
 	}
 
+__attribute__((xcl_pipeline_loop))
 LOOP_WHILE_INTRAE_MAIN:
 while(active) {
 	char mode;
@@ -81,6 +84,7 @@ while(active) {
 	active = actmode;
 	mode   = actmode;
 
+	__attribute__((xcl_pipeline_loop))
 	LOOP_FOR_INTRAE_READ_XYZ:
 	for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt+=2) {
 /*
@@ -94,7 +98,6 @@ while(active) {
 		loc_coords[pipe_cnt] = tmp1;
 		loc_coords[pipe_cnt+1] = tmp2;
 	}
-
 
 	// --------------------------------------------------------------
 	//printf("AFTER In INTRA CHANNEL\n");

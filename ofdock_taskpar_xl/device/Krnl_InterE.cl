@@ -52,6 +52,7 @@ void Krnl_InterE(
 	__global const float* GlobFgrids2 = & GlobFgrids [Host_mul_tmp2];
 	__global const float* GlobFgrids3 = & GlobFgrids [Host_mul_tmp3];
 
+__attribute__((xcl_pipeline_loop))
 LOOP_WHILE_INTERE_MAIN:
 while(active) {
 
@@ -85,6 +86,7 @@ while(active) {
 	active = actmode;
 	mode   = actmode;
 
+	__attribute__((xcl_pipeline_loop))
 	LOOP_FOR_INTERE_READ_XYZ:
 	for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt+=2) {
 /*

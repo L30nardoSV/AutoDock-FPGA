@@ -31,6 +31,7 @@ void Krnl_Prng_BT_ushort_float(
 /*
 	while(!valid) {	
 */
+	__attribute__((xcl_pipeline_loop))
 	LOOP_WHILE_PRNG_BT_USHOT_FLOAT:
 	while(valid != 0) {	
 /*
@@ -126,6 +127,7 @@ void Krnl_Prng_GG_uchar(
 /*
 	while(!valid) {
 */
+	__attribute__((xcl_pipeline_loop))
 	LOOP_WHILE_PRNG_GG_UCHAR:
 	while(valid != 0) {
 /*
@@ -196,6 +198,7 @@ void Krnl_Prng_GG_float(
 /*
 	while(!valid) {
 */
+	__attribute__((xcl_pipeline_loop))
 	LOOP_WHILE_PRNG_GG_FLOAT:
 	while(valid != 0) {
 /*
@@ -207,6 +210,7 @@ void Krnl_Prng_GG_float(
 */
 		valid = read_pipe(chan_Arbiter_GG_float_off, &active);
 
+		__attribute__((xcl_pipeline_loop))
 		LOOP_FOR_PRNG_GG_FLOAT:
 		for(uchar i=0; i<DockConst_num_of_genes; i++) {
 			float tmp;
@@ -280,6 +284,7 @@ void Krnl_Prng_LS123_ushort(
 /*
 	while(!valid) {
 */
+	__attribute__((xcl_pipeline_loop))
 	LOOP_WHILE_PRNG_LS123_USHORT:
 	while(valid != 0) {
 /*
@@ -381,6 +386,7 @@ void Krnl_Prng_LS_float(
 /*
 	while(!valid) {
 */
+	__attribute__((xcl_pipeline_loop))
 	LOOP_WHILE_PRNG_LS_FLOAT:
 	while(valid != 0) {
 /*
@@ -392,6 +398,7 @@ void Krnl_Prng_LS_float(
 */
 		valid  = read_pipe(chan_Arbiter_LS_float_off, &active);
 	
+		__attribute__((xcl_pipeline_loop))
 		LOOP_FOR_PRNG_LS_FLOAT:
 		for(uchar i=0; i<DockConst_num_of_genes; i++) {
 			float tmp;
@@ -457,6 +464,7 @@ void Krnl_Prng_LS2_float(
 /*
 	while(!valid) {
 */
+	__attribute__((xcl_pipeline_loop))
 	LOOP_WHILE_PRNG_LS2_FLOAT:
 	while(valid != 0) {
 /*
@@ -468,6 +476,7 @@ void Krnl_Prng_LS2_float(
 */
 		valid  = read_pipe(chan_Arbiter_LS2_float_off, &active);
 	
+		__attribute__((xcl_pipeline_loop))
 		LOOP_FOR_PRNG_LS2_FLOAT:
 		for(uchar i=0; i<DockConst_num_of_genes; i++) {
 			float tmp;
@@ -533,6 +542,7 @@ void Krnl_Prng_LS3_float(
 /*
 	while(!valid) {
 */
+	__attribute__((xcl_pipeline_loop))
 	LOOP_WHILE_PRNG_LS3_FLOAT:
 	while(valid != 0) {
 /*
@@ -544,6 +554,7 @@ void Krnl_Prng_LS3_float(
 */
 		valid  = read_pipe(chan_Arbiter_LS3_float_off, &active);
 	
+		__attribute__((xcl_pipeline_loop))
 		LOOP_FOR_PRNG_LS3_FLOAT:
 		for(uchar i=0; i<DockConst_num_of_genes; i++) {
 			float tmp;
@@ -610,6 +621,7 @@ void Krnl_Prng_LS4_float(
 /*
 	while(!valid) {
 */
+	__attribute__((xcl_pipeline_loop))
 	LOOP_WHILE_PRNG_LS4_FLOAT:
 	while(valid != 0) {
 /*
@@ -621,6 +633,7 @@ void Krnl_Prng_LS4_float(
 */
 		valid  = read_pipe(chan_Arbiter_LS4_float_off, &active);
 	
+		__attribute__((xcl_pipeline_loop))
 		LOOP_FOR_PRNG_LS4_FLOAT:
 		for(uchar i=0; i<DockConst_num_of_genes; i++) {
 			float tmp;
@@ -686,6 +699,7 @@ void Krnl_Prng_LS5_float(
 /*
 	while(!valid) {
 */
+	__attribute__((xcl_pipeline_loop))
 	LOOP_WHILE_PRNG_LS5_FLOAT:
 	while(valid != 0) {
 /*
@@ -697,6 +711,7 @@ void Krnl_Prng_LS5_float(
 */
 		valid  = read_pipe(chan_Arbiter_LS5_float_off, &active);
 	
+		__attribute__((xcl_pipeline_loop))
 		LOOP_FOR_PRNG_LS5_FLOAT:
 		for(uchar i=0; i<DockConst_num_of_genes; i++) {
 			float tmp;
@@ -762,6 +777,7 @@ void Krnl_Prng_LS6_float(
 /*
 	while(!valid) {
 */
+	__attribute__((xcl_pipeline_loop))
 	LOOP_WHILE_PRNG_LS6_FLOAT:
 	while(valid != 0) {
 /*
@@ -773,6 +789,7 @@ void Krnl_Prng_LS6_float(
 */
 		valid  = read_pipe(chan_Arbiter_LS6_float_off, &active);
 	
+		__attribute__((xcl_pipeline_loop))
 		LOOP_FOR_PRNG_LS6_FLOAT:
 		for(uchar i=0; i<DockConst_num_of_genes; i++) {
 			float tmp;
@@ -838,6 +855,7 @@ void Krnl_Prng_LS7_float(
 /*
 	while(!valid) {
 */
+	__attribute__((xcl_pipeline_loop))
 	LOOP_WHILE_PRNG_LS7_FLOAT:
 	while(valid != 0) {
 /*
@@ -849,6 +867,7 @@ void Krnl_Prng_LS7_float(
 */
 		valid  = read_pipe(chan_Arbiter_LS7_float_off, &active);
 	
+		__attribute__((xcl_pipeline_loop))
 		LOOP_FOR_PRNG_LS7_FLOAT:
 		for(uchar i=0; i<DockConst_num_of_genes; i++) {
 			float tmp;
@@ -914,6 +933,7 @@ void Krnl_Prng_LS8_float(
 /*
 	while(!valid) {
 */
+	__attribute__((xcl_pipeline_loop))
 	LOOP_WHILE_PRNG_LS8_FLOAT:
 	while(valid != 0) {
 /*
@@ -925,6 +945,7 @@ void Krnl_Prng_LS8_float(
 */
 		valid  = read_pipe(chan_Arbiter_LS8_float_off, &active);
 	
+		__attribute__((xcl_pipeline_loop))
 		LOOP_FOR_PRNG_LS8_FLOAT:
 		for(uchar i=0; i<DockConst_num_of_genes; i++) {
 			float tmp;
@@ -990,6 +1011,7 @@ void Krnl_Prng_LS9_float(
 /*
 	while(!valid) {
 */
+	__attribute__((xcl_pipeline_loop))
 	LOOP_WHILE_PRNG_LS9_FLOAT:
 	while(valid != 0) {
 /*
@@ -1001,6 +1023,7 @@ void Krnl_Prng_LS9_float(
 */
 		valid  = read_pipe(chan_Arbiter_LS9_float_off, &active);
 	
+		__attribute__((xcl_pipeline_loop))
 		LOOP_FOR_PRNG_LS9_FLOAT:
 		for(uchar i=0; i<DockConst_num_of_genes; i++) {
 			float tmp;

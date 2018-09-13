@@ -37,6 +37,7 @@ void Krnl_IGL_Arbiter(/*unsigned char DockConst_num_of_genes*/
 	uint LS3_eval = 0;
 	*/
 
+	__attribute__((xcl_pipeline_loop))
 	LOOP_WHILE_IGL_MAIN:
 	while(active) {
 /*
@@ -93,6 +94,7 @@ void Krnl_IGL_Arbiter(/*unsigned char DockConst_num_of_genes*/
 			(LS8_end_valid == false) &&
 			(LS9_end_valid == false) 
 */
+		__attribute__((xcl_pipeline_loop))
 		LOOP_WHILE_IGL_INNER:
 		while (
 			(Off_valid     != 0) &&
@@ -166,6 +168,7 @@ void Krnl_IGL_Arbiter(/*unsigned char DockConst_num_of_genes*/
 		} // End if (active == 0x01)
 
 		// Send "mode" to Conform
+		__attribute__((xcl_pipeline_loop))
 		LOOP_FOR_IGL_WRITE_MODE:
 		for (uchar j=0; j<9; j++) {
 			bool enable_write_channel = false;
