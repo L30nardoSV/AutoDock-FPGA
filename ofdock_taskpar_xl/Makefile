@@ -169,16 +169,18 @@ swemu: kerswemu
 	-lfile input/$(PDB)/derived/$(PDB)_ligand.pdbqt \
 	-psize $(PSIZE) -nrun $(NRUN) -nev $(NEV) -ngen $(NGEN) -gfpop 1
 	@echo $(newline)
-	@echo "==========================================================================="
-	@echo "INFO: swemu log file is under: \"./docking.dlg\"                           "
+	@echo "===================================================================================="
+	@echo "INFO: swemu log file is under: \"./docking.dlg\"                                    "
 	@echo $(newline)
-	@echo "INFO: profile and timeline trace report files are formatted for SDx GUI    "
-	@echo "INFO: ... if reports not generated, verify that \"sdaccel.ini\" exists!    "
+	@echo "INFO: profile and timeline trace report files are formatted for SDx GUI             "
+	@echo "INFO: ... if reports not generated, verify that \"sdaccel.ini\" exists!             "
 	@echo $(newline)
 	sdx_analyze profile sdaccel_profile_summary.csv
 	@echo $(newline)
 	sdx_analyze trace sdaccel_timeline_trace.csv
-	@echo "==========================================================================="
+	@echo $(newline)
+	@echo "INFO: (1) open sdx, (2) select \"File->Open File\", (3) browse to *.xprf or *.wdb  "
+	@echo "===================================================================================="
 	@echo $(newline)
 
 
