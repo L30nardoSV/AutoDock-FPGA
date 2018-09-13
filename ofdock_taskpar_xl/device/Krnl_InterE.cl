@@ -78,18 +78,11 @@ while(active) {
 /*
 	char2 actmode = read_channel_altera(chan_Conf2Intere_actmode);
 */
-#if 0
-	char2 actmode;
-#endif
 	char actmode;
 	read_pipe_block(chan_Conf2Intere_actmode, &actmode);
 /*
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 */
-#if 0
-	active = actmode.x;
-	mode   = actmode.y;
-#endif
 	active = actmode;
 	mode   = actmode;
 
