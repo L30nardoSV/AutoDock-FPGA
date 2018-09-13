@@ -164,11 +164,8 @@ while(valid) {
 			__attribute__((xcl_pipeline_loop))
 			LOOP_FOR_LS5_WRITE_GENOTYPE:
 			for (uchar i=0; i<DockConst_num_of_genes; i++) {
-/*
-				float tmp_prng = read_channel_altera(chan_PRNG2GA_LS5_float_prng);
-*/
 				float tmp_prng;
-				read_pipe_block(chan_PRNG2GA_LS5_float_prng, &tmp_prng);
+				read_pipe_block(chan_PRNG2LS5_float_prng, &tmp_prng);
 /*
 				mem_fence(CLK_CHANNEL_MEM_FENCE);
 */

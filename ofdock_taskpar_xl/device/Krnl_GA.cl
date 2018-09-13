@@ -77,6 +77,7 @@ pipe float8   chan_PRNG2GA_BT_ushort_float_prng	__attribute__((xcl_reqd_pipe_dep
 pipe uchar2   chan_PRNG2GA_GG_uchar_prng	__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_16)));
 pipe float    chan_PRNG2GA_GG_float_prng     	__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_64)));
 pipe ushort16 chan_PRNG2GA_LS123_ushort_prng	__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_16)));
+/*
 pipe float    chan_PRNG2GA_LS_float_prng     	__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_64)));
 pipe float    chan_PRNG2GA_LS2_float_prng    	__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_64)));
 pipe float    chan_PRNG2GA_LS3_float_prng    	__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_64)));
@@ -86,6 +87,16 @@ pipe float    chan_PRNG2GA_LS6_float_prng    	__attribute__((xcl_reqd_pipe_depth
 pipe float    chan_PRNG2GA_LS7_float_prng    	__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_64)));
 pipe float    chan_PRNG2GA_LS8_float_prng    	__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_64)));
 pipe float    chan_PRNG2GA_LS9_float_prng    	__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_64)));
+*/
+pipe float    chan_PRNG2LS_float_prng     	__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_64)));
+pipe float    chan_PRNG2LS2_float_prng    	__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_64)));
+pipe float    chan_PRNG2LS3_float_prng    	__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_64)));
+pipe float    chan_PRNG2LS4_float_prng   	__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_64)));
+pipe float    chan_PRNG2LS5_float_prng    	__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_64)));
+pipe float    chan_PRNG2LS6_float_prng    	__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_64)));
+pipe float    chan_PRNG2LS7_float_prng    	__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_64)));
+pipe float    chan_PRNG2LS8_float_prng    	__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_64)));
+pipe float    chan_PRNG2LS9_float_prng    	__attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_64)));
 
 // Turn-off signals to PRNG generators
 

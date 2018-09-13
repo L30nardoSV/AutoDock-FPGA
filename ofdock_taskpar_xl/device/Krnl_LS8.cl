@@ -165,7 +165,7 @@ while(valid) {
 			LOOP_FOR_LS8_WRITE_GENOTYPE:
 			for (uchar i=0; i<DockConst_num_of_genes; i++) {
 				float tmp_prng;
-				read_pipe_block(chan_PRNG2GA_LS8_float_prng, &tmp_prng);
+				read_pipe_block(chan_PRNG2LS8_float_prng, &tmp_prng);
 /*
 				mem_fence(CLK_CHANNEL_MEM_FENCE);
 */
