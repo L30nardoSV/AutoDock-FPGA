@@ -508,10 +508,7 @@ while(active) {
 		tmp.s0 = tmp_coords[0].x; tmp.s1 = tmp_coords[0].y; tmp.s2 = tmp_coords[0].z; //tmp.s3
 		tmp.s4 = tmp_coords[1].x; tmp.s5 = tmp_coords[1].y; tmp.s6 = tmp_coords[1].z; //tmp.s7
 		#endif
-/*
-		write_channel_altera(chan_Conf2Intere_xyz, tmp);
-		write_channel_altera(chan_Conf2Intrae_xyz, tmp);
-*/
+
 		write_pipe_block(chan_Conf2Intere_xyz, &tmp);
 		write_pipe_block(chan_Conf2Intrae_xyz, &tmp);
 	}

@@ -546,13 +546,6 @@ void Krnl_GA(
 	LOOP_FOR_GA_IC_OUTER:
 	for (ushort pop_cnt = 0; pop_cnt < DockConst_pop_size; pop_cnt++) {
 		// Calculate energy
-/*
-		write_channel_altera(chan_GA2IGL_IC_active, true);
-*/
-/*
-		const bool tmp_bool_true = true;
-		write_pipe_block(chan_GA2IGL_IC_active, &tmp_bool_true);
-*/
 		const int tmp_int_zero = 0;
 		write_pipe_block(chan_GA2IGL_IC_active, &tmp_int_zero);
 
@@ -568,9 +561,7 @@ void Krnl_GA(
 			#else
 			tmp_ic = GlobPopulationCurrent[pop_cnt*ACTUAL_GENOTYPE_LENGTH + pipe_cnt];
 			#endif
-/*
-			write_channel_altera(chan_IC2Conf_genotype, LocalPopCurr[pop_cnt][pipe_cnt & MASK_GENOTYPE]);	
-*/
+
 			LocalPopCurr[pop_cnt][pipe_cnt & MASK_GENOTYPE] = tmp_ic;
 			write_pipe_block(chan_IC2Conf_genotype, &tmp_ic);	
 		}
@@ -818,13 +809,7 @@ void Krnl_GA(
 			
 			// Reuse of bt prng float as crossover-rate
 			bool crossover_yes = (DockConst_crossover_rate > bt_tmp_f0);
-/*
-			write_channel_altera(chan_GA2IGL_GG_active, true);
-*/
-/*
-			const bool tmp_bool_true = true;
-			write_pipe_block(chan_GA2IGL_GG_active, &tmp_bool_true);
-*/
+
 			const int tmp_int_zero = 0;
 			write_pipe_block(chan_GA2IGL_GG_active, &tmp_int_zero);
 /*
@@ -876,9 +861,6 @@ void Krnl_GA(
 
 				// Calculate energy
 				LocalPopNext [new_pop_cnt][gene_cnt & MASK_GENOTYPE] = tmp_offspring;
-/*
-				write_channel_altera(chan_GG2Conf_genotype, tmp_offspring);
-*/
 				write_pipe_block(chan_GG2Conf_genotype, &tmp_offspring);
 //printf("test point 5\n");
 			}
@@ -966,17 +948,6 @@ void Krnl_GA(
 			ushort entity_ls8 = entity_ls.s7;
 			ushort entity_ls9 = entity_ls.s8;
 
-/*
-			write_channel_altera(chan_GA2LS_LS1_energy, LocalEneNext[entity_ls1]);
-			write_channel_altera(chan_GA2LS_LS2_energy, LocalEneNext[entity_ls2]);
-			write_channel_altera(chan_GA2LS_LS3_energy, LocalEneNext[entity_ls3]);
-			write_channel_altera(chan_GA2LS_LS4_energy, LocalEneNext[entity_ls4]);
-			write_channel_altera(chan_GA2LS_LS5_energy, LocalEneNext[entity_ls5]);
-			write_channel_altera(chan_GA2LS_LS6_energy, LocalEneNext[entity_ls6]);
-			write_channel_altera(chan_GA2LS_LS7_energy, LocalEneNext[entity_ls7]);
-			write_channel_altera(chan_GA2LS_LS8_energy, LocalEneNext[entity_ls8]);
-			write_channel_altera(chan_GA2LS_LS9_energy, LocalEneNext[entity_ls9]);
-*/
 			write_pipe_block(chan_GA2LS_LS1_energy, &LocalEneNext[entity_ls1]);
 			write_pipe_block(chan_GA2LS_LS2_energy, &LocalEneNext[entity_ls2]);
 			write_pipe_block(chan_GA2LS_LS3_energy, &LocalEneNext[entity_ls3]);
@@ -994,17 +965,6 @@ void Krnl_GA(
 			__attribute__((xcl_pipeline_loop))
 			LOOP_GA_LS_INNER_WRITE_GENOTYPE:
 			for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
-/*
-				write_channel_altera(chan_GA2LS_LS1_genotype, LocalPopNext[entity_ls1][gene_cnt & MASK_GENOTYPE]);
-				write_channel_altera(chan_GA2LS_LS2_genotype, LocalPopNext[entity_ls2][gene_cnt & MASK_GENOTYPE]);
-				write_channel_altera(chan_GA2LS_LS3_genotype, LocalPopNext[entity_ls3][gene_cnt & MASK_GENOTYPE]);
-				write_channel_altera(chan_GA2LS_LS4_genotype, LocalPopNext[entity_ls4][gene_cnt & MASK_GENOTYPE]);
-				write_channel_altera(chan_GA2LS_LS5_genotype, LocalPopNext[entity_ls5][gene_cnt & MASK_GENOTYPE]);
-				write_channel_altera(chan_GA2LS_LS6_genotype, LocalPopNext[entity_ls6][gene_cnt & MASK_GENOTYPE]);
-				write_channel_altera(chan_GA2LS_LS7_genotype, LocalPopNext[entity_ls7][gene_cnt & MASK_GENOTYPE]);
-				write_channel_altera(chan_GA2LS_LS8_genotype, LocalPopNext[entity_ls8][gene_cnt & MASK_GENOTYPE]);
-				write_channel_altera(chan_GA2LS_LS9_genotype, LocalPopNext[entity_ls9][gene_cnt & MASK_GENOTYPE]);
-*/
 				write_pipe_block(chan_GA2LS_LS1_genotype, &LocalPopNext[entity_ls1][gene_cnt & MASK_GENOTYPE]);
 				write_pipe_block(chan_GA2LS_LS2_genotype, &LocalPopNext[entity_ls2][gene_cnt & MASK_GENOTYPE]);
 				write_pipe_block(chan_GA2LS_LS3_genotype, &LocalPopNext[entity_ls3][gene_cnt & MASK_GENOTYPE]);
@@ -1258,37 +1218,6 @@ void Krnl_GA(
 	// ------------------------------------------------------------------
 
 	// Turn off PRNG kernels
-/*	
-	write_channel_altera(chan_Arbiter_BT_ushort_float_off,  false);
-	write_channel_altera(chan_Arbiter_GG_uchar_off, 	false);
-	write_channel_altera(chan_Arbiter_GG_float_off, 	false);
-	write_channel_altera(chan_Arbiter_LS123_ushort_off,  	false);
-	write_channel_altera(chan_Arbiter_LS_float_off, 	false);
-	write_channel_altera(chan_Arbiter_LS2_float_off, 	false);
-	write_channel_altera(chan_Arbiter_LS3_float_off, 	false);
-	write_channel_altera(chan_Arbiter_LS4_float_off, 	false);
-	write_channel_altera(chan_Arbiter_LS5_float_off, 	false);
-	write_channel_altera(chan_Arbiter_LS6_float_off, 	false);
-	write_channel_altera(chan_Arbiter_LS7_float_off, 	false);
-	write_channel_altera(chan_Arbiter_LS8_float_off, 	false);
-	write_channel_altera(chan_Arbiter_LS9_float_off, 	false);
-*/
-/*
-	const bool tmp_bool_false = false;
-	write_pipe_block(chan_Arbiter_BT_ushort_float_off,  	&tmp_bool_false);
-	write_pipe_block(chan_Arbiter_GG_uchar_off, 		&tmp_bool_false);
-	write_pipe_block(chan_Arbiter_GG_float_off, 		&tmp_bool_false);
-	write_pipe_block(chan_Arbiter_LS123_ushort_off,  	&tmp_bool_false);
-	write_pipe_block(chan_Arbiter_LS_float_off, 		&tmp_bool_false);
-	write_pipe_block(chan_Arbiter_LS2_float_off, 		&tmp_bool_false);
-	write_pipe_block(chan_Arbiter_LS3_float_off, 		&tmp_bool_false);
-	write_pipe_block(chan_Arbiter_LS4_float_off, 		&tmp_bool_false);
-	write_pipe_block(chan_Arbiter_LS5_float_off, 		&tmp_bool_false);
-	write_pipe_block(chan_Arbiter_LS6_float_off, 		&tmp_bool_false);
-	write_pipe_block(chan_Arbiter_LS7_float_off, 		&tmp_bool_false);
-	write_pipe_block(chan_Arbiter_LS8_float_off, 		&tmp_bool_false);
-	write_pipe_block(chan_Arbiter_LS9_float_off, 		&tmp_bool_false);
-*/
 	const int tmp_int_one = 1;
 	write_pipe_block(chan_Arbiter_BT_ushort_float_off,  	&tmp_int_one);
 	write_pipe_block(chan_Arbiter_GG_uchar_off, 		&tmp_int_one);
@@ -1308,28 +1237,6 @@ void Krnl_GA(
 */
 
 	// Turn off LS kernels
-/*
-	write_channel_altera(chan_GA2LS_Off1_active,  		false);
-	write_channel_altera(chan_GA2LS_Off2_active,  		false);
-	write_channel_altera(chan_GA2LS_Off3_active,  		false);
-	write_channel_altera(chan_GA2LS_Off4_active,  		false);
-	write_channel_altera(chan_GA2LS_Off5_active,  		false);
-	write_channel_altera(chan_GA2LS_Off6_active,  		false);
-	write_channel_altera(chan_GA2LS_Off7_active,  		false);
-	write_channel_altera(chan_GA2LS_Off8_active,  		false);
-	write_channel_altera(chan_GA2LS_Off9_active,  		false);
-*/
-/*
-	write_pipe_block(chan_GA2LS_Off1_active,  		&tmp_bool_false);
-	write_pipe_block(chan_GA2LS_Off2_active,  		&tmp_bool_false);
-	write_pipe_block(chan_GA2LS_Off3_active,  		&tmp_bool_false);
-	write_pipe_block(chan_GA2LS_Off4_active,  		&tmp_bool_false);
-	write_pipe_block(chan_GA2LS_Off5_active,  		&tmp_bool_false);
-	write_pipe_block(chan_GA2LS_Off6_active,  		&tmp_bool_false);
-	write_pipe_block(chan_GA2LS_Off7_active,  		&tmp_bool_false);
-	write_pipe_block(chan_GA2LS_Off8_active,  		&tmp_bool_false);
-	write_pipe_block(chan_GA2LS_Off9_active,  		&tmp_bool_false);
-*/
 	write_pipe_block(chan_GA2LS_Off1_active,  		&tmp_int_one);
 	write_pipe_block(chan_GA2LS_Off2_active,  		&tmp_int_one);
 	write_pipe_block(chan_GA2LS_Off3_active,  		&tmp_int_one);
@@ -1344,12 +1251,6 @@ void Krnl_GA(
 */
 
 	// Turn off IGL_Arbiter, Conform, InterE, IntraE kernerls
-/*
-	write_channel_altera(chan_IGLArbiter_Off,     		false);
-*/
-/*
-	write_pipe_block(chan_IGLArbiter_Off,     		&tmp_bool_false);
-*/
 	write_pipe_block(chan_IGLArbiter_Off,     		&tmp_int_one);
 /*
 	mem_fence(CLK_CHANNEL_MEM_FENCE);

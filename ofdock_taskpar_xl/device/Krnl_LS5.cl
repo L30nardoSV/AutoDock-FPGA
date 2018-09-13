@@ -177,23 +177,9 @@ while(valid) {
 			// Not completely strict as the (iteration_cnt < DockConst_max_num_of_iters) is ignored
 			// In practice, rho condition dominates most of the cases
 			#if defined (FIXED_POINT_LS5)
-/*
-			write_channel_altera(chan_LS2Arbiter_LS5_end, (fixpt_rho < DockConst_rho_lower_bound)?true:false);
-*/
-/*		
-			bool tmp_bool = (fixpt_rho < DockConst_rho_lower_bound)?true:false;
-			write_pipe_block(chan_LS2Arbiter_LS5_end, &tmp_bool);
-*/
 			int tmp_int = (fixpt_rho < DockConst_rho_lower_bound)?0:1;
 			write_pipe_block(chan_LS2Arbiter_LS5_end, &tmp_int);
 			#else
-/*
-			write_channel_altera(chan_LS2Arbiter_LS5_end, (rho < DockConst_rho_lower_bound)?true:false);
-*/
-/*
-			bool tmp_bool= (rho < DockConst_rho_lower_bound)?true:false;
-			write_pipe_block(chan_LS2Arbiter_LS5_end, &tmp_bool);
-*/
 			int tmp_int = (rho < DockConst_rho_lower_bound)?0:1;
 			write_pipe_block(chan_LS2Arbiter_LS5_end, &tmp_int);
 			#endif
@@ -241,9 +227,6 @@ while(valid) {
 					  else      { fixpt_tmp3 = fixedpt_map_angle_360(fixpt_tmp3);}}
 
 				entity_possible_new_genotype [i] = fixpt_tmp3;
-/*
-				write_channel_altera(chan_LS2Conf_LS5_genotype, fixedpt_tofloat(fixpt_tmp3));
-*/
 				float tmp_float = fixedpt_tofloat(fixpt_tmp3);
 				write_pipe_block(chan_LS2Conf_LS5_genotype, &tmp_float);
 
@@ -271,9 +254,6 @@ while(valid) {
 					  else      { tmp3 = map_angle_360(tmp3);}}
 
 				entity_possible_new_genotype [i] = tmp3;
-/*
-				write_channel_altera(chan_LS2Conf_LS5_genotype, tmp3);
-*/
 				write_pipe_block(chan_LS2Conf_LS5_genotype, &tmp3);
 				#endif
 
@@ -408,9 +388,6 @@ while(valid) {
 		for (uchar i=0; i<DockConst_num_of_genes; i++) {
 			if (i == 0) {
 				float2 evalenergy  = {*(float*)&LS_eval, current_energy};
-/*
-				write_channel_altera(chan_LS2GA_LS5_evalenergy, evalenergy);	
-*/			
 				write_pipe_block(chan_LS2GA_LS5_evalenergy, &evalenergy);
 			}
 /*
@@ -418,15 +395,9 @@ while(valid) {
 */
 
 			#if defined (FIXED_POINT_LS5)
-/*
-			write_channel_altera(chan_LS2GA_LS5_genotype, fixedpt_tofloat(genotype [i]));
-*/
 			float tmp_float = fixedpt_tofloat(genotype [i]);
 			write_pipe_block(chan_LS2GA_LS5_genotype, &tmp_float);
 			#else
-/*
-			write_channel_altera(chan_LS2GA_LS5_genotype, genotype [i]);
-*/
 			write_pipe_block(chan_LS2GA_LS5_genotype, &genotype [i]);	
 			#endif
 		}

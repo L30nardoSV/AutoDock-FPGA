@@ -89,10 +89,6 @@ void Krnl_Prng_BT_ushort_float(
 				      u_tmp_float_2, f_tmp[2],
 				      u_tmp_float_3, f_tmp[3]};
 
-/*
-			success = write_channel_nb_altera(chan_PRNG2GA_BT_ushort_float_prng, tmp);
-*/
-
 			success = write_pipe(chan_PRNG2GA_BT_ushort_float_prng, &tmp);
 		}
 	} /*// End of while(!valid)*/
@@ -164,9 +160,6 @@ void Krnl_Prng_GG_uchar(
 		if(!valid) {
 */
 		if(valid != 0) {
-/*
-			success = write_channel_nb_altera(chan_PRNG2GA_GG_uchar_prng, utmp);
-*/
 			success = write_pipe(chan_PRNG2GA_GG_uchar_prng, &utmp);
 		}
 	} // End of while(active)
@@ -228,9 +221,6 @@ void Krnl_Prng_GG_float(
 			if(!valid) {
 */
 			if(valid != 0) {
-/*
-				success = write_channel_nb_altera(chan_PRNG2GA_GG_float_prng, tmp);
-*/
 				success = write_pipe(chan_PRNG2GA_GG_float_prng, &tmp);
 			}
 		}
@@ -349,9 +339,6 @@ void Krnl_Prng_LS123_ushort(
 		if(!valid) {
 */
 		if(valid != 0) {
-/*
-			success = write_channel_nb_altera(chan_PRNG2GA_LS123_ushort_prng, tmp123);
-*/
 			success = write_pipe(chan_PRNG2GA_LS123_ushort_prng, &tmp123);
 		}
 
@@ -418,9 +405,6 @@ void Krnl_Prng_LS_float(
 			if(!valid) {
 */
 			if(valid != 0) {
-/*
-				success = write_channel_nb_altera(chan_PRNG2GA_LS_float_prng, *(float*) &fixpt_tmp);
-*/
 				success = write_pipe(chan_PRNG2GA_LS_float_prng, (float*) &fixpt_tmp);
 			}
 			#else
@@ -428,9 +412,6 @@ void Krnl_Prng_LS_float(
 			if(!valid) {
 */
 			if(valid != 0) {
-/*
-				success = write_channel_nb_altera(chan_PRNG2GA_LS_float_prng, tmp);
-*/
 				success = write_pipe(chan_PRNG2GA_LS_float_prng, &tmp);
 			}
 			#endif
@@ -496,9 +477,6 @@ void Krnl_Prng_LS2_float(
 			if(!valid) {
 */
 			if(valid != 0) {
-/*
-				success = write_channel_nb_altera(chan_PRNG2GA_LS2_float_prng, *(float*) &fixpt_tmp);
-*/
 				success = write_pipe(chan_PRNG2GA_LS2_float_prng, (float*) &fixpt_tmp);
 			}
 			#else
@@ -506,9 +484,6 @@ void Krnl_Prng_LS2_float(
 			if(!valid) {
 */
 			if(valid != 0) {
-/*
-				success = write_channel_nb_altera(chan_PRNG2GA_LS2_float_prng, tmp);
-*/
 				success = write_pipe(chan_PRNG2GA_LS2_float_prng, &tmp);
 			}
 			#endif
@@ -574,9 +549,6 @@ void Krnl_Prng_LS3_float(
 			if(!valid) {
 */
 			if(valid != 0) {
-/*
-				success = write_channel_nb_altera(chan_PRNG2GA_LS3_float_prng, *(float*) &fixpt_tmp);
-*/
 				success = write_pipe(chan_PRNG2GA_LS3_float_prng, (float*) &fixpt_tmp);
 			}
 
@@ -585,9 +557,6 @@ void Krnl_Prng_LS3_float(
 			if(!valid) {
 */
 			if(valid != 0) {
-/*
-				success = write_channel_nb_altera(chan_PRNG2GA_LS3_float_prng, tmp);
-*/
 				success = write_pipe(chan_PRNG2GA_LS3_float_prng, &tmp);
 			}
 			#endif
@@ -653,9 +622,6 @@ void Krnl_Prng_LS4_float(
 			if(!valid) {
 */
 			if(valid != 0) {
-/*
-				success = write_channel_nb_altera(chan_PRNG2GA_LS4_float_prng, *(float*) &fixpt_tmp);
-*/
 				success = write_pipe(chan_PRNG2GA_LS4_float_prng, (float*) &fixpt_tmp);
 			}
 			#else
@@ -663,9 +629,6 @@ void Krnl_Prng_LS4_float(
 			if(!valid) {
 */
 			if(valid != 0) {
-/*
-				success = write_channel_nb_altera(chan_PRNG2GA_LS4_float_prng, tmp);
-*/
 				success = write_pipe(chan_PRNG2GA_LS4_float_prng, &tmp);
 			}
 			#endif
@@ -731,9 +694,6 @@ void Krnl_Prng_LS5_float(
 			if(!valid) {
 */
 			if(valid != 0) {
-/*
-				success = write_channel_nb_altera(chan_PRNG2GA_LS5_float_prng, *(float*) &fixpt_tmp);
-*/
 				success = write_pipe(chan_PRNG2GA_LS5_float_prng, (float*) &fixpt_tmp);
 			}
 			#else
@@ -741,9 +701,6 @@ void Krnl_Prng_LS5_float(
 			if(!valid) {
 */
 			if(valid != 0) {
-/*
-				success = write_channel_nb_altera(chan_PRNG2GA_LS5_float_prng, tmp);
-*/
 				success = write_pipe(chan_PRNG2GA_LS5_float_prng, &tmp);
 			}
 			#endif
@@ -809,9 +766,6 @@ void Krnl_Prng_LS6_float(
 			if(!valid) {
 */
 			if(valid != 0) {
-/*
-				success = write_channel_nb_altera(chan_PRNG2GA_LS6_float_prng, *(float*) &fixpt_tmp);
-*/
 				success = write_pipe(chan_PRNG2GA_LS6_float_prng, (float*) &fixpt_tmp);
 			}
 			#else
@@ -819,9 +773,6 @@ void Krnl_Prng_LS6_float(
 			if(!valid) {
 */
 			if(valid != 0) {
-/*
-				success = write_channel_nb_altera(chan_PRNG2GA_LS6_float_prng, tmp);
-*/
 				success = write_pipe(chan_PRNG2GA_LS6_float_prng, &tmp);
 			}
 			#endif
@@ -887,9 +838,6 @@ void Krnl_Prng_LS7_float(
 			if(!valid) {
 */
 			if(valid != 0) {
-/*
-				success = write_channel_nb_altera(chan_PRNG2GA_LS7_float_prng, *(float*) &fixpt_tmp);
-*/
 				success = write_pipe(chan_PRNG2GA_LS7_float_prng, (float*) &fixpt_tmp);
 			}
 			#else
@@ -897,9 +845,6 @@ void Krnl_Prng_LS7_float(
 			if(!valid) {
 */
 			if(valid != 0) {
-/*
-				success = write_channel_nb_altera(chan_PRNG2GA_LS7_float_prng, tmp);
-*/
 				success = write_pipe(chan_PRNG2GA_LS7_float_prng, &tmp);
 			}
 			#endif
@@ -965,9 +910,6 @@ void Krnl_Prng_LS8_float(
 			if(!valid) {
 */
 			if(valid != 0) {
-/*
-				success = write_channel_nb_altera(chan_PRNG2GA_LS8_float_prng, *(float*) &fixpt_tmp);
-*/
 				success = write_pipe(chan_PRNG2GA_LS8_float_prng, (float*) &fixpt_tmp);
 			}
 			#else
@@ -975,9 +917,6 @@ void Krnl_Prng_LS8_float(
 			if(!valid) {
 */
 			if(valid != 0) {
-/*
-				success = write_channel_nb_altera(chan_PRNG2GA_LS8_float_prng, tmp);
-*/
 				success = write_pipe(chan_PRNG2GA_LS8_float_prng, &tmp);
 			}
 			#endif
@@ -1043,9 +982,6 @@ void Krnl_Prng_LS9_float(
 			if(!valid) {
 */
 			if(valid != 0) {
-/*
-				success = write_channel_nb_altera(chan_PRNG2GA_LS9_float_prng, *(float*) &fixpt_tmp);
-*/
 				success = write_pipe(chan_PRNG2GA_LS9_float_prng, (float*) &fixpt_tmp);
 			}
 			#else
@@ -1053,9 +989,6 @@ void Krnl_Prng_LS9_float(
 			if(!valid) {
 */
 			if(valid != 0) {
-/*
-				success = write_channel_nb_altera(chan_PRNG2GA_LS9_float_prng, tmp);
-*/
 				success = write_pipe(chan_PRNG2GA_LS9_float_prng, &tmp);
 			}
 			#endif

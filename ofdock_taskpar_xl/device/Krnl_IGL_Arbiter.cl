@@ -1378,17 +1378,6 @@ while(active) {
 	__attribute__((xcl_pipeline_loop))
 	LOOP_FOR_IGL_WRITE_MODE:
 	for (uchar j=0; j<bound; j++) {
-#if 0
-/*
-		char mode_tmp = Off_valid? 0x00: IC_valid? 'I': GG_valid? 'G': mode[j];
-*/
-		char mode_tmp = (Off_valid == 0)? 0x00: (IC_valid == 0)? 'I': (GG_valid == 0)? 'G': mode[j];
-		char2 actmode = {active, mode_tmp};
-/*
-		write_channel_altera(chan_IGL2Conform_actmode, actmode);
-*/
-		write_pipe_block(chan_IGL2Conform_actmode, &actmode);
-#endif
 		char mode_tmp = (Off_valid == 0)? 0x00: (IC_valid == 0)? 'I': (GG_valid == 0)? 'G': mode[j];
 		write_pipe_block(chan_IGL2Conform_actmode, &mode_tmp);
 

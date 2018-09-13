@@ -199,9 +199,6 @@ void Krnl_IGL_Arbiter(/*unsigned char DockConst_num_of_genes*/
 			}
 
 			if (enable_write_channel == true) {
-				/*
-				write_channel_intel(chan_IGL2Conform_actmode, mode_tmp);
-				*/
 				write_pipe_block(chan_IGL2Conform_actmode, &mode_tmp);
 			}
 		} // End for (uchar j=0; j<9; j++)

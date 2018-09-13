@@ -479,19 +479,6 @@ while(active) {
 	#endif
 
 	switch (mode) {
-/*
-		case 'I':  write_channel_altera(chan_Intere2StoreIC_intere, final_interE);     break;
-		case 'G':  write_channel_altera(chan_Intere2StoreGG_intere, final_interE);     break;
-		case 0x01: write_channel_altera(chan_Intere2StoreLS_LS1_intere, final_interE); break;
-		case 0x02: write_channel_altera(chan_Intere2StoreLS_LS2_intere, final_interE); break;
-		case 0x03: write_channel_altera(chan_Intere2StoreLS_LS3_intere, final_interE); break;
-		case 0x04: write_channel_altera(chan_Intere2StoreLS_LS4_intere, final_interE); break;
-		case 0x05: write_channel_altera(chan_Intere2StoreLS_LS5_intere, final_interE); break;
-		case 0x06: write_channel_altera(chan_Intere2StoreLS_LS6_intere, final_interE); break;
-		case 0x07: write_channel_altera(chan_Intere2StoreLS_LS7_intere, final_interE); break;
-		case 0x08: write_channel_altera(chan_Intere2StoreLS_LS8_intere, final_interE); break;
-		case 0x09: write_channel_altera(chan_Intere2StoreLS_LS9_intere, final_interE); break;
-*/
 		case 'I':  write_pipe_block(chan_Intere2StoreIC_intere, &final_interE);     break;
 		case 'G':  write_pipe_block(chan_Intere2StoreGG_intere, &final_interE);     break;
 		case 0x01: write_pipe_block(chan_Intere2StoreLS_LS1_intere, &final_interE); break;
