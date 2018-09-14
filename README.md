@@ -64,3 +64,5 @@ make eva
 
 * Information on how to setup the system for evaluation: 
 	* [SDAccel Environment Tutorial: Introduction (UG1021)](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2017_4/ug1021-sdaccel-intro-tutorial.pdf) -> Chapter 2 (_Flow Overview_) -> Lab 2 (_Introduction to the SDAccel Makefile_) -> Step 5: Running System Run
+	* [SDAccel Environment User Guide (UG1023)](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2017_4/ug1023-sdaccel-user-guide.pdf) -> Appendix J (_Board Installations_) -> Installing the VCU1525 Card -> Step 5: Verifying Successful Board Installation
+	
