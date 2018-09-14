@@ -106,9 +106,17 @@ GFPOP:= 0
 # Switching to the other SDAccel 2017.4 default platform
 # As it is available in Xelera "saruman" server
 #DEVICES:= xilinx:kcu1500:dynamic (in ../common_xilinx/utility/boards.mk)
+
+# Boards in SDAccel installation path
+# If several versions are present, e.g.: "vcu1525_5_0" and "vcu1525_5_1"
+# Pay attention to which should be used
 #BOARD:= xilinx:kcu1500:dynamic
-BOARD:= xilinx:vcu1525:dynamic
+#BOARD:= xilinx:vcu1525:dynamic
+
+# Boards in external paths
+BOARD:= /home/wimi/lvs/DSA_SDACCEL_VCU1525_5_1/xilinx_vcu1525_dynamic_5_1/xilinx_vcu1525_dynamic_5_1.xpfm
 #BOARD:= /opt/cad/xilinx/SDx/2017.1/platforms/xilinx_adm-pcie-7v3_1ddr_3_0/xilinx_adm-pcie-7v3_1ddr_3_0.xpfm
+
 NDEVICES_EMU:=1
 
 
