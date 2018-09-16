@@ -4,8 +4,18 @@
 REPORT:=none
 PROFILE ?= no
 
+OTHER_FLAGS=
+
+ifeq ($(TARGETS), sw_emu)
+	OTHER_FLAGS=-DSW_EMU
+endif
+
+ifeq ($(TARGETS), hw_emu)
+	OTHER_FLAGS=-DSW_EMU
+endif
+
 # Default C++ Compiler Flags and xocc compiler flags
-CXXFLAGS:=-Wall -O0 -g -std=c++14
+CXXFLAGS:=-Wall -O0 -g -std=c++14 $(OTHER_FLAGS)
 
 # =============================
 # Enable Kernels
@@ -554,16 +564,7 @@ FIPO_FLAG = $(FIPOCO_FLAG) \
 	    $(FIPOLS9_FLAG) \
 	    $(COPYPOPENE_FLAG) $(SEP_FGRID_FLAG) 
 
-
-OTHER_FLAGS=
-
-ifeq ($(TARGETS), sw_emu)
-	OTHER_FLAGS=-DSW_EMU
-endif
-
-ifeq ($(TARGETS), hw_emu)
-	OTHER_FLAGS=-DSW_EMU
-endif
+# Definition of OTHER_FLAGS (moved to the top)
 
 # Set manually the frequency to 200 MHz
 # TODO: make it configurable from Makefile

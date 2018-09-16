@@ -600,6 +600,12 @@ cl_mem mem_evals_and_generations_performed;
 
 
 
+#if !defined(SW_EMU)
+// IMPORTANT: enable this dummy global argument only for "hw" build.
+// Check ../common_xilinx/utility/boards.mk
+// https://forums.xilinx.com/t5/SDAccel/ERROR-KernelCheck-83-114-in-sdx-2017-4/td-p/818135
+cl_mem mem_dummy;
+#endif
 
 
 
@@ -1157,11 +1163,19 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 
 #ifdef ENABLE_KERNEL6 // Krnl_PRNG_GG_float
 	setKernelArg(kernel6,1, sizeof(unsigned char),  &dockpars.num_of_genes);
+
+	#if !defined(SW_EMU)
+	setKernelArg(kernel6,2, sizeof(mem_dummy),   &mem_dummy);
+	#endif
 #endif // End of ENABLE_KERNEL6
 
 
 #ifdef ENABLE_KERNEL7 // Krnl_PRNG_float
 	setKernelArg(kernel7,1, sizeof(unsigned char),  &dockpars.num_of_genes);
+
+	#if !defined(SW_EMU)
+	setKernelArg(kernel7,2, sizeof(mem_dummy),   &mem_dummy);
+	#endif
 #endif // End of ENABLE_KERNEL7
 
 #if 0
@@ -1178,6 +1192,10 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 
 #ifdef ENABLE_KERNEL10 // Krnl_PRNG_uchar
 	setKernelArg(kernel10,1, sizeof(unsigned char),  &dockpars.num_of_genes);
+
+	#if !defined(SW_EMU)
+	setKernelArg(kernel10,2, sizeof(mem_dummy),   &mem_dummy);
+	#endif
 #endif // End of ENABLE_KERNEL10
 
 // Kernel 11 has no args
@@ -1190,6 +1208,11 @@ fixedpt fixpt_rho_lower_bound = fixedpt_fromfloat(dockpars.rho_lower_bound);
 
 unsigned short Host_max_num_of_iters = (unsigned short)dockpars.max_num_of_iters;
 unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
+
+
+#if !defined(SW_EMU)
+
+#endif
 
 #ifdef ENABLE_KERNEL12 // Krnl_LS
 	//setKernelArg(kernel12,0, sizeof(unsigned int),  &dockpars.max_num_of_iters);
@@ -1211,6 +1234,10 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 
 	//setKernelArg(kernel12,5, sizeof(unsigned int),  &dockpars.cons_limit);
 	setKernelArg(kernel12,5, sizeof(unsigned char),   &Host_cons_limit);
+
+	#if !defined(SW_EMU)
+	setKernelArg(kernel12,6, sizeof(mem_dummy),   &mem_dummy);
+	#endif
 #endif // End of ENABLE_KERNEL12
 
 /*
@@ -1221,6 +1248,10 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 
 #ifdef ENABLE_KERNEL14 // Krnl_PRNG_LS2_float
 	setKernelArg(kernel14,1, sizeof(unsigned char),  &dockpars.num_of_genes);
+
+	#if !defined(SW_EMU)
+	setKernelArg(kernel14,2, sizeof(mem_dummy),   &mem_dummy);
+	#endif
 #endif // End of ENABLE_KERNEL14
 
 #ifdef ENABLE_KERNEL15 // Krnl_LS2
@@ -1242,6 +1273,10 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 
 	//setKernelArg(kernel15,5, sizeof(unsigned int),  &dockpars.cons_limit);
 	setKernelArg(kernel15,5, sizeof(unsigned char),   &Host_cons_limit);
+
+	#if !defined(SW_EMU)
+	setKernelArg(kernel15,6, sizeof(mem_dummy),   &mem_dummy);
+	#endif
 #endif // End of ENABLE_KERNEL15
 
 /*
@@ -1270,6 +1305,10 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 
 #ifdef ENABLE_KERNEL20 // Krnl_PRNG_LS3_float
 	setKernelArg(kernel20,1, sizeof(unsigned char),  &dockpars.num_of_genes);
+
+	#if !defined(SW_EMU)
+	setKernelArg(kernel20,2, sizeof(mem_dummy),   &mem_dummy);
+	#endif
 #endif // End of ENABLE_KERNEL20
 
 #ifdef ENABLE_KERNEL21 // Krnl_LS3
@@ -1291,6 +1330,10 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 
 	//setKernelArg(kernel21,5, sizeof(unsigned int),  &dockpars.cons_limit);
 	setKernelArg(kernel21,5, sizeof(unsigned char),   &Host_cons_limit);
+
+	#if !defined(SW_EMU)
+	setKernelArg(kernel21,6, sizeof(mem_dummy),   &mem_dummy);
+	#endif
 #endif // End of ENABLE_KERNEL21
 
 /*
@@ -1327,6 +1370,10 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 /*	
 	setKernelArg(kernel27,0, sizeof(unsigned char),  &dockpars.num_of_genes);
 */
+
+	#if !defined(SW_EMU)
+	setKernelArg(kernel27,0, sizeof(mem_dummy),   &mem_dummy);
+	#endif
 #endif // End of ENABLE_KERNEL27
 
 #if 0
@@ -1349,18 +1396,34 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 
 #ifdef ENABLE_KERNEL35 // Krnl_PRNG_LS123_ushort
 	setKernelArg(kernel35,9, sizeof(unsigned int),  &dockpars.pop_size);
+
+	#if !defined(SW_EMU)
+	setKernelArg(kernel35,10, sizeof(mem_dummy),   &mem_dummy);
+	#endif
 #endif // End of ENABLE_KERNEL35
 
 #ifdef ENABLE_KERNEL36 // Krnl_PRNG_ushort_float
 	setKernelArg(kernel36,2, sizeof(unsigned int),  &dockpars.pop_size);
+
+	#if !defined(SW_EMU)
+	setKernelArg(kernel36,3, sizeof(mem_dummy),   &mem_dummy);
+	#endif
 #endif // End of ENABLE_KERNEL36
 
 #ifdef ENABLE_KERNEL37 // Krnl_PRNG_LS4_float
 	setKernelArg(kernel37,1, sizeof(unsigned char),  &dockpars.num_of_genes);
+
+	#if !defined(SW_EMU)
+	setKernelArg(kernel37,2, sizeof(mem_dummy),   &mem_dummy);
+	#endif
 #endif // End of ENABLE_KERNEL37
 
 #ifdef ENABLE_KERNEL38 // Krnl_PRNG_LS5_float
 	setKernelArg(kernel38,1, sizeof(unsigned char),  &dockpars.num_of_genes);
+
+	#if !defined(SW_EMU)
+	setKernelArg(kernel38,2, sizeof(mem_dummy),   &mem_dummy);
+	#endif
 #endif // End of ENABLE_KERNEL38
 
 #ifdef ENABLE_KERNEL39 // Krnl_LS4
@@ -1379,6 +1442,10 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 	setKernelArg(kernel39,4, sizeof(float),  	  &dockpars.base_dang_mul_sqrt3);
 	#endif
 	setKernelArg(kernel39,5, sizeof(unsigned char),   &Host_cons_limit);
+
+	#if !defined(SW_EMU)
+	setKernelArg(kernel39,6, sizeof(mem_dummy),   &mem_dummy);
+	#endif
 #endif // End of ENABLE_KERNEL39
 
 #ifdef ENABLE_KERNEL40 // Krnl_LS5
@@ -1397,22 +1464,42 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 	setKernelArg(kernel40,4, sizeof(float),  	  &dockpars.base_dang_mul_sqrt3);
 	#endif
 	setKernelArg(kernel40,5, sizeof(unsigned char),   &Host_cons_limit);
+
+	#if !defined(SW_EMU)
+	setKernelArg(kernel40,6, sizeof(mem_dummy),   &mem_dummy);
+	#endif
 #endif // End of ENABLE_KERNEL40
 
 #ifdef ENABLE_KERNEL41 // Krnl_PRNG_LS6_float
 	setKernelArg(kernel41,1, sizeof(unsigned char),  &dockpars.num_of_genes);
+
+	#if !defined(SW_EMU)
+	setKernelArg(kernel41,2, sizeof(mem_dummy),   &mem_dummy);
+	#endif
 #endif // End of ENABLE_KERNEL41
 
 #ifdef ENABLE_KERNEL42 // Krnl_PRNG_LS7_float
 	setKernelArg(kernel42,1, sizeof(unsigned char),  &dockpars.num_of_genes);
+
+	#if !defined(SW_EMU)
+	setKernelArg(kernel42,2, sizeof(mem_dummy),   &mem_dummy);
+	#endif
 #endif // End of ENABLE_KERNEL42
 
 #ifdef ENABLE_KERNEL43 // Krnl_PRNG_LS8_float
 	setKernelArg(kernel43,1, sizeof(unsigned char),  &dockpars.num_of_genes);
+
+	#if !defined(SW_EMU)
+	setKernelArg(kernel43,2, sizeof(mem_dummy),   &mem_dummy);
+	#endif
 #endif // End of ENABLE_KERNEL43
 
 #ifdef ENABLE_KERNEL44 // Krnl_PRNG_LS9_float
 	setKernelArg(kernel44,1, sizeof(unsigned char),  &dockpars.num_of_genes);
+
+	#if !defined(SW_EMU)
+	setKernelArg(kernel44,2, sizeof(mem_dummy),   &mem_dummy);
+	#endif
 #endif // End of ENABLE_KERNEL44
 
 #ifdef ENABLE_KERNEL45 // Krnl_LS6
@@ -1431,6 +1518,10 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 	setKernelArg(kernel45,4, sizeof(float),  	  &dockpars.base_dang_mul_sqrt3);
 	#endif
 	setKernelArg(kernel45,5, sizeof(unsigned char),   &Host_cons_limit);
+
+	#if !defined(SW_EMU)
+	setKernelArg(kernel45,6, sizeof(mem_dummy),   &mem_dummy);
+	#endif
 #endif // End of ENABLE_KERNEL45
 
 #ifdef ENABLE_KERNEL46 // Krnl_LS7
@@ -1449,6 +1540,10 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 	setKernelArg(kernel46,4, sizeof(float),  	  &dockpars.base_dang_mul_sqrt3);
 	#endif
 	setKernelArg(kernel46,5, sizeof(unsigned char),   &Host_cons_limit);
+
+	#if !defined(SW_EMU)
+	setKernelArg(kernel46,6, sizeof(mem_dummy),   &mem_dummy);
+	#endif
 #endif // End of ENABLE_KERNEL46
 
 #ifdef ENABLE_KERNEL47 // Krnl_LS8
@@ -1467,6 +1562,10 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 	setKernelArg(kernel47,4, sizeof(float),  	  &dockpars.base_dang_mul_sqrt3);
 	#endif
 	setKernelArg(kernel47,5, sizeof(unsigned char),   &Host_cons_limit);
+
+	#if !defined(SW_EMU)
+	setKernelArg(kernel47,6, sizeof(mem_dummy),   &mem_dummy);
+	#endif
 #endif // End of ENABLE_KERNEL47
 
 #ifdef ENABLE_KERNEL48 // Krnl_LS9
@@ -1485,6 +1584,10 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 	setKernelArg(kernel48,4, sizeof(float),  	  &dockpars.base_dang_mul_sqrt3);
 	#endif
 	setKernelArg(kernel48,5, sizeof(unsigned char),   &Host_cons_limit);
+
+	#if !defined(SW_EMU)
+	setKernelArg(kernel48,6, sizeof(mem_dummy),   &mem_dummy);
+	#endif
 #endif // End of ENABLE_KERNEL48
 
 
