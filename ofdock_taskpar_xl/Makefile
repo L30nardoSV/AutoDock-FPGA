@@ -66,6 +66,44 @@ EXES=hostbin
 #vector_addition_SRCS=./device/Krnl_GA.cl
 Krnl_GA_SRCS=./device/Krnl_GA.cl
 
+#-------------------------------
+# AWS only: apply the following 
+# kernel compile & link configuration options
+
+# Otherwise error during VPL
+# "dr.bd.tcl" seems to be using a configuration for VCU1525
+# instead for AWS VU9P
+
+# Problem reported here:
+# https://forums.xilinx.com/t5/SDAccel/Building-ERROR-VPL-17-55-set-property-expects-at-least-one/td-p/893221
+
+# AWS reference guide
+# https://github.com/aws/aws-fpga/blob/master/SDAccel/docs/On_Premises_Development_Steps.md
+# aws-fpga/SDAccel/examples/aws/kernel_3ddr_bandwidth/Makefile
+
+# https://www.xilinx.com/support/documentation/sw_manuals/xilinx2017_2/ug1023-sdaccel-user-guide.pdf
+# Page 33 (could not find in the v2017.4)
+# --max_memory_ports [all | <kernel_name>]
+# Optional
+# Sets the maximum memory port property 
+# for all kernels or a given kernel
+
+krnl_GA_CLFLAGS=--max_memory_ports bandwidth
+
+# https://www.xilinx.com/support/documentation/sw_manuals/xilinx2017_4/ug1023-sdaccel-user-guide.pdf
+# Page 44
+# --sp <kernel_inst_name>.<interface_name>:<bank>
+# Valid DDR4 bank names are 
+# bank0, bank1, bank2, and bank3 
+# for platforms with 4 DDR banks.
+
+krnl_GA_LDCLFLAGS+= --sp bandwidth_1.m_axi_gmem0:bank0 \
+		    --sp bandwidth_1.m_axi_gmem1:bank1 \
+		    --sp bandwidth_1.m_axi_gmem2:bank2	
+#-------------------------------
+
+
+
 #XOS=vector_addition
 XOS=Krnl_GA
 
@@ -114,7 +152,8 @@ GFPOP:= 0
 #BOARD:= xilinx:vcu1525:dynamic
 
 # Boards in external paths
-BOARD:= /home/wimi/lvs/DSA_SDACCEL_VCU1525_5_1/xilinx_vcu1525_dynamic_5_1/xilinx_vcu1525_dynamic_5_1.xpfm
+BOARD:= /home/wimi/lvs/DSA_SDACCEL_AWS_VU9P/xilinx_aws-vu9p-f1_dynamic_5_0/xilinx_aws-vu9p-f1_dynamic_5_0.xpfm
+#BOARD:= /home/wimi/lvs/DSA_SDACCEL_VCU1525_5_1/xilinx_vcu1525_dynamic_5_1/xilinx_vcu1525_dynamic_5_1.xpfm
 #BOARD:= /opt/cad/xilinx/SDx/2017.1/platforms/xilinx_adm-pcie-7v3_1ddr_3_0/xilinx_adm-pcie-7v3_1ddr_3_0.xpfm
 
 NDEVICES_EMU:=1
