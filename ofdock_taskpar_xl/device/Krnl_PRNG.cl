@@ -26,7 +26,7 @@ void Krnl_Prng_BT_ushort_float(
 	nb_pipe_status valid = PIPE_STATUS_FAILURE;
 	
 	__attribute__((xcl_pipeline_loop))
-	LOOP_WHILE_PRNG_BT_USHOT_FLOAT:
+	LOOP_WHILE_PRNG_BT_USHORT_FLOAT:
 	while(valid != PIPE_STATUS_SUCCESS) {	
 /*
 		bool active = true;

@@ -10,9 +10,9 @@ ifeq ($(TARGETS), sw_emu)
 	OTHER_FLAGS=-DSW_EMU
 endif
 
-ifeq ($(TARGETS), hw_emu)
-	OTHER_FLAGS=-DSW_EMU
-endif
+#ifeq ($(TARGETS), hw_emu)
+#	OTHER_FLAGS=-DSW_EMU
+#endif
 
 # Default C++ Compiler Flags and xocc compiler flags
 CXXFLAGS:=-Wall -O0 -g -std=c++14 $(OTHER_FLAGS)
