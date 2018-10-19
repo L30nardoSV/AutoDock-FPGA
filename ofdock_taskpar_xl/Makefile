@@ -88,7 +88,11 @@ Krnl_GA_SRCS=./device/Krnl_GA.cl
 # Sets the maximum memory port property 
 # for all kernels or a given kernel
 
-krnl_GA_CLFLAGS=--max_memory_ports bandwidth
+# Choosing the "bandwidth" kernel for maximum memory port property 
+# krnl_GA_CLFLAGS=--max_memory_ports bandwidth
+
+# Choosing the all kernels in design for maximum memory port property 
+krnl_GA_CLFLAGS=--max_memory_ports all
 
 # https://www.xilinx.com/support/documentation/sw_manuals/xilinx2017_4/ug1023-sdaccel-user-guide.pdf
 # Page 44
@@ -97,9 +101,11 @@ krnl_GA_CLFLAGS=--max_memory_ports bandwidth
 # bank0, bank1, bank2, and bank3 
 # for platforms with 4 DDR banks.
 
-krnl_GA_LDCLFLAGS+= --sp bandwidth_1.m_axi_gmem0:bank0 \
-		    --sp bandwidth_1.m_axi_gmem1:bank1 \
-		    --sp bandwidth_1.m_axi_gmem2:bank2	
+#krnl_GA_LDCLFLAGS+= --sp bandwidth_1.m_axi_gmem0:bank0 \
+#		    --sp bandwidth_1.m_axi_gmem1:bank1 \
+#		    --sp bandwidth_1.m_axi_gmem2:bank2	
+
+krnl_GA_LDCLFLAGS+=
 #-------------------------------
 
 
@@ -145,14 +151,25 @@ GFPOP:= 0
 # As it is available in Xelera "saruman" server
 #DEVICES:= xilinx:kcu1500:dynamic (in ../common_xilinx/utility/boards.mk)
 
-# Boards in SDAccel installation path
+# Boards in SDAccel installation path: /opt/cad/xilinx/SDx/2017.4/platforms/
+
 # If several versions are present, e.g.: "vcu1525_5_0" and "vcu1525_5_1"
 # Pay attention to which should be used
 #BOARD:= xilinx:kcu1500:dynamic
 #BOARD:= xilinx:vcu1525:dynamic
 
 # Boards in external paths
-BOARD:= /home/wimi/lvs/DSA_SDACCEL_AWS_VU9P/xilinx_aws-vu9p-f1_dynamic_5_0/xilinx_aws-vu9p-f1_dynamic_5_0.xpfm
+
+# Cloned from https://github.com/aws/aws-fpga
+# This corresponds to AWS Shell v04261818 
+# https://github.com/aws/aws-fpga/blob/master/hdk/docs/AWS_Shell_RELEASE_NOTES.md
+# IMPORTANT: source scripts to get the full DSA
+# Because by default only the "sw" component is provided in GitHub
+#BOARD:= /home/wimi/lvs/ocl_xilinx/aws-fpga/SDAccel/aws_platform/xilinx_aws-vu9p-f1-04261818_dynamic_5_0/xilinx_aws-vu9p-f1-04261818_dynamic_5_0.xpfm
+BOARD:= /home/wimi/lvs/DSA_SDACCEL_AWS_VU9P/xilinx_aws-vu9p-f1-04261818_dynamic_5_0/xilinx_aws-vu9p-f1-04261818_dynamic_5_0.xpfm
+
+# Copied from Xelera (saruman) SDAccel installation path
+#BOARD:= /home/wimi/lvs/DSA_SDACCEL_AWS_VU9P/xilinx_aws-vu9p-f1_dynamic_5_0/xilinx_aws-vu9p-f1_dynamic_5_0.xpfm
 #BOARD:= /home/wimi/lvs/DSA_SDACCEL_VCU1525_5_1/xilinx_vcu1525_dynamic_5_1/xilinx_vcu1525_dynamic_5_1.xpfm
 #BOARD:= /opt/cad/xilinx/SDx/2017.1/platforms/xilinx_adm-pcie-7v3_1ddr_3_0/xilinx_adm-pcie-7v3_1ddr_3_0.xpfm
 
@@ -302,9 +319,14 @@ COPY_DIR := copy_$(PROJECT_NAME)
 COPY_DIR_DOCK := $(PROJECT_NAME)
 
 # Make sure this remote-server alias exists (in ~/.ssh/config)
-SERVER_BRIDGE := erebor:/scratch/
-SERVER_EXEC   := saruman:~/ocladock_sdx17_4
 
+## Xelera
+#SERVER_BRIDGE := erebor:/scratch/
+#SERVER_EXEC   := saruman:~/ocladock_sdx17_4
+
+## AWS
+SERVER_BRIDGE := eredmithrim:/home/lvs/ESA/AWS
+SERVER_EXEC   := AWS
 
 # Delete an existing folder if previously created
 # Create a folder $(COPY_DIR) in the parent directory
@@ -325,7 +347,7 @@ copy: clean-copy
 	cp defines_fixedpt_64.h ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
 	cp -r device/ ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
 	cp -r host/ ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
-	cp -r input/ ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
+	#cp -r input/ ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
 	cp -r wrapcl/ ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
 	cp -r ../common ../$(COPY_DIR)/
 	cp -r ../common_xilinx ../$(COPY_DIR)/
