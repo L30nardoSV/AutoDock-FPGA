@@ -2582,7 +2582,12 @@ bool init() {
   std::string binary_file = getBoardBinaryFile("docking", device);
 */
   std::string binary_file = getBoardBinaryFile("Krnl_GA", device);
+
+/*
   printf("Using AOCX: %s\n", binary_file.c_str());
+*/
+  printf("Using XCLBIN: %s\n", binary_file.c_str());
+
   program = createProgramFromBinary(context, binary_file.c_str(), &device, 1);
 
 
@@ -2596,7 +2601,7 @@ bool init() {
   checkError(status, "Failed to create command queue");
 
   // Create the kernel - name passed in here must match kernel name in the
-  // original CL file, that was compiled into an AOCX file using the AOC tool
+  // original CL file, that was compiled into an XCLBIN file using the SDAccel tool
 #ifdef ENABLE_KERNEL1
 /*
   command_queue1 = clCreateCommandQueue(context, device, 0, &status);
