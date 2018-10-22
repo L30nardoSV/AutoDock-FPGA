@@ -92,7 +92,7 @@ Krnl_GA_SRCS=./device/Krnl_GA.cl
 # krnl_GA_CLFLAGS=--max_memory_ports bandwidth
 
 # Choosing the all kernels in design for maximum memory port property 
-krnl_GA_CLFLAGS=--max_memory_ports all
+Krnl_GA_CLFLAGS=--max_memory_ports all
 
 # https://www.xilinx.com/support/documentation/sw_manuals/xilinx2017_4/ug1023-sdaccel-user-guide.pdf
 # Page 44
@@ -105,7 +105,10 @@ krnl_GA_CLFLAGS=--max_memory_ports all
 #		    --sp bandwidth_1.m_axi_gmem1:bank1 \
 #		    --sp bandwidth_1.m_axi_gmem2:bank2	
 
-krnl_GA_LDCLFLAGS+=
+Krnl_GA_LDCLFLAGS+=--sp Krnl_GA_1.m_axi_gmem0:bank0 \
+		   --sp Krnl_Conform_1.m_axi_gmem1:bank1 \
+		   --sp Krnl_InterE_1.m_axi_gmem2:bank2 \
+		   --sp Krnl_IntraE_1.m_axi_gmem3:bank3	
 #-------------------------------
 
 
@@ -358,12 +361,12 @@ copy: clean-copy
 	@echo " "
 	cd ../ && scp $(COPY_DIR).zip $(SERVER_BRIDGE)
 	@echo $(newline)
-	@echo "===================================================="
-	@echo "Files listed were transferred to $(SERVER_BRIDGE)   "
+	@echo "=================================================================="
+	@echo "Files listed were transferred to $(SERVER_BRIDGE)                 "
 	@echo $(newline)
-	@echo "Then, transfer files manually                       "
-	@echo "from $(SERVER_BRIDGE) to $(SERVER_EXEC)             "
-	@echo "===================================================="
+	@echo "Then, create AFI and transfer files manually                      "
+	@echo "from $(SERVER_BRIDGE) to $(SERVER_EXEC)                           "
+	@echo "=================================================================="
 	@echo $(newline)
 
 
