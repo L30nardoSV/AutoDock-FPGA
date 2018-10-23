@@ -250,6 +250,20 @@ swemu: kerswemu
 	@echo "===================================================================================="
 	@echo $(newline)
 
+# Debug on software using Xilinx GDB
+# Analyze hangs with the following gdb extensions:
+# xprint queue [<cl_command_queue>]
+# xprint event <cl_event>
+# xprint mem [<cl_mem>]
+# xprint kernel
+# xprint all
+swemudebug:
+	xgdb --args \
+	./$(EXES) \
+	-ffile input/$(PDB)/derived/$(PDB)_protein.maps.fld \
+	-lfile input/$(PDB)/derived/$(PDB)_ligand.pdbqt \
+	-psize $(PSIZE) -nrun $(NRUN) -nev $(NEV) -ngen $(NGEN) -gfpop 1
+
 
 hwemu: kerhwemu
 	emconfigutil --platform $(BOARD) --nd $(NDEVICES_EMU)
@@ -282,14 +296,6 @@ hw:
 	@echo $(newline)
 
 
-sw-debug:
-	XCL_EMULATION_MODE=sw_emu \
-	xgdb -args ./$(EXES) \
-	-ffile input/1stp/derived/1stp_protein.maps.fld \
-	-lfile input/1stp/derived/1stp_ligand.pdbqt \
-	-nrun 1 -nev 100 -lsit 10 -psize 10
-
-
 # Execute on remote server
 # Host-recompilation
 # Copy of host to $(TARGET_DIR_HW)
@@ -313,6 +319,22 @@ eva: exe
 	sdx_analyze trace sdaccel_timeline_trace.csv
 	@echo "==========================================================================="
 	@echo $(newline)
+
+
+# Debug on hardware using Xilinx GDB
+# Analyze hangs with the following gdb extensions:
+# xprint queue [<cl_command_queue>]
+# xprint event <cl_event>
+# xprint mem [<cl_mem>]
+# xprint kernel
+# xprint all
+evadebug:
+	xgdb --args \
+	./$(EXES) \
+	-ffile input/$(PDB)/derived/$(PDB)_protein.maps.fld \
+	-lfile input/$(PDB)/derived/$(PDB)_ligand.pdbqt \
+	-resnam docking_debug_$(PDB)_$(NRUN) \
+	-nrun $(NRUN) -gfpop $(GFPOP)
 
 
 # Project name
@@ -344,6 +366,7 @@ copy: clean-copy
 	cp ./xclbin/$(XCLBINS).hw.*.xo ../$(COPY_DIR)/$(COPY_DIR_DOCK)/xclbin/
 	cp ./xclbin/$(XCLBINS).hw.*.xclbin ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
 	mv ../$(COPY_DIR)/$(COPY_DIR_DOCK)/$(XCLBINS).hw.*.xclbin ../$(COPY_DIR)/$(COPY_DIR_DOCK)/$(XCLBINS).xclbin
+	cp sdaccel.ini ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
 	cp Makefile ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
 	cp defines.h ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
 	cp defines_fixedpt.h ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
