@@ -109,6 +109,28 @@ Krnl_GA_LDCLFLAGS+=--sp Krnl_GA_1.m_axi_gmem0:bank0 \
 		   --sp Krnl_Conform_1.m_axi_gmem1:bank1 \
 		   --sp Krnl_InterE_1.m_axi_gmem2:bank2 \
 		   --sp Krnl_IntraE_1.m_axi_gmem3:bank3	
+
+
+##
+# https://www.xilinx.com/support/documentation/sw_manuals/xilinx2017_4/ug1281-sdaccel-debugging-guide.pdf
+# Page 32
+# Instrumentation 1: Kernel Hangs due to AXI Violations
+##
+
+# Add Lightweight AXI Protocol Checker (lapc)
+# <protocol:< compute_unit_name >:< interface_name >>
+LAPC:=none
+
+ifneq ($(LAPC),none)
+# Number of axi protocol checkers requested must be between 1 and 63.
+#Krnl_GA_LDCLFLAGS+=--dk protocol:all:all
+
+Krnl_GA_LDCLFLAGS+=--dk protocol:Krnl_GA_1:m_axi_gmem0 \
+		   --dk protocol:Krnl_Conform_1:m_axi_gmem1 \
+                   --dk protocol:Krnl_InterE_1:m_axi_gmem2 \
+	           --dk protocol:Krnl_IntraE_1:m_axi_gmem3
+endif
+
 #-------------------------------
 
 
@@ -294,6 +316,18 @@ hw:
 	@echo "INFO: FPGA bitstream is under: \"./xclbin/$(XCLBINS).hw.*.xclbin\"       " 
 	@echo "========================================================================="
 	@echo $(newline)
+
+
+# Build instrumented hw (FPGA bitstream)
+# NOT integrated yet in a multistep compilation
+hw-instr: 	
+	make all TARGETS=hw DEVICES=$(BOARD) LAPC=yes
+	@echo $(newline)
+	@echo "=============================================================================================="
+	@echo "INFO: [instrumented] FPGA bitstream is under: \"./xclbin/$(XCLBINS).hw.*.xclbin\"             " 
+	@echo "=============================================================================================="
+	@echo $(newline)
+
 
 
 # Execute on remote server
