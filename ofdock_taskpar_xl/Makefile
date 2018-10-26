@@ -88,11 +88,18 @@ Krnl_GA_SRCS=./device/Krnl_GA.cl
 # Sets the maximum memory port property 
 # for all kernels or a given kernel
 
-# Choosing the "bandwidth" kernel for maximum memory port property 
+## Commented because it is example
+## Choosing the "bandwidth" kernel for maximum memory port property 
 # krnl_GA_CLFLAGS=--max_memory_ports bandwidth
 
-# Choosing the all kernels in design for maximum memory port property 
-Krnl_GA_CLFLAGS=--max_memory_ports all
+## Commented because not all kernels in design need that
+## Choosing the all kernels in design for maximum memory port property 
+# Krnl_GA_CLFLAGS=--max_memory_ports all
+
+Krnl_GA_CLFLAGS=--max_memory_ports Krnl_GA \
+		--max_memory_ports Krnl_Conform \
+		--max_memory_ports Krnl_InterE \
+		--max_memory_ports Krnl_IntraE
 
 # https://www.xilinx.com/support/documentation/sw_manuals/xilinx2017_4/ug1023-sdaccel-user-guide.pdf
 # Page 44
@@ -101,6 +108,7 @@ Krnl_GA_CLFLAGS=--max_memory_ports all
 # bank0, bank1, bank2, and bank3 
 # for platforms with 4 DDR banks.
 
+## Commented because it is example
 #krnl_GA_LDCLFLAGS+= --sp bandwidth_1.m_axi_gmem0:bank0 \
 #		    --sp bandwidth_1.m_axi_gmem1:bank1 \
 #		    --sp bandwidth_1.m_axi_gmem2:bank2	
@@ -122,13 +130,37 @@ Krnl_GA_LDCLFLAGS+=--sp Krnl_GA_1.m_axi_gmem0:bank0 \
 LAPC:=none
 
 ifneq ($(LAPC),none)
-# Number of axi protocol checkers requested must be between 1 and 63.
+
+## Commented because error was obtained:
+## Number of axi protocol checkers requested must be between 1 and 63.
 #Krnl_GA_LDCLFLAGS+=--dk protocol:all:all
 
+## Warning obtained (not sure if because of configuration)
+## # xbsak status --lapc
+## Invalid codes read, skip decoding
 Krnl_GA_LDCLFLAGS+=--dk protocol:Krnl_GA_1:m_axi_gmem0 \
 		   --dk protocol:Krnl_Conform_1:m_axi_gmem1 \
                    --dk protocol:Krnl_InterE_1:m_axi_gmem2 \
 	           --dk protocol:Krnl_IntraE_1:m_axi_gmem3
+
+## Commented because error was obtained:
+## No interface pins matched 'get_bd_intf_pins -of /Krnl_Conform_1 -filter NAME=~m_axi_gmem'
+## ERROR: caught error: Unable to find interface pin  for AXI protocol checker insertion
+#Krnl_GA_LDCLFLAGS+=--dk protocol:Krnl_GA_1:m_axi_gmem \
+#		   --dk protocol:Krnl_Conform_1:m_axi_gmem \
+#                  --dk protocol:Krnl_InterE_1:m_axi_gmem \
+#	           --dk protocol:Krnl_IntraE_1:m_axi_gmem
+endif
+
+## Adding Performance Monitors (spm) 
+## enables the listing of detailed communication statistics (counters). 
+## --profile_kernel data:<kernel_name|all>:<cu_name|all>:<interface_name|all>
+SPM:=none
+
+ifneq ($(SPM),none)
+##--profile_kernel data:krnl1:cu1:m_axi_gmem0
+##--profile_kernel data:krnl2:cu2:m_axi_gmem
+Krnl_GA_LDCLFLAGS+=--profile_kernel Krnl_GA:Krnl_GA_1:all
 endif
 
 #-------------------------------
@@ -321,7 +353,7 @@ hw:
 # Build instrumented hw (FPGA bitstream)
 # NOT integrated yet in a multistep compilation
 hw-instr: 	
-	make all TARGETS=hw DEVICES=$(BOARD) LAPC=yes
+	make all TARGETS=hw DEVICES=$(BOARD) LAPC=yes SPM=yes
 	@echo $(newline)
 	@echo "=============================================================================================="
 	@echo "INFO: [instrumented] FPGA bitstream is under: \"./xclbin/$(XCLBINS).hw.*.xclbin\"             " 
