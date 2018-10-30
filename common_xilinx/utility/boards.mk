@@ -49,17 +49,6 @@ ENABLE_K21 = YES
 
 ENABLE_K27 = YES
 
-# IA Pipeline
-ENABLE_K28 = NO
-ENABLE_K29 = NO
-ENABLE_K30 = NO
-
-# BT, GG, LS_ushort, LS_float arbiters
-ENABLE_K31 = NO
-ENABLE_K32 = NO
-ENABLE_K33 = NO
-ENABLE_K34 = NO
-
 # ls123 prng
 ENABLE_K35 = YES
 
@@ -165,48 +154,6 @@ else
 	K27 =
 endif
 
-ifeq ($(ENABLE_K28),YES)
-	K28 =-DENABLE_KERNEL28
-else
-	K28 =
-endif
-
-ifeq ($(ENABLE_K29),YES)
-	K29 =-DENABLE_KERNEL29
-else
-	K29 =
-endif
-
-ifeq ($(ENABLE_K30),YES)
-	K30 =-DENABLE_KERNEL30
-else
-	K30 =
-endif
-
-ifeq ($(ENABLE_K31),YES)
-	K31 =-DENABLE_KERNEL31
-else
-	K31 =
-endif
-
-ifeq ($(ENABLE_K32),YES)
-	K32 =-DENABLE_KERNEL32
-else
-	K32 =
-endif
-
-ifeq ($(ENABLE_K33),YES)
-	K33 =-DENABLE_KERNEL33
-else
-	K33 =
-endif
-
-ifeq ($(ENABLE_K34),YES)
-	K34 =-DENABLE_KERNEL34
-else
-	K34 =
-endif
-
 ifeq ($(ENABLE_K35),YES)
 	K35 =-DENABLE_KERNEL35
 else
@@ -242,10 +189,6 @@ ifeq ($(ENABLE_K40),YES)
 else
 	K40 =
 endif
-
-
-
-
 
 ifeq ($(ENABLE_K41),YES)
 	K41 =-DENABLE_KERNEL41
@@ -306,8 +249,8 @@ else
 endif
 ENABLE_KERNELS = $(K1)  $(K2)  $(K3)  $(K4)         $(K6)  $(K7)                $(K10) \
 		        $(K12)        $(K14) $(K15)                             $(K20) \
-		 $(K21)                                    $(K27) $(K28) $(K29) $(K30) \
-		 $(K31) $(K32) $(K33) $(K34) $(K35) $(K36) $(K37) $(K38) $(K39) $(K40) \
+		 $(K21)                                    $(K27)                      \
+		                             $(K35) $(K36) $(K37) $(K38) $(K39) $(K40) \
 		 $(K41) $(K42) $(K43) $(K44) $(K45) $(K46) $(K47) $(K48)
 
 # =============================
