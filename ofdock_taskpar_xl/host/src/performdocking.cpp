@@ -41,10 +41,10 @@ static cl_command_queue command_queue = NULL;
 #endif
 
 // Kernel name, as defined in the CL file
-#ifdef ENABLE_KERNEL1
-static cl_command_queue command_queue1 = NULL;
-static cl_kernel kernel1  = NULL;
-static const char *name_k1 = "Krnl_GA";
+#ifdef ENABLE_KRNL_GA
+static cl_command_queue command_queue_ga = NULL;
+static cl_kernel kernel_ga  = NULL;
+static const char *name_krnl_ga = "Krnl_GA";
 #endif
 
 #ifdef ENABLE_KERNEL2
@@ -749,44 +749,44 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 
 #if defined (FIXED_POINT_INTERE)
 	#if 0
-	memcopyBufferObjectToDevice(command_queue/*1*/,mem_KerConstStatic_fixpt64_atom_charges_const,            &KerConstStatic.fixpt64_atom_charges_const[0],            MAX_NUM_OF_ATOMS*sizeof(fixedpt64));
+	memcopyBufferObjectToDevice(command_queue,mem_KerConstStatic_fixpt64_atom_charges_const,            &KerConstStatic.fixpt64_atom_charges_const[0],            MAX_NUM_OF_ATOMS*sizeof(fixedpt64));
 	#endif
-	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_fixpt64_atom_charges_const,            &KerConstStatic.fixpt64_atom_charges_const[0],            MAX_NUM_OF_ATOMS*sizeof(fixedpt64));
+	memcopyBufferObjectToDevice(command_queue_ga,mem_KerConstStatic_fixpt64_atom_charges_const,            &KerConstStatic.fixpt64_atom_charges_const[0],            MAX_NUM_OF_ATOMS*sizeof(fixedpt64));
 #endif
-	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_InterE_atom_charges_const,            &KerConstStatic.atom_charges_const[0],            MAX_NUM_OF_ATOMS*sizeof(float));
-	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_InterE_atom_types_const,              &KerConstStatic.atom_types_const[0],              MAX_NUM_OF_ATOMS*sizeof(char));
+	memcopyBufferObjectToDevice(command_queue_ga,mem_KerConstStatic_InterE_atom_charges_const,            &KerConstStatic.atom_charges_const[0],            MAX_NUM_OF_ATOMS*sizeof(float));
+	memcopyBufferObjectToDevice(command_queue_ga,mem_KerConstStatic_InterE_atom_types_const,              &KerConstStatic.atom_types_const[0],              MAX_NUM_OF_ATOMS*sizeof(char));
 
-	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_IntraE_atom_charges_const,            &KerConstStatic.atom_charges_const[0],            MAX_NUM_OF_ATOMS*sizeof(float));
-	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_IntraE_atom_types_const,              &KerConstStatic.atom_types_const[0],              MAX_NUM_OF_ATOMS*sizeof(char));
+	memcopyBufferObjectToDevice(command_queue_ga,mem_KerConstStatic_IntraE_atom_charges_const,            &KerConstStatic.atom_charges_const[0],            MAX_NUM_OF_ATOMS*sizeof(float));
+	memcopyBufferObjectToDevice(command_queue_ga,mem_KerConstStatic_IntraE_atom_types_const,              &KerConstStatic.atom_types_const[0],              MAX_NUM_OF_ATOMS*sizeof(char));
 
 /*
-	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_intraE_contributors_const,     &KerConstStatic.intraE_contributors_const[0],     3*MAX_INTRAE_CONTRIBUTORS*sizeof(char));
+	memcopyBufferObjectToDevice(command_queue_ga,mem_KerConstStatic_intraE_contributors_const,     &KerConstStatic.intraE_contributors_const[0],     3*MAX_INTRAE_CONTRIBUTORS*sizeof(char));
 */
-	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_intraE_contributors_const,     &KerConstStatic.intraE_contributors_const[0],     MAX_INTRAE_CONTRIBUTORS*sizeof(cl_char3));
+	memcopyBufferObjectToDevice(command_queue_ga,mem_KerConstStatic_intraE_contributors_const,     &KerConstStatic.intraE_contributors_const[0],     MAX_INTRAE_CONTRIBUTORS*sizeof(cl_char3));
 
-	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_reqm_const,         	     &KerConstStatic.reqm_const,           	           ATYPE_NUM*sizeof(float));
-  	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_reqm_hbond_const,              &KerConstStatic.reqm_hbond_const,                 ATYPE_NUM*sizeof(float));
-  	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_atom1_types_reqm_const,        &KerConstStatic.atom1_types_reqm_const,           ATYPE_NUM*sizeof(unsigned int));
-  	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_atom2_types_reqm_const,        &KerConstStatic.atom2_types_reqm_const,           ATYPE_NUM*sizeof(unsigned int));
+	memcopyBufferObjectToDevice(command_queue_ga,mem_KerConstStatic_reqm_const,         	     &KerConstStatic.reqm_const,           	           ATYPE_NUM*sizeof(float));
+  	memcopyBufferObjectToDevice(command_queue_ga,mem_KerConstStatic_reqm_hbond_const,              &KerConstStatic.reqm_hbond_const,                 ATYPE_NUM*sizeof(float));
+  	memcopyBufferObjectToDevice(command_queue_ga,mem_KerConstStatic_atom1_types_reqm_const,        &KerConstStatic.atom1_types_reqm_const,           ATYPE_NUM*sizeof(unsigned int));
+  	memcopyBufferObjectToDevice(command_queue_ga,mem_KerConstStatic_atom2_types_reqm_const,        &KerConstStatic.atom2_types_reqm_const,           ATYPE_NUM*sizeof(unsigned int));
 
-	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_VWpars_AC_const,               &KerConstStatic.VWpars_AC_const[0],               MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES*sizeof(float));
-	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_VWpars_BD_const,               &KerConstStatic.VWpars_BD_const[0],               MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES*sizeof(float));
-	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_dspars_S_const,                &KerConstStatic.dspars_S_const[0], 	       MAX_NUM_OF_ATYPES*sizeof(float));
-	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_dspars_V_const,                &KerConstStatic.dspars_V_const[0], 	       MAX_NUM_OF_ATYPES*sizeof(float));
+	memcopyBufferObjectToDevice(command_queue_ga,mem_KerConstStatic_VWpars_AC_const,               &KerConstStatic.VWpars_AC_const[0],               MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES*sizeof(float));
+	memcopyBufferObjectToDevice(command_queue_ga,mem_KerConstStatic_VWpars_BD_const,               &KerConstStatic.VWpars_BD_const[0],               MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES*sizeof(float));
+	memcopyBufferObjectToDevice(command_queue_ga,mem_KerConstStatic_dspars_S_const,                &KerConstStatic.dspars_S_const[0], 	       MAX_NUM_OF_ATYPES*sizeof(float));
+	memcopyBufferObjectToDevice(command_queue_ga,mem_KerConstStatic_dspars_V_const,                &KerConstStatic.dspars_V_const[0], 	       MAX_NUM_OF_ATYPES*sizeof(float));
 	#if defined (FIXED_POINT_CONFORM)
 	// fixed-point
-	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_rotlist_const,                 &KerConstStatic.rotlist_const[0], 		       MAX_NUM_OF_ROTATIONS*sizeof(fixedpt));
-	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_ref_coords_const, 	     &KerConstStatic.ref_coords_const[0],              MAX_NUM_OF_ATOMS*sizeof(cl_int3));
-	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_rotbonds_moving_vectors_const, &KerConstStatic.rotbonds_moving_vectors_const[0], MAX_NUM_OF_ROTBONDS*sizeof(cl_int3));
-	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_rotbonds_unit_vectors_const,   &KerConstStatic.rotbonds_unit_vectors_const[0],   MAX_NUM_OF_ROTBONDS*sizeof(cl_int3));
-	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_ref_orientation_quats_const,   &KerConstStatic.ref_orientation_quats_const[0],   MAX_NUM_OF_RUNS*sizeof(cl_int4));
+	memcopyBufferObjectToDevice(command_queue_ga,mem_KerConstStatic_rotlist_const,                 &KerConstStatic.rotlist_const[0], 		       MAX_NUM_OF_ROTATIONS*sizeof(fixedpt));
+	memcopyBufferObjectToDevice(command_queue_ga,mem_KerConstStatic_ref_coords_const, 	     &KerConstStatic.ref_coords_const[0],              MAX_NUM_OF_ATOMS*sizeof(cl_int3));
+	memcopyBufferObjectToDevice(command_queue_ga,mem_KerConstStatic_rotbonds_moving_vectors_const, &KerConstStatic.rotbonds_moving_vectors_const[0], MAX_NUM_OF_ROTBONDS*sizeof(cl_int3));
+	memcopyBufferObjectToDevice(command_queue_ga,mem_KerConstStatic_rotbonds_unit_vectors_const,   &KerConstStatic.rotbonds_unit_vectors_const[0],   MAX_NUM_OF_ROTBONDS*sizeof(cl_int3));
+	memcopyBufferObjectToDevice(command_queue_ga,mem_KerConstStatic_ref_orientation_quats_const,   &KerConstStatic.ref_orientation_quats_const[0],   MAX_NUM_OF_RUNS*sizeof(cl_int4));
 	#else
 	// floating-point (original)
-	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_rotlist_const,                 &KerConstStatic.rotlist_const[0], 		       MAX_NUM_OF_ROTATIONS*sizeof(int));
-	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_ref_coords_const, 	     &KerConstStatic.ref_coords_const[0],              MAX_NUM_OF_ATOMS*sizeof(cl_float3));
-	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_rotbonds_moving_vectors_const, &KerConstStatic.rotbonds_moving_vectors_const[0], MAX_NUM_OF_ROTBONDS*sizeof(cl_float3));
-	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_rotbonds_unit_vectors_const,   &KerConstStatic.rotbonds_unit_vectors_const[0],   MAX_NUM_OF_ROTBONDS*sizeof(cl_float3));
-	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_ref_orientation_quats_const,   &KerConstStatic.ref_orientation_quats_const[0],   MAX_NUM_OF_RUNS*sizeof(cl_float4));
+	memcopyBufferObjectToDevice(command_queue_ga,mem_KerConstStatic_rotlist_const,                 &KerConstStatic.rotlist_const[0], 		       MAX_NUM_OF_ROTATIONS*sizeof(int));
+	memcopyBufferObjectToDevice(command_queue_ga,mem_KerConstStatic_ref_coords_const, 	     &KerConstStatic.ref_coords_const[0],              MAX_NUM_OF_ATOMS*sizeof(cl_float3));
+	memcopyBufferObjectToDevice(command_queue_ga,mem_KerConstStatic_rotbonds_moving_vectors_const, &KerConstStatic.rotbonds_moving_vectors_const[0], MAX_NUM_OF_ROTBONDS*sizeof(cl_float3));
+	memcopyBufferObjectToDevice(command_queue_ga,mem_KerConstStatic_rotbonds_unit_vectors_const,   &KerConstStatic.rotbonds_unit_vectors_const[0],   MAX_NUM_OF_ROTBONDS*sizeof(cl_float3));
+	memcopyBufferObjectToDevice(command_queue_ga,mem_KerConstStatic_ref_orientation_quats_const,   &KerConstStatic.ref_orientation_quats_const[0],   MAX_NUM_OF_RUNS*sizeof(cl_float4));
 	#endif
 
 //#if defined (FIXED_POINT_INTERE)
@@ -827,57 +827,57 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 				}
 	}
 
-	memcopyBufferObjectToDevice(command_queue1,mem_dockpars_fgrids, 	cpu_fixedpt64grids,       size_fixedpt64grids);
+	memcopyBufferObjectToDevice(command_queue_ga,mem_dockpars_fgrids, 	cpu_fixedpt64grids,       size_fixedpt64grids);
 #else
-	memcopyBufferObjectToDevice(command_queue1,mem_dockpars_fgrids, 	cpu_floatgrids,       size_floatgrids);
+	memcopyBufferObjectToDevice(command_queue_ga,mem_dockpars_fgrids, 	cpu_floatgrids,       size_floatgrids);
 
 	#if defined(SEPARATE_FGRID_INTERE)
-	memcopyBufferObjectToDevice(command_queue1,mem_dockpars_fgrids2, 	cpu_floatgrids + mygrid->num_of_atypes     * mygrid->size_xyz[0]*mygrid->size_xyz[1]* mygrid->size_xyz[2],       size_floatgrids2);
-	memcopyBufferObjectToDevice(command_queue1,mem_dockpars_fgrids3, 	cpu_floatgrids + (mygrid->num_of_atypes+1) * mygrid->size_xyz[0]*mygrid->size_xyz[1]* mygrid->size_xyz[2],       size_floatgrids3);
+	memcopyBufferObjectToDevice(command_queue_ga,mem_dockpars_fgrids2, 	cpu_floatgrids + mygrid->num_of_atypes     * mygrid->size_xyz[0]*mygrid->size_xyz[1]* mygrid->size_xyz[2],       size_floatgrids2);
+	memcopyBufferObjectToDevice(command_queue_ga,mem_dockpars_fgrids3, 	cpu_floatgrids + (mygrid->num_of_atypes+1) * mygrid->size_xyz[0]*mygrid->size_xyz[1]* mygrid->size_xyz[2],       size_floatgrids3);
 	#endif
 #endif
 
 	clock_start_docking = clock();
 
-#ifdef ENABLE_KERNEL1 // Krnl_GA
+#ifdef ENABLE_KRNL_GA
 	#if defined(SINGLE_COPY_POP_ENE)
-        setKernelArg(kernel1,0,  sizeof(mem_dockpars_conformations_current),    &mem_dockpars_conformations_current);
-        setKernelArg(kernel1,1,  sizeof(mem_dockpars_energies_current),         &mem_dockpars_energies_current);
-	setKernelArg(kernel1,2,  sizeof(mem_evals_performed),   		&mem_evals_performed);
-	setKernelArg(kernel1,3,  sizeof(mem_gens_performed),    		&mem_gens_performed);
-	setKernelArg(kernel1,4,  sizeof(unsigned int),                  	&dockpars.pop_size);
-	setKernelArg(kernel1,5,  sizeof(unsigned int),                 		&dockpars.num_of_energy_evals);
-	setKernelArg(kernel1,6,  sizeof(unsigned int),                 		&dockpars.num_of_generations);
-	setKernelArg(kernel1,7,  sizeof(float),                          	&dockpars.tournament_rate);
-	setKernelArg(kernel1,8,  sizeof(float),                          	&dockpars.mutation_rate);
-	setKernelArg(kernel1,9,  sizeof(float),                          	&dockpars.abs_max_dmov);
-	setKernelArg(kernel1,10, sizeof(float),                          	&dockpars.abs_max_dang);
-	setKernelArg(kernel1,11, sizeof(float),                                 &two_absmaxdmov);
-	setKernelArg(kernel1,12, sizeof(float),                                 &two_absmaxdang);
-	setKernelArg(kernel1,13, sizeof(float),                          	&dockpars.crossover_rate);
-	setKernelArg(kernel1,14, sizeof(unsigned int),                          &dockpars.num_of_lsentities);
-	setKernelArg(kernel1,15, sizeof(unsigned char),                         &dockpars.num_of_genes);
-	//setKernelArg(kernel1,16, sizeof(unsigned short),                      run_cnt);
-	//setKernelArg(kernel1,17, sizeof(unsigned int),                        offset_pop);
-	//setKernelArg(kernel1,18, sizeof(unsigned int),                        offset_ene);
+        setKernelArg(kernel_ga,0,  sizeof(mem_dockpars_conformations_current),    &mem_dockpars_conformations_current);
+        setKernelArg(kernel_ga,1,  sizeof(mem_dockpars_energies_current),         &mem_dockpars_energies_current);
+	setKernelArg(kernel_ga,2,  sizeof(mem_evals_performed),   		&mem_evals_performed);
+	setKernelArg(kernel_ga,3,  sizeof(mem_gens_performed),    		&mem_gens_performed);
+	setKernelArg(kernel_ga,4,  sizeof(unsigned int),                  	&dockpars.pop_size);
+	setKernelArg(kernel_ga,5,  sizeof(unsigned int),                 		&dockpars.num_of_energy_evals);
+	setKernelArg(kernel_ga,6,  sizeof(unsigned int),                 		&dockpars.num_of_generations);
+	setKernelArg(kernel_ga,7,  sizeof(float),                          	&dockpars.tournament_rate);
+	setKernelArg(kernel_ga,8,  sizeof(float),                          	&dockpars.mutation_rate);
+	setKernelArg(kernel_ga,9,  sizeof(float),                          	&dockpars.abs_max_dmov);
+	setKernelArg(kernel_ga,10, sizeof(float),                          	&dockpars.abs_max_dang);
+	setKernelArg(kernel_ga,11, sizeof(float),                                 &two_absmaxdmov);
+	setKernelArg(kernel_ga,12, sizeof(float),                                 &two_absmaxdang);
+	setKernelArg(kernel_ga,13, sizeof(float),                          	&dockpars.crossover_rate);
+	setKernelArg(kernel_ga,14, sizeof(unsigned int),                          &dockpars.num_of_lsentities);
+	setKernelArg(kernel_ga,15, sizeof(unsigned char),                         &dockpars.num_of_genes);
+	//setKernelArg(kernel_ga,16, sizeof(unsigned short),                      run_cnt);
+	//setKernelArg(kernel_ga,17, sizeof(unsigned int),                        offset_pop);
+	//setKernelArg(kernel_ga,18, sizeof(unsigned int),                        offset_ene);
 	#else
-        setKernelArg(kernel1,0,  sizeof(mem_dockpars_conformations_current),    &mem_dockpars_conformations_current);
-        setKernelArg(kernel1,1,  sizeof(mem_dockpars_energies_current),         &mem_dockpars_energies_current);
-	setKernelArg(kernel1,2,  sizeof(mem_evals_and_generations_performed),   &mem_evals_and_generations_performed);
-	setKernelArg(kernel1,3,  sizeof(unsigned int),                  	&dockpars.pop_size);
-	setKernelArg(kernel1,4,  sizeof(unsigned int),                 		&dockpars.num_of_energy_evals);
-	setKernelArg(kernel1,5,  sizeof(unsigned int),                 		&dockpars.num_of_generations);
-	setKernelArg(kernel1,6,  sizeof(float),                          	&dockpars.tournament_rate);
-	setKernelArg(kernel1,7,  sizeof(float),                          	&dockpars.mutation_rate);
-	setKernelArg(kernel1,8,  sizeof(float),                          	&dockpars.abs_max_dmov);
-	setKernelArg(kernel1,9,  sizeof(float),                          	&dockpars.abs_max_dang);
-	setKernelArg(kernel1,10, sizeof(float),                                 &two_absmaxdmov);
-	setKernelArg(kernel1,11, sizeof(float),                                 &two_absmaxdang);
-	setKernelArg(kernel1,12, sizeof(float),                          	&dockpars.crossover_rate);
-	setKernelArg(kernel1,13, sizeof(unsigned int),                          &dockpars.num_of_lsentities);
-	setKernelArg(kernel1,14, sizeof(unsigned char),                         &dockpars.num_of_genes);
+        setKernelArg(kernel_ga,0,  sizeof(mem_dockpars_conformations_current),    &mem_dockpars_conformations_current);
+        setKernelArg(kernel_ga,1,  sizeof(mem_dockpars_energies_current),         &mem_dockpars_energies_current);
+	setKernelArg(kernel_ga,2,  sizeof(mem_evals_and_generations_performed),   &mem_evals_and_generations_performed);
+	setKernelArg(kernel_ga,3,  sizeof(unsigned int),                  	&dockpars.pop_size);
+	setKernelArg(kernel_ga,4,  sizeof(unsigned int),                 		&dockpars.num_of_energy_evals);
+	setKernelArg(kernel_ga,5,  sizeof(unsigned int),                 		&dockpars.num_of_generations);
+	setKernelArg(kernel_ga,6,  sizeof(float),                          	&dockpars.tournament_rate);
+	setKernelArg(kernel_ga,7,  sizeof(float),                          	&dockpars.mutation_rate);
+	setKernelArg(kernel_ga,8,  sizeof(float),                          	&dockpars.abs_max_dmov);
+	setKernelArg(kernel_ga,9,  sizeof(float),                          	&dockpars.abs_max_dang);
+	setKernelArg(kernel_ga,10, sizeof(float),                                 &two_absmaxdmov);
+	setKernelArg(kernel_ga,11, sizeof(float),                                 &two_absmaxdang);
+	setKernelArg(kernel_ga,12, sizeof(float),                          	&dockpars.crossover_rate);
+	setKernelArg(kernel_ga,13, sizeof(unsigned int),                          &dockpars.num_of_lsentities);
+	setKernelArg(kernel_ga,14, sizeof(unsigned char),                         &dockpars.num_of_genes);
 	#endif
-#endif // End of ENABLE_KERNEL1
+#endif // End of ENABLE_KRNL_GA
 
 #ifdef ENABLE_KERNEL2 // Krnl_Conform
 	setKernelArg(kernel2,0,  sizeof(mem_KerConstStatic_rotlist_const),      	   &mem_KerConstStatic_rotlist_const);
@@ -1328,7 +1328,7 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 
 
 #if defined(SINGLE_COPY_POP_ENE)
-	memcopyBufferObjectToDevice(command_queue1,mem_dockpars_conformations_current, 	cpu_init_populations, size_populations);
+	memcopyBufferObjectToDevice(command_queue_ga,mem_dockpars_conformations_current, 	cpu_init_populations, size_populations);
 #endif
 
 
@@ -1353,16 +1353,16 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		if (prepare_constdynamic_fields_for_gpu(&myligand_reference, mypars, cpu_ref_ori_angles, &KerConstDynamic) == 1)
 			return 1;
 
- 		memcopyBufferObjectToDevice(command_queue1,mem_dockpars_conformations_current, 	cpu_init_populations, size_populations);
+ 		memcopyBufferObjectToDevice(command_queue_ga,mem_dockpars_conformations_current, 	cpu_init_populations, size_populations);
 #endif
 
 #if defined(SINGLE_COPY_POP_ENE)
-	#ifdef ENABLE_KERNEL1
+	#ifdef ENABLE_KRNL_GA
 		unsigned int Host_Offset_Pop = run_cnt * dockpars.pop_size * ACTUAL_GENOTYPE_LENGTH;
 		unsigned int Host_Offset_Ene = run_cnt * dockpars.pop_size;
-		setKernelArg(kernel1,16,  sizeof(unsigned short), &run_cnt);
-		setKernelArg(kernel1,17,  sizeof(unsigned int),   &Host_Offset_Pop);
-		setKernelArg(kernel1,18,  sizeof(unsigned int),   &Host_Offset_Ene);
+		setKernelArg(kernel_ga,16,  sizeof(unsigned short), &run_cnt);
+		setKernelArg(kernel_ga,17,  sizeof(unsigned int),   &Host_Offset_Pop);
+		setKernelArg(kernel_ga,18,  sizeof(unsigned int),   &Host_Offset_Ene);
 
 	#endif
 #endif
@@ -1463,12 +1463,12 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		setKernelArg(kernel44,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 21]);
 #endif // End of ENABLE_KERNEL44
 
-		#ifdef ENABLE_KERNEL1
+		#ifdef ENABLE_KRNL_GA
 		#if 0
-		runKernelTask(command_queue/*1*/,kernel1,NULL,NULL);
+		runKernelTask(command_queue,kernel_ga,NULL,NULL);
 		#endif
-		runKernelTask(command_queue1,kernel1,NULL,NULL);
-		#endif // ENABLE_KERNEL1
+		runKernelTask(command_queue_ga,kernel_ga,NULL,NULL);
+		#endif // ENABLE_KRNL_GA
 
 		#ifdef ENABLE_KERNEL2
 		runKernelTask(command_queue2,kernel2,NULL,NULL);
@@ -1579,8 +1579,8 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		clFinish(command_queue); 
 		#endif
 
-		#ifdef ENABLE_KERNEL1 		
-		clFinish(command_queue1); 
+		#ifdef ENABLE_KRNL_GA	
+		clFinish(command_queue_ga); 
 		#endif
 
 		#ifdef ENABLE_KERNEL2	
@@ -1699,13 +1699,13 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		*/
 
 		//copy results from device
-		memcopyBufferObjectFromDevice(command_queue1,array_evals_and_generations_performed,mem_evals_and_generations_performed,2*sizeof(unsigned int));
+		memcopyBufferObjectFromDevice(command_queue_ga,array_evals_and_generations_performed,mem_evals_and_generations_performed,2*sizeof(unsigned int));
 		mypars->num_of_energy_evals = array_evals_and_generations_performed [0];
 		mypars->num_of_generations  = array_evals_and_generations_performed [1];
 	
-		memcopyBufferObjectFromDevice(command_queue1,cpu_final_populations,mem_dockpars_conformations_current,size_populations);
+		memcopyBufferObjectFromDevice(command_queue_ga,cpu_final_populations,mem_dockpars_conformations_current,size_populations);
 
-		memcopyBufferObjectFromDevice(command_queue1,cpu_energies,mem_dockpars_energies_current,size_energies);
+		memcopyBufferObjectFromDevice(command_queue_ga,cpu_energies,mem_dockpars_energies_current,size_energies);
 
 
 
@@ -1788,11 +1788,11 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 #if defined(SINGLE_COPY_POP_ENE)
 
 	//copy results from device
-	memcopyBufferObjectFromDevice(command_queue1, cpu_evals_of_runs, mem_evals_performed, size_evals_of_runs);
-	memcopyBufferObjectFromDevice(command_queue1, cpu_gens_of_runs,  mem_gens_performed,  size_evals_of_runs);
+	memcopyBufferObjectFromDevice(command_queue_ga, cpu_evals_of_runs, mem_evals_performed, size_evals_of_runs);
+	memcopyBufferObjectFromDevice(command_queue_ga, cpu_gens_of_runs,  mem_gens_performed,  size_evals_of_runs);
 
-	memcopyBufferObjectFromDevice(command_queue1,cpu_final_populations,mem_dockpars_conformations_current,size_populations);
-	memcopyBufferObjectFromDevice(command_queue1,cpu_energies,mem_dockpars_energies_current,size_energies);
+	memcopyBufferObjectFromDevice(command_queue_ga,cpu_final_populations,mem_dockpars_conformations_current,size_populations);
+	memcopyBufferObjectFromDevice(command_queue_ga,cpu_energies,mem_dockpars_energies_current,size_energies);
 
 
 	for (unsigned int run_cnt = 0; run_cnt < mypars->num_of_runs; run_cnt++) {
@@ -1968,10 +1968,10 @@ bool init() {
 
   // Create the kernel - name passed in here must match kernel name in the
   // original CL file, that was compiled into an XCLBIN file using the SDAccel tool
-#ifdef ENABLE_KERNEL1
-  command_queue1 = clCreateCommandQueue(context, device, 0, &status);
+#ifdef ENABLE_KRNL_GA
+  command_queue_ga = clCreateCommandQueue(context, device, 0, &status);
   checkError(status, "Failed to create command queue1");
-  kernel1 = clCreateKernel(program, name_k1, &status);
+  kernel_ga = clCreateKernel(program, name_krnl_ga, &status);
   checkError(status, "Failed to create kernel");
 #endif
 
@@ -2162,9 +2162,9 @@ bool init() {
 
 // Free the resources allocated during initialization
 void cleanup() {
-#ifdef ENABLE_KERNEL1
-  if(kernel1) {clReleaseKernel(kernel1);}
-  if(command_queue1) {clReleaseCommandQueue(command_queue1);}
+#ifdef ENABLE_KRNL_GA
+  if(kernel_ga) {clReleaseKernel(kernel_ga);}
+  if(command_queue_ga) {clReleaseCommandQueue(command_queue_ga);}
 #endif
 
 #ifdef ENABLE_KERNEL2

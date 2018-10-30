@@ -20,7 +20,7 @@ CXXFLAGS:=-Wall -O0 -g -std=c++14 $(OTHER_FLAGS)
 # =============================
 # Enable Kernels
 # ============================= 
-ENABLE_K1  = YES
+ENABLE_KRNL_GA  = YES
 ENABLE_K2  = YES
 ENABLE_K3  = YES
 ENABLE_K4  = YES
@@ -76,10 +76,10 @@ ENABLE_K47 = YES
 ENABLE_K48 = YES
 
 
-ifeq ($(ENABLE_K1),YES)
-	K1 =-DENABLE_KERNEL1
+ifeq ($(ENABLE_KRNL_GA),YES)
+	KRNL_GA =-DENABLE_KRNL_GA
 else
-	K1 =
+	KRNL_GA =
 endif
 
 ifeq ($(ENABLE_K2),YES)
@@ -247,7 +247,7 @@ ifeq ($(REPRO), YES)
 else	
 	REP=
 endif
-ENABLE_KERNELS = $(K1)  $(K2)  $(K3)  $(K4)         $(K6)  $(K7)                $(K10) \
+ENABLE_KERNELS = $(KRNL_GA)  $(K2)  $(K3)  $(K4)         $(K6)  $(K7)                $(K10) \
 		        $(K12)        $(K14) $(K15)                             $(K20) \
 		 $(K21)                                    $(K27)                      \
 		                             $(K35) $(K36) $(K37) $(K38) $(K39) $(K40) \
