@@ -96,10 +96,13 @@ Krnl_GA_SRCS=./device/Krnl_GA.cl
 ## Choosing the all kernels in design for maximum memory port property 
 # Krnl_GA_CLFLAGS=--max_memory_ports all
 
-Krnl_GA_CLFLAGS=--max_memory_ports Krnl_GA \
-		--max_memory_ports Krnl_Conform \
-		--max_memory_ports Krnl_InterE \
-		--max_memory_ports Krnl_IntraE
+## Ideal configuration, but results in routing error
+#Krnl_GA_CLFLAGS=--max_memory_ports Krnl_GA \
+#		--max_memory_ports Krnl_Conform \
+#		--max_memory_ports Krnl_InterE \
+#		--max_memory_ports Krnl_IntraE
+
+#Krnl_GA_CLFLAGS=--max_memory_ports Krnl_GA
 
 # https://www.xilinx.com/support/documentation/sw_manuals/xilinx2017_4/ug1023-sdaccel-user-guide.pdf
 # Page 44
@@ -113,12 +116,37 @@ Krnl_GA_CLFLAGS=--max_memory_ports Krnl_GA \
 #		    --sp bandwidth_1.m_axi_gmem1:bank1 \
 #		    --sp bandwidth_1.m_axi_gmem2:bank2	
 
-Krnl_GA_LDCLFLAGS+=--sp Krnl_GA_1.m_axi_gmem0:bank0 \
-		   --sp Krnl_Conform_1.m_axi_gmem1:bank1 \
-		   --sp Krnl_InterE_1.m_axi_gmem2:bank2 \
-		   --sp Krnl_IntraE_1.m_axi_gmem3:bank3	
+## Ideal configuration, but results in routing error
+# First two args of IntraE are the 2nd and 3rd of InterE (atom_charges & atom_types),
+# Therefore they are mapped to the same DDR bank
+#Krnl_GA_LDCLFLAGS+=--sp Krnl_GA_1.m_axi_gmem0:bank0 \
+#		   --sp Krnl_GA_1.m_axi_gmem1:bank0 \
+#		   --sp Krnl_GA_1.m_axi_gmem2:bank0 \
+#		   --sp Krnl_GA_1.m_axi_gmem3:bank0 \
+#		   --sp Krnl_Conform_1.m_axi_gmem0:bank1 \
+#		   --sp Krnl_Conform_1.m_axi_gmem1:bank1 \
+#		   --sp Krnl_Conform_1.m_axi_gmem2:bank1 \
+#		   --sp Krnl_Conform_1.m_axi_gmem3:bank1 \
+#		   --sp Krnl_Conform_1.m_axi_gmem4:bank1 \
+#		   --sp Krnl_InterE_1.m_axi_gmem0:bank2 \
+#		   --sp Krnl_InterE_1.m_axi_gmem1:bank2 \
+#		   --sp Krnl_InterE_1.m_axi_gmem2:bank2 \
+#		   --sp Krnl_IntraE_1.m_axi_gmem0:bank2	\
+#		   --sp Krnl_IntraE_1.m_axi_gmem1:bank2	\
+#		   --sp Krnl_IntraE_1.m_axi_gmem2:bank3	\
+#		   --sp Krnl_IntraE_1.m_axi_gmem3:bank3	\
+#		   --sp Krnl_IntraE_1.m_axi_gmem4:bank3	\
+#		   --sp Krnl_IntraE_1.m_axi_gmem5:bank3	\
+#		   --sp Krnl_IntraE_1.m_axi_gmem6:bank3	\
+#		   --sp Krnl_IntraE_1.m_axi_gmem7:bank3	\
+# 		   --sp Krnl_IntraE_1.m_axi_gmem8:bank3	\
+#		   --sp Krnl_IntraE_1.m_axi_gmem9:bank3	\
+#		   --sp Krnl_IntraE_1.m_axi_gmem10:bank3
 
-
+Krnl_GA_LDCLFLAGS+=--sp Krnl_GA_1.m_axi_gmem:bank0      \
+		   --sp Krnl_Conform_1.m_axi_gmem:bank1 \
+		   --sp Krnl_InterE_1.m_axi_gmem:bank2  \
+		   --sp Krnl_IntraE_1.m_axi_gmem:bank3
 ##
 # https://www.xilinx.com/support/documentation/sw_manuals/xilinx2017_4/ug1281-sdaccel-debugging-guide.pdf
 # Page 32
@@ -139,9 +167,28 @@ ifneq ($(LAPC),none)
 ## # xbsak status --lapc
 ## Invalid codes read, skip decoding
 Krnl_GA_LDCLFLAGS+=--dk protocol:Krnl_GA_1:m_axi_gmem0 \
+		   --dk protocol:Krnl_GA_1:m_axi_gmem1 \
+		   --dk protocol:Krnl_GA_1:m_axi_gmem2 \
+		   --dk protocol:Krnl_GA_1:m_axi_gmem3 \
+		   --dk protocol:Krnl_Conform_1:m_axi_gmem0 \
 		   --dk protocol:Krnl_Conform_1:m_axi_gmem1 \
-                   --dk protocol:Krnl_InterE_1:m_axi_gmem2 \
-	           --dk protocol:Krnl_IntraE_1:m_axi_gmem3
+		   --dk protocol:Krnl_Conform_1:m_axi_gmem2 \
+		   --dk protocol:Krnl_Conform_1:m_axi_gmem3 \
+		   --dk protocol:Krnl_Conform_1:m_axi_gmem4 \
+                   --dk protocol:Krnl_InterE_1:m_axi_gmem0 \
+	 	   --dk protocol:Krnl_InterE_1:m_axi_gmem1 \
+		   --dk protocol:Krnl_InterE_1:m_axi_gmem2 \
+	           --dk protocol:Krnl_IntraE_1:m_axi_gmem0 \
+		   --dk protocol:Krnl_IntraE_1:m_axi_gmem1 \
+		   --dk protocol:Krnl_IntraE_1:m_axi_gmem2 \
+	           --dk protocol:Krnl_IntraE_1:m_axi_gmem3 \
+		   --dk protocol:Krnl_IntraE_1:m_axi_gmem4 \
+		   --dk protocol:Krnl_IntraE_1:m_axi_gmem5 \
+	           --dk protocol:Krnl_IntraE_1:m_axi_gmem6 \
+		   --dk protocol:Krnl_IntraE_1:m_axi_gmem7 \
+		   --dk protocol:Krnl_IntraE_1:m_axi_gmem8 \
+	           --dk protocol:Krnl_IntraE_1:m_axi_gmem9 \
+		   --dk protocol:Krnl_IntraE_1:m_axi_gmem10
 
 ## Commented because error was obtained:
 ## No interface pins matched 'get_bd_intf_pins -of /Krnl_Conform_1 -filter NAME=~m_axi_gmem'
@@ -160,7 +207,10 @@ SPM:=none
 ifneq ($(SPM),none)
 ##--profile_kernel data:krnl1:cu1:m_axi_gmem0
 ##--profile_kernel data:krnl2:cu2:m_axi_gmem
-Krnl_GA_LDCLFLAGS+=--profile_kernel Krnl_GA:Krnl_GA_1:all
+Krnl_GA_LDCLFLAGS+=--profile_kernel data:Krnl_GA:Krnl_GA_1:all \
+		   --profile_kernel data:Krnl_Conform:Krnl_Conform_1:all \
+		   --profile_kernel data:Krnl_InterE:Krnl_InterE_1:all \
+		   --profile_kernel data:Krnl_IntraE:Krnl_IntraE_1:all
 endif
 
 #-------------------------------

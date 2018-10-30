@@ -15,9 +15,18 @@
 /*
 
 */
+  #if 0
   int mallocBufferObject(cl_context   context,
 			 cl_mem_flags flags,
 			 size_t       size,
+			 cl_mem*      mem);
+  #endif
+
+  // Modified to support explicit host point
+  int mallocBufferObject(cl_context   context,
+			 cl_mem_flags flags,
+			 size_t       size,
+			 void*        host_pointer,
 			 cl_mem*      mem);
 
 /*

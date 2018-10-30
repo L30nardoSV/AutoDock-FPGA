@@ -450,8 +450,12 @@ float* cpu_ref_ori_angles;
 #if defined (FIXED_POINT_INTERE)
 cl_mem mem_KerConstStatic_fixpt64_atom_charges_const;
 #endif
-cl_mem mem_KerConstStatic_atom_charges_const;
-cl_mem mem_KerConstStatic_atom_types_const;
+cl_mem mem_KerConstStatic_InterE_atom_charges_const;
+cl_mem mem_KerConstStatic_InterE_atom_types_const;
+
+cl_mem mem_KerConstStatic_IntraE_atom_charges_const;
+cl_mem mem_KerConstStatic_IntraE_atom_types_const;
+
 cl_mem mem_KerConstStatic_intraE_contributors_const;
 
 cl_mem mem_KerConstStatic_reqm_const;
@@ -514,8 +518,6 @@ cl_mem mem_evals_and_generations_performed;
 // https://forums.xilinx.com/t5/SDAccel/ERROR-KernelCheck-83-114-in-sdx-2017-4/td-p/818135
 cl_mem mem_dummy;
 #endif
-
-
 
 
 
@@ -769,6 +771,36 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	#endif
 #endif
 
+
+
+// -----------------------------------------------------------------------------------------------------
+// Hardware specific
+// Specifiying exact memory bank from host code
+// Only valid if 4 banks are available (AWS)
+	cl_mem_ext_ptr_t d_bank0_ext; // Krnl_GA
+	cl_mem_ext_ptr_t d_bank1_ext; // Krnl_Conform
+	cl_mem_ext_ptr_t d_bank2_ext; // Krnl_InterE
+	cl_mem_ext_ptr_t d_bank3_ext; // Krnl_IntraE
+
+	d_bank0_ext.flags = XCL_MEM_DDR_BANK0;
+	d_bank0_ext.obj   = NULL;
+	d_bank0_ext.param = 0;
+
+	d_bank1_ext.flags = XCL_MEM_DDR_BANK1;
+	d_bank1_ext.obj   = NULL;
+	d_bank1_ext.param = 0;
+
+	d_bank2_ext.flags = XCL_MEM_DDR_BANK2;
+	d_bank2_ext.obj   = NULL;
+	d_bank2_ext.param = 0;
+
+	d_bank3_ext.flags = XCL_MEM_DDR_BANK3;
+	d_bank3_ext.obj   = NULL;
+	d_bank3_ext.param = 0;
+
+// Replacing common buffer creation with 
+// a Xilinx-specific where DDR banks can be specified
+#if 0
 #if defined (FIXED_POINT_INTERE)
 	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ATOMS*sizeof(fixedpt64),                &mem_KerConstStatic_fixpt64_atom_charges_const);
 #endif
@@ -827,6 +859,87 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 #else
 	mallocBufferObject(context,CL_MEM_WRITE_ONLY,2*sizeof(unsigned int),  	&mem_evals_and_generations_performed);
 #endif
+#endif
+
+
+
+#if defined (FIXED_POINT_INTERE)
+	mallocBufferObject(context,CL_MEM_READ_ONLY | CL_MEM_EXT_PTR_XILINX, MAX_NUM_OF_ATOMS*sizeof(fixedpt64),                &d_bank2_ext, &mem_KerConstStatic_fixpt64_atom_charges_const);	
+#endif
+	mallocBufferObject(context,CL_MEM_READ_ONLY | CL_MEM_EXT_PTR_XILINX, MAX_NUM_OF_ATOMS*sizeof(float),                    &d_bank2_ext, &mem_KerConstStatic_InterE_atom_charges_const);	// InterE
+  	mallocBufferObject(context,CL_MEM_READ_ONLY | CL_MEM_EXT_PTR_XILINX, MAX_NUM_OF_ATOMS*sizeof(char),                     &d_bank2_ext, &mem_KerConstStatic_InterE_atom_types_const);	// InterE
+
+	mallocBufferObject(context,CL_MEM_READ_ONLY | CL_MEM_EXT_PTR_XILINX, MAX_NUM_OF_ATOMS*sizeof(float),                    &d_bank3_ext, &mem_KerConstStatic_IntraE_atom_charges_const);	// IntraE
+  	mallocBufferObject(context,CL_MEM_READ_ONLY | CL_MEM_EXT_PTR_XILINX, MAX_NUM_OF_ATOMS*sizeof(char),                     &d_bank3_ext, &mem_KerConstStatic_IntraE_atom_types_const);	// IntraE
+
+/*
+	mallocBufferObject(context,CL_MEM_READ_ONLY | CL_MEM_EXT_PTR_XILINX, 3*MAX_INTRAE_CONTRIBUTORS*sizeof(char),            &d_bank3_ext, &mem_KerConstStatic_intraE_contributors_const);	// IntraE
+*/
+	mallocBufferObject(context,CL_MEM_READ_ONLY | CL_MEM_EXT_PTR_XILINX, MAX_INTRAE_CONTRIBUTORS*sizeof(cl_char3),          &d_bank3_ext, &mem_KerConstStatic_intraE_contributors_const);	// IntraE
+
+        mallocBufferObject(context,CL_MEM_READ_ONLY | CL_MEM_EXT_PTR_XILINX, ATYPE_NUM*sizeof(float),			        &d_bank3_ext, &mem_KerConstStatic_reqm_const);			// IntraE
+	mallocBufferObject(context,CL_MEM_READ_ONLY | CL_MEM_EXT_PTR_XILINX, ATYPE_NUM*sizeof(float),			        &d_bank3_ext, &mem_KerConstStatic_reqm_hbond_const);		// IntraE
+  	mallocBufferObject(context,CL_MEM_READ_ONLY | CL_MEM_EXT_PTR_XILINX, ATYPE_NUM*sizeof(unsigned int),		        &d_bank3_ext, &mem_KerConstStatic_atom1_types_reqm_const);	// IntraE
+  	mallocBufferObject(context,CL_MEM_READ_ONLY | CL_MEM_EXT_PTR_XILINX, ATYPE_NUM*sizeof(unsigned int),                    &d_bank3_ext, &mem_KerConstStatic_atom2_types_reqm_const);	// IntraE
+
+	mallocBufferObject(context,CL_MEM_READ_ONLY | CL_MEM_EXT_PTR_XILINX, MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES*sizeof(float), &d_bank3_ext, &mem_KerConstStatic_VWpars_AC_const);		// IntraE
+	mallocBufferObject(context,CL_MEM_READ_ONLY | CL_MEM_EXT_PTR_XILINX, MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES*sizeof(float), &d_bank3_ext, &mem_KerConstStatic_VWpars_BD_const);		// IntraE
+	mallocBufferObject(context,CL_MEM_READ_ONLY | CL_MEM_EXT_PTR_XILINX, MAX_NUM_OF_ATYPES*sizeof(float), 		        &d_bank3_ext, &mem_KerConstStatic_dspars_S_const);		// IntraE
+	mallocBufferObject(context,CL_MEM_READ_ONLY | CL_MEM_EXT_PTR_XILINX, MAX_NUM_OF_ATYPES*sizeof(float), 			&d_bank3_ext, &mem_KerConstStatic_dspars_V_const);		// IntraE
+	#if defined (FIXED_POINT_CONFORM)
+	// fixed-point
+	mallocBufferObject(context,CL_MEM_READ_ONLY | CL_MEM_EXT_PTR_XILINX, MAX_NUM_OF_ROTATIONS*sizeof(fixedpt), 		&d_bank1_ext, &mem_KerConstStatic_rotlist_const);			// Conform
+	mallocBufferObject(context,CL_MEM_READ_ONLY | CL_MEM_EXT_PTR_XILINX, MAX_NUM_OF_ATOMS*sizeof(cl_int3), 		        &d_bank1_ext, &mem_KerConstStatic_ref_coords_const);			// Conform
+	mallocBufferObject(context,CL_MEM_READ_ONLY | CL_MEM_EXT_PTR_XILINX, MAX_NUM_OF_ROTBONDS*sizeof(cl_int3), 		&d_bank1_ext, &mem_KerConstStatic_rotbonds_moving_vectors_const);	// Conform
+	mallocBufferObject(context,CL_MEM_READ_ONLY | CL_MEM_EXT_PTR_XILINX, MAX_NUM_OF_ROTBONDS*sizeof(cl_int3), 		&d_bank1_ext, &mem_KerConstStatic_rotbonds_unit_vectors_const);		// Conform
+	mallocBufferObject(context,CL_MEM_READ_ONLY | CL_MEM_EXT_PTR_XILINX, MAX_NUM_OF_RUNS*sizeof(cl_int4),			&d_bank1_ext, &mem_KerConstStatic_ref_orientation_quats_const);		// Conform
+	#else
+	// floating-point (original)
+	mallocBufferObject(context,CL_MEM_READ_ONLY | CL_MEM_EXT_PTR_XILINX, MAX_NUM_OF_ROTATIONS*sizeof(int), 			&d_bank1_ext, &mem_KerConstStatic_rotlist_const);			// Conform
+	mallocBufferObject(context,CL_MEM_READ_ONLY | CL_MEM_EXT_PTR_XILINX, MAX_NUM_OF_ATOMS*sizeof(cl_float3), 		&d_bank1_ext, &mem_KerConstStatic_ref_coords_const); 			// Conform
+	mallocBufferObject(context,CL_MEM_READ_ONLY | CL_MEM_EXT_PTR_XILINX, MAX_NUM_OF_ROTBONDS*sizeof(cl_float3), 		&d_bank1_ext, &mem_KerConstStatic_rotbonds_moving_vectors_const);	// Conform
+	mallocBufferObject(context,CL_MEM_READ_ONLY | CL_MEM_EXT_PTR_XILINX, MAX_NUM_OF_ROTBONDS*sizeof(cl_float3), 		&d_bank1_ext, &mem_KerConstStatic_rotbonds_unit_vectors_const);		// Conform
+	mallocBufferObject(context,CL_MEM_READ_ONLY | CL_MEM_EXT_PTR_XILINX, MAX_NUM_OF_RUNS*sizeof(cl_float4),			&d_bank1_ext, &mem_KerConstStatic_ref_orientation_quats_const);		// Conform
+	#endif
+
+//#if defined (FIXED_POINT_INTERE)
+#if 0
+	mallocBufferObject(context,CL_MEM_READ_ONLY | CL_MEM_EXT_PTR_XILINX,size_fixedpt64grids,   	&d_bank2_ext,	&mem_dockpars_fgrids);	// InterE
+#else
+	mallocBufferObject(context,CL_MEM_READ_ONLY | CL_MEM_EXT_PTR_XILINX,size_floatgrids,   		&d_bank2_ext,	&mem_dockpars_fgrids);	// InterE
+
+	#if defined(SEPARATE_FGRID_INTERE)
+	mallocBufferObject(context,CL_MEM_READ_ONLY | CL_MEM_EXT_PTR_XILINX,size_floatgrids2,   	&d_bank2_ext,	&mem_dockpars_fgrids2);	// InterE
+	mallocBufferObject(context,CL_MEM_READ_ONLY | CL_MEM_EXT_PTR_XILINX,size_floatgrids3,   	&d_bank2_ext,	&mem_dockpars_fgrids3);	// InterE
+	#endif
+#endif
+
+	mallocBufferObject(context,CL_MEM_READ_WRITE | CL_MEM_EXT_PTR_XILINX,size_populations,  	&d_bank0_ext,	&mem_dockpars_conformations_current);	// GA
+	mallocBufferObject(context,CL_MEM_READ_WRITE | CL_MEM_EXT_PTR_XILINX,size_energies,    		&d_bank0_ext,	&mem_dockpars_energies_current);	// GA
+
+#if defined(SINGLE_COPY_POP_ENE)
+	mallocBufferObject(context,CL_MEM_WRITE_ONLY | CL_MEM_EXT_PTR_XILINX,size_evals_of_runs,  	&d_bank0_ext,	&mem_evals_performed);			// GA					
+	mallocBufferObject(context,CL_MEM_WRITE_ONLY | CL_MEM_EXT_PTR_XILINX,size_evals_of_runs,  	&d_bank0_ext,	&mem_gens_performed);			// GA
+#else
+	mallocBufferObject(context,CL_MEM_WRITE_ONLY | CL_MEM_EXT_PTR_XILINX,2*sizeof(unsigned int),  	&d_bank0_ext,	&mem_evals_and_generations_performed);	// GA
+#endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// -----------------------------------------------------------------------------------------------------
+
 
 #if defined(SINGLE_COPY_POP_ENE)
 
@@ -840,9 +953,11 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	#endif
 	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_fixpt64_atom_charges_const,            &KerConstStatic.fixpt64_atom_charges_const[0],            MAX_NUM_OF_ATOMS*sizeof(fixedpt64));
 #endif
-	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_atom_charges_const,            &KerConstStatic.atom_charges_const[0],            MAX_NUM_OF_ATOMS*sizeof(float));
+	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_InterE_atom_charges_const,            &KerConstStatic.atom_charges_const[0],            MAX_NUM_OF_ATOMS*sizeof(float));
+	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_InterE_atom_types_const,              &KerConstStatic.atom_types_const[0],              MAX_NUM_OF_ATOMS*sizeof(char));
 
-	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_atom_types_const,              &KerConstStatic.atom_types_const[0],              MAX_NUM_OF_ATOMS*sizeof(char));
+	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_IntraE_atom_charges_const,            &KerConstStatic.atom_charges_const[0],            MAX_NUM_OF_ATOMS*sizeof(float));
+	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_IntraE_atom_types_const,              &KerConstStatic.atom_types_const[0],              MAX_NUM_OF_ATOMS*sizeof(char));
 
 /*
 	memcopyBufferObjectToDevice(command_queue1,mem_KerConstStatic_intraE_contributors_const,     &KerConstStatic.intraE_contributors_const[0],     3*MAX_INTRAE_CONTRIBUTORS*sizeof(char));
@@ -1016,9 +1131,9 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	#if defined (FIXED_POINT_INTERE)
 	setKernelArg(kernel3,1,  sizeof(mem_KerConstStatic_fixpt64_atom_charges_const),  &mem_KerConstStatic_fixpt64_atom_charges_const);
 	#else
-	setKernelArg(kernel3,1,  sizeof(mem_KerConstStatic_atom_charges_const),  &mem_KerConstStatic_atom_charges_const);
+	setKernelArg(kernel3,1,  sizeof(mem_KerConstStatic_InterE_atom_charges_const),  &mem_KerConstStatic_InterE_atom_charges_const);
 	#endif
-	setKernelArg(kernel3,2,  sizeof(mem_KerConstStatic_atom_types_const),    &mem_KerConstStatic_atom_types_const);
+	setKernelArg(kernel3,2,  sizeof(mem_KerConstStatic_InterE_atom_types_const),    &mem_KerConstStatic_InterE_atom_types_const);
 	setKernelArg(kernel3,3,  sizeof(unsigned char),                          &dockpars.g1);
 	setKernelArg(kernel3,4,  sizeof(unsigned int),                           &dockpars.g2);
 	setKernelArg(kernel3,5,  sizeof(unsigned int),                           &dockpars.g3);
@@ -1044,8 +1159,8 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 #endif // End of ENABLE_KERNEL3
 
 #ifdef ENABLE_KERNEL4 // Krnl_IntraE
-	setKernelArg(kernel4,0,  sizeof(mem_KerConstStatic_atom_charges_const),        &mem_KerConstStatic_atom_charges_const);
-	setKernelArg(kernel4,1,  sizeof(mem_KerConstStatic_atom_types_const),          &mem_KerConstStatic_atom_types_const);
+	setKernelArg(kernel4,0,  sizeof(mem_KerConstStatic_IntraE_atom_charges_const),        &mem_KerConstStatic_IntraE_atom_charges_const);
+	setKernelArg(kernel4,1,  sizeof(mem_KerConstStatic_IntraE_atom_types_const),          &mem_KerConstStatic_IntraE_atom_types_const);
 	setKernelArg(kernel4,2,  sizeof(mem_KerConstStatic_intraE_contributors_const), &mem_KerConstStatic_intraE_contributors_const);
 
   	setKernelArg(kernel4,3,  sizeof(dockpars.smooth),                              &dockpars.smooth);
@@ -3123,8 +3238,12 @@ void cleanup() {
 #if defined (FIXED_POINT_INTERE)
   if(mem_KerConstStatic_fixpt64_atom_charges_const)	  {clReleaseMemObject(mem_KerConstStatic_fixpt64_atom_charges_const);}
 #endif
-  if(mem_KerConstStatic_atom_charges_const)	  	  {clReleaseMemObject(mem_KerConstStatic_atom_charges_const);}
-  if(mem_KerConstStatic_atom_types_const)	   	  {clReleaseMemObject(mem_KerConstStatic_atom_types_const);}
+  if(mem_KerConstStatic_InterE_atom_charges_const)	  	  {clReleaseMemObject(mem_KerConstStatic_InterE_atom_charges_const);}
+  if(mem_KerConstStatic_InterE_atom_types_const)	   	  {clReleaseMemObject(mem_KerConstStatic_InterE_atom_types_const);}
+
+  if(mem_KerConstStatic_IntraE_atom_charges_const)	  	  {clReleaseMemObject(mem_KerConstStatic_IntraE_atom_charges_const);}
+  if(mem_KerConstStatic_IntraE_atom_types_const)	   	  {clReleaseMemObject(mem_KerConstStatic_IntraE_atom_types_const);}
+
   if(mem_KerConstStatic_intraE_contributors_const) 	  {clReleaseMemObject(mem_KerConstStatic_intraE_contributors_const);}
 
   if(mem_KerConstStatic_reqm_const) 	  		  {clReleaseMemObject(mem_KerConstStatic_reqm_const);}

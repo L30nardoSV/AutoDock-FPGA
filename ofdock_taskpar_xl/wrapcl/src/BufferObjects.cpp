@@ -1,5 +1,6 @@
 #include "BufferObjects.h"
 
+#if 0
 int mallocBufferObject(cl_context   context,
                        cl_mem_flags flags,
                        size_t       size,
@@ -26,6 +27,36 @@ int mallocBufferObject(cl_context   context,
   *mem = local_mem;
   return CL_SUCCESS;
 }
+#endif
+
+int mallocBufferObject(cl_context   context,
+		       cl_mem_flags flags,
+		       size_t       size,
+		       void*        host_pointer,
+		       cl_mem*      mem){
+  cl_mem local_mem;
+
+  local_mem = clCreateBuffer(context, flags, size, host_pointer, NULL);
+  if (!local_mem){
+	printf("Error: clCreateBuffer()\n");
+	fflush(stdout);
+	return EXIT_FAILURE;
+  }
+
+#ifdef BUFFER_OBJECT_INFO_DISPLAY
+  cl_int err;
+  err = getBufferObjectInfo(local_mem);
+  if (err != CL_SUCCESS){
+	printf("Error: getBufferObjectInfo() %d\n",err);
+	fflush(stdout);
+	return EXIT_FAILURE;
+  }
+#endif
+
+  *mem = local_mem;
+  return CL_SUCCESS;
+}
+
 
 #ifdef BUFFER_OBJECT_INFO_DISPLAY
 int getBufferObjectInfo(cl_mem object){
