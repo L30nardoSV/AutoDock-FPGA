@@ -51,7 +51,7 @@ ENABLE_KRNL_LS7 = YES
 ENABLE_KRNL_LS8 = YES
 ENABLE_KRNL_LS9 = YES
 
-ENABLE_K27 = YES
+ENABLE_KRNL_IGL_ARBITER = YES
 
 ifeq ($(ENABLE_KRNL_GA),YES)
 	KRNL_GA =-DENABLE_KRNL_GA
@@ -209,30 +209,11 @@ else
 	KRNL_LS9 =
 endif
 
-
-
-
-
-
-
-
-
-ifeq ($(ENABLE_K27),YES)
-	K27 =-DENABLE_KERNEL27
+ifeq ($(ENABLE_KRNL_IGL_ARBITER),YES)
+	KRNL_IGL_ARBITER =-DENABLE_KRNL_IGL_ARBITER
 else
-	K27 =
+	KRNL_IGL_ARBITER =
 endif
-
-
-
-
-
-
-
-
-
-
-
 
 # =============================
 # Reproduce result (remove randomness)
@@ -271,7 +252,7 @@ ENABLE_KERNELS = $(KRNL_GA) \
 		 $(KRNL_LS7) \
 		 $(KRNL_LS8) \
 		 $(KRNL_LS9) \
-		 $(K27)
+		 $(KRNL_IGL_ARBITER)
 
 # =============================
 # Fixed-point

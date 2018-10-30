@@ -197,30 +197,11 @@ static cl_kernel kernel_ls9  = NULL;
 static const char *name_krnl_ls9 = "Krnl_LS9";
 #endif
 
-
-
-
-
-
-
-
-#ifdef ENABLE_KERNEL27
-static cl_command_queue command_queue27 = NULL;
-static cl_kernel kernel27  = NULL;
-static const char *name_k27 = "Krnl_IGL_Arbiter";
+#ifdef ENABLE_KRNL_IGL_ARBITER
+static cl_command_queue command_queue_igl_arbiter = NULL;
+static cl_kernel kernel_igl_arbiter = NULL;
+static const char *name_krnl_igl_arbiter = "Krnl_IGL_Arbiter";
 #endif
-
-
-
-
-
-
-
-
-
-
-
-
 
 static cl_program program = NULL;
 
@@ -1343,65 +1324,15 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 	#endif
 #endif // End of ENABLE_KRNL_LS9
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#ifdef ENABLE_KERNEL27 // Krnl_IGL_Arbiter
+#ifdef ENABLE_KRNL_IGL_ARBITER // Krnl_IGL_Arbiter
 /*	
-	setKernelArg(kernel27,0, sizeof(unsigned char),  &dockpars.num_of_genes);
+	setKernelArg(kernel_igl_arbiter,0, sizeof(unsigned char),  &dockpars.num_of_genes);
 */
 
 	#if !defined(SW_EMU)
-	setKernelArg(kernel27,0, sizeof(mem_dummy),   &mem_dummy);
+	setKernelArg(kernel_igl_arbiter,0, sizeof(mem_dummy),   &mem_dummy);
 	#endif
-#endif // End of ENABLE_KERNEL27
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#endif // End of ENABLE_KRNL_IGL_ARBITER
 
 #if defined(SINGLE_COPY_POP_ENE)
 	memcopyBufferObjectToDevice(command_queue_ga,mem_dockpars_conformations_current, 	cpu_init_populations, size_populations);
@@ -1661,39 +1592,9 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		runKernelTask(command_queue_ls9,kernel_ls9,NULL,NULL);
 		#endif // ENABLE_KRNL_LS9
 
-
-
-
-
-
-		#ifdef ENABLE_KERNEL27
-		runKernelTask(command_queue27,kernel27,NULL,NULL);
-		#endif // ENABLE_KERNEL27
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+		#ifdef ENABLE_KRNL_IGL_ARBITER
+		runKernelTask(command_queue_igl_arbiter,kernel_igl_arbiter,NULL,NULL);
+		#endif // ENABLE_KRNL_IGL_ARBITER
 
 		#if 0
 		clFinish(command_queue); 
@@ -1803,41 +1704,11 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		clFinish(command_queue_ls9);
 		#endif
 
-
-
-
-		#ifdef ENABLE_KERNEL27
-		clFinish(command_queue27);
+		#ifdef ENABLE_KRNL_IGL_ARBITER
+		clFinish(command_queue_igl_arbiter);
 		#endif
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 		clock_stop_docking = clock();
-
 
 #if defined(SINGLE_COPY_POP_ENE)
 
@@ -2299,48 +2170,12 @@ bool init() {
   checkError(status, "Failed to create kernel ls9");
 #endif
 
-
-
-
-
-
-
-
-
-
-
-#ifdef ENABLE_KERNEL27
-  command_queue27 = clCreateCommandQueue(context, device, 0, &status);
-  checkError(status, "Failed to create command queue27");
-  kernel27 = clCreateKernel(program, name_k27, &status);
-  checkError(status, "Failed to create kernel");
+#ifdef ENABLE_KRNL_IGL_ARBITER
+  command_queue_igl_arbiter = clCreateCommandQueue(context, device, 0, &status);
+  checkError(status, "Failed to create command queue igl_arbiter");
+  kernel_igl_arbiter = clCreateKernel(program, name_krnl_igl_arbiter, &status);
+  checkError(status, "Failed to create kernel igl_arbiter");
 #endif
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   return true;
 }
@@ -2477,49 +2312,10 @@ void cleanup() {
   if(command_queue_ls9) {clReleaseCommandQueue(command_queue_ls9);}
 #endif
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#ifdef ENABLE_KERNEL27
-  if(kernel27) {clReleaseKernel(kernel27);}
-  if(command_queue27) {clReleaseCommandQueue(command_queue27);}
+#ifdef ENABLE_KRNL_IGL_ARBITER
+  if(kernel_igl_arbiter) {clReleaseKernel(kernel_igl_arbiter);}
+  if(command_queue_igl_arbiter) {clReleaseCommandQueue(command_queue_igl_arbiter);}
 #endif
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 #if 0
   if(command_queue) {clReleaseCommandQueue(command_queue);}
