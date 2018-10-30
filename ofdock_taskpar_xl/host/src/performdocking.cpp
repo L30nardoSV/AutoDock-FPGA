@@ -113,46 +113,6 @@ static cl_kernel kernel21  = NULL;
 static const char *name_k21 = "Krnl_LS3";
 #endif
 
-#if 0
-#ifdef ENABLE_KERNEL22
-static cl_command_queue command_queue22 = NULL;
-static cl_kernel kernel22  = NULL;
-static const char *name_k22 = "Krnl_LS3_Arbiter";
-#endif
-#endif
-
-#if 0
-#ifdef ENABLE_KERNEL23
-static cl_command_queue command_queue23 = NULL;
-static cl_kernel kernel23  = NULL;
-static const char *name_k23 = "Krnl_Conf_Arbiter";
-#endif
-#endif
-
-#if 0
-#ifdef ENABLE_KERNEL24
-static cl_command_queue command_queue24 = NULL;
-static cl_kernel kernel24  = NULL;
-static const char *name_k24 = "Krnl_Conf_Arbiter2";
-#endif
-#endif
-
-#if 0
-#ifdef ENABLE_KERNEL25
-static cl_command_queue command_queue25 = NULL;
-static cl_kernel kernel25  = NULL;
-static const char *name_k25 = "Krnl_Prng_LS2_ushort";
-#endif
-#endif
-
-#if 0
-#ifdef ENABLE_KERNEL26
-static cl_command_queue command_queue26 = NULL;
-static cl_kernel kernel26  = NULL;
-static const char *name_k26 = "Krnl_Prng_LS3_ushort";
-#endif
-#endif
-
 #ifdef ENABLE_KERNEL27
 static cl_command_queue command_queue27 = NULL;
 static cl_kernel kernel27  = NULL;
@@ -1235,36 +1195,6 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 	#endif
 #endif // End of ENABLE_KERNEL21
 
-/*
-#ifdef ENABLE_KERNEL22 // Krnl_LS3_Arbiter
-	setKernelArg(kernel22,0, sizeof(unsigned char),  &dockpars.num_of_genes);
-#endif // End of ENABLE_KERNEL22
-*/
-
-#if 0
-#ifdef ENABLE_KERNEL23 // Krnl_Conf_Arbiter
-	setKernelArg(kernel23,0, sizeof(unsigned char),  &dockpars.num_of_genes);
-#endif // End of ENABLE_KERNEL23
-#endif
-
-#if 0
-#ifdef ENABLE_KERNEL24 // Krnl_Conf_Arbiter2
-	setKernelArg(kernel24,0, sizeof(unsigned char),  &dockpars.num_of_genes);
-#endif // End of ENABLE_KERNEL24
-#endif
-
-#if 0
-#ifdef ENABLE_KERNEL25 // Krnl_PRNG_LS2_ushort
-	setKernelArg(kernel25,1, sizeof(unsigned int),  &dockpars.pop_size);
-#endif // End of ENABLE_KERNEL25
-#endif
-
-#if 0
-#ifdef ENABLE_KERNEL26 // Krnl_PRNG_LS3_ushort
-	setKernelArg(kernel26,1, sizeof(unsigned int),  &dockpars.pop_size);
-#endif // End of ENABLE_KERNEL26
-#endif
-
 #ifdef ENABLE_KERNEL27 // Krnl_IGL_Arbiter
 /*	
 	setKernelArg(kernel27,0, sizeof(unsigned char),  &dockpars.num_of_genes);
@@ -1585,18 +1515,6 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		setKernelArg(kernel20,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 4]);
 #endif // End of ENABLE_KERNEL20
 
-#if 0
-#ifdef ENABLE_KERNEL25 // Krnl_PRNG_LS2_ushort
-		setKernelArg(kernel25,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 8]);
-#endif // End of ENABLE_KERNEL25
-#endif
-
-#if 0
-#ifdef ENABLE_KERNEL26 // Krnl_PRNG_LS3_ushort
-		setKernelArg(kernel26,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 9]);
-#endif // End of ENABLE_KERNEL26
-#endif
-
 #ifdef ENABLE_KERNEL35 // Krnl_PRNG_LS123_ushort
 		setKernelArg(kernel35,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 5]);
 		setKernelArg(kernel35,1, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 6]);
@@ -1688,36 +1606,6 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		#ifdef ENABLE_KERNEL21
 		runKernelTask(command_queue21,kernel21,NULL,NULL);
 		#endif // ENABLE_KERNEL21
-
-#if 0
-		#ifdef ENABLE_KERNEL22
-		runKernelTask(command_queue22,kernel22,NULL,NULL);
-		#endif // ENABLE_KERNEL22
-#endif
-
-#if 0
-		#ifdef ENABLE_KERNEL23
-		runKernelTask(command_queue23,kernel23,NULL,NULL);
-		#endif // ENABLE_KERNEL23
-#endif
-
-#if 0
-		#ifdef ENABLE_KERNEL24
-		runKernelTask(command_queue24,kernel24,NULL,NULL);
-		#endif // ENABLE_KERNEL24
-#endif
-
-#if 0
-		#ifdef ENABLE_KERNEL25
-		runKernelTask(command_queue25,kernel25,NULL,NULL);
-		#endif // ENABLE_KERNEL25
-#endif
-
-#if 0
-		#ifdef ENABLE_KERNEL26
-		runKernelTask(command_queue26,kernel26,NULL,NULL);
-		#endif // ENABLE_KERNEL26
-#endif
 
 		#ifdef ENABLE_KERNEL27
 		runKernelTask(command_queue27,kernel27,NULL,NULL);
@@ -1873,36 +1761,6 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		#ifdef ENABLE_KERNEL21
 		clFinish(command_queue21);
 		#endif
-
-#if 0
-		#ifdef ENABLE_KERNEL22
-		clFinish(command_queue22);
-		#endif
-#endif
-
-#if 0
-		#ifdef ENABLE_KERNEL23
-		clFinish(command_queue23);
-		#endif
-#endif
-
-#if 0
-		#ifdef ENABLE_KERNEL24
-		clFinish(command_queue24);
-		#endif
-#endif
-
-#if 0
-		#ifdef ENABLE_KERNEL25
-		clFinish(command_queue25);
-		#endif
-#endif
-
-#if 0
-		#ifdef ENABLE_KERNEL26
-		clFinish(command_queue26);
-		#endif
-#endif
 
 		#ifdef ENABLE_KERNEL27
 		clFinish(command_queue27);
@@ -2371,51 +2229,6 @@ bool init() {
   checkError(status, "Failed to create kernel");
 #endif
 
-#if 0
-#ifdef ENABLE_KERNEL22
-  command_queue22 = clCreateCommandQueue(context, device, 0, &status);
-  checkError(status, "Failed to create command queue22");
-  kernel22 = clCreateKernel(program, name_k22, &status);
-  checkError(status, "Failed to create kernel");
-#endif
-#endif
-
-#if 0
-#ifdef ENABLE_KERNEL23
-  command_queue23 = clCreateCommandQueue(context, device, 0, &status);
-  checkError(status, "Failed to create command queue23");
-  kernel23 = clCreateKernel(program, name_k23, &status);
-  checkError(status, "Failed to create kernel");
-#endif
-#endif
-
-#if 0
-#ifdef ENABLE_KERNEL24
-  command_queue24 = clCreateCommandQueue(context, device, 0, &status);
-  checkError(status, "Failed to create command queue24");
-  kernel24 = clCreateKernel(program, name_k24, &status);
-  checkError(status, "Failed to create kernel");
-#endif
-#endif
-
-#if 0
-#ifdef ENABLE_KERNEL25
-  command_queue25 = clCreateCommandQueue(context, device, 0, &status);
-  checkError(status, "Failed to create command queue25");
-  kernel25 = clCreateKernel(program, name_k25, &status);
-  checkError(status, "Failed to create kernel");
-#endif
-#endif
-
-#if 0
-#ifdef ENABLE_KERNEL26
-  command_queue26 = clCreateCommandQueue(context, device, 0, &status);
-  checkError(status, "Failed to create command queue26");
-  kernel26 = clCreateKernel(program, name_k26, &status);
-  checkError(status, "Failed to create kernel");
-#endif
-#endif
-
 #ifdef ENABLE_KERNEL27
   command_queue27 = clCreateCommandQueue(context, device, 0, &status);
   checkError(status, "Failed to create command queue27");
@@ -2649,41 +2462,6 @@ void cleanup() {
 #ifdef ENABLE_KERNEL21
   if(kernel21) {clReleaseKernel(kernel21);}
   if(command_queue21) {clReleaseCommandQueue(command_queue21);}
-#endif
-
-#if 0
-#ifdef ENABLE_KERNEL22
-  if(kernel22) {clReleaseKernel(kernel22);}
-  if(command_queue22) {clReleaseCommandQueue(command_queue22);}
-#endif
-#endif
-
-#if 0
-#ifdef ENABLE_KERNEL23
-  if(kernel23) {clReleaseKernel(kernel23);}
-  if(command_queue23) {clReleaseCommandQueue(command_queue23);}
-#endif
-#endif
-
-#if 0
-#ifdef ENABLE_KERNEL24
-  if(kernel24) {clReleaseKernel(kernel24);}
-  if(command_queue24) {clReleaseCommandQueue(command_queue24);}
-#endif
-#endif
-
-#if 0
-#ifdef ENABLE_KERNEL25
-  if(kernel25) {clReleaseKernel(kernel25);}
-  if(command_queue25) {clReleaseCommandQueue(command_queue25);}
-#endif
-#endif
-
-#if 0
-#ifdef ENABLE_KERNEL26
-  if(kernel26) {clReleaseKernel(kernel26);}
-  if(command_queue26) {clReleaseCommandQueue(command_queue26);}
-#endif
 #endif
 
 #ifdef ENABLE_KERNEL27

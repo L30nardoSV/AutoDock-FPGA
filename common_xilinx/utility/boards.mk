@@ -45,17 +45,7 @@ ENABLE_K15 = YES
 ENABLE_K20 = YES
 ENABLE_K21 = YES
 
-# disable Krnl_LS3_Arbiter
-ENABLE_K22 = NO
-#ENABLE_K23 = YES
-#ENABLE_K24 = YES
-
 # PRNGS in GA for LS2 and LS3
-
-# ls2 & ls3 prng
-# replacement is K35
-ENABLE_K25 = NO
-ENABLE_K26 = NO
 
 ENABLE_K27 = YES
 
@@ -167,36 +157,6 @@ ifeq ($(ENABLE_K21),YES)
 	K21 =-DENABLE_KERNEL21
 else
 	K21 =
-endif
-
-ifeq ($(ENABLE_K22),YES)
-	K22 =-DENABLE_KERNEL22
-else
-	K22 =
-endif
-
-ifeq ($(ENABLE_K23),YES)
-	K23 =-DENABLE_KERNEL23
-else
-	K23 =
-endif
-
-ifeq ($(ENABLE_K24),YES)
-	K24 =-DENABLE_KERNEL24
-else
-	K24 =
-endif
-
-ifeq ($(ENABLE_K25),YES)
-	K25 =-DENABLE_KERNEL25
-else
-	K25 =
-endif
-
-ifeq ($(ENABLE_K26),YES)
-	K26 =-DENABLE_KERNEL26
-else
-	K26 =
 endif
 
 ifeq ($(ENABLE_K27),YES)
@@ -346,7 +306,7 @@ else
 endif
 ENABLE_KERNELS = $(K1)  $(K2)  $(K3)  $(K4)         $(K6)  $(K7)                $(K10) \
 		        $(K12)        $(K14) $(K15)                             $(K20) \
-		 $(K21) $(K22) $(K23) $(K24) $(K25) $(K26) $(K27) $(K28) $(K29) $(K30) \
+		 $(K21)                                    $(K27) $(K28) $(K29) $(K30) \
 		 $(K31) $(K32) $(K33) $(K34) $(K35) $(K36) $(K37) $(K38) $(K39) $(K40) \
 		 $(K41) $(K42) $(K43) $(K44) $(K45) $(K46) $(K47) $(K48)
 
