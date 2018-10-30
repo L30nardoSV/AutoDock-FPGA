@@ -34,23 +34,14 @@ ENABLE_KRNL_PRNG_LS_FLOAT  	 = YES
 ENABLE_KRNL_PRNG_LS2_FLOAT       = YES
 ENABLE_KRNL_PRNG_LS3_FLOAT       = YES
 
+ENABLE_KRNL_PRNG_LS4_FLOAT       = YES
+ENABLE_KRNL_PRNG_LS5_FLOAT       = YES
+ENABLE_KRNL_PRNG_LS6_FLOAT       = YES
 
 
 
 
 
-
-
-
-
-
-
-# prng ls4, ls5
-ENABLE_K37 = YES
-ENABLE_K38 = YES
-
-# prng ls6, ls7, ls8, ls9
-ENABLE_K41 = YES
 ENABLE_K42 = YES
 ENABLE_K43 = YES
 ENABLE_K44 = YES
@@ -162,6 +153,24 @@ else
 	KRNL_PRNG_LS3_FLOAT =
 endif
 
+ifeq ($(ENABLE_KRNL_PRNG_LS4_FLOAT),YES)
+	KRNL_PRNG_LS4_FLOAT =-DENABLE_KRNL_PRNG_LS4_FLOAT
+else
+	KRNL_PRNG_LS4_FLOAT =
+endif
+
+ifeq ($(ENABLE_KRNL_PRNG_LS5_FLOAT),YES)
+	KRNL_PRNG_LS5_FLOAT =-DENABLE_KRNL_PRNG_LS5_FLOAT
+else
+	KRNL_PRNG_LS5_FLOAT =
+endif
+
+ifeq ($(ENABLE_KRNL_PRNG_LS6_FLOAT),YES)
+	KRNL_PRNG_LS6_FLOAT =-DENABLE_KRNL_PRNG_LS6_FLOAT
+else
+	KRNL_PRNG_LS6_FLOAT =
+endif
+
 
 
 
@@ -206,17 +215,9 @@ endif
 
 
 
-ifeq ($(ENABLE_K37),YES)
-	K37 =-DENABLE_KERNEL37
-else
-	K37 =
-endif
 
-ifeq ($(ENABLE_K38),YES)
-	K38 =-DENABLE_KERNEL38
-else
-	K38 =
-endif
+
+
 
 ifeq ($(ENABLE_K39),YES)
 	K39 =-DENABLE_KERNEL39
@@ -230,11 +231,7 @@ else
 	K40 =
 endif
 
-ifeq ($(ENABLE_K41),YES)
-	K41 =-DENABLE_KERNEL41
-else
-	K41 =
-endif
+
 
 ifeq ($(ENABLE_K42),YES)
 	K42 =-DENABLE_KERNEL42
@@ -287,6 +284,7 @@ ifeq ($(REPRO), YES)
 else	
 	REP=
 endif
+
 ENABLE_KERNELS = $(KRNL_GA) \
 		 $(KRNL_CONFORM) \
 		 $(KRNL_INTERE) \
@@ -295,13 +293,16 @@ ENABLE_KERNELS = $(KRNL_GA) \
 		 $(KRNL_PRNG_GG_UCHAR) \
 		 $(KRNL_PRNG_GG_FLOAT) \
 		 $(KRNL_PRNG_LS123_USHORT) \
-	         $(KRNL_PRNG_LS_FLOAT) \
+	         $(KRNL_PRNG_LS_FLOAT)  \
 		 $(KRNL_PRNG_LS2_FLOAT) \
 		 $(KRNL_PRNG_LS3_FLOAT) \
+		 $(KRNL_PRNG_LS4_FLOAT) \
+		 $(KRNL_PRNG_LS5_FLOAT) \
+		 $(KRNL_PRNG_LS6_FLOAT) \
 		 $(K12) $(K15) \
 		 $(K21)        $(K27)        \
-		 $(K37) $(K38) $(K39) $(K40) \
-		 $(K41) $(K42) $(K43) $(K44) $(K45) $(K46) $(K47) $(K48)
+		 $(K39) $(K40) \
+		 $(K42) $(K43) $(K44) $(K45) $(K46) $(K47) $(K48)
 
 # =============================
 # Fixed-point
