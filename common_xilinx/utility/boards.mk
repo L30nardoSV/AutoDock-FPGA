@@ -26,37 +26,21 @@ ENABLE_K3  = YES
 ENABLE_K4  = YES
 
 # Prng kernels
-
-# bt prng float
-ENABLE_K5  = NO
-
 ENABLE_K6  = YES
 ENABLE_K7  = YES
 
 # ls1 prng
-ENABLE_K9  = NO
-
 ENABLE_K10 = YES
 
 # Replace single Krnl_Prng_Arbiter
 # See kernels 31, 32, 33, 34
-ENABLE_K11 = NO
 
 # LS kernels
 ENABLE_K12 = YES
 
 # disable Krnl_LS_Arbiter
-ENABLE_K13 = NO
-
 ENABLE_K14 = YES
 ENABLE_K15 = YES
-
-# disable Krnl_LS2_Arbiter
-ENABLE_K16 = NO
-
-#ENABLE_K17 = YES
-#ENABLE_K18 = YES
-#ENABLE_K19 = YES
 
 ENABLE_K20 = YES
 ENABLE_K21 = YES
@@ -68,7 +52,7 @@ ENABLE_K22 = NO
 
 # PRNGS in GA for LS2 and LS3
 
-# ls2 & ls3 prng (ls1 is  K9)
+# ls2 & ls3 prng
 # replacement is K35
 ENABLE_K25 = NO
 ENABLE_K26 = NO
@@ -137,12 +121,6 @@ else
 	K4 =
 endif
 
-ifeq ($(ENABLE_K5),YES)
-	K5 =-DENABLE_KERNEL5
-else
-	K5 =
-endif
-
 ifeq ($(ENABLE_K6),YES)
 	K6 =-DENABLE_KERNEL6
 else
@@ -155,37 +133,17 @@ else
 	K7 =
 endif
 
-ifeq ($(ENABLE_K9),YES)
-	K9 =-DENABLE_KERNEL9
-else
-	K9 =
-endif
-
 ifeq ($(ENABLE_K10),YES)
 	K10 =-DENABLE_KERNEL10
 else
 	K10 =
 endif
 
-ifeq ($(ENABLE_K11),YES)
-	K11 =-DENABLE_KERNEL11
-else
-	K11 =
-endif
-
-
 ifeq ($(ENABLE_K12),YES)
 	K12 =-DENABLE_KERNEL12
 else
 	K12 =
 endif
-
-ifeq ($(ENABLE_K13),YES)
-	K13 =-DENABLE_KERNEL13
-else
-	K13 =
-endif
-
 
 ifeq ($(ENABLE_K14),YES)
 	K14 =-DENABLE_KERNEL14
@@ -198,34 +156,6 @@ ifeq ($(ENABLE_K15),YES)
 else
 	K15 =
 endif
-
-ifeq ($(ENABLE_K16),YES)
-	K16 =-DENABLE_KERNEL16
-else
-	K16 =
-endif
-
-ifeq ($(ENABLE_K17),YES)
-	K17 =-DENABLE_KERNEL17
-else
-	K17 =
-endif
-
-ifeq ($(ENABLE_K18),YES)
-	K18 =-DENABLE_KERNEL18
-else
-	K18 =
-endif
-
-ifeq ($(ENABLE_K19),YES)
-	K19 =-DENABLE_KERNEL19
-else
-	K19 =
-endif
-
-
-
-
 
 ifeq ($(ENABLE_K20),YES)
 	K20 =-DENABLE_KERNEL20
@@ -414,8 +344,8 @@ ifeq ($(REPRO), YES)
 else	
 	REP=
 endif
-ENABLE_KERNELS = $(K1)  $(K2)  $(K3)  $(K4)  $(K5)  $(K6)  $(K7)         $(K9)  $(K10) \
-		 $(K11) $(K12) $(K13) $(K14) $(K15) $(K16) $(K17) $(K18) $(K19) $(K20) \
+ENABLE_KERNELS = $(K1)  $(K2)  $(K3)  $(K4)         $(K6)  $(K7)                $(K10) \
+		        $(K12)        $(K14) $(K15)                             $(K20) \
 		 $(K21) $(K22) $(K23) $(K24) $(K25) $(K26) $(K27) $(K28) $(K29) $(K30) \
 		 $(K31) $(K32) $(K33) $(K34) $(K35) $(K36) $(K37) $(K38) $(K39) $(K40) \
 		 $(K41) $(K42) $(K43) $(K44) $(K45) $(K46) $(K47) $(K48)
