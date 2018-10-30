@@ -1,14 +1,4 @@
-/*
- * (C) 2013. Evopro Innovation Kft.
- *
- * processresult.c
- *
- *  Created on: 2008.09.22.
- *      Author: pechan.imre
- */
-
 #include "processresult.h"
-
 
 void arrange_result(float* final_population, float* energies, const int pop_size)
 //The function arranges the rows of the input array (first array index is considered to be the row

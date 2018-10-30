@@ -1,12 +1,3 @@
-/*
- * (C) 2013. Evopro Innovation Kft.
- *
- * performdocking.cu
- *
- * Created on: 2010.04.20.
- * Author: pechan.imre
- */
-
 //// ------------------------
 //// Correct time measurement
 //// Moved from main.cpp to performdocking.cpp
@@ -242,11 +233,6 @@ float* cpu_ref_ori_angles;
 //// --------------------------------
 //// Device memory buffers
 //// --------------------------------
-// Altera Issue
-// Constant data holding struct data
-// Created because structs containing array
-// are not supported as OpenCL kernel args
-
 #if defined (FIXED_POINT_INTERE)
 cl_mem mem_KerConstStatic_fixpt64_atom_charges_const;
 #endif
@@ -299,9 +285,6 @@ cl_mem mem_dockpars_fgrids3;
 
 cl_mem mem_dockpars_conformations_current;
 cl_mem mem_dockpars_energies_current;
-/*
-cl_mem mem_dockpars_prng_states;
-*/
 
 #if defined(SINGLE_COPY_POP_ENE)
 cl_mem mem_evals_performed;
@@ -310,8 +293,6 @@ cl_mem mem_gens_performed;
 cl_mem mem_evals_and_generations_performed;
 #endif
 
-
-
 #if !defined(SW_EMU)
 // IMPORTANT: enable this dummy global argument only for "hw" build.
 // Check ../common_xilinx/utility/boards.mk
@@ -319,43 +300,12 @@ cl_mem mem_evals_and_generations_performed;
 cl_mem mem_dummy;
 #endif
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //#if defined (FIXED_POINT_INTERE)
 #if 0
 //#include "defines_fixedpt_64.h"
 fixedpt64* cpu_fixedpt64grids;
 
 #endif
-
-
 
 //// --------------------------------
 //// Docking
@@ -509,7 +459,7 @@ filled with clock() */
 	dockpars.rotbondlist_length = ((unsigned int) NUM_OF_THREADS_PER_BLOCK*(myligand_reference.num_of_rotcyc));
 	dockpars.coeff_elec    = ((float) mypars->coeffs.scaled_AD4_coeff_elec);
 	dockpars.coeff_desolv  = ((float) mypars->coeffs.AD4_coeff_desolv);
-	// L30nardoSV added
+
 	dockpars.num_of_energy_evals = (unsigned int) mypars->num_of_energy_evals;
 	dockpars.num_of_generations  = (unsigned int) mypars->num_of_generations;
 
@@ -530,11 +480,6 @@ filled with clock() */
 	dockpars.qasp = mypars->qasp;
 	dockpars.smooth = mypars->smooth;
 
-/*
-// passed correctly
-printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of_intraE_contributors);
-*/
-
 	// these variables hold multiplications between kernel-constants
 	// better calculate them here and then pass them to Krnl_GA
 	const float two_absmaxdmov = 2.0 * dockpars.abs_max_dmov;
@@ -548,10 +493,6 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	const unsigned int mul_tmp2 = dockpars.num_of_atypes * dockpars.g3;
 	const unsigned int mul_tmp3 = (dockpars.num_of_atypes + 1) * dockpars.g3;
 	#endif
-
-	// this variable holds a multiplication between kernel-constants
-	// better calculate them it and then pass them to Krnl_IntraE and Krnl_IntraE2
-	const unsigned int square_num_of_atypes = dockpars.num_of_atypes * dockpars.num_of_atypes;
 
 	// num of rotbonds
 	const unsigned char num_rotbonds = myligand_reference.num_of_rotbonds;
@@ -879,7 +820,7 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	#endif
 #endif // End of ENABLE_KRNL_GA
 
-#ifdef ENABLE_KRNL_CONFORM // Krnl_Conform
+#ifdef ENABLE_KRNL_CONFORM
 	setKernelArg(kernel_conform,0,  sizeof(mem_KerConstStatic_rotlist_const),      	   &mem_KerConstStatic_rotlist_const);
 	setKernelArg(kernel_conform,1,  sizeof(mem_KerConstStatic_ref_coords_const),              &mem_KerConstStatic_ref_coords_const);
 	setKernelArg(kernel_conform,2,  sizeof(mem_KerConstStatic_rotbonds_moving_vectors_const), &mem_KerConstStatic_rotbonds_moving_vectors_const);
@@ -926,7 +867,7 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 #endif
 
 
-#ifdef ENABLE_KRNL_INTERE // Krnl_InterE
+#ifdef ENABLE_KRNL_INTERE
         setKernelArg(kernel_intere,0,  sizeof(mem_dockpars_fgrids),                    &mem_dockpars_fgrids);
 	#if defined (FIXED_POINT_INTERE)
 	setKernelArg(kernel_intere,1,  sizeof(mem_KerConstStatic_fixpt64_atom_charges_const),  &mem_KerConstStatic_fixpt64_atom_charges_const);
@@ -958,7 +899,7 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	#endif
 #endif // End of ENABLE_KRNL_INTERE
 
-#ifdef ENABLE_KRNL_INTRAE // Krnl_IntraE
+#ifdef ENABLE_KRNL_INTRAE
 	setKernelArg(kernel_intrae,0,  sizeof(mem_KerConstStatic_IntraE_atom_charges_const),        &mem_KerConstStatic_IntraE_atom_charges_const);
 	setKernelArg(kernel_intrae,1,  sizeof(mem_KerConstStatic_IntraE_atom_types_const),          &mem_KerConstStatic_IntraE_atom_types_const);
 	setKernelArg(kernel_intrae,2,  sizeof(mem_KerConstStatic_intraE_contributors_const), &mem_KerConstStatic_intraE_contributors_const);
@@ -981,13 +922,9 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	setKernelArg(kernel_intrae,16, sizeof(float),                          	       &dockpars.coeff_elec);
 	setKernelArg(kernel_intrae,17, sizeof(float),                          	       &dockpars.qasp);
 	setKernelArg(kernel_intrae,18, sizeof(float),                          	       &dockpars.coeff_desolv);
-
-/*
-	setKernelArg(kernel_intrae,14, sizeof(unsigned int),                     	&square_num_of_atypes);
-*/
 #endif // End of ENABLE_KRNL_INTRAE
 
-#ifdef ENABLE_KRNL_PRNG_BT_USHORT_FLOAT // Krnl_PRNG_ushort_float
+#ifdef ENABLE_KRNL_PRNG_BT_USHORT_FLOAT
 	setKernelArg(kernel_prng_bt_ushort_float,2, sizeof(unsigned int),  &dockpars.pop_size);
 
 	#if !defined(SW_EMU)
@@ -995,7 +932,7 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	#endif
 #endif // End of ENABLE_KRNL_PRNG_BT_USHORT_FLOAT
 
-#ifdef ENABLE_KRNL_PRNG_GG_UCHAR // Krnl_PRNG_uchar
+#ifdef ENABLE_KRNL_PRNG_GG_UCHAR
 	setKernelArg(kernel_prng_gg_uchar,1, sizeof(unsigned char),  &dockpars.num_of_genes);
 
 	#if !defined(SW_EMU)
@@ -1003,7 +940,7 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	#endif
 #endif // End of ENABLE_KRNL_PRNG_GG_UCHAR
 
-#ifdef ENABLE_KRNL_PRNG_GG_FLOAT // Krnl_PRNG_GG_float
+#ifdef ENABLE_KRNL_PRNG_GG_FLOAT
 	setKernelArg(kernel_prng_gg_float,1, sizeof(unsigned char),  &dockpars.num_of_genes);
 
 	#if !defined(SW_EMU)
@@ -1011,7 +948,7 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	#endif
 #endif // End of ENABLE_KRNL_PRNG_GG_FLOAT
 
-#ifdef ENABLE_KRNL_PRNG_LS123_USHORT // Krnl_PRNG_LS123_ushort
+#ifdef ENABLE_KRNL_PRNG_LS123_USHORT
 	setKernelArg(kernel_prng_ls123_ushort,9, sizeof(unsigned int),  &dockpars.pop_size);
 
 	#if !defined(SW_EMU)
@@ -1019,7 +956,7 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	#endif
 #endif // End of ENABLE_KRNL_PRNG_LS123_USHORT
 
-#ifdef ENABLE_KRNL_PRNG_LS_FLOAT // Krnl_PRNG_float
+#ifdef ENABLE_KRNL_PRNG_LS_FLOAT
 	setKernelArg(kernel_prng_ls_float,1, sizeof(unsigned char),  &dockpars.num_of_genes);
 
 	#if !defined(SW_EMU)
@@ -1027,7 +964,7 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	#endif
 #endif // End of ENABLE_KRNL_PRNG_LS_FLOAT
 
-#ifdef ENABLE_KRNL_PRNG_LS2_FLOAT // Krnl_PRNG_LS2_float
+#ifdef ENABLE_KRNL_PRNG_LS2_FLOAT
 	setKernelArg(kernel_prng_ls2_float,1, sizeof(unsigned char),  &dockpars.num_of_genes);
 
 	#if !defined(SW_EMU)
@@ -1035,7 +972,7 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	#endif
 #endif // End of ENABLE_KRNL_PRNG_LS2_FLOAT
 
-#ifdef ENABLE_KRNL_PRNG_LS3_FLOAT // Krnl_PRNG_LS3_float
+#ifdef ENABLE_KRNL_PRNG_LS3_FLOAT
 	setKernelArg(kernel_prng_ls3_float,1, sizeof(unsigned char),  &dockpars.num_of_genes);
 
 	#if !defined(SW_EMU)
@@ -1043,7 +980,7 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	#endif
 #endif // End of ENABLE_KRNL_PRNG_LS3_FLOAT
 
-#ifdef ENABLE_KRNL_PRNG_LS4_FLOAT // Krnl_PRNG_LS4_float
+#ifdef ENABLE_KRNL_PRNG_LS4_FLOAT
 	setKernelArg(kernel_prng_ls4_float,1, sizeof(unsigned char),  &dockpars.num_of_genes);
 
 	#if !defined(SW_EMU)
@@ -1051,7 +988,7 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	#endif
 #endif // End of ENABLE_KRNL_PRNG_LS4_FLOAT
 
-#ifdef ENABLE_KRNL_PRNG_LS5_FLOAT // Krnl_PRNG_LS5_float
+#ifdef ENABLE_KRNL_PRNG_LS5_FLOAT
 	setKernelArg(kernel_prng_ls5_float,1, sizeof(unsigned char),  &dockpars.num_of_genes);
 
 	#if !defined(SW_EMU)
@@ -1059,7 +996,7 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	#endif
 #endif // End of ENABLE_KRNL_PRNG_LS5_FLOAT
 
-#ifdef ENABLE_KRNL_PRNG_LS6_FLOAT // Krnl_PRNG_LS6_float
+#ifdef ENABLE_KRNL_PRNG_LS6_FLOAT
 	setKernelArg(kernel_prng_ls6_float,1, sizeof(unsigned char),  &dockpars.num_of_genes);
 
 	#if !defined(SW_EMU)
@@ -1067,7 +1004,7 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	#endif
 #endif // End of ENABLE_KRNL_PRNG_LS6_FLOAT
 
-#ifdef ENABLE_KRNL_PRNG_LS7_FLOAT // Krnl_PRNG_LS7_float
+#ifdef ENABLE_KRNL_PRNG_LS7_FLOAT
 	setKernelArg(kernel_prng_ls7_float,1, sizeof(unsigned char),  &dockpars.num_of_genes);
 
 	#if !defined(SW_EMU)
@@ -1075,7 +1012,7 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	#endif
 #endif // End of ENABLE_KRNL_PRNG_LS7_FLOAT
 
-#ifdef ENABLE_KRNL_PRNG_LS8_FLOAT // Krnl_PRNG_LS8_float
+#ifdef ENABLE_KRNL_PRNG_LS8_FLOAT
 	setKernelArg(kernel_prng_ls8_float,1, sizeof(unsigned char),  &dockpars.num_of_genes);
 
 	#if !defined(SW_EMU)
@@ -1083,7 +1020,7 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	#endif
 #endif // End of ENABLE_KRNL_PRNG_LS8_FLOAT
 
-#ifdef ENABLE_KRNL_PRNG_LS9_FLOAT // Krnl_PRNG_LS9_float
+#ifdef ENABLE_KRNL_PRNG_LS9_FLOAT
 	setKernelArg(kernel_prng_ls9_float,1, sizeof(unsigned char),  &dockpars.num_of_genes);
 
 	#if !defined(SW_EMU)
@@ -1116,7 +1053,7 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 
 
 
-#ifdef ENABLE_KRNL_LS // Krnl_LS
+#ifdef ENABLE_KRNL_LS
 	//setKernelArg(kernel_ls,0, sizeof(unsigned int),  &dockpars.max_num_of_iters);
 	setKernelArg(kernel_ls,0, sizeof(unsigned short),  &Host_max_num_of_iters);
 
@@ -1142,7 +1079,7 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 	#endif
 #endif // End of ENABLE_KRNL_LS
 
-#ifdef ENABLE_KRNL_LS2 // Krnl_LS2
+#ifdef ENABLE_KRNL_LS2
 	//setKernelArg(kernel_ls2,0, sizeof(unsigned int),  &dockpars.max_num_of_iters);
 	setKernelArg(kernel_ls2,0, sizeof(unsigned short),  &Host_max_num_of_iters);
 	#if defined (FIXED_POINT_LS2)
@@ -1167,7 +1104,7 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 	#endif
 #endif // End of ENABLE_KRNL_LS2
 
-#ifdef ENABLE_KRNL_LS3 // Krnl_LS3
+#ifdef ENABLE_KRNL_LS3
 	//setKernelArg(kernel_ls3,0, sizeof(unsigned int),  &dockpars.max_num_of_iters);
 	setKernelArg(kernel_ls3,0, sizeof(unsigned short),  &Host_max_num_of_iters);
 	#if defined (FIXED_POINT_LS3)
@@ -1192,7 +1129,7 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 	#endif
 #endif // End of ENABLE_KRNL_LS3
 
-#ifdef ENABLE_KRNL_LS4 // Krnl_LS4
+#ifdef ENABLE_KRNL_LS4
 	setKernelArg(kernel_ls4,0, sizeof(unsigned short),  &Host_max_num_of_iters);
 	#if defined (FIXED_POINT_LS4)
 	setKernelArg(kernel_ls4,1, sizeof(fixedpt),  	  &fixpt_rho_lower_bound);
@@ -1214,7 +1151,7 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 	#endif
 #endif // End of ENABLE_KRNL_LS4
 
-#ifdef ENABLE_KRNL_LS5 // Krnl_LS5
+#ifdef ENABLE_KRNL_LS5
 	setKernelArg(kernel_ls5,0, sizeof(unsigned short),  &Host_max_num_of_iters);
 	#if defined (FIXED_POINT_LS4)
 	setKernelArg(kernel_ls5,1, sizeof(fixedpt),  	  &fixpt_rho_lower_bound);
@@ -1236,7 +1173,7 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 	#endif
 #endif // End of ENABLE_KRNL_LS5
 
-#ifdef ENABLE_KRNL_LS6 // Krnl_LS6
+#ifdef ENABLE_KRNL_LS6
 	setKernelArg(kernel_ls6,0, sizeof(unsigned short),  &Host_max_num_of_iters);
 	#if defined (FIXED_POINT_LS6)
 	setKernelArg(kernel_ls6,1, sizeof(fixedpt),  	  &fixpt_rho_lower_bound);
@@ -1258,7 +1195,7 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 	#endif
 #endif // End of ENABLE_KRNL_LS6
 
-#ifdef ENABLE_KRNL_LS7 // Krnl_LS7
+#ifdef ENABLE_KRNL_LS7
 	setKernelArg(kernel_ls7,0, sizeof(unsigned short),  &Host_max_num_of_iters);
 	#if defined (FIXED_POINT_LS7)
 	setKernelArg(kernel_ls7,1, sizeof(fixedpt),  	  &fixpt_rho_lower_bound);
@@ -1280,7 +1217,7 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 	#endif
 #endif // End of ENABLE_KRNL_LS7
 
-#ifdef ENABLE_KRNL_LS8 // Krnl_LS8
+#ifdef ENABLE_KRNL_LS8
 	setKernelArg(kernel_ls8,0, sizeof(unsigned short),  &Host_max_num_of_iters);
 	#if defined (FIXED_POINT_LS8)
 	setKernelArg(kernel_ls8,1, sizeof(fixedpt),  	  &fixpt_rho_lower_bound);
@@ -1302,7 +1239,7 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 	#endif
 #endif // End of ENABLE_KRNL_LS8
 
-#ifdef ENABLE_KRNL_LS9 // Krnl_LS9
+#ifdef ENABLE_KRNL_LS9
 	setKernelArg(kernel_ls9,0, sizeof(unsigned short),  &Host_max_num_of_iters);
 	#if defined (FIXED_POINT_LS9)
 	setKernelArg(kernel_ls9,1, sizeof(fixedpt),  	  &fixpt_rho_lower_bound);
@@ -1324,11 +1261,7 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 	#endif
 #endif // End of ENABLE_KRNL_LS9
 
-#ifdef ENABLE_KRNL_IGL_ARBITER // Krnl_IGL_Arbiter
-/*	
-	setKernelArg(kernel_igl_arbiter,0, sizeof(unsigned char),  &dockpars.num_of_genes);
-*/
-
+#ifdef ENABLE_KRNL_IGL_ARBITER
 	#if !defined(SW_EMU)
 	setKernelArg(kernel_igl_arbiter,0, sizeof(mem_dummy),   &mem_dummy);
 	#endif
@@ -1344,84 +1277,49 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 
 	for (unsigned int run_cnt = 0; run_cnt < mypars->num_of_runs; run_cnt++)
 	{
-/*
-		printf("Run %3u started ...     \n", run_cnt+1); 
-		fflush(stdout);
-*/
 		printf(" %u", run_cnt+1); 
 		fflush(stdout);
 
-#if defined(SINGLE_COPY_POP_ENE)
+		#if defined(SINGLE_COPY_POP_ENE)
 
-#else
+		#else
 		myligand_reference = *myligand_init;
 		gen_initpop_and_reflig(mypars, cpu_init_populations, cpu_ref_ori_angles, &myligand_reference, mygrid);
 
 		if (prepare_constdynamic_fields_for_gpu(&myligand_reference, mypars, cpu_ref_ori_angles, &KerConstDynamic) == 1)
 			return 1;
 
- 		memcopyBufferObjectToDevice(command_queue_ga,mem_dockpars_conformations_current, 	cpu_init_populations, size_populations);
-#endif
+		memcopyBufferObjectToDevice(command_queue_ga,mem_dockpars_conformations_current, cpu_init_populations, size_populations);
+		#endif
 
-#if defined(SINGLE_COPY_POP_ENE)
-	#ifdef ENABLE_KRNL_GA
+		#if defined(SINGLE_COPY_POP_ENE)
+		#ifdef ENABLE_KRNL_GA
 		unsigned int Host_Offset_Pop = run_cnt * dockpars.pop_size * ACTUAL_GENOTYPE_LENGTH;
 		unsigned int Host_Offset_Ene = run_cnt * dockpars.pop_size;
 		setKernelArg(kernel_ga,16,  sizeof(unsigned short), &run_cnt);
 		setKernelArg(kernel_ga,17,  sizeof(unsigned int),   &Host_Offset_Pop);
 		setKernelArg(kernel_ga,18,  sizeof(unsigned int),   &Host_Offset_Ene);
-
-	#endif
-#endif
-
-#ifdef ENABLE_KRNL_CONFORM // Krnl_Conform
-	/*
-	#if defined(SINGLE_COPY_POP_ENE)
-		#if defined (FIXED_POINT_CONFORM)
-		setKernelArg(kernel_conform,8,  sizeof(fixedpt),        &KerConstStatic.ref_orientation_quats_const[4*run_cnt]);
-		setKernelArg(kernel_conform,9,  sizeof(fixedpt),        &KerConstStatic.ref_orientation_quats_const[4*run_cnt + 1]);	
-		setKernelArg(kernel_conform,10, sizeof(fixedpt),        &KerConstStatic.ref_orientation_quats_const[4*run_cnt + 2]);	
-		setKernelArg(kernel_conform,11, sizeof(fixedpt),        &KerConstStatic.ref_orientation_quats_const[4*run_cnt + 3]);
-		#else
-		setKernelArg(kernel_conform,8,  sizeof(float),          &KerConstStatic.ref_orientation_quats_const[4*run_cnt]);
-		setKernelArg(kernel_conform,9,  sizeof(float),          &KerConstStatic.ref_orientation_quats_const[4*run_cnt + 1]);	
-		setKernelArg(kernel_conform,10, sizeof(float),          &KerConstStatic.ref_orientation_quats_const[4*run_cnt + 2]);	
-		setKernelArg(kernel_conform,11, sizeof(float),          &KerConstStatic.ref_orientation_quats_const[4*run_cnt + 3]);
 		#endif
-	#else
-		#if defined (FIXED_POINT_CONFORM)
-		setKernelArg(kernel_conform,8,  sizeof(fixedpt),        &KerConstDynamic.ref_orientation_quats_const[0]);
-		setKernelArg(kernel_conform,9,  sizeof(fixedpt),        &KerConstDynamic.ref_orientation_quats_const[1]);	
-		setKernelArg(kernel_conform,10, sizeof(fixedpt),        &KerConstDynamic.ref_orientation_quats_const[2]);	
-		setKernelArg(kernel_conform,11, sizeof(fixedpt),        &KerConstDynamic.ref_orientation_quats_const[3]);
-		#else
-		setKernelArg(kernel_conform,8,  sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[0]);
-		setKernelArg(kernel_conform,9,  sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[1]);	
-		setKernelArg(kernel_conform,10, sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[2]);	
-		setKernelArg(kernel_conform,11, sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[3]);
 		#endif
-	#endif
-	*/
-	/*
-	setKernelArg(kernel_conform,9,  sizeof(unsigned short), &run_cnt);
-	*/
-	setKernelArg(kernel_conform,8,  sizeof(unsigned short), &run_cnt);
-#endif // End of ENABLE_KRNL_CONFORM
 
-#ifdef ENABLE_KRNL_PRNG_BT_USHORT_FLOAT // Krnl_Prng_BT_ushort_float
+		#ifdef ENABLE_KRNL_CONFORM
+		setKernelArg(kernel_conform,8,  sizeof(unsigned short), &run_cnt);
+		#endif // End of ENABLE_KRNL_CONFORM
+
+		#ifdef ENABLE_KRNL_PRNG_BT_USHORT_FLOAT
 		setKernelArg(kernel_prng_bt_ushort_float,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 14]);
 		setKernelArg(kernel_prng_bt_ushort_float,1, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 15]);
-#endif // End of ENABLE_KRNL_PRNG_BT_USHORT_FLOAT
+		#endif // End of ENABLE_KRNL_PRNG_BT_USHORT_FLOAT
 
-#ifdef ENABLE_KRNL_PRNG_GG_UCHAR // Krnl_Prng_GG_uchar
+		#ifdef ENABLE_KRNL_PRNG_GG_UCHAR
 		setKernelArg(kernel_prng_gg_uchar,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 2]);
-#endif // End of ENABLE_KRNL_PRNG_GG_UCHAR
+		#endif // End of ENABLE_KRNL_PRNG_GG_UCHAR
 
-#ifdef ENABLE_KRNL_PRNG_GG_FLOAT // Krnl_PRNG_GG_float
+		#ifdef ENABLE_KRNL_PRNG_GG_FLOAT
 		setKernelArg(kernel_prng_gg_float,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt]);
-#endif // End of ENABLE_KRNL_PRNG_GG_FLOAT
+		#endif // End of ENABLE_KRNL_PRNG_GG_FLOAT
 
-#ifdef ENABLE_KRNL_PRNG_LS123_USHORT // Krnl_PRNG_LS123_ushort
+		#ifdef ENABLE_KRNL_PRNG_LS123_USHORT
 		setKernelArg(kernel_prng_ls123_ushort,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 5]);
 		setKernelArg(kernel_prng_ls123_ushort,1, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 6]);
 		setKernelArg(kernel_prng_ls123_ushort,2, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 7]);
@@ -1431,134 +1329,118 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		setKernelArg(kernel_prng_ls123_ushort,6, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 11]);
 		setKernelArg(kernel_prng_ls123_ushort,7, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 12]);
 		setKernelArg(kernel_prng_ls123_ushort,8, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 13]);
-#endif // End of ENABLE_KRNL_PRNG_LS123_USHORT
+		#endif // End of ENABLE_KRNL_PRNG_LS123_USHORT
 
-#ifdef ENABLE_KRNL_PRNG_LS_FLOAT // Krnl_PRNG_LS_float
+		#ifdef ENABLE_KRNL_PRNG_LS_FLOAT
 		setKernelArg(kernel_prng_ls_float,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 1]);
-#endif // End of ENABLE_KRNL_PRNG_LS_FLOAT
+		#endif // End of ENABLE_KRNL_PRNG_LS_FLOAT
 
-#ifdef ENABLE_KRNL_PRNG_LS2_FLOAT // Krnl_PRNG_LS2_float
+		#ifdef ENABLE_KRNL_PRNG_LS2_FLOAT
 		setKernelArg(kernel_prng_ls2_float,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 3]);
-#endif // End of ENABLE_KRNL_PRNG_LS2_FLOAT
+		#endif // End of ENABLE_KRNL_PRNG_LS2_FLOAT
 
-#ifdef ENABLE_KRNL_PRNG_LS3_FLOAT // Krnl_PRNG_LS3_float
+		#ifdef ENABLE_KRNL_PRNG_LS3_FLOAT
 		setKernelArg(kernel_prng_ls3_float,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 4]);
-#endif // End of ENABLE_KRNL_PRNG_LS3_FLOAT
+		#endif // End of ENABLE_KRNL_PRNG_LS3_FLOAT
 
-#ifdef ENABLE_KRNL_PRNG_LS4_FLOAT // Krnl_PRNG_LS4_float
+		#ifdef ENABLE_KRNL_PRNG_LS4_FLOAT
 		setKernelArg(kernel_prng_ls4_float,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 16]);
-#endif // End of ENABLE_KRNL_PRNG_LS4_FLOAT
+		#endif // End of ENABLE_KRNL_PRNG_LS4_FLOAT
 
-#ifdef ENABLE_KRNL_PRNG_LS5_FLOAT // Krnl_PRNG_LS5_float
+		#ifdef ENABLE_KRNL_PRNG_LS5_FLOAT
 		setKernelArg(kernel_prng_ls5_float,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 17]);
-#endif // End of ENABLE_KRNL_PRNG_LS5_FLOAT
+		#endif // End of ENABLE_KRNL_PRNG_LS5_FLOAT
 
-#ifdef ENABLE_KRNL_PRNG_LS6_FLOAT // Krnl_PRNG_LS6_float
+		#ifdef ENABLE_KRNL_PRNG_LS6_FLOAT
 		setKernelArg(kernel_prng_ls6_float,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 18]);
-#endif // End of ENABLE_KRNL_PRNG_LS6_FLOAT
+		#endif // End of ENABLE_KRNL_PRNG_LS6_FLOAT
 
-#ifdef ENABLE_KRNL_PRNG_LS7_FLOAT // Krnl_PRNG_LS7_float
+		#ifdef ENABLE_KRNL_PRNG_LS7_FLOAT
 		setKernelArg(kernel_prng_ls7_float,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 19]);
-#endif // End of ENABLE_KRNL_PRNG_LS7_FLOAT
+		#endif // End of ENABLE_KRNL_PRNG_LS7_FLOAT
 
-#ifdef ENABLE_KRNL_PRNG_LS8_FLOAT // Krnl_PRNG_LS8_float
+		#ifdef ENABLE_KRNL_PRNG_LS8_FLOAT
 		setKernelArg(kernel_prng_ls8_float,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 20]);
-#endif // End of ENABLE_KRNL_PRNG_LS8_FLOAT
+		#endif // End of ENABLE_KRNL_PRNG_LS8_FLOAT
 
-#ifdef ENABLE_KRNL_PRNG_LS9_FLOAT // Krnl_PRNG_LS9_float
+		#ifdef ENABLE_KRNL_PRNG_LS9_FLOAT
 		setKernelArg(kernel_prng_ls9_float,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 21]);
-#endif // End of ENABLE_KRNL_PRNG_LS9_FLOAT
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+		#endif // End of ENABLE_KRNL_PRNG_LS9_FLOAT
 
 		#ifdef ENABLE_KRNL_GA
 		#if 0
 		runKernelTask(command_queue,kernel_ga,NULL,NULL);
 		#endif
 		runKernelTask(command_queue_ga,kernel_ga,NULL,NULL);
-		#endif // ENABLE_KRNL_GA
+		#endif
 
 		#ifdef ENABLE_KRNL_CONFORM
 		runKernelTask(command_queue_conform,kernel_conform,NULL,NULL);
-		#endif // ENABLE_KRNL_CONFORM
+		#endif
 
 		#ifdef ENABLE_KRNL_INTERE
 		runKernelTask(command_queue_intere,kernel_intere,NULL,NULL);
-		#endif // ENABLE_KRNL_INTERE
+		#endif
 
 		#ifdef ENABLE_KRNL_INTRAE
 		runKernelTask(command_queue_intrae,kernel_intrae,NULL,NULL);
-		#endif // ENABLE_KRNL_INTRAE
+		#endif
 
 		#ifdef ENABLE_KRNL_PRNG_BT_USHORT_FLOAT
 		runKernelTask(command_queue_prng_bt_ushort_float,kernel_prng_bt_ushort_float,NULL,NULL);
-		#endif // ENABLE_KRNL_PRNG_BT_USHORT_FLOAT
+		#endif
 
 		#ifdef ENABLE_KRNL_PRNG_GG_UCHAR
 		runKernelTask(command_queue_prng_gg_uchar,kernel_prng_gg_uchar,NULL,NULL);
-		#endif // ENABLE_KRNL_PRNG_GG_UCHAR
+		#endif
 
 		#ifdef ENABLE_KRNL_PRNG_GG_FLOAT
 		runKernelTask(command_queue_prng_gg_float,kernel_prng_gg_float,NULL,NULL);
-		#endif // ENABLE_KRNL_PRNG_GG_FLOAT
+		#endif
 
 		#ifdef ENABLE_KRNL_PRNG_LS123_USHORT
 		runKernelTask(command_queue_prng_ls123_ushort,kernel_prng_ls123_ushort,NULL,NULL);
-		#endif // ENABLE_KRNL_PRNG_LS123_USHORT
+		#endif
 
 		#ifdef ENABLE_KRNL_PRNG_LS_FLOAT
 		runKernelTask(command_queue_prng_ls_float,kernel_prng_ls_float,NULL,NULL);
-		#endif // ENABLE_KRNL_PRNG_LS_FLOAT
+		#endif
 
 		#ifdef ENABLE_KRNL_PRNG_LS2_FLOAT
 		runKernelTask(command_queue_prng_ls2_float,kernel_prng_ls2_float,NULL,NULL);
-		#endif // ENABLE_KRNL_PRNG_LS2_FLOAT
+		#endif
 
 		#ifdef ENABLE_KRNL_PRNG_LS3_FLOAT
 		runKernelTask(command_queue_prng_ls3_float,kernel_prng_ls3_float,NULL,NULL);
-		#endif // ENABLE_KRNL_PRNG_LS3_FLOAT
+		#endif
 
 		#ifdef ENABLE_KRNL_PRNG_LS4_FLOAT
 		runKernelTask(command_queue_prng_ls4_float,kernel_prng_ls4_float,NULL,NULL);
-		#endif // ENABLE_KRNL_PRNG_LS4_FLOAT
+		#endif
 
 		#ifdef ENABLE_KRNL_PRNG_LS5_FLOAT
 		runKernelTask(command_queue_prng_ls5_float,kernel_prng_ls5_float,NULL,NULL);
-		#endif // ENABLE_KRNL_PRNG_LS5_FLOAT
+		#endif
 
 		#ifdef ENABLE_KRNL_PRNG_LS6_FLOAT
 		runKernelTask(command_queue_prng_ls6_float,kernel_prng_ls6_float,NULL,NULL);
-		#endif // ENABLE_KRNL_PRNG_LS6_FLOAT
+		#endif
 
 		#ifdef ENABLE_KRNL_PRNG_LS7_FLOAT
 		runKernelTask(command_queue_prng_ls7_float,kernel_prng_ls7_float,NULL,NULL);
-		#endif // ENABLE_KRNL_PRNG_LS7_FLOAT
+		#endif
 
 		#ifdef ENABLE_KRNL_PRNG_LS8_FLOAT
 		runKernelTask(command_queue_prng_ls8_float,kernel_prng_ls8_float,NULL,NULL);
-		#endif // ENABLE_KRNL_PRNG_LS8_FLOAT
+		#endif
 
 		#ifdef ENABLE_KRNL_PRNG_LS9_FLOAT
 		runKernelTask(command_queue_prng_ls9_float,kernel_prng_ls9_float,NULL,NULL);
-		#endif // ENABLE_KRNL_PRNG_LS9_FLOAT
+		#endif
 
 		#ifdef ENABLE_KRNL_LS
 		runKernelTask(command_queue_ls,kernel_ls,NULL,NULL);
-		#endif // ENABLE_KRNL_LS
+		#endif
 
 		#ifdef ENABLE_KRNL_LS2
 		runKernelTask(command_queue_ls2,kernel_ls2,NULL,NULL);
@@ -1566,35 +1448,35 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 
 		#ifdef ENABLE_KRNL_LS3
 		runKernelTask(command_queue_ls3,kernel_ls3,NULL,NULL);
-		#endif // ENABLE_KRNL_LS3
+		#endif
 
 		#ifdef ENABLE_KRNL_LS4
 		runKernelTask(command_queue_ls4,kernel_ls4,NULL,NULL);
-		#endif // ENABLE_KRNL_LS4
+		#endif
 
 		#ifdef ENABLE_KRNL_LS5
 		runKernelTask(command_queue_ls5,kernel_ls5,NULL,NULL);
-		#endif // ENABLE_KRNL_LS5
+		#endif
 
 		#ifdef ENABLE_KRNL_LS6
 		runKernelTask(command_queue_ls6,kernel_ls6,NULL,NULL);
-		#endif // ENABLE_KRNL_LS6
+		#endif
 
 		#ifdef ENABLE_KRNL_LS7
 		runKernelTask(command_queue_ls7,kernel_ls7,NULL,NULL);
-		#endif // ENABLE_KRNL_LS7
+		#endif
 
 		#ifdef ENABLE_KRNL_LS8
 		runKernelTask(command_queue_ls8,kernel_ls8,NULL,NULL);
-		#endif // ENABLE_KRNL_LS8
+		#endif
 
 		#ifdef ENABLE_KRNL_LS9
 		runKernelTask(command_queue_ls9,kernel_ls9,NULL,NULL);
-		#endif // ENABLE_KRNL_LS9
+		#endif
 
 		#ifdef ENABLE_KRNL_IGL_ARBITER
 		runKernelTask(command_queue_igl_arbiter,kernel_igl_arbiter,NULL,NULL);
-		#endif // ENABLE_KRNL_IGL_ARBITER
+		#endif
 
 		#if 0
 		clFinish(command_queue); 
@@ -1955,18 +1837,9 @@ bool init() {
   //checkError(status, "Failed to create command queue");
 
   // Create the program.
-/*  
-  std::string binary_file = getBoardBinaryFile("docking", device);
-*/
   std::string binary_file = getBoardBinaryFile("Krnl_GA", device);
-
-/*
-  printf("Using AOCX: %s\n", binary_file.c_str());
-*/
   printf("Using XCLBIN: %s\n", binary_file.c_str());
-
   program = createProgramFromBinary(context, binary_file.c_str(), &device, 1);
-
 
   // Build the program that was just created.
   status = clBuildProgram(program, 0, NULL, "", NULL, NULL);
@@ -2374,9 +2247,6 @@ void cleanup() {
   if(mem_dockpars_conformations_current)  {clReleaseMemObject(mem_dockpars_conformations_current);}
   if(mem_dockpars_energies_current) 	  {clReleaseMemObject(mem_dockpars_energies_current);}
 
-/*
-  if(mem_dockpars_prng_states)            {clReleaseMemObject(mem_dockpars_prng_states);}
-*/
 #if defined(SINGLE_COPY_POP_ENE)
   if(mem_evals_performed) {clReleaseMemObject(mem_evals_performed);}
   if(mem_gens_performed)  {clReleaseMemObject(mem_gens_performed);}
