@@ -33,9 +33,6 @@ ENABLE_K5  = NO
 ENABLE_K6  = YES
 ENABLE_K7  = YES
 
-# bt prng ushort (check kernel36)
-ENABLE_K8  = NO
-
 # ls1 prng
 ENABLE_K9  = NO
 
@@ -156,12 +153,6 @@ ifeq ($(ENABLE_K7),YES)
 	K7 =-DENABLE_KERNEL7
 else
 	K7 =
-endif
-
-ifeq ($(ENABLE_K8),YES)
-	K8 =-DENABLE_KERNEL8
-else
-	K8 =
 endif
 
 ifeq ($(ENABLE_K9),YES)
@@ -423,7 +414,7 @@ ifeq ($(REPRO), YES)
 else	
 	REP=
 endif
-ENABLE_KERNELS = $(K1)  $(K2)  $(K3)  $(K4)  $(K5)  $(K6)  $(K7)  $(K8)  $(K9)  $(K10) \
+ENABLE_KERNELS = $(K1)  $(K2)  $(K3)  $(K4)  $(K5)  $(K6)  $(K7)         $(K9)  $(K10) \
 		 $(K11) $(K12) $(K13) $(K14) $(K15) $(K16) $(K17) $(K18) $(K19) $(K20) \
 		 $(K21) $(K22) $(K23) $(K24) $(K25) $(K26) $(K27) $(K28) $(K29) $(K30) \
 		 $(K31) $(K32) $(K33) $(K34) $(K35) $(K36) $(K37) $(K38) $(K39) $(K40) \

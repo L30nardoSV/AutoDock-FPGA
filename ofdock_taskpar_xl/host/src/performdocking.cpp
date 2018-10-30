@@ -65,17 +65,6 @@ static cl_kernel kernel4  = NULL;
 static const char *name_k4 = "Krnl_IntraE";
 #endif
 
-
-
-
-#if 0
-#ifdef ENABLE_KERNEL8
-static cl_command_queue command_queue8 = NULL;
-static cl_kernel kernel8  = NULL;
-static const char *name_k8 = "Krnl_Prng_BT_ushort";
-#endif
-#endif
-
 #if 0
 #ifdef ENABLE_KERNEL5
 static cl_command_queue command_queue5 = NULL;
@@ -1205,12 +1194,6 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 #endif // End of ENABLE_KERNEL7
 
 #if 0
-#ifdef ENABLE_KERNEL8 // Krnl_PRNG_ushort
-	setKernelArg(kernel8,1, sizeof(unsigned int),  &dockpars.pop_size);
-#endif // End of ENABLE_KERNEL8
-#endif
-
-#if 0
 #ifdef ENABLE_KERNEL9 // Krnl_PRNG_LS_ushort
 	setKernelArg(kernel9,1, sizeof(unsigned int),  &dockpars.pop_size);
 #endif // End of ENABLE_KERNEL9
@@ -1707,12 +1690,6 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 #endif // End of ENABLE_KERNEL7
 
 #if 0
-	#ifdef ENABLE_KERNEL8 // Krnl_PRNG_ushort
-			setKernelArg(kernel8,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 3]);
-	#endif // End of ENABLE_KERNEL8
-#endif
-
-#if 0
 	#ifdef ENABLE_KERNEL9 // Krnl_PRNG_LS_ushort
 			setKernelArg(kernel9,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 4]);
 	#endif // End of ENABLE_KERNEL9
@@ -1821,12 +1798,6 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		#ifdef ENABLE_KERNEL7
 		runKernelTask(command_queue7,kernel7,NULL,NULL);
 		#endif // ENABLE_KERNEL7
-
-#if 0
-		#ifdef ENABLE_KERNEL8
-		runKernelTask(command_queue8,kernel8,NULL,NULL);
-		#endif // ENABLE_KERNEL8
-#endif
 
 #if 0
 		#ifdef ENABLE_KERNEL9
@@ -2060,12 +2031,6 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		#ifdef ENABLE_KERNEL7
 		clFinish(command_queue7);
 		#endif
-
-#if 0
-		#ifdef ENABLE_KERNEL8
-		clFinish(command_queue8);
-		#endif
-#endif
 
 #if 0
 		#ifdef ENABLE_KERNEL9
@@ -2598,15 +2563,6 @@ bool init() {
 #endif
 
 #if 0
-#ifdef ENABLE_KERNEL8
-  command_queue8 = clCreateCommandQueue(context, device, 0, &status);
-  checkError(status, "Failed to create command queue8");
-  kernel8 = clCreateKernel(program, name_k8, &status);
-  checkError(status, "Failed to create kernel");
-#endif
-#endif
-
-#if 0
 #ifdef ENABLE_KERNEL9
   command_queue9 = clCreateCommandQueue(context, device, 0, &status);
   checkError(status, "Failed to create command queue9");
@@ -2966,13 +2922,6 @@ void cleanup() {
 #ifdef ENABLE_KERNEL7
   if(kernel7) {clReleaseKernel(kernel7);}
   if(command_queue7) {clReleaseCommandQueue(command_queue7);}
-#endif
-
-#if 0
-#ifdef ENABLE_KERNEL8
-  if(kernel8) {clReleaseKernel(kernel8);}
-  if(command_queue8) {clReleaseCommandQueue(command_queue8);}
-#endif
 #endif
 
 #if 0
