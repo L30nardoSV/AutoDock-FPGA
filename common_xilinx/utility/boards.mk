@@ -41,46 +41,17 @@ ENABLE_KRNL_PRNG_LS7_FLOAT       = YES
 ENABLE_KRNL_PRNG_LS8_FLOAT       = YES
 ENABLE_KRNL_PRNG_LS9_FLOAT       = YES
 
-
-
-
-
-
-
-# Replace single Krnl_Prng_Arbiter
-# See kernels 31, 32, 33, 34
-
-# LS kernels
-ENABLE_K12 = YES
-
-# disable Krnl_LS_Arbiter
-ENABLE_K15 = YES
-
-
-ENABLE_K21 = YES
-
-# PRNGS in GA for LS2 and LS3
+ENABLE_KRNL_LS  = YES
+ENABLE_KRNL_LS2 = YES
+ENABLE_KRNL_LS3 = YES
+ENABLE_KRNL_LS4 = YES
+ENABLE_KRNL_LS5 = YES
+ENABLE_KRNL_LS6 = YES
+ENABLE_KRNL_LS7 = YES
+ENABLE_KRNL_LS8 = YES
+ENABLE_KRNL_LS9 = YES
 
 ENABLE_K27 = YES
-
-
-
-
-
-
-
-# krnl_ls4, Krnl_ls5
-ENABLE_K39 = YES
-ENABLE_K40 = YES
-
-
-
-# krnl_ls6, Krnl_ls7, krnl_ls8, Krnl_ls9
-ENABLE_K45 = YES
-ENABLE_K46 = YES
-ENABLE_K47 = YES
-ENABLE_K48 = YES
-
 
 ifeq ($(ENABLE_KRNL_GA),YES)
 	KRNL_GA =-DENABLE_KRNL_GA
@@ -184,33 +155,67 @@ else
 	KRNL_PRNG_LS9_FLOAT =
 endif
 
-
-
-
-
-
-
-ifeq ($(ENABLE_K12),YES)
-	K12 =-DENABLE_KERNEL12
+ifeq ($(ENABLE_KRNL_LS),YES)
+	KRNL_LS =-DENABLE_KRNL_LS
 else
-	K12 =
+	KRNL_LS =
+endif
+
+ifeq ($(ENABLE_KRNL_LS2),YES)
+	KRNL_LS2 =-DENABLE_KRNL_LS2
+else
+	KRNL_LS2 =
+endif
+
+ifeq ($(ENABLE_KRNL_LS3),YES)
+	KRNL_LS3 =-DENABLE_KRNL_LS3
+else
+	KRNL_LS3 =
+endif
+
+ifeq ($(ENABLE_KRNL_LS4),YES)
+	KRNL_LS4 =-DENABLE_KRNL_LS4
+else
+	KRNL_LS4 =
+endif
+
+ifeq ($(ENABLE_KRNL_LS5),YES)
+	KRNL_LS5 =-DENABLE_KRNL_LS5
+else
+	KRNL_LS5 =
+endif
+
+ifeq ($(ENABLE_KRNL_LS6),YES)
+	KRNL_LS6 =-DENABLE_KRNL_LS6
+else
+	KRNL_LS6 =
+endif
+
+ifeq ($(ENABLE_KRNL_LS7),YES)
+	KRNL_LS7 =-DENABLE_KRNL_LS7
+else
+	KRNL_LS7 =
+endif
+
+ifeq ($(ENABLE_KRNL_LS8),YES)
+	KRNL_LS8 =-DENABLE_KRNL_LS8
+else
+	KRNL_LS8 =
+endif
+
+ifeq ($(ENABLE_KRNL_LS9),YES)
+	KRNL_LS9 =-DENABLE_KRNL_LS9
+else
+	KRNL_LS9 =
 endif
 
 
 
-ifeq ($(ENABLE_K15),YES)
-	K15 =-DENABLE_KERNEL15
-else
-	K15 =
-endif
 
 
 
-ifeq ($(ENABLE_K21),YES)
-	K21 =-DENABLE_KERNEL21
-else
-	K21 =
-endif
+
+
 
 ifeq ($(ENABLE_K27),YES)
 	K27 =-DENABLE_KERNEL27
@@ -226,49 +231,9 @@ endif
 
 
 
-ifeq ($(ENABLE_K39),YES)
-	K39 =-DENABLE_KERNEL39
-else
-	K39 =
-endif
-
-ifeq ($(ENABLE_K40),YES)
-	K40 =-DENABLE_KERNEL40
-else
-	K40 =
-endif
 
 
 
-
-
-
-
-
-
-ifeq ($(ENABLE_K45),YES)
-	K45 =-DENABLE_KERNEL45
-else
-	K45 =
-endif
-
-ifeq ($(ENABLE_K46),YES)
-	K46 =-DENABLE_KERNEL46
-else
-	K46 =
-endif
-
-ifeq ($(ENABLE_K47),YES)
-	K47 =-DENABLE_KERNEL47
-else
-	K47 =
-endif
-
-ifeq ($(ENABLE_K48),YES)
-	K48 =-DENABLE_KERNEL48
-else
-	K48 =
-endif
 # =============================
 # Reproduce result (remove randomness)
 # =============================
@@ -297,10 +262,16 @@ ENABLE_KERNELS = $(KRNL_GA) \
 		 $(KRNL_PRNG_LS7_FLOAT) \
 		 $(KRNL_PRNG_LS8_FLOAT) \
 		 $(KRNL_PRNG_LS9_FLOAT) \
-		 $(K12) $(K15) \
-		 $(K21)        $(K27)        \
-		 $(K39) $(K40) \
-		 $(K45) $(K46) $(K47) $(K48)
+		 $(KRNL_LS)  \
+		 $(KRNL_LS2) \
+		 $(KRNL_LS3) \
+		 $(KRNL_LS4) \
+		 $(KRNL_LS5) \
+		 $(KRNL_LS6) \
+		 $(KRNL_LS7) \
+		 $(KRNL_LS8) \
+		 $(KRNL_LS9) \
+		 $(K27)
 
 # =============================
 # Fixed-point
