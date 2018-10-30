@@ -29,14 +29,21 @@ ENABLE_KRNL_PRNG_BT_USHORT_FLOAT = YES
 ENABLE_KRNL_PRNG_GG_UCHAR        = YES
 ENABLE_KRNL_PRNG_GG_FLOAT        = YES
 
-# ls123 prng
-ENABLE_K35 = YES
+ENABLE_KRNL_PRNG_LS123_USHORT    = YES
+ENABLE_KRNL_PRNG_LS_FLOAT  	 = YES
+ENABLE_KRNL_PRNG_LS2_FLOAT       = YES
+ENABLE_KRNL_PRNG_LS3_FLOAT       = YES
 
-ENABLE_K7  = YES
 
-ENABLE_K14 = YES
 
-ENABLE_K20 = YES
+
+
+
+
+
+
+
+
 
 # prng ls4, ls5
 ENABLE_K37 = YES
@@ -131,16 +138,39 @@ else
 	KRNL_PRNG_GG_FLOAT =
 endif
 
-
-
-
-
-
-ifeq ($(ENABLE_K7),YES)
-	K7 =-DENABLE_KERNEL7
+ifeq ($(ENABLE_KRNL_PRNG_LS123_USHORT),YES)
+	KRNL_PRNG_LS123_USHORT =-DENABLE_KRNL_PRNG_LS123_USHORT
 else
-	K7 =
+	KRNL_PRNG_LS123_USHORT =
 endif
+
+ifeq ($(ENABLE_KRNL_PRNG_LS_FLOAT),YES)
+	KRNL_PRNG_LS_FLOAT =-DENABLE_KRNL_PRNG_LS_FLOAT
+else
+	KRNL_PRNG_LS_FLOAT =
+endif
+
+ifeq ($(ENABLE_KRNL_PRNG_LS2_FLOAT),YES)
+	KRNL_PRNG_LS2_FLOAT =-DENABLE_KRNL_PRNG_LS2_FLOAT
+else
+	KRNL_PRNG_LS2_FLOAT =
+endif
+
+ifeq ($(ENABLE_KRNL_PRNG_LS3_FLOAT),YES)
+	KRNL_PRNG_LS3_FLOAT =-DENABLE_KRNL_PRNG_LS3_FLOAT
+else
+	KRNL_PRNG_LS3_FLOAT =
+endif
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -150,11 +180,7 @@ else
 	K12 =
 endif
 
-ifeq ($(ENABLE_K14),YES)
-	K14 =-DENABLE_KERNEL14
-else
-	K14 =
-endif
+
 
 ifeq ($(ENABLE_K15),YES)
 	K15 =-DENABLE_KERNEL15
@@ -162,11 +188,7 @@ else
 	K15 =
 endif
 
-ifeq ($(ENABLE_K20),YES)
-	K20 =-DENABLE_KERNEL20
-else
-	K20 =
-endif
+
 
 ifeq ($(ENABLE_K21),YES)
 	K21 =-DENABLE_KERNEL21
@@ -180,11 +202,7 @@ else
 	K27 =
 endif
 
-ifeq ($(ENABLE_K35),YES)
-	K35 =-DENABLE_KERNEL35
-else
-	K35 =
-endif
+
 
 
 
@@ -276,10 +294,13 @@ ENABLE_KERNELS = $(KRNL_GA) \
 		 $(KRNL_PRNG_BT_USHORT_FLOAT) \
 		 $(KRNL_PRNG_GG_UCHAR) \
 		 $(KRNL_PRNG_GG_FLOAT) \
-	         $(K7)      \
-		        $(K12)        $(K14) $(K15)                             $(K20) \
-		 $(K21)                                    $(K27)                      \
-		                             $(K35) $(K37) $(K38) $(K39) $(K40) \
+		 $(KRNL_PRNG_LS123_USHORT) \
+	         $(KRNL_PRNG_LS_FLOAT) \
+		 $(KRNL_PRNG_LS2_FLOAT) \
+		 $(KRNL_PRNG_LS3_FLOAT) \
+		 $(K12) $(K15) \
+		 $(K21)        $(K27)        \
+		 $(K37) $(K38) $(K39) $(K40) \
 		 $(K41) $(K42) $(K43) $(K44) $(K45) $(K46) $(K47) $(K48)
 
 # =============================
