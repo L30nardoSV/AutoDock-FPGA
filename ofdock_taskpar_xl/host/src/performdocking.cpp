@@ -53,16 +53,16 @@ static cl_kernel kernel_conform  = NULL;
 static const char *name_krnl_conform = "Krnl_Conform";
 #endif
 
-#ifdef ENABLE_KERNEL3
-static cl_command_queue command_queue3 = NULL;
-static cl_kernel kernel3  = NULL;
-static const char *name_k3 = "Krnl_InterE";
+#ifdef ENABLE_KRNL_INTERE
+static cl_command_queue command_queue_intere = NULL;
+static cl_kernel kernel_intere  = NULL;
+static const char *name_krnl_intere = "Krnl_InterE";
 #endif
 
-#ifdef ENABLE_KERNEL4
-static cl_command_queue command_queue4 = NULL;
-static cl_kernel kernel4  = NULL;
-static const char *name_k4 = "Krnl_IntraE";
+#ifdef ENABLE_KRNL_INTRAE
+static cl_command_queue command_queue_intrae = NULL;
+static cl_kernel kernel_intrae  = NULL;
+static const char *name_krnl_intrae = "Krnl_IntraE";
 #endif
 
 #ifdef ENABLE_KERNEL10
@@ -926,66 +926,66 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 #endif
 
 
-#ifdef ENABLE_KERNEL3 // Krnl_InterE
-        setKernelArg(kernel3,0,  sizeof(mem_dockpars_fgrids),                    &mem_dockpars_fgrids);
+#ifdef ENABLE_KRNL_INTERE // Krnl_InterE
+        setKernelArg(kernel_intere,0,  sizeof(mem_dockpars_fgrids),                    &mem_dockpars_fgrids);
 	#if defined (FIXED_POINT_INTERE)
-	setKernelArg(kernel3,1,  sizeof(mem_KerConstStatic_fixpt64_atom_charges_const),  &mem_KerConstStatic_fixpt64_atom_charges_const);
+	setKernelArg(kernel_intere,1,  sizeof(mem_KerConstStatic_fixpt64_atom_charges_const),  &mem_KerConstStatic_fixpt64_atom_charges_const);
 	#else
-	setKernelArg(kernel3,1,  sizeof(mem_KerConstStatic_InterE_atom_charges_const),  &mem_KerConstStatic_InterE_atom_charges_const);
+	setKernelArg(kernel_intere,1,  sizeof(mem_KerConstStatic_InterE_atom_charges_const),  &mem_KerConstStatic_InterE_atom_charges_const);
 	#endif
-	setKernelArg(kernel3,2,  sizeof(mem_KerConstStatic_InterE_atom_types_const),    &mem_KerConstStatic_InterE_atom_types_const);
-	setKernelArg(kernel3,3,  sizeof(unsigned char),                          &dockpars.g1);
-	setKernelArg(kernel3,4,  sizeof(unsigned int),                           &dockpars.g2);
-	setKernelArg(kernel3,5,  sizeof(unsigned int),                           &dockpars.g3);
-	setKernelArg(kernel3,6,  sizeof(unsigned char),                          &dockpars.num_of_atoms);
+	setKernelArg(kernel_intere,2,  sizeof(mem_KerConstStatic_InterE_atom_types_const),    &mem_KerConstStatic_InterE_atom_types_const);
+	setKernelArg(kernel_intere,3,  sizeof(unsigned char),                          &dockpars.g1);
+	setKernelArg(kernel_intere,4,  sizeof(unsigned int),                           &dockpars.g2);
+	setKernelArg(kernel_intere,5,  sizeof(unsigned int),                           &dockpars.g3);
+	setKernelArg(kernel_intere,6,  sizeof(unsigned char),                          &dockpars.num_of_atoms);
 
 	#if defined (FIXED_POINT_INTERE)
-	setKernelArg(kernel3,7,  sizeof(unsigned char),                          &gridsizex_minus1);
-	setKernelArg(kernel3,8,  sizeof(unsigned char),                          &gridsizey_minus1);
-	setKernelArg(kernel3,9,  sizeof(unsigned char),                          &gridsizez_minus1);
+	setKernelArg(kernel_intere,7,  sizeof(unsigned char),                          &gridsizex_minus1);
+	setKernelArg(kernel_intere,8,  sizeof(unsigned char),                          &gridsizey_minus1);
+	setKernelArg(kernel_intere,9,  sizeof(unsigned char),                          &gridsizez_minus1);
 	#else
-	setKernelArg(kernel3,7,  sizeof(float),                          	 &fgridsizex_minus1);
-	setKernelArg(kernel3,8,  sizeof(float),                          	 &fgridsizey_minus1);
-	setKernelArg(kernel3,9,  sizeof(float),                          	 &fgridsizez_minus1);
+	setKernelArg(kernel_intere,7,  sizeof(float),                          	 &fgridsizex_minus1);
+	setKernelArg(kernel_intere,8,  sizeof(float),                          	 &fgridsizey_minus1);
+	setKernelArg(kernel_intere,9,  sizeof(float),                          	 &fgridsizez_minus1);
 	#endif
 
 	#if defined(SEPARATE_FGRID_INTERE)
-	setKernelArg(kernel3,10, sizeof(mem_dockpars_fgrids2),                   &mem_dockpars_fgrids2);
-	setKernelArg(kernel3,11, sizeof(mem_dockpars_fgrids3),                   &mem_dockpars_fgrids3);
+	setKernelArg(kernel_intere,10, sizeof(mem_dockpars_fgrids2),                   &mem_dockpars_fgrids2);
+	setKernelArg(kernel_intere,11, sizeof(mem_dockpars_fgrids3),                   &mem_dockpars_fgrids3);
 	#else
-	setKernelArg(kernel3,10, sizeof(unsigned int),                           &mul_tmp2);
-	setKernelArg(kernel3,11, sizeof(unsigned int),                           &mul_tmp3);
+	setKernelArg(kernel_intere,10, sizeof(unsigned int),                           &mul_tmp2);
+	setKernelArg(kernel_intere,11, sizeof(unsigned int),                           &mul_tmp3);
 	#endif
-#endif // End of ENABLE_KERNEL3
+#endif // End of ENABLE_KRNL_INTERE
 
-#ifdef ENABLE_KERNEL4 // Krnl_IntraE
-	setKernelArg(kernel4,0,  sizeof(mem_KerConstStatic_IntraE_atom_charges_const),        &mem_KerConstStatic_IntraE_atom_charges_const);
-	setKernelArg(kernel4,1,  sizeof(mem_KerConstStatic_IntraE_atom_types_const),          &mem_KerConstStatic_IntraE_atom_types_const);
-	setKernelArg(kernel4,2,  sizeof(mem_KerConstStatic_intraE_contributors_const), &mem_KerConstStatic_intraE_contributors_const);
+#ifdef ENABLE_KRNL_INTRAE // Krnl_IntraE
+	setKernelArg(kernel_intrae,0,  sizeof(mem_KerConstStatic_IntraE_atom_charges_const),        &mem_KerConstStatic_IntraE_atom_charges_const);
+	setKernelArg(kernel_intrae,1,  sizeof(mem_KerConstStatic_IntraE_atom_types_const),          &mem_KerConstStatic_IntraE_atom_types_const);
+	setKernelArg(kernel_intrae,2,  sizeof(mem_KerConstStatic_intraE_contributors_const), &mem_KerConstStatic_intraE_contributors_const);
 
-  	setKernelArg(kernel4,3,  sizeof(dockpars.smooth),                              &dockpars.smooth);
-  	setKernelArg(kernel4,4,  sizeof(mem_KerConstStatic_reqm_const),                &mem_KerConstStatic_reqm_const);
-  	setKernelArg(kernel4,5,  sizeof(mem_KerConstStatic_reqm_hbond_const),          &mem_KerConstStatic_reqm_hbond_const);
-  	setKernelArg(kernel4,6,  sizeof(mem_KerConstStatic_atom1_types_reqm_const),    &mem_KerConstStatic_atom1_types_reqm_const);
-  	setKernelArg(kernel4,7,  sizeof(mem_KerConstStatic_atom2_types_reqm_const),    &mem_KerConstStatic_atom2_types_reqm_const);
+  	setKernelArg(kernel_intrae,3,  sizeof(dockpars.smooth),                              &dockpars.smooth);
+  	setKernelArg(kernel_intrae,4,  sizeof(mem_KerConstStatic_reqm_const),                &mem_KerConstStatic_reqm_const);
+  	setKernelArg(kernel_intrae,5,  sizeof(mem_KerConstStatic_reqm_hbond_const),          &mem_KerConstStatic_reqm_hbond_const);
+  	setKernelArg(kernel_intrae,6,  sizeof(mem_KerConstStatic_atom1_types_reqm_const),    &mem_KerConstStatic_atom1_types_reqm_const);
+  	setKernelArg(kernel_intrae,7,  sizeof(mem_KerConstStatic_atom2_types_reqm_const),    &mem_KerConstStatic_atom2_types_reqm_const);
 
-	setKernelArg(kernel4,8,  sizeof(mem_KerConstStatic_VWpars_AC_const),           &mem_KerConstStatic_VWpars_AC_const);
-	setKernelArg(kernel4,9,  sizeof(mem_KerConstStatic_VWpars_BD_const),           &mem_KerConstStatic_VWpars_BD_const);
-	setKernelArg(kernel4,10, sizeof(mem_KerConstStatic_dspars_S_const),            &mem_KerConstStatic_dspars_S_const);
-	setKernelArg(kernel4,11, sizeof(mem_KerConstStatic_dspars_V_const),            &mem_KerConstStatic_dspars_V_const);
+	setKernelArg(kernel_intrae,8,  sizeof(mem_KerConstStatic_VWpars_AC_const),           &mem_KerConstStatic_VWpars_AC_const);
+	setKernelArg(kernel_intrae,9,  sizeof(mem_KerConstStatic_VWpars_BD_const),           &mem_KerConstStatic_VWpars_BD_const);
+	setKernelArg(kernel_intrae,10, sizeof(mem_KerConstStatic_dspars_S_const),            &mem_KerConstStatic_dspars_S_const);
+	setKernelArg(kernel_intrae,11, sizeof(mem_KerConstStatic_dspars_V_const),            &mem_KerConstStatic_dspars_V_const);
 
-	setKernelArg(kernel4,12, sizeof(unsigned char),                    	       &dockpars.num_of_atoms);
-	setKernelArg(kernel4,13, sizeof(unsigned int),                     	       &dockpars.num_of_intraE_contributors);
-	setKernelArg(kernel4,14, sizeof(float),                          	       &dockpars.grid_spacing);
-	setKernelArg(kernel4,15, sizeof(unsigned char),                    	       &dockpars.num_of_atypes);
-	setKernelArg(kernel4,16, sizeof(float),                          	       &dockpars.coeff_elec);
-	setKernelArg(kernel4,17, sizeof(float),                          	       &dockpars.qasp);
-	setKernelArg(kernel4,18, sizeof(float),                          	       &dockpars.coeff_desolv);
+	setKernelArg(kernel_intrae,12, sizeof(unsigned char),                    	       &dockpars.num_of_atoms);
+	setKernelArg(kernel_intrae,13, sizeof(unsigned int),                     	       &dockpars.num_of_intraE_contributors);
+	setKernelArg(kernel_intrae,14, sizeof(float),                          	       &dockpars.grid_spacing);
+	setKernelArg(kernel_intrae,15, sizeof(unsigned char),                    	       &dockpars.num_of_atypes);
+	setKernelArg(kernel_intrae,16, sizeof(float),                          	       &dockpars.coeff_elec);
+	setKernelArg(kernel_intrae,17, sizeof(float),                          	       &dockpars.qasp);
+	setKernelArg(kernel_intrae,18, sizeof(float),                          	       &dockpars.coeff_desolv);
 
 /*
-	setKernelArg(kernel4,14, sizeof(unsigned int),                     	&square_num_of_atypes);
+	setKernelArg(kernel_intrae,14, sizeof(unsigned int),                     	&square_num_of_atypes);
 */
-#endif // End of ENABLE_KERNEL4
+#endif // End of ENABLE_KRNL_INTRAE
 
 #ifdef ENABLE_KERNEL6 // Krnl_PRNG_GG_float
 	setKernelArg(kernel6,1, sizeof(unsigned char),  &dockpars.num_of_genes);
@@ -1474,13 +1474,13 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		runKernelTask(command_queue_conform,kernel_conform,NULL,NULL);
 		#endif // ENABLE_KRNL_CONFORM
 
-		#ifdef ENABLE_KERNEL3
-		runKernelTask(command_queue3,kernel3,NULL,NULL);
-		#endif // ENABLE_KERNEL3
+		#ifdef ENABLE_KRNL_INTERE
+		runKernelTask(command_queue_intere,kernel_intere,NULL,NULL);
+		#endif // ENABLE_KRNL_INTERE
 
-		#ifdef ENABLE_KERNEL4
-		runKernelTask(command_queue4,kernel4,NULL,NULL);
-		#endif // ENABLE_KERNEL4
+		#ifdef ENABLE_KRNL_INTRAE
+		runKernelTask(command_queue_intrae,kernel_intrae,NULL,NULL);
+		#endif // ENABLE_KRNL_INTRAE
 
 		#ifdef ENABLE_KERNEL6
 		runKernelTask(command_queue6,kernel6,NULL,NULL);
@@ -1587,12 +1587,12 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		clFinish(command_queue_conform); 
 		#endif
 
-		#ifdef ENABLE_KERNEL3 		
-		clFinish(command_queue3); 
+		#ifdef ENABLE_KRNL_INTERE	
+		clFinish(command_queue_intere); 
 		#endif
 
-		#ifdef ENABLE_KERNEL4 		
-		clFinish(command_queue4); 
+		#ifdef ENABLE_KRNL_INTRAE	
+		clFinish(command_queue_intrae); 
 		#endif
 
 		#ifdef ENABLE_KERNEL6
@@ -1982,18 +1982,18 @@ bool init() {
   checkError(status, "Failed to create kernel conform");
 #endif
 
-#ifdef ENABLE_KERNEL3
-  command_queue3 = clCreateCommandQueue(context, device, 0, &status);
-  checkError(status, "Failed to create command queue3");
-  kernel3 = clCreateKernel(program, name_k3, &status);
-  checkError(status, "Failed to create kernel");
+#ifdef ENABLE_KRNL_INTERE
+  command_queue_intere = clCreateCommandQueue(context, device, 0, &status);
+  checkError(status, "Failed to create command queue intere");
+  kernel_intere = clCreateKernel(program, name_krnl_intere, &status);
+  checkError(status, "Failed to create kernel intere");
 #endif
 
-#ifdef ENABLE_KERNEL4
-  command_queue4 = clCreateCommandQueue(context, device, 0, &status);
-  checkError(status, "Failed to create command queue4");
-  kernel4 = clCreateKernel(program, name_k4, &status);
-  checkError(status, "Failed to create kernel");
+#ifdef ENABLE_KRNL_INTRAE
+  command_queue_intrae = clCreateCommandQueue(context, device, 0, &status);
+  checkError(status, "Failed to create command queue intrae");
+  kernel_intrae = clCreateKernel(program, name_krnl_intrae, &status);
+  checkError(status, "Failed to create kernel intrae");
 #endif
 
 #ifdef ENABLE_KERNEL6
@@ -2172,14 +2172,14 @@ void cleanup() {
   if(command_queue_conform) {clReleaseCommandQueue(command_queue_conform);}
 #endif
 
-#ifdef ENABLE_KERNEL3
-  if(kernel3) {clReleaseKernel(kernel3);}
-  if(command_queue3) {clReleaseCommandQueue(command_queue3);}
+#ifdef ENABLE_KRNL_INTERE
+  if(kernel_intere) {clReleaseKernel(kernel_intere);}
+  if(command_queue_intere) {clReleaseCommandQueue(command_queue_intere);}
 #endif
 
-#ifdef ENABLE_KERNEL4
-  if(kernel4) {clReleaseKernel(kernel4);}
-  if(command_queue4) {clReleaseCommandQueue(command_queue4);}
+#ifdef ENABLE_KRNL_INTRAE
+  if(kernel_intrae) {clReleaseKernel(kernel_intrae);}
+  if(command_queue_intrae) {clReleaseCommandQueue(command_queue_intrae);}
 #endif
 
 #ifdef ENABLE_KERNEL6
