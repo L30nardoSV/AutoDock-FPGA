@@ -358,7 +358,7 @@ void make_resfiles(float* final_population,
 		fprintf(fp, " Entity |      dx [A]      |      dy [A]      |      dz [A]      |     phi [°]      |    theta [°]     | alpha_genrot [°] |");
 		for (i=0; i<ligand_from_pdb->num_of_rotbonds; i++)
 			fprintf(fp, " alpha_rotb%2d [°] |", i);
-		fprintf(fp, " intramolecular energy | intermolecular energy | total energy calculated by CPU / calculated by GPU / difference | RMSD [A] | \n");
+		fprintf(fp, " intramolecular energy | intermolecular energy | total energy calculated by CPU / calculated by FPGA / difference | RMSD [A] | \n");
 
 		fprintf(fp, "--------+------------------+------------------+------------------+------------------+------------------+------------------+");
 		for (i=0; i<ligand_from_pdb->num_of_rotbonds; i++)
@@ -492,8 +492,8 @@ void cluster_analysis(Ligandresult myresults [], int num_of_runs, char* report_f
 	fprintf(fp, "           RUN TIME INFO           \n");
 	fprintf(fp, "===================================\n\n");
 
-	fprintf(fp, "Average GPU run time for 1 run:           %lfs\n", docking_avg_runtime);
-	fprintf(fp, "Total GPU docking run time:               %fs\n", docking_avg_runtime*mypars->num_of_runs);
+	fprintf(fp, "Average FPGA run time for 1 run:           %lfs\n", docking_avg_runtime);
+	fprintf(fp, "Total FPGA docking run time:               %fs\n", docking_avg_runtime*mypars->num_of_runs);
 
 	fprintf(fp, "Program run time:                          %lfs\n", program_runtime);
 	fprintf(fp, "\n\n");
