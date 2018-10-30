@@ -494,9 +494,6 @@ filled with clock() */
 	const unsigned int mul_tmp3 = (dockpars.num_of_atypes + 1) * dockpars.g3;
 	#endif
 
-	// num of rotbonds
-	const unsigned char num_rotbonds = myligand_reference.num_of_rotbonds;
-
  	//allocating GPU memory for populations, floatgrids,
 	//energies, evaluation counters and random number generator states
 //#if defined (FIXED_POINT_INTERE)
@@ -829,7 +826,6 @@ filled with clock() */
 	setKernelArg(kernel_conform,5,  sizeof(unsigned char),      &dockpars.num_of_atoms);
 	setKernelArg(kernel_conform,6,  sizeof(unsigned char),      &dockpars.num_of_genes);
 /*
-	setKernelArg(kernel_conform,7,  sizeof(unsigned char),      &num_rotbonds);
 	setKernelArg(kernel_conform,8,  sizeof(mem_KerConstStatic_ref_orientation_quats_const),   &mem_KerConstStatic_ref_orientation_quats_const);
 */
 	setKernelArg(kernel_conform,7,  sizeof(mem_KerConstStatic_ref_orientation_quats_const),   &mem_KerConstStatic_ref_orientation_quats_const);
