@@ -39,11 +39,11 @@ static const char *const VERSION_STR = "161";
 //////////////////////////////////////////
 
 // This is the minimum alignment requirement to ensure DMA can be used.
-const unsigned AOCL_ALIGNMENT = 64;
+const unsigned SDX_ALIGNMENT = 4096;
 
 #ifdef _WIN32 // Windows
 void *alignedMalloc(size_t size) {
-  return _aligned_malloc (size, AOCL_ALIGNMENT);
+  return _aligned_malloc (size, SDX_ALIGNMENT);
 }
 
 void alignedFree(void * ptr) {
@@ -53,7 +53,7 @@ void alignedFree(void * ptr) {
 void *alignedMalloc(size_t size) {
   void *result = NULL;
   int rc;
-  rc = posix_memalign (&result, AOCL_ALIGNMENT, size);
+  rc = posix_memalign (&result, SDX_ALIGNMENT, size);
   return result;
 }
 
