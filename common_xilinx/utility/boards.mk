@@ -25,12 +25,34 @@ ENABLE_KRNL_CONFORM  = YES
 ENABLE_KRNL_INTERE   = YES
 ENABLE_KRNL_INTRAE   = YES
 
-# Prng kernels
-ENABLE_K6  = YES
+ENABLE_KRNL_PRNG_BT_USHORT_FLOAT = YES
+ENABLE_KRNL_PRNG_GG_UCHAR        = YES
+ENABLE_KRNL_PRNG_GG_FLOAT        = YES
+
+# ls123 prng
+ENABLE_K35 = YES
+
 ENABLE_K7  = YES
 
-# ls1 prng
-ENABLE_K10 = YES
+ENABLE_K14 = YES
+
+ENABLE_K20 = YES
+
+# prng ls4, ls5
+ENABLE_K37 = YES
+ENABLE_K38 = YES
+
+# prng ls6, ls7, ls8, ls9
+ENABLE_K41 = YES
+ENABLE_K42 = YES
+ENABLE_K43 = YES
+ENABLE_K44 = YES
+
+
+
+
+
+
 
 # Replace single Krnl_Prng_Arbiter
 # See kernels 31, 32, 33, 34
@@ -39,35 +61,26 @@ ENABLE_K10 = YES
 ENABLE_K12 = YES
 
 # disable Krnl_LS_Arbiter
-ENABLE_K14 = YES
 ENABLE_K15 = YES
 
-ENABLE_K20 = YES
+
 ENABLE_K21 = YES
 
 # PRNGS in GA for LS2 and LS3
 
 ENABLE_K27 = YES
 
-# ls123 prng
-ENABLE_K35 = YES
 
-# bt ushort_float
-ENABLE_K36 = YES
 
-# prng ls4, ls5
-ENABLE_K37 = YES
-ENABLE_K38 = YES
+
+
+
 
 # krnl_ls4, Krnl_ls5
 ENABLE_K39 = YES
 ENABLE_K40 = YES
 
-# prng ls6, ls7, ls8, ls9
-ENABLE_K41 = YES
-ENABLE_K42 = YES
-ENABLE_K43 = YES
-ENABLE_K44 = YES
+
 
 # krnl_ls6, Krnl_ls7, krnl_ls8, Krnl_ls9
 ENABLE_K45 = YES
@@ -100,11 +113,28 @@ else
 	KRNL_INTRAE =
 endif
 
-ifeq ($(ENABLE_K6),YES)
-	K6 =-DENABLE_KERNEL6
+ifeq ($(ENABLE_KRNL_PRNG_BT_USHORT_FLOAT),YES)
+	KRNL_PRNG_BT_USHORT_FLOAT =-DENABLE_KRNL_PRNG_BT_USHORT_FLOAT
 else
-	K6 =
+	KRNL_PRNG_BT_USHORT_FLOAT =
 endif
+
+ifeq ($(ENABLE_KRNL_PRNG_GG_UCHAR),YES)
+	KRNL_PRNG_GG_UCHAR =-DENABLE_KRNL_PRNG_GG_UCHAR
+else
+	KRNL_PRNG_GG_UCHAR =
+endif
+
+ifeq ($(ENABLE_KRNL_PRNG_GG_FLOAT),YES)
+	KRNL_PRNG_GG_FLOAT =-DENABLE_KRNL_PRNG_GG_FLOAT
+else
+	KRNL_PRNG_GG_FLOAT =
+endif
+
+
+
+
+
 
 ifeq ($(ENABLE_K7),YES)
 	K7 =-DENABLE_KERNEL7
@@ -112,11 +142,7 @@ else
 	K7 =
 endif
 
-ifeq ($(ENABLE_K10),YES)
-	K10 =-DENABLE_KERNEL10
-else
-	K10 =
-endif
+
 
 ifeq ($(ENABLE_K12),YES)
 	K12 =-DENABLE_KERNEL12
@@ -160,11 +186,7 @@ else
 	K35 =
 endif
 
-ifeq ($(ENABLE_K36),YES)
-	K36 =-DENABLE_KERNEL36
-else
-	K36 =
-endif
+
 
 ifeq ($(ENABLE_K37),YES)
 	K37 =-DENABLE_KERNEL37
@@ -251,10 +273,13 @@ ENABLE_KERNELS = $(KRNL_GA) \
 		 $(KRNL_CONFORM) \
 		 $(KRNL_INTERE) \
 		 $(KRNL_INTRAE) \
-	        $(K6)  $(K7)                $(K10) \
+		 $(KRNL_PRNG_BT_USHORT_FLOAT) \
+		 $(KRNL_PRNG_GG_UCHAR) \
+		 $(KRNL_PRNG_GG_FLOAT) \
+	         $(K7)      \
 		        $(K12)        $(K14) $(K15)                             $(K20) \
 		 $(K21)                                    $(K27)                      \
-		                             $(K35) $(K36) $(K37) $(K38) $(K39) $(K40) \
+		                             $(K35) $(K37) $(K38) $(K39) $(K40) \
 		 $(K41) $(K42) $(K43) $(K44) $(K45) $(K46) $(K47) $(K48)
 
 # =============================
