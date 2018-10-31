@@ -9,7 +9,7 @@ SDAccel v17.4.
 ## Must
 
 ```zsh
-source init_sdx174_vcu1525.sh
+source init_sdx174.sh
 ```
 
 ### Documentation
