@@ -1837,10 +1837,11 @@ bool init() {
   printf("Using XCLBIN: %s\n", binary_file.c_str());
   program = createProgramFromBinary(context, binary_file.c_str(), &device, 1);
 
+/*
   // Build the program that was just created.
   status = clBuildProgram(program, 0, NULL, "", NULL, NULL);
   checkError(status, "Failed to build program");
-
+*/
   // Commenting out single out-of-order command queue design for lga-sdx174.
   // As a valid alternative, multiple in-order command queues are used
   // to individualize kernels from their command queues
