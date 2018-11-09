@@ -143,10 +143,16 @@ Krnl_GA_SRCS=./device/Krnl_GA.cl
 #		   --sp Krnl_IntraE_1.m_axi_gmem9:bank3	\
 #		   --sp Krnl_IntraE_1.m_axi_gmem10:bank3
 
+#Krnl_GA_LDCLFLAGS+=--sp Krnl_GA_1.m_axi_gmem:bank0      \
+#		   --sp Krnl_Conform_1.m_axi_gmem:bank1 \
+#		   --sp Krnl_InterE_1.m_axi_gmem:bank2  \
+#		   --sp Krnl_IntraE_1.m_axi_gmem:bank3
+
 Krnl_GA_LDCLFLAGS+=--sp Krnl_GA_1.m_axi_gmem:bank0      \
-		   --sp Krnl_Conform_1.m_axi_gmem:bank1 \
-		   --sp Krnl_InterE_1.m_axi_gmem:bank2  \
-		   --sp Krnl_IntraE_1.m_axi_gmem:bank3
+		   --sp Krnl_Conform_1.m_axi_gmem:bank0 \
+		   --sp Krnl_InterE_1.m_axi_gmem:bank1  \
+		   --sp Krnl_IntraE_1.m_axi_gmem:bank1
+
 ##
 # https://www.xilinx.com/support/documentation/sw_manuals/xilinx2017_4/ug1281-sdaccel-debugging-guide.pdf
 # Page 32
