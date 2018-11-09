@@ -15,10 +15,6 @@
 #include <sys/time.h>
 // ------------------------
 
-#include "AOCLUtils/aocl_utils.h"
-
-using namespace aocl_utils;
-
 int main(int argc, char* argv[])
 {
 
@@ -101,10 +97,8 @@ int main(int argc, char* argv[])
 	if (docking_with_gpu(&mygrid, floatgrids, &mypars, &myligand_init, &argc, argv, clock_start_program) != 0)
 		return 1;
 
-/*
-	free(floatgrids);
-*/
-	if(floatgrids) {alignedFree(floatgrids);}
+	if(floatgrids) {free(floatgrids);}
+
 /*
 	clock_stop_program = clock();
 	printf("Program run time: %.3f sec\n", ELAPSEDSECS(clock_stop_program, clock_start_program));
