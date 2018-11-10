@@ -113,7 +113,7 @@ CXXFLAGS:=-Wall -O0 -g -std=c++14 $(OTHER_FLAGS)
 
 # Host Application
 
-hostbin_SRCS=$(wildcard ../common/src/AOCLUtils/*.cpp wrapcl/src/*.cpp host/src/*.cpp) \
+hostbin_SRCS=$(wildcard ./host/src/*.cpp) \
 		$(oclHelper_SRCS) \
 		$(xcl2_SRCS)
 
@@ -391,8 +391,8 @@ kerrpt-sw:
 # Compile for sw and hw emulation
 kerswemu:
 	make all TARGETS=sw_emu DEVICES=$(BOARD)
-	cp ./xclbin/$(XCLBINS).sw_emu.*.xclbin .
-	mv ./$(XCLBINS).sw_emu.*.xclbin ./$(XCLBINS).xclbin
+	#cp ./xclbin/$(XCLBINS).sw_emu.*.xclbin .
+	#mv ./$(XCLBINS).sw_emu.*.xclbin ./$(XCLBINS).xclbin
 	@echo $(newline)
 	@echo "==============================================================================="
 	@echo "INFO: sw emulation file created under: \"./xclbin/$(XCLBINS).sw_emu.*.xclbin\" "

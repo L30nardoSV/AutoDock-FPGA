@@ -26,8 +26,6 @@ int main(int argc, char* argv[])
 	Liganddata myligand_init;
 	Dockpars mypars;
 
-	float* floatgrids;
-
 	clock_t clock_start_program, clock_stop_program;
 
 
@@ -57,6 +55,11 @@ int main(int argc, char* argv[])
 	if (get_gridinfo(mypars.fldfile, &mygrid) != 0)
 		return 1;
 
+	//allocating CPU memory for floatgrids
+	size_t size_fgrid_nelems = (mygrid.num_of_atypes+2) * mygrid.size_xyz[0] * mygrid.size_xyz[1] * mygrid.size_xyz[2];
+	vector<float,aligned_allocator<float>> floatgrids(size_fgrid_nelems);
+
+
 	// Filling the atom types filed of myligand according to the grid types
 	if (init_liganddata(mypars.ligandfile, &myligand_init, &mygrid) != 0)
 		return 1;
@@ -66,7 +69,7 @@ int main(int argc, char* argv[])
 		return 1;
 
 	//Reading the grid files and storing values in the memory region pointed by floatgrids
-	if (get_gridvalues_f(&mygrid, &floatgrids) != 0)
+	if (get_gridvalues_f(&mygrid, floatgrids.data()) != 0)
 		return 1;
 
 	//------------------------------------------------------------
@@ -85,7 +88,7 @@ int main(int argc, char* argv[])
 		print_ref_lig_energies_f(myligand_init,
 					 mypars.smooth,
 					 mygrid,
-					 floatgrids,
+					 floatgrids.data(),
 					 mypars.coeffs.scaled_AD4_coeff_elec,
 					 mypars.coeffs.AD4_coeff_desolv,
 					 mypars.qasp);
@@ -94,10 +97,8 @@ int main(int argc, char* argv[])
 	//------------------------------------------------------------
 	// Starting Docking
 	//------------------------------------------------------------
-	if (docking_with_gpu(&mygrid, floatgrids, &mypars, &myligand_init, &argc, argv, clock_start_program) != 0)
+	if (docking_with_gpu(&mygrid, floatgrids.data(), &mypars, &myligand_init, &argc, argv, clock_start_program) != 0)
 		return 1;
-
-	if(floatgrids) {free(floatgrids);}
 
 /*
 	clock_stop_program = clock();

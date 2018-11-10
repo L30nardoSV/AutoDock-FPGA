@@ -1,7 +1,4 @@
 #include "processgrid.h"
-#include "AOCLUtils/aocl_utils.h"
-
-using namespace aocl_utils;
 
 int get_gridinfo(const char* fldfilename, Gridinfo* mygrid)
 {
@@ -99,7 +96,7 @@ int get_gridinfo(const char* fldfilename, Gridinfo* mygrid)
 	return 0;
 }
 
-int get_gridvalues_f(const Gridinfo* mygrid, float** fgrids)
+int get_gridvalues_f(const Gridinfo* mygrid, float* fgrids)
 //The function reads the grid point values from the .map files
 //that correspond to the receptor given by the first parameter.
 //It allocates the proper amount of memory and stores the data there,
@@ -112,23 +109,13 @@ int get_gridvalues_f(const Gridinfo* mygrid, float** fgrids)
 	char tempstr [128];
 	float* mypoi;
 
-/*
-	*fgrids = (float*) malloc((sizeof(float))*(mygrid->num_of_atypes+2)*
-						  (mygrid->size_xyz[0])*
-					          (mygrid->size_xyz[1])*
-						  (mygrid->size_xyz[2]));
-*/
-	*fgrids = (float*) alignedMalloc((sizeof(float))*(mygrid->num_of_atypes+2)*
-						  (mygrid->size_xyz[0])*
-					          (mygrid->size_xyz[1])*
-						  (mygrid->size_xyz[2]));
-	if (*fgrids == NULL)
+	if (fgrids == NULL)
 	{
 		printf("Error: not enough memory!\n");
 		return 1;
 	}
 
-	mypoi = *fgrids;
+	mypoi = fgrids;
 
 	for (t=0; t < mygrid->num_of_atypes+2; t++)
 	{

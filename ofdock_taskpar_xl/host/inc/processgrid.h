@@ -16,6 +16,10 @@
 
 #include "miscellaneous.h"
 
+// Added for allocating fgrids
+#include <vector>
+using std::vector;
+
 #define getvalue_4Darr(mempoi, grinf, t, z, y, x)                  *(mempoi + (grinf).size_xyz[0] * (y + (grinf).size_xyz[1] * (z + (grinf).size_xyz[2]*t)) + x)
 #define getvalue_4Darr_withsize(mempoi, gridsize_xyz, t, z, y, x)  *(mempoi + gridsize_xyz[0]*(y + gridsize_xyz[1] * (z + gridsize_xyz[2]*t)) + x)
 //The macro helps to access the grid point values
@@ -41,6 +45,6 @@ typedef struct
 int get_gridinfo(const char*, Gridinfo*);
 
 int get_gridvalues_f(const Gridinfo* mygrid,
-		     float** fgrids);
+		     float* fgrids);
 
 #endif /* PROCESSGRID_H_ */

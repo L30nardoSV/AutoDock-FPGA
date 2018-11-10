@@ -26,6 +26,10 @@
 //#include "ImportSource.h"
 #include "BufferObjects.h"
 
+#include "xcl2.hpp"
+#include <vector>
+using std::vector;
+
 #define ELAPSEDSECS(stop,start) ((float) stop-start)/((float) CLOCKS_PER_SEC)
 
 int docking_with_gpu(const Gridinfo* 	mygrid,
