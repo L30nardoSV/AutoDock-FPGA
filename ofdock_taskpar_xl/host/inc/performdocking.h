@@ -13,8 +13,6 @@
 #include "calcenergy.h"	
 #include "processresult.h"
 
-#include <CL/opencl.h>
-
 #include "xcl2.hpp"
 #include <vector>
 using std::vector;

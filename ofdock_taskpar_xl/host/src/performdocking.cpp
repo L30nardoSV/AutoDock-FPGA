@@ -14,7 +14,6 @@
 #include <stdlib.h>
 #include <math.h>
 #include <cstring>
-#include "CL/opencl.h"
 
 
 //// --------------------------------
