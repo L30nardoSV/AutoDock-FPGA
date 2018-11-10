@@ -323,16 +323,9 @@ void Krnl_Prng_LS_float(
 
 			nb_pipe_status success = PIPE_STATUS_FAILURE;
 
-			#if defined (FIXED_POINT_LS1)
-			fixedpt fixpt_tmp = fixedpt_fromfloat(tmp);
-			if(valid != PIPE_STATUS_SUCCESS) {
-				success = write_pipe(chan_PRNG2LS_float_prng, (float*) &fixpt_tmp);
-			}
-			#else
 			if(valid != PIPE_STATUS_SUCCESS) {
 				success = write_pipe(chan_PRNG2LS_float_prng, &tmp);
 			}
-			#endif
 		}
 	} // End of while(valid != PIPE_STATUS_SUCCESS)
 }
@@ -378,16 +371,9 @@ void Krnl_Prng_LS2_float(
 
 			nb_pipe_status success = PIPE_STATUS_FAILURE;
 
-			#if defined (FIXED_POINT_LS2)
-			fixedpt fixpt_tmp = fixedpt_fromfloat(tmp);
-			if(valid != PIPE_STATUS_SUCCESS) {
-				success = write_pipe(chan_PRNG2LS2_float_prng, (float*) &fixpt_tmp);
-			}
-			#else
 			if(valid != PIPE_STATUS_SUCCESS) {
 				success = write_pipe(chan_PRNG2LS2_float_prng, &tmp);
 			}
-			#endif
 		}
 	} // End of while(valid != PIPE_STATUS_SUCCESS)
 }
@@ -433,17 +419,9 @@ void Krnl_Prng_LS3_float(
 
 			nb_pipe_status success = PIPE_STATUS_FAILURE;
 
-			#if defined (FIXED_POINT_LS3)
-			fixedpt fixpt_tmp = fixedpt_fromfloat(tmp);
-			if(valid != PIPE_STATUS_SUCCESS) {
-				success = write_pipe(chan_PRNG2LS3_float_prng, (float*) &fixpt_tmp);
-			}
-
-			#else
 			if(valid != PIPE_STATUS_SUCCESS) {
 				success = write_pipe(chan_PRNG2LS3_float_prng, &tmp);
 			}
-			#endif
 		}
 	} // End of while(valid != PIPE_STATUS_SUCCESS)
 }
@@ -489,16 +467,9 @@ void Krnl_Prng_LS4_float(
 
 			nb_pipe_status success = PIPE_STATUS_FAILURE;
 
-			#if defined (FIXED_POINT_LS4)
-			fixedpt fixpt_tmp = fixedpt_fromfloat(tmp);
-			if(valid != PIPE_STATUS_SUCCESS) {
-				success = write_pipe(chan_PRNG2LS4_float_prng, (float*) &fixpt_tmp);
-			}
-			#else
 			if(valid != PIPE_STATUS_SUCCESS) {
 				success = write_pipe(chan_PRNG2LS4_float_prng, &tmp);
 			}
-			#endif
 		}
 	} // End of while(valid != PIPE_STATUS_SUCCESS)
 }
@@ -544,16 +515,9 @@ void Krnl_Prng_LS5_float(
 
 			nb_pipe_status success = PIPE_STATUS_FAILURE;
 
-			#if defined (FIXED_POINT_LS5)
-			fixedpt fixpt_tmp = fixedpt_fromfloat(tmp);
-			if(valid != PIPE_STATUS_SUCCESS) {
-				success = write_pipe(chan_PRNG2LS5_float_prng, (float*) &fixpt_tmp);
-			}
-			#else
 			if(valid != PIPE_STATUS_SUCCESS) {
 				success = write_pipe(chan_PRNG2LS5_float_prng, &tmp);
 			}
-			#endif
 		}
 	} // End of while(valid != PIPE_STATUS_SUCCESS)
 }
@@ -599,17 +563,9 @@ void Krnl_Prng_LS6_float(
 
 			nb_pipe_status success = PIPE_STATUS_FAILURE;
 
-			#if defined (FIXED_POINT_LS6)
-			fixedpt fixpt_tmp = fixedpt_fromfloat(tmp);
-
-			if(valid != PIPE_STATUS_SUCCESS) {
-				success = write_pipe(chan_PRNG2LS6_float_prng, (float*) &fixpt_tmp);
-			}
-			#else
 			if(valid != PIPE_STATUS_SUCCESS) {
 				success = write_pipe(chan_PRNG2LS6_float_prng, &tmp);
 			}
-			#endif
 		}
 	} // End of while(active)
 }
@@ -655,16 +611,9 @@ void Krnl_Prng_LS7_float(
 
 			nb_pipe_status success = PIPE_STATUS_FAILURE;
 
-			#if defined (FIXED_POINT_LS7)
-			fixedpt fixpt_tmp = fixedpt_fromfloat(tmp);
-			if(valid != PIPE_STATUS_SUCCESS) {
-				success = write_pipe(chan_PRNG2LS7_float_prng, (float*) &fixpt_tmp);
-			}
-			#else
 			if(valid != PIPE_STATUS_SUCCESS) {
 				success = write_pipe(chan_PRNG2LS7_float_prng, &tmp);
 			}
-			#endif
 		}
 	} // End of while(valid != PIPE_STATUS_SUCCESS)
 }
@@ -710,16 +659,9 @@ void Krnl_Prng_LS8_float(
 
 			nb_pipe_status success = PIPE_STATUS_FAILURE;
 
-			#if defined (FIXED_POINT_LS8)
-			fixedpt fixpt_tmp = fixedpt_fromfloat(tmp);
-			if(valid != PIPE_STATUS_SUCCESS) {
-				success = write_pipe(chan_PRNG2LS8_float_prng, (float*) &fixpt_tmp);
-			}
-			#else
 			if(valid != PIPE_STATUS_SUCCESS) {
 				success = write_pipe(chan_PRNG2LS8_float_prng, &tmp);
 			}
-			#endif
 		}
 	} // End of while(valid != PIPE_STATUS_SUCCESS)
 }
@@ -765,16 +707,9 @@ void Krnl_Prng_LS9_float(
 
 			nb_pipe_status success = PIPE_STATUS_FAILURE;
 
-			#if defined (FIXED_POINT_LS9)
-			fixedpt fixpt_tmp = fixedpt_fromfloat(tmp);
-			if(valid != PIPE_STATUS_SUCCESS) {
-				success = write_pipe(chan_PRNG2LS9_float_prng, (float*) &fixpt_tmp);
-			}
-			#else
 			if(valid != PIPE_STATUS_SUCCESS) {
 				success = write_pipe(chan_PRNG2LS9_float_prng, &tmp);
 			}
-			#endif
 		}
 	} // End of while(valid != PIPE_STATUS_SUCCESS)
 }

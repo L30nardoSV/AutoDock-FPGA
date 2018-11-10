@@ -103,19 +103,6 @@ while(active) {
 
 	float intraE = 0.0f;
 
-	#if defined (FIXED_POINT_INTRAE)
-	// Create shift register to reduce II (initially II=32, unroll-factor=8) 
-	// Use fixedpt64 to reduce II=4 (after shift-register) downto II=1
-	//float shift_intraE[33];
-	fixedpt64 shift_intraE[33];
-
-	__attribute__((opencl_unroll_hint))
-	LOOP_INTRAE_SHIFT_INIT:
-	for (uchar i=0; i<33; i++) {
-		//shift_intraE[i] = 0.0f;
-		shift_intraE[i] = 0;
-	}
-	#endif
 
 	// For each intramolecular atom contributor pair
 
@@ -244,35 +231,9 @@ while(active) {
 				 DockConst_coeff_desolv*native_exp(-0.0386f*distance_pow_2);
 		} // if cuttoff2 - internuclear-distance at 20.48A
 	
-		#if defined (FIXED_POINT_INTRAE)
-		//shift_intraE[32] = shift_intraE[0] + partialE1 + partialE2 + partialE3 + partialE4;
-		shift_intraE[32] = shift_intraE[0] + fixedpt64_fromfloat(partialE1) + 
-						     fixedpt64_fromfloat(partialE2) + 
-						     fixedpt64_fromfloat(partialE3) + 
-						     fixedpt64_fromfloat(partialE4);
-
-		__attribute__((opencl_unroll_hint))
-		LOOP_INTRAE_SHIFT:
-		for (uchar j=0; j<32; j++) {
-			shift_intraE[j] = shift_intraE[j+1];
-		}
-		#else
 		intraE += partialE1 + partialE2 + partialE3 + partialE4;
-		#endif
 	
 	} // End of contributor_counter for-loop
-
-	#if defined (FIXED_POINT_INTRAE)
-	fixedpt64 fixpt_intraE = 0;
-
-	__attribute__((opencl_unroll_hint))
-	LOOP_INTRAE_SHIFT_RED:
-	for (uchar j=0; j<32; j++) {
-		//intraE += shift_intraE[j];
-		fixpt_intraE += shift_intraE[j];
-	}
-	intraE = fixedpt64_tofloat(fixpt_intraE);
-	#endif
 
 	// --------------------------------------------------------------
 	// Send intramolecular energy to channel

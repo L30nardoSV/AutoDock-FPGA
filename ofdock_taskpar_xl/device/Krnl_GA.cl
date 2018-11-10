@@ -183,26 +183,6 @@ pipe float  chan_IGL2Conform_genotype       __attribute__((xcl_reqd_pipe_depth(P
 // Resized to valid SDAccel depths: 16, 32, ...
 pipe int   chan_IGLArbiter_Off		    __attribute__((xcl_reqd_pipe_depth(PIPE_DEPTH_16)));
 
-#if defined (FIXED_POINT_CONFORM) || \
-    defined (FIXED_POINT_LS1)     || \
-    defined (FIXED_POINT_LS2)     || \
-    defined (FIXED_POINT_LS3)     || \
-    defined (FIXED_POINT_LS4)     || \
-    defined (FIXED_POINT_LS5)     || \
-    defined (FIXED_POINT_LS6)     || \
-    defined (FIXED_POINT_LS7)     || \
-    defined (FIXED_POINT_LS8)     || \
-    defined (FIXED_POINT_LS9)
-#include "../defines_fixedpt.h"
-
-typedef int3          fixedpt3;
-typedef int4	      fixedpt4;
-#endif
-
-#if defined (FIXED_POINT_INTERE) || defined (FIXED_POINT_INTRAE)
-#include "../defines_fixedpt_64.h"
-#endif
-
 // --------------------------------------------------------------------------
 // Map the argument into the interval 0 - 180, or 0 - 360
 // by adding/subtracting n*ang_max to/from it.
@@ -232,43 +212,6 @@ float map_angle_360(float angle)
 	{ x -= 360.0f;}
 	return x;
 }
-
-#if defined (FIXED_POINT_LS1) || \
-    defined (FIXED_POINT_LS2) || \
-    defined (FIXED_POINT_LS3) || \
-    defined (FIXED_POINT_LS4) || \
-    defined (FIXED_POINT_LS5) || \
-    defined (FIXED_POINT_LS6) || \
-    defined (FIXED_POINT_LS7) || \
-    defined (FIXED_POINT_LS8) || \
-    defined (FIXED_POINT_LS9)
-#define FIXEDPT_180	0xB40000
-#define FIXEDPT_360	0x1680000
-
-fixedpt fixedpt_map_angle_180(fixedpt angle)
-{
-	fixedpt x = angle;
-	//while (x < 0.0f) 
-	if (x < 0)
-	{ x += FIXEDPT_180; }
-	//while (x > 180.0f)
-	if (x > FIXEDPT_180)
-	{ x -= FIXEDPT_180; }
-	return x;
-}
-
-fixedpt fixedpt_map_angle_360(fixedpt angle)
-{
-	fixedpt x = angle;
-	//while (x < 0.0f) 
-	if (x < 0)
-	{ x += FIXEDPT_360; }
-	//while (x > 360.0f)
-	if (x > FIXEDPT_360)
-	{ x -= FIXEDPT_360;}
-	return x;
-}
-#endif
 
 // --------------------------------------------------------------------------
 // Lamarckian Genetic-Algorithm (GA): GA + LS (Local Search) 

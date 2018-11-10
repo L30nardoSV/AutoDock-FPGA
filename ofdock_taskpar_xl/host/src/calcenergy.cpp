@@ -397,11 +397,7 @@ int prepare_conststatic_fields_for_gpu(Liganddata* 	       myligand_reference,
 
 	int m;
 	for (m=0;m<MAX_NUM_OF_ATOMS;m++) {
-#if defined (FIXED_POINT_INTERE)
-		KerConstStatic->fixpt64_atom_charges_const[m] = fixedpt64_fromfloat(atom_charges[m]); 
-#endif
 		KerConstStatic->atom_charges_const[m] = atom_charges[m]; 
-
 	}
 
 
@@ -429,41 +425,20 @@ int prepare_conststatic_fields_for_gpu(Liganddata* 	       myligand_reference,
 
 	//coordinates of reference ligand
 	for (i=0; i < myligand_reference->num_of_atoms; i++) {
-		#if defined (FIXED_POINT_CONFORM)
-		// fixed-point
-		KerConstStatic->ref_coords_const[i].x = fixedpt_fromfloat(myligand_reference->atom_idxyzq[i][1]);
-		KerConstStatic->ref_coords_const[i].y = fixedpt_fromfloat(myligand_reference->atom_idxyzq[i][2]);
-		KerConstStatic->ref_coords_const[i].z = fixedpt_fromfloat(myligand_reference->atom_idxyzq[i][3]);
-		#else
-		// floating-point (original)
 		KerConstStatic->ref_coords_const[i].x = myligand_reference->atom_idxyzq[i][1];
 		KerConstStatic->ref_coords_const[i].y = myligand_reference->atom_idxyzq[i][2];
 		KerConstStatic->ref_coords_const[i].z = myligand_reference->atom_idxyzq[i][3];
-		#endif
 	}
 
 
 	//rotatable bond vectors
 	for (i=0; i < myligand_reference->num_of_rotbonds; i++) {
-		#if defined (FIXED_POINT_CONFORM)
-		// fixed-point
-		KerConstStatic->rotbonds_moving_vectors_const[i].x = fixedpt_fromfloat(myligand_reference->rotbonds_moving_vectors[i][0]);
-		KerConstStatic->rotbonds_moving_vectors_const[i].y = fixedpt_fromfloat(myligand_reference->rotbonds_moving_vectors[i][1]);
-		KerConstStatic->rotbonds_moving_vectors_const[i].z = fixedpt_fromfloat(myligand_reference->rotbonds_moving_vectors[i][2]);
-
-		KerConstStatic->rotbonds_unit_vectors_const[i].x = fixedpt_fromfloat(myligand_reference->rotbonds_unit_vectors[i][0]);
-		KerConstStatic->rotbonds_unit_vectors_const[i].y = fixedpt_fromfloat(myligand_reference->rotbonds_unit_vectors[i][1]);
-		KerConstStatic->rotbonds_unit_vectors_const[i].z = fixedpt_fromfloat(myligand_reference->rotbonds_unit_vectors[i][2]);
-		#else
-		// floating-point (original)
 		KerConstStatic->rotbonds_moving_vectors_const[i].x = myligand_reference->rotbonds_moving_vectors[i][0];
 		KerConstStatic->rotbonds_moving_vectors_const[i].y = myligand_reference->rotbonds_moving_vectors[i][1];
 		KerConstStatic->rotbonds_moving_vectors_const[i].z = myligand_reference->rotbonds_moving_vectors[i][2];
-
 		KerConstStatic->rotbonds_unit_vectors_const[i].x = myligand_reference->rotbonds_unit_vectors[i][0];
 		KerConstStatic->rotbonds_unit_vectors_const[i].y = myligand_reference->rotbonds_unit_vectors[i][1];
 		KerConstStatic->rotbonds_unit_vectors_const[i].z = myligand_reference->rotbonds_unit_vectors[i][2];
-		#endif
 	}
 
 
@@ -479,20 +454,6 @@ int prepare_conststatic_fields_for_gpu(Liganddata* 	       myligand_reference,
 		theta = cpu_ref_ori_angles[3*i+1]*DEG_TO_RAD;
 		genrotangle = cpu_ref_ori_angles[3*i+2]*DEG_TO_RAD;
 
-		#if defined (FIXED_POINT_CONFORM)
-		// fixed-point
-		/*
-		KerConstStatic->ref_orientation_quats_const[4*i]   = fixedpt_fromfloat(cosf(genrotangle/2.0f));			//q
-		KerConstStatic->ref_orientation_quats_const[4*i+1] = fixedpt_fromfloat(sinf(genrotangle/2.0f)*sinf(theta)*cosf(phi));	//x
-		KerConstStatic->ref_orientation_quats_const[4*i+2] = fixedpt_fromfloat(sinf(genrotangle/2.0f)*sinf(theta)*sinf(phi));	//y
-		KerConstStatic->ref_orientation_quats_const[4*i+3] = fixedpt_fromfloat(sinf(genrotangle/2.0f)*cosf(theta)); 		//z
-		*/
-		KerConstStatic->ref_orientation_quats_const[i].x = fixedpt_fromfloat(cosf(genrotangle/2.0f));			//q
-		KerConstStatic->ref_orientation_quats_const[i].y = fixedpt_fromfloat(sinf(genrotangle/2.0f)*sinf(theta)*cosf(phi));	//x
-		KerConstStatic->ref_orientation_quats_const[i].z = fixedpt_fromfloat(sinf(genrotangle/2.0f)*sinf(theta)*sinf(phi));	//y
-		KerConstStatic->ref_orientation_quats_const[i].w = fixedpt_fromfloat(sinf(genrotangle/2.0f)*cosf(theta)); 		//z
-		#else
-		// floating-point (original)
 		/*
 		KerConstStatic->ref_orientation_quats_const[4*i]   = cosf(genrotangle/2.0f);				//q
 		KerConstStatic->ref_orientation_quats_const[4*i+1] = sinf(genrotangle/2.0f)*sinf(theta)*cosf(phi);	//x
@@ -503,7 +464,6 @@ int prepare_conststatic_fields_for_gpu(Liganddata* 	       myligand_reference,
 		KerConstStatic->ref_orientation_quats_const[i].y = sinf(genrotangle/2.0f)*sinf(theta)*cosf(phi);	//x
 		KerConstStatic->ref_orientation_quats_const[i].z = sinf(genrotangle/2.0f)*sinf(theta)*sinf(phi);	//y
 		KerConstStatic->ref_orientation_quats_const[i].w = sinf(genrotangle/2.0f)*cosf(theta);		//z
-		#endif
 	}
 #endif
 
@@ -627,24 +587,10 @@ int prepare_constdynamic_fields_for_gpu(Liganddata* 	 	myligand_reference,
 
 
 
-
-
-	#if defined (FIXED_POINT_CONFORM)
-	// fixed-point
-	KerConstDynamic->ref_orientation_quats_const[0] = fixedpt_fromfloat(cosf(genrotangle/2.0f));				//q
-	KerConstDynamic->ref_orientation_quats_const[1] = fixedpt_fromfloat(sinf(genrotangle/2.0f)*sinf(theta)*cosf(phi));	//x
-	KerConstDynamic->ref_orientation_quats_const[2] = fixedpt_fromfloat(sinf(genrotangle/2.0f)*sinf(theta)*sinf(phi));	//y
-	KerConstDynamic->ref_orientation_quats_const[3] = fixedpt_fromfloat(sinf(genrotangle/2.0f)*cosf(theta)); 		//z
-	#else
-	// floating-point (original)
 	KerConstDynamic->ref_orientation_quats_const[0] = cosf(genrotangle/2.0f);			//q
 	KerConstDynamic->ref_orientation_quats_const[1] = sinf(genrotangle/2.0f)*sinf(theta)*cosf(phi);	//x
 	KerConstDynamic->ref_orientation_quats_const[2] = sinf(genrotangle/2.0f)*sinf(theta)*sinf(phi);	//y
 	KerConstDynamic->ref_orientation_quats_const[3] = sinf(genrotangle/2.0f)*cosf(theta);		//z
-	#endif
-
-
-
 
 
 /*

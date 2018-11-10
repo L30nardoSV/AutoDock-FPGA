@@ -96,30 +96,17 @@ typedef struct
 
 #include "xcl2.hpp"
 
-#if defined (FIXED_POINT_CONFORM) || defined (FIXED_POINT_LS1) || defined (FIXED_POINT_LS2) || defined (FIXED_POINT_LS3)
-#include "defines_fixedpt.h"
-#endif
-
-#if defined (FIXED_POINT_INTERE) || (FIXED_POINT_INTRAE)
-#include "defines_fixedpt_64.h"
-#endif
-
 // As struct members are used as host buffers
 // they are aligned to multiples of 64 bytes (power of 2).
 // This solves aligment problem
 
 typedef struct
 {
-	#if defined (FIXED_POINT_INTERE)
-       	fixedpt64 fixpt64_atom_charges_const[MAX_NUM_OF_ATOMS]        __attribute__ ((aligned (1024)));
-	#endif
+
        	float atom_charges_const[MAX_NUM_OF_ATOMS]                    __attribute__ ((aligned (512)));
 
        	char  atom_types_const  [MAX_NUM_OF_ATOMS]                    __attribute__ ((aligned (128)));
 
-/*
-       	char  intraE_contributors_const[3*MAX_INTRAE_CONTRIBUTORS]    __attribute__ ((aligned (32768)));
-*/
 	cl_char3  intraE_contributors_const[MAX_INTRAE_CONTRIBUTORS]    __attribute__ ((aligned (32768)));
 
         float reqm_const [ATYPE_NUM]				      __attribute__ ((aligned (64)));
@@ -133,28 +120,14 @@ typedef struct
        	float dspars_V_const    [MAX_NUM_OF_ATYPES]                   __attribute__ ((aligned (64)));
        	int   rotlist_const     [MAX_NUM_OF_ROTATIONS]                __attribute__ ((aligned (4096)));
 
-	#if defined (FIXED_POINT_CONFORM)
-	// fixed-point
-       	cl_int3 ref_coords_const[MAX_NUM_OF_ATOMS]                   __attribute__ ((aligned (2048)));
-       	cl_int3 rotbonds_moving_vectors_const[MAX_NUM_OF_ROTBONDS]   __attribute__ ((aligned (512)));
-       	cl_int3 rotbonds_unit_vectors_const  [MAX_NUM_OF_ROTBONDS]   __attribute__ ((aligned (512)));
-	#else
  	// floating-point (original)
       	cl_float3 ref_coords_const[MAX_NUM_OF_ATOMS]                 __attribute__ ((aligned (2048)));
        	cl_float3 rotbonds_moving_vectors_const[MAX_NUM_OF_ROTBONDS] __attribute__ ((aligned (512)));
        	cl_float3 rotbonds_unit_vectors_const  [MAX_NUM_OF_ROTBONDS] __attribute__ ((aligned (512)));
-	#endif
+
 
 #if defined(SINGLE_COPY_POP_ENE)
-	#if defined (FIXED_POINT_CONFORM)
-	// fixed-point
-      	//fixedpt   ref_orientation_quats_const  [4*MAX_NUM_OF_RUNS] __attribute__ ((aligned (512)));
-	cl_int4    ref_orientation_quats_const  [MAX_NUM_OF_RUNS] __attribute__ ((aligned (512)));
-	#else
-	// floating-point (original)
-       	//float     ref_orientation_quats_const  [4*MAX_NUM_OF_RUNS] __attribute__ ((aligned (512)));
 	cl_float4  ref_orientation_quats_const  [MAX_NUM_OF_RUNS] __attribute__ ((aligned (512)));
-	#endif
 #endif
 } kernelconstant_static;
 
@@ -168,13 +141,7 @@ typedef struct
 #else
 typedef struct
 {
-	#if defined (FIXED_POINT_CONFORM)
-	// fixed-point
-      	fixedpt   ref_orientation_quats_const  [4] __attribute__ ((aligned (64)));
-	#else
-	// floating-point (original)
        	float     ref_orientation_quats_const  [4] __attribute__ ((aligned (64)));
-	#endif
 } kernelconstant_dynamic;
 #endif
 
