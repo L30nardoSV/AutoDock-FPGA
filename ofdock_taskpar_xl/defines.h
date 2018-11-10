@@ -2,25 +2,6 @@
 #define DEFINES_H_
 
 // -----------------------------------------------------------------------------
-// DIFFERENT WORK GROUP SIZES
-// -----------------------------------------------------------------------------
-/*
-//NUM_WORKITEMS=-DN32WI 
-#if defined (N32WI) 	
-	#define NUM_OF_THREADS_PER_BLOCK 32  // ofdock_amd_32wi 
-#elif defined (N16WI) 	
-	#define NUM_OF_THREADS_PER_BLOCK 16  // ofdock_amd_16wi 
-#elif defined (N64WI) 	
-	#define NUM_OF_THREADS_PER_BLOCK 64  // ofdock_amd_64wi 
-#elif defined (N128WI) 	
-	#define NUM_OF_THREADS_PER_BLOCK 128 // ofdock_amd_128wi 
-#else 	
-	#define NUM_OF_THREADS_PER_BLOCK 1  // ofdock_amd_32wi 
-#endif
-*/
-
-#define NUM_OF_THREADS_PER_BLOCK 1
-// -----------------------------------------------------------------------------
 // DOCKING CONSTANTS
 // -----------------------------------------------------------------------------
 #define RLIST_ATOMID_MASK    0x000000FF

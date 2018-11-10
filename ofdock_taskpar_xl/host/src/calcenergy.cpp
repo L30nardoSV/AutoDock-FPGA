@@ -30,6 +30,7 @@ int prepare_const_fields_for_gpu(Liganddata*     myligand_reference,
 //               considering that NUM_OF_THREADS_PER_BLOCK rotations will be performed in
 //		 parallel (that is, each block of contiguous NUM_OF_THREADS_PER_BLOCK pieces of elements describe rotations that can
 //		 be performed simultaneously).
+//               For FPGA, this has been replaced by const int num_of_threads_per_block within gen_rotlist()
 //		 One element is a 32 bit integer, with bit 0 in the LSB position.
 //		 Bit 7-0 describe the atom ID of the atom to be rotated (according to myligand_reference).
 //		 Bit 15-7 describe the rotatable bond ID of the bond around which the atom is to be rotated (if this is not a general rotation)
@@ -732,8 +733,10 @@ int gen_rotlist(Liganddata* myligand, int rotlist[MAX_NUM_OF_ROTATIONS])
 	myligand->num_of_rotcyc = 0;
 	myligand->num_of_rotations_required = 0;
 
+	// On the FPGA: kernels are single threaded
+	const int num_of_threads_per_block = 1;
 
-	for (atom_id=0; atom_id<NUM_OF_THREADS_PER_BLOCK; atom_id++)	//handling special case when num_of_atoms<NUM_OF_THREADS_PER_BLOCK
+	for (atom_id=0; atom_id<num_of_threads_per_block; atom_id++)	//handling special case when num_of_atoms<num_of_threads_per_block
 		number_of_req_rotations[atom_id] = 0;
 
 	for (atom_id=0; atom_id<myligand->num_of_atoms; atom_id++)
@@ -758,8 +761,8 @@ int gen_rotlist(Liganddata* myligand, int rotlist[MAX_NUM_OF_ROTATIONS])
 		if (rotlist_id == MAX_NUM_OF_ROTATIONS)
 			return 1;
 
-		//putting the NUM_OF_THREADS_PER_BLOCK pieces of most important rotations to the list
-		for (parallel_rot_id=0; parallel_rot_id<NUM_OF_THREADS_PER_BLOCK; parallel_rot_id++)
+		//putting the num_of_threads_per_block pieces of most important rotations to the list
+		for (parallel_rot_id=0; parallel_rot_id<num_of_threads_per_block; parallel_rot_id++)
 		{
 			if (number_of_req_rotations[parallel_rot_id] == 0)	//if the atom has not to be rotated anymore, dummy rotation
 				new_rotlist_element = RLIST_DUMMY_MASK;

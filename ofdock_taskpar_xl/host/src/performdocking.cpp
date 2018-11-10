@@ -332,7 +332,7 @@ filled with clock() */
 	dockpars.g2	       			= dockpars.gridsize_x * dockpars.gridsize_y;
 	dockpars.g3	       			= dockpars.gridsize_x * dockpars.gridsize_y * dockpars.gridsize_z;
 	dockpars.grid_spacing  			= ((float) mygrid->spacing);
-	dockpars.rotbondlist_length 		= ((unsigned int) NUM_OF_THREADS_PER_BLOCK*(myligand_reference.num_of_rotcyc));
+	dockpars.rotbondlist_length 		= ((unsigned int) myligand_reference.num_of_rotcyc);
 	dockpars.coeff_elec    			= ((float) mypars->coeffs.scaled_AD4_coeff_elec);
 	dockpars.coeff_desolv  			= ((float) mypars->coeffs.AD4_coeff_desolv);
 	dockpars.num_of_energy_evals 		= (unsigned int) mypars->num_of_energy_evals;
