@@ -125,7 +125,6 @@ hostbin_HDRS=$(wildcard ./host/inc/*.h) \
 hostbin_CXXFLAGS=-I../common/inc/ \
 		    -I./host/inc/ \
 		    -I. \
-		    -I./wrapcl/inc/ \
 		    $(opencl_CXXFLAGS) $(xcl2_CXXFLAGS) $(oclHelper_CXXFLAGS) \
 		    -std=c++0x \
 		    -U__STRICT_ANSI__ \
@@ -576,7 +575,6 @@ copy: clean-copy
 	cp -r device/ ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
 	cp -r host/ ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
 	#cp -r input/ ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
-	cp -r wrapcl/ ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
 	cp -r ../common ../$(COPY_DIR)/
 	cp -r ../common_xilinx ../$(COPY_DIR)/
 	cp ../conf_sdx174_saruman.sh ../$(COPY_DIR)/

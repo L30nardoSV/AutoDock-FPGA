@@ -14,17 +14,6 @@
 #include "processresult.h"
 
 #include <CL/opencl.h>
-//#include "commonMacros.h"
-//#include "listAttributes.h"
-//#include "Platforms.h"
-//#include "Devices.h"
-//#include "Contexts.h"
-//#include "CommandQueues.h"
-//#include "Programs.h"
-#include "Kernels.h"
-//#include "ImportBinary.h"
-//#include "ImportSource.h"
-#include "BufferObjects.h"
 
 #include "xcl2.hpp"
 #include <vector>
