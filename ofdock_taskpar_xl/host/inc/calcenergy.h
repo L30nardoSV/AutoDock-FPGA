@@ -72,74 +72,30 @@ typedef struct
 // as originally.
 // ----------------------------------------------------------------------
 
-// Constant struct
-/*
-typedef struct
-{
-       float atom_charges_const[MAX_NUM_OF_ATOMS];
-       char  atom_types_const  [MAX_NUM_OF_ATOMS];
-       char  intraE_contributors_const[3*MAX_INTRAE_CONTRIBUTORS];
-       float VWpars_AC_const   [MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES];
-       float VWpars_BD_const   [MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES];
-       float dspars_S_const    [MAX_NUM_OF_ATYPES];
-       float dspars_V_const    [MAX_NUM_OF_ATYPES];
-       int   rotlist_const     [MAX_NUM_OF_ROTATIONS];
-       float ref_coords_x_const[MAX_NUM_OF_ATOMS];
-       float ref_coords_y_const[MAX_NUM_OF_ATOMS];
-       float ref_coords_z_const[MAX_NUM_OF_ATOMS];
-       float rotbonds_moving_vectors_const[3*MAX_NUM_OF_ROTBONDS];
-       float rotbonds_unit_vectors_const  [3*MAX_NUM_OF_ROTBONDS];
-       //float ref_orientation_quats_const  [4*MAX_NUM_OF_RUNS];
-       float ref_orientation_quats_const  [4];
-} kernelconstant;
-*/
-
 #include "xcl2.hpp"
+#define XILINX_MEMALIGN 4096
 
-// As struct members are used as host buffers
-// they are aligned to multiples of 64 bytes (power of 2).
-// This solves aligment problem
-
+// Aligning struc to XILINX_MEMALIGN to avoid additional memcpy() calls
 typedef struct
 {
-
-       	float atom_charges_const[MAX_NUM_OF_ATOMS]                    __attribute__ ((aligned (512)));
-
-       	char  atom_types_const  [MAX_NUM_OF_ATOMS]                    __attribute__ ((aligned (128)));
-
-	cl_char3  intraE_contributors_const[MAX_INTRAE_CONTRIBUTORS]    __attribute__ ((aligned (32768)));
-
-        float reqm_const [ATYPE_NUM]				      __attribute__ ((aligned (64)));
-        float reqm_hbond_const [ATYPE_NUM]			      __attribute__ ((aligned (64)));
-        unsigned int  atom1_types_reqm_const [ATYPE_NUM]	      __attribute__ ((aligned (64)));
-        unsigned int  atom2_types_reqm_const [ATYPE_NUM]	      __attribute__ ((aligned (64)));
-
-       	float VWpars_AC_const   [MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES] __attribute__ ((aligned (1024)));
-       	float VWpars_BD_const   [MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES] __attribute__ ((aligned (1024)));
-      	float dspars_S_const    [MAX_NUM_OF_ATYPES]                   __attribute__ ((aligned (64)));
-       	float dspars_V_const    [MAX_NUM_OF_ATYPES]                   __attribute__ ((aligned (64)));
-       	int   rotlist_const     [MAX_NUM_OF_ROTATIONS]                __attribute__ ((aligned (4096)));
-
- 	// floating-point (original)
-      	cl_float3 ref_coords_const[MAX_NUM_OF_ATOMS]                 __attribute__ ((aligned (2048)));
-       	cl_float3 rotbonds_moving_vectors_const[MAX_NUM_OF_ROTBONDS] __attribute__ ((aligned (512)));
-       	cl_float3 rotbonds_unit_vectors_const  [MAX_NUM_OF_ROTBONDS] __attribute__ ((aligned (512)));
-	cl_float4  ref_orientation_quats_const  [MAX_NUM_OF_RUNS] __attribute__ ((aligned (512)));
+       	float 		atom_charges_const	     [MAX_NUM_OF_ATOMS]                    	__attribute__ ((aligned (XILINX_MEMALIGN)));
+       	char  		atom_types_const  	     [MAX_NUM_OF_ATOMS]                    	__attribute__ ((aligned (XILINX_MEMALIGN)));
+	cl_char3  	intraE_contributors_const    [MAX_INTRAE_CONTRIBUTORS]  		__attribute__ ((aligned (XILINX_MEMALIGN)));
+        float 		reqm_const 		     [ATYPE_NUM]				__attribute__ ((aligned (XILINX_MEMALIGN)));
+        float 		reqm_hbond_const 	     [ATYPE_NUM]			      	__attribute__ ((aligned (XILINX_MEMALIGN)));
+        unsigned int 	atom1_types_reqm_const 	     [ATYPE_NUM]	      			__attribute__ ((aligned (XILINX_MEMALIGN)));
+        unsigned int	atom2_types_reqm_const 	     [ATYPE_NUM]	      			__attribute__ ((aligned (XILINX_MEMALIGN)));
+       	float     	VWpars_AC_const              [MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES] 	__attribute__ ((aligned (XILINX_MEMALIGN)));
+       	float     	VWpars_BD_const              [MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES] 	__attribute__ ((aligned (XILINX_MEMALIGN)));
+      	float     	dspars_S_const               [MAX_NUM_OF_ATYPES]                   	__attribute__ ((aligned (XILINX_MEMALIGN)));
+       	float     	dspars_V_const               [MAX_NUM_OF_ATYPES]                   	__attribute__ ((aligned (XILINX_MEMALIGN)));
+       	int       	rotlist_const                [MAX_NUM_OF_ROTATIONS]                	__attribute__ ((aligned (XILINX_MEMALIGN)));
+      	cl_float3 	ref_coords_const             [MAX_NUM_OF_ATOMS]                  	__attribute__ ((aligned (XILINX_MEMALIGN)));
+       	cl_float3 	rotbonds_moving_vectors_const[MAX_NUM_OF_ROTBONDS]  			__attribute__ ((aligned (XILINX_MEMALIGN)));
+       	cl_float3 	rotbonds_unit_vectors_const  [MAX_NUM_OF_ROTBONDS]  			__attribute__ ((aligned (XILINX_MEMALIGN)));
+	cl_float4 	ref_orientation_quats_const  [MAX_NUM_OF_RUNS]      			__attribute__ ((aligned (XILINX_MEMALIGN)));
 } kernelconstant_static;
 
-// As struct members are used as host buffers
-// they are aligned to multiples of 64 bytes (power of 2).
-// This is added for the sake of completion
-// cl_float3 is made of 4 floats, its size is 16 bytes
-
-
-
-/*
-int prepare_const_fields_for_gpu(Liganddata* 	 myligand_reference,
-				 Dockpars*   	 mypars,
-				 float*      	 cpu_ref_ori_angles,
-				 kernelconstant* KerConst);
-*/
 int prepare_conststatic_fields_for_gpu(Liganddata* 	       myligand_reference,
 				 	Dockpars*   	       mypars,
 				 	float*      	       cpu_ref_ori_angles,
