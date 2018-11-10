@@ -122,8 +122,7 @@ hostbin_HDRS=$(wildcard ./host/inc/*.h) \
 
 # -U__STRICT_ANSI__: to avoid: ‘cl_float3 {aka union cl_float4}’ has no member named ‘y’
 
-hostbin_CXXFLAGS=-I../common/inc/ \
-		    -I./host/inc/ \
+hostbin_CXXFLAGS=   -I./host/inc/ \
 		    -I. \
 		    $(opencl_CXXFLAGS) $(xcl2_CXXFLAGS) $(oclHelper_CXXFLAGS) \
 		    -std=c++0x \
@@ -575,8 +574,6 @@ copy: clean-copy
 	cp -r device/ ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
 	cp -r host/ ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
 	#cp -r input/ ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
-	cp -r ../common ../$(COPY_DIR)/
-	cp -r ../common_xilinx ../$(COPY_DIR)/
 	cp ../conf_sdx174_saruman.sh ../$(COPY_DIR)/
 	cd ../;	zip -r $(COPY_DIR).zip $(COPY_DIR)
 	@echo $(newline)

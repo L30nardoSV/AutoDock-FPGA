@@ -455,7 +455,6 @@ filled with clock() */
 	vector<int,aligned_allocator<int>> cpu_dummy (1);	
 
 	// IMPORTANT: enable this dummy global argument only for "hw" build.
-	// Check ../common_xilinx/utility/boards.mk
 	// https://forums.xilinx.com/t5/SDAccel/ERROR-KernelCheck-83-114-in-sdx-2017-4/td-p/818135
 	cl::Buffer mem_dummy				(context, CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY, sizeof(int), cpu_dummy.data();
 	#endif
