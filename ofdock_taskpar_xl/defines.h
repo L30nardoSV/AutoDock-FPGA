@@ -38,6 +38,7 @@
 //#define QASP_AD 0.01097f
 //#define QASP_DS 0.00679f
 
+#define ATYPE_NUM 		22
 #define MAX_NUM_OF_ATOMS 	90
 #define MAX_NUM_OF_ATYPES 	14
 #define MAX_INTRAE_CONTRIBUTORS 8128

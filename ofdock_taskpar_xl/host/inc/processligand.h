@@ -5,8 +5,6 @@
 #include "processgrid.h"
 #include "miscellaneous.h"
 
-#define ATYPE_NUM 22
-
 typedef struct
 //Struct which contains ligand information. The fields contain the following information:
 //num_of_atoms: 	Number of ligand atoms.
