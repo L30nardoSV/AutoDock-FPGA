@@ -832,7 +832,7 @@ filled with clock() */
 		#endif
 
 		#ifdef ENABLE_KRNL_CONFORM
-		kernel_conform.setArg(8, run_cnt);
+		kernel_conform.setArg(8, ushort_run_cnt);
 		#endif
 
 		#ifdef ENABLE_KRNL_PRNG_BT_USHORT_FLOAT
