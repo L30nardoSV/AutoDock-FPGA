@@ -44,7 +44,7 @@ typedef struct
 	unsigned int num_of_generations;
 
 	unsigned int    pop_size;
-	unsigned int   	num_of_genes;
+	unsigned char   num_of_genes;
 	float  		tournament_rate;
 	float  		crossover_rate;
 	float  		mutation_rate;

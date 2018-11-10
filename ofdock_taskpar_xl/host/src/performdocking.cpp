@@ -338,7 +338,7 @@ filled with clock() */
 	dockpars.num_of_energy_evals 		= (unsigned int) mypars->num_of_energy_evals;
 	dockpars.num_of_generations  		= (unsigned int) mypars->num_of_generations;
 	dockpars.pop_size      			= (unsigned int) mypars->pop_size;
-	dockpars.num_of_genes  			= (unsigned int)(myligand_reference.num_of_rotbonds + 6);
+	dockpars.num_of_genes  			= (unsigned char)(myligand_reference.num_of_rotbonds + 6);
 	dockpars.tournament_rate 		= (mypars->tournament_rate)/100;
 	dockpars.crossover_rate  		= (mypars->crossover_rate)/100;
 	dockpars.mutation_rate   		= (mypars->mutation_rate)/100;
