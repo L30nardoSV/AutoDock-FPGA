@@ -376,12 +376,9 @@ kerrpt-sw:
 # Compile for sw and hw emulation
 kerswemu:
 	make all TARGETS=sw_emu DEVICES=$(BOARD)
-	#cp ./xclbin/$(XCLBINS).sw_emu.*.xclbin .
-	#mv ./$(XCLBINS).sw_emu.*.xclbin ./$(XCLBINS).xclbin
 	@echo $(newline)
 	@echo "==============================================================================="
 	@echo "INFO: sw emulation file created under: \"./xclbin/$(XCLBINS).sw_emu.*.xclbin\" "
-	@echo "INFO: ... was copied and renamed as \"./$(XCLBINS).xclbin\"    	              "
 	@echo "==============================================================================="
 	@echo $(newline)
 
