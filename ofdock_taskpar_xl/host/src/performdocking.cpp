@@ -823,9 +823,10 @@ filled with clock() */
 		fflush(stdout);
 
 		#ifdef ENABLE_KRNL_GA
-		unsigned int Host_Offset_Pop = run_cnt * dockpars.pop_size * ACTUAL_GENOTYPE_LENGTH;
-		unsigned int Host_Offset_Ene = run_cnt * dockpars.pop_size;
-		kernel_ga.setArg(16, run_cnt);
+		unsigned short ushort_run_cnt  = (unsigned ushort) run_cnt;
+		unsigned int   Host_Offset_Pop = run_cnt * dockpars.pop_size * ACTUAL_GENOTYPE_LENGTH;
+		unsigned int   Host_Offset_Ene = run_cnt * dockpars.pop_size;
+		kernel_ga.setArg(16, ushort_run_cnt);
 		kernel_ga.setArg(17, Host_Offset_Pop);
 		kernel_ga.setArg(18, Host_Offset_Ene);
 		#endif
