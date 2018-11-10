@@ -124,11 +124,7 @@ typedef struct
       	cl_float3 ref_coords_const[MAX_NUM_OF_ATOMS]                 __attribute__ ((aligned (2048)));
        	cl_float3 rotbonds_moving_vectors_const[MAX_NUM_OF_ROTBONDS] __attribute__ ((aligned (512)));
        	cl_float3 rotbonds_unit_vectors_const  [MAX_NUM_OF_ROTBONDS] __attribute__ ((aligned (512)));
-
-
-#if defined(SINGLE_COPY_POP_ENE)
 	cl_float4  ref_orientation_quats_const  [MAX_NUM_OF_RUNS] __attribute__ ((aligned (512)));
-#endif
 } kernelconstant_static;
 
 // As struct members are used as host buffers
@@ -136,14 +132,6 @@ typedef struct
 // This is added for the sake of completion
 // cl_float3 is made of 4 floats, its size is 16 bytes
 
-#if defined(SINGLE_COPY_POP_ENE)
-
-#else
-typedef struct
-{
-       	float     ref_orientation_quats_const  [4] __attribute__ ((aligned (64)));
-} kernelconstant_dynamic;
-#endif
 
 
 /*
@@ -154,19 +142,8 @@ int prepare_const_fields_for_gpu(Liganddata* 	 myligand_reference,
 */
 int prepare_conststatic_fields_for_gpu(Liganddata* 	       myligand_reference,
 				 	Dockpars*   	       mypars,
-					#if defined(SINGLE_COPY_POP_ENE)
 				 	float*      	       cpu_ref_ori_angles,
-					#endif
 				 	kernelconstant_static* KerConstStatic);
-
-#if defined(SINGLE_COPY_POP_ENE)
-
-#else
-int prepare_constdynamic_fields_for_gpu(Liganddata* 	 	myligand_reference,
-				 	Dockpars*   	 	mypars,
-				 	float*      	 	cpu_ref_ori_angles,
-				 	kernelconstant_dynamic* KerConstDynamic);
-#endif
 
 void make_reqrot_ordering(char number_of_req_rotations[MAX_NUM_OF_ATOMS],
 			  char atom_id_of_numrots[MAX_NUM_OF_ATOMS],

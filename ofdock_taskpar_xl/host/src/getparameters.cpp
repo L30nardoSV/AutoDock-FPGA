@@ -598,11 +598,7 @@ void gen_initpop_and_reflig(Dockpars*       mypars,
 	//Generating initial population
 	if (gen_pop == 1)
 	{
-#if defined(SINGLE_COPY_POP_ENE)
 		for (entity_id=0; entity_id<pop_size*mypars->num_of_runs; entity_id++)
-#else
-		for (entity_id=0; entity_id<pop_size; entity_id++)
-#endif
 			for (gene_id=0; gene_id<3; gene_id++)
 				#if defined (REPRO)
 				//init_populations[entity_id*GENOTYPE_LENGTH_IN_GLOBMEM+gene_id] = 30.1186;
@@ -612,11 +608,7 @@ void gen_initpop_and_reflig(Dockpars*       mypars,
 				init_populations[entity_id*ACTUAL_GENOTYPE_LENGTH+gene_id] = (float) myrand()*(mygrid->size_xyz_angstr[gene_id]);
 				#endif			
 
-#if defined(SINGLE_COPY_POP_ENE)
 		for (entity_id=0; entity_id<pop_size*mypars->num_of_runs; entity_id++)
-#else
-		for (entity_id=0; entity_id<pop_size; entity_id++)
-#endif
 			for (gene_id=3; gene_id<MAX_NUM_OF_ROTBONDS+6; gene_id++)
 				if (gene_id == 4)
 					#if defined (REPRO)
@@ -668,12 +660,7 @@ void gen_initpop_and_reflig(Dockpars*       mypars,
 
 	//genotypes should contain x, y and z genes in grid spacing instead of Angstroms
 	//(but was previously generated in Angstroms since fdock does the same)
-
-#if defined(SINGLE_COPY_POP_ENE)
 	for (entity_id=0; entity_id<pop_size*mypars->num_of_runs; entity_id++)
-#else
-	for (entity_id=0; entity_id<pop_size; entity_id++)
-#endif
 		for (gene_id=0; gene_id<3; gene_id++)
 			//init_populations [entity_id*GENOTYPE_LENGTH_IN_GLOBMEM+gene_id] = init_populations [entity_id*GENOTYPE_LENGTH_IN_GLOBMEM+gene_id]/mygrid->spacing;
 			init_populations [entity_id*ACTUAL_GENOTYPE_LENGTH+gene_id] = init_populations [entity_id*ACTUAL_GENOTYPE_LENGTH+gene_id]/mygrid->spacing;
@@ -699,7 +686,6 @@ void gen_initpop_and_reflig(Dockpars*       mypars,
 	//initial orientation will be calculated during docking,
 	//only the required angles are generated here,
 	//but the angles possibly read from file are ignored
-#if defined(SINGLE_COPY_POP_ENE)
 	for (int i=0; i<mypars->num_of_runs; i++)
 	{
 		#if defined (REPRO)
@@ -712,17 +698,7 @@ void gen_initpop_and_reflig(Dockpars*       mypars,
 		ref_ori_angles[3*i+2] = (float) (myrand()*360.0);	//angle
 		#endif
 	}
-#else
-	#if defined (REPRO)
-	ref_ori_angles[0] = 190.279;
-	ref_ori_angles[1] =  90.279;
-	ref_ori_angles[2] = 190.279;
-	#else
-	ref_ori_angles[0] = (float) (myrand()*360.0); 	//phi
-	ref_ori_angles[1] = (float) (myrand()*180.0);	//theta
-	ref_ori_angles[2] = (float) (myrand()*360.0);	//angle
-	#endif
-#endif
+
 	get_movvec_to_origo(myligand, movvec_to_origo);
 	move_ligand(myligand, movvec_to_origo);
 	scale_ligand(myligand, 1.0/mygrid->spacing);
