@@ -388,8 +388,12 @@ filled with clock() */
 	// functions.
 
 	// Krnl_GA buffers
-	cl::Buffer mem_dockpars_conformations_current	(context, CL_MEM_USE_HOST_PTR | CL_MEM_READ_WRITE, 
+	cl::Buffer mem_dockpars_conformations_current_Initial
+							(context, CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY, 
 							size_populations_nbytes,	cpu_init_populations.data());
+	cl::Buffer mem_dockpars_conformations_current_Final
+							(context, CL_MEM_USE_HOST_PTR | CL_MEM_WRITE_ONLY, 
+							size_populations_nbytes,	cpu_final_populations.data());
 	cl::Buffer mem_dockpars_energies_current     	(context, CL_MEM_USE_HOST_PTR | CL_MEM_WRITE_ONLY, 
 							size_energies_nbytes,     	cpu_energies.data());
 	cl::Buffer mem_evals_performed			(context, CL_MEM_USE_HOST_PTR | CL_MEM_WRITE_ONLY, 
@@ -463,7 +467,7 @@ filled with clock() */
 	std::vector<cl::Memory> inBufVec, outBufVec;
 
 	// Krnl_GA
-	inBufVec.push_back(mem_dockpars_conformations_current); 	// RD & WR
+	inBufVec.push_back(mem_dockpars_conformations_current_Initial);
 	// Krnl_Conform
 	inBufVec.push_back(mem_KerConstStatic_rotlist_const);
 	inBufVec.push_back(mem_KerConstStatic_ref_coords_const);
@@ -488,8 +492,8 @@ filled with clock() */
 	inBufVec.push_back(mem_KerConstStatic_dspars_V_const);
 
 	// Krnl_GA
-        outBufVec.push_back(mem_dockpars_conformations_current);	// RD & WR
-	outBufVec.push_back(mem_dockpars_energies_current);		// WR
+        outBufVec.push_back(mem_dockpars_conformations_current_Final);
+	outBufVec.push_back(mem_dockpars_energies_current);
 	outBufVec.push_back(mem_evals_performed);
 	outBufVec.push_back(mem_gens_performed);
 
@@ -506,7 +510,8 @@ filled with clock() */
 	int narg;
 	#ifdef ENABLE_KRNL_GA
 	narg = 0;
-	kernel_ga.setArg(narg++, mem_dockpars_conformations_current);
+	kernel_ga.setArg(narg++, mem_dockpars_conformations_current_Initial);
+	kernel_ga.setArg(narg++, mem_dockpars_conformations_current_Final);
 	kernel_ga.setArg(narg++, mem_dockpars_energies_current);
 	kernel_ga.setArg(narg++, mem_evals_performed);
 	kernel_ga.setArg(narg++, mem_gens_performed);
@@ -825,9 +830,9 @@ filled with clock() */
 		unsigned short ushort_run_cnt  = (unsigned ushort) run_cnt;
 		unsigned int   Host_Offset_Pop = run_cnt * dockpars.pop_size * ACTUAL_GENOTYPE_LENGTH;
 		unsigned int   Host_Offset_Ene = run_cnt * dockpars.pop_size;
-		kernel_ga.setArg(16, ushort_run_cnt);
-		kernel_ga.setArg(17, Host_Offset_Pop);
-		kernel_ga.setArg(18, Host_Offset_Ene);
+		kernel_ga.setArg(17, ushort_run_cnt);
+		kernel_ga.setArg(18, Host_Offset_Pop);
+		kernel_ga.setArg(19, Host_Offset_Ene);
 		#endif
 
 		#ifdef ENABLE_KRNL_CONFORM

@@ -222,7 +222,8 @@ __kernel __attribute__ ((max_global_work_dim(0)))
 */
 __kernel __attribute__ ((reqd_work_group_size(1,1,1)))
 void Krnl_GA(
-	     __global       float*           restrict GlobPopulationCurrent,
+	     __global const float*           restrict GlobPopulationCurrentInitial,
+	     __global       float*           restrict GlobPopulationCurrentFinal,
 	     __global       float*           restrict GlobEnergyCurrent,
    	     __global       unsigned int*    restrict GlobEvals_performed,
              __global       unsigned int*    restrict GlobGens_performed,
@@ -264,8 +265,9 @@ void Krnl_GA(
 	__local float LocalPopCurr[MAX_POPSIZE][ACTUAL_GENOTYPE_LENGTH];
 	__local float LocalEneCurr[MAX_POPSIZE];
 
-	__global float* GlobPopCurr = & GlobPopulationCurrent [Host_Offset_Pop];
-	__global float* GlobEneCurr = & GlobEnergyCurrent     [Host_Offset_Ene];
+	__global const float* GlobPopCurrInitial = & GlobPopulationCurrentInitial [Host_Offset_Pop];
+	__global       float* GlobPopCurrFinal   = & GlobPopulationCurrentFinal   [Host_Offset_Pop];
+	__global       float* GlobEneCurr        = & GlobEnergyCurrent     	  [Host_Offset_Ene];
 
 	// ------------------------------------------------------------------
 	// Initial Calculation (IC) of scores
@@ -283,7 +285,7 @@ void Krnl_GA(
 		LOOP_FOR_GA_IC_INNER_WRITE_GENOTYPE:
 		for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
 			float tmp_ic;
-			tmp_ic = GlobPopCurr[pop_cnt*ACTUAL_GENOTYPE_LENGTH + gene_cnt];
+			tmp_ic = GlobPopCurrInitial[pop_cnt*ACTUAL_GENOTYPE_LENGTH + gene_cnt];
 
 			LocalPopCurr[pop_cnt][gene_cnt & MASK_GENOTYPE] = tmp_ic;
 			write_pipe_block(chan_IC2Conf_genotype, &tmp_ic);	
@@ -856,7 +858,7 @@ void Krnl_GA(
 		__attribute__((xcl_pipeline_loop))
 		LOOP_GA_WRITEPOP2DDR_INNER:
 		for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
-			GlobPopCurr[pop_cnt*ACTUAL_GENOTYPE_LENGTH + gene_cnt] = LocalPopCurr[pop_cnt][gene_cnt & MASK_GENOTYPE];
+			GlobPopCurrFinal[pop_cnt*ACTUAL_GENOTYPE_LENGTH + gene_cnt] = LocalPopCurr[pop_cnt][gene_cnt & MASK_GENOTYPE];
 		}
 
 		GlobEneCurr[pop_cnt] = LocalEneCurr[pop_cnt];
