@@ -390,7 +390,7 @@ filled with clock() */
 	// Krnl_GA buffers
 	cl::Buffer mem_dockpars_conformations_current	(context, CL_MEM_USE_HOST_PTR | CL_MEM_READ_WRITE, 
 							size_populations_nbytes,	cpu_init_populations.data());
-	cl::Buffer mem_dockpars_energies_current     	(context, CL_MEM_USE_HOST_PTR | CL_MEM_READ_WRITE, 
+	cl::Buffer mem_dockpars_energies_current     	(context, CL_MEM_USE_HOST_PTR | CL_MEM_WRITE_ONLY, 
 							size_energies_nbytes,     	cpu_energies.data());
 	cl::Buffer mem_evals_performed			(context, CL_MEM_USE_HOST_PTR | CL_MEM_WRITE_ONLY, 
 							size_evals_of_runs_nbytes, 	cpu_evals_of_runs.data());
@@ -464,7 +464,6 @@ filled with clock() */
 
 	// Krnl_GA
 	inBufVec.push_back(mem_dockpars_conformations_current); 	// RD & WR
-    	inBufVec.push_back(mem_dockpars_energies_current);		// RD & WR
 	// Krnl_Conform
 	inBufVec.push_back(mem_KerConstStatic_rotlist_const);
 	inBufVec.push_back(mem_KerConstStatic_ref_coords_const);
@@ -490,7 +489,7 @@ filled with clock() */
 
 	// Krnl_GA
         outBufVec.push_back(mem_dockpars_conformations_current);	// RD & WR
-	outBufVec.push_back(mem_dockpars_energies_current);		// RD & WR
+	outBufVec.push_back(mem_dockpars_energies_current);		// WR
 	outBufVec.push_back(mem_evals_performed);
 	outBufVec.push_back(mem_gens_performed);
 
