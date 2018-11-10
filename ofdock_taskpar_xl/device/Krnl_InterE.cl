@@ -211,12 +211,6 @@ while(active) {
 			#endif
 
 			// Energy contribution of the electrostatic grid
-			/*
-			#if defined(SEPARATE_FGRID_INTERE)
-			#else
-			uint mul_tmp2 = Host_mul_tmp2;
-			#endif
-			*/
 			cube [0][0][0] = GlobFgrids2[cube_000] /*GlobFgrids [Host_mul_tmp2 + cube_000]*/;
                         cube [1][0][0] = GlobFgrids2[cube_100] /*GlobFgrids [Host_mul_tmp2 + cube_100]*/;
                         cube [0][1][0] = GlobFgrids2[cube_010] /*GlobFgrids [Host_mul_tmp2 + cube_010]*/;
@@ -253,13 +247,6 @@ while(active) {
 			#endif
 
 			// Energy contribution of the desolvation grid
-			/*
-			#if defined(SEPARATE_FGRID_INTERE)
-			#else
-			uint mul_tmp3 = Host_mul_tmp3;
-			#endif
-			*/
-
 			cube [0][0][0] = GlobFgrids3[cube_000] /*GlobFgrids [Host_mul_tmp3 + cube_000]*/;
                         cube [1][0][0] = GlobFgrids3[cube_100] /*GlobFgrids [Host_mul_tmp3 + cube_100]*/;
                         cube [0][1][0] = GlobFgrids3[cube_010] /*GlobFgrids [Host_mul_tmp3 + cube_010]*/;
