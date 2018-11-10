@@ -459,7 +459,7 @@ filled with clock() */
 
 	// IMPORTANT: enable this dummy global argument only for "hw" build.
 	// https://forums.xilinx.com/t5/SDAccel/ERROR-KernelCheck-83-114-in-sdx-2017-4/td-p/818135
-	cl::Buffer mem_dummy				(context, CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY, sizeof(int), cpu_dummy.data();
+	cl::Buffer mem_dummy				(context, CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY, sizeof(int), cpu_dummy.data());
 	#endif
 
 	// -----------------------------------------------------------------------------------------------------
