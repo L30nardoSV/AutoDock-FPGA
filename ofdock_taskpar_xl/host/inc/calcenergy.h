@@ -27,22 +27,11 @@ typedef struct
 	unsigned int	g2;
 	unsigned int 	g3;
 	float  		grid_spacing;
-
 	unsigned int    rotbondlist_length;
 	float  		coeff_elec;
 	float  		coeff_desolv;
-/*
-	float* 		conformations_current;
-	float* 		energies_current;
-	float* 		conformations_next;
-	float* 		energies_next;
-	int*   		evals_of_new_entities;
-	unsigned int* 	prng_states;
-*/
-	// L30nardoSV added
-	unsigned int num_of_energy_evals;
-	unsigned int num_of_generations;
-
+	unsigned int 	num_of_energy_evals;
+	unsigned int 	num_of_generations;
 	unsigned int    pop_size;
 	unsigned char   num_of_genes;
 	float  		tournament_rate;
@@ -51,9 +40,7 @@ typedef struct
 	float  		abs_max_dmov;
 	float  		abs_max_dang;
 	float  		lsearch_rate;
-
 	float 		smooth;
-
 	unsigned int 	num_of_lsentities;
 	float  		rho_lower_bound;
 	float  		base_dmov_mul_sqrt3;
@@ -62,15 +49,6 @@ typedef struct
 	unsigned int 	max_num_of_iters;
 	float  		qasp;
 } Dockparameters;
-
-// ----------------------------------------------------------------------
-// L30nardoSV modified
-// The original function does CUDA calls initializing const kernel data.
-// We create a struct to hold those constants and return them <here>
-// (<here> = where prepare_const_fields_for_gpu() was called),
-// so we can send them to kernels from <here>, instead of from calcenergy.cpp
-// as originally.
-// ----------------------------------------------------------------------
 
 #include "xcl2.hpp"
 #define XILINX_MEMALIGN 4096

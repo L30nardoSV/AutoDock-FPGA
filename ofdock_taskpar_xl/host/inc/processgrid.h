@@ -6,7 +6,6 @@
 #include <stdlib.h>
 #include <math.h>
 
-// L30nardoSV
 #include <libgen.h>
 
 // libgen.h contains basename() and dir() from a fullpath name
@@ -31,7 +30,6 @@ using std::vector;
 typedef struct
 //Struct which can contain all the important informations which derives from .gpf and .xyz files.
 {
-	// L30nardoSV
 	char*  grid_file_path;	  // Added to store the full path of the grid file
 	char   receptor_name [64];
 	int    size_xyz [3];
