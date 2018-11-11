@@ -6,11 +6,7 @@ OpenCL task-parallel version of AutoDock4 for Xilinx FPGAs.
 
 SDAccel v17.4.
 
-## Must
-
-```zsh
-source init_sdx174.sh
-```
+This can be initialized via: `source init_sdx174.sh`. Then choose the server to work on: either _local_ or _remote_.
 
 ### Documentation
 
@@ -21,13 +17,13 @@ source init_sdx174.sh
 	* [SDAccel Development Environment Help](https://www.xilinx.com/html_docs/xilinx2018_2/sdaccel_doc/zrq1526323398130.html)
 
 
-# Important commands
+## Important commands
 
 * See basic rules under [Makefile](./ofdock_taskpar_xl/Makefile)
-* See user compilation flags under [boards.mk](./common_xilinx/utility/boards.mk)
-* See OpenCL ICD options under [opencl.mk](./common_xilinx/libs/opencl/opencl.mk)
+* See user compilation flags under [boards.mk](./SDAccel_Examples/utility/boards.mk)
+* See OpenCL ICD options under [opencl.mk](./SDAccel_Examples/libs/opencl/opencl.mk)
 
-## SW and HW Emulation
+### SW and HW Emulation (in local server)
 
 ```zsh
 make swemu
@@ -37,13 +33,13 @@ make swemu
 make hwemu
 ```
 
-## FPGA building
+### FPGA building (in local server)
 
 ```zsh
 make hw
 ```
 
-## Where to find reports
+### Where to find reports
 
 A Makefile flow is used. A system estimate can be generated this way:
 
@@ -54,7 +50,7 @@ make kerrpt-sw
 * A [`sdaccel_ini`](./ofdock_taskpar_xl/sdaccel.ini) was created to generate additional reports. Its specific format is documented in: 
 	* [SDAccel Environment User Guide (UG1023)](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2017_4/ug1023-sdaccel-user-guide.pdf) -> Appendix H (_Using the Runtime Initialization File_)
 
-## FPGA evaluation on remote server
+### FPGA evaluation (in remote server)
 
 ```zsh
 make eva
