@@ -3,9 +3,6 @@
 // the genotype fed by any producer logic/kernel (IC, GG, LSs).
 // Originally from: processligand.c
 // --------------------------------------------------------------------------
-/*
-__kernel __attribute__ ((max_global_work_dim(0)))
-*/
 __kernel __attribute__ ((reqd_work_group_size(1,1,1)))
 void Krnl_Conform(
 	     __global const int*  restrict KerConstStatic_rotlist_const,

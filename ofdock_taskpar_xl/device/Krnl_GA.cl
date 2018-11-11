@@ -217,9 +217,6 @@ float map_angle_360(float angle)
 // Lamarckian Genetic-Algorithm (GA): GA + LS (Local Search) 
 // Originally from: searchoptimum.c
 // --------------------------------------------------------------------------
-/*
-__kernel __attribute__ ((max_global_work_dim(0)))
-*/
 __kernel __attribute__ ((reqd_work_group_size(1,1,1)))
 void Krnl_GA(
 	     __global const float*           restrict GlobPopulationCurrentInitial,

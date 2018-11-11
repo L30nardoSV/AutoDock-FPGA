@@ -2,9 +2,6 @@
 // PRNG generators are implemented as Linear Feedback Shift Registers (LFSR)
 // All are 32-bit LFRS, feedback taps: 30, 20, 26, 25
 // --------------------------------------------------------------------------
-/*
-__kernel __attribute__ ((max_global_work_dim(0)))
-*/
 __kernel __attribute__ ((reqd_work_group_size(1,1,1)))
 void Krnl_Prng_BT_ushort_float(
 			       unsigned int Host_seed1,
@@ -77,9 +74,6 @@ void Krnl_Prng_BT_ushort_float(
 
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------
-/*
-__kernel __attribute__ ((max_global_work_dim(0)))
-*/
 __kernel __attribute__ ((reqd_work_group_size(1,1,1)))
 void Krnl_Prng_GG_uchar(
 			unsigned int  Host_seed, 
@@ -131,9 +125,6 @@ void Krnl_Prng_GG_uchar(
 	} // while(valid != PIPE_STATUS_SUCCESS)
 }
 
-/*
-__kernel __attribute__ ((max_global_work_dim(0)))
-*/
 __kernel __attribute__ ((reqd_work_group_size(1,1,1)))
 void Krnl_Prng_GG_float(
 			unsigned int  Host_seed,
@@ -181,9 +172,6 @@ void Krnl_Prng_GG_float(
 
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------
-/*
-__kernel __attribute__ ((max_global_work_dim(0)))
-*/
 __kernel __attribute__ ((reqd_work_group_size(1,1,1)))
 void Krnl_Prng_LS123_ushort(
 			    unsigned int Host_seed1,
@@ -282,9 +270,6 @@ void Krnl_Prng_LS123_ushort(
 
 // --------------------------------------------------------------------------
 // --------------------------------------------------------------------------
-/*
-__kernel __attribute__ ((max_global_work_dim(0)))
-*/
 __kernel __attribute__ ((reqd_work_group_size(1,1,1)))
 void Krnl_Prng_LS_float(
 			unsigned int  Host_seed,
@@ -330,9 +315,6 @@ void Krnl_Prng_LS_float(
 	} // End of while(valid != PIPE_STATUS_SUCCESS)
 }
 
-/*
-__kernel __attribute__ ((max_global_work_dim(0)))
-*/
 __kernel __attribute__ ((reqd_work_group_size(1,1,1)))
 void Krnl_Prng_LS2_float(
 			 unsigned int  Host_seed,
@@ -378,9 +360,6 @@ void Krnl_Prng_LS2_float(
 	} // End of while(valid != PIPE_STATUS_SUCCESS)
 }
 
-/*
-__kernel __attribute__ ((max_global_work_dim(0)))
-*/
 __kernel __attribute__ ((reqd_work_group_size(1,1,1)))
 void Krnl_Prng_LS3_float(
 			 unsigned int  Host_seed,
@@ -426,9 +405,6 @@ void Krnl_Prng_LS3_float(
 	} // End of while(valid != PIPE_STATUS_SUCCESS)
 }
 
-/*
-__kernel __attribute__ ((max_global_work_dim(0)))
-*/
 __kernel __attribute__ ((reqd_work_group_size(1,1,1)))
 void Krnl_Prng_LS4_float(
 			 unsigned int  Host_seed,
@@ -474,9 +450,6 @@ void Krnl_Prng_LS4_float(
 	} // End of while(valid != PIPE_STATUS_SUCCESS)
 }
 
-/*
-__kernel __attribute__ ((max_global_work_dim(0)))
-*/
 __kernel __attribute__ ((reqd_work_group_size(1,1,1)))
 void Krnl_Prng_LS5_float(
 			 unsigned int  Host_seed,
@@ -522,9 +495,6 @@ void Krnl_Prng_LS5_float(
 	} // End of while(valid != PIPE_STATUS_SUCCESS)
 }
 
-/*
-__kernel __attribute__ ((max_global_work_dim(0)))
-*/
 __kernel __attribute__ ((reqd_work_group_size(1,1,1)))
 void Krnl_Prng_LS6_float(
 			 unsigned int  Host_seed,
@@ -570,9 +540,6 @@ void Krnl_Prng_LS6_float(
 	} // End of while(active)
 }
 
-/*
-__kernel __attribute__ ((max_global_work_dim(0)))
-*/
 __kernel __attribute__ ((reqd_work_group_size(1,1,1)))
 void Krnl_Prng_LS7_float(
 			 unsigned int  Host_seed,
@@ -618,9 +585,6 @@ void Krnl_Prng_LS7_float(
 	} // End of while(valid != PIPE_STATUS_SUCCESS)
 }
 
-/*
-__kernel __attribute__ ((max_global_work_dim(0)))
-*/
 __kernel __attribute__ ((reqd_work_group_size(1,1,1)))
 void Krnl_Prng_LS8_float(
 			 unsigned int  Host_seed,
@@ -666,9 +630,6 @@ void Krnl_Prng_LS8_float(
 	} // End of while(valid != PIPE_STATUS_SUCCESS)
 }
 
-/*
-__kernel __attribute__ ((max_global_work_dim(0)))
-*/
 __kernel __attribute__ ((reqd_work_group_size(1,1,1)))
 void Krnl_Prng_LS9_float(
 			 unsigned int  Host_seed,

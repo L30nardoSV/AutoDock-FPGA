@@ -15,9 +15,6 @@
 // This has been later optimized, so now genotypes go directly 
 // from producer logic/kernel (IC, GG, LSs) to the consumer (Conform) kernel.
 // --------------------------------------------------------------------------
-/*
-__kernel __attribute__ ((max_global_work_dim(0)))
-*/
 __kernel __attribute__ ((reqd_work_group_size(1,1,1)))
 void Krnl_IGL_Arbiter(/*unsigned char DockConst_num_of_genes*/
 #if !defined(SW_EMU)
