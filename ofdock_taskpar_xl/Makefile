@@ -385,12 +385,9 @@ kerswemu:
 
 kerhwemu:
 	make all TARGETS=hw_emu	DEVICES=$(BOARD)
-	cp ./xclbin/$(XCLBINS).hw_emu.*.xclbin .
-	mv ./$(XCLBINS).hw_emu.*.xclbin ./$(XCLBINS).xclbin
 	@echo $(newline)
 	@echo "==============================================================================="
 	@echo "INFO: hw emulation file created under: \"./xclbin/$(XCLBINS).hw_emu.*.xclbin\" "
-	@echo "INFO: ... was copied and renamed as \"./$(XCLBINS).xclbin\"                    "
 	@echo "==============================================================================="
 	@echo $(newline)
 
