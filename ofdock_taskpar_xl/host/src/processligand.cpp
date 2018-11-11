@@ -853,11 +853,16 @@ int gen_new_pdbfile(const char* oldpdb, const char* newpdb, const Liganddata* my
 	FILE* fp_new;
 	char tempstr [256];
 	char tempstr_short [32];
-	int acnt_oldlig, acnt_newlig;
+	int acnt_oldlig;
+	/*
+	int acnt_newlig;
+	*/
 	int i,j;
 
 	acnt_oldlig = 0;
+	/*
 	acnt_newlig = 0;
+	*/
 
 	fp_old = fopen(oldpdb, "r");
 	if (fp_old == NULL)

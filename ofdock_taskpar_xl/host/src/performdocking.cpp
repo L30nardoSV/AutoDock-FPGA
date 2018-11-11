@@ -803,7 +803,7 @@ filled with clock() */
 	#endif
 	#endif
 
-	printf("Docking runs to be executed: %u\n", mypars->num_of_runs); 
+	printf("Docking runs to be executed: %lu\n", mypars->num_of_runs); 
 	printf("Execution run: ");
 
 	for (unsigned int run_cnt = 0; run_cnt < mypars->num_of_runs; run_cnt++) {

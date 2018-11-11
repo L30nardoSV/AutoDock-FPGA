@@ -433,7 +433,7 @@ int prepare_conststatic_fields_for_gpu(Liganddata* 	       myligand_reference,
 	float phi, theta, genrotangle;
 
 	//reference orientation quaternions
-	for (i=0; i<mypars->num_of_runs; i++)
+	for (unsigned int i=0; i<mypars->num_of_runs; i++)
 	{
 		//printf("Pregenerated angles for run %d: %f %f %f\n", i, cpu_ref_ori_angles[3*i], cpu_ref_ori_angles[3*i+1], cpu_ref_ori_angles[3*i+2]);
 		phi = cpu_ref_ori_angles[3*i]*DEG_TO_RAD;

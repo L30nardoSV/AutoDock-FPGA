@@ -37,7 +37,7 @@ typedef struct
 	unsigned long max_num_of_iters;
 	unsigned long pop_size;
 		char  initpop_gen_or_loadfile;
-		char  gen_pdbs;
+	unsigned char gen_pdbs;
 		char  fldfile [128];
 		char  ligandfile [128];
 		float ref_ori_angles [3];

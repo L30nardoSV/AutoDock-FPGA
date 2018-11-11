@@ -522,7 +522,7 @@ void get_commandpars(const int* argc,
 
 	if (mypars->pop_size < mypars->gen_pdbs)
 	{
-		printf("Warning: value of -npdb argument igonred. Value mustn't be greater than the population size.\n");
+		printf("Warning: value of -npdb argument ignored. Value mustn't be greater than the population size.\n");
 		mypars->gen_pdbs = 1;
 	}
 
@@ -545,13 +545,17 @@ void gen_initpop_and_reflig(Dockpars*       mypars,
 //In addition, as part of reference orientation handling,
 //the function moves myligand to origo and scales it according to grid spacing.
 {
-	int entity_id, gene_id;
-	int gen_pop, gen_seeds;
+	//int entity_id;
+	//int gene_id;
+	int gen_pop;
+	//int gen_seeds;
 	FILE* fp;
+	/*
 	float init_orientation[MAX_NUM_OF_ROTBONDS+6];
+	*/
 	double movvec_to_origo[3];
 
-	int pop_size = mypars->pop_size;
+	unsigned int pop_size = mypars->pop_size;
 
 	//initial population
 	gen_pop = 0;
@@ -576,8 +580,8 @@ void gen_initpop_and_reflig(Dockpars*       mypars,
 			}
 			else
 			{
-				for (entity_id=0; entity_id<pop_size; entity_id++)
-					for (gene_id=0; gene_id<MAX_NUM_OF_ROTBONDS+6; gene_id++)
+				for (unsigned int entity_id=0; entity_id<pop_size; entity_id++)
+					for (unsigned char gene_id=0; gene_id<MAX_NUM_OF_ROTBONDS+6; gene_id++)
 						//fscanf(fp, "%f", &(init_populations[entity_id*GENOTYPE_LENGTH_IN_GLOBMEM+gene_id]));
 						fscanf(fp, "%f", &(init_populations[entity_id*ACTUAL_GENOTYPE_LENGTH+gene_id]));
 
@@ -598,13 +602,13 @@ void gen_initpop_and_reflig(Dockpars*       mypars,
 	//Generating initial population
 	if (gen_pop == 1)
 	{
-		for (entity_id=0; entity_id<pop_size*mypars->num_of_runs; entity_id++)
-			for (gene_id=0; gene_id<3; gene_id++)
+		for (unsigned int entity_id=0; entity_id<pop_size*mypars->num_of_runs; entity_id++)
+			for (unsigned char gene_id=0; gene_id<3; gene_id++)
 				//init_populations[entity_id*GENOTYPE_LENGTH_IN_GLOBMEM+gene_id] = (float) myrand()*(mygrid->size_xyz_angstr[gene_id]);
 				init_populations[entity_id*ACTUAL_GENOTYPE_LENGTH+gene_id] = (float) myrand()*(mygrid->size_xyz_angstr[gene_id]);
 
-		for (entity_id=0; entity_id<pop_size*mypars->num_of_runs; entity_id++)
-			for (gene_id=3; gene_id<MAX_NUM_OF_ROTBONDS+6; gene_id++)
+		for (unsigned int entity_id=0; entity_id<pop_size*mypars->num_of_runs; entity_id++)
+			for (unsigned char gene_id=3; gene_id<MAX_NUM_OF_ROTBONDS+6; gene_id++)
 				if (gene_id == 4)
 					//init_populations[entity_id*GENOTYPE_LENGTH_IN_GLOBMEM+gene_id] = myrand()*180;
 					init_populations[entity_id*ACTUAL_GENOTYPE_LENGTH+gene_id] = myrand()*180;
@@ -623,8 +627,8 @@ void gen_initpop_and_reflig(Dockpars*       mypars,
 			printf("Warning: can't create initpop.txt.\n");
 		else
 		{
-			for (entity_id=0; entity_id<pop_size; entity_id++)
-				for (gene_id=0; gene_id<MAX_NUM_OF_ROTBONDS+6; gene_id++)
+			for (unsigned int entity_id=0; entity_id<pop_size; entity_id++)
+				for (unsigned char gene_id=0; gene_id<MAX_NUM_OF_ROTBONDS+6; gene_id++)
 					//fprintf(fp, "%f ", init_populations[entity_id*GENOTYPE_LENGTH_IN_GLOBMEM+gene_id]);
 					fprintf(fp, "%f ", init_populations[entity_id*ACTUAL_GENOTYPE_LENGTH+gene_id]);
 
@@ -639,12 +643,12 @@ void gen_initpop_and_reflig(Dockpars*       mypars,
 
 	//genotypes should contain x, y and z genes in grid spacing instead of Angstroms
 	//(but was previously generated in Angstroms since fdock does the same)
-	for (entity_id=0; entity_id<pop_size*mypars->num_of_runs; entity_id++)
-		for (gene_id=0; gene_id<3; gene_id++)
+	for (unsigned int entity_id=0; entity_id<pop_size*mypars->num_of_runs; entity_id++)
+		for (unsigned char gene_id=0; gene_id<3; gene_id++)
 			//init_populations [entity_id*GENOTYPE_LENGTH_IN_GLOBMEM+gene_id] = init_populations [entity_id*GENOTYPE_LENGTH_IN_GLOBMEM+gene_id]/mygrid->spacing;
 			init_populations [entity_id*ACTUAL_GENOTYPE_LENGTH+gene_id] = init_populations [entity_id*ACTUAL_GENOTYPE_LENGTH+gene_id]/mygrid->spacing;
 
-/*
+	/*
 	//changing initial orientation of reference ligand
 	for (uint i=0; i<38; i++)
 		switch (i)
@@ -660,12 +664,12 @@ void gen_initpop_and_reflig(Dockpars*       mypars,
 	
 	//change_conform_f(myligand, init_orientation, 0);
 	change_conform_f(myligand, init_orientation, ref_ori_angles, 0);
-*/
+	*/
 
 	//initial orientation will be calculated during docking,
 	//only the required angles are generated here,
 	//but the angles possibly read from file are ignored
-	for (int i=0; i<mypars->num_of_runs; i++)
+	for (unsigned int i=0; i<mypars->num_of_runs; i++)
 	{
 		ref_ori_angles[3*i]   = (float) (myrand()*360.0); 	//phi
 		ref_ori_angles[3*i+1] = (float) (myrand()*180.0);	//theta

@@ -8,7 +8,9 @@ void arrange_result(float* final_population, float* energies, const int pop_size
 //the population, the arrangement will be performed only on the first pop_size part of final_population.
 {
 	int i,j;
-	//float temp_genotype[GENOTYPE_LENGTH_IN_GLOBMEM];
+	/*
+	float temp_genotype[GENOTYPE_LENGTH_IN_GLOBMEM];
+	*/
 	float temp_genotype[ACTUAL_GENOTYPE_LENGTH];
 	float temp_energy;
 
@@ -16,12 +18,11 @@ void arrange_result(float* final_population, float* energies, const int pop_size
 		for (i=pop_size-2; i>=j; i--)		//arrange according to sum of inter- and intramolecular energies
 			if (energies[i] > energies[i+1])
 			{
-/*
+				/*
 				memcpy(temp_genotype, final_population+i*GENOTYPE_LENGTH_IN_GLOBMEM, GENOTYPE_LENGTH_IN_GLOBMEM*sizeof(float));
 				memcpy(final_population+i*GENOTYPE_LENGTH_IN_GLOBMEM, final_population+(i+1)*GENOTYPE_LENGTH_IN_GLOBMEM, GENOTYPE_LENGTH_IN_GLOBMEM*sizeof(float));
 				memcpy(final_population+(i+1)*GENOTYPE_LENGTH_IN_GLOBMEM, temp_genotype, GENOTYPE_LENGTH_IN_GLOBMEM*sizeof(float));
-*/
-
+				*/
 				memcpy(temp_genotype, final_population+i*ACTUAL_GENOTYPE_LENGTH, ACTUAL_GENOTYPE_LENGTH*sizeof(float));
 				memcpy(final_population+i*ACTUAL_GENOTYPE_LENGTH, final_population+(i+1)*ACTUAL_GENOTYPE_LENGTH, ACTUAL_GENOTYPE_LENGTH*sizeof(float));
 				memcpy(final_population+(i+1)*ACTUAL_GENOTYPE_LENGTH, temp_genotype, ACTUAL_GENOTYPE_LENGTH*sizeof(float));
