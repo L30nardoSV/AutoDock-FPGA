@@ -20,8 +20,10 @@ This can be initialized via: `source init_sdx174.sh`. Then choose the server to 
 ## Important commands
 
 * See basic rules under [Makefile](./ofdock_taskpar_xl/Makefile)
-* See user compilation flags under [boards.mk](./SDAccel_Examples/utility/boards.mk)
-* See OpenCL ICD options under [opencl.mk](./SDAccel_Examples/libs/opencl/opencl.mk)
+* See user compilation flags under [boards.mk](https://github.com/Xilinx/SDAccel_Examples/blob/aws_2017.4/utility/boards.mk)
+* See OpenCL ICD options under [opencl.mk](https://github.com/Xilinx/SDAccel_Examples/blob/aws_2017.4/libs/opencl/opencl.mk)
+
+**Note**: _when referring to the external SDAccel repository, pay attention to the branch being used_.
 
 ### SW and HW Emulation (in local server)
 
