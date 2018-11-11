@@ -6,13 +6,11 @@
 //// ------------------------
 #include "performdocking.h"
 
-//// --------------------------------
-//// Altera OpenCL Helper Variables
-//// --------------------------------
+
 #include <assert.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
+//#include <stdio.h>
+//#include <stdlib.h>
+//#include <math.h>
 #include <cstring>
 
 
