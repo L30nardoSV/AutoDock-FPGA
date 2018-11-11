@@ -1,11 +1,7 @@
 #ifndef MISCELLANEOUS_H_
 #define MISCELLANEOUS_H_
 
-#include <time.h>
-#include <stdio.h>
-#include <math.h>
-#include <stdlib.h>
-#include <ctype.h>
+#include "ext_headers.h"
 
 #define PI 3.1415926535
 

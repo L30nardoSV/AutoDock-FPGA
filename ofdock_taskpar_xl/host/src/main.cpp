@@ -1,18 +1,12 @@
-//#include <stdio.h>
-//#include <stdlib.h>
-#include <time.h>
-
+#include "ext_headers.h"
 #include "processgrid.h"
-//include "processresult.h"
 #include "processligand.h"
 #include "getparameters.h"
 #include "performdocking.h"
 
-
 // ------------------------
 // Correct time measurement
 // Moved to performdocking.cpp to skip measuring build time
-#include <sys/time.h>
 // ------------------------
 
 int main(int argc, char* argv[])

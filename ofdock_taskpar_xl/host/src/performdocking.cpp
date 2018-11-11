@@ -2,17 +2,8 @@
 //// Correct time measurement
 //// Moved from main.cpp to performdocking.cpp
 //// to skip measuring build time
-//#include <sys/time.h>
 //// ------------------------
 #include "performdocking.h"
-
-
-#include <assert.h>
-//#include <stdio.h>
-//#include <stdlib.h>
-//#include <math.h>
-#include <cstring>
-
 
 //// --------------------------------
 //// Device memory buffers

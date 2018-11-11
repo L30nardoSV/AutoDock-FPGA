@@ -1,11 +1,7 @@
 #ifndef PROCESSRESULT_H_
 #define PROCESSRESULT_H_
 
-#include <stdio.h>
-#include <string.h>
-#include <math.h>
-
-#include "defines.h"
+#include "ext_headers.h"
 #include "processligand.h"
 #include "getparameters.h"
 

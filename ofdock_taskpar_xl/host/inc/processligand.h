@@ -1,7 +1,7 @@
 #ifndef PROCESSLIGAND_H_
 #define PROCESSLIGAND_H_
 
-#include "defines.h"
+#include "ext_headers.h"
 #include "processgrid.h"
 #include "miscellaneous.h"
 

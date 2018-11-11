@@ -1,11 +1,7 @@
 #ifndef GETPARAMETERS_H_
 #define GETPARAMETERS_H_
 
-#include <math.h>
-#include <string.h>
-#include <stdio.h>
-
-#include "defines.h"
+#include "ext_headers.h"
 #include "processligand.h"
 #include "processgrid.h"
 #include "miscellaneous.h"
@@ -73,5 +69,3 @@ void gen_initpop_and_reflig(Dockpars*       mypars,
 			    const Gridinfo* mygrid);
 
 #endif /* GETPARAMETERS_H_ */
-
-

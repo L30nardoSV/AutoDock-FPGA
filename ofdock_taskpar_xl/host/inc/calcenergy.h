@@ -1,10 +1,7 @@
 #ifndef CALCENERGY_H_
 #define CALCENERGY_H_
 
-#include <math.h>
-#include <stdio.h>
-
-#include "defines.h"
+#include "ext_headers.h"
 #include "miscellaneous.h"
 #include "processligand.h"
 #include "getparameters.h"
@@ -50,10 +47,9 @@ typedef struct
 	float  		qasp;
 } Dockparameters;
 
-#include "xcl2.hpp"
+// Aligning struc explictly to XILINX_MEMALIGN to avoid additional memcpy() calls
 #define XILINX_MEMALIGN 4096
 
-// Aligning struc to XILINX_MEMALIGN to avoid additional memcpy() calls
 typedef struct
 {
        	float 		atom_charges_const	     [MAX_NUM_OF_ATOMS]                    	__attribute__ ((aligned (XILINX_MEMALIGN)));

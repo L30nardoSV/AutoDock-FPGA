@@ -1,12 +1,7 @@
 #ifndef PROCESSGRID_H_
 #define PROCESSGRID_H_
 
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <math.h>
-
-#include <libgen.h>
+#include "ext_headers.h"
 
 // libgen.h contains basename() and dir() from a fullpath name
 // Specific: to open correctly grid map field fiels and associated files
@@ -16,7 +11,6 @@
 #include "miscellaneous.h"
 
 // Added for allocating fgrids
-#include <vector>
 using std::vector;
 
 #define getvalue_4Darr(mempoi, grinf, t, z, y, x)                  *(mempoi + (grinf).size_xyz[0] * (y + (grinf).size_xyz[1] * (z + (grinf).size_xyz[2]*t)) + x)
