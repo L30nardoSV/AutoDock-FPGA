@@ -1052,6 +1052,11 @@ filled with clock() */
 	// The data will be be transferred from system memory 
 	// over PCIe to the FPGA on-board DDR memory.
 	command_queue_ga.enqueueMigrateMemObjects(outBufVec,CL_MIGRATE_MEM_OBJECT_HOST);
+
+	// Making sure all data was transferred back to host
+	#ifdef ENABLE_KRNL_GA	
+	command_queue_ga.finish(); 
+	#endif
 	// -----------------------------------------------------------------------------------------------------
 
 	for (unsigned int run_cnt = 0; run_cnt < mypars->num_of_runs; run_cnt++) {
@@ -1059,6 +1064,8 @@ filled with clock() */
 		arrange_result(cpu_final_populations.data() + run_cnt*mypars->pop_size*ACTUAL_GENOTYPE_LENGTH, 
 			       cpu_energies.data()          + run_cnt*mypars->pop_size, 
 			       mypars->pop_size);
+
+		/*printf("cpu_evals_of_runs[%u]: %u\n", run_cnt, cpu_evals_of_runs[run_cnt]);*/
 
 		make_resfiles(cpu_final_populations.data() + run_cnt*mypars->pop_size*ACTUAL_GENOTYPE_LENGTH, 
 			      cpu_energies.data()          + run_cnt*mypars->pop_size, 

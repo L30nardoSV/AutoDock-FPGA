@@ -872,6 +872,8 @@ void Krnl_GA(
 	// Write final evals & generation counts to FPGA-board DDRs
 	GlobEvals_performed[Host_RunId] = eval_cnt;
 	GlobGens_performed [Host_RunId] = generation_cnt;
+
+	/*printf("Host_RunId: %u, eval_cnt: %u, generation_cnt: %u\n", Host_RunId, eval_cnt, generation_cnt);*/
 }
 
 // --------------------------------------------------------------------------
