@@ -63,38 +63,4 @@
 				       cube[0][1][0]*weights[0][1][0] +cube[1][1][0]*weights[1][1][0] + \
 				       cube[0][0][1]*weights[0][0][1] +cube[1][0][1]*weights[1][0][1] + \
 				       cube[0][1][1]*weights[0][1][1] +cube[1][1][1]*weights[1][1][1])
-
-// -----------------------------------------------------------------------------
-// IMPROVEMENTS OVER PECHAN'S IMPLEMENTATION
-// -----------------------------------------------------------------------------
-
-//#define NATIVE_PRECISION	// if disabled, then full precision, 
-				// improvement: 152 (disabled) to 75 (enabled) sec
-//#define HALF_PRECISION		// if disabled, then full precision,
-				//no improvement: 152 (disabled) to 153 (enabled) sec
-
-#define ASYNC_COPY		// if disabled, then original approach of copy, 
-				// no improvement: 76 sec both
-#define IMPROVE_GRID		// if disabled, then original approach to calculate grid contribution
-				// improvement from 78 (disabled) to 76 (enabled) sec
-
-#define MAPPED_COPY	// if disabled, then mem copy inside main computation loop
-			// doesn't use DMA engine
-			// improvement: 77 (disabled) to 76 (enabled) sec 
-//#define REPRO
-// -----------------------------------------------------------------------------
-
-// Enable to debug kernels using printf
-// Disable them to save RAM resources
-//#define DEBUG_ACTIVE_KERNEL
-//#define DEBUG_KRNL_GA
-//#define DEBUG_KRNL_IC
-//
-//
-//#define DEBUG_KRNL_CONFORM
-//#define DEBUG_KRNL_INTERE
-//#define DEBUG_KRNL_INTRAE
-//#define DEBUG_KRNL_STORE
-
-
 #endif /* DEFINES_H_ */

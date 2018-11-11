@@ -600,43 +600,22 @@ void gen_initpop_and_reflig(Dockpars*       mypars,
 	{
 		for (entity_id=0; entity_id<pop_size*mypars->num_of_runs; entity_id++)
 			for (gene_id=0; gene_id<3; gene_id++)
-				#if defined (REPRO)
-				//init_populations[entity_id*GENOTYPE_LENGTH_IN_GLOBMEM+gene_id] = 30.1186;
-				init_populations[entity_id*ACTUAL_GENOTYPE_LENGTH+gene_id] = 30.1186;
-				#else
 				//init_populations[entity_id*GENOTYPE_LENGTH_IN_GLOBMEM+gene_id] = (float) myrand()*(mygrid->size_xyz_angstr[gene_id]);
 				init_populations[entity_id*ACTUAL_GENOTYPE_LENGTH+gene_id] = (float) myrand()*(mygrid->size_xyz_angstr[gene_id]);
-				#endif			
 
 		for (entity_id=0; entity_id<pop_size*mypars->num_of_runs; entity_id++)
 			for (gene_id=3; gene_id<MAX_NUM_OF_ROTBONDS+6; gene_id++)
 				if (gene_id == 4)
-					#if defined (REPRO)
-					//init_populations[entity_id*GENOTYPE_LENGTH_IN_GLOBMEM+gene_id] = 26.0555;
-					init_populations[entity_id*ACTUAL_GENOTYPE_LENGTH+gene_id] = 26.0555;
-					#else
 					//init_populations[entity_id*GENOTYPE_LENGTH_IN_GLOBMEM+gene_id] = myrand()*180;
 					init_populations[entity_id*ACTUAL_GENOTYPE_LENGTH+gene_id] = myrand()*180;
-					#endif	
 				else
-					#if defined (REPRO)
-					//init_populations[entity_id*GENOTYPE_LENGTH_IN_GLOBMEM+gene_id] = 22.0452;
-					init_populations[entity_id*ACTUAL_GENOTYPE_LENGTH+gene_id] = 22.0452;
-					#else
 					//init_populations[entity_id*GENOTYPE_LENGTH_IN_GLOBMEM+gene_id] = myrand()*360;
 					init_populations[entity_id*ACTUAL_GENOTYPE_LENGTH+gene_id] = myrand()*360;
-					#endif
 
 		//generating reference orientation angles
-		#if defined (REPRO)
-		mypars->ref_ori_angles[0] = 190.279;
-		mypars->ref_ori_angles[1] = 190.279;
-		mypars->ref_ori_angles[2] = 190.279;
-		#else
 		mypars->ref_ori_angles[0] = (float) floor(myrand()*360*100)/100.0;
 		mypars->ref_ori_angles[1] = (float) floor(myrand()*360*100)/100.0;
 		mypars->ref_ori_angles[2] = (float) floor(myrand()*360*100)/100.0;
-		#endif
 
 		//Writing first initial population to initpop.txt
 		fp = fopen("initpop.txt", "w");
@@ -688,15 +667,9 @@ void gen_initpop_and_reflig(Dockpars*       mypars,
 	//but the angles possibly read from file are ignored
 	for (int i=0; i<mypars->num_of_runs; i++)
 	{
-		#if defined (REPRO)
-		ref_ori_angles[3*i]   = 190.279;
-		ref_ori_angles[3*i+1] =  90.279;
-		ref_ori_angles[3*i+2] = 190.279;
-		#else
 		ref_ori_angles[3*i]   = (float) (myrand()*360.0); 	//phi
 		ref_ori_angles[3*i+1] = (float) (myrand()*180.0);	//theta
 		ref_ori_angles[3*i+2] = (float) (myrand()*360.0);	//angle
-		#endif
 	}
 
 	get_movvec_to_origo(myligand, movvec_to_origo);
