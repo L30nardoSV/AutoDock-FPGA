@@ -840,8 +840,8 @@ filled with clock() */
 		#endif
 
 		#ifdef ENABLE_KRNL_PRNG_BT_USHORT_FLOAT
-		kernel_prng_bt_ushort_float.setArg(0, cpu_prng_seeds[num_of_prng_blocks * run_cnt + 14]);
-		kernel_prng_bt_ushort_float.setArg(1, cpu_prng_seeds[num_of_prng_blocks * run_cnt + 15]);
+		kernel_prng_bt_ushort_float.setArg(0, cpu_prng_seeds[num_of_prng_blocks * run_cnt]);
+		kernel_prng_bt_ushort_float.setArg(1, cpu_prng_seeds[num_of_prng_blocks * run_cnt + 1]);
 		#endif
 
 		#ifdef ENABLE_KRNL_PRNG_GG_UCHAR
@@ -849,29 +849,29 @@ filled with clock() */
 		#endif
 
 		#ifdef ENABLE_KRNL_PRNG_GG_FLOAT
-		kernel_prng_gg_float.setArg(0, cpu_prng_seeds[num_of_prng_blocks * run_cnt]);
+		kernel_prng_gg_float.setArg(0, cpu_prng_seeds[num_of_prng_blocks * run_cnt + 3]);
 		#endif
 
 		#ifdef ENABLE_KRNL_PRNG_LS123_USHORT
-		kernel_prng_ls123_ushort.setArg(0, cpu_prng_seeds[num_of_prng_blocks * run_cnt + 5]);
-		kernel_prng_ls123_ushort.setArg(1, cpu_prng_seeds[num_of_prng_blocks * run_cnt + 6]);
-		kernel_prng_ls123_ushort.setArg(2, cpu_prng_seeds[num_of_prng_blocks * run_cnt + 7]);
-		kernel_prng_ls123_ushort.setArg(3, cpu_prng_seeds[num_of_prng_blocks * run_cnt + 8]);
-		kernel_prng_ls123_ushort.setArg(4, cpu_prng_seeds[num_of_prng_blocks * run_cnt + 9]);
-		kernel_prng_ls123_ushort.setArg(5, cpu_prng_seeds[num_of_prng_blocks * run_cnt + 10]);
-		kernel_prng_ls123_ushort.setArg(6, cpu_prng_seeds[num_of_prng_blocks * run_cnt + 11]);
-		kernel_prng_ls123_ushort.setArg(7, cpu_prng_seeds[num_of_prng_blocks * run_cnt + 12]);
-		kernel_prng_ls123_ushort.setArg(8, cpu_prng_seeds[num_of_prng_blocks * run_cnt + 13]);
+		kernel_prng_ls123_ushort.setArg(0, cpu_prng_seeds[num_of_prng_blocks * run_cnt + 4]);
+		kernel_prng_ls123_ushort.setArg(1, cpu_prng_seeds[num_of_prng_blocks * run_cnt + 5]);
+		kernel_prng_ls123_ushort.setArg(2, cpu_prng_seeds[num_of_prng_blocks * run_cnt + 6]);
+		kernel_prng_ls123_ushort.setArg(3, cpu_prng_seeds[num_of_prng_blocks * run_cnt + 7]);
+		kernel_prng_ls123_ushort.setArg(4, cpu_prng_seeds[num_of_prng_blocks * run_cnt + 8]);
+		kernel_prng_ls123_ushort.setArg(5, cpu_prng_seeds[num_of_prng_blocks * run_cnt + 9]);
+		kernel_prng_ls123_ushort.setArg(6, cpu_prng_seeds[num_of_prng_blocks * run_cnt + 10]);
+		kernel_prng_ls123_ushort.setArg(7, cpu_prng_seeds[num_of_prng_blocks * run_cnt + 11]);
+		kernel_prng_ls123_ushort.setArg(8, cpu_prng_seeds[num_of_prng_blocks * run_cnt + 12]);
 		#endif
 
 		#ifdef ENABLE_KRNL_PRNG_LS_FLOAT
-		kernel_prng_ls_float.setArg (0, cpu_prng_seeds[num_of_prng_blocks * run_cnt + 1]);
+		kernel_prng_ls_float.setArg (0, cpu_prng_seeds[num_of_prng_blocks * run_cnt + 13]);
 		#endif
 		#ifdef ENABLE_KRNL_PRNG_LS2_FLOAT
-		kernel_prng_ls2_float.setArg(0, cpu_prng_seeds[num_of_prng_blocks * run_cnt + 3]);
+		kernel_prng_ls2_float.setArg(0, cpu_prng_seeds[num_of_prng_blocks * run_cnt + 14]);
 		#endif
 		#ifdef ENABLE_KRNL_PRNG_LS3_FLOAT
-		kernel_prng_ls3_float.setArg(0, cpu_prng_seeds[num_of_prng_blocks * run_cnt + 4]);
+		kernel_prng_ls3_float.setArg(0, cpu_prng_seeds[num_of_prng_blocks * run_cnt + 15]);
 		#endif
 		#ifdef ENABLE_KRNL_PRNG_LS4_FLOAT
 		kernel_prng_ls4_float.setArg(0, cpu_prng_seeds[num_of_prng_blocks * run_cnt + 16]);
