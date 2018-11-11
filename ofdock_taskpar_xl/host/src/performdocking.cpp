@@ -1,8 +1,3 @@
-//// ------------------------
-//// Correct time measurement
-//// Moved from main.cpp to performdocking.cpp
-//// to skip measuring build time
-//// ------------------------
 #include "performdocking.h"
 
 //// --------------------------------
