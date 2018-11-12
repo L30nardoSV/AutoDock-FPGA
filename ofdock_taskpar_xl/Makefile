@@ -11,10 +11,10 @@ include $(COMMON_REPO)/libs/opencl/opencl.mk
 
 # Added to fix the unnecessarily required pointer 
 # to global memory in each kernel
-OTHER_FLAGS=
+DUMMYGLOBPOINTER_FLAGS=
 
 ifeq ($(TARGETS), sw_emu)
-	OTHER_FLAGS=-DSW_EMU
+	DUMMYGLOBPOINTER_FLAGS=-DSW_EMU
 endif
 
 # Enable Kernels
@@ -96,7 +96,7 @@ FIPO_FLAG = $(FIPOCO_FLAG) \
 # Overall custom configs
 CONFIG_FLAG = $(FIPO_FLAG)
 
-CXXFLAGS:=-Wall -O0 -g -std=c++14 $(OTHER_FLAGS)
+CXXFLAGS:=-Wall -O0 -g -std=c++14 $(DUMMYGLOBPOINTER_FLAGS)
 
 # Host Application
 
@@ -125,12 +125,34 @@ EXES=hostbin
 Krnl_GA_SRCS=./device/Krnl_GA.cl
 
 # Custom configuration of vars within: boards.mk
+#CLFLAGS= --xp "param:compiler.version=31" \
+#	 --xp "param:compiler.preserveHlsOutput=1" \
+#	 --xp "param:compiler.generateExtraRunData=true" \
+#	 -s -g -I./ -I../ -I./device \
+#	 $(CONFIG_FLAG) \
+#	 $(DUMMYGLOBPOINTER_FLAGS)
+
+# Kernel "-g" debug option must be added 
+# only for sw-emu and hw-emu, not hw
+# UG1023: SDAccel Debug Command Line Flow / Preparing the Kernel
+KERNELDEBUG_FLAGS=
+
+ifeq ($(TARGETS), sw_emu)
+	KERNELDEBUG_FLAGS=-g
+else
+	ifeq ($(TARGETS), hw_emu)
+		KERNELDEBUG_FLAGS=-g
+	endif
+endif
+
 CLFLAGS= --xp "param:compiler.version=31" \
 	 --xp "param:compiler.preserveHlsOutput=1" \
 	 --xp "param:compiler.generateExtraRunData=true" \
-	 -s -g -I./ -I../ -I./device \
+	 -s -I./ -I../ -I./device \
 	 $(CONFIG_FLAG) \
-	 $(OTHER_FLAGS)
+	 $(DUMMYGLOBPOINTER_FLAGS) \
+	 $(KERNELDEBUG_FLAGS)
+
 LDCLFLAGS=$(CLFLAGS)
 
 # Custom configuration of vars within: opencl.mk
@@ -218,10 +240,10 @@ opencl_LDFLAGS=-L$(OPENCL_LIB) -L$(SDA_LIB) -lxilinxopencl -pthread
 #		   --sp Krnl_InterE_1.m_axi_gmem:bank2  \
 #		   --sp Krnl_IntraE_1.m_axi_gmem:bank3
 
-Krnl_GA_LDCLFLAGS+=--sp Krnl_GA_1.m_axi_gmem:bank0      \
-		   --sp Krnl_Conform_1.m_axi_gmem:bank0 \
-		   --sp Krnl_InterE_1.m_axi_gmem:bank1  \
-		   --sp Krnl_IntraE_1.m_axi_gmem:bank1
+#Krnl_GA_LDCLFLAGS+=--sp Krnl_GA_1.m_axi_gmem:bank0      \
+#		   --sp Krnl_Conform_1.m_axi_gmem:bank0 \
+#		   --sp Krnl_InterE_1.m_axi_gmem:bank1  \
+#		   --sp Krnl_IntraE_1.m_axi_gmem:bank1
 
 ##
 # https://www.xilinx.com/support/documentation/sw_manuals/xilinx2017_4/ug1281-sdaccel-debugging-guide.pdf
