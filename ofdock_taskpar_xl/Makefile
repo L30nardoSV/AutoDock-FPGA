@@ -240,10 +240,10 @@ opencl_LDFLAGS=-L$(OPENCL_LIB) -L$(SDA_LIB) -lxilinxopencl -pthread
 #		   --sp Krnl_InterE_1.m_axi_gmem:bank2  \
 #		   --sp Krnl_IntraE_1.m_axi_gmem:bank3
 
-#Krnl_GA_LDCLFLAGS+=--sp Krnl_GA_1.m_axi_gmem:bank0      \
-#		   --sp Krnl_Conform_1.m_axi_gmem:bank0 \
-#		   --sp Krnl_InterE_1.m_axi_gmem:bank1  \
-#		   --sp Krnl_IntraE_1.m_axi_gmem:bank1
+Krnl_GA_LDCLFLAGS+=--sp Krnl_GA_1.m_axi_gmem:bank0      \
+		   --sp Krnl_Conform_1.m_axi_gmem:bank0 \
+		   --sp Krnl_InterE_1.m_axi_gmem:bank1  \
+		   --sp Krnl_IntraE_1.m_axi_gmem:bank1
 
 ##
 # https://www.xilinx.com/support/documentation/sw_manuals/xilinx2017_4/ug1281-sdaccel-debugging-guide.pdf
