@@ -567,28 +567,24 @@ copy: clean-copy
 	mkdir ../$(COPY_DIR)/$(COPY_DIR_DOCK)/xclbin
 	cp ./xclbin/$(XCLBINS).hw.*.xclbin ../$(COPY_DIR)/$(COPY_DIR_DOCK)/xclbin/
 	cp ./xclbin/$(XCLBINS).hw.*.xo ../$(COPY_DIR)/$(COPY_DIR_DOCK)/xclbin/
-	cp ./xclbin/$(XCLBINS).hw.*.xclbin ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
-	mv ../$(COPY_DIR)/$(COPY_DIR_DOCK)/$(XCLBINS).hw.*.xclbin ../$(COPY_DIR)/$(COPY_DIR_DOCK)/$(XCLBINS).xclbin
 	cp sdaccel.ini ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
 	cp Makefile ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
 	cp defines.h ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
-	cp defines_fixedpt.h ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
-	cp defines_fixedpt_64.h ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
-	cp -r device/ ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
+	#cp defines_fixedpt.h ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
+	#cp defines_fixedpt_64.h ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
 	cp -r host/ ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
 	#cp -r input/ ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
-	cp ../conf_sdx174_saruman.sh ../$(COPY_DIR)/
 	cd ../;	zip -r $(COPY_DIR).zip $(COPY_DIR)
 	@echo $(newline)
-	@echo "Transfer the \"$(COPY_DIR).zip\" file to $(SERVER_BRIDGE) server: "
-	@echo " "
+	@echo "INFO: transfering the \"$(COPY_DIR).zip\" file to $(SERVER_BRIDGE) server: "
+	@echo $(newline)
 	cd ../ && scp $(COPY_DIR).zip $(SERVER_BRIDGE)
 	@echo $(newline)
 	@echo "=================================================================="
-	@echo "Files listed were transferred to $(SERVER_BRIDGE)                 "
+	@echo "INFO: files listed were transferred to $(SERVER_BRIDGE)           "
 	@echo $(newline)
-	@echo "Then, create AFI and transfer files manually                      "
-	@echo "from $(SERVER_BRIDGE) to $(SERVER_EXEC)                           "
+	@echo "INFO: then, create AFI and transfer files manually                "
+	@echo "INFO: ... from $(SERVER_BRIDGE) to $(SERVER_EXEC)                 "
 	@echo "=================================================================="
 	@echo $(newline)
 
@@ -598,7 +594,7 @@ clean-copy:
 	rm -f ../$(COPY_DIR).zip
 	@echo $(newline)
 	@echo "=================================================================="
-	@echo "Previous \"$(COPY_DIR).zip\" and its folder were deleted          "
+	@echo "INFO: previous \"$(COPY_DIR).zip\" and its folder were deleted    "
 	@echo "=================================================================="
 	@echo $(newline)
 
