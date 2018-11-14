@@ -349,22 +349,8 @@ filled with clock() */
 	const unsigned int mul_tmp3 = (dockpars.num_of_atypes + 1) * dockpars.g3;
 
 	// -----------------------------------------------------------------------------------------------------
+	// Replaced by cl_mem extensions (custom connections to DDR banks)
 	#if 0
-	// Hardware specific configuration (valid if 4 DDR banks are available, e.g.: AWS)
-	// Specifiying precisely which DDR memory bank is 
-	// being pointed to by a kernel globgal memory pointer.
-
-	cl_mem_ext_ptr_t d_bank0_ext; // Ideally: DDR bank0 <-> Krnl_GA
-	cl_mem_ext_ptr_t d_bank1_ext; // Ideally: DDR bank1 <-> Krnl_Conform
-	cl_mem_ext_ptr_t d_bank2_ext; // Ideally: DDR bank2 <-> Krnl_InterE
-	cl_mem_ext_ptr_t d_bank3_ext; // Ideally: DDR bank3 <-> Krnl_IntraE
-
-	d_bank0_ext.flags = XCL_MEM_DDR_BANK0; d_bank0_ext.obj = NULL; d_bank0_ext.param = 0;
-	d_bank1_ext.flags = XCL_MEM_DDR_BANK1; d_bank1_ext.obj = NULL; d_bank1_ext.param = 0;
-	d_bank2_ext.flags = XCL_MEM_DDR_BANK2; d_bank2_ext.obj = NULL; d_bank2_ext.param = 0;
-	d_bank3_ext.flags = XCL_MEM_DDR_BANK3; d_bank3_ext.obj = NULL; d_bank3_ext.param = 0;
-	#endif
-	// -----------------------------------------------------------------------------------------------------
 
         // These commands will allocate memory on the FPGA. The cl::Buffer objects can
         // be used to reference the memory locations on the device. The cl::Buffer
@@ -446,6 +432,202 @@ filled with clock() */
 	cl::Buffer mem_dummy				(context, CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY, sizeof(int), cpu_dummy.data());
 	#endif
 
+	#endif
+	// -----------------------------------------------------------------------------------------------------
+        // For Allocating Buffer to specific Global Memory Bank, 
+	// user has to use cl_mem_ext_ptr_t and provide the Banks
+
+	// Declaring two extensions for both buffers
+
+	// Krnl_GA cl_mem extensions
+	cl_mem_ext_ptr_t memExt_dockpars_conformations_current_Initial;
+	cl_mem_ext_ptr_t memExt_dockpars_conformations_current_Final;
+	cl_mem_ext_ptr_t memExt_dockpars_energies_current;
+	cl_mem_ext_ptr_t memExt_evals_performed;
+	cl_mem_ext_ptr_t memExt_gens_performed;
+
+	// Krnl_Conform cl_mem extensions
+	cl_mem_ext_ptr_t memExt_KerConstStatic_rotlist_const;
+	cl_mem_ext_ptr_t memExt_KerConstStatic_ref_coords_const;	
+	cl_mem_ext_ptr_t memExt_KerConstStatic_rotbonds_moving_vectors_const;			
+	cl_mem_ext_ptr_t memExt_KerConstStatic_rotbonds_unit_vectors_const;
+	cl_mem_ext_ptr_t memExt_KerConstStatic_ref_orientation_quats_const;
+
+	// Krnl_InterE cl_mem extensions
+	cl_mem_ext_ptr_t memExt_dockpars_fgrids;	
+	cl_mem_ext_ptr_t memExt_KerConstStatic_InterE_atom_charges_const;
+	cl_mem_ext_ptr_t memExt_KerConstStatic_InterE_atom_types_const;
+
+	// Krnl_IntraE cl_mem extensions
+	cl_mem_ext_ptr_t memExt_KerConstStatic_IntraE_atom_charges_const;
+	cl_mem_ext_ptr_t memExt_KerConstStatic_IntraE_atom_types_const;
+	cl_mem_ext_ptr_t memExt_KerConstStatic_intraE_contributors_const;
+	cl_mem_ext_ptr_t memExt_KerConstStatic_reqm_const;	
+	cl_mem_ext_ptr_t memExt_KerConstStatic_reqm_hbond_const;
+	cl_mem_ext_ptr_t memExt_KerConstStatic_atom1_types_reqm_const;
+	cl_mem_ext_ptr_t memExt_KerConstStatic_atom2_types_reqm_const;
+	cl_mem_ext_ptr_t memExt_KerConstStatic_VWpars_AC_const;
+	cl_mem_ext_ptr_t memExt_KerConstStatic_VWpars_BD_const;
+	cl_mem_ext_ptr_t memExt_KerConstStatic_dspars_S_const;
+	cl_mem_ext_ptr_t memExt_KerConstStatic_dspars_V_const;
+
+	// Specify Bank0 Memory for Krnl_GA & Krnl_Conform
+	memExt_dockpars_conformations_current_Initial.flags = XCL_MEM_DDR_BANK0;
+	memExt_dockpars_conformations_current_Final.flags   = XCL_MEM_DDR_BANK0;
+	memExt_dockpars_energies_current.flags              = XCL_MEM_DDR_BANK0;
+	memExt_evals_performed.flags                        = XCL_MEM_DDR_BANK0;
+	memExt_gens_performed.flags                         = XCL_MEM_DDR_BANK0;
+	memExt_KerConstStatic_rotlist_const.flags	          = XCL_MEM_DDR_BANK0;
+	memExt_KerConstStatic_ref_coords_const.flags		  = XCL_MEM_DDR_BANK0;	
+	memExt_KerConstStatic_rotbonds_moving_vectors_const.flags = XCL_MEM_DDR_BANK0;			
+	memExt_KerConstStatic_rotbonds_unit_vectors_const.flags   = XCL_MEM_DDR_BANK0;
+	memExt_KerConstStatic_ref_orientation_quats_const.flags   = XCL_MEM_DDR_BANK0;
+
+	// Specify Bank1 Memory for Krnl_InterE & Krnl_IntraE
+	memExt_dockpars_fgrids.flags				= XCL_MEM_DDR_BANK1;	
+	memExt_KerConstStatic_InterE_atom_charges_const.flags	= XCL_MEM_DDR_BANK1;
+	memExt_KerConstStatic_InterE_atom_types_const.flags	= XCL_MEM_DDR_BANK1;
+	memExt_KerConstStatic_IntraE_atom_charges_const.flags	= XCL_MEM_DDR_BANK1;
+	memExt_KerConstStatic_IntraE_atom_types_const.flags	= XCL_MEM_DDR_BANK1;
+	memExt_KerConstStatic_intraE_contributors_const.flags	= XCL_MEM_DDR_BANK1;
+	memExt_KerConstStatic_reqm_const.flags			= XCL_MEM_DDR_BANK1;	
+	memExt_KerConstStatic_reqm_hbond_const.flags		= XCL_MEM_DDR_BANK1;
+	memExt_KerConstStatic_atom1_types_reqm_const.flags	= XCL_MEM_DDR_BANK1;
+	memExt_KerConstStatic_atom2_types_reqm_const.flags	= XCL_MEM_DDR_BANK1;
+	memExt_KerConstStatic_VWpars_AC_const.flags		= XCL_MEM_DDR_BANK1;
+	memExt_KerConstStatic_VWpars_BD_const.flags		= XCL_MEM_DDR_BANK1;
+	memExt_KerConstStatic_dspars_S_const.flags		= XCL_MEM_DDR_BANK1;
+	memExt_KerConstStatic_dspars_V_const.flags		= XCL_MEM_DDR_BANK1;
+
+	// Specifying the mapping from host arrays to Krnl_GA & Krnl_Conform
+	memExt_dockpars_conformations_current_Initial.obj = cpu_init_populations.data();
+	memExt_dockpars_conformations_current_Final.obj   = cpu_final_populations.data();
+	memExt_dockpars_energies_current.obj              = cpu_energies.data();
+	memExt_evals_performed.obj                        = cpu_evals_of_runs.data();
+	memExt_gens_performed.obj                         = cpu_gens_of_runs.data();
+	memExt_KerConstStatic_rotlist_const.obj                 = &KerConstStatic.rotlist_const[0];
+	memExt_KerConstStatic_ref_coords_const.obj              = &KerConstStatic.ref_coords_const[0];	
+	memExt_KerConstStatic_rotbonds_moving_vectors_const.obj = &KerConstStatic.rotbonds_moving_vectors_const[0];			
+	memExt_KerConstStatic_rotbonds_unit_vectors_const.obj   = &KerConstStatic.rotbonds_unit_vectors_const[0];
+	memExt_KerConstStatic_ref_orientation_quats_const.obj   = &KerConstStatic.ref_orientation_quats_const[0];
+
+	// Specifying the mapping from host arrays to Krnl_InterE & Krnl_IntraE
+	memExt_dockpars_fgrids.obj                              = cpu_floatgrids;	
+	memExt_KerConstStatic_InterE_atom_charges_const.obj     = &KerConstStatic.atom_charges_const[0];
+	memExt_KerConstStatic_InterE_atom_types_const.obj       = &KerConstStatic.atom_types_const[0];
+	memExt_KerConstStatic_IntraE_atom_charges_const.obj     = &KerConstStatic.atom_charges_const[0];
+	memExt_KerConstStatic_IntraE_atom_types_const.obj       = &KerConstStatic.atom_types_const[0];
+	memExt_KerConstStatic_intraE_contributors_const.obj     = &KerConstStatic.intraE_contributors_const[0];
+	memExt_KerConstStatic_reqm_const.obj                    = &KerConstStatic.reqm_const;	
+	memExt_KerConstStatic_reqm_hbond_const.obj              = &KerConstStatic.reqm_hbond_const;
+	memExt_KerConstStatic_atom1_types_reqm_const.obj        = &KerConstStatic.atom1_types_reqm_const;
+	memExt_KerConstStatic_atom2_types_reqm_const.obj        = &KerConstStatic.atom2_types_reqm_const; 
+	memExt_KerConstStatic_VWpars_AC_const.obj               = &KerConstStatic.VWpars_AC_const[0];
+	memExt_KerConstStatic_VWpars_BD_const.obj               = &KerConstStatic.VWpars_BD_const[0];
+	memExt_KerConstStatic_dspars_S_const.obj                = &KerConstStatic.dspars_S_const[0];
+	memExt_KerConstStatic_dspars_V_const.obj                = &KerConstStatic.dspars_V_const[0];
+
+	// Setting param to zero
+	memExt_dockpars_conformations_current_Initial.param = 0;
+	memExt_dockpars_conformations_current_Final.param   = 0;
+	memExt_dockpars_energies_current.param              = 0;
+	memExt_evals_performed.param                        = 0;
+	memExt_gens_performed.param                         = 0;
+	memExt_KerConstStatic_rotlist_const.param                 = 0;
+	memExt_KerConstStatic_ref_coords_const.param              = 0;	
+	memExt_KerConstStatic_rotbonds_moving_vectors_const.param = 0;			
+	memExt_KerConstStatic_rotbonds_unit_vectors_const.param   = 0;
+	memExt_KerConstStatic_ref_orientation_quats_const.param   = 0;
+	memExt_dockpars_fgrids.param                          = 0;	
+	memExt_KerConstStatic_InterE_atom_charges_const.param = 0;
+	memExt_KerConstStatic_InterE_atom_types_const.param   = 0;
+	memExt_KerConstStatic_IntraE_atom_charges_const.param = 0;
+	memExt_KerConstStatic_IntraE_atom_types_const.param   = 0;
+	memExt_KerConstStatic_intraE_contributors_const.param = 0;
+	memExt_KerConstStatic_reqm_const.param                = 0;	
+	memExt_KerConstStatic_reqm_hbond_const.param          = 0;
+	memExt_KerConstStatic_atom1_types_reqm_const.param    = 0;
+	memExt_KerConstStatic_atom2_types_reqm_const.param    = 0; 
+	memExt_KerConstStatic_VWpars_AC_const.param           = 0;
+	memExt_KerConstStatic_VWpars_BD_const.param           = 0;
+	memExt_KerConstStatic_dspars_S_const.param            = 0;
+	memExt_KerConstStatic_dspars_V_const.param            = 0;
+
+	// -----------------------------------------------------------------------------------------------------
+	// Krnl_GA buffers
+	cl::Buffer mem_dockpars_conformations_current_Initial
+							(context, CL_MEM_READ_ONLY | CL_MEM_USE_HOST_PTR | CL_MEM_EXT_PTR_XILINX, 
+							size_populations_nbytes,	&memExt_dockpars_conformations_current_Initial);
+	cl::Buffer mem_dockpars_conformations_current_Final
+							(context, CL_MEM_WRITE_ONLY | CL_MEM_USE_HOST_PTR | CL_MEM_EXT_PTR_XILINX, 
+							size_populations_nbytes,	&memExt_dockpars_conformations_current_Final);
+	cl::Buffer mem_dockpars_energies_current     	(context, CL_MEM_WRITE_ONLY | CL_MEM_USE_HOST_PTR | CL_MEM_EXT_PTR_XILINX, 
+							size_energies_nbytes,     	&memExt_dockpars_energies_current);
+	cl::Buffer mem_evals_performed			(context, CL_MEM_WRITE_ONLY | CL_MEM_USE_HOST_PTR | CL_MEM_EXT_PTR_XILINX, 
+							size_evals_of_runs_nbytes, 	&memExt_evals_performed);
+	cl::Buffer mem_gens_performed			(context, CL_MEM_WRITE_ONLY | CL_MEM_USE_HOST_PTR | CL_MEM_EXT_PTR_XILINX, 
+							size_evals_of_runs_nbytes,	&memExt_gens_performed);
+	// Krnl_Conform buffers
+	cl::Buffer mem_KerConstStatic_rotlist_const	(context, CL_MEM_READ_ONLY | CL_MEM_USE_HOST_PTR | CL_MEM_EXT_PTR_XILINX,
+							MAX_NUM_OF_ROTATIONS*sizeof(int),	&memExt_KerConstStatic_rotlist_const);
+	cl::Buffer mem_KerConstStatic_ref_coords_const	(context, CL_MEM_READ_ONLY | CL_MEM_USE_HOST_PTR | CL_MEM_EXT_PTR_XILINX,
+							MAX_NUM_OF_ATOMS*sizeof(cl_float3),	&memExt_KerConstStatic_ref_coords_const);	
+	cl::Buffer mem_KerConstStatic_rotbonds_moving_vectors_const
+							(context, CL_MEM_READ_ONLY | CL_MEM_USE_HOST_PTR | CL_MEM_EXT_PTR_XILINX,  
+							MAX_NUM_OF_ROTBONDS*sizeof(cl_float3),	&memExt_KerConstStatic_rotbonds_moving_vectors_const);
+	cl::Buffer mem_KerConstStatic_rotbonds_unit_vectors_const
+							(context, CL_MEM_READ_ONLY | CL_MEM_USE_HOST_PTR | CL_MEM_EXT_PTR_XILINX,
+							MAX_NUM_OF_ROTBONDS*sizeof(cl_float3),	&memExt_KerConstStatic_rotbonds_unit_vectors_const);
+	cl::Buffer mem_KerConstStatic_ref_orientation_quats_const
+							(context, CL_MEM_READ_ONLY | CL_MEM_USE_HOST_PTR | CL_MEM_EXT_PTR_XILINX,
+							MAX_NUM_OF_RUNS*sizeof(cl_float4),   	&memExt_KerConstStatic_ref_orientation_quats_const);
+	
+	// Krnl_InterE buffers
+	cl::Buffer mem_dockpars_fgrids			(context, CL_MEM_READ_ONLY | CL_MEM_USE_HOST_PTR | CL_MEM_EXT_PTR_XILINX,
+							size_floatgrids_nbytes,		&memExt_dockpars_fgrids);	
+	cl::Buffer mem_KerConstStatic_InterE_atom_charges_const
+							(context, CL_MEM_READ_ONLY | CL_MEM_USE_HOST_PTR | CL_MEM_EXT_PTR_XILINX,
+							MAX_NUM_OF_ATOMS*sizeof(float),	&memExt_KerConstStatic_InterE_atom_charges_const);
+	cl::Buffer mem_KerConstStatic_InterE_atom_types_const
+							(context, CL_MEM_READ_ONLY | CL_MEM_USE_HOST_PTR | CL_MEM_EXT_PTR_XILINX,
+							MAX_NUM_OF_ATOMS*sizeof(char),	&memExt_KerConstStatic_InterE_atom_types_const);
+	
+	// Krnl_IntraE buffers
+	cl::Buffer mem_KerConstStatic_IntraE_atom_charges_const
+							(context, CL_MEM_READ_ONLY | CL_MEM_USE_HOST_PTR | CL_MEM_EXT_PTR_XILINX,
+							MAX_NUM_OF_ATOMS*sizeof(float),	&memExt_KerConstStatic_IntraE_atom_charges_const);
+	cl::Buffer mem_KerConstStatic_IntraE_atom_types_const
+							(context, CL_MEM_READ_ONLY | CL_MEM_USE_HOST_PTR | CL_MEM_EXT_PTR_XILINX,
+							MAX_NUM_OF_ATOMS*sizeof(char),  &memExt_KerConstStatic_IntraE_atom_types_const);
+	cl::Buffer mem_KerConstStatic_intraE_contributors_const
+							(context, CL_MEM_READ_ONLY | CL_MEM_USE_HOST_PTR | CL_MEM_EXT_PTR_XILINX,
+							MAX_INTRAE_CONTRIBUTORS*sizeof(cl_char3), &memExt_KerConstStatic_intraE_contributors_const);
+	cl::Buffer mem_KerConstStatic_reqm_const	(context, CL_MEM_READ_ONLY | CL_MEM_USE_HOST_PTR | CL_MEM_EXT_PTR_XILINX,
+							ATYPE_NUM*sizeof(float),	&memExt_KerConstStatic_reqm_const);	
+	cl::Buffer mem_KerConstStatic_reqm_hbond_const	(context, CL_MEM_READ_ONLY | CL_MEM_USE_HOST_PTR | CL_MEM_EXT_PTR_XILINX,
+							ATYPE_NUM*sizeof(float),	&memExt_KerConstStatic_reqm_hbond_const);
+	cl::Buffer mem_KerConstStatic_atom1_types_reqm_const
+							(context, CL_MEM_READ_ONLY | CL_MEM_USE_HOST_PTR | CL_MEM_EXT_PTR_XILINX,
+							ATYPE_NUM*sizeof(unsigned int),	&memExt_KerConstStatic_atom1_types_reqm_const);
+	cl::Buffer mem_KerConstStatic_atom2_types_reqm_const
+							(context, CL_MEM_READ_ONLY | CL_MEM_USE_HOST_PTR | CL_MEM_EXT_PTR_XILINX,
+							ATYPE_NUM*sizeof(unsigned int),	&memExt_KerConstStatic_atom2_types_reqm_const);
+	cl::Buffer mem_KerConstStatic_VWpars_AC_const	(context, CL_MEM_READ_ONLY | CL_MEM_USE_HOST_PTR | CL_MEM_EXT_PTR_XILINX,
+							MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES*sizeof(float),	&memExt_KerConstStatic_VWpars_AC_const);
+	cl::Buffer mem_KerConstStatic_VWpars_BD_const	(context, CL_MEM_READ_ONLY | CL_MEM_USE_HOST_PTR | CL_MEM_EXT_PTR_XILINX,
+							MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES*sizeof(float),	&memExt_KerConstStatic_VWpars_BD_const);
+	cl::Buffer mem_KerConstStatic_dspars_S_const	(context, CL_MEM_READ_ONLY | CL_MEM_USE_HOST_PTR | CL_MEM_EXT_PTR_XILINX,
+							MAX_NUM_OF_ATYPES*sizeof(float),			&memExt_KerConstStatic_dspars_S_const);
+	cl::Buffer mem_KerConstStatic_dspars_V_const	(context, CL_MEM_READ_ONLY | CL_MEM_USE_HOST_PTR | CL_MEM_EXT_PTR_XILINX,
+							MAX_NUM_OF_ATYPES*sizeof(float),			&memExt_KerConstStatic_dspars_V_const);
+	#if !defined(SW_EMU)
+	//allocating CPU memory for dummy data (one integer)
+	vector<int,aligned_allocator<int>> cpu_dummy (1);	
+
+	// IMPORTANT: enable this dummy global argument only for "hw" build.
+	// https://forums.xilinx.com/t5/SDAccel/ERROR-KernelCheck-83-114-in-sdx-2017-4/td-p/818135
+	cl::Buffer mem_dummy				(context, CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY, sizeof(int), cpu_dummy.data());
+	#endif
 	// -----------------------------------------------------------------------------------------------------
 	//Separate Read/write Buffer vector is needed to migrate data between host/device
 	std::vector<cl::Memory> inBufVec, outBufVec;
