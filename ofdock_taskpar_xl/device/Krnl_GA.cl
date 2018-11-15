@@ -188,7 +188,7 @@ pipe int   chan_IGLArbiter_Off		    __attribute__((xcl_reqd_pipe_depth(PIPE_DEPT
 // by adding/subtracting n*ang_max to/from it.
 // Originally from: searchoptimum.c
 // --------------------------------------------------------------------------
-
+__attribute__((always_inline))
 float map_angle_180(float angle)
 {
 	float x = angle;
@@ -201,6 +201,7 @@ float map_angle_180(float angle)
 	return x;
 }
 
+__attribute__((always_inline))
 float map_angle_360(float angle)
 {
 	float x = angle;
