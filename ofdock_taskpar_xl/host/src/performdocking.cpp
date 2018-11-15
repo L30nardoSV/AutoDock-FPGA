@@ -25,13 +25,13 @@ cl_mem mem_ref_orientation_quats_const;	// float [4*MAX_NUM_OF_RUNS];			// 4*100
 //// --------------------------------
 //// Docking
 //// --------------------------------
-int docking_with_gpu(const Gridinfo*   mygrid,
-	             /*const*/ float*  cpu_floatgrids,
-                           Dockpars*   mypars,
-		     const Liganddata* myligand_init,
-		     const int*        argc,
-		           char**      argv,
-		           clock_t     clock_start_program)
+int docking_with_fpga( const    Gridinfo*   mygrid,
+	              /*const*/ float*      cpu_floatgrids,
+                                Dockpars*   mypars,
+		      const     Liganddata* myligand_init,
+		      const     int*        argc,
+		                char**      argv,
+		                clock_t     clock_start_program)
 /* The function performs the docking algorithm and generates the corresponding result files.
 parameter mygrid:
 		describes the grid
@@ -241,7 +241,7 @@ filled with clock() */
 
 	Liganddata myligand_reference;
 
- 	//allocating GPU memory for floatgrids,
+ 	//allocating FPGA memory for floatgrids,
 	size_t size_floatgrids_nbytes = sizeof(float) * (mygrid->num_of_atypes+2) *
 					(mygrid->size_xyz[0]) * (mygrid->size_xyz[1]) * (mygrid->size_xyz[2]);
 
@@ -293,15 +293,10 @@ filled with clock() */
 	// allocating memory in CPU for generation counters
 	vector<int,aligned_allocator<int>> cpu_gens_of_runs (size_evals_of_runs_nelems, 0);
 
-	//preparing the constant data fields for the FPGA
-	// -----------------------------------------------------------------------------------------------------
-	// The original function does CUDA calls initializing const Kernel data.
-	// We create a struct to hold those constants
-	// and return them <here> (<here> = where prepare_const_fields_for_gpu() is called),
-	// so we can send them to Kernels from <here>, instead of from calcenergy.cpp as originally.
+	//preparing the constant data fields for the FPGA (calcenergy.cpp)
 	// -----------------------------------------------------------------------------------------------------
 	kernelconstant_static  KerConstStatic;
-	if (prepare_conststatic_fields_for_gpu(&myligand_reference, mypars, cpu_ref_ori_angles.data(), &KerConstStatic) == 1)
+	if (prepare_conststatic_fields_for_fpga(&myligand_reference, mypars, cpu_ref_ori_angles.data(), &KerConstStatic) == 1)
 		return 1;
 
 	//preparing parameter struct

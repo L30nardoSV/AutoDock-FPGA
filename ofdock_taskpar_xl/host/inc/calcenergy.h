@@ -6,9 +6,9 @@
 #include "processligand.h"
 #include "getparameters.h"
 
-// This struct is passed to the GPU global functions (OpenCL kernels) as input.
-// Its members are parameters related to the ligand, the grid
-// and the genetic algorithm, or they are pointers of GPU (ADM FPGA) memory areas
+// Members of this struct are passed to the FPGA OpenCL kernels as inputs.
+// Struct members are parameters related to the ligand, the grid
+// and the genetic algorithm, or they are pointers of FPGA memory areas
 // used for storing different data such as the current
 // and the next population genotypes and energies, the grids,
 // the evaluation counters and the random number generator states.
@@ -70,7 +70,7 @@ typedef struct
 	cl_float4 	ref_orientation_quats_const  [MAX_NUM_OF_RUNS]      			__attribute__ ((aligned (XILINX_MEMALIGN)));
 } kernelconstant_static;
 
-int prepare_conststatic_fields_for_gpu(Liganddata* 	       myligand_reference,
+int prepare_conststatic_fields_for_fpga(Liganddata* 	       myligand_reference,
 				 	Dockpars*   	       mypars,
 				 	float*      	       cpu_ref_ori_angles,
 				 	kernelconstant_static* KerConstStatic);

@@ -1,12 +1,11 @@
 #include "calcenergy.h"
 
 /*
-int prepare_const_fields_for_gpu(Liganddata*     myligand_reference,
-                                 Dockpars*       mypars,
-                                 float*          cpu_ref_ori_angles,
-                                 kernelconstant* KerConst)
-//The function fills the constant memory field of the GPU (ADM FPGA)
-//defined above (erased from here) and used during GPU docking,
+int prepare_const_fields_for_fpga(Liganddata*     myligand_reference,
+                                  Dockpars*       mypars,
+                                  float*          cpu_ref_ori_angles,
+                                  kernelconstant* KerConst)
+//The function fills the constant memory field of the FPGA and are
 //based on the parameters which describe the ligand,
 //the docking parameters and the reference orientation angles.
 //Short description of the field is as follows:
@@ -232,7 +231,7 @@ int prepare_const_fields_for_gpu(Liganddata*     myligand_reference,
 }
 */
 
-int prepare_conststatic_fields_for_gpu(Liganddata* 	       myligand_reference,
+int prepare_conststatic_fields_for_fpga(Liganddata* 	       myligand_reference,
 				 	Dockpars*   	       mypars,
 				 	float*      	       cpu_ref_ori_angles,
 				 	kernelconstant_static* KerConstStatic)
@@ -493,7 +492,7 @@ void make_reqrot_ordering(char number_of_req_rotations[MAX_NUM_OF_ATOMS],
 
 int gen_rotlist(Liganddata* myligand, int rotlist[MAX_NUM_OF_ROTATIONS])
 //The function generates the rotation list which will be stored in the constant memory field rotlist_const by
-//prepare_const_fields_for_gpu(). The structure of this array is described at that function.
+//prepare_const_fields_for_fpga(). The structure of this array is described at that function.
 {
 	int atom_id, rotb_id, parallel_rot_id, rotlist_id;
 	char number_of_req_rotations[MAX_NUM_OF_ATOMS];

@@ -13,13 +13,13 @@ using std::vector;
 
 #define ELAPSEDSECS(stop,start) ((float) stop-start)/((float) CLOCKS_PER_SEC)
 
-int docking_with_gpu(const Gridinfo* 	mygrid,
-         	     /*const*/ float* 	cpu_floatgrids,
-		           Dockpars*	mypars,
-		     const Liganddata* 	myligand_init,
-		     const int* 	argc,
-		     char**		argv,
-		           clock_t 	clock_start_program);
+int docking_with_fpga(const     Gridinfo* 	mygrid,
+         	      /*const*/ float* 	        cpu_floatgrids,
+		                Dockpars*	mypars,
+		      const     Liganddata* 	myligand_init,
+		      const     int* 	        argc,
+		                char**		argv,
+		                clock_t 	clock_start_program);
 
 double check_progress(int* evals_of_runs,
 		      int generation_cnt,

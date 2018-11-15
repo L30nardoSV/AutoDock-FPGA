@@ -83,7 +83,7 @@ int main(int argc, char* argv[])
 	//------------------------------------------------------------
 	// Starting Docking
 	//------------------------------------------------------------
-	if (docking_with_gpu(&mygrid, floatgrids.data(), &mypars, &myligand_init, &argc, argv, clock_start_program) != 0)
+	if (docking_with_fpga(&mygrid, floatgrids.data(), &mypars, &myligand_init, &argc, argv, clock_start_program) != 0)
 		return 1;
 
 	/*
