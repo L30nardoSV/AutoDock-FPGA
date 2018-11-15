@@ -27,7 +27,8 @@ void Krnl_LS2(
 	printf("LS2: DockConst_cons_limit: %u\n",           DockConst_cons_limit);
 	#endif
 
-	bool valid = true;
+	/*bool valid = true;*/
+	char valid = 0x01;
 
 __attribute__((xcl_pipeline_loop))
 LOOP_WHILE_LS2_MAIN:
@@ -47,7 +48,11 @@ while(valid) {
 	}
 
 	// (active == 1) means stop LS
-	valid = (active != 1) || (valid_energy == PIPE_STATUS_SUCCESS);
+	/*valid = (active != 1) || (valid_energy == PIPE_STATUS_SUCCESS);*/
+
+	// Received something on pipe: chan_GA2LS_Off_active?
+	// If so, then turn this kernel off
+	valid = (valid_active == PIPE_STATUS_SUCCESS)? 0x00:0x01;
 
 	if (valid) {
 		float   genotype [ACTUAL_GENOTYPE_LENGTH];
