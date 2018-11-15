@@ -1,4 +1,5 @@
 // sqrt7 ////https://www.codeproject.com/Articles/69941/Best-Square-Root-Method-Algorithm-Function-Precisi
+__attribute__((always_inline))
 float sqrt_custom(const float x) 
 { 	//uint i = as_uint(x);	
 	uint i = *(uint*) &x;    	
