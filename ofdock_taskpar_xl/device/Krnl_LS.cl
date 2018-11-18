@@ -44,8 +44,8 @@ while(valid) {
 	__attribute__((xcl_pipeline_loop))
 	LOOP_WHILE_LS_ACTIVE:
 	while( (valid_active != PIPE_STATUS_SUCCESS) && (valid_energy != PIPE_STATUS_SUCCESS)) {
-		valid_active = read_pipe(chan_GA2LS_Off1_active, &active);
-		valid_energy = read_pipe(chan_GA2LS_LS1_energy,  &current_energy);
+		valid_active = read_pipe(pipe00ga2ls00off100active, &active);
+		valid_energy = read_pipe(pipe00ga2ls00ls100energy,  &current_energy);
 	}
 
 	// (active == 1) means stop LS
@@ -62,7 +62,7 @@ while(valid) {
 		__attribute__((xcl_pipeline_loop))
 		LOOP_FOR_LS_READ_INPUT_GENOTYPE:
 		for (uchar i=0; i<DockConst_num_of_genes; i++) {
-			read_pipe_block(chan_GA2LS_LS1_genotype, &genotype [i]);
+			read_pipe_block(pipe00ga2ls00ls100genotype, &genotype [i]);
 		}
 	
 		float rho = 1.0f;
@@ -106,7 +106,7 @@ while(valid) {
 			// Not completely strict as the (iteration_cnt < DockConst_max_num_of_iters) is ignored
 			// In practice, rho condition dominates most of the cases
 			int tmp_int = (rho < DockConst_rho_lower_bound)?0:1;
-			write_pipe_block(chan_LS2Arbiter_LS1_end, &tmp_int);
+			write_pipe_block(pipe00ls2arbiter00ls100end, &tmp_int);
 
 /*
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
@@ -118,7 +118,7 @@ while(valid) {
 			LOOP_FOR_LS_WRITE_GENOTYPE:
 			for (uchar i=0; i<DockConst_num_of_genes; i++) {
 				float tmp_prng;
-				read_pipe_block(chan_PRNG2LS_float_prng, &tmp_prng);
+				read_pipe_block(pipe00prng2ls00float00prng, &tmp_prng);
 /*
 				mem_fence(CLK_CHANNEL_MEM_FENCE);
 */
@@ -146,7 +146,7 @@ while(valid) {
 					  else      { tmp3 = map_angle_360(tmp3); }}
 
 				entity_possible_new_genotype [i] = tmp3;
-				write_pipe_block(chan_LS2Conf_LS1_genotype, &tmp3);
+				write_pipe_block(pipe00ls2conf00ls100genotype, &tmp3);
 
 				#if defined (DEBUG_KRNL_LS1)
 				printf("LS1_genotype sent\n");
@@ -166,10 +166,10 @@ while(valid) {
 			while( (intra_valid != PIPE_STATUS_SUCCESS) || (inter_valid != PIPE_STATUS_SUCCESS)) {
 
 				if (intra_valid != PIPE_STATUS_SUCCESS) {
-					intra_valid = read_pipe(chan_Intrae2StoreLS_LS1_intrae, &energyIA_LS_rx);
+					intra_valid = read_pipe(pipe00intrae2storels00ls100intrae, &energyIA_LS_rx);
 				}
 				else if (inter_valid != PIPE_STATUS_SUCCESS) {
-					inter_valid = read_pipe(chan_Intere2StoreLS_LS1_intere, &energyIE_LS_rx);
+					inter_valid = read_pipe(pipe00intere2storels00ls100intere, &energyIE_LS_rx);
 				}
 			}
 
@@ -223,13 +223,13 @@ while(valid) {
 		for (uchar i=0; i<DockConst_num_of_genes; i++) {
 			if (i == 0) {
 				float2 evalenergy  = {*(float*)&LS_eval, current_energy};
-				write_pipe_block(chan_LS2GA_LS1_evalenergy, &evalenergy);	
+				write_pipe_block(pipe00ls2ga00ls100evalenergy, &evalenergy);	
 			}
 /*
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 */
 
-			write_pipe_block(chan_LS2GA_LS1_genotype, &genotype [i]);
+			write_pipe_block(pipe00ls2ga00ls100genotype, &genotype [i]);
 		}
 
 	} // End of if (valid)

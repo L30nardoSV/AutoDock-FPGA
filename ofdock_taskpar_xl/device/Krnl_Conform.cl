@@ -63,7 +63,7 @@ while(active) {
 	float3 loc_coords [MAX_NUM_OF_ATOMS];
 
 	char actmode;
-	read_pipe_block(chan_IGL2Conform_actmode, &actmode);
+	read_pipe_block(pipe00igl2conform00actmode, &actmode);
 /*
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 */
@@ -79,17 +79,17 @@ while(active) {
 	for (uchar i=0; i<DockConst_num_of_genes; i++) {
 		float fl_tmp;
 		switch (mode) {
-			case 'I':  read_pipe_block(chan_IC2Conf_genotype,     &fl_tmp); break;
-			case 'G':  read_pipe_block(chan_GG2Conf_genotype,     &fl_tmp); break;
-			case 0x01: read_pipe_block(chan_LS2Conf_LS1_genotype, &fl_tmp); break;
-			case 0x02: read_pipe_block(chan_LS2Conf_LS2_genotype, &fl_tmp); break;
-			case 0x03: read_pipe_block(chan_LS2Conf_LS3_genotype, &fl_tmp); break;
-			case 0x04: read_pipe_block(chan_LS2Conf_LS4_genotype, &fl_tmp); break;
-			case 0x05: read_pipe_block(chan_LS2Conf_LS5_genotype, &fl_tmp); break;
-			case 0x06: read_pipe_block(chan_LS2Conf_LS6_genotype, &fl_tmp); break;
-			case 0x07: read_pipe_block(chan_LS2Conf_LS7_genotype, &fl_tmp); break;
-			case 0x08: read_pipe_block(chan_LS2Conf_LS8_genotype, &fl_tmp); break;
-			case 0x09: read_pipe_block(chan_LS2Conf_LS9_genotype, &fl_tmp); break;
+			case 'I':  read_pipe_block(pipe00ic2conf00genotype,      &fl_tmp); break;
+			case 'G':  read_pipe_block(pipe00gg2conf00genotype,      &fl_tmp); break;
+			case 0x01: read_pipe_block(pipe00ls2conf00ls100genotype, &fl_tmp); break;
+			case 0x02: read_pipe_block(pipe00ls2conf00ls200genotype, &fl_tmp); break;
+			case 0x03: read_pipe_block(pipe00ls2conf00ls300genotype, &fl_tmp); break;
+			case 0x04: read_pipe_block(pipe00ls2conf00ls400genotype, &fl_tmp); break;
+			case 0x05: read_pipe_block(pipe00ls2conf00ls500genotype, &fl_tmp); break;
+			case 0x06: read_pipe_block(pipe00ls2conf00ls600genotype, &fl_tmp); break;
+			case 0x07: read_pipe_block(pipe00ls2conf00ls700genotype, &fl_tmp); break;
+			case 0x08: read_pipe_block(pipe00ls2conf00ls800genotype, &fl_tmp); break;
+			case 0x09: read_pipe_block(pipe00ls2conf00ls900genotype, &fl_tmp); break;
 		}
 		
 		if (i > 2) {
@@ -247,8 +247,8 @@ while(active) {
 	LOOP_FOR_CONFORM_WRITE_XYZ:
 	for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt+=2) {
 		if (pipe_cnt == 0) {
-			write_pipe_block(chan_Conf2Intere_actmode, &mode);
-			write_pipe_block(chan_Conf2Intrae_actmode, &mode);
+			write_pipe_block(pipe00conf2intere00actmode, &mode);
+			write_pipe_block(pipe00conf2intrae00actmode, &mode);
 		}
 /*
 		mem_fence(CLK_CHANNEL_MEM_FENCE);
@@ -267,8 +267,8 @@ while(active) {
 		tmp.s0 = tmp_coords[0].x; tmp.s1 = tmp_coords[0].y; tmp.s2 = tmp_coords[0].z; //tmp.s3
 		tmp.s4 = tmp_coords[1].x; tmp.s5 = tmp_coords[1].y; tmp.s6 = tmp_coords[1].z; //tmp.s7
 
-		write_pipe_block(chan_Conf2Intere_xyz, &tmp);
-		write_pipe_block(chan_Conf2Intrae_xyz, &tmp);
+		write_pipe_block(pipe00conf2intere00xyz, &tmp);
+		write_pipe_block(pipe00conf2intrae00xyz, &tmp);
 	}
 
 	// --------------------------------------------------------------

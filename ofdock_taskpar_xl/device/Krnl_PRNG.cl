@@ -29,7 +29,7 @@ void Krnl_Prng_BT_ushort_float(
 		bool active = true;
 */
 		int active;
-		valid = read_pipe(chan_GA2PRNG_BT_ushort_float_off, &active);
+		valid = read_pipe(pipe00ga2prng00bt00ushort00float00off, &active);
 
 		uint   u_tmp[4]; // used as short in GA
 		float  f_tmp[4];	
@@ -67,7 +67,7 @@ void Krnl_Prng_BT_ushort_float(
 				      u_tmp_float_2, f_tmp[2],
 				      u_tmp_float_3, f_tmp[3]};
 
-			success = write_pipe(chan_PRNG2GA_BT_ushort_float_prng, &tmp);
+			success = write_pipe(pipe00prng2ga00bt00ushort00float00prng, &tmp);
 		}
 	} // End of while(valid != PIPE_STATUS_SUCCESS)
 }
@@ -98,7 +98,7 @@ void Krnl_Prng_GG_uchar(
 		bool active = true;
 */
 		int active;
-		valid = read_pipe(chan_GA2PRNG_GG_uchar_off, &active);		
+		valid = read_pipe(pipe00ga2prng00gg00uchar00off, &active);		
 
 		uchar tmp[2];
 
@@ -120,7 +120,7 @@ void Krnl_Prng_GG_uchar(
 		utmp.y = tmp[1];
 
 		if(valid != PIPE_STATUS_SUCCESS) {
-			success = write_pipe(chan_PRNG2GA_GG_uchar_prng, &utmp);
+			success = write_pipe(pipe00prng2ga00gg00uchar00prng, &utmp);
 		}
 	} // while(valid != PIPE_STATUS_SUCCESS)
 }
@@ -149,7 +149,7 @@ void Krnl_Prng_GG_float(
 		bool active = true;
 */
 		int active;
-		valid = read_pipe(chan_GA2PRNG_GG_float_off, &active);
+		valid = read_pipe(pipe00ga2prng00gg00float00off, &active);
 
 		__attribute__((xcl_pipeline_loop))
 		LOOP_FOR_PRNG_GG_FLOAT:
@@ -164,7 +164,7 @@ void Krnl_Prng_GG_float(
 			nb_pipe_status success = PIPE_STATUS_FAILURE;
 
 			if(valid != PIPE_STATUS_SUCCESS) {
-				success = write_pipe(chan_PRNG2GA_GG_float_prng, &tmp);
+				success = write_pipe(pipe00prng2ga00gg00float00prng, &tmp);
 			}
 		}
 	} // End of while(valid != PIPE_STATUS_SUCCESS)
@@ -213,7 +213,7 @@ void Krnl_Prng_LS123_ushort(
 		bool active = true;
 */
 		int active;
-		valid  = read_pipe(chan_GA2PRNG_LS123_ushort_off, &active);
+		valid  = read_pipe(pipe00ga2prng00ls12300ushort00off, &active);
 
 		ushort tmp[9];
 		
@@ -262,7 +262,7 @@ void Krnl_Prng_LS123_ushort(
 		tmp123.s8 = tmp[8];
 
 		if(valid != PIPE_STATUS_SUCCESS) {
-			success = write_pipe(chan_PRNG2GA_LS123_ushort_prng, &tmp123);
+			success = write_pipe(pipe00prng2ga00ls12300ushort00prng, &tmp123);
 		}
 
 	} // End of while(valid != PIPE_STATUS_SUCCESS)
@@ -294,7 +294,7 @@ void Krnl_Prng_LS_float(
 		bool active = true;
 */
 		int active;
-		valid  = read_pipe(chan_GA2PRNG_LS_float_off, &active);
+		valid  = read_pipe(pipe00ga2prng00ls00float00off, &active);
 	
 		__attribute__((xcl_pipeline_loop))
 		LOOP_FOR_PRNG_LS_FLOAT:
@@ -309,7 +309,7 @@ void Krnl_Prng_LS_float(
 			nb_pipe_status success = PIPE_STATUS_FAILURE;
 
 			if(valid != PIPE_STATUS_SUCCESS) {
-				success = write_pipe(chan_PRNG2LS_float_prng, &tmp);
+				success = write_pipe(pipe00prng2ls00float00prng, &tmp);
 			}
 		}
 	} // End of while(valid != PIPE_STATUS_SUCCESS)
@@ -339,7 +339,7 @@ void Krnl_Prng_LS2_float(
 		bool active = true;
 */
 		int active;
-		valid  = read_pipe(chan_GA2PRNG_LS2_float_off, &active);
+		valid  = read_pipe(pipe00ga2prng00ls200float00off, &active);
 	
 		__attribute__((xcl_pipeline_loop))
 		LOOP_FOR_PRNG_LS2_FLOAT:
@@ -354,7 +354,7 @@ void Krnl_Prng_LS2_float(
 			nb_pipe_status success = PIPE_STATUS_FAILURE;
 
 			if(valid != PIPE_STATUS_SUCCESS) {
-				success = write_pipe(chan_PRNG2LS2_float_prng, &tmp);
+				success = write_pipe(pipe00prng2ls200float00prng, &tmp);
 			}
 		}
 	} // End of while(valid != PIPE_STATUS_SUCCESS)
@@ -384,7 +384,7 @@ void Krnl_Prng_LS3_float(
 		bool active = true;
 */
 		int active;
-		valid  = read_pipe(chan_GA2PRNG_LS3_float_off, &active);
+		valid  = read_pipe(pipe00ga2prng00ls300float00off, &active);
 	
 		__attribute__((xcl_pipeline_loop))
 		LOOP_FOR_PRNG_LS3_FLOAT:
@@ -399,7 +399,7 @@ void Krnl_Prng_LS3_float(
 			nb_pipe_status success = PIPE_STATUS_FAILURE;
 
 			if(valid != PIPE_STATUS_SUCCESS) {
-				success = write_pipe(chan_PRNG2LS3_float_prng, &tmp);
+				success = write_pipe(pipe00prng2ls300float00prng, &tmp);
 			}
 		}
 	} // End of while(valid != PIPE_STATUS_SUCCESS)
@@ -429,7 +429,7 @@ void Krnl_Prng_LS4_float(
 		bool active = true;
 */
 		int active;
-		valid  = read_pipe(chan_GA2PRNG_LS4_float_off, &active);
+		valid  = read_pipe(pipe00ga2prng00ls400float00off, &active);
 	
 		__attribute__((xcl_pipeline_loop))
 		LOOP_FOR_PRNG_LS4_FLOAT:
@@ -444,7 +444,7 @@ void Krnl_Prng_LS4_float(
 			nb_pipe_status success = PIPE_STATUS_FAILURE;
 
 			if(valid != PIPE_STATUS_SUCCESS) {
-				success = write_pipe(chan_PRNG2LS4_float_prng, &tmp);
+				success = write_pipe(pipe00prng2ls400float00prng, &tmp);
 			}
 		}
 	} // End of while(valid != PIPE_STATUS_SUCCESS)
@@ -474,7 +474,7 @@ void Krnl_Prng_LS5_float(
 		bool active = true;
 */
 		int active;
-		valid  = read_pipe(chan_GA2PRNG_LS5_float_off, &active);
+		valid  = read_pipe(pipe00ga2prng00ls500float00off, &active);
 	
 		__attribute__((xcl_pipeline_loop))
 		LOOP_FOR_PRNG_LS5_FLOAT:
@@ -489,7 +489,7 @@ void Krnl_Prng_LS5_float(
 			nb_pipe_status success = PIPE_STATUS_FAILURE;
 
 			if(valid != PIPE_STATUS_SUCCESS) {
-				success = write_pipe(chan_PRNG2LS5_float_prng, &tmp);
+				success = write_pipe(pipe00prng2ls500float00prng, &tmp);
 			}
 		}
 	} // End of while(valid != PIPE_STATUS_SUCCESS)
@@ -519,7 +519,7 @@ void Krnl_Prng_LS6_float(
 		bool active = true;
 */
 		int active;
-		valid  = read_pipe(chan_GA2PRNG_LS6_float_off, &active);
+		valid  = read_pipe(pipe00ga2prng00ls600float00off, &active);
 	
 		__attribute__((xcl_pipeline_loop))
 		LOOP_FOR_PRNG_LS6_FLOAT:
@@ -534,7 +534,7 @@ void Krnl_Prng_LS6_float(
 			nb_pipe_status success = PIPE_STATUS_FAILURE;
 
 			if(valid != PIPE_STATUS_SUCCESS) {
-				success = write_pipe(chan_PRNG2LS6_float_prng, &tmp);
+				success = write_pipe(pipe00prng2ls600float00prng, &tmp);
 			}
 		}
 	} // End of while(active)
@@ -564,7 +564,7 @@ void Krnl_Prng_LS7_float(
 		bool active = true;
 */
 		int active;
-		valid  = read_pipe(chan_GA2PRNG_LS7_float_off, &active);
+		valid  = read_pipe(pipe00ga2prng00ls700float00off, &active);
 	
 		__attribute__((xcl_pipeline_loop))
 		LOOP_FOR_PRNG_LS7_FLOAT:
@@ -579,7 +579,7 @@ void Krnl_Prng_LS7_float(
 			nb_pipe_status success = PIPE_STATUS_FAILURE;
 
 			if(valid != PIPE_STATUS_SUCCESS) {
-				success = write_pipe(chan_PRNG2LS7_float_prng, &tmp);
+				success = write_pipe(pipe00prng2ls700float00prng, &tmp);
 			}
 		}
 	} // End of while(valid != PIPE_STATUS_SUCCESS)
@@ -609,7 +609,7 @@ void Krnl_Prng_LS8_float(
 		bool active = true;
 */
 		int active;
-		valid  = read_pipe(chan_GA2PRNG_LS8_float_off, &active);
+		valid  = read_pipe(pipe00ga2prng00ls800float00off, &active);
 	
 		__attribute__((xcl_pipeline_loop))
 		LOOP_FOR_PRNG_LS8_FLOAT:
@@ -624,7 +624,7 @@ void Krnl_Prng_LS8_float(
 			nb_pipe_status success = PIPE_STATUS_FAILURE;
 
 			if(valid != PIPE_STATUS_SUCCESS) {
-				success = write_pipe(chan_PRNG2LS8_float_prng, &tmp);
+				success = write_pipe(pipe00prng2ls800float00prng, &tmp);
 			}
 		}
 	} // End of while(valid != PIPE_STATUS_SUCCESS)
@@ -654,7 +654,7 @@ void Krnl_Prng_LS9_float(
 		bool active = true;
 */
 		int active;
-		valid  = read_pipe(chan_GA2PRNG_LS9_float_off, &active);
+		valid  = read_pipe(pipe00ga2prng00ls900float00off, &active);
 	
 		__attribute__((xcl_pipeline_loop))
 		LOOP_FOR_PRNG_LS9_FLOAT:
@@ -669,7 +669,7 @@ void Krnl_Prng_LS9_float(
 			nb_pipe_status success = PIPE_STATUS_FAILURE;
 
 			if(valid != PIPE_STATUS_SUCCESS) {
-				success = write_pipe(chan_PRNG2LS9_float_prng, &tmp);
+				success = write_pipe(pipe00prng2ls900float00prng, &tmp);
 			}
 		}
 	} // End of while(valid != PIPE_STATUS_SUCCESS)

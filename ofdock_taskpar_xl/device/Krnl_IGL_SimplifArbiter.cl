@@ -79,18 +79,18 @@ void Krnl_IGL_Arbiter(/*unsigned char DockConst_num_of_genes*/
 			(LS8_end_valid != PIPE_STATUS_SUCCESS) &&
 			(LS9_end_valid != PIPE_STATUS_SUCCESS) 
 		){
-			Off_valid     = read_pipe(chan_IGLArbiter_Off,     &Off_active);
-			IC_valid      = read_pipe(chan_GA2IGL_IC_active,   &IC_active);
-			GG_valid      = read_pipe(chan_GA2IGL_GG_active,   &GG_active);
-			LS1_end_valid = read_pipe(chan_LS2Arbiter_LS1_end, &LS1_end_active);
-			LS2_end_valid = read_pipe(chan_LS2Arbiter_LS2_end, &LS2_end_active);
-			LS3_end_valid = read_pipe(chan_LS2Arbiter_LS3_end, &LS3_end_active);
-			LS4_end_valid = read_pipe(chan_LS2Arbiter_LS4_end, &LS4_end_active);
-			LS5_end_valid = read_pipe(chan_LS2Arbiter_LS5_end, &LS5_end_active);
-			LS6_end_valid = read_pipe(chan_LS2Arbiter_LS6_end, &LS6_end_active);
-			LS7_end_valid = read_pipe(chan_LS2Arbiter_LS7_end, &LS7_end_active);
-			LS8_end_valid = read_pipe(chan_LS2Arbiter_LS8_end, &LS8_end_active);
-			LS9_end_valid = read_pipe(chan_LS2Arbiter_LS9_end, &LS9_end_active);
+			Off_valid     = read_pipe(pipe00iglarbiter00off,     &Off_active);
+			IC_valid      = read_pipe(pipe00ga2igl00ic00active,   &IC_active);
+			GG_valid      = read_pipe(pipe00ga2igl00gg00active,   &GG_active);
+			LS1_end_valid = read_pipe(pipe00ls2arbiter00ls100end, &LS1_end_active);
+			LS2_end_valid = read_pipe(pipe00ls2arbiter00ls200end, &LS2_end_active);
+			LS3_end_valid = read_pipe(pipe00ls2arbiter00ls300end, &LS3_end_active);
+			LS4_end_valid = read_pipe(pipe00ls2arbiter00ls400end, &LS4_end_active);
+			LS5_end_valid = read_pipe(pipe00ls2arbiter00ls500end, &LS5_end_active);
+			LS6_end_valid = read_pipe(pipe00ls2arbiter00ls600end, &LS6_end_active);
+			LS7_end_valid = read_pipe(pipe00ls2arbiter00ls700end, &LS7_end_active);
+			LS8_end_valid = read_pipe(pipe00ls2arbiter00ls800end, &LS8_end_active);
+			LS9_end_valid = read_pipe(pipe00ls2arbiter00ls900end, &LS9_end_active);
 		}
 
 		active = (Off_valid == PIPE_STATUS_SUCCESS)? 0x00 : 0x01;
@@ -152,7 +152,7 @@ void Krnl_IGL_Arbiter(/*unsigned char DockConst_num_of_genes*/
 			}
 
 			if (enable_write_channel == true) {
-				write_pipe_block(chan_IGL2Conform_actmode, &mode_tmp);
+				write_pipe_block(pipe00igl2conform00actmode, &mode_tmp);
 			}
 		} // End for (uchar j=0; j<9; j++)
 

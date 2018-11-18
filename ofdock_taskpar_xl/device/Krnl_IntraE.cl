@@ -73,7 +73,7 @@ while(active) {
 	// --------------------------------------------------------------
 
 	char actmode;
-	read_pipe_block(chan_Conf2Intrae_actmode, &actmode);
+	read_pipe_block(pipe00conf2intrae00actmode, &actmode);
 /*
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 */
@@ -84,7 +84,7 @@ while(active) {
 	LOOP_FOR_INTRAE_READ_XYZ:
 	for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt+=2) {
 		float8 tmp;
-		read_pipe_block(chan_Conf2Intrae_xyz, &tmp);
+		read_pipe_block(pipe00conf2intrae00xyz, &tmp);
 
 		float3 tmp1 = {tmp.s0, tmp.s1, tmp.s2};
 		float3 tmp2 = {tmp.s4, tmp.s5, tmp.s6};
@@ -237,17 +237,17 @@ while(active) {
 	// Send intramolecular energy to channel
 	// --------------------------------------------------------------
 	switch (mode) {
-		case 'I':  write_pipe_block(chan_Intrae2StoreIC_intrae,     &intraE); break;
-		case 'G':  write_pipe_block(chan_Intrae2StoreGG_intrae,     &intraE); break;
-		case 0x01: write_pipe_block(chan_Intrae2StoreLS_LS1_intrae, &intraE); break;
-		case 0x02: write_pipe_block(chan_Intrae2StoreLS_LS2_intrae, &intraE); break;
-		case 0x03: write_pipe_block(chan_Intrae2StoreLS_LS3_intrae, &intraE); break;
-		case 0x04: write_pipe_block(chan_Intrae2StoreLS_LS4_intrae, &intraE); break;
-		case 0x05: write_pipe_block(chan_Intrae2StoreLS_LS5_intrae, &intraE); break;
-		case 0x06: write_pipe_block(chan_Intrae2StoreLS_LS6_intrae, &intraE); break;
-		case 0x07: write_pipe_block(chan_Intrae2StoreLS_LS7_intrae, &intraE); break;
-		case 0x08: write_pipe_block(chan_Intrae2StoreLS_LS8_intrae, &intraE); break;
-		case 0x09: write_pipe_block(chan_Intrae2StoreLS_LS9_intrae, &intraE); break;
+		case 'I':  write_pipe_block(pipe00intrae2storeic00intrae,      &intraE); break;
+		case 'G':  write_pipe_block(pipe00intrae2storegg00intrae,      &intraE); break;
+		case 0x01: write_pipe_block(pipe00intrae2storels00ls100intrae, &intraE); break;
+		case 0x02: write_pipe_block(pipe00intrae2storels00ls200intrae, &intraE); break;
+		case 0x03: write_pipe_block(pipe00intrae2storels00ls300intrae, &intraE); break;
+		case 0x04: write_pipe_block(pipe00intrae2storels00ls400intrae, &intraE); break;
+		case 0x05: write_pipe_block(pipe00intrae2storels00ls500intrae, &intraE); break;
+		case 0x06: write_pipe_block(pipe00intrae2storels00ls600intrae, &intraE); break;
+		case 0x07: write_pipe_block(pipe00intrae2storels00ls700intrae, &intraE); break;
+		case 0x08: write_pipe_block(pipe00intrae2storels00ls800intrae, &intraE); break;
+		case 0x09: write_pipe_block(pipe00intrae2storels00ls900intrae, &intraE); break;
 	}
 	// --------------------------------------------------------------
 

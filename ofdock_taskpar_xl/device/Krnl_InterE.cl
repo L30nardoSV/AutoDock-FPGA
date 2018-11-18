@@ -51,7 +51,7 @@ while(active) {
 	// --------------------------------------------------------------
 
 	char actmode;
-	read_pipe_block(chan_Conf2Intere_actmode, &actmode);
+	read_pipe_block(pipe00conf2intere00actmode, &actmode);
 /*
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 */
@@ -62,7 +62,7 @@ while(active) {
 	LOOP_FOR_INTERE_READ_XYZ:
 	for (uchar pipe_cnt=0; pipe_cnt<DockConst_num_of_atoms; pipe_cnt+=2) {
 		float8 tmp;
-		read_pipe_block(chan_Conf2Intere_xyz, &tmp);
+		read_pipe_block(pipe00conf2intere00xyz, &tmp);
 
 		float3 tmp1 = {tmp.s0, tmp.s1, tmp.s2};
 		float3 tmp2 = {tmp.s4, tmp.s5, tmp.s6};
@@ -290,17 +290,17 @@ while(active) {
 	float final_interE = interE;
 
 	switch (mode) {
-		case 'I':  write_pipe_block(chan_Intere2StoreIC_intere,     &final_interE); break;
-		case 'G':  write_pipe_block(chan_Intere2StoreGG_intere,     &final_interE); break;
-		case 0x01: write_pipe_block(chan_Intere2StoreLS_LS1_intere, &final_interE); break;
-		case 0x02: write_pipe_block(chan_Intere2StoreLS_LS2_intere, &final_interE); break;
-		case 0x03: write_pipe_block(chan_Intere2StoreLS_LS3_intere, &final_interE); break;
-		case 0x04: write_pipe_block(chan_Intere2StoreLS_LS4_intere, &final_interE); break;
-		case 0x05: write_pipe_block(chan_Intere2StoreLS_LS5_intere, &final_interE); break;
-		case 0x06: write_pipe_block(chan_Intere2StoreLS_LS6_intere, &final_interE); break;
-		case 0x07: write_pipe_block(chan_Intere2StoreLS_LS7_intere, &final_interE); break;
-		case 0x08: write_pipe_block(chan_Intere2StoreLS_LS8_intere, &final_interE); break;
-		case 0x09: write_pipe_block(chan_Intere2StoreLS_LS9_intere, &final_interE); break;
+		case 'I':  write_pipe_block(pipe00intere2storeic00intere,      &final_interE); break;
+		case 'G':  write_pipe_block(pipe00intere2storegg00intere,      &final_interE); break;
+		case 0x01: write_pipe_block(pipe00intere2storels00ls100intere, &final_interE); break;
+		case 0x02: write_pipe_block(pipe00intere2storels00ls200intere, &final_interE); break;
+		case 0x03: write_pipe_block(pipe00intere2storels00ls300intere, &final_interE); break;
+		case 0x04: write_pipe_block(pipe00intere2storels00ls400intere, &final_interE); break;
+		case 0x05: write_pipe_block(pipe00intere2storels00ls500intere, &final_interE); break;
+		case 0x06: write_pipe_block(pipe00intere2storels00ls600intere, &final_interE); break;
+		case 0x07: write_pipe_block(pipe00intere2storels00ls700intere, &final_interE); break;
+		case 0x08: write_pipe_block(pipe00intere2storels00ls800intere, &final_interE); break;
+		case 0x09: write_pipe_block(pipe00intere2storels00ls900intere, &final_interE); break;
 	}
 	// --------------------------------------------------------------
 
