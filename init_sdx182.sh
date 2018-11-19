@@ -24,19 +24,20 @@ fi
 
 # Selecting path for settings64.sh
 if [ "$serverconfig_userinput" == "local" ]; then
-	SDX174_INITFILE=/opt/cad/xilinx/sdx/SDx/2017.4/settings64.sh
+	SDX_INITFILE=/opt/cad/xilinx/sdx/SDx/2018.2/settings64.sh
 elif [ "$serverconfig_userinput" == "remote" ]; then
-	SDX174_INITFILE=/opt/xilinx-2017.4/SDx/2017.4/settings64.sh
+	SDX_INITFILE=
 fi
 
 # Verifying that settings64.sh file exists
-# If it does, only then initialize SDx-v2017.4
-if [ ! -f "$SDX174_INITFILE" ]; then
-	echo "File $SDX174_INITFILE not found!"
+# If it does, only then initialize SDx
+if [ ! -f "$SDX_INITFILE" ]; then
+	echo "File $SDX_INITFILE not found!"
 else
-	echo "Initialization file in $serverconfig_userinput server:" $SDX174_INITFILE
-	source "$SDX174_INITFILE"
+	echo "Initialization file in $serverconfig_userinput server:" $SDX_INITFILE
+	source "$SDX_INITFILE"
 	echo " "
 	echo "Xilinx SDAccel version: "
 	sdx --version
 fi
+
