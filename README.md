@@ -4,9 +4,9 @@ OpenCL task-parallel version of AutoDock4 for Xilinx FPGAs.
 
 ## Development tool
 
-SDAccel v17.4.
+SDAccel v18.2.
 
-This can be initialized via: `source init_sdx174.sh`. Then choose the server to work on: either _local_ or _remote_.
+This can be initialized via: `source init_sdx182.sh`. Then choose the server to work on: either _local_ or _remote_.
 
 ### Documentation
 
