@@ -3,10 +3,10 @@
 OpenCL task-parallel version of AutoDock4 for Intel FPGAs.
 
 ## Development tool
-Intel Quatus Prime Pro Edition v17.1 (17.1.0.240).
+Intel Quatus Prime Pro Edition v18.1.
 
 ## Must
 
 ```zsh
-% source init_aoc171_nalla510t.sh
+% source init_aoc181.sh
 ```
