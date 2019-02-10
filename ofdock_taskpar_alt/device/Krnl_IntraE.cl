@@ -14,20 +14,20 @@ float sqrt_custom(const float x)
 // --------------------------------------------------------------------------
 __kernel __attribute__ ((max_global_work_dim(0)))
 void Krnl_IntraE(
- 	     __constant     float* restrict KerConstStatic_atom_charges_const,
- 	     __constant     char*  restrict KerConstStatic_atom_types_const,
-	     __global const char3* restrict KerConstStatic_intraE_contributors_const,
+ 	     __constant     float* __restrict KerConstStatic_atom_charges_const,
+ 	     __constant     char*  __restrict KerConstStatic_atom_types_const,
+	     __global const char3* __restrict KerConstStatic_intraE_contributors_const,
 
 			float 				 DockConst_smooth,
-	     __constant     float* restrict KerConstStatic_reqm,
-	     __constant     float* restrict KerConstStatic_reqm_hbond,    
-	     __constant     uint*  restrict KerConstStatic_atom1_types_reqm,
-	     __constant     uint*  restrict KerConstStatic_atom2_types_reqm,  
+	     __constant     float* __restrict KerConstStatic_reqm,
+	     __constant     float* __restrict KerConstStatic_reqm_hbond,    
+	     __constant     uint*  __restrict KerConstStatic_atom1_types_reqm,
+	     __constant     uint*  __restrict KerConstStatic_atom2_types_reqm,  
 
-	     __constant     float* restrict KerConstStatic_VWpars_AC_const,
-	     __constant     float* restrict KerConstStatic_VWpars_BD_const,
-	     __constant     float* restrict KerConstStatic_dspars_S_const,
- 	     __constant     float* restrict KerConstStatic_dspars_V_const,
+	     __constant     float* __restrict KerConstStatic_VWpars_AC_const,
+	     __constant     float* __restrict KerConstStatic_VWpars_BD_const,
+	     __constant     float* __restrict KerConstStatic_dspars_S_const,
+ 	     __constant     float* __restrict KerConstStatic_dspars_V_const,
 
 			unsigned char                    DockConst_num_of_atoms,
 		   	unsigned int                     DockConst_num_of_intraE_contributors,

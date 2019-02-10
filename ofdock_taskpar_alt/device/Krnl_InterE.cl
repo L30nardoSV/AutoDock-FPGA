@@ -8,15 +8,15 @@
 // --------------------------------------------------------------------------
 __kernel __attribute__ ((max_global_work_dim(0)))
 void Krnl_InterE(
-             __global const float* restrict GlobFgrids,
+             __global const float* __restrict GlobFgrids,
 
 #if defined (FIXED_POINT_INTERE)
- 	     __constant fixedpt64* restrict KerConstStatic_atom_charges_const,
+ 	     __constant fixedpt64* __restrict KerConstStatic_atom_charges_const,
 #else
- 	     __constant float*     restrict KerConstStatic_atom_charges_const,
+ 	     __constant float*     __restrict KerConstStatic_atom_charges_const,
 #endif
 
- 	     __constant char*      restrict KerConstStatic_atom_types_const,
+ 	     __constant char*      __restrict KerConstStatic_atom_types_const,
 
 			    unsigned char                    DockConst_g1,
   			    unsigned int                     DockConst_g2,
@@ -33,8 +33,8 @@ void Krnl_InterE(
 #endif
 /*
 #if defined(SEPARATE_FGRID_INTERE)
-	     __constant float* restrict GlobFgrids2,
-	     __constant float* restrict GlobFgrids3
+	     __constant float* __restrict GlobFgrids2,
+	     __constant float* __restrict GlobFgrids3
 #else
 */
 			    unsigned int                     Host_mul_tmp2,

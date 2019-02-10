@@ -5,24 +5,24 @@
 // --------------------------------------------------------------------------
 __kernel __attribute__ ((max_global_work_dim(0)))
 void Krnl_Conform(
-	     __global const int*  restrict KerConstStatic_rotlist_const,
+	     __global const int*  __restrict KerConstStatic_rotlist_const,
 	     #if defined (FIXED_POINT_CONFORM)
-	     __constant fixedpt3* restrict KerConstStatic_ref_coords_const,
-	     __constant fixedpt3* restrict KerConstStatic_rotbonds_moving_vectors_const,
-	     __constant fixedpt3* restrict KerConstStatic_rotbonds_unit_vectors_const,
+	     __constant fixedpt3* __restrict KerConstStatic_ref_coords_const,
+	     __constant fixedpt3* __restrict KerConstStatic_rotbonds_moving_vectors_const,
+	     __constant fixedpt3* __restrict KerConstStatic_rotbonds_unit_vectors_const,
 	     #else
-	     __constant float3*   restrict KerConstStatic_ref_coords_const,
-	     __constant float3*   restrict KerConstStatic_rotbonds_moving_vectors_const,
-	     __constant float3*   restrict KerConstStatic_rotbonds_unit_vectors_const,
+	     __constant float3*   __restrict KerConstStatic_ref_coords_const,
+	     __constant float3*   __restrict KerConstStatic_rotbonds_moving_vectors_const,
+	     __constant float3*   __restrict KerConstStatic_rotbonds_unit_vectors_const,
 	     #endif    
 			      unsigned int          DockConst_rotbondlist_length,
 			      unsigned char         DockConst_num_of_atoms,
 			      unsigned char         DockConst_num_of_genes,
 
 	     #if defined (FIXED_POINT_CONFORM)
-	     __constant fixedpt4* restrict KerConstStatic_ref_orientation_quats_const,
+	     __constant fixedpt4* __restrict KerConstStatic_ref_orientation_quats_const,
 	     #else
-	     __constant float4*   restrict KerConstStatic_ref_orientation_quats_const,
+	     __constant float4*   __restrict KerConstStatic_ref_orientation_quats_const,
 	     #endif
 			      unsigned short        Host_RunId
 )

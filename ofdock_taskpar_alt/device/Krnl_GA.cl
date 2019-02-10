@@ -167,13 +167,13 @@ fixedpt fixedpt_map_angle_360(fixedpt angle)
 // Originally from: searchoptimum.c
 // --------------------------------------------------------------------------
 __kernel __attribute__ ((max_global_work_dim(0)))
-void Krnl_GA(__global       float*           restrict GlobPopulationCurrent,
-	     __global       float*           restrict GlobEnergyCurrent,
+void Krnl_GA(__global       float*           __restrict GlobPopulationCurrent,
+	     __global       float*           __restrict GlobEnergyCurrent,
 	     #if defined(SINGLE_COPY_POP_ENE)
-   	     __global       unsigned int*    restrict GlobEvals_performed,
-             __global       unsigned int*    restrict GlobGens_performed,
+   	     __global       unsigned int*    __restrict GlobEvals_performed,
+             __global       unsigned int*    __restrict GlobGens_performed,
 	     #else
-	     __global       unsigned int*    restrict GlobEvalsGenerations_performed,
+	     __global       unsigned int*    __restrict GlobEvalsGenerations_performed,
 	     #endif
 			    unsigned int              DockConst_pop_size,
 		     	    unsigned int              DockConst_num_of_energy_evals,
