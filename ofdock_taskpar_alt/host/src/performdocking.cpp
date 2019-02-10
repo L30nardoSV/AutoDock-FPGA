@@ -26,11 +26,13 @@
 #include "CL/opencl.h"
 #include "AOCLUtils/aocl_utils.h"
 
+#if 0
 // **********************************************
 // Power Nallatech 510T (saruman server)
 // **********************************************
 #include "aocl_mmd.h"
 // **********************************************
+#endif
 
 using namespace aocl_utils;
 
@@ -1401,6 +1403,7 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 	memcopyBufferObjectToDevice(command_queue1,mem_dockpars_conformations_current, 	cpu_init_populations, size_populations);
 #endif
 
+#if 0
         // **********************************************
         // Power Nallatech 510T (saruman server)
 	// **********************************************
@@ -1466,7 +1469,7 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 	*/
 
         // **********************************************
-
+#endif
 
 
 	printf("Docking runs to be executed: %u\n", mypars->num_of_runs); 
@@ -1486,6 +1489,7 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		}
 		fflush(stdout);
 
+#if 0
 	        // **********************************************
         	// Power Nallatech 510T (saruman server)
 		// **********************************************
@@ -1496,6 +1500,7 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 			fflush(stdout);
 		}
 		// **********************************************
+#endif
 
 #if defined(SINGLE_COPY_POP_ENE)
 

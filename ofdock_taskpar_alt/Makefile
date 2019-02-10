@@ -770,7 +770,8 @@ DEV_DIRS := device
 KRNL_NAME:= Krnl_GA
 DEV_SRC  := $(DEV_DIRS)/$(KRNL_NAME).cl
 #BOARD    := Proc10A_X115
-BOARD    := p510t_sch_ax115
+#BOARD    := p510t_sch_ax115
+BOARD    := s10gx
 
 ## Make it all: compilation (host & device) + run emulation
 ## Notice, it switches automatically to /bin folder

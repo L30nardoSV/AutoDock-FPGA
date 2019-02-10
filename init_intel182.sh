@@ -9,8 +9,8 @@ echo ""
 echo "==============================================="
 echo "Setting up Altera OpenCL SDK & Compiler"
 echo ""
-echo "Run:          $ source init_aoc171_nalla510t.sh"
-echo "or if Ubuntu: $ bash   init_aoc171_nalla510t.sh"
+echo "Run:          $ source init_aoc181.sh"
+echo "or if Ubuntu: $ bash   init_aoc181.sh"
 echo "==============================================="
 echo ""
 
@@ -19,7 +19,7 @@ echo "LM_LICENSE_FILE: "
 echo $LM_LICENSE_FILE
 echo " "
 
-export ALTERAROOT=/opt/altera-17.1_pro/
+export ALTERAROOT=/opt/cad/altera/altera-18.1
 echo "ALTERAROOT: "
 echo $ALTERAROOT
 echo " "
@@ -39,8 +39,9 @@ echo "PATH: "
 echo $PATH
 echo " "
 
-
-export AOCL_BOARD_PACKAGE_ROOT=$INTELFPGAOCLSDKROOT/board/nalla_pcie
+#export AOCL_BOARD_PACKAGE_ROOT=~/BSP_AOC_NALLA510T/nalla_pcie
+#export AOCL_BOARD_PACKAGE_ROOT=~/BSP_AOC_NALLA520N/nalla_pcie
+export AOCL_BOARD_PACKAGE_ROOT=$INTELFPGAOCLSDKROOT/board/s10_ref
 echo "AOCL_BOARD_PACKAGE_ROOT: "
 echo $AOCL_BOARD_PACKAGE_ROOT
 echo " "
