@@ -941,9 +941,9 @@ copy: clean-copy
 	@echo $(newline)
 	cd ../ && scp $(COPY_DIR).zip $(SERVER_DEVCLOUD):$(HOME_DEVCLOUD)
 	@echo $(newline)
-	@echo "================================================="
+	@echo "=========================================================="
 	@echo "Files listed were transferred to $(SERVER_DEVCLOUD):$(HOME_DEVCLOUD)"
-	@echo "================================================="
+	@echo "=========================================================="
 	@echo $(newline)
 
 clean-copy:
