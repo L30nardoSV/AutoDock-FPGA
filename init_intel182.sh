@@ -1,9 +1,16 @@
 #!/bin/bash
 
-# This is created to automate the boring 
-# process of setting AOC in celebdil
-# DO NOT FORGET to run it using:
-# >source init_aoc_esa.sh
+# Automate the boring process of initializing Intel tools.
+# Script must be sourced. It will automatically check it.
+
+echo " "
+echo "Verifying if script is being sourced"
+if [[ ${BASH_SOURCE[0]} != $0 ]]; then
+  echo "OK. Script is sourced"
+else
+  echo "Run \"source ${BASH_SOURCE[0]}\" instead!"
+  echo "Terminating!" && exit 1
+fi
 
 echo ""
 echo "==============================================="
