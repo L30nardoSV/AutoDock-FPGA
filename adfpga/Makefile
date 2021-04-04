@@ -772,7 +772,8 @@ DEV_SRC  := $(DEV_DIRS)/$(KRNL_NAME).cl
 #BOARD    := Proc10A_X115
 #BOARD    := p510t_sch_ax115
 #BOARD    := p520_max_sg280l
-BOARD    := pac_a10
+#BOARD    := a10gx	# Use locally
+BOARD    := pac_a10	# DevCloud
 
 ## Make it all: compilation (host & device) + run emulation
 ## Notice, it switches automatically to /bin folder
