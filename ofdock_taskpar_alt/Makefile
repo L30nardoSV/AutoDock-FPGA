@@ -771,7 +771,8 @@ KRNL_NAME:= Krnl_GA
 DEV_SRC  := $(DEV_DIRS)/$(KRNL_NAME).cl
 #BOARD    := Proc10A_X115
 #BOARD    := p510t_sch_ax115
-BOARD    := p520_max_sg280l
+#BOARD    := p520_max_sg280l
+BOARD    := pac_a10
 
 ## Make it all: compilation (host & device) + run emulation
 ## Notice, it switches automatically to /bin folder
@@ -784,7 +785,7 @@ BOARD    := p520_max_sg280l
 # $(KRNL_NAME).aoco
 # $(KRNL_NAME).aocx
 keremu: $(DEV_SRC)
-	aoc -march=emulator -emulator-channel-depth-model=strict -v -board=$(BOARD) $(DEV_SRC) -o $(TARGET_DIR)/$(KRNL_NAME).aocx $(REP) $(FIPO_FLAG) $(AOC_FLAG) -g
+	aoc -march=emulator -legacy-emulator -emulator-channel-depth-model=strict -v -board=$(BOARD) $(DEV_SRC) -o $(TARGET_DIR)/$(KRNL_NAME).aocx $(REP) $(FIPO_FLAG) $(AOC_FLAG) -g
 	@echo $(newline)
 	@echo "=============================================================================="
 	@echo "INFO: emulation files are under: \"$(TARGET_DIR)/$(KRNL_NAME)(.aoco)(.aocx)\" "
