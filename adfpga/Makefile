@@ -927,6 +927,7 @@ copy: clean-copy
 	mkdir ../$(COPY_DIR)/$(COPY_DIR_DOCK)
 	mkdir ../$(COPY_DIR)/$(COPY_DIR_DOCK)/$(TARGET_DIR_HW)
 	mkdir ../$(COPY_DIR)/$(COPY_DIR_DOCK)/$(TARGET_DIR_HW_PROF)
+	cp A10_v1.2.1_opencl_batch.sh ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
 	cp Makefile ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
 	cp defines.h ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
 	cp defines_fixedpt.h ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
