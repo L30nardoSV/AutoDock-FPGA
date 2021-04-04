@@ -19,6 +19,12 @@
 # **Adjust commands to your own needs.**
 #############################################################################################################
 
+# Execute it from head node (not compute note!)
+# $ devcloud_login -b A10PAC 1.2.1 A10_v1.2.1_opencl_batch.sh
+#
+# Including prompt paths:
+# u71100@login-2:~/copy_adfpga/adfpga$ devcloud_login -b A10PAC 1.2.1 A10_v1.2.1_opencl_batch.sh
+
 # Initial Setup
 source /data/intel_fpga/devcloudLoginToolSetup.sh
 tools_setup -t A10DS
@@ -33,6 +39,9 @@ tools_setup -t A10DS
 # Check Arria 10 PAC card connectivity
 aocl diagnose
 error_check
+
+# Moving into project folder
+cd /home/u71100/copy_adfpga/adfpga
 
 # Running project in Emulation mode
     #cd hello_world
