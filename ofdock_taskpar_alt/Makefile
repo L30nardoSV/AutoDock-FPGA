@@ -914,21 +914,18 @@ COPY_DIR := copy_$(PROJECT_NAME)
 COPY_DIR_DOCK := $(PROJECT_NAME)
 
 # Make sure this remote-server alias exists (in ~/.ssh/config)
-SERVER_BRIDGE := erebor:/scratch/
-SERVER_EXEC   := saruman:~/ocladock_intelfpga17_1
+SERVER_DEVCLOUD := devcloud
+HOME_DEVCLOUD := /home/u71100
 
 # Delete an existing folder if previously created
 # Create a folder $(COPY_DIR) in the parent directory
-# Copy binaries into $(COPY_DIR) folder, avoiding the (innecesary) compilation intermediate files
-# Copy source files into $(COPY_DIR) as host is built in the remote $(SERVER)
+# Copy source files into $(COPY_DIR) as host is built in the remote $(SERVER_DEVCLOUD)
 # Create a zip file out of the $(COPY_DIR) folder
 copy: clean-copy
 	mkdir ../$(COPY_DIR)
 	mkdir ../$(COPY_DIR)/$(COPY_DIR_DOCK)
 	mkdir ../$(COPY_DIR)/$(COPY_DIR_DOCK)/$(TARGET_DIR_HW)
 	mkdir ../$(COPY_DIR)/$(COPY_DIR_DOCK)/$(TARGET_DIR_HW_PROF)
-	cp $(TARGET_DIR_HW)/$(KRNL_NAME).* ../$(COPY_DIR)/$(COPY_DIR_DOCK)/$(TARGET_DIR_HW)/
-	cp $(TARGET_DIR_HW_PROF)/$(KRNL_NAME).* ../$(COPY_DIR)/$(COPY_DIR_DOCK)/$(TARGET_DIR_HW_PROF)/
 	cp Makefile ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
 	cp defines.h ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
 	cp defines_fixedpt.h ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
@@ -938,18 +935,14 @@ copy: clean-copy
 	cp -r input/ ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
 	cp -r wrapcl/ ../$(COPY_DIR)/$(COPY_DIR_DOCK)/
 	cp -r ../common ../$(COPY_DIR)/
-	cp ../conf_aoc171_saruman.sh ../$(COPY_DIR)/
 	cd ../;	zip -r $(COPY_DIR).zip $(COPY_DIR)
 	@echo $(newline)
-	@echo "Transfer the $(COPY_DIR).zip file to $(SERVER_BRIDGE) server: "
+	@echo "Transfer the $(COPY_DIR).zip file to $(SERVER_DEVCLOUD) server: "
 	@echo $(newline)
-	cd ../ && scp $(COPY_DIR).zip $(SERVER_BRIDGE)
+	cd ../ && scp $(COPY_DIR).zip $(SERVER_DEVCLOUD):$(HOME_DEVCLOUD)
 	@echo $(newline)
 	@echo "================================================="
-	@echo "Files listed were transferred to $(SERVER_BRIDGE)"
-	@echo $(newline)
-	@echo "Then, transfer files manually                    "
-	@echo "from $(SERVER_BRIDGE) to $(SERVER_EXEC)          "
+	@echo "Files listed were transferred to $(SERVER_DEVCLOUD):$(HOME_DEVCLOUD)"
 	@echo "================================================="
 	@echo $(newline)
 
