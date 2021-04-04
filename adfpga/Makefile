@@ -760,7 +760,7 @@ NGEN := 27000
 GFPOP:= 0
 
 # Project name
-PROJECT_NAME := ofdock_taskpar_alt
+PROJECT_NAME := adfpga
 
 # Device folder
 # Device main kernel name
