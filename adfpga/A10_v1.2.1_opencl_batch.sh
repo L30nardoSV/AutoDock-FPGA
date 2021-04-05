@@ -43,11 +43,14 @@ error_check
 
 # Running project in FPGA Hardware Mode (this takes approximately 1 hour)
 printf "\\n%s\\n" "Running in FPGA Hardware Mode:"
-printf "\n"
+printf "\\n"
 date
+printf "\\n"
 make hw
-printf "\n"
+printf "\\n"
 date
+printf "\\n"
+
 # Availability of Acceleration cards
 aoc -list-boards
 error_check
@@ -61,7 +64,7 @@ printf "\\n%s\\n" "Converting to unsigned .aocx:"
 printf "Y\\nY\\n" | source $AOCL_BOARD_PACKAGE_ROOT/linux64/libexec/sign_aocx.sh -H openssl_manager -i /home/u71100/copy_adfpga/adfpga/bin_hw/Krnl_GA.aocx -r NULL -k NULL -o /home/u71100/copy_adfpga/adfpga/bin_hw/Krnl_GA_unsigned.aocx
 error_check
 # Programmming PAC Card
-aocl program acl0 ./bin_hw/Krnl_GA_unsigned.aocx
+aocl program acl0 /home/u71100/copy_adfpga/adfpga/bin_hw/Krnl_GA_unsigned.aocx
 make exe
 error_check
 
