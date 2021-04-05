@@ -54,10 +54,10 @@ error_check
 # Converting to an unsigned .aocx file
 cd ${TARGET_DIR_HW}
 printf "\\n%s\\n" "Converting to unsigned .aocx:"
-printf "Y\\nY\\n" | source $AOCL_BOARD_PACKAGE_ROOT/linux64/libexec/sign_aocx.sh -H openssl_manager -i ${KRNL_NAME}.aocx -r NULL -k NULL -o ${KRNL_NAME}_unsigned.aocx
+printf "Y\\nY\\n" | source $AOCL_BOARD_PACKAGE_ROOT/linux64/libexec/sign_aocx.sh -H openssl_manager -i ./bin_hw/Krnl_GA.aocx -r NULL -k NULL -o ./bin_hw/Krnl_GA_unsigned.aocx
 error_check
 # Programmming PAC Card
-aocl program acl0 ${KRNL_NAME}_unsigned.aocx
+aocl program acl0 ./bin_hw/Krnl_GA_unsigned.aocx
 make exe
 error_check
 
