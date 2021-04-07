@@ -851,6 +851,10 @@ kerrpt: intc intrtl
 	@echo $(newline)
 	@echo "====================================================================================="
 	@echo "INFO: output files are under: \"$(TARGET_DIR_RPT)/$(KRNL_NAME)/reports/report.html\" "
+	@echo $(newline)
+	@echo "INFO: suggested steps for report analysis in local machine: "
+	@echo "Devcloud: \"~/copy_adfpga/adfpga$ zip -r reports.zip bin_rpt/Krnl_GA/reports/ \" "
+	@echo "Local machine: \"scp devcloud:/home/u71100/copy_adfpga/adfpga/reports.zip . \" "
 	@echo "====================================================================================="
 	@echo $(newline)
 
