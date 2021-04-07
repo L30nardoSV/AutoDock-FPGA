@@ -41,7 +41,8 @@ printf "\\n%s\\n" "Running in Emulation Mode:"
 make emu
 error_check
 
-# Running project in FPGA Hardware Mode (this takes approximately 1 hour)
+# Running project in FPGA Hardware Mode
+# (this takes approximately 3 hours for the original docking design)
 printf "\\n%s\\n" "Running in FPGA Hardware Mode:"
 printf "\\n"
 date
@@ -59,16 +60,17 @@ aocl diagnose
 error_check
 
 # Converting to an unsigned .aocx file
-cd ${TARGET_DIR_HW}
 printf "\\n%s\\n" "Converting to unsigned .aocx:"
 printf "Y\\nY\\n" | source $AOCL_BOARD_PACKAGE_ROOT/linux64/libexec/sign_aocx.sh -H openssl_manager -i /home/u71100/copy_adfpga/adfpga/bin_hw/Krnl_GA.aocx -r NULL -k NULL -o /home/u71100/copy_adfpga/adfpga/bin_hw/Krnl_GA_unsigned.aocx
 error_check
-# Renaming FPGA binaries so that source code is not required to be modified
-mv /home/u71100/copy_adfpga/adfpga/bin_hw/Krnl_GA.aocx /home/u71100/copy_adfpga/adfpga/bin_hw/Krnl_GA_orig.aocx
-mv /home/u71100/copy_adfpga/adfpga/bin_hw/Krnl_GA_unsigned.aocx /home/u71100/copy_adfpga/adfpga/bin_hw/Krnl_GA.aocx
+
 # Programmming PAC Card
-#aocl program acl0 /home/u71100/copy_adfpga/adfpga/bin_hw/Krnl_GA_unsigned.aocx
-aocl program acl0 /home/u71100/copy_adfpga/adfpga/bin_hw/Krnl_GA.aocx
+printf "\\n%s\\n" "Programming FPGA device:"
+aocl program acl0 /home/u71100/copy_adfpga/adfpga/bin_hw/Krnl_GA_unsigned.aocx
+
+# Running <make exe>
+printf "\\n%s\\n" "Running on the FPGA device:"
 make exe
+
 error_check
 
