@@ -786,7 +786,12 @@ BOARD    := pac_a10	# DevCloud
 # $(KRNL_NAME).aoco
 # $(KRNL_NAME).aocx
 keremu: $(DEV_SRC)
-	aoc -march=emulator -legacy-emulator -emulator-channel-depth-model=strict -v -board=$(BOARD) $(DEV_SRC) -o $(TARGET_DIR)/$(KRNL_NAME).aocx $(REP) $(FIPO_FLAG) $(AOC_FLAG) -g
+	aoc -v -g \
+	-march=emulator -legacy-emulator -emulator-channel-depth-model=strict \
+	-board=$(BOARD) \
+	$(DEV_SRC) \
+	-o $(TARGET_DIR)/$(KRNL_NAME).aocx \
+	$(REP) $(FIPO_FLAG) $(AOC_FLAG)
 	@echo $(newline)
 	@echo "=============================================================================="
 	@echo "INFO: emulation files are under: \"$(TARGET_DIR)/$(KRNL_NAME)(.aoco)(.aocx)\" "
@@ -810,21 +815,42 @@ emu: $(TARGET_DIR)/$(TARGET) keremu
 	@echo $(newline)
 
 
-# Reports are generated
+# Intermediate C compilation
 # Could be used in multistep compilation
-# Creates under bin:
-# $(KRNL_NAME) folder -> /reports/report.html, to see details
-# $(KRNL_NAME).aoco
-# No actual hardware is built (NO .aocx)
-kerrpt: $(DEV_SRC)
-	aoc -board=$(BOARD) $(DEV_SRC) -o $(TARGET_DIR_RPT)/$(KRNL_NAME).aoco $(REP) $(FIPO_FLAG) $(AOC_FLAG) -c -report -g
+intc: $(DEV_SRC)
+	aoc -v -g \
+	-c \
+	-board=$(BOARD) \
+	$(DEV_SRC) \
+	-o $(TARGET_DIR_RPT)/$(KRNL_NAME).aoco \
+	$(REP) $(FIPO_FLAG) $(AOC_FLAG) \
+	-report
 	@echo $(newline)
+	@echo "====================================================================================="			            "
+	@echo "INFO: output files are under: \"$(TARGET_DIR_RPT)/$(KRNL_NAME).aoco\" "
 	@echo "====================================================================================="
-	@echo "INFO: THIS WORKS ONLY FROM V16.1 ON:					            "
-	@echo "INFO: report files are under: \"$(TARGET_DIR_RPT)/$(KRNL_NAME)/reports/report.html\" "
 	@echo $(newline)
-	@echo "INFO: THIS WORKS IN V16.0 AND OLDER:                                                 "
-	@echo "INFO: report file is under: \"$(TARGET_DIR_RPT)/$(KRNL_NAME)/$(KRNL_NAME).log\"      "
+
+# Intermediate RTL compilation
+# Could be used in multistep compilation
+intrtl: $(DEV_SRC)
+	aoc -v -g \
+	-rtl \
+	-board=$(BOARD) \
+	$(DEV_SRC) \
+	-o $(TARGET_DIR_RPT)/$(KRNL_NAME).aocr \
+	$(REP) $(FIPO_FLAG) $(AOC_FLAG) \
+	-report
+	@echo $(newline)
+	@echo "====================================================================================="			            "
+	@echo "INFO: report files are under: \"$(TARGET_DIR_RPT)/$(KRNL_NAME).aocr\" "
+	@echo "====================================================================================="
+	@echo $(newline)
+
+kerrpt: intc intrtl
+	@echo $(newline)
+	@echo "====================================================================================="			            "
+	@echo "INFO: output files are under: \"$(TARGET_DIR_RPT)/$(KRNL_NAME)/reports/report.html\" "
 	@echo "====================================================================================="
 	@echo $(newline)
 
