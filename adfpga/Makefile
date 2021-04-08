@@ -898,7 +898,11 @@ hw-prof:
 # Host-recompilation
 # Copy of host to $(TARGET_DIR_HW)
 # The working directory is changed
-# So .dlg file is written in $(TARGET_DIR_HW)
+# So .dlg file is written in $(TARGET_DIR_HW).
+#
+# For DevCloud, make sure binary was loaded as
+# indicated in A10_v1.2.1_opencl_batch.sh
+
 MEASURE_POWER := NO
 ifeq ($(MEASURE_POWER), YES)
 	POWER_FLAG=1
