@@ -164,12 +164,6 @@ ENABLE_K21 = YES
 
 ENABLE_K27 = YES
 
-# BT, GG, LS_ushort, LS_float arbiters
-ENABLE_K31 = NO
-ENABLE_K32 = NO
-ENABLE_K33 = NO
-ENABLE_K34 = NO
-
 # ls123 prng
 ENABLE_K35 = YES
 
@@ -275,30 +269,6 @@ else
 	K27 =
 endif
 
-ifeq ($(ENABLE_K31),YES)
-	K31 =-DENABLE_KERNEL31
-else
-	K31 =
-endif
-
-ifeq ($(ENABLE_K32),YES)
-	K32 =-DENABLE_KERNEL32
-else
-	K32 =
-endif
-
-ifeq ($(ENABLE_K33),YES)
-	K33 =-DENABLE_KERNEL33
-else
-	K33 =
-endif
-
-ifeq ($(ENABLE_K34),YES)
-	K34 =-DENABLE_KERNEL34
-else
-	K34 =
-endif
-
 ifeq ($(ENABLE_K35),YES)
 	K35 =-DENABLE_KERNEL35
 else
@@ -334,10 +304,6 @@ ifeq ($(ENABLE_K40),YES)
 else
 	K40 =
 endif
-
-
-
-
 
 ifeq ($(ENABLE_K41),YES)
 	K41 =-DENABLE_KERNEL41
