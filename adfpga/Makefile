@@ -148,24 +148,10 @@ ENABLE_K3  = YES
 ENABLE_K4  = YES
 
 # Prng kernels
-
-# bt prng float
-ENABLE_K5  = NO
-
 ENABLE_K6  = YES
 ENABLE_K7  = YES
 
-# bt prng ushort (check kernel36)
-ENABLE_K8  = NO
-
-# ls1 prng
-ENABLE_K9  = NO
-
 ENABLE_K10 = YES
-
-# Replace single Krnl_Prng_Arbiter
-# See kernels 31, 32, 33, 34
-ENABLE_K11 = NO
 
 # LS kernels
 ENABLE_K12 = YES
@@ -262,12 +248,6 @@ else
 	K4 =
 endif
 
-ifeq ($(ENABLE_K5),YES)
-	K5 =-DENABLE_KERNEL5
-else
-	K5 =
-endif
-
 ifeq ($(ENABLE_K6),YES)
 	K6 =-DENABLE_KERNEL6
 else
@@ -280,30 +260,11 @@ else
 	K7 =
 endif
 
-ifeq ($(ENABLE_K8),YES)
-	K8 =-DENABLE_KERNEL8
-else
-	K8 =
-endif
-
-ifeq ($(ENABLE_K9),YES)
-	K9 =-DENABLE_KERNEL9
-else
-	K9 =
-endif
-
 ifeq ($(ENABLE_K10),YES)
 	K10 =-DENABLE_KERNEL10
 else
 	K10 =
 endif
-
-ifeq ($(ENABLE_K11),YES)
-	K11 =-DENABLE_KERNEL11
-else
-	K11 =
-endif
-
 
 ifeq ($(ENABLE_K12),YES)
 	K12 =-DENABLE_KERNEL12
