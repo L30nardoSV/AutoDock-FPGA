@@ -624,7 +624,8 @@ emu: $(TARGET_DIR)/$(TARGET) keremu
 	CL_CONTEXT_EMULATOR_DEVICE_INTELFPGA=1 ./$(TARGET) \
 	-ffile ../input/$(PDB)/derived/$(PDB)_protein.maps.fld \
 	-lfile ../input/$(PDB)/derived/$(PDB)_ligand.pdbqt \
-	-psize $(PSIZE) -nrun $(NRUN) -nev $(NEV) -ngen $(NGEN) -gfpop 1
+	-psize $(PSIZE) -nrun $(NRUN) -nev $(NEV) -ngen $(NGEN) -gfpop 1 \
+	-resnam $(PDB)_pop-$(PSIZE)_nrun-$(NRUN)_nev-$(NEV)_ngen-$(NGEN)_"`date +"%Y-%m-%d-%H:%M"`"
 	@echo $(newline)
 	@echo "======================================================="
 	@echo "INFO: log file is under: \"$(TARGET_DIR)/docking.dlg\" "
@@ -725,8 +726,8 @@ exe: $(TARGET_DIR)/$(TARGET)
 	./$(TARGET) \
 	-ffile ../input/$(PDB)/derived/$(PDB)_protein.maps.fld \
 	-lfile ../input/$(PDB)/derived/$(PDB)_ligand.pdbqt \
-	-resnam docking_$(PDB)_$(NRUN) \
-	-nrun $(NRUN) -gfpop $(GFPOP)
+	-psize $(PSIZE) -nrun $(NRUN) -nev $(NEV) -ngen $(NGEN) -gfpop $(GFPOP) \
+	-resnam $(PDB)_pop-$(PSIZE)_nrun-$(NRUN)_nev-$(NEV)_ngen-$(NGEN)_"`date +"%Y-%m-%d-%H:%M"`"
 	@echo $(newline)
 	@echo "========================================================================="
 	@echo "INFO: log file is under: \"$(TARGET_DIR_HW)/docking_$(PDB)_$(NRUN).dlg\" "
@@ -745,8 +746,8 @@ exe-prof: $(TARGET_DIR)/$(TARGET)
 	./$(TARGET) \
 	-ffile ../input/$(PDB)/derived/$(PDB)_protein.maps.fld \
 	-lfile ../input/$(PDB)/derived/$(PDB)_ligand.pdbqt \
-	-resnam docking_$(PDB)_$(NRUN) \
-	-nrun $(NRUN) -gfpop $(GFPOP)
+	-psize $(PSIZE) -nrun $(NRUN) -nev $(NEV) -ngen $(NGEN) -gfpop $(GFPOP) \
+	-resnam $(PDB)_pop-$(PSIZE)_nrun-$(NRUN)_nev-$(NEV)_ngen-$(NGEN)_"`date +"%Y-%m-%d-%H:%M"`"
 	@echo $(newline)
 	@echo "=============================================================================="
 	@echo "INFO: log file is under: \"$(TARGET_DIR_HW_PROF)/docking_$(PDB)_$(NRUN).dlg\" "
