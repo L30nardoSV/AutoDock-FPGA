@@ -17,14 +17,6 @@
 #include "CL/opencl.h"
 #include "AOCLUtils/aocl_utils.h"
 
-#if 0
-// **********************************************
-// Power Nallatech 510T (saruman server)
-// **********************************************
-#include "aocl_mmd.h"
-// **********************************************
-#endif
-
 using namespace aocl_utils;
 
 #define STRING_BUFFER_LEN 1024
@@ -1088,75 +1080,6 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 	memcopyBufferObjectToDevice(command_queue1,mem_dockpars_conformations_current, 	cpu_init_populations, size_populations);
 #endif
 
-#if 0
-        // **********************************************
-        // Power Nallatech 510T (saruman server)
-	// **********************************************
-
-        typedef void* (*get_board_extension_function_address_fn_t)(const char* func_name, cl_device_id device);
-        typedef void* (*aocl_mmd_card_info_fn_t)(const char*, aocl_mmd_info_t, size_t, void*, size_t* );
-        void *tempPointer;
-
-        float power;
-        size_t returnedSize;
-
-        // Here a small modification as argc was declared as a pointer
-        //Options options(argc, argv);
-        Options options(*argc, argv);
-
-        // Optional argument to specify the problem size.
-	/*
-        if(options.has("n")) {
-                N = options.get<unsigned>("n");
-        }
-	*/
-
-        // Initialize OpenCL.
-	/*
-        if(!init_opencl()) {
-                return -1;
-        }
-	*/
-
-        // Initialize the problem data.
-        // Requires the number of devices to be known.
-	/*
-	init_problem();
-	*/
-
-        get_board_extension_function_address_fn_t board_extension_function_address =
-        (get_board_extension_function_address_fn_t) clGetExtensionFunctionAddress
-        ("clGetBoardExtensionFunctionAddressIntelFPGA");
-
-        if (board_extension_function_address == NULL )
-        {
-        	printf ("Failed to get clGetBoardExtensionFunctionAddressIntelFPGA\n");
-        }
-
-        //tempPointer = board_extension_function_address("aocl_mmd_card_info",device[0]);
-        tempPointer = board_extension_function_address("aocl_mmd_card_info",device);
-
-        aocl_mmd_card_info_fn_t aocl_mmd_card_info_fn = (aocl_mmd_card_info_fn_t)tempPointer;
-
-        if (aocl_mmd_card_info_fn == NULL )
-        {
-		printf ("\n");
-		printf ("Power-measurement setup.\n");
-		printf ("Ignore the next message if doing emulation: \n");
-                printf ("Failed to get aocl_mmd_card_info_fn address\n");
-		printf ("\n");
-        }
-
-	/*
-        // Note aclnalla_pcie0 is the card name string
-        aocl_mmd_card_info_fn("aclnalla_pcie0", AOCL_MMD_POWER, sizeof(float),(void*) &power, &returnedSize);
-        printf("Power = %f W\n", power);
-	*/
-
-        // **********************************************
-#endif
-
-
 	printf("Docking runs to be executed: %u\n", mypars->num_of_runs); 
 	printf("Execution run: \n");
 
@@ -1173,19 +1096,6 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 			printf(" %u", run_cnt+1); 
 		}
 		fflush(stdout);
-
-#if 0
-	        // **********************************************
-        	// Power Nallatech 510T (saruman server)
-		// **********************************************
-		if (mypars->power == 1) {
-	        	// Note aclnalla_pcie0 is the card name string
-		        aocl_mmd_card_info_fn("aclnalla_pcie0", AOCL_MMD_POWER, sizeof(float),(void*) &power, &returnedSize);
-		        printf("Power = %f W\n", power);
-			fflush(stdout);
-		}
-		// **********************************************
-#endif
 
 #if defined(SINGLE_COPY_POP_ENE)
 
