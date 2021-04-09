@@ -55,11 +55,6 @@ typedef struct
 		char  resname [128];
 		float qasp;
 		float rmsd_tolerance;
-
-        // **********************************************
-       	// Power Nallatech 510T (saruman server)
-	// **********************************************
-	unsigned char power;
 } Dockpars;
 
 int get_filenames_and_ADcoeffs(const int*,
