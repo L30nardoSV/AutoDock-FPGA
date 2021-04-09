@@ -625,10 +625,10 @@ emu: $(TARGET_DIR)/$(TARGET) keremu
 	-ffile ../input/$(PDB)/derived/$(PDB)_protein.maps.fld \
 	-lfile ../input/$(PDB)/derived/$(PDB)_ligand.pdbqt \
 	-psize $(PSIZE) -nrun $(NRUN) -nev $(NEV) -ngen $(NGEN) -gfpop 1 \
-	-resnam $(PDB)_pop-$(PSIZE)_nrun-$(NRUN)_nev-$(NEV)_ngen-$(NGEN)_"`date +"%Y-%m-%d-%H:%M"`"
+	-resnam $(PDB)-"`date +"%Y-%m-%d-%H:%M"`"
 	@echo $(newline)
 	@echo "======================================================="
-	@echo "INFO: log file is under: \"$(TARGET_DIR)/docking.dlg\" "
+	@echo "INFO: log file is under: \"$(TARGET_DIR)/$(PDB)-<...>.dlg\" "
 	@echo "======================================================="
 	@echo $(newline)
 
@@ -727,10 +727,10 @@ exe: $(TARGET_DIR)/$(TARGET)
 	-ffile ../input/$(PDB)/derived/$(PDB)_protein.maps.fld \
 	-lfile ../input/$(PDB)/derived/$(PDB)_ligand.pdbqt \
 	-psize $(PSIZE) -nrun $(NRUN) -nev $(NEV) -ngen $(NGEN) -gfpop $(GFPOP) \
-	-resnam $(PDB)_pop-$(PSIZE)_nrun-$(NRUN)_nev-$(NEV)_ngen-$(NGEN)_"`date +"%Y-%m-%d-%H:%M"`"
+	-resnam $(PDB)-"`date +"%Y-%m-%d-%H:%M"`"
 	@echo $(newline)
 	@echo "========================================================================="
-	@echo "INFO: log file is under: \"$(TARGET_DIR_HW)/docking_$(PDB)_$(NRUN).dlg\" "
+	@echo "INFO: log file is under: \"$(TARGET_DIR_HW)/$(PDB)-<...>.dlg\" "
 	@echo "========================================================================="
 	@echo $(newline)
 
@@ -747,10 +747,10 @@ exe-prof: $(TARGET_DIR)/$(TARGET)
 	-ffile ../input/$(PDB)/derived/$(PDB)_protein.maps.fld \
 	-lfile ../input/$(PDB)/derived/$(PDB)_ligand.pdbqt \
 	-psize $(PSIZE) -nrun $(NRUN) -nev $(NEV) -ngen $(NGEN) -gfpop $(GFPOP) \
-	-resnam $(PDB)_pop-$(PSIZE)_nrun-$(NRUN)_nev-$(NEV)_ngen-$(NGEN)_"`date +"%Y-%m-%d-%H:%M"`"
+	-resnam $(PDB)-"`date +"%Y-%m-%d-%H:%M"`"
 	@echo $(newline)
 	@echo "=============================================================================="
-	@echo "INFO: log file is under: \"$(TARGET_DIR_HW_PROF)/docking_$(PDB)_$(NRUN).dlg\" "
+	@echo "INFO: log file is under: \"$(TARGET_DIR_HW_PROF)/$(PDB)-<...>.dlg\" "
 	@echo "=============================================================================="
 	@echo $(newline)
 
