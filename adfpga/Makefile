@@ -156,40 +156,13 @@ ENABLE_K10 = YES
 # LS kernels
 ENABLE_K12 = YES
 
-# disable Krnl_LS_Arbiter
-ENABLE_K13 = NO
-
 ENABLE_K14 = YES
 ENABLE_K15 = YES
-
-# disable Krnl_LS2_Arbiter
-ENABLE_K16 = NO
-
-#ENABLE_K17 = YES
-#ENABLE_K18 = YES
-#ENABLE_K19 = YES
 
 ENABLE_K20 = YES
 ENABLE_K21 = YES
 
-# disable Krnl_LS3_Arbiter
-ENABLE_K22 = NO
-#ENABLE_K23 = YES
-#ENABLE_K24 = YES
-
-# PRNGS in GA for LS2 and LS3
-
-# ls2 & ls3 prng (ls1 is  K9)
-# replacement is K35
-ENABLE_K25 = NO
-ENABLE_K26 = NO
-
 ENABLE_K27 = YES
-
-# IA Pipeline
-ENABLE_K28 = NO
-ENABLE_K29 = NO
-ENABLE_K30 = NO
 
 # BT, GG, LS_ushort, LS_float arbiters
 ENABLE_K31 = NO
@@ -272,13 +245,6 @@ else
 	K12 =
 endif
 
-ifeq ($(ENABLE_K13),YES)
-	K13 =-DENABLE_KERNEL13
-else
-	K13 =
-endif
-
-
 ifeq ($(ENABLE_K14),YES)
 	K14 =-DENABLE_KERNEL14
 else
@@ -290,34 +256,6 @@ ifeq ($(ENABLE_K15),YES)
 else
 	K15 =
 endif
-
-ifeq ($(ENABLE_K16),YES)
-	K16 =-DENABLE_KERNEL16
-else
-	K16 =
-endif
-
-ifeq ($(ENABLE_K17),YES)
-	K17 =-DENABLE_KERNEL17
-else
-	K17 =
-endif
-
-ifeq ($(ENABLE_K18),YES)
-	K18 =-DENABLE_KERNEL18
-else
-	K18 =
-endif
-
-ifeq ($(ENABLE_K19),YES)
-	K19 =-DENABLE_KERNEL19
-else
-	K19 =
-endif
-
-
-
-
 
 ifeq ($(ENABLE_K20),YES)
 	K20 =-DENABLE_KERNEL20
@@ -331,58 +269,10 @@ else
 	K21 =
 endif
 
-ifeq ($(ENABLE_K22),YES)
-	K22 =-DENABLE_KERNEL22
-else
-	K22 =
-endif
-
-ifeq ($(ENABLE_K23),YES)
-	K23 =-DENABLE_KERNEL23
-else
-	K23 =
-endif
-
-ifeq ($(ENABLE_K24),YES)
-	K24 =-DENABLE_KERNEL24
-else
-	K24 =
-endif
-
-ifeq ($(ENABLE_K25),YES)
-	K25 =-DENABLE_KERNEL25
-else
-	K25 =
-endif
-
-ifeq ($(ENABLE_K26),YES)
-	K26 =-DENABLE_KERNEL26
-else
-	K26 =
-endif
-
 ifeq ($(ENABLE_K27),YES)
 	K27 =-DENABLE_KERNEL27
 else
 	K27 =
-endif
-
-ifeq ($(ENABLE_K28),YES)
-	K28 =-DENABLE_KERNEL28
-else
-	K28 =
-endif
-
-ifeq ($(ENABLE_K29),YES)
-	K29 =-DENABLE_KERNEL29
-else
-	K29 =
-endif
-
-ifeq ($(ENABLE_K30),YES)
-	K30 =-DENABLE_KERNEL30
-else
-	K30 =
 endif
 
 ifeq ($(ENABLE_K31),YES)
