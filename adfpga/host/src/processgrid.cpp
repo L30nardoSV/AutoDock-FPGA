@@ -1,13 +1,3 @@
-/*
- * (C) 2013. Evopro Innovation Kft.
- *
- * processgrid.c
- *
- *  Created on: 2008.09.30.
- *      Author: pechan.imre
- */
-
-
 #include "processgrid.h"
 #include "AOCLUtils/aocl_utils.h"
 
