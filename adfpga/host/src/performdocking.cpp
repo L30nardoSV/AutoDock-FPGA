@@ -1736,7 +1736,8 @@ bool init() {
 
   // User-visible output - Platform information
   {
-    char char_buffer[STRING_BUFFER_LEN]; 
+    char char_buffer[STRING_BUFFER_LEN];
+	printf("\n========================\n");
     printf("Querying platform for info:\n");
     printf("==========================\n");
     clGetPlatformInfo(platform, CL_PLATFORM_NAME, STRING_BUFFER_LEN, char_buffer, NULL);
@@ -2213,6 +2214,7 @@ static void device_info_string( cl_device_id device, cl_device_info param, const
 // Query and display OpenCL information on device and runtime environment
 static void display_device_info( cl_device_id device ) {
 
+   printf("\n========================\n");
    printf("Querying device for info:\n");
    printf("========================\n");
    device_info_string(device, CL_DEVICE_NAME, "CL_DEVICE_NAME");
