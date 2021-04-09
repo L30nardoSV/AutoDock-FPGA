@@ -1738,7 +1738,6 @@ bool init() {
 
   // Get the OpenCL platform.
   platform = findPlatform("Intel(R) FPGA"); // use it from aoc v16.1
-  //platform = findPlatform("Altera SDK");      // works for harp2, i.e. v16.0 patched
   if(platform == NULL) {
     printf("ERROR: Unable to find Intel(R) FPGA OpenCL platform.\n");
     return false;
@@ -1773,27 +1772,16 @@ bool init() {
   context = clCreateContext(NULL, 1, &device, &oclContextCallback, NULL, &status);
   checkError(status, "Failed to create context");
 
-  // Create the command queue.
-  //queue = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
-  //command_queue = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
-  //checkError(status, "Failed to create command queue");
-
   // Create the program.
-/*  
-  std::string binary_file = getBoardBinaryFile("docking", device);
-*/
   std::string binary_file = getBoardBinaryFile("Krnl_GA", device);
   printf("Using AOCX: %s\n", binary_file.c_str());
   program = createProgramFromBinary(context, binary_file.c_str(), &device, 1);
-
 
   // Build the program that was just created.
   status = clBuildProgram(program, 0, NULL, "", NULL, NULL);
   checkError(status, "Failed to build program");
 
-
-  // Create the kernel - name passed in here must match kernel name in the
-  // original CL file, that was compiled into an AOCX file using the AOC tool
+  // Create the command queue and kernel
 #ifdef ENABLE_KERNEL1
   //command_queue1 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
   command_queue1 = clCreateCommandQueue(context, device, 0, &status);
@@ -1955,8 +1943,6 @@ bool init() {
   kernel44 = clCreateKernel(program, name_k44, &status);
   checkError(status, "Failed to create kernel");
 #endif
-
-
 
 #ifdef ENABLE_KERNEL45
   command_queue45 = clCreateCommandQueue(context, device, 0, &status);
@@ -2145,44 +2131,69 @@ void cleanup() {
 #endif
 
 #if defined (FIXED_POINT_INTERE)
-  if(mem_KerConstStatic_fixpt64_atom_charges_const)	  {clReleaseMemObject(mem_KerConstStatic_fixpt64_atom_charges_const);}
+  if(mem_KerConstStatic_fixpt64_atom_charges_const)	{
+	clReleaseMemObject(mem_KerConstStatic_fixpt64_atom_charges_const);}
 #endif
-  if(mem_KerConstStatic_atom_charges_const)	  	  {clReleaseMemObject(mem_KerConstStatic_atom_charges_const);}
-  if(mem_KerConstStatic_atom_types_const)	   	  {clReleaseMemObject(mem_KerConstStatic_atom_types_const);}
-  if(mem_KerConstStatic_intraE_contributors_const) 	  {clReleaseMemObject(mem_KerConstStatic_intraE_contributors_const);}
+  if(mem_KerConstStatic_atom_charges_const)	{
+	clReleaseMemObject(mem_KerConstStatic_atom_charges_const);}
+  if(mem_KerConstStatic_atom_types_const) {
+	clReleaseMemObject(mem_KerConstStatic_atom_types_const);}
+  if(mem_KerConstStatic_intraE_contributors_const) {
+	clReleaseMemObject(mem_KerConstStatic_intraE_contributors_const);}
 
-  if(mem_KerConstStatic_reqm_const) 	  		  {clReleaseMemObject(mem_KerConstStatic_reqm_const);}
-  if(mem_KerConstStatic_reqm_hbond_const) 	  	  {clReleaseMemObject(mem_KerConstStatic_reqm_hbond_const);}
-  if(mem_KerConstStatic_atom1_types_reqm_const) 	  {clReleaseMemObject(mem_KerConstStatic_atom1_types_reqm_const);}
-  if(mem_KerConstStatic_atom2_types_reqm_const)	  	  {clReleaseMemObject(mem_KerConstStatic_atom2_types_reqm_const);}
+  if(mem_KerConstStatic_reqm_const) {
+	clReleaseMemObject(mem_KerConstStatic_reqm_const);}
+  if(mem_KerConstStatic_reqm_hbond_const) {
+	clReleaseMemObject(mem_KerConstStatic_reqm_hbond_const);}
+  if(mem_KerConstStatic_atom1_types_reqm_const) {
+	clReleaseMemObject(mem_KerConstStatic_atom1_types_reqm_const);}
+  if(mem_KerConstStatic_atom2_types_reqm_const) {
+	clReleaseMemObject(mem_KerConstStatic_atom2_types_reqm_const);}
 
-  if(mem_KerConstStatic_VWpars_AC_const)	   	  {clReleaseMemObject(mem_KerConstStatic_VWpars_AC_const);}
-  if(mem_KerConstStatic_VWpars_BD_const)	   	  {clReleaseMemObject(mem_KerConstStatic_VWpars_BD_const);}
-  if(mem_KerConstStatic_dspars_S_const)		   	  {clReleaseMemObject(mem_KerConstStatic_dspars_S_const);}
-  if(mem_KerConstStatic_dspars_V_const)		   	  {clReleaseMemObject(mem_KerConstStatic_dspars_V_const);}
-  if(mem_KerConstStatic_rotlist_const)		   	  {clReleaseMemObject(mem_KerConstStatic_rotlist_const);}
-  if(mem_KerConstStatic_ref_coords_const)		  {clReleaseMemObject(mem_KerConstStatic_ref_coords_const);}
-  if(mem_KerConstStatic_rotbonds_moving_vectors_const)    {clReleaseMemObject(mem_KerConstStatic_rotbonds_moving_vectors_const);}
-  if(mem_KerConstStatic_rotbonds_unit_vectors_const)	  {clReleaseMemObject(mem_KerConstStatic_rotbonds_unit_vectors_const);}
-  if(mem_KerConstStatic_ref_orientation_quats_const)	  {clReleaseMemObject(mem_KerConstStatic_ref_orientation_quats_const);}
+  if(mem_KerConstStatic_VWpars_AC_const) {
+	clReleaseMemObject(mem_KerConstStatic_VWpars_AC_const);}
+  if(mem_KerConstStatic_VWpars_BD_const) {
+	clReleaseMemObject(mem_KerConstStatic_VWpars_BD_const);}
+  if(mem_KerConstStatic_dspars_S_const) {
+	clReleaseMemObject(mem_KerConstStatic_dspars_S_const);}
+  if(mem_KerConstStatic_dspars_V_const) {
+	clReleaseMemObject(mem_KerConstStatic_dspars_V_const);}
+  if(mem_KerConstStatic_rotlist_const) {
+	clReleaseMemObject(mem_KerConstStatic_rotlist_const);}
+  if(mem_KerConstStatic_ref_coords_const) {
+	clReleaseMemObject(mem_KerConstStatic_ref_coords_const);}
+  if(mem_KerConstStatic_rotbonds_moving_vectors_const) {
+	clReleaseMemObject(mem_KerConstStatic_rotbonds_moving_vectors_const);}
+  if(mem_KerConstStatic_rotbonds_unit_vectors_const) {
+	clReleaseMemObject(mem_KerConstStatic_rotbonds_unit_vectors_const);}
+  if(mem_KerConstStatic_ref_orientation_quats_const) {
+	clReleaseMemObject(mem_KerConstStatic_ref_orientation_quats_const);}
 
-  if(mem_dockpars_fgrids) 		  {clReleaseMemObject(mem_dockpars_fgrids);}
+  if(mem_dockpars_fgrids) {
+	clReleaseMemObject(mem_dockpars_fgrids);}
 #if defined(SEPARATE_FGRID_INTERE)
-  if(mem_dockpars_fgrids2) 		  {clReleaseMemObject(mem_dockpars_fgrids2);}
-  if(mem_dockpars_fgrids3) 		  {clReleaseMemObject(mem_dockpars_fgrids3);}
+  if(mem_dockpars_fgrids2) {
+	clReleaseMemObject(mem_dockpars_fgrids2);}
+  if(mem_dockpars_fgrids3) {
+	clReleaseMemObject(mem_dockpars_fgrids3);}
 #endif
 
-  if(mem_dockpars_conformations_current)  {clReleaseMemObject(mem_dockpars_conformations_current);}
-  if(mem_dockpars_energies_current) 	  {clReleaseMemObject(mem_dockpars_energies_current);}
+  if(mem_dockpars_conformations_current) {
+	clReleaseMemObject(mem_dockpars_conformations_current);}
+  if(mem_dockpars_energies_current) {
+	clReleaseMemObject(mem_dockpars_energies_current);}
 
 /*
   if(mem_dockpars_prng_states)            {clReleaseMemObject(mem_dockpars_prng_states);}
 */
 #if defined(SINGLE_COPY_POP_ENE)
-  if(mem_evals_performed) {clReleaseMemObject(mem_evals_performed);}
-  if(mem_gens_performed)  {clReleaseMemObject(mem_gens_performed);}
+  if(mem_evals_performed) {
+	clReleaseMemObject(mem_evals_performed);}
+  if(mem_gens_performed) {
+	clReleaseMemObject(mem_gens_performed);}
 #else
-  if(mem_evals_and_generations_performed) {clReleaseMemObject(mem_evals_and_generations_performed);}
+  if(mem_evals_and_generations_performed) {
+	clReleaseMemObject(mem_evals_and_generations_performed);}
 #endif
 }
 
