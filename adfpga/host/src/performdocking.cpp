@@ -1085,10 +1085,8 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 
 	for (unsigned int run_cnt = 0; run_cnt < mypars->num_of_runs; run_cnt++)
 	{
-/*
-		printf("Run %3u started ...     \n", run_cnt+1); 
+		printf(" %u", run_cnt+1);
 		fflush(stdout);
-*/
 
 #if defined(SINGLE_COPY_POP_ENE)
 
