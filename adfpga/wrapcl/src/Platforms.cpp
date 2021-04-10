@@ -1,19 +1,18 @@
 #include "Platforms.h"
 
-int getPlatforms(cl_platform_id** platform_id, cl_uint* platformCount){
+int getPlatforms(cl_platform_id** platform_id, cl_uint* platformCount) {
   cl_int err;
-
-  cl_platform_id*               local_platform_id;
-  cl_uint                       local_platformCount;
+  cl_platform_id* local_platform_id;
+  cl_uint local_platformCount;
 
   err = clGetPlatformIDs(0, NULL, &local_platformCount);
-  if (err != CL_SUCCESS){
-	printf("Error: clGetPlatformIDs(): %d\n",err);
-	fflush(stdout);
- 	return EXIT_FAILURE;
+  if (err != CL_SUCCESS) {
+	  printf("Error: clGetPlatformIDs(): %d\n",err);
+	  fflush(stdout);
+ 	  return EXIT_FAILURE;
   }
 
-#if defined (PLATFORM_ATTRIBUTES_DISPLAY) || defined (PRINT_PROGRESS)
+#ifdef (PRINT_OCL_INFO)
   printf("\n-----------------------------------------------------------------------\n"); 
   printf("Number of available OpenCL platforms: %d\n",local_platformCount);
 #endif
@@ -21,10 +20,10 @@ int getPlatforms(cl_platform_id** platform_id, cl_uint* platformCount){
   local_platform_id = (cl_platform_id*) malloc(sizeof(cl_platform_id) * local_platformCount);
 
   err = clGetPlatformIDs(local_platformCount, local_platform_id, NULL);
-  if (err != CL_SUCCESS){
-	printf("Error: clGetPlatformIDs(): %d\n",err);
-	fflush(stdout);
- 	return EXIT_FAILURE;
+  if (err != CL_SUCCESS) {
+	  printf("Error: clGetPlatformIDs(): %d\n",err);
+	  fflush(stdout);
+ 	  return EXIT_FAILURE;
   }
 
 #ifdef PLATFORM_ATTRIBUTES_DISPLAY

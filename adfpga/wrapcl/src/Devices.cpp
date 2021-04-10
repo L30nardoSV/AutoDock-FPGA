@@ -1,76 +1,42 @@
 #include "Devices.h"
 
 int getDevices(cl_platform_id   platform_id, cl_uint  platformCount,
-                 cl_device_id** device_id,   cl_uint* deviceCount)
-{
-  cl_int err;
-
-  cl_device_id* local_device_id;
-  cl_uint       local_deviceCount;
-
-
-
-
-  /* WHEN ALL DEVICES ARE ACCESSED */
+                 cl_device_id** device_id,   cl_uint* deviceCount) {
+    cl_int err;
+    cl_device_id* local_device_id;
+    cl_uint local_deviceCount;
   
     // Access first platforms, get all devices
-#if defined (DEVICE_ATTRIBUTES_DISPLAY) || defined (PRINT_PROGRESS)
+#ifdef (PRINT_OCL_INFO)
     printf("\n-----------------------------------------------------------------------\n");
 #endif
 
-#if defined ALL_DEVICE
-	err = clGetDeviceIDs(platform_id, CL_DEVICE_TYPE_ALL, 0, NULL, &local_deviceCount);
-#elif defined GPU_DEVICE
-	err = clGetDeviceIDs(platform_id, CL_DEVICE_TYPE_GPU, 0, NULL, &local_deviceCount);
-#elif defined FPGA_DEVICE
-	err = clGetDeviceIDs(platform_id, CL_DEVICE_TYPE_ACCELERATOR, 0, NULL, &local_deviceCount);
-#elif defined CPU_DEVICE
-	err = clGetDeviceIDs(platform_id, CL_DEVICE_TYPE_CPU, 0, NULL, &local_deviceCount);
-#else
-	err = 1;	
-	printf("The device-type specified is not recognized.\n");
-	fflush(stdout);	
-#endif
-
-	if (err != CL_SUCCESS){
+    err = clGetDeviceIDs(platform_id, CL_DEVICE_TYPE_ALL, 0, NULL, &local_deviceCount);
+	if (err != CL_SUCCESS) {
 		printf("Error: clGetDevices(): %d\n", err);
 		fflush(stdout);
 		return EXIT_FAILURE;
-    	}
+    }
 
-#if defined (DEVICE_ATTRIBUTES_DISPLAY) || defined (PRINT_PROGRESS)
+#ifdef (PRINT_OCL_INFO)
     printf("Number of available OpenCL devices: %d \n",local_deviceCount);
 #endif
 
-
     local_device_id = (cl_device_id *) malloc(sizeof(cl_device_id) * local_deviceCount);
 
-#if defined ALL_DEVICE
     err = clGetDeviceIDs (platform_id,CL_DEVICE_TYPE_ALL,local_deviceCount,local_device_id,NULL);
-#elif defined GPU_DEVICE
-    err = clGetDeviceIDs (platform_id,CL_DEVICE_TYPE_GPU,local_deviceCount,local_device_id,NULL);
-#elif defined FPGA_DEVICE
-    err = clGetDeviceIDs (platform_id,CL_DEVICE_TYPE_ACCELERATOR,local_deviceCount,local_device_id,NULL);
-#elif CPU_DEVICE
-    err = clGetDeviceIDs (platform_id,CL_DEVICE_TYPE_CPU,local_deviceCount,local_device_id,NULL);
-#else
-    err = 1;
-    printf("The device-type specified is not recognized.\n");
-    fflush(stdout);
-#endif
-
-    if (err != CL_SUCCESS){
+    if (err != CL_SUCCESS) {
     	printf("Error: clGetDevices(): %d\n", err);
     	fflush(stdout);
     	return EXIT_FAILURE;
     }
   
-#ifdef DEVICE_ATTRIBUTES_DISPLAY
+#ifdef (PRINT_OCL_INFO)
     err = getDeviceAttributes(local_device_id, local_deviceCount);
-    if (err != CL_SUCCESS){
-	printf("Error: getDeviceAttributes(): %d\n",err);
-	fflush(stdout);
-	return EXIT_FAILURE;
+    if (err != CL_SUCCESS) {
+	    printf("Error: getDeviceAttributes(): %d\n",err);
+	    fflush(stdout);
+	    return EXIT_FAILURE;
     }
 #endif
 
