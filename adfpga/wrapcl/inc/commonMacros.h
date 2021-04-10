@@ -5,7 +5,8 @@
 #include <stdlib.h>
 #include <CL/opencl.h>
 
-#define EXIT_FAILURE -1
+// Commented out, to avoid this redefinition
+//#define EXIT_FAILURE -1
 
 // wrapcl/Platforms.cpp
 // #define PLATFORM_ATTRIBUTES_DISPLAY
