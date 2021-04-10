@@ -35,11 +35,9 @@ static cl_command_queue command_queue_pc = NULL;
 static cl_kernel kernel_pc = NULL;
 static const char *name_pc = "Krnl_Conform";
 
-#ifdef ENABLE_KERNEL3
-static cl_command_queue command_queue3 = NULL;
-static cl_kernel kernel3  = NULL;
-static const char *name_k3 = "Krnl_InterE";
-#endif
+static cl_command_queue command_queue_ie = NULL;
+static cl_kernel kernel_ie  = NULL;
+static const char *name_ie = "Krnl_InterE";
 
 #ifdef ENABLE_KERNEL4
 static cl_command_queue command_queue4 = NULL;
@@ -746,37 +744,36 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 #endif
 
 
-#ifdef ENABLE_KERNEL3 // Krnl_InterE
-        setKernelArg(kernel3,0,  sizeof(mem_dockpars_fgrids),                    &mem_dockpars_fgrids);
+	// Krnl_InterE
+    setKernelArg(kernel_ie,0,  sizeof(mem_dockpars_fgrids),                    &mem_dockpars_fgrids);
 	#if defined (FIXED_POINT_INTERE)
-	setKernelArg(kernel3,1,  sizeof(mem_KerConstStatic_fixpt64_atom_charges_const),  &mem_KerConstStatic_fixpt64_atom_charges_const);
+	setKernelArg(kernel_ie,1,  sizeof(mem_KerConstStatic_fixpt64_atom_charges_const),  &mem_KerConstStatic_fixpt64_atom_charges_const);
 	#else
-	setKernelArg(kernel3,1,  sizeof(mem_KerConstStatic_atom_charges_const),  &mem_KerConstStatic_atom_charges_const);
+	setKernelArg(kernel_ie,1,  sizeof(mem_KerConstStatic_atom_charges_const),  &mem_KerConstStatic_atom_charges_const);
 	#endif
-	setKernelArg(kernel3,2,  sizeof(mem_KerConstStatic_atom_types_const),    &mem_KerConstStatic_atom_types_const);
-	setKernelArg(kernel3,3,  sizeof(unsigned char),                          &dockpars.g1);
-	setKernelArg(kernel3,4,  sizeof(unsigned int),                           &dockpars.g2);
-	setKernelArg(kernel3,5,  sizeof(unsigned int),                           &dockpars.g3);
-	setKernelArg(kernel3,6,  sizeof(unsigned char),                          &dockpars.num_of_atoms);
+	setKernelArg(kernel_ie,2,  sizeof(mem_KerConstStatic_atom_types_const),    &mem_KerConstStatic_atom_types_const);
+	setKernelArg(kernel_ie,3,  sizeof(unsigned char),                          &dockpars.g1);
+	setKernelArg(kernel_ie,4,  sizeof(unsigned int),                           &dockpars.g2);
+	setKernelArg(kernel_ie,5,  sizeof(unsigned int),                           &dockpars.g3);
+	setKernelArg(kernel_ie,6,  sizeof(unsigned char),                          &dockpars.num_of_atoms);
 
 	#if defined (FIXED_POINT_INTERE)
-	setKernelArg(kernel3,7,  sizeof(unsigned char),                          &gridsizex_minus1);
-	setKernelArg(kernel3,8,  sizeof(unsigned char),                          &gridsizey_minus1);
-	setKernelArg(kernel3,9,  sizeof(unsigned char),                          &gridsizez_minus1);
+	setKernelArg(kernel_ie,7,  sizeof(unsigned char),                          &gridsizex_minus1);
+	setKernelArg(kernel_ie,8,  sizeof(unsigned char),                          &gridsizey_minus1);
+	setKernelArg(kernel_ie,9,  sizeof(unsigned char),                          &gridsizez_minus1);
 	#else
-	setKernelArg(kernel3,7,  sizeof(float),                          	 &fgridsizex_minus1);
-	setKernelArg(kernel3,8,  sizeof(float),                          	 &fgridsizey_minus1);
-	setKernelArg(kernel3,9,  sizeof(float),                          	 &fgridsizez_minus1);
+	setKernelArg(kernel_ie,7,  sizeof(float),                          	 &fgridsizex_minus1);
+	setKernelArg(kernel_ie,8,  sizeof(float),                          	 &fgridsizey_minus1);
+	setKernelArg(kernel_ie,9,  sizeof(float),                          	 &fgridsizez_minus1);
 	#endif
 
 	#if defined(SEPARATE_FGRID_INTERE)
-	setKernelArg(kernel3,10, sizeof(mem_dockpars_fgrids2),                   &mem_dockpars_fgrids2);
-	setKernelArg(kernel3,11, sizeof(mem_dockpars_fgrids3),                   &mem_dockpars_fgrids3);
+	setKernelArg(kernel_ie,10, sizeof(mem_dockpars_fgrids2),                   &mem_dockpars_fgrids2);
+	setKernelArg(kernel_ie,11, sizeof(mem_dockpars_fgrids3),                   &mem_dockpars_fgrids3);
 	#else
-	setKernelArg(kernel3,10, sizeof(unsigned int),                           &mul_tmp2);
-	setKernelArg(kernel3,11, sizeof(unsigned int),                           &mul_tmp3);
+	setKernelArg(kernel_ie,10, sizeof(unsigned int),                           &mul_tmp2);
+	setKernelArg(kernel_ie,11, sizeof(unsigned int),                           &mul_tmp3);
 	#endif
-#endif // End of ENABLE_KERNEL3
 
 #ifdef ENABLE_KERNEL4 // Krnl_IntraE
 	setKernelArg(kernel4,0,  sizeof(mem_KerConstStatic_atom_charges_const),        &mem_KerConstStatic_atom_charges_const);
@@ -1179,10 +1176,7 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 
 		runKernelTask(command_queue_ga,kernel_ga,NULL,NULL);
 		runKernelTask(command_queue_pc,kernel_pc,NULL,NULL);
-
-		#ifdef ENABLE_KERNEL3
-		runKernelTask(command_queue3,kernel3,NULL,NULL);
-		#endif // ENABLE_KERNEL3
+		runKernelTask(command_queue_ie,kernel_ie,NULL,NULL);
 
 		#ifdef ENABLE_KERNEL4
 		runKernelTask(command_queue4,kernel4,NULL,NULL);
@@ -1283,10 +1277,7 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 
 		clFinish(command_queue_ga); 
 		clFinish(command_queue_pc); 
-
-		#ifdef ENABLE_KERNEL3 		
-		clFinish(command_queue3); 
-		#endif
+		clFinish(command_queue_ie); 
 
 		#ifdef ENABLE_KERNEL4 		
 		clFinish(command_queue4); 
@@ -1641,21 +1632,19 @@ bool init() {
 
   //command_queue_ga = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
   command_queue_ga = clCreateCommandQueue(context, device, 0, &status);
-  checkError(status, "Failed to create command queue1");
+  checkError(status, "Failed to create command queue ga");
   kernel_ga = clCreateKernel(program, name_ga, &status);
-  checkError(status, "Failed to create kernel");
+  checkError(status, "Failed to create kernel ga");
 
   command_queue_pc = clCreateCommandQueue(context, device, 0, &status);
-  checkError(status, "Failed to create command queue2");
+  checkError(status, "Failed to create command queue pc");
   kernel_pc = clCreateKernel(program, name_pc, &status);
-  checkError(status, "Failed to create kernel");
+  checkError(status, "Failed to create kernel pc");
 
-#ifdef ENABLE_KERNEL3
-  command_queue3 = clCreateCommandQueue(context, device, 0, &status);
-  checkError(status, "Failed to create command queue3");
-  kernel3 = clCreateKernel(program, name_k3, &status);
-  checkError(status, "Failed to create kernel");
-#endif
+  command_queue_ie = clCreateCommandQueue(context, device, 0, &status);
+  checkError(status, "Failed to create command queue ie");
+  kernel_ie = clCreateKernel(program, name_ie, &status);
+  checkError(status, "Failed to create kernel ie");
 
 #ifdef ENABLE_KERNEL4
   command_queue4 = clCreateCommandQueue(context, device, 0, &status);
@@ -1837,8 +1826,8 @@ void cleanup() {
   if(command_queue_pc) {clReleaseCommandQueue(command_queue_pc);}
 
 #ifdef ENABLE_KERNEL3
-  if(kernel3) {clReleaseKernel(kernel3);}
-  if(command_queue3) {clReleaseCommandQueue(command_queue3);}
+  if(kernel_ie) {clReleaseKernel(kernel_ie);}
+  if(command_queue_ie) {clReleaseCommandQueue(command_queue_ie);}
 #endif
 
 #ifdef ENABLE_KERNEL4
