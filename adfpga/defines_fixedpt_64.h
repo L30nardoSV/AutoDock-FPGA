@@ -284,8 +284,9 @@ fixedpt64_div(fixedpt64 a, fixedpt64 b)
 		bit <<= 1;
 	}
 	
-	// Not present in the original implementation
+	// L30nardoSV added
 	fixedpt64 result;
+
 
 	if (b == 0) {
 		/*return FIXEDPT64_MIN;*/
@@ -301,7 +302,7 @@ fixedpt64_div(fixedpt64 a, fixedpt64 b)
 	}
 	/*#endif*/
 	
-	// Not present in the original implementation
+	// L30nardoSV added
 	else {	
 		if (divider & /*0x80000000*/ 0x8000000000000000)
 		{
@@ -355,7 +356,7 @@ fixedpt64_div(fixedpt64 a, fixedpt64 b)
 		
 			result = -result;
 		}
-	} // end // Not present in the original implementation
+	} // end added else L30nardoSV
 	return result;
 }
 
@@ -428,7 +429,7 @@ else {
 			out_of_loop = true;
 		}
 		
-		// Not present in the original implementation
+		// L30nardoSV added
 		i++;
 	}
             
