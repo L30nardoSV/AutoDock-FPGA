@@ -80,7 +80,7 @@ static cl_kernel kernel_igl_arb = NULL;
 static const char *name_igl_arb = "Krnl_IGL_Arbiter";
 
 static cl_command_queue command_queue_ls123_ushort = NULL;
-static cl_kernel kernel_ls123_ushort = NULL;
+static cl_kernel kernel_ls123_ushort = NULL;name_k45
 static const char *name_ls123_ushort = "Krnl_Prng_LS123_ushort";
 
 static cl_command_queue command_queue_prng_bt_ushort_float = NULL;
@@ -119,11 +119,9 @@ static cl_command_queue command_queue_prng_ls9_float = NULL;
 static cl_kernel kernel_prng_ls9_float = NULL;
 static const char *name_prng_ls9_float = "Krnl_Prng_LS9_float";
 
-#ifdef ENABLE_KERNEL45
-static cl_command_queue command_queue45 = NULL;
-static cl_kernel kernel45  = NULL;
-static const char *name_k45 = "Krnl_LS6";
-#endif
+static cl_command_queue command_queue_ls6 = NULL;
+static cl_kernel kernel_ls6 = NULL;
+static const char *name_ls6 = "Krnl_LS6";
 
 #ifdef ENABLE_KERNEL46
 static cl_command_queue command_queue46 = NULL;
@@ -895,23 +893,21 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 	setKernelArg(kernel_prng_ls8_float,1, sizeof(unsigned char),  &dockpars.num_of_genes);
 	setKernelArg(kernel_prng_ls9_float,1, sizeof(unsigned char),  &dockpars.num_of_genes);
 
-#ifdef ENABLE_KERNEL45 // Krnl_LS6
-	setKernelArg(kernel45,0, sizeof(unsigned short),  &Host_max_num_of_iters);
+	setKernelArg(kernel_ls6,0, sizeof(unsigned short),  &Host_max_num_of_iters);
 	#if defined (FIXED_POINT_LS6)
-	setKernelArg(kernel45,1, sizeof(fixedpt),  	  &fixpt_rho_lower_bound);
-	setKernelArg(kernel45,2, sizeof(fixedpt),  	  &fixpt_base_dmov_mul_sqrt3);
+	setKernelArg(kernel_ls6,1, sizeof(fixedpt),  	  &fixpt_rho_lower_bound);
+	setKernelArg(kernel_ls6,2, sizeof(fixedpt),  	  &fixpt_base_dmov_mul_sqrt3);
 	#else
-	setKernelArg(kernel45,1, sizeof(float),  	  &dockpars.rho_lower_bound);
-	setKernelArg(kernel45,2, sizeof(float),  	  &dockpars.base_dmov_mul_sqrt3);
+	setKernelArg(kernel_ls6,1, sizeof(float),  	  &dockpars.rho_lower_bound);
+	setKernelArg(kernel_ls6,2, sizeof(float),  	  &dockpars.base_dmov_mul_sqrt3);
 	#endif
-	setKernelArg(kernel45,3, sizeof(unsigned char),   &dockpars.num_of_genes);
+	setKernelArg(kernel_ls6,3, sizeof(unsigned char),   &dockpars.num_of_genes);
 	#if defined (FIXED_POINT_LS6)
-	setKernelArg(kernel45,4, sizeof(fixedpt),  	  &fixpt_base_dang_mul_sqrt3);
+	setKernelArg(kernel_ls6,4, sizeof(fixedpt),  	  &fixpt_base_dang_mul_sqrt3);
 	#else
-	setKernelArg(kernel45,4, sizeof(float),  	  &dockpars.base_dang_mul_sqrt3);
+	setKernelArg(kernel_ls6,4, sizeof(float),  	  &dockpars.base_dang_mul_sqrt3);
 	#endif
-	setKernelArg(kernel45,5, sizeof(unsigned char),   &Host_cons_limit);
-#endif // End of ENABLE_KERNEL45
+	setKernelArg(kernel_ls6,5, sizeof(unsigned char),   &Host_cons_limit);
 
 #ifdef ENABLE_KERNEL46 // Krnl_LS7
 	setKernelArg(kernel46,0, sizeof(unsigned short),  &Host_max_num_of_iters);
@@ -1084,10 +1080,7 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		runKernelTask(command_queue_prng_ls7_float,kernel_prng_ls7_float,NULL,NULL);
 		runKernelTask(command_queue_prng_ls8_float,kernel_prng_ls8_float,NULL,NULL);
 		runKernelTask(command_queue_prng_ls9_float,kernel_prng_ls9_float,NULL,NULL);
-
-		#ifdef ENABLE_KERNEL45
-		runKernelTask(command_queue45,kernel45,NULL,NULL);
-		#endif // ENABLE_KERNEL45
+		runKernelTask(command_queue_ls6,kernel_ls6,NULL,NULL);
 
 		#ifdef ENABLE_KERNEL46
 		runKernelTask(command_queue46,kernel46,NULL,NULL);
@@ -1125,10 +1118,7 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		clFinish(command_queue_prng_ls7_float);
 		clFinish(command_queue_prng_ls8_float);
 		clFinish(command_queue_prng_ls9_float);
-
-		#ifdef ENABLE_KERNEL45
-		clFinish(command_queue45);
-		#endif
+		clFinish(command_queue_ls6);
 
 		#ifdef ENABLE_KERNEL46
 		clFinish(command_queue46);
@@ -1513,12 +1503,10 @@ bool init() {
   kernel_prng_ls9_float = clCreateKernel(program, name_prng_ls9_float, &status);
   checkError(status, "Failed to create kernel prng_ls9_float");
 
-#ifdef ENABLE_KERNEL45
-  command_queue45 = clCreateCommandQueue(context, device, 0, &status);
-  checkError(status, "Failed to create command queue45");
-  kernel45 = clCreateKernel(program, name_k45, &status);
-  checkError(status, "Failed to create kernel");
-#endif
+  command_queue_ls6 = clCreateCommandQueue(context, device, 0, &status);
+  checkError(status, "Failed to create command queue ls6");
+  kernel_ls6 = clCreateKernel(program, name_ls6, &status);
+  checkError(status, "Failed to create kernel ls6");
 
 #ifdef ENABLE_KERNEL46
   command_queue46 = clCreateCommandQueue(context, device, 0, &status);
@@ -1615,10 +1603,8 @@ void cleanup() {
   if(kernel_prng_ls9_float) {clReleaseKernel(kernel_prng_ls9_float);}
   if(command_queue_prng_ls9_float) {clReleaseCommandQueue(command_queue_prng_ls9_float);}
 
-#ifdef ENABLE_KERNEL45
-  if(kernel45) {clReleaseKernel(kernel45);}
-  if(command_queue45) {clReleaseCommandQueue(command_queue45);}
-#endif
+  if(kernel_ls6) {clReleaseKernel(kernel_ls6);}
+  if(command_queue_ls6) {clReleaseCommandQueue(command_queue_ls6);}
 
 #ifdef ENABLE_KERNEL46
   if(kernel46) {clReleaseKernel(kernel46);}

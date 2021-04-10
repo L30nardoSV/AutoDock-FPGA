@@ -128,7 +128,7 @@ K46 =-DENABLE_KERNEL46
 K47 =-DENABLE_KERNEL47
 K48 =-DENABLE_KERNEL48
 
-ENABLE_KERNELS = $(K45) $(K46) $(K47) $(K48)
+ENABLE_KERNELS = $(K46) $(K47) $(K48)
 
 # =============================
 # Reproduce result (remove randomness)
