@@ -101,12 +101,12 @@ LIBS := rt pthread
 # =============================
 # Print progress info
 # =============================
-PRINT_OCL_INFO=YES
+PRINT_PROGRESS=YES
 
-ifeq ($(PRINT_OCL_INFO),YES)
-	PRINT_OCL_INFO =-DPRINT_OCL_INFO
+ifeq ($(PRINT_PROGRESS),YES)
+	DOCK_PROG =-DPRINT_PROGRESS
 else
-	PRINT_OCL_INFO =
+	DOCK_PROG =
 endif
 
 # =============================
@@ -539,7 +539,7 @@ $(TARGET_DIR)/$(TARGET) : Makefile $(SRCS) $(INCS) $(TARGET_DIR)
 			$(AOCL_COMPILE_CONFIG) $(SRCS) $(AOCL_LINK_CONFIG) \
 			$(foreach D,$(LIB_DIRS),-L$D) \
 			$(foreach L,$(LIBS),-l$L) \
-			-o $(TARGET_DIR)/$(TARGET) $(DOCK_DEBUG_FLAG) $(PRINT_OCL_INFO) $(ENABLE_KERNELS) $(REP) $(FIPO_FLAG)
+			-o $(TARGET_DIR)/$(TARGET) $(DOCK_DEBUG_FLAG) $(DOCK_PROG) $(ENABLE_KERNELS) $(REP) $(FIPO_FLAG)
 	@echo $(newline)
 	@echo "========================================================"
 	@echo "INFO: host binary is under: \"$(TARGET_DIR)/$(TARGET)\" "
