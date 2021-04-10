@@ -80,7 +80,7 @@ static cl_kernel kernel_igl_arb = NULL;
 static const char *name_igl_arb = "Krnl_IGL_Arbiter";
 
 static cl_command_queue command_queue_ls123_ushort = NULL;
-static cl_kernel kernel_ls123_ushort = NULL;name_k45
+static cl_kernel kernel_ls123_ushort = NULL;
 static const char *name_ls123_ushort = "Krnl_Prng_LS123_ushort";
 
 static cl_command_queue command_queue_prng_bt_ushort_float = NULL;
