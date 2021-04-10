@@ -123,7 +123,6 @@ endif
 # =============================
 # Enable Kernels
 # =============================
-K10 =-DENABLE_KERNEL10
 K12 =-DENABLE_KERNEL12
 K14 =-DENABLE_KERNEL14
 K15 =-DENABLE_KERNEL15
@@ -145,8 +144,7 @@ K46 =-DENABLE_KERNEL46
 K47 =-DENABLE_KERNEL47
 K48 =-DENABLE_KERNEL48
 
-ENABLE_KERNELS = $(K8)  $(K9)  $(K10) \
-		 $(K11) $(K12) $(K13) $(K14) $(K15) $(K16) $(K17) $(K18) $(K19) $(K20) \
+ENABLE_KERNELS = $(K11) $(K12) $(K13) $(K14) $(K15) $(K16) $(K17) $(K18) $(K19) $(K20) \
 		 $(K21) $(K22) $(K23) $(K24) $(K25) $(K26) $(K27) $(K28) $(K29) $(K30) \
 		 $(K31) $(K32) $(K33) $(K34) $(K35) $(K36) $(K37) $(K38) $(K39) $(K40) \
 		 $(K41) $(K42) $(K43) $(K44) $(K45) $(K46) $(K47) $(K48)
