@@ -79,11 +79,9 @@ static cl_command_queue command_queue_igl_arb = NULL;
 static cl_kernel kernel_igl_arb = NULL;
 static const char *name_igl_arb = "Krnl_IGL_Arbiter";
 
-#ifdef ENABLE_KERNEL35
-static cl_command_queue command_queue35 = NULL;
-static cl_kernel kernel35  = NULL;
-static const char *name_k35 = "Krnl_Prng_LS123_ushort";
-#endif
+static cl_command_queue command_queue_ls123_ushort = NULL;
+static cl_kernel kernel_ls123_ushort = NULL;
+static const char *name_ls123_ushort = "Krnl_Prng_LS123_ushort";
 
 #ifdef ENABLE_KERNEL36
 static cl_command_queue command_queue36 = NULL;
@@ -870,9 +868,7 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 	setKernelArg(kernel_igl_arb,0, sizeof(unsigned char),  &dockpars.num_of_genes);
 */
 
-#ifdef ENABLE_KERNEL35 // Krnl_PRNG_LS123_ushort
-	setKernelArg(kernel35,9, sizeof(unsigned int),  &dockpars.pop_size);
-#endif // End of ENABLE_KERNEL35
+	setKernelArg(kernel_ls123_ushort,9, sizeof(unsigned int),  &dockpars.pop_size);
 
 #ifdef ENABLE_KERNEL36 // Krnl_PRNG_ushort_float
 	setKernelArg(kernel36,2, sizeof(unsigned int),  &dockpars.pop_size);
@@ -1084,17 +1080,15 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 	setKernelArg(kernel_prng_ls2_float,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 3]);
 	setKernelArg(kernel_prng_ls3_float,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 4]);
 
-#ifdef ENABLE_KERNEL35 // Krnl_PRNG_LS123_ushort
-		setKernelArg(kernel35,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 5]);
-		setKernelArg(kernel35,1, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 6]);
-		setKernelArg(kernel35,2, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 7]);
-		setKernelArg(kernel35,3, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 8]);
-		setKernelArg(kernel35,4, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 9]);
-		setKernelArg(kernel35,5, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 10]);
-		setKernelArg(kernel35,6, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 11]);
-		setKernelArg(kernel35,7, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 12]);
-		setKernelArg(kernel35,8, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 13]);
-#endif // End of ENABLE_KERNEL35
+	setKernelArg(kernel_ls123_ushort,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 5]);
+	setKernelArg(kernel_ls123_ushort,1, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 6]);
+	setKernelArg(kernel_ls123_ushort,2, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 7]);
+	setKernelArg(kernel_ls123_ushort,3, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 8]);
+	setKernelArg(kernel_ls123_ushort,4, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 9]);
+	setKernelArg(kernel_ls123_ushort,5, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 10]);
+	setKernelArg(kernel_ls123_ushort,6, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 11]);
+	setKernelArg(kernel_ls123_ushort,7, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 12]);
+	setKernelArg(kernel_ls123_ushort,8, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 13]);
 
 #ifdef ENABLE_KERNEL36 // Krnl_Prng_BT_ushort_float
 		setKernelArg(kernel36,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 14]);
@@ -1138,10 +1132,7 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		runKernelTask(command_queue_prng_ls3_float,kernel_prng_ls3_float,NULL,NULL);
 		runKernelTask(command_queue_ls3,kernel_ls3,NULL,NULL);
 		runKernelTask(command_queue_igl_arb,kernel_igl_arb,NULL,NULL);
-
-		#ifdef ENABLE_KERNEL35
-		runKernelTask(command_queue35,kernel35,NULL,NULL);
-		#endif // ENABLE_KERNEL35
+		runKernelTask(command_queue_ls123_ushort,kernel_ls123_ushort,NULL,NULL);
 
 		#ifdef ENABLE_KERNEL36
 		runKernelTask(command_queue36,kernel36,NULL,NULL);
@@ -1209,10 +1200,7 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		clFinish(command_queue_prng_ls3_float);
 		clFinish(command_queue_ls3);
 		clFinish(command_queue_igl_arb);
-
-		#ifdef ENABLE_KERNEL35
-		clFinish(command_queue35);
-		#endif
+		clFinish(command_queue_ls123_ushort);
 
 		#ifdef ENABLE_KERNEL36
 		clFinish(command_queue36);
@@ -1587,12 +1575,10 @@ bool init() {
   kernel_igl_arb = clCreateKernel(program, name_igl_arb, &status);
   checkError(status, "Failed to create kernel igl_arb");
 
-#ifdef ENABLE_KERNEL35
-  command_queue35 = clCreateCommandQueue(context, device, 0, &status);
-  checkError(status, "Failed to create command queue26");
-  kernel35 = clCreateKernel(program, name_k35, &status);
-  checkError(status, "Failed to create kernel");
-#endif
+  command_queue_ls123_ushort = clCreateCommandQueue(context, device, 0, &status);
+  checkError(status, "Failed to create command queue ls123_ushort");
+  kernel_ls123_ushort = clCreateKernel(program, name_ls123_ushort, &status);
+  checkError(status, "Failed to create kernel ls123_ushort");
 
 #ifdef ENABLE_KERNEL36
   command_queue36 = clCreateCommandQueue(context, device, 0, &status);
@@ -1729,10 +1715,8 @@ void cleanup() {
   if(kernel_igl_arb) {clReleaseKernel(kernel_igl_arb);}
   if(command_queue_igl_arb) {clReleaseCommandQueue(command_queue_igl_arb);}
 
-#ifdef ENABLE_KERNEL35
-  if(kernel35) {clReleaseKernel(kernel35);}
-  if(command_queue35) {clReleaseCommandQueue(command_queue35);}
-#endif
+  if(kernel_ls123_ushort) {clReleaseKernel(kernel_ls123_ushort);}
+  if(command_queue_ls123_ushort) {clReleaseCommandQueue(command_queue_ls123_ushort);}
 
 #ifdef ENABLE_KERNEL36
   if(kernel36) {clReleaseKernel(kernel36);}
