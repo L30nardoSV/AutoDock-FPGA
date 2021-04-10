@@ -99,25 +99,6 @@ SRCS := $(wildcard ../common/src/AOCLUtils/*.cpp wrapcl/src/*.cpp host/src/*.cpp
 LIBS := rt pthread
 
 # =============================
-# Select OpenCL device type
-# =============================
-CPU_DEVICE=NO
-GPU_DEVICE=NO
-FPGA_DEVICE=NO
-
-ifeq ($(CPU_DEVICE),YES)
-	DEV =-DCPU_DEVICE
-
-else ifeq ($(GPU_DEVICE),YES)
-	DEV =-DGPU_DEVICE
-
-else ifeq ($(FPGA_DEVICE),YES)
-	DEV =-DFPGA_DEVICE
-else 
-	DEV =-DALL_DEVICE
-endif
-
-# =============================
 # Print progress info
 # =============================
 PRINT_PROGRESS=YES
@@ -558,7 +539,7 @@ $(TARGET_DIR)/$(TARGET) : Makefile $(SRCS) $(INCS) $(TARGET_DIR)
 			$(AOCL_COMPILE_CONFIG) $(SRCS) $(AOCL_LINK_CONFIG) \
 			$(foreach D,$(LIB_DIRS),-L$D) \
 			$(foreach L,$(LIBS),-l$L) \
-			-o $(TARGET_DIR)/$(TARGET) $(DOCK_DEBUG_FLAG) $(DEV) $(DOCK_PROG) $(ENABLE_KERNELS) $(REP) $(FIPO_FLAG)
+			-o $(TARGET_DIR)/$(TARGET) $(DOCK_DEBUG_FLAG) $(DOCK_PROG) $(ENABLE_KERNELS) $(REP) $(FIPO_FLAG)
 	@echo $(newline)
 	@echo "========================================================"
 	@echo "INFO: host binary is under: \"$(TARGET_DIR)/$(TARGET)\" "
