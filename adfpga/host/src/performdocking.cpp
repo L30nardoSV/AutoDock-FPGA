@@ -31,11 +31,9 @@ static cl_command_queue command_queue_ga = NULL;
 static cl_kernel kernel_ga  = NULL;
 static const char *name_ga = "Krnl_GA";
 
-#ifdef ENABLE_KERNEL2
-static cl_command_queue command_queue2 = NULL;
-static cl_kernel kernel2  = NULL;
-static const char *name_k2 = "Krnl_Conform";
-#endif
+static cl_command_queue command_queue_pc = NULL;
+static cl_kernel kernel_pc = NULL;
+static const char *name_pc = "Krnl_Conform";
 
 #ifdef ENABLE_KERNEL3
 static cl_command_queue command_queue3 = NULL;
@@ -703,38 +701,36 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	setKernelArg(kernel_ga,14, sizeof(unsigned char),                         &dockpars.num_of_genes);
 	#endif
 
-#ifdef ENABLE_KERNEL2 // Krnl_Conform
-	setKernelArg(kernel2,0,  sizeof(mem_KerConstStatic_rotlist_const),      	   &mem_KerConstStatic_rotlist_const);
-	setKernelArg(kernel2,1,  sizeof(mem_KerConstStatic_ref_coords_const),              &mem_KerConstStatic_ref_coords_const);
-	setKernelArg(kernel2,2,  sizeof(mem_KerConstStatic_rotbonds_moving_vectors_const), &mem_KerConstStatic_rotbonds_moving_vectors_const);
-	setKernelArg(kernel2,3,  sizeof(mem_KerConstStatic_rotbonds_unit_vectors_const),   &mem_KerConstStatic_rotbonds_unit_vectors_const);
-	setKernelArg(kernel2,4,  sizeof(unsigned int),       &dockpars.rotbondlist_length);
-	setKernelArg(kernel2,5,  sizeof(unsigned char),      &dockpars.num_of_atoms);
-	setKernelArg(kernel2,6,  sizeof(unsigned char),      &dockpars.num_of_genes);
+	// Krnl_PoseCalc
+	setKernelArg(kernel_pc,0,  sizeof(mem_KerConstStatic_rotlist_const),      	   &mem_KerConstStatic_rotlist_const);
+	setKernelArg(kernel_pc,1,  sizeof(mem_KerConstStatic_ref_coords_const),              &mem_KerConstStatic_ref_coords_const);
+	setKernelArg(kernel_pc,2,  sizeof(mem_KerConstStatic_rotbonds_moving_vectors_const), &mem_KerConstStatic_rotbonds_moving_vectors_const);
+	setKernelArg(kernel_pc,3,  sizeof(mem_KerConstStatic_rotbonds_unit_vectors_const),   &mem_KerConstStatic_rotbonds_unit_vectors_const);
+	setKernelArg(kernel_pc,4,  sizeof(unsigned int),       &dockpars.rotbondlist_length);
+	setKernelArg(kernel_pc,5,  sizeof(unsigned char),      &dockpars.num_of_atoms);
+	setKernelArg(kernel_pc,6,  sizeof(unsigned char),      &dockpars.num_of_genes);
 /*
-	setKernelArg(kernel2,7,  sizeof(unsigned char),      &num_rotbonds);
-	setKernelArg(kernel2,8,  sizeof(mem_KerConstStatic_ref_orientation_quats_const),   &mem_KerConstStatic_ref_orientation_quats_const);
+	setKernelArg(kernel_pc,7,  sizeof(unsigned char),      &num_rotbonds);
+	setKernelArg(kernel_pc,8,  sizeof(mem_KerConstStatic_ref_orientation_quats_const),   &mem_KerConstStatic_ref_orientation_quats_const);
 */
-	setKernelArg(kernel2,7,  sizeof(mem_KerConstStatic_ref_orientation_quats_const),   &mem_KerConstStatic_ref_orientation_quats_const);
+	setKernelArg(kernel_pc,7,  sizeof(mem_KerConstStatic_ref_orientation_quats_const),   &mem_KerConstStatic_ref_orientation_quats_const);
 	#if defined(SINGLE_COPY_POP_ENE)
 
 	#else
 		#if defined (FIXED_POINT_CONFORM)
 	// fixed-point
-	setKernelArg(kernel2,8,  sizeof(fixedpt),            &KerConstDynamic.ref_orientation_quats_const[0]);
-	setKernelArg(kernel2,9,  sizeof(fixedpt),            &KerConstDynamic.ref_orientation_quats_const[1]);
-	setKernelArg(kernel2,10, sizeof(fixedpt),            &KerConstDynamic.ref_orientation_quats_const[2]);
-	setKernelArg(kernel2,11, sizeof(fixedpt),            &KerConstDynamic.ref_orientation_quats_const[3]);
+	setKernelArg(kernel_pc,8,  sizeof(fixedpt),            &KerConstDynamic.ref_orientation_quats_const[0]);
+	setKernelArg(kernel_pc,9,  sizeof(fixedpt),            &KerConstDynamic.ref_orientation_quats_const[1]);
+	setKernelArg(kernel_pc,10, sizeof(fixedpt),            &KerConstDynamic.ref_orientation_quats_const[2]);
+	setKernelArg(kernel_pc,11, sizeof(fixedpt),            &KerConstDynamic.ref_orientation_quats_const[3]);
 		#else
 	// floating-point (original)
-	setKernelArg(kernel2,8,  sizeof(float),              &KerConstDynamic.ref_orientation_quats_const[0]);
-	setKernelArg(kernel2,9,  sizeof(float),              &KerConstDynamic.ref_orientation_quats_const[1]);
-	setKernelArg(kernel2,10, sizeof(float),              &KerConstDynamic.ref_orientation_quats_const[2]);
-	setKernelArg(kernel2,11, sizeof(float),              &KerConstDynamic.ref_orientation_quats_const[3]);
+	setKernelArg(kernel_pc,8,  sizeof(float),              &KerConstDynamic.ref_orientation_quats_const[0]);
+	setKernelArg(kernel_pc,9,  sizeof(float),              &KerConstDynamic.ref_orientation_quats_const[1]);
+	setKernelArg(kernel_pc,10, sizeof(float),              &KerConstDynamic.ref_orientation_quats_const[2]);
+	setKernelArg(kernel_pc,11, sizeof(float),              &KerConstDynamic.ref_orientation_quats_const[3]);
 		#endif
 	#endif
-#endif // End of ENABLE_KERNEL2
-
 
 	unsigned char gridsizex_minus1 = dockpars.gridsize_x - 1;
 	unsigned char gridsizey_minus1 = dockpars.gridsize_y - 1;
@@ -1087,39 +1083,38 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		setKernelArg(kernel_ga,18,  sizeof(unsigned int),   &Host_Offset_Ene);
 #endif
 
-#ifdef ENABLE_KERNEL2 // Krnl_Conform
+	// Krnl_PoseCalc
 	/*
 	#if defined(SINGLE_COPY_POP_ENE)
 		#if defined (FIXED_POINT_CONFORM)
-		setKernelArg(kernel2,8,  sizeof(fixedpt),        &KerConstStatic.ref_orientation_quats_const[4*run_cnt]);
-		setKernelArg(kernel2,9,  sizeof(fixedpt),        &KerConstStatic.ref_orientation_quats_const[4*run_cnt + 1]);	
-		setKernelArg(kernel2,10, sizeof(fixedpt),        &KerConstStatic.ref_orientation_quats_const[4*run_cnt + 2]);	
-		setKernelArg(kernel2,11, sizeof(fixedpt),        &KerConstStatic.ref_orientation_quats_const[4*run_cnt + 3]);
+		setKernelArg(kernel_pc,8,  sizeof(fixedpt),        &KerConstStatic.ref_orientation_quats_const[4*run_cnt]);
+		setKernelArg(kernel_pc,9,  sizeof(fixedpt),        &KerConstStatic.ref_orientation_quats_const[4*run_cnt + 1]);	
+		setKernelArg(kernel_pc,10, sizeof(fixedpt),        &KerConstStatic.ref_orientation_quats_const[4*run_cnt + 2]);	
+		setKernelArg(kernel_pc,11, sizeof(fixedpt),        &KerConstStatic.ref_orientation_quats_const[4*run_cnt + 3]);
 		#else
-		setKernelArg(kernel2,8,  sizeof(float),          &KerConstStatic.ref_orientation_quats_const[4*run_cnt]);
-		setKernelArg(kernel2,9,  sizeof(float),          &KerConstStatic.ref_orientation_quats_const[4*run_cnt + 1]);	
-		setKernelArg(kernel2,10, sizeof(float),          &KerConstStatic.ref_orientation_quats_const[4*run_cnt + 2]);	
-		setKernelArg(kernel2,11, sizeof(float),          &KerConstStatic.ref_orientation_quats_const[4*run_cnt + 3]);
+		setKernelArg(kernel_pc,8,  sizeof(float),          &KerConstStatic.ref_orientation_quats_const[4*run_cnt]);
+		setKernelArg(kernel_pc,9,  sizeof(float),          &KerConstStatic.ref_orientation_quats_const[4*run_cnt + 1]);	
+		setKernelArg(kernel_pc,10, sizeof(float),          &KerConstStatic.ref_orientation_quats_const[4*run_cnt + 2]);	
+		setKernelArg(kernel_pc,11, sizeof(float),          &KerConstStatic.ref_orientation_quats_const[4*run_cnt + 3]);
 		#endif
 	#else
 		#if defined (FIXED_POINT_CONFORM)
-		setKernelArg(kernel2,8,  sizeof(fixedpt),        &KerConstDynamic.ref_orientation_quats_const[0]);
-		setKernelArg(kernel2,9,  sizeof(fixedpt),        &KerConstDynamic.ref_orientation_quats_const[1]);	
-		setKernelArg(kernel2,10, sizeof(fixedpt),        &KerConstDynamic.ref_orientation_quats_const[2]);	
-		setKernelArg(kernel2,11, sizeof(fixedpt),        &KerConstDynamic.ref_orientation_quats_const[3]);
+		setKernelArg(kernel_pc,8,  sizeof(fixedpt),        &KerConstDynamic.ref_orientation_quats_const[0]);
+		setKernelArg(kernel_pc,9,  sizeof(fixedpt),        &KerConstDynamic.ref_orientation_quats_const[1]);	
+		setKernelArg(kernel_pc,10, sizeof(fixedpt),        &KerConstDynamic.ref_orientation_quats_const[2]);	
+		setKernelArg(kernel_pc,11, sizeof(fixedpt),        &KerConstDynamic.ref_orientation_quats_const[3]);
 		#else
-		setKernelArg(kernel2,8,  sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[0]);
-		setKernelArg(kernel2,9,  sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[1]);	
-		setKernelArg(kernel2,10, sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[2]);	
-		setKernelArg(kernel2,11, sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[3]);
+		setKernelArg(kernel_pc,8,  sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[0]);
+		setKernelArg(kernel_pc,9,  sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[1]);	
+		setKernelArg(kernel_pc,10, sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[2]);	
+		setKernelArg(kernel_pc,11, sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[3]);
 		#endif
 	#endif
 	*/
 	/*
-	setKernelArg(kernel2,9,  sizeof(unsigned short), &run_cnt);
+	setKernelArg(kernel_pc,9,  sizeof(unsigned short), &run_cnt);
 	*/
-	setKernelArg(kernel2,8,  sizeof(unsigned short), &run_cnt);
-#endif // End of ENABLE_KERNEL2
+	setKernelArg(kernel_pc,8,  sizeof(unsigned short), &run_cnt);
 
 #ifdef ENABLE_KERNEL6 // Krnl_PRNG_GG_float
 		setKernelArg(kernel6,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt]);
@@ -1183,10 +1178,7 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 #endif // End of ENABLE_KERNEL44
 
 		runKernelTask(command_queue_ga,kernel_ga,NULL,NULL);
-
-		#ifdef ENABLE_KERNEL2
-		runKernelTask(command_queue2,kernel2,NULL,NULL);
-		#endif // ENABLE_KERNEL2
+		runKernelTask(command_queue_pc,kernel_pc,NULL,NULL);
 
 		#ifdef ENABLE_KERNEL3
 		runKernelTask(command_queue3,kernel3,NULL,NULL);
@@ -1290,10 +1282,7 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 
 
 		clFinish(command_queue_ga); 
-
-		#ifdef ENABLE_KERNEL2	
-		clFinish(command_queue2); 
-		#endif
+		clFinish(command_queue_pc); 
 
 		#ifdef ENABLE_KERNEL3 		
 		clFinish(command_queue3); 
@@ -1656,12 +1645,10 @@ bool init() {
   kernel_ga = clCreateKernel(program, name_ga, &status);
   checkError(status, "Failed to create kernel");
 
-#ifdef ENABLE_KERNEL2
-  command_queue2 = clCreateCommandQueue(context, device, 0, &status);
+  command_queue_pc = clCreateCommandQueue(context, device, 0, &status);
   checkError(status, "Failed to create command queue2");
-  kernel2 = clCreateKernel(program, name_k2, &status);
+  kernel_pc = clCreateKernel(program, name_pc, &status);
   checkError(status, "Failed to create kernel");
-#endif
 
 #ifdef ENABLE_KERNEL3
   command_queue3 = clCreateCommandQueue(context, device, 0, &status);
@@ -1846,10 +1833,8 @@ void cleanup() {
   if(kernel_ga) {clReleaseKernel(kernel_ga);}
   if(command_queue_ga) {clReleaseCommandQueue(command_queue_ga);}
 
-#ifdef ENABLE_KERNEL2
-  if(kernel2) {clReleaseKernel(kernel2);}
-  if(command_queue2) {clReleaseCommandQueue(command_queue2);}
-#endif
+  if(kernel_pc) {clReleaseKernel(kernel_pc);}
+  if(command_queue_pc) {clReleaseCommandQueue(command_queue_pc);}
 
 #ifdef ENABLE_KERNEL3
   if(kernel3) {clReleaseKernel(kernel3);}
