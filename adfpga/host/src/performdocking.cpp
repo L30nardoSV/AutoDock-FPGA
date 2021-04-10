@@ -664,7 +664,7 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 
 	clock_start_docking = clock();
 
-#ifdef ENABLE_KERNEL1 // Krnl_GA
+	// Krnl_GA
 	#if defined(SINGLE_COPY_POP_ENE)
     setKernelArg(kernel_ga,0,  sizeof(mem_dockpars_conformations_current),    &mem_dockpars_conformations_current);
     setKernelArg(kernel_ga,1,  sizeof(mem_dockpars_energies_current),         &mem_dockpars_energies_current);
@@ -702,7 +702,6 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	setKernelArg(kernel_ga,13, sizeof(unsigned int),                          &dockpars.num_of_lsentities);
 	setKernelArg(kernel_ga,14, sizeof(unsigned char),                         &dockpars.num_of_genes);
 	#endif
-#endif // End of ENABLE_KERNEL1
 
 #ifdef ENABLE_KERNEL2 // Krnl_Conform
 	setKernelArg(kernel2,0,  sizeof(mem_KerConstStatic_rotlist_const),      	   &mem_KerConstStatic_rotlist_const);
@@ -1081,14 +1080,11 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 #endif
 
 #if defined(SINGLE_COPY_POP_ENE)
-	#ifdef ENABLE_KERNEL1
 		unsigned int Host_Offset_Pop = run_cnt * dockpars.pop_size * ACTUAL_GENOTYPE_LENGTH;
 		unsigned int Host_Offset_Ene = run_cnt * dockpars.pop_size;
 		setKernelArg(kernel_ga,16,  sizeof(unsigned short), &run_cnt);
 		setKernelArg(kernel_ga,17,  sizeof(unsigned int),   &Host_Offset_Pop);
 		setKernelArg(kernel_ga,18,  sizeof(unsigned int),   &Host_Offset_Ene);
-
-	#endif
 #endif
 
 #ifdef ENABLE_KERNEL2 // Krnl_Conform
@@ -1186,9 +1182,7 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		setKernelArg(kernel44,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 21]);
 #endif // End of ENABLE_KERNEL44
 
-		#ifdef ENABLE_KERNEL1
 		runKernelTask(command_queue_ga,kernel_ga,NULL,NULL);
-		#endif // ENABLE_KERNEL1
 
 		#ifdef ENABLE_KERNEL2
 		runKernelTask(command_queue2,kernel2,NULL,NULL);
@@ -1295,11 +1289,7 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		#endif // ENABLE_KERNEL48
 
 
-
-
-		#ifdef ENABLE_KERNEL1 		
 		clFinish(command_queue_ga); 
-		#endif
 
 		#ifdef ENABLE_KERNEL2	
 		clFinish(command_queue2); 
@@ -1659,13 +1649,12 @@ bool init() {
   checkError(status, "Failed to build program");
 
   // Create the command queue and kernel
-#ifdef ENABLE_KERNEL1
+
   //command_queue_ga = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
   command_queue_ga = clCreateCommandQueue(context, device, 0, &status);
   checkError(status, "Failed to create command queue1");
   kernel_ga = clCreateKernel(program, name_ga, &status);
   checkError(status, "Failed to create kernel");
-#endif
 
 #ifdef ENABLE_KERNEL2
   command_queue2 = clCreateCommandQueue(context, device, 0, &status);
@@ -1854,10 +1843,8 @@ bool init() {
 
 // Free the resources allocated during initialization
 void cleanup() {
-#ifdef ENABLE_KERNEL1
   if(kernel_ga) {clReleaseKernel(kernel_ga);}
   if(command_queue_ga) {clReleaseCommandQueue(command_queue_ga);}
-#endif
 
 #ifdef ENABLE_KERNEL2
   if(kernel2) {clReleaseKernel(kernel2);}
