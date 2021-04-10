@@ -1067,7 +1067,8 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 
 	for (unsigned int run_cnt = 0; run_cnt < mypars->num_of_runs; run_cnt++)
 	{
-		printf(" %u", run_cnt+1);
+		printf(" %u", run_cnt + 1);
+		if ((run_cnt + 1) % 10 == 0) { printf("\n"); } // Next line if nrun is multiple of 10
 		fflush(stdout);
 
 #if defined(SINGLE_COPY_POP_ENE)
