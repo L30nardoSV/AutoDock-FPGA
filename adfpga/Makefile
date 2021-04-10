@@ -101,7 +101,7 @@ LIBS := rt pthread
 # =============================
 # Print progress info
 # =============================
-PRINT_OCLINFO=YES
+PRINT_OCLINFO=NO
 
 ifeq ($(PRINT_OCLINFO),YES)
 	PRINT_OCL =-DPRINT_OCLINFO
