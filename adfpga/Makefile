@@ -121,13 +121,6 @@ else
 endif
 
 # =============================
-# Enable Kernels
-# =============================
-K48 =-DENABLE_KERNEL48
-
-ENABLE_KERNELS = $(K48)
-
-# =============================
 # Reproduce result (remove randomness)
 # =============================
 REPRO=NO
@@ -325,7 +318,7 @@ $(TARGET_DIR)/$(TARGET) : Makefile $(SRCS) $(INCS) $(TARGET_DIR)
 			$(AOCL_COMPILE_CONFIG) $(SRCS) $(AOCL_LINK_CONFIG) \
 			$(foreach D,$(LIB_DIRS),-L$D) \
 			$(foreach L,$(LIBS),-l$L) \
-			-o $(TARGET_DIR)/$(TARGET) $(DOCK_DEBUG_FLAG) $(PRINT_OCL) $(ENABLE_KERNELS) $(REP) $(FIPO_FLAG)
+			-o $(TARGET_DIR)/$(TARGET) $(DOCK_DEBUG_FLAG) $(PRINT_OCL) $(REP) $(FIPO_FLAG)
 	@echo $(newline)
 	@echo "========================================================"
 	@echo "INFO: host binary is under: \"$(TARGET_DIR)/$(TARGET)\" "

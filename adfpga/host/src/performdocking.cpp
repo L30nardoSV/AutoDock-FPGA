@@ -131,11 +131,9 @@ static cl_command_queue command_queue_ls8 = NULL;
 static cl_kernel kernel_ls8 = NULL;
 static const char *name_ls8 = "Krnl_LS8";
 
-#ifdef ENABLE_KERNEL48
-static cl_command_queue command_queue48 = NULL;
-static cl_kernel kernel48  = NULL;
-static const char *name_k48 = "Krnl_LS9";
-#endif
+static cl_command_queue command_queue_ls9 = NULL;
+static cl_kernel kernel_ls9 = NULL;
+static const char *name_ls9 = "Krnl_LS9";
 
 static cl_program program = NULL;
 
@@ -937,24 +935,21 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 	#endif
 	setKernelArg(kernel_ls8,5, sizeof(unsigned char),   &Host_cons_limit);
 
-#ifdef ENABLE_KERNEL48 // Krnl_LS9
-	setKernelArg(kernel48,0, sizeof(unsigned short),  &Host_max_num_of_iters);
+	setKernelArg(kernel_ls9,0, sizeof(unsigned short),  &Host_max_num_of_iters);
 	#if defined (FIXED_POINT_LS9)
-	setKernelArg(kernel48,1, sizeof(fixedpt),  	  &fixpt_rho_lower_bound);
-	setKernelArg(kernel48,2, sizeof(fixedpt),  	  &fixpt_base_dmov_mul_sqrt3);
+	setKernelArg(kernel_ls9,1, sizeof(fixedpt),  	  &fixpt_rho_lower_bound);
+	setKernelArg(kernel_ls9,2, sizeof(fixedpt),  	  &fixpt_base_dmov_mul_sqrt3);
 	#else
-	setKernelArg(kernel48,1, sizeof(float),  	  &dockpars.rho_lower_bound);
-	setKernelArg(kernel48,2, sizeof(float),  	  &dockpars.base_dmov_mul_sqrt3);
+	setKernelArg(kernel_ls9,1, sizeof(float),  	  &dockpars.rho_lower_bound);
+	setKernelArg(kernel_ls9,2, sizeof(float),  	  &dockpars.base_dmov_mul_sqrt3);
 	#endif
-	setKernelArg(kernel48,3, sizeof(unsigned char),   &dockpars.num_of_genes);
+	setKernelArg(kernel_ls9,3, sizeof(unsigned char),   &dockpars.num_of_genes);
 	#if defined (FIXED_POINT_LS9)
-	setKernelArg(kernel48,4, sizeof(fixedpt),  	  &fixpt_base_dang_mul_sqrt3);
+	setKernelArg(kernel_ls9,4, sizeof(fixedpt),  	  &fixpt_base_dang_mul_sqrt3);
 	#else
-	setKernelArg(kernel48,4, sizeof(float),  	  &dockpars.base_dang_mul_sqrt3);
+	setKernelArg(kernel_ls9,4, sizeof(float),  	  &dockpars.base_dang_mul_sqrt3);
 	#endif
-	setKernelArg(kernel48,5, sizeof(unsigned char),   &Host_cons_limit);
-#endif // End of ENABLE_KERNEL48
-
+	setKernelArg(kernel_ls9,5, sizeof(unsigned char),   &Host_cons_limit);
 
 #if defined(SINGLE_COPY_POP_ENE)
 	memcopyBufferObjectToDevice(command_queue_ga,mem_dockpars_conformations_current, 	cpu_init_populations, size_populations);
@@ -1075,11 +1070,7 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		runKernelTask(command_queue_ls6,kernel_ls6,NULL,NULL);
 		runKernelTask(command_queue_ls7,kernel_ls7,NULL,NULL);
 		runKernelTask(command_queue_ls8,kernel_ls8,NULL,NULL);
-
-		#ifdef ENABLE_KERNEL48
-		runKernelTask(command_queue48,kernel48,NULL,NULL);
-		#endif // ENABLE_KERNEL48
-
+		runKernelTask(command_queue_ls9,kernel_ls9,NULL,NULL);
 
 		clFinish(command_queue_ga); 
 		clFinish(command_queue_pc); 
@@ -1107,10 +1098,7 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		clFinish(command_queue_ls6);
 		clFinish(command_queue_ls7);
 		clFinish(command_queue_ls8);
-
-		#ifdef ENABLE_KERNEL48
-		clFinish(command_queue48);
-		#endif
+		clFinish(command_queue_ls9);
 
 		clock_stop_docking = clock();
 
@@ -1498,12 +1486,10 @@ bool init() {
   kernel_ls8 = clCreateKernel(program, name_ls8, &status);
   checkError(status, "Failed to create kernel ls8");
 
-#ifdef ENABLE_KERNEL48
-  command_queue48 = clCreateCommandQueue(context, device, 0, &status);
-  checkError(status, "Failed to create command queue48");
-  kernel48 = clCreateKernel(program, name_k48, &status);
-  checkError(status, "Failed to create kernel");
-#endif
+  command_queue_ls9 = clCreateCommandQueue(context, device, 0, &status);
+  checkError(status, "Failed to create command queue ls9");
+  kernel_ls9 = clCreateKernel(program, name_ls9, &status);
+  checkError(status, "Failed to create kernel ls9");
 
   return true;
 }
@@ -1588,10 +1574,8 @@ void cleanup() {
   if(kernel_ls8) {clReleaseKernel(kernel_ls8);}
   if(command_queue_ls8) {clReleaseCommandQueue(command_queue_ls8);}
 
-#ifdef ENABLE_KERNEL48
-  if(kernel48) {clReleaseKernel(kernel48);}
-  if(command_queue48) {clReleaseCommandQueue(command_queue48);}
-#endif
+  if(kernel_ls9) {clReleaseKernel(kernel_ls9);}
+  if(command_queue_ls9) {clReleaseCommandQueue(command_queue_ls9);}
 
   if(program) {clReleaseProgram(program);}
   if(context) {clReleaseContext(context);}
