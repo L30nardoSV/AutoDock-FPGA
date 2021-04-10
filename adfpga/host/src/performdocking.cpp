@@ -60,14 +60,12 @@ static cl_kernel kernel_ls = NULL;
 static const char *name_ls = "Krnl_LS";
 
 static cl_command_queue command_queue_prng_ls2_float = NULL;
-static cl_kernel kernel_prng_ls2_float  = NULL;
+static cl_kernel kernel_prng_ls2_float = NULL;
 static const char *name_prng_ls2_float = "Krnl_Prng_LS2_float";
 
-#ifdef ENABLE_KERNEL15
-static cl_command_queue command_queue15 = NULL;
-static cl_kernel kernel15  = NULL;
-static const char *name_k15 = "Krnl_LS2";
-#endif
+static cl_command_queue command_queue_ls2 = NULL;
+static cl_kernel kernel_ls2 = NULL;
+static const char *name_ls2 = "Krnl_LS2";
 
 #ifdef ENABLE_KERNEL20
 static cl_command_queue command_queue20 = NULL;
@@ -833,26 +831,25 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 
 	setKernelArg(kernel_prng_ls2_float,1, sizeof(unsigned char),  &dockpars.num_of_genes);
 
-#ifdef ENABLE_KERNEL15 // Krnl_LS2
-	//setKernelArg(kernel15,0, sizeof(unsigned int),  &dockpars.max_num_of_iters);
-	setKernelArg(kernel15,0, sizeof(unsigned short),  &Host_max_num_of_iters);
+	// Krnl_LS2
+	//setKernelArg(kernel_ls2,0, sizeof(unsigned int),  &dockpars.max_num_of_iters);
+	setKernelArg(kernel_ls2,0, sizeof(unsigned short),  &Host_max_num_of_iters);
 	#if defined (FIXED_POINT_LS2)
-	setKernelArg(kernel15,1, sizeof(fixedpt),  	&fixpt_rho_lower_bound);
-	setKernelArg(kernel15,2, sizeof(fixedpt),  	&fixpt_base_dmov_mul_sqrt3);
+	setKernelArg(kernel_ls2,1, sizeof(fixedpt),  	&fixpt_rho_lower_bound);
+	setKernelArg(kernel_ls2,2, sizeof(fixedpt),  	&fixpt_base_dmov_mul_sqrt3);
 	#else
-	setKernelArg(kernel15,1, sizeof(float),  	&dockpars.rho_lower_bound);
-	setKernelArg(kernel15,2, sizeof(float),  	&dockpars.base_dmov_mul_sqrt3);
+	setKernelArg(kernel_ls2,1, sizeof(float),  	&dockpars.rho_lower_bound);
+	setKernelArg(kernel_ls2,2, sizeof(float),  	&dockpars.base_dmov_mul_sqrt3);
 	#endif
-	setKernelArg(kernel15,3, sizeof(unsigned char), &dockpars.num_of_genes);
+	setKernelArg(kernel_ls2,3, sizeof(unsigned char), &dockpars.num_of_genes);
 	#if defined (FIXED_POINT_LS2)
-	setKernelArg(kernel15,4, sizeof(fixedpt),  	&fixpt_base_dang_mul_sqrt3);
+	setKernelArg(kernel_ls2,4, sizeof(fixedpt),  	&fixpt_base_dang_mul_sqrt3);
 	#else
-	setKernelArg(kernel15,4, sizeof(float),  	&dockpars.base_dang_mul_sqrt3);
+	setKernelArg(kernel_ls2,4, sizeof(float),  	&dockpars.base_dang_mul_sqrt3);
 	#endif
+	//setKernelArg(kernel_ls2,5, sizeof(unsigned int),  &dockpars.cons_limit);
+	setKernelArg(kernel_ls2,5, sizeof(unsigned char),   &Host_cons_limit);
 
-	//setKernelArg(kernel15,5, sizeof(unsigned int),  &dockpars.cons_limit);
-	setKernelArg(kernel15,5, sizeof(unsigned char),   &Host_cons_limit);
-#endif // End of ENABLE_KERNEL15
 
 #ifdef ENABLE_KERNEL20 // Krnl_PRNG_LS3_float
 	setKernelArg(kernel20,1, sizeof(unsigned char),  &dockpars.num_of_genes);
@@ -1152,10 +1149,7 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		runKernelTask(command_queue_prng_gg_uchar,kernel_prng_gg_uchar,NULL,NULL);
 		runKernelTask(command_queue_ls,kernel_ls,NULL,NULL);
 		runKernelTask(command_queue_prng_ls2_float,kernel_prng_ls2_float,NULL,NULL);
-
-		#ifdef ENABLE_KERNEL15
-		runKernelTask(command_queue15,kernel15,NULL,NULL);
-		#endif // ENABLE_KERNEL15
+		runKernelTask(command_queue_ls2,kernel_ls2,NULL,NULL);
 
 		#ifdef ENABLE_KERNEL20
 		runKernelTask(command_queue20,kernel20,NULL,NULL);
@@ -1235,10 +1229,7 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		clFinish(command_queue_prng_gg_uchar);
 		clFinish(command_queue_ls);
 		clFinish(command_queue_prng_ls2_float);
-
-		#ifdef ENABLE_KERNEL15
-		clFinish(command_queue15);
-		#endif
+		clFinish(command_queue_ls2);
 
 		#ifdef ENABLE_KERNEL20
 		clFinish(command_queue20);
@@ -1609,12 +1600,10 @@ bool init() {
   kernel_prng_ls2_float = clCreateKernel(program, name_prng_ls2_float, &status);
   checkError(status, "Failed to create kernel prng_ls2_float");
 
-#ifdef ENABLE_KERNEL15
-  command_queue15 = clCreateCommandQueue(context, device, 0, &status);
-  checkError(status, "Failed to create command queue15");
-  kernel15 = clCreateKernel(program, name_k15, &status);
-  checkError(status, "Failed to create kernel");
-#endif
+  command_queue_ls2 = clCreateCommandQueue(context, device, 0, &status);
+  checkError(status, "Failed to create command queue ls2");
+  kernel_ls2 = clCreateKernel(program, name_ls2, &status);
+  checkError(status, "Failed to create kernel ls2");
 
 #ifdef ENABLE_KERNEL20
   command_queue20 = clCreateCommandQueue(context, device, 0, &status);
@@ -1767,10 +1756,8 @@ void cleanup() {
   if(kernel_prng_ls2_float) {clReleaseKernel(kernel_prng_ls2_float);}
   if(command_queue_prng_ls2_float) {clReleaseCommandQueue(command_queue_prng_ls2_float);}
 
-#ifdef ENABLE_KERNEL15
-  if(kernel15) {clReleaseKernel(kernel15);}
-  if(command_queue15) {clReleaseCommandQueue(command_queue15);}
-#endif
+  if(kernel_ls2) {clReleaseKernel(kernel_ls2);}
+  if(command_queue_ls2) {clReleaseCommandQueue(command_queue_ls2);}
 
 #ifdef ENABLE_KERNEL20
   if(kernel20) {clReleaseKernel(kernel20);}
