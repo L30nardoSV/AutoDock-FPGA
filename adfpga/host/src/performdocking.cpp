@@ -27,11 +27,9 @@ static cl_device_id     device        = NULL;
 static cl_context       context       = NULL;
 
 // Kernel name, as defined in the CL file
-#ifdef ENABLE_KERNEL1
 static cl_command_queue command_queue_ga = NULL;
-static cl_kernel kernel1  = NULL;
-static const char *name_k1 = "Krnl_GA";
-#endif
+static cl_kernel kernel_ga  = NULL;
+static const char *name_ga = "Krnl_GA";
 
 #ifdef ENABLE_KERNEL2
 static cl_command_queue command_queue2 = NULL;
@@ -668,41 +666,41 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 
 #ifdef ENABLE_KERNEL1 // Krnl_GA
 	#if defined(SINGLE_COPY_POP_ENE)
-        setKernelArg(kernel1,0,  sizeof(mem_dockpars_conformations_current),    &mem_dockpars_conformations_current);
-        setKernelArg(kernel1,1,  sizeof(mem_dockpars_energies_current),         &mem_dockpars_energies_current);
-	setKernelArg(kernel1,2,  sizeof(mem_evals_performed),   		&mem_evals_performed);
-	setKernelArg(kernel1,3,  sizeof(mem_gens_performed),    		&mem_gens_performed);
-	setKernelArg(kernel1,4,  sizeof(unsigned int),                  	&dockpars.pop_size);
-	setKernelArg(kernel1,5,  sizeof(unsigned int),                 		&dockpars.num_of_energy_evals);
-	setKernelArg(kernel1,6,  sizeof(unsigned int),                 		&dockpars.num_of_generations);
-	setKernelArg(kernel1,7,  sizeof(float),                          	&dockpars.tournament_rate);
-	setKernelArg(kernel1,8,  sizeof(float),                          	&dockpars.mutation_rate);
-	setKernelArg(kernel1,9,  sizeof(float),                          	&dockpars.abs_max_dmov);
-	setKernelArg(kernel1,10, sizeof(float),                          	&dockpars.abs_max_dang);
-	setKernelArg(kernel1,11, sizeof(float),                                 &two_absmaxdmov);
-	setKernelArg(kernel1,12, sizeof(float),                                 &two_absmaxdang);
-	setKernelArg(kernel1,13, sizeof(float),                          	&dockpars.crossover_rate);
-	setKernelArg(kernel1,14, sizeof(unsigned int),                          &dockpars.num_of_lsentities);
-	setKernelArg(kernel1,15, sizeof(unsigned char),                         &dockpars.num_of_genes);
-	//setKernelArg(kernel1,16, sizeof(unsigned short),                      run_cnt);
-	//setKernelArg(kernel1,17, sizeof(unsigned int),                        offset_pop);
-	//setKernelArg(kernel1,18, sizeof(unsigned int),                        offset_ene);
+    setKernelArg(kernel_ga,0,  sizeof(mem_dockpars_conformations_current),    &mem_dockpars_conformations_current);
+    setKernelArg(kernel_ga,1,  sizeof(mem_dockpars_energies_current),         &mem_dockpars_energies_current);
+	setKernelArg(kernel_ga,2,  sizeof(mem_evals_performed),   		&mem_evals_performed);
+	setKernelArg(kernel_ga,3,  sizeof(mem_gens_performed),    		&mem_gens_performed);
+	setKernelArg(kernel_ga,4,  sizeof(unsigned int),                  	&dockpars.pop_size);
+	setKernelArg(kernel_ga,5,  sizeof(unsigned int),                 		&dockpars.num_of_energy_evals);
+	setKernelArg(kernel_ga,6,  sizeof(unsigned int),                 		&dockpars.num_of_generations);
+	setKernelArg(kernel_ga,7,  sizeof(float),                          	&dockpars.tournament_rate);
+	setKernelArg(kernel_ga,8,  sizeof(float),                          	&dockpars.mutation_rate);
+	setKernelArg(kernel_ga,9,  sizeof(float),                          	&dockpars.abs_max_dmov);
+	setKernelArg(kernel_ga,10, sizeof(float),                          	&dockpars.abs_max_dang);
+	setKernelArg(kernel_ga,11, sizeof(float),                                 &two_absmaxdmov);
+	setKernelArg(kernel_ga,12, sizeof(float),                                 &two_absmaxdang);
+	setKernelArg(kernel_ga,13, sizeof(float),                          	&dockpars.crossover_rate);
+	setKernelArg(kernel_ga,14, sizeof(unsigned int),                          &dockpars.num_of_lsentities);
+	setKernelArg(kernel_ga,15, sizeof(unsigned char),                         &dockpars.num_of_genes);
+	//setKernelArg(kernel_ga,16, sizeof(unsigned short),                      run_cnt);
+	//setKernelArg(kernel_ga,17, sizeof(unsigned int),                        offset_pop);
+	//setKernelArg(kernel_ga,18, sizeof(unsigned int),                        offset_ene);
 	#else
-        setKernelArg(kernel1,0,  sizeof(mem_dockpars_conformations_current),    &mem_dockpars_conformations_current);
-        setKernelArg(kernel1,1,  sizeof(mem_dockpars_energies_current),         &mem_dockpars_energies_current);
-	setKernelArg(kernel1,2,  sizeof(mem_evals_and_generations_performed),   &mem_evals_and_generations_performed);
-	setKernelArg(kernel1,3,  sizeof(unsigned int),                  	&dockpars.pop_size);
-	setKernelArg(kernel1,4,  sizeof(unsigned int),                 		&dockpars.num_of_energy_evals);
-	setKernelArg(kernel1,5,  sizeof(unsigned int),                 		&dockpars.num_of_generations);
-	setKernelArg(kernel1,6,  sizeof(float),                          	&dockpars.tournament_rate);
-	setKernelArg(kernel1,7,  sizeof(float),                          	&dockpars.mutation_rate);
-	setKernelArg(kernel1,8,  sizeof(float),                          	&dockpars.abs_max_dmov);
-	setKernelArg(kernel1,9,  sizeof(float),                          	&dockpars.abs_max_dang);
-	setKernelArg(kernel1,10, sizeof(float),                                 &two_absmaxdmov);
-	setKernelArg(kernel1,11, sizeof(float),                                 &two_absmaxdang);
-	setKernelArg(kernel1,12, sizeof(float),                          	&dockpars.crossover_rate);
-	setKernelArg(kernel1,13, sizeof(unsigned int),                          &dockpars.num_of_lsentities);
-	setKernelArg(kernel1,14, sizeof(unsigned char),                         &dockpars.num_of_genes);
+    setKernelArg(kernel_ga,0,  sizeof(mem_dockpars_conformations_current),    &mem_dockpars_conformations_current);
+    setKernelArg(kernel_ga,1,  sizeof(mem_dockpars_energies_current),         &mem_dockpars_energies_current);
+	setKernelArg(kernel_ga,2,  sizeof(mem_evals_and_generations_performed),   &mem_evals_and_generations_performed);
+	setKernelArg(kernel_ga,3,  sizeof(unsigned int),                  	&dockpars.pop_size);
+	setKernelArg(kernel_ga,4,  sizeof(unsigned int),                 		&dockpars.num_of_energy_evals);
+	setKernelArg(kernel_ga,5,  sizeof(unsigned int),                 		&dockpars.num_of_generations);
+	setKernelArg(kernel_ga,6,  sizeof(float),                          	&dockpars.tournament_rate);
+	setKernelArg(kernel_ga,7,  sizeof(float),                          	&dockpars.mutation_rate);
+	setKernelArg(kernel_ga,8,  sizeof(float),                          	&dockpars.abs_max_dmov);
+	setKernelArg(kernel_ga,9,  sizeof(float),                          	&dockpars.abs_max_dang);
+	setKernelArg(kernel_ga,10, sizeof(float),                                 &two_absmaxdmov);
+	setKernelArg(kernel_ga,11, sizeof(float),                                 &two_absmaxdang);
+	setKernelArg(kernel_ga,12, sizeof(float),                          	&dockpars.crossover_rate);
+	setKernelArg(kernel_ga,13, sizeof(unsigned int),                          &dockpars.num_of_lsentities);
+	setKernelArg(kernel_ga,14, sizeof(unsigned char),                         &dockpars.num_of_genes);
 	#endif
 #endif // End of ENABLE_KERNEL1
 
@@ -1086,9 +1084,9 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 	#ifdef ENABLE_KERNEL1
 		unsigned int Host_Offset_Pop = run_cnt * dockpars.pop_size * ACTUAL_GENOTYPE_LENGTH;
 		unsigned int Host_Offset_Ene = run_cnt * dockpars.pop_size;
-		setKernelArg(kernel1,16,  sizeof(unsigned short), &run_cnt);
-		setKernelArg(kernel1,17,  sizeof(unsigned int),   &Host_Offset_Pop);
-		setKernelArg(kernel1,18,  sizeof(unsigned int),   &Host_Offset_Ene);
+		setKernelArg(kernel_ga,16,  sizeof(unsigned short), &run_cnt);
+		setKernelArg(kernel_ga,17,  sizeof(unsigned int),   &Host_Offset_Pop);
+		setKernelArg(kernel_ga,18,  sizeof(unsigned int),   &Host_Offset_Ene);
 
 	#endif
 #endif
@@ -1189,7 +1187,7 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 #endif // End of ENABLE_KERNEL44
 
 		#ifdef ENABLE_KERNEL1
-		runKernelTask(command_queue_ga,kernel1,NULL,NULL);
+		runKernelTask(command_queue_ga,kernel_ga,NULL,NULL);
 		#endif // ENABLE_KERNEL1
 
 		#ifdef ENABLE_KERNEL2
@@ -1665,7 +1663,7 @@ bool init() {
   //command_queue_ga = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
   command_queue_ga = clCreateCommandQueue(context, device, 0, &status);
   checkError(status, "Failed to create command queue1");
-  kernel1 = clCreateKernel(program, name_k1, &status);
+  kernel_ga = clCreateKernel(program, name_ga, &status);
   checkError(status, "Failed to create kernel");
 #endif
 
@@ -1857,7 +1855,7 @@ bool init() {
 // Free the resources allocated during initialization
 void cleanup() {
 #ifdef ENABLE_KERNEL1
-  if(kernel1) {clReleaseKernel(kernel1);}
+  if(kernel_ga) {clReleaseKernel(kernel_ga);}
   if(command_queue_ga) {clReleaseCommandQueue(command_queue_ga);}
 #endif
 
