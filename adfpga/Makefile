@@ -122,218 +122,34 @@ endif
 
 # =============================
 # Enable Kernels
-# ============================= 
-ENABLE_K1  = YES
-ENABLE_K2  = YES
-ENABLE_K3  = YES
-ENABLE_K4  = YES
-
-# Prng kernels
-ENABLE_K6  = YES
-ENABLE_K7  = YES
-
-ENABLE_K10 = YES
-
-# LS kernels
-ENABLE_K12 = YES
-
-ENABLE_K14 = YES
-ENABLE_K15 = YES
-
-ENABLE_K20 = YES
-ENABLE_K21 = YES
-
-ENABLE_K27 = YES
-
-# ls123 prng
-ENABLE_K35 = YES
-
-# bt ushort_float
-ENABLE_K36 = YES
-
-# prng ls4, ls5
-ENABLE_K37 = YES
-ENABLE_K38 = YES
-
-# krnl_ls4, Krnl_ls5
-ENABLE_K39 = YES
-ENABLE_K40 = YES
-
-# prng ls6, ls7, ls8, ls9
-ENABLE_K41 = YES
-ENABLE_K42 = YES
-ENABLE_K43 = YES
-ENABLE_K44 = YES
-
-# krnl_ls6, Krnl_ls7, krnl_ls8, Krnl_ls9
-ENABLE_K45 = YES
-ENABLE_K46 = YES
-ENABLE_K47 = YES
-ENABLE_K48 = YES
-
-
-ifeq ($(ENABLE_K1),YES)
-	K1 =-DENABLE_KERNEL1
-else
-	K1 =
-endif
-
-ifeq ($(ENABLE_K2),YES)
-	K2 =-DENABLE_KERNEL2
-else
-	K2 =
-endif
-
-ifeq ($(ENABLE_K3),YES)
-	K3 =-DENABLE_KERNEL3
-else
-	K3 =
-endif
-
-ifeq ($(ENABLE_K4),YES)
-	K4 =-DENABLE_KERNEL4
-else
-	K4 =
-endif
-
-ifeq ($(ENABLE_K6),YES)
-	K6 =-DENABLE_KERNEL6
-else
-	K6 =
-endif
-
-ifeq ($(ENABLE_K7),YES)
-	K7 =-DENABLE_KERNEL7
-else
-	K7 =
-endif
-
-ifeq ($(ENABLE_K10),YES)
-	K10 =-DENABLE_KERNEL10
-else
-	K10 =
-endif
-
-ifeq ($(ENABLE_K12),YES)
-	K12 =-DENABLE_KERNEL12
-else
-	K12 =
-endif
-
-ifeq ($(ENABLE_K14),YES)
-	K14 =-DENABLE_KERNEL14
-else
-	K14 =
-endif
-
-ifeq ($(ENABLE_K15),YES)
-	K15 =-DENABLE_KERNEL15
-else
-	K15 =
-endif
-
-ifeq ($(ENABLE_K20),YES)
-	K20 =-DENABLE_KERNEL20
-else
-	K20 =
-endif
-
-ifeq ($(ENABLE_K21),YES)
-	K21 =-DENABLE_KERNEL21
-else
-	K21 =
-endif
-
-ifeq ($(ENABLE_K27),YES)
-	K27 =-DENABLE_KERNEL27
-else
-	K27 =
-endif
-
-ifeq ($(ENABLE_K35),YES)
-	K35 =-DENABLE_KERNEL35
-else
-	K35 =
-endif
-
-ifeq ($(ENABLE_K36),YES)
-	K36 =-DENABLE_KERNEL36
-else
-	K36 =
-endif
-
-ifeq ($(ENABLE_K37),YES)
-	K37 =-DENABLE_KERNEL37
-else
-	K37 =
-endif
-
-ifeq ($(ENABLE_K38),YES)
-	K38 =-DENABLE_KERNEL38
-else
-	K38 =
-endif
-
-ifeq ($(ENABLE_K39),YES)
-	K39 =-DENABLE_KERNEL39
-else
-	K39 =
-endif
-
-ifeq ($(ENABLE_K40),YES)
-	K40 =-DENABLE_KERNEL40
-else
-	K40 =
-endif
-
-ifeq ($(ENABLE_K41),YES)
-	K41 =-DENABLE_KERNEL41
-else
-	K41 =
-endif
-
-ifeq ($(ENABLE_K42),YES)
-	K42 =-DENABLE_KERNEL42
-else
-	K42 =
-endif
-
-ifeq ($(ENABLE_K43),YES)
-	K43 =-DENABLE_KERNEL43
-else
-	K43 =
-endif
-
-ifeq ($(ENABLE_K44),YES)
-	K44 =-DENABLE_KERNEL44
-else
-	K44 =
-endif
-
-ifeq ($(ENABLE_K45),YES)
-	K45 =-DENABLE_KERNEL45
-else
-	K45 =
-endif
-
-ifeq ($(ENABLE_K46),YES)
-	K46 =-DENABLE_KERNEL46
-else
-	K46 =
-endif
-
-ifeq ($(ENABLE_K47),YES)
-	K47 =-DENABLE_KERNEL47
-else
-	K47 =
-endif
-
-ifeq ($(ENABLE_K48),YES)
-	K48 =-DENABLE_KERNEL48
-else
-	K48 =
-endif
-
+# =============================
+K1 =-DENABLE_KERNEL1
+K2 =-DENABLE_KERNEL2
+K3 =-DENABLE_KERNEL3
+K4 =-DENABLE_KERNEL4
+K6 =-DENABLE_KERNEL6
+K7 =-DENABLE_KERNEL7
+K10 =-DENABLE_KERNEL10
+K12 =-DENABLE_KERNEL12
+K14 =-DENABLE_KERNEL14
+K15 =-DENABLE_KERNEL15
+K20 =-DENABLE_KERNEL20
+K21 =-DENABLE_KERNEL21
+K27 =-DENABLE_KERNEL27
+K35 =-DENABLE_KERNEL35
+K36 =-DENABLE_KERNEL36
+K37 =-DENABLE_KERNEL37
+K38 =-DENABLE_KERNEL38
+K39 =-DENABLE_KERNEL39
+K40 =-DENABLE_KERNEL40
+K41 =-DENABLE_KERNEL41
+K42 =-DENABLE_KERNEL42
+K43 =-DENABLE_KERNEL43
+K44 =-DENABLE_KERNEL44
+K45 =-DENABLE_KERNEL45
+K46 =-DENABLE_KERNEL46
+K47 =-DENABLE_KERNEL47
+K48 =-DENABLE_KERNEL48
 
 ENABLE_KERNELS = $(K1)  $(K2)  $(K3)  $(K4)  $(K5)  $(K6)  $(K7)  $(K8)  $(K9)  $(K10) \
 		 $(K11) $(K12) $(K13) $(K14) $(K15) $(K16) $(K17) $(K18) $(K19) $(K20) \
