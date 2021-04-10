@@ -127,11 +127,9 @@ static cl_command_queue command_queue_ls7 = NULL;
 static cl_kernel kernel_ls7 = NULL;
 static const char *name_ls7 = "Krnl_LS7";
 
-#ifdef ENABLE_KERNEL47
-static cl_command_queue command_queue47 = NULL;
-static cl_kernel kernel47  = NULL;
-static const char *name_k47 = "Krnl_LS8";
-#endif
+static cl_command_queue command_queue_ls8 = NULL;
+static cl_kernel kernel_ls8 = NULL;
+static const char *name_ls8 = "Krnl_LS8";
 
 #ifdef ENABLE_KERNEL48
 static cl_command_queue command_queue48 = NULL;
@@ -923,23 +921,21 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 	#endif
 	setKernelArg(kernel_ls7,5, sizeof(unsigned char),   &Host_cons_limit);
 
-#ifdef ENABLE_KERNEL47 // Krnl_LS8
-	setKernelArg(kernel47,0, sizeof(unsigned short),  &Host_max_num_of_iters);
+	setKernelArg(kernel_ls8,0, sizeof(unsigned short),  &Host_max_num_of_iters);
 	#if defined (FIXED_POINT_LS8)
-	setKernelArg(kernel47,1, sizeof(fixedpt),  	  &fixpt_rho_lower_bound);
-	setKernelArg(kernel47,2, sizeof(fixedpt),  	  &fixpt_base_dmov_mul_sqrt3);
+	setKernelArg(kernel_ls8,1, sizeof(fixedpt),  	  &fixpt_rho_lower_bound);
+	setKernelArg(kernel_ls8,2, sizeof(fixedpt),  	  &fixpt_base_dmov_mul_sqrt3);
 	#else
-	setKernelArg(kernel47,1, sizeof(float),  	  &dockpars.rho_lower_bound);
-	setKernelArg(kernel47,2, sizeof(float),  	  &dockpars.base_dmov_mul_sqrt3);
+	setKernelArg(kernel_ls8,1, sizeof(float),  	  &dockpars.rho_lower_bound);
+	setKernelArg(kernel_ls8,2, sizeof(float),  	  &dockpars.base_dmov_mul_sqrt3);
 	#endif
-	setKernelArg(kernel47,3, sizeof(unsigned char),   &dockpars.num_of_genes);
+	setKernelArg(kernel_ls8,3, sizeof(unsigned char),   &dockpars.num_of_genes);
 	#if defined (FIXED_POINT_LS8)
-	setKernelArg(kernel47,4, sizeof(fixedpt),  	  &fixpt_base_dang_mul_sqrt3);
+	setKernelArg(kernel_ls8,4, sizeof(fixedpt),  	  &fixpt_base_dang_mul_sqrt3);
 	#else
-	setKernelArg(kernel47,4, sizeof(float),  	  &dockpars.base_dang_mul_sqrt3);
+	setKernelArg(kernel_ls8,4, sizeof(float),  	  &dockpars.base_dang_mul_sqrt3);
 	#endif
-	setKernelArg(kernel47,5, sizeof(unsigned char),   &Host_cons_limit);
-#endif // End of ENABLE_KERNEL47
+	setKernelArg(kernel_ls8,5, sizeof(unsigned char),   &Host_cons_limit);
 
 #ifdef ENABLE_KERNEL48 // Krnl_LS9
 	setKernelArg(kernel48,0, sizeof(unsigned short),  &Host_max_num_of_iters);
@@ -1078,10 +1074,7 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		runKernelTask(command_queue_prng_ls9_float,kernel_prng_ls9_float,NULL,NULL);
 		runKernelTask(command_queue_ls6,kernel_ls6,NULL,NULL);
 		runKernelTask(command_queue_ls7,kernel_ls7,NULL,NULL);
-
-		#ifdef ENABLE_KERNEL47
-		runKernelTask(command_queue47,kernel47,NULL,NULL);
-		#endif // ENABLE_KERNEL47
+		runKernelTask(command_queue_ls8,kernel_ls8,NULL,NULL);
 
 		#ifdef ENABLE_KERNEL48
 		runKernelTask(command_queue48,kernel48,NULL,NULL);
@@ -1113,10 +1106,7 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		clFinish(command_queue_prng_ls9_float);
 		clFinish(command_queue_ls6);
 		clFinish(command_queue_ls7);
-
-		#ifdef ENABLE_KERNEL47
-		clFinish(command_queue47);
-		#endif
+		clFinish(command_queue_ls8);
 
 		#ifdef ENABLE_KERNEL48
 		clFinish(command_queue48);
@@ -1503,12 +1493,10 @@ bool init() {
   kernel_ls7 = clCreateKernel(program, name_ls7, &status);
   checkError(status, "Failed to create kernel ls7");
 
-#ifdef ENABLE_KERNEL47
-  command_queue47 = clCreateCommandQueue(context, device, 0, &status);
-  checkError(status, "Failed to create command queue47");
-  kernel47 = clCreateKernel(program, name_k47, &status);
-  checkError(status, "Failed to create kernel");
-#endif
+  command_queue_ls8 = clCreateCommandQueue(context, device, 0, &status);
+  checkError(status, "Failed to create command queue ls8");
+  kernel_ls8 = clCreateKernel(program, name_ls8, &status);
+  checkError(status, "Failed to create kernel ls8");
 
 #ifdef ENABLE_KERNEL48
   command_queue48 = clCreateCommandQueue(context, device, 0, &status);
@@ -1597,10 +1585,8 @@ void cleanup() {
   if(kernel_ls7) {clReleaseKernel(kernel_ls7);}
   if(command_queue_ls7) {clReleaseCommandQueue(command_queue_ls7);}
 
-#ifdef ENABLE_KERNEL47
-  if(kernel47) {clReleaseKernel(kernel47);}
-  if(command_queue47) {clReleaseCommandQueue(command_queue47);}
-#endif
+  if(kernel_ls8) {clReleaseKernel(kernel_ls8);}
+  if(command_queue_ls8) {clReleaseCommandQueue(command_queue_ls8);}
 
 #ifdef ENABLE_KERNEL48
   if(kernel48) {clReleaseKernel(kernel48);}

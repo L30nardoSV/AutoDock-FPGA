@@ -123,10 +123,9 @@ endif
 # =============================
 # Enable Kernels
 # =============================
-K47 =-DENABLE_KERNEL47
 K48 =-DENABLE_KERNEL48
 
-ENABLE_KERNELS = $(K47) $(K48)
+ENABLE_KERNELS = $(K48)
 
 # =============================
 # Reproduce result (remove randomness)
