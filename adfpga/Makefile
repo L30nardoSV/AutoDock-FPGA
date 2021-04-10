@@ -123,7 +123,6 @@ endif
 # =============================
 # Enable Kernels
 # =============================
-K37 =-DENABLE_KERNEL37
 K38 =-DENABLE_KERNEL38
 K39 =-DENABLE_KERNEL39
 K40 =-DENABLE_KERNEL40
@@ -136,7 +135,7 @@ K46 =-DENABLE_KERNEL46
 K47 =-DENABLE_KERNEL47
 K48 =-DENABLE_KERNEL48
 
-ENABLE_KERNELS = $(K37) $(K38) $(K39) $(K40) \
+ENABLE_KERNELS = $(K38) $(K39) $(K40) \
 		 $(K41) $(K42) $(K43) $(K44) $(K45) $(K46) $(K47) $(K48)
 
 # =============================
