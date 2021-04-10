@@ -453,7 +453,6 @@ filled with clock() */
 	dockpars.rotbondlist_length = ((unsigned int) NUM_OF_THREADS_PER_BLOCK*(myligand_reference.num_of_rotcyc));
 	dockpars.coeff_elec    = ((float) mypars->coeffs.scaled_AD4_coeff_elec);
 	dockpars.coeff_desolv  = ((float) mypars->coeffs.AD4_coeff_desolv);
-	// L30nardoSV added
 	dockpars.num_of_energy_evals = (unsigned int) mypars->num_of_energy_evals;
 	dockpars.num_of_generations  = (unsigned int) mypars->num_of_generations;
 

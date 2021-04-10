@@ -39,7 +39,6 @@ typedef struct
 	int*   		evals_of_new_entities;
 	unsigned int* 	prng_states;
 */
-	// L30nardoSV added
 	unsigned int num_of_energy_evals;
 	unsigned int num_of_generations;
 
@@ -64,7 +63,7 @@ typedef struct
 } Dockparameters;
 
 // ----------------------------------------------------------------------
-// L30nardoSV modified
+// Modified
 // The original function does CUDA calls initializing const kernel data.
 // We create a struct to hold those constants and return them <here>
 // (<here> = where prepare_const_fields_for_gpu() was called),

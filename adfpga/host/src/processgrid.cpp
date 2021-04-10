@@ -17,7 +17,6 @@ int get_gridinfo(const char* fldfilename, Gridinfo* mygrid)
 	//char* dir = dirname(ts1);
 	//char* filename = basename(ts1);
 
-	// L30nardoSV
 	char* ts1 = strdup(fldfilename);
 	mygrid->grid_file_path = dirname(ts1);
 	// ----------------------------------------------------
@@ -140,8 +139,6 @@ int get_gridvalues_f(const Gridinfo* mygrid, float** fgrids)
 		strcpy(tempstr,mygrid->grid_file_path);
 		strcat(tempstr, "/");
 		strcat(tempstr, mygrid->receptor_name);
-		
-		// L30nardoSV
 		//strcpy(tempstr, mygrid->receptor_name);
 		//-------------------------------------
 		strcat(tempstr, ".");

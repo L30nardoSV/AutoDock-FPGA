@@ -7,13 +7,11 @@
 #include <stdlib.h>
 #include <math.h>
 
-// L30nardoSV
-#include <libgen.h>
-
 // libgen.h contains basename() and dir() from a fullpath name
 // Specific: to open correctly grid map field fiels and associated files
 // Not only during real execution but also SDAccel cpu-, hw-emulation
 // http://ask.systutorials.com/681/get-the-directory-path-and-file-name-from-absolute-path-linux
+#include <libgen.h>
 
 #include "miscellaneous.h"
 
@@ -25,10 +23,9 @@
 //The second one is the corresponding grid info (parameter of get_gridinfo function).
 //The other parameters are the type index, z, y and x coordinates of the grid point.
 
-typedef struct
 //Struct which can contain all the important informations which derives from .gpf and .xyz files.
+typedef struct
 {
-	// L30nardoSV
 	char*  grid_file_path;	  // Added to store the full path of the grid file
 	char   receptor_name [64];
 	int    size_xyz [3];

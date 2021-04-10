@@ -293,7 +293,6 @@ void print_binary_string(unsigned long long to_print)
 	}
 }
 
-//L30nardoSV
 // This was disabled for Windows
 int stricmp(const char* str1, const char* str2)
 //The function compares the two input strings and
