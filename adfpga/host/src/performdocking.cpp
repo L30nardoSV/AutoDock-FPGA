@@ -67,11 +67,9 @@ static cl_command_queue command_queue_ls2 = NULL;
 static cl_kernel kernel_ls2 = NULL;
 static const char *name_ls2 = "Krnl_LS2";
 
-#ifdef ENABLE_KERNEL20
-static cl_command_queue command_queue20 = NULL;
-static cl_kernel kernel20  = NULL;
-static const char *name_k20 = "Krnl_Prng_LS3_float";
-#endif
+static cl_command_queue command_queue_prng_ls3_float = NULL;
+static cl_kernel kernel_prng_ls3_float = NULL;
+static const char *name_prng_ls3_float = "Krnl_Prng_LS3_float";
 
 #ifdef ENABLE_KERNEL21
 static cl_command_queue command_queue21 = NULL;
@@ -850,10 +848,7 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 	//setKernelArg(kernel_ls2,5, sizeof(unsigned int),  &dockpars.cons_limit);
 	setKernelArg(kernel_ls2,5, sizeof(unsigned char),   &Host_cons_limit);
 
-
-#ifdef ENABLE_KERNEL20 // Krnl_PRNG_LS3_float
-	setKernelArg(kernel20,1, sizeof(unsigned char),  &dockpars.num_of_genes);
-#endif // End of ENABLE_KERNEL20
+	setKernelArg(kernel_prng_ls3_float,1, sizeof(unsigned char),  &dockpars.num_of_genes);
 
 #ifdef ENABLE_KERNEL21 // Krnl_LS3
 	//setKernelArg(kernel21,0, sizeof(unsigned int),  &dockpars.max_num_of_iters);
@@ -1094,10 +1089,7 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 	setKernelArg(kernel_prng_gg_uchar,0, sizeof(unsigned int), &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 2]);
 
 	setKernelArg(kernel_prng_ls2_float,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 3]);
-
-#ifdef ENABLE_KERNEL20 // Krnl_PRNG_LS3_float
-		setKernelArg(kernel20,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 4]);
-#endif // End of ENABLE_KERNEL20
+	setKernelArg(kernel_prng_ls3_float,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 4]);
 
 #ifdef ENABLE_KERNEL35 // Krnl_PRNG_LS123_ushort
 		setKernelArg(kernel35,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 5]);
@@ -1150,10 +1142,7 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		runKernelTask(command_queue_ls,kernel_ls,NULL,NULL);
 		runKernelTask(command_queue_prng_ls2_float,kernel_prng_ls2_float,NULL,NULL);
 		runKernelTask(command_queue_ls2,kernel_ls2,NULL,NULL);
-
-		#ifdef ENABLE_KERNEL20
-		runKernelTask(command_queue20,kernel20,NULL,NULL);
-		#endif // ENABLE_KERNEL20
+		runKernelTask(command_queue_prng_ls3_float,kernel_prng_ls3_float,NULL,NULL);
 
 		#ifdef ENABLE_KERNEL21
 		runKernelTask(command_queue21,kernel21,NULL,NULL);
@@ -1230,10 +1219,7 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		clFinish(command_queue_ls);
 		clFinish(command_queue_prng_ls2_float);
 		clFinish(command_queue_ls2);
-
-		#ifdef ENABLE_KERNEL20
-		clFinish(command_queue20);
-		#endif
+		clFinish(command_queue_prng_ls3_float);
 
 		#ifdef ENABLE_KERNEL21
 		clFinish(command_queue21);
@@ -1605,12 +1591,10 @@ bool init() {
   kernel_ls2 = clCreateKernel(program, name_ls2, &status);
   checkError(status, "Failed to create kernel ls2");
 
-#ifdef ENABLE_KERNEL20
-  command_queue20 = clCreateCommandQueue(context, device, 0, &status);
-  checkError(status, "Failed to create command queue20");
-  kernel20 = clCreateKernel(program, name_k20, &status);
-  checkError(status, "Failed to create kernel");
-#endif
+  command_queue_prng_ls3_float = clCreateCommandQueue(context, device, 0, &status);
+  checkError(status, "Failed to create command queue prng_ls3_float");
+  kernel_prng_ls3_float = clCreateKernel(program, name_prng_ls3_float, &status);
+  checkError(status, "Failed to create kernel prng_ls3_float");
 
 #ifdef ENABLE_KERNEL21
   command_queue21 = clCreateCommandQueue(context, device, 0, &status);
@@ -1759,10 +1743,8 @@ void cleanup() {
   if(kernel_ls2) {clReleaseKernel(kernel_ls2);}
   if(command_queue_ls2) {clReleaseCommandQueue(command_queue_ls2);}
 
-#ifdef ENABLE_KERNEL20
-  if(kernel20) {clReleaseKernel(kernel20);}
-  if(command_queue20) {clReleaseCommandQueue(command_queue20);}
-#endif
+  if(kernel_prng_ls3_float) {clReleaseKernel(kernel_prng_ls3_float);}
+  if(command_queue_prng_ls3_float) {clReleaseCommandQueue(command_queue_prng_ls3_float);}
 
 #ifdef ENABLE_KERNEL21
   if(kernel21) {clReleaseKernel(kernel21);}
