@@ -47,11 +47,9 @@ static cl_command_queue command_queue_prng_gg_float = NULL;
 static cl_kernel kernel_prng_gg_float  = NULL;
 static const char *name_prng_gg_float = "Krnl_Prng_GG_float";
 
-#ifdef ENABLE_KERNEL7
-static cl_command_queue command_queue7 = NULL;
-static cl_kernel kernel7  = NULL;
-static const char *name_k7 = "Krnl_Prng_LS_float";
-#endif
+static cl_command_queue command_queue_prng_ls_float = NULL;
+static cl_kernel kernel_prng_ls_float  = NULL;
+static const char *name_prng_ls_float = "Krnl_Prng_LS_float";
 
 #ifdef ENABLE_KERNEL10
 static cl_command_queue command_queue10 = NULL;
@@ -801,9 +799,8 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	// Krnl_PRNG_GG_float
 	setKernelArg(kernel_prng_gg_float,1, sizeof(unsigned char),  &dockpars.num_of_genes);
 
-#ifdef ENABLE_KERNEL7 // Krnl_PRNG_float
-	setKernelArg(kernel7,1, sizeof(unsigned char),  &dockpars.num_of_genes);
-#endif // End of ENABLE_KERNEL7
+	// Krnl_PRNG_float
+	setKernelArg(kernel_prng_ls_float,1, sizeof(unsigned char),  &dockpars.num_of_genes);
 
 #ifdef ENABLE_KERNEL10 // Krnl_PRNG_uchar
 	setKernelArg(kernel10,1, sizeof(unsigned char),  &dockpars.num_of_genes);
@@ -1108,9 +1105,8 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 	// Krnl_PRNG_GG_float
 	setKernelArg(kernel_prng_gg_float,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt]);
 
-#ifdef ENABLE_KERNEL7 // Krnl_PRNG_LS_float
-		setKernelArg(kernel7,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 1]);
-#endif // End of ENABLE_KERNEL7
+	// Krnl_PRNG_LS_float
+	setKernelArg(kernel_prng_ls_float,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 1]);
 
 #ifdef ENABLE_KERNEL10 // Krnl_Prng_GG_uchar
 		setKernelArg(kernel10,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 2]);
@@ -1118,7 +1114,7 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 
 #ifdef ENABLE_KERNEL14 // Krnl_PRNG_LS2_float
 		setKernelArg(kernel14,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 3]);
-#endif // End of ENABLE_KERNEL7
+#endif // End of ENABLE_KERNEL14
 
 #ifdef ENABLE_KERNEL20 // Krnl_PRNG_LS3_float
 		setKernelArg(kernel20,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 4]);
@@ -1170,10 +1166,7 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		runKernelTask(command_queue_ie,kernel_ie,NULL,NULL);
 		runKernelTask(command_queue_ia,kernel_ia,NULL,NULL);
 		runKernelTask(command_queue_prng_gg_float,kernel_prng_gg_float,NULL,NULL);
-
-		#ifdef ENABLE_KERNEL7
-		runKernelTask(command_queue7,kernel7,NULL,NULL);
-		#endif // ENABLE_KERNEL7
+		runKernelTask(command_queue_prng_ls_float,kernel_prng_ls_float,NULL,NULL);
 
 		#ifdef ENABLE_KERNEL10
 		runKernelTask(command_queue10,kernel10,NULL,NULL);
@@ -1265,10 +1258,7 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		clFinish(command_queue_ie); 
 		clFinish(command_queue_ia); 
 		clFinish(command_queue_prng_gg_float); 
-
-		#ifdef ENABLE_KERNEL7
-		clFinish(command_queue7);
-		#endif
+		clFinish(command_queue_prng_ls_float);
 
 		#ifdef ENABLE_KERNEL10
 		clFinish(command_queue10);
@@ -1631,16 +1621,14 @@ bool init() {
   checkError(status, "Failed to create kernel ia");
 
   command_queue_prng_gg_float = clCreateCommandQueue(context, device, 0, &status);
-  checkError(status, "Failed to create command queue6");
+  checkError(status, "Failed to create command queue prng_gg_float");
   kernel_prng_gg_float = clCreateKernel(program, name_prng_gg_float, &status);
-  checkError(status, "Failed to create kernel");
+  checkError(status, "Failed to create kernel prng_gg_float");
 
-#ifdef ENABLE_KERNEL7
-  command_queue7 = clCreateCommandQueue(context, device, 0, &status);
-  checkError(status, "Failed to create command queue7");
-  kernel7 = clCreateKernel(program, name_k7, &status);
-  checkError(status, "Failed to create kernel");
-#endif
+  command_queue_prng_ls_float = clCreateCommandQueue(context, device, 0, &status);
+  checkError(status, "Failed to create command queue prng_ls_float");
+  kernel_prng_ls_float = clCreateKernel(program, name_prng_ls_float, &status);
+  checkError(status, "Failed to create kernel prng_ls_float");
 
 #ifdef ENABLE_KERNEL10
   command_queue10 = clCreateCommandQueue(context, device, 0, &status);
@@ -1809,10 +1797,8 @@ void cleanup() {
   if(kernel_prng_gg_float) {clReleaseKernel(kernel_prng_gg_float);}
   if(command_queue_prng_gg_float) {clReleaseCommandQueue(command_queue_prng_gg_float);}
 
-#ifdef ENABLE_KERNEL7
-  if(kernel7) {clReleaseKernel(kernel7);}
-  if(command_queue7) {clReleaseCommandQueue(command_queue7);}
-#endif
+  if(kernel_prng_ls_float) {clReleaseKernel(kernel_prng_ls_float);}
+  if(command_queue_prng_ls_float) {clReleaseCommandQueue(command_queue_prng_ls_float);}
 
 #ifdef ENABLE_KERNEL10
   if(kernel10) {clReleaseKernel(kernel10);}
