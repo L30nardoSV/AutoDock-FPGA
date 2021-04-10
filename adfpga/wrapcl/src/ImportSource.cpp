@@ -46,7 +46,6 @@ int ImportSource(const char*    filename,
 	err = convertToString2(filename, sourceStr);
 	const char *source = sourceStr.c_str();
 
-	// L30nardoSV
 	size_t sourceSize[] = { strlen(source) };
 
 	cl_program local_program;

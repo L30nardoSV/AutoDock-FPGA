@@ -1,8 +1,6 @@
 #ifndef LIST_ATTRIBUTES_H
 #define LIST_ATTRIBUTES_H
 
-  // L30nardoSV
-  //#include <CL/opencl.h>
   #include "commonMacros.h"
   
   // Platforms

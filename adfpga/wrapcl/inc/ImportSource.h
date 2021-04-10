@@ -1,13 +1,10 @@
 #ifndef IMPORT_SOURCE_H
 #define IMPORT_SOURCE_H
 
-// L30nardoSV
-//#include <stdio.h>
 #include <iostream>
 #include <string.h>
 #include <fstream>
 
-//#include <stdlib.h>
 #include "commonMacros.h"
 #include "Programs.h"
 #include "Kernels.h"

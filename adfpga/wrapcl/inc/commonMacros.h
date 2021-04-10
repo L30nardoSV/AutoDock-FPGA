@@ -1,9 +1,6 @@
 #ifndef COMMON_MACROS_H
 #define COMMON_MACROS_H
 
-// L30nardoSV
-	//#include <malloc.h>
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <CL/opencl.h>

@@ -1,9 +1,6 @@
 #ifndef BUFFER_OBJECTS_H
 #define BUFFER_OBJECTS_H
 
-  // L30nardoSV
-  //#include <stdio.h>
-  //#include <CL/opencl.h>
   #include "commonMacros.h"
   /*
    Memory objects are represented by cl_mem objects.
