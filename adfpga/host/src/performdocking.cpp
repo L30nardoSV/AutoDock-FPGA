@@ -1015,101 +1015,96 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 	/*
 	setKernelArg(kernel_pc,9,  sizeof(unsigned short), &run_cnt);
 	*/
-	setKernelArg(kernel_pc,8,  sizeof(unsigned short), &run_cnt);
+		setKernelArg(kernel_pc,8, sizeof(unsigned short), &run_cnt);
 
-	setKernelArg(kernel_prng_gg_float,0, sizeof(unsigned int), &cpu_prng_seeds[num_of_prng_blocks * run_cnt]);
-	setKernelArg(kernel_prng_ls_float,0, sizeof(unsigned int), &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 1]);
-	setKernelArg(kernel_prng_gg_uchar,0, sizeof(unsigned int), &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 2]);
+		setKernelArg(kernel_prng_gg_float, 0, sizeof(unsigned int), &cpu_prng_seeds[num_of_prng_blocks * run_cnt]);
+		setKernelArg(kernel_prng_gg_uchar, 0, sizeof(unsigned int), &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 2]);
+		setKernelArg(kernel_prng_bt_ushort_float, 0, sizeof(unsigned int), &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 14]);
+		setKernelArg(kernel_prng_bt_ushort_float, 1, sizeof(unsigned int), &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 15]);
 
-	setKernelArg(kernel_prng_ls2_float,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 3]);
-	setKernelArg(kernel_prng_ls3_float,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 4]);
+		setKernelArg(kernel_ls123_ushort, 0, sizeof(unsigned int), &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 5]);
+		setKernelArg(kernel_ls123_ushort, 1, sizeof(unsigned int), &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 6]);
+		setKernelArg(kernel_ls123_ushort, 2, sizeof(unsigned int), &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 7]);
+		setKernelArg(kernel_ls123_ushort, 3, sizeof(unsigned int), &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 8]);
+		setKernelArg(kernel_ls123_ushort, 4, sizeof(unsigned int), &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 9]);
+		setKernelArg(kernel_ls123_ushort, 5, sizeof(unsigned int), &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 10]);
+		setKernelArg(kernel_ls123_ushort, 6, sizeof(unsigned int), &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 11]);
+		setKernelArg(kernel_ls123_ushort, 7, sizeof(unsigned int), &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 12]);
+		setKernelArg(kernel_ls123_ushort, 8, sizeof(unsigned int), &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 13]);
 
-	setKernelArg(kernel_ls123_ushort,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 5]);
-	setKernelArg(kernel_ls123_ushort,1, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 6]);
-	setKernelArg(kernel_ls123_ushort,2, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 7]);
-	setKernelArg(kernel_ls123_ushort,3, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 8]);
-	setKernelArg(kernel_ls123_ushort,4, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 9]);
-	setKernelArg(kernel_ls123_ushort,5, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 10]);
-	setKernelArg(kernel_ls123_ushort,6, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 11]);
-	setKernelArg(kernel_ls123_ushort,7, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 12]);
-	setKernelArg(kernel_ls123_ushort,8, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 13]);
+		setKernelArg(kernel_prng_ls_float,  0, sizeof(unsigned int), &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 1]);
+		setKernelArg(kernel_prng_ls2_float, 0, sizeof(unsigned int), &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 3]);
+		setKernelArg(kernel_prng_ls3_float, 0, sizeof(unsigned int), &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 4]);
+		setKernelArg(kernel_prng_ls4_float, 0, sizeof(unsigned int), &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 16]);
+		setKernelArg(kernel_prng_ls5_float, 0, sizeof(unsigned int), &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 17]);
+		setKernelArg(kernel_prng_ls6_float, 0, sizeof(unsigned int), &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 18]);
+		setKernelArg(kernel_prng_ls7_float, 0, sizeof(unsigned int), &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 19]);
+		setKernelArg(kernel_prng_ls8_float, 0, sizeof(unsigned int), &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 20]);
+		setKernelArg(kernel_prng_ls9_float, 0, sizeof(unsigned int), &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 21]);
 
-	setKernelArg(kernel_prng_bt_ushort_float,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 14]);
-	setKernelArg(kernel_prng_bt_ushort_float,1, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 15]);
-	setKernelArg(kernel_prng_ls4_float,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 16]);
-	setKernelArg(kernel_prng_ls5_float,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 17]);
-
-	setKernelArg(kernel_prng_ls6_float,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 18]);
-	setKernelArg(kernel_prng_ls7_float,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 19]);
-	setKernelArg(kernel_prng_ls8_float,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 20]);
-	setKernelArg(kernel_prng_ls9_float,0, sizeof(unsigned int),   &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 21]);
-
-		runKernelTask(command_queue_ga,kernel_ga,NULL,NULL);
-		runKernelTask(command_queue_pc,kernel_pc,NULL,NULL);
-		runKernelTask(command_queue_ie,kernel_ie,NULL,NULL);
-		runKernelTask(command_queue_ia,kernel_ia,NULL,NULL);
-		runKernelTask(command_queue_prng_gg_float,kernel_prng_gg_float,NULL,NULL);
-		runKernelTask(command_queue_prng_ls_float,kernel_prng_ls_float,NULL,NULL);
-		runKernelTask(command_queue_prng_gg_uchar,kernel_prng_gg_uchar,NULL,NULL);
-		runKernelTask(command_queue_ls,kernel_ls,NULL,NULL);
-		runKernelTask(command_queue_prng_ls2_float,kernel_prng_ls2_float,NULL,NULL);
-		runKernelTask(command_queue_ls2,kernel_ls2,NULL,NULL);
-		runKernelTask(command_queue_prng_ls3_float,kernel_prng_ls3_float,NULL,NULL);
-		runKernelTask(command_queue_ls3,kernel_ls3,NULL,NULL);
-		runKernelTask(command_queue_igl_arb,kernel_igl_arb,NULL,NULL);
-		runKernelTask(command_queue_ls123_ushort,kernel_ls123_ushort,NULL,NULL);
-		runKernelTask(command_queue_prng_bt_ushort_float,kernel_prng_bt_ushort_float,NULL,NULL);
-		runKernelTask(command_queue_prng_ls4_float,kernel_prng_ls4_float,NULL,NULL);
-		runKernelTask(command_queue_prng_ls5_float,kernel_prng_ls5_float,NULL,NULL);
-		runKernelTask(command_queue_ls4,kernel_ls4,NULL,NULL);
-		runKernelTask(command_queue_ls5,kernel_ls5,NULL,NULL);
-		runKernelTask(command_queue_prng_ls6_float,kernel_prng_ls6_float,NULL,NULL);
-		runKernelTask(command_queue_prng_ls7_float,kernel_prng_ls7_float,NULL,NULL);
-		runKernelTask(command_queue_prng_ls8_float,kernel_prng_ls8_float,NULL,NULL);
-		runKernelTask(command_queue_prng_ls9_float,kernel_prng_ls9_float,NULL,NULL);
-		runKernelTask(command_queue_ls6,kernel_ls6,NULL,NULL);
-		runKernelTask(command_queue_ls7,kernel_ls7,NULL,NULL);
-		runKernelTask(command_queue_ls8,kernel_ls8,NULL,NULL);
-		runKernelTask(command_queue_ls9,kernel_ls9,NULL,NULL);
+		runKernelTask(command_queue_ga, kernel_ga, NULL, NULL);
+		runKernelTask(command_queue_pc, kernel_pc, NULL, NULL);
+		runKernelTask(command_queue_ie, kernel_ie, NULL, NULL);
+		runKernelTask(command_queue_ia, kernel_ia, NULL, NULL);
+		runKernelTask(command_queue_ls123_ushort, kernel_ls123_ushort, NULL, NULL);
+		runKernelTask(command_queue_igl_arb, kernel_igl_arb, NULL, NULL);		
+		runKernelTask(command_queue_prng_gg_float, kernel_prng_gg_float, NULL, NULL);
+		runKernelTask(command_queue_prng_gg_uchar, kernel_prng_gg_uchar, NULL, NULL);
+		runKernelTask(command_queue_prng_bt_ushort_float, kernel_prng_bt_ushort_float, NULL, NULL);
+		runKernelTask(command_queue_ls,  kernel_ls,  NULL, NULL);
+		runKernelTask(command_queue_ls2, kernel_ls2, NULL, NULL);
+		runKernelTask(command_queue_ls3, kernel_ls3, NULL, NULL);
+		runKernelTask(command_queue_ls4, kernel_ls4, NULL, NULL);
+		runKernelTask(command_queue_ls5, kernel_ls5, NULL, NULL);
+		runKernelTask(command_queue_ls6, kernel_ls6, NULL, NULL);
+		runKernelTask(command_queue_ls7, kernel_ls7, NULL, NULL);
+		runKernelTask(command_queue_ls8, kernel_ls8, NULL, NULL);
+		runKernelTask(command_queue_ls9, kernel_ls9, NULL, NULL);
+		runKernelTask(command_queue_prng_ls_float,  kernel_prng_ls_float,  NULL, NULL);
+		runKernelTask(command_queue_prng_ls2_float, kernel_prng_ls2_float, NULL, NULL);
+		runKernelTask(command_queue_prng_ls3_float, kernel_prng_ls3_float, NULL, NULL);
+		runKernelTask(command_queue_prng_ls4_float, kernel_prng_ls4_float, NULL, NULL);
+		runKernelTask(command_queue_prng_ls5_float, kernel_prng_ls5_float, NULL, NULL);
+		runKernelTask(command_queue_prng_ls6_float, kernel_prng_ls6_float, NULL, NULL);
+		runKernelTask(command_queue_prng_ls7_float, kernel_prng_ls7_float, NULL, NULL);
+		runKernelTask(command_queue_prng_ls8_float, kernel_prng_ls8_float, NULL, NULL);
+		runKernelTask(command_queue_prng_ls9_float, kernel_prng_ls9_float, NULL, NULL);
 
 		clFinish(command_queue_ga); 
 		clFinish(command_queue_pc); 
 		clFinish(command_queue_ie); 
-		clFinish(command_queue_ia); 
-		clFinish(command_queue_prng_gg_float); 
-		clFinish(command_queue_prng_ls_float);
-		clFinish(command_queue_prng_gg_uchar);
-		clFinish(command_queue_ls);
-		clFinish(command_queue_prng_ls2_float);
-		clFinish(command_queue_ls2);
-		clFinish(command_queue_prng_ls3_float);
-		clFinish(command_queue_ls3);
+		clFinish(command_queue_ia);
+		clFinish(command_queue_ls123_ushort); 
 		clFinish(command_queue_igl_arb);
-		clFinish(command_queue_ls123_ushort);
+		clFinish(command_queue_prng_gg_float); 
+		clFinish(command_queue_prng_gg_uchar);		
 		clFinish(command_queue_prng_bt_ushort_float);
-		clFinish(command_queue_prng_ls4_float);
-		clFinish(command_queue_prng_ls5_float);
+		clFinish(command_queue_ls);
+		clFinish(command_queue_ls2);
+		clFinish(command_queue_ls3);
 		clFinish(command_queue_ls4);
 		clFinish(command_queue_ls5);
-		clFinish(command_queue_prng_ls6_float);
-		clFinish(command_queue_prng_ls7_float);
-		clFinish(command_queue_prng_ls8_float);
-		clFinish(command_queue_prng_ls9_float);
 		clFinish(command_queue_ls6);
 		clFinish(command_queue_ls7);
 		clFinish(command_queue_ls8);
 		clFinish(command_queue_ls9);
+		clFinish(command_queue_prng_ls_float);
+		clFinish(command_queue_prng_ls2_float);
+		clFinish(command_queue_prng_ls3_float);
+		clFinish(command_queue_prng_ls4_float);
+		clFinish(command_queue_prng_ls5_float);
+		clFinish(command_queue_prng_ls6_float);
+		clFinish(command_queue_prng_ls7_float);
+		clFinish(command_queue_prng_ls8_float);
+		clFinish(command_queue_prng_ls9_float);			
 
 		clock_stop_docking = clock();
 
 
 #if defined(SINGLE_COPY_POP_ENE)
 
-
 #else
-		/*
-		fflush(stdout);
-		*/
+
 
 		//copy results from device
 		memcopyBufferObjectFromDevice(command_queue_ga,array_evals_and_generations_performed,mem_evals_and_generations_performed,2*sizeof(unsigned int));
@@ -1117,13 +1112,9 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		mypars->num_of_generations  = array_evals_and_generations_performed [1];
 	
 		memcopyBufferObjectFromDevice(command_queue_ga,cpu_final_populations,mem_dockpars_conformations_current,size_populations);
-
 		memcopyBufferObjectFromDevice(command_queue_ga,cpu_energies,mem_dockpars_energies_current,size_energies);
 
-
-
 		//processing results
-		
 /*
 		// Fix genotypes so map angle is used for genotypes 3,4,5
 		// Check what format is used by host regarding the angles
