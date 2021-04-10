@@ -71,11 +71,9 @@ static cl_command_queue command_queue_prng_ls3_float = NULL;
 static cl_kernel kernel_prng_ls3_float = NULL;
 static const char *name_prng_ls3_float = "Krnl_Prng_LS3_float";
 
-#ifdef ENABLE_KERNEL21
-static cl_command_queue command_queue21 = NULL;
-static cl_kernel kernel21  = NULL;
-static const char *name_k21 = "Krnl_LS3";
-#endif
+static cl_command_queue command_queue_ls3 = NULL;
+static cl_kernel kernel_ls3  = NULL;
+static const char *name_ls3 = "Krnl_LS3";
 
 #ifdef ENABLE_KERNEL27
 static cl_command_queue command_queue27 = NULL;
@@ -850,27 +848,26 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 
 	setKernelArg(kernel_prng_ls3_float,1, sizeof(unsigned char),  &dockpars.num_of_genes);
 
-#ifdef ENABLE_KERNEL21 // Krnl_LS3
-	//setKernelArg(kernel21,0, sizeof(unsigned int),  &dockpars.max_num_of_iters);
-	setKernelArg(kernel21,0, sizeof(unsigned short),  &Host_max_num_of_iters);
+	// Krnl_LS3
+	//setKernelArg(kernel_ls3,0, sizeof(unsigned int),  &dockpars.max_num_of_iters);
+	setKernelArg(kernel_ls3,0, sizeof(unsigned short),  &Host_max_num_of_iters);
 	#if defined (FIXED_POINT_LS3)
-	setKernelArg(kernel21,1, sizeof(fixedpt),  	&fixpt_rho_lower_bound);
-	setKernelArg(kernel21,2, sizeof(fixedpt),  	&fixpt_base_dmov_mul_sqrt3);
+	setKernelArg(kernel_ls3,1, sizeof(fixedpt),  	&fixpt_rho_lower_bound);
+	setKernelArg(kernel_ls3,2, sizeof(fixedpt),  	&fixpt_base_dmov_mul_sqrt3);
 	#else
-	setKernelArg(kernel21,1, sizeof(float),  	&dockpars.rho_lower_bound);
-	setKernelArg(kernel21,2, sizeof(float),  	&dockpars.base_dmov_mul_sqrt3);
+	setKernelArg(kernel_ls3,1, sizeof(float),  	&dockpars.rho_lower_bound);
+	setKernelArg(kernel_ls3,2, sizeof(float),  	&dockpars.base_dmov_mul_sqrt3);
 	#endif
-	setKernelArg(kernel21,3, sizeof(unsigned char), &dockpars.num_of_genes);
+	setKernelArg(kernel_ls3,3, sizeof(unsigned char), &dockpars.num_of_genes);
 	#if defined (FIXED_POINT_LS3)
-	setKernelArg(kernel21,4, sizeof(fixedpt),  	&fixpt_base_dang_mul_sqrt3);
+	setKernelArg(kernel_ls3,4, sizeof(fixedpt),  	&fixpt_base_dang_mul_sqrt3);
 	#else
-	setKernelArg(kernel21,4, sizeof(float),  	&dockpars.base_dang_mul_sqrt3);
+	setKernelArg(kernel_ls3,4, sizeof(float),  	&dockpars.base_dang_mul_sqrt3);
 	#endif
 
-	//setKernelArg(kernel21,5, sizeof(unsigned int),  &dockpars.cons_limit);
-	setKernelArg(kernel21,5, sizeof(unsigned char),   &Host_cons_limit);
-#endif // End of ENABLE_KERNEL21
-
+	//setKernelArg(kernel_ls3,5, sizeof(unsigned int),  &dockpars.cons_limit);
+	setKernelArg(kernel_ls3,5, sizeof(unsigned char),   &Host_cons_limit);
+	
 #ifdef ENABLE_KERNEL27 // Krnl_IGL_Arbiter
 /*	
 	setKernelArg(kernel27,0, sizeof(unsigned char),  &dockpars.num_of_genes);
@@ -1143,10 +1140,7 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		runKernelTask(command_queue_prng_ls2_float,kernel_prng_ls2_float,NULL,NULL);
 		runKernelTask(command_queue_ls2,kernel_ls2,NULL,NULL);
 		runKernelTask(command_queue_prng_ls3_float,kernel_prng_ls3_float,NULL,NULL);
-
-		#ifdef ENABLE_KERNEL21
-		runKernelTask(command_queue21,kernel21,NULL,NULL);
-		#endif // ENABLE_KERNEL21
+		runKernelTask(command_queue_ls3,kernel_ls3,NULL,NULL);
 
 		#ifdef ENABLE_KERNEL27
 		runKernelTask(command_queue27,kernel27,NULL,NULL);
@@ -1220,10 +1214,7 @@ unsigned char  Host_cons_limit       = (unsigned char) dockpars.cons_limit;
 		clFinish(command_queue_prng_ls2_float);
 		clFinish(command_queue_ls2);
 		clFinish(command_queue_prng_ls3_float);
-
-		#ifdef ENABLE_KERNEL21
-		clFinish(command_queue21);
-		#endif
+		clFinish(command_queue_ls3);
 
 		#ifdef ENABLE_KERNEL27
 		clFinish(command_queue27);
@@ -1596,12 +1587,10 @@ bool init() {
   kernel_prng_ls3_float = clCreateKernel(program, name_prng_ls3_float, &status);
   checkError(status, "Failed to create kernel prng_ls3_float");
 
-#ifdef ENABLE_KERNEL21
-  command_queue21 = clCreateCommandQueue(context, device, 0, &status);
-  checkError(status, "Failed to create command queue21");
-  kernel21 = clCreateKernel(program, name_k21, &status);
-  checkError(status, "Failed to create kernel");
-#endif
+  command_queue_ls3 = clCreateCommandQueue(context, device, 0, &status);
+  checkError(status, "Failed to create command queue ls3");
+  kernel_ls3 = clCreateKernel(program, name_ls3, &status);
+  checkError(status, "Failed to create kernel ls3");
 
 #ifdef ENABLE_KERNEL27
   command_queue27 = clCreateCommandQueue(context, device, 0, &status);
@@ -1746,10 +1735,8 @@ void cleanup() {
   if(kernel_prng_ls3_float) {clReleaseKernel(kernel_prng_ls3_float);}
   if(command_queue_prng_ls3_float) {clReleaseCommandQueue(command_queue_prng_ls3_float);}
 
-#ifdef ENABLE_KERNEL21
-  if(kernel21) {clReleaseKernel(kernel21);}
-  if(command_queue21) {clReleaseCommandQueue(command_queue21);}
-#endif
+  if(kernel_ls3) {clReleaseKernel(kernel_ls3);}
+  if(command_queue_ls3) {clReleaseCommandQueue(command_queue_ls3);}
 
 #ifdef ENABLE_KERNEL27
   if(kernel27) {clReleaseKernel(kernel27);}
