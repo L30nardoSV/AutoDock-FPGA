@@ -14,7 +14,7 @@ int getDevices(cl_platform_id   platform_id, cl_uint  platformCount,
   /* WHEN ALL DEVICES ARE ACCESSED */
   
     // Access first platforms, get all devices
-#if defined (DEVICE_ATTRIBUTES_DISPLAY) || defined (PRINT_PROGRESS)
+#if defined (DEVICE_ATTRIBUTES_DISPLAY) || defined (PRINT_OCL_INFO)
     printf("\n-----------------------------------------------------------------------\n");
 #endif
 
@@ -38,7 +38,7 @@ int getDevices(cl_platform_id   platform_id, cl_uint  platformCount,
 		return EXIT_FAILURE;
     	}
 
-#if defined (DEVICE_ATTRIBUTES_DISPLAY) || defined (PRINT_PROGRESS)
+#if defined (DEVICE_ATTRIBUTES_DISPLAY) || defined (PRINT_OCL_INFO)
     printf("Number of available OpenCL devices: %d \n",local_deviceCount);
 #endif
 

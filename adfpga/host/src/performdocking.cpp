@@ -1619,7 +1619,8 @@ bool init() {
 
   // User-visible output - Platform information
   {
-    char char_buffer[STRING_BUFFER_LEN];
+#ifdef PRINT_OCLINFO
+	char char_buffer[STRING_BUFFER_LEN];
 	printf("\n========================\n");
     printf("Querying platform for info:\n");
     printf("==========================\n");
@@ -1629,6 +1630,7 @@ bool init() {
     printf("%-40s = %s\n", "CL_PLATFORM_VENDOR ", char_buffer);
     clGetPlatformInfo(platform, CL_PLATFORM_VERSION, STRING_BUFFER_LEN, char_buffer, NULL);
     printf("%-40s = %s\n\n", "CL_PLATFORM_VERSION ", char_buffer);
+#endif
   }
 
   // Query the available OpenCL devices.
@@ -1641,7 +1643,9 @@ bool init() {
   device = devices[0];
 
   // Display some device information.
+#ifdef PRINT_OCLINFO
   display_device_info(device);
+#endif
 
   // Create the context.
   context = clCreateContext(NULL, 1, &device, &oclContextCallback, NULL, &status);

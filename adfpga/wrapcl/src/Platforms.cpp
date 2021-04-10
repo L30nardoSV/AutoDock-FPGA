@@ -13,7 +13,7 @@ int getPlatforms(cl_platform_id** platform_id, cl_uint* platformCount){
  	return EXIT_FAILURE;
   }
 
-#if defined (PLATFORM_ATTRIBUTES_DISPLAY) || defined (PRINT_PROGRESS)
+#if defined (PLATFORM_ATTRIBUTES_DISPLAY) || defined (PRINT_CL_INFO)
   printf("\n-----------------------------------------------------------------------\n"); 
   printf("Number of available OpenCL platforms: %d\n",local_platformCount);
 #endif
