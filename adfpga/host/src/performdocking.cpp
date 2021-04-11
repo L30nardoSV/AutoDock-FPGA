@@ -1,5 +1,13 @@
 #include "performdocking.h"
 
+Dockparameters dockpars;
+kernelconstant_static  KerConstStatic;
+#if defined(SINGLE_COPY_POP_ENE)
+
+#else
+kernelconstant_dynamic KerConstDynamic;
+#endif
+
 int docking_with_gpu(const Gridinfo*   mygrid,
 	             /*const*/ float*  cpu_floatgrids,
                            Dockpars*   mypars,

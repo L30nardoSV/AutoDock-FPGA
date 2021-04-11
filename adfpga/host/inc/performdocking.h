@@ -31,15 +31,4 @@ double check_progress(int* evals_of_runs,
 		      int max_num_of_gens,
 		      int num_of_runs);
 
-//// --------------------------------
-//// Host constant struct
-//// --------------------------------
-Dockparameters dockpars;
-kernelconstant_static  KerConstStatic;
-#if defined(SINGLE_COPY_POP_ENE)
-
-#else
-kernelconstant_dynamic KerConstDynamic;
-#endif
-
 #endif /* PERFORMDOCKING_H_ */
