@@ -143,23 +143,6 @@ cl_mem mem_KerConstStatic_rotbonds_moving_vectors_const;
 cl_mem mem_KerConstStatic_rotbonds_unit_vectors_const;
 cl_mem mem_KerConstStatic_ref_orientation_quats_const;
 
-/*								                  // Nr elements	// Nr bytes
-cl_mem mem_atom_charges_const;		// float [MAX_NUM_OF_ATOMS];			// 90	 = 90	//360
-cl_mem mem_atom_types_const;		// char  [MAX_NUM_OF_ATOMS];			// 90	 = 90	//360
-cl_mem mem_intraE_contributors_const;	// char  [3*MAX_INTRAE_CONTRIBUTORS];		// 3*8128=28384 //24384	
-cl_mem mem_VWpars_AC_const;		// float [MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES];	// 14*14 = 196  //784
-cl_mem mem_VWpars_BD_const;		// float [MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES]; // 14*14 = 196	//784
-cl_mem mem_dspars_S_const;		// float [MAX_NUM_OF_ATYPES];			// 14    = 14   //56
-cl_mem mem_dspars_V_const;		// float [MAX_NUM_OF_ATYPES];			// 14    = 14   //56
-cl_mem mem_rotlist_const;		// int   [MAX_NUM_OF_ROTATIONS];		// 4096  = 4096 //16384
-cl_mem mem_ref_coords_x_const;		// float [MAX_NUM_OF_ATOMS];			// 90    = 90   //360
-cl_mem mem_ref_coords_y_const;		// float [MAX_NUM_OF_ATOMS];			// 90    = 90   //360
-cl_mem mem_ref_coords_z_const;		// float [MAX_NUM_OF_ATOMS];			// 90	 = 90   //360
-cl_mem mem_rotbonds_moving_vectors_const;// float [3*MAX_NUM_OF_ROTBONDS];		// 3*32  = 96   //384
-cl_mem mem_rotbonds_unit_vectors_const;	// float [3*MAX_NUM_OF_ROTBONDS];		// 3*32  = 96   //384
-cl_mem mem_ref_orientation_quats_const;	// float [4*MAX_NUM_OF_RUNS];			// 4*100 = 400  //1600
-*/
-
 cl_mem mem_dockpars_fgrids;
 
 #if defined(SEPARATE_FGRID_INTERE)
@@ -187,7 +170,6 @@ fixedpt64* cpu_fixedpt64grids;
 
 #endif
 
-
 // Host memory buffers
 float* cpu_init_populations;
 float* cpu_final_populations;
@@ -200,10 +182,7 @@ int *cpu_gens_of_runs;
 #endif
 float* cpu_ref_ori_angles;			  
 
-
-//// --------------------------------
-//// Altera OpenCL Helper Functions
-//// --------------------------------
+// Altera OpenCL Helper Functions
 bool init() {
   cl_int status;
 
