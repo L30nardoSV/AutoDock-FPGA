@@ -1,7 +1,7 @@
 #ifndef OCL_INIT_H_
 #define OCL_INIT_H_
 
-#include "processligand.h"
+#include "processresult.h"
 #include "CL/opencl.h"
 #include "AOCLUtils/aocl_utils.h"
 
