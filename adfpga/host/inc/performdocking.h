@@ -10,10 +10,9 @@
 
 #include "processgrid.h"
 #include "miscellaneous.h"
-#include "processligand.h"
 #include "getparameters.h"
 #include "calcenergy.h"	
-#include "processresult.h"
+#include "processligand.h"
 #include "ocl_init.h"
 
 #include "Kernels.h"
