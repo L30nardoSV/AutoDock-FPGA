@@ -126,7 +126,7 @@ extern cl_command_queue command_queue_ls9;
 extern cl_kernel kernel_ls9;
 extern const char *name_ls9;
 
-extern cl_program program = NULL;
+extern cl_program program;
 
 // Altera Issue
 // Constant data holding struct data
