@@ -15,9 +15,6 @@
 #include "processligand.h"
 #include "ocl_init.h"
 
-#include "Kernels.h"
-#include "BufferObjects.h"
-
 #define ELAPSEDSECS(stop,start) ((float) stop-start)/((float) CLOCKS_PER_SEC)
 
 int docking_with_gpu(const Gridinfo* 	mygrid,

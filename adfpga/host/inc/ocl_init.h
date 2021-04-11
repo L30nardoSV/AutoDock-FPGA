@@ -5,6 +5,9 @@
 #include "CL/opencl.h"
 #include "AOCLUtils/aocl_utils.h"
 
+#include "Kernels.h"
+#include "BufferObjects.h"
+
 using namespace aocl_utils;
 
 #define STRING_BUFFER_LEN 1024
