@@ -46,18 +46,4 @@ kernelconstant_static  KerConstStatic;
 kernelconstant_dynamic KerConstDynamic;
 #endif
 
-//// --------------------------------
-//// Host memory buffers
-//// --------------------------------
-float* cpu_init_populations;
-float* cpu_final_populations;
-float* cpu_energies;
-Ligandresult* cpu_result_ligands;
-unsigned int* cpu_prng_seeds;
-#if defined(SINGLE_COPY_POP_ENE)
-int *cpu_evals_of_runs;
-int *cpu_gens_of_runs;
-#endif
-float* cpu_ref_ori_angles;			  
-
 #endif /* PERFORMDOCKING_H_ */

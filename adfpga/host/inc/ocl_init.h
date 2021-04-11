@@ -1,6 +1,7 @@
 #ifndef OCL_INIT_H_
 #define OCL_INIT_H_
 
+#include "processligand.h"
 #include "CL/opencl.h"
 #include "AOCLUtils/aocl_utils.h"
 
@@ -194,6 +195,20 @@ cl_mem mem_evals_and_generations_performed;
 fixedpt64* cpu_fixedpt64grids;
 
 #endif
+
+
+// Host memory buffers
+float* cpu_init_populations;
+float* cpu_final_populations;
+float* cpu_energies;
+Ligandresult* cpu_result_ligands;
+unsigned int* cpu_prng_seeds;
+#if defined(SINGLE_COPY_POP_ENE)
+int *cpu_evals_of_runs;
+int *cpu_gens_of_runs;
+#endif
+float* cpu_ref_ori_angles;			  
+
 
 // Function prototypes
 bool init();
