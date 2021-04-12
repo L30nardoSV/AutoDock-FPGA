@@ -2,13 +2,23 @@
 #define DEFINES_H_
 
 // ------------------------------------
+// Datatypes
+// ------------------------------------
+#ifndef SHORT_TYPE_NAMES_
+#define SHORT_TYPE_NAMES_
+typedef unsigned char uchar;
+typedef unsigned short ushort;
+typedef unsigned int  uint;
+#endif
+
+// ------------------------------------
 // Different OpenCL work-group sizes
 // ------------------------------------
 #define NUM_OF_THREADS_PER_BLOCK 1
 
-// -----------------------------------------------------------------------------
+// ------------------------------------
 // Docking constants
-// -----------------------------------------------------------------------------
+// ------------------------------------
 #define RLIST_ATOMID_MASK    0x000000FF
 #define RLIST_RBONDID_MASK   0x0000FF00
 #define RLIST_RBONDID_SHIFT  8
