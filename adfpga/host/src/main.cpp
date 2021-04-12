@@ -75,20 +75,21 @@ int main(int argc, char* argv[]) {
 	// Calculating energies of reference ligand if required
 	//------------------------------------------------------------
 	if (mypars.reflig_en_reqired == 1) {
-		print_ref_lig_energies_f(
+		print_ref_lig_energies_f (
 			myligand_init,
 			mypars.smooth,
 			mygrid,
 			floatgrids,
 			mypars.coeffs.scaled_AD4_coeff_elec,
 			mypars.coeffs.AD4_coeff_desolv,
-			mypars.qasp);
+			mypars.qasp
+		);
 	}
 
 	//------------------------------------------------------------
 	// Starting Docking
 	//------------------------------------------------------------
-	if (docking_with_gpu(&mygrid, floatgrids, &mypars, &myligand_init, &argc, argv, clock_start_program) != 0)
+	if (docking_with_fpga (&mygrid, floatgrids, &mypars, &myligand_init, &argc, argv, clock_start_program) != 0)
 		return 1;
 
 	if(floatgrids) {alignedFree(floatgrids);}

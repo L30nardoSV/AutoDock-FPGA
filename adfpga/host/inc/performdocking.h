@@ -17,18 +17,14 @@
 
 #define ELAPSEDSECS(stop,start) ((float) stop-start)/((float) CLOCKS_PER_SEC)
 
-int docking_with_gpu(const Gridinfo* 	mygrid,
-         	     /*const*/ float* 	cpu_floatgrids,
-		           Dockpars*	mypars,
-		     const Liganddata* 	myligand_init,
-		     const int* 	argc,
-		     char**		argv,
-		           clock_t 	clock_start_program);
-
-double check_progress(int* evals_of_runs,
-		      int generation_cnt,
-		      int max_num_of_evals,
-		      int max_num_of_gens,
-		      int num_of_runs);
+int docking_with_fpga (
+	const Gridinfo* mygrid,
+    /*const*/ float* cpu_floatgrids,
+	Dockpars* mypars,
+	const Liganddata* myligand_init,
+	const int* argc,
+	char** argv,
+	clock_t clock_start_program
+);
 
 #endif /* PERFORMDOCKING_H_ */
