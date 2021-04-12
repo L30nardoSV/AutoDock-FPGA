@@ -1865,8 +1865,8 @@ float calc_intraE_f(const Liganddata* myligand,
 				type_id1 = myligand->atom_idxyzq [atom_id1][0];
 				type_id2 = myligand->atom_idxyzq [atom_id2][0];
 
-				unsigned int atom1_type_vdw_hb = myligand->atom1_types_reqm [type_id1];
-		     	        unsigned int atom2_type_vdw_hb = myligand->atom2_types_reqm [type_id2];
+				uint atom1_type_vdw_hb = myligand->atom1_types_reqm [type_id1];
+		     	uint atom2_type_vdw_hb = myligand->atom2_types_reqm [type_id2];
 
 				// Getting optimum pair distance (opt_distance) from reqm and reqm_hbond
 				// reqm: equilibrium internuclear separation

@@ -231,15 +231,6 @@ int prepare_const_fields_for_gpu(Liganddata*     myligand_reference,
 }
 */
 
-
-
-
-
-
-
-
-
-
 int prepare_conststatic_fields_for_gpu(Liganddata* 	       myligand_reference,
 				 	Dockpars*   	       mypars,
 					#if defined(SINGLE_COPY_POP_ENE)
@@ -264,9 +255,9 @@ int prepare_conststatic_fields_for_gpu(Liganddata* 	       myligand_reference,
 	cl_char3  intraE_contributors[MAX_INTRAE_CONTRIBUTORS];
 
 	float reqm [ATYPE_NUM];
-        float reqm_hbond [ATYPE_NUM];
-	unsigned int atom1_types_reqm [ATYPE_NUM];
-        unsigned int atom2_types_reqm [ATYPE_NUM];
+    float reqm_hbond [ATYPE_NUM];
+	uint atom1_types_reqm [ATYPE_NUM];
+    uint atom2_types_reqm [ATYPE_NUM];
 
 	float VWpars_AC[MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES];
 	float VWpars_BD[MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES];

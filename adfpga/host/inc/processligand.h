@@ -74,8 +74,8 @@ typedef struct
 	// See "User Guide AutoDock 4.2" (page 34)
 	double  reqm [ATYPE_NUM];
 	double  reqm_hbond [ATYPE_NUM];
-	unsigned int  atom1_types_reqm [ATYPE_NUM];
-	unsigned int  atom2_types_reqm [ATYPE_NUM];
+	uint  atom1_types_reqm [ATYPE_NUM];
+	uint  atom2_types_reqm [ATYPE_NUM];
 
 	double 	VWpars_A [14][14];
 	double	VWpars_B [14][14];

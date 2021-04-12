@@ -17,33 +17,33 @@
 // the evaluation counters and the random number generator states.
 typedef struct
 {
-	unsigned char  	num_of_atoms;
-	unsigned char   num_of_atypes;
-	unsigned int    num_of_intraE_contributors;
-	unsigned char   gridsize_x;
-	unsigned char   gridsize_y;
-	unsigned char   gridsize_z;
-	unsigned char	g1;
-	unsigned int	g2;
-	unsigned int 	g3;
-	float  		grid_spacing;
+	uchar  	num_of_atoms;
+	uchar   num_of_atypes;
+	uint    num_of_intraE_contributors;
+	uchar   gridsize_x;
+	uchar   gridsize_y;
+	uchar   gridsize_z;
+	uchar	g1;
+	uint	g2;
+	uint 	g3;
+	float	grid_spacing;
 
-	unsigned int    rotbondlist_length;
-	float  		coeff_elec;
-	float  		coeff_desolv;
+	uint	rotbondlist_length;
+	float	coeff_elec;
+	float	coeff_desolv;
 /*
 	float* 		conformations_current;
 	float* 		energies_current;
 	float* 		conformations_next;
 	float* 		energies_next;
 	int*   		evals_of_new_entities;
-	unsigned int* 	prng_states;
+	uint* 	prng_states;
 */
-	unsigned int num_of_energy_evals;
-	unsigned int num_of_generations;
+	uint num_of_energy_evals;
+	uint num_of_generations;
 
-	unsigned int    pop_size;
-	unsigned int   	num_of_genes;
+	uint    pop_size;
+	uint   	num_of_genes;
 	float  		tournament_rate;
 	float  		crossover_rate;
 	float  		mutation_rate;
@@ -53,12 +53,12 @@ typedef struct
 
 	float 		smooth;
 
-	unsigned int 	num_of_lsentities;
+	uint 	num_of_lsentities;
 	float  		rho_lower_bound;
 	float  		base_dmov_mul_sqrt3;
 	float  		base_dang_mul_sqrt3;
-	unsigned int 	cons_limit;
-	unsigned int 	max_num_of_iters;
+	uint 	cons_limit;
+	uint 	max_num_of_iters;
 	float  		qasp;
 } Dockparameters;
 
@@ -123,8 +123,8 @@ typedef struct
 
         float reqm_const [ATYPE_NUM]				      __attribute__ ((aligned (64)));
         float reqm_hbond_const [ATYPE_NUM]			      __attribute__ ((aligned (64)));
-        unsigned int  atom1_types_reqm_const [ATYPE_NUM]	      __attribute__ ((aligned (64)));
-        unsigned int  atom2_types_reqm_const [ATYPE_NUM]	      __attribute__ ((aligned (64)));
+        uint  atom1_types_reqm_const [ATYPE_NUM]	      __attribute__ ((aligned (64)));
+        uint  atom2_types_reqm_const [ATYPE_NUM]	      __attribute__ ((aligned (64)));
 
        	float VWpars_AC_const   [MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES] __attribute__ ((aligned (1024)));
        	float VWpars_BD_const   [MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES] __attribute__ ((aligned (1024)));
