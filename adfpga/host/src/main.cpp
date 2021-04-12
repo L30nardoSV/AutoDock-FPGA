@@ -19,19 +19,13 @@
 
 using namespace aocl_utils;
 
-int main(int argc, char* argv[])
-{
-
-	//=======================================================================
-	// Docking Algorithm
-	//=======================================================================
-
+int main(int argc, char* argv[]) {
 	Gridinfo mygrid;
 	Liganddata myligand_init;
 	Dockpars mypars;
 	float* floatgrids;
-	FILE*	fp;
-	char 	report_file_name [256];
+	FILE* fp;
+	char report_file_name [256];
 
 	clock_t clock_start_program, clock_stop_program;
 
@@ -68,7 +62,7 @@ int main(int argc, char* argv[])
 	if (get_liganddata(mypars.ligandfile, &myligand_init, mypars.coeffs.AD4_coeff_vdW, mypars.coeffs.AD4_coeff_hb) != 0)
 		return 1;
 
-	//Reading the grid files and storing values in the memory region pointed by floatgrids
+	// Reading the grid files and storing values in the memory region pointed by floatgrids
 	if (get_gridvalues_f(&mygrid, &floatgrids) != 0)
 		return 1;
 
@@ -80,19 +74,15 @@ int main(int argc, char* argv[])
 	//------------------------------------------------------------
 	// Calculating energies of reference ligand if required
 	//------------------------------------------------------------
-#if 0
-	if (mypars.reflig_en_reqired == 1)
-		print_ref_lig_energies_f(myligand_init, mygrid, floatgrids, mypars.coeffs.scaled_AD4_coeff_elec, mypars.coeffs.AD4_coeff_desolv, mypars.qasp);
-#endif
-
 	if (mypars.reflig_en_reqired == 1) {
-		print_ref_lig_energies_f(myligand_init,
-					 mypars.smooth,
-					 mygrid,
-					 floatgrids,
-					 mypars.coeffs.scaled_AD4_coeff_elec,
-					 mypars.coeffs.AD4_coeff_desolv,
-					 mypars.qasp);
+		print_ref_lig_energies_f(
+			myligand_init,
+			mypars.smooth,
+			mygrid,
+			floatgrids,
+			mypars.coeffs.scaled_AD4_coeff_elec,
+			mypars.coeffs.AD4_coeff_desolv,
+			mypars.qasp);
 	}
 
 	//------------------------------------------------------------
