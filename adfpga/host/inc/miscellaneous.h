@@ -1,6 +1,7 @@
 #ifndef MISCELLANEOUS_H_
 #define MISCELLANEOUS_H_
 
+#include "defines.h"
 #include <time.h>
 #include <stdio.h>
 #include <math.h>
@@ -36,7 +37,7 @@ long long float2fraclint(double, int);
 
 double myrand(void);
 
-unsigned int myrand_int(unsigned int);
+uint myrand_int(uint);
 
 double distance(const double [], const double []);
 
@@ -57,6 +58,6 @@ void print_binary_string(unsigned long long);
 int stricmp(const char*, const char*);
 
 
-unsigned int genseed(unsigned int init);
+uint genseed(uint init);
 
 #endif /* MISCELLANEOUS_H_ */

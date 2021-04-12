@@ -39,7 +39,7 @@ double myrand(void)
 
 	if (first_call == 0)
 	{
-		srand((unsigned int) time(NULL));
+		srand((uint) time(NULL));
 		first_call++;
 	}
 
@@ -50,10 +50,10 @@ double myrand(void)
 	return temprand;
 }
 
-unsigned int myrand_int(unsigned int limit)
+uint myrand_int(uint limit)
 //The function returns a random integer which is lower than the given limit.
 {
-	return (unsigned int) floor(limit*myrand());
+	return (uint) floor(limit*myrand());
 }
 
 double distance(const double point1 [], const double point2 [])
@@ -331,14 +331,14 @@ int stricmp(const char* str1, const char* str2)
 
 
 
-unsigned int genseed(unsigned int init)
+uint genseed(uint init)
 //The function generates random numbers with a linear congruential generator,
 //using Visual C++ generator constants.
 //The generator can be initialized with the init parameter.
 //If the parameter is 0, a new random value will be
 //returned (and init won't be used).
 {
-	static unsigned int state = 0;
+	static uint state = 0;
 
 	if (init != 0)
 		state = init;

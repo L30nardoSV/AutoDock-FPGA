@@ -203,7 +203,7 @@ extern float* cpu_init_populations;
 extern float* cpu_final_populations;
 extern float* cpu_energies;
 extern Ligandresult* cpu_result_ligands;
-extern unsigned int* cpu_prng_seeds;
+extern uint* cpu_prng_seeds;
 #if defined(SINGLE_COPY_POP_ENE)
 extern int *cpu_evals_of_runs;
 extern int *cpu_gens_of_runs;
