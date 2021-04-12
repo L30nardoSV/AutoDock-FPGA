@@ -170,28 +170,28 @@ __kernel __attribute__ ((max_global_work_dim(0)))
 void Krnl_GA(__global       float*           __restrict GlobPopulationCurrent,
 	     __global       float*           __restrict GlobEnergyCurrent,
 	     #if defined(SINGLE_COPY_POP_ENE)
-   	     __global       unsigned int*    __restrict GlobEvals_performed,
-             __global       unsigned int*    __restrict GlobGens_performed,
+   	     __global       uint*    __restrict GlobEvals_performed,
+             __global       uint*    __restrict GlobGens_performed,
 	     #else
-	     __global       unsigned int*    __restrict GlobEvalsGenerations_performed,
+	     __global       uint*    __restrict GlobEvalsGenerations_performed,
 	     #endif
-			    unsigned int              DockConst_pop_size,
-		     	    unsigned int              DockConst_num_of_energy_evals,
-			    unsigned int              DockConst_num_of_generations,
-		      	    float                     DockConst_tournament_rate,
+			    uint              DockConst_pop_size,
+				uint              DockConst_num_of_energy_evals,
+			    uint              DockConst_num_of_generations,
+		      	float                     DockConst_tournament_rate,
 			    float                     DockConst_mutation_rate,
-		    	    float                     DockConst_abs_max_dmov,
+		    	float                     DockConst_abs_max_dmov,
 			    float                     DockConst_abs_max_dang,
-		    	    float                     Host_two_absmaxdmov,
+		    	float                     Host_two_absmaxdmov,
 			    float                     Host_two_absmaxdang,
 			    float                     DockConst_crossover_rate,
-			    unsigned int              DockConst_num_of_lsentities,
-			    unsigned char             DockConst_num_of_genes
+			    uint              DockConst_num_of_lsentities,
+			    uchar             DockConst_num_of_genes
 	     #if defined(SINGLE_COPY_POP_ENE)
 	     					      ,
-	                    unsigned short            Host_RunId,
-			    unsigned int 	      Host_Offset_Pop,
-			    unsigned int	      Host_Offset_Ene
+	                    ushort            Host_RunId,
+			    uint 	      Host_Offset_Pop,
+			    uint	      Host_Offset_Ene
 	     #endif
 	     )
 {

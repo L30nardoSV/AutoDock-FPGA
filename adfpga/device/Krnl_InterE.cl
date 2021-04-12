@@ -18,14 +18,14 @@ void Krnl_InterE(
 
  	     __constant char*      __restrict KerConstStatic_atom_types_const,
 
-			    unsigned char                    DockConst_g1,
-  			    unsigned int                     DockConst_g2,
-			    unsigned int                     DockConst_g3,
-   			    unsigned char                    DockConst_num_of_atoms,
+			    uchar                    DockConst_g1,
+  			    uint                     DockConst_g2,
+			    uint                     DockConst_g3,
+   			    uchar                    DockConst_num_of_atoms,
 #if defined (FIXED_POINT_INTERE)
-			    unsigned char                    DockConst_gridsize_x_minus1,
-			    unsigned char                    DockConst_gridsize_y_minus1,
-			    unsigned char                    DockConst_gridsize_z_minus1,
+			    uchar                    DockConst_gridsize_x_minus1,
+			    uchar                    DockConst_gridsize_y_minus1,
+			    uchar                    DockConst_gridsize_z_minus1,
 #else
 			    float                   	     DockConst_gridsize_x_minus1,
 			    float                    	     DockConst_gridsize_y_minus1,
@@ -37,8 +37,8 @@ void Krnl_InterE(
 	     __constant float* __restrict GlobFgrids3
 #else
 */
-			    unsigned int                     Host_mul_tmp2,
-			    unsigned int                     Host_mul_tmp3
+			    uint                     Host_mul_tmp2,
+			    uint                     Host_mul_tmp3
 /*
 #endif
 */

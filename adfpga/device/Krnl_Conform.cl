@@ -15,16 +15,16 @@ void Krnl_Conform(
 	     __constant float3*   __restrict KerConstStatic_rotbonds_moving_vectors_const,
 	     __constant float3*   __restrict KerConstStatic_rotbonds_unit_vectors_const,
 	     #endif    
-			      unsigned int          DockConst_rotbondlist_length,
-			      unsigned char         DockConst_num_of_atoms,
-			      unsigned char         DockConst_num_of_genes,
+			      uint          DockConst_rotbondlist_length,
+			      uchar         DockConst_num_of_atoms,
+			      uchar         DockConst_num_of_genes,
 
 	     #if defined (FIXED_POINT_CONFORM)
 	     __constant fixedpt4* __restrict KerConstStatic_ref_orientation_quats_const,
 	     #else
 	     __constant float4*   __restrict KerConstStatic_ref_orientation_quats_const,
 	     #endif
-			      unsigned short        Host_RunId
+			      ushort        Host_RunId
 )
 {
 	#if defined (DEBUG_KRNL_Conform) 

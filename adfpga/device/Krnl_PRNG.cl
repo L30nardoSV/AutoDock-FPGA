@@ -4,9 +4,10 @@
 // --------------------------------------------------------------------------
 
 __kernel __attribute__ ((max_global_work_dim(0)))
-void Krnl_Prng_BT_ushort_float(unsigned int Host_seed1,
-			       unsigned int Host_seed2,
-			       unsigned int DockConst_pop_size){
+void Krnl_Prng_BT_ushort_float (
+	uint Host_seed1,
+	uint Host_seed2,
+	uint DockConst_pop_size) {
 
 	uint2 lfsr;
 	lfsr.x = Host_seed1;
@@ -52,8 +53,9 @@ void Krnl_Prng_BT_ushort_float(unsigned int Host_seed1,
 // --------------------------------------------------------------------------
 
 __kernel __attribute__ ((max_global_work_dim(0)))
-void Krnl_Prng_GG_uchar(unsigned int  Host_seed, 
-		        unsigned char DockConst_num_of_genes){
+void Krnl_Prng_GG_uchar (
+	uint  Host_seed, 
+	uchar DockConst_num_of_genes) {
 
 	uint lfsr = Host_seed;
 	bool valid = false;
@@ -86,8 +88,9 @@ void Krnl_Prng_GG_uchar(unsigned int  Host_seed,
 }
 
 __kernel __attribute__ ((max_global_work_dim(0)))
-void Krnl_Prng_GG_float(unsigned int  Host_seed,
-		        unsigned char DockConst_num_of_genes){
+void Krnl_Prng_GG_float (
+	uint Host_seed,
+	uchar DockConst_num_of_genes) {
 
 	uint lfsr = Host_seed;
 	bool valid = false;
@@ -116,17 +119,17 @@ void Krnl_Prng_GG_float(unsigned int  Host_seed,
 // --------------------------------------------------------------------------
 
 __kernel __attribute__ ((max_global_work_dim(0)))
-void Krnl_Prng_LS123_ushort(unsigned int Host_seed1,
-			    unsigned int Host_seed2, 
-			    unsigned int Host_seed3,
-			    unsigned int Host_seed4,
-			    unsigned int Host_seed5, 
-			    unsigned int Host_seed6, 
-			    unsigned int Host_seed7,
-			    unsigned int Host_seed8,
-			    unsigned int Host_seed9, 
-		            unsigned int DockConst_pop_size){
-
+void Krnl_Prng_LS123_ushort (
+	uint Host_seed1,
+	uint Host_seed2, 
+	uint Host_seed3,
+	uint Host_seed4,
+	uint Host_seed5, 
+	uint Host_seed6, 
+	uint Host_seed7,
+	uint Host_seed8,
+	uint Host_seed9, 
+	uint DockConst_pop_size) {
 
 	uint lfsr[LS_REPLICATION_FACTOR];
 	lfsr[0] = Host_seed1;
@@ -200,8 +203,9 @@ void Krnl_Prng_LS123_ushort(unsigned int Host_seed1,
 // --------------------------------------------------------------------------
 
 __kernel __attribute__ ((max_global_work_dim(0)))
-void Krnl_Prng_LS_float(unsigned int  Host_seed,
-		        unsigned char DockConst_num_of_genes){
+void Krnl_Prng_LS_float (
+	uint Host_seed,
+	uchar DockConst_num_of_genes) {
 
 	uint lfsr = Host_seed;
 	bool valid = false;
@@ -234,8 +238,9 @@ void Krnl_Prng_LS_float(unsigned int  Host_seed,
 }
 
 __kernel __attribute__ ((max_global_work_dim(0)))
-void Krnl_Prng_LS2_float(unsigned int  Host_seed,
-			 unsigned char DockConst_num_of_genes){
+void Krnl_Prng_LS2_float (
+	uint Host_seed,
+	uchar DockConst_num_of_genes) {
 
 	uint lfsr = Host_seed;
 	bool valid = false;
@@ -268,8 +273,9 @@ void Krnl_Prng_LS2_float(unsigned int  Host_seed,
 }
 
 __kernel __attribute__ ((max_global_work_dim(0)))
-void Krnl_Prng_LS3_float(unsigned int  Host_seed,
-			 unsigned char DockConst_num_of_genes){
+void Krnl_Prng_LS3_float (
+	uint Host_seed,
+	uchar DockConst_num_of_genes) {
 
 	uint lfsr = Host_seed;
 	bool valid = false;
@@ -303,8 +309,9 @@ void Krnl_Prng_LS3_float(unsigned int  Host_seed,
 }
 
 __kernel __attribute__ ((max_global_work_dim(0)))
-void Krnl_Prng_LS4_float(unsigned int  Host_seed,
-			 unsigned char DockConst_num_of_genes){
+void Krnl_Prng_LS4_float (
+	uint Host_seed,
+	uchar DockConst_num_of_genes) {
 
 	uint lfsr = Host_seed;
 	bool valid = false;
@@ -337,8 +344,9 @@ void Krnl_Prng_LS4_float(unsigned int  Host_seed,
 }
 
 __kernel __attribute__ ((max_global_work_dim(0)))
-void Krnl_Prng_LS5_float(unsigned int  Host_seed,
-			 unsigned char DockConst_num_of_genes){
+void Krnl_Prng_LS5_float (
+	uint Host_seed,
+	uchar DockConst_num_of_genes) {
 
 	uint lfsr = Host_seed;
 	bool valid = false;
@@ -371,8 +379,9 @@ void Krnl_Prng_LS5_float(unsigned int  Host_seed,
 }
 
 __kernel __attribute__ ((max_global_work_dim(0)))
-void Krnl_Prng_LS6_float(unsigned int  Host_seed,
-			 unsigned char DockConst_num_of_genes){
+void Krnl_Prng_LS6_float (
+	uint Host_seed,
+	uchar DockConst_num_of_genes) {
 
 	uint lfsr = Host_seed;
 	bool valid = false;
@@ -405,8 +414,9 @@ void Krnl_Prng_LS6_float(unsigned int  Host_seed,
 }
 
 __kernel __attribute__ ((max_global_work_dim(0)))
-void Krnl_Prng_LS7_float(unsigned int  Host_seed,
-			 unsigned char DockConst_num_of_genes){
+void Krnl_Prng_LS7_float (
+	uint Host_seed,
+	uchar DockConst_num_of_genes) {
 
 	uint lfsr = Host_seed;
 	bool valid = false;
@@ -439,8 +449,9 @@ void Krnl_Prng_LS7_float(unsigned int  Host_seed,
 }
 
 __kernel __attribute__ ((max_global_work_dim(0)))
-void Krnl_Prng_LS8_float(unsigned int  Host_seed,
-			 unsigned char DockConst_num_of_genes){
+void Krnl_Prng_LS8_float (
+	uint Host_seed,
+	uchar DockConst_num_of_genes) {
 
 	uint lfsr = Host_seed;
 	bool valid = false;
@@ -473,8 +484,9 @@ void Krnl_Prng_LS8_float(unsigned int  Host_seed,
 }
 
 __kernel __attribute__ ((max_global_work_dim(0)))
-void Krnl_Prng_LS9_float(unsigned int  Host_seed,
-			 unsigned char DockConst_num_of_genes){
+void Krnl_Prng_LS9_float (
+	uint Host_seed,
+	uchar DockConst_num_of_genes) {
 
 	uint lfsr = Host_seed;
 	bool valid = false;

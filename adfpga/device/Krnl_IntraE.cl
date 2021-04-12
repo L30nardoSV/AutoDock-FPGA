@@ -29,10 +29,10 @@ void Krnl_IntraE(
 	     __constant     float* __restrict KerConstStatic_dspars_S_const,
  	     __constant     float* __restrict KerConstStatic_dspars_V_const,
 
-			unsigned char                    DockConst_num_of_atoms,
-		   	unsigned int                     DockConst_num_of_intraE_contributors,
+			uchar                    DockConst_num_of_atoms,
+		   	uint                     DockConst_num_of_intraE_contributors,
 		  	float                            DockConst_grid_spacing,
-			unsigned char                    DockConst_num_of_atypes,
+			uchar                    DockConst_num_of_atypes,
 			float                            DockConst_coeff_elec,
 			float                            DockConst_qasp,
 			float                            DockConst_coeff_desolv
