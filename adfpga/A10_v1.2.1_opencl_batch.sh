@@ -76,10 +76,10 @@ date
 printf "\\n"
 
 printf "\\n%s\\n"
-make exe PDB=3ptb NRUN=100 NEV=2500000 NGEN=27000
+make exe PDB=3ptb NRUN=10 NEV=2500000 NGEN=27000
 
 printf "\\n%s\\n"
-make exe PDB=1stp NRUN=100 NEV=2500000 NGEN=27000
+make exe PDB=1stp NRUN=10 NEV=2500000 NGEN=27000
 
 printf "\\n"
 date
