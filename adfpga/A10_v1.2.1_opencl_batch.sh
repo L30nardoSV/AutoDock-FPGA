@@ -38,7 +38,7 @@ cd /home/u71100/copy_adfpga/adfpga
 
 # Running project in Emulation mode
 printf "\\n%s\\n" "Running in Emulation Mode:"
-make emu
+make emu NRUN=10 NEV=250000 NGEN=27000
 error_check
 
 # Running project in FPGA Hardware Mode
@@ -70,7 +70,20 @@ aocl program acl0 /home/u71100/copy_adfpga/adfpga/bin_hw/Krnl_GA_unsigned.aocx
 
 # Running <make exe>
 printf "\\n%s\\n" "Running on the FPGA device:"
-make exe
+
+printf "\\n"
+date
+printf "\\n"
+
+printf "\\n%s\\n"
+make exe PDB=3ptb NRUN=100 NEV=2500000 NGEN=27000
+
+printf "\\n%s\\n"
+make exe PDB=1stp NRUN=100 NEV=2500000 NGEN=27000
+
+printf "\\n"
+date
+printf "\\n"
 
 error_check
 
