@@ -48,7 +48,6 @@ AOCL_LINK_CONFIG := $(shell aocl link-config )
 #= defines a recursively-expanded variable
 #:= defines a simply-expanded variable
 
-
 # Compilation flags
 ifeq ($(DEBUG),1)
 CXXFLAGS += -g
@@ -211,7 +210,6 @@ else
 	RELAXED_REDUCED_FLOATINGPOINT_FLAG=
 endif
 
-
 AOC_FLAG = $(CUSTOMSIZE_CONSTMEM_FLAG) $(RELAXED_REDUCED_FLOATINGPOINT_FLAG)
 
 # =============================
@@ -313,7 +311,6 @@ emu: $(TARGET_DIR)/$(TARGET) keremu
 	@echo "======================================================="
 	@echo $(newline)
 
-
 # Intermediate C compilation
 # Could be used in multistep compilation
 intc: $(DEV_SRC)
@@ -414,7 +411,6 @@ exe: $(TARGET_DIR)/$(TARGET)
 	@echo "INFO: log file is under: \"$(TARGET_DIR_HW)/$(PDB)-<...>.dlg\" "
 	@echo "========================================================================="
 	@echo $(newline)
-
 
 # Execute and profile on remote server
 # Host-recompilation
