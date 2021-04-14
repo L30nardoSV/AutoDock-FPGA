@@ -95,7 +95,7 @@ typedef struct
 
 #include "CL/opencl.h"
 
-#if defined (FIXED_POINT_CONFORM) || defined (FIXED_POINT_LS1) || defined (FIXED_POINT_LS2) || defined (FIXED_POINT_LS3)
+#if defined (FIXED_POINT_CONFORM) || defined (FIXED_POINT_LS)
 #include "defines_fixedpt.h"
 #endif
 

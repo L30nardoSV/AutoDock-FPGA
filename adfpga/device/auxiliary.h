@@ -75,18 +75,8 @@ channel float  chan_IGL2Conform_genotype       __attribute__((depth(LS_REPLICATI
 // Turn-off signal to IGL_Arbiter, Conform, InterE, IntraE
 channel bool   chan_IGLArbiter_Off;
 
-#if defined (FIXED_POINT_CONFORM) || \
-    defined (FIXED_POINT_LS1)     || \
-    defined (FIXED_POINT_LS2)     || \
-    defined (FIXED_POINT_LS3)     || \
-    defined (FIXED_POINT_LS4)     || \
-    defined (FIXED_POINT_LS5)     || \
-    defined (FIXED_POINT_LS6)     || \
-    defined (FIXED_POINT_LS7)     || \
-    defined (FIXED_POINT_LS8)     || \
-    defined (FIXED_POINT_LS9)
+#if defined (FIXED_POINT_CONFORM) || defined (FIXED_POINT_LS)
 #include "../defines_fixedpt.h"
-
 typedef int3          fixedpt3;
 typedef int4	      fixedpt4;
 #endif
@@ -125,15 +115,7 @@ float map_angle_360(float angle)
 	return x;
 }
 
-#if defined (FIXED_POINT_LS1) || \
-    defined (FIXED_POINT_LS2) || \
-    defined (FIXED_POINT_LS3) || \
-    defined (FIXED_POINT_LS4) || \
-    defined (FIXED_POINT_LS5) || \
-    defined (FIXED_POINT_LS6) || \
-    defined (FIXED_POINT_LS7) || \
-    defined (FIXED_POINT_LS8) || \
-    defined (FIXED_POINT_LS9)
+#ifdef FIXED_POINT_LS
 #define FIXEDPT_180	0xB40000
 #define FIXEDPT_360	0x1680000
 

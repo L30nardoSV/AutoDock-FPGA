@@ -1,24 +1,20 @@
-// --------------------------------------------------------------------------
-// --------------------------------------------------------------------------
-
 __kernel __attribute__ ((max_global_work_dim(0)))
-void Krnl_LS(
-		unsigned short            DockConst_max_num_of_iters,
-		#if defined (FIXED_POINT_LS1)
-		fixedpt                   DockConst_rho_lower_bound,
-		fixedpt                   DockConst_base_dmov_mul_sqrt3,
-		#else
-		float                     DockConst_rho_lower_bound,
-		float                     DockConst_base_dmov_mul_sqrt3,
-		#endif
-		unsigned char             DockConst_num_of_genes,
-		#if defined (FIXED_POINT_LS1)
-		fixedpt                   DockConst_base_dang_mul_sqrt3,
-		#else
-   		float                     DockConst_base_dang_mul_sqrt3,
-		#endif
-
-		unsigned char             DockConst_cons_limit
+void Krnl_LS (
+	ushort DockConst_max_num_of_iters,
+#ifdef FIXED_POINT_LS
+	fixedpt DockConst_rho_lower_bound,
+	fixedpt DockConst_base_dmov_mul_sqrt3,
+#else
+	float DockConst_rho_lower_bound,
+	float DockConst_base_dmov_mul_sqrt3,
+#endif
+	uchar DockConst_num_of_genes,
+#ifdef FIXED_POINT_LS
+	fixedpt DockConst_base_dang_mul_sqrt3,
+#else
+	float DockConst_base_dang_mul_sqrt3,
+#endif
+	uchar DockConst_cons_limit
 )
 {	
 	bool valid = true;
@@ -39,26 +35,26 @@ while(valid) {
 
 	if (valid) {
 		
-		#if defined (FIXED_POINT_LS1)
+#ifdef FIXED_POINT_LS
 		fixedpt genotype [ACTUAL_GENOTYPE_LENGTH];
-		#else
+#else
 		float   genotype [ACTUAL_GENOTYPE_LENGTH];
-		#endif
+#endif
 
 		for (uchar i=0; i<DockConst_num_of_genes; i++) {
-			#if defined (FIXED_POINT_LS1)
+#ifdef FIXED_POINT_LS
 			float tmp_gene = read_channel_intel(chan_GA2LS_genotype[0]);
 			genotype [i] = fixedpt_fromfloat(tmp_gene);
-			#else
+#else
 			genotype [i] = read_channel_intel(chan_GA2LS_genotype[0]);
-			#endif
+#endif
 		}
 	
-		#if defined (FIXED_POINT_LS1)
+#ifdef FIXED_POINT_LS
 		fixedpt fixpt_rho = FIXEDPT_ONE;
-		#else
+#else
 		float rho = 1.0f;
-		#endif
+#endif
 		ushort iteration_cnt = 0;
 		uchar  cons_succ     = 0;
 		uchar  cons_fail     = 0;
@@ -66,29 +62,29 @@ while(valid) {
 		bool   positive_direction = true;
 
 		// performing local search
-		#if defined (FIXED_POINT_LS1)
+#ifdef FIXED_POINT_LS
 		while ((iteration_cnt < DockConst_max_num_of_iters) && (fixpt_rho > DockConst_rho_lower_bound)) {
-		#else
+#else
 		while ((iteration_cnt < DockConst_max_num_of_iters) && (rho > DockConst_rho_lower_bound)) {
-		#endif
+#endif
 			// -----------------------------------------------
 			// Exit condition is groups here. It allows pipelining
 			if (positive_direction == true) { 
 				if (cons_succ >= DockConst_cons_limit) {
-					#if defined (FIXED_POINT_LS1)
+#ifdef FIXED_POINT_LS
 					fixpt_rho = fixpt_rho << 1;
-					#else
+#else
 					rho = LS_EXP_FACTOR*rho;
-					#endif
+#endif
 					cons_fail = 0;
 					cons_succ = 0;
 				}
 				else if (cons_fail >= DockConst_cons_limit) {
-					#if defined (FIXED_POINT_LS1)
+#ifdef FIXED_POINT_LS
 					fixpt_rho = fixpt_rho >> 1;
-					#else
+#else
 					rho = LS_CONT_FACTOR*rho;
-					#endif
+#endif
 					cons_fail = 0;
 					cons_succ = 0;
 				}
@@ -100,26 +96,26 @@ while(valid) {
 			#endif
 			// -----------------------------------------------
 
-			#if defined (FIXED_POINT_LS1)
+#ifdef FIXED_POINT_LS
 			fixedpt entity_possible_new_genotype [ACTUAL_GENOTYPE_LENGTH];
 			fixedpt genotype_bias                [ACTUAL_GENOTYPE_LENGTH];
 			fixedpt deviate_plus_bias            [ACTUAL_GENOTYPE_LENGTH];
 			fixedpt deviate_minus_bias           [ACTUAL_GENOTYPE_LENGTH];
-			#else
+#else
 			float entity_possible_new_genotype   [ACTUAL_GENOTYPE_LENGTH];
 			float genotype_bias                  [ACTUAL_GENOTYPE_LENGTH];
 			float deviate_plus_bias              [ACTUAL_GENOTYPE_LENGTH];
 			float deviate_minus_bias             [ACTUAL_GENOTYPE_LENGTH];
-			#endif
+#endif
 
 			// Tell Krnl_Conf_Arbiter, LS1 is done
 			// Not completely strict as the (iteration_cnt < DockConst_max_num_of_iters) is ignored
 			// In practice, rho condition dominates most of the cases
-			#if defined (FIXED_POINT_LS1)
+#ifdef FIXED_POINT_LS
 			write_channel_intel(chan_LS2Arbiter_end[0], (fixpt_rho < DockConst_rho_lower_bound)?true:false);
-			#else
+#else
 			write_channel_intel(chan_LS2Arbiter_end[0], (rho < DockConst_rho_lower_bound)?true:false);
-			#endif
+#endif
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 			// read pnrgs from prng_kernel using channels.
@@ -142,7 +138,7 @@ while(valid) {
 				*/
 				float tmp_prng = float_prng[i];
 
-				#if defined (FIXED_POINT_LS1)
+#ifdef FIXED_POINT_LS
 				fixedpt fixpt_tmp_prng = *(fixedpt*) &tmp_prng;
 
 				// tmp1 is genotype_deviate
@@ -171,7 +167,7 @@ while(valid) {
 				entity_possible_new_genotype [i] = fixpt_tmp3;
 				write_channel_intel(chan_LS2Conf_genotype[0], fixedpt_tofloat(fixpt_tmp3));
 
-				#else
+#else
 				// tmp1 is genotype_deviate
 				float tmp1 = rho * (2.0f*tmp_prng - 1.0f);
 
@@ -196,7 +192,7 @@ while(valid) {
 
 				entity_possible_new_genotype [i] = tmp3;
 				write_channel_intel(chan_LS2Conf_genotype[0], tmp3);
-				#endif
+#endif
 
 				#if defined (DEBUG_KRNL_LS1)
 				printf("LS1_genotype sent\n");
@@ -223,7 +219,7 @@ while(valid) {
 			// update LS energy-evaluation count
 			LS_eval++;
 
-			#if defined (FIXED_POINT_LS1)
+#ifdef FIXED_POINT_LS
 			if (candidate_energy < current_energy) {
 				// updating offspring_genotype
 				// updating genotype_bias
@@ -255,8 +251,7 @@ while(valid) {
 				}
 				positive_direction = !positive_direction;
 			}
-
-			#else
+#else
 			if (candidate_energy < current_energy) {
 				// updating offspring_genotype
 				// updating genotype_bias
@@ -287,8 +282,7 @@ while(valid) {
 				}
 				positive_direction = !positive_direction;
 			}
-			#endif
-
+#endif
 		} // end of while (iteration_cnt) && (rho)
 
 		#if defined (DEBUG_KRNL_LS1)
@@ -303,11 +297,11 @@ while(valid) {
 			}
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 
-			#if defined (FIXED_POINT_LS1)
+#ifdef FIXED_POINT_LS
 			write_channel_intel(chan_LS2GA_genotype[0], fixedpt_tofloat(genotype [i]));
-			#else
+#else
 			write_channel_intel(chan_LS2GA_genotype[0], genotype [i]);
-			#endif
+#endif
 		}
 
 	} // End of if (valid)
@@ -320,5 +314,3 @@ printf("	%-20s: %s\n", "Krnl_LS1", "disabled");
 #endif
 	
 }
-// --------------------------------------------------------------------------
-// --------------------------------------------------------------------------

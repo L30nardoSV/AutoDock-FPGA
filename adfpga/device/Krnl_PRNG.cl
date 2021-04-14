@@ -223,16 +223,16 @@ void Krnl_Prng_LS_float (
 			tmp = (0.999999f/MAX_UINT)*lfsr;
 			bool success = false;
 
-			#if defined (FIXED_POINT_LS1)
+#ifdef FIXED_POINT_LS
 			fixedpt fixpt_tmp = fixedpt_fromfloat(tmp);
 			if(!valid) {
 				success = write_channel_nb_intel(chan_PRNG2LS_float_prng[0], *(float*) &fixpt_tmp);
 			}
-			#else
+#else
 			if(!valid) {
 				success = write_channel_nb_intel(chan_PRNG2LS_float_prng[0], tmp);
 			}
-			#endif
+#endif
 		}
 	} // End of while(active)
 }
@@ -258,16 +258,16 @@ void Krnl_Prng_LS2_float (
 			tmp = (0.999999f/MAX_UINT)*lfsr;
 			bool success = false;
 
-			#if defined (FIXED_POINT_LS2)
+#ifdef FIXED_POINT_LS
 			fixedpt fixpt_tmp = fixedpt_fromfloat(tmp);
 			if(!valid) {
 				success = write_channel_nb_intel(chan_PRNG2LS_float_prng[1], *(float*) &fixpt_tmp);
 			}
-			#else
+#else
 			if(!valid) {
 				success = write_channel_nb_intel(chan_PRNG2LS_float_prng[1], tmp);
 			}
-			#endif
+#endif
 		}
 	} // End of while(active)
 }
@@ -293,17 +293,16 @@ void Krnl_Prng_LS3_float (
 			tmp = (0.999999f/MAX_UINT)*lfsr;
 			bool success = false;
 
-			#if defined (FIXED_POINT_LS3)
+#ifdef FIXED_POINT_LS
 			fixedpt fixpt_tmp = fixedpt_fromfloat(tmp);
 			if(!valid) {
 				success = write_channel_nb_intel(chan_PRNG2LS_float_prng[2], *(float*) &fixpt_tmp);
 			}
-
-			#else
+#else
 			if(!valid) {
 				success = write_channel_nb_intel(chan_PRNG2LS_float_prng[2], tmp);
 			}
-			#endif
+#endif
 		}
 	} // End of while(active)
 }
@@ -329,16 +328,16 @@ void Krnl_Prng_LS4_float (
 			tmp = (0.999999f/MAX_UINT)*lfsr;
 			bool success = false;
 
-			#if defined (FIXED_POINT_LS4)
+#ifdef FIXED_POINT_LS
 			fixedpt fixpt_tmp = fixedpt_fromfloat(tmp);
 			if(!valid) {
 				success = write_channel_nb_intel(chan_PRNG2LS_float_prng[3], *(float*) &fixpt_tmp);
 			}
-			#else
+#else
 			if(!valid) {
 				success = write_channel_nb_intel(chan_PRNG2LS_float_prng[3], tmp);
 			}
-			#endif
+#endif
 		}
 	} // End of while(active)
 }
@@ -364,16 +363,16 @@ void Krnl_Prng_LS5_float (
 			tmp = (0.999999f/MAX_UINT)*lfsr;
 			bool success = false;
 
-			#if defined (FIXED_POINT_LS5)
+#ifdef FIXED_POINT_LS
 			fixedpt fixpt_tmp = fixedpt_fromfloat(tmp);
 			if(!valid) {
 				success = write_channel_nb_intel(chan_PRNG2LS_float_prng[4], *(float*) &fixpt_tmp);
 			}
-			#else
+#else
 			if(!valid) {
 				success = write_channel_nb_intel(chan_PRNG2LS_float_prng[4], tmp);
 			}
-			#endif
+#endif
 		}
 	} // End of while(active)
 }
@@ -399,16 +398,16 @@ void Krnl_Prng_LS6_float (
 			tmp = (0.999999f/MAX_UINT)*lfsr;
 			bool success = false;
 
-			#if defined (FIXED_POINT_LS6)
+#ifdef FIXED_POINT_LS
 			fixedpt fixpt_tmp = fixedpt_fromfloat(tmp);
 			if(!valid) {
 				success = write_channel_nb_intel(chan_PRNG2LS_float_prng[5], *(float*) &fixpt_tmp);
 			}
-			#else
+#else
 			if(!valid) {
 				success = write_channel_nb_intel(chan_PRNG2LS_float_prng[5], tmp);
 			}
-			#endif
+#endif
 		}
 	} // End of while(active)
 }
@@ -434,16 +433,16 @@ void Krnl_Prng_LS7_float (
 			tmp = (0.999999f/MAX_UINT)*lfsr;
 			bool success = false;
 
-			#if defined (FIXED_POINT_LS7)
+#ifdef FIXED_POINT_LS
 			fixedpt fixpt_tmp = fixedpt_fromfloat(tmp);
 			if(!valid) {
 				success = write_channel_nb_intel(chan_PRNG2LS_float_prng[6], *(float*) &fixpt_tmp);
 			}
-			#else
+#else
 			if(!valid) {
 				success = write_channel_nb_intel(chan_PRNG2LS_float_prng[6], tmp);
 			}
-			#endif
+#endif
 		}
 	} // End of while(active)
 }
@@ -469,16 +468,16 @@ void Krnl_Prng_LS8_float (
 			tmp = (0.999999f/MAX_UINT)*lfsr;
 			bool success = false;
 
-			#if defined (FIXED_POINT_LS8)
+#ifdef FIXED_POINT_LS
 			fixedpt fixpt_tmp = fixedpt_fromfloat(tmp);
 			if(!valid) {
 				success = write_channel_nb_intel(chan_PRNG2LS_float_prng[7], *(float*) &fixpt_tmp);
 			}
-			#else
+#else
 			if(!valid) {
 				success = write_channel_nb_intel(chan_PRNG2LS_float_prng[7], tmp);
 			}
-			#endif
+#endif
 		}
 	} // End of while(active)
 }
@@ -504,16 +503,16 @@ void Krnl_Prng_LS9_float (
 			tmp = (0.999999f/MAX_UINT)*lfsr;
 			bool success = false;
 
-			#if defined (FIXED_POINT_LS9)
+#ifdef FIXED_POINT_LS
 			fixedpt fixpt_tmp = fixedpt_fromfloat(tmp);
 			if(!valid) {
 				success = write_channel_nb_intel(chan_PRNG2LS_float_prng[8], *(float*) &fixpt_tmp);
 			}
-			#else
+#else
 			if(!valid) {
 				success = write_channel_nb_intel(chan_PRNG2LS_float_prng[8], tmp);
 			}
-			#endif
+#endif
 		}
 	} // End of while(active)
 }
