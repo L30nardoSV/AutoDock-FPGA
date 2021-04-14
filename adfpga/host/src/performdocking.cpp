@@ -35,18 +35,14 @@ parameters argc and argv:
 		contains the state of the clock tick counter at the beginning of the program
 filled with clock() */
 {
-	//// ------------------------
-	//// OpenCL Host Setup
-        //// ------------------------
+
 	if(!init()) {
     		return -1;
   	}
 	printf("Init complete!\n"); fflush(stdout);
 
 	Liganddata myligand_reference;
-	//Dockparameters dockpars;
 	
-
 //#if defined (FIXED_POINT_INTERE)
 #if 0
 	size_t size_fixedpt64grids;
@@ -57,12 +53,12 @@ filled with clock() */
 	size_t size_floatgrids2;
 	size_t size_floatgrids3;
 	#endif
-
 #endif
 
 	size_t size_populations;
 	size_t size_energies;
 	size_t size_prng_seeds;
+
 #if defined(SINGLE_COPY_POP_ENE)
 	size_t size_evals_of_runs;
 #endif
@@ -73,17 +69,16 @@ filled with clock() */
 
 	timeval tv_start_docking, tv_stop_docking;
 
-	//allocating CPU memory for initial populations
+	// Allocating CPU memory for initial populations
 #if defined(SINGLE_COPY_POP_ENE)
 	size_populations = mypars->num_of_runs * mypars->pop_size * ACTUAL_GENOTYPE_LENGTH * sizeof(float);
 #else
-	//size_populations = mypars->pop_size * GENOTYPE_LENGTH_IN_GLOBMEM * sizeof(float);
 	size_populations = mypars->pop_size * ACTUAL_GENOTYPE_LENGTH * sizeof(float);
 #endif
-        cpu_init_populations = (float*) alignedMalloc(size_populations);
+	cpu_init_populations = (float*) alignedMalloc(size_populations);
 	memset(cpu_init_populations, 0, size_populations);
 
-	//allocating CPU memory for results
+	// Allocating CPU memory for results
 #if defined(SINGLE_COPY_POP_ENE)
 	size_energies = mypars->num_of_runs * mypars->pop_size * sizeof(float);
 #else
@@ -93,24 +88,24 @@ filled with clock() */
 	cpu_result_ligands = (Ligandresult*) alignedMalloc(sizeof(Ligandresult)*(mypars->num_of_runs));	
 	cpu_final_populations = (float*) alignedMalloc(size_populations);
 
-	//allocating memory in CPU for reference orientation angles
+	// Allocating memory in CPU for reference orientation angles
 #if defined(SINGLE_COPY_POP_ENE)
 	cpu_ref_ori_angles = (float*) alignedMalloc(mypars->num_of_runs*3*sizeof(float));
 #else
 	cpu_ref_ori_angles = (float*) alignedMalloc(3*sizeof(float));
 #endif
 
-	//generating initial populations and random orientation angles of reference ligand
-	//(ligand will be moved to origo and scaled as well)
+	// Generating initial populations and random orientation angles of reference ligand
+	// (ligand will be moved to origo and scaled as well)
 	myligand_reference = *myligand_init;
 	gen_initpop_and_reflig(mypars, cpu_init_populations, cpu_ref_ori_angles, &myligand_reference, mygrid);
 
-	//allocating memory in CPU for pseudorandom number generator seeds and
-	//generating them (seed for each thread during GA)
+	// Allocating memory in CPU for pseudorandom number generator seeds, 
+	// and generating them (seed for each thread during GA)
 	uint num_of_prng_blocks = 25;
 	size_prng_seeds = num_of_prng_blocks * mypars->num_of_runs * sizeof(uint);
 	cpu_prng_seeds = (uint*) alignedMalloc(size_prng_seeds);
-	genseed(time(NULL));	//initializing seed generator
+	genseed(time(NULL)); //initializing seed generator
 
 	for (uint i=0; i<num_of_prng_blocks*mypars->num_of_runs; i++) {
 #if defined (REPRO)
@@ -119,8 +114,6 @@ filled with clock() */
 		cpu_prng_seeds[i] = genseed(0u);
 #endif
 	}
-
-	//srand(time(NULL));
 
 #if defined(SINGLE_COPY_POP_ENE)
 	// allocating memory in CPU for evaluation counters
@@ -133,7 +126,7 @@ filled with clock() */
 	memset(cpu_gens_of_runs, 0, size_evals_of_runs);
 #endif
 
-	//preparing the constant data fields for the GPU
+	// Preparing the constant data fields for the GPU
 	// ----------------------------------------------------------------------
 	// The original function does CUDA calls initializing const Kernel data.
 	// We create a struct to hold those constants
@@ -147,52 +140,50 @@ filled with clock() */
 #endif
 		return 1;
 
-	//preparing parameter struct
-	dockpars.num_of_atoms  = ((uchar) myligand_reference.num_of_atoms);
+	// Preparing parameter struct
+	dockpars.num_of_atoms = ((uchar) myligand_reference.num_of_atoms);
 	dockpars.num_of_atypes = ((uchar) myligand_reference.num_of_atypes);
 	dockpars.num_of_intraE_contributors = ((uint) myligand_reference.num_of_intraE_contributors);
-	dockpars.gridsize_x    = ((uchar)  mygrid->size_xyz[0]);
-	dockpars.gridsize_y    = ((uchar)  mygrid->size_xyz[1]);
-	dockpars.gridsize_z    = ((uchar)  mygrid->size_xyz[2]);
-	dockpars.g1	       = dockpars.gridsize_x ;
-	dockpars.g2	       = dockpars.gridsize_x * dockpars.gridsize_y;
-	dockpars.g3	       = dockpars.gridsize_x * dockpars.gridsize_y * dockpars.gridsize_z;
-	dockpars.grid_spacing  = ((float) mygrid->spacing);
-	dockpars.rotbondlist_length = ((uint) NUM_OF_THREADS_PER_BLOCK*(myligand_reference.num_of_rotcyc));
-	dockpars.coeff_elec    = ((float) mypars->coeffs.scaled_AD4_coeff_elec);
-	dockpars.coeff_desolv  = ((float) mypars->coeffs.AD4_coeff_desolv);
+	dockpars.gridsize_x = ((uchar) mygrid->size_xyz[0]);
+	dockpars.gridsize_y = ((uchar) mygrid->size_xyz[1]);
+	dockpars.gridsize_z = ((uchar) mygrid->size_xyz[2]);
+	dockpars.g1 = dockpars.gridsize_x;
+	dockpars.g2 = dockpars.gridsize_x * dockpars.gridsize_y;
+	dockpars.g3 = dockpars.gridsize_x * dockpars.gridsize_y * dockpars.gridsize_z;
+	dockpars.grid_spacing = ((float) mygrid->spacing);
+	dockpars.rotbondlist_length = ((uint) NUM_OF_THREADS_PER_BLOCK * (myligand_reference.num_of_rotcyc));
+	dockpars.coeff_elec = ((float) mypars->coeffs.scaled_AD4_coeff_elec);
+	dockpars.coeff_desolv = ((float) mypars->coeffs.AD4_coeff_desolv);
 	dockpars.num_of_energy_evals = (uint) mypars->num_of_energy_evals;
-	dockpars.num_of_generations  = (uint) mypars->num_of_generations;
-
-	dockpars.pop_size      = (uint) mypars->pop_size;
-	dockpars.num_of_genes  = (uint)(myligand_reference.num_of_rotbonds + 6);
-	dockpars.tournament_rate = (mypars->tournament_rate)/100;//dockpars.tournament_rate = mypars->tournament_rate;
-	dockpars.crossover_rate  = (mypars->crossover_rate)/100; //dockpars.crossover_rate  = mypars->crossover_rate;
-	dockpars.mutation_rate   = (mypars->mutation_rate)/100;	 //dockpars.mutation_rate   = mypars->mutation_rate;
-	dockpars.abs_max_dang    = mypars->abs_max_dang;
-	dockpars.abs_max_dmov    = mypars->abs_max_dmov;
-	dockpars.lsearch_rate    = mypars->lsearch_rate;
+	dockpars.num_of_generations = (uint) mypars->num_of_generations;
+	dockpars.pop_size = (uint) mypars->pop_size;
+	dockpars.num_of_genes = (uint)(myligand_reference.num_of_rotbonds + 6);
+	dockpars.tournament_rate = (mypars->tournament_rate) / 100;
+	dockpars.crossover_rate = (mypars->crossover_rate) / 100;
+	dockpars.mutation_rate = (mypars->mutation_rate) / 100;
+	dockpars.abs_max_dang = mypars->abs_max_dang;
+	dockpars.abs_max_dmov = mypars->abs_max_dmov;
+	dockpars.lsearch_rate = mypars->lsearch_rate;
 	dockpars.num_of_lsentities = (uint) (mypars->lsearch_rate/100.0*mypars->pop_size + 0.5);
-	dockpars.rho_lower_bound   = mypars->rho_lower_bound;
+	dockpars.rho_lower_bound = mypars->rho_lower_bound;
 	dockpars.base_dmov_mul_sqrt3 = mypars->base_dmov_mul_sqrt3;
 	dockpars.base_dang_mul_sqrt3 = mypars->base_dang_mul_sqrt3;
-	dockpars.cons_limit        = (uint) mypars->cons_limit;
-	dockpars.max_num_of_iters  = (uint) mypars->max_num_of_iters;
+	dockpars.cons_limit = (uint) mypars->cons_limit;
+	dockpars.max_num_of_iters = (uint) mypars->max_num_of_iters;
 	dockpars.qasp = mypars->qasp;
 	dockpars.smooth = mypars->smooth;
 
 /*
-// passed correctly
 printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of_intraE_contributors);
 */
 
-	// these variables hold multiplications between kernel-constants
-	// better calculate them here and then pass them to Krnl_GA
+	// Variables holding multiplications between kernel-constants.
+	// Calculating them here and then pass them to Krnl_GA
 	const float two_absmaxdmov = 2.0 * dockpars.abs_max_dmov;
 	const float two_absmaxdang = 2.0 * dockpars.abs_max_dang;
 
-	// these variables hold multiplications between kernel-constants
-	// better calculate them here and then pass them to Krnl_InterE and Krnl_InterE2
+	// Variables holding multiplications between kernel-constants.
+	// Calculating them here and then pass them to Krnl_InterE
 	#if defined(SEPARATE_FGRID_INTERE)
 
 	#else
@@ -200,15 +191,14 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	const uint mul_tmp3 = (dockpars.num_of_atypes + 1) * dockpars.g3;
 	#endif
 
-	// this variable holds a multiplication between kernel-constants
-	// better calculate them it and then pass them to Krnl_IntraE and Krnl_IntraE2
+	// Variable holding a multiplication between kernel-constants
+	// Calculating them it and then pass them to Krnl_IntraE
 	const uint square_num_of_atypes = dockpars.num_of_atypes * dockpars.num_of_atypes;
 
-	// num of rotbonds
 	const uchar num_rotbonds = myligand_reference.num_of_rotbonds;
 
- 	//allocating GPU memory for populations, floatgrids,
-	//energies, evaluation counters and random number generator states
+ 	// Allocating GPU memory for populations, floatgrids,
+	// energies, evaluation counters, and random number generator states
 //#if defined (FIXED_POINT_INTERE)
 #if 0
 	size_fixedpt64grids = (sizeof(fixedpt64)) * (mygrid->num_of_atypes+2) * (mygrid->size_xyz[0]) * (mygrid->size_xyz[1]) * (mygrid->size_xyz[2]);
@@ -223,62 +213,61 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 #endif
 
 #if defined (FIXED_POINT_INTERE)
-	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ATOMS*sizeof(fixedpt64),                &mem_KerConstStatic_fixpt64_atom_charges_const);
+	mallocBufferObject(context, CL_MEM_READ_ONLY, MAX_NUM_OF_ATOMS*sizeof(fixedpt64), &mem_KerConstStatic_fixpt64_atom_charges_const);
 #endif
-	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ATOMS*sizeof(float),                    &mem_KerConstStatic_atom_charges_const);
+	mallocBufferObject(context, CL_MEM_READ_ONLY, MAX_NUM_OF_ATOMS*sizeof(float), &mem_KerConstStatic_atom_charges_const);
 
-	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ATOMS*sizeof(char),                     &mem_KerConstStatic_atom_types_const);
+	mallocBufferObject(context, CL_MEM_READ_ONLY, MAX_NUM_OF_ATOMS*sizeof(char), &mem_KerConstStatic_atom_types_const);
 
-/*
-	mallocBufferObject(context,CL_MEM_READ_ONLY, 3*MAX_INTRAE_CONTRIBUTORS*sizeof(char),            &mem_KerConstStatic_intraE_contributors_const);
-*/
-	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_INTRAE_CONTRIBUTORS*sizeof(cl_char3),            &mem_KerConstStatic_intraE_contributors_const);
+	//mallocBufferObject(context, CL_MEM_READ_ONLY, 3*MAX_INTRAE_CONTRIBUTORS*sizeof(char), &mem_KerConstStatic_intraE_contributors_const);
+	mallocBufferObject(context, CL_MEM_READ_ONLY, MAX_INTRAE_CONTRIBUTORS*sizeof(cl_char3), &mem_KerConstStatic_intraE_contributors_const);
 
-    mallocBufferObject(context,CL_MEM_READ_ONLY, ATYPE_NUM*sizeof(float),				&mem_KerConstStatic_reqm_const);
-	mallocBufferObject(context,CL_MEM_READ_ONLY, ATYPE_NUM*sizeof(float),				&mem_KerConstStatic_reqm_hbond_const);
-  	mallocBufferObject(context,CL_MEM_READ_ONLY, ATYPE_NUM*sizeof(uint),			&mem_KerConstStatic_atom1_types_reqm_const);
-  	mallocBufferObject(context,CL_MEM_READ_ONLY, ATYPE_NUM*sizeof(uint),                    &mem_KerConstStatic_atom2_types_reqm_const);
+    mallocBufferObject(context, CL_MEM_READ_ONLY, ATYPE_NUM*sizeof(float), &mem_KerConstStatic_reqm_const);
+	mallocBufferObject(context, CL_MEM_READ_ONLY, ATYPE_NUM*sizeof(float), &mem_KerConstStatic_reqm_hbond_const);
+  	mallocBufferObject(context, CL_MEM_READ_ONLY, ATYPE_NUM*sizeof(uint), &mem_KerConstStatic_atom1_types_reqm_const);
+  	mallocBufferObject(context, CL_MEM_READ_ONLY, ATYPE_NUM*sizeof(uint), &mem_KerConstStatic_atom2_types_reqm_const);
 
-	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES*sizeof(float), &mem_KerConstStatic_VWpars_AC_const);
-	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES*sizeof(float), &mem_KerConstStatic_VWpars_BD_const);
-	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ATYPES*sizeof(float), 			&mem_KerConstStatic_dspars_S_const);
-	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ATYPES*sizeof(float), 			&mem_KerConstStatic_dspars_V_const);
+	mallocBufferObject(context, CL_MEM_READ_ONLY, MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES*sizeof(float), &mem_KerConstStatic_VWpars_AC_const);
+	mallocBufferObject(context, CL_MEM_READ_ONLY, MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES*sizeof(float), &mem_KerConstStatic_VWpars_BD_const);
+	mallocBufferObject(context, CL_MEM_READ_ONLY, MAX_NUM_OF_ATYPES*sizeof(float), &mem_KerConstStatic_dspars_S_const);
+	mallocBufferObject(context, CL_MEM_READ_ONLY, MAX_NUM_OF_ATYPES*sizeof(float), &mem_KerConstStatic_dspars_V_const);
+
 	#if defined (FIXED_POINT_CONFORM)
 	// fixed-point
-	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ROTATIONS*sizeof(fixedpt), 		&mem_KerConstStatic_rotlist_const);
-	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ATOMS*sizeof(cl_int3), 		        &mem_KerConstStatic_ref_coords_const);
-	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ROTBONDS*sizeof(cl_int3), 		&mem_KerConstStatic_rotbonds_moving_vectors_const);
-	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ROTBONDS*sizeof(cl_int3), 		&mem_KerConstStatic_rotbonds_unit_vectors_const);
-	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_RUNS*sizeof(cl_int4),			&mem_KerConstStatic_ref_orientation_quats_const);
+	mallocBufferObject(context, CL_MEM_READ_ONLY, MAX_NUM_OF_ROTATIONS*sizeof(fixedpt), &mem_KerConstStatic_rotlist_const);
+	mallocBufferObject(context, CL_MEM_READ_ONLY, MAX_NUM_OF_ATOMS*sizeof(cl_int3), &mem_KerConstStatic_ref_coords_const);
+	mallocBufferObject(context, CL_MEM_READ_ONLY, MAX_NUM_OF_ROTBONDS*sizeof(cl_int3), &mem_KerConstStatic_rotbonds_moving_vectors_const);
+	mallocBufferObject(context, CL_MEM_READ_ONLY, MAX_NUM_OF_ROTBONDS*sizeof(cl_int3), &mem_KerConstStatic_rotbonds_unit_vectors_const);
+	mallocBufferObject(context, CL_MEM_READ_ONLY, MAX_NUM_OF_RUNS*sizeof(cl_int4), &mem_KerConstStatic_ref_orientation_quats_const);
 	#else
 	// floating-point (original)
-	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ROTATIONS*sizeof(int), 			&mem_KerConstStatic_rotlist_const);
-	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ATOMS*sizeof(cl_float3), 		&mem_KerConstStatic_ref_coords_const);
-	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ROTBONDS*sizeof(cl_float3), 		&mem_KerConstStatic_rotbonds_moving_vectors_const);
-	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_ROTBONDS*sizeof(cl_float3), 		&mem_KerConstStatic_rotbonds_unit_vectors_const);
-	mallocBufferObject(context,CL_MEM_READ_ONLY, MAX_NUM_OF_RUNS*sizeof(cl_float4),			&mem_KerConstStatic_ref_orientation_quats_const);
+	mallocBufferObject(context, CL_MEM_READ_ONLY, MAX_NUM_OF_ROTATIONS*sizeof(int), &mem_KerConstStatic_rotlist_const);
+	mallocBufferObject(context, CL_MEM_READ_ONLY, MAX_NUM_OF_ATOMS*sizeof(cl_float3), &mem_KerConstStatic_ref_coords_const);
+	mallocBufferObject(context, CL_MEM_READ_ONLY, MAX_NUM_OF_ROTBONDS*sizeof(cl_float3), &mem_KerConstStatic_rotbonds_moving_vectors_const);
+	mallocBufferObject(context, CL_MEM_READ_ONLY, MAX_NUM_OF_ROTBONDS*sizeof(cl_float3), &mem_KerConstStatic_rotbonds_unit_vectors_const);
+	mallocBufferObject(context, CL_MEM_READ_ONLY, MAX_NUM_OF_RUNS*sizeof(cl_float4), &mem_KerConstStatic_ref_orientation_quats_const);
 	#endif
 
 //#if defined (FIXED_POINT_INTERE)
 #if 0
-	mallocBufferObject(context,CL_MEM_READ_ONLY,size_fixedpt64grids,   	&mem_dockpars_fgrids);
+	mallocBufferObject(context, CL_MEM_READ_ONLY, size_fixedpt64grids, &mem_dockpars_fgrids);
 #else
-	mallocBufferObject(context,CL_MEM_READ_ONLY,size_floatgrids,   		&mem_dockpars_fgrids);
+	mallocBufferObject(context, CL_MEM_READ_ONLY, size_floatgrids, &mem_dockpars_fgrids);
 
 	#if defined(SEPARATE_FGRID_INTERE)
-	mallocBufferObject(context,CL_MEM_READ_ONLY,size_floatgrids2,   	&mem_dockpars_fgrids2);
-	mallocBufferObject(context,CL_MEM_READ_ONLY,size_floatgrids3,   	&mem_dockpars_fgrids3);
+	mallocBufferObject(context, CL_MEM_READ_ONLY, size_floatgrids2, &mem_dockpars_fgrids2);
+	mallocBufferObject(context, CL_MEM_READ_ONLY, size_floatgrids3, &mem_dockpars_fgrids3);
 	#endif
 #endif
 
-	mallocBufferObject(context,CL_MEM_READ_WRITE,size_populations,  	&mem_dockpars_conformations_current);
-	mallocBufferObject(context,CL_MEM_READ_WRITE,size_energies,    		&mem_dockpars_energies_current);
+	mallocBufferObject(context,CL_MEM_READ_WRITE, size_populations, &mem_dockpars_conformations_current);
+	mallocBufferObject(context,CL_MEM_READ_WRITE, size_energies, &mem_dockpars_energies_current);
 
 #if defined(SINGLE_COPY_POP_ENE)
-	mallocBufferObject(context,CL_MEM_WRITE_ONLY,size_evals_of_runs,  	&mem_evals_performed);
-	mallocBufferObject(context,CL_MEM_WRITE_ONLY,size_evals_of_runs,  	&mem_gens_performed);
+	mallocBufferObject(context,CL_MEM_WRITE_ONLY, size_evals_of_runs, &mem_evals_performed);
+	mallocBufferObject(context,CL_MEM_WRITE_ONLY, size_evals_of_runs, &mem_gens_performed);
 #else
-	mallocBufferObject(context,CL_MEM_WRITE_ONLY,2*sizeof(uint),  	&mem_evals_and_generations_performed);
+	mallocBufferObject(context,CL_MEM_WRITE_ONLY, 2*sizeof(uint), &mem_evals_and_generations_performed);
 #endif
 
 #if defined(SINGLE_COPY_POP_ENE)
@@ -288,40 +277,39 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 #endif
 
 #if defined (FIXED_POINT_INTERE)
-	memcopyBufferObjectToDevice(command_queue_ga,mem_KerConstStatic_fixpt64_atom_charges_const,            &KerConstStatic.fixpt64_atom_charges_const[0],            MAX_NUM_OF_ATOMS*sizeof(fixedpt64));
+	memcopyBufferObjectToDevice(command_queue_ga, mem_KerConstStatic_fixpt64_atom_charges_const, &KerConstStatic.fixpt64_atom_charges_const[0], MAX_NUM_OF_ATOMS*sizeof(fixedpt64));
 #endif
-	memcopyBufferObjectToDevice(command_queue_ga,mem_KerConstStatic_atom_charges_const,            &KerConstStatic.atom_charges_const[0],            MAX_NUM_OF_ATOMS*sizeof(float));
+	memcopyBufferObjectToDevice(command_queue_ga, mem_KerConstStatic_atom_charges_const, &KerConstStatic.atom_charges_const[0], MAX_NUM_OF_ATOMS*sizeof(float));
 
-	memcopyBufferObjectToDevice(command_queue_ga,mem_KerConstStatic_atom_types_const,              &KerConstStatic.atom_types_const[0],              MAX_NUM_OF_ATOMS*sizeof(char));
+	memcopyBufferObjectToDevice(command_queue_ga, mem_KerConstStatic_atom_types_const, &KerConstStatic.atom_types_const[0], MAX_NUM_OF_ATOMS*sizeof(char));
 
-/*
-	memcopyBufferObjectToDevice(command_queue_ga,mem_KerConstStatic_intraE_contributors_const,     &KerConstStatic.intraE_contributors_const[0],     3*MAX_INTRAE_CONTRIBUTORS*sizeof(char));
-*/
-	memcopyBufferObjectToDevice(command_queue_ga,mem_KerConstStatic_intraE_contributors_const,     &KerConstStatic.intraE_contributors_const[0],     MAX_INTRAE_CONTRIBUTORS*sizeof(cl_char3));
+	//memcopyBufferObjectToDevice(command_queue_ga, mem_KerConstStatic_intraE_contributors_const, &KerConstStatic.intraE_contributors_const[0], 3*MAX_INTRAE_CONTRIBUTORS*sizeof(char));
+	memcopyBufferObjectToDevice(command_queue_ga, mem_KerConstStatic_intraE_contributors_const, &KerConstStatic.intraE_contributors_const[0], MAX_INTRAE_CONTRIBUTORS*sizeof(cl_char3));
 
-	memcopyBufferObjectToDevice(command_queue_ga,mem_KerConstStatic_reqm_const,         	     &KerConstStatic.reqm_const,           	       ATYPE_NUM*sizeof(float));
-  	memcopyBufferObjectToDevice(command_queue_ga,mem_KerConstStatic_reqm_hbond_const,              &KerConstStatic.reqm_hbond_const,                 ATYPE_NUM*sizeof(float));
-  	memcopyBufferObjectToDevice(command_queue_ga,mem_KerConstStatic_atom1_types_reqm_const,        &KerConstStatic.atom1_types_reqm_const,           ATYPE_NUM*sizeof(uint));
-  	memcopyBufferObjectToDevice(command_queue_ga,mem_KerConstStatic_atom2_types_reqm_const,        &KerConstStatic.atom2_types_reqm_const,           ATYPE_NUM*sizeof(uint));
+	memcopyBufferObjectToDevice(command_queue_ga, mem_KerConstStatic_reqm_const, &KerConstStatic.reqm_const, ATYPE_NUM*sizeof(float));
+  	memcopyBufferObjectToDevice(command_queue_ga, mem_KerConstStatic_reqm_hbond_const, &KerConstStatic.reqm_hbond_const, ATYPE_NUM*sizeof(float));
+  	memcopyBufferObjectToDevice(command_queue_ga, mem_KerConstStatic_atom1_types_reqm_const, &KerConstStatic.atom1_types_reqm_const, ATYPE_NUM*sizeof(uint));
+  	memcopyBufferObjectToDevice(command_queue_ga, mem_KerConstStatic_atom2_types_reqm_const, &KerConstStatic.atom2_types_reqm_const, ATYPE_NUM*sizeof(uint));
 
-	memcopyBufferObjectToDevice(command_queue_ga,mem_KerConstStatic_VWpars_AC_const,               &KerConstStatic.VWpars_AC_const[0],               MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES*sizeof(float));
-	memcopyBufferObjectToDevice(command_queue_ga,mem_KerConstStatic_VWpars_BD_const,               &KerConstStatic.VWpars_BD_const[0],               MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES*sizeof(float));
-	memcopyBufferObjectToDevice(command_queue_ga,mem_KerConstStatic_dspars_S_const,                &KerConstStatic.dspars_S_const[0], 	       MAX_NUM_OF_ATYPES*sizeof(float));
-	memcopyBufferObjectToDevice(command_queue_ga,mem_KerConstStatic_dspars_V_const,                &KerConstStatic.dspars_V_const[0], 	       MAX_NUM_OF_ATYPES*sizeof(float));
+	memcopyBufferObjectToDevice(command_queue_ga, mem_KerConstStatic_VWpars_AC_const, &KerConstStatic.VWpars_AC_const[0], MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES*sizeof(float));
+	memcopyBufferObjectToDevice(command_queue_ga, mem_KerConstStatic_VWpars_BD_const, &KerConstStatic.VWpars_BD_const[0], MAX_NUM_OF_ATYPES*MAX_NUM_OF_ATYPES*sizeof(float));
+	memcopyBufferObjectToDevice(command_queue_ga, mem_KerConstStatic_dspars_S_const, &KerConstStatic.dspars_S_const[0], MAX_NUM_OF_ATYPES*sizeof(float));
+	memcopyBufferObjectToDevice(command_queue_ga, mem_KerConstStatic_dspars_V_const, &KerConstStatic.dspars_V_const[0], MAX_NUM_OF_ATYPES*sizeof(float));
+
 	#if defined (FIXED_POINT_CONFORM)
-	// fixed-point
-	memcopyBufferObjectToDevice(command_queue_ga,mem_KerConstStatic_rotlist_const,                 &KerConstStatic.rotlist_const[0], 		       MAX_NUM_OF_ROTATIONS*sizeof(fixedpt));
-	memcopyBufferObjectToDevice(command_queue_ga,mem_KerConstStatic_ref_coords_const, 	     &KerConstStatic.ref_coords_const[0],              MAX_NUM_OF_ATOMS*sizeof(cl_int3));
-	memcopyBufferObjectToDevice(command_queue_ga,mem_KerConstStatic_rotbonds_moving_vectors_const, &KerConstStatic.rotbonds_moving_vectors_const[0], MAX_NUM_OF_ROTBONDS*sizeof(cl_int3));
-	memcopyBufferObjectToDevice(command_queue_ga,mem_KerConstStatic_rotbonds_unit_vectors_const,   &KerConstStatic.rotbonds_unit_vectors_const[0],   MAX_NUM_OF_ROTBONDS*sizeof(cl_int3));
-	memcopyBufferObjectToDevice(command_queue_ga,mem_KerConstStatic_ref_orientation_quats_const,   &KerConstStatic.ref_orientation_quats_const[0],   MAX_NUM_OF_RUNS*sizeof(cl_int4));
+	// Fixed-point
+	memcopyBufferObjectToDevice(command_queue_ga, mem_KerConstStatic_rotlist_const, &KerConstStatic.rotlist_const[0], MAX_NUM_OF_ROTATIONS*sizeof(fixedpt));
+	memcopyBufferObjectToDevice(command_queue_ga, mem_KerConstStatic_ref_coords_const, &KerConstStatic.ref_coords_const[0], MAX_NUM_OF_ATOMS*sizeof(cl_int3));
+	memcopyBufferObjectToDevice(command_queue_ga, mem_KerConstStatic_rotbonds_moving_vectors_const, &KerConstStatic.rotbonds_moving_vectors_const[0], MAX_NUM_OF_ROTBONDS*sizeof(cl_int3));
+	memcopyBufferObjectToDevice(command_queue_ga, mem_KerConstStatic_rotbonds_unit_vectors_const, &KerConstStatic.rotbonds_unit_vectors_const[0], MAX_NUM_OF_ROTBONDS*sizeof(cl_int3));
+	memcopyBufferObjectToDevice(command_queue_ga, mem_KerConstStatic_ref_orientation_quats_const, &KerConstStatic.ref_orientation_quats_const[0], MAX_NUM_OF_RUNS*sizeof(cl_int4));
 	#else
-	// floating-point (original)
-	memcopyBufferObjectToDevice(command_queue_ga,mem_KerConstStatic_rotlist_const,                 &KerConstStatic.rotlist_const[0], 		       MAX_NUM_OF_ROTATIONS*sizeof(int));
-	memcopyBufferObjectToDevice(command_queue_ga,mem_KerConstStatic_ref_coords_const, 	     &KerConstStatic.ref_coords_const[0],              MAX_NUM_OF_ATOMS*sizeof(cl_float3));
-	memcopyBufferObjectToDevice(command_queue_ga,mem_KerConstStatic_rotbonds_moving_vectors_const, &KerConstStatic.rotbonds_moving_vectors_const[0], MAX_NUM_OF_ROTBONDS*sizeof(cl_float3));
-	memcopyBufferObjectToDevice(command_queue_ga,mem_KerConstStatic_rotbonds_unit_vectors_const,   &KerConstStatic.rotbonds_unit_vectors_const[0],   MAX_NUM_OF_ROTBONDS*sizeof(cl_float3));
-	memcopyBufferObjectToDevice(command_queue_ga,mem_KerConstStatic_ref_orientation_quats_const,   &KerConstStatic.ref_orientation_quats_const[0],   MAX_NUM_OF_RUNS*sizeof(cl_float4));
+	// Floating-point (original)
+	memcopyBufferObjectToDevice(command_queue_ga, mem_KerConstStatic_rotlist_const, &KerConstStatic.rotlist_const[0], MAX_NUM_OF_ROTATIONS*sizeof(int));
+	memcopyBufferObjectToDevice(command_queue_ga, mem_KerConstStatic_ref_coords_const, &KerConstStatic.ref_coords_const[0], MAX_NUM_OF_ATOMS*sizeof(cl_float3));
+	memcopyBufferObjectToDevice(command_queue_ga, mem_KerConstStatic_rotbonds_moving_vectors_const, &KerConstStatic.rotbonds_moving_vectors_const[0], MAX_NUM_OF_ROTBONDS*sizeof(cl_float3));
+	memcopyBufferObjectToDevice(command_queue_ga, mem_KerConstStatic_rotbonds_unit_vectors_const, &KerConstStatic.rotbonds_unit_vectors_const[0], MAX_NUM_OF_ROTBONDS*sizeof(cl_float3));
+	memcopyBufferObjectToDevice(command_queue_ga, mem_KerConstStatic_ref_orientation_quats_const, &KerConstStatic.ref_orientation_quats_const[0], MAX_NUM_OF_RUNS*sizeof(cl_float4));
 	#endif
 
 //#if defined (FIXED_POINT_INTERE)
@@ -362,13 +350,13 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 				}
 	}
 
-	memcopyBufferObjectToDevice(command_queue_ga,mem_dockpars_fgrids, 	cpu_fixedpt64grids,       size_fixedpt64grids);
+	memcopyBufferObjectToDevice(command_queue_ga, mem_dockpars_fgrids, cpu_fixedpt64grids, size_fixedpt64grids);
 #else
-	memcopyBufferObjectToDevice(command_queue_ga,mem_dockpars_fgrids, 	cpu_floatgrids,       size_floatgrids);
+	memcopyBufferObjectToDevice(command_queue_ga, mem_dockpars_fgrids, cpu_floatgrids, size_floatgrids);
 
 	#if defined(SEPARATE_FGRID_INTERE)
-	memcopyBufferObjectToDevice(command_queue_ga,mem_dockpars_fgrids2, 	cpu_floatgrids + mygrid->num_of_atypes     * mygrid->size_xyz[0]*mygrid->size_xyz[1]* mygrid->size_xyz[2],       size_floatgrids2);
-	memcopyBufferObjectToDevice(command_queue_ga,mem_dockpars_fgrids3, 	cpu_floatgrids + (mygrid->num_of_atypes+1) * mygrid->size_xyz[0]*mygrid->size_xyz[1]* mygrid->size_xyz[2],       size_floatgrids3);
+	memcopyBufferObjectToDevice(command_queue_ga, mem_dockpars_fgrids2, cpu_floatgrids + mygrid->num_of_atypes * mygrid->size_xyz[0] * mygrid->size_xyz[1] * mygrid->size_xyz[2], size_floatgrids2);
+	memcopyBufferObjectToDevice(command_queue_ga, mem_dockpars_fgrids3, cpu_floatgrids + (mygrid->num_of_atypes+1) * mygrid->size_xyz[0] * mygrid->size_xyz[1] * mygrid->size_xyz[2], size_floatgrids3);
 	#endif
 #endif
 
@@ -376,71 +364,69 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 
 	// Krnl_GA
 	#if defined(SINGLE_COPY_POP_ENE)
-    setKernelArg(kernel_ga,0,  sizeof(mem_dockpars_conformations_current),    &mem_dockpars_conformations_current);
-    setKernelArg(kernel_ga,1,  sizeof(mem_dockpars_energies_current),         &mem_dockpars_energies_current);
-	setKernelArg(kernel_ga,2,  sizeof(mem_evals_performed),   		&mem_evals_performed);
-	setKernelArg(kernel_ga,3,  sizeof(mem_gens_performed),    		&mem_gens_performed);
-	setKernelArg(kernel_ga,4,  sizeof(uint),                  	&dockpars.pop_size);
-	setKernelArg(kernel_ga,5,  sizeof(uint),                 		&dockpars.num_of_energy_evals);
-	setKernelArg(kernel_ga,6,  sizeof(uint),                 		&dockpars.num_of_generations);
-	setKernelArg(kernel_ga,7,  sizeof(float),                          	&dockpars.tournament_rate);
-	setKernelArg(kernel_ga,8,  sizeof(float),                          	&dockpars.mutation_rate);
-	setKernelArg(kernel_ga,9,  sizeof(float),                          	&dockpars.abs_max_dmov);
-	setKernelArg(kernel_ga,10, sizeof(float),                          	&dockpars.abs_max_dang);
-	setKernelArg(kernel_ga,11, sizeof(float),                                 &two_absmaxdmov);
-	setKernelArg(kernel_ga,12, sizeof(float),                                 &two_absmaxdang);
-	setKernelArg(kernel_ga,13, sizeof(float),                          	&dockpars.crossover_rate);
-	setKernelArg(kernel_ga,14, sizeof(uint),                          &dockpars.num_of_lsentities);
-	setKernelArg(kernel_ga,15, sizeof(uchar),                         &dockpars.num_of_genes);
-	//setKernelArg(kernel_ga,16, sizeof(ushort),                      run_cnt);
-	//setKernelArg(kernel_ga,17, sizeof(uint),                        offset_pop);
-	//setKernelArg(kernel_ga,18, sizeof(uint),                        offset_ene);
+	setKernelArg(kernel_ga, 0, sizeof(mem_dockpars_conformations_current), &mem_dockpars_conformations_current);
+	setKernelArg(kernel_ga, 1, sizeof(mem_dockpars_energies_current), &mem_dockpars_energies_current);
+	setKernelArg(kernel_ga, 2, sizeof(mem_evals_performed), &mem_evals_performed);
+	setKernelArg(kernel_ga, 3, sizeof(mem_gens_performed), &mem_gens_performed);
+	setKernelArg(kernel_ga, 4, sizeof(uint), &dockpars.pop_size);
+	setKernelArg(kernel_ga, 5, sizeof(uint), &dockpars.num_of_energy_evals);
+	setKernelArg(kernel_ga, 6, sizeof(uint), &dockpars.num_of_generations);
+	setKernelArg(kernel_ga, 7, sizeof(float), &dockpars.tournament_rate);
+	setKernelArg(kernel_ga, 8, sizeof(float), &dockpars.mutation_rate);
+	setKernelArg(kernel_ga, 9, sizeof(float), &dockpars.abs_max_dmov);
+	setKernelArg(kernel_ga, 10, sizeof(float), &dockpars.abs_max_dang);
+	setKernelArg(kernel_ga, 11, sizeof(float), &two_absmaxdmov);
+	setKernelArg(kernel_ga, 12, sizeof(float), &two_absmaxdang);
+	setKernelArg(kernel_ga, 13, sizeof(float), &dockpars.crossover_rate);
+	setKernelArg(kernel_ga, 14, sizeof(uint), &dockpars.num_of_lsentities);
+	setKernelArg(kernel_ga, 15, sizeof(uchar), &dockpars.num_of_genes);
+	//setKernelArg(kernel_ga, 16, sizeof(ushort), run_cnt);
+	//setKernelArg(kernel_ga, 17, sizeof(uint), offset_pop);
+	//setKernelArg(kernel_ga, 18, sizeof(uint), offset_ene);
 	#else
-    setKernelArg(kernel_ga,0,  sizeof(mem_dockpars_conformations_current),    &mem_dockpars_conformations_current);
-    setKernelArg(kernel_ga,1,  sizeof(mem_dockpars_energies_current),         &mem_dockpars_energies_current);
-	setKernelArg(kernel_ga,2,  sizeof(mem_evals_and_generations_performed),   &mem_evals_and_generations_performed);
-	setKernelArg(kernel_ga,3,  sizeof(uint),                  	&dockpars.pop_size);
-	setKernelArg(kernel_ga,4,  sizeof(uint),                 		&dockpars.num_of_energy_evals);
-	setKernelArg(kernel_ga,5,  sizeof(uint),                 		&dockpars.num_of_generations);
-	setKernelArg(kernel_ga,6,  sizeof(float),                          	&dockpars.tournament_rate);
-	setKernelArg(kernel_ga,7,  sizeof(float),                          	&dockpars.mutation_rate);
-	setKernelArg(kernel_ga,8,  sizeof(float),                          	&dockpars.abs_max_dmov);
-	setKernelArg(kernel_ga,9,  sizeof(float),                          	&dockpars.abs_max_dang);
-	setKernelArg(kernel_ga,10, sizeof(float),                                 &two_absmaxdmov);
-	setKernelArg(kernel_ga,11, sizeof(float),                                 &two_absmaxdang);
-	setKernelArg(kernel_ga,12, sizeof(float),                          	&dockpars.crossover_rate);
-	setKernelArg(kernel_ga,13, sizeof(uint),                          &dockpars.num_of_lsentities);
-	setKernelArg(kernel_ga,14, sizeof(uchar),                         &dockpars.num_of_genes);
+	setKernelArg(kernel_ga, 0, sizeof(mem_dockpars_conformations_current), &mem_dockpars_conformations_current);
+	setKernelArg(kernel_ga, 1, sizeof(mem_dockpars_energies_current), &mem_dockpars_energies_current);
+	setKernelArg(kernel_ga, 2, sizeof(mem_evals_and_generations_performed), &mem_evals_and_generations_performed);
+	setKernelArg(kernel_ga, 3, sizeof(uint), &dockpars.pop_size);
+	setKernelArg(kernel_ga, 4, sizeof(uint), &dockpars.num_of_energy_evals);
+	setKernelArg(kernel_ga, 5, sizeof(uint), &dockpars.num_of_generations);
+	setKernelArg(kernel_ga, 6, sizeof(float), &dockpars.tournament_rate);
+	setKernelArg(kernel_ga, 7, sizeof(float), &dockpars.mutation_rate);
+	setKernelArg(kernel_ga, 8, sizeof(float), &dockpars.abs_max_dmov);
+	setKernelArg(kernel_ga, 9, sizeof(float), &dockpars.abs_max_dang);
+	setKernelArg(kernel_ga, 10, sizeof(float), &two_absmaxdmov);
+	setKernelArg(kernel_ga, 11, sizeof(float), &two_absmaxdang);
+	setKernelArg(kernel_ga, 12, sizeof(float), &dockpars.crossover_rate);
+	setKernelArg(kernel_ga, 13, sizeof(uint), &dockpars.num_of_lsentities);
+	setKernelArg(kernel_ga, 14, sizeof(uchar), &dockpars.num_of_genes);
 	#endif
 
 	// Krnl_PoseCalc
-	setKernelArg(kernel_pc,0,  sizeof(mem_KerConstStatic_rotlist_const),      	   &mem_KerConstStatic_rotlist_const);
-	setKernelArg(kernel_pc,1,  sizeof(mem_KerConstStatic_ref_coords_const),              &mem_KerConstStatic_ref_coords_const);
-	setKernelArg(kernel_pc,2,  sizeof(mem_KerConstStatic_rotbonds_moving_vectors_const), &mem_KerConstStatic_rotbonds_moving_vectors_const);
-	setKernelArg(kernel_pc,3,  sizeof(mem_KerConstStatic_rotbonds_unit_vectors_const),   &mem_KerConstStatic_rotbonds_unit_vectors_const);
-	setKernelArg(kernel_pc,4,  sizeof(uint),       &dockpars.rotbondlist_length);
-	setKernelArg(kernel_pc,5,  sizeof(uchar),      &dockpars.num_of_atoms);
-	setKernelArg(kernel_pc,6,  sizeof(uchar),      &dockpars.num_of_genes);
-/*
-	setKernelArg(kernel_pc,7,  sizeof(uchar),      &num_rotbonds);
-	setKernelArg(kernel_pc,8,  sizeof(mem_KerConstStatic_ref_orientation_quats_const),   &mem_KerConstStatic_ref_orientation_quats_const);
-*/
-	setKernelArg(kernel_pc,7,  sizeof(mem_KerConstStatic_ref_orientation_quats_const),   &mem_KerConstStatic_ref_orientation_quats_const);
+	setKernelArg(kernel_pc, 0, sizeof(mem_KerConstStatic_rotlist_const), &mem_KerConstStatic_rotlist_const);
+	setKernelArg(kernel_pc, 1, sizeof(mem_KerConstStatic_ref_coords_const), &mem_KerConstStatic_ref_coords_const);
+	setKernelArg(kernel_pc, 2, sizeof(mem_KerConstStatic_rotbonds_moving_vectors_const), &mem_KerConstStatic_rotbonds_moving_vectors_const);
+	setKernelArg(kernel_pc, 3, sizeof(mem_KerConstStatic_rotbonds_unit_vectors_const), &mem_KerConstStatic_rotbonds_unit_vectors_const);
+	setKernelArg(kernel_pc, 4, sizeof(uint), &dockpars.rotbondlist_length);
+	setKernelArg(kernel_pc, 5, sizeof(uchar), &dockpars.num_of_atoms);
+	setKernelArg(kernel_pc, 6, sizeof(uchar), &dockpars.num_of_genes);
+	setKernelArg(kernel_pc, 7, sizeof(mem_KerConstStatic_ref_orientation_quats_const), &mem_KerConstStatic_ref_orientation_quats_const);
+	//setKernelArg(kernel_pc, 7, sizeof(uchar), &num_rotbonds);
+	//setKernelArg(kernel_pc, 8, sizeof(mem_KerConstStatic_ref_orientation_quats_const), &mem_KerConstStatic_ref_orientation_quats_const);	
 	#if defined(SINGLE_COPY_POP_ENE)
 
 	#else
 		#if defined (FIXED_POINT_CONFORM)
-	// fixed-point
-	setKernelArg(kernel_pc,8,  sizeof(fixedpt),            &KerConstDynamic.ref_orientation_quats_const[0]);
-	setKernelArg(kernel_pc,9,  sizeof(fixedpt),            &KerConstDynamic.ref_orientation_quats_const[1]);
-	setKernelArg(kernel_pc,10, sizeof(fixedpt),            &KerConstDynamic.ref_orientation_quats_const[2]);
-	setKernelArg(kernel_pc,11, sizeof(fixedpt),            &KerConstDynamic.ref_orientation_quats_const[3]);
+	// Fixed-point
+	setKernelArg(kernel_pc, 8, sizeof(fixedpt), &KerConstDynamic.ref_orientation_quats_const[0]);
+	setKernelArg(kernel_pc, 9, sizeof(fixedpt), &KerConstDynamic.ref_orientation_quats_const[1]);
+	setKernelArg(kernel_pc, 10, sizeof(fixedpt), &KerConstDynamic.ref_orientation_quats_const[2]);
+	setKernelArg(kernel_pc, 11, sizeof(fixedpt), &KerConstDynamic.ref_orientation_quats_const[3]);
 		#else
-	// floating-point (original)
-	setKernelArg(kernel_pc,8,  sizeof(float),              &KerConstDynamic.ref_orientation_quats_const[0]);
-	setKernelArg(kernel_pc,9,  sizeof(float),              &KerConstDynamic.ref_orientation_quats_const[1]);
-	setKernelArg(kernel_pc,10, sizeof(float),              &KerConstDynamic.ref_orientation_quats_const[2]);
-	setKernelArg(kernel_pc,11, sizeof(float),              &KerConstDynamic.ref_orientation_quats_const[3]);
+	// Floating-point (original)
+	setKernelArg(kernel_pc, 8, sizeof(float), &KerConstDynamic.ref_orientation_quats_const[0]);
+	setKernelArg(kernel_pc, 9, sizeof(float), &KerConstDynamic.ref_orientation_quats_const[1]);
+	setKernelArg(kernel_pc, 10, sizeof(float), &KerConstDynamic.ref_orientation_quats_const[2]);
+	setKernelArg(kernel_pc, 11, sizeof(float), &KerConstDynamic.ref_orientation_quats_const[3]);
 		#endif
 	#endif
 
@@ -449,272 +435,257 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	uchar gridsizez_minus1 = dockpars.gridsize_z - 1;
 
 #if defined (FIXED_POINT_INTERE)
-
 #else
 	float fgridsizex_minus1 = (float) gridsizex_minus1;
 	float fgridsizey_minus1 = (float) gridsizey_minus1;
 	float fgridsizez_minus1 = (float) gridsizez_minus1;
-
 #endif
 
-
 	// Krnl_InterE
-    setKernelArg(kernel_ie,0,  sizeof(mem_dockpars_fgrids),                    &mem_dockpars_fgrids);
+	setKernelArg(kernel_ie, 0, sizeof(mem_dockpars_fgrids), &mem_dockpars_fgrids);
 	#if defined (FIXED_POINT_INTERE)
-	setKernelArg(kernel_ie,1,  sizeof(mem_KerConstStatic_fixpt64_atom_charges_const),  &mem_KerConstStatic_fixpt64_atom_charges_const);
+	setKernelArg(kernel_ie, 1, sizeof(mem_KerConstStatic_fixpt64_atom_charges_const), &mem_KerConstStatic_fixpt64_atom_charges_const);
 	#else
-	setKernelArg(kernel_ie,1,  sizeof(mem_KerConstStatic_atom_charges_const),  &mem_KerConstStatic_atom_charges_const);
+	setKernelArg(kernel_ie, 1, sizeof(mem_KerConstStatic_atom_charges_const), &mem_KerConstStatic_atom_charges_const);
 	#endif
-	setKernelArg(kernel_ie,2,  sizeof(mem_KerConstStatic_atom_types_const),    &mem_KerConstStatic_atom_types_const);
-	setKernelArg(kernel_ie,3,  sizeof(uchar),                          &dockpars.g1);
-	setKernelArg(kernel_ie,4,  sizeof(uint),                           &dockpars.g2);
-	setKernelArg(kernel_ie,5,  sizeof(uint),                           &dockpars.g3);
-	setKernelArg(kernel_ie,6,  sizeof(uchar),                          &dockpars.num_of_atoms);
+	setKernelArg(kernel_ie, 2, sizeof(mem_KerConstStatic_atom_types_const), &mem_KerConstStatic_atom_types_const);
+	setKernelArg(kernel_ie, 3, sizeof(uchar), &dockpars.g1);
+	setKernelArg(kernel_ie, 4, sizeof(uint), &dockpars.g2);
+	setKernelArg(kernel_ie, 5, sizeof(uint), &dockpars.g3);
+	setKernelArg(kernel_ie, 6, sizeof(uchar), &dockpars.num_of_atoms);
 
 	#if defined (FIXED_POINT_INTERE)
-	setKernelArg(kernel_ie,7,  sizeof(uchar),                          &gridsizex_minus1);
-	setKernelArg(kernel_ie,8,  sizeof(uchar),                          &gridsizey_minus1);
-	setKernelArg(kernel_ie,9,  sizeof(uchar),                          &gridsizez_minus1);
+	setKernelArg(kernel_ie, 7, sizeof(uchar), &gridsizex_minus1);
+	setKernelArg(kernel_ie, 8, sizeof(uchar), &gridsizey_minus1);
+	setKernelArg(kernel_ie, 9, sizeof(uchar), &gridsizez_minus1);
 	#else
-	setKernelArg(kernel_ie,7,  sizeof(float),                          	 &fgridsizex_minus1);
-	setKernelArg(kernel_ie,8,  sizeof(float),                          	 &fgridsizey_minus1);
-	setKernelArg(kernel_ie,9,  sizeof(float),                          	 &fgridsizez_minus1);
+	setKernelArg(kernel_ie, 7, sizeof(float), &fgridsizex_minus1);
+	setKernelArg(kernel_ie, 8, sizeof(float), &fgridsizey_minus1);
+	setKernelArg(kernel_ie, 9, sizeof(float), &fgridsizez_minus1);
 	#endif
 
 	#if defined(SEPARATE_FGRID_INTERE)
-	setKernelArg(kernel_ie,10, sizeof(mem_dockpars_fgrids2),                   &mem_dockpars_fgrids2);
-	setKernelArg(kernel_ie,11, sizeof(mem_dockpars_fgrids3),                   &mem_dockpars_fgrids3);
+	setKernelArg(kernel_ie, 10, sizeof(mem_dockpars_fgrids2), &mem_dockpars_fgrids2);
+	setKernelArg(kernel_ie, 11, sizeof(mem_dockpars_fgrids3), &mem_dockpars_fgrids3);
 	#else
-	setKernelArg(kernel_ie,10, sizeof(uint),                           &mul_tmp2);
-	setKernelArg(kernel_ie,11, sizeof(uint),                           &mul_tmp3);
+	setKernelArg(kernel_ie, 10, sizeof(uint), &mul_tmp2);
+	setKernelArg(kernel_ie, 11, sizeof(uint), &mul_tmp3);
 	#endif
 
 	// Krnl_IntraE
-	setKernelArg(kernel_ia,0,  sizeof(mem_KerConstStatic_atom_charges_const),        &mem_KerConstStatic_atom_charges_const);
-	setKernelArg(kernel_ia,1,  sizeof(mem_KerConstStatic_atom_types_const),          &mem_KerConstStatic_atom_types_const);
-	setKernelArg(kernel_ia,2,  sizeof(mem_KerConstStatic_intraE_contributors_const), &mem_KerConstStatic_intraE_contributors_const);
-
-  	setKernelArg(kernel_ia,3,  sizeof(dockpars.smooth),                              &dockpars.smooth);
-  	setKernelArg(kernel_ia,4,  sizeof(mem_KerConstStatic_reqm_const),                &mem_KerConstStatic_reqm_const);
-  	setKernelArg(kernel_ia,5,  sizeof(mem_KerConstStatic_reqm_hbond_const),          &mem_KerConstStatic_reqm_hbond_const);
-  	setKernelArg(kernel_ia,6,  sizeof(mem_KerConstStatic_atom1_types_reqm_const),    &mem_KerConstStatic_atom1_types_reqm_const);
-  	setKernelArg(kernel_ia,7,  sizeof(mem_KerConstStatic_atom2_types_reqm_const),    &mem_KerConstStatic_atom2_types_reqm_const);
-
-	setKernelArg(kernel_ia,8,  sizeof(mem_KerConstStatic_VWpars_AC_const),           &mem_KerConstStatic_VWpars_AC_const);
-	setKernelArg(kernel_ia,9,  sizeof(mem_KerConstStatic_VWpars_BD_const),           &mem_KerConstStatic_VWpars_BD_const);
-	setKernelArg(kernel_ia,10, sizeof(mem_KerConstStatic_dspars_S_const),            &mem_KerConstStatic_dspars_S_const);
-	setKernelArg(kernel_ia,11, sizeof(mem_KerConstStatic_dspars_V_const),            &mem_KerConstStatic_dspars_V_const);
-
-	setKernelArg(kernel_ia,12, sizeof(uchar),                    	       &dockpars.num_of_atoms);
-	setKernelArg(kernel_ia,13, sizeof(uint),                     	       &dockpars.num_of_intraE_contributors);
-	setKernelArg(kernel_ia,14, sizeof(float),                          	       &dockpars.grid_spacing);
-	setKernelArg(kernel_ia,15, sizeof(uchar),                    	       &dockpars.num_of_atypes);
-	setKernelArg(kernel_ia,16, sizeof(float),                          	       &dockpars.coeff_elec);
-	setKernelArg(kernel_ia,17, sizeof(float),                          	       &dockpars.qasp);
-	setKernelArg(kernel_ia,18, sizeof(float),                          	       &dockpars.coeff_desolv);
-/*
-	setKernelArg(kernel_ia,14, sizeof(uint),                     	&square_num_of_atypes);
-*/
+	setKernelArg(kernel_ia, 0, sizeof(mem_KerConstStatic_atom_charges_const), &mem_KerConstStatic_atom_charges_const);
+	setKernelArg(kernel_ia, 1, sizeof(mem_KerConstStatic_atom_types_const), &mem_KerConstStatic_atom_types_const);
+	setKernelArg(kernel_ia, 2, sizeof(mem_KerConstStatic_intraE_contributors_const), &mem_KerConstStatic_intraE_contributors_const);
+  	setKernelArg(kernel_ia, 3, sizeof(dockpars.smooth), &dockpars.smooth);
+  	setKernelArg(kernel_ia, 4, sizeof(mem_KerConstStatic_reqm_const), &mem_KerConstStatic_reqm_const);
+  	setKernelArg(kernel_ia, 5, sizeof(mem_KerConstStatic_reqm_hbond_const), &mem_KerConstStatic_reqm_hbond_const);
+  	setKernelArg(kernel_ia, 6, sizeof(mem_KerConstStatic_atom1_types_reqm_const), &mem_KerConstStatic_atom1_types_reqm_const);
+  	setKernelArg(kernel_ia, 7, sizeof(mem_KerConstStatic_atom2_types_reqm_const), &mem_KerConstStatic_atom2_types_reqm_const);
+	setKernelArg(kernel_ia, 8, sizeof(mem_KerConstStatic_VWpars_AC_const), &mem_KerConstStatic_VWpars_AC_const);
+	setKernelArg(kernel_ia, 9, sizeof(mem_KerConstStatic_VWpars_BD_const), &mem_KerConstStatic_VWpars_BD_const);
+	setKernelArg(kernel_ia, 10, sizeof(mem_KerConstStatic_dspars_S_const), &mem_KerConstStatic_dspars_S_const);
+	setKernelArg(kernel_ia, 11, sizeof(mem_KerConstStatic_dspars_V_const), &mem_KerConstStatic_dspars_V_const);
+	setKernelArg(kernel_ia, 12, sizeof(uchar), &dockpars.num_of_atoms);
+	setKernelArg(kernel_ia, 13, sizeof(uint), &dockpars.num_of_intraE_contributors);
+	setKernelArg(kernel_ia, 14, sizeof(float), &dockpars.grid_spacing);
+	setKernelArg(kernel_ia, 15, sizeof(uchar), &dockpars.num_of_atypes);
+	setKernelArg(kernel_ia, 16, sizeof(float), &dockpars.coeff_elec);
+	setKernelArg(kernel_ia, 17, sizeof(float), &dockpars.qasp);
+	setKernelArg(kernel_ia, 18, sizeof(float), &dockpars.coeff_desolv);
 
 	// Krnl_PRNG_GG_float
-	setKernelArg(kernel_prng_gg_float,1, sizeof(uchar),  &dockpars.num_of_genes);
+	setKernelArg(kernel_prng_gg_float, 1, sizeof(uchar), &dockpars.num_of_genes);
 
 	// Krnl_PRNG_float
-	setKernelArg(kernel_prng_ls_float,1, sizeof(uchar),  &dockpars.num_of_genes);
+	setKernelArg(kernel_prng_ls_float, 1, sizeof(uchar), &dockpars.num_of_genes);
 
 	// Krnl_PRNG_uchar
-	setKernelArg(kernel_prng_gg_uchar,1, sizeof(uchar),  &dockpars.num_of_genes);
-
-// Kernel 11 has no args
+	setKernelArg(kernel_prng_gg_uchar, 1, sizeof(uchar), &dockpars.num_of_genes);
 
 #if defined (FIXED_POINT_LS1) || defined (FIXED_POINT_LS2) || defined (FIXED_POINT_LS3) || defined (FIXED_POINT_LS4) || defined (FIXED_POINT_LS5) || defined (FIXED_POINT_LS6) || defined (FIXED_POINT_LS7) || defined (FIXED_POINT_LS8) || defined (FIXED_POINT_LS9)
-fixedpt fixpt_base_dmov_mul_sqrt3 = fixedpt_fromfloat(dockpars.base_dmov_mul_sqrt3);
-fixedpt fixpt_base_dang_mul_sqrt3 = fixedpt_fromfloat(dockpars.base_dang_mul_sqrt3);
-fixedpt fixpt_rho_lower_bound = fixedpt_fromfloat(dockpars.rho_lower_bound);
+	fixedpt fixpt_base_dmov_mul_sqrt3 = fixedpt_fromfloat(dockpars.base_dmov_mul_sqrt3);
+	fixedpt fixpt_base_dang_mul_sqrt3 = fixedpt_fromfloat(dockpars.base_dang_mul_sqrt3);
+	fixedpt fixpt_rho_lower_bound = fixedpt_fromfloat(dockpars.rho_lower_bound);
 #endif
 
-ushort Host_max_num_of_iters = (ushort) dockpars.max_num_of_iters;
-uchar Host_cons_limit = (uchar) dockpars.cons_limit;
+	ushort Host_max_num_of_iters = (ushort) dockpars.max_num_of_iters;
+	uchar Host_cons_limit = (uchar) dockpars.cons_limit;
 
-// Krnl_LS
-	//setKernelArg(kernel_ls,0, sizeof(uint),  &dockpars.max_num_of_iters);
-	setKernelArg(kernel_ls,0, sizeof(ushort),  &Host_max_num_of_iters);
-
+	// Krnl_LS
+	setKernelArg(kernel_ls, 0, sizeof(ushort), &Host_max_num_of_iters);
 	#if defined (FIXED_POINT_LS1)
-	setKernelArg(kernel_ls,1, sizeof(fixedpt),  	&fixpt_rho_lower_bound);
-	setKernelArg(kernel_ls,2, sizeof(fixedpt),  	&fixpt_base_dmov_mul_sqrt3);
+	setKernelArg(kernel_ls, 1, sizeof(fixedpt), &fixpt_rho_lower_bound);
+	setKernelArg(kernel_ls, 2, sizeof(fixedpt), &fixpt_base_dmov_mul_sqrt3);
 	#else
-	setKernelArg(kernel_ls,1, sizeof(float),  	&dockpars.rho_lower_bound);
-	setKernelArg(kernel_ls,2, sizeof(float),  	&dockpars.base_dmov_mul_sqrt3);
+	setKernelArg(kernel_ls, 1, sizeof(float), &dockpars.rho_lower_bound);
+	setKernelArg(kernel_ls, 2, sizeof(float), &dockpars.base_dmov_mul_sqrt3);
 	#endif
-	setKernelArg(kernel_ls,3, sizeof(uchar), &dockpars.num_of_genes);
+	setKernelArg(kernel_ls, 3, sizeof(uchar), &dockpars.num_of_genes);
 	#if defined (FIXED_POINT_LS1)
-	setKernelArg(kernel_ls,4, sizeof(fixedpt),  	&fixpt_base_dang_mul_sqrt3);
+	setKernelArg(kernel_ls, 4, sizeof(fixedpt), &fixpt_base_dang_mul_sqrt3);
 	#else
-	setKernelArg(kernel_ls,4, sizeof(float),  	&dockpars.base_dang_mul_sqrt3);
+	setKernelArg(kernel_ls, 4, sizeof(float), &dockpars.base_dang_mul_sqrt3);
 	#endif
 
-	//setKernelArg(kernel_ls,5, sizeof(uint),  &dockpars.cons_limit);
-	setKernelArg(kernel_ls,5, sizeof(uchar),   &Host_cons_limit);
+	setKernelArg(kernel_ls, 5, sizeof(uchar), &Host_cons_limit);
 
-	setKernelArg(kernel_prng_ls2_float,1, sizeof(uchar),  &dockpars.num_of_genes);
+	setKernelArg(kernel_prng_ls2_float, 1, sizeof(uchar), &dockpars.num_of_genes);
 
 	// Krnl_LS2
-	//setKernelArg(kernel_ls2,0, sizeof(uint),  &dockpars.max_num_of_iters);
-	setKernelArg(kernel_ls2,0, sizeof(ushort),  &Host_max_num_of_iters);
+	setKernelArg(kernel_ls2, 0, sizeof(ushort), &Host_max_num_of_iters);
 	#if defined (FIXED_POINT_LS2)
-	setKernelArg(kernel_ls2,1, sizeof(fixedpt),  	&fixpt_rho_lower_bound);
-	setKernelArg(kernel_ls2,2, sizeof(fixedpt),  	&fixpt_base_dmov_mul_sqrt3);
+	setKernelArg(kernel_ls2, 1, sizeof(fixedpt), &fixpt_rho_lower_bound);
+	setKernelArg(kernel_ls2, 2, sizeof(fixedpt), &fixpt_base_dmov_mul_sqrt3);
 	#else
-	setKernelArg(kernel_ls2,1, sizeof(float),  	&dockpars.rho_lower_bound);
-	setKernelArg(kernel_ls2,2, sizeof(float),  	&dockpars.base_dmov_mul_sqrt3);
+	setKernelArg(kernel_ls2, 1, sizeof(float), &dockpars.rho_lower_bound);
+	setKernelArg(kernel_ls2, 2, sizeof(float), &dockpars.base_dmov_mul_sqrt3);
 	#endif
-	setKernelArg(kernel_ls2,3, sizeof(uchar), &dockpars.num_of_genes);
+	setKernelArg(kernel_ls2, 3, sizeof(uchar), &dockpars.num_of_genes);
 	#if defined (FIXED_POINT_LS2)
-	setKernelArg(kernel_ls2,4, sizeof(fixedpt),  	&fixpt_base_dang_mul_sqrt3);
+	setKernelArg(kernel_ls2, 4, sizeof(fixedpt), &fixpt_base_dang_mul_sqrt3);
 	#else
-	setKernelArg(kernel_ls2,4, sizeof(float),  	&dockpars.base_dang_mul_sqrt3);
+	setKernelArg(kernel_ls2, 4, sizeof(float), &dockpars.base_dang_mul_sqrt3);
 	#endif
-	//setKernelArg(kernel_ls2,5, sizeof(uint),  &dockpars.cons_limit);
-	setKernelArg(kernel_ls2,5, sizeof(uchar),   &Host_cons_limit);
+	//setKernelArg(kernel_ls2, 5, sizeof(uint), &dockpars.cons_limit);
+	setKernelArg(kernel_ls2, 5, sizeof(uchar), &Host_cons_limit);
 
-	setKernelArg(kernel_prng_ls3_float,1, sizeof(uchar),  &dockpars.num_of_genes);
+	setKernelArg(kernel_prng_ls3_float, 1, sizeof(uchar), &dockpars.num_of_genes);
 
 	// Krnl_LS3
-	//setKernelArg(kernel_ls3,0, sizeof(uint),  &dockpars.max_num_of_iters);
-	setKernelArg(kernel_ls3,0, sizeof(ushort),  &Host_max_num_of_iters);
+	setKernelArg(kernel_ls3, 0, sizeof(ushort), &Host_max_num_of_iters);
 	#if defined (FIXED_POINT_LS3)
-	setKernelArg(kernel_ls3,1, sizeof(fixedpt),  	&fixpt_rho_lower_bound);
-	setKernelArg(kernel_ls3,2, sizeof(fixedpt),  	&fixpt_base_dmov_mul_sqrt3);
+	setKernelArg(kernel_ls3, 1, sizeof(fixedpt), &fixpt_rho_lower_bound);
+	setKernelArg(kernel_ls3, 2, sizeof(fixedpt), &fixpt_base_dmov_mul_sqrt3);
 	#else
-	setKernelArg(kernel_ls3,1, sizeof(float),  	&dockpars.rho_lower_bound);
-	setKernelArg(kernel_ls3,2, sizeof(float),  	&dockpars.base_dmov_mul_sqrt3);
+	setKernelArg(kernel_ls3, 1, sizeof(float), &dockpars.rho_lower_bound);
+	setKernelArg(kernel_ls3, 2, sizeof(float), &dockpars.base_dmov_mul_sqrt3);
 	#endif
-	setKernelArg(kernel_ls3,3, sizeof(uchar), &dockpars.num_of_genes);
+	setKernelArg(kernel_ls3, 3, sizeof(uchar), &dockpars.num_of_genes);
 	#if defined (FIXED_POINT_LS3)
-	setKernelArg(kernel_ls3,4, sizeof(fixedpt),  	&fixpt_base_dang_mul_sqrt3);
+	setKernelArg(kernel_ls3, 4, sizeof(fixedpt), &fixpt_base_dang_mul_sqrt3);
 	#else
-	setKernelArg(kernel_ls3,4, sizeof(float),  	&dockpars.base_dang_mul_sqrt3);
+	setKernelArg(kernel_ls3, 4, sizeof(float), &dockpars.base_dang_mul_sqrt3);
 	#endif
 
-	//setKernelArg(kernel_ls3,5, sizeof(uint),  &dockpars.cons_limit);
-	setKernelArg(kernel_ls3,5, sizeof(uchar),   &Host_cons_limit);
+	setKernelArg(kernel_ls3, 5, sizeof(uchar), &Host_cons_limit);
 	
-/*	
-	setKernelArg(kernel_igl_arb,0, sizeof(uchar),  &dockpars.num_of_genes);
-*/
+	setKernelArg(kernel_ls123_ushort, 9, sizeof(uint), &dockpars.pop_size);
 
-	setKernelArg(kernel_ls123_ushort,9, sizeof(uint),  &dockpars.pop_size);
+	setKernelArg(kernel_prng_bt_ushort_float, 2, sizeof(uint), &dockpars.pop_size);
 
-	setKernelArg(kernel_prng_bt_ushort_float,2, sizeof(uint),  &dockpars.pop_size);
+	setKernelArg(kernel_prng_ls4_float, 1, sizeof(uchar), &dockpars.num_of_genes);
 
-	setKernelArg(kernel_prng_ls4_float,1, sizeof(uchar),  &dockpars.num_of_genes);
+	setKernelArg(kernel_prng_ls5_float, 1, sizeof(uchar), &dockpars.num_of_genes);
 
-	setKernelArg(kernel_prng_ls5_float,1, sizeof(uchar),  &dockpars.num_of_genes);
-
-	setKernelArg(kernel_ls4,0, sizeof(ushort),  &Host_max_num_of_iters);
+	// Krnl_LS4
+	setKernelArg(kernel_ls4, 0, sizeof(ushort), &Host_max_num_of_iters);
 	#if defined (FIXED_POINT_LS4)
-	setKernelArg(kernel_ls4,1, sizeof(fixedpt),  	  &fixpt_rho_lower_bound);
-	setKernelArg(kernel_ls4,2, sizeof(fixedpt),  	  &fixpt_base_dmov_mul_sqrt3);
+	setKernelArg(kernel_ls4, 1, sizeof(fixedpt), &fixpt_rho_lower_bound);
+	setKernelArg(kernel_ls4, 2, sizeof(fixedpt), &fixpt_base_dmov_mul_sqrt3);
 	#else
-	setKernelArg(kernel_ls4,1, sizeof(float),  	  &dockpars.rho_lower_bound);
-	setKernelArg(kernel_ls4,2, sizeof(float),  	  &dockpars.base_dmov_mul_sqrt3);
+	setKernelArg(kernel_ls4, 1, sizeof(float), &dockpars.rho_lower_bound);
+	setKernelArg(kernel_ls4, 2, sizeof(float), &dockpars.base_dmov_mul_sqrt3);
 	#endif
-	setKernelArg(kernel_ls4,3, sizeof(uchar),   &dockpars.num_of_genes);
+	setKernelArg(kernel_ls4, 3, sizeof(uchar), &dockpars.num_of_genes);
 	#if defined (FIXED_POINT_LS4)
-	setKernelArg(kernel_ls4,4, sizeof(fixedpt),  	  &fixpt_base_dang_mul_sqrt3);
+	setKernelArg(kernel_ls4, 4, sizeof(fixedpt), &fixpt_base_dang_mul_sqrt3);
 	#else
-	setKernelArg(kernel_ls4,4, sizeof(float),  	  &dockpars.base_dang_mul_sqrt3);
+	setKernelArg(kernel_ls4, 4, sizeof(float), &dockpars.base_dang_mul_sqrt3);
 	#endif
-	setKernelArg(kernel_ls4,5, sizeof(uchar),   &Host_cons_limit);
+	setKernelArg(kernel_ls4, 5, sizeof(uchar), &Host_cons_limit);
 
-	setKernelArg(kernel_ls5,0, sizeof(ushort),  &Host_max_num_of_iters);
+	// Krnl_LS5
+	setKernelArg(kernel_ls5, 0, sizeof(ushort),  &Host_max_num_of_iters);
 	#if defined (FIXED_POINT_LS4)
-	setKernelArg(kernel_ls5,1, sizeof(fixedpt),  	  &fixpt_rho_lower_bound);
-	setKernelArg(kernel_ls5,2, sizeof(fixedpt),  	  &fixpt_base_dmov_mul_sqrt3);
+	setKernelArg(kernel_ls5, 1, sizeof(fixedpt), &fixpt_rho_lower_bound);
+	setKernelArg(kernel_ls5, 2, sizeof(fixedpt), &fixpt_base_dmov_mul_sqrt3);
 	#else
-	setKernelArg(kernel_ls5,1, sizeof(float),  	  &dockpars.rho_lower_bound);
-	setKernelArg(kernel_ls5,2, sizeof(float),  	  &dockpars.base_dmov_mul_sqrt3);
+	setKernelArg(kernel_ls5, 1, sizeof(float), &dockpars.rho_lower_bound);
+	setKernelArg(kernel_ls5, 2, sizeof(float), &dockpars.base_dmov_mul_sqrt3);
 	#endif
-	setKernelArg(kernel_ls5,3, sizeof(uchar),   &dockpars.num_of_genes);
+	setKernelArg(kernel_ls5, 3, sizeof(uchar), &dockpars.num_of_genes);
 	#if defined (FIXED_POINT_LS4)
-	setKernelArg(kernel_ls5,4, sizeof(fixedpt),  	  &fixpt_base_dang_mul_sqrt3);
+	setKernelArg(kernel_ls5, 4, sizeof(fixedpt), &fixpt_base_dang_mul_sqrt3);
 	#else
-	setKernelArg(kernel_ls5,4, sizeof(float),  	  &dockpars.base_dang_mul_sqrt3);
+	setKernelArg(kernel_ls5, 4, sizeof(float), &dockpars.base_dang_mul_sqrt3);
 	#endif
-	setKernelArg(kernel_ls5,5, sizeof(uchar),   &Host_cons_limit);
+	setKernelArg(kernel_ls5, 5, sizeof(uchar), &Host_cons_limit);
 
-	setKernelArg(kernel_prng_ls6_float,1, sizeof(uchar),  &dockpars.num_of_genes);
-	setKernelArg(kernel_prng_ls7_float,1, sizeof(uchar),  &dockpars.num_of_genes);
-	setKernelArg(kernel_prng_ls8_float,1, sizeof(uchar),  &dockpars.num_of_genes);
-	setKernelArg(kernel_prng_ls9_float,1, sizeof(uchar),  &dockpars.num_of_genes);
+	setKernelArg(kernel_prng_ls6_float,1, sizeof(uchar), &dockpars.num_of_genes);
+	setKernelArg(kernel_prng_ls7_float,1, sizeof(uchar), &dockpars.num_of_genes);
+	setKernelArg(kernel_prng_ls8_float,1, sizeof(uchar), &dockpars.num_of_genes);
+	setKernelArg(kernel_prng_ls9_float,1, sizeof(uchar), &dockpars.num_of_genes);
 
-	setKernelArg(kernel_ls6,0, sizeof(ushort),  &Host_max_num_of_iters);
+	// Krnl_LS6
+	setKernelArg(kernel_ls6, 0, sizeof(ushort), &Host_max_num_of_iters);
 	#if defined (FIXED_POINT_LS6)
-	setKernelArg(kernel_ls6,1, sizeof(fixedpt),  	  &fixpt_rho_lower_bound);
-	setKernelArg(kernel_ls6,2, sizeof(fixedpt),  	  &fixpt_base_dmov_mul_sqrt3);
+	setKernelArg(kernel_ls6, 1, sizeof(fixedpt), &fixpt_rho_lower_bound);
+	setKernelArg(kernel_ls6, 2, sizeof(fixedpt), &fixpt_base_dmov_mul_sqrt3);
 	#else
-	setKernelArg(kernel_ls6,1, sizeof(float),  	  &dockpars.rho_lower_bound);
-	setKernelArg(kernel_ls6,2, sizeof(float),  	  &dockpars.base_dmov_mul_sqrt3);
+	setKernelArg(kernel_ls6, 1, sizeof(float), &dockpars.rho_lower_bound);
+	setKernelArg(kernel_ls6, 2, sizeof(float), &dockpars.base_dmov_mul_sqrt3);
 	#endif
-	setKernelArg(kernel_ls6,3, sizeof(uchar),   &dockpars.num_of_genes);
+	setKernelArg(kernel_ls6, 3, sizeof(uchar), &dockpars.num_of_genes);
 	#if defined (FIXED_POINT_LS6)
-	setKernelArg(kernel_ls6,4, sizeof(fixedpt),  	  &fixpt_base_dang_mul_sqrt3);
+	setKernelArg(kernel_ls6, 4, sizeof(fixedpt), &fixpt_base_dang_mul_sqrt3);
 	#else
-	setKernelArg(kernel_ls6,4, sizeof(float),  	  &dockpars.base_dang_mul_sqrt3);
+	setKernelArg(kernel_ls6, 4, sizeof(float), &dockpars.base_dang_mul_sqrt3);
 	#endif
-	setKernelArg(kernel_ls6,5, sizeof(uchar),   &Host_cons_limit);
+	setKernelArg(kernel_ls6, 5, sizeof(uchar), &Host_cons_limit);
 
-	setKernelArg(kernel_ls7,0, sizeof(ushort),  &Host_max_num_of_iters);
+	// Krnl_LS7
+	setKernelArg(kernel_ls7, 0, sizeof(ushort), &Host_max_num_of_iters);
 	#if defined (FIXED_POINT_LS7)
-	setKernelArg(kernel_ls7,1, sizeof(fixedpt),  	  &fixpt_rho_lower_bound);
-	setKernelArg(kernel_ls7,2, sizeof(fixedpt),  	  &fixpt_base_dmov_mul_sqrt3);
+	setKernelArg(kernel_ls7, 1, sizeof(fixedpt), &fixpt_rho_lower_bound);
+	setKernelArg(kernel_ls7, 2, sizeof(fixedpt), &fixpt_base_dmov_mul_sqrt3);
 	#else
-	setKernelArg(kernel_ls7,1, sizeof(float),  	  &dockpars.rho_lower_bound);
-	setKernelArg(kernel_ls7,2, sizeof(float),  	  &dockpars.base_dmov_mul_sqrt3);
+	setKernelArg(kernel_ls7, 1, sizeof(float), &dockpars.rho_lower_bound);
+	setKernelArg(kernel_ls7, 2, sizeof(float), &dockpars.base_dmov_mul_sqrt3);
 	#endif
-	setKernelArg(kernel_ls7,3, sizeof(uchar),   &dockpars.num_of_genes);
+	setKernelArg(kernel_ls7, 3, sizeof(uchar), &dockpars.num_of_genes);
 	#if defined (FIXED_POINT_LS7)
-	setKernelArg(kernel_ls7,4, sizeof(fixedpt),  	  &fixpt_base_dang_mul_sqrt3);
+	setKernelArg(kernel_ls7, 4, sizeof(fixedpt), &fixpt_base_dang_mul_sqrt3);
 	#else
-	setKernelArg(kernel_ls7,4, sizeof(float),  	  &dockpars.base_dang_mul_sqrt3);
+	setKernelArg(kernel_ls7, 4, sizeof(float), &dockpars.base_dang_mul_sqrt3);
 	#endif
-	setKernelArg(kernel_ls7,5, sizeof(uchar),   &Host_cons_limit);
+	setKernelArg(kernel_ls7, 5, sizeof(uchar), &Host_cons_limit);
 
-	setKernelArg(kernel_ls8,0, sizeof(ushort),  &Host_max_num_of_iters);
+	// Krnl_LS8
+	setKernelArg(kernel_ls8, 0, sizeof(ushort), &Host_max_num_of_iters);
 	#if defined (FIXED_POINT_LS8)
-	setKernelArg(kernel_ls8,1, sizeof(fixedpt),  	  &fixpt_rho_lower_bound);
-	setKernelArg(kernel_ls8,2, sizeof(fixedpt),  	  &fixpt_base_dmov_mul_sqrt3);
+	setKernelArg(kernel_ls8, 1, sizeof(fixedpt), &fixpt_rho_lower_bound);
+	setKernelArg(kernel_ls8, 2, sizeof(fixedpt), &fixpt_base_dmov_mul_sqrt3);
 	#else
-	setKernelArg(kernel_ls8,1, sizeof(float),  	  &dockpars.rho_lower_bound);
-	setKernelArg(kernel_ls8,2, sizeof(float),  	  &dockpars.base_dmov_mul_sqrt3);
+	setKernelArg(kernel_ls8, 1, sizeof(float), &dockpars.rho_lower_bound);
+	setKernelArg(kernel_ls8, 2, sizeof(float), &dockpars.base_dmov_mul_sqrt3);
 	#endif
-	setKernelArg(kernel_ls8,3, sizeof(uchar),   &dockpars.num_of_genes);
+	setKernelArg(kernel_ls8, 3, sizeof(uchar), &dockpars.num_of_genes);
 	#if defined (FIXED_POINT_LS8)
-	setKernelArg(kernel_ls8,4, sizeof(fixedpt),  	  &fixpt_base_dang_mul_sqrt3);
+	setKernelArg(kernel_ls8, 4, sizeof(fixedpt), &fixpt_base_dang_mul_sqrt3);
 	#else
-	setKernelArg(kernel_ls8,4, sizeof(float),  	  &dockpars.base_dang_mul_sqrt3);
+	setKernelArg(kernel_ls8, 4, sizeof(float), &dockpars.base_dang_mul_sqrt3);
 	#endif
-	setKernelArg(kernel_ls8,5, sizeof(uchar),   &Host_cons_limit);
+	setKernelArg(kernel_ls8, 5, sizeof(uchar), &Host_cons_limit);
 
-	setKernelArg(kernel_ls9,0, sizeof(ushort),  &Host_max_num_of_iters);
+	// Krnl_LS9
+	setKernelArg(kernel_ls9, 0, sizeof(ushort), &Host_max_num_of_iters);
 	#if defined (FIXED_POINT_LS9)
-	setKernelArg(kernel_ls9,1, sizeof(fixedpt),  	  &fixpt_rho_lower_bound);
-	setKernelArg(kernel_ls9,2, sizeof(fixedpt),  	  &fixpt_base_dmov_mul_sqrt3);
+	setKernelArg(kernel_ls9, 1, sizeof(fixedpt), &fixpt_rho_lower_bound);
+	setKernelArg(kernel_ls9, 2, sizeof(fixedpt), &fixpt_base_dmov_mul_sqrt3);
 	#else
-	setKernelArg(kernel_ls9,1, sizeof(float),  	  &dockpars.rho_lower_bound);
-	setKernelArg(kernel_ls9,2, sizeof(float),  	  &dockpars.base_dmov_mul_sqrt3);
+	setKernelArg(kernel_ls9, 1, sizeof(float), &dockpars.rho_lower_bound);
+	setKernelArg(kernel_ls9, 2, sizeof(float), &dockpars.base_dmov_mul_sqrt3);
 	#endif
-	setKernelArg(kernel_ls9,3, sizeof(uchar),   &dockpars.num_of_genes);
+	setKernelArg(kernel_ls9, 3, sizeof(uchar), &dockpars.num_of_genes);
 	#if defined (FIXED_POINT_LS9)
-	setKernelArg(kernel_ls9,4, sizeof(fixedpt),  	  &fixpt_base_dang_mul_sqrt3);
+	setKernelArg(kernel_ls9, 4, sizeof(fixedpt), &fixpt_base_dang_mul_sqrt3);
 	#else
-	setKernelArg(kernel_ls9,4, sizeof(float),  	  &dockpars.base_dang_mul_sqrt3);
+	setKernelArg(kernel_ls9, 4, sizeof(float), &dockpars.base_dang_mul_sqrt3);
 	#endif
-	setKernelArg(kernel_ls9,5, sizeof(uchar),   &Host_cons_limit);
+	setKernelArg(kernel_ls9, 5, sizeof(uchar), &Host_cons_limit);
 
 #if defined(SINGLE_COPY_POP_ENE)
-	memcopyBufferObjectToDevice(command_queue_ga,mem_dockpars_conformations_current, 	cpu_init_populations, size_populations);
+	memcopyBufferObjectToDevice(command_queue_ga, mem_dockpars_conformations_current, cpu_init_populations, size_populations);
 #endif
 
 	printf("Docking runs to be executed: %u\n", mypars->num_of_runs); 
@@ -741,43 +712,40 @@ uchar Host_cons_limit = (uchar) dockpars.cons_limit;
 #if defined(SINGLE_COPY_POP_ENE)
 		uint Host_Offset_Pop = run_cnt * dockpars.pop_size * ACTUAL_GENOTYPE_LENGTH;
 		uint Host_Offset_Ene = run_cnt * dockpars.pop_size;
-		setKernelArg(kernel_ga,16,  sizeof(ushort), &run_cnt);
-		setKernelArg(kernel_ga,17,  sizeof(uint),   &Host_Offset_Pop);
-		setKernelArg(kernel_ga,18,  sizeof(uint),   &Host_Offset_Ene);
+		setKernelArg(kernel_ga, 16, sizeof(ushort), &run_cnt);
+		setKernelArg(kernel_ga, 17, sizeof(uint), &Host_Offset_Pop);
+		setKernelArg(kernel_ga, 18, sizeof(uint), &Host_Offset_Ene);
 #endif
 
 	// Krnl_PoseCalc
 	/*
 	#if defined(SINGLE_COPY_POP_ENE)
 		#if defined (FIXED_POINT_CONFORM)
-		setKernelArg(kernel_pc,8,  sizeof(fixedpt),        &KerConstStatic.ref_orientation_quats_const[4*run_cnt]);
-		setKernelArg(kernel_pc,9,  sizeof(fixedpt),        &KerConstStatic.ref_orientation_quats_const[4*run_cnt + 1]);	
-		setKernelArg(kernel_pc,10, sizeof(fixedpt),        &KerConstStatic.ref_orientation_quats_const[4*run_cnt + 2]);	
-		setKernelArg(kernel_pc,11, sizeof(fixedpt),        &KerConstStatic.ref_orientation_quats_const[4*run_cnt + 3]);
+		setKernelArg(kernel_pc, 8, sizeof(fixedpt), &KerConstStatic.ref_orientation_quats_const[4*run_cnt]);
+		setKernelArg(kernel_pc, 9, sizeof(fixedpt), &KerConstStatic.ref_orientation_quats_const[4*run_cnt + 1]);
+		setKernelArg(kernel_pc, 10, sizeof(fixedpt), &KerConstStatic.ref_orientation_quats_const[4*run_cnt + 2]);
+		setKernelArg(kernel_pc, 11, sizeof(fixedpt), &KerConstStatic.ref_orientation_quats_const[4*run_cnt + 3]);
 		#else
-		setKernelArg(kernel_pc,8,  sizeof(float),          &KerConstStatic.ref_orientation_quats_const[4*run_cnt]);
-		setKernelArg(kernel_pc,9,  sizeof(float),          &KerConstStatic.ref_orientation_quats_const[4*run_cnt + 1]);	
-		setKernelArg(kernel_pc,10, sizeof(float),          &KerConstStatic.ref_orientation_quats_const[4*run_cnt + 2]);	
-		setKernelArg(kernel_pc,11, sizeof(float),          &KerConstStatic.ref_orientation_quats_const[4*run_cnt + 3]);
+		setKernelArg(kernel_pc, 8, sizeof(float), &KerConstStatic.ref_orientation_quats_const[4*run_cnt]);
+		setKernelArg(kernel_pc, 9, sizeof(float), &KerConstStatic.ref_orientation_quats_const[4*run_cnt + 1]);
+		setKernelArg(kernel_pc, 10, sizeof(float), &KerConstStatic.ref_orientation_quats_const[4*run_cnt + 2]);
+		setKernelArg(kernel_pc, 11, sizeof(float), &KerConstStatic.ref_orientation_quats_const[4*run_cnt + 3]);
 		#endif
 	#else
 		#if defined (FIXED_POINT_CONFORM)
-		setKernelArg(kernel_pc,8,  sizeof(fixedpt),        &KerConstDynamic.ref_orientation_quats_const[0]);
-		setKernelArg(kernel_pc,9,  sizeof(fixedpt),        &KerConstDynamic.ref_orientation_quats_const[1]);	
-		setKernelArg(kernel_pc,10, sizeof(fixedpt),        &KerConstDynamic.ref_orientation_quats_const[2]);	
-		setKernelArg(kernel_pc,11, sizeof(fixedpt),        &KerConstDynamic.ref_orientation_quats_const[3]);
+		setKernelArg(kernel_pc, 8, sizeof(fixedpt), &KerConstDynamic.ref_orientation_quats_const[0]);
+		setKernelArg(kernel_pc, 9, sizeof(fixedpt), &KerConstDynamic.ref_orientation_quats_const[1]);
+		setKernelArg(kernel_pc, 10, sizeof(fixedpt), &KerConstDynamic.ref_orientation_quats_const[2]);
+		setKernelArg(kernel_pc, 11, sizeof(fixedpt), &KerConstDynamic.ref_orientation_quats_const[3]);
 		#else
-		setKernelArg(kernel_pc,8,  sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[0]);
-		setKernelArg(kernel_pc,9,  sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[1]);	
-		setKernelArg(kernel_pc,10, sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[2]);	
-		setKernelArg(kernel_pc,11, sizeof(float),          &KerConstDynamic.ref_orientation_quats_const[3]);
+		setKernelArg(kernel_pc, 8, sizeof(float), &KerConstDynamic.ref_orientation_quats_const[0]);
+		setKernelArg(kernel_pc, 9, sizeof(float), &KerConstDynamic.ref_orientation_quats_const[1]);
+		setKernelArg(kernel_pc, 10, sizeof(float), &KerConstDynamic.ref_orientation_quats_const[2]);
+		setKernelArg(kernel_pc, 11, sizeof(float), &KerConstDynamic.ref_orientation_quats_const[3]);
 		#endif
 	#endif
 	*/
-	/*
-	setKernelArg(kernel_pc,9,  sizeof(ushort), &run_cnt);
-	*/
-		setKernelArg(kernel_pc,8, sizeof(ushort), &run_cnt);
+		setKernelArg(kernel_pc, 8, sizeof(ushort), &run_cnt);
 
 		setKernelArg(kernel_prng_gg_float, 0, sizeof(uint), &cpu_prng_seeds[num_of_prng_blocks * run_cnt]);
 		setKernelArg(kernel_prng_gg_uchar, 0, sizeof(uint), &cpu_prng_seeds[num_of_prng_blocks * run_cnt + 2]);
@@ -862,16 +830,13 @@ uchar Host_cons_limit = (uchar) dockpars.cons_limit;
 
 		clock_stop_docking = clock();
 
-
 #if defined(SINGLE_COPY_POP_ENE)
 
 #else
-
-
 		//copy results from device
 		memcopyBufferObjectFromDevice(command_queue_ga,array_evals_and_generations_performed,mem_evals_and_generations_performed,2*sizeof(uint));
-		mypars->num_of_energy_evals = array_evals_and_generations_performed [0];
-		mypars->num_of_generations  = array_evals_and_generations_performed [1];
+		mypars->num_of_energy_evals = array_evals_and_generations_performed[0];
+		mypars->num_of_generations  = array_evals_and_generations_performed[1];
 	
 		memcopyBufferObjectFromDevice(command_queue_ga,cpu_final_populations,mem_dockpars_conformations_current,size_populations);
 		memcopyBufferObjectFromDevice(command_queue_ga,cpu_energies,mem_dockpars_energies_current,size_energies);
@@ -906,7 +871,6 @@ uchar Host_cons_limit = (uchar) dockpars.cons_limit;
 
 		arrange_result(cpu_final_populations, cpu_energies, mypars->pop_size);
 
-
 /*
 		make_resfiles(cpu_final_populations+run_cnt*mypars->pop_size*GENOTYPE_LENGTH_IN_GLOBMEM, 
 			      cpu_energies+run_cnt*mypars->pop_size, 
@@ -924,8 +888,7 @@ uchar Host_cons_limit = (uchar) dockpars.cons_limit;
 			      run_cnt, 
                               &(cpu_result_ligands [run_cnt]));
 */
-
-		//To write out final_population generated by get_result
+		// Writing out final_population generated by get_result
 		make_resfiles(cpu_final_populations, 
 			      cpu_energies, 
 			      &myligand_reference,
@@ -941,10 +904,7 @@ uchar Host_cons_limit = (uchar) dockpars.cons_limit;
 			      0,
 			      run_cnt, 
 			      &cpu_result_ligands[run_cnt]);
-
-
 #endif
-
 	} // End of for (run_cnt = 0; run_cnt < mypars->num_of_runs; run_cnt++)
 
 	printf("\n"); 
@@ -953,10 +913,10 @@ uchar Host_cons_limit = (uchar) dockpars.cons_limit;
 
 	//copy results from device
 	memcopyBufferObjectFromDevice(command_queue_ga, cpu_evals_of_runs, mem_evals_performed, size_evals_of_runs);
-	memcopyBufferObjectFromDevice(command_queue_ga, cpu_gens_of_runs,  mem_gens_performed,  size_evals_of_runs);
+	memcopyBufferObjectFromDevice(command_queue_ga, cpu_gens_of_runs, mem_gens_performed, size_evals_of_runs);
 
-	memcopyBufferObjectFromDevice(command_queue_ga,cpu_final_populations,mem_dockpars_conformations_current,size_populations);
-	memcopyBufferObjectFromDevice(command_queue_ga,cpu_energies,mem_dockpars_energies_current,size_energies);
+	memcopyBufferObjectFromDevice(command_queue_ga, cpu_final_populations, mem_dockpars_conformations_current, size_populations);
+	memcopyBufferObjectFromDevice(command_queue_ga, cpu_energies, mem_dockpars_energies_current, size_energies);
 
 
 	for (uint run_cnt = 0; run_cnt < mypars->num_of_runs; run_cnt++) {
@@ -999,7 +959,7 @@ uchar Host_cons_limit = (uchar) dockpars.cons_limit;
 	clusanal_gendlg(cpu_result_ligands, 
 			mypars->num_of_runs,
 			myligand_init, mypars,
-   		        mygrid, 
+			mygrid,
 			argc,
 			argv,
 			ELAPSEDSECS(clock_stop_docking, clock_start_docking)/mypars->num_of_runs,
