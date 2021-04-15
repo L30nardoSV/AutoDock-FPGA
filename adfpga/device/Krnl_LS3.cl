@@ -1,20 +1,20 @@
 __kernel __attribute__ ((max_global_work_dim(0)))
-void Krnl_LS3(
-	ushort            DockConst_max_num_of_iters,
+void Krnl_LS3 (
+	ushort DockConst_max_num_of_iters,
 #ifdef FIXED_POINT_LS
-	fixedpt                   DockConst_rho_lower_bound,
-	fixedpt                   DockConst_base_dmov_mul_sqrt3,
+	fixedpt DockConst_rho_lower_bound,
+	fixedpt DockConst_base_dmov_mul_sqrt3,
 #else
-	float                     DockConst_rho_lower_bound,
-	float                     DockConst_base_dmov_mul_sqrt3,
+	float DockConst_rho_lower_bound,
+	float DockConst_base_dmov_mul_sqrt3,
 #endif
-	uchar             DockConst_num_of_genes,
+	uchar DockConst_num_of_genes,
 #ifdef FIXED_POINT_LS
-	fixedpt                   DockConst_base_dang_mul_sqrt3,
+	fixedpt DockConst_base_dang_mul_sqrt3,
 #else
-   	float                     DockConst_base_dang_mul_sqrt3,
+	float DockConst_base_dang_mul_sqrt3,
 #endif
-	uchar             DockConst_cons_limit
+	uchar DockConst_cons_limit
 )
 {
 	bool valid = true;
