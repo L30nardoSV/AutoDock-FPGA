@@ -170,7 +170,6 @@ while(valid) {
 
 				entity_possible_new_genotype [i] = fixpt_tmp3;
 				write_channel_intel(chan_LS2Conf_genotype[7], fixedpt_tofloat(fixpt_tmp3));
-
 #else
 				// tmp1 is genotype_deviate
 				float tmp1 = rho * (2.0f*tmp_prng - 1.0f);
@@ -197,7 +196,6 @@ while(valid) {
 				entity_possible_new_genotype [i] = tmp3;
 				write_channel_intel(chan_LS2Conf_genotype[7], tmp3);
 #endif
-
 				#if defined (DEBUG_KRNL_LS8)
 				printf("LS8_genotype sent: %u\n", i);
 				#endif
@@ -292,7 +290,6 @@ while(valid) {
 				positive_direction = !positive_direction;
 			}
 #endif
-
 		} // end of while (iteration_cnt) && (rho)
 	
 		#if defined (DEBUG_KRNL_LS8)
