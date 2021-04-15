@@ -1,120 +1,120 @@
 #include "ocl_init.h"
 
 // OpenCL runtime configuration
-/*static*/ cl_platform_id platform = NULL;
-/*static*/ cl_device_id device = NULL;
-/*static*/ cl_context context = NULL;
+cl_platform_id platform = NULL;
+cl_device_id device = NULL;
+cl_context context = NULL;
 
 // Kernel name, as defined in the CL file
-/*static*/ cl_command_queue command_queue_ga = NULL;
-/*static*/ cl_kernel kernel_ga = NULL;
-/*static*/ const char *name_ga = "Krnl_GA";
+cl_command_queue command_queue_ga = NULL;
+cl_kernel kernel_ga = NULL;
+const char *name_ga = "Krnl_GA";
 
-/*static*/ cl_command_queue command_queue_pc = NULL;
-/*static*/ cl_kernel kernel_pc = NULL;
-/*static*/ const char *name_pc = "Krnl_Conform";
+cl_command_queue command_queue_pc = NULL;
+cl_kernel kernel_pc = NULL;
+const char *name_pc = "Krnl_Conform";
 
-/*static*/ cl_command_queue command_queue_ie = NULL;
-/*static*/ cl_kernel kernel_ie = NULL;
-/*static*/ const char *name_ie = "Krnl_InterE";
+cl_command_queue command_queue_ie = NULL;
+cl_kernel kernel_ie = NULL;
+const char *name_ie = "Krnl_InterE";
 
-/*static*/ cl_command_queue command_queue_ia = NULL;
-/*static*/ cl_kernel kernel_ia = NULL;
-/*static*/ const char *name_ia = "Krnl_IntraE";
+cl_command_queue command_queue_ia = NULL;
+cl_kernel kernel_ia = NULL;
+const char *name_ia = "Krnl_IntraE";
 
-/*static*/ cl_command_queue command_queue_prng_gg_float = NULL;
-/*static*/ cl_kernel kernel_prng_gg_float = NULL;
-/*static*/ const char *name_prng_gg_float = "Krnl_Prng_GG_float";
+cl_command_queue command_queue_prng_gg_float = NULL;
+cl_kernel kernel_prng_gg_float = NULL;
+const char *name_prng_gg_float = "Krnl_Prng_GG_float";
 
-/*static*/ cl_command_queue command_queue_prng_ls_float = NULL;
-/*static*/ cl_kernel kernel_prng_ls_float = NULL;
-/*static*/ const char *name_prng_ls_float = "Krnl_Prng_LS_float";
+cl_command_queue command_queue_prng_ls_float = NULL;
+cl_kernel kernel_prng_ls_float = NULL;
+const char *name_prng_ls_float = "Krnl_Prng_LS_float";
 
-/*static*/ cl_command_queue command_queue_prng_gg_uchar = NULL;
-/*static*/ cl_kernel kernel_prng_gg_uchar = NULL;
-/*static*/ const char *name_prng_gg_uchar = "Krnl_Prng_GG_uchar";
+cl_command_queue command_queue_prng_gg_uchar = NULL;
+cl_kernel kernel_prng_gg_uchar = NULL;
+const char *name_prng_gg_uchar = "Krnl_Prng_GG_uchar";
 
-/*static*/ cl_command_queue command_queue_ls = NULL;
-/*static*/ cl_kernel kernel_ls = NULL;
-/*static*/ const char *name_ls = "Krnl_LS";
+cl_command_queue command_queue_ls = NULL;
+cl_kernel kernel_ls = NULL;
+const char *name_ls = "Krnl_LS";
 
-/*static*/ cl_command_queue command_queue_prng_ls2_float = NULL;
-/*static*/ cl_kernel kernel_prng_ls2_float = NULL;
-/*static*/ const char *name_prng_ls2_float = "Krnl_Prng_LS2_float";
+cl_command_queue command_queue_prng_ls2_float = NULL;
+cl_kernel kernel_prng_ls2_float = NULL;
+const char *name_prng_ls2_float = "Krnl_Prng_LS2_float";
 
-/*static*/ cl_command_queue command_queue_ls2 = NULL;
-/*static*/ cl_kernel kernel_ls2 = NULL;
-/*static*/ const char *name_ls2 = "Krnl_LS2";
+cl_command_queue command_queue_ls2 = NULL;
+cl_kernel kernel_ls2 = NULL;
+const char *name_ls2 = "Krnl_LS2";
 
-/*static*/ cl_command_queue command_queue_prng_ls3_float = NULL;
-/*static*/ cl_kernel kernel_prng_ls3_float = NULL;
-/*static*/ const char *name_prng_ls3_float = "Krnl_Prng_LS3_float";
+cl_command_queue command_queue_prng_ls3_float = NULL;
+cl_kernel kernel_prng_ls3_float = NULL;
+const char *name_prng_ls3_float = "Krnl_Prng_LS3_float";
 
-/*static*/ cl_command_queue command_queue_ls3 = NULL;
-/*static*/ cl_kernel kernel_ls3 = NULL;
-/*static*/ const char *name_ls3 = "Krnl_LS3";
+cl_command_queue command_queue_ls3 = NULL;
+cl_kernel kernel_ls3 = NULL;
+const char *name_ls3 = "Krnl_LS3";
 
-/*static*/ cl_command_queue command_queue_igl_arb = NULL;
-/*static*/ cl_kernel kernel_igl_arb = NULL;
-/*static*/ const char *name_igl_arb = "Krnl_IGL_Arbiter";
+cl_command_queue command_queue_igl_arb = NULL;
+cl_kernel kernel_igl_arb = NULL;
+const char *name_igl_arb = "Krnl_IGL_Arbiter";
 
-/*static*/ cl_command_queue command_queue_ls123_ushort = NULL;
-/*static*/ cl_kernel kernel_ls123_ushort = NULL;
-/*static*/ const char *name_ls123_ushort = "Krnl_Prng_LS123_ushort";
+cl_command_queue command_queue_ls123_ushort = NULL;
+cl_kernel kernel_ls123_ushort = NULL;
+const char *name_ls123_ushort = "Krnl_Prng_LS123_ushort";
 
-/*static*/ cl_command_queue command_queue_prng_bt_ushort_float = NULL;
-/*static*/ cl_kernel kernel_prng_bt_ushort_float = NULL;
-/*static*/ const char *name_prng_bt_ushort_float = "Krnl_Prng_BT_ushort_float";
+cl_command_queue command_queue_prng_bt_ushort_float = NULL;
+cl_kernel kernel_prng_bt_ushort_float = NULL;
+const char *name_prng_bt_ushort_float = "Krnl_Prng_BT_ushort_float";
 
-/*static*/ cl_command_queue command_queue_prng_ls4_float = NULL;
-/*static*/ cl_kernel kernel_prng_ls4_float = NULL;
-/*static*/ const char *name_prng_ls4_float = "Krnl_Prng_LS4_float";
+cl_command_queue command_queue_prng_ls4_float = NULL;
+cl_kernel kernel_prng_ls4_float = NULL;
+const char *name_prng_ls4_float = "Krnl_Prng_LS4_float";
 
-/*static*/ cl_command_queue command_queue_prng_ls5_float = NULL;
-/*static*/ cl_kernel kernel_prng_ls5_float = NULL;
-/*static*/ const char *name_prng_ls5_float = "Krnl_Prng_LS5_float";
+cl_command_queue command_queue_prng_ls5_float = NULL;
+cl_kernel kernel_prng_ls5_float = NULL;
+const char *name_prng_ls5_float = "Krnl_Prng_LS5_float";
 
-/*static*/ cl_command_queue command_queue_ls4 = NULL;
-/*static*/ cl_kernel kernel_ls4 = NULL;
-/*static*/ const char *name_ls4 = "Krnl_LS4";
+cl_command_queue command_queue_ls4 = NULL;
+cl_kernel kernel_ls4 = NULL;
+const char *name_ls4 = "Krnl_LS4";
 
-/*static*/ cl_command_queue command_queue_ls5 = NULL;
-/*static*/ cl_kernel kernel_ls5 = NULL;
-/*static*/ const char *name_ls5 = "Krnl_LS5";
+cl_command_queue command_queue_ls5 = NULL;
+cl_kernel kernel_ls5 = NULL;
+const char *name_ls5 = "Krnl_LS5";
 
-/*static*/ cl_command_queue command_queue_prng_ls6_float = NULL;
-/*static*/ cl_kernel kernel_prng_ls6_float = NULL;
-/*static*/ const char *name_prng_ls6_float = "Krnl_Prng_LS6_float";
+cl_command_queue command_queue_prng_ls6_float = NULL;
+cl_kernel kernel_prng_ls6_float = NULL;
+const char *name_prng_ls6_float = "Krnl_Prng_LS6_float";
 
-/*static*/ cl_command_queue command_queue_prng_ls7_float = NULL;
-/*static*/ cl_kernel kernel_prng_ls7_float = NULL;
-/*static*/ const char *name_prng_ls7_float = "Krnl_Prng_LS7_float";
+cl_command_queue command_queue_prng_ls7_float = NULL;
+cl_kernel kernel_prng_ls7_float = NULL;
+const char *name_prng_ls7_float = "Krnl_Prng_LS7_float";
 
-/*static*/ cl_command_queue command_queue_prng_ls8_float = NULL;
-/*static*/ cl_kernel kernel_prng_ls8_float = NULL;
-/*static*/ const char *name_prng_ls8_float = "Krnl_Prng_LS8_float";
+cl_command_queue command_queue_prng_ls8_float = NULL;
+cl_kernel kernel_prng_ls8_float = NULL;
+const char *name_prng_ls8_float = "Krnl_Prng_LS8_float";
 
-/*static*/ cl_command_queue command_queue_prng_ls9_float = NULL;
-/*static*/ cl_kernel kernel_prng_ls9_float = NULL;
-/*static*/ const char *name_prng_ls9_float = "Krnl_Prng_LS9_float";
+cl_command_queue command_queue_prng_ls9_float = NULL;
+cl_kernel kernel_prng_ls9_float = NULL;
+const char *name_prng_ls9_float = "Krnl_Prng_LS9_float";
 
-/*static*/ cl_command_queue command_queue_ls6 = NULL;
-/*static*/ cl_kernel kernel_ls6 = NULL;
-/*static*/ const char *name_ls6 = "Krnl_LS6";
+cl_command_queue command_queue_ls6 = NULL;
+cl_kernel kernel_ls6 = NULL;
+const char *name_ls6 = "Krnl_LS6";
 
-/*static*/ cl_command_queue command_queue_ls7 = NULL;
-/*static*/ cl_kernel kernel_ls7 = NULL;
-/*static*/ const char *name_ls7 = "Krnl_LS7";
+cl_command_queue command_queue_ls7 = NULL;
+cl_kernel kernel_ls7 = NULL;
+const char *name_ls7 = "Krnl_LS7";
 
-/*static*/ cl_command_queue command_queue_ls8 = NULL;
-/*static*/ cl_kernel kernel_ls8 = NULL;
-/*static*/ const char *name_ls8 = "Krnl_LS8";
+cl_command_queue command_queue_ls8 = NULL;
+cl_kernel kernel_ls8 = NULL;
+const char *name_ls8 = "Krnl_LS8";
 
-/*static*/ cl_command_queue command_queue_ls9 = NULL;
-/*static*/ cl_kernel kernel_ls9 = NULL;
-/*static*/ const char *name_ls9 = "Krnl_LS9";
+cl_command_queue command_queue_ls9 = NULL;
+cl_kernel kernel_ls9 = NULL;
+const char *name_ls9 = "Krnl_LS9";
 
-/*static*/ cl_program program = NULL;
+cl_program program = NULL;
 
 // Altera Issue
 // Constant data holding struct data
