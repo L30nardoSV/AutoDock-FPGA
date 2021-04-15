@@ -66,9 +66,11 @@ extern cl_command_queue command_queue_ls3;
 extern cl_kernel kernel_ls3;
 extern const char *name_ls3;
 
+/*
 extern cl_command_queue command_queue_igl_arb;
 extern cl_kernel kernel_igl_arb;
 extern const char *name_igl_arb;
+*/
 
 extern cl_command_queue command_queue_ls123_ushort ;
 extern cl_kernel kernel_ls123_ushort;

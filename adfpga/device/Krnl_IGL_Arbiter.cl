@@ -15,7 +15,9 @@
 // This has been later optimized, so now genotypes go directly 
 // from producer logic/kernel (IC, GG, LSs) to the consumer (Conform) kernel.
 // --------------------------------------------------------------------------
-__kernel __attribute__ ((max_global_work_dim(0)))
+__attribute__ ((max_global_work_dim(0)))
+__attribute__ ((autorun))
+__kernel
 void Krnl_IGL_Arbiter(/*unsigned char DockConst_num_of_genes*/) {
 
 	char active = 0x01;

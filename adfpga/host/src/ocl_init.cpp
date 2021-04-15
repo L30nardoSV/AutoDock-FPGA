@@ -54,9 +54,11 @@ cl_command_queue command_queue_ls3 = NULL;
 cl_kernel kernel_ls3 = NULL;
 const char *name_ls3 = "Krnl_LS3";
 
+/*
 cl_command_queue command_queue_igl_arb = NULL;
 cl_kernel kernel_igl_arb = NULL;
 const char *name_igl_arb = "Krnl_IGL_Arbiter";
+*/
 
 cl_command_queue command_queue_ls123_ushort = NULL;
 cl_kernel kernel_ls123_ushort = NULL;
@@ -303,10 +305,12 @@ bool init() {
   kernel_ls3 = clCreateKernel(program, name_ls3, &status);
   checkError(status, "Failed to create kernel ls3");
 
+/*
   command_queue_igl_arb = clCreateCommandQueue(context, device, 0, &status);
   checkError(status, "Failed to create command queue igl_arb");
   kernel_igl_arb = clCreateKernel(program, name_igl_arb, &status);
   checkError(status, "Failed to create kernel igl_arb");
+*/
 
   command_queue_ls123_ushort = clCreateCommandQueue(context, device, 0, &status);
   checkError(status, "Failed to create command queue ls123_ushort");
@@ -419,8 +423,10 @@ void cleanup() {
   if(kernel_ls3) {clReleaseKernel(kernel_ls3);}
   if(command_queue_ls3) {clReleaseCommandQueue(command_queue_ls3);}
 
+/*
   if(kernel_igl_arb) {clReleaseKernel(kernel_igl_arb);}
   if(command_queue_igl_arb) {clReleaseCommandQueue(command_queue_igl_arb);}
+*/
 
   if(kernel_ls123_ushort) {clReleaseKernel(kernel_ls123_ushort);}
   if(command_queue_ls123_ushort) {clReleaseCommandQueue(command_queue_ls123_ushort);}

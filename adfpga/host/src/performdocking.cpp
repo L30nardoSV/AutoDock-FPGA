@@ -777,7 +777,9 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 		runKernelTask(command_queue_ie, kernel_ie, NULL, NULL);
 		runKernelTask(command_queue_ia, kernel_ia, NULL, NULL);
 		runKernelTask(command_queue_ls123_ushort, kernel_ls123_ushort, NULL, NULL);
-		runKernelTask(command_queue_igl_arb, kernel_igl_arb, NULL, NULL);		
+/*		
+		runKernelTask(command_queue_igl_arb, kernel_igl_arb, NULL, NULL);
+*/		
 		runKernelTask(command_queue_prng_gg_float, kernel_prng_gg_float, NULL, NULL);
 		runKernelTask(command_queue_prng_gg_uchar, kernel_prng_gg_uchar, NULL, NULL);
 		runKernelTask(command_queue_prng_bt_ushort_float, kernel_prng_bt_ushort_float, NULL, NULL);
@@ -804,8 +806,10 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 		clFinish(command_queue_pc); 
 		clFinish(command_queue_ie); 
 		clFinish(command_queue_ia);
-		clFinish(command_queue_ls123_ushort); 
+		clFinish(command_queue_ls123_ushort);
+/*		
 		clFinish(command_queue_igl_arb);
+*/		
 		clFinish(command_queue_prng_gg_float); 
 		clFinish(command_queue_prng_gg_uchar);		
 		clFinish(command_queue_prng_bt_ushort_float);
