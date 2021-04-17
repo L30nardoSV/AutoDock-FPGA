@@ -76,9 +76,8 @@ TARGET_DIR_HW_PROF := bin_hw_profile
 # Directories
 #INC_DIRS := ../common/inc
 #INC_DIRS := ../common/inc wrapcl/inc host/inc ./
-# Extra header for arbitrary precision int extension: ihc_apint.h
 # Some extra software libraries provided along with the BSP
-INC_DIRS := ../common/inc wrapcl/inc host/inc ./ $(INTELFPGAOCLSDKROOT)/include/kernel_headers $(AOCL_BOARD_PACKAGE_ROOT)/software/include/
+INC_DIRS := ../common/inc wrapcl/inc host/inc ./ $(AOCL_BOARD_PACKAGE_ROOT)/software/include/
 LIB_DIRS := 
 
 # Files
@@ -272,6 +271,9 @@ DEV_SRC  := $(DEV_DIRS)/$(KRNL_NAME).cl
 #BOARD    := a10gx	# Use locally
 BOARD    := pac_a10	# DevCloud
 
+# Flag for supporting arbitrary precision int extension
+APINT = -I $(INTELFPGAOCLSDKROOT)/include/kernel_headers
+
 ## Make it all: compilation (host & device) + run emulation
 ## Notice, it switches automatically to /bin folder
 #emu: $(TARGET_DIR)/$(TARGET) keremu runemu
@@ -285,6 +287,7 @@ BOARD    := pac_a10	# DevCloud
 keremu: $(DEV_SRC)
 	aoc -v -g \
 	-march=emulator -legacy-emulator -emulator-channel-depth-model=strict \
+	$(APINT) \
 	-board=$(BOARD) \
 	$(DEV_SRC) \
 	-o $(TARGET_DIR)/$(KRNL_NAME).aocx \
@@ -317,6 +320,7 @@ emu: $(TARGET_DIR)/$(TARGET) keremu
 intc: $(DEV_SRC)
 	aoc -v -g \
 	-c \
+	$(APINT) \
 	-board=$(BOARD) \
 	$(DEV_SRC) \
 	-o $(TARGET_DIR_RPT)/$(KRNL_NAME).aoco \
@@ -333,6 +337,7 @@ intc: $(DEV_SRC)
 intrtl: $(DEV_SRC)
 	aoc -v -g \
 	-rtl \
+	$(APINT) \
 	-board=$(BOARD) \
 	$(DEV_SRC) \
 	-o $(TARGET_DIR_RPT)/$(KRNL_NAME).aocr \
@@ -362,7 +367,7 @@ kerrpt: intc intrtl
 # $(KRNL_NAME).aoco
 # $(KRNL_NAME).aocx
 hw: 	
-	aoc -board=$(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW)/$(KRNL_NAME).aocx $(FIPO_FLAG) $(AOC_FLAG)
+	aoc $(APINT) -board=$(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW)/$(KRNL_NAME).aocx $(FIPO_FLAG) $(AOC_FLAG)
 	@echo $(newline)
 	@echo "==============================================================================="
 	@echo "INFO: FPGA bitstream is under: \"$(TARGET_DIR_HW)/$(KRNL_NAME)(.aoco)(.aocx)\" "
@@ -370,7 +375,7 @@ hw:
 	@echo $(newline)
 
 hw-he:
-	aoc -high-effort -board=$(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW)/$(KRNL_NAME).aocx $(FIPO_FLAG) $(AOC_FLAG)
+	aoc -high-effort $(APINT) -board=$(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW)/$(KRNL_NAME).aocx $(FIPO_FLAG) $(AOC_FLAG)
 	@echo $(newline)
 	@echo "==============================================================================="
 	@echo "INFO: FPGA bitstream is under: \"$(TARGET_DIR_HW)/$(KRNL_NAME)(.aoco)(.aocx)\" "
@@ -384,7 +389,7 @@ hw-he:
 # $(KRNL_NAME).aoco
 # $(KRNL_NAME).aocx
 hw-prof:
-	aoc -profile -board=$(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW_PROF)/$(KRNL_NAME).aocx $(FIPO_FLAG) $(AOC_FLAG)
+	aoc -profile $(APINT) -board=$(BOARD) $(DEV_SRC) -o $(TARGET_DIR_HW_PROF)/$(KRNL_NAME).aocx $(FIPO_FLAG) $(AOC_FLAG)
 	@echo $(newline)
 	@echo "================================================================================================="
 	@echo "INFO: instrumented FPGA bitstream is under: \"$(TARGET_DIR_HW_PROF)/$(KRNL_NAME)(.aoco)(.aocx)\" "
