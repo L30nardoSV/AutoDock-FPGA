@@ -9,6 +9,8 @@
 
 #include "../defines.h"
 
+#include "ihc_apint.h"
+
 #define CHAN_DEPTH_ATOMXYZ   (MAX_NUM_OF_ATOMS/2)
 #define CHAN_DEPTH_GENOTYPE  ACTUAL_GENOTYPE_LENGTH
 
