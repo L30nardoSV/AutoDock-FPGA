@@ -13,42 +13,40 @@ float sqrt_custom(const float x)
 // Originally from: processligand.c
 // --------------------------------------------------------------------------
 __kernel __attribute__ ((max_global_work_dim(0)))
-void Krnl_IntraE(
- 	     __constant     float* __restrict KerConstStatic_atom_charges_const,
- 	     __constant     char*  __restrict KerConstStatic_atom_types_const,
-	     __global const char3* __restrict KerConstStatic_intraE_contributors_const,
+void Krnl_IntraE (
+	__constant     float* __restrict KerConstStatic_atom_charges_const,
+	__constant     char*  __restrict KerConstStatic_atom_types_const,
+	__global const char3* __restrict KerConstStatic_intraE_contributors_const,
 
-			float 				 DockConst_smooth,
-	     __constant     float* __restrict KerConstStatic_reqm,
-	     __constant     float* __restrict KerConstStatic_reqm_hbond,    
-	     __constant     uint*  __restrict KerConstStatic_atom1_types_reqm,
-	     __constant     uint*  __restrict KerConstStatic_atom2_types_reqm,  
+	float DockConst_smooth,
+	__constant     float* __restrict KerConstStatic_reqm,
+	__constant     float* __restrict KerConstStatic_reqm_hbond,
+	__constant     uint*  __restrict KerConstStatic_atom1_types_reqm,
+	__constant     uint*  __restrict KerConstStatic_atom2_types_reqm,
 
-	     __constant     float* __restrict KerConstStatic_VWpars_AC_const,
-	     __constant     float* __restrict KerConstStatic_VWpars_BD_const,
-	     __constant     float* __restrict KerConstStatic_dspars_S_const,
- 	     __constant     float* __restrict KerConstStatic_dspars_V_const,
+	__constant     float* __restrict KerConstStatic_VWpars_AC_const,
+	__constant     float* __restrict KerConstStatic_VWpars_BD_const,
+	__constant     float* __restrict KerConstStatic_dspars_S_const,
+	__constant     float* __restrict KerConstStatic_dspars_V_const,
 
-			uchar                    DockConst_num_of_atoms,
-		   	uint                     DockConst_num_of_intraE_contributors,
-		  	float                            DockConst_grid_spacing,
-			uchar                    DockConst_num_of_atypes,
-			float                            DockConst_coeff_elec,
-			float                            DockConst_qasp,
-			float                            DockConst_coeff_desolv
+	uchar	DockConst_num_of_atoms,
+	uint	DockConst_num_of_intraE_contributors,
+	float	DockConst_grid_spacing,
+	uchar	DockConst_num_of_atypes,
+	float	DockConst_coeff_elec,
+	float	DockConst_qasp,
+	float	DockConst_coeff_desolv
 )
 {
 	char active = 0x01;
 
-	/*
-	__local char3  intraE_contributors_localcache   [MAX_INTRAE_CONTRIBUTORS];
-	*/
 	__local char3 __attribute__ ((
-					memory,
-			        	bankwidth(16),
-			    	    )) intraE_contributors_localcache[MAX_INTRAE_CONTRIBUTORS];
+						memory,
+						bankwidth(16),
+						)) intraE_contributors_localcache [MAX_INTRAE_CONTRIBUTORS];
 
-	for (ushort i=0; i<MAX_INTRAE_CONTRIBUTORS; i++) {
+	// Loop index uint13_t covers up to 8192 intra-contrib (see auxiliary.h)
+	for (uint13_t i=0; i<MAX_INTRAE_CONTRIBUTORS; i++) {
 		intraE_contributors_localcache [i] = KerConstStatic_intraE_contributors_const [i];	
 	}
 
@@ -87,30 +85,28 @@ while(active) {
 	// --------------------------------------------------------------
 	//printf("AFTER In INTRA CHANNEL\n");
 
-	#if defined (DEBUG_ACTIVE_KERNEL)
+#ifdef DEBUG_ACTIVE_KERNEL
 	if (active == 0) {printf("	%-20s: %s\n", "Krnl_IntraE", "must be disabled");}
-	#endif
+#endif
 
 	float intraE = 0.0f;
 
-	#if defined (FIXED_POINT_INTRAE)
+#ifdef FIXED_POINT_INTRAE
 	// Create shift register to reduce II (initially II=32, unroll-factor=8) 
 	// Use fixedpt64 to reduce II=4 (after shift-register) downto II=1
 	//float shift_intraE[33];
 	fixedpt64 shift_intraE[33];
 
+	// Loop index uint6_t covers up to 64 iterations
 	#pragma unroll
-	for (uchar i=0; i<33; i++) {
-		//shift_intraE[i] = 0.0f;
+	for (uint6_t i=0; i<33; i++) {
 		shift_intraE[i] = 0;
 	}
-
-	#endif
+#endif
 
 	// For each intramolecular atom contributor pair
-
-	//#pragma unroll 10
-	for (ushort contributor_counter=0; contributor_counter<DockConst_num_of_intraE_contributors; contributor_counter++) {
+	// Loop index uint13_t covers up to 8192 intra-contrib (see auxiliary.h)
+	for (uint13_t contributor_counter=0; contributor_counter<DockConst_num_of_intraE_contributors; contributor_counter++) {
 
 		char3 ref_intraE_contributors_const;
 		ref_intraE_contributors_const = intraE_contributors_localcache[contributor_counter];
@@ -137,17 +133,10 @@ while(active) {
 		}
 */
 
-		#if defined (DEBUG_KRNL_INTRAE)
+#ifdef DEBUG_KRNL_INTRAE
 		printf("\n\nCalculating energy contribution of atoms %u and %u\n", atom1_id+1, atom2_id+1);
 		printf("Distance: %f\n", atomic_distance);
-		#endif
-
-/*
-		float partialE1;
-		float partialE2;
-		float partialE3;
-		float partialE4;
-*/
+#endif
 
 		float partialE1 = 0.0f;
 		float partialE2 = 0.0f;
@@ -194,8 +183,7 @@ while(active) {
 			smoothed_distance = atomic_distance - delta_distance;
 		}
 
-		float distance_pow_2  = atomic_distance*atomic_distance; 
-
+		float distance_pow_2  = atomic_distance*atomic_distance;
 		float smoothed_distance_pow_2 = smoothed_distance*smoothed_distance; 
 		float inverse_smoothed_distance_pow_2  = native_divide(1.0f, smoothed_distance_pow_2);
 		float inverse_smoothed_distance_pow_4  = inverse_smoothed_distance_pow_2 * inverse_smoothed_distance_pow_2;
@@ -232,33 +220,33 @@ while(active) {
 				 DockConst_coeff_desolv*native_exp(-0.0386f*distance_pow_2);
 		} // if cuttoff2 - internuclear-distance at 20.48A
 	
-		#if defined (FIXED_POINT_INTRAE)
+#ifdef FIXED_POINT_INTRAE
 		//shift_intraE[32] = shift_intraE[0] + partialE1 + partialE2 + partialE3 + partialE4;
 		shift_intraE[32] = shift_intraE[0] + fixedpt64_fromfloat(partialE1) + 
 						     fixedpt64_fromfloat(partialE2) + 
 						     fixedpt64_fromfloat(partialE3) + 
 						     fixedpt64_fromfloat(partialE4);
 
+		// Loop index uint5_t covers up to 32 iterations
 		#pragma unroll
-		for (uchar j=0; j<32; j++) {
+		for (uint5_t j=0; j<32; j++) {
 			shift_intraE[j] = shift_intraE[j+1];
 		}
-		#else
+#else
 		intraE += partialE1 + partialE2 + partialE3 + partialE4;
-		#endif
-	
+#endif
 	} // End of contributor_counter for-loop
 
-	#if defined (FIXED_POINT_INTRAE)
+#ifdef FIXED_POINT_INTRAE
 	fixedpt64 fixpt_intraE = 0;
 
+	// Loop index uint5_t covers up to 32 iterations
 	#pragma unroll
-	for (uchar j=0; j<32; j++) {
-		//intraE += shift_intraE[j];
+	for (uint5_t j=0; j<32; j++) {
 		fixpt_intraE += shift_intraE[j];
 	}
 	intraE = fixedpt64_tofloat(fixpt_intraE);
-	#endif
+#endif
 
 	// --------------------------------------------------------------
 	// Send intramolecular energy to channel
@@ -280,9 +268,7 @@ while(active) {
 
 } // End of while(active)
 
-	#if defined (DEBUG_ACTIVE_KERNEL)
+#ifdef DEBUG_ACTIVE_KERNEL
 	printf("	%-20s: %s\n", "Krnl_IntraE", "disabled");
-	#endif
+#endif
 }
-// --------------------------------------------------------------------------
-// --------------------------------------------------------------------------
