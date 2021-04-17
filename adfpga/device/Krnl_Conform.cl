@@ -43,7 +43,9 @@ void Krnl_Conform (
 	char active = 0x01;	
 
 	__local int rotlist_localcache [MAX_NUM_OF_ROTATIONS];
-	for (ushort c = 0; c < DockConst_rotbondlist_length; c++) {
+
+	// Loop index uint12_t convers up to 4096 rotations (see defines.h)
+	for (uint12_t c = 0; c < DockConst_rotbondlist_length; c++) {
 		rotlist_localcache [c] = KerConstStatic_rotlist_const [c];
 	}
 
@@ -93,7 +95,8 @@ while(active) {
 	float genotype [ACTUAL_GENOTYPE_LENGTH];
 #endif
 
-	for (uchar i=0; i<DockConst_num_of_genes; i++) {
+	// Loop index uint6_t convers up to 64 genes (see defines.h)
+	for (uint6_t i=0; i<DockConst_num_of_genes; i++) {
 		float fl_tmp;
 		switch (mode) {
 			case 'I':  fl_tmp = read_channel_intel(chan_IC2Conf_genotype);    break;
@@ -144,7 +147,8 @@ while(active) {
 	if (active == 0x00) {printf("	%-20s: %s\n", "Krnl_Conform", "must be disabled");}
 #endif
 
-	for (ushort rotation_counter = 0; rotation_counter < DockConst_rotbondlist_length; rotation_counter++)
+	// Loop index uint12_t convers up to 4096 rotations (see defines.h)
+	for (uint12_t rotation_counter = 0; rotation_counter < DockConst_rotbondlist_length; rotation_counter++)
 	{
 		int rotation_list_element = rotlist_localcache [rotation_counter];
 
@@ -217,7 +221,6 @@ while(active) {
 
 				// In addition performing the first movement 
 				// which is needed only if rotating around rotatable bond
-
 #ifdef FIXED_POINT_CONFORM
 				atom_to_rotate.x = fixedpt_sub(atom_to_rotate.x, rotation_movingvec.x);
 				atom_to_rotate.y = fixedpt_sub(atom_to_rotate.y, rotation_movingvec.y);
@@ -239,7 +242,7 @@ while(active) {
 #ifdef FIXED_POINT_CONFORM
 			rotation_angle = rotation_angle >> 1;
 #else
-			rotation_angle = rotation_angle*0.5f;
+			rotation_angle = rotation_angle * 0.5f;
 #endif
 
 #ifdef FIXED_POINT_CONFORM
@@ -418,16 +421,15 @@ while(active) {
 		}
 		mem_fence(CLK_CHANNEL_MEM_FENCE);
 
-		#if defined (FIXED_POINT_CONFORM)
+#ifdef FIXED_POINT_CONFORM
 		// convert fixedpt3 to float3
 		float tmp_x = fixedpt_tofloat(loc_coords[pipe_cnt].x);
 		float tmp_y = fixedpt_tofloat(loc_coords[pipe_cnt].y);
 		float tmp_z = fixedpt_tofloat(loc_coords[pipe_cnt].z);
 		float3 tmp = {tmp_x, tmp_y, tmp_z};
-		#else
+#else
 		float3 tmp = loc_coords[pipe_cnt];
-		#endif
-
+#endif
 		write_channel_intel(chan_Conf2Intere_xyz, tmp);
 		write_channel_intel(chan_Conf2Intrae_xyz, tmp);
 	}
@@ -446,10 +448,8 @@ while(active) {
 		float3 tmp_coords[2];
 #endif
 
-		#pragma unroll
-		for (uchar i=0; i<2; i++) {
-			tmp_coords[i] = loc_coords[pipe_cnt+i];
-		}
+		tmp_coords[0] = loc_coords[pipe_cnt+0];
+		tmp_coords[1] = loc_coords[pipe_cnt+1];
 
 		float8 tmp;
 
@@ -484,5 +484,3 @@ printf("	%-20s: %s\n", "Krnl_Conform", "disabled");
 #endif
 
 }
-// --------------------------------------------------------------------------
-// --------------------------------------------------------------------------
