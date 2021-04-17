@@ -76,8 +76,9 @@ TARGET_DIR_HW_PROF := bin_hw_profile
 # Directories
 #INC_DIRS := ../common/inc
 #INC_DIRS := ../common/inc wrapcl/inc host/inc ./
+# Extra header for arbitrary precision int extension: ihc_apint.h
 # Some extra software libraries provided along with the BSP
-INC_DIRS := ../common/inc wrapcl/inc host/inc ./ $(AOCL_BOARD_PACKAGE_ROOT)/software/include/
+INC_DIRS := ../common/inc wrapcl/inc host/inc ./ $(INTELFPGAOCLSDKROOT)/include/kernel_headers $(AOCL_BOARD_PACKAGE_ROOT)/software/include/
 LIB_DIRS := 
 
 # Files
