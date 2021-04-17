@@ -44,7 +44,7 @@ void Krnl_Conform (
 
 	__local int rotlist_localcache [MAX_NUM_OF_ROTATIONS];
 
-	// Loop index uint12_t convers up to 4096 rotations (see defines.h)
+	// Loop index uint12_t covers up to 4096 rotations (see defines.h)
 	for (uint12_t c = 0; c < DockConst_rotbondlist_length; c++) {
 		rotlist_localcache [c] = KerConstStatic_rotlist_const [c];
 	}
@@ -95,7 +95,7 @@ while(active) {
 	float genotype [ACTUAL_GENOTYPE_LENGTH];
 #endif
 
-	// Loop index uint6_t convers up to 64 genes (see defines.h)
+	// Loop index uint6_t covers up to 64 genes (see defines.h)
 	for (uint6_t i=0; i<DockConst_num_of_genes; i++) {
 		float fl_tmp;
 		switch (mode) {
@@ -147,7 +147,7 @@ while(active) {
 	if (active == 0x00) {printf("	%-20s: %s\n", "Krnl_Conform", "must be disabled");}
 #endif
 
-	// Loop index uint12_t convers up to 4096 rotations (see defines.h)
+	// Loop index uint12_t covers up to 4096 rotations (see defines.h)
 	for (uint12_t rotation_counter = 0; rotation_counter < DockConst_rotbondlist_length; rotation_counter++)
 	{
 		int rotation_list_element = rotlist_localcache [rotation_counter];

@@ -5,83 +5,86 @@
 // Originally from: searchoptimum.c
 // --------------------------------------------------------------------------
 __kernel __attribute__ ((max_global_work_dim(0)))
-void Krnl_GA(__global       float*           __restrict GlobPopulationCurrent,
-	     __global       float*           __restrict GlobEnergyCurrent,
-	     #if defined(SINGLE_COPY_POP_ENE)
-   	     __global       uint*    __restrict GlobEvals_performed,
-             __global       uint*    __restrict GlobGens_performed,
-	     #else
-	     __global       uint*    __restrict GlobEvalsGenerations_performed,
-	     #endif
-			    uint              DockConst_pop_size,
-				uint              DockConst_num_of_energy_evals,
-			    uint              DockConst_num_of_generations,
-		      	float                     DockConst_tournament_rate,
-			    float                     DockConst_mutation_rate,
-		    	float                     DockConst_abs_max_dmov,
-			    float                     DockConst_abs_max_dang,
-		    	float                     Host_two_absmaxdmov,
-			    float                     Host_two_absmaxdang,
-			    float                     DockConst_crossover_rate,
-			    uint              DockConst_num_of_lsentities,
-			    uchar             DockConst_num_of_genes
-	     #if defined(SINGLE_COPY_POP_ENE)
-	     					      ,
-	                    ushort            Host_RunId,
-			    uint 	      Host_Offset_Pop,
-			    uint	      Host_Offset_Ene
-	     #endif
-	     )
+void Krnl_GA (
+	__global float* __restrict GlobPopulationCurrent,
+	__global float* __restrict GlobEnergyCurrent,
+#ifdef SINGLE_COPY_POP_ENE
+	__global uint* __restrict GlobEvals_performed,
+	__global uint* __restrict GlobGens_performed,
+#else
+	__global uint* __restrict GlobEvalsGenerations_performed,
+#endif
+	uint DockConst_pop_size,
+	uint DockConst_num_of_energy_evals,
+	uint DockConst_num_of_generations,
+	float DockConst_tournament_rate,
+	float DockConst_mutation_rate,
+	float DockConst_abs_max_dmov,
+	float DockConst_abs_max_dang,
+	float Host_two_absmaxdmov,
+	float Host_two_absmaxdang,
+	float DockConst_crossover_rate,
+	uint  DockConst_num_of_lsentities,
+	uchar DockConst_num_of_genes
+#ifdef SINGLE_COPY_POP_ENE
+    ,
+	ushort Host_RunId,
+	uint Host_Offset_Pop,
+	uint Host_Offset_Ene
+#endif
+)
 {
-	#if defined (DEBUG_KRNL_GA)
+#ifdef DEBUG_KRNL_GA
 	printf("\n");
-	printf("%-40s %u\n", "DockConst_pop_size: ",        		DockConst_pop_size);
-	printf("%-40s %u\n", "DockConst_num_of_energy_evals: ",  	DockConst_num_of_energy_evals);
-	printf("%-40s %u\n", "DockConst_num_of_generations: ",  	DockConst_num_of_generations);
-	printf("%-40s %f\n", "DockConst_tournament_rate: ", 		DockConst_tournament_rate);
-	printf("%-40s %f\n", "DockConst_mutation_rate: ", 		DockConst_mutation_rate);
-	printf("%-40s +/-%fA\n", "DockConst_abs_max_dmov: ",		DockConst_abs_max_dmov);
-	printf("%-40s +/-%f°\n", "DockConst_abs_max_dang: ",  		DockConst_abs_max_dang);
-	printf("%-40s +/-%fA\n", "Host_two_absmaxdmov: ",		Host_two_absmaxdmov);
-	printf("%-40s +/-%f°\n", "Host_two_absmaxdang: ",  		Host_two_absmaxdang);
-	printf("%-40s %f\n", "DockConst_crossover_rate: ", 		DockConst_crossover_rate);
-	printf("%-40s %u\n", "DockConst_num_of_lsentities: ",   	DockConst_num_of_lsentities);
-	printf("%-40s %u\n", "DockConst_num_of_genes: ",        	DockConst_num_of_genes);
-	#endif
+	printf("%-40s %u\n", "DockConst_pop_size: ", DockConst_pop_size);
+	printf("%-40s %u\n", "DockConst_num_of_energy_evals: ", DockConst_num_of_energy_evals);
+	printf("%-40s %u\n", "DockConst_num_of_generations: ", DockConst_num_of_generations);
+	printf("%-40s %f\n", "DockConst_tournament_rate: ", DockConst_tournament_rate);
+	printf("%-40s %f\n", "DockConst_mutation_rate: ", DockConst_mutation_rate);
+	printf("%-40s +/-%fA\n", "DockConst_abs_max_dmov: ", DockConst_abs_max_dmov);
+	printf("%-40s +/-%f°\n", "DockConst_abs_max_dang: ", DockConst_abs_max_dang);
+	printf("%-40s +/-%fA\n", "Host_two_absmaxdmov: ", Host_two_absmaxdmov);
+	printf("%-40s +/-%f°\n", "Host_two_absmaxdang: ", Host_two_absmaxdang);
+	printf("%-40s %f\n", "DockConst_crossover_rate: ", DockConst_crossover_rate);
+	printf("%-40s %u\n", "DockConst_num_of_lsentities: ", DockConst_num_of_lsentities);
+	printf("%-40s %u\n", "DockConst_num_of_genes: ", DockConst_num_of_genes);
+#endif
 
 	// Other banking configuration (see PopNext, eneNext) might reduce logic
 	// but makes PopCurr stallable
 	__local float LocalPopCurr[MAX_POPSIZE][ACTUAL_GENOTYPE_LENGTH];
 	__local float LocalEneCurr[MAX_POPSIZE];
 
-	#if defined(SINGLE_COPY_POP_ENE)
+#ifdef SINGLE_COPY_POP_ENE
 	__global float* GlobPopCurr = & GlobPopulationCurrent [Host_Offset_Pop];
 	__global float* GlobEneCurr = & GlobEnergyCurrent     [Host_Offset_Ene];
-	#endif
+#endif
 
 	// ------------------------------------------------------------------
 	// Initial Calculation (IC) of scores
 	// ------------------------------------------------------------------
-	for (ushort pop_cnt = 0; pop_cnt < DockConst_pop_size; pop_cnt++) {
+	// Loop index uint8_t covers up to 256 individuals (see defines.h)
+	for (uint8_t pop_cnt = 0; pop_cnt < DockConst_pop_size; pop_cnt++) {
 		// Calculate energy
 		write_channel_intel(chan_GA2IGL_IC_active, true);
 		mem_fence(CLK_CHANNEL_MEM_FENCE);
 
-		for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
+		// Loop index uint6_t covers up to 64 genes (see defines.h)
+		for (uint6_t gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
 			float tmp_ic;
-			#if defined(SINGLE_COPY_POP_ENE)
+#ifdef SINGLE_COPY_POP_ENE
 			tmp_ic = GlobPopCurr[pop_cnt*ACTUAL_GENOTYPE_LENGTH + gene_cnt];
-			#else
+#else
 			tmp_ic = GlobPopulationCurrent[pop_cnt*ACTUAL_GENOTYPE_LENGTH + gene_cnt];
-			#endif
+#endif
 		
 			LocalPopCurr[pop_cnt][gene_cnt & MASK_GENOTYPE] = tmp_ic;
 			write_channel_intel(chan_IC2Conf_genotype, tmp_ic);
 		}
 
-		#if defined (DEBUG_KRNL_IC)
+#ifdef DEBUG_KRNL_IC
 		printf("\nIC - tx pop: %u", pop_cnt); 		
-		#endif
+#endif
 
 		// Read energy
 		float energyIA_IC_rx;
@@ -99,9 +102,9 @@ void Krnl_GA(__global       float*           __restrict GlobPopulationCurrent,
 
 		LocalEneCurr[pop_cnt] = energyIA_IC_rx + energyIE_IC_rx;
 
-		#if defined (DEBUG_KRNL_IC)
+#ifdef DEBUG_KRNL_IC
 		printf(", IC - rx pop: %u\n", pop_cnt); 		
-		#endif
+#endif
 	}
 	// ------------------------------------------------------------------
 
@@ -114,89 +117,74 @@ void Krnl_GA(__global       float*           __restrict GlobPopulationCurrent,
 		//float LocalPopNext[MAX_POPSIZE][ACTUAL_GENOTYPE_LENGTH];
 		//float LocalEneNext[MAX_POPSIZE];
 
-		// This configuration reduces logic and does not increase block RAM usage
-/*
 		float __attribute__ ((
-				       memory,
-		   		       numbanks(4),
-			               bankwidth(32),
-			              )) LocalPopNext[MAX_POPSIZE][ACTUAL_GENOTYPE_LENGTH];
-*/
+						memory,
+						numbanks(4),
+						bankwidth(32),
+						singlepump,
+						numreadports(10),
+						numwriteports(1) 
+			            )) LocalPopNext[MAX_POPSIZE][ACTUAL_GENOTYPE_LENGTH];
 
 		float __attribute__ ((
-				       memory,
-		   		       numbanks(4),
-			               bankwidth(32),
-				       singlepump,
-				       numreadports(10),
-			               numwriteports(1) 
-			              )) LocalPopNext[MAX_POPSIZE][ACTUAL_GENOTYPE_LENGTH];
-
-/*
-		float __attribute__ ((
-				       memory,
-		   		       numbanks(4),
-			               bankwidth(4),
-			              )) LocalEneNext[MAX_POPSIZE];
-*/
-
-		float __attribute__ ((
-				       memory,
-		   		       numbanks(1),
-			               bankwidth(4),
-				       singlepump,
-				       numreadports(10),
-			               numwriteports(1)  
-			              )) LocalEneNext[MAX_POPSIZE];
+						memory,
+						numbanks(1),
+						bankwidth(4),
+						singlepump,
+						numreadports(10),
+						numwriteports(1)  
+						)) LocalEneNext[MAX_POPSIZE];
 
 		// ------------------------------------------------------------------
 		// Genetic Generation (GG)
 		// ------------------------------------------------------------------
 		float __attribute__ ((
-				       memory,
-		   		       numbanks(1),
-			               bankwidth(64),
-			               singlepump,
- 			               numreadports(6),
-			               numwriteports(1)
-			              )) loc_energies[MAX_POPSIZE];
+						memory,
+						numbanks(1),
+						bankwidth(64),
+						singlepump,
+ 						numreadports(6),
+						numwriteports(1)
+						)) loc_energies[MAX_POPSIZE];
 
 		ushort best_entity = 0;
 
-//		for (ushort pop_cnt=1; pop_cnt<DockConst_pop_size; pop_cnt++) {
-		for (ushort pop_cnt=0; pop_cnt<DockConst_pop_size; pop_cnt++) {
+		// Loop index uint8_t covers up to 256 individuals (see defines.h)
+		for (uint8_t pop_cnt=0; pop_cnt<DockConst_pop_size; pop_cnt++) {
 			// copy energy to local memory
 			loc_energies[pop_cnt] = LocalEneCurr[pop_cnt];
 
-			#if defined (DEBUG_KRNL_GA)
+#ifdef DEBUG_KRNL_GA
 			if (pop_cnt==0) {printf("\n");}
 			printf("%3u %20.6f\n", pop_cnt, loc_energies[pop_cnt]);
-			#endif
+#endif
 
 			if (loc_energies[pop_cnt] < loc_energies[best_entity]) {
 				best_entity = pop_cnt;
 			}
 		}
 
-		#if defined (DEBUG_KRNL_GA)
+#ifdef DEBUG_KRNL_GA
 		printf("best_entity: %3u, energy: %20.6f\n", best_entity, loc_energies[best_entity]);
-		#endif
+#endif
 
 		// ---------------------------------------------------
 		// Elitism: copying the best entity to new population
 		// ---------------------------------------------------
-		for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) { 		
+		// Loop index uint6_t covers up to 64 genes (see defines.h)
+		for (uint6_t gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) { 		
 			LocalPopNext[0][gene_cnt & MASK_GENOTYPE] = LocalPopCurr[best_entity][gene_cnt & MASK_GENOTYPE]; 	
 		} 		
 		LocalEneNext[0] = loc_energies[best_entity];
 
+		// Loop index uint8_t covers up to 256 individuals (see defines.h)
 		#pragma ivdep array (LocalPopNext)
 		#pragma ivdep array (LocalEneNext)
-		for (ushort new_pop_cnt = 1; new_pop_cnt < DockConst_pop_size; new_pop_cnt++) {
+		for (uint8_t new_pop_cnt = 1; new_pop_cnt < DockConst_pop_size; new_pop_cnt++) {
 
-			#if defined (DEBUG_KRNL_GA)
+#ifdef DEBUG_KRNL_GA
 			printf("Krnl_GA: %u\n", new_pop_cnt);
-			#endif
+#endif
 
 			float local_entity_1 [ACTUAL_GENOTYPE_LENGTH];
 			float local_entity_2 [ACTUAL_GENOTYPE_LENGTH]; 
@@ -281,7 +269,8 @@ void Krnl_GA(__global       float*           __restrict GlobPopulationCurrent,
 			write_channel_intel(chan_GA2IGL_GG_active, true);
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 
-			for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
+			// Loop index uint6_t covers up to 64 genes (see defines.h)
+			for (uint6_t gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
 
 				float prngGG = read_channel_intel(chan_PRNG2GA_GG_float_prng);
 				mem_fence(CLK_CHANNEL_MEM_FENCE);
@@ -321,9 +310,9 @@ void Krnl_GA(__global       float*           __restrict GlobPopulationCurrent,
 				write_channel_intel(chan_GG2Conf_genotype, tmp_offspring);
 			}
 
-			#if defined (DEBUG_KRNL_GG)
+#ifdef DEBUG_KRNL_GG
 			printf("GG - tx pop: %u", new_pop_cnt); 		
-			#endif	
+#endif	
 
 			// Read energy
 			float energyIA_GG_rx;
@@ -341,9 +330,9 @@ void Krnl_GA(__global       float*           __restrict GlobPopulationCurrent,
 			
 			LocalEneNext[new_pop_cnt] = energyIA_GG_rx + energyIE_GG_rx;
 
-			#if defined (DEBUG_KRNL_GG)
+#ifdef DEBUG_KRNL_GG
 			printf(", GG - rx pop: %u\n", new_pop_cnt); 		
-			#endif
+#endif
 		} 
 		// ------------------------------------------------------------------
 		// LS: Local Search
@@ -352,8 +341,9 @@ void Krnl_GA(__global       float*           __restrict GlobPopulationCurrent,
 
 		uint ls_eval_cnt = 0;
 
+		// Loop index uint8_t covers up to 256 individuals (see defines.h)
 		#pragma ivdep
-		for (ushort ls_ent_cnt=0; ls_ent_cnt<DockConst_num_of_lsentities; ls_ent_cnt+=LS_REPLICATION_FACTOR) {
+		for (uint8_t ls_ent_cnt=0; ls_ent_cnt<DockConst_num_of_lsentities; ls_ent_cnt+=LS_REPLICATION_FACTOR) {
 
 			// Choose random & different entities on every iteration
 			ushort16 entity_ls = read_channel_intel(chan_PRNG2GA_LS123_ushort_prng);
@@ -371,15 +361,18 @@ void Krnl_GA(__global       float*           __restrict GlobPopulationCurrent,
 
 			// Here you can (in theory) read from u_entity_ls.arr[i] safely thanks to sec 6.2.4.1
 			// A nice property of OpenCL C that does not exist in C99
+			// Loop index uint4_t covers up to 16 replicas (see auxiliary.h)
 			#pragma unroll
-			for (uchar j=0; j<LS_REPLICATION_FACTOR; j++) {
+			for (uint4_t j=0; j<LS_REPLICATION_FACTOR; j++) {
 				write_channel_intel(chan_GA2LS_energy[j], LocalEneNext[u_entity_ls.arr[j]]);
 			}
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 
-			for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
+			// Loop index uint6_t covers up to 64 genes (see defines.h)
+			for (uint6_t gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
+				// Loop index uint4_t covers up to 16 replicas (see auxiliary.h)
 				#pragma unroll
-				for (uchar j=0; j<LS_REPLICATION_FACTOR; j++) {
+				for (uint4_t j=0; j<LS_REPLICATION_FACTOR; j++) {
 					write_channel_intel(chan_GA2LS_genotype[j], LocalPopNext[u_entity_ls.arr[j]][gene_cnt & MASK_GENOTYPE]);
 				}
 			}
@@ -388,8 +381,10 @@ void Krnl_GA(__global       float*           __restrict GlobPopulationCurrent,
 			float2 evalenergy_tmp[LS_REPLICATION_FACTOR];
 
 			bool ls_done[LS_REPLICATION_FACTOR];
+
+			// Loop index uint4_t covers up to 16 replicas (see auxiliary.h)
 			#pragma unroll
-			for (uchar j=0; j<LS_REPLICATION_FACTOR; j++) {
+			for (uint4_t j=0; j<LS_REPLICATION_FACTOR; j++) {
 				ls_done[j] = false;
 			}
   
@@ -441,8 +436,10 @@ void Krnl_GA(__global       float*           __restrict GlobPopulationCurrent,
 			// Energy values: evalenergy_tmp[j].y
 			float eetmp[LS_REPLICATION_FACTOR];
 			uint eval_tmp[LS_REPLICATION_FACTOR];
+
+			// Loop index uint4_t covers up to 16 replicas (see auxiliary.h)
 			#pragma unroll
-			for (uchar j=0; j<LS_REPLICATION_FACTOR; j++) {
+			for (uint4_t j=0; j<LS_REPLICATION_FACTOR; j++) {
 				eetmp[j]    = evalenergy_tmp[j].x;
 				eval_tmp[j] = *(uint*)&eetmp[j];
 				LocalEneNext[u_entity_ls.arr[j]] = evalenergy_tmp[j].y;
@@ -450,31 +447,36 @@ void Krnl_GA(__global       float*           __restrict GlobPopulationCurrent,
 
 			// Reading back updated genotypes
 			#pragma ivdep
-			for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
+			// Loop index uint6_t covers up to 64 genes (see defines.h)
+			for (uint6_t gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
+				// Loop index uint4_t covers up to 16 replicas (see auxiliary.h)
 				#pragma unroll
-				for (uchar j=0; j<LS_REPLICATION_FACTOR; j++) {
+				for (uint4_t j=0; j<LS_REPLICATION_FACTOR; j++) {
 					LocalPopNext[u_entity_ls.arr[j]][gene_cnt & MASK_GENOTYPE] = read_channel_intel(chan_LS2GA_genotype[j]);
 				}
 			}
 
 			// Accumulating number of energy evals
 			uint tmp_eval_cnt = 0;
+			// Loop index uint4_t covers up to 16 replicas (see auxiliary.h)
 			#pragma unroll
-			for (uchar j=0; j<LS_REPLICATION_FACTOR; j++) {
+			for (uint4_t j=0; j<LS_REPLICATION_FACTOR; j++) {
 				tmp_eval_cnt += eval_tmp[j];
 			}
 			ls_eval_cnt += tmp_eval_cnt;
 			
-			#if defined (DEBUG_KRNL_LS)
+#ifdef DEBUG_KRNL_LS
 			printf("%u, ls_eval_cnt: %u\n", ls_ent_cnt, ls_eval_cnt);
 			printf("LS - got all genotypes back\n");
-			#endif
+#endif
 		} // End of for-loop ls_ent_cnt
 		// ------------------------------------------------------------------
 
 		// Update current pops & energies
-		for (ushort pop_cnt=0; pop_cnt<DockConst_pop_size; pop_cnt++) {
-			for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
+		// Loop index uint8_t covers up to 256 individuals (see defines.h)
+		for (uint8_t pop_cnt=0; pop_cnt<DockConst_pop_size; pop_cnt++) {
+			// Loop index uint6_t covers up to 64 genes (see defines.h)
+			for (uint6_t gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
 				LocalPopCurr[pop_cnt][gene_cnt & MASK_GENOTYPE] = LocalPopNext[pop_cnt][gene_cnt & MASK_GENOTYPE];
 			}
 
@@ -487,9 +489,9 @@ void Krnl_GA(__global       float*           __restrict GlobPopulationCurrent,
 		// Update generation count
 		generation_cnt++;
 
-		#if defined (DEBUG_KRNL_GA)
+#ifdef DEBUG_KRNL_GA
 		printf("eval_cnt: %u, generation_cnt: %u\n", eval_cnt, generation_cnt);
-		#endif
+#endif
 	} // End while eval_cnt & generation_cnt
 
 	// ------------------------------------------------------------------
@@ -502,15 +504,17 @@ void Krnl_GA(__global       float*           __restrict GlobPopulationCurrent,
 	write_channel_intel(chan_GA2PRNG_GG_float_off, 		false);
 	write_channel_intel(chan_GA2PRNG_LS123_ushort_off,  	false);
 
+	// Loop index uint4_t covers up to 16 replicas (see auxiliary.h)
 	#pragma unroll
-	for (uchar j=0; j<LS_REPLICATION_FACTOR; j++) {
+	for (uint4_t j=0; j<LS_REPLICATION_FACTOR; j++) {
 		write_channel_intel(chan_GA2PRNG_LS_float_off[j], false);
 	}
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 	// Turn off LS kernels
+	// Loop index uint4_t covers up to 16 replicas (see auxiliary.h)
 	#pragma unroll
-	for (uchar j=0; j<LS_REPLICATION_FACTOR; j++) {
+	for (uint4_t j=0; j<LS_REPLICATION_FACTOR; j++) {
 		write_channel_intel(chan_GA2LS_Off_active[j], false);
 	}
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
@@ -520,9 +524,10 @@ void Krnl_GA(__global       float*           __restrict GlobPopulationCurrent,
 	mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 	// Write final pop & energies back to FPGA-board DDRs
-	for (ushort pop_cnt=0;pop_cnt<DockConst_pop_size; pop_cnt++) { 	
-
-		for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
+	// Loop index uint8_t covers up to 256 individuals (see defines.h)
+	for (uint8_t pop_cnt=0;pop_cnt<DockConst_pop_size; pop_cnt++) { 	
+		// Loop index uint6_t covers up to 64 genes (see defines.h)
+		for (uint6_t gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
 			#if defined(SINGLE_COPY_POP_ENE)
 			GlobPopCurr[pop_cnt*ACTUAL_GENOTYPE_LENGTH + gene_cnt] = LocalPopCurr[pop_cnt][gene_cnt & MASK_GENOTYPE];
 			#else
@@ -530,29 +535,29 @@ void Krnl_GA(__global       float*           __restrict GlobPopulationCurrent,
 			#endif
 		}
 
-		#if defined(SINGLE_COPY_POP_ENE)
+#ifdef SINGLE_COPY_POP_ENE
 		GlobEneCurr[pop_cnt] = LocalEneCurr[pop_cnt];
-		#else
+#else
 		GlobEnergyCurrent[pop_cnt] = LocalEneCurr[pop_cnt];
-		#endif
+#endif
 	}
 
-	#if defined (DEBUG_KRNL_GA)
+#ifdef DEBUG_KRNL_GA
 	printf("GA: %u %u\n", active, DockConst_pop_size -1);
-	#endif
+#endif
 
-	#if defined (DEBUG_ACTIVE_KERNEL)
+#ifdef DEBUG_ACTIVE_KERNEL
 	printf("	%-20s: %s\n", "Krnl_GA", "disabled");
-	#endif
+#endif
 
 	// Write final evals & generation counts to FPGA-board DDRs
-	#if defined(SINGLE_COPY_POP_ENE)
+#ifdef SINGLE_COPY_POP_ENE
 	GlobEvals_performed[Host_RunId] = eval_cnt;
 	GlobGens_performed [Host_RunId] = generation_cnt;
-	#else
+#else
 	GlobEvalsGenerations_performed[0] = eval_cnt;
 	GlobEvalsGenerations_performed[1] = generation_cnt;
-	#endif
+#endif
 }
 
 // --------------------------------------------------------------------------
