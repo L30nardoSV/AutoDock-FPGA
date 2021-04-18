@@ -51,7 +51,7 @@ while(valid) {
 #endif
 		}
 	
-#ifdef (DEBUG_KRNL_LS9)
+#ifdef DEBUG_KRNL_LS9
 		printf("In of while iter LS9\n");
 #endif
 
