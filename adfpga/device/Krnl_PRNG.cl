@@ -21,9 +21,9 @@ void Krnl_Prng_BT_ushort_float (
 		uint   u_tmp[4]; // used as short in GA
 		float  f_tmp[4];	
 
-		// Loop index uint2_t covers up to 4 iterations
+		// Loop index uint3_t covers up to 8 iterations (uint2_t ends up in deadlock)
 		#pragma unroll
-		for(uint2_t i=0; i<4; i++) {
+		for(uint3_t i=0; i<4; i++) {
 			uchar2 lsb;
 
 			lsb.x = lfsr.x & 0x01u;
@@ -67,9 +67,9 @@ void Krnl_Prng_GG_uchar (
 		
 		uchar tmp[2];
 
-		// Loop index uint1_t covers up to 2 iterations
+		// Loop index uint2_t covers up to 4 iterations (uint1_t ends up in deadlock)
 		#pragma unroll
-		for(uint1_t i=0; i<2; i++) {
+		for(uint2_t i=0; i<2; i++) {
 			uchar lsb;
 			lsb = lfsr & 0x01u;
 			lfsr >>= 1;
