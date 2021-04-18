@@ -112,7 +112,10 @@ void Krnl_GA (
 
 	uint generation_cnt = 0;
 
-	while ((eval_cnt < DockConst_num_of_energy_evals) && (generation_cnt < DockConst_num_of_generations)) {
+	// Termination criteria depends only on eval_cnt,
+	// not anymore on generation_cnt
+	// as in most cases, eval_cnt reaches its maximum first
+	while (eval_cnt < DockConst_num_of_energy_evals) {
 
 		//float LocalPopNext[MAX_POPSIZE][ACTUAL_GENOTYPE_LENGTH];
 		//float LocalEneNext[MAX_POPSIZE];
