@@ -41,7 +41,8 @@ while(valid) {
 		float   genotype [ACTUAL_GENOTYPE_LENGTH];
 #endif
 
-		for (uchar i=0; i<DockConst_num_of_genes; i++) {
+		// Loop index uint6_t covers up to 64 genes (see defines.h)
+		for (uint6_t i=0; i<DockConst_num_of_genes; i++) {
 #ifdef FIXED_POINT_LS
 			float tmp_gene = read_channel_intel(chan_GA2LS_genotype[1]);
 			genotype [i] = fixedpt_fromfloat(tmp_gene);
@@ -65,7 +66,7 @@ while(valid) {
 		uint   LS_eval       = 0;
 		bool   positive_direction = true;
 
-		// performing local search
+		// Performing local search
 #ifdef FIXED_POINT_LS
 		while ((iteration_cnt < DockConst_max_num_of_iters) && (fixpt_rho > DockConst_rho_lower_bound)) {
 #else
@@ -95,9 +96,9 @@ while(valid) {
 				iteration_cnt++;
 			}
 
-			#if defined (DEBUG_KRNL_LS2)
+#ifdef DEBUG_KRNL_LS2
 			printf("LS2 positive?: %u, iteration_cnt: %u, rho: %f, limit rho: %f\n", positive_direction, iteration_cnt, rho, DockConst_rho_lower_bound);
-			#endif
+#endif
 			// -----------------------------------------------
 
 #ifdef FIXED_POINT_LS
@@ -112,7 +113,7 @@ while(valid) {
 			float deviate_minus_bias             [ACTUAL_GENOTYPE_LENGTH];
 #endif
 
-			// Tell Krnl_Conf_Arbiter, LS2 is done
+			// Telling Krnl_Conf_Arbiter, LS2 is done
 			// Not completely strict as the (iteration_cnt < DockConst_max_num_of_iters) is ignored
 			// In practice, rho condition dominates most of the cases
 #ifdef FIXED_POINT_LS
@@ -122,20 +123,22 @@ while(valid) {
 #endif
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 
-			// read pnrgs from prng_kernel using channels.
-			// these and following loop were initially merged for deeper pipelining.
-			// however the prng channel-read created a bottleneck II=15.
-			// splitted loops have each II=1.
+			// Reading pnrgs from prng_kernel using channels.
+			// These and following loop were initially merged for deeper pipelining.
+			// However the prng channel-read created a bottleneck II=15.
+			// Splitted loops have each II=1.
 			float float_prng [ACTUAL_GENOTYPE_LENGTH];
 
-			for (uchar i=0; i<DockConst_num_of_genes; i++) {
+			// Loop index uint6_t covers up to 64 genes (see defines.h)
+			for (uint6_t i=0; i<DockConst_num_of_genes; i++) {
 				float_prng [i] = read_channel_intel(chan_PRNG2LS_float_prng[1]);
 			}
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 		
-			// new random deviate
+			// New random deviate,
 			// rho is the deviation of the uniform distribution
-			for (uchar i=0; i<DockConst_num_of_genes; i++) {
+			// Loop index uint6_t covers up to 64 genes (see defines.h)
+			for (uint6_t i=0; i<DockConst_num_of_genes; i++) {
 				/*
 				float tmp_prng = read_channel_intel(chan_PRNG2LS_float_prng[1]);
 				mem_fence(CLK_CHANNEL_MEM_FENCE);
@@ -196,9 +199,10 @@ while(valid) {
 				entity_possible_new_genotype [i] = tmp3;
 				write_channel_intel(chan_LS2Conf_genotype[1], tmp3);
 #endif
-				#if defined (DEBUG_KRNL_LS2)
+
+#ifdef DEBUG_KRNL_LS2
 				printf("LS2_genotype sent: %u\n", i);
-				#endif
+#endif
 			}
 
 			//printf("Energy to calculate sent from LS2 ... ");
@@ -218,20 +222,19 @@ while(valid) {
 
 			float candidate_energy = energyIA_LS_rx + energyIE_LS_rx;
 
-			// update LS energy-evaluation count
+			// Updating LS energy-evaluation count
 			LS_eval++;
 
-			#if defined (DEBUG_KRNL_LS2)
+#ifdef DEBUG_KRNL_LS2
 			printf("INTERE received in LS2: %u\n", LS_eval);
-			#endif
+#endif
 
 #ifdef FIXED_POINT_LS
 			if (candidate_energy < current_energy) {
-				// updating offspring_genotype
-				// updating genotype_bias
-
-				//#pragma unroll 16
-				for (uchar i=0; i<DockConst_num_of_genes; i++) {
+				// Updating offspring_genotype
+				// Updating genotype_bias
+				// Loop index uint6_t covers up to 64 genes (see defines.h)
+				for (uint6_t i=0; i<DockConst_num_of_genes; i++) {
 					genotype_bias [i] = (positive_direction == true) ? deviate_plus_bias  [i]: 
 											   deviate_minus_bias [i]; 
 
@@ -245,10 +248,9 @@ while(valid) {
 
 			}
 			else {
-				// updating (halving) genotype_bias
-
-				//#pragma unroll 16
-				for (uchar i=0; i<DockConst_num_of_genes; i++) {
+				// Updating (halving) genotype_bias
+				// Loop index uint6_t covers up to 64 genes (see defines.h)
+				for (uint6_t i=0; i<DockConst_num_of_genes; i++) {
 					genotype_bias [i] = (iteration_cnt == 1)? 0: (genotype_bias [i] >> 1);
 				}
 
@@ -260,11 +262,10 @@ while(valid) {
 			}
 #else
 			if (candidate_energy < current_energy) {
-				// updating offspring_genotype
-				// updating genotype_bias
-
-				//#pragma unroll 16
-				for (uchar i=0; i<DockConst_num_of_genes; i++) {
+				// Updating offspring_genotype
+				// Updating genotype_bias
+				// Loop index uint6_t covers up to 64 genes (see defines.h)
+				for (uint6_t i=0; i<DockConst_num_of_genes; i++) {
 					genotype_bias [i] = (positive_direction == true) ?  deviate_plus_bias  [i] : 
 											    deviate_minus_bias [i] ;
 					genotype [i] = entity_possible_new_genotype [i];
@@ -276,10 +277,9 @@ while(valid) {
 				positive_direction = true;				
 			}
 			else {
-				// updating (halving) genotype_bias
-
-				//#pragma unroll 16
-				for (uchar i=0; i<DockConst_num_of_genes; i++) {
+				// Updating (halving) genotype_bias
+				// Loop index uint6_t covers up to 64 genes (see defines.h)
+				for (uint6_t i=0; i<DockConst_num_of_genes; i++) {
 					genotype_bias [i] = (iteration_cnt == 1)? 0.0f: (0.5f*genotype_bias [i]);
 				}
 
@@ -290,14 +290,15 @@ while(valid) {
 				positive_direction = !positive_direction;
 			}
 #endif
-		} // end of while (iteration_cnt) && (rho)
+		} // End of while (iteration_cnt) && (rho)
 	
-		#if defined (DEBUG_KRNL_LS2)
+#ifdef DEBUG_KRNL_LS2
 		printf("Out of while iter LS2\n");
-		#endif
+#endif
 
-		// write back data to GA
-		for (uchar i=0; i<DockConst_num_of_genes; i++) {
+		// Writing back data to GA
+		// Loop index uint6_t covers up to 64 genes (see defines.h)
+		for (uint6_t i=0; i<DockConst_num_of_genes; i++) {
 			if (i == 0) {
 				float2 evalenergy  = {*(float*)&LS_eval, current_energy};
 				write_channel_intel(chan_LS2GA_evalenergy[1], evalenergy);
