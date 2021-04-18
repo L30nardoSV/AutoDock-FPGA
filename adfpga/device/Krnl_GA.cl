@@ -78,7 +78,7 @@ void Krnl_GA (
 			tmp_ic = GlobPopulationCurrent[pop_cnt*ACTUAL_GENOTYPE_LENGTH + gene_cnt];
 #endif
 		
-			LocalPopCurr[pop_cnt][gene_cnt & MASK_GENOTYPE] = tmp_ic;
+			LocalPopCurr[pop_cnt][gene_cnt] = tmp_ic;
 			write_channel_intel(chan_IC2Conf_genotype, tmp_ic);
 		}
 
@@ -173,7 +173,7 @@ void Krnl_GA (
 		// ---------------------------------------------------
 		// Loop index uint6_t covers up to 64 genes (see defines.h)
 		for (uint6_t gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) { 		
-			LocalPopNext[0][gene_cnt & MASK_GENOTYPE] = LocalPopCurr[best_entity][gene_cnt & MASK_GENOTYPE]; 	
+			LocalPopNext[0][gene_cnt] = LocalPopCurr[best_entity][gene_cnt]; 	
 		} 		
 		LocalEneNext[0] = loc_energies[best_entity];
 
@@ -237,8 +237,8 @@ void Krnl_GA (
 
 			// local_entity_1 and local_entity_2 are population-parent1, population-parent2
 			for (uchar gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
-				local_entity_1[gene_cnt & MASK_GENOTYPE] = LocalPopCurr[parent1][gene_cnt & MASK_GENOTYPE];
-				local_entity_2[gene_cnt & MASK_GENOTYPE] = LocalPopCurr[parent2][gene_cnt & MASK_GENOTYPE];
+				local_entity_1[gene_cnt] = LocalPopCurr[parent1][gene_cnt];
+				local_entity_2[gene_cnt] = LocalPopCurr[parent2][gene_cnt];
 			}
 
 			// ---------------------------------------------------
@@ -285,10 +285,10 @@ void Krnl_GA (
 					)) || 
 					(!crossover_yes)	// no crossover
 				   ) {
-					tmp_offspring = local_entity_1[gene_cnt & MASK_GENOTYPE];
+					tmp_offspring = local_entity_1[gene_cnt];
 				}
 				else {
-					tmp_offspring = local_entity_2[gene_cnt & MASK_GENOTYPE];
+					tmp_offspring = local_entity_2[gene_cnt];
 				}
 
 				// Performing mutation
@@ -306,7 +306,7 @@ void Krnl_GA (
 				}
 
 				// Calculate energy
-				LocalPopNext [new_pop_cnt][gene_cnt & MASK_GENOTYPE] = tmp_offspring;
+				LocalPopNext [new_pop_cnt][gene_cnt] = tmp_offspring;
 				write_channel_intel(chan_GG2Conf_genotype, tmp_offspring);
 			}
 
@@ -373,7 +373,7 @@ void Krnl_GA (
 				// Loop index uint4_t covers up to 16 replicas (see auxiliary.h)
 				#pragma unroll
 				for (uint4_t j=0; j<LS_REPLICATION_FACTOR; j++) {
-					write_channel_intel(chan_GA2LS_genotype[j], LocalPopNext[u_entity_ls.arr[j]][gene_cnt & MASK_GENOTYPE]);
+					write_channel_intel(chan_GA2LS_genotype[j], LocalPopNext[u_entity_ls.arr[j]][gene_cnt]);
 				}
 			}
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
@@ -452,7 +452,7 @@ void Krnl_GA (
 				// Loop index uint4_t covers up to 16 replicas (see auxiliary.h)
 				#pragma unroll
 				for (uint4_t j=0; j<LS_REPLICATION_FACTOR; j++) {
-					LocalPopNext[u_entity_ls.arr[j]][gene_cnt & MASK_GENOTYPE] = read_channel_intel(chan_LS2GA_genotype[j]);
+					LocalPopNext[u_entity_ls.arr[j]][gene_cnt] = read_channel_intel(chan_LS2GA_genotype[j]);
 				}
 			}
 
@@ -477,7 +477,7 @@ void Krnl_GA (
 		for (uint8_t pop_cnt=0; pop_cnt<DockConst_pop_size; pop_cnt++) {
 			// Loop index uint6_t covers up to 64 genes (see defines.h)
 			for (uint6_t gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
-				LocalPopCurr[pop_cnt][gene_cnt & MASK_GENOTYPE] = LocalPopNext[pop_cnt][gene_cnt & MASK_GENOTYPE];
+				LocalPopCurr[pop_cnt][gene_cnt] = LocalPopNext[pop_cnt][gene_cnt];
 			}
 
 			LocalEneCurr[pop_cnt] = LocalEneNext[pop_cnt];
@@ -529,9 +529,9 @@ void Krnl_GA (
 		// Loop index uint6_t covers up to 64 genes (see defines.h)
 		for (uint6_t gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
 			#if defined(SINGLE_COPY_POP_ENE)
-			GlobPopCurr[pop_cnt*ACTUAL_GENOTYPE_LENGTH + gene_cnt] = LocalPopCurr[pop_cnt][gene_cnt & MASK_GENOTYPE];
+			GlobPopCurr[pop_cnt*ACTUAL_GENOTYPE_LENGTH + gene_cnt] = LocalPopCurr[pop_cnt][gene_cnt];
 			#else
-			GlobPopulationCurrent[pop_cnt*ACTUAL_GENOTYPE_LENGTH + gene_cnt] = LocalPopCurr[pop_cnt][gene_cnt & MASK_GENOTYPE];
+			GlobPopulationCurrent[pop_cnt*ACTUAL_GENOTYPE_LENGTH + gene_cnt] = LocalPopCurr[pop_cnt][gene_cnt];
 			#endif
 		}
 

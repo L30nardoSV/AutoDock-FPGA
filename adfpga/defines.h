@@ -50,8 +50,8 @@ typedef unsigned int  uint;
 #define LS_EXP_FACTOR 	2.0f
 #define LS_CONT_FACTOR 	0.5f
 
-// Mask for genotypes
-#define MASK_GENOTYPE 0x3F
+// Mask for genotypes (used before introduction of apuint.h)
+//#define MASK_GENOTYPE 0x3F
 
 //macro for a%b where b=2^N
 //#define MOD2N(a, b) (a&(b-1))
