@@ -86,8 +86,9 @@ void Krnl_IGL_Arbiter(/*unsigned char DockConst_num_of_genes*/) {
 
 		bool mode_LS_bool [LS_REPLICATION_FACTOR];
 
+		// Loop index uint4_t covers up to 16 replicas (see auxiliary.h)
 		#pragma unroll
-		for(uchar i=0; i<LS_REPLICATION_FACTOR; i++) {
+		for(uint4_t i=0; i<LS_REPLICATION_FACTOR; i++) {
 			mode_LS_bool [i] = false;
 		}
 
@@ -109,7 +110,8 @@ void Krnl_IGL_Arbiter(/*unsigned char DockConst_num_of_genes*/) {
 		} // End if (active == 0x01)
 
 		// Send "mode" to Conform
-		for (uchar j=0; j<LS_REPLICATION_FACTOR; j++) {
+		// Loop index uint4_t covers up to 16 replicas (see auxiliary.h)
+		for (uint4_t j=0; j<LS_REPLICATION_FACTOR; j++) {
 			bool enable_write_channel = false;
 			char mode_tmp;		
 

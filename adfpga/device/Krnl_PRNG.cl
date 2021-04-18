@@ -21,8 +21,9 @@ void Krnl_Prng_BT_ushort_float (
 		uint   u_tmp[4]; // used as short in GA
 		float  f_tmp[4];	
 
+		// Loop index uint2_t covers up to 4 iterations
 		#pragma unroll
-		for(uchar i=0; i<4; i++) {
+		for(uint2_t i=0; i<4; i++) {
 			uchar2 lsb;
 
 			lsb.x = lfsr.x & 0x01u;
@@ -66,8 +67,9 @@ void Krnl_Prng_GG_uchar (
 		
 		uchar tmp[2];
 
+		// Loop index uint1_t covers up to 2 iterations
 		#pragma unroll
-		for(uchar i=0; i<2; i++) {
+		for(uint1_t i=0; i<2; i++) {
 			uchar lsb;
 			lsb = lfsr & 0x01u;
 			lfsr >>= 1;
@@ -99,7 +101,8 @@ void Krnl_Prng_GG_float (
 		bool active = true;
 		active = read_channel_nb_intel(chan_GA2PRNG_GG_float_off, &valid);
 
-		for(uchar i=0; i<DockConst_num_of_genes; i++) {
+		// Loop index uint6_t covers up to 64 genes (see defines.h)
+		for(uint6_t i=0; i<DockConst_num_of_genes; i++) {
 			float tmp;
 			uchar lsb;
 			lsb = lfsr & 0x01u;
@@ -150,8 +153,9 @@ void Krnl_Prng_LS123_ushort (
 
 		ushort tmp[LS_REPLICATION_FACTOR];
 		
+		// Loop index uint4_t covers up to 16 replicas (see auxiliary.h)
 		#pragma unroll
-		for (uint i=0; i<LS_REPLICATION_FACTOR; i++){
+		for (uint4_t i=0; i<LS_REPLICATION_FACTOR; i++){
 			uchar  lsb[LS_REPLICATION_FACTOR];
 			lsb [i] = lfsr[i] & 0x01u;
 			lfsr[i] >>= 1;
@@ -214,7 +218,8 @@ void Krnl_Prng_LS_float (
 		bool active = true;
 		active  = read_channel_nb_intel(chan_GA2PRNG_LS_float_off[0], &valid);
 	
-		for(uchar i=0; i<DockConst_num_of_genes; i++) {
+		// Loop index uint6_t covers up to 64 genes (see defines.h)
+		for(uint6_t i=0; i<DockConst_num_of_genes; i++) {
 			float tmp;
 			uchar lsb;
 			lsb = lfsr & 0x01u;
@@ -249,7 +254,8 @@ void Krnl_Prng_LS2_float (
 		bool active = true;
 		active  = read_channel_nb_intel(chan_GA2PRNG_LS_float_off[1], &valid);
 	
-		for(uchar i=0; i<DockConst_num_of_genes; i++) {
+		// Loop index uint6_t covers up to 64 genes (see defines.h)
+		for(uint6_t i=0; i<DockConst_num_of_genes; i++) {
 			float tmp;
 			uchar lsb;
 			lsb = lfsr & 0x01u;
@@ -284,7 +290,8 @@ void Krnl_Prng_LS3_float (
 		bool active = true;
 		active  = read_channel_nb_intel(chan_GA2PRNG_LS_float_off[2], &valid);
 	
-		for(uchar i=0; i<DockConst_num_of_genes; i++) {
+		// Loop index uint6_t covers up to 64 genes (see defines.h)
+		for(uint6_t i=0; i<DockConst_num_of_genes; i++) {
 			float tmp;
 			uchar lsb;
 			lsb = lfsr & 0x01u;
@@ -319,7 +326,8 @@ void Krnl_Prng_LS4_float (
 		bool active = true;
 		active  = read_channel_nb_intel(chan_GA2PRNG_LS_float_off[3], &valid);
 	
-		for(uchar i=0; i<DockConst_num_of_genes; i++) {
+		// Loop index uint6_t covers up to 64 genes (see defines.h)
+		for(uint6_t i=0; i<DockConst_num_of_genes; i++) {
 			float tmp;
 			uchar lsb;
 			lsb = lfsr & 0x01u;
@@ -354,7 +362,8 @@ void Krnl_Prng_LS5_float (
 		bool active = true;
 		active  = read_channel_nb_intel(chan_GA2PRNG_LS_float_off[4], &valid);
 	
-		for(uchar i=0; i<DockConst_num_of_genes; i++) {
+		// Loop index uint6_t covers up to 64 genes (see defines.h)
+		for(uint6_t i=0; i<DockConst_num_of_genes; i++) {
 			float tmp;
 			uchar lsb;
 			lsb = lfsr & 0x01u;
@@ -389,7 +398,8 @@ void Krnl_Prng_LS6_float (
 		bool active = true;
 		active  = read_channel_nb_intel(chan_GA2PRNG_LS_float_off[5], &valid);
 	
-		for(uchar i=0; i<DockConst_num_of_genes; i++) {
+		// Loop index uint6_t covers up to 64 genes (see defines.h)
+		for(uint6_t i=0; i<DockConst_num_of_genes; i++) {
 			float tmp;
 			uchar lsb;
 			lsb = lfsr & 0x01u;
@@ -424,7 +434,8 @@ void Krnl_Prng_LS7_float (
 		bool active = true;
 		active  = read_channel_nb_intel(chan_GA2PRNG_LS_float_off[6], &valid);
 	
-		for(uchar i=0; i<DockConst_num_of_genes; i++) {
+		// Loop index uint6_t covers up to 64 genes (see defines.h)
+		for(uint6_t i=0; i<DockConst_num_of_genes; i++) {
 			float tmp;
 			uchar lsb;
 			lsb = lfsr & 0x01u;
@@ -459,7 +470,8 @@ void Krnl_Prng_LS8_float (
 		bool active = true;
 		active  = read_channel_nb_intel(chan_GA2PRNG_LS_float_off[7], &valid);
 	
-		for(uchar i=0; i<DockConst_num_of_genes; i++) {
+		// Loop index uint6_t covers up to 64 genes (see defines.h)
+		for(uint6_t i=0; i<DockConst_num_of_genes; i++) {
 			float tmp;
 			uchar lsb;
 			lsb = lfsr & 0x01u;
@@ -494,7 +506,8 @@ void Krnl_Prng_LS9_float (
 		bool active = true;
 		active  = read_channel_nb_intel(chan_GA2PRNG_LS_float_off[8], &valid);
 	
-		for(uchar i=0; i<DockConst_num_of_genes; i++) {
+		// Loop index uint6_t covers up to 64 genes (see defines.h)
+		for(uint6_t i=0; i<DockConst_num_of_genes; i++) {
 			float tmp;
 			uchar lsb;
 			lsb = lfsr & 0x01u;
@@ -516,5 +529,3 @@ void Krnl_Prng_LS9_float (
 		}
 	} // End of while(active)
 }
-// --------------------------------------------------------------------------
-// --------------------------------------------------------------------------     
