@@ -383,7 +383,7 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	setKernelArg(kernel_ga, narg_ga++, sizeof(uchar), &dockpars.num_of_genes);
 	//setKernelArg(kernel_ga, narg_ga++, sizeof(ushort), run_cnt);
 	//setKernelArg(kernel_ga, narg_ga++, sizeof(uint), offset_pop);
-	//setKernelArg(kernel_ga, narg_ga++, sizeof(uint), offset_ene);
+	//setKernelArg(kernel_ga, narg_ga, sizeof(uint), offset_ene);
 	#else
 	setKernelArg(kernel_ga, narg_ga++, sizeof(mem_dockpars_conformations_current), &mem_dockpars_conformations_current);
 	setKernelArg(kernel_ga, narg_ga++, sizeof(mem_dockpars_energies_current), &mem_dockpars_energies_current);
@@ -399,7 +399,7 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	setKernelArg(kernel_ga, narg_ga++, sizeof(float), &two_absmaxdang);
 	setKernelArg(kernel_ga, narg_ga++, sizeof(float), &dockpars.crossover_rate);
 	setKernelArg(kernel_ga, narg_ga++, sizeof(uint), &dockpars.num_of_lsentities);
-	setKernelArg(kernel_ga, narg_ga++, sizeof(uchar), &dockpars.num_of_genes);
+	setKernelArg(kernel_ga, narg_ga, sizeof(uchar), &dockpars.num_of_genes);
 	#endif
 
 	// Krnl_PoseCalc
