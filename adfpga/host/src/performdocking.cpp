@@ -399,7 +399,7 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	setKernelArg(kernel_ga, narg_ga++, sizeof(float), &two_absmaxdang);
 	setKernelArg(kernel_ga, narg_ga++, sizeof(float), &dockpars.crossover_rate);
 	setKernelArg(kernel_ga, narg_ga++, sizeof(uint), &dockpars.num_of_lsentities);
-	setKernelArg(kernel_ga, narg_ga, sizeof(uchar), &dockpars.num_of_genes);
+	setKernelArg(kernel_ga, narg_ga++, sizeof(uchar), &dockpars.num_of_genes);
 	#endif
 
 	// Krnl_PoseCalc
@@ -713,9 +713,10 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 #if defined(SINGLE_COPY_POP_ENE)
 		uint Host_Offset_Pop = run_cnt * dockpars.pop_size * ACTUAL_GENOTYPE_LENGTH;
 		uint Host_Offset_Ene = run_cnt * dockpars.pop_size;
-		setKernelArg(kernel_ga, narg_ga++, sizeof(ushort), &run_cnt);
-		setKernelArg(kernel_ga, narg_ga++, sizeof(uint), &Host_Offset_Pop);
-		setKernelArg(kernel_ga, narg_ga++, sizeof(uint), &Host_Offset_Ene);
+		uint narg_ga_2 = narg_ga;
+		setKernelArg(kernel_ga, narg_ga_2++, sizeof(ushort), &run_cnt);
+		setKernelArg(kernel_ga, narg_ga_2++, sizeof(uint), &Host_Offset_Pop);
+		setKernelArg(kernel_ga, narg_ga_2++, sizeof(uint), &Host_Offset_Ene);
 #endif
 
 	// Krnl_PoseCalc
