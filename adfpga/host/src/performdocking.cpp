@@ -632,55 +632,58 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	setKernelArg(kernel_ls6, narg_ls6++, sizeof(uchar), &Host_cons_limit);
 
 	// Krnl_LS7
-	setKernelArg(kernel_ls7, 0, sizeof(ushort), &Host_max_num_of_iters);
+	uint narg_ls7 = 0;
+	setKernelArg(kernel_ls7, narg_ls7++, sizeof(ushort), &Host_max_num_of_iters);
 #ifdef FIXED_POINT_LS
-	setKernelArg(kernel_ls7, 1, sizeof(fixedpt), &fixpt_rho_lower_bound);
-	setKernelArg(kernel_ls7, 2, sizeof(fixedpt), &fixpt_base_dmov_mul_sqrt3);
+	setKernelArg(kernel_ls7, narg_ls7++, sizeof(fixedpt), &fixpt_rho_lower_bound);
+	setKernelArg(kernel_ls7, narg_ls7++, sizeof(fixedpt), &fixpt_base_dmov_mul_sqrt3);
 #else
-	setKernelArg(kernel_ls7, 1, sizeof(float), &dockpars.rho_lower_bound);
-	setKernelArg(kernel_ls7, 2, sizeof(float), &dockpars.base_dmov_mul_sqrt3);
+	setKernelArg(kernel_ls7, narg_ls7++, sizeof(float), &dockpars.rho_lower_bound);
+	setKernelArg(kernel_ls7, narg_ls7++, sizeof(float), &dockpars.base_dmov_mul_sqrt3);
 #endif
-	setKernelArg(kernel_ls7, 3, sizeof(uchar), &dockpars.num_of_genes);
+	setKernelArg(kernel_ls7, narg_ls7++, sizeof(uchar), &dockpars.num_of_genes);
 #ifdef FIXED_POINT_LS
-	setKernelArg(kernel_ls7, 4, sizeof(fixedpt), &fixpt_base_dang_mul_sqrt3);
+	setKernelArg(kernel_ls7, narg_ls7++, sizeof(fixedpt), &fixpt_base_dang_mul_sqrt3);
 #else
-	setKernelArg(kernel_ls7, 4, sizeof(float), &dockpars.base_dang_mul_sqrt3);
+	setKernelArg(kernel_ls7, narg_ls7++, sizeof(float), &dockpars.base_dang_mul_sqrt3);
 #endif
-	setKernelArg(kernel_ls7, 5, sizeof(uchar), &Host_cons_limit);
+	setKernelArg(kernel_ls7, narg_ls7++, sizeof(uchar), &Host_cons_limit);
 
 	// Krnl_LS8
-	setKernelArg(kernel_ls8, 0, sizeof(ushort), &Host_max_num_of_iters);
+	uint narg_ls8 = 0;
+	setKernelArg(kernel_ls8, narg_ls8++, sizeof(ushort), &Host_max_num_of_iters);
 #ifdef FIXED_POINT_LS
-	setKernelArg(kernel_ls8, 1, sizeof(fixedpt), &fixpt_rho_lower_bound);
-	setKernelArg(kernel_ls8, 2, sizeof(fixedpt), &fixpt_base_dmov_mul_sqrt3);
+	setKernelArg(kernel_ls8, narg_ls8++, sizeof(fixedpt), &fixpt_rho_lower_bound);
+	setKernelArg(kernel_ls8, narg_ls8++, sizeof(fixedpt), &fixpt_base_dmov_mul_sqrt3);
 #else
-	setKernelArg(kernel_ls8, 1, sizeof(float), &dockpars.rho_lower_bound);
-	setKernelArg(kernel_ls8, 2, sizeof(float), &dockpars.base_dmov_mul_sqrt3);
+	setKernelArg(kernel_ls8, narg_ls8++, sizeof(float), &dockpars.rho_lower_bound);
+	setKernelArg(kernel_ls8, narg_ls8++, sizeof(float), &dockpars.base_dmov_mul_sqrt3);
 #endif
-	setKernelArg(kernel_ls8, 3, sizeof(uchar), &dockpars.num_of_genes);
+	setKernelArg(kernel_ls8, narg_ls8++, sizeof(uchar), &dockpars.num_of_genes);
 #ifdef FIXED_POINT_LS
-	setKernelArg(kernel_ls8, 4, sizeof(fixedpt), &fixpt_base_dang_mul_sqrt3);
+	setKernelArg(kernel_ls8, narg_ls8++, sizeof(fixedpt), &fixpt_base_dang_mul_sqrt3);
 #else
-	setKernelArg(kernel_ls8, 4, sizeof(float), &dockpars.base_dang_mul_sqrt3);
+	setKernelArg(kernel_ls8, narg_ls8++, sizeof(float), &dockpars.base_dang_mul_sqrt3);
 #endif
-	setKernelArg(kernel_ls8, 5, sizeof(uchar), &Host_cons_limit);
+	setKernelArg(kernel_ls8, narg_ls8++, sizeof(uchar), &Host_cons_limit);
 
 	// Krnl_LS9
-	setKernelArg(kernel_ls9, 0, sizeof(ushort), &Host_max_num_of_iters);
+	uint narg_ls9 = 0;
+	setKernelArg(kernel_ls9, narg_ls9++, sizeof(ushort), &Host_max_num_of_iters);
 #ifdef FIXED_POINT_LS
-	setKernelArg(kernel_ls9, 1, sizeof(fixedpt), &fixpt_rho_lower_bound);
-	setKernelArg(kernel_ls9, 2, sizeof(fixedpt), &fixpt_base_dmov_mul_sqrt3);
+	setKernelArg(kernel_ls9, narg_ls9++, sizeof(fixedpt), &fixpt_rho_lower_bound);
+	setKernelArg(kernel_ls9, narg_ls9++, sizeof(fixedpt), &fixpt_base_dmov_mul_sqrt3);
 #else
-	setKernelArg(kernel_ls9, 1, sizeof(float), &dockpars.rho_lower_bound);
-	setKernelArg(kernel_ls9, 2, sizeof(float), &dockpars.base_dmov_mul_sqrt3);
+	setKernelArg(kernel_ls9, narg_ls9++, sizeof(float), &dockpars.rho_lower_bound);
+	setKernelArg(kernel_ls9, narg_ls9++, sizeof(float), &dockpars.base_dmov_mul_sqrt3);
 #endif
-	setKernelArg(kernel_ls9, 3, sizeof(uchar), &dockpars.num_of_genes);
+	setKernelArg(kernel_ls9, narg_ls9++, sizeof(uchar), &dockpars.num_of_genes);
 #ifdef FIXED_POINT_LS
-	setKernelArg(kernel_ls9, 4, sizeof(fixedpt), &fixpt_base_dang_mul_sqrt3);
+	setKernelArg(kernel_ls9, narg_ls9++, sizeof(fixedpt), &fixpt_base_dang_mul_sqrt3);
 #else
-	setKernelArg(kernel_ls9, 4, sizeof(float), &dockpars.base_dang_mul_sqrt3);
+	setKernelArg(kernel_ls9, narg_ls9++, sizeof(float), &dockpars.base_dang_mul_sqrt3);
 #endif
-	setKernelArg(kernel_ls9, 5, sizeof(uchar), &Host_cons_limit);
+	setKernelArg(kernel_ls9, narg_ls9++, sizeof(uchar), &Host_cons_limit);
 
 #if defined(SINGLE_COPY_POP_ENE)
 	memcopyBufferObjectToDevice(command_queue_ga, mem_dockpars_conformations_current, cpu_init_populations, size_populations);
