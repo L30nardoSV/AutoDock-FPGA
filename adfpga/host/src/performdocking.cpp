@@ -475,25 +475,26 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 #endif
 
 	// Krnl_IntraE
-	setKernelArg(kernel_ia, 0, sizeof(mem_KerConstStatic_atom_charges_const), &mem_KerConstStatic_atom_charges_const);
-	setKernelArg(kernel_ia, 1, sizeof(mem_KerConstStatic_atom_types_const), &mem_KerConstStatic_atom_types_const);
-	setKernelArg(kernel_ia, 2, sizeof(mem_KerConstStatic_intraE_contributors_const), &mem_KerConstStatic_intraE_contributors_const);
-  	setKernelArg(kernel_ia, 3, sizeof(dockpars.smooth), &dockpars.smooth);
-  	setKernelArg(kernel_ia, 4, sizeof(mem_KerConstStatic_reqm_const), &mem_KerConstStatic_reqm_const);
-  	setKernelArg(kernel_ia, 5, sizeof(mem_KerConstStatic_reqm_hbond_const), &mem_KerConstStatic_reqm_hbond_const);
-  	setKernelArg(kernel_ia, 6, sizeof(mem_KerConstStatic_atom1_types_reqm_const), &mem_KerConstStatic_atom1_types_reqm_const);
-  	setKernelArg(kernel_ia, 7, sizeof(mem_KerConstStatic_atom2_types_reqm_const), &mem_KerConstStatic_atom2_types_reqm_const);
-	setKernelArg(kernel_ia, 8, sizeof(mem_KerConstStatic_VWpars_AC_const), &mem_KerConstStatic_VWpars_AC_const);
-	setKernelArg(kernel_ia, 9, sizeof(mem_KerConstStatic_VWpars_BD_const), &mem_KerConstStatic_VWpars_BD_const);
-	setKernelArg(kernel_ia, 10, sizeof(mem_KerConstStatic_dspars_S_const), &mem_KerConstStatic_dspars_S_const);
-	setKernelArg(kernel_ia, 11, sizeof(mem_KerConstStatic_dspars_V_const), &mem_KerConstStatic_dspars_V_const);
-	setKernelArg(kernel_ia, 12, sizeof(uchar), &dockpars.num_of_atoms);
-	setKernelArg(kernel_ia, 13, sizeof(uint), &dockpars.num_of_intraE_contributors);
-	setKernelArg(kernel_ia, 14, sizeof(float), &dockpars.grid_spacing);
-	setKernelArg(kernel_ia, 15, sizeof(uchar), &dockpars.num_of_atypes);
-	setKernelArg(kernel_ia, 16, sizeof(float), &dockpars.coeff_elec);
-	setKernelArg(kernel_ia, 17, sizeof(float), &dockpars.qasp);
-	setKernelArg(kernel_ia, 18, sizeof(float), &dockpars.coeff_desolv);
+	uint narg_ia = 0;
+	setKernelArg(kernel_ia, narg_ia++, sizeof(mem_KerConstStatic_atom_charges_const), &mem_KerConstStatic_atom_charges_const);
+	setKernelArg(kernel_ia, narg_ia++, sizeof(mem_KerConstStatic_atom_types_const), &mem_KerConstStatic_atom_types_const);
+	setKernelArg(kernel_ia, narg_ia++, sizeof(mem_KerConstStatic_intraE_contributors_const), &mem_KerConstStatic_intraE_contributors_const);
+  	setKernelArg(kernel_ia, narg_ia++, sizeof(dockpars.smooth), &dockpars.smooth);
+  	setKernelArg(kernel_ia, narg_ia++, sizeof(mem_KerConstStatic_reqm_const), &mem_KerConstStatic_reqm_const);
+  	setKernelArg(kernel_ia, narg_ia++, sizeof(mem_KerConstStatic_reqm_hbond_const), &mem_KerConstStatic_reqm_hbond_const);
+  	setKernelArg(kernel_ia, narg_ia++, sizeof(mem_KerConstStatic_atom1_types_reqm_const), &mem_KerConstStatic_atom1_types_reqm_const);
+  	setKernelArg(kernel_ia, narg_ia++, sizeof(mem_KerConstStatic_atom2_types_reqm_const), &mem_KerConstStatic_atom2_types_reqm_const);
+	setKernelArg(kernel_ia, narg_ia++, sizeof(mem_KerConstStatic_VWpars_AC_const), &mem_KerConstStatic_VWpars_AC_const);
+	setKernelArg(kernel_ia, narg_ia++, sizeof(mem_KerConstStatic_VWpars_BD_const), &mem_KerConstStatic_VWpars_BD_const);
+	setKernelArg(kernel_ia, narg_ia++, sizeof(mem_KerConstStatic_dspars_S_const), &mem_KerConstStatic_dspars_S_const);
+	setKernelArg(kernel_ia, narg_ia++, sizeof(mem_KerConstStatic_dspars_V_const), &mem_KerConstStatic_dspars_V_const);
+	setKernelArg(kernel_ia, narg_ia++, sizeof(uchar), &dockpars.num_of_atoms);
+	setKernelArg(kernel_ia, narg_ia++, sizeof(uint), &dockpars.num_of_intraE_contributors);
+	setKernelArg(kernel_ia, narg_ia++, sizeof(float), &dockpars.grid_spacing);
+	setKernelArg(kernel_ia, narg_ia++, sizeof(uchar), &dockpars.num_of_atypes);
+	setKernelArg(kernel_ia, narg_ia++, sizeof(float), &dockpars.coeff_elec);
+	setKernelArg(kernel_ia, narg_ia++, sizeof(float), &dockpars.qasp);
+	setKernelArg(kernel_ia, narg_ia++, sizeof(float), &dockpars.coeff_desolv);
 
 	// Krnl_PRNG_GG_float
 	setKernelArg(kernel_prng_gg_float, 1, sizeof(uchar), &dockpars.num_of_genes);
