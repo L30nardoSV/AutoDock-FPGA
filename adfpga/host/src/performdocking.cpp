@@ -364,7 +364,7 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 
 	// Krnl_GA
 	uint narg_ga = 0;
-	#if defined(SINGLE_COPY_POP_ENE)
+#ifdef SINGLE_COPY_POP_ENE
 	setKernelArg(kernel_ga, narg_ga++, sizeof(mem_dockpars_conformations_current), &mem_dockpars_conformations_current);
 	setKernelArg(kernel_ga, narg_ga++, sizeof(mem_dockpars_energies_current), &mem_dockpars_energies_current);
 	setKernelArg(kernel_ga, narg_ga++, sizeof(mem_evals_performed), &mem_evals_performed);
@@ -384,7 +384,7 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	//setKernelArg(kernel_ga, narg_ga++, sizeof(ushort), run_cnt);
 	//setKernelArg(kernel_ga, narg_ga++, sizeof(uint), offset_pop);
 	//setKernelArg(kernel_ga, narg_ga, sizeof(uint), offset_ene);
-	#else
+#else
 	setKernelArg(kernel_ga, narg_ga++, sizeof(mem_dockpars_conformations_current), &mem_dockpars_conformations_current);
 	setKernelArg(kernel_ga, narg_ga++, sizeof(mem_dockpars_energies_current), &mem_dockpars_energies_current);
 	setKernelArg(kernel_ga, narg_ga++, sizeof(mem_evals_and_generations_performed), &mem_evals_and_generations_performed);
@@ -400,7 +400,7 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	setKernelArg(kernel_ga, narg_ga++, sizeof(float), &dockpars.crossover_rate);
 	setKernelArg(kernel_ga, narg_ga++, sizeof(uint), &dockpars.num_of_lsentities);
 	setKernelArg(kernel_ga, narg_ga++, sizeof(uchar), &dockpars.num_of_genes);
-	#endif
+#endif
 
 	// Krnl_PoseCalc
 	setKernelArg(kernel_pc, 0, sizeof(mem_KerConstStatic_rotlist_const), &mem_KerConstStatic_rotlist_const);
@@ -443,35 +443,36 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 #endif
 
 	// Krnl_InterE
-	setKernelArg(kernel_ie, 0, sizeof(mem_dockpars_fgrids), &mem_dockpars_fgrids);
-	#if defined (FIXED_POINT_INTERE)
-	setKernelArg(kernel_ie, 1, sizeof(mem_KerConstStatic_fixpt64_atom_charges_const), &mem_KerConstStatic_fixpt64_atom_charges_const);
-	#else
-	setKernelArg(kernel_ie, 1, sizeof(mem_KerConstStatic_atom_charges_const), &mem_KerConstStatic_atom_charges_const);
-	#endif
-	setKernelArg(kernel_ie, 2, sizeof(mem_KerConstStatic_atom_types_const), &mem_KerConstStatic_atom_types_const);
-	setKernelArg(kernel_ie, 3, sizeof(uchar), &dockpars.g1);
-	setKernelArg(kernel_ie, 4, sizeof(uint), &dockpars.g2);
-	setKernelArg(kernel_ie, 5, sizeof(uint), &dockpars.g3);
-	setKernelArg(kernel_ie, 6, sizeof(uchar), &dockpars.num_of_atoms);
+	uint narg_ie = 0;
+	setKernelArg(kernel_ie, narg_ie++, sizeof(mem_dockpars_fgrids), &mem_dockpars_fgrids);
+#ifdef FIXED_POINT_INTERE
+	setKernelArg(kernel_ie, narg_ie++, sizeof(mem_KerConstStatic_fixpt64_atom_charges_const), &mem_KerConstStatic_fixpt64_atom_charges_const);
+#else
+	setKernelArg(kernel_ie, narg_ie++, sizeof(mem_KerConstStatic_atom_charges_const), &mem_KerConstStatic_atom_charges_const);
+#endif
+	setKernelArg(kernel_ie, narg_ie++, sizeof(mem_KerConstStatic_atom_types_const), &mem_KerConstStatic_atom_types_const);
+	setKernelArg(kernel_ie, narg_ie++, sizeof(uchar), &dockpars.g1);
+	setKernelArg(kernel_ie, narg_ie++, sizeof(uint), &dockpars.g2);
+	setKernelArg(kernel_ie, narg_ie++, sizeof(uint), &dockpars.g3);
+	setKernelArg(kernel_ie, narg_ie++, sizeof(uchar), &dockpars.num_of_atoms);
 
-	#if defined (FIXED_POINT_INTERE)
-	setKernelArg(kernel_ie, 7, sizeof(uchar), &gridsizex_minus1);
-	setKernelArg(kernel_ie, 8, sizeof(uchar), &gridsizey_minus1);
-	setKernelArg(kernel_ie, 9, sizeof(uchar), &gridsizez_minus1);
-	#else
-	setKernelArg(kernel_ie, 7, sizeof(float), &fgridsizex_minus1);
-	setKernelArg(kernel_ie, 8, sizeof(float), &fgridsizey_minus1);
-	setKernelArg(kernel_ie, 9, sizeof(float), &fgridsizez_minus1);
-	#endif
+#ifdef FIXED_POINT_INTERE
+	setKernelArg(kernel_ie, narg_ie++, sizeof(uchar), &gridsizex_minus1);
+	setKernelArg(kernel_ie, narg_ie++, sizeof(uchar), &gridsizey_minus1);
+	setKernelArg(kernel_ie, narg_ie++, sizeof(uchar), &gridsizez_minus1);
+#else
+	setKernelArg(kernel_ie, narg_ie++, sizeof(float), &fgridsizex_minus1);
+	setKernelArg(kernel_ie, narg_ie++, sizeof(float), &fgridsizey_minus1);
+	setKernelArg(kernel_ie, narg_ie++, sizeof(float), &fgridsizez_minus1);
+#endif
 
-	#if defined(SEPARATE_FGRID_INTERE)
-	setKernelArg(kernel_ie, 10, sizeof(mem_dockpars_fgrids2), &mem_dockpars_fgrids2);
-	setKernelArg(kernel_ie, 11, sizeof(mem_dockpars_fgrids3), &mem_dockpars_fgrids3);
-	#else
-	setKernelArg(kernel_ie, 10, sizeof(uint), &mul_tmp2);
-	setKernelArg(kernel_ie, 11, sizeof(uint), &mul_tmp3);
-	#endif
+#ifdef SEPARATE_FGRID_INTERE
+	setKernelArg(kernel_ie, narg_ie++, sizeof(mem_dockpars_fgrids2), &mem_dockpars_fgrids2);
+	setKernelArg(kernel_ie, narg_ie++, sizeof(mem_dockpars_fgrids3), &mem_dockpars_fgrids3);
+#else
+	setKernelArg(kernel_ie, narg_ie++, sizeof(uint), &mul_tmp2);
+	setKernelArg(kernel_ie, narg_ie++, sizeof(uint), &mul_tmp3);
+#endif
 
 	// Krnl_IntraE
 	setKernelArg(kernel_ia, 0, sizeof(mem_KerConstStatic_atom_charges_const), &mem_KerConstStatic_atom_charges_const);
@@ -710,7 +711,7 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
  		memcopyBufferObjectToDevice(command_queue_ga,mem_dockpars_conformations_current, 	cpu_init_populations, size_populations);
 #endif
 
-#if defined(SINGLE_COPY_POP_ENE)
+#ifdef SINGLE_COPY_POP_ENE
 		uint Host_Offset_Pop = run_cnt * dockpars.pop_size * ACTUAL_GENOTYPE_LENGTH;
 		uint Host_Offset_Ene = run_cnt * dockpars.pop_size;
 		uint narg_ga_2 = narg_ga;
