@@ -363,42 +363,43 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 	clock_start_docking = clock();
 
 	// Krnl_GA
+	uint narg_ga = 0;
 	#if defined(SINGLE_COPY_POP_ENE)
-	setKernelArg(kernel_ga, 0, sizeof(mem_dockpars_conformations_current), &mem_dockpars_conformations_current);
-	setKernelArg(kernel_ga, 1, sizeof(mem_dockpars_energies_current), &mem_dockpars_energies_current);
-	setKernelArg(kernel_ga, 2, sizeof(mem_evals_performed), &mem_evals_performed);
-	setKernelArg(kernel_ga, 3, sizeof(mem_gens_performed), &mem_gens_performed);
-	setKernelArg(kernel_ga, 4, sizeof(uint), &dockpars.pop_size);
-	setKernelArg(kernel_ga, 5, sizeof(uint), &dockpars.num_of_energy_evals);
-	setKernelArg(kernel_ga, 6, sizeof(uint), &dockpars.num_of_generations);
-	setKernelArg(kernel_ga, 7, sizeof(float), &dockpars.tournament_rate);
-	setKernelArg(kernel_ga, 8, sizeof(float), &dockpars.mutation_rate);
-	setKernelArg(kernel_ga, 9, sizeof(float), &dockpars.abs_max_dmov);
-	setKernelArg(kernel_ga, 10, sizeof(float), &dockpars.abs_max_dang);
-	setKernelArg(kernel_ga, 11, sizeof(float), &two_absmaxdmov);
-	setKernelArg(kernel_ga, 12, sizeof(float), &two_absmaxdang);
-	setKernelArg(kernel_ga, 13, sizeof(float), &dockpars.crossover_rate);
-	setKernelArg(kernel_ga, 14, sizeof(uint), &dockpars.num_of_lsentities);
-	setKernelArg(kernel_ga, 15, sizeof(uchar), &dockpars.num_of_genes);
-	//setKernelArg(kernel_ga, 16, sizeof(ushort), run_cnt);
-	//setKernelArg(kernel_ga, 17, sizeof(uint), offset_pop);
-	//setKernelArg(kernel_ga, 18, sizeof(uint), offset_ene);
+	setKernelArg(kernel_ga, narg_ga++, sizeof(mem_dockpars_conformations_current), &mem_dockpars_conformations_current);
+	setKernelArg(kernel_ga, narg_ga++, sizeof(mem_dockpars_energies_current), &mem_dockpars_energies_current);
+	setKernelArg(kernel_ga, narg_ga++, sizeof(mem_evals_performed), &mem_evals_performed);
+	setKernelArg(kernel_ga, narg_ga++, sizeof(mem_gens_performed), &mem_gens_performed);
+	setKernelArg(kernel_ga, narg_ga++, sizeof(uint), &dockpars.pop_size);
+	setKernelArg(kernel_ga, narg_ga++, sizeof(uint), &dockpars.num_of_energy_evals);
+	setKernelArg(kernel_ga, narg_ga++, sizeof(uint), &dockpars.num_of_generations);
+	setKernelArg(kernel_ga, narg_ga++, sizeof(float), &dockpars.tournament_rate);
+	setKernelArg(kernel_ga, narg_ga++, sizeof(float), &dockpars.mutation_rate);
+	setKernelArg(kernel_ga, narg_ga++, sizeof(float), &dockpars.abs_max_dmov);
+	setKernelArg(kernel_ga, narg_ga++, sizeof(float), &dockpars.abs_max_dang);
+	setKernelArg(kernel_ga, narg_ga++, sizeof(float), &two_absmaxdmov);
+	setKernelArg(kernel_ga, narg_ga++, sizeof(float), &two_absmaxdang);
+	setKernelArg(kernel_ga, narg_ga++, sizeof(float), &dockpars.crossover_rate);
+	setKernelArg(kernel_ga, narg_ga++, sizeof(uint), &dockpars.num_of_lsentities);
+	setKernelArg(kernel_ga, narg_ga++, sizeof(uchar), &dockpars.num_of_genes);
+	//setKernelArg(kernel_ga, narg_ga++, sizeof(ushort), run_cnt);
+	//setKernelArg(kernel_ga, narg_ga++, sizeof(uint), offset_pop);
+	//setKernelArg(kernel_ga, narg_ga++, sizeof(uint), offset_ene);
 	#else
-	setKernelArg(kernel_ga, 0, sizeof(mem_dockpars_conformations_current), &mem_dockpars_conformations_current);
-	setKernelArg(kernel_ga, 1, sizeof(mem_dockpars_energies_current), &mem_dockpars_energies_current);
-	setKernelArg(kernel_ga, 2, sizeof(mem_evals_and_generations_performed), &mem_evals_and_generations_performed);
-	setKernelArg(kernel_ga, 3, sizeof(uint), &dockpars.pop_size);
-	setKernelArg(kernel_ga, 4, sizeof(uint), &dockpars.num_of_energy_evals);
-	setKernelArg(kernel_ga, 5, sizeof(uint), &dockpars.num_of_generations);
-	setKernelArg(kernel_ga, 6, sizeof(float), &dockpars.tournament_rate);
-	setKernelArg(kernel_ga, 7, sizeof(float), &dockpars.mutation_rate);
-	setKernelArg(kernel_ga, 8, sizeof(float), &dockpars.abs_max_dmov);
-	setKernelArg(kernel_ga, 9, sizeof(float), &dockpars.abs_max_dang);
-	setKernelArg(kernel_ga, 10, sizeof(float), &two_absmaxdmov);
-	setKernelArg(kernel_ga, 11, sizeof(float), &two_absmaxdang);
-	setKernelArg(kernel_ga, 12, sizeof(float), &dockpars.crossover_rate);
-	setKernelArg(kernel_ga, 13, sizeof(uint), &dockpars.num_of_lsentities);
-	setKernelArg(kernel_ga, 14, sizeof(uchar), &dockpars.num_of_genes);
+	setKernelArg(kernel_ga, narg_ga++, sizeof(mem_dockpars_conformations_current), &mem_dockpars_conformations_current);
+	setKernelArg(kernel_ga, narg_ga++, sizeof(mem_dockpars_energies_current), &mem_dockpars_energies_current);
+	setKernelArg(kernel_ga, narg_ga++, sizeof(mem_evals_and_generations_performed), &mem_evals_and_generations_performed);
+	setKernelArg(kernel_ga, narg_ga++, sizeof(uint), &dockpars.pop_size);
+	setKernelArg(kernel_ga, narg_ga++, sizeof(uint), &dockpars.num_of_energy_evals);
+	setKernelArg(kernel_ga, narg_ga++, sizeof(uint), &dockpars.num_of_generations);
+	setKernelArg(kernel_ga, narg_ga++, sizeof(float), &dockpars.tournament_rate);
+	setKernelArg(kernel_ga, narg_ga++, sizeof(float), &dockpars.mutation_rate);
+	setKernelArg(kernel_ga, narg_ga++, sizeof(float), &dockpars.abs_max_dmov);
+	setKernelArg(kernel_ga, narg_ga++, sizeof(float), &dockpars.abs_max_dang);
+	setKernelArg(kernel_ga, narg_ga++, sizeof(float), &two_absmaxdmov);
+	setKernelArg(kernel_ga, narg_ga++, sizeof(float), &two_absmaxdang);
+	setKernelArg(kernel_ga, narg_ga++, sizeof(float), &dockpars.crossover_rate);
+	setKernelArg(kernel_ga, narg_ga++, sizeof(uint), &dockpars.num_of_lsentities);
+	setKernelArg(kernel_ga, narg_ga++, sizeof(uchar), &dockpars.num_of_genes);
 	#endif
 
 	// Krnl_PoseCalc
@@ -712,9 +713,9 @@ printf("%i %i\n", dockpars.num_of_intraE_contributors, myligand_reference.num_of
 #if defined(SINGLE_COPY_POP_ENE)
 		uint Host_Offset_Pop = run_cnt * dockpars.pop_size * ACTUAL_GENOTYPE_LENGTH;
 		uint Host_Offset_Ene = run_cnt * dockpars.pop_size;
-		setKernelArg(kernel_ga, 16, sizeof(ushort), &run_cnt);
-		setKernelArg(kernel_ga, 17, sizeof(uint), &Host_Offset_Pop);
-		setKernelArg(kernel_ga, 18, sizeof(uint), &Host_Offset_Ene);
+		setKernelArg(kernel_ga, narg_ga++, sizeof(ushort), &run_cnt);
+		setKernelArg(kernel_ga, narg_ga++, sizeof(uint), &Host_Offset_Pop);
+		setKernelArg(kernel_ga, narg_ga++, sizeof(uint), &Host_Offset_Ene);
 #endif
 
 	// Krnl_PoseCalc
