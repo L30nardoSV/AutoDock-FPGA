@@ -69,6 +69,8 @@ void Krnl_GA (
 		write_channel_intel(chan_GA2IGL_IC_active, true);
 		mem_fence(CLK_CHANNEL_MEM_FENCE);
 
+		ch_geno_t tmp_genotype_ic;
+
 		// Loop index uint6_t covers up to 64 genes (see defines.h)
 		for (uint6_t gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
 			float tmp_ic;
@@ -77,10 +79,11 @@ void Krnl_GA (
 #else
 			tmp_ic = GlobPopulationCurrent[pop_cnt*ACTUAL_GENOTYPE_LENGTH + gene_cnt];
 #endif
-		
 			LocalPopCurr[pop_cnt][gene_cnt] = tmp_ic;
-			write_channel_intel(chan_IC2Conf_genotype, tmp_ic);
+			tmp_genotype_ic.array[gene_cnt] = tmp_ic;
 		}
+		write_channel_intel(chan_IC2Conf_genotype, tmp_genotype_ic);
+		mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 #ifdef DEBUG_KRNL_IC
 		printf("\nIC - tx pop: %u", pop_cnt); 		
@@ -269,6 +272,8 @@ void Krnl_GA (
 			write_channel_intel(chan_GA2IGL_GG_active, true);
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
 
+			ch_geno_t tmp_genotype_gg;
+
 			// Loop index uint6_t covers up to 64 genes (see defines.h)
 			for (uint6_t gene_cnt=0; gene_cnt<DockConst_num_of_genes; gene_cnt++) {
 
@@ -307,8 +312,10 @@ void Krnl_GA (
 
 				// Calculate energy
 				LocalPopNext [new_pop_cnt][gene_cnt] = tmp_offspring;
-				write_channel_intel(chan_GG2Conf_genotype, tmp_offspring);
+				tmp_genotype_gg.array [gene_cnt] = tmp_offspring;
 			}
+			write_channel_intel(chan_GG2Conf_genotype, tmp_genotype_gg);
+			mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 #ifdef DEBUG_KRNL_GG
 			printf("GG - tx pop: %u", new_pop_cnt); 		

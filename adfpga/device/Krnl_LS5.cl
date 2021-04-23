@@ -134,6 +134,8 @@ while(valid) {
 				float_prng [i] = read_channel_intel(chan_PRNG2LS_float_prng[4]);
 			}
 			mem_fence(CLK_CHANNEL_MEM_FENCE);
+
+			ch_geno_t tmp_genotype_ls;
 		
 			// New random deviate,
 			// rho is the deviation of the uniform distribution
@@ -172,7 +174,7 @@ while(valid) {
 					  else      { fixpt_tmp3 = fixedpt_map_angle_360(fixpt_tmp3);}}
 
 				entity_possible_new_genotype [i] = fixpt_tmp3;
-				write_channel_intel(chan_LS2Conf_genotype[4], fixedpt_tofloat(fixpt_tmp3));
+				tmp_genotype_ls.array [i] = fixedpt_tofloat(fixpt_tmp3);
 #else
 				// tmp1 is genotype_deviate
 				float tmp1 = rho * (2.0f*tmp_prng - 1.0f);
@@ -197,13 +199,15 @@ while(valid) {
 					  else      { tmp3 = map_angle_360(tmp3);}}
 
 				entity_possible_new_genotype [i] = tmp3;
-				write_channel_intel(chan_LS2Conf_genotype[4], tmp3);
+				tmp_genotype_ls.array [i] = tmp3;
 #endif
 
 #ifdef DEBUG_KRNL_LS5
 				printf("LS5_genotype sent: %u\n", i);
 #endif
 			}
+			write_channel_intel(chan_LS2Conf_genotype[4], tmp_genotype_ls);
+			mem_fence(CLK_CHANNEL_MEM_FENCE);
 
 			//printf("Energy to calculate sent from LS5 ... ");
 

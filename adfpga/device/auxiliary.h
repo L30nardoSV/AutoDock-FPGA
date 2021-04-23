@@ -20,10 +20,18 @@
 channel bool    chan_GA2IGL_IC_active;
 channel bool    chan_GA2IGL_GG_active;
 
+typedef struct ch_geno {
+	float array [ACTUAL_GENOTYPE_LENGTH];
+} ch_geno_t;
+
 // Send genotypes from producers (IC, GG, LSs) to Conform
-channel float  	chan_IC2Conf_genotype          			__attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float  	chan_GG2Conf_genotype          			__attribute__((depth(CHAN_DEPTH_GENOTYPE)));
-channel float  	chan_LS2Conf_genotype[LS_REPLICATION_FACTOR]    __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
+//channel float  	chan_IC2Conf_genotype          			__attribute__((depth(CHAN_DEPTH_GENOTYPE)));
+//channel float  	chan_GG2Conf_genotype          			__attribute__((depth(CHAN_DEPTH_GENOTYPE)));
+//channel float  	chan_LS2Conf_genotype[LS_REPLICATION_FACTOR]    __attribute__((depth(CHAN_DEPTH_GENOTYPE)));
+
+channel ch_geno_t chan_IC2Conf_genotype __attribute__((depth(2)));
+channel ch_geno_t chan_GG2Conf_genotype __attribute__((depth(2)));
+channel ch_geno_t chan_LS2Conf_genotype[LS_REPLICATION_FACTOR] __attribute__((depth(2)));
 
 // Send ligand-atom positions from Conform to InterE & IntraE
 channel float8  chan_Conf2Intere_xyz           __attribute__((depth(CHAN_DEPTH_ATOMXYZ)));
