@@ -8,6 +8,18 @@ Steps to initialize Intel OpenCL development/deployment tools.
 
 ### DevCloud
 
+Instructions: https://github.com/intel/FPGA-Devcloud/tree/master/main/Devcloud_Access_Instructions#50-connecting-to-servers-running-fpga-development-software
+
+#### Summary
+
+```
+cd adfpga
+./1_runme_first.sh
+devcloud_login -b A10PAC 1.2.1 A10_v1.2.1_opencl_batch.sh
+```
+
+#### Explanation (perhaps a bit outdated)
+
 Intel tools available in DevCloud.
 
 * First: login into the head node: `% ssh devcloud`
