@@ -34,7 +34,7 @@ aocl diagnose
 error_check
 
 # Moving into project folder
-cd /home/u71100/copy_adfpga/adfpga
+cd ${pwd}
 
 # Running project in Emulation mode
 printf "\\n%s\\n" "Running in Emulation Mode:"
@@ -61,12 +61,12 @@ error_check
 
 # Converting to an unsigned .aocx file
 printf "\\n%s\\n" "Converting to unsigned .aocx:"
-printf "Y\\nY\\n" | source $AOCL_BOARD_PACKAGE_ROOT/linux64/libexec/sign_aocx.sh -H openssl_manager -i /home/u71100/copy_adfpga/adfpga/bin_hw/Krnl_GA.aocx -r NULL -k NULL -o /home/u71100/copy_adfpga/adfpga/bin_hw/Krnl_GA_unsigned.aocx
+printf "Y\\nY\\n" | source $AOCL_BOARD_PACKAGE_ROOT/linux64/libexec/sign_aocx.sh -H openssl_manager -i ${pwd}/bin_hw/Krnl_GA.aocx -r NULL -k NULL -o ${pwd}/bin_hw/Krnl_GA_unsigned.aocx
 error_check
 
 # Programmming PAC Card
 printf "\\n%s\\n" "Programming FPGA device:"
-aocl program acl0 /home/u71100/copy_adfpga/adfpga/bin_hw/Krnl_GA_unsigned.aocx
+aocl program acl0 ${pwd}/bin_hw/Krnl_GA_unsigned.aocx
 
 # Running <make exe>
 printf "\\n%s\\n" "Running on the FPGA device:"
