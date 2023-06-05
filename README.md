@@ -14,7 +14,7 @@ Instructions: https://github.com/intel/FPGA-Devcloud/tree/master/main/Devcloud_A
 
 ```
 cd adfpga
-./1_runme_first.sh
+source ./1_runme_first.sh
 devcloud_login -b A10PAC 1.2.1 A10_v1.2.1_opencl_batch.sh
 ```
 
