@@ -32,6 +32,7 @@ echo $PROJECT_DIR
 # Initial Setup
 source /data/intel_fpga/devcloudLoginToolSetup.sh
 tools_setup -t A10DS
+#tools_setup -t S10DS
 
 # Check Arria 10 PAC card connectivity
 aocl diagnose
