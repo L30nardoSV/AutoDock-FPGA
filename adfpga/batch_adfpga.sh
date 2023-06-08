@@ -48,7 +48,7 @@ function convert_to_unsigned_aocx() {
 
 function program_fpga_device() {
     printf "\\n%s\\n" "Programming FPGA device:"
-    if [ $BOARD -eq "pac_s10_dc" ]; then
+    if [ $BOARD == "pac_s10_dc" ]; then
         aocl program acl0 $PROJECT_DIR/bin_hw/Krnl_GA.aocx
     else
         aocl program acl0 $PROJECT_DIR/bin_hw/Krnl_GA_unsigned.aocx
@@ -79,7 +79,7 @@ function run_emu() {
 function run_hw() {
     build_adfpga_hw_mode
     check_card_availability
-    if [ $BOARD -eq "pac_s10_dc" ]; then
+    if [ $BOARD == "pac_s10_dc" ]; then
         printf "\\n%s\\n" "No conversion to unsigned .aocx"
     else
         convert_to_unsigned_aocx
