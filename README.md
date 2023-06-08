@@ -12,6 +12,8 @@ Instructions: https://github.com/intel/FPGA-Devcloud/tree/master/main/Devcloud_A
 
 #### Summary
 
+Execute the following commands from head node (not compute note!):
+
 ```
 cd adfpga
 source ./1_runme_first.sh
