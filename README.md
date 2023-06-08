@@ -8,11 +8,7 @@ Steps to initialize Intel OpenCL development/deployment tools.
 
 ### DevCloud
 
-Instructions: https://github.com/intel/FPGA-Devcloud/tree/master/main/Devcloud_Access_Instructions#50-connecting-to-servers-running-fpga-development-software
-
-#### Summary
-
-Execute the following commands from head node (not compute note!):
+Execute the following commands on a head node (not compute note!):
 
 ```
 cd adfpga
@@ -27,21 +23,11 @@ devcloud_login -b A10PAC 1.2.1 walltime=12:00:00 batch_A10.sh
 devcloud_login -b S10PAC walltime=12:00:00 batch_S10.sh
 ```
 
-#### Explanation (perhaps a bit outdated)
-
-Intel tools available in DevCloud.
-
-* First: login into the head node: `% ssh devcloud`
-* Second: login into a compute node: `% devcloud_login`
-* Third: set intel tools for the PAC Arria 10: `% tools_setup`
-
-Flow:
-
-* Emulation: `make emu` (pac_a10 is enabled by default)
+Instructions: https://github.com/intel/FPGA-Devcloud/tree/master/main/Devcloud_Access_Instructions#50-connecting-to-servers-running-fpga-development-software
 
 ### Local
 
-* On local machine: `% source init_aoc<>.sh`
+* On local machine: `% source init_intel_opencl.sh`
 
 Flow:
 
