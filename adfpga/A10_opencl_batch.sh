@@ -30,3 +30,4 @@ tools_setup -t A10DS
 
 # Common A10 and S10 workflow
 source $PROJECT_DIR/adfpga_batch.sh
+export BOARD=pac_a10

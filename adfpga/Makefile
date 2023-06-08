@@ -268,8 +268,7 @@ DEV_SRC  := $(DEV_DIRS)/$(KRNL_NAME).cl
 #BOARD    := Proc10A_X115
 #BOARD    := p510t_sch_ax115
 #BOARD    := p520_max_sg280l
-#BOARD    := a10gx	# Use locally
-BOARD    := pac_a10	# DevCloud
+#BOARD    := a10gx
 
 # Flag for supporting arbitrary precision int extension
 APINT = -I $(INTELFPGAOCLSDKROOT)/include/kernel_headers
