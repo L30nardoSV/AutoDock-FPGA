@@ -2,9 +2,7 @@
 
 OpenCL task-parallel version of AutoDock4 for Intel FPGAs.
 
-## Tools
-
-Steps to initialize Intel OpenCL development/deployment tools.
+## Instructions
 
 ### DevCloud
 
@@ -27,8 +25,5 @@ Instructions: https://github.com/intel/FPGA-Devcloud/tree/master/main/Devcloud_A
 
 ### Local
 
-* On local machine: `% source init_intel_opencl.sh`
-
-Flow:
-
-* Emulation: `make emu BOARD=a10gx`
+* Initialization: `source init_intel_opencl.sh`
+* Emulation: `cd ./adfpga && make emu BOARD=a10gx`
