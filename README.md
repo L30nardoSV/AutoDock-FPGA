@@ -6,7 +6,7 @@ OpenCL task-parallel version of AutoDock4 for Intel FPGAs.
 
 ### DevCloud
 
-Execute the following commands on a head node (not compute note!):
+Execute the following commands on a login node (not compute note!):
 
 ```
 cd adfpga
@@ -25,5 +25,13 @@ Instructions: https://github.com/intel/FPGA-Devcloud/tree/master/main/Devcloud_A
 
 ### Local
 
-* Initialization: `source init_intel_opencl.sh`
-* Emulation: `cd ./adfpga && make emu BOARD=a10gx`
+Execute the following on any local machine with all tools installed:
+
+```
+source init_intel_opencl.sh
+```
+
+```
+cd adfpga
+make emu BOARD=a10gx
+```
