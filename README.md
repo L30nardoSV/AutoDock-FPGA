@@ -15,7 +15,14 @@ Instructions: https://github.com/intel/FPGA-Devcloud/tree/master/main/Devcloud_A
 ```
 cd adfpga
 source ./1_runme_first.sh
-devcloud_login -b A10PAC 1.2.1 A10_v1.2.1_opencl_batch.sh
+```
+
+```
+devcloud_login -b A10PAC 1.2.1 walltime=12:00:00 A10_v1.2.1_opencl_batch.sh
+```
+
+```
+devcloud_login -b S10PAC walltime=12:00:00 A10_v1.2.1_opencl_batch.sh
 ```
 
 #### Explanation (perhaps a bit outdated)
