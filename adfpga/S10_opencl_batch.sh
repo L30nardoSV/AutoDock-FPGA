@@ -7,6 +7,7 @@ printf "\\n"
 source /data/intel_fpga/devcloudLoginToolSetup.sh
 tools_setup -t S10DS
 
-# Common A10 and S10 workflow
 export BOARD=pac_s10_dc
+
+# Common A10 and S10 workflow
 source $PROJECT_DIR/adfpga_batch.sh
