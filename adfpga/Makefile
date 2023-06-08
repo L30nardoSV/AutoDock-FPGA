@@ -307,7 +307,7 @@ emu: $(TARGET_DIR)/$(TARGET) keremu
 	-ffile ../input/$(PDB)/derived/$(PDB)_protein.maps.fld \
 	-lfile ../input/$(PDB)/derived/$(PDB)_ligand.pdbqt \
 	-psize $(PSIZE) -nrun $(NRUN) -nev $(NEV) -ngen $(NGEN) -gfpop 1 \
-	-resnam $(TARGET_DIR)/$(PDB)-"`date +"%Y-%m-%d-%H:%M"`"
+	-resnam $(PDB)-"`date +"%Y-%m-%d-%H:%M"`"
 	@echo $(newline)
 	@echo "======================================================="
 	@echo "INFO: log file is under: \"$(TARGET_DIR)/$(PDB)-<...>.dlg\" "
@@ -410,7 +410,7 @@ exe: $(TARGET_DIR)/$(TARGET)
 	-ffile ../input/$(PDB)/derived/$(PDB)_protein.maps.fld \
 	-lfile ../input/$(PDB)/derived/$(PDB)_ligand.pdbqt \
 	-psize $(PSIZE) -nrun $(NRUN) -nev $(NEV) -ngen $(NGEN) -gfpop $(GFPOP) \
-	-resnam $(TARGET_DIR_HW)/$(PDB)-"`date +"%Y-%m-%d-%H:%M"`"
+	-resnam $(PDB)-"`date +"%Y-%m-%d-%H:%M"`"
 	@echo $(newline)
 	@echo "========================================================================="
 	@echo "INFO: log file is under: \"$(TARGET_DIR_HW)/$(PDB)-<...>.dlg\" "
@@ -429,7 +429,7 @@ exe-prof: $(TARGET_DIR)/$(TARGET)
 	-ffile ../input/$(PDB)/derived/$(PDB)_protein.maps.fld \
 	-lfile ../input/$(PDB)/derived/$(PDB)_ligand.pdbqt \
 	-psize $(PSIZE) -nrun $(NRUN) -nev $(NEV) -ngen $(NGEN) -gfpop $(GFPOP) \
-	-resnam $(TARGET_DIR_HW)/$(PDB)-"`date +"%Y-%m-%d-%H:%M"`"
+	-resnam $(PDB)-"`date +"%Y-%m-%d-%H:%M"`"
 	@echo $(newline)
 	@echo "=============================================================================="
 	@echo "INFO: log file is under: \"$(TARGET_DIR_HW_PROF)/$(PDB)-<...>.dlg\" "
