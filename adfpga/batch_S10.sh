@@ -1,7 +1,6 @@
 PROJECT_DIR=$HOME/Intel_Agilex/AutoDock-FPGA/adfpga
-echo $HOME
-echo $PROJECT_DIR
-printf "\\n"
+printf "\\n%s\\n" $HOME
+printf "\\n%s\\n" $PROJECT_DIR
 
 # Initial Setup
 source /data/intel_fpga/devcloudLoginToolSetup.sh

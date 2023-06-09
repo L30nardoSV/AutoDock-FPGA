@@ -15,7 +15,7 @@ function build_and_run_adfpga_emu_mode() {
     error_check
 }
 
-# This takes approximately 3 hours (A10) and 6 hours (S10) on DevCloud servers
+# This takes approximately 3 hours (A10) / 6 hours (S10) on DevCloud servers
 function build_adfpga_hw_mode() {
     printf "\\n%s\\n" "Building AutoDock-FPGA in Hardware Mode:"
     printf "\\n"
