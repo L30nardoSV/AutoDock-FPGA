@@ -6,7 +6,6 @@ printf "\\n"
 # Initial Setup
 source /data/intel_fpga/devcloudLoginToolSetup.sh
 tools_setup -t A10DS
-
 export BOARD=pac_a10
 
 # Common A10 and S10 workflow
