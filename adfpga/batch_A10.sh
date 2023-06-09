@@ -1,3 +1,4 @@
+# Common folder setup
 PROJECT_DIR=$HOME/Intel_Agilex/AutoDock-FPGA/adfpga
 printf "\\n%s\\n" $HOME
 printf "\\n%s\\n" $PROJECT_DIR
